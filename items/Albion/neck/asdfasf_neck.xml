@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<SCItem>
+	<ActiveState>drop</ActiveState>
+	<Location>Neck</Location>
+	<Realm>Albion</Realm>
+	<ItemName>asdfasf</ItemName>
+	<AFDPS></AFDPS>
+	<Speed></Speed>
+	<Bonus></Bonus>
+	<ItemQuality>94</ItemQuality>
+	<Equipped>1</Equipped>
+	<Level>51</Level>
+	<PLAYERITEM>
+		<SLOT Number="0">
+			<Remakes>0</Remakes>
+			<Effect>Hits</Effect>
+			<Qua>99</Qua>
+			<Amount>44</Amount>
+			<Done>0</Done>
+			<Time>0</Time>
+			<Type>Hits</Type>
+		</SLOT>
+		<SLOT Number="1">
+			<Remakes>0</Remakes>
+			<Effect></Effect>
+			<Qua>99</Qua>
+			<Amount></Amount>
+			<Done>0</Done>
+			<Time>0</Time>
+			<Type>Unused</Type>
+		</SLOT>
+		<SLOT Number="2">
+			<Remakes>0</Remakes>
+			<Effect></Effect>
+			<Qua>99</Qua>
+			<Amount></Amount>
+			<Done>0</Done>
+			<Time>0</Time>
+			<Type>Unused</Type>
+		</SLOT>
+		<SLOT Number="3">
+			<Remakes>0</Remakes>
+			<Effect></Effect>
+			<Qua>99</Qua>
+			<Amount></Amount>
+			<Done>0</Done>
+			<Time>0</Time>
+			<Type>Unused</Type>
+		</SLOT>
+	</PLAYERITEM>
+	<DROPITEM>
+		<SLOT Number="0">
+			<Remakes>0</Remakes>
+			<Effect></Effect>
+			<Qua>99</Qua>
+			<Amount></Amount>
+			<Done>0</Done>
+			<Time>0</Time>
+			<Type>Unused</Type>
+		</SLOT>
+		<SLOT Number="1">
+			<Remakes>0</Remakes>
+			<Effect>Body Magic</Effect>
+			<Qua>99</Qua>
+			<Amount>5</Amount>
+			<Done>0</Done>
+			<Time>0</Time>
+			<Type>Skill</Type>
+		</SLOT>
+		<SLOT Number="2">
+			<Remakes>0</Remakes>
+			<Effect></Effect>
+			<Qua>99</Qua>
+			<Amount></Amount>
+			<Done>0</Done>
+			<Time>0</Time>
+			<Type>Unused</Type>
+		</SLOT>
+		<SLOT Number="3">
+			<Remakes>0</Remakes>
+			<Effect></Effect>
+			<Qua>99</Qua>
+			<Amount>0</Amount>
+			<Done>0</Done>
+			<Time>0</Time>
+			<Type>Unused</Type>
+		</SLOT>
+		<SLOT Number="4">
+			<Remakes>0</Remakes>
+			<Effect></Effect>
+			<Qua>99</Qua>
+			<Amount>0</Amount>
+			<Done>0</Done>
+			<Time>0</Time>
+			<Type>Unused</Type>
+		</SLOT>
+		<SLOT Number="5">
+			<Remakes>0</Remakes>
+			<Effect></Effect>
+			<Qua>99</Qua>
+			<Amount>0</Amount>
+			<Done>0</Done>
+			<Time>0</Time>
+			<Type>Unused</Type>
+		</SLOT>
+		<SLOT Number="6">
+			<Remakes>0</Remakes>
+			<Effect></Effect>
+			<Qua>99</Qua>
+			<Amount>0</Amount>
+			<Done>0</Done>
+			<Time>0</Time>
+			<Type>Unused</Type>
+		</SLOT>
+		<SLOT Number="7">
+			<Remakes>0</Remakes>
+			<Effect></Effect>
+			<Qua>99</Qua>
+			<Amount>0</Amount>
+			<Done>0</Done>
+			<Time>0</Time>
+			<Type>Unused</Type>
+		</SLOT>
+		<SLOT Number="8">
+			<Remakes>0</Remakes>
+			<Effect></Effect>
+			<Qua>99</Qua>
+			<Amount>0</Amount>
+			<Done>0</Done>
+			<Time>0</Time>
+			<Type>Unused</Type>
+		</SLOT>
+		<SLOT Number="9">
+			<Remakes>0</Remakes>
+			<Effect></Effect>
+			<Qua>99</Qua>
+			<Amount>0</Amount>
+			<Done>0</Done>
+			<Time>0</Time>
+			<Type>Unused</Type>
+		</SLOT>
+	</DROPITEM>
+</SCItem>

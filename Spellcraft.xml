@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<DefaultOptions>
+	<Realm>Albion</Realm>
+	<IncludeRRInTotals>True</IncludeRRInTotals>
+	<CrafterSkill>1001</CrafterSkill>
+	<WindowX>161</WindowX>
+	<WindowY>32</WindowY>
+	<WindowW>817</WindowW>
+	<WindowH>568</WindowH>
+	<RecentFiles/>
+
+	<DaocPath></DaocPath>
+	<ConfigReportFile>/Users/jamesl/Spellcrafting-3.0/reports/Default_Config_Report.xml</ConfigReportFile>
+	<Pricing>
+		<Tier/>
+
+		<PPLevel>0</PPLevel>
+		<Hour>0</Hour>
+		<HourInclude>True</HourInclude>
+		<PPOC>0</PPOC>
+		<CostInPrice>True</CostInPrice>
+		<General>50.0</General>
+		<Qual/>
+
+		<TierInclude>True</TierInclude>
+		<PPItem>0</PPItem>
+		<QualInclude>True</QualInclude>
+		<PPInclude>True</PPInclude>
+		<PPGem>0</PPGem>
+		<PPImbue>0</PPImbue>
+		<PPOrder>0</PPOrder>
+	</Pricing>
+</DefaultOptions>

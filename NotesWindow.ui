@@ -1,0 +1,113 @@
+<!DOCTYPE UI><UI>
+<class>B_NotesWindow</class>
+<widget>
+    <class>QDialog</class>
+    <property stdset="1">
+        <name>name</name>
+        <cstring>B_NotesWindow</cstring>
+    </property>
+    <property stdset="1">
+        <name>geometry</name>
+        <rect>
+            <x>0</x>
+            <y>0</y>
+            <width>364</width>
+            <height>306</height>
+        </rect>
+    </property>
+    <property stdset="1">
+        <name>caption</name>
+        <string>Notes</string>
+    </property>
+    <widget>
+        <class>QLabel</class>
+        <property stdset="1">
+            <name>name</name>
+            <cstring>B_NotesDialog</cstring>
+        </property>
+        <property stdset="1">
+            <name>geometry</name>
+            <rect>
+                <x>23</x>
+                <y>3</y>
+                <width>83</width>
+                <height>16</height>
+            </rect>
+        </property>
+        <property stdset="1">
+            <name>text</name>
+            <string>Template Notes:</string>
+        </property>
+    </widget>
+    <widget>
+        <class>QMultiLineEdit</class>
+        <property stdset="1">
+            <name>name</name>
+            <cstring>NoteText</cstring>
+        </property>
+        <property stdset="1">
+            <name>geometry</name>
+            <rect>
+                <x>16</x>
+                <y>24</y>
+                <width>336</width>
+                <height>237</height>
+            </rect>
+        </property>
+    </widget>
+    <widget>
+        <class>QPushButton</class>
+        <property stdset="1">
+            <name>name</name>
+            <cstring>PushButton8</cstring>
+        </property>
+        <property stdset="1">
+            <name>geometry</name>
+            <rect>
+                <x>49</x>
+                <y>271</y>
+                <width>93</width>
+                <height>27</height>
+            </rect>
+        </property>
+        <property stdset="1">
+            <name>text</name>
+            <string>Save</string>
+        </property>
+    </widget>
+    <widget>
+        <class>QPushButton</class>
+        <property stdset="1">
+            <name>name</name>
+            <cstring>PushButton9</cstring>
+        </property>
+        <property stdset="1">
+            <name>geometry</name>
+            <rect>
+                <x>219</x>
+                <y>271</y>
+                <width>93</width>
+                <height>26</height>
+            </rect>
+        </property>
+        <property stdset="1">
+            <name>text</name>
+            <string>Cancel</string>
+        </property>
+    </widget>
+</widget>
+<connections>
+    <connection>
+        <sender>PushButton8</sender>
+        <signal>clicked()</signal>
+        <receiver>B_NotesWindow</receiver>
+        <slot>accept()</slot>
+    </connection>
+    <connection>
+        <sender>PushButton9</sender>
+        <signal>clicked()</signal>
+        <receiver>B_NotesWindow</receiver>
+        <slot>reject()</slot>
+    </connection>
+</connections>
+</UI>
