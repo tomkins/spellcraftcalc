@@ -37,7 +37,6 @@ import CraftWindow
 import ReportWindow
 import ReportParser
 import MouseLabel
-import MouseButton
 import DisplayWindow
 import CraftBar
 import SearchingCombo
@@ -145,9 +144,6 @@ class SCApp(B_SC):
         self.Name_3 = self.replaceGemLabel(self.Name_3)
         self.Name_4 = self.replaceGemLabel(self.Name_4)
 
-        self.ConfigButton = self.replaceButton(self.ConfigButton)
-        self.connect(self.ConfigButton,SIGNAL('clicked()'),self.OpenConfigReport)
-
         self.ItemLevelWindow = ItemLevel.ItemLevel(self, '', 1)
         self.DaocPath = ''
         self.realm = 'Albion'
@@ -168,6 +164,14 @@ class SCApp(B_SC):
         self.filemenu.insertItem('&Recent Files', self.rf_menu)
         self.filemenu.insertItem('E&xit', self, SLOT('close()'), Qt.CTRL+Qt.Key_X)
         self.menuBar.insertItem('&File', self.filemenu)
+
+        self.reportmenu = QPopupMenu(self, 'FileMenu')
+        self.reportmenu.insertItem('Choose Config Format...', self.chooseReportFile)
+        self.reportmenu.insertItem('&Configuration', self.openConfigReport, Qt.CTRL+Qt.Key_C)
+        self.reportmenu.insertItem('&Materials', self.openMaterialsReport, Qt.CTRL+Qt.Key_M)
+        self.reportmenu.insertItem('&Set up Craft Bars...', self.openCraftBars)
+        self.reportmenu.insertItem('&Generate UI XML (Beta)', self.generateUIXML)
+        self.menuBar.insertItem('&Reports', self.reportmenu)
 
         self.swapGems = QPopupMenu(self, "SwapGems")
         self.swapGems.insertItem('Chest', 0)
@@ -196,8 +200,6 @@ class SCApp(B_SC):
         self.toolsmenu = QPopupMenu(self, 'ToolsMenu')
         self.toolsmenu.insertItem('S&wap Gems With...', self.swapGems)
         self.toolsmenu.insertItem('&Options...', self.openOptions)
-        self.toolsmenu.insertItem('&Set up Craft Bars...', self.openCraftBars)
-        self.toolsmenu.insertItem('&Generate UI XML (Beta)', self.generateUIXML)
         self.menuBar.insertItem('&Tools', self.toolsmenu)
 
         self.helpmenu = QPopupMenu(self, 'HelpMenu')
@@ -235,14 +237,6 @@ class SCApp(B_SC):
         lbl.hide()
         ml.show()
         return ml
-
-    def replaceButton(self, button):
-        mb = MouseButton.MouseButton(self, button.text(), button.parent())
-        mb.setGeometry(button.x(), button.y(), button.width(), button.height())
-        mb.setReportFile(self.reportFile)
-        button.hide()
-        mb.show()
-        return mb
 
     def initialize(self):
 
@@ -399,16 +393,10 @@ class SCApp(B_SC):
     def show(self):
         QMainWindow.show(self)
         self.PlayerMade.setChecked(1)
-        # Kludge...major kludge.
         if self.startup:
-            for w in self.switchOnType['player']:
-                w.show()
-            for w in self.switchOnType['drop']:
-                w.hide()
-            for w in self.extraSlots:
-                w.hide()
+            # Kludge...major kludge.
+            self.PlayerToggled(1)
             self.startup = 0
-            self.calculate()
     
     def currentTabLabel(self):
         return str(self.currentTab.tabLabel(self.currentPage))
@@ -668,7 +656,14 @@ class SCApp(B_SC):
                     costindex = eval('%sValues' % gemtype, globals(), globals()).index(str(amount))
                     cost = GemCosts[costindex]
                     remakecost = RemakeCosts[costindex] * int(item.getSlotAttr(itemtype, i, 'Remakes'))
-                    if gemtype == 'Resist' or gemtype == 'Focus':
+                    if 'All ' in effect:
+                        cost += 60 * costindex
+                        cost = cost * 3
+                        if remakecost > 0:
+                            remakecost += 180 * costindex
+                        if effect != 'All Focus Bonus' and amount > 1:
+                            self.DupErrorString.setText('Invalid ' + effect + ' on ' + key)
+                    elif gemtype == 'Resist' or gemtype == 'Focus':
                         cost += 60 * costindex
                         if remakecost > 0:
                             remakecost += 60 * costindex
@@ -1141,6 +1136,7 @@ class SCApp(B_SC):
         else:
             for w in self.extraSlots:
                 w.hide()
+        self.calculate()
 
     def DropToggled(self,a0):
         self.modified = 1
@@ -1541,15 +1537,20 @@ class SCApp(B_SC):
         self.calculate()
         self.modified = 1
     
-    def OpenMaterialsReport(self):
+    def openMaterialsReport(self):
         RW = ReportWindow.ReportWindow(self, '', 1)
         RW.materialsReport(self.itemattrlist)
         RW.exec_loop()
 
-    def OpenConfigReport(self):
+    def openConfigReport(self):
         RW = ReportWindow.ReportWindow(self, '', 1)
-        RW.parseConfigReport(self.ConfigButton.getReportFile(), self.itemattrlist)
+        RW.parseConfigReport(self.reportFile, self.itemattrlist)
         RW.exec_loop()
+
+    def chooseReportFile(self):
+	filename = QFileDialog.getOpenFileName('./reports', "Reports (*.xml *.rpt)")
+        if filename is not None and str(filename) != '':
+            self.reportFile = str(filename)
 
     def SkillClicked(self,a0):
         if a0 is None: return

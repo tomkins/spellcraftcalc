@@ -98,66 +98,6 @@
         </widget>
     </widget>
     <widget>
-        <class>QGroupBox</class>
-        <property stdset="1">
-            <name>name</name>
-            <cstring>GroupBox7</cstring>
-        </property>
-        <property stdset="1">
-            <name>geometry</name>
-            <rect>
-                <x>310</x>
-                <y>165</y>
-                <width>215</width>
-                <height>38</height>
-            </rect>
-        </property>
-        <property stdset="1">
-            <name>title</name>
-            <string>Reports</string>
-        </property>
-        <widget>
-            <class>QPushButton</class>
-            <property stdset="1">
-                <name>name</name>
-                <cstring>ConfigButton</cstring>
-            </property>
-            <property stdset="1">
-                <name>geometry</name>
-                <rect>
-                    <x>7</x>
-                    <y>14</y>
-                    <width>99</width>
-                    <height>19</height>
-                </rect>
-            </property>
-            <property stdset="1">
-                <name>text</name>
-                <string>Config Report</string>
-            </property>
-        </widget>
-        <widget>
-            <class>QPushButton</class>
-            <property stdset="1">
-                <name>name</name>
-                <cstring>MatsButton</cstring>
-            </property>
-            <property stdset="1">
-                <name>geometry</name>
-                <rect>
-                    <x>111</x>
-                    <y>14</y>
-                    <width>99</width>
-                    <height>19</height>
-                </rect>
-            </property>
-            <property stdset="1">
-                <name>text</name>
-                <string>Mats List</string>
-            </property>
-        </widget>
-    </widget>
-    <widget>
         <class>QLabel</class>
         <property stdset="1">
             <name>name</name>
@@ -167,7 +107,7 @@
             <name>geometry</name>
             <rect>
                 <x>316</x>
-                <y>208</y>
+                <y>165</y>
                 <width>159</width>
                 <height>16</height>
             </rect>

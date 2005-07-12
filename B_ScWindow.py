@@ -37,20 +37,8 @@ class B_SC(QMainWindow):
         self.OtherBonusList = QListBox(self.GroupBox6_2,'OtherBonusList')
         self.OtherBonusList.setGeometry(QRect(3,15,164,123))
 
-        self.GroupBox7 = QGroupBox(self,'GroupBox7')
-        self.GroupBox7.setGeometry(QRect(310,165,215,38))
-        self.GroupBox7.setTitle(self.tr("Reports"))
-
-        self.ConfigButton = QPushButton(self.GroupBox7,'ConfigButton')
-        self.ConfigButton.setGeometry(QRect(7,14,99,19))
-        self.ConfigButton.setText(self.tr("Config Report"))
-
-        self.MatsButton = QPushButton(self.GroupBox7,'MatsButton')
-        self.MatsButton.setGeometry(QRect(111,14,99,19))
-        self.MatsButton.setText(self.tr("Mats List"))
-
         self.FileNameLabel = QLabel(self,'FileNameLabel')
-        self.FileNameLabel.setGeometry(QRect(316,208,159,16))
+        self.FileNameLabel.setGeometry(QRect(316,165,159,16))
         self.FileNameLabel.setText(self.tr(""))
 
         self.TypeTab = QTabWidget(self,'TypeTab')
@@ -933,8 +921,6 @@ class B_SC(QMainWindow):
         self.connect(self.SaveItem,SIGNAL('clicked()'),self.Save_Item)
         self.connect(self.CharLevel,SIGNAL('textChanged(const QString&)'),self.recalculate)
         self.connect(self.CraftButton,SIGNAL('clicked()'),self.OpenCraftWindow)
-        self.connect(self.MatsButton,SIGNAL('clicked()'),self.OpenMaterialsReport)
-        self.connect(self.ConfigButton,SIGNAL('clicked()'),self.OpenConfigReport)
         self.connect(self.SkillsList,SIGNAL('clicked(QListBoxItem*)'),self.SkillClicked)
         self.connect(self.CharClass,SIGNAL('activated(const QString&)'),self.recalculate)
         self.connect(self.AFDPS_Edit,SIGNAL('textChanged(const QString&)'),self.recalculate)
@@ -999,9 +985,6 @@ class B_SC(QMainWindow):
         self.setTabOrder(self.Speed_Edit,self.Bonus_Edit)
         self.setTabOrder(self.Bonus_Edit,self.SkillsList)
         self.setTabOrder(self.SkillsList,self.OtherBonusList)
-        self.setTabOrder(self.OtherBonusList,self.ConfigButton)
-        self.setTabOrder(self.ConfigButton,self.MatsButton)
-        self.setTabOrder(self.MatsButton,self.TotalBonus)
         self.setTabOrder(self.TotalBonus,self.CharName)
         self.setTabOrder(self.CharName,self.CharClass)
         self.setTabOrder(self.CharClass,self.CharLevel)
@@ -1039,9 +1022,6 @@ class B_SC(QMainWindow):
 
     def Load_Item(self):
         print 'B_SC.Load_Item(): not implemented yet'
-
-    def OpenConfigReport(self):
-        print 'B_SC.OpenConfigReport(): not implemented yet'
 
     def OpenCraftWindow(self):
         print 'B_SC.OpenCraftWindow(): not implemented yet'

@@ -1,3 +1,8 @@
+Ehrayn Updated 2/23/05 - Patch 1.0.1
+Removed Materials/Options buttons, moved to the Reports menu.
+Added Warning if Finesse stone +2 or higher is chosen
+Fixed Calulation for Finesse/Brilliant prices.
+
 Ehrayn Updated 2/23/05 - Patch 1.0.0
 Added all Catacombs and +all melee/magic gems (patch 1.74).
 Added all new Catacombs classes.

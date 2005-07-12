@@ -168,7 +168,7 @@ def computeOverchargeSuccess(imbue, itemimbue, item, crafterskill):
 
 def computeGemCost(item, i):
     itemtype = item.getAttr('ActiveState')
-    
+
     gemtype = re.sub(' ', '', item.getSlotAttr(itemtype, i, 'Type'))
     if item.getSlotAttr(itemtype, i, 'Amount') == '':
         amount = 0
