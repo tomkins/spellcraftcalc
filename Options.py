@@ -25,7 +25,6 @@ import XMLHelper
 import sys
 import os.path
 import traceback
-import sys
 from xml.dom.minidom import *
 from MyStringIO import UnicodeStringIO
 

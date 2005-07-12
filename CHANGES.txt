@@ -1,3 +1,7 @@
+Ehrayn Updated 2/24/05 - Patch 1.0.2
+GUI Cleanups, shrunk the top panel to make more space for slots.
+Corrected several lingering QtPy .ui source file problems.
+
 Ehrayn Updated 2/23/05 - Patch 1.0.1
 Removed Materials/Options buttons, moved to the Reports menu.
 Added Warning if Finesse stone +2 or higher is chosen

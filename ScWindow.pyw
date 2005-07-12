@@ -52,6 +52,7 @@ import sys
 
 import UIXML
 
+import psyco
 
 class SCApp(B_SC):
     def __init__(self,parent = None,name = None,fl = 0):
@@ -220,7 +221,7 @@ class SCApp(B_SC):
                 return QMainWindow.close(self, 1)
             else:
                 return False
-        else: return QMainWindow.close(self, False)
+        else: return QMainWindow.close(self, 1)
 
     def replaceLabel(self, lbl, eff):
         ml = MouseLabel.MouseLabel(eff, self, '', lbl.parent())
@@ -1742,6 +1743,7 @@ class SCApp(B_SC):
         UIXML.uixml(self)
 
 if __name__ == '__main__':
+    psyco.full()
     locale.setlocale(locale.LC_ALL, '')
     a = QApplication(sys.argv)
     QObject.connect(a,SIGNAL('lastWindowClosed()'),a,SLOT('quit()'))

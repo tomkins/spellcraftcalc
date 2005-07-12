@@ -11,7 +11,7 @@
         <rect>
             <x>0</x>
             <y>0</y>
-            <width>368</width>
+            <width>364</width>
             <height>295</height>
         </rect>
     </property>
@@ -239,6 +239,30 @@
 from all realms)</string>
                 </property>
             </widget>
+            <widget>
+                <class>QCheckBox</class>
+                <property stdset="1">
+                    <name>name</name>
+                    <cstring>IncludeRR</cstring>
+                </property>
+                <property stdset="1">
+                    <name>geometry</name>
+                    <rect>
+                        <x>19</x>
+                        <y>139</y>
+                        <width>176</width>
+                        <height>17</height>
+                    </rect>
+                </property>
+                <property stdset="1">
+                    <name>text</name>
+                    <string>Include Racial Resists in Totals</string>
+                </property>
+                <property stdset="1">
+                    <name>checked</name>
+                    <bool>true</bool>
+                </property>
+            </widget>
         </widget>
         <widget>
             <class>QWidget</class>
@@ -338,7 +362,7 @@ from all realms)</string>
                     <property stdset="1">
                         <name>alignment</name>
                         <set>AlignVCenter|AlignRight</set>
-                    </property>
+                     </property>
                     <property>
                         <name>hAlign</name>
                     </property>

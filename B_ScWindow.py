@@ -1,6 +1,6 @@
 # Form implementation generated from reading ui file 'ScWindow.ui'
 #
-# Created: Sun Apr 4 17:55:21 2004
+# Created: Thu Feb 24 10:36:29 2005
 #      by: The Python User Interface Compiler (pyuic) 3.8
 #
 # WARNING! All changes made in this file will be lost!
@@ -24,30 +24,38 @@ class B_SC(QMainWindow):
         self.setCaption(self.tr("Spellcrafting Calculator"))
 
         self.GroupBox6 = QGroupBox(self,'GroupBox6')
-        self.GroupBox6.setGeometry(QRect(310,21,121,145))
+        self.GroupBox6.setGeometry(QRect(310,21,121,136))
         self.GroupBox6.setTitle(self.tr("Skills"))
 
         self.SkillsList = QListBox(self.GroupBox6,'SkillsList')
-        self.SkillsList.setGeometry(QRect(8,15,106,123))
+        self.SkillsList.setGeometry(QRect(8,15,106,116))
 
         self.GroupBox6_2 = QGroupBox(self,'GroupBox6_2')
-        self.GroupBox6_2.setGeometry(QRect(435,21,173,145))
+        self.GroupBox6_2.setGeometry(QRect(435,21,173,136))
         self.GroupBox6_2.setTitle(self.tr("Other Bonuses"))
 
         self.OtherBonusList = QListBox(self.GroupBox6_2,'OtherBonusList')
-        self.OtherBonusList.setGeometry(QRect(3,15,164,123))
+        self.OtherBonusList.setGeometry(QRect(3,15,164,116))
 
         self.FileNameLabel = QLabel(self,'FileNameLabel')
-        self.FileNameLabel.setGeometry(QRect(316,165,159,16))
+        self.FileNameLabel.setGeometry(QRect(315,160,159,14))
         self.FileNameLabel.setText(self.tr(""))
 
+        self.OcErrorString = QLabel(self,'OcErrorString')
+        self.OcErrorString.setGeometry(QRect(315,175,285,14))
+        self.OcErrorString.setText(self.tr(""))
+
+        self.DupErrorString = QLabel(self,'DupErrorString')
+        self.DupErrorString.setGeometry(QRect(315,191,285,14))
+        self.DupErrorString.setText(self.tr(""))
+
         self.TypeTab = QTabWidget(self,'TypeTab')
-        self.TypeTab.setGeometry(QRect(0,224,788,377))
+        self.TypeTab.setGeometry(QRect(2,208,780,377))
 
         self.Armor = QWidget(self.TypeTab,'Armor')
 
         self.PieceTab = QTabWidget(self.Armor,'PieceTab')
-        self.PieceTab.setGeometry(QRect(3,9,868,343))
+        self.PieceTab.setGeometry(QRect(1,0,773,350))
 
         self.Chest = QWidget(self.PieceTab,'Chest')
         self.PieceTab.insertTab(self.Chest,self.tr("Chest"))
@@ -84,10 +92,6 @@ class B_SC(QMainWindow):
         self.TypeTab.insertTab(self.Armor,self.tr("Armor/Weapons"))
 
         self.Jewelry = QWidget(self.TypeTab,'Jewelry')
-
-        self.TextLabel4_2 = QLabel(self.Jewelry,'TextLabel4_2')
-        self.TextLabel4_2.setGeometry(QRect(287,-21,259,17))
-        self.TextLabel4_2.setText(self.tr("TextLabel4"))
 
         self.JewelTab = QTabWidget(self.Jewelry,'JewelTab')
         self.JewelTab.setGeometry(QRect(3,9,838,341))
@@ -600,10 +604,6 @@ class B_SC(QMainWindow):
         self.CapDistance.setGeometry(QRect(11,32,109,17))
         self.CapDistance.setText(self.tr("Distance To Cap"))
 
-        self.DupErrorString = QLabel(self,'DupErrorString')
-        self.DupErrorString.setGeometry(QRect(530,184,285,17))
-        self.DupErrorString.setText(self.tr(""))
-
         self.GroupBox9 = QGroupBox(self,'GroupBox9')
         self.GroupBox9.setGeometry(QRect(613,72,167,111))
         self.GroupBox9.setTitle(self.tr("Char Info"))
@@ -873,10 +873,6 @@ class B_SC(QMainWindow):
         self.SlashRR.setGeometry(QRect(67,160,17,16))
         self.SlashRR.setText(self.tr("-"))
 
-        self.OcErrorString = QLabel(self,'OcErrorString')
-        self.OcErrorString.setGeometry(QRect(530,205,285,16))
-        self.OcErrorString.setText(self.tr(""))
-
         self.connect(self.JewelTab,SIGNAL('currentChanged(QWidget*)'),self.JewelTabChanged)
         self.connect(self.PlayerMade,SIGNAL('toggled(bool)'),self.PlayerToggled)
         self.connect(self.Drop,SIGNAL('toggled(bool)'),self.DropToggled)
@@ -985,16 +981,13 @@ class B_SC(QMainWindow):
         self.setTabOrder(self.Speed_Edit,self.Bonus_Edit)
         self.setTabOrder(self.Bonus_Edit,self.SkillsList)
         self.setTabOrder(self.SkillsList,self.OtherBonusList)
+        self.setTabOrder(self.OtherBonusList,self.TotalBonus)
         self.setTabOrder(self.TotalBonus,self.CharName)
         self.setTabOrder(self.CharName,self.CharClass)
         self.setTabOrder(self.CharClass,self.CharLevel)
         self.setTabOrder(self.CharLevel,self.TypeTab)
         self.setTabOrder(self.TypeTab,self.PieceTab)
         self.setTabOrder(self.PieceTab,self.JewelTab)
-
-    def event(self,ev):
-        ret = QMainWindow.event(self,ev)
-        return ret
 
     def AmountChanged(self,a0):
         print 'B_SC.AmountChanged(const QString&): not implemented yet'
@@ -1025,9 +1018,6 @@ class B_SC(QMainWindow):
 
     def OpenCraftWindow(self):
         print 'B_SC.OpenCraftWindow(): not implemented yet'
-
-    def OpenMaterialsReport(self):
-        print 'B_SC.OpenMaterialsReport(): not implemented yet'
 
     def PieceTabChanged(self,a0):
         print 'B_SC.PieceTabChanged(QWidget*): not implemented yet'

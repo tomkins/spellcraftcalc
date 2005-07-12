@@ -37,7 +37,7 @@
                 <x>310</x>
                 <y>21</y>
                 <width>121</width>
-                <height>145</height>
+                <height>136</height>
             </rect>
         </property>
         <property stdset="1">
@@ -56,7 +56,7 @@
                     <x>8</x>
                     <y>15</y>
                     <width>106</width>
-                    <height>123</height>
+                    <height>116</height>
                 </rect>
             </property>
         </widget>
@@ -73,7 +73,7 @@
                 <x>435</x>
                 <y>21</y>
                 <width>173</width>
-                <height>145</height>
+                <height>136</height>
             </rect>
         </property>
         <property stdset="1">
@@ -92,7 +92,7 @@
                     <x>3</x>
                     <y>15</y>
                     <width>164</width>
-                    <height>123</height>
+                    <height>116</height>
                 </rect>
             </property>
         </widget>
@@ -106,10 +106,10 @@
         <property stdset="1">
             <name>geometry</name>
             <rect>
-                <x>316</x>
-                <y>165</y>
+                <x>315</x>
+                <y>160</y>
                 <width>159</width>
-                <height>16</height>
+                <height>14</height>
             </rect>
         </property>
         <property stdset="1">
@@ -121,52 +121,40 @@
         <class>QLabel</class>
         <property stdset="1">
             <name>name</name>
-            <cstring>TextLabel3</cstring>
+            <cstring>OcErrorString</cstring>
         </property>
         <property stdset="1">
             <name>geometry</name>
             <rect>
-                <x>10</x>
-                <y>194</y>
-                <width>53</width>
+                <x>315</x>
+                <y>175</y>
+                <width>285</width>
                 <height>14</height>
             </rect>
         </property>
         <property stdset="1">
-            <name>font</name>
-            <font>
-                <bold>1</bold>
-            </font>
-        </property>
-        <property stdset="1">
             <name>text</name>
-            <string>Version:</string>
+            <string></string>
         </property>
     </widget>
     <widget>
         <class>QLabel</class>
         <property stdset="1">
             <name>name</name>
-            <cstring>Version</cstring>
+            <cstring>DupErrorString</cstring>
         </property>
         <property stdset="1">
             <name>geometry</name>
             <rect>
-                <x>61</x>
-                <y>194</y>
-                <width>56</width>
+                <x>315</x>
+                <y>191</y>
+                <width>285</width>
                 <height>14</height>
             </rect>
         </property>
         <property stdset="1">
-            <name>font</name>
-            <font>
-                <bold>1</bold>
-            </font>
-        </property>
-        <property stdset="1">
             <name>text</name>
-            <string>0.1</string>
+            <string></string>
         </property>
     </widget>
     <widget>
@@ -178,9 +166,9 @@
         <property stdset="1">
             <name>geometry</name>
             <rect>
-                <x>0</x>
-                <y>224</y>
-                <width>788</width>
+                <x>2</x>
+                <y>208</y>
+                <width>780</width>
                 <height>377</height>
             </rect>
         </property>
@@ -203,10 +191,10 @@
                 <property stdset="1">
                     <name>geometry</name>
                     <rect>
-                        <x>3</x>
-                        <y>9</y>
-                        <width>868</width>
-                        <height>343</height>
+                        <x>1</x>
+                        <y>0</y>
+                        <width>773</width>
+                        <height>350</height>
                     </rect>
                 </property>
                 <widget>
@@ -342,26 +330,6 @@
                 <name>title</name>
                 <string>Jewelry</string>
             </attribute>
-            <widget>
-                <class>QLabel</class>
-                <property stdset="1">
-                    <name>name</name>
-                    <cstring>TextLabel4_2</cstring>
-                </property>
-                <property stdset="1">
-                    <name>geometry</name>
-                    <rect>
-                        <x>287</x>
-                        <y>-21</y>
-                        <width>259</width>
-                        <height>17</height>
-                    </rect>
-                </property>
-                <property stdset="1">
-                    <name>text</name>
-                    <string>TextLabel4</string>
-                </property>
-            </widget>
             <widget>
                 <class>QTabWidget</class>
                 <property stdset="1">
@@ -3023,26 +2991,6 @@
         </widget>
     </widget>
     <widget>
-        <class>QLabel</class>
-        <property stdset="1">
-            <name>name</name>
-            <cstring>DupErrorString</cstring>
-        </property>
-        <property stdset="1">
-            <name>geometry</name>
-            <rect>
-                <x>530</x>
-                <y>184</y>
-                <width>285</width>
-                <height>17</height>
-            </rect>
-        </property>
-        <property stdset="1">
-            <name>text</name>
-            <string></string>
-        </property>
-    </widget>
-    <widget>
         <class>QGroupBox</class>
         <property stdset="1">
             <name>name</name>
@@ -3218,7 +3166,7 @@
                 <x>5</x>
                 <y>21</y>
                 <width>75</width>
-                <height>202</height>
+                <height>182</height>
             </rect>
         </property>
         <property stdset="1">
@@ -3256,7 +3204,7 @@
                 <rect>
                     <x>42</x>
                     <y>16</y>
-                    <width>27</width>
+                    <width>28</width>
                     <height>16</height>
                 </rect>
             </property>
@@ -3766,7 +3714,7 @@
             </property>
         </widget>
         <widget>
-            <clafss>QLabel</class>
+            <class>QLabel</class>
             <property stdset="1">
                 <name>name</name>
                 <cstring>Focus_2</cstring>
@@ -3838,7 +3786,7 @@
                 <x>83</x>
                 <y>21</y>
                 <width>90</width>
-                <height>172</height>
+                <height>182</height>
             </rect>
         </property>
         <property stdset="1">
@@ -4063,7 +4011,7 @@
                 <rect>
                     <x>48</x>
                     <y>70</y>
-                    <width>16</width>
+                    <width>17</width>
                     <height>16</height>
                 </rect>
             </property>
@@ -4282,7 +4230,7 @@
                 <name>geometry</name>
                 <rect>
                     <x>6</x>
-                    <y>143</y>
+                    <y>142</y>
                     <width>36</width>
                     <height>16</height>
                 </rect>
@@ -4392,26 +4340,6 @@
                 <string>-</string>
             </property>
         </widget>
-    </widget>
-    <widget>
-        <class>QLabel</class>
-        <property stdset="1">
-            <name>name</name>
-            <cstring>OcErrorString</cstring>
-        </property>
-        <property stdset="1">
-            <name>geometry</name>
-            <rect>
-                <x>530</x>
-                <y>205</y>
-                <width>285</width>
-                <height>16</height>
-            </rect>
-        </property>
-        <property stdset="1">
-            <name>text</name>
-            <string></string>
-        </property>
     </widget>
 </widget>
 <connections>
@@ -4680,18 +4608,6 @@
         <slot>OpenCraftWindow()</slot>
     </connection>
     <connection>
-        <sender>MatsButton</sender>
-        <signal>clicked()</signal>
-        <receiver>B_SC</receiver>
-        <slot>OpenMaterialsReport()</slot>
-    </connection>
-    <connection>
-        <sender>ConfigButton</sender>
-        <signal>clicked()</signal>
-        <receiver>B_SC</receiver>
-        <slot>OpenConfigReport()</slot>
-    </connection>
-    <connection>
         <sender>SkillsList</sender>
         <signal>clicked(QListBoxItem*)</signal>
         <receiver>B_SC</receiver>
@@ -4820,9 +4736,7 @@
     <slot access="public">ItemLevelShow()</slot>
     <slot access="public">JewelTabChanged(QWidget*)</slot>
     <slot access="public">Load_Item()</slot>
-    <slot access="public">OpenConfigReport()</slot>
     <slot access="public">OpenCraftWindow()</slot>
-    <slot access="public">OpenMaterialsReport()</slot>
     <slot access="public">PieceTabChanged(QWidget*)</slot>
     <slot access="public">PlayerToggled(bool)</slot>
     <slot access="public">QualityChanged(const QString&amp;)</slot>
@@ -4891,8 +4805,6 @@
     <tabstop>Bonus_Edit</tabstop>
     <tabstop>SkillsList</tabstop>
     <tabstop>OtherBonusList</tabstop>
-    <tabstop>ConfigButton</tabstop>
-    <tabstop>MatsButton</tabstop>
     <tabstop>TotalBonus</tabstop>
     <tabstop>CharName</tabstop>
     <tabstop>CharClass</tabstop>
