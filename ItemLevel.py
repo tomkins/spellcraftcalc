@@ -6,7 +6,7 @@ import re
 class ItemLevel(B_ItemLevel):
     def __init__(self,parent = None,name = None,modal = 0,fl = 0):
         B_ItemLevel.__init__(self,parent,name,modal,fl)
-        self.ShieldType.insertStrList(ShieldTypes)
+        self.ShieldType.insertStrList(list(ShieldTypes))
         self.AFDPS.setText('102')
         self.level = 51
         self.ShieldType.setEnabled(0)

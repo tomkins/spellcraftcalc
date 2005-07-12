@@ -40,6 +40,7 @@ import MouseLabel
 import DisplayWindow
 import CraftBar
 import SearchingCombo
+import UIXML
 import os
 import os.path
 import ItemPreview
@@ -49,8 +50,6 @@ import traceback
 import encodings
 import codecs
 import sys
-
-import UIXML
 
 import psyco
 
@@ -66,7 +65,7 @@ class SCApp(B_SC):
         self.extraSlotsOpen = False
         self.recentFiles = []
         self.effectlists = {
-            'Unused' : UnusedList, 
+            'Unused' : UnusedList,
             'Stat'   : StatList, 
             'Resist' : ResistList, 
             'Hits'   : HitsList, 
@@ -75,10 +74,10 @@ class SCApp(B_SC):
             'Focus'  : []
         }
         self.dropeffectlists = self.effectlists.copy()
-        self.dropeffectlists['Stat'] = DropStatList
+        self.dropeffectlists['Stat'] =         DropStatList
         self.dropeffectlists['Cap Increase'] = CapIncreaseList
-        self.dropeffectlists['PvE Bonus'] = PvEBonusList
-        self.dropeffectlists['Other Bonus'] = OtherBonusList
+        self.dropeffectlists['PvE Bonus'] =    PvEBonusList
+        self.dropeffectlists['Other Bonus'] =  OtherBonusList
 
         self.reportFile = os.path.join(os.path.dirname(os.path.abspath(sys.argv[0])),
                                        'reports', 'Default_Config_Report.xml')
@@ -531,7 +530,7 @@ class SCApp(B_SC):
         for slot in range(1, toprng):
             typecombo = getattr(self, 'Type_%d' % slot)
             typecombo.clear()
-            typecombo.insertStrList(typelist)
+            typecombo.insertStrList(list(typelist))
             gemtype = item.getSlotAttr(itemtype, slot-1, 'Type')
             gemeffect = item.getSlotAttr(itemtype, slot-1, 'Effect')
             typecombo.setCurrentItem(typelist.index(gemtype))
@@ -539,13 +538,15 @@ class SCApp(B_SC):
             effcombo = getattr(self, 'Effect_%d' % slot)
             if self.Drop.isChecked():
                 if not gemeffect in self.dropeffectlists[gemtype]:
-                    self.dropeffectlists[gemtype] = self.dropeffectlists[gemtype][:]
+                    if not isinstance(self.dropeffectlists[gemtype], list):
+                        self.dropeffectlists[gemtype] = list(self.dropeffectlists[gemtype])
                     self.dropeffectlists[gemtype].append(gemeffect)
                     effcombo.insertStrList( [gemeffect] )
                 effectlist = self.dropeffectlists[gemtype]
             else:
                 if not gemeffect in self.effectlists[gemtype]:
-                    self.effectlists[gemtype] = self.effectlists[gemtype][:]
+                    if not isinstance(self.effectlists[gemtype], list):
+                        self.effectlists[gemtype] = list(self.effectlists[gemtype])
                     self.effectlists[gemtype].append(gemeffect)
                     effcombo.insertStrList( [gemeffect] )
                 effectlist = self.effectlists[gemtype]
@@ -692,7 +693,7 @@ class SCApp(B_SC):
                     utility += 1
                     if item.getAttr('Equipped') == '1':
                         if effect == 'All Spell Lines':
-                            for f in AllBonusList[self.realm][self.charclass][effect][1:]:
+                            for f in AllBonusList[self.realm][self.charclass][effect]:
                                 if focusnum <= 4:
                                     getattr(self, 'Focus_%d' % focusnum).setText(
                                         '%s %s' % (amount, f)) 
@@ -962,16 +963,18 @@ class SCApp(B_SC):
         else:
             amountedit = getattr(self, 'Amount_Edit_%d' % num)
         if typetext != 'Unused':
+
+
             if self.Drop.isChecked():
                 effectlist = self.dropeffectlists[typetext]
             else:
                 effectlist = self.effectlists[typetext]
             if len(effectlist) > 0:
-                effcombo.insertStrList(effectlist)
+                effcombo.insertStrList(list(effectlist))
             if self.PlayerMade.isChecked():
                 valueslist = ValuesLists[typetext]
                 amountcombo.clear()
-                amountcombo.insertStrList(valueslist)
+                amountcombo.insertStrList(list(valueslist))
             else:
                 amountedit.setText('0')
         else:
@@ -982,17 +985,17 @@ class SCApp(B_SC):
         if self.PlayerMade.isChecked():
             qualcombo = getattr(self, 'Quality_%d' % num)
             qualcombo.clear()
-            qualcombo.insertStrList(QualityValues)
+            qualcombo.insertStrList(list(QualityValues))
             qualcombo.setCurrentItem(len(QualityValues)-2)
 
     def RaceChanged(self, a0):
         race = str(self.CharRace.currentText())
         for rt in ResistList:
-            if RacialResists[race].has_key(rt):
+            if Races['All'][race]['Resists'].has_key(rt):
               if self.includeRacials:
-                getattr(self, rt + 'RR').setText('('+str(RacialResists[race][rt])+')')
+                getattr(self, rt + 'RR').setText('('+str(Races['All'][race]['Resists'][rt])+')')
               else:
-                getattr(self, rt + 'RR').setText('+'+str(RacialResists[race][rt]))
+                getattr(self, rt + 'RR').setText('+'+str(Races['All'][race]['Resists'][rt]))
             else:
                 getattr(self, rt + 'RR').setText('-')
         self.calculate()
@@ -1006,15 +1009,16 @@ class SCApp(B_SC):
         self.dropeffectlists['Focus'] = FocusList[showrealm]
         if self.hideNonClassSkills:
             self.effectlists['Skill'] = AllBonusList['All'][self.charclass]['All Skills']
-            self.effectlists['Focus'] = AllBonusList['All'][self.charclass]['All Spell Lines']
+            self.effectlists['Focus'] = AllBonusList['All'][self.charclass]['All Focus']
         else:
             self.effectlists['Skill'] = SkillList[showrealm]
             self.effectlists['Focus'] = FocusList[showrealm]
         race = str(self.CharRace.currentText())
         self.CharRace.clear()
-        self.CharRace.insertStrList(Races[self.realm])
-        if race in Races[self.realm]:
-          self.CharRace.setCurrentItem(Races[self.realm].index(race))
+        racelist = AllBonusList[self.realm][self.charclass]['Races']
+        self.CharRace.insertStrList(list(racelist))
+        if race in racelist:
+          self.CharRace.setCurrentItem(racelist.index(race))
         self.RaceChanged('')
         item = self.itemattrlist.get(self.currentTabLabel(), Item(self.currentTabLabel()))
         item.loadAttr('ActiveState','player')
@@ -1024,7 +1028,7 @@ class SCApp(B_SC):
 
     def RealmChanged(self):
         self.CharClass.clear()
-        self.CharClass.insertStrList(ClassList[self.realm])
+        self.CharClass.insertStrList(list(ClassList[self.realm]))
         if self.charclass in ClassList[self.realm]:
           self.CharClass.setCurrentItem(ClassList[self.realm].index(self.charclass))
         self.CharClassChanged('')
@@ -1395,13 +1399,14 @@ class SCApp(B_SC):
         self.initialize()
         self.ClearCurrentItem()
         racename = ''
+        classname = ''
         for child in template.childNodes:
             if child.nodeType == Node.TEXT_NODE: continue
             if child.tagName == 'Name':
                 self.CharName.setText(XMLHelper.getText(child.childNodes))
             elif child.tagName == 'Class':
                 # defer for the moment
-                self.charclass = XMLHelper.getText(child.childNodes)
+                charclass = XMLHelper.getText(child.childNodes)
             elif child.tagName == 'Race':
                 racename = XMLHelper.getText(child.childNodes)
             elif child.tagName == 'Realm':
@@ -1422,11 +1427,11 @@ class SCApp(B_SC):
                 self.coop = eval(XMLHelper.getText(child.childNodes), 
                                  globals(), globals())
         self.RealmChanged()
-        if self.charclass != '':
-            self.CharClass.setCurrentItem(ClassList[self.realm].index(self.charclass))
+        if AllBonusList[self.realm].has_key(charclass):
+            self.CharClass.setCurrentItem(ClassList[self.realm].index(charclass))
             self.CharClassChanged('')
-        if racename != '':
-            self.CharRace.setCurrentItem(Races[self.realm].index(racename))
+        if racename in AllBonusList[self.realm][self.charclass]['Races']:
+            self.CharRace.setCurrentItem(AllBonusList[self.realm][self.charclass]['Races'].index(racename))
             self.RaceChanged('')
         self.nocalc = wascalc
         self.restoreItem(self.itemattrlist.get(self.currentTabLabel()))
@@ -1445,19 +1450,18 @@ class SCApp(B_SC):
             if attr == 'CHAR_NAME':
                 self.CharName.setText(value)
             elif attr == 'CHAR_CLASS':
-                self.realm, self.charclass = string.split(value, '_', 1)
-                self.charclass = self.charclass[0]+string.lower(self.charclass[1:])
+                self.realm, charclass = string.split(value, '_', 1)
+                charclass = charclass[0]+string.lower(charclass[1:])
                 if self.realm == 'HIB':
                     self.realm = 'Hibernia'
                 elif self.realm == 'ALB':
                     self.realm = 'Albion'
                 elif self.realm == 'MID':
                     self.realm = 'Midgard'
-                self.CharClass.clear()
-                self.CharClass.insertStrList(ClassList[self.realm])
-                self.CharClass.setCurrentItem(ClassList[self.realm].index(self.charclass))
-                self.CharRace.clear()
-                self.CharRace.insertStrList(Races[self.realm])
+                self.RealmChanged()
+                if AllBonusList[self.realm].has_key(charclass):
+                   self.CharClass.setCurrentItem(ClassList[self.realm].index(charclass))
+                   self.CharClassChanged('')
 
         for itemnum in range(0, 19):
             item = Item(TabList[itemnum])

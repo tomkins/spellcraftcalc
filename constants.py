@@ -1,12 +1,12 @@
 # constants.py: Dark Age of Camelot Spellcrafting Calculator
 # See http://www.ugcs.caltech.edu/~jlamanna/daoc/sccalc/index.html for updates
 
-# Copyright (C) 2003,  James Lamanna (jlamanna@ugcs.caltech.edu)
+# Copyright t2(C) 2003,  James Lamanna t2(jlamanna@ugcs.caltech.edu)
 
 # This program is free software; you can redistribute it and/or
 # modify it under the terms of the GNU General Public License
 # as published by the Free Software Foundation; either version 2
-# of the License, or (at your option) any later version.
+# of the License, or t2(at your option) any later version.
 
 # This program is distributed in the hope that it will be useful,
 # but WITHOUT ANY WARRANTY; without even the implied warranty of
@@ -17,10 +17,28 @@
 # along with this program; if not, write to the Free Software
 # Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
-ScVersion = "Kort 1.42b + Ehrayn/patch 1.0.7"
+__all__ = [
+  'QualityValues', 'CapIncreaseTable', 'HitsList', 'StatTableOrdered', 
+  'GemQualOCModifiers', 'ItemQualOCModifiers', 'ClassList', 'PowerTable', 
+  'Races', 'GemLiquids', 'GemNames', 'ImbuePts', 'HitsValues', 'RaceList', 
+  'DropStatTable', 'PvEBonusList', 'PowerList', 'ScVersion', 'FileExt', 'StatList', 
+  'ResistValues', 'OtherBonusList', 'HighCapBonusList', 'TypeList', 'UnusedTable',
+  'AllBonusList', 'DustsOrder', 'PowerValues', 'Caps', 'ResistList', 'GemDusts', 
+  'StatValues', 'DropSkillList', 'Realms', 'ValuesLists', 'SkillValues', 
+  'HitsTable', 'CapIncreaseList', 'FixEffectsTable', 'GemSubName', 'RemakeCosts', 
+  'FocusTable', 'DropStatList', 'GemTables', 'ResistTableOrdered', 'StatTable', 
+  'TabList', 'GemCosts', 'FocusValues', 'DropStatTableOrdered', 'OCStartPercentages', 
+  'UnusedValues', 'ShieldTypes', 'ResistTable', 'SkillList', 'SkillTable', 
+  'UnusedList', 'ImbueMultipliers', 'PvEBonusTable', 'DropTypeList', 'MaterialGems', 
+  'FocusList', 'OtherBonusTable', 'LiquidsOrder'
+]
 
+ScVersion = "Kort 1.43 (dev)"
 
-Realms = ['Albion', 'Hibernia', 'Midgard']
+from tuple2 import * 
+from dict2 import * 
+
+Realms = t2(('Albion', 'Hibernia', 'Midgard'))
 
 
 AllBonusList = { 
@@ -28,414 +46,503 @@ AllBonusList = {
   'Albion' : {
 
     'Armsman' : {
-        'All Spell Lines' : [], 
-        'All Magic Skills' : [],
-        'All Melee Weapon Skills' : ['Crush', 'Slash', 'Thrust', 'Polearm', 'Two Handed'],
-        'All Dual Wield Skills' : [],
-        'All Archery Skills' : [],
-        'Other Skills' : ['Parry', 'Shield'],
-        'Acuity' : [] },
+        'All Spell Lines' : (), 
+        'All Magic Skills' : (),
+        'All Melee Weapon Skills' : ('Crush', 'Slash', 'Thrust', 'Polearm', 'Two Handed',),
+        'All Dual Wield Skills' : (),
+        'All Archery Skills' : (),
+        'Other Skills' : ('Parry', 'Shield',),
+        'Races' : t2(('Avalonian', 'Briton', 'Half Ogre', 'Highlander', 'Inconnu', 'Saracen',)),
+        'Acuity' : (),
+    },
 
     'Cabalist' : {
-        'All Spell Lines' : ['Body Magic', 'Matter Magic', 'Spirit Magic'], 
-        'All Magic Skills' : ['Body Magic', 'Matter Magic', 'Spirit Magic'],
-        'All Melee Weapon Skills' : [],
-        'All Dual Wield Skills' : [],
-        'All Archery Skills' : [],
-        'Other Skills' : [],
-        'Acuity' : ['Intelligence'] },
+        'All Spell Lines' : ('Body Magic', 'Matter Magic', 'Spirit Magic',), 
+        'All Magic Skills' : ('Body Magic', 'Matter Magic', 'Spirit Magic',),
+        'All Melee Weapon Skills' : (),
+        'All Dual Wield Skills' : (),
+        'All Archery Skills' : (),
+        'Other Skills' : (),
+        'Races' : t2(('Avalonian', 'Briton', 'Half Ogre', 'Inconnu', 'Saracen',)),
+        'Acuity' : ('Intelligence',),
+    },
 
     'Cleric' : {
-        'All Spell Lines' : [], 
-        'All Magic Skills' : ['Rejuvenation', 'Enhancement', 'Smite'],
-        'All Melee Weapon Skills' : [],
-        'All Dual Wield Skills' : [],
-        'All Archery Skills' : [],
-        'Other Skills' : [],
-        'Acuity' : ['Piety'] },
+        'All Spell Lines' : (), 
+        'All Magic Skills' : ('Rejuvenation', 'Enhancement', 'Smite',),
+        'All Melee Weapon Skills' : (),
+        'All Dual Wield Skills' : (),
+        'All Archery Skills' : (),
+        'Other Skills' : (),
+        'Races' : t2(('Avalonian', 'Briton', 'Highlander',)),
+        'Acuity' : ('Piety',),
+    },
 
     'Friar' : {
-        'All Spell Lines' : [], 
-        'All Magic Skills' : ['Rejuvenation', 'Enhancement'],
-        'All Melee Weapon Skills' : ['Staff'],
-        'All Dual Wield Skills' : [],
-        'All Archery Skills' : [],
-        'Other Skills' : ['Parry'],
-        'Acuity' : ['Piety'] },
+        'All Spell Lines' : (), 
+        'All Magic Skills' : ('Rejuvenation', 'Enhancement',),
+        'All Melee Weapon Skills' : ('Staff',),
+        'All Dual Wield Skills' : (),
+        'All Archery Skills' : (),
+        'Other Skills' : ('Parry',),
+        'Races' : t2(('Briton',)),
+        'Acuity' : ('Piety',),
+    },
 
     'Heretic' : {
-        'All Spell Lines' : [], 
-        'All Magic Skills' : ['Rejuvenation', 'Enhancement'],
-        'All Melee Weapon Skills' : ['Crush', 'Flexible'],
-        'All Dual Wield Skills' : [],
-        'All Archery Skills' : [],
-        'Other Skills' : ['Shield'],
-        'Acuity' : ['Piety'] },
+        'All Spell Lines' : (), 
+        'All Magic Skills' : ('Rejuvenation', 'Enhancement',),
+        'All Melee Weapon Skills' : ('Crush', 'Flexible',),
+        'All Dual Wield Skills' : (),
+        'All Archery Skills' : (),
+        'Other Skills' : ('Shield',),
+        'Races' : t2(('Avalonian', 'Briton', 'Inconnu',)),
+        'Acuity' : ('Piety',),
+    },
 
     'Infiltrator' : {
-        'All Spell Lines' : [], 
-        'All Magic Skills' : [],
-        'All Melee Weapon Skills' : ['Slash', 'Thrust'],
-        'All Dual Wield Skills' : ['Dual Wield'],
-        'All Archery Skills' : [],
-        'Other Skills' : ['Critical Strike', 'Envenom', 'Stealth'],
-        'Acuity' : [] },
+        'All Spell Lines' : (), 
+        'All Magic Skills' : (),
+        'All Melee Weapon Skills' : ('Slash', 'Thrust',),
+        'All Dual Wield Skills' : ('Dual Wield',),
+        'All Archery Skills' : (),
+        'Other Skills' : ('Critical Strike', 'Envenom', 'Stealth',),
+        'Races' : t2(('Briton', 'Inconnu', 'Saracen',)),
+        'Acuity' : (),
+    },
 
     'Mercenary' : {
-        'All Spell Lines' : [], 
-        'All Magic Skills' : [],
-        'All Melee Weapon Skills' : ['Crush', 'Slash', 'Thrust'],
-        'All Dual Wield Skills' : ['Dual Wield'],
-        'All Archery Skills' : [],
-        'Other Skills' : ['Parry', 'Shield'],
-        'Acuity' : [] },
+        'All Spell Lines' : (), 
+        'All Magic Skills' : (),
+        'All Melee Weapon Skills' : ('Crush', 'Slash', 'Thrust',),
+        'All Dual Wield Skills' : ('Dual Wield',),
+        'All Archery Skills' : (),
+        'Other Skills' : ('Parry', 'Shield',),
+        'Races' : t2(('Avalonian', 'Briton', 'Half Ogre', 'Highlander', 'Inconnu', 'Saracen',)),
+        'Acuity' : (),
+    },
 
     'Minstrel' : {
-        'All Spell Lines' : [], 
-        'All Magic Skills' : ['Instruments'],
-        'All Melee Weapon Skills' : ['Slash', 'Thrust'],
-        'All Dual Wield Skills' : [],
-        'All Archery Skills' : [],
-        'Other Skills' : ['Stealth'],
-        'Acuity' : ['Charisma'] },
+        'All Spell Lines' : (), 
+        'All Magic Skills' : ('Instruments',),
+        'All Melee Weapon Skills' : ('Slash', 'Thrust',),
+        'All Dual Wield Skills' : (),
+        'All Archery Skills' : (),
+        'Other Skills' : ('Stealth',),
+        'Races' : t2(('Briton', 'Highlander', 'Saracen',)),
+        'Acuity' : ('Charisma',),
+    },
 
     'Necromancer' : {
-        'All Spell Lines' : ['Deathsight', 'Death Servant', 
-        'Painworking'], 
-        'All Magic Skills' : ['Deathsight', 'Death Servant', 'Painworking'],
-        'All Melee Weapon Skills' : [],
-        'All Dual Wield Skills' : [],
-        'All Archery Skills' : [],
-        'Other Skills' : [],
-        'Acuity' : ['Intelligence'] },
+        'All Spell Lines' : ('Deathsight', 'Death Servant', 'Painworking',), 
+        'All Magic Skills' : ('Deathsight', 'Death Servant', 'Painworking',),
+        'All Melee Weapon Skills' : (),
+        'All Dual Wield Skills' : (),
+        'All Archery Skills' : (),
+        'Other Skills' : (),
+        'Races' : t2(('Briton', 'Inconnu', 'Saracen',)),
+        'Acuity' : ('Intelligence',),
+    },
 
     'Paladin' : {
-        'All Spell Lines' : [],
-        'All Magic Skills' : [],
-        'All Melee Weapon Skills' : ['Crush', 'Slash', 'Thrust', 'Two Handed'],
-        'All Dual Wield Skills' : [],
-        'All Archery Skills' : [],
-        'Other Skills' : ['Parry', 'Shield'],
-        'No Skill Effect' : ['Chants'],
-        'Acuity' : ['Piety'] },
+        'All Spell Lines' : (),
+        'All Magic Skills' : (),
+        'All Melee Weapon Skills' : ('Crush', 'Slash', 'Thrust', 'Two Handed',),
+        'All Dual Wield Skills' : (),
+        'All Archery Skills' : (),
+        'Other Skills' : ('Parry', 'Shield',),
+        'No Skill Effect' : ('Chants',),
+        'Races' : t2(('Avalonian', 'Briton', 'Highlander', 'Saracen',)),
+        'Acuity' : ('Piety',),
+    },
 
     'Reaver' : {
-        'All Spell Lines' : [],
-        'All Magic Skills' : ['Soulrending'],
-        'All Melee Weapon Skills' : ['Crush', 'Flexible', 'Slash', 'Thrust'],
-        'All Dual Wield Skills' : [],
-        'All Archery Skills' : [],
-        'Other Skills' : ['Parry', 'Shield'],
-        'Acuity' : ['Piety'] },
+        'All Spell Lines' : (),
+        'All Magic Skills' : ('Soulrending',),
+        'All Melee Weapon Skills' : ('Crush', 'Flexible', 'Slash', 'Thrust',),
+        'All Dual Wield Skills' : (),
+        'All Archery Skills' : (),
+        'Other Skills' : ('Parry', 'Shield',),
+        'Races' : t2(('Briton', 'Inconnu', 'Saracen',)),
+        'Acuity' : ('Piety',),
+    },
 
     'Scout' : {
-        'All Spell Lines' : [],
-        'All Magic Skills' : [],
-        'All Melee Weapon Skills' : ['Slash', 'Thrust'],
-        'All Dual Wield Skills' : [],
-        'All Archery Skills' : ['Longbow'],
-        'Other Skills' : ['Stealth', 'Shield'],
-        'Acuity' : [] },
+        'All Spell Lines' : (),
+        'All Magic Skills' : (),
+        'All Melee Weapon Skills' : ('Slash', 'Thrust',),
+        'All Dual Wield Skills' : (),
+        'All Archery Skills' : ('Longbow',),
+        'Other Skills' : ('Stealth', 'Shield',),
+        'Races' : t2(('Briton', 'Highlander', 'Inconnu', 'Saracen',)),
+        'Acuity' : (),
+    },
 
     'Sorcerer' : {
-        'All Spell Lines' : ['Body Magic', 'Mind Magic', 'Matter Magic'],
-        'All Magic Skills' : ['Body Magic', 'Matter Magic'],
-        'All Melee Weapon Skills' : [],
-        'All Dual Wield Skills' : [],
-        'All Archery Skills' : [],
-        'Other Skills' : [],
-        'No Skill Effect' : ['Mind Magic'],
-        'Acuity' : ['Intelligence'] },
+        'All Spell Lines' : ('Body Magic', 'Mind Magic', 'Matter Magic',),
+        'All Magic Skills' : ('Body Magic', 'Matter Magic',),
+        'All Melee Weapon Skills' : (),
+        'All Dual Wield Skills' : (),
+        'All Archery Skills' : (),
+        'Other Skills' : (),
+        'No Skill Effect' : ('Mind Magic',),
+        'Races' : t2(('Avalonian', 'Briton', 'Half Ogre', 'Inconnu', 'Saracen',)),
+        'Acuity' : ('Intelligence',),
+    },
 
     'Theurgist' : {
-        'All Spell Lines' : ['Earth Magic', 'Cold Magic', 'Wind Magic'],
-        'All Magic Skills' : ['Earth Magic', 'Cold Magic', 'Wind Magic'],
-        'All Melee Weapon Skills' : [],
-        'All Dual Wield Skills' : [],
-        'All Archery Skills' : [],
-        'Other Skills' : [],
-        'Acuity' : ['Intelligence'] },
+        'All Spell Lines' : ('Earth Magic', 'Cold Magic', 'Wind Magic',),
+        'All Magic Skills' : ('Earth Magic', 'Cold Magic', 'Wind Magic',),
+        'All Melee Weapon Skills' : (),
+        'All Dual Wield Skills' : (),
+        'All Archery Skills' : (),
+        'Other Skills' : (),
+        'Races' : t2(('Avalonian', 'Briton', 'Half Ogre',)),
+        'Acuity' : ('Intelligence',),
+    },
 
     'Wizard' : {
-        'All Spell Lines' : ['Earth Magic', 'Cold Magic', 'Fire Magic'],
-        'All Magic Skills' : ['Earth Magic', 'Cold Magic', 'Fire Magic'],
-        'All Melee Weapon Skills' : [],
-        'All Dual Wield Skills' : [],
-        'All Archery Skills' : [],
-        'Other Skills' : [],
-        'Acuity' : ['Intelligence'] } 
+        'All Spell Lines' : ('Earth Magic', 'Cold Magic', 'Fire Magic',),
+        'All Magic Skills' : ('Earth Magic', 'Cold Magic', 'Fire Magic',),
+        'All Melee Weapon Skills' : (),
+        'All Dual Wield Skills' : (),
+        'All Archery Skills' : (),
+        'Other Skills' : (),
+        'Races' : t2(('Avalonian', 'Briton', 'Half Ogre',)),
+        'Acuity' : ('Intelligence',),
+    },
   },
 
   'Hibernia' : {
 
     'Animist' : {
-        'All Spell Lines' : ['Arboreal Path', 'Creeping Path', 'Verdant Path'],
-        'All Magic Skills' : ['Arboreal Path', 'Creeping Path', 'Verdant Path'],
-        'All Melee Weapon Skills' : [],
-        'All Dual Wield Skills' : [],
-        'All Archery Skills' : [],
-        'Other Skills' : [],
-        'Acuity' : ['Intelligence'] },
+        'All Spell Lines' : ('Arboreal Path', 'Creeping Path', 'Verdant Path',),
+        'All Magic Skills' : ('Arboreal Path', 'Creeping Path', 'Verdant Path',),
+        'All Melee Weapon Skills' : (),
+        'All Dual Wield Skills' : (),
+        'All Archery Skills' : (),
+        'Other Skills' : (),
+        'Races' : t2(('Celt', 'Firbolg', 'Sylvan',)),
+        'Acuity' : ('Intelligence',),
+    },
 
     'Bainshee' : {
-        'All Spell Lines' : ['Ethereal Shriek', 'Phantasmal Wail', 'Spectral Guard'],
-        'All Magic Skills' : ['Ethereal Shriek', 'Phantasmal Wail', 'Spectral Guard'],
-        'All Melee Weapon Skills' : [],
-        'All Dual Wield Skills' : [],
-        'All Archery Skills' : [],
-        'Other Skills' : [],
-        'Acuity' : ['Intelligence'] },
+        'All Spell Lines' : ('Ethereal Shriek', 'Phantasmal Wail', 'Spectral Guard',),
+        'All Magic Skills' : ('Ethereal Shriek', 'Phantasmal Wail', 'Spectral Guard',),
+        'All Melee Weapon Skills' : (),
+        'All Dual Wield Skills' : (),
+        'All Archery Skills' : (),
+        'Other Skills' : (),
+        'Races' : t2(('Celt', 'Elf', 'Lurikeen',)),
+        'Acuity' : ('Intelligence',),
+    },
 
     'Bard' : {
-        'All Spell Lines' : [],
-        'All Magic Skills' : ['Regrowth', 'Nurture', 'Music'],
-        'All Melee Weapon Skills' : ['Blades', 'Blunt'],
-        'All Dual Wield Skills' : [],
-        'All Archery Skills' : [],
-        'Other Skills' : [],
-        'Acuity' : ['Charisma'] },
+        'All Spell Lines' : (),
+        'All Magic Skills' : ('Regrowth', 'Nurture', 'Music',),
+        'All Melee Weapon Skills' : ('Blades', 'Blunt',),
+        'All Dual Wield Skills' : (),
+        'All Archery Skills' : (),
+        'Other Skills' : (),
+        'Races' : t2(('Celt', 'Firbolg',)),
+        'Acuity' : ('Charisma',),
+    },
 
     'Blademaster' : {
-        'All Spell Lines' : [],
-        'All Magic Skills' : [],
-        'All Melee Weapon Skills' : ['Blades', 'Blunt', 'Piercing'],
-        'All Dual Wield Skills' : ['Celtic Dual'],
-        'All Archery Skills' : [],
-        'Other Skills' : ['Parry', 'Shield'],
-        'Acuity' : [] },
+        'All Spell Lines' : (),
+        'All Magic Skills' : (),
+        'All Melee Weapon Skills' : ('Blades', 'Blunt', 'Piercing',),
+        'All Dual Wield Skills' : ('Celtic Dual',),
+        'All Archery Skills' : (),
+        'Other Skills' : ('Parry', 'Shield',),
+        'Races' : t2(('Celt', 'Firbolg', 'Shar',)),
+        'Acuity' : (),
+    },
 
     'Champion' : {
-        'All Spell Lines' : [],
-        'All Magic Skills' : ['Valor'],
-        'All Melee Weapon Skills' : ['Blades', 'Blunt', 'Piercing', 'Large Weaponry'],
-        'All Dual Wield Skills' : [],
-        'All Archery Skills' : [],
-        'Other Skills' : ['Parry', 'Shield'],
-        'Acuity' : ['Intelligence'] },
+        'All Spell Lines' : (),
+        'All Magic Skills' : ('Valor',),
+        'All Melee Weapon Skills' : ('Blades', 'Blunt', 'Piercing', 'Large Weaponry',),
+        'All Dual Wield Skills' : (),
+        'All Archery Skills' : (),
+        'Other Skills' : ('Parry', 'Shield',),
+        'Races' : t2(('Celt', 'Elf', 'Lurikeen', 'Shar',)),
+        'Acuity' : ('Intelligence',),
+    },
 
     'Druid' : {
-        'All Spell Lines' : [],
-        'All Magic Skills' : ['Regrowth', 'Nature', 'Nurture'],
-        'All Melee Weapon Skills' : [],
-        'All Dual Wield Skills' : [],
-        'All Archery Skills' : [],
-        'Other Skills' : [],
-        'Acuity' : ['Empathy'] },
+        'All Spell Lines' : (),
+        'All Magic Skills' : ('Regrowth', 'Nature', 'Nurture',),
+        'All Melee Weapon Skills' : (),
+        'All Dual Wield Skills' : (),
+        'All Archery Skills' : (),
+        'Other Skills' : (),
+        'Races' : t2(('Celt', 'Firbolg', 'Sylvan',)),
+        'Acuity' : ('Empathy',),
+    },
 
     'Eldritch' : {
-        'All Spell Lines' : ['Light', 'Mana', 'Void'],
-        'All Magic Skills' : ['Light', 'Mana', 'Void'],
-        'All Melee Weapon Skills' : [],
-        'All Dual Wield Skills' : [],
-        'All Archery Skills' : [],
-        'Other Skills' : [],
-        'Acuity' : ['Intelligence'] },
+        'All Spell Lines' : ('Light', 'Mana', 'Void',),
+        'All Magic Skills' : ('Light', 'Mana', 'Void',),
+        'All Melee Weapon Skills' : (),
+        'All Dual Wield Skills' : (),
+        'All Archery Skills' : (),
+        'Other Skills' : (),
+        'Races' : t2(('Elf', 'Lurikeen',)),
+        'Acuity' : ('Intelligence',),
+    },
 
     'Enchanter' : {
-        'All Spell Lines' : ['Light', 'Mana', 'Enchantments'],
-        'All Magic Skills' : ['Light', 'Mana', 'Enchantments'],
-        'All Melee Weapon Skills' : [],
-        'All Dual Wield Skills' : [],
-        'All Archery Skills' : [],
-        'Other Skills' : [],
-        'Acuity' : ['Intelligence'] },
+        'All Spell Lines' : ('Light', 'Mana', 'Enchantments',),
+        'All Magic Skills' : ('Light', 'Mana', 'Enchantments',),
+        'All Melee Weapon Skills' : (),
+        'All Dual Wield Skills' : (),
+        'All Archery Skills' : (),
+        'Other Skills' : (),
+        'Races' : t2(('Elf', 'Lurikeen',)),
+        'Acuity' : ('Intelligence',),
+    },
 
     'Mentalist' : {
-        'All Spell Lines' : ['Light', 'Mana', 'Mentalism'],
-        'All Magic Skills' : ['Light', 'Mana', 'Mentalism'],
-        'All Melee Weapon Skills' : [],
-        'All Dual Wield Skills' : [],
-        'All Archery Skills' : [],
-        'Other Skills' : [],
-        'Acuity' : ['Intelligence'] },
+        'All Spell Lines' : ('Light', 'Mana', 'Mentalism',),
+        'All Magic Skills' : ('Light', 'Mana', 'Mentalism',),
+        'All Melee Weapon Skills' : (),
+        'All Dual Wield Skills' : (),
+        'All Archery Skills' : (),
+        'Other Skills' : (),
+        'Races' : t2(('Celt', 'Elf', 'Lurikeen', 'Shar',)),
+        'Acuity' : ('Intelligence',),
+    },
 
     'Hero' : {
-        'All Spell Lines' : [],
-        'All Magic Skills' : [],
-        'All Melee Weapon Skills' : ['Blades', 'Blunt', 'Celtic Spear', 'Large Weaponry', 'Piercing'],
-        'All Dual Wield Skills' : [],
-        'All Archery Skills' : [],
-        'Other Skills' : ['Parry', 'Shield'],
-        'Acuity' : [] },
+        'All Spell Lines' : (),
+        'All Magic Skills' : (),
+        'All Melee Weapon Skills' : ('Blades', 'Blunt', 'Celtic Spear', 'Large Weaponry', 'Piercing',),
+        'All Dual Wield Skills' : (),
+        'All Archery Skills' : (),
+        'Other Skills' : ('Parry', 'Shield',),
+        'Races' : t2(('Celt', 'Firbolg', 'Lurikeen', 'Shar', 'Sylvan',)),
+        'Acuity' : (),
+    },
 
     'Nightshade' : {
-        'All Spell Lines' : [],
-        'All Magic Skills' : [],
-        'All Melee Weapon Skills' : ['Blades', 'Piercing'],
-        'All Dual Wield Skills' : ['Celtic Dual'],
-        'All Archery Skills' : [],
-        'Other Skills' : ['Critical Strike', 'Envenom', 'Stealth'],
-        'Acuity' : [] },
+        'All Spell Lines' : (),
+        'All Magic Skills' : (),
+        'All Melee Weapon Skills' : ('Blades', 'Piercing',),
+        'All Dual Wield Skills' : ('Celtic Dual',),
+        'All Archery Skills' : (),
+        'Other Skills' : ('Critical Strike', 'Envenom', 'Stealth',),
+        'Races' : t2(('Elf', 'Lurikeen',)),
+        'Acuity' : (),
+    },
 
     'Ranger' : {
-        'All Spell Lines' : [],
-        'All Magic Skills' : ['Pathfinding'],
-        'All Melee Weapon Skills' : ['Blades', 'Piercing'],
-        'All Dual Wield Skills' : ['Celtic Dual'],
-        'All Archery Skills' : ['Recurve Bow'],
-        'Other Skills' : ['Stealth'],
-        'Acuity' : [] },
+        'All Spell Lines' : (),
+        'All Magic Skills' : ('Pathfinding',),
+        'All Melee Weapon Skills' : ('Blades', 'Piercing',),
+        'All Dual Wield Skills' : ('Celtic Dual',),
+        'All Archery Skills' : ('Recurve Bow',),
+        'Other Skills' : ('Stealth',),
+        'Races' : t2(('Celt', 'Elf', 'Lurikeen', 'Shar',)),
+        'Acuity' : (),
+    },
 
     'Valewalker' : {
-        'All Spell Lines' : ['Arboreal Path'],
-        'All Magic Skills' : ['Arboreal Path'],
-        'All Melee Weapon Skills' : ['Scythe'],
-        'All Dual Wield Skills' : [],
-        'All Archery Skills' : [],
-        'Other Skills' : ['Parry'],
-        'Acuity' : ['Intelligence'] },
+        'All Spell Lines' : ('Arboreal Path',),
+        'All Magic Skills' : ('Arboreal Path',),
+        'All Melee Weapon Skills' : ('Scythe',),
+        'All Dual Wield Skills' : (),
+        'All Archery Skills' : (),
+        'Other Skills' : ('Parry',),
+        'Races' : t2(('Celt', 'Firbolg', 'Sylvan',)),
+        'Acuity' : ('Intelligence',),
+    },
 
     'Vampiir' : {
-        'All Spell Lines' : [],
-        'All Magic Skills' : ['Dementia', 'Shadow Mastery', 'Vampiiric Embrace'],
-        'All Melee Weapon Skills' : ['Piercing'],
-        'All Dual Wield Skills' : [],
-        'All Archery Skills' : [],
-        'Other Skills' : [],
-        'Acuity' : [] },
+        'All Spell Lines' : (),
+        'All Magic Skills' : ('Dementia', 'Shadow Mastery', 'Vampiiric Embrace',),
+        'All Melee Weapon Skills' : ('Piercing',),
+        'All Dual Wield Skills' : (),
+        'All Archery Skills' : (),
+        'Other Skills' : (),
+        'Races' : t2(('Celt', 'Lurikeen', 'Shar',)),
+        'Acuity' : (),
+    },
 
     'Warden' : {
-        'All Spell Lines' : [],
-        'All Magic Skills' : ['Nurture', 'Regrowth'],
-        'All Melee Weapon Skills' : ['Blades', 'Blunt'],
-        'All Dual Wield Skills' : [],
-        'All Archery Skills' : [],
-        'Other Skills' : ['Parry'],
-        'Acuity' : ['Empathy'] } 
+        'All Spell Lines' : (),
+        'All Magic Skills' : ('Nurture', 'Regrowth',),
+        'All Melee Weapon Skills' : ('Blades', 'Blunt',),
+        'All Dual Wield Skills' : (),
+        'All Archery Skills' : (),
+        'Other Skills' : ('Parry',),
+        'Races' : t2(('Celt', 'Firbolg', 'Sylvan',)),
+        'Acuity' : ('Empathy',),
+    },
   },
 
   'Midgard' : {
 
     'Berserker' : {
-        'All Spell Lines' : [],
-        'All Magic Skills' : [],
-        'All Melee Weapon Skills' : ['Axe', 'Hammer', 'Sword'],
-        'All Dual Wield Skills' : ['Left Axe'],
-        'All Archery Skills' : [],
-        'Other Skills' : ['Parry'],
-        'Acuity' : [] },
+        'All Spell Lines' : (),
+        'All Magic Skills' : (),
+        'All Melee Weapon Skills' : ('Axe', 'Hammer', 'Sword',),
+        'All Dual Wield Skills' : ('Left Axe',),
+        'All Archery Skills' : (),
+        'Other Skills' : ('Parry',),
+        'Races' : t2(('Dwarf', 'Norseman', 'Troll', 'Valkyn',)),
+        'Acuity' : (),
+    },
 
     'Bonedancer' : {
-        'All Spell Lines' : ['Darkness', 'Suppression', 'Bone Army'],
-        'All Magic Skills' : ['Darkness', 'Suppression', 'Bone Army'],
-        'All Melee Weapon Skills' : [],
-        'All Dual Wield Skills' : [],
-        'All Archery Skills' : [],
-        'Other Skills' : [],
-        'Acuity' : ['Piety'] },
+        'All Spell Lines' : ('Darkness', 'Suppression', 'Bone Army',),
+        'All Magic Skills' : ('Darkness', 'Suppression', 'Bone Army',),
+        'All Melee Weapon Skills' : (),
+        'All Dual Wield Skills' : (),
+        'All Archery Skills' : (),
+        'Other Skills' : (),
+        'Races' : t2(('Kobold', 'Troll', 'Valkyn',)),
+        'Acuity' : ('Piety',),
+    },
 
     'Healer' : {
-        'All Spell Lines' : [],
-        'All Magic Skills' : ['Augmentation', 'Mending'],
-        'All Melee Weapon Skills' : [],
-        'All Dual Wield Skills' : [],
-        'All Archery Skills' : [],
-        'Other Skills' : [],
-        'No Skill Effect' : ['Pacification'],
-        'Acuity' : ['Piety'] },
+        'All Spell Lines' : (),
+        'All Magic Skills' : ('Augmentation', 'Mending',),
+        'All Melee Weapon Skills' : (),
+        'All Dual Wield Skills' : (),
+        'All Archery Skills' : (),
+        'Other Skills' : (),
+        'No Skill Effect' : ('Pacification',),
+        'Races' : t2(('Dwarf', 'Frostalf', 'Norseman',)),
+        'Acuity' : ('Piety',),
+    },
 
     'Hunter' : {
-        'All Spell Lines' : [],
-        'All Magic Skills' : ['Beastcraft'],
-        'All Melee Weapon Skills' : ['Spear', 'Sword'],
-        'All Dual Wield Skills' : [],
-        'All Archery Skills' : ['Composite Bow'],
-        'Other Skills' : ['Stealth'],
-        'Acuity' : [] },
+        'All Spell Lines' : (),
+        'All Magic Skills' : ('Beastcraft',),
+        'All Melee Weapon Skills' : ('Spear', 'Sword',),
+        'All Dual Wield Skills' : (),
+        'All Archery Skills' : ('Composite Bow',),
+        'Other Skills' : ('Stealth',),
+        'Races' : t2(('Dwarf', 'Frostalf', 'Kobold', 'Norseman', 'Valkyn',)),
+        'Acuity' : (),
+    },
 
     'Runemaster' : {
-        'All Spell Lines' : ['Darkness', 'Suppression', 'Runecarving'],
-        'All Magic Skills' : ['Darkness', 'Suppression', 'Runecarving'],
-        'All Melee Weapon Skills' : [],
-        'All Dual Wield Skills' : [],
-        'All Archery Skills' : [],
-        'Other Skills' : [],
-        'Acuity' : ['Piety'] },
+        'All Spell Lines' : ('Darkness', 'Suppression', 'Runecarving',),
+        'All Magic Skills' : ('Darkness', 'Suppression', 'Runecarving',),
+        'All Melee Weapon Skills' : (),
+        'All Dual Wield Skills' : (),
+        'All Archery Skills' : (),
+        'Other Skills' : (),
+        'Races' : t2(('Dwarf', 'Frostalf', 'Kobold', 'Norseman',)),
+        'Acuity' : ('Piety',),
+    },
 
     'Savage' : {
-        'All Spell Lines' : [],
-        'All Magic Skills' : [],
-        'All Melee Weapon Skills' : ['Sword', 'Axe', 'Hammer', 'Hand To Hand'],
-        'All Dual Wield Skills' : [],
-        'All Archery Skills' : [],
-        'Other Skills' : ['Parry'],
-        'No Skill Effect' : ['Savagery'],
-        'Acuity' : [] },
+        'All Spell Lines' : (),
+        'All Magic Skills' : (),
+        'All Melee Weapon Skills' : ('Sword', 'Axe', 'Hammer', 'Hand To Hand',),
+        'All Dual Wield Skills' : (),
+        'All Archery Skills' : (),
+        'Other Skills' : ('Parry',),
+        'No Skill Effect' : ('Savagery',),
+        'Races' : t2(('Dwarf', 'Kobold', 'Norseman', 'Troll', 'Valkyn',)),
+        'Acuity' : (),
+    },
 
     'Shadowblade' : {
-        'All Spell Lines' : [],
-        'All Magic Skills' : [],
-        'All Melee Weapon Skills' : ['Sword', 'Axe'],
-        'All Dual Wield Skills' : ['Left Axe'],
-        'All Archery Skills' : [],
-        'Other Skills' : ['Critical Strike', 'Envenom', 'Stealth'],
-        'Acuity' : [] },
+        'All Spell Lines' : (),
+        'All Magic Skills' : (),
+        'All Melee Weapon Skills' : ('Sword', 'Axe',),
+        'All Dual Wield Skills' : ('Left Axe',),
+        'All Archery Skills' : (),
+        'Other Skills' : ('Critical Strike', 'Envenom', 'Stealth',),
+        'Races' : t2(('Kobold', 'Norseman', 'Valkyn',)),
+        'Acuity' : (),
+    },
 
     'Shaman' : {
-        'All Spell Lines' : [],
-        'All Magic Skills' : ['Augmentation', 'Cave Magic', 'Mending'],
-        'All Melee Weapon Skills' : [],
-        'All Dual Wield Skills' : [],
-        'All Archery Skills' : [],
-        'Other Skills' : [],
-        'Acuity' : ['Piety'] },
+        'All Spell Lines' : (),
+        'All Magic Skills' : ('Augmentation', 'Cave Magic', 'Mending',),
+        'All Melee Weapon Skills' : (),
+        'All Dual Wield Skills' : (),
+        'All Archery Skills' : (),
+        'Other Skills' : (),
+        'Races' : t2(('Frostalf', 'Kobold', 'Troll',)),
+        'Acuity' : ('Piety',),
+    },
 
     'Skald' : {
-        'All Spell Lines' : [],
-        'All Magic Skills' : ['Battlesongs'],
-        'All Melee Weapon Skills' : ['Sword', 'Hammer', 'Axe'],
-        'All Dual Wield Skills' : [],
-        'All Archery Skills' : [],
-        'Other Skills' : ['Parry'],
-        'Acuity' : ['Charisma'] },
+        'All Spell Lines' : (),
+        'All Magic Skills' : ('Battlesongs',),
+        'All Melee Weapon Skills' : ('Sword', 'Hammer', 'Axe',),
+        'All Dual Wield Skills' : (),
+        'All Archery Skills' : (),
+        'Other Skills' : ('Parry',),
+        'Races' : t2(('Dwarf', 'Kobold', 'Norseman', 'Troll',)),
+        'Acuity' : ('Charisma',),
+    },
 
     'Spiritmaster' : {
-        'All Spell Lines' : ['Darkness', 'Suppression', 'Summoning'],
-        'All Magic Skills' : ['Darkness', 'Suppression', 'Summoning'],
-        'All Melee Weapon Skills' : [],
-        'All Dual Wield Skills' : [],
-        'All Archery Skills' : [],
-        'Other Skills' : [],
-        'Acuity' : ['Piety'] },
+        'All Spell Lines' : ('Darkness', 'Suppression', 'Summoning',),
+        'All Magic Skills' : ('Darkness', 'Suppression', 'Summoning',),
+        'All Melee Weapon Skills' : (),
+        'All Dual Wield Skills' : (),
+        'All Archery Skills' : (),
+        'Other Skills' : (),
+        'Races' : t2(('Frostalf', 'Kobold', 'Norseman',)),
+        'Acuity' : ('Piety',),
+    },
 
     'Thane' : {
-        'All Spell Lines' : [],
-        'All Magic Skills' : ['Stormcalling'],
-        'All Melee Weapon Skills' : ['Sword', 'Hammer', 'Axe'],
-        'All Dual Wield Skills' : [],
-        'All Archery Skills' : [],
-        'Other Skills' : ['Parry', 'Shield'],
-        'Acuity' : ['Piety'] },
+        'All Spell Lines' : (),
+        'All Magic Skills' : ('Stormcalling',),
+        'All Melee Weapon Skills' : ('Sword', 'Hammer', 'Axe',),
+        'All Dual Wield Skills' : (),
+        'All Archery Skills' : (),
+        'Other Skills' : ('Parry', 'Shield',),
+        'Races' : t2(('Dwarf', 'Frostalf', 'Norseman', 'Troll',)),
+        'Acuity' : ('Piety',),
+    },
 
     'Valkyrie' : {
-        'All Spell Lines' : [],
-        'All Magic Skills' : ['Odin\'s Will'],
-        'All Melee Weapon Skills' : ['Spear', 'Sword'],
-        'All Dual Wield Skills' : [],
-        'All Archery Skills' : [],
-        'Other Skills' : ['Parry', 'Shield'],
-        'Acuity' : ['Piety'] },
+        'All Spell Lines' : (),
+        'All Magic Skills' : ('Odin\'s Will',),
+        'All Melee Weapon Skills' : ('Spear', 'Sword',),
+        'All Dual Wield Skills' : (),
+        'All Archery Skills' : (),
+        'Other Skills' : ('Parry', 'Shield',),
+        'Races' : t2(('Dwarf', 'Frostalf', 'Norseman',)),
+        'Acuity' : ('Piety',),
+    },
 
     'Warlock' : {
-        'All Spell Lines' : ['Cursing'],
-        'All Magic Skills' : ['Cursing', 'Hexing', 'Witchcraft'],
-        'All Melee Weapon Skills' : [],
-        'All Dual Wield Skills' : [],
-        'All Archery Skills' : [],
-        'Other Skills' : [],
-        'Acuity' : ['Piety'] },
+        'All Spell Lines' : ('Cursing',),
+        'All Magic Skills' : ('Cursing', 'Hexing',),
+        'All Melee Weapon Skills' : (),
+        'All Dual Wield Skills' : (),
+        'All Archery Skills' : (),
+        'Other Skills' : (),
+        'No Skill Effect' : ('Witchcraft',),
+        'Races' : t2(('Frostalf', 'Kobold', 'Norseman',)),
+        'Acuity' : ('Piety',),
+    },
 
     'Warrior' : {
-        'All Spell Lines' : [],
-        'All Magic Skills' : [],
-        'All Melee Weapon Skills' : ['Sword', 'Hammer', 'Axe'],
-        'All Dual Wield Skills' : [],
-        'All Archery Skills' : [],
-        'Other Skills' : ['Parry', 'Shield'],
-        'No Skill Effect' : ['Thrown Weapons'],
-        'Acuity' : [] } 
-  } 
+        'All Spell Lines' : (),
+        'All Magic Skills' : (),
+        'All Melee Weapon Skills' : ('Sword', 'Hammer', 'Axe',),
+        'All Dual Wield Skills' : (),
+        'All Archery Skills' : (),
+        'Other Skills' : ('Parry', 'Shield',),
+        'No Skill Effect' : ('Thrown Weapons',),
+        'Races' : t2(('Dwarf', 'Kobold', 'Norseman', 'Troll', 'Valkyn',)),
+        'Acuity' : ()
+    },
+  }, 
 }
+
 
 # Make ClassList[realm] from AllBonusList[realm] class names
 #
@@ -443,136 +550,143 @@ AllBonusList = {
 #
 # Make AllBonusList['Hash']{'class'} dictionary for each class
 #
-ClassList = { }
+ClassList = {}
 ClassList['All'] = []
+
 AllBonusList['All'] = {}
+
 for realm in Realms:
-  ClassList[realm] = AllBonusList[realm].keys()
-  ClassList[realm].sort()
+  classes = AllBonusList[realm].keys()
+  classes.sort()
+  ClassList[realm] = t2(classes)
   for charclass in AllBonusList[realm]:
-    list = []
-    list.extend(AllBonusList[realm][charclass]['All Magic Skills'])
-    list.extend(AllBonusList[realm][charclass]['All Melee Weapon Skills'])
-    list.extend(AllBonusList[realm][charclass]['All Dual Wield Skills'])
-    list.extend(AllBonusList[realm][charclass]['All Archery Skills'])
-    list.extend(AllBonusList[realm][charclass]['Other Skills'])
+    skills = []
+    skills.extend(AllBonusList[realm][charclass]['All Magic Skills'])
+    skills.extend(AllBonusList[realm][charclass]['All Melee Weapon Skills'])
+    skills.extend(AllBonusList[realm][charclass]['All Dual Wield Skills'])
+    skills.extend(AllBonusList[realm][charclass]['All Archery Skills'])
+    skills.extend(AllBonusList[realm][charclass]['Other Skills'])
 
     AllBonusList[realm][charclass]['Skills Hash'] = {}
-    for skill in list:
-      AllBonusList[realm][charclass]['Skills Hash'][skill] = ''
+    AllBonusList[realm][charclass]['Skills Hash'].fromkeys(skills)
+    AllBonusList[realm][charclass]['Skills Hash'] = d2(AllBonusList[realm][charclass]['Skills Hash'])
 
     AllBonusList[realm][charclass]['Focus Hash'] = {}
-    for focus in AllBonusList[realm][charclass]['All Spell Lines']:
-      AllBonusList[realm][charclass]['Focus Hash'][focus] = ''
+    AllBonusList[realm][charclass]['Focus Hash'].fromkeys(AllBonusList[realm][charclass]['All Spell Lines'])
+    AllBonusList[realm][charclass]['Focus Hash'] = d2(AllBonusList[realm][charclass]['Focus Hash'])
 
     if len(AllBonusList[realm][charclass]['All Spell Lines']):
-      AllBonusList[realm][charclass]['All Spell Lines'].insert(0, 'All Spell Lines')
+      AllBonusList[realm][charclass]['All Focus'] = t2(('All Spell Lines',) +
+                         AllBonusList[realm][charclass]['All Spell Lines'])
+    else:
+      AllBonusList[realm][charclass]['All Focus'] = t2()
 
-    list.sort()
+    skills.sort()
     if len(AllBonusList[realm][charclass]['All Melee Weapon Skills']) > 0:
-      list.insert(0, 'All Melee Weapon Skills')
+      skills.insert(0, 'All Melee Weapon Skills')
     if len(AllBonusList[realm][charclass]['All Magic Skills']) > 0:
-      list.insert(0, 'All Magic Skills')
-    AllBonusList[realm][charclass]['All Skills'] = list
- 
+      skills.insert(0, 'All Magic Skills')
+    AllBonusList[realm][charclass]['All Skills'] = t2(skills)
+    AllBonusList[realm][charclass] = d2(AllBonusList[realm][charclass])
+  AllBonusList[realm] = d2(AllBonusList[realm])
   AllBonusList['All'].update(AllBonusList[realm])
   ClassList['All'].extend(ClassList[realm])
 ClassList['All'].sort()
 
+ClassList['All'] = t2(ClassList['All'])
+ClassList = d2(ClassList)
 
-TypeList = [
+AllBonusList['All'] = d2(AllBonusList['All'])
+AllBonusList = d2(AllBonusList)
+
+TypeList = t2((
     'Unused', 
     'Stat', 
     'Resist', 
     'Hits', 
     'Power', 
     'Focus', 
-    'Skill'
-]
+    'Skill',
+))
 
 # Duplicate the TypeList, add non-craftable categories
 #
-DropTypeList = TypeList[:]
-DropTypeList.extend( [
+DropTypeList = t2(TypeList + (
     'Cap Increase', 
     'PvE Bonus', 
     'Other Bonus'
-] )
+))
 
 
-StatTableOrdered = [ 
-    ['Strength',     'Fiery'], 
-    ['Constitution', 'Earthen'], 
-    ['Dexterity',    'Vapor'], 
-    ['Quickness',    'Airy'], 
-    ['Intelligence', 'Dusty'], 
-    ['Piety',        'Watery'], 
-    ['Charisma',     'Icy'] , 
-    ['Empathy',      'Heated'] 
-]
+StatTableOrdered = (
+    ('Strength',     'Fiery'   ), 
+    ('Constitution', 'Earthen' ), 
+    ('Dexterity',    'Vapor'   ), 
+    ('Quickness',    'Airy'    ), 
+    ('Intelligence', 'Dusty'   ), 
+    ('Piety',        'Watery'  ), 
+    ('Charisma',     'Icy'     ), 
+    ('Empathy',      'Heated'  ),
+)
 
-StatTable = {}
-for stat, stone in StatTableOrdered:
-  StatTable[stat] = stone
+StatTable = d2(StatTableOrdered)
 
-StatList = map(lambda(x): x[0], StatTableOrdered)
+StatList = t2(map(lambda(x): x[0], StatTableOrdered))
 
-StatValues = ['1', '4', '7', '10', '13', '16', '19', '22', '25', '28']
+StatValues = t2(('1', '4', '7', '10', '13', '16', '19', '22', '25', '28',))
 
 
 # Duplicate the Stat lists as DropStat lists, add non-craftable 'Acuity' stat
 #
-DropStatTableOrdered = StatTableOrdered[:]
-DropStatTableOrdered.append( [
-    'Acuity', ''
-] ) 
+DropStatTableOrdered = t2(StatTableOrdered + (
+    ('Acuity',       ''        ),
+))
 
-DropStatTable = {}
-DropStatTable.update(StatTable)
-DropStatTable['Acuity'] = ''
+DropStatTable = d2(DropStatTableOrdered)
 
-DropStatList = StatList[:]
-DropStatList.append('Acuity') 
+DropStatList = t2(map(lambda(x): x[0], DropStatTableOrdered))
 
 
-ResistTableOrdered = [ 
-    ['Body',   'Dusty'   ], 
-    ['Cold',   'Icy'     ], 
-    ['Heat',   'Heated'  ], 
-    ['Energy', 'Light'   ],
-    ['Matter', 'Earthen' ], 
-    ['Spirit', 'Vapor'   ],
-    ['Crush',  'Fiery'   ], 
-    ['Thrust', 'Airy'    ], 
-    ['Slash',  'Watery'  ] 
-]
+ResistTableOrdered = (
+    ('Body',   'Dusty'   ), 
+    ('Cold',   'Icy'     ), 
+    ('Heat',   'Heated'  ), 
+    ('Energy', 'Light'   ),
+    ('Matter', 'Earthen' ), 
+    ('Spirit', 'Vapor'   ),
+    ('Crush',  'Fiery'   ), 
+    ('Thrust', 'Airy'    ), 
+    ('Slash',  'Watery'  ),
+)
 
-ResistTable = {}
-for resist, gem in ResistTableOrdered:
-  ResistTable[resist] = gem
+ResistTable = d2(ResistTableOrdered)
 
 ResistList = map(lambda(x): x[0], ResistTableOrdered)
 
-ResistValues = ['1', '2', '3', '5', '7', '9', '11', '13', '15', '17']
+ResistValues = t2(('1', '2', '3', '5', '7', '9', '11', '13', '15', '17',))
 
 
-HitsTable = { 'Hits' : 'Blood' }
+HitsTable = d2((
+    ('Hits',   'Blood'   ),
+))
 
-HitsList = HitsTable.keys()
+HitsList = t2(HitsTable.keys())
 
-HitsValues = ['4', '12', '20', '28', '36', '44', '52', '60', '68', '76']
+HitsValues = t2(('4', '12', '20', '28', '36', '44', '52', '60', '68', '76',))
 
 
-PowerTable = { 'Power' : 'Mystical' }
+PowerTable = d2((
+    ('Power',  'Mystical'),
+))
 
-PowerList = PowerTable.keys()
+PowerList = t2(PowerTable.keys())
 
-PowerValues = ['1', '2', '3', '5', '7', '9', '11', '13', '15', '17']
+PowerValues = t2(('1', '2', '3', '5', '7', '9', '11', '13', '15', '17'))
 
 
 FocusTable = {
 
-    'Albion' : {
+    'Albion' : d2({
 
         'All Spell Lines' : 'Brilliant Sigil',
         'Body Magic' :      'Heat Sigil', 
@@ -585,10 +699,10 @@ FocusTable = {
         'Mind Magic' :      'Water Sigil',
         'Painworking' :     'Salt Crusted Sigil',
         'Spirit Magic' :    'Vapor Sigil',
-        'Wind Magic' :      'Air Sigil'
-    },
+        'Wind Magic' :      'Air Sigil',
+    }),
 
-    'Hibernia' : {
+    'Hibernia' : d2({
 
         'All Spell Lines' : 'Brilliant Spell Stone',
         'Arboreal Path' :   'Steaming Spell Stone', 
@@ -601,10 +715,10 @@ FocusTable = {
         'Phantasmal Wail':  'Phantasmal Spell Stone', 
         'Spectral Guard' :  'Spectral Spell Stone', 
         'Verdant Path' :    'Mineral Encrusted Spell Stone',
-        'Void' :            'Ice Spell Stone'
-    },
+        'Void' :            'Ice Spell Stone',
+    }),
 
-    'Midgard' : {
+    'Midgard' : d2({
 
         'All Spell Lines' : 'Brilliant Rune', 
         'Bone Army' :       'Ashen Rune', 
@@ -612,28 +726,32 @@ FocusTable = {
         'Darkness' :        'Ice Rune',
         'Runecarving' :     'Heat Rune',
         'Summoning' :       'Vapor Rune', 
-        'Suppression' :     'Dust Rune'
-    }
+        'Suppression' :     'Dust Rune',
+    }),
 }
 
 FocusTable['All'] = {}
 for realm in Realms:
   FocusTable['All'].update(FocusTable[realm])
+FocusTable['All'] = d2(FocusTable['All'])
+FocusTable = d2(FocusTable)
 
 FocusList = {}
 for realm in FocusTable.keys():
   FocusList[realm] = FocusTable[realm].keys()
   FocusList[realm].sort()
+  FocusList[realm] = t2(FocusList[realm])
+FocusList = d2(FocusList)
 
-FocusValues = ['5', '10', '15', '20', '25', '30', '35', '40', '45', '50']
+FocusValues = t2(('5', '10', '15', '20', '25', '30', '35', '40', '45', '50',))
 
 
 SkillTable = { 
 
-    'Albion' : {
+    'Albion' : d2({
 
-        'All Magic Skills' :  'Finesse Fervor Sigil',
-        'All Melee Weapon Skills' :  'Finesse War Sigil',
+        'All Magic Skills' :        'Finesse Fervor Sigil',
+        'All Melee Weapon Skills' : 'Finesse War Sigil',
         'Body Magic' :        'Heated Evocation Sigil',
         'Chants' :            'Earthen Fervor Sigil',
         'Cold Magic' :        'Icy Evocation Sigil',
@@ -665,13 +783,13 @@ SkillTable = {
         'Stealth' :           'Airy Battle Jewel',
         'Thrust' :            'Dusty War Sigil',
         'Two Handed' :        'Heated War Sigil',
-        'Wind Magic' :        'Air Evocation Sigil'
-    }, 
+        'Wind Magic' :        'Air Evocation Sigil',
+    }), 
 
-    'Hibernia' : {
+    'Hibernia' : d2({
 
-        'All Magic Skills' :  'Finesse Nature Spell Stone',
-        'All Melee Weapon Skills' :  'Finesse War Spell Stone',
+        'All Magic Skills' :        'Finesse Nature Spell Stone',
+        'All Melee Weapon Skills' : 'Finesse War Spell Stone',
         'Arboreal Path' :     'Steaming Nature Spell Stone', 
         'Blades' :            'Watery War Spell Stone', 
         'Blunt' :             'Fiery War Spell Stone',
@@ -704,13 +822,13 @@ SkillTable = {
         'Valor' :             'Airy Arcane Spell Stone',
         'Vampiiric Embrace' : 'Embracing Arcane Spell Stone', 
         'Verdant Path' :      'Mineral Encrusted Nature Spell Stone',
-        'Void' :              'Icy Arcane Spell Stone'
-    },
+        'Void' :              'Icy Arcane Spell Stone',
+    }),
 
-    'Midgard' : { 
+    'Midgard' : d2({ 
 
-        'All Magic Skills' :  'Finesse Primal Rune',
-        'All Melee Weapon Skills' :  'Finesse War Rune',
+        'All Magic Skills' :        'Finesse Primal Rune',
+        'All Melee Weapon Skills' : 'Finesse War Rune',
         'Augmentation' :      'Airy Chaos Rune',
         'Axe' :               'Earthen War Rune', 
         'Battlesongs' :       'Airy Primal Rune',
@@ -740,47 +858,46 @@ SkillTable = {
         'Suppression' :       'Dusty Chaos Rune',
         'Sword' :             'Watery War Rune',
         'Thrown Weapons' :    'Vapor War Rune',
-    }
+    }),
 }
 
 SkillTable['All'] = {}
 for realm in Realms:
   SkillTable['All'].update(SkillTable[realm])
+SkillTable['All'] = d2(SkillTable['All'])
+SkillTable = d2(SkillTable)
 
 SkillList = {}
 DropSkillList = {}
 
 for realm in SkillTable.keys():
-  SkillList[realm] = SkillTable[realm].keys()
-  SkillList[realm].sort()
-  DropSkillList[realm] = SkillList[realm][:]
-  DropSkillList[realm].insert(2, 'All Dual Wield Skills')
-  DropSkillList[realm].insert(3, 'All Archery Skills')
+  skills = SkillTable[realm].keys()
+  skills.sort()
+  SkillList[realm] = t2(skills)
+  skills.insert(2, 'All Dual Wield Skills')
+  skills.insert(3, 'All Archery Skills')
+  # bug - CM Explorer shows +Witchcraft, but no craftable gem
+  if realm == 'Midgard': skills.append('Witchcraft')
+  DropSkillList[realm] = t2(skills)
 
-# bug - in game drops +Witchcraft(?), but no craftable gem
-DropSkillList['Midgard'].append('Witchcraft')
-DropSkillList['All'].append('Witchcraft')
+SkillList = d2(SkillList)
+DropSkillList = d2(DropSkillList)
 
-SkillValues = ['1', '2', '3', '4', '5', '6', '7', '8']
+SkillValues = t2(('1', '2', '3', '4', '5', '6', '7', '8',))
 
 
-CapIncreaseTable = {}
-CapIncreaseTable.update(DropStatTable)
-CapIncreaseTable.update( { 
-    'Hits'  : '', 
-    'Power' : '', 
-    'AF'    : '' 
-} )
-
-CapIncreaseList = DropStatList[:]
-CapIncreaseList.extend( [
+CapIncreaseList = t2(DropStatList + (
     'Hits', 
     'Power', 
-    'AF'
-] )
+    'AF',
+))
+
+CapIncreaseTable = {}
+CapIncreaseTable.fromkeys(CapIncreaseList)
+CapIncreaseTable = d2(CapIncreaseTable)
 
 
-OtherBonusTable = {
+OtherBonusTable = d2({
     'AF' :                        '',
     'Archery Damage' :            '',
     'Archery Range' :             '',
@@ -796,14 +913,15 @@ OtherBonusTable = {
     'Style Damage' :              '',
     'Melee Damage' :              '',
     'Melee Combat Speed' :        '',   
-    '% Power Pool' :              ''
-}
+    '% Power Pool' :              '', 
+})
 
 OtherBonusList = OtherBonusTable.keys()
 OtherBonusList.sort()
+OtherBonusList = t2(OtherBonusList)
 
 
-PvEBonusTable = {
+PvEBonusTable = d2({
     'Defensive' :                          '',
     'Concentration' :                      '', 
     'Block' :                              '', 
@@ -818,19 +936,20 @@ PvEBonusTable = {
     'Spell Power Cost Reduction' :         '', 
     'Style Cost Reduction' :               '', 
     'Death Experience Loss Reduction' :    '', 
-    'Arrow Recovery' :                     '' 
-}
+    'Arrow Recovery' :                     '', 
+})
 
 PvEBonusList = PvEBonusTable.keys()
 PvEBonusList.sort()
+PvEBonusList = t2(PvEBonusList)
 
 
 # Placeholder
-UnusedTable = {}
+UnusedTable = d2({})
 
-UnusedList = [ ]
+UnusedList = t2()
 
-UnusedValues = [ ]
+UnusedValues = t2()
 
 
 GemTables = {
@@ -853,64 +972,71 @@ for realm in Realms:
 for realm in GemTables.keys():
   GemTables[realm]['Focus'] = FocusTable[realm]
   GemTables[realm]['Skill'] = SkillTable[realm]
+  GemTables[realm] = d2(GemTables[realm])
+GemTables = d2(GemTables)
 
 
-ValuesLists = {
+ValuesLists = d2({
     'Stat' :    StatValues,
     'Resist' :  ResistValues,
     'Hits' :    HitsValues,
     'Power' :   PowerValues,
     'Focus' :   FocusValues,
     'Skill' :   SkillValues,
-    'Unused' :  UnusedValues
-}
+    'Unused' :  UnusedValues,
+})
 
 
 Caps = {}
-for resist in ResistList:
-  Caps[resist] = 'Resist'
-for stat in StatList:
-  Caps[stat] = 'Stat'
+Caps.fromkeys(ResistList, 'Resist')
+Caps.fromkeys(StatList,   'Stat')
+Caps = d2(Caps)
+
+#for resist in ResistList:
+#  Caps[resist] = 'Resist'
+#for stat in StatList:
+#  Caps[stat] = 'Stat'
+
 
 # Bonuses are given as % of level + add constant
 # e.g. [ .25,  1] is the level / 4 + 1
 #      [   0, 10] is a fixed 10
 #      [   4,  0] is the level * 4
 #
-HighCapBonusList = {
-    'Stat'                      : [ 1.50,  0 ],
-    'Resist'                    : [  .50,  1 ],
-    'Hits'                      : [ 4.00,  0 ],
-    'Power'                     : [  .50,  1 ],
-    'Skill'                     : [  .20,  1 ],
-    'Cap'                       : [  .50,  1 ],
-    'Hits Cap'                  : [ 4.00,  0 ],
-    'Power Cap'                 : [ 1.00,  0 ],
-    'AF Cap'                    : [ 1.00,  0 ],
-    'PvE Bonus'                 : [  .20,  0 ],
-    'Other Bonus'               : [  .20,  0 ],
-    '% Power Pool'              : [  .50,  0 ],
-    'Stat Buff Effectiveness'   : [  .50,  0 ],
-    'Stat Debuff Effectiveness' : [  .50,  0 ],
-    'Healing  Effectiveness'    : [  .50,  0 ],
-    'Spell Duration'            : [  .50,  0 ],
-    'Fatigue'                   : [  .50,  0 ],
-    'AF'                        : [ 1.00,  0 ],
-    'Arrow Recovery'            : [ 1.00,  0 ], 
-    'Death Experience Loss Reduction'   : [ 1.00,  0 ] 
-}
+HighCapBonusList = d2({
+    'Stat'                      : ( 1.50,  0 ),
+    'Resist'                    : (  .50,  1 ),
+    'Hits'                      : ( 4.00,  0 ),
+    'Power'                     : (  .50,  1 ),
+    'Skill'                     : (  .20,  1 ),
+    'Cap'                       : (  .50,  1 ),
+    'Hits Cap'                  : ( 4.00,  0 ),
+    'Power Cap'                 : ( 1.00,  0 ),
+    'AF Cap'                    : ( 1.00,  0 ),
+    'PvE Bonus'                 : (  .20,  0 ),
+    'Other Bonus'               : (  .20,  0 ),
+    '% Power Pool'              : (  .50,  0 ),
+    'Stat Buff Effectiveness'   : (  .50,  0 ),
+    'Stat Debuff Effectiveness' : (  .50,  0 ),
+    'Healing  Effectiveness'    : (  .50,  0 ),
+    'Spell Duration'            : (  .50,  0 ),
+    'Fatigue'                   : (  .50,  0 ),
+    'AF'                        : ( 1.00,  0 ),
+    'Arrow Recovery'            : ( 1.00,  0 ), 
+    'Death Experience Loss Reduction' : ( 1.00,  0 ),
+})
 
 
-MaterialGems = [ 'Lo',   'Um',   'On',    'Ee',      'Pal',     'Mon',    'Ros',      'Zo',    'Kath',     'Ra']
+MaterialGems = t2(( 'Lo',   'Um',   'On',    'Ee',      'Pal',     'Mon',    'Ros',      'Zo',    'Kath',     'Ra',))
 
-GemCosts =     [ 160,    920,   3900,   13900,      40100,     88980,   133000,    198920,    258240,   296860 ]
+GemCosts =     t2(( 160,    920,   3900,   13900,      40100,     88980,   133000,    198920,    258240,   296860, ))
 
-RemakeCosts =  [ 120,    560,   1740,    5260,      14180,     30660,    45520,     67680,     87640,   100700 ]
+RemakeCosts =  t2(( 120,    560,   1740,    5260,      14180,     30660,    45520,     67680,     87640,   100700, ))
 
-GemNames =     ['Raw','Uncut','Rough','Flawed','Imperfect','Polished','Faceted','Precious','Flawless','Perfect']
+GemNames =     t2(('Raw','Uncut','Rough','Flawed','Imperfect','Polished','Faceted','Precious','Flawless','Perfect',))
 
 
-LiquidsOrder = [
+LiquidsOrder = t2((
     'Air Elemental Essence', 
     'Draconic Fire', 
     'Frost From a Wasteland',
@@ -921,10 +1047,10 @@ LiquidsOrder = [
     'Sun Light',
     'Swamp Fog',
     'Treant Blood', 
-    'Undead Ash and Holy Water' 
-]
+    'Undead Ash and Holy Water',
+))
 
-DustsOrder = [
+DustsOrder = t2((
     'Bloodied Battlefield Dirt',
     'Essence of Life', 
     'Fairy Dust', 
@@ -936,10 +1062,10 @@ DustsOrder = [
     'Ground Vendo Bone', 
     'Other Worldly Dust',
     'Soot From Niflheim',
-    'Unseelie Dust'
-]
+    'Unseelie Dust',
+))
 
-GemLiquids = { 
+GemLiquids = d2({ 
     'Fiery' :              'Draconic Fire', 
     'Earthen':             'Treant Blood',
     'Vapor' :              'Swamp Fog', 
@@ -970,8 +1096,8 @@ GemLiquids = {
     'Blood' :              'Giant Blood',
     'Mystical' :           'Mystic Energy',
     'Mystic' :             'Mystic Energy', 
-    'Brilliant' :         ['Draconic Fire', 'Mystic Energy', 'Treant Blood'],
-    'Finesse' :           ['Draconic Fire', 'Mystic Energy', 'Treant Blood'],
+    'Brilliant' :         ('Draconic Fire', 'Mystic Energy', 'Treant Blood'),
+    'Finesse' :           ('Draconic Fire', 'Mystic Energy', 'Treant Blood'),
     'Ethereal Spell' :     'Swamp Fog', 
     'Phantasmal Spell' :   'Leviathan Blood', 
     'Spectral Spell' :     'Draconic Fire', 
@@ -984,10 +1110,10 @@ GemLiquids = {
     'Blighted Primal' :    'Air Elemental Essence', 
     'Blighted Rune' :      'Undead Ash and Holy Water', 
     'Valiant' :            'Swamp Fog', 
-    'Unholy' :             'Air Elemental Essence' 
-}
+    'Unholy' :             'Air Elemental Essence', 
+})
 
-GemDusts = { 
+GemDusts = d2({ 
     'Essence' :            'Essence of Life',
     'Shielding' :          'Ground Draconic Scales',
     'Spell Stone' :        'Ground Draconic Scales',
@@ -1002,34 +1128,34 @@ GemDusts = {
     'War Sigil' :          'Ground Caer Stone',
     'Nature Spell Stone' : 'Fairy Dust',
     'War Spell Stone' :    'Unseelie Dust',
-    'Arcane Spell Stone' : 'Other Worldly Dust' 
-}
+    'Arcane Spell Stone' : 'Other Worldly Dust',
+})
 
-GemSubName = { 
+GemSubName = d2({ 
     'Stat' :   'Essence', 
     'Resist' : 'Shielding', 
     'Hits' :   'Essence', 
     'Power' :  'Essence', 
     'Focus' :  '', 
-    'Skill' :  '' 
-}
+    'Skill' :  '', 
+})
 
 
-OCStartPercentages = [0, 10, 20, 30, 50, 70]
+OCStartPercentages = (0, 10, 20, 30, 50, 70)
 
-ImbueMultipliers = { 
+ImbueMultipliers = d2({ 
     'Stat' :   1.0, 
     'Resist' : 2.0, 
     'Skill' :  5.0, 
     'Hits' :   0.25, 
     'Power' :  2.0, 
     'Focus' :  1.0, 
-    'Unused' : 0.0 
-} 
+    'Unused' : 0.0, 
+})
 
-QualityValues = ['94', '95', '96', '97', '98', '99', '100']
+QualityValues = t2(('94', '95', '96', '97', '98', '99', '100'))
 
-GemQualOCModifiers = { 
+GemQualOCModifiers = d2({ 
       '' :  0, 
     '94' :  0, 
     '95' :  0, 
@@ -1037,80 +1163,80 @@ GemQualOCModifiers = {
     '97' :  3, 
     '98' :  5, 
     '99' :  8, 
-   '100' : 11 
-}
+   '100' : 11, 
+})
 
-ItemQualOCModifiers = { 
+ItemQualOCModifiers = d2({ 
     '94' :  0, 
     '95' :  0, 
     '96' :  6, 
     '97' :  8, 
     '98' : 10, 
     '99' : 18, 
-   '100' : 26 
-}
+   '100' : 26, 
+})
 
-ImbuePts = [ 
-    [0,1,1,1,1,1,1],
-    [1,1,1,1,1,2,2],
-    [1,1,1,2,2,2,2],
-    [1,1,2,2,2,3,3],
-    [1,2,2,2,3,3,4],
-    [1,2,2,3,3,4,4],
-    [2,2,3,3,4,4,5],
-    [2,3,3,4,4,5,5],
-    [2,3,3,4,5,5,6],
-    [2,3,4,4,5,6,7],
-    [2,3,4,5,6,6,7],
-    [3,4,4,5,6,7,8],
-    [3,4,5,6,6,7,9],
-    [3,4,5,6,7,8,9],
-    [3,4,5,6,7,8,10],
-    [3,5,6,7,8,9,10],
-    [4,5,6,7,8,10,11],
-    [4,5,6,8,9,10,12],
-    [4,6,7,8,9,11,12],
-    [4,6,7,8,10,11,13],
-    [4,6,7,9,10,12,13],
-    [5,6,8,9,11,12,14],
-    [5,7,8,10,11,13,15],
-    [5,7,9,10,12,13,15],
-    [5,7,9,10,12,14,16],
-    [5,8,9,11,12,14,16],
-    [6,8,10,11,13,15,17],
-    [6,8,10,12,13,15,18],
-    [6,8,10,12,14,16,18],
-    [6,9,11,12,14,16,19],
-    [6,9,11,13,15,17,20],
-    [7,9,11,13,15,17,20],
-    [7,10,12,14,16,18,21],
-    [7,10,12,14,16,19,21],
-    [7,10,12,14,17,19,22],
-    [7,10,13,15,17,20,23],
-    [8,11,13,15,17,20,23],
-    [8,11,13,16,18,21,24],
-    [8,11,14,16,18,21,24],
-    [8,11,14,16,19,22,25],
-    [8,12,14,17,19,22,26],
-    [9,12,15,17,20,23,26],
-    [9,12,15,18,20,23,27],
-    [9,13,15,18,21,24,27],
-    [9,13,16,18,21,24,28],
-    [9,13,16,19,22,25,29],
-    [10,13,16,19,22,25,29],
-    [10,14,17,20,23,26,30],
-    [10,14,17,20,23,27,31],
-    [10,14,17,20,23,27,31],
-    [10,15,18,21,24,28,32] 
-]
+ImbuePts = (
+    ( 0, 1, 1, 1, 1, 1, 1),
+    ( 1, 1, 1, 1, 1, 2, 2),
+    ( 1, 1, 1, 2, 2, 2, 2),
+    ( 1, 1, 2, 2, 2, 3, 3),
+    ( 1, 2, 2, 2, 3, 3, 4),
+    ( 1, 2, 2, 3, 3, 4, 4),
+    ( 2, 2, 3, 3, 4, 4, 5),
+    ( 2, 3, 3, 4, 4, 5, 5),
+    ( 2, 3, 3, 4, 5, 5, 6),
+    ( 2, 3, 4, 4, 5, 6, 7),
+    ( 2, 3, 4, 5, 6, 6, 7),
+    ( 3, 4, 4, 5, 6, 7, 8),
+    ( 3, 4, 5, 6, 6, 7, 9),
+    ( 3, 4, 5, 6, 7, 8, 9),
+    ( 3, 4, 5, 6, 7, 8,10),
+    ( 3, 5, 6, 7, 8, 9,10),
+    ( 4, 5, 6, 7, 8,10,11),
+    ( 4, 5, 6, 8, 9,10,12),
+    ( 4, 6, 7, 8, 9,11,12),
+    ( 4, 6, 7, 8,10,11,13),
+    ( 4, 6, 7, 9,10,12,13),
+    ( 5, 6, 8, 9,11,12,14),
+    ( 5, 7, 8,10,11,13,15),
+    ( 5, 7, 9,10,12,13,15),
+    ( 5, 7, 9,10,12,14,16),
+    ( 5, 8, 9,11,12,14,16),
+    ( 6, 8,10,11,13,15,17),
+    ( 6, 8,10,12,13,15,18),
+    ( 6, 8,10,12,14,16,18),
+    ( 6, 9,11,12,14,16,19),
+    ( 6, 9,11,13,15,17,20),
+    ( 7, 9,11,13,15,17,20),
+    ( 7,10,12,14,16,18,21),
+    ( 7,10,12,14,16,19,21),
+    ( 7,10,12,14,17,19,22),
+    ( 7,10,13,15,17,20,23),
+    ( 8,11,13,15,17,20,23),
+    ( 8,11,13,16,18,21,24),
+    ( 8,11,14,16,18,21,24),
+    ( 8,11,14,16,19,22,25),
+    ( 8,12,14,17,19,22,26),
+    ( 9,12,15,17,20,23,26),
+    ( 9,12,15,18,20,23,27),
+    ( 9,13,15,18,21,24,27),
+    ( 9,13,16,18,21,24,28),
+    ( 9,13,16,19,22,25,29),
+    (10,13,16,19,22,25,29),
+    (10,14,17,20,23,26,30),
+    (10,14,17,20,23,27,31),
+    (10,14,17,20,23,27,31),
+    (10,15,18,21,24,28,32),
+)
 
 
-TabList = [
+TabList = t2((
     'Chest', 'Arms', 'Head', 'Legs', 'Hands', 'Feet', 
     'Right Hand', 'Left Hand', '2 Handed', 'Ranged', 'Spare', 
     'Neck', 'Cloak', 'Jewel', 'Belt', 
-    'Left Ring', 'Right Ring', 'Left Wrist', 'Right Wrist'
-]
+    'Left Ring', 'Right Ring', 'Left Wrist', 'Right Wrist',
+))
 
 FileExt = { 
     'Neck' :         'neck', 
@@ -1131,70 +1257,104 @@ FileExt = {
     'Left Hand' :   ['lhwep', 'shield'],
     '2 Handed' :    ['2hwep', 'lhwep', 'wep'],
     'Ranged' :       'ranged', 
-    'Spare' :        '*' 
+    'Spare' :        '*', 
 }
 
-ShieldTypes = [
+ShieldTypes = t2((
     'Rowan',     'Elm',       'Oaken',     'Ironwood',  'Heartwood', 
-    'Runewood',  'Stonewood', 'Ebonwood',  'Dyrwood',   'Duskwood' 
-]
+    'Runewood',  'Stonewood', 'Ebonwood',  'Dyrwood',   'Duskwood',
+))
 
+
+#Races[realm] Now RaceList[realm]
+#RacialResists[realm] Now Races[realm]['Resists']
 
 Races = {
-    'Albion' : [
-        'Avalonian',
-        'Briton',
-        'Inconnu',
-        'Saracen',
-        'Half Ogre',
-        'Highlander' 
-    ],
 
-    'Hibernia' : [
-        'Celt',
-        'Elf',
-        'Firbolg',
-        'Lurikeen',
-        'Shar',
-        'Sylvan' 
-    ],
+  'Albion' : d2({
+    'Avalonian' : d2({
+      'Resists' : d2({'Slash'  : 3, 'Crush'  : 2, 'Spirit' : 5}),
+      'Stats' :   (45, 45, 60, 70, 80, 60, 60, 60),
+    }),
+    'Briton' : d2({
+      'Resists' : d2({'Slash'  : 3, 'Crush'  : 2, 'Spirit' : 5}),      'Stats' :   (60, 60, 60, 60, 60, 60, 60, 60),
+    }),
+    'Half Ogre' : d2({
+      'Resists' : d2({'Slash'  : 3, 'Thrust' : 2, 'Matter' : 5}),      'Stats' :   (90, 70, 40, 40, 60, 60, 60, 60),
+    }),
+    'Highlander' : d2({
+      'Resists' : d2({'Crush'  : 3, 'Slash'  : 2, 'Cold'   : 5}),      'Stats' :   (70, 70, 50, 50, 60, 60, 60, 60),
+    }),
+    'Inconnu' : d2({
+      'Resists' : d2({'Thrust' : 3, 'Crush'  : 2, 'Heat'   : 5, 'Spirit' : 5}),      'Stats' :   (50, 60, 70, 50, 70, 60, 60, 60),
+    }),
+    'Saracen' : d2({
+      'Resists' : d2({'Thrust' : 3, 'Slash'  : 2, 'Heat'   : 5}),      'Stats' :   (50, 50, 80, 60, 60, 60, 60, 60),
+    }),
+  }),
 
-    'Midgard' : [
-        'Dwarf',
-        'Frostalf',
-        'Kobold',
-        'Troll',
-        'Norseman',
-        'Valkyn' 
-    ] 
+  'Hibernia' : d2({
+    'Celt' : d2({
+      'Resists' : d2({'Slash'  : 3, 'Crush'  : 2, 'Spirit' : 5}),      'Stats' :   (60, 60, 60, 60, 60, 60, 60, 60),
+    }),
+    'Elf' : d2({
+      'Resists' : d2({'Thrust' : 3, 'Slash'  : 2, 'Spirit' : 5}),      'Stats' :   (40, 40, 75, 75, 70, 60, 60, 60),
+    }),
+    'Firbolg' : d2({
+      'Resists' : d2({'Crush'  : 3, 'Slash'  : 2, 'Heat'   : 5}),      'Stats' :   (90, 60, 40, 40, 60, 60, 70, 60),
+    }),
+    'Lurikeen' : d2({
+      'Resists' : d2({'Crush'  : 5, 'Energy' : 5}),      'Stats' :   (40, 40, 80, 80, 60, 60, 60, 60),
+    }),
+    'Shar' : d2({
+      'Resists' : d2({'Crush'  : 5, 'Energy' : 5}),      'Stats' :   (60, 80, 50, 50, 60, 60, 60, 60),
+    }),
+    'Sylvan' : d2({
+      'Resists' : d2({'Crush'  : 3, 'Thrust' : 2, 'Energy' : 5, 'Matter' : 5}),      'Stats' :   (70, 60, 55, 45, 70, 60, 60, 60),
+    }),
+  }),
+
+  'Midgard' : d2({
+    'Dwarf' : d2({
+      'Resists' : d2({'Thrust' : 3, 'Slash'  : 2, 'Body'   : 5}),      'Stats' :   (60, 80, 50, 50, 60, 60, 60, 60),
+    }),
+    'Frostalf' : d2({
+      'Resists' : d2({'Thrust' : 3, 'Slash'  : 2, 'Spirit' : 5}),      'Stats' :   (55, 55, 55, 60, 60, 75, 60, 60),
+    }),
+    'Kobold' : d2({
+      'Resists' : d2({'Crush'  : 5, 'Energy' : 5}),      'Stats' :   (50, 50, 70, 70, 60, 60, 60, 60),
+    }),
+    'Norseman' : d2({
+      'Resists' : d2({'Slash'  : 3, 'Crush'  : 2, 'Cold'   : 5}),      'Stats' :   (70, 70, 50, 50, 60, 60, 60, 60),
+    }),
+    'Troll' : d2({
+      'Resists' : d2({'Slash'  : 3, 'Thrust' : 2, 'Matter' : 5}),      'Stats' :   (100, 70, 35, 35, 60, 60, 60, 60),
+    }),
+    'Valkyn' : d2({
+      'Resists' : d2({'Slash'  : 3, 'Thrust' : 2, 'Cold'   : 5, 'Body'   : 5}),
+      'Stats' :   (55, 45, 65, 75, 60, 60, 60, 60),
+    }),
+  }),
 }
 
-Races['All'] = []
+Races['All'] = {}
+RaceList = {}
+RaceList['All'] = []
+
 for realm in Realms:
-  Races['All'].extend(Races[realm])
-Races['All'].sort()
+  for charclass in Races[realm]:
+    Races['All'][charclass] = Races[realm][charclass]
+  RaceList[realm] = Races[realm].keys()
+  RaceList[realm].sort()
+  RaceList[realm] = t2(RaceList[realm])
+  RaceList['All'].extend(Races[realm])
 
+RaceList['All'].sort()
+RaceList['All'] = t2(RaceList['All'])
+RaceList = d2(RaceList)
 
-RacialResists = {
-   'Avalonian' :  {'Crush' : 2, 'Slash'  : 3, 'Matter' : 5 },
-   'Briton' :     {'Crush' : 2, 'Slash'  : 3, 'Cold'   : 5 },
-   'Inconnu' :    {'Crush' : 2, 'Thrust' : 3, 'Heat'   : 5, 'Spirit' : 5 },
-   'Saracen' :    {'Slash' : 2, 'Thrust' : 3, 'Heat'   : 5 },
-   'Half Ogre' :  {'Slash' : 3, 'Thrust' : 2, 'Matter' : 5 },
-   'Highlander' : {'Crush' : 3, 'Slash'  : 2, 'Cold'   : 5 },
-   'Celt' :       {'Crush' : 2, 'Slash'  : 3, 'Spirit' : 5 },
-   'Elf' :        {'Slash' : 2, 'Thrust' : 3, 'Spirit' : 5 },
-   'Firbolg' :    {'Crush' : 3, 'Slash'  : 2, 'Heat'   : 5 },
-   'Lurikeen' :   {'Crush' : 5,               'Energy' : 5 },
-   'Shar' :       {'Crush' : 5,               'Energy' : 5 },
-   'Sylvan' :     {'Crush' : 3, 'Thrust' : 2, 'Matter' : 5, 'Energy' : 5 },
-   'Dwarf' :      {'Slash' : 2, 'Thrust' : 3, 'Body'   : 5 },
-   'Frostalf' :   {'Slash' : 2, 'Thrust' : 3, 'Spirit' : 5 },
-   'Kobold' :     {'Crush' : 5,               'Energy' : 5 },
-   'Troll' :      {'Slash' : 3, 'Thrust' : 2, 'Matter' : 5 },
-   'Norseman' :   {'Crush' : 2, 'Slash'  : 3, 'Cold'   : 5 },
-   'Valkyn' :     {'Slash' : 3, 'Thrust' : 2, 'Cold'   : 5, 'Body'   : 5 } 
-}
+Races['All'] = d2(Races['All'])
+Races = d2(Races)
 
 
 # Rename old skills to new skills, from previously saved template files
@@ -1219,7 +1379,6 @@ FixEffectsTable = {
     'Casting Range' :          'Spell Range',
     'Casting Speed Bonus' :    'Casting Speed',
     'Debuff Bonus' :           'Stat Debuff Effectiveness',
-    #??'Fatigue' :                'Fatigue', 
     'Healing Bonus' :          'Healing Effectiveness',
     'Spell Damage Bonus' :     'Magic Damage',
     'Spell Duration Bonus' :   'Duration of Spells',
@@ -1254,8 +1413,5 @@ FixEffectsTable = {
     'Spirit Resist' :   'Spirit',
     'Crush Resist' :    'Crush', 
     'Thrust Resist' :   'Thrust', 
-    'Slash Resist' :    'Slash'
-
-    
+    'Slash Resist' :    'Slash', 
 }
-
