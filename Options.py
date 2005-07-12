@@ -187,8 +187,8 @@ class Options(B_Options):
         self.OK_pressed()
             
     def load(self):
-        scfile = os.path.join(os.path.dirname(os.path.basename(sys.argv[0])),
-                'Spellcraft.xml')
+        scfile = os.path.join(os.path.dirname(os.path.abspath(sys.argv[0])),
+                              'Spellcraft.xml')
         if os.path.exists(scfile):
             try:
                 f = open(scfile, 'r')
@@ -209,7 +209,7 @@ class Options(B_Options):
         self.parent.pricingInfo = self.getPriceInfo()
         self.parent.coop = self.Coop.isChecked()
         scfile = os.path.join(os.path.dirname(os.path.abspath(sys.argv[0])),
-                'Spellcraft.xml')
+                              'Spellcraft.xml')
         print scfile
         if os.access(os.path.dirname(scfile), os.W_OK):
             try:

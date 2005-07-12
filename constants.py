@@ -17,346 +17,426 @@
 # along with this program; if not, write to the Free Software
 # Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
-ScVersion = "1.42b + ehrayn/patch 1.0.2"
+ScVersion = "Kort 1.42b + Ehrayn/patch 1.0.3"
 
-ClassList = { 'Albion' : ['Armsman', 'Cabalist', 'Cleric', 'Friar', 
-    'Heretic', 'Infiltrator', 'Mercenary', 'Minstrel', 'Necromancer', 
-    'Paladin', 'Reaver', 'Scout', 'Sorcerer', 'Theurgist', 'Wizard' ],
-    'Hibernia' : ['Animist', 'Bainshee', 'Bard', 'Blademaster', 'Champion', 
-    'Druid', 'Eldritch', 'Enchanter', 'Hero', 'Mentalist', 'Nightshade',
-    'Ranger', 'Valewalker', 'Vampiir', 'Warden' ],
-    'Midgard' : ['Berserker', 'Bonedancer', 'Healer', 'Hunter',
-    'Runemaster', 'Savage', 'Shadowblade', 'Shaman', 'Skald', 'Spiritmaster',
-    'Thane', 'Valkyrie', 'Warlock', 'Warrior' ] }
+ClassList = { 
+    'Albion' : [
+        'Armsman', 'Cabalist', 'Cleric', 'Friar', 'Heretic', 'Infiltrator', 
+        'Mercenary', 'Minstrel', 'Necromancer', 'Paladin', 'Reaver', 'Scout', 
+        'Sorcerer', 'Theurgist', 'Wizard' ],
+    'Hibernia' : [
+        'Animist', 'Bainshee', 'Bard', 'Blademaster', 'Champion', 'Druid', 
+        'Eldritch', 'Enchanter', 'Hero', 'Mentalist', 'Nightshade', 'Ranger', 
+        'Valewalker', 'Vampiir', 'Warden' ],
+    'Midgard' : [
+        'Berserker', 'Bonedancer', 'Healer', 'Hunter',
+        'Runemaster', 'Savage', 'Shadowblade', 'Shaman', 'Skald', 
+        'Spiritmaster', 'Thane', 'Valkyrie', 'Warlock', 'Warrior' ] }
 
-TabList = ['Chest', 'Arms', 'Head', 'Legs', 'Hands', 'Feet', 'Right Hand',
+TabList = [
+    'Chest', 'Arms', 'Head', 'Legs', 'Hands', 'Feet', 'Right Hand',
     'Left Hand', '2 Handed', 'Ranged', 'Spare', 'Neck', 'Cloak', 'Jewel',
     'Belt', 'Left Ring', 'Right Ring', 'Left Wrist', 'Right Wrist']
 
 TypeList = ['Unused', 'Stat', 'Resist', 'Hits', 'Power', 'Focus', 'Skill']
 
-DropTypeList = ['Unused', 'Stat', 'Resist', 'Hits', 'Power', 'Focus', 'Skill',
-    'Cap Increase', 'Other Bonus']
+DropTypeList = [
+    'Unused', 'Stat', 'Resist', 'Hits', 'Power', 'Focus', 'Skill',
+    'Cap Increase', 'PvE Bonus', 'Other Bonus']
 
 StatList = [ 
-    ['Strength', 'Fiery'], ['Constitution', 'Earthen'], 
-    ['Dexterity', 'Vapor'], ['Quickness', 'Airy'], ['Intelligence', 'Dusty'], 
-    ['Piety', 'Watery'], ['Charisma', 'Icy'] , ['Empathy', 'Heated'] ]
+    ['Strength', 'Fiery'], 
+    ['Constitution', 'Earthen'], 
+    ['Dexterity', 'Vapor'], 
+    ['Quickness', 'Airy'], 
+    ['Intelligence', 'Dusty'], 
+    ['Piety', 'Watery'], 
+    ['Charisma', 'Icy'] , 
+    ['Empathy', 'Heated'] ]
 
 DropStatList = [ 
-    ['Strength', 'Fiery'], ['Constitution', 'Earthen'], 
-    ['Dexterity', 'Vapor'], ['Quickness', 'Airy'], ['Intelligence', 'Dusty'], 
-    ['Piety', 'Watery'], ['Charisma', 'Icy'] , ['Empathy', 'Heated'],
-        ['Acuity', '' ] ]
+    ['Strength', 'Fiery'], 
+    ['Constitution', 'Earthen'], 
+    ['Dexterity', 'Vapor'], 
+    ['Quickness', 'Airy'], 
+    ['Intelligence', 'Dusty'], 
+    ['Piety', 'Watery'], 
+    ['Charisma', 'Icy'] , 
+    ['Empathy', 'Heated'],
+    ['Acuity', '' ] ]
 
-AllBonusList = { 'Armsman' : {'All Focus Bonus' : [], 
+AllBonusList = { 'Armsman' : {
+        'All Focus Bonus' : [], 
         'All Magic Skill Bonus' : [],
         'All Melee Skill Bonus' : ['Crush', 'Slash', 'Thrust', 'Polearm', 'Two Handed'],
         'All Dual Wield Skill Bonus' : [],
         'Archery Skill Bonus' : [],
         'Acuity' : [] },
-    'Cabalist' : {'All Focus Bonus' : ['Body Focus', 'Matter Focus', 'Spirit Focus'], 
+    'Cabalist' : {
+        'All Focus Bonus' : ['Body Focus', 'Matter Focus', 'Spirit Focus'], 
         'All Magic Skill Bonus' : ['Body Magic', 'Matter Magic', 'Spirit Magic'],
         'All Melee Skill Bonus' : [],
         'All Dual Wield Skill Bonus' : [],
         'Archery Skill Bonus' : [],
         'Acuity' : ['Intelligence'] },
-    'Cleric' : {'All Focus Bonus' : [], 
+    'Cleric' : {
+        'All Focus Bonus' : [], 
         'All Magic Skill Bonus' : ['Rejuvenation', 'Enhancement', 'Smite'],
         'All Melee Skill Bonus' : [],
         'All Dual Wield Skill Bonus' : [],
         'Archery Skill Bonus' : [],
         'Acuity' : ['Piety'] },
-    'Friar' : {'All Focus Bonus' : [], 
+    'Friar' : {
+        'All Focus Bonus' : [], 
         'All Magic Skill Bonus' : ['Rejuvenation', 'Enhancement'],
         'All Melee Skill Bonus' : ['Staff'],
         'All Dual Wield Skill Bonus' : [],
         'Archery Skill Bonus' : [],
         'Acuity' : ['Piety'] },
-    'Heretic' : {'All Focus Bonus' : [], 
+    'Heretic' : {
+        'All Focus Bonus' : [], 
         'All Magic Skill Bonus' : ['Rejuvenation', 'Enhancement'],
         'All Melee Skill Bonus' : ['Crush', 'Flexible'],
         'All Dual Wield Skill Bonus' : [],
         'Archery Skill Bonus' : [],
         'Acuity' : ['Piety'] },
-    'Infiltrator' : {'All Focus Bonus' : [], 
+    'Infiltrator' : {
+        'All Focus Bonus' : [], 
         'All Magic Skill Bonus' : [],
         'All Melee Skill Bonus' : ['Slash', 'Thrust'],
         'All Dual Wield Skill Bonus' : ['Dual Wield'],
         'Archery Skill Bonus' : [],
         'Acuity' : [] },
-    'Mercenary' : {'All Focus Bonus' : [], 
+    'Mercenary' : {
+        'All Focus Bonus' : [], 
         'All Magic Skill Bonus' : [],
         'All Melee Skill Bonus' : ['Crush', 'Slash', 'Thrust'],
         'All Dual Wield Skill Bonus' : ['Dual Wield'],
         'Archery Skill Bonus' : [],
         'Acuity' : [] },
-    'Minstrel' : {'All Focus Bonus' : [], 
+    'Minstrel' : {
+        'All Focus Bonus' : [], 
         'All Magic Skill Bonus' : ['Instruments'],
         'All Melee Skill Bonus' : ['Slash', 'Thrust'],
         'All Dual Wield Skill Bonus' : [],
         'Archery Skill Bonus' : [],
         'Acuity' : ['Charisma'] },
-    'Necromancer' : {'All Focus Bonus' : ['Deathsight Focus', 'Death Servant Focus', 
+    'Necromancer' : {
+        'All Focus Bonus' : ['Deathsight Focus', 'Death Servant Focus', 
         'Painworking Focus'], 
         'All Magic Skill Bonus' : ['Deathsight', 'Death Servant', 'Painworking'],
         'All Melee Skill Bonus' : [],
         'All Dual Wield Skill Bonus' : [],
         'Archery Skill Bonus' : [],
         'Acuity' : ['Intelligence'] },
-    'Paladin' : {'All Focus Bonus' : [],
+    'Paladin' : {
+        'All Focus Bonus' : [],
         'All Magic Skill Bonus' : [],
-        'All Melee Skill Bonus' : ['Crush', 'Slash', 'Thrust', 'Polearm', 'Two Handed'],
+        'All Melee Skill Bonus' : ['Crush', 'Slash', 'Thrust', 'Two Handed'],
         'All Dual Wield Skill Bonus' : [],
         'Archery Skill Bonus' : [],
         'Acuity' : [] },
-    'Reaver' : {'All Focus Bonus' : [],
+    'Reaver' : {
+        'All Focus Bonus' : [],
         'All Magic Skill Bonus' : ['Soulrending'],
         'All Melee Skill Bonus' : ['Crush', 'Slash', 'Thrust', 'Flexible'],
         'All Dual Wield Skill Bonus' : [],
         'Archery Skill Bonus' : [],
         'Acuity' : [] },
-    'Scout' : {'All Focus Bonus' : [],
+    'Scout' : {
+        'All Focus Bonus' : [],
         'All Magic Skill Bonus' : [],
         'All Melee Skill Bonus' : ['Slash', 'Thrust'],
         'All Dual Wield Skill Bonus' : [],
         'Archery Skill Bonus' : ['Longbow'],
         'Acuity' : [] },
-    'Sorcerer' : {'All Focus Bonus' : ['Body Focus', 'Mind Focus', 'Matter Focus'],
+    'Sorcerer' : {
+        'All Focus Bonus' : ['Body Focus', 'Mind Focus', 'Matter Focus'],
         'All Magic Skill Bonus' : ['Body Magic', 'Mind Magic', 'Matter Magic'],
         'All Melee Skill Bonus' : [],
         'All Dual Wield Skill Bonus' : [],
         'Archery Skill Bonus' : [],
         'Acuity' : ['Intelligence'] },
-    'Theurgist' : {'All Focus Bonus' : ['Earth Focus', 'Cold Focus', 'Wind Focus'],
+    'Theurgist' : {
+        'All Focus Bonus' : ['Earth Focus', 'Cold Focus', 'Wind Focus'],
         'All Magic Skill Bonus' : ['Earth Magic', 'Cold Magic', 'Wind Magic'],
         'All Melee Skill Bonus' : [],
         'All Dual Wield Skill Bonus' : [],
         'Archery Skill Bonus' : [],
         'Acuity' : ['Intelligence'] },
-    'Wizard' : {'All Focus Bonus' : ['Earth Focus', 'Cold Focus', 'Fire Focus'],
+    'Wizard' : {
+        'All Focus Bonus' : ['Earth Focus', 'Cold Focus', 'Fire Focus'],
         'All Magic Skill Bonus' : ['Earth Magic', 'Cold Magic', 'Fire Magic'],
         'All Melee Skill Bonus' : [],
         'All Dual Wield Skill Bonus' : [],
         'Archery Skill Bonus' : [],
         'Acuity' : ['Intelligence'] },
-    'Animist' : {'All Focus Bonus' : ['Creeping Path Focus', 'Arboreal Focus', 'Verdant Path Focus'],
+    'Animist' : {
+        'All Focus Bonus' : ['Creeping Path Focus', 'Arboreal Focus', 'Verdant Path Focus'],
         'All Magic Skill Bonus' : ['Arboreal Path', 'Creeping Path', 'Verdant Path'],
         'All Melee Skill Bonus' : [],
         'All Dual Wield Skill Bonus' : [],
         'Archery Skill Bonus' : [],
         'Acuity' : ['Intelligence'] },
-    'Bainshee' : {'All Focus Bonus' : ['Ethereal Shriek Focus', 'Phantasmal Wail Focus', 'Spectral Guard Focus'],
+    'Bainshee' : {
+        'All Focus Bonus' : ['Ethereal Shriek Focus', 'Phantasmal Wail Focus', 'Spectral Guard Focus'],
         'All Magic Skill Bonus' : ['Ethereal Shriek', 'Phantasmal Wail', 'Spectral Guard'],
         'All Melee Skill Bonus' : [],
         'All Dual Wield Skill Bonus' : [],
         'Archery Skill Bonus' : [],
         'Acuity' : ['Intelligence'] },
-    'Bard' : {'All Focus Bonus' : [],
+    'Bard' : {
+        'All Focus Bonus' : [],
         'All Magic Skill Bonus' : ['Regrowth', 'Nurture', 'Music'],
         'All Melee Skill Bonus' : ['Blades', 'Blunt'],
         'All Dual Wield Skill Bonus' : [],
         'Archery Skill Bonus' : [],
         'Acuity' : ['Charisma'] },
-    'Blademaster' : {'All Focus Bonus' : [],
+    'Blademaster' : {
+        'All Focus Bonus' : [],
         'All Magic Skill Bonus' : [],
         'All Melee Skill Bonus' : ['Blades', 'Blunt', 'Piercing'],
         'All Dual Wield Skill Bonus' : ['Celtic Dual'],
         'Archery Skill Bonus' : [],
         'Acuity' : [] },
-    'Champion' : {'All Focus Bonus' : [],
+    'Champion' : {
+        'All Focus Bonus' : [],
         'All Magic Skill Bonus' : ['Valor'],
         'All Melee Skill Bonus' : ['Blades', 'Blunt', 'Piercing', 'Large Weaponry'],
         'All Dual Wield Skill Bonus' : [],
         'Archery Skill Bonus' : [],
         'Acuity' : ['Intelligence'] },
-    'Druid' : {'All Focus Bonus' : [],
+    'Druid' : {
+        'All Focus Bonus' : [],
         'All Magic Skill Bonus' : ['Regrowth', 'Nature', 'Nurture'],
         'All Melee Skill Bonus' : [],
         'All Dual Wield Skill Bonus' : [],
         'Archery Skill Bonus' : [],
         'Acuity' : ['Empathy'] },
-    'Eldritch' : {'All Focus Bonus' : ['Light Focus', 'Mana Focus', 'Void Focus'],
+    'Eldritch' : {
+        'All Focus Bonus' : ['Light Focus', 'Mana Focus', 'Void Focus'],
         'All Magic Skill Bonus' : ['Light', 'Mana', 'Void'],
         'All Melee Skill Bonus' : [],
         'All Dual Wield Skill Bonus' : [],
         'Archery Skill Bonus' : [],
         'Acuity' : ['Intelligence'] },
-    'Enchanter' : {'All Focus Bonus' : ['Light Focus', 'Mana Focus', 'Enchantments Focus'],
+    'Enchanter' : {
+        'All Focus Bonus' : ['Light Focus', 'Mana Focus', 'Enchantments Focus'],
         'All Magic Skill Bonus' : ['Light', 'Mana', 'Enchantments'],
         'All Melee Skill Bonus' : [],
         'All Dual Wield Skill Bonus' : [],
         'Archery Skill Bonus' : [],
         'Acuity' : ['Intelligence'] },
-    'Mentalist' : {'All Focus Bonus' : ['Light Focus', 'Mana Focus', 'Mentalism Focus'],
+    'Mentalist' : {
+        'All Focus Bonus' : ['Light Focus', 'Mana Focus', 'Mentalism Focus'],
         'All Magic Skill Bonus' : ['Light', 'Mana', 'Mentalism'],
         'All Melee Skill Bonus' : [],
         'All Dual Wield Skill Bonus' : [],
         'Archery Skill Bonus' : [],
         'Acuity' : ['Intelligence'] },
-    'Hero' : {'All Focus Bonus' : [],
+    'Hero' : {
+        'All Focus Bonus' : [],
         'All Magic Skill Bonus' : [],
         'All Melee Skill Bonus' : ['Blades', 'Blunt', 'Celtic Spear', 'Large Weaponry', 'Piercing'],
         'All Dual Wield Skill Bonus' : [],
         'Archery Skill Bonus' : [],
         'Acuity' : [] },
-    'Nightshade' : {'All Focus Bonus' : [],
+    'Nightshade' : {
+        'All Focus Bonus' : [],
         'All Magic Skill Bonus' : [],
         'All Melee Skill Bonus' : ['Blades', 'Blunt', 'Piercing'],
         'All Dual Wield Skill Bonus' : ['Celtic Dual'],
         'Archery Skill Bonus' : [],
         'Acuity' : [] },
-    'Ranger' : {'All Focus Bonus' : [],
+    'Ranger' : {
+        'All Focus Bonus' : [],
         'All Magic Skill Bonus' : ['Pathfinding'],
         'All Melee Skill Bonus' : ['Blades', 'Piercing'],
         'All Dual Wield Skill Bonus' : ['Celtic Dual'],
         'Archery Skill Bonus' : ['Recurve Bow'],
         'Acuity' : ['Empathy'] },
-    'Valewalker' : {'All Focus Bonus' : [],
+    'Valewalker' : {
+        'All Focus Bonus' : [],
         'All Magic Skill Bonus' : ['Arboreal Path'],
         'All Melee Skill Bonus' : ['Scythe'],
         'All Dual Wield Skill Bonus' : [],
         'Archery Skill Bonus' : [],
         'Acuity' : ['Intelligence'] },
-    'Vampiir' : {'All Focus Bonus' : [],
+    'Vampiir' : {
+        'All Focus Bonus' : [],
         'All Magic Skill Bonus' : ['Dementia', 'Shadow Mastery', 'Vampiiric Embrace'],
         'All Melee Skill Bonus' : ['Piercing'],
         'All Dual Wield Skill Bonus' : [],
         'Archery Skill Bonus' : [],
         'Acuity' : [] },
-    'Warden' : {'All Focus Bonus' : [],
+    'Warden' : {
+        'All Focus Bonus' : [],
         'All Magic Skill Bonus' : ['Nurture', 'Regrowth', 'Nature'],
         'All Melee Skill Bonus' : ['Blades', 'Blunt'],
         'All Dual Wield Skill Bonus' : [],
         'Archery Skill Bonus' : [],
         'Acuity' : ['Empathy'] },
-    'Berserker' : {'All Focus Bonus' : [],
+    'Berserker' : {
+        'All Focus Bonus' : [],
         'All Magic Skill Bonus' : [],
         'All Melee Skill Bonus' : ['Axe', 'Hammer', 'Sword'],
         'All Dual Wield Skill Bonus' : ['Left Axe'],
         'Archery Skill Bonus' : [],
         'Acuity' : [] },
-    'Bonedancer' : {'All Focus Bonus' : ['Darkness Focus', 'Suppression Focus', 'Bone Army Focus'],
+    'Bonedancer' : {
+        'All Focus Bonus' : ['Darkness Focus', 'Suppression Focus', 'Bone Army Focus'],
         'All Magic Skill Bonus' : ['Darkness', 'Suppression', 'Bone Army'],
         'All Melee Skill Bonus' : [],
         'All Dual Wield Skill Bonus' : [],
         'Archery Skill Bonus' : [],
         'Acuity' : ['Piety'] },
-    'Healer' : {'All Focus Bonus' : [],
+    'Healer' : {
+        'All Focus Bonus' : [],
         'All Magic Skill Bonus' : ['Mending', 'Augmentation'],
         'All Melee Skill Bonus' : [],
         'All Dual Wield Skill Bonus' : [],
         'Archery Skill Bonus' : [],
         'Acuity' : ['Piety'] },
-    'Hunter' : {'All Focus Bonus' : [],
+    'Hunter' : {
+        'All Focus Bonus' : [],
         'All Magic Skill Bonus' : ['Beastcraft'],
         'All Melee Skill Bonus' : ['Spear', 'Sword'],
         'All Dual Wield Skill Bonus' : [],
         'Archery Skill Bonus' : ['Composite Bow'],
         'Acuity' : [] },
-    'Runemaster' : {'All Focus Bonus' : ['Darkness Focus', 'Suppression Focus', 'Runecarving Focus'],
+    'Runemaster' : {
+        'All Focus Bonus' : ['Darkness Focus', 'Suppression Focus', 'Runecarving Focus'],
         'All Magic Skill Bonus' : ['Darkness', 'Suppression', 'Runecarving'],
         'All Melee Skill Bonus' : [],
         'All Dual Wield Skill Bonus' : [],
         'Archery Skill Bonus' : [],
         'Acuity' : ['Piety'] },
-    'Savage' : {'All Focus Bonus' : [],
+    'Savage' : {
+        'All Focus Bonus' : [],
         'All Magic Skill Bonus' : ['Savagery'],
         'All Melee Skill Bonus' : ['Sword', 'Axe', 'Hammer', 'Hand To Hand'],
         'All Dual Wield Skill Bonus' : [],
         'Archery Skill Bonus' : [],
         'Acuity' : [] },
-    'Shadowblade' : {'All Focus Bonus' : [],
+    'Shadowblade' : {
+        'All Focus Bonus' : [],
         'All Magic Skill Bonus' : [],
         'All Melee Skill Bonus' : ['Sword', 'Axe'],
         'All Dual Wield Skill Bonus' : ['Left Axe'],
         'Archery Skill Bonus' : [],
         'Acuity' : [] },
-    'Shaman' : {'All Focus Bonus' : [],
+    'Shaman' : {
+        'All Focus Bonus' : [],
         'All Magic Skill Bonus' : ['Augmentation', 'Mending', 'Subterranean'],
         'All Melee Skill Bonus' : [],
         'All Dual Wield Skill Bonus' : [],
         'Archery Skill Bonus' : [],
         'Acuity' : ['Piety'] },
-    'Skald' : {'All Focus Bonus' : [],
+    'Skald' : {
+        'All Focus Bonus' : [],
         'All Magic Skill Bonus' : ['Battlesongs'],
         'All Melee Skill Bonus' : ['Sword', 'Hammer', 'Axe'],
         'All Dual Wield Skill Bonus' : [],
         'Archery Skill Bonus' : [],
         'Acuity' : ['Charisma'] },
-    'Spiritmaster' : {'All Focus Bonus' : ['Darkness Focus', 'Suppression Focus', 'Summoning Focus'],
+    'Spiritmaster' : {
+        'All Focus Bonus' : ['Darkness Focus', 'Suppression Focus', 'Summoning Focus'],
         'All Magic Skill Bonus' : ['Darkness', 'Suppression', 'Summoning'],
         'All Melee Skill Bonus' : [],
         'All Dual Wield Skill Bonus' : [],
         'Archery Skill Bonus' : [],
         'Acuity' : ['Piety'] },
-    'Thane' : {'All Focus Bonus' : [],
+    'Thane' : {
+        'All Focus Bonus' : [],
         'All Magic Skill Bonus' : ['Stormcalling'],
         'All Melee Skill Bonus' : ['Sword', 'Hammer', 'Axe'],
         'All Dual Wield Skill Bonus' : [],
         'Archery Skill Bonus' : [],
         'Acuity' : ['Piety'] },
-    'Valkyrie' : {'All Focus Bonus' : [],
+    'Valkyrie' : {
+        'All Focus Bonus' : [],
         'All Magic Skill Bonus' : ['Odin\'s Will'],
         'All Melee Skill Bonus' : ['Sword', 'Spear'],
         'All Dual Wield Skill Bonus' : [],
         'Archery Skill Bonus' : [],
         'Acuity' : ['Piety'] },
-    'Warlock' : {'All Focus Bonus' : ['Cursing'],
+    'Warlock' : {
+        'All Focus Bonus' : ['Cursing'],
         'All Magic Skill Bonus' : ['Cursing', 'Hexing', 'Witchcraft'],
         'All Melee Skill Bonus' : [],
         'All Dual Wield Skill Bonus' : [],
         'Archery Skill Bonus' : [],
         'Acuity' : ['Piety'] },
-    'Warrior' : {'All Focus Bonus' : [],
+    'Warrior' : {
+        'All Focus Bonus' : [],
         'All Magic Skill Bonus' : [],
         'All Melee Skill Bonus' : ['Sword', 'Hammer', 'Axe'],
         'All Dual Wield Skill Bonus' : [],
         'Archery Skill Bonus' : [],
         'Acuity' : [] } }
 
-HighCapBonusList = [
-    'Power Percentage Bonus',
-    'Debuff Bonus',
-    'Buff Bonus',
-    'Healing Bonus',
-    'Spell Duration Bonus',
-    'AF Bonus',
-    'Fatigue' ]
-
 OtherBonusList = [
     [ 'Power Percentage Bonus', ''],
-    [ 'Debuff Bonus', ''],
-    [ 'Buff Bonus', ''],
-    [ 'Healing Bonus', ''],
-    [ 'Spell Duration Bonus', ''],
-    [ 'Casting Speed Bonus', ''],
-    [ 'Spell Range Bonus', ''],
-    [ 'Spell Damage Bonus', ''],
-    [ 'Archery Damage Bonus', ''],
-    [ 'Archery Range Bonus', ''],
-    [ 'Archery Speed Bonus', ''],
-    [ 'Style Damage Bonus', ''],
-    [ 'Melee Damage Bonus', ''],
-    [ 'Melee Speed Bonus', ''],
-    [ 'AF Bonus', ''],
-    [ 'Fatigue', ''] ]
+    [ 'Debuff Bonus',           ''],
+    [ 'Buff Bonus',             ''],
+    [ 'Healing Bonus',          ''],
+    [ 'Spell Duration Bonus',   ''],
+    [ 'Casting Speed Bonus',    ''],
+    [ 'Spell Range Bonus',      ''],
+    [ 'Spell Damage Bonus',     ''],
+    [ 'Archery Damage Bonus',   ''],
+    [ 'Archery Range Bonus',    ''],
+    [ 'Archery Speed Bonus',    ''],
+    [ 'Style Damage Bonus',     ''],
+    [ 'Melee Damage Bonus',     ''],
+    [ 'Melee Speed Bonus',      ''],
+    [ 'AF Bonus',               ''],
+    [ 'Fatigue',                ''] ]
+
+PvEBonusList = [
+    [ 'Concentration', '' ], 
+    [ 'Blocking', ''], 
+    [ 'Evade', '' ], 
+    [ 'Parry', '' ], 
+    [ 'Negative Effect Duration Reduction', ''], 
+    [ 'Bladeturn Reinforcement', ''], 
+    [ 'Piece Ablative', ''], 
+    [ 'Damage Reduction', ''], 
+    [ 'Reactionary Style Damage Bonus', ''], 
+    [ 'To-Hit Bonus', ''], 
+    [ 'Spell Power Cost Reduction', ''], 
+    [ 'Style Cost Reduction', ''], 
+    [ 'Death Experience Loss Reduction', ''], 
+    [ 'Arrow Recovery', ''] ]
 
 CapIncreaseList = [ 
-    ['Strength', ''], ['Constitution', ''], 
-    ['Dexterity', ''], ['Quickness', ''], ['Intelligence', ''], 
-    ['Piety', ''], ['Charisma', ''] , ['Empathy', ''],
-    ['Hits', ''], ['Power', ''], ['Acuity', ''], ['AF', ''] ]
+    ['Strength',     ''], 
+    ['Constitution', ''], 
+    ['Dexterity',    ''], 
+    ['Quickness',    ''], 
+    ['Intelligence', ''], 
+    ['Piety',        ''], 
+    ['Charisma',     ''] , 
+    ['Empathy',      ''],
+    ['Hits',         ''], 
+    ['Power',        ''], 
+    ['Acuity',       ''], 
+    ['AF',           ''] ]
 
 StatValues = ['1', '4', '7', '10', '13', '16', '19', '22', '25', '28']
 
 QualityValues = ['94', '95', '96', '97', '98', '99', '100']
 
-ResistList = [ ['Body Resist', 'Dusty'], ['Cold Resist', 'Icy'], 
-    ['Heat Resist', 'Heated'], ['Energy Resist', 'Light'],
-    ['Matter Resist', 'Earthen'], ['Spirit Resist', 'Vapor'],
-    ['Crush Resist', 'Fiery'], ['Thrust Resist', 'Airy'], 
-    ['Slash Resist', 'Watery'] ]
+ResistList = [ 
+    ['Body Resist',   'Dusty'], 
+    ['Cold Resist',   'Icy'], 
+    ['Heat Resist',   'Heated'], 
+    ['Energy Resist', 'Light'],
+    ['Matter Resist', 'Earthen'], 
+    ['Spirit Resist', 'Vapor'],
+    ['Crush Resist',  'Fiery'], 
+    ['Thrust Resist', 'Airy'], 
+    ['Slash Resist',  'Watery'] ]
 
 ResistValues = ['1', '2', '3', '5', '7', '9', '11', '13', '15', '17']
 
@@ -369,83 +449,44 @@ PowerList = [ ['Power', 'Mystical'] ]
 PowerValues = ['1', '2', '3', '5', '7', '9', '11', '13', '15', '17']
 
 FocusList = { 
-    'Albion' : 
-    [ ['Body Focus', 'Heat Sigil'], 
-    ['Cold Focus', 'Ice Sigil'], 
-    ['Death Servant Focus', 'Ashen Sigil'],
-    ['Deathsight Focus', 'Vacuous Sigil'],
-    ['Earth Focus', 'Earth Sigil'],
-    ['Fire Focus', 'Fire Sigil'],
-    ['Matter Focus', 'Dust Sigil'],
-    ['Mind Focus', 'Water Sigil'],
-    ['Painworking Focus', 'Salt Crusted Sigil'],
-    ['Spirit Focus', 'Vapor Sigil'],
-    ['Wind Focus', 'Air Sigil'],
-    ['All Focus Bonus', 'Brilliant Sigil'] ],
+    'Albion' : [
+        ['Body Focus',            'Heat Sigil'], 
+        ['Cold Focus',            'Ice Sigil'], 
+        ['Death Servant Focus',   'Ashen Sigil'],
+        ['Deathsight Focus',      'Vacuous Sigil'],
+        ['Earth Focus',           'Earth Sigil'],
+        ['Fire Focus',            'Fire Sigil'],
+        ['Matter Focus',          'Dust Sigil'],
+        ['Mind Focus',            'Water Sigil'],
+        ['Painworking Focus',     'Salt Crusted Sigil'],
+        ['Spirit Focus',          'Vapor Sigil'],
+        ['Wind Focus',            'Air Sigil'],
+        ['All Focus Bonus',       'Brilliant Sigil'] ],
 
-    'Hibernia' : 
-    [ ['Arboreal Focus', 'Steaming Spell Stone'] , 
-    ['Creeping Path Focus', 'Oozing Spell Stone'],
-    ['Enchantments Focus', 'Vapor Spell Stone'], 
-    ['Ethereal Shriek Focus', 'Ethereal Spell Stone'], 
-    ['Light Focus', 'Fire Spell Stone'], 
-    ['Mana Focus', 'Water Spell Stone'], 
-    ['Mentalism Focus', 'Earth Spell Stone'], 
-    ['Phantasmal Wail Focus', 'Phantasmal Spell Stone'], 
-    ['Spectral Guard Focus', 'Spectral Spell Stone'], 
-    ['Verdant Path Focus', 'Mineral Encrusted Spell Stone'],
-    ['Void Focus', 'Ice Spell Stone'],
-    ['All Focus Bonus', 'Brilliant Spell Stone'] ],
+    'Hibernia' : [
+        ['Arboreal Focus',        'Steaming Spell Stone'] , 
+        ['Creeping Path Focus',   'Oozing Spell Stone'],
+        ['Enchantments Focus',    'Vapor Spell Stone'], 
+        ['Ethereal Shriek Focus', 'Ethereal Spell Stone'], 
+        ['Light Focus',           'Fire Spell Stone'], 
+        ['Mana Focus',            'Water Spell Stone'], 
+        ['Mentalism Focus',       'Earth Spell Stone'], 
+        ['Phantasmal Wail Focus', 'Phantasmal Spell Stone'], 
+        ['Spectral Guard Focus',  'Spectral Spell Stone'], 
+        ['Verdant Path Focus',    'Mineral Encrusted Spell Stone'],
+        ['Void Focus',            'Ice Spell Stone'],
+        ['All Focus Bonus',       'Brilliant Spell Stone'] ],
 
-    'Midgard' : 
-    [ ['Bone Army Focus', 'Ashen Rune'], 
-    ['Cursing Focus', 'Blighted Rune'],
-    ['Darkness Focus', 'Ice Rune'],
-    ['Runecarving Focus', 'Heat Rune'],
-    ['Summoning Focus', 'Vapor Rune'], 
-    ['Suppression Focus', 'Dust Rune'],
-    ['All Focus Bonus', 'Brilliant Rune'] ] }
+    'Midgard' : [ 
+        ['Bone Army Focus',       'Ashen Rune'], 
+        ['Cursing Focus',         'Blighted Rune'],
+        ['Darkness Focus',        'Ice Rune'],
+        ['Runecarving Focus',     'Heat Rune'],
+        ['Summoning Focus',       'Vapor Rune'], 
+        ['Suppression Focus',     'Dust Rune'],
+        ['All Focus Bonus',       'Brilliant Rune'] ] }
 
-DropFocusList = { 
-    'Albion' : 
-    [ ['Body Focus', 'Heat Sigil'], 
-    ['Cold Focus', 'Ice Sigil'], 
-    ['Death Servant Focus', 'Ashen Sigil'],
-    ['Deathsight Focus', 'Vacuous Sigil'],
-    ['Earth Focus', 'Earth Sigil'],
-    ['Fire Focus', 'Fire Sigil'],
-    ['Matter Focus', 'Dust Sigil'],
-    ['Mind Focus', 'Water Sigil'],
-    ['Painworking Focus', 'Salt Crusted Sigil'],
-    ['Spirit Focus', 'Vapor Sigil'],
-    ['Wind Focus', 'Air Sigil'],
-    ['All Focus Bonus', 'Brilliant Sigil'] ],
-
-    'Hibernia' : 
-    [ ['Arboreal Focus', 'Steaming Spell Stone'] , 
-    ['Creeping Path Focus', 'Oozing Spell Stone'],
-    ['Enchantments Focus', 'Vapor Spell Stone'], 
-    ['Ethereal Shriek Focus', 'Ethereal Spell Stone'], 
-    ['Light Focus', 'Fire Spell Stone'], 
-    ['Mana Focus', 'Water Spell Stone'], 
-    ['Mentalism Focus', 'Earth Spell Stone'], 
-    ['Phantasmal Wail Focus', 'Phantasmal Spell Stone'], 
-    ['Spectral Guard Focus', 'Spectral Spell Stone'], 
-    ['Verdant Path Focus', 'Mineral Encrusted Nature Stone'],
-    ['Void Focus', 'Ice Spell Stone'],
-    ['Ethereal Shriek Focus', 'Ethereal Spell Stone'], 
-    ['Phantasmal Wail Focus', 'Phantasmal Spell Stone'], 
-    ['Spectral Guard Focus', 'Spectral Spell Stone'],
-    ['All Focus Bonus', 'Brilliant Spell Stone'] ],
-
-    'Midgard' : 
-    [ ['Bone Army Focus', 'Ashen Rune'], 
-    ['Cursing Focus', 'Blighted Rune'],
-    ['Darkness Focus', 'Ice Rune'],
-    ['Runecarving Focus', 'Heat Rune'],
-    ['Summoning Focus', 'Vapor Rune'], 
-    ['Suppression Focus', 'Dust Rune'],
-    ['All Focus Bonus', 'Brilliant Rune'] ] }
+DropFocusList =  FocusList
 
 FocusValues = ['5', '10', '15', '20', '25', '30', '35', '40', '45', '50']
 
@@ -679,19 +720,49 @@ UnusedList = [ ]
 
 UnusedValues = [ ]
 
-Caps = { 'Str' : 'AttributeCap', 'Con' : 'AttributeCap', 
-    'Dex' : 'AttributeCap', 'Qui' : 'AttributeCap', 
-    'Int' : 'AttributeCap', 
-    'Pie' : 'AttributeCap', 
-    'Cha' : 'AttributeCap', 
-    'Emp' : 'AttributeCap', 
-    'Body' : 'ResistCap', 
-    'Cold' : 'ResistCap', 'Heat' : 'ResistCap',
-    'Energy' : 'ResistCap', 'Matter' : 'ResistCap', 
-    'Spirit' : 'ResistCap', 'Crush' : 'ResistCap', 
-    'Thrust' : 'ResistCap',
-    'Slash' : 'ResistCap', 'Hits' : 'HitsCap', 
-    'Power' : 'PowerCap', 'Skill' : 'SkillCap' }
+Caps = { 
+    'Str' : 'Stat', 
+    'Con' : 'Stat', 
+    'Dex' : 'Stat', 
+    'Qui' : 'Stat', 
+    'Int' : 'Stat', 
+    'Pie' : 'Stat', 
+    'Cha' : 'Stat', 
+    'Emp' : 'Stat', 
+    'Body' : 'Resist', 
+    'Cold' : 'Resist', 
+    'Heat' : 'Resist',
+    'Energy' : 'Resist', 
+    'Matter' : 'Resist', 
+    'Spirit' : 'Resist', 
+    'Crush' : 'Resist', 
+    'Thrust' : 'Resist',
+    'Slash' : 'Resist' }
+
+# Bonuses are given as % of level + add
+# e.g. [.25, 1] is level / 4 + 1,  [0, 10] is a fixed 10, [1, 0] is level
+HighCapBonusList = {
+    'Stat'                   : [ 1.50,  0 ],
+    'Resist'                 : [  .50,  1 ],
+    'Hits'                   : [ 4.00,  0 ],
+    'Power'                  : [  .50,  1 ],
+    'Skill'                  : [  .20,  1 ],
+    'Cap'                    : [  .50,  0 ],
+    'Hits Cap'               : [ 4.00,  0 ],
+    'Power Cap'              : [ 1.00,  0 ],
+    'AF Cap'                 : [ 1.00,  0 ],
+    'PvE Bonus'              : [  .20,  0 ],
+    'Other Bonus'            : [  .20,  0 ],
+    'Power Percentage Bonus' : [  .50,  0 ],
+    'Buff Bonus'             : [  .50,  0 ],
+    'Debuff Bonus'           : [  .50,  0 ],
+    'Healing Bonus'          : [  .50,  0 ],
+    'Spell Duration Bonus'   : [  .50,  0 ],
+    'Fatigue'                : [  .50,  0 ],
+    'AF Bonus'               : [ 1.50,  0 ],
+    'Arrow Recovery'         : [ 1.00,  0 ], 
+    'Death Experience Loss Reduction' : [ 1.00, 0 ] }
+
 
 ImbueMultipliers = { 'Stat' : 1.0, 'Resist' : 2.0, 'Skill' : 5.0, 
     'Hits' : 0.25, 'Power' : 2.0, 'Focus' : 1.0, 'Unused' : 0.0 } 
@@ -701,8 +772,9 @@ OCStartPercentages = [0, 10, 20, 30, 50, 70]
 GemQualOCModifiers = { '' : 0, '94': 0, '95' : 0, '96' : 1, '97' : 3, '98' : 5, 
     '99' : 8, '100' : 11 }
 
-ItemQualOCModifiers = { '94': 0, '95' : 0, '96' : 6, '97' : 8, '98' : 10, 
-    '99' : 18, '100' : 26 }
+ItemQualOCModifiers = { 
+    '94' :  0, '95' :  0, '96'  :  6, '97' :  8, 
+    '98' : 10, '99' : 18, '100' : 26 }
 
 GemCosts = [ 160, 920, 3900, 13900, 40100, 88980, 133000, 198920, 258240, 296860 ]
 
@@ -710,90 +782,108 @@ RemakeCosts = [ 120, 560, 1740, 5260, 14180, 30660, 45520, 67680, 87640, 100700 
 
 MaterialGems = ['Lo', 'Um', 'On', 'Ee', 'Pal', 'Mon', 'Ros', 'Zo', 'Kath', 'Ra' ]
 
-LiquidsOrder = [ 'Sun Light',
-    'Draconic Fire', 'Treant Blood', 'Swamp Fog',
-    'Air Elemental Essence', 'Leviathan Blood',
-    'Heat From an Unearthly Pyre',
-    'Undead Ash and Holy Water',
+LiquidsOrder = [
+    'Air Elemental Essence', 
+    'Draconic Fire', 
     'Frost From a Wasteland',
-    'Giant Blood', 'Mystic Energy' ]
+    'Giant Blood', 
+    'Heat From an Unearthly Pyre',
+    'Leviathan Blood',
+    'Mystic Energy',
+    'Sun Light',
+    'Swamp Fog',
+    'Treant Blood', 
+    'Undead Ash and Holy Water' ]
 
-DustsOrder = ['Ground Draconic Scales',
-    'Essence of Life', 'Bloodied Battlefield Dirt',
-    'Unseelie Dust', 'Fairy Dust', 'Other Worldly Dust',
-    'Ground Caer Stone', 'Ground Blessed Undead Bone',
+DustsOrder = [
+    'Ground Draconic Scales',
+    'Essence of Life', 
+    'Bloodied Battlefield Dirt',
+    'Unseelie Dust', 
+    'Fairy Dust', 
+    'Other Worldly Dust',
+    'Ground Caer Stone', 
+    'Ground Blessed Undead Bone',
     'Ground Cave Crystal',
-    'Ground Giant Bone', 'Ground Vendo Bone', 
+    'Ground Giant Bone', 
+    'Ground Vendo Bone', 
     'Soot From Niflheim']
 
 GemLiquids = { 
-    'Fiery' : 'Draconic Fire', 
-    'Earthen': 'Treant Blood',
-    'Vapor' : 'Swamp Fog', 
-    'Airy' : 'Air Elemental Essence',
-    'Heated' : 'Heat From an Unearthly Pyre', 
-    'Icy' : 'Frost From a Wasteland', 
-    'Watery' : 'Leviathan Blood',
-    'Dusty' : 'Undead Ash and Holy Water',
-    'Fire' : 'Draconic Fire', 
-    'Earth' : 'Treant Blood',
-    'Vapor' : 'Swamp Fog', 
-    'Air' : 'Air Elemental Essence',
-    'Heat' : 'Heat From an Unearthly Pyre', 
-    'Ice' : 'Frost From a Wasteland', 
-    'Water' : 'Leviathan Blood',
-    'Dust' : 'Undead Ash and Holy Water',
-    'Ashen' : 'Undead Ash and Holy Water',
-    'Vacuous' : 'Swamp Fog',
-    'Salt' : 'Mystic Energy',
-    'Steaming Spell' : 'Swamp Fog',
-    'Steaming Nature' : 'Swamp Fog',
-    'Steaming Fervor' : 'Heat From an Unearthly Pyre',
-    'Oozing' : 'Treant Blood',
-    'Mineral' : 'Heat From an Unearthly Pyre',
-    'Lightning' : 'Leviathan Blood',
-    'Molten' : 'Leviathan Blood',
-    'Light' : 'Sun Light',
-    'Blood' : 'Giant Blood',
-    'Mystical' : 'Mystic Energy',
-    'Mystic' : 'Mystic Energy', 
-    'Brilliant' : ['Draconic Fire', 'Mystic Energy', 'Treant Blood'],
-    'Finesse' : ['Draconic Fire', 'Mystic Energy', 'Treant Blood'],
-    'Ethereal Spell' : 'Swamp Fog', 
-    'Phantasmal Spell' : 'Leviathan Blood', 
-    'Spectral Spell' : 'Draconic Fire', 
-    'Ethereal Arcane' : 'Leviathan Blood', 
+    'Fiery' :             'Draconic Fire', 
+    'Earthen':            'Treant Blood',
+    'Vapor' :             'Swamp Fog', 
+    'Airy' :              'Air Elemental Essence',
+    'Heated' :            'Heat From an Unearthly Pyre', 
+    'Icy' :               'Frost From a Wasteland', 
+    'Watery' :            'Leviathan Blood',
+    'Dusty' :             'Undead Ash and Holy Water',
+    'Fire' :              'Draconic Fire', 
+    'Earth' :             'Treant Blood',
+    'Vapor' :             'Swamp Fog', 
+    'Air' :               'Air Elemental Essence',
+    'Heat' :              'Heat From an Unearthly Pyre', 
+    'Ice' :               'Frost From a Wasteland', 
+    'Water' :             'Leviathan Blood',
+    'Dust' :              'Undead Ash and Holy Water',
+    'Ashen' :             'Undead Ash and Holy Water',
+    'Vacuous' :           'Swamp Fog',
+    'Salt' :              'Mystic Energy',
+    'Steaming Spell' :    'Swamp Fog',
+    'Steaming Nature' :   'Swamp Fog',
+    'Steaming Fervor' :   'Heat From an Unearthly Pyre',
+    'Oozing' :            'Treant Blood',
+    'Mineral' :           'Heat From an Unearthly Pyre',
+    'Lightning' :         'Leviathan Blood',
+    'Molten' :            'Leviathan Blood',
+    'Light' :             'Sun Light',
+    'Blood' :             'Giant Blood',
+    'Mystical' :          'Mystic Energy',
+    'Mystic' :            'Mystic Energy', 
+    'Brilliant' :       [ 'Draconic Fire', 'Mystic Energy', 'Treant Blood' ],
+    'Finesse' :         [ 'Draconic Fire', 'Mystic Energy', 'Treant Blood' ],
+    'Ethereal Spell' :    'Swamp Fog', 
+    'Phantasmal Spell' :  'Leviathan Blood', 
+    'Spectral Spell' :    'Draconic Fire', 
+    'Ethereal Arcane' :   'Leviathan Blood', 
     'Phantasmal Arcane' : 'Draconic Fire', 
-    'Spectral Arcane' : 'Air Elemental Essence', 
-    'Aberrant' : 'Treant Blood', 
-    'Embracing' : 'Frost From a Wasteland', 
-    'Shadowy' : 'Swamp Fog', 
-    'Blighted Primal' : 'Air Elemental Essence', 
-    'Blighted Rune' : 'Undead Ash and Holy Water', 
-    'Valiant' : 'Swamp Fog', 
-    'Unholy' : 'Air Elemental Essence' }
+    'Spectral Arcane' :   'Air Elemental Essence', 
+    'Aberrant' :          'Treant Blood', 
+    'Embracing' :         'Frost From a Wasteland', 
+    'Shadowy' :           'Swamp Fog', 
+    'Blighted Primal' :   'Air Elemental Essence', 
+    'Blighted Rune' :     'Undead Ash and Holy Water', 
+    'Valiant' :           'Swamp Fog', 
+    'Unholy' :            'Air Elemental Essence' }
 
-GemDusts = { 'Essence' : 'Essence of Life',
-    'Shielding' : 'Ground Draconic Scales',
-    'Spell Stone' : 'Ground Draconic Scales',
-    'Sigil' : 'Ground Draconic Scales',
-    'Rune' : 'Ground Draconic Scales',
-    'Chaos Rune' : 'Soot From Niflheim',
-    'Battle Jewel': 'Bloodied Battlefield Dirt',
-    'War Rune': 'Ground Giant Bone',
-    'Primal Rune': 'Ground Vendo Bone',
-    'Evocation Sigil': 'Ground Cave Crystal', 
-    'Fervor Sigil':'Ground Blessed Undead Bone',
-    'War Sigil' : 'Ground Caer Stone',
+GemDusts = { 
+    'Essence' :            'Essence of Life',
+    'Shielding' :          'Ground Draconic Scales',
+    'Spell Stone' :        'Ground Draconic Scales',
+    'Sigil' :              'Ground Draconic Scales',
+    'Rune' :               'Ground Draconic Scales',
+    'Chaos Rune' :         'Soot From Niflheim',
+    'Battle Jewel':        'Bloodied Battlefield Dirt',
+    'War Rune' :           'Ground Giant Bone',
+    'Primal Rune' :        'Ground Vendo Bone',
+    'Evocation Sigil' :    'Ground Cave Crystal', 
+    'Fervor Sigil' :       'Ground Blessed Undead Bone',
+    'War Sigil' :          'Ground Caer Stone',
     'Nature Spell Stone' : 'Fairy Dust',
-    'War Spell Stone' : 'Unseelie Dust',
+    'War Spell Stone' :    'Unseelie Dust',
     'Arcane Spell Stone' : 'Other Worldly Dust' }
 
-GemNames = [ 'raw', 'uncut', 'rough', 'flawed', 'imperfect', 'polished',
-    'faceted', 'precious', 'flawless', 'perfect' ]
+GemNames = [ 
+    'raw',      'uncut',   'rough',    'flawed',   'imperfect', 
+    'polished', 'faceted', 'precious', 'flawless', 'perfect' ]
 
-GemSubName = { 'Stat' : 'Essence', 'Resist' : 'Shielding', 'Hits' : 'Essence', 
-    'Power' : 'Essence', 'Focus' : '', 'Skill' : '' }
+GemSubName = { 
+    'Stat' : 'Essence', 
+    'Resist' : 'Shielding', 
+    'Hits' : 'Essence', 
+    'Power' : 'Essence', 
+    'Focus' : '', 
+    'Skill' : '' }
 
 ImbuePts = [ 
     [0,1,1,1,1,1,1],
@@ -848,57 +938,70 @@ ImbuePts = [
     [10,14,17,20,23,27,31],
     [10,15,18,21,24,28,32] ]
 
-FileExt = { 'Neck' : 'neck', 'Cloak' : 'cloak', 'Belt' : 'belt', 'Jewel' : 'jewel',
-    'Left Ring' : 'ring', 'Right Ring' : 'ring', 'Left Wrist' : ['bracer', 'wrist'],
-    'Right Wrist' : ['bracer', 'wrist'], 'Chest' : 'chest', 'Arms' : 'arms', 
-    'Head' : 'helm', 'Legs' : 'legs', 'Feet' : 'boots', 'Hands' : 'hands',
-    'Right Hand' : 'wep', 'Left Hand' : 'lhwep', '2 Handed' : ['2hwep', 'lhwep', 'wep'],
+FileExt = { 
+    'Neck' : 'neck', 
+    'Cloak' : 'cloak', 
+    'Belt' : 'belt', 
+    'Jewel' : 'jewel',
+    'Left Ring' : 'ring', 
+    'Right Ring' : 'ring', 
+    'Left Wrist' : ['bracer', 'wrist'],
+    'Right Wrist' : ['bracer', 'wrist'], 
+    'Chest' : 'chest', 'Arms' : 'arms', 
+    'Head' : 'helm', 
+    'Legs' : 'legs', 
+    'Feet' : 'boots', 
+    'Hands' : 'hands',
+    'Right Hand' : 'wep', 
+    'Left Hand' : ['lhwep', 'shield'],
+    '2 Handed' : ['2hwep', 'lhwep', 'wep'],
     'Ranged' : 'ranged', 'Spare' : '*' }
 
-ShieldTypes = ['Rowan', 'Elm', 'Oaken', 'Ironwood', 'Heartwood', 'Runewood', 
-    'Stonewood', 'Ebonwood', 'Dyrwood', 'Duskwood' ]
+ShieldTypes = [
+    'Rowan',    'Elm',       'Oaken',    'Ironwood', 'Heartwood', 
+    'Runewood', 'Stonewood', 'Ebonwood', 'Dyrwood',  'Duskwood' ]
 
-Races = {'Albion' : [
-               'Avalonian',
-               'Briton',
-               'Inconnu',
-               'Saracen',
-               'Half Ogre',
-               'Highlander' ],
-         'Hibernia' : [
-               'Celt',
-               'Elf',
-               'Firbolg',
-               'Lurikeen',
-               'Shar',
-               'Sylvan' ],
-         'Midgard' : [
-               'Dwarf',
-               'Frostalf',
-               'Kobold',
-               'Troll',
-               'Norseman',
-               'Valkyn' ]
-        }
+Races = {
+    'Albion' : [
+        'Avalonian',
+        'Briton',
+        'Inconnu',
+        'Saracen',
+        'Half Ogre',
+        'Highlander' ],
+    'Hibernia' : [
+        'Celt',
+        'Elf',
+        'Firbolg',
+        'Lurikeen',
+        'Shar',
+        'Sylvan' ],
+    'Midgard' : [
+        'Dwarf',
+        'Frostalf',
+        'Kobold',
+        'Troll',
+        'Norseman',
+        'Valkyn' ] }
 
 RacialResists = {
-   'Avalonian' : {'Crush' : 2, 'Slash' : 3, 'Matter' : 5 },
-   'Briton' : {'Cold' : 5, 'Crush' : 2, 'Slash' : 3},
-   'Inconnu' : {'Crush' : 2, 'Thrust' : 3, 'Heat' : 5, 'Spirit' : 5 },
-   'Saracen' : {'Slash' : 2, 'Thrust' : 3, 'Heat' : 5 },
-   'Half Ogre' : {'Thrust' : 2, 'Slash' : 3, 'Matter' : 5 },
-   'Highlander' : {'Crush' : 3, 'Slash' : 2, 'Cold' : 5 },
-   'Celt' : {'Crush' : 2, 'Slash' : 3, 'Spirit' : 5 },
-   'Elf' : {'Slash' : 2, 'Thrust' : 3, 'Spirit' : 5 },
-   'Firbolg' : {'Crush' : 3, 'Slash' : 2, 'Heat' : 5 },
-   'Lurikeen' : {'Crush' : 5, 'Energy' : 5 },
-   'Shar' : {'Crush' : 5, 'Energy' : 5 },
-   'Sylvan' : {'Crush' : 3, 'Thrust' : 2, 'Matter' : 5, 'Energy' : 5 },
-   'Dwarf' : {'Slash' : 2, 'Thrust' : 3, 'Body' : 5 },
-   'Frostalf' : {'Slash' : 2, 'Thrust' : 3, 'Spirit' : 5 },
-   'Kobold' : {'Crush' : 5, 'Energy' : 5 },
-   'Troll' : {'Slash' : 3, 'Thrust' : 2, 'Matter' : 5 },
-   'Norseman' : {'Crush' : 2, 'Slash' : 3, 'Cold' : 5 },
-   'Valkyn' : {'Slash' : 3, 'Thrust' : 2, 'Cold' : 5, 'Body' : 5 } }
+   'Avalonian' :  {'Crush' : 2, 'Slash'  : 3, 'Matter' : 5 },
+   'Briton' :     {'Crush' : 2, 'Slash'  : 3, 'Cold'   : 5 },
+   'Inconnu' :    {'Crush' : 2, 'Thrust' : 3, 'Heat'   : 5, 'Spirit' : 5 },
+   'Saracen' :    {'Slash' : 2, 'Thrust' : 3, 'Heat'   : 5 },
+   'Half Ogre' :  {'Slash' : 3, 'Thrust' : 2, 'Matter' : 5 },
+   'Highlander' : {'Crush' : 3, 'Slash'  : 2, 'Cold'   : 5 },
+   'Celt' :       {'Crush' : 2, 'Slash'  : 3, 'Spirit' : 5 },
+   'Elf' :        {'Slash' : 2, 'Thrust' : 3, 'Spirit' : 5 },
+   'Firbolg' :    {'Crush' : 3, 'Slash'  : 2, 'Heat'   : 5 },
+   'Lurikeen' :   {'Crush' : 5,               'Energy' : 5 },
+   'Shar' :       {'Crush' : 5,               'Energy' : 5 },
+   'Sylvan' :     {'Crush' : 3, 'Thrust' : 2, 'Matter' : 5, 'Energy' : 5 },
+   'Dwarf' :      {'Slash' : 2, 'Thrust' : 3, 'Body'   : 5 },
+   'Frostalf' :   {'Slash' : 2, 'Thrust' : 3, 'Spirit' : 5 },
+   'Kobold' :     {'Crush' : 5,               'Energy' : 5 },
+   'Troll' :      {'Slash' : 3, 'Thrust' : 2, 'Matter' : 5 },
+   'Norseman' :   {'Crush' : 2, 'Slash'  : 3, 'Cold'   : 5 },
+   'Valkyn' :     {'Slash' : 3, 'Thrust' : 2, 'Cold'   : 5, 'Body'   : 5 } }
 
 

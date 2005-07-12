@@ -55,49 +55,47 @@ import UIXML
 import psyco
 
 class SCApp(B_SC):
-    def __init__(self,parent = None,name = None,fl = 0):
-        self.scroller = None
+    def __init__(self):
+	self.scroller = None
         self.totals = { }
         self.currentPieceTab = None
         self.currentJewelTab = None
         self.currentTypeTab = None
         self.extraSlotsOpen = False
-        B_SC.__init__(self,parent,name,fl)
-        self.font().setPointSize(8)
         self.recentFiles = []
-        self.scroller = QScrollView(self)
-        self.scroller.enableClipper(True)
-        self.scroller.setGeometry(QRect(0, 0, 781, 526))
-        self.scroller.resizeContents(self.width(), self.height())
-        self.setGeometry(self.x(), self.y(), 781, 526)
         self.reportFile = os.path.join(os.path.dirname(os.path.abspath(sys.argv[0])),
-                'reports', 'Default_Config_Report.xml')
+                                       'reports', 'Default_Config_Report.xml')
         self.coop = False
+
+        B_SC.__init__(self,parent=None,name="SpellCraft Calulator",fl=Qt.WDestructiveClose)
 
         self.menuBar = QMenuBar(self)
         pal = QPalette(self.palette().copy())
         self.menuBar.setPalette(pal)
 
+        self.scroller = QScrollView(self)
+        self.scroller.enableClipper(True)
+        self.scroller.setGeometry(QRect(0, self.menuBar.height(), self.width(), 
+                                        self.height() - self.menuBar.height()))
+        self.scroller.resizeContents(self.width() - 2, 
+                                     self.height() - self.menuBar.height() - 2)
+        self.setGeometry(self.x(), self.y(), self.width() + 5, 
+			 self.height() + 10)
+
         # Dummy widget, makes things look nicer on linux
-        q = QWidget(self.scroller)
-        q.setGeometry(0, 0, 2000, 2000)
-        self.scroller.addChild(q, 0, 0)
+        #q = QWidget(self.scroller)
+        #q.setGeometry(0, 0, 2000, 2000)
+        #self.scroller.addChild(q, 0, 0)
 
         for c in self.children():
             if isinstance(c, QTabWidget) or isinstance(c, QGroupBox) \
-                    or isinstance(c, QMenuBar) or isinstance(c, QLabel):
+                    or isinstance(c, QLabel):
                 c.reparent(self.scroller.viewport(), c.pos(), 1)
-                if not isinstance(c, QMenuBar):
-                    self.scroller.addChild(c, c.pos().x(), c.pos().y() + (self.menuBar.height() - 18))
-                else:
-                    self.scroller.addChild(c, c.pos().x(), c.pos().y())
+                self.scroller.addChild(c, c.pos().x(), c.pos().y())
         self.scroller.show()
         self.TypeTab.setFocusPolicy(QWidget.StrongFocus)
-        self.growWidget(self.TypeTab, -72)
         self.PieceTab.setFocusPolicy(QWidget.StrongFocus)
-        self.growWidget(self.PieceTab, -72)
         self.JewelTab.setFocusPolicy(QWidget.StrongFocus)
-        self.growWidget(self.JewelTab, -72)
 
         # Change text color to red for error strings
         pal = QPalette(self.OcErrorString.palette().copy())
@@ -273,77 +271,69 @@ class SCApp(B_SC):
         self.extraSlots = []
         self.switchOnType = {'drop' : [], 'player' : [] }
         self.switchOnType['drop'].append(self.QualEdit)
-        self.switchOnType['drop'].append(self.SaveItem)
-        self.switchOnType['drop'].append(self.ItemName_Label)
-        self.switchOnType['drop'].append(self.ItemName)
-        self.switchOnType['drop'].append(self.AFDPS_Label)
-        self.switchOnType['drop'].append(self.AFDPS_Edit)
-        self.switchOnType['drop'].append(self.Speed_Label)
-        self.switchOnType['drop'].append(self.Speed_Edit)
-        self.switchOnType['drop'].append(self.Bonus_Label)
-        self.switchOnType['drop'].append(self.Bonus_Edit)
         self.switchOnType['drop'].append(self.Amount_Edit_1)
         self.switchOnType['drop'].append(self.Amount_Edit_2)
         self.switchOnType['drop'].append(self.Amount_Edit_3)
         self.switchOnType['drop'].append(self.Amount_Edit_4)
         self.switchOnType['drop'].append(self.Amount_Edit_5)
         self.switchOnType['drop'].append(self.Amount_Edit_6)
-        self.extraSlots.append(self.Amount_Edit_7)
-        self.extraSlots.append(self.Amount_Edit_8)
-        self.extraSlots.append(self.Amount_Edit_9)
-        self.extraSlots.append(self.Amount_Edit_10)
+        self.switchOnType['drop'].append(self.Amount_Edit_7)
+        self.switchOnType['drop'].append(self.Amount_Edit_8)
+        self.switchOnType['drop'].append(self.Amount_Edit_9)
+        self.switchOnType['drop'].append(self.Amount_Edit_10)
         self.switchOnType['drop'].append(self.Gem_Label_5)
         self.switchOnType['drop'].append(self.Gem_Label_6)
-        self.extraSlots.append(self.Gem_Label_7)
-        self.extraSlots.append(self.Gem_Label_8)
-        self.extraSlots.append(self.Gem_Label_9)
-        self.extraSlots.append(self.Gem_Label_10)
+        self.switchOnType['drop'].append(self.Gem_Label_7)
+        self.switchOnType['drop'].append(self.Gem_Label_8)
+        self.switchOnType['drop'].append(self.Gem_Label_9)
+        self.switchOnType['drop'].append(self.Gem_Label_10)
         self.switchOnType['drop'].append(self.Type_5)
         self.switchOnType['drop'].append(self.Type_6)
-        self.extraSlots.append(self.Type_7)
-        self.extraSlots.append(self.Type_8)
-        self.extraSlots.append(self.Type_9)
-        self.extraSlots.append(self.Type_10)
+        self.switchOnType['drop'].append(self.Type_7)
+        self.switchOnType['drop'].append(self.Type_8)
+        self.switchOnType['drop'].append(self.Type_9)
+        self.switchOnType['drop'].append(self.Type_10)
         self.switchOnType['drop'].append(self.Effect_5)
         self.switchOnType['drop'].append(self.Effect_6)
-        self.extraSlots.append(self.Effect_7)
-        self.extraSlots.append(self.Effect_8)
-        self.extraSlots.append(self.Effect_9)
-        self.extraSlots.append(self.Effect_10)
-        self.switchOnType['drop'].append(self.Quality_5)
-        self.switchOnType['drop'].append(self.Quality_6)
-        self.extraSlots.append(self.Quality_7)
-        self.extraSlots.append(self.Quality_8)
-        self.extraSlots.append(self.Quality_9)
-        self.extraSlots.append(self.Quality_10)
-        self.switchOnType['drop'].append(self.MoreSlots)
+        self.switchOnType['drop'].append(self.Effect_7)
+        self.switchOnType['drop'].append(self.Effect_8)
+        self.switchOnType['drop'].append(self.Effect_9)
+        self.switchOnType['drop'].append(self.Effect_10)
+        self.switchOnType['drop'].append(self.SaveItem)
+        self.switchOnType['drop'].append(self.ItemName_Label)
+        self.switchOnType['drop'].append(self.ItemName)
 
         self.switchOnType['player'].append(self.QualDrop)
-        self.switchOnType['player'].append(self.Points_Label)
-        self.switchOnType['player'].append(self.Cost_Label)
-        self.switchOnType['player'].append(self.Name_Label)
-        self.switchOnType['player'].append(self.Points_1)
-        self.switchOnType['player'].append(self.Points_2)
-        self.switchOnType['player'].append(self.Points_3)
-        self.switchOnType['player'].append(self.Points_4)
-        self.switchOnType['player'].append(self.Cost_1)
-        self.switchOnType['player'].append(self.Cost_2)
-        self.switchOnType['player'].append(self.Cost_3)
-        self.switchOnType['player'].append(self.Cost_4)
-        self.switchOnType['player'].append(self.Name_1)
-        self.switchOnType['player'].append(self.Name_2)
-        self.switchOnType['player'].append(self.Name_3)
-        self.switchOnType['player'].append(self.Name_4)
-        self.switchOnType['player'].append(self.Imbue)
-        self.switchOnType['player'].append(self.Slash_Label)
-        self.switchOnType['player'].append(self.Total_Imbue)
-        self.switchOnType['player'].append(self.Imbue_Label)
-        self.switchOnType['player'].append(self.Overcharge_Label)
-        self.switchOnType['player'].append(self.Overcharge)
         self.switchOnType['player'].append(self.Amount_Drop_1)
         self.switchOnType['player'].append(self.Amount_Drop_2)
         self.switchOnType['player'].append(self.Amount_Drop_3)
         self.switchOnType['player'].append(self.Amount_Drop_4)
+        self.switchOnType['player'].append(self.Quality_Label)
+        self.switchOnType['player'].append(self.Quality_1)
+        self.switchOnType['player'].append(self.Quality_2)
+        self.switchOnType['player'].append(self.Quality_3)
+        self.switchOnType['player'].append(self.Quality_4)
+        self.switchOnType['player'].append(self.Points_Label)
+        self.switchOnType['player'].append(self.Points_1)
+        self.switchOnType['player'].append(self.Points_2)
+        self.switchOnType['player'].append(self.Points_3)
+        self.switchOnType['player'].append(self.Points_4)
+        self.switchOnType['player'].append(self.Cost_Label)
+        self.switchOnType['player'].append(self.Cost_1)
+        self.switchOnType['player'].append(self.Cost_2)
+        self.switchOnType['player'].append(self.Cost_3)
+        self.switchOnType['player'].append(self.Cost_4)
+        self.switchOnType['player'].append(self.Name_Label)
+        self.switchOnType['player'].append(self.Name_1)
+        self.switchOnType['player'].append(self.Name_2)
+        self.switchOnType['player'].append(self.Name_3)
+        self.switchOnType['player'].append(self.Name_4)
+        self.switchOnType['player'].append(self.Imbue_Label)
+        self.switchOnType['player'].append(self.Imbue)
+        self.switchOnType['player'].append(self.Slash_Label)
+        self.switchOnType['player'].append(self.Total_Imbue)
+        self.switchOnType['player'].append(self.Overcharge_Label)
+        self.switchOnType['player'].append(self.Overcharge)
         self.switchOnType['player'].append(self.ItemCost_Label)
         self.switchOnType['player'].append(self.ItemCost)
         self.switchOnType['player'].append(self.CraftButton)
@@ -426,20 +416,6 @@ class SCApp(B_SC):
         self.restoreItem(self.itemattrlist.get(self.currentTabLabel(), Item(self.currentTabLabel())))
         self.calculate()
         item = self.itemattrlist.get(self.currentTabLabel(), Item(self.currentTabLabel()))
-        extraused = False
-        if item.getAttr('ActiveState') == 'drop':
-            for i in range(6, 10):
-                if item.getSlotAttr('drop', i, 'Type') != 'Unused':
-                    extraused = True
-                    break
-        if not extraused:
-            if self.extraSlotsOpen:
-                self.openMoreSlots()
-            for w in self.extraSlots:
-                w.hide()
-        else:
-            if not self.extraSlotsOpen:
-                self.openMoreSlots()
 
     def JewelTabChanged(self,a0):
         if self.currentJewelTab is None: return
@@ -454,21 +430,6 @@ class SCApp(B_SC):
         item = self.itemattrlist.get(self.currentTabLabel(), Item(self.currentTabLabel()))
         self.restoreItem(self.itemattrlist.get(self.currentTabLabel(), Item(self.currentTabLabel())))
         self.calculate()
-
-        extraused = False
-        if item.getAttr('ActiveState') == 'drop':
-            for i in range(6, 10):
-                if item.getSlotAttr('drop', i, 'Type') != 'Unused':
-                    extraused = True
-                    break
-        if not extraused:
-            if self.extraSlotsOpen:
-                self.openMoreSlots()
-            for w in self.extraSlots:
-                w.hide()
-        else:
-            if not self.extraSlotsOpen:
-                self.openMoreSlots()
 
     def FixupItemLevel(self):
         if str(self.ItemLevel.text()) == '' \
@@ -498,10 +459,10 @@ class SCApp(B_SC):
             state = 'drop'
             toprng = 11
             item.loadAttr('ItemName', unicode(self.ItemName.text())) 
-            item.loadAttr('AFDPS', unicode(self.AFDPS_Edit.text()))
-            item.loadAttr('Speed', unicode(self.Speed_Edit.text())) 
-            item.loadAttr('Bonus', unicode(self.Bonus_Edit.text()))
             item.loadAttr('ItemQuality', unicode(self.QualEdit.text()))
+        item.loadAttr('AFDPS', unicode(self.AFDPS_Edit.text()))
+        item.loadAttr('Speed', unicode(self.Speed_Edit.text())) 
+        item.loadAttr('Bonus', unicode(self.Bonus_Edit.text()))
         item.loadAttr('ActiveState', state)
         for slot in range(1, toprng):
             typectrl = getattr(self, 'Type_%d' % slot)
@@ -556,7 +517,6 @@ class SCApp(B_SC):
         self.Equipped.setChecked(int(item.getAttr('Equipped')))
         for slot in range(1, toprng):
             typecombo = getattr(self, 'Type_%d' % slot)
-            quacombo = getattr(self, 'Quality_%d' % slot)
             typecombo.clear()
             typecombo.insertStrList(typelist)
             gemtype = item.getSlotAttr(itemtype, slot-1, 'Type')
@@ -587,14 +547,15 @@ class SCApp(B_SC):
                             amountlist.index(gemamount))
                     #eval('self.Amount_Drop_%d.setCurrentItem(%d)' % (slot, 
                     #    amountlist.index(gemamount)))
-            gemqua = item.getSlotAttr(itemtype, slot-1, 'Qua')
-            if gemqua in QualityValues:
-                if quacombo.count() > 0:
-                    quacombo.setCurrentItem(QualityValues.index(gemqua))
+                quacombo = getattr(self, 'Quality_%d' % slot)
+                gemqua = item.getSlotAttr(itemtype, slot-1, 'Qua')
+                if gemqua in QualityValues:
+                    if quacombo.count() > 0:
+                        quacombo.setCurrentItem(QualityValues.index(gemqua))
+        self.AFDPS_Edit.setText(item.getAttr('AFDPS'))
+        self.Speed_Edit.setText(item.getAttr('Speed'))
+        self.Bonus_Edit.setText(item.getAttr('Bonus'))
         if itemtype == 'drop':
-            self.AFDPS_Edit.setText(item.getAttr('AFDPS'))
-            self.Speed_Edit.setText(item.getAttr('Speed'))
-            self.Bonus_Edit.setText(item.getAttr('Bonus'))
             self.QualEdit.setText(item.getAttr('ItemQuality'))
             self.ItemName.setText(item.getAttr('ItemName'))
         else:
@@ -606,6 +567,12 @@ class SCApp(B_SC):
     def calculate(self):
         focusnum = 1
         charclass = unicode(self.CharClass.currentText())
+        charleveltext = str(self.CharLevel.text())
+        if charleveltext == '': 
+            charlevel = 1
+        else:
+            charlevel = max(min(50, int(charleveltext)), 1)
+        self.CharLevel.setText(str(charlevel))
         for effect, gem in ResistList:
             self.totals[effect[:string.find(effect, ' ')]] = 0
         for effect, gem in StatList:
@@ -742,7 +709,7 @@ class SCApp(B_SC):
                         utility += amount * 2.0 / 3.0
                         if item.getAttr('Equipped') == '1':
                             self.totals[effect[:3]] += amount
-                elif gemtype == 'OtherBonus':
+                elif gemtype == 'OtherBonus' or gemtype == 'PvEBonus':
                     if item.getAttr('Equipped') == '1':
                         if not otherTotals.has_key(effect):
                             otherTotals[effect] = amount
@@ -751,26 +718,22 @@ class SCApp(B_SC):
                 elif gemtype == 'CapIncrease':
                     if item.getAttr('Equipped') == '1':
                         oeffect = effect + ' Cap'
-                        if not otherTotals.has_key(oeffect):
-                            otherTotals[oeffect] = amount
-                        else:
-                            otherTotals[oeffect] += amount
-                        if effect == 'Acuity':
+                        if effect == 'AF':
+                          if not otherTotals.has_key(oeffect):
+                              otherTotals[oeffect] = amount
+                          else:
+                              otherTotals[oeffect] += amount
+                        elif effect == 'Acuity':
                             effect = AllBonusList[charclass][effect]
                             if len(effect) == 0:
                                 continue
                             effect = effect[0][:3]
-                        elif effect != 'Hits' and effect != 'Power' and effect != 'AF':
+                        elif effect != 'Hits' and effect != 'Power':
                             effect = effect[:3]
                         if not capTotals.has_key(effect):
                             capTotals[effect] = amount
                         else:
                             capTotals[effect] += amount
-                        if effect == 'Hits':
-                            if capTotals['Hits'] > 200:
-                                capTotals['Hits'] = 200 
-                        elif capTotals[effect] > 25:
-                            capTotals[effect] = 25
             if item.getAttr('Equipped') == '1':
                 totalutility += utility
                 totalcost += itemcost
@@ -820,14 +783,30 @@ class SCApp(B_SC):
                         rr = str(getattr(self, key+'RR').text())
                         if rr != '-':
                             val += int(rr[1:-1])
+                if capTotals.has_key(key):
+                    getattr(self, key+'Cap').setText('('+str(capTotals[key])+')')
                 getattr(self, key).setText(unicode(val))
             else:
+                if HighCapBonusList.has_key(key):
+                    capcalc = HighCapBonusList[key]
+                elif Caps.has_key(key):
+                    capcalc = HighCapBonusList[Caps[key]]
+                else:
+                    capcalc = HighCapBonusList['Other Bonus']
+                basecap = int(charlevel * capcalc[0]) + capcalc[1]
                 if capTotals.has_key(key):
+                    if HighCapBonusList.has_key(key):
+                        capcalc = HighCapBonusList[key + ' Cap']
+                    else:
+                        capcalc = HighCapBonusList['Cap']
+                    addcap = int(charlevel * capcalc[0]) + capcalc[1]
                     capmod = capTotals[key]
+                    capcap = addcap - capmod
+                    if capmod > addcap:  capmod = addcap
+                    getattr(self, key+'Cap').setText('('+unicode(int(capcap))+')')
                 else:
                     capmod = 0
-                capfunc = getattr(self, Caps[key])
-                getattr(self, key).setText(unicode(int(capmod) + capfunc() - val))
+                getattr(self, key).setText(unicode(int(basecap + capmod) - val))
         self.TotalUtility.setText('%3.1f' % totalutility)
         self.TotalCost.setText(SC.formatCost(totalcost))
         self.SkillsList.clear()
@@ -836,22 +815,29 @@ class SCApp(B_SC):
             if self.TotalBonus.isChecked():
                 self.SkillsList.insertItem('%d %s' % (amount, skill))
             else:
-                capfunc = getattr(self, Caps['Skill'])
-                self.SkillsList.insertItem('%d %s' % (capfunc() - amount, skill))
+                capcalc = HighCapBonusList['Skill']
+                thiscap = int(charlevel * capcalc[0]) + capcalc[1]
+                self.SkillsList.insertItem('%d %s' % (thiscap - amount, skill))
         for bonus, amount in otherTotals.items():
             if self.TotalBonus.isChecked():
                 self.OtherBonusList.insertItem('%d %s' % (amount, bonus))
             else:
-                cap = 10
-                if bonus[-3:] == 'Cap':
-                    if bonus[:4] == 'Hits':
-                        cap = 200
-                    else:
-                        cap = 25
+                if HighCapBonusList.has_key(bonus):
+                    capcalc = HighCapBonusList[bonus]
                 else:
-                    if bonus in HighCapBonusList:
-                        cap = 25
-                self.OtherBonusList.insertItem('%d %s' % (cap - amount, bonus))
+                    capcalc = HighCapBonusList['Other Bonus']
+                cap = int(charlevel * capcalc[0]) + capcalc[1]
+                if bonus == 'Power Percentage Bonus': key = 'Power'
+                elif bonus == 'AF Bonus': key = 'AF'
+                else: key = 'xxx'
+                if capTotals.has_key(key):
+                    capcalc = HighCapBonusList[key + ' Cap']
+                    addcap = int(charlevel * capcalc[0]) + capcalc[1]
+                    capmod = capTotals[key]
+                    if capmod > addcap:  capmod = addcap
+                else:
+                    capmod = 0
+                self.OtherBonusList.insertItem('%d %s' % (cap + capmod - amount, bonus))
                 
         self.TotalPrice.setText(SC.formatCost(self.computePrice()))
         
@@ -947,57 +933,10 @@ class SCApp(B_SC):
     def getMultiplier(self, type):
         return ImbueMultipliers[type]
 
-    def AttributeCap(self):
-        cltext = str(self.CharLevel.text())
-        if cltext == '': 
-            level = 1
-        else:
-            level = max(min(50, int(cltext)), 1)
-        self.CharLevel.setText(str(level))
-        return int(level * 1.5)
-
-    def ResistCap(self):
-        cltext = str(self.CharLevel.text())
-        if cltext == '': 
-            level = 1
-        else:
-            level = max(min(50, int(cltext)), 1)
-        self.CharLevel.setText(str(level))
-        return (level / 2) + 1
-
-    def SkillCap(self):
-        cltext = str(self.CharLevel.text())
-        if cltext == '': 
-            level = 1
-        else:
-            level = max(min(50, int(cltext)), 1)
-        self.CharLevel.setText(str(level))
-        return (level / 5) + 1
-
-    def HitsCap(self):
-        cltext = str(self.CharLevel.text())
-        if cltext == '': 
-            level = 1
-        else:
-            level = max(min(50, int(cltext)), 1)
-        self.CharLevel.setText(str(level))
-        return level * 4
-
-    def PowerCap(self):
-        cltext = str(self.CharLevel.text())
-        if cltext == '': 
-            level = 1
-        else:
-            level = max(min(50, int(cltext)), 1)
-        self.CharLevel.setText(str(level))
-        return (level / 2) + 1
-
     def UpdateCombo(self, num):
         effcombo = getattr(self, 'Effect_%d' % num)
         typecombo = getattr(self, 'Type_%d' % num)
-        qualcombo = getattr(self, 'Quality_%d' % num)
         effcombo.clear()
-        qualcombo.clear()
         typetext = re.sub(' ', '', unicode(typecombo.currentText()))
         if self.PlayerMade.isChecked():
             amountcombo = getattr(self, 'Amount_Drop_%d' % num)
@@ -1024,8 +963,11 @@ class SCApp(B_SC):
                 amountcombo.clear()
             else:
                 amountedit.clear()
-        qualcombo.insertStrList(QualityValues)
-        qualcombo.setCurrentItem(len(QualityValues)-2)
+        if self.PlayerMade.isChecked():
+            qualcombo = getattr(self, 'Quality_%d' % num)
+            qualcombo.clear()
+            qualcombo.insertStrList(QualityValues)
+            qualcombo.setCurrentItem(len(QualityValues)-2)
 
     def RaceChanged(self, a0, calc=True):
         race = str(self.CharRace.currentText())
@@ -1114,29 +1056,17 @@ class SCApp(B_SC):
             w.hide()
         for w in self.switchOnType['drop']:
             w.show()
-        for i in range(1, 11):
-            q = getattr(self, 'Quality_%d' % i)
-            q.setEnabled(0)
-        # By setting this to True and calling openMoreSlots() it will hide them
-        if self.extraSlotsOpen:
-            self.openMoreSlots()
-        else:
-            for w in self.extraSlots:
-                w.hide()
+        self.Gem_Label_1.setEnabled(1)
+        self.Gem_Label_2.setEnabled(1)
+        self.Gem_Label_3.setEnabled(1)
+        self.Gem_Label_4.setEnabled(1)
+
 
     def showPlayerWidgets(self):
         for w in self.switchOnType['player']:
             w.show()
         for w in self.switchOnType['drop']:
             w.hide()
-        for i in range(1, 5):
-            q = getattr(self, 'Quality_%d' % i)
-            q.setEnabled(1)
-        if self.extraSlotsOpen:
-            self.openMoreSlots()
-        else:
-            for w in self.extraSlots:
-                w.hide()
         self.calculate()
 
     def DropToggled(self,a0):
@@ -1200,10 +1130,6 @@ class SCApp(B_SC):
         self.Equipped.show()
         item = self.itemattrlist.get(self.currentTabLabel(), Item(self.currentTabLabel()))
         self.restoreItem(item)
-        if self.extraSlotsOpen:
-            self.openMoreSlots()
-        for w in self.extraSlots:
-            w.hide()
 
     def AmountChanged(self,a0):
         self.modified = 1
@@ -1595,7 +1521,8 @@ class SCApp(B_SC):
     def resizeEvent(self, e):
         sz = e.size()
         if self.scroller is not None:
-            self.scroller.setGeometry(0, 0, sz.width(), sz.height())
+            self.scroller.setGeometry(0, 0 + self.menuBar.height(), 
+				      sz.width(), sz.height() - self.menuBar.height())
         QMainWindow.resizeEvent(self, e)
 
     def moveWidget(self, w, y):
@@ -1605,40 +1532,6 @@ class SCApp(B_SC):
     def growWidget(self, w, h):
         w.setGeometry(w.x(), w.y(), 
                 w.width(), w.height() + h)
-
-    def openMoreSlots(self):
-        if self.extraSlotsOpen:
-            for w in self.extraSlots:
-                w.hide()
-            self.growWidget(self.TypeTab, -72)
-            self.growWidget(self.PieceTab, -72)
-            self.growWidget(self.JewelTab, -72)
-            #self.moveWidget(self.MoreSlots, -72)
-            #self.moveWidget(self.SaveItem, -72)
-            #self.moveWidget(self.LoadItem, -72)
-            #self.moveWidget(self.ClearItem, -72)
-            #self.moveWidget(self.ItemCost_Label, -72)
-            #self.moveWidget(self.ItemCost, -72)
-            self.extraSlotsOpen = False
-            self.scroller.resizeContents(self.scroller.contentsWidth(), 
-                    self.scroller.contentsHeight() - 72)
-            self.MoreSlots.setText('View More Slots....')
-        else:
-            for w in self.extraSlots:
-                w.show()
-            self.growWidget(self.TypeTab, 72)
-            self.growWidget(self.PieceTab, 72)
-            self.growWidget(self.JewelTab, 72)
-            #self.moveWidget(self.MoreSlots, 72)
-            #self.moveWidget(self.SaveItem, 72)
-            #self.moveWidget(self.LoadItem, 72)
-            #self.moveWidget(self.ClearItem, 72)
-            #self.moveWidget(self.ItemCost_Label, 72)
-            #self.moveWidget(self.ItemCost, 72)
-            self.extraSlotsOpen = True
-            self.scroller.resizeContents(self.scroller.contentsWidth(), 
-                    self.scroller.contentsHeight() + 75)
-            self.MoreSlots.setText('Collapse Slots....')
             
     def swapWithChest(self):
         cur = self.itemattrlist.get(self.currentTabLabel(), Item(self.currentTabLabel()))

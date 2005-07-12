@@ -41,8 +41,8 @@ def getGemName(item, slot):
     gemstate = item.getAttr('ActiveState')
     gemtype = item.getSlotAttr(gemstate, slot, 'Type')
     realm = item.getAttr('Realm')
-    if gemtype == 'Unused': return ''
-    gemlist = eval('%sList' % gemtype, globals(), globals())
+    if gemtype == '' or gemtype == 'Unused': return ''
+    gemlist = eval('%sList' % ''.join(gemtype.split(' ')), globals(), globals())
     amountlist = eval('%sValues' % gemtype, globals(), globals())
     amountindex = amountlist.index(item.getSlotAttr(gemstate, slot, 'Amount'))
     effect = item.getSlotAttr(gemstate, slot, 'Effect')

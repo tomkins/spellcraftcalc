@@ -1,3 +1,10 @@
+
+Ehrayn Updated 3/06/05 - Patch 1.0.3
+Allow Bonus, DPS/AF and Speed for crafted items.
+Finished some GUI Cleanup, allow all 10 gems always, caps show w/ stats.
+Polearm for Armsman only (not Paladin).
+Added PvE-Only Bonuses, recoded all cap logic (watch for bugs).
+
 Ehrayn Updated 2/24/05 - Patch 1.0.2
 GUI Cleanups, shrunk the top panel to make more space for slots.
 Corrected several lingering QtPy .ui source file problems.
