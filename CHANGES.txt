@@ -1,0 +1,253 @@
+Updated 4/10/04 - Version 1.42b
+Options will now save correctly.
+
+Updated 4/10/04 - Version 1.42a
+Fixed template loading problem.
+
+Updated 4/10/04 - Version 1.42
+Gems now sort properly on the materials list.
+Fixed a bug with distance to cap config reports.
+Racial resists will now update properly when loading a template.
+Added option to not include racial resists in totals.
+Fixed an issue with the Spellcraft.xml file preventing proper startup.
+
+Updated 4/04/04 - Version 1.41
+Fixed a couple of gem recepies.
+Added multiplier spinbox on materials report.
+The second column in the Resists box now shows racial resists, there is a drop down box below character level where you can set race type. When Total Bonus is selected, the Racial Resists will be added into the total.
+In the options dialog, next to realm selection, there is a checkbox for Coop/PvP servers. This will allow you to load an item from any realm.
+The installer should hopefully work correctly without having to uninstall/reinstall the software. Please give me feedback if this does/doesn't work.
+Updated 3/25/04 - Version 1.40a
+Fixed 0-byte saves.
+
+Updated 3/23/04 - Version 1.40
+Hopefully all the problems with distance to cap and unicode-<UTF-8 are fixed.
+If you are upgrading to this version, use the full installer. The program I used to generate the .exe has changed.
+
+Updated 3/13/04 - Version 1.39
+Fixed Distance to cap problem, which should fix the Error Loading Template Problem.
+
+Updated 3/13/04 - Version 1.38
+Fixed remaining unicode problems. Fixed line breaks and the column break tag for the UI folks.
+
+Updated 3/13/04 - Version 1.37
+Other bonuses will now show distance to cap.
+Fixed problems with importing items with non-ascii characters
+Added blank lines and columns for the UI mod people
+
+Updated 3/09/04 - Version 1.36
+Cap Increases will now add up properly in the Other Bonuses List
+Fixed a problem where selecting some jewelry tabs would cause things to not update properly
+Added beta version of UI XML generation for the UI Mod folks
+
+Updated 2/26/04 - Version 1.35
+Fixed problem with templates :\
+
+Updated 2/26/04 - Version 1.35
+Cap increases will now show in the Other Bonuses list
+
+Updated 2/17/04 - Version 1.34
+Fixed problem with acuity and wardens
+
+Updated 1/18/04 - Version 1.33
+Fixed a problem were stats from a loaded item wouldn't update until you toggled the Player/Drop button.
+
+Updated 1/18/04 - Version 1.32
+Fixed problem with defaults file that wouldn't get you open the calculator.
+
+Updated 1/18/04 - Version 1.31
+Fixed bug _again_ that was crashing setting up craft bars for european players
+Fixed utility discrepancy with the item previewer
+Fixed problems relating to Linux - it should run ok on it now.
+
+Updated 1/17/04 - Version 1.30
+Added recent files on the File Menu.
+The path to Daoc in craft bar setup will now be persistent.
+The assigned config report template will not be persistent.
+Fixed small problem with config report crashing.
+Cleaned up the "Save As Text" option so there should be fewer spaces.
+
+Updated 1/14/04 - Version 1.29
+Gems will now be placed in piece order when setting up craft bars.
+Acuity now properly increases piety for Friars and Clerics.
+Added a new report tag, - prevents an item from printing in a config report if it is totally empty
+Example:
+
+
+This woudl not print if there are no stats ont he chest piece
+
+
+
+Updated 1/5/04 - Version 1.28
+Fixed a problem some international users were having with pricing.
+The equipped checkboxes now work correctly on all tabs
+You can now have 4 focus bonuses (hey someone asked for it...)
+
+Updated 1/1/04 - Version 1.27
+Window size/position is now persistent
+Materials will now be subtracted from Expected Materials on the crafting window when a gem is marked as done
+
+Updated 12/31/03 - Version 1.26
+Fixed typo with Hand to Hand
+Item locator window now handles +All slots correctly
+
+Updated 12/21/03 - Version 1.25
+Added Swap Gems With... option to the Tools menu.
+
+Updated 12/16/03 - Version 1.24
+Fixed problem where the materials list would not show for painworking and Verdant Path Focuses.
+Added Archery Range Bonus
+
+Updated 12/11/03 - Version 1.23
+Fixed small bug when importing Leladia templates
+
+Updated 12/09/03 - Version 1.22
+Added fatique under other bonuses
+Fixed Painworking spelling error
+
+Updated 12/02/03 - Version 1.21
+Added Acuity stat and cap increase
+
+Updated 11/24/03 - Version 1.20
+Fixed mispelling of Hurture
+Removed Critical Strike from +All Melee Skills
+Fixed bug in item level calculator where selecting non-shield items after selecting shield would not re-enable the af/dps box.
+
+Updated 11/23/03 - Version 1.19
+Drops now have 10 slots (for artifacts)
+Fixed problem with All Focus Bonus and Enchanters/Mentalists
+European players can now use the setup craft bars option properly
+You can now scroll around the window if it is too small to view everything
+
+Updated 11/21/03 - Version 1.18
+Fixed a problem where the config report would not generate properly in Distance To Cap Mode
+Fixed a problem where stats would cease to update.
+
+Updated 11/18/03 - Version 1.17
+All Magic Skills for Albion now adds Cold Magic and not Ice Magic
+Arrow keys now work on the combo boxes again
+
+Updated 11/17/03 - Version 1.16
+Fixed problem where combo boxes were not updated when being selected with the keyboard.
+
+Updated 11/16/03 - Version 1.15
+Combo boxes are now searchable by typing the first letter of items in them.
+
+Updated 11/14/03 - Version 1.14
+Cancelling while loading an item no longer loads the last item anyways.
+Bonus now displays properly on config report
+Items should get saved in the proper location
+
+Updated 11/13/03 - Version 1.13
+Increased speed of Config Report
+Crafterskill and realm will now save properly.
+Lists will update properly on realm change
+
+Updated 11/13/03 - Version 1.12
+Fixed problem where Config Report would hang on ToA bonuses
+Cap Increases will not show as stat increases in the locations window
+Stats now properly update when Class is changed
+
+Updated 11/11/03 - Version 1.11
+Fixed problem with crash on saving.
+Added filename on window
+Save verification now asks on 'New' and is more sane
+
+Updated 11/11/03 - Version 1.10
+Fixed problem with materials list
+Fixed problem with non-numeric characters in Amount field
+Added item previewer
+
+Updated 11/10/03 - Version 1.09
+Fixed a bug with Overcharge Point pricing
+Pricing will now be persistent across sessions
+Fixed bug where Mystical Essence Gems would not be automatically setup properly.
+
+Updated 11/09/03 - Version 1.08
+Fixed problem with materials list generation.
+
+Updated 11/09/03 - Version 1.07
+Implemented pricing window
+Fixed problem where crafting times were not being saved properly
+Items marked as 'All' should now import properly
+
+Updated 11/08/03 - Version 1.06
+When setting up craft bars, you can now select individual pieces
+Fixed tab order on main window
+You can now arrow through tabs
+
+Updated 11/06/03 - Version 1.05
+Added ability to attach notes to a template
+Added ability to set up hotbars with gems in game (NEEDS TESTING!)
+Exclude done items from materials list checkbox will now save its state during a session
+
+Updated 11/05/03 - Version 1.04
+Fixed item import bug with the 'Equipped' flag
+Added checkbox in Options to exclude done gems from materials list
+Gem Names/Dusts/Liquids should now display in merchant order on materials list
+Added 'About' box.
+Fixed a problem where +All Magic Skills was adding 'Smiting' and not 'Smite'
+
+Updated 11/05/03 - Version 1.03
+Fixed bug that wouldn't let you Unequip and item
+
+Updated 11/02/03 - Version 1.02
+Fixed Gem ordering in Materials report
+Fixed erroneous duplicate gem error
+Can now click on skills (not skills from +ALL bonuses) to get their piece locations
+
+Updated 11/02/03 - Version 1.01
+Fixed flexible gem lookup problem
+
+Updated 11/02/03 - Version 1.0
+Added version label!
+
+Updated 11/02/03
+Fixed some cost calculation issues
+Templates now save the craft multiplier
+Fixed bug with Scythe skill and gem materials
+Implemented report scripting for the Config Report, see reports/Reports.txt for details
+
+Updated 10/31/03
+Tighted up the UI for our low resolution users
+Changed ordering of Gem Names in the Materials List to more match merchants
+
+Updated 10/31/03
+Fixed some weird widget display issues
+
+Updated 10/29/03
+Fixed a problem with import Hand to Hand gems
+Added the ability to click on Skill labels and such
+Fixed default paths on Saving/Opening
+Added *.wrist to bracer item load
+
+Updated 10/28/03
+Minor Bugfixes
+The Materials/Config reports are in!
+
+Updated 10/28/03
+Added Materials Expected to the craft dialog.
+Fixed a slight problem with materials calculation.
+The Materials/Config reports will be finished soon, I promise.
+
+Updated 10/28/03
+Added all ToA Item Bonuses (hopefully they work correctly).
+Fixed a problem with saving 'Hands' Item.
+
+Updated 10/25/03
+Implemented Craft window.
+Changed Windows installer to use the PyExe/distutils distribution
+
+Updated 10/23/03
+Fixed 5.5 imbues showing as impossible
+Suppressed combo box errors
+Added error warnings for Duplicate Gems / Impossible OCs
+Distance to cap now adjusts with char level
+
+Updated 10/23/03
+Fixed missing python23.dll in Windows installer
+Suppressed Dos Box
+
+Updated 10/22/03 - Bugfixes:
+Fixed some display and cost calculation issues.
+Leladia's .scc files can now be imported (Leladia v.2.0 only)
