@@ -75,6 +75,7 @@ class SCApp(B_SC):
             'Focus'  : []
         }
         self.dropeffectlists = self.effectlists.copy()
+        self.dropeffectlists['Cap Increase'] = CapIncreaseList
         self.dropeffectlists['PvE Bonus'] = PvEBonusList
         self.dropeffectlists['Other Bonus'] = OtherBonusList
 
@@ -599,6 +600,7 @@ class SCApp(B_SC):
         self.totals['Power'] = 0
         self.capTotals['Hits'] = 0
         self.capTotals['Power'] = 0
+        self.capTotals['AF'] = 0
         skillTotals = {}
         otherTotals = {}
         self.Focus_1.setText('')
@@ -725,13 +727,13 @@ class SCApp(B_SC):
                         utility += amount * 2.0 / 3.0
                         if item.getAttr('Equipped') == '1':
                             self.totals[effect] += amount
-                elif gemtype == 'OtherBonus' or gemtype == 'PvEBonus':
+                elif gemtype == 'Other Bonus' or gemtype == 'PvE Bonus':
                     if item.getAttr('Equipped') == '1':
                         if not otherTotals.has_key(effect):
                             otherTotals[effect] = amount
                         else:
                             otherTotals[effect] += amount
-                elif gemtype == 'CapIncrease':
+                elif gemtype == 'Cap Increase':
                     if item.getAttr('Equipped') == '1':
                         oeffect = effect + ' Cap'
                         if effect == 'AF':
@@ -841,10 +843,9 @@ class SCApp(B_SC):
                 else:
                     capcalc = HighCapBonusList['Other Bonus']
                 cap = int(charlevel * capcalc[0]) + capcalc[1]
-                if bonus == 'Power Percentage Bonus': key = 'Power'
-                elif bonus == 'AF Bonus': key = 'AF'
-                else: key = 'xxx'
-                if self.capTotals.has_key(key):
+                if bonus == '% Power Pool' or bonus == 'AF':
+                    key = bonus
+                    if bonus == '% Power Pool': key = 'Power'
                     capcalc = HighCapBonusList[key + ' Cap']
                     addcap = int(charlevel * capcalc[0]) + capcalc[1]
                     capmod = self.capTotals[key]
@@ -1003,8 +1004,11 @@ class SCApp(B_SC):
         else:
             self.effectlists['Skill'] = SkillList[showrealm]
             self.effectlists['Focus'] = FocusList[showrealm]
+        race = str(self.CharRace.currentText())
         self.CharRace.clear()
         self.CharRace.insertStrList(Races[self.realm])
+        if race in Races[self.realm]:
+          self.CharRace.setCurrentItem(Races[self.realm].index(race))
         self.RaceChanged('')
         self.restoreItem(self.itemattrlist.get(self.currentTabLabel()))
         self.calculate()
@@ -1012,6 +1016,8 @@ class SCApp(B_SC):
     def RealmChanged(self):
         self.CharClass.clear()
         self.CharClass.insertStrList(ClassList[self.realm])
+        if self.charclass in ClassList[self.realm]:
+          self.CharClass.setCurrentItem(ClassList[self.realm].index(self.charclass))
         self.CharClassChanged('')
     
     def TypeChanged(self, index):

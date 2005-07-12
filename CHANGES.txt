@@ -1,3 +1,8 @@
+Ehrayn Updated 3/14/05 - Patch 1.0.6
+Warned ya that wouldn't last long - fix major foobar in 1.0.5 
+which broke all of the Cap Increases and Other Bonuses display.
+Also fixed some strange side effects of the Options window when
+not changing realms - now ensure we keep our old class/race.
 
 Ehrayn Updated 3/14/05 - Patch 1.0.5
 Ultra-Unstable Experimental Patch - use at your own risk.

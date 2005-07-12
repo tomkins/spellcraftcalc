@@ -1211,7 +1211,6 @@ FixEffectsTable = {
     'Casting Range' :          'Spell Range',
     'Casting Speed Bonus' :    'Casting Speed',
     'Debuff Bonus' :           'Stat Debuff Effectiveness',
-    'Fatigue' :                'Fatigue', 
     'Healing Bonus' :          'Healing Effectiveness',
     'Spell Damage Bonus' :     'Magic Damage',
     'Spell Duration Bonus' :   'Duration of Spells',
@@ -1222,7 +1221,7 @@ FixEffectsTable = {
     'Power Percentage Bonus' : '% Power Pool',
 
     'Reactionary Style Damage Bonus' :  'Reactionary Style Damage',
-    'Death Experience Loss Reduction' : 'Death XP Loss Reduction',
+    'Death XP Loss Reduction' :         'Death Experience Loss Reduction',
     'Blocking' :                        'Block',
 
     'Body Resist' :     'Body', 
