@@ -20,6 +20,7 @@
 from Item import *
 from constants import *
 import string
+import sys
 
 def formatCost(cost):
     plat = (cost / 10000000) % 1000
@@ -56,27 +57,59 @@ def getGemName(item, slot):
     gemname += ' ' + gemmiddle + ' ' + gemend
     return string.strip(gemname)
 
+def getGemNameParts(gemname):
+    #returns level, liquid prefix and dust suffix
+    if gemname == '':
+        return ['','','']
+    gemwords = string.split(gemname, ' ', 3)
+    if gemwords[0] not in GemNames:
+        sys.stderr.write("Could not find " + gemwords[1] + " gem\r\n")
+        return ['','','']
+    # Prefix (two words distinguish some borked gems)
+    if gemwords[1] not in GemLiquids:
+	dbg = "Could not find liquid " + gemwords[1] + "\r\n"
+        gemwords[1] += " " + gemwords[2]
+        if gemwords[1] not in GemLiquids:
+            dbg = dbg + "Could not find liquid " + gemwords[1] + "\r\n"
+            sys.stderr.write(dbg)
+            return ['','','']
+    # Suffix (may include second prefix word) to distinguish dust
+    gemwords[2] = " ".join(gemwords[2:])
+    if gemwords[2] not in GemDusts:
+	dbg = "Could not find dust " + gemwords[2] + "\r\n"
+        gemwords[2] = gemwords[3]
+        if gemwords[2] not in GemDusts:
+            dbg = "Could not find dust " + gemwords[2] + "\r\n"
+            sys.stderr.write(dbg)
+            return ['','','']
+    if len(gemwords) > 3:
+        gemwords.pop()
+    return gemwords
+
 def getGemMaterials(item, slot, realm):
     gemstate = item.getAttr('ActiveState')
     gemname = getGemName(item, slot)
     ret = { 'Gems' : { }, 'Dusts' : { }, 'Liquids' : { } }
-    if gemname == '': return ret
-    gemlevel, gemname2 = string.split(gemname, ' ', 1)
-    gemliquid, gemdust = string.split(gemname2, ' ', 1)
-
-    # Fix some inconsistencies
-    if gemname2 == 'Steaming Fervor Sigil':
-        gemliquid = 'Heated'
+    gemlevel, gemliquid, gemdust = getGemNameParts(gemname)
+    if gemlevel == '': return ret
 
     gemtype = item.getSlotAttr(gemstate, slot, 'Type')
     gemindex = GemNames.index(gemlevel)
 
-    ret['Gems'][MaterialGems[gemindex]] = 1
-    if gemtype == 'Focus' or gemtype == 'Resist':
+    if gemliquid == 'Brilliant' or gemliquid == 'Finesse':
+        ret['Gems'][MaterialGems[gemindex]] = 3
         ret['Dusts'][GemDusts[gemdust]] = (gemindex * 5) + 1
+        ret['Liquids'][GemLiquids[gemliquid][0]] = (gemindex * 6) + 2
+        ret['Liquids'][GemLiquids[gemliquid][1]] = (gemindex * 6) + 2
+        ret['Liquids'][GemLiquids[gemliquid][2]] = (gemindex * 6) + 2
+    elif gemtype == 'Focus' or gemtype == 'Resist':
+        ret['Gems'][MaterialGems[gemindex]] = 1
+        ret['Dusts'][GemDusts[gemdust]] = (gemindex * 5) + 1
+        ret['Liquids'][GemLiquids[gemliquid]] = gemindex + 1
     else:
+        ret['Gems'][MaterialGems[gemindex]] = 1
         ret['Dusts'][GemDusts[gemdust]] = (gemindex * 4) + 1
-    ret['Liquids'][GemLiquids[gemliquid]] = gemindex + 1
+        ret['Liquids'][GemLiquids[gemliquid]] = gemindex + 1
     
     return ret
 
@@ -145,14 +178,23 @@ def computeGemCost(item, i):
         cost = 0    
         remakecost = 0
         costindex = 0
-    else:
-        costindex = eval('%sValues' % gemtype, globals(), globals()).index(str(amount))
-        cost = GemCosts[costindex]
-        remakecost = RemakeCosts[costindex] * int(item.getSlotAttr(itemtype, i, 'Remakes'))
-        if gemtype == 'Resist' or gemtype == 'Focus':
-            cost += 60 * costindex
-            if remakecost > 0:
-                remakecost += 60 * costindex
+        return (0, 1)
+    gemname = getGemName(item, i)
+    gemlevel, gemliquid, gemdust = getGemNameParts(gemname)
+    if gemlevel == '':
+	return (0, 1)
+    costindex = eval('%sValues' % gemtype, globals(), globals()).index(str(amount))
+    cost = GemCosts[costindex]
+    remakecost = RemakeCosts[costindex] * int(item.getSlotAttr(itemtype, i, 'Remakes'))
+    if gemliquid == 'Brilliant' or gemliquid == 'Finesse':
+        cost += 60 * costindex
+        cost = cost * 3
+        if remakecost > 0:
+            remakecost += 180 * costindex
+    elif gemtype == 'Resist' or gemtype == 'Focus':
+        cost += 60 * costindex
+        if remakecost > 0:
+            remakecost += 60 * costindex
     return (cost + remakecost, costindex+1)
 
 # vim: set ts=4 sw=4 et:

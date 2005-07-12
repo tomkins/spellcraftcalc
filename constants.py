@@ -17,23 +17,27 @@
 # along with this program; if not, write to the Free Software
 # Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
+ScVersion = "1.42b + ehrayn/patch 1.0.0"
+
 ClassList = { 'Albion' : ['Armsman', 'Cabalist', 'Cleric', 'Friar', 
-    'Infiltrator', 'Mercenary', 'Minstrel', 'Necromancer', 'Paladin', 
-    'Reaver', 'Scout', 'Sorcerer', 'Theurgist', 'Wizard' ],
-    'Hibernia' : ['Animist', 'Bard', 'Blademaster', 'Champion', 
+    'Heretic', 'Infiltrator', 'Mercenary', 'Minstrel', 'Necromancer', 
+    'Paladin', 'Reaver', 'Scout', 'Sorcerer', 'Theurgist', 'Wizard' ],
+    'Hibernia' : ['Animist', 'Bainshee', 'Bard', 'Blademaster', 'Champion', 
     'Druid', 'Eldritch', 'Enchanter', 'Hero', 'Mentalist', 'Nightshade',
-    'Ranger', 'Warden', 'Valewalker' ],
+    'Ranger', 'Valewalker', 'Vampiir', 'Warden' ],
     'Midgard' : ['Berserker', 'Bonedancer', 'Healer', 'Hunter',
     'Runemaster', 'Savage', 'Shadowblade', 'Shaman', 'Skald', 'Spiritmaster',
-    'Thane', 'Warrior' ] }
+    'Thane', 'Valkyrie', 'Warlock', 'Warrior' ] }
 
 TabList = ['Chest', 'Arms', 'Head', 'Legs', 'Hands', 'Feet', 'Right Hand',
     'Left Hand', '2 Handed', 'Ranged', 'Spare', 'Neck', 'Cloak', 'Jewel',
     'Belt', 'Left Ring', 'Right Ring', 'Left Wrist', 'Right Wrist']
 
 TypeList = ['Unused', 'Stat', 'Resist', 'Hits', 'Power', 'Focus', 'Skill']
+
 DropTypeList = ['Unused', 'Stat', 'Resist', 'Hits', 'Power', 'Focus', 'Skill',
     'Cap Increase', 'Other Bonus']
+
 StatList = [ 
     ['Strength', 'Fiery'], ['Constitution', 'Earthen'], 
     ['Dexterity', 'Vapor'], ['Quickness', 'Airy'], ['Intelligence', 'Dusty'], 
@@ -66,6 +70,12 @@ AllBonusList = { 'Armsman' : {'All Focus Bonus' : [],
     'Friar' : {'All Focus Bonus' : [], 
         'All Magic Skill Bonus' : ['Rejuvenation', 'Enhancement'],
         'All Melee Skill Bonus' : ['Staff'],
+        'All Dual Wield Skill Bonus' : [],
+        'Archery Skill Bonus' : [],
+        'Acuity' : ['Piety'] },
+    'Heretic' : {'All Focus Bonus' : [], 
+        'All Magic Skill Bonus' : ['Rejuvenation', 'Enhancement'],
+        'All Melee Skill Bonus' : ['Crush', 'Flexible'],
         'All Dual Wield Skill Bonus' : [],
         'Archery Skill Bonus' : [],
         'Acuity' : ['Piety'] },
@@ -136,6 +146,12 @@ AllBonusList = { 'Armsman' : {'All Focus Bonus' : [],
         'All Dual Wield Skill Bonus' : [],
         'Archery Skill Bonus' : [],
         'Acuity' : ['Intelligence'] },
+    'Bainshee' : {'All Focus Bonus' : ['Ethereal Shriek Focus', 'Phantasmal Wail Focus', 'Spectral Guard Focus'],
+        'All Magic Skill Bonus' : ['Ethereal Shriek', 'Phantasmal Wail', 'Spectral Guard'],
+        'All Melee Skill Bonus' : [],
+        'All Dual Wield Skill Bonus' : [],
+        'Archery Skill Bonus' : [],
+        'Acuity' : ['Intelligence'] },
     'Bard' : {'All Focus Bonus' : [],
         'All Magic Skill Bonus' : ['Regrowth', 'Nurture', 'Music'],
         'All Melee Skill Bonus' : ['Blades', 'Blunt'],
@@ -196,18 +212,24 @@ AllBonusList = { 'Armsman' : {'All Focus Bonus' : [],
         'All Dual Wield Skill Bonus' : ['Celtic Dual'],
         'Archery Skill Bonus' : ['Recurve Bow'],
         'Acuity' : ['Empathy'] },
-    'Warden' : {'All Focus Bonus' : [],
-        'All Magic Skill Bonus' : ['Nurture', 'Regrowth', 'Nature'],
-        'All Melee Skill Bonus' : ['Blades', 'Blunt'],
-        'All Dual Wield Skill Bonus' : [],
-        'Archery Skill Bonus' : [],
-        'Acuity' : ['Empathy'] },
     'Valewalker' : {'All Focus Bonus' : [],
         'All Magic Skill Bonus' : ['Arboreal Path'],
         'All Melee Skill Bonus' : ['Scythe'],
         'All Dual Wield Skill Bonus' : [],
         'Archery Skill Bonus' : [],
         'Acuity' : ['Intelligence'] },
+    'Vampiir' : {'All Focus Bonus' : [],
+        'All Magic Skill Bonus' : ['Dementia', 'Shadow Mastery', 'Vampiiric Embrace'],
+        'All Melee Skill Bonus' : ['Piercing'],
+        'All Dual Wield Skill Bonus' : [],
+        'Archery Skill Bonus' : [],
+        'Acuity' : [] },
+    'Warden' : {'All Focus Bonus' : [],
+        'All Magic Skill Bonus' : ['Nurture', 'Regrowth', 'Nature'],
+        'All Melee Skill Bonus' : ['Blades', 'Blunt'],
+        'All Dual Wield Skill Bonus' : [],
+        'Archery Skill Bonus' : [],
+        'Acuity' : ['Empathy'] },
     'Berserker' : {'All Focus Bonus' : [],
         'All Magic Skill Bonus' : [],
         'All Melee Skill Bonus' : ['Axe', 'Hammer', 'Sword'],
@@ -274,13 +296,25 @@ AllBonusList = { 'Armsman' : {'All Focus Bonus' : [],
         'All Dual Wield Skill Bonus' : [],
         'Archery Skill Bonus' : [],
         'Acuity' : ['Piety'] },
+    'Valkyrie' : {'All Focus Bonus' : [],
+        'All Magic Skill Bonus' : ['Odin\'s Will'],
+        'All Melee Skill Bonus' : ['Sword', 'Spear'],
+        'All Dual Wield Skill Bonus' : [],
+        'Archery Skill Bonus' : [],
+        'Acuity' : ['Piety'] },
+    'Warlock' : {'All Focus Bonus' : ['Cursing'],
+        'All Magic Skill Bonus' : ['Cursing', 'Hexing', 'Witchcraft'],
+        'All Melee Skill Bonus' : [],
+        'All Dual Wield Skill Bonus' : [],
+        'Archery Skill Bonus' : [],
+        'Acuity' : ['Piety'] },
     'Warrior' : {'All Focus Bonus' : [],
         'All Magic Skill Bonus' : [],
         'All Melee Skill Bonus' : ['Sword', 'Hammer', 'Axe'],
         'All Dual Wield Skill Bonus' : [],
         'Archery Skill Bonus' : [],
         'Acuity' : [] } }
-    
+
 HighCapBonusList = [
     'Power Percentage Bonus',
     'Debuff Bonus',
@@ -315,6 +349,7 @@ CapIncreaseList = [
     ['Hits', ''], ['Power', ''], ['Acuity', ''], ['AF', ''] ]
 
 StatValues = ['1', '4', '7', '10', '13', '16', '19', '22', '25', '28']
+
 QualityValues = ['94', '95', '96', '97', '98', '99', '100']
 
 ResistList = [ ['Body Resist', 'Dusty'], ['Cold Resist', 'Icy'], 
@@ -322,11 +357,17 @@ ResistList = [ ['Body Resist', 'Dusty'], ['Cold Resist', 'Icy'],
     ['Matter Resist', 'Earthen'], ['Spirit Resist', 'Vapor'],
     ['Crush Resist', 'Fiery'], ['Thrust Resist', 'Airy'], 
     ['Slash Resist', 'Watery'] ]
+
 ResistValues = ['1', '2', '3', '5', '7', '9', '11', '13', '15', '17']
+
 HitsList = [ ['Hits', 'Blood'] ]
+
 HitsValues = ['4', '12', '20', '28', '36', '44', '52', '60', '68', '76']
+
 PowerList = [ ['Power', 'Mystical'] ]
+
 PowerValues = ['1', '2', '3', '5', '7', '9', '11', '13', '15', '17']
+
 FocusList = { 
     'Albion' : 
     [ ['Body Focus', 'Heat Sigil'], 
@@ -339,24 +380,31 @@ FocusList = {
     ['Mind Focus', 'Water Sigil'],
     ['Painworking Focus', 'Salt Crusted Sigil'],
     ['Spirit Focus', 'Vapor Sigil'],
-    ['Wind Focus', 'Air Sigil'] ],
+    ['Wind Focus', 'Air Sigil'],
+    ['All Focus Bonus', 'Brilliant Sigil'] ],
 
     'Hibernia' : 
     [ ['Arboreal Focus', 'Steaming Spell Stone'] , 
     ['Creeping Path Focus', 'Oozing Spell Stone'],
     ['Enchantments Focus', 'Vapor Spell Stone'], 
+    ['Ethereal Shriek Focus', 'Ethereal Spell Stone'], 
     ['Light Focus', 'Fire Spell Stone'], 
     ['Mana Focus', 'Water Spell Stone'], 
     ['Mentalism Focus', 'Earth Spell Stone'], 
-    ['Verdant Path Focus', 'Mineral Encrusted Nature Spell Stone'],
-    ['Void Focus', 'Ice Spell Stone'] ],
+    ['Phantasmal Wail Focus', 'Phantasmal Spell Stone'], 
+    ['Spectral Guard Focus', 'Spectral Spell Stone'], 
+    ['Verdant Path Focus', 'Mineral Encrusted Spell Stone'],
+    ['Void Focus', 'Ice Spell Stone'],
+    ['All Focus Bonus', 'Brilliant Spell Stone'] ],
 
     'Midgard' : 
     [ ['Bone Army Focus', 'Ashen Rune'], 
+    ['Cursing Focus', 'Blighted Rune'],
     ['Darkness Focus', 'Ice Rune'],
     ['Runecarving Focus', 'Heat Rune'],
     ['Summoning Focus', 'Vapor Rune'], 
-    ['Suppression Focus', 'Dust Rune'] ] }
+    ['Suppression Focus', 'Dust Rune'],
+    ['All Focus Bonus', 'Brilliant Rune'] ] }
 
 DropFocusList = { 
     'Albion' : 
@@ -371,26 +419,34 @@ DropFocusList = {
     ['Painworking Focus', 'Salt Crusted Sigil'],
     ['Spirit Focus', 'Vapor Sigil'],
     ['Wind Focus', 'Air Sigil'],
-    ['All Focus Bonus', ''] ],
+    ['All Focus Bonus', 'Brilliant Sigil'] ],
 
     'Hibernia' : 
     [ ['Arboreal Focus', 'Steaming Spell Stone'] , 
     ['Creeping Path Focus', 'Oozing Spell Stone'],
     ['Enchantments Focus', 'Vapor Spell Stone'], 
+    ['Ethereal Shriek Focus', 'Ethereal Spell Stone'], 
     ['Light Focus', 'Fire Spell Stone'], 
     ['Mana Focus', 'Water Spell Stone'], 
     ['Mentalism Focus', 'Earth Spell Stone'], 
-    ['Verdant Path Focus', 'Mineral Encrusted Nature Spell Stone'],
+    ['Phantasmal Wail Focus', 'Phantasmal Spell Stone'], 
+    ['Spectral Guard Focus', 'Spectral Spell Stone'], 
+    ['Verdant Path Focus', 'Mineral Encrusted Nature Stone'],
     ['Void Focus', 'Ice Spell Stone'],
-    ['All Focus Bonus', ''] ],
+    ['Ethereal Shriek Focus', 'Ethereal Spell Stone'], 
+    ['Phantasmal Wail Focus', 'Phantasmal Spell Stone'], 
+    ['Spectral Guard Focus', 'Spectral Spell Stone'],
+    ['All Focus Bonus', 'Brilliant Spell Stone'] ],
 
     'Midgard' : 
     [ ['Bone Army Focus', 'Ashen Rune'], 
+    ['Cursing Focus', 'Blighted Rune'],
     ['Darkness Focus', 'Ice Rune'],
     ['Runecarving Focus', 'Heat Rune'],
     ['Summoning Focus', 'Vapor Rune'], 
     ['Suppression Focus', 'Dust Rune'],
-    ['All Focus Bonus', ''] ] }
+    ['All Focus Bonus', 'Brilliant Rune'] ] }
+
 FocusValues = ['5', '10', '15', '20', '25', '30', '35', '40', '45', '50']
 
 SkillList = { 
@@ -402,104 +458,15 @@ SkillList = {
     ['Bone Army', 'Ashen Primal Rune'],
     ['Composite Bow', 'Airy War Rune'],
     ['Critical Strike', 'Heated Battle Jewel'],
+    ['Cursing', 'Blighted Primal Rune'], 
     ['Darkness', 'Icy Chaos Rune'],
     ['Envenom', 'Dusty Battle Jewel'],
     ['Hammer', 'Fiery War Rune'],
     ['Hand To Hand', 'Lightning Charged War Rune'],
+    ['Hexing', 'Unholy Primal Rune'], 
     ['Left Axe', 'Icy War Rune'],
     ['Mending', 'Watery Chaos Rune'],
-    ['Pacification', 'Earthen Chaos Rune'],
-    ['Parry', 'Vapor Battle Jewel'],
-    ['Runecarving', 'Heated Chaos Rune'],
-    ['Shield', 'Fiery Battle Jewel'],
-    ['Spear', 'Heated War Rune'],
-    ['Staff', 'Earthen Battle Jewel'],
-    ['Stealth', 'Airy Battle Jewel'],
-    ['Stormcalling', 'Fiery Primal Rune'],
-    ['Subterranean', 'Fiery Chaos Rune'],
-    ['Summoning', 'Vapor Chaos Rune'],
-    ['Suppression', 'Dusty Chaos Rune'],
-    ['Sword', 'Watery War Rune'],
-    ['Thrown Weapons', 'Vapor War Rune'] ],
-
-    'Albion' : [
-    ['Body Magic', 'Heated Evocation Sigil' ],
-    ['Chants', 'Earthen Fervor Sigil' ],
-    ['Cold Magic', 'Icy Evocation Sigil' ],
-    ['Critical Strike','Heated Battle Jewel' ],
-    ['Crossbow', 'Vapor War Sigil' ],
-    ['Crush', 'Fiery War Sigil' ],
-    ['Death Servant', 'Ashen Fervor Sigil' ],
-    ['Deathsight', 'Vacuous Fervor Sigil' ],
-    ['Dual Wield', 'Icy War Sigil' ],
-    ['Earth Magic', 'Earthen Evocation Sigil' ],
-    ['Enhancement', 'Airy Fervor Sigil' ],
-    ['Envenom', 'Dusty Battle Jewel' ],
-    ['Flexible', 'Molten Magma War Sigil' ],
-    ['Fire Magic','Fiery Evocation Sigil' ],
-    ['Instruments', 'Vapor Fervor Sigil' ],
-    ['Longbow', 'Airy War Sigil' ],
-    ['Matter Magic', 'Dusty Evocation Sigil' ],
-    ['Mind Magic', 'Watery Evocation Sigil' ],
-    ['Painworking','Salt Crusted Fervor Sigil' ],
-    ['Parry', 'Vapor Battle Jewel' ],
-    ['Polearm', 'Earthen War Sigil' ],
-    ['Rejuvenation', 'Watery Fervor Sigil' ],
-    ['Shield', 'Fiery Battle Jewel' ],
-    ['Slash', 'Watery War Sigil' ],
-    ['Smite','Fiery Fervor Sigil' ],
-    ['Soulrending', 'Steaming Fervor Sigil' ],
-    ['Spirit Magic', 'Vapor Evocation Sigil' ],
-    ['Staff', 'Earthen Battle Jewel' ],
-    ['Stealth', 'Airy Battle Jewel' ],
-    ['Thrust','Dusty War Sigil' ],
-    ['Two Handed', 'Heated War Sigil' ],
-    ['Wind Magic', 'Air Evocation Sigil'] ],
-
-    'Hibernia' : 
-    [ ['Arboreal Path', 'Steaming Nature Spell Stone'], 
-    ['Blades', 'Watery War Spell Stone'], 
-    ['Blunt', 'Fiery War Spell Stone'],
-    ['Celtic Dual', 'Icy War Spell Stone'],
-    ['Celtic Spear', 'Earthen War Spell Stone'],
-    ['Creeping Path', 'Oozing Nature Spell Stone'],
-    ['Critical Strike', 'Heated Battle Jewel'],
-    ['Enchantments', 'Vapor Arcane Spell Stone'],
-    ['Envenom', 'Dusty Battle Jewel'],
-    ['Large Weaponry', 'Heated War Spell Stone'],
-    ['Light', 'Fiery Arcane Spell Stone'], 
-    ['Mana', 'Watery Arcane Spell Stone'],
-    ['Mentalism', 'Earthen Arcane Spell Stone'],
-    ['Music', 'Airy Nature Spell Stone'],
-    ['Nature', 'Earthen Nature Spell Stone'],
-    ['Nurture', 'Fiery Nature Spell Stone'],
-    ['Parry', 'Vapor Battle Jewel'],
-    ['Piercing', 'Dusty War Spell Stone'],
-    ['Recurve Bow', 'Airy War Spell Stone'],
-    ['Regrowth', 'Watery Nature Spell Stone'],
-    ['Scythe', 'Light War Spell Stone'],
-    ['Shield', 'Fiery Battle Jewel'],
-    ['Staff', 'Earthen Battle Jewel'],
-    ['Stealth', 'Airy Battle Jewel'],
-    ['Valor', 'Airy Arcane Spell Stone'],
-    ['Verdant Path', 'Mineral Encrusted Nature Spell Stone'],
-    ['Void', 'Icy Arcane Spell Stone'] ] }
-
-DropSkillList = { 
-    'Midgard' : 
-    [ ['Augmentation', 'Airy Chaos Rune'],
-    ['Axe', 'Earthen War Rune'], 
-    ['Battlesongs', 'Airy Primal Rune'],
-    ['BeastCraft', 'Earthen Primal Rune'],
-    ['Bone Army', 'Ashen Chaos Rune'],
-    ['Composite Bow', 'Airy War Rune'],
-    ['Critical Strike', 'Heated Battle Jewel'],
-    ['Darkness', 'Icy Chaos Rune'],
-    ['Envenom', 'Dusty Battle Jewel'],
-    ['Hammer', 'Fiery War Rune'],
-    ['Hand To Hand', 'Lightning Charged War Rune'],
-    ['Left Axe', 'Icy War Rune'],
-    ['Mending', 'Watery Chaos Rune'],
+    ["Odin's Will", 'Valiant Primal Rune'], 
     ['Pacification', 'Earthen Chaos Rune'],
     ['Parry', 'Vapor Battle Jewel'],
     ['Runecarving', 'Heated Chaos Rune'],
@@ -513,10 +480,8 @@ DropSkillList = {
     ['Suppression', 'Dusty Chaos Rune'],
     ['Sword', 'Watery War Rune'],
     ['Thrown Weapons', 'Vapor War Rune'],
-    ['All Magic Skill Bonus', ''],
-    ['All Melee Skill Bonus', ''],
-    ['All Dual Wield Skill Bonus', ''],
-    ['Archery Skill Bonus', ''] ],
+    ['All Magic Skill Bonus', 'Finesse Primal Rune'],
+    ['All Melee Skill Bonus', 'Finesse War Rune'] ],
 
     'Albion' : [
     ['Body Magic', 'Heated Evocation Sigil' ],
@@ -551,8 +516,120 @@ DropSkillList = {
     ['Thrust','Dusty War Sigil' ],
     ['Two Handed', 'Heated War Sigil' ],
     ['Wind Magic', 'Air Evocation Sigil'],
-    ['All Magic Skill Bonus', ''],
-    ['All Melee Skill Bonus', ''],
+    ['All Magic Skill Bonus', 'Finesse Fervor Sigil'],
+    ['All Melee Skill Bonus', 'Finesse War Sigil'] ], 
+
+    'Hibernia' : 
+    [ ['Arboreal Path', 'Steaming Nature Spell Stone'], 
+    ['Blades', 'Watery War Spell Stone'], 
+    ['Blunt', 'Fiery War Spell Stone'],
+    ['Celtic Dual', 'Icy War Spell Stone'],
+    ['Celtic Spear', 'Earthen War Spell Stone'],
+    ['Creeping Path', 'Oozing Nature Spell Stone'],
+    ['Critical Strike', 'Heated Battle Jewel'],
+    ['Dementia', 'Aberrant Arcane Spell Stone'], 
+    ['Enchantments', 'Vapor Arcane Spell Stone'],
+    ['Envenom', 'Dusty Battle Jewel'],
+    ['Ethereal Shriek', 'Ethereal Arcane Spell Stone'], 
+    ['Large Weaponry', 'Heated War Spell Stone'],
+    ['Light', 'Fiery Arcane Spell Stone'], 
+    ['Mana', 'Watery Arcane Spell Stone'],
+    ['Mentalism', 'Earthen Arcane Spell Stone'],
+    ['Music', 'Airy Nature Spell Stone'],
+    ['Nature', 'Earthen Nature Spell Stone'],
+    ['Nurture', 'Fiery Nature Spell Stone'],
+    ['Parry', 'Vapor Battle Jewel'],
+    ['Phantasmal Wail', 'Phantasmal Arcane Spell Stone'], 
+    ['Piercing', 'Dusty War Spell Stone'],
+    ['Recurve Bow', 'Airy War Spell Stone'],
+    ['Regrowth', 'Watery Nature Spell Stone'],
+    ['Scythe', 'Light War Spell Stone'],
+    ['Shadow Mastery', 'Shadowy Arcane Spell Stone'], 
+    ['Shield', 'Fiery Battle Jewel'],
+    ['Spectral Guard', 'Spectral Arcane Spell Stone'], 
+    ['Staff', 'Earthen Battle Jewel'],
+    ['Stealth', 'Airy Battle Jewel'],
+    ['Valor', 'Airy Arcane Spell Stone'],
+    ['Vampiiric Embrace', 'Embracing Arcane Spell Stone'], 
+    ['Verdant Path', 'Mineral Encrusted Nature Spell Stone'],
+    ['Void', 'Icy Arcane Spell Stone'],
+    ['All Magic Skill Bonus', 'Finesse Nature Spell Stone'],
+    ['All Melee Skill Bonus', 'Finesse War Spell Stone'] ] }
+
+DropSkillList = { 
+    'Midgard' : 
+    [ ['Augmentation', 'Airy Chaos Rune'],
+    ['Axe', 'Earthen War Rune'], 
+    ['Battlesongs', 'Airy Primal Rune'],
+    ['BeastCraft', 'Earthen Primal Rune'],
+    ['Bone Army', 'Ashen Chaos Rune'],
+    ['Composite Bow', 'Airy War Rune'],
+    ['Critical Strike', 'Heated Battle Jewel'],
+    ['Cursing', 'Blighted Primal Rune'], 
+    ['Darkness', 'Icy Chaos Rune'],
+    ['Envenom', 'Dusty Battle Jewel'],
+    ['Hammer', 'Fiery War Rune'],
+    ['Hand To Hand', 'Lightning Charged War Rune'],
+    ['Hexing', 'Unholy Primal Rune'], 
+    ['Left Axe', 'Icy War Rune'],
+    ['Mending', 'Watery Chaos Rune'],
+    ['Odin\'s Will', 'Valiant Primal Rune'], 
+    ['Pacification', 'Earthen Chaos Rune'],
+    ['Parry', 'Vapor Battle Jewel'],
+    ['Runecarving', 'Heated Chaos Rune'],
+    ['Shield', 'Fiery Battle Jewel'],
+    ['Spear', 'Heated War Rune'],
+    ['Staff', 'Earthen Battle Jewel'],
+    ['Stealth', 'Airy Battle Jewel'],
+    ['Stormcalling', 'Fiery Primal Rune'],
+    ['Subterranean', 'Fiery Chaos Rune'],
+    ['Summoning', 'Vapor Chaos Rune'],
+    ['Suppression', 'Dusty Chaos Rune'],
+    ['Sword', 'Watery War Rune'],
+    ['Thrown Weapons', 'Vapor War Rune'],
+    ['All Magic Skill Bonus', 'Finesse Primal Rune'],
+    ['All Melee Skill Bonus', 'Finesse War Rune'],
+    ['All Dual Wield Skill Bonus', ''],
+    ['Archery Skill Bonus', ''] ],
+
+    'Albion' : [
+    ['Body Magic', 'Heated Evocation Sigil' ],
+    ['Chants', 'Earthen Fervor Sigil' ],
+    ['Cold Magic', 'Icy Evocation Sigil' ],
+    ['Critical Strike','Heated Battle Jewel' ],
+    ['Crossbow', 'Vapor War Sigil' ],
+    ['Crush', 'Fiery War Sigil' ],
+    ['Cursing', 'Blighted Primal Rune'], 
+    ['Death Servant', 'Ashen Fervor Sigil' ],
+    ['Deathsight', 'Vacuous Fervor Sigil' ],
+    ['Dual Wield', 'Icy War Sigil' ],
+    ['Earth Magic', 'Earthen Evocation Sigil' ],
+    ['Enhancement', 'Airy Fervor Sigil' ],
+    ['Envenom', 'Dusty Battle Jewel' ],
+    ['Flexible', 'Molten Magma War Sigil' ],
+    ['Fire Magic','Fiery Evocation Sigil' ],
+    ['Hexing', 'Unholy Primal Rune'], 
+    ['Instruments', 'Vapor Fervor Sigil' ],
+    ['Longbow', 'Airy War Sigil' ],
+    ['Matter Magic', 'Dusty Evocation Sigil' ],
+    ['Mind Magic', 'Watery Evocation Sigil' ],
+    ['Odin\'s Will', 'Valiant Primal Rune'], 
+    ['Painworking','Salt Crusted Fervor Sigil' ],
+    ['Parry', 'Vapor Battle Jewel' ],
+    ['Polearm', 'Earthen War Sigil' ],
+    ['Rejuvenation', 'Watery Fervor Sigil' ],
+    ['Shield', 'Fiery Battle Jewel' ],
+    ['Slash', 'Watery War Sigil' ],
+    ['Smite','Fiery Fervor Sigil' ],
+    ['Soulrending', 'Steaming Fervor Sigil' ],
+    ['Spirit Magic', 'Vapor Evocation Sigil' ],
+    ['Staff', 'Earthen Battle Jewel' ],
+    ['Stealth', 'Airy Battle Jewel' ],
+    ['Thrust','Dusty War Sigil' ],
+    ['Two Handed', 'Heated War Sigil' ],
+    ['Wind Magic', 'Air Evocation Sigil'],
+    ['All Magic Skill Bonus', 'Finesse Fervor Sigil'],
+    ['All Melee Skill Bonus', 'Finesse War Sigil'],
     ['All Dual Wield Skill Bonus', ''],
     ['Archery Skill Bonus', ''] ],
 
@@ -564,8 +641,10 @@ DropSkillList = {
     ['Celtic Spear', 'Earthen War Spell Stone'],
     ['Creeping Path', 'Oozing Nature Spell Stone'],
     ['Critical Strike', 'Heated Battle Jewel'],
+    ['Dementia', 'Aberrant Arcane Spell Stone'], 
     ['Enchantments', 'Vapor Arcane Spell Stone'],
     ['Envenom', 'Dusty Battle Jewel'],
+    ['Ethereal Shriek', 'Ethereal Arcane Spell Stone'], 
     ['Large Weaponry', 'Heated War Spell Stone'],
     ['Light', 'Fiery Arcane Spell Stone'], 
     ['Mana', 'Watery Arcane Spell Stone'],
@@ -574,24 +653,30 @@ DropSkillList = {
     ['Nature', 'Earthen Nature Spell Stone'],
     ['Nurture', 'Fiery Nature Spell Stone'],
     ['Parry', 'Vapor Battle Jewel'],
+    ['Phantasmal Wail', 'Phantasmal Arcane Spell Stone'], 
     ['Piercing', 'Dusty War Spell Stone'],
     ['Recurve Bow', 'Airy War Spell Stone'],
     ['Regrowth', 'Watery Nature Spell Stone'],
     ['Scythe', 'Light War Spell Stone'],
+    ['Shadow Mastery', 'Shadowy Arcane Spell Stone'], 
     ['Shield', 'Fiery Battle Jewel'],
+    ['Spectral Guard', 'Spectral Arcane Spell Stone'], 
     ['Staff', 'Earthen Battle Jewel'],
     ['Stealth', 'Airy Battle Jewel'],
     ['Valor', 'Airy Arcane Spell Stone'],
+    ['Vampiiric Embrace', 'Embracing Arcane Spell Stone'], 
     ['Verdant Path', 'Mineral Encrusted Nature Spell Stone'],
     ['Void', 'Icy Arcane Spell Stone'],
-    ['All Magic Skill Bonus', ''],
-    ['All Melee Skill Bonus', ''],
+    ['All Magic Skill Bonus', 'Finesse Nature Spell Stone'],
+    ['All Melee Skill Bonus', 'Finesse War Spell Stone'],
     ['All Dual Wield Skill Bonus', ''],
     ['Archery Skill Bonus', ''] ] }
+
 SkillValues = ['1', '2', '3', '4', '5', '6', '7', '8']
 
 # Placeholder
 UnusedList = [ ]
+
 UnusedValues = [ ]
 
 Caps = { 'Str' : 'AttributeCap', 'Con' : 'AttributeCap', 
@@ -612,14 +697,19 @@ ImbueMultipliers = { 'Stat' : 1.0, 'Resist' : 2.0, 'Skill' : 5.0,
     'Hits' : 0.25, 'Power' : 2.0, 'Focus' : 1.0, 'Unused' : 0.0 } 
 
 OCStartPercentages = [0, 10, 20, 30, 50, 70]
+
 GemQualOCModifiers = { '' : 0, '94': 0, '95' : 0, '96' : 1, '97' : 3, '98' : 5, 
     '99' : 8, '100' : 11 }
+
 ItemQualOCModifiers = { '94': 0, '95' : 0, '96' : 6, '97' : 8, '98' : 10, 
     '99' : 18, '100' : 26 }
 
 GemCosts = [ 160, 920, 3900, 13900, 40100, 88980, 133000, 198920, 258240, 296860 ]
+
 RemakeCosts = [ 120, 560, 1740, 5260, 14180, 30660, 45520, 67680, 87640, 100700 ]
+
 MaterialGems = ['Lo', 'Um', 'On', 'Ee', 'Pal', 'Mon', 'Ros', 'Zo', 'Kath', 'Ra' ]
+
 LiquidsOrder = [ 'Sun Light',
     'Draconic Fire', 'Treant Blood', 'Swamp Fog',
     'Air Elemental Essence', 'Leviathan Blood',
@@ -627,6 +717,7 @@ LiquidsOrder = [ 'Sun Light',
     'Undead Ash and Holy Water',
     'Frost From a Wasteland',
     'Giant Blood', 'Mystic Energy' ]
+
 DustsOrder = ['Ground Draconic Scales',
     'Essence of Life', 'Bloodied Battlefield Dirt',
     'Unseelie Dust', 'Fairy Dust', 'Other Worldly Dust',
@@ -634,22 +725,30 @@ DustsOrder = ['Ground Draconic Scales',
     'Ground Cave Crystal',
     'Ground Giant Bone', 'Ground Vendo Bone', 
     'Soot From Niflheim']
+
 GemLiquids = { 
-    'Fiery' : 'Draconic Fire', 'Earthen': 'Treant Blood',
-    'Vapor' : 'Swamp Fog', 'Airy' : 'Air Elemental Essence',
+    'Fiery' : 'Draconic Fire', 
+    'Earthen': 'Treant Blood',
+    'Vapor' : 'Swamp Fog', 
+    'Airy' : 'Air Elemental Essence',
     'Heated' : 'Heat From an Unearthly Pyre', 
     'Icy' : 'Frost From a Wasteland', 
     'Watery' : 'Leviathan Blood',
     'Dusty' : 'Undead Ash and Holy Water',
-    'Fire' : 'Draconic Fire', 'Earth': 'Treant Blood',
-    'Vapor' : 'Swamp Fog', 'Air' : 'Air Elemental Essence',
+    'Fire' : 'Draconic Fire', 
+    'Earth' : 'Treant Blood',
+    'Vapor' : 'Swamp Fog', 
+    'Air' : 'Air Elemental Essence',
     'Heat' : 'Heat From an Unearthly Pyre', 
-    'Ice' : 'Frost From a Wasteland', 'Water' : 'Leviathan Blood',
+    'Ice' : 'Frost From a Wasteland', 
+    'Water' : 'Leviathan Blood',
     'Dust' : 'Undead Ash and Holy Water',
     'Ashen' : 'Undead Ash and Holy Water',
     'Vacuous' : 'Swamp Fog',
     'Salt' : 'Mystic Energy',
-    'Steaming' : 'Swamp Fog',
+    'Steaming Spell' : 'Swamp Fog',
+    'Steaming Nature' : 'Swamp Fog',
+    'Steaming Fervor' : 'Heat From an Unearthly Pyre',
     'Oozing' : 'Treant Blood',
     'Mineral' : 'Heat From an Unearthly Pyre',
     'Lightning' : 'Leviathan Blood',
@@ -657,7 +756,22 @@ GemLiquids = {
     'Light' : 'Sun Light',
     'Blood' : 'Giant Blood',
     'Mystical' : 'Mystic Energy',
-    'Mystic' : 'Mystic Energy' }
+    'Mystic' : 'Mystic Energy', 
+    'Brilliant' : ['Draconic Fire', 'Mystic Energy', 'Treant Blood'],
+    'Finesse' : ['Draconic Fire', 'Mystic Energy', 'Treant Blood'],
+    'Ethereal Spell' : 'Swamp Fog', 
+    'Phantasmal Spell' : 'Leviathan Blood', 
+    'Spectral Spell' : 'Draconic Fire', 
+    'Ethereal Arcane' : 'Leviathan Blood', 
+    'Phantasmal Arcane' : 'Draconic Fire', 
+    'Spectral Arcane' : 'Air Elemental Essence', 
+    'Aberrant' : 'Treant Blood', 
+    'Embracing' : 'Frost From a Wasteland', 
+    'Shadowy' : 'Swamp Fog', 
+    'Blighted Primal' : 'Air Elemental Essence', 
+    'Blighted Rune' : 'Undead Ash and Holy Water', 
+    'Valiant' : 'Swamp Fog', 
+    'Unholy' : 'Air Elemental Essence' }
 
 GemDusts = { 'Essence' : 'Essence of Life',
     'Shielding' : 'Ground Draconic Scales',
@@ -667,21 +781,17 @@ GemDusts = { 'Essence' : 'Essence of Life',
     'Chaos Rune' : 'Soot From Niflheim',
     'Battle Jewel': 'Bloodied Battlefield Dirt',
     'War Rune': 'Ground Giant Bone',
-    'Charged War Rune': 'Ground Giant Bone',
     'Primal Rune': 'Ground Vendo Bone',
     'Evocation Sigil': 'Ground Cave Crystal', 
     'Fervor Sigil':'Ground Blessed Undead Bone',
     'War Sigil' : 'Ground Caer Stone',
-    'Magma War Sigil' : 'Ground Caer Stone',
-    'Crusted Fervor Sigil' : 'Ground Blessed Undead Bone',
-    'Crusted Sigil' : 'Ground Draconic Scales',
     'Nature Spell Stone' : 'Fairy Dust',
     'War Spell Stone' : 'Unseelie Dust',
-    'Arcane Spell Stone' : 'Other Worldly Dust',
-    'Encrusted Nature Spell Stone' : 'Fairy Dust' }
+    'Arcane Spell Stone' : 'Other Worldly Dust' }
 
 GemNames = [ 'raw', 'uncut', 'rough', 'flawed', 'imperfect', 'polished',
     'faceted', 'precious', 'flawless', 'perfect' ]
+
 GemSubName = { 'Stat' : 'Essence', 'Resist' : 'Shielding', 'Hits' : 'Essence', 
     'Power' : 'Essence', 'Focus' : '', 'Skill' : '' }
 
@@ -770,9 +880,10 @@ Races = {'Albion' : [
                'Norseman',
                'Valkyn' ]
         }
+
 RacialResists = {
-   'Avalonian' : { 'Crush' : 2, 'Slash' : 3, 'Matter' : 5 },
-   'Briton' : {'Crush' : 2, 'Slash' : 3, 'Spirit' : 5 },
+   'Avalonian' : {'Crush' : 2, 'Slash' : 3, 'Matter' : 5 },
+   'Briton' : {'Cold' : 5, 'Crush' : 2, 'Slash' : 3},
    'Inconnu' : {'Crush' : 2, 'Thrust' : 3, 'Heat' : 5, 'Spirit' : 5 },
    'Saracen' : {'Slash' : 2, 'Thrust' : 3, 'Heat' : 5 },
    'Half Ogre' : {'Thrust' : 2, 'Slash' : 3, 'Matter' : 5 },

@@ -30,7 +30,6 @@ from MyStringIO import UnicodeStringIO
 import types
 import re
 import string
-import sys
 import ItemLevel
 import Options
 import SC
@@ -50,6 +49,7 @@ import locale
 import traceback
 import encodings
 import codecs
+import sys
 
 import UIXML
 
@@ -150,7 +150,6 @@ class SCApp(B_SC):
 
         self.ItemLevelWindow = ItemLevel.ItemLevel(self, '', 1)
         self.DaocPath = ''
-        self.Version.setText('1.42b')
         self.realm = 'Albion'
         self.crafterSkill = 1001
         self.showDoneInMatsList = 0
@@ -163,11 +162,11 @@ class SCApp(B_SC):
         self.filemenu.insertItem('&New', self.newFile, Qt.CTRL+Qt.Key_N)
         self.filemenu.insertItem('&Open', self.openFile, Qt.CTRL+Qt.Key_O)
         self.filemenu.insertItem('&Save', self.saveFile, Qt.CTRL+Qt.Key_S)
-        self.filemenu.insertItem('&Save As', self.saveAsFile)
+        self.filemenu.insertItem('Save &As...', self.saveAsFile)
         self.rf_menu = QPopupMenu(self, "Recent Files")
         self.updateRecentFiles(None)
         self.filemenu.insertItem('&Recent Files', self.rf_menu)
-        self.filemenu.insertItem('&Exit', self, SLOT('close()'), Qt.CTRL+Qt.Key_X)
+        self.filemenu.insertItem('E&xit', self, SLOT('close()'), Qt.CTRL+Qt.Key_X)
         self.menuBar.insertItem('&File', self.filemenu)
 
         self.swapGems = QPopupMenu(self, "SwapGems")
@@ -1579,8 +1578,12 @@ class SCApp(B_SC):
         DW.exec_loop()
 
     def aboutBox(self):
-        QMessageBox.information(None, 'About this program', 
-            "Kort's Spellcrafting Calculator v. %s\n\nHomepage: http://sc.aod.net\n\nReport Bugs/Features to kortsc@hotmail.com" % str(self.Version.text()), 'Close')
+        QMessageBox.information(None, "Kort's Spellcrafting Calculator", 
+              "Verison " + ScVersion + "\n\n" 
+            + "Homepage http://sc.aod.net\n"
+            + "Author's Email kortsc@hotmail.com\n\n"
+            + "Bugs/Features discussed on the IGN Trade Skill Forum\n"
+            + "http://vnboards.ign.com/Trade_Skills/b20673/", 'Close')
 
     def openCraftBars(self):
         CB = CraftBar.CraftBar(self.DaocPath, self, '', 1)

@@ -22,6 +22,7 @@ from B_Options import *
 import re
 import types
 import XMLHelper
+import sys
 import os.path
 import traceback
 import sys

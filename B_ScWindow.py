@@ -38,34 +38,20 @@ class B_SC(QMainWindow):
         self.OtherBonusList.setGeometry(QRect(3,15,164,123))
 
         self.GroupBox7 = QGroupBox(self,'GroupBox7')
-        self.GroupBox7.setGeometry(QRect(310,165,215,44))
+        self.GroupBox7.setGeometry(QRect(310,165,215,38))
         self.GroupBox7.setTitle(self.tr("Reports"))
 
         self.ConfigButton = QPushButton(self.GroupBox7,'ConfigButton')
-        self.ConfigButton.setGeometry(QRect(7,14,99,26))
+        self.ConfigButton.setGeometry(QRect(7,14,99,19))
         self.ConfigButton.setText(self.tr("Config Report"))
 
         self.MatsButton = QPushButton(self.GroupBox7,'MatsButton')
-        self.MatsButton.setGeometry(QRect(111,14,99,26))
+        self.MatsButton.setGeometry(QRect(111,14,99,19))
         self.MatsButton.setText(self.tr("Mats List"))
 
         self.FileNameLabel = QLabel(self,'FileNameLabel')
-        self.FileNameLabel.setGeometry(QRect(10,208,159,16))
+        self.FileNameLabel.setGeometry(QRect(316,208,159,16))
         self.FileNameLabel.setText(self.tr(""))
-
-        self.TextLabel3 = QLabel(self,'TextLabel3')
-        self.TextLabel3.setGeometry(QRect(10,194,53,14))
-        TextLabel3_font = QFont(self.TextLabel3.font())
-        TextLabel3_font.setBold(1)
-        self.TextLabel3.setFont(TextLabel3_font)
-        self.TextLabel3.setText(self.tr("Version:"))
-
-        self.Version = QLabel(self,'Version')
-        self.Version.setGeometry(QRect(61,194,56,14))
-        Version_font = QFont(self.Version.font())
-        Version_font.setBold(1)
-        self.Version.setFont(Version_font)
-        self.Version.setText(self.tr("0.1"))
 
         self.TypeTab = QTabWidget(self,'TypeTab')
         self.TypeTab.setGeometry(QRect(0,224,788,377))
@@ -663,75 +649,91 @@ class B_SC(QMainWindow):
         self.CharRace.setGeometry(QRect(46,84,114,22))
 
         self.GroupBox1 = QGroupBox(self,'GroupBox1')
-        self.GroupBox1.setGeometry(QRect(5,21,75,172))
+        self.GroupBox1.setGeometry(QRect(5,21,75,182))
         self.GroupBox1.setTitle(self.tr("Stats"))
 
-        self.Str = QLabel(self.GroupBox1,'Str')
-        self.Str.setGeometry(QRect(42,16,28,18))
-        self.Str.setText(self.tr("0"))
-
         self.StrLabel = QLabel(self.GroupBox1,'StrLabel')
-        self.StrLabel.setGeometry(QRect(11,16,27,18))
+        self.StrLabel.setGeometry(QRect(11,16,27,16))
         self.StrLabel.setText(self.tr("STR:"))
 
-        self.EmpLabel = QLabel(self.GroupBox1,'EmpLabel')
-        self.EmpLabel.setGeometry(QRect(11,146,24,18))
-        self.EmpLabel.setText(self.tr("EMP:"))
-
-        self.Emp = QLabel(self.GroupBox1,'Emp')
-        self.Emp.setGeometry(QRect(42,146,28,18))
-        self.Emp.setText(self.tr("0"))
-
-        self.Con = QLabel(self.GroupBox1,'Con')
-        self.Con.setGeometry(QRect(42,34,28,19))
-        self.Con.setText(self.tr("0"))
+        self.Str = QLabel(self.GroupBox1,'Str')
+        self.Str.setGeometry(QRect(42,16,28,16))
+        self.Str.setText(self.tr("0"))
 
         self.ConLabel = QLabel(self.GroupBox1,'ConLabel')
-        self.ConLabel.setGeometry(QRect(10,34,25,19))
+        self.ConLabel.setGeometry(QRect(10,32,25,16))
         self.ConLabel.setText(self.tr("CON:"))
 
+        self.Con = QLabel(self.GroupBox1,'Con')
+        self.Con.setGeometry(QRect(42,32,28,16))
+        self.Con.setText(self.tr("0"))
+
         self.DexLabel = QLabel(self.GroupBox1,'DexLabel')
-        self.DexLabel.setGeometry(QRect(11,52,26,18))
+        self.DexLabel.setGeometry(QRect(11,48,26,16))
         self.DexLabel.setText(self.tr("DEX:"))
 
         self.Dex = QLabel(self.GroupBox1,'Dex')
-        self.Dex.setGeometry(QRect(42,52,28,18))
+        self.Dex.setGeometry(QRect(42,48,28,16))
         self.Dex.setText(self.tr("0"))
 
-        self.Qui = QLabel(self.GroupBox1,'Qui')
-        self.Qui.setGeometry(QRect(42,71,28,18))
-        self.Qui.setText(self.tr("0"))
-
         self.QuiLabel = QLabel(self.GroupBox1,'QuiLabel')
-        self.QuiLabel.setGeometry(QRect(11,71,24,18))
+        self.QuiLabel.setGeometry(QRect(11,64,24,16))
         self.QuiLabel.setText(self.tr("QUI:"))
 
+        self.Qui = QLabel(self.GroupBox1,'Qui')
+        self.Qui.setGeometry(QRect(42,64,28,16))
+        self.Qui.setText(self.tr("0"))
+
         self.IntLabel = QLabel(self.GroupBox1,'IntLabel')
-        self.IntLabel.setGeometry(QRect(11,90,22,18))
+        self.IntLabel.setGeometry(QRect(11,80,22,16))
         self.IntLabel.setText(self.tr("INT:"))
 
+        self.Int = QLabel(self.GroupBox1,'Int')
+        self.Int.setGeometry(QRect(42,80,28,16))
+        self.Int.setText(self.tr("0"))
+
         self.PieLabel = QLabel(self.GroupBox1,'PieLabel')
-        self.PieLabel.setGeometry(QRect(11,109,20,19))
+        self.PieLabel.setGeometry(QRect(11,96,20,16))
         self.PieLabel.setText(self.tr("PIE:"))
 
         self.Pie = QLabel(self.GroupBox1,'Pie')
-        self.Pie.setGeometry(QRect(42,109,28,19))
+        self.Pie.setGeometry(QRect(42,96,28,16))
         self.Pie.setText(self.tr("0"))
 
-        self.Cha = QLabel(self.GroupBox1,'Cha')
-        self.Cha.setGeometry(QRect(42,128,28,18))
-        self.Cha.setText(self.tr("0"))
-
         self.ChaLabel = QLabel(self.GroupBox1,'ChaLabel')
-        self.ChaLabel.setGeometry(QRect(11,128,26,18))
+        self.ChaLabel.setGeometry(QRect(11,112,26,16))
         self.ChaLabel.setText(self.tr("CHA:"))
 
-        self.Int = QLabel(self.GroupBox1,'Int')
-        self.Int.setGeometry(QRect(42,90,28,18))
-        self.Int.setText(self.tr("0"))
+        self.Cha = QLabel(self.GroupBox1,'Cha')
+        self.Cha.setGeometry(QRect(42,112,28,16))
+        self.Cha.setText(self.tr("0"))
+
+        self.EmpLabel = QLabel(self.GroupBox1,'EmpLabel')
+        self.EmpLabel.setGeometry(QRect(11,128,24,16))
+        self.EmpLabel.setText(self.tr("EMP:"))
+
+        self.Emp = QLabel(self.GroupBox1,'Emp')
+        self.Emp.setGeometry(QRect(42,128,28,16))
+        self.Emp.setText(self.tr("0"))
+
+        self.HitsLabel = QLabel(self.GroupBox1,'HitsLabel')
+        self.HitsLabel.setGeometry(QRect(11,144,28,16))
+        self.HitsLabel.setText(self.tr("Hits:"))
+
+        self.Hits = QLabel(self.GroupBox1,'Hits')
+        self.Hits.setGeometry(QRect(42,144,28,16))
+        self.Hits.setText(self.tr("0"))
+
+        self.PowerLabel = QLabel(self.GroupBox1,'PowerLabel')
+        self.PowerLabel.setGeometry(QRect(11,160,28,16))
+        self.PowerLabel.setText(self.tr("Pow:"))
+
+        self.Power = QLabel(self.GroupBox1,'Power')
+        self.Power.setGeometry(QRect(42,160,28,16))
+        self.Power.setText(self.tr("0"))
 
         self.GroupBox5 = QGroupBox(self,'GroupBox5')
-        self.GroupBox5.setGeometry(QRect(174,176,135,48))
+        self.GroupBox5.setGeometry(QRect(174,155,135,48))
         self.GroupBox5.setTitle(self.tr("Totals"))
 
         self.TextLabel20 = QLabel(self.GroupBox5,'TextLabel20')
@@ -750,29 +752,8 @@ class B_SC(QMainWindow):
         self.TotalCost.setGeometry(QRect(45,14,86,16))
         self.TotalCost.setText(self.tr("0"))
 
-        self.GroupBox3 = QGroupBox(self,'GroupBox3')
-        self.GroupBox3.setGeometry(QRect(174,21,134,60))
-        self.GroupBox3.setTitle(self.tr("Hits && Power"))
-
-        self.PowerLabel = QLabel(self.GroupBox3,'PowerLabel')
-        self.PowerLabel.setGeometry(QRect(9,35,37,16))
-        self.PowerLabel.setSizePolicy(QSizePolicy(3,3,self.PowerLabel.sizePolicy().hasHeightForWidth()))
-        self.PowerLabel.setText(self.tr("Power:"))
-
-        self.Hits = QLabel(self.GroupBox3,'Hits')
-        self.Hits.setGeometry(QRect(47,16,32,16))
-        self.Hits.setText(self.tr("0"))
-
-        self.Power = QLabel(self.GroupBox3,'Power')
-        self.Power.setGeometry(QRect(47,35,28,16))
-        self.Power.setText(self.tr("0"))
-
-        self.HitsLabel = QLabel(self.GroupBox3,'HitsLabel')
-        self.HitsLabel.setGeometry(QRect(9,16,37,16))
-        self.HitsLabel.setText(self.tr("Hits:"))
-
         self.GroupBox4 = QGroupBox(self,'GroupBox4')
-        self.GroupBox4.setGeometry(QRect(174,81,135,97))
+        self.GroupBox4.setGeometry(QRect(174,21,135,136))
         self.GroupBox4.setTitle(self.tr("Focus"))
 
         self.Focus_1 = QLabel(self.GroupBox4,'Focus_1')
@@ -792,116 +773,116 @@ class B_SC(QMainWindow):
         self.Focus_4.setText(self.tr(""))
 
         self.GroupBox2 = QGroupBox(self,'GroupBox2')
-        self.GroupBox2.setGeometry(QRect(83,21,90,172))
+        self.GroupBox2.setGeometry(QRect(83,21,90,182))
         self.GroupBox2.setTitle(self.tr("Resists"))
 
         self.BodyLabel = QLabel(self.GroupBox2,'BodyLabel')
-        self.BodyLabel.setGeometry(QRect(6,16,36,17))
+        self.BodyLabel.setGeometry(QRect(6,16,36,16))
         self.BodyLabel.setText(self.tr("Body:"))
 
-        self.EnergyLabel = QLabel(self.GroupBox2,'EnergyLabel')
-        self.EnergyLabel.setGeometry(QRect(6,64,36,17))
-        self.EnergyLabel.setText(self.tr("Energy:"))
-
-        self.SlashLabel = QLabel(self.GroupBox2,'SlashLabel')
-        self.SlashLabel.setGeometry(QRect(6,151,36,17))
-        self.SlashLabel.setText(self.tr("Slash:"))
-
-        self.ThrustLabel = QLabel(self.GroupBox2,'ThrustLabel')
-        self.ThrustLabel.setGeometry(QRect(6,134,36,16))
-        self.ThrustLabel.setText(self.tr("Thrust:"))
-
-        self.CrushLabel = QLabel(self.GroupBox2,'CrushLabel')
-        self.CrushLabel.setGeometry(QRect(6,117,36,17))
-        self.CrushLabel.setText(self.tr("Crush:"))
-
-        self.SpiritLabel = QLabel(self.GroupBox2,'SpiritLabel')
-        self.SpiritLabel.setGeometry(QRect(6,99,36,17))
-        self.SpiritLabel.setText(self.tr("Spirit:"))
-
-        self.Spirit = QLabel(self.GroupBox2,'Spirit')
-        self.Spirit.setGeometry(QRect(48,99,17,17))
-        self.Spirit.setText(self.tr("0"))
-
-        self.Crush = QLabel(self.GroupBox2,'Crush')
-        self.Crush.setGeometry(QRect(48,117,17,17))
-        self.Crush.setText(self.tr("0"))
-
-        self.Thrust = QLabel(self.GroupBox2,'Thrust')
-        self.Thrust.setGeometry(QRect(48,134,17,16))
-        self.Thrust.setText(self.tr("0"))
-
-        self.Slash = QLabel(self.GroupBox2,'Slash')
-        self.Slash.setGeometry(QRect(48,151,17,17))
-        self.Slash.setText(self.tr("0"))
-
-        self.HeatLabel = QLabel(self.GroupBox2,'HeatLabel')
-        self.HeatLabel.setGeometry(QRect(6,48,36,17))
-        self.HeatLabel.setText(self.tr("Heat:"))
-
-        self.Heat = QLabel(self.GroupBox2,'Heat')
-        self.Heat.setGeometry(QRect(48,48,17,17))
-        self.Heat.setText(self.tr("0"))
-
-        self.Energy = QLabel(self.GroupBox2,'Energy')
-        self.Energy.setGeometry(QRect(48,64,17,17))
-        self.Energy.setText(self.tr("0"))
-
-        self.MatterLabel = QLabel(self.GroupBox2,'MatterLabel')
-        self.MatterLabel.setGeometry(QRect(6,81,36,16))
-        self.MatterLabel.setText(self.tr("Matter:"))
-
-        self.Matter = QLabel(self.GroupBox2,'Matter')
-        self.Matter.setGeometry(QRect(48,81,17,16))
-        self.Matter.setText(self.tr("0"))
-
         self.Body = QLabel(self.GroupBox2,'Body')
-        self.Body.setGeometry(QRect(48,16,17,17))
+        self.Body.setGeometry(QRect(48,16,17,16))
         self.Body.setSizePolicy(QSizePolicy(1,1,self.Body.sizePolicy().hasHeightForWidth()))
         self.Body.setText(self.tr("0"))
-
-        self.ColdLabel = QLabel(self.GroupBox2,'ColdLabel')
-        self.ColdLabel.setGeometry(QRect(6,32,36,16))
-        self.ColdLabel.setText(self.tr("Cold:"))
-
-        self.Cold = QLabel(self.GroupBox2,'Cold')
-        self.Cold.setGeometry(QRect(48,32,17,16))
-        self.Cold.setText(self.tr("0"))
 
         self.BodyRR = QLabel(self.GroupBox2,'BodyRR')
         self.BodyRR.setGeometry(QRect(67,16,17,16))
         self.BodyRR.setText(self.tr("-"))
 
+        self.ColdLabel = QLabel(self.GroupBox2,'ColdLabel')
+        self.ColdLabel.setGeometry(QRect(6,34,36,16))
+        self.ColdLabel.setText(self.tr("Cold:"))
+
+        self.Cold = QLabel(self.GroupBox2,'Cold')
+        self.Cold.setGeometry(QRect(48,34,17,16))
+        self.Cold.setText(self.tr("0"))
+
         self.ColdRR = QLabel(self.GroupBox2,'ColdRR')
-        self.ColdRR.setGeometry(QRect(67,32,17,16))
+        self.ColdRR.setGeometry(QRect(67,34,17,16))
         self.ColdRR.setText(self.tr("-"))
 
+        self.HeatLabel = QLabel(self.GroupBox2,'HeatLabel')
+        self.HeatLabel.setGeometry(QRect(6,52,36,16))
+        self.HeatLabel.setText(self.tr("Heat:"))
+
+        self.Heat = QLabel(self.GroupBox2,'Heat')
+        self.Heat.setGeometry(QRect(48,52,17,16))
+        self.Heat.setText(self.tr("0"))
+
         self.HeatRR = QLabel(self.GroupBox2,'HeatRR')
-        self.HeatRR.setGeometry(QRect(67,48,17,16))
+        self.HeatRR.setGeometry(QRect(67,52,17,16))
         self.HeatRR.setText(self.tr("-"))
 
+        self.EnergyLabel = QLabel(self.GroupBox2,'EnergyLabel')
+        self.EnergyLabel.setGeometry(QRect(6,70,36,16))
+        self.EnergyLabel.setText(self.tr("Energy:"))
+
+        self.Energy = QLabel(self.GroupBox2,'Energy')
+        self.Energy.setGeometry(QRect(48,70,17,16))
+        self.Energy.setText(self.tr("0"))
+
         self.EnergyRR = QLabel(self.GroupBox2,'EnergyRR')
-        self.EnergyRR.setGeometry(QRect(67,64,17,16))
+        self.EnergyRR.setGeometry(QRect(67,70,17,16))
         self.EnergyRR.setText(self.tr("-"))
 
+        self.MatterLabel = QLabel(self.GroupBox2,'MatterLabel')
+        self.MatterLabel.setGeometry(QRect(6,88,36,16))
+        self.MatterLabel.setText(self.tr("Matter:"))
+
+        self.Matter = QLabel(self.GroupBox2,'Matter')
+        self.Matter.setGeometry(QRect(48,88,17,16))
+        self.Matter.setText(self.tr("0"))
+
         self.MatterRR = QLabel(self.GroupBox2,'MatterRR')
-        self.MatterRR.setGeometry(QRect(67,81,17,16))
+        self.MatterRR.setGeometry(QRect(67,88,17,16))
         self.MatterRR.setText(self.tr("-"))
 
+        self.SpiritLabel = QLabel(self.GroupBox2,'SpiritLabel')
+        self.SpiritLabel.setGeometry(QRect(6,106,36,16))
+        self.SpiritLabel.setText(self.tr("Spirit:"))
+
+        self.Spirit = QLabel(self.GroupBox2,'Spirit')
+        self.Spirit.setGeometry(QRect(48,106,17,16))
+        self.Spirit.setText(self.tr("0"))
+
         self.SpiritRR = QLabel(self.GroupBox2,'SpiritRR')
-        self.SpiritRR.setGeometry(QRect(67,99,17,16))
+        self.SpiritRR.setGeometry(QRect(67,106,17,16))
         self.SpiritRR.setText(self.tr("-"))
 
+        self.CrushLabel = QLabel(self.GroupBox2,'CrushLabel')
+        self.CrushLabel.setGeometry(QRect(6,124,36,16))
+        self.CrushLabel.setText(self.tr("Crush:"))
+
+        self.Crush = QLabel(self.GroupBox2,'Crush')
+        self.Crush.setGeometry(QRect(48,124,17,16))
+        self.Crush.setText(self.tr("0"))
+
         self.CrushRR = QLabel(self.GroupBox2,'CrushRR')
-        self.CrushRR.setGeometry(QRect(67,117,17,16))
+        self.CrushRR.setGeometry(QRect(67,124,17,16))
         self.CrushRR.setText(self.tr("-"))
 
+        self.ThrustLabel = QLabel(self.GroupBox2,'ThrustLabel')
+        self.ThrustLabel.setGeometry(QRect(6,142,36,16))
+        self.ThrustLabel.setText(self.tr("Thrust:"))
+
+        self.Thrust = QLabel(self.GroupBox2,'Thrust')
+        self.Thrust.setGeometry(QRect(48,142,17,16))
+        self.Thrust.setText(self.tr("0"))
+
         self.ThrustRR = QLabel(self.GroupBox2,'ThrustRR')
-        self.ThrustRR.setGeometry(QRect(67,134,17,16))
+        self.ThrustRR.setGeometry(QRect(67,142,17,16))
         self.ThrustRR.setText(self.tr("-"))
 
+        self.SlashLabel = QLabel(self.GroupBox2,'SlashLabel')
+        self.SlashLabel.setGeometry(QRect(6,160,36,16))
+        self.SlashLabel.setText(self.tr("Slash:"))
+
+        self.Slash = QLabel(self.GroupBox2,'Slash')
+        self.Slash.setGeometry(QRect(48,160,17,16))
+        self.Slash.setText(self.tr("0"))
+
         self.SlashRR = QLabel(self.GroupBox2,'SlashRR')
-        self.SlashRR.setGeometry(QRect(67,151,17,16))
+        self.SlashRR.setGeometry(QRect(67,160,17,16))
         self.SlashRR.setText(self.tr("-"))
 
         self.OcErrorString = QLabel(self,'OcErrorString')
@@ -1030,15 +1011,6 @@ class B_SC(QMainWindow):
 
     def event(self,ev):
         ret = QMainWindow.event(self,ev)
-
-        if ev.type() == QEvent.ApplicationFontChange:
-            TextLabel3_font = QFont(self.TextLabel3.font())
-            TextLabel3_font.setBold(1)
-            self.TextLabel3.setFont(TextLabel3_font)
-            Version_font = QFont(self.Version.font())
-            Version_font.setBold(1)
-            self.Version.setFont(Version_font)
-
         return ret
 
     def AmountChanged(self,a0):
