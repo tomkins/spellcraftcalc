@@ -56,8 +56,10 @@ import psyco
 
 class SCApp(B_SC):
     def __init__(self):
+        self.nocalc = 1
 	self.scroller = None
         self.totals = { }
+        self.capTotals = { }
         self.currentPieceTab = None
         self.currentJewelTab = None
         self.currentTypeTab = None
@@ -109,10 +111,8 @@ class SCApp(B_SC):
         pal.setActive(cg)
         self.OcErrorString.setPalette(pal)
 
-
         self.startup = 1
         self.pricingInfo = {}
-
 
         self.StrLabel = self.replaceLabel(self.StrLabel, 'Strength')
         self.ConLabel = self.replaceLabel(self.ConLabel, 'Constitution')
@@ -150,6 +150,7 @@ class SCApp(B_SC):
         self.showDoneInMatsList = 0
         self.noteText = ''
         self.includeRacials = True
+        self.hideNonClassSkills = False
         OW = Options.Options(self, '', 0)
         OW.load()
 
@@ -208,8 +209,9 @@ class SCApp(B_SC):
         self.initialize()
         self.pricingInfo = OW.getPriceInfo()
         self.restoreItem(Item())
+        self.nocalc = 0
+        self.calculate()
         self.modified = 0
-
     
     def close(self, args):
         Options.Options(self).OK_pressed() # write out app config data to disk
@@ -414,7 +416,6 @@ class SCApp(B_SC):
         self.currentPage = a0
         self.swapGems.setItemEnabled(TabList.index(self.currentTabLabel()), False)
         self.restoreItem(self.itemattrlist.get(self.currentTabLabel(), Item(self.currentTabLabel())))
-        self.calculate()
         item = self.itemattrlist.get(self.currentTabLabel(), Item(self.currentTabLabel()))
 
     def JewelTabChanged(self,a0):
@@ -429,7 +430,6 @@ class SCApp(B_SC):
         self.currentPage = a0
         item = self.itemattrlist.get(self.currentTabLabel(), Item(self.currentTabLabel()))
         self.restoreItem(self.itemattrlist.get(self.currentTabLabel(), Item(self.currentTabLabel())))
-        self.calculate()
 
     def FixupItemLevel(self):
         if str(self.ItemLevel.text()) == '' \
@@ -493,6 +493,8 @@ class SCApp(B_SC):
 
     def restoreItem(self, item):
         if item is None: return
+        wascalc = self.nocalc
+        self.nocalc = 1
         self.save = 0
         itemtype = item.getAttr('ActiveState')
         if itemtype == 'player':
@@ -563,8 +565,13 @@ class SCApp(B_SC):
                 self.QualDrop.setCurrentItem(
                     QualityValues.index(item.getAttr('ItemQuality')))
         self.save = 1
+        self.nocalc = wascalc
+        self.calculate()
 
     def calculate(self):
+        if self.nocalc:
+            return
+        self.nocalc = 1
         focusnum = 1
         charclass = unicode(self.CharClass.currentText())
         charleveltext = str(self.CharLevel.text())
@@ -573,15 +580,19 @@ class SCApp(B_SC):
         else:
             charlevel = max(min(50, int(charleveltext)), 1)
         self.CharLevel.setText(str(charlevel))
+        self.totals = { }
+        self.capTotals = { }
         for effect, gem in ResistList:
             self.totals[effect[:string.find(effect, ' ')]] = 0
         for effect, gem in StatList:
             self.totals[effect[:3]] = 0
+            self.capTotals[effect[:3]] = 0
         self.totals['Hits'] = 0
         self.totals['Power'] = 0
+        self.capTotals['Hits'] = 0
+        self.capTotals['Power'] = 0
         skillTotals = {}
         otherTotals = {}
-        capTotals = {}
         self.Focus_1.setText('')
         self.Focus_2.setText('')
         self.Focus_3.setText('')
@@ -641,30 +652,33 @@ class SCApp(B_SC):
                     #eval('self.Cost_%d.setText("%s")' % (i+1, 
                     #    SC.formatCost(cost+remakecost)))
                 if gemtype == 'Skill':
-                        if effect == 'All Magic Skill Bonus'\
-                            or effect == 'All Melee Skill Bonus'\
-                            or effect == 'All Dual Wield Skill Bonus'\
-                            or effect == 'Archery Skill Bonus':
+                    if effect == 'All Magic Skill Bonus'\
+                        or effect == 'All Melee Skill Bonus'\
+                        or effect == 'All Dual Wield Skill Bonus'\
+                        or effect == 'Archery Skill Bonus':
 
-                            if effect == 'All Melee Skill Bonus':
-                                utility += amount * 5
-                            for e in AllBonusList[charclass][effect]:
-                                if effect == 'All Magic Skill Bonus'\
-                                    or effect == 'All Dual Wield Skill Bonus'\
-                                    or effect == 'Archery Skill Bonus':
-                                    utility += amount * 5
-                                if item.getAttr('Equipped') == '1':
-                                    if not skillTotals.has_key(e):
-                                        skillTotals[e] = amount
-                                    else:
-                                        skillTotals[e] += amount
-                        else:           
+                        if effect == 'All Melee Skill Bonus':
                             utility += amount * 5
+                        for e in AllBonusList[charclass][effect]:
+                            if effect == 'All Magic Skill Bonus'\
+                                or effect == 'All Dual Wield Skill Bonus'\
+                                or effect == 'Archery Skill Bonus':
+                                utility += amount * 5
                             if item.getAttr('Equipped') == '1':
-                                if not skillTotals.has_key(effect):
-                                    skillTotals[effect] = amount
+                                if not skillTotals.has_key(e):
+                                    skillTotals[e] = amount
                                 else:
-                                    skillTotals[effect] += amount
+                                    skillTotals[e] += amount
+                    else:           
+                        utility += amount * 5
+                        if item.getAttr('Equipped') == '1':
+                            if self.hideNonClassSkills:
+                                if not AllBonusList[charclass]['All Skills'].has_key(effect):
+                                    continue
+                            if not skillTotals.has_key(effect):
+                                skillTotals[effect] = amount
+                            else:
+                                skillTotals[effect] += amount
                 elif gemtype == 'Focus':
                     utility += 1
                     if item.getAttr('Equipped') == '1':
@@ -697,7 +711,7 @@ class SCApp(B_SC):
                         self.totals[gemtype] += amount
                 elif gemtype == 'Resist':
                     utility += amount * 2
-                    if item.getAttr('Equipped') == '1':
+		    if item.getAttr('Equipped') == '1':
                         self.totals[effect[:string.find(effect, ' ')]] += amount
                 elif gemtype == 'Stat':
                     if effect == 'Acuity':
@@ -730,13 +744,13 @@ class SCApp(B_SC):
                             effect = effect[0][:3]
                         elif effect != 'Hits' and effect != 'Power':
                             effect = effect[:3]
-                        if not capTotals.has_key(effect):
-                            capTotals[effect] = amount
+                        if not self.capTotals.has_key(effect):
+                            self.capTotals[effect] = amount
                         else:
-                            capTotals[effect] += amount
+                            self.capTotals[effect] += amount
             if item.getAttr('Equipped') == '1':
                 totalutility += utility
-                totalcost += itemcost
+            totalcost += itemcost
             if itemtype == 'player':
                 itemimbue = self.getItemImbue(item)
                 imbue = self.calcImbue(item, key == self.currentTabLabel())
@@ -783,8 +797,8 @@ class SCApp(B_SC):
                         rr = str(getattr(self, key+'RR').text())
                         if rr != '-':
                             val += int(rr[1:-1])
-                if capTotals.has_key(key):
-                    getattr(self, key+'Cap').setText('('+str(capTotals[key])+')')
+                if self.capTotals.has_key(key):
+                    getattr(self, key+'Cap').setText('('+str(self.capTotals[key])+')')
                 getattr(self, key).setText(unicode(val))
             else:
                 if HighCapBonusList.has_key(key):
@@ -794,13 +808,13 @@ class SCApp(B_SC):
                 else:
                     capcalc = HighCapBonusList['Other Bonus']
                 basecap = int(charlevel * capcalc[0]) + capcalc[1]
-                if capTotals.has_key(key):
+                if self.capTotals.has_key(key):
                     if HighCapBonusList.has_key(key):
                         capcalc = HighCapBonusList[key + ' Cap']
                     else:
                         capcalc = HighCapBonusList['Cap']
                     addcap = int(charlevel * capcalc[0]) + capcalc[1]
-                    capmod = capTotals[key]
+                    capmod = self.capTotals[key]
                     capcap = addcap - capmod
                     if capmod > addcap:  capmod = addcap
                     getattr(self, key+'Cap').setText('('+unicode(int(capcap))+')')
@@ -830,17 +844,17 @@ class SCApp(B_SC):
                 if bonus == 'Power Percentage Bonus': key = 'Power'
                 elif bonus == 'AF Bonus': key = 'AF'
                 else: key = 'xxx'
-                if capTotals.has_key(key):
+                if self.capTotals.has_key(key):
                     capcalc = HighCapBonusList[key + ' Cap']
                     addcap = int(charlevel * capcalc[0]) + capcalc[1]
-                    capmod = capTotals[key]
+                    capmod = self.capTotals[key]
                     if capmod > addcap:  capmod = addcap
                 else:
                     capmod = 0
-                self.OtherBonusList.insertItem('%d %s' % (cap + capmod - amount, bonus))
-                
+                self.OtherBonusList.insertItem('%d %s' % (cap + capmod - amount, bonus))        
         self.TotalPrice.setText(SC.formatCost(self.computePrice()))
-        
+        self.nocalc = 0
+
     def computePrice(self):
         price = 0
         cost = 0
@@ -848,7 +862,7 @@ class SCApp(B_SC):
             itemcost = 0
             itemtype = item.getAttr('ActiveState')
             if itemtype == 'drop': continue
-            if item.getAttr('Equipped') == '0': continue
+            #if item.getAttr('Equipped') == '0': continue
             for i in range(0, 4):
                 gemcost, tierlvl = SC.computeGemCost(item, i)
                 cost += gemcost
@@ -969,7 +983,7 @@ class SCApp(B_SC):
             qualcombo.insertStrList(QualityValues)
             qualcombo.setCurrentItem(len(QualityValues)-2)
 
-    def RaceChanged(self, a0, calc=True):
+    def RaceChanged(self, a0):
         race = str(self.CharRace.currentText())
         for r in ResistList:
             rt = r[0]
@@ -978,78 +992,39 @@ class SCApp(B_SC):
                 getattr(self, rt + 'RR').setText('('+str(RacialResists[race][rt])+')')
             else:
                 getattr(self, rt + 'RR').setText('-')
-        if calc:
+        if self.includeRacials:
             self.calculate()
 
+    def TypeChanged(self, index):
+        wascalc = self.nocalc
+        self.nocalc = 1
+        self.modified = 1
+        self.UpdateCombo(index)
+        item = self.itemattrlist.get(self.currentTabLabel(), Item(self.currentTabLabel()))
+        self.storeItem(item)
+        self.nocalc = wascalc
+        self.calculate()
+
     def Type_1_Changed(self,a0):
-        self.modified = 1
-        self.UpdateCombo(1)
-        item = self.itemattrlist.get(self.currentTabLabel(), Item(self.currentTabLabel()))
-        self.storeItem(item)
-        self.calculate()
-
+        self.TypeChanged(1)
     def Type_2_Changed(self,a0):
-        self.modified = 1
-        self.UpdateCombo(2)
-        item = self.itemattrlist.get(self.currentTabLabel(), Item(self.currentTabLabel()))
-        self.storeItem(item)
-        self.calculate()
-
+        self.TypeChanged(2)
     def Type_3_Changed(self,a0):
-        self.modified = 1
-        self.UpdateCombo(3)
-        item = self.itemattrlist.get(self.currentTabLabel(), Item(self.currentTabLabel()))
-        self.storeItem(item)
-        self.calculate()
-
+        self.TypeChanged(3)
     def Type_4_Changed(self,a0):
-        self.modified = 1
-        self.UpdateCombo(4)
-        item = self.itemattrlist.get(self.currentTabLabel(), Item(self.currentTabLabel()))
-        self.storeItem(item)
-        self.calculate()
-
+        self.TypeChanged(4)
     def Type_5_Changed(self,a0):
-        self.modified = 1
-        self.UpdateCombo(5)
-        item = self.itemattrlist.get(self.currentTabLabel(), Item(self.currentTabLabel()))
-        self.storeItem(item)
-        self.calculate()
-
+        self.TypeChanged(5)
     def Type_6_Changed(self,a0):
-        self.modified = 1
-        self.UpdateCombo(6)
-        item = self.itemattrlist.get(self.currentTabLabel(), Item(self.currentTabLabel()))
-        self.storeItem(item)
-        self.calculate()
-
+        self.TypeChanged(6)
     def Type_7_Changed(self,a0):
-        self.modified = 1
-        self.UpdateCombo(7)
-        item = self.itemattrlist.get(self.currentTabLabel(), Item(self.currentTabLabel()))
-        self.storeItem(item)
-        self.calculate()
-
+        self.TypeChanged(7)
     def Type_8_Changed(self,a0):
-        self.modified = 1
-        self.UpdateCombo(8)
-        item = self.itemattrlist.get(self.currentTabLabel(), Item(self.currentTabLabel()))
-        self.storeItem(item)
-        self.calculate()
-
+        self.TypeChanged(8)
     def Type_9_Changed(self,a0):
-        self.modified = 1
-        self.UpdateCombo(9)
-        item = self.itemattrlist.get(self.currentTabLabel(), Item(self.currentTabLabel()))
-        self.storeItem(item)
-        self.calculate()
-
+        self.TypeChanged(9)
     def Type_10_Changed(self,a0):
-        self.modified = 1
-        self.UpdateCombo(10)
-        item = self.itemattrlist.get(self.currentTabLabel(), Item(self.currentTabLabel()))
-        self.storeItem(item)
-        self.calculate()
+        self.TypeChanged(10)
 
     def showDropWidgets(self):
         for w in self.switchOnType['player']:
@@ -1067,7 +1042,6 @@ class SCApp(B_SC):
             w.show()
         for w in self.switchOnType['drop']:
             w.hide()
-        self.calculate()
 
     def DropToggled(self,a0):
         self.modified = 1
@@ -1078,8 +1052,6 @@ class SCApp(B_SC):
         item.loadAttr('ActiveState','drop')
         if self.save:
             self.restoreItem(item)
-            self.calculate()
-
 
     def PlayerToggled(self, a0):
         self.modified = 1
@@ -1090,11 +1062,12 @@ class SCApp(B_SC):
         item.loadAttr('ActiveState','player')
         if self.save:
             self.restoreItem(item)
-            self.calculate()
 
     def TypeTabChanged(self,a0):
         if (str(self.TypeTab.tabLabel(self.currentTypeTab)) == str(self.TypeTab.tabLabel(a0))) or self.currentTypeTab is None:
             return
+        wascacl = self.nocalc
+        self.nocalc = 1
         if str(self.TypeTab.tabLabel(self.currentTypeTab)) == 'Jewelry':
             curtab = self.JewelTab
             othertab = self.PieceTab
@@ -1129,6 +1102,7 @@ class SCApp(B_SC):
             #    self.Equipped.hide()
         self.Equipped.show()
         item = self.itemattrlist.get(self.currentTabLabel(), Item(self.currentTabLabel()))
+        self.nocalc = wascacl
         self.restoreItem(item)
 
     def AmountChanged(self,a0):
@@ -1149,10 +1123,10 @@ class SCApp(B_SC):
         item = Item(self.currentTabLabel())
         self.itemattrlist[self.currentTabLabel()] = item
         self.restoreItem(item)
-        self.calculate()
 
     def DistanceCapSet(self):
         self.calculate()
+
     def TotalBonusSet(self):
         self.calculate()
 
@@ -1248,12 +1222,17 @@ class SCApp(B_SC):
         self.calculate()
     
     def newFile(self):
+        wascalc = self.nocalc
+        self.nocalc = 1
         if self.modified:
             ret = QMessageBox.warning(self, 'Save Changes?', 'Some changes may not have been saved. Are you sure you want to discard these changes?', 'Yes', 'No')
             if ret == 1:
+                self.nocalc = wascalc
                 return
         self.initialize()
         self.ClearCurrentItem()
+        self.nocalc = wascalc
+        self.calculate()
         self.modified = 0
 
     def saveFile(self):
@@ -1369,6 +1348,8 @@ class SCApp(B_SC):
             count += 1
 
     def loadFromXML(self, template):
+        wascalc = self.nocalc
+        self.nocalc = 1
         self.initialize()
         self.ClearCurrentItem()
         racename = ''
@@ -1407,13 +1388,14 @@ class SCApp(B_SC):
         self.CharRace.insertStrList(Races[self.realm])
         if racename != '':
             self.CharRace.setCurrentItem(Races[self.realm].index(racename))
-            self.RaceChanged('', False)
-        
+            self.RaceChanged('')
+        self.nocalc = wascalc
         self.restoreItem(self.itemattrlist.get(self.currentTabLabel()))
-        self.calculate()
         self.modified = 0
         
     def loadFromLela(self, scclines):
+        wascalc = self.nocalc
+        self.nocalc = 1
         self.initialize()
         self.ClearCurrentItem()
         sublines = filter(lambda(x): re.compile('^ITEM').match(x) is None, scclines)
@@ -1442,9 +1424,8 @@ class SCApp(B_SC):
             #item.loadAttr('Location', TabList[itemnum])
             item.loadLelaItemFromSCC(itemnum, scclines, self.realm)
             self.itemattrlist[item.getAttr('Location')] = item
-        self.restoreItem(self.itemattrlist.get(self.currentTabLabel()))
-        self.calculate()
-                        
+        self.nocalc = wascalc
+        self.restoreItem(self.itemattrlist.get(self.currentTabLabel()))                        
         
     def openOptions(self):
         self.modified = 1
@@ -1525,101 +1506,35 @@ class SCApp(B_SC):
 				      sz.width(), sz.height() - self.menuBar.height())
         QMainWindow.resizeEvent(self, e)
 
-    def moveWidget(self, w, y):
-        w.setGeometry(w.x(), w.y() + y, 
-                w.width(), w.height())
+    def swapWith(self, part):
+        cur = self.itemattrlist.get(self.currentTabLabel(), Item(self.currentTabLabel()))
+        swap = self.itemattrlist.get(part, Item(part))
+        self.itemattrlist[part] = cur
+        self.itemattrlist[self.currentTabLabel()] = swap
+        self.restoreItem(self.itemattrlist[self.currentTabLabel()])
 
-    def growWidget(self, w, h):
-        w.setGeometry(w.x(), w.y(), 
-                w.width(), w.height() + h)
-            
     def swapWithChest(self):
-        cur = self.itemattrlist.get(self.currentTabLabel(), Item(self.currentTabLabel()))
-        chest = self.itemattrlist.get('Chest', Item('Chest'))
-        self.itemattrlist['Chest'] = cur
-        self.itemattrlist[self.currentTabLabel()] = chest
-        self.restoreItem(self.itemattrlist[self.currentTabLabel()])
-        self.calculate()
-
+        self.swapWith('Chest')
     def swapWithArms(self):
-        cur = self.itemattrlist.get(self.currentTabLabel(), Item(self.currentTabLabel()))
-        arms = self.itemattrlist.get('Arms', Item('Arms'))
-        self.itemattrlist['Arms'] = cur
-        self.itemattrlist[self.currentTabLabel()] = arms
-        self.restoreItem(self.itemattrlist[self.currentTabLabel()])
-        self.calculate()
-
+        self.swapWith('Arms')
     def swapWithHead(self):
-        cur = self.itemattrlist.get(self.currentTabLabel(), Item(self.currentTabLabel()))
-        head = self.itemattrlist.get('Head', Item('Head'))
-        self.itemattrlist['Head'] = cur
-        self.itemattrlist[self.currentTabLabel()] = head
-        self.restoreItem(self.itemattrlist[self.currentTabLabel()])
-        self.calculate()
-
+        self.swapWith('Head')
     def swapWithLegs(self):
-        cur = self.itemattrlist.get(self.currentTabLabel(), Item(self.currentTabLabel()))
-        legs = self.itemattrlist.get('Legs', Item('Legs'))
-        self.itemattrlist['Legs'] = cur
-        self.itemattrlist[self.currentTabLabel()] = legs
-        self.restoreItem(self.itemattrlist[self.currentTabLabel()])
-        self.calculate()
-
+        self.swapWith('Legs')
     def swapWithFeet(self):
-        cur = self.itemattrlist.get(self.currentTabLabel(), Item(self.currentTabLabel()))
-        feet = self.itemattrlist.get('Feet', Item('Feet'))
-        self.itemattrlist['Feet'] = cur
-        self.itemattrlist[self.currentTabLabel()] = feet
-        self.restoreItem(self.itemattrlist[self.currentTabLabel()])
-        self.calculate()
-        
+        self.swapWith('Feet')
     def swapWithHands(self):
-        cur = self.itemattrlist.get(self.currentTabLabel(), Item(self.currentTabLabel()))
-        hands = self.itemattrlist.get('Hands', Item('Hands'))
-        self.itemattrlist['Hands'] = cur
-        self.itemattrlist[self.currentTabLabel()] = hands
-        self.restoreItem(self.itemattrlist[self.currentTabLabel()])
-        self.calculate()
-
+        self.swapWith('Hands')
     def swapWithRH(self):
-        cur = self.itemattrlist.get(self.currentTabLabel(), Item(self.currentTabLabel()))
-        rh = self.itemattrlist.get('Right Hand', Item('Right Hand'))
-        self.itemattrlist['Right Hand'] = cur
-        self.itemattrlist[self.currentTabLabel()] = rh
-        self.restoreItem(self.itemattrlist[self.currentTabLabel()])
-        self.calculate()
-
+        self.swapWith('Right Hand')
     def swapWithLH(self):
-        cur = self.itemattrlist.get(self.currentTabLabel(), Item(self.currentTabLabel()))
-        lh = self.itemattrlist.get('Left Hand', Item('Left Hand'))
-        self.itemattrlist['Left Hand'] = cur
-        self.itemattrlist[self.currentTabLabel()] = lh
-        self.restoreItem(self.itemattrlist[self.currentTabLabel()])
-        self.calculate()
-
+        self.swapWith('Left Hand')
     def swapWith2H(self):
-        cur = self.itemattrlist.get(self.currentTabLabel(), Item(self.currentTabLabel()))
-        th = self.itemattrlist.get('2 Handed', Item('2 Handed'))
-        self.itemattrlist['2 Handed'] = cur
-        self.itemattrlist[self.currentTabLabel()] = th
-        self.restoreItem(self.itemattrlist[self.currentTabLabel()])
-        self.calculate()
-
+        self.swapWith('2 Handed')
     def swapWithRanged(self):
-        cur = self.itemattrlist.get(self.currentTabLabel(), Item(self.currentTabLabel()))
-        ranged = self.itemattrlist.get('Ranged', Item('Ranged'))
-        self.itemattrlist['Ranged'] = cur
-        self.itemattrlist[self.currentTabLabel()] = ranged
-        self.restoreItem(self.itemattrlist[self.currentTabLabel()])
-        self.calculate()
-
+        self.swapWith('Ranged')
     def swapWithSpare(self):
-        cur = self.itemattrlist.get(self.currentTabLabel(), Item(self.currentTabLabel()))
-        spare = self.itemattrlist.get('Spare', Item('Spare'))
-        self.itemattrlist['Spare'] = cur
-        self.itemattrlist[self.currentTabLabel()] = spare
-        self.restoreItem(self.itemattrlist[self.currentTabLabel()])
-        self.calculate()
+        self.swapWith('Spare')
 
     def recentFile1(self):
         self.openFile(self.recentFiles[0], True)

@@ -17,7 +17,7 @@
 # along with this program; if not, write to the Free Software
 # Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
-ScVersion = "Kort 1.42b + Ehrayn/patch 1.0.3"
+ScVersion = "Kort 1.42b + Ehrayn/patch 1.0.4"
 
 ClassList = { 
     'Albion' : [
@@ -65,12 +65,14 @@ DropStatList = [
     ['Empathy', 'Heated'],
     ['Acuity', '' ] ]
 
-AllBonusList = { 'Armsman' : {
+AllBonusList = { 
+    'Armsman' : {
         'All Focus Bonus' : [], 
         'All Magic Skill Bonus' : [],
         'All Melee Skill Bonus' : ['Crush', 'Slash', 'Thrust', 'Polearm', 'Two Handed'],
         'All Dual Wield Skill Bonus' : [],
         'Archery Skill Bonus' : [],
+        'Other Skill Bonus' : ['Parry'],
         'Acuity' : [] },
     'Cabalist' : {
         'All Focus Bonus' : ['Body Focus', 'Matter Focus', 'Spirit Focus'], 
@@ -78,6 +80,7 @@ AllBonusList = { 'Armsman' : {
         'All Melee Skill Bonus' : [],
         'All Dual Wield Skill Bonus' : [],
         'Archery Skill Bonus' : [],
+        'Other Skill Bonus' : [],
         'Acuity' : ['Intelligence'] },
     'Cleric' : {
         'All Focus Bonus' : [], 
@@ -85,6 +88,7 @@ AllBonusList = { 'Armsman' : {
         'All Melee Skill Bonus' : [],
         'All Dual Wield Skill Bonus' : [],
         'Archery Skill Bonus' : [],
+        'Other Skill Bonus' : [],
         'Acuity' : ['Piety'] },
     'Friar' : {
         'All Focus Bonus' : [], 
@@ -92,6 +96,7 @@ AllBonusList = { 'Armsman' : {
         'All Melee Skill Bonus' : ['Staff'],
         'All Dual Wield Skill Bonus' : [],
         'Archery Skill Bonus' : [],
+        'Other Skill Bonus' : ['Parry'],
         'Acuity' : ['Piety'] },
     'Heretic' : {
         'All Focus Bonus' : [], 
@@ -99,6 +104,7 @@ AllBonusList = { 'Armsman' : {
         'All Melee Skill Bonus' : ['Crush', 'Flexible'],
         'All Dual Wield Skill Bonus' : [],
         'Archery Skill Bonus' : [],
+        'Other Skill Bonus' : ['Shield'],
         'Acuity' : ['Piety'] },
     'Infiltrator' : {
         'All Focus Bonus' : [], 
@@ -106,6 +112,7 @@ AllBonusList = { 'Armsman' : {
         'All Melee Skill Bonus' : ['Slash', 'Thrust'],
         'All Dual Wield Skill Bonus' : ['Dual Wield'],
         'Archery Skill Bonus' : [],
+        'Other Skill Bonus' : ['Critical Strike', 'Envenom', 'Stealth'],
         'Acuity' : [] },
     'Mercenary' : {
         'All Focus Bonus' : [], 
@@ -113,6 +120,7 @@ AllBonusList = { 'Armsman' : {
         'All Melee Skill Bonus' : ['Crush', 'Slash', 'Thrust'],
         'All Dual Wield Skill Bonus' : ['Dual Wield'],
         'Archery Skill Bonus' : [],
+        'Other Skill Bonus' : ['Parry', 'Shield'],
         'Acuity' : [] },
     'Minstrel' : {
         'All Focus Bonus' : [], 
@@ -120,6 +128,7 @@ AllBonusList = { 'Armsman' : {
         'All Melee Skill Bonus' : ['Slash', 'Thrust'],
         'All Dual Wield Skill Bonus' : [],
         'Archery Skill Bonus' : [],
+        'Other Skill Bonus' : ['Stealth'],
         'Acuity' : ['Charisma'] },
     'Necromancer' : {
         'All Focus Bonus' : ['Deathsight Focus', 'Death Servant Focus', 
@@ -128,6 +137,7 @@ AllBonusList = { 'Armsman' : {
         'All Melee Skill Bonus' : [],
         'All Dual Wield Skill Bonus' : [],
         'Archery Skill Bonus' : [],
+        'Other Skill Bonus' : [],
         'Acuity' : ['Intelligence'] },
     'Paladin' : {
         'All Focus Bonus' : [],
@@ -135,6 +145,7 @@ AllBonusList = { 'Armsman' : {
         'All Melee Skill Bonus' : ['Crush', 'Slash', 'Thrust', 'Two Handed'],
         'All Dual Wield Skill Bonus' : [],
         'Archery Skill Bonus' : [],
+        'Other Skill Bonus' : ['Parry', 'Shield'],
         'Acuity' : [] },
     'Reaver' : {
         'All Focus Bonus' : [],
@@ -142,6 +153,7 @@ AllBonusList = { 'Armsman' : {
         'All Melee Skill Bonus' : ['Crush', 'Slash', 'Thrust', 'Flexible'],
         'All Dual Wield Skill Bonus' : [],
         'Archery Skill Bonus' : [],
+        'Other Skill Bonus' : ['Parry', 'Shield'],
         'Acuity' : [] },
     'Scout' : {
         'All Focus Bonus' : [],
@@ -149,6 +161,7 @@ AllBonusList = { 'Armsman' : {
         'All Melee Skill Bonus' : ['Slash', 'Thrust'],
         'All Dual Wield Skill Bonus' : [],
         'Archery Skill Bonus' : ['Longbow'],
+        'Other Skill Bonus' : ['Stealth', 'Shield'],
         'Acuity' : [] },
     'Sorcerer' : {
         'All Focus Bonus' : ['Body Focus', 'Mind Focus', 'Matter Focus'],
@@ -156,6 +169,7 @@ AllBonusList = { 'Armsman' : {
         'All Melee Skill Bonus' : [],
         'All Dual Wield Skill Bonus' : [],
         'Archery Skill Bonus' : [],
+        'Other Skill Bonus' : [],
         'Acuity' : ['Intelligence'] },
     'Theurgist' : {
         'All Focus Bonus' : ['Earth Focus', 'Cold Focus', 'Wind Focus'],
@@ -163,6 +177,7 @@ AllBonusList = { 'Armsman' : {
         'All Melee Skill Bonus' : [],
         'All Dual Wield Skill Bonus' : [],
         'Archery Skill Bonus' : [],
+        'Other Skill Bonus' : [],
         'Acuity' : ['Intelligence'] },
     'Wizard' : {
         'All Focus Bonus' : ['Earth Focus', 'Cold Focus', 'Fire Focus'],
@@ -170,6 +185,7 @@ AllBonusList = { 'Armsman' : {
         'All Melee Skill Bonus' : [],
         'All Dual Wield Skill Bonus' : [],
         'Archery Skill Bonus' : [],
+        'Other Skill Bonus' : [],
         'Acuity' : ['Intelligence'] },
     'Animist' : {
         'All Focus Bonus' : ['Creeping Path Focus', 'Arboreal Focus', 'Verdant Path Focus'],
@@ -177,6 +193,7 @@ AllBonusList = { 'Armsman' : {
         'All Melee Skill Bonus' : [],
         'All Dual Wield Skill Bonus' : [],
         'Archery Skill Bonus' : [],
+        'Other Skill Bonus' : [],
         'Acuity' : ['Intelligence'] },
     'Bainshee' : {
         'All Focus Bonus' : ['Ethereal Shriek Focus', 'Phantasmal Wail Focus', 'Spectral Guard Focus'],
@@ -184,6 +201,7 @@ AllBonusList = { 'Armsman' : {
         'All Melee Skill Bonus' : [],
         'All Dual Wield Skill Bonus' : [],
         'Archery Skill Bonus' : [],
+        'Other Skill Bonus' : [],
         'Acuity' : ['Intelligence'] },
     'Bard' : {
         'All Focus Bonus' : [],
@@ -191,6 +209,7 @@ AllBonusList = { 'Armsman' : {
         'All Melee Skill Bonus' : ['Blades', 'Blunt'],
         'All Dual Wield Skill Bonus' : [],
         'Archery Skill Bonus' : [],
+        'Other Skill Bonus' : [],
         'Acuity' : ['Charisma'] },
     'Blademaster' : {
         'All Focus Bonus' : [],
@@ -198,6 +217,7 @@ AllBonusList = { 'Armsman' : {
         'All Melee Skill Bonus' : ['Blades', 'Blunt', 'Piercing'],
         'All Dual Wield Skill Bonus' : ['Celtic Dual'],
         'Archery Skill Bonus' : [],
+        'Other Skill Bonus' : ['Parry', 'Shield'],
         'Acuity' : [] },
     'Champion' : {
         'All Focus Bonus' : [],
@@ -205,6 +225,7 @@ AllBonusList = { 'Armsman' : {
         'All Melee Skill Bonus' : ['Blades', 'Blunt', 'Piercing', 'Large Weaponry'],
         'All Dual Wield Skill Bonus' : [],
         'Archery Skill Bonus' : [],
+        'Other Skill Bonus' : ['Parry', 'Shield'],
         'Acuity' : ['Intelligence'] },
     'Druid' : {
         'All Focus Bonus' : [],
@@ -212,6 +233,7 @@ AllBonusList = { 'Armsman' : {
         'All Melee Skill Bonus' : [],
         'All Dual Wield Skill Bonus' : [],
         'Archery Skill Bonus' : [],
+        'Other Skill Bonus' : [],
         'Acuity' : ['Empathy'] },
     'Eldritch' : {
         'All Focus Bonus' : ['Light Focus', 'Mana Focus', 'Void Focus'],
@@ -219,6 +241,7 @@ AllBonusList = { 'Armsman' : {
         'All Melee Skill Bonus' : [],
         'All Dual Wield Skill Bonus' : [],
         'Archery Skill Bonus' : [],
+        'Other Skill Bonus' : [],
         'Acuity' : ['Intelligence'] },
     'Enchanter' : {
         'All Focus Bonus' : ['Light Focus', 'Mana Focus', 'Enchantments Focus'],
@@ -226,6 +249,7 @@ AllBonusList = { 'Armsman' : {
         'All Melee Skill Bonus' : [],
         'All Dual Wield Skill Bonus' : [],
         'Archery Skill Bonus' : [],
+        'Other Skill Bonus' : [],
         'Acuity' : ['Intelligence'] },
     'Mentalist' : {
         'All Focus Bonus' : ['Light Focus', 'Mana Focus', 'Mentalism Focus'],
@@ -233,6 +257,7 @@ AllBonusList = { 'Armsman' : {
         'All Melee Skill Bonus' : [],
         'All Dual Wield Skill Bonus' : [],
         'Archery Skill Bonus' : [],
+        'Other Skill Bonus' : [],
         'Acuity' : ['Intelligence'] },
     'Hero' : {
         'All Focus Bonus' : [],
@@ -240,13 +265,15 @@ AllBonusList = { 'Armsman' : {
         'All Melee Skill Bonus' : ['Blades', 'Blunt', 'Celtic Spear', 'Large Weaponry', 'Piercing'],
         'All Dual Wield Skill Bonus' : [],
         'Archery Skill Bonus' : [],
+        'Other Skill Bonus' : ['Parry', 'Shield'],
         'Acuity' : [] },
     'Nightshade' : {
         'All Focus Bonus' : [],
         'All Magic Skill Bonus' : [],
-        'All Melee Skill Bonus' : ['Blades', 'Blunt', 'Piercing'],
+        'All Melee Skill Bonus' : ['Blades', 'Piercing'],
         'All Dual Wield Skill Bonus' : ['Celtic Dual'],
         'Archery Skill Bonus' : [],
+        'Other Skill Bonus' : ['Critical Strike', 'Envenom', 'Stealth'],
         'Acuity' : [] },
     'Ranger' : {
         'All Focus Bonus' : [],
@@ -254,13 +281,15 @@ AllBonusList = { 'Armsman' : {
         'All Melee Skill Bonus' : ['Blades', 'Piercing'],
         'All Dual Wield Skill Bonus' : ['Celtic Dual'],
         'Archery Skill Bonus' : ['Recurve Bow'],
-        'Acuity' : ['Empathy'] },
+        'Other Skill Bonus' : ['Stealth'],
+        'Acuity' : [] },
     'Valewalker' : {
         'All Focus Bonus' : [],
         'All Magic Skill Bonus' : ['Arboreal Path'],
         'All Melee Skill Bonus' : ['Scythe'],
         'All Dual Wield Skill Bonus' : [],
         'Archery Skill Bonus' : [],
+        'Other Skill Bonus' : ['Parry'],
         'Acuity' : ['Intelligence'] },
     'Vampiir' : {
         'All Focus Bonus' : [],
@@ -268,6 +297,7 @@ AllBonusList = { 'Armsman' : {
         'All Melee Skill Bonus' : ['Piercing'],
         'All Dual Wield Skill Bonus' : [],
         'Archery Skill Bonus' : [],
+        'Other Skill Bonus' : [],
         'Acuity' : [] },
     'Warden' : {
         'All Focus Bonus' : [],
@@ -275,6 +305,7 @@ AllBonusList = { 'Armsman' : {
         'All Melee Skill Bonus' : ['Blades', 'Blunt'],
         'All Dual Wield Skill Bonus' : [],
         'Archery Skill Bonus' : [],
+        'Other Skill Bonus' : ['Parry'],
         'Acuity' : ['Empathy'] },
     'Berserker' : {
         'All Focus Bonus' : [],
@@ -282,6 +313,7 @@ AllBonusList = { 'Armsman' : {
         'All Melee Skill Bonus' : ['Axe', 'Hammer', 'Sword'],
         'All Dual Wield Skill Bonus' : ['Left Axe'],
         'Archery Skill Bonus' : [],
+        'Other Skill Bonus' : ['Parry'],
         'Acuity' : [] },
     'Bonedancer' : {
         'All Focus Bonus' : ['Darkness Focus', 'Suppression Focus', 'Bone Army Focus'],
@@ -289,13 +321,15 @@ AllBonusList = { 'Armsman' : {
         'All Melee Skill Bonus' : [],
         'All Dual Wield Skill Bonus' : [],
         'Archery Skill Bonus' : [],
+        'Other Skill Bonus' : [],
         'Acuity' : ['Piety'] },
     'Healer' : {
         'All Focus Bonus' : [],
-        'All Magic Skill Bonus' : ['Mending', 'Augmentation'],
+        'All Magic Skill Bonus' : ['Augmentation', 'Mending', 'Pacification'],
         'All Melee Skill Bonus' : [],
         'All Dual Wield Skill Bonus' : [],
         'Archery Skill Bonus' : [],
+        'Other Skill Bonus' : [],
         'Acuity' : ['Piety'] },
     'Hunter' : {
         'All Focus Bonus' : [],
@@ -303,6 +337,7 @@ AllBonusList = { 'Armsman' : {
         'All Melee Skill Bonus' : ['Spear', 'Sword'],
         'All Dual Wield Skill Bonus' : [],
         'Archery Skill Bonus' : ['Composite Bow'],
+        'Other Skill Bonus' : ['Stealth'],
         'Acuity' : [] },
     'Runemaster' : {
         'All Focus Bonus' : ['Darkness Focus', 'Suppression Focus', 'Runecarving Focus'],
@@ -310,6 +345,7 @@ AllBonusList = { 'Armsman' : {
         'All Melee Skill Bonus' : [],
         'All Dual Wield Skill Bonus' : [],
         'Archery Skill Bonus' : [],
+        'Other Skill Bonus' : [],
         'Acuity' : ['Piety'] },
     'Savage' : {
         'All Focus Bonus' : [],
@@ -317,6 +353,7 @@ AllBonusList = { 'Armsman' : {
         'All Melee Skill Bonus' : ['Sword', 'Axe', 'Hammer', 'Hand To Hand'],
         'All Dual Wield Skill Bonus' : [],
         'Archery Skill Bonus' : [],
+        'Other Skill Bonus' : ['Parry'],
         'Acuity' : [] },
     'Shadowblade' : {
         'All Focus Bonus' : [],
@@ -324,6 +361,7 @@ AllBonusList = { 'Armsman' : {
         'All Melee Skill Bonus' : ['Sword', 'Axe'],
         'All Dual Wield Skill Bonus' : ['Left Axe'],
         'Archery Skill Bonus' : [],
+        'Other Skill Bonus' : ['Critical Strike', 'Envenom', 'Stealth'],
         'Acuity' : [] },
     'Shaman' : {
         'All Focus Bonus' : [],
@@ -331,6 +369,7 @@ AllBonusList = { 'Armsman' : {
         'All Melee Skill Bonus' : [],
         'All Dual Wield Skill Bonus' : [],
         'Archery Skill Bonus' : [],
+        'Other Skill Bonus' : [],
         'Acuity' : ['Piety'] },
     'Skald' : {
         'All Focus Bonus' : [],
@@ -338,6 +377,7 @@ AllBonusList = { 'Armsman' : {
         'All Melee Skill Bonus' : ['Sword', 'Hammer', 'Axe'],
         'All Dual Wield Skill Bonus' : [],
         'Archery Skill Bonus' : [],
+        'Other Skill Bonus' : ['Parry'],
         'Acuity' : ['Charisma'] },
     'Spiritmaster' : {
         'All Focus Bonus' : ['Darkness Focus', 'Suppression Focus', 'Summoning Focus'],
@@ -345,6 +385,7 @@ AllBonusList = { 'Armsman' : {
         'All Melee Skill Bonus' : [],
         'All Dual Wield Skill Bonus' : [],
         'Archery Skill Bonus' : [],
+        'Other Skill Bonus' : [],
         'Acuity' : ['Piety'] },
     'Thane' : {
         'All Focus Bonus' : [],
@@ -352,13 +393,15 @@ AllBonusList = { 'Armsman' : {
         'All Melee Skill Bonus' : ['Sword', 'Hammer', 'Axe'],
         'All Dual Wield Skill Bonus' : [],
         'Archery Skill Bonus' : [],
+        'Other Skill Bonus' : ['Parry', 'Shield'],
         'Acuity' : ['Piety'] },
     'Valkyrie' : {
         'All Focus Bonus' : [],
         'All Magic Skill Bonus' : ['Odin\'s Will'],
-        'All Melee Skill Bonus' : ['Sword', 'Spear'],
+        'All Melee Skill Bonus' : ['Spear', 'Sword'],
         'All Dual Wield Skill Bonus' : [],
         'Archery Skill Bonus' : [],
+        'Other Skill Bonus' : ['Parry'],
         'Acuity' : ['Piety'] },
     'Warlock' : {
         'All Focus Bonus' : ['Cursing'],
@@ -366,6 +409,7 @@ AllBonusList = { 'Armsman' : {
         'All Melee Skill Bonus' : [],
         'All Dual Wield Skill Bonus' : [],
         'Archery Skill Bonus' : [],
+        'Other Skill Bonus' : [],
         'Acuity' : ['Piety'] },
     'Warrior' : {
         'All Focus Bonus' : [],
@@ -373,7 +417,18 @@ AllBonusList = { 'Armsman' : {
         'All Melee Skill Bonus' : ['Sword', 'Hammer', 'Axe'],
         'All Dual Wield Skill Bonus' : [],
         'Archery Skill Bonus' : [],
+        'Other Skill Bonus' : ['Parry', 'Shield', 'Thrown Weapons'],
         'Acuity' : [] } }
+
+for chcl in AllBonusList:
+    list = {}
+    for skill in AllBonusList[chcl]['All Magic Skill Bonus']: list[skill] = ''
+    for skill in AllBonusList[chcl]['All Melee Skill Bonus']: list[skill] = ''
+    for skill in AllBonusList[chcl]['All Dual Wield Skill Bonus']: list[skill] = ''
+    for skill in AllBonusList[chcl]['Archery Skill Bonus']: list[skill] = ''
+    for skill in AllBonusList[chcl]['Other Skill Bonus']: list[skill] = ''
+    AllBonusList[chcl]['All Skills'] = list
+
 
 OtherBonusList = [
     [ 'Power Percentage Bonus', ''],
@@ -747,7 +802,7 @@ HighCapBonusList = {
     'Hits'                   : [ 4.00,  0 ],
     'Power'                  : [  .50,  1 ],
     'Skill'                  : [  .20,  1 ],
-    'Cap'                    : [  .50,  0 ],
+    'Cap'                    : [  .50,  1 ],
     'Hits Cap'               : [ 4.00,  0 ],
     'Power Cap'              : [ 1.00,  0 ],
     'AF Cap'                 : [ 1.00,  0 ],
@@ -759,7 +814,7 @@ HighCapBonusList = {
     'Healing Bonus'          : [  .50,  0 ],
     'Spell Duration Bonus'   : [  .50,  0 ],
     'Fatigue'                : [  .50,  0 ],
-    'AF Bonus'               : [ 1.50,  0 ],
+    'AF Bonus'               : [ 1.00,  0 ],
     'Arrow Recovery'         : [ 1.00,  0 ], 
     'Death Experience Loss Reduction' : [ 1.00, 0 ] }
 

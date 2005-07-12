@@ -182,61 +182,20 @@
                 <class>QCheckBox</class>
                 <property stdset="1">
                     <name>name</name>
-                    <cstring>Coop</cstring>
-                </property>
-                <property stdset="1">
-                    <name>geometry</name>
-                    <rect>
-                        <x>176</x>
-                        <y>57</y>
-                        <width>120</width>
-                        <height>18</height>
-                    </rect>
-                </property>
-                <property stdset="1">
-                    <name>text</name>
-                    <string>Co-op / PvP Server</string>
-                </property>
-            </widget>
-            <widget>
-                <class>QCheckBox</class>
-                <property stdset="1">
-                    <name>name</name>
                     <cstring>ShowDoneGems</cstring>
                 </property>
                 <property stdset="1">
                     <name>geometry</name>
                     <rect>
                         <x>18</x>
-                        <y>110</y>
-                        <width>242</width>
+                        <y>100</y>
+                        <width>250</width>
                         <height>17</height>
                     </rect>
                 </property>
                 <property stdset="1">
                     <name>text</name>
                     <string>"Done" Gems do not show up in Materials List</string>
-                </property>
-            </widget>
-            <widget>
-                <class>QLabel</class>
-                <property stdset="1">
-                    <name>name</name>
-                    <cstring>TextLabel2_5</cstring>
-                </property>
-                <property stdset="1">
-                    <name>geometry</name>
-                    <rect>
-                        <x>192</x>
-                        <y>73</y>
-                        <width>114</width>
-                        <height>32</height>
-                    </rect>
-                </property>
-                <property stdset="1">
-                    <name>text</name>
-                    <string>(Lets you access items 
-from all realms)</string>
                 </property>
             </widget>
             <widget>
@@ -248,9 +207,9 @@ from all realms)</string>
                 <property stdset="1">
                     <name>geometry</name>
                     <rect>
-                        <x>19</x>
-                        <y>139</y>
-                        <width>176</width>
+                        <x>18</x>
+                        <y>125</y>
+                        <width>250</width>
                         <height>17</height>
                     </rect>
                 </property>
@@ -261,6 +220,70 @@ from all realms)</string>
                 <property stdset="1">
                     <name>checked</name>
                     <bool>true</bool>
+                </property>
+            </widget>
+            <widget>
+                <class>QCheckBox</class>
+                <property stdset="1">
+                    <name>name</name>
+                    <cstring>HideNonClassSkills</cstring>
+                </property>
+                <property stdset="1">
+                    <name>geometry</name>
+                    <rect>
+                        <x>18</x>
+                        <y>150</y>
+                        <width>250</width>
+                        <height>17</height>
+                    </rect>
+                </property>
+                <property stdset="1">
+                    <name>text</name>
+                    <string>Hide Skills not usable by this Class</string>
+                </property>
+                <property stdset="1">
+                    <name>checked</name>
+                    <bool>true</bool>
+                </property>
+            </widget>
+            <widget>
+                <class>QCheckBox</class>
+                <property stdset="1">
+                    <name>name</name>
+                    <cstring>Coop</cstring>
+                </property>
+                <property stdset="1">
+                    <name>geometry</name>
+                    <rect>
+                        <x>18</x>
+                        <y>175</y>
+                        <width>250</width>
+                        <height>17</height>
+                    </rect>
+                </property>
+                <property stdset="1">
+                    <name>text</name>
+                    <string>Co-op / PvP Server</string>
+                </property>
+            </widget>
+            <widget>
+                <class>QLabel</class>
+                <property stdset="1">
+                    <name>name</name>
+                    <cstring>TextLabel2_5</cstring>
+                </property>
+                <property stdset="1">
+                    <name>geometry</name>
+                    <rect>
+                        <x>40</x>
+                        <y>192</y>
+                        <width>250</width>
+                        <height>14</height>
+                    </rect>
+                </property>
+                <property stdset="1">
+                    <name>text</name>
+                    <string>(Lets you access items from all realms)</string>
                 </property>
             </widget>
         </widget>

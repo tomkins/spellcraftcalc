@@ -1,6 +1,6 @@
 # Form implementation generated from reading ui file 'Options.ui'
 #
-# Created: Tue Apr 13 21:47:53 2004
+# Created: Tue Mar 8 21:25:43 2005
 #      by: The Python User Interface Compiler (pyuic) 3.8
 #
 # WARNING! All changes made in this file will be lost!
@@ -50,23 +50,27 @@ class B_Options(QDialog):
         self.Realm.insertItem(self.tr("Midgard"))
         self.Realm.setGeometry(QRect(83,55,81,22))
 
-        self.Coop = QCheckBox(self.General,'Coop')
-        self.Coop.setGeometry(QRect(176,57,120,18))
-        self.Coop.setText(self.tr("Co-op / PvP Server"))
-
         self.ShowDoneGems = QCheckBox(self.General,'ShowDoneGems')
-        self.ShowDoneGems.setGeometry(QRect(18,110,242,17))
+        self.ShowDoneGems.setGeometry(QRect(18,100,250,17))
         self.ShowDoneGems.setText(self.tr("\"Done\" Gems do not show up in Materials List"))
 
-        self.TextLabel2_5 = QLabel(self.General,'TextLabel2_5')
-        self.TextLabel2_5.setGeometry(QRect(192,73,114,32))
-        self.TextLabel2_5.setText(self.tr("(Lets you access items \n"
-"from all realms)"))
-
         self.IncludeRR = QCheckBox(self.General,'IncludeRR')
-        self.IncludeRR.setGeometry(QRect(19,139,176,17))
+        self.IncludeRR.setGeometry(QRect(18,125,250,17))
         self.IncludeRR.setText(self.tr("Include Racial Resists in Totals"))
         self.IncludeRR.setChecked(1)
+
+        self.HideNonClassSkills = QCheckBox(self.General,'HideNonClassSkills')
+        self.HideNonClassSkills.setGeometry(QRect(18,150,250,17))
+        self.HideNonClassSkills.setText(self.tr("Hide Skills not usable by this Class"))
+        self.HideNonClassSkills.setChecked(1)
+
+        self.Coop = QCheckBox(self.General,'Coop')
+        self.Coop.setGeometry(QRect(18,175,250,17))
+        self.Coop.setText(self.tr("Co-op / PvP Server"))
+
+        self.TextLabel2_5 = QLabel(self.General,'TextLabel2_5')
+        self.TextLabel2_5.setGeometry(QRect(40,192,250,14))
+        self.TextLabel2_5.setText(self.tr("(Lets you access items from all realms)"))
         self.Tab.insertTab(self.General,self.tr("General"))
 
         self.Notes = QWidget(self.Tab,'Notes')

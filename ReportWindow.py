@@ -347,38 +347,12 @@ class ReportWindow(B_ReportWindow):
             iteminfo[key]['utility'] = utility
 
         for (key, val) in totals.items():
-            if self.parent.CapDistance.isChecked():
-                key_cap = string.capitalize(key)
-                if capTotals.has_key(key_cap):
-                    capmod = capTotals[key_cap]
-                else:
-                    capmod = 0
-                capfunc = getattr(self.parent, Caps[key_cap])
-                totals[key] = int(capmod) + capfunc() - val
-            else:
-                if self.parent.includeRacials:
-                    if key in map(lambda(x): string.lower(x[0][:string.find(x[0], ' ')]), ResistList):
-                        rr = str(getattr(self.parent, string.capitalize(key)+'RR').text())
-                        if rr != '-':
-                            val += int(rr[1:-1])
-                            totals[key] = str(val) + ' (' + str(rr[1:-1]) + ')'
-        for (key, val) in skillTotals.items():
-            if self.parent.CapDistance.isChecked():
-                key_cap = string.capitalize(key)
-                capfunc = getattr(self.parent, Caps['Skill'])
-                skillTotals[key] = capfunc() - val
-        for (bonus, amount) in otherTotals.items():
-            if self.parent.CapDistance.isChecked():
-                cap = 10
-                if bonus[-3:] == 'Cap':
-                    if bonus[:4] == 'Hits':
-                        cap = 200
-                    else:
-                        cap = 25
-                else:
-                    if bonus in HighCapBonusList:
-                        cap = 25
-                otherTotals[bonus] = cap - val
+            if self.parent.includeRacials:
+                if key in map(lambda(x): string.lower(x[0][:string.find(x[0], ' ')]), ResistList):
+                    rr = str(getattr(self.parent, string.capitalize(key)+'RR').text())
+                    if rr != '-':
+                        val += int(rr[1:-1])
+                        totals[key] = str(val) + ' (' + str(rr[1:-1]) + ')'
         return { 'Skills' : skillTotals, 'Focus' : focusTotals, 
     'Stats' : totals, 'Other' : otherTotals, 'Caps' : capTotals, 'Items' : iteminfo }
             

@@ -63,6 +63,12 @@ class Options(B_Options):
         else:
             self.IncludeRR.setChecked(0)
 
+        if self.parent.hideNonClassSkills:
+            self.HideNonClassSkills.setChecked(1)
+        else:
+            self.HideNonClassSkills.setChecked(0)
+
+
     def asXML(self):
         document = Document()
         rootnode = document.createElement('DefaultOptions')
@@ -75,6 +81,9 @@ class Options(B_Options):
         includerr = document.createElement('IncludeRRInTotals')
         includerr.appendChild(document.createTextNode(str(self.IncludeRR.isChecked())))
         rootnode.appendChild(includerr)
+        hideskill = document.createElement('HideNonClassSkills')
+        hideskill.appendChild(document.createTextNode(str(self.HideNonClassSkills.isChecked())))
+        rootnode.appendChild(hideskill)
         cskill = document.createElement('CrafterSkill')
         cskill.appendChild(document.createTextNode(str(self.Skill.currentText())))
         rootnode.appendChild(cskill)
@@ -145,6 +154,11 @@ class Options(B_Options):
                     self.IncludeRR.setChecked(1)
                 else:
                     self.IncludeRR.setChecked(0)
+            elif child.tagName == 'HideNonClassSkills':
+                if XMLHelper.getText(child.childNodes) == 'True':
+                    self.HideNonClassSkills.setChecked(1)
+                else:
+                    self.HideNonClassSkills.setChecked(0)
             elif child.tagName == 'CrafterSkill':
                 li = self.Skill.listBox().findItem(XMLHelper.getText(child.childNodes))
                 self.Skill.setCurrentItem(self.Skill.listBox().index(li))
@@ -205,12 +219,12 @@ class Options(B_Options):
         self.parent.crafterSkill = int(str(self.Skill.currentText()))
         self.parent.showDoneInMatsList = self.ShowDoneGems.isChecked()
         self.parent.includeRacials = self.IncludeRR.isChecked()
+        self.parent.hideNonClassSkills = self.HideNonClassSkills.isChecked()
         self.parent.noteText = str(self.NoteText.text())
         self.parent.pricingInfo = self.getPriceInfo()
         self.parent.coop = self.Coop.isChecked()
         scfile = os.path.join(os.path.dirname(os.path.abspath(sys.argv[0])),
                               'Spellcraft.xml')
-        print scfile
         if os.access(os.path.dirname(scfile), os.W_OK):
             try:
                 f = open(scfile, 'w')

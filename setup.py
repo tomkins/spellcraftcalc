@@ -12,11 +12,11 @@ if __name__ == "__main__":
     #sys.argv.append('-icon py.ico')
 
 sc = dict(
-        script="ScWindow.py",
+        script="ScWindow.pyw",
         icon_resources=[(100, 'py.ico')],)
 setup(name="testsetup", 
     windows=[sc],
-   ##scripts=["ScWindow.py"],
+    #scripts=["ScWindow.pyw"],
     data_files=[('.', ['./LICENSE.txt']),
         ('reports', ['reports/Reports.txt']), 
         ('reports', glob.glob("reports/*"))],

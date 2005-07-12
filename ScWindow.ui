@@ -37,7 +37,7 @@
             <rect>
                 <x>613</x>
                 <y>3</y>
-                <width>167</width>
+                <width>165</width>
                 <height>111</height>
             </rect>
         </property>
@@ -199,9 +199,9 @@
         <property stdset="1">
             <name>geometry</name>
             <rect>
-                <x>612</x>
+                <x>613</x>
                 <y>114</y>
-                <width>166</width>
+                <width>165</width>
                 <height>51</height>
             </rect>
         </property>

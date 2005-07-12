@@ -1,4 +1,13 @@
 
+Ehrayn Updated 3/08/05 - Patch 1.0.4
+HUGE speedup: prevent recursive/mutiple invocations of 'calculate()'
+Properly refresh + to Cap Stat/Pow/Hits when 'unset' to zero.
+Unequipped items are now included in cost/materials.
+Remove Blunt skill from Nightshade, give back Pacification to Healers.
+Drop Acuity stat for Rangers (casting pool is Str anyways.)
+Ignore Distance-To-Cap option entirely for the config report.
+Config report displays +cap effects but still does not observe/note caps.
+
 Ehrayn Updated 3/06/05 - Patch 1.0.3
 Allow Bonus, DPS/AF and Speed for crafted items.
 Finished some GUI Cleanup, allow all 10 gems always, caps show w/ stats.

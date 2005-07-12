@@ -1,6 +1,6 @@
 # Form implementation generated from reading ui file 'ScWindow.ui'
 #
-# Created: Sun Mar 6 17:00:20 2005
+# Created: Tue Mar 8 21:25:38 2005
 #      by: The Python User Interface Compiler (pyuic) 3.8
 #
 # WARNING! All changes made in this file will be lost!
@@ -25,7 +25,7 @@ class B_SC(QMainWindow):
         self.setCaption(self.tr("Spellcrafting Calculator"))
 
         self.GroupBox9 = QGroupBox(self,'GroupBox9')
-        self.GroupBox9.setGeometry(QRect(613,3,167,111))
+        self.GroupBox9.setGeometry(QRect(613,3,165,111))
         self.GroupBox9.setTitle(self.tr("Char Info"))
 
         self.TextLabel1_2 = QLabel(self.GroupBox9,'TextLabel1_2')
@@ -57,7 +57,7 @@ class B_SC(QMainWindow):
         self.CharRace.setGeometry(QRect(46,84,114,22))
 
         self.ButtonGroup2 = QButtonGroup(self,'ButtonGroup2')
-        self.ButtonGroup2.setGeometry(QRect(612,114,166,51))
+        self.ButtonGroup2.setGeometry(QRect(613,114,165,51))
         self.ButtonGroup2.setTitle(self.tr("Display"))
 
         self.TotalBonus = QRadioButton(self.ButtonGroup2,'TotalBonus')

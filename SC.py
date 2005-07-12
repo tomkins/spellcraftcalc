@@ -63,15 +63,12 @@ def getGemNameParts(gemname):
         return ['','','']
     gemwords = string.split(gemname, ' ', 3)
     if gemwords[0] not in GemNames:
-        sys.stderr.write("Could not find " + gemwords[1] + " gem\r\n")
         return ['','','']
     # Prefix (two words distinguish some borked gems)
     if gemwords[1] not in GemLiquids:
 	dbg = "Could not find liquid " + gemwords[1] + "\r\n"
         gemwords[1] += " " + gemwords[2]
         if gemwords[1] not in GemLiquids:
-            dbg = dbg + "Could not find liquid " + gemwords[1] + "\r\n"
-            sys.stderr.write(dbg)
             return ['','','']
     # Suffix (may include second prefix word) to distinguish dust
     gemwords[2] = " ".join(gemwords[2:])
@@ -79,8 +76,6 @@ def getGemNameParts(gemname):
 	dbg = "Could not find dust " + gemwords[2] + "\r\n"
         gemwords[2] = gemwords[3]
         if gemwords[2] not in GemDusts:
-            dbg = "Could not find dust " + gemwords[2] + "\r\n"
-            sys.stderr.write(dbg)
             return ['','','']
     if len(gemwords) > 3:
         gemwords.pop()
