@@ -1,3 +1,9 @@
+Ehrayn Updated 3/18/05 - Patch 1.0.7
+Display Racial Resists as +# when not included in total.
+Fix updating of many fields when switching realm/class/race on the fly.
+Restore the dropdown for Acuity Drop Stats bonus, broken in 1.0.5.
+Fix some report bugs, broken in the 1.0.5 overhaul.
+
 Ehrayn Updated 3/14/05 - Patch 1.0.6
 Warned ya that wouldn't last long - fix major foobar in 1.0.5 
 which broke all of the Cap Increases and Other Bonuses display.

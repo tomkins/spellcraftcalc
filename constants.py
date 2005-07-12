@@ -17,7 +17,7 @@
 # along with this program; if not, write to the Free Software
 # Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
-ScVersion = "Kort 1.42b + Ehrayn/patch 1.0.5"
+ScVersion = "Kort 1.42b + Ehrayn/patch 1.0.7"
 
 
 Realms = ['Albion', 'Hibernia', 'Midgard']
@@ -766,10 +766,18 @@ SkillValues = ['1', '2', '3', '4', '5', '6', '7', '8']
 
 CapIncreaseTable = {}
 CapIncreaseTable.update(DropStatTable)
-CapIncreaseTable.update( { 'Hits' : '', 'Power' : '', 'AF' : '' } )
+CapIncreaseTable.update( { 
+    'Hits'  : '', 
+    'Power' : '', 
+    'AF'    : '' 
+} )
 
 CapIncreaseList = DropStatList[:]
-CapIncreaseList.extend( ['Hits', 'Power', 'AF'] )
+CapIncreaseList.extend( [
+    'Hits', 
+    'Power', 
+    'AF'
+] )
 
 
 OtherBonusTable = {
@@ -1211,6 +1219,7 @@ FixEffectsTable = {
     'Casting Range' :          'Spell Range',
     'Casting Speed Bonus' :    'Casting Speed',
     'Debuff Bonus' :           'Stat Debuff Effectiveness',
+    #??'Fatigue' :                'Fatigue', 
     'Healing Bonus' :          'Healing Effectiveness',
     'Spell Damage Bonus' :     'Magic Damage',
     'Spell Duration Bonus' :   'Duration of Spells',
@@ -1219,6 +1228,19 @@ FixEffectsTable = {
     'Melee Damage Bonus' :     'Melee Damage',
     'Melee Speed Bonus' :      'Melee Combat Speed',   
     'Power Percentage Bonus' : '% Power Pool',
+
+    'Strength Cap Increase' :     'Strength',
+    'Constitution Cap Increase' : 'Constitution',
+    'Dexterity Cap Increase' :    'Dexterity',
+    'Quickness Cap Increase' :    'Quickness',
+    'Intelligence Cap Increase':  'Intelligence',
+    'Piety Cap Increase' :        'Piety',
+    'Charisma Cap Increase' :     'Charisma', 
+    'Empathy Cap Increase' :      'Empathy',
+    'Acuity Cap Increase' :       'Acuity',
+    'Power Cap Increase' :        'Power', 
+    'Hits Cap Increase' :         'Hits', 
+    'AF Cap Increase' :           'AF',
 
     'Reactionary Style Damage Bonus' :  'Reactionary Style Damage',
     'Death XP Loss Reduction' :         'Death Experience Loss Reduction',
@@ -1233,5 +1255,7 @@ FixEffectsTable = {
     'Crush Resist' :    'Crush', 
     'Thrust Resist' :   'Thrust', 
     'Slash Resist' :    'Slash'
+
+    
 }
 

@@ -101,7 +101,7 @@ class CraftWindow(B_CraftWindow):
         gemtype = self.currentItem.getSlotAttr('player', slotindex, 'Type')
         if gemtype == 'Unused': return 0
         gemamount = self.currentItem.getSlotAttr('player', slotindex, 'Amount')
-        costindex = eval('%sValues' % gemtype, globals(), globals()).index(gemamount)
+        costindex = ValuesLists[gemtype].index(gemamount)
         basecost = GemCosts[costindex]
         remakecost = RemakeCosts[costindex]
         if gemtype == 'Resist' or gemtype == 'Focus':

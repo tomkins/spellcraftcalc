@@ -223,12 +223,8 @@ class Item:
                 if slots[l-14][0] == 'Unused':
                     slots[l-14].append('')
                 else:
-                    efflist = eval('%sList' % slots[l-14][0], globals(), globals())
-                    if slots[l-14][0] == 'Skill' or \
-                            slots[l-14][0] == 'Focus':
-                        slots[l-14].append(efflist[string.capitalize(self.Realm)][int(line)][0])
-                    else:
-                        slots[l-14].append(efflist[int(line)][0])
+                    efflist = GemTables[self.Realm][slots[l-14][0]]
+                    slots[l-14].append(efflist[int(line)])
             elif l in range(18, 22):
                 if line == '0': line = '99'
                 slots[l-18].append(line)
@@ -318,13 +314,11 @@ class Item:
                     'Unused', '0', '', '99')
             else:
                 for gem, subname in GemSubName.items():
-                    namelist = eval('%sList' % gem, globals(), globals())
-                    if type(namelist) != types.ListType:
-                        namelist = namelist[realm]
-                    gemamounts = eval('%sValues' % gem, globals(), globals())
-                    for effect, name in namelist:
+                    namelist = GemTables[realm][gem]
+                    gemamounts = ValuesLists[gem]
+                    for effect in namelist.keys():
                         if re.compile('%s' % id, re.IGNORECASE)\
-                                .search(string.strip(name + ' ' + subname))\
+                                .search(string.strip(namelist[effect] + ' ' + subname))\
                                 is not None:
                             if (self.getAttr('ActiveState') == 'player'):
                                 self.loadSlotAttrs(self.getAttr('ActiveState'), 

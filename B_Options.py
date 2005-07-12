@@ -1,6 +1,6 @@
 # Form implementation generated from reading ui file 'Options.ui'
 #
-# Created: Sat Mar 12 23:31:45 2005
+# Created: Sun Mar 20 20:18:07 2005
 #      by: The Python User Interface Compiler (pyuic) 3.8
 #
 # WARNING! All changes made in this file will be lost!

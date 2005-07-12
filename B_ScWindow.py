@@ -1,6 +1,6 @@
 # Form implementation generated from reading ui file 'ScWindow.ui'
 #
-# Created: Sat Mar 12 23:31:30 2005
+# Created: Sun Mar 20 20:17:51 2005
 #      by: The Python User Interface Compiler (pyuic) 3.8
 #
 # WARNING! All changes made in this file will be lost!
@@ -213,46 +213,6 @@ class B_SC(QMainWindow):
         self.HitsCap.setAlignment(QLabel.AlignVCenter | QLabel.AlignRight)
         self.HitsCap.setText(self.tr("-"))
 
-        self.GroupBox5 = QGroupBox(self,'GroupBox5')
-        self.GroupBox5.setGeometry(QRect(182,137,135,48))
-        self.GroupBox5.setTitle(self.tr("Totals"))
-
-        self.TotalCostLabel = QLabel(self.GroupBox5,'TotalCostLabel')
-        self.TotalCostLabel.setGeometry(QRect(6,13,29,16))
-        self.TotalCostLabel.setText(self.tr("Cost:"))
-
-        self.TotalCost = QLabel(self.GroupBox5,'TotalCost')
-        self.TotalCost.setGeometry(QRect(45,14,86,16))
-        self.TotalCost.setText(self.tr("0"))
-
-        self.TotalPriceLabel = QLabel(self.GroupBox5,'TotalPriceLabel')
-        self.TotalPriceLabel.setGeometry(QRect(6,29,37,16))
-        self.TotalPriceLabel.setText(self.tr("Price:"))
-
-        self.TotalPrice = QLabel(self.GroupBox5,'TotalPrice')
-        self.TotalPrice.setGeometry(QRect(45,29,85,16))
-        self.TotalPrice.setText(self.tr("0"))
-
-        self.GroupBox4 = QGroupBox(self,'GroupBox4')
-        self.GroupBox4.setGeometry(QRect(182,3,135,136))
-        self.GroupBox4.setTitle(self.tr("Focus"))
-
-        self.Focus_1 = QLabel(self.GroupBox4,'Focus_1')
-        self.Focus_1.setGeometry(QRect(7,18,122,16))
-        self.Focus_1.setText(self.tr(""))
-
-        self.Focus_2 = QLabel(self.GroupBox4,'Focus_2')
-        self.Focus_2.setGeometry(QRect(7,36,122,16))
-        self.Focus_2.setText(self.tr(""))
-
-        self.Focus_3 = QLabel(self.GroupBox4,'Focus_3')
-        self.Focus_3.setGeometry(QRect(7,55,122,16))
-        self.Focus_3.setText(self.tr(""))
-
-        self.Focus_4 = QLabel(self.GroupBox4,'Focus_4')
-        self.Focus_4.setGeometry(QRect(7,75,122,16))
-        self.Focus_4.setText(self.tr(""))
-
         self.GroupBox2 = QGroupBox(self,'GroupBox2')
         self.GroupBox2.setGeometry(QRect(91,3,90,182))
         self.GroupBox2.setTitle(self.tr("Resists"))
@@ -267,7 +227,7 @@ class B_SC(QMainWindow):
         self.Body.setText(self.tr("0"))
 
         self.BodyRR = QLabel(self.GroupBox2,'BodyRR')
-        self.BodyRR.setGeometry(QRect(67,16,17,16))
+        self.BodyRR.setGeometry(QRect(66,16,17,16))
         self.BodyRR.setAlignment(QLabel.AlignVCenter | QLabel.AlignRight)
         self.BodyRR.setText(self.tr("-"))
 
@@ -281,7 +241,7 @@ class B_SC(QMainWindow):
         self.Cold.setText(self.tr("0"))
 
         self.ColdRR = QLabel(self.GroupBox2,'ColdRR')
-        self.ColdRR.setGeometry(QRect(67,34,17,16))
+        self.ColdRR.setGeometry(QRect(66,34,17,16))
         self.ColdRR.setAlignment(QLabel.AlignVCenter | QLabel.AlignRight)
         self.ColdRR.setText(self.tr("-"))
 
@@ -295,7 +255,7 @@ class B_SC(QMainWindow):
         self.Heat.setText(self.tr("0"))
 
         self.HeatRR = QLabel(self.GroupBox2,'HeatRR')
-        self.HeatRR.setGeometry(QRect(67,52,17,16))
+        self.HeatRR.setGeometry(QRect(66,52,17,16))
         self.HeatRR.setAlignment(QLabel.AlignVCenter | QLabel.AlignRight)
         self.HeatRR.setText(self.tr("-"))
 
@@ -309,7 +269,7 @@ class B_SC(QMainWindow):
         self.Energy.setText(self.tr("0"))
 
         self.EnergyRR = QLabel(self.GroupBox2,'EnergyRR')
-        self.EnergyRR.setGeometry(QRect(67,70,17,16))
+        self.EnergyRR.setGeometry(QRect(66,70,17,16))
         self.EnergyRR.setAlignment(QLabel.AlignVCenter | QLabel.AlignRight)
         self.EnergyRR.setText(self.tr("-"))
 
@@ -323,7 +283,7 @@ class B_SC(QMainWindow):
         self.Matter.setText(self.tr("0"))
 
         self.MatterRR = QLabel(self.GroupBox2,'MatterRR')
-        self.MatterRR.setGeometry(QRect(67,88,17,16))
+        self.MatterRR.setGeometry(QRect(66,88,17,16))
         self.MatterRR.setAlignment(QLabel.AlignVCenter | QLabel.AlignRight)
         self.MatterRR.setText(self.tr("-"))
 
@@ -337,7 +297,7 @@ class B_SC(QMainWindow):
         self.Spirit.setText(self.tr("0"))
 
         self.SpiritRR = QLabel(self.GroupBox2,'SpiritRR')
-        self.SpiritRR.setGeometry(QRect(67,106,17,16))
+        self.SpiritRR.setGeometry(QRect(66,106,17,16))
         self.SpiritRR.setAlignment(QLabel.AlignVCenter | QLabel.AlignRight)
         self.SpiritRR.setText(self.tr("-"))
 
@@ -351,7 +311,7 @@ class B_SC(QMainWindow):
         self.Crush.setText(self.tr("0"))
 
         self.CrushRR = QLabel(self.GroupBox2,'CrushRR')
-        self.CrushRR.setGeometry(QRect(67,124,17,16))
+        self.CrushRR.setGeometry(QRect(66,124,17,16))
         self.CrushRR.setAlignment(QLabel.AlignVCenter | QLabel.AlignRight)
         self.CrushRR.setText(self.tr("-"))
 
@@ -365,7 +325,7 @@ class B_SC(QMainWindow):
         self.Thrust.setText(self.tr("0"))
 
         self.ThrustRR = QLabel(self.GroupBox2,'ThrustRR')
-        self.ThrustRR.setGeometry(QRect(67,142,17,16))
+        self.ThrustRR.setGeometry(QRect(66,142,17,16))
         self.ThrustRR.setAlignment(QLabel.AlignVCenter | QLabel.AlignRight)
         self.ThrustRR.setText(self.tr("-"))
 
@@ -379,34 +339,76 @@ class B_SC(QMainWindow):
         self.Slash.setText(self.tr("0"))
 
         self.SlashRR = QLabel(self.GroupBox2,'SlashRR')
-        self.SlashRR.setGeometry(QRect(67,160,17,16))
+        self.SlashRR.setGeometry(QRect(66,160,17,16))
         self.SlashRR.setAlignment(QLabel.AlignVCenter | QLabel.AlignRight)
         self.SlashRR.setText(self.tr("-"))
 
+        self.GroupBox4 = QGroupBox(self,'GroupBox4')
+        self.GroupBox4.setGeometry(QRect(182,3,124,136))
+        self.GroupBox4.setTitle(self.tr("Focus"))
+
+        self.Focus_1 = QLabel(self.GroupBox4,'Focus_1')
+        self.Focus_1.setGeometry(QRect(6,18,112,16))
+        self.Focus_1.setText(self.tr(""))
+
+        self.Focus_2 = QLabel(self.GroupBox4,'Focus_2')
+        self.Focus_2.setGeometry(QRect(6,36,112,16))
+        self.Focus_2.setText(self.tr(""))
+
+        self.Focus_3 = QLabel(self.GroupBox4,'Focus_3')
+        self.Focus_3.setGeometry(QRect(6,54,112,16))
+        self.Focus_3.setText(self.tr(""))
+
+        self.Focus_4 = QLabel(self.GroupBox4,'Focus_4')
+        self.Focus_4.setGeometry(QRect(6,72,112,16))
+        self.Focus_4.setText(self.tr(""))
+
+        self.GroupBox5 = QGroupBox(self,'GroupBox5')
+        self.GroupBox5.setGeometry(QRect(182,138,124,47))
+        self.GroupBox5.setTitle(self.tr("Totals"))
+
+        self.TotalCostLabel = QLabel(self.GroupBox5,'TotalCostLabel')
+        self.TotalCostLabel.setGeometry(QRect(6,13,30,16))
+        self.TotalCostLabel.setText(self.tr("Cost:"))
+
+        self.TotalCost = QLabel(self.GroupBox5,'TotalCost')
+        self.TotalCost.setGeometry(QRect(36,14,82,16))
+        self.TotalCost.setAlignment(QLabel.AlignVCenter | QLabel.AlignRight)
+        self.TotalCost.setText(self.tr("0"))
+
+        self.TotalPriceLabel = QLabel(self.GroupBox5,'TotalPriceLabel')
+        self.TotalPriceLabel.setGeometry(QRect(6,28,30,16))
+        self.TotalPriceLabel.setText(self.tr("Price:"))
+
+        self.TotalPrice = QLabel(self.GroupBox5,'TotalPrice')
+        self.TotalPrice.setGeometry(QRect(36,28,82,16))
+        self.TotalPrice.setAlignment(QLabel.AlignVCenter | QLabel.AlignRight)
+        self.TotalPrice.setText(self.tr("0"))
+
         self.GroupSkillsList = QGroupBox(self,'GroupSkillsList')
-        self.GroupSkillsList.setGeometry(QRect(318,3,129,136))
+        self.GroupSkillsList.setGeometry(QRect(307,3,140,136))
         self.GroupSkillsList.setTitle(self.tr("Skills"))
 
         self.SkillsList = QListBox(self.GroupSkillsList,'SkillsList')
-        self.SkillsList.setGeometry(QRect(8,15,115,116))
+        self.SkillsList.setGeometry(QRect(5,15,130,116))
 
         self.GroupOtherBonusList = QGroupBox(self,'GroupOtherBonusList')
-        self.GroupOtherBonusList.setGeometry(QRect(449,3,163,136))
+        self.GroupOtherBonusList.setGeometry(QRect(448,3,164,136))
         self.GroupOtherBonusList.setTitle(self.tr("Other Bonuses"))
 
         self.OtherBonusList = QListBox(self.GroupOtherBonusList,'OtherBonusList')
-        self.OtherBonusList.setGeometry(QRect(3,15,154,116))
+        self.OtherBonusList.setGeometry(QRect(5,15,154,116))
 
         self.FileNameLabel = QLabel(self,'FileNameLabel')
-        self.FileNameLabel.setGeometry(QRect(325,142,285,14))
+        self.FileNameLabel.setGeometry(QRect(315,142,285,14))
         self.FileNameLabel.setText(self.tr(""))
 
         self.OcErrorString = QLabel(self,'OcErrorString')
-        self.OcErrorString.setGeometry(QRect(325,157,285,14))
+        self.OcErrorString.setGeometry(QRect(315,157,285,14))
         self.OcErrorString.setText(self.tr(""))
 
         self.DupErrorString = QLabel(self,'DupErrorString')
-        self.DupErrorString.setGeometry(QRect(325,173,285,14))
+        self.DupErrorString.setGeometry(QRect(315,173,285,14))
         self.DupErrorString.setText(self.tr(""))
 
         self.TypeTab = QTabWidget(self,'TypeTab')
@@ -735,7 +737,7 @@ class B_SC(QMainWindow):
         self.Amount_Edit_5.setGeometry(QRect(177,132,51,22))
 
         self.Effect_5 = SearchingCombo(0,self.Neck,'Effect_5')
-        self.Effect_5.setGeometry(QRect(233,132,150,22))
+        self.Effect_5.setGeometry(QRect(233,132,206,22))
 
         self.Gem_Label_6 = QLabel(self.Neck,'Gem_Label_6')
         self.Gem_Label_6.setGeometry(QRect(7,153,34,22))
@@ -755,7 +757,7 @@ class B_SC(QMainWindow):
         self.Amount_Edit_6.setGeometry(QRect(177,153,51,22))
 
         self.Effect_6 = SearchingCombo(0,self.Neck,'Effect_6')
-        self.Effect_6.setGeometry(QRect(233,153,150,22))
+        self.Effect_6.setGeometry(QRect(233,153,206,22))
 
         self.Gem_Label_7 = QLabel(self.Neck,'Gem_Label_7')
         self.Gem_Label_7.setGeometry(QRect(7,174,34,22))
@@ -775,7 +777,7 @@ class B_SC(QMainWindow):
         self.Amount_Edit_7.setGeometry(QRect(177,174,51,22))
 
         self.Effect_7 = SearchingCombo(0,self.Neck,'Effect_7')
-        self.Effect_7.setGeometry(QRect(233,174,150,22))
+        self.Effect_7.setGeometry(QRect(233,174,206,22))
 
         self.Gem_Label_8 = QLabel(self.Neck,'Gem_Label_8')
         self.Gem_Label_8.setGeometry(QRect(7,195,34,22))
@@ -795,7 +797,7 @@ class B_SC(QMainWindow):
         self.Amount_Edit_8.setGeometry(QRect(177,195,51,22))
 
         self.Effect_8 = SearchingCombo(0,self.Neck,'Effect_8')
-        self.Effect_8.setGeometry(QRect(233,195,150,22))
+        self.Effect_8.setGeometry(QRect(233,195,206,22))
 
         self.Gem_Label_9 = QLabel(self.Neck,'Gem_Label_9')
         self.Gem_Label_9.setGeometry(QRect(7,216,34,22))
@@ -815,7 +817,7 @@ class B_SC(QMainWindow):
         self.Amount_Edit_9.setGeometry(QRect(177,216,51,22))
 
         self.Effect_9 = SearchingCombo(0,self.Neck,'Effect_9')
-        self.Effect_9.setGeometry(QRect(233,216,150,22))
+        self.Effect_9.setGeometry(QRect(233,216,206,22))
 
         self.Gem_Label_10 = QLabel(self.Neck,'Gem_Label_10')
         self.Gem_Label_10.setGeometry(QRect(7,237,41,22))
@@ -835,7 +837,7 @@ class B_SC(QMainWindow):
         self.Amount_Edit_10.setGeometry(QRect(177,237,51,22))
 
         self.Effect_10 = SearchingCombo(0,self.Neck,'Effect_10')
-        self.Effect_10.setGeometry(QRect(233,237,150,22))
+        self.Effect_10.setGeometry(QRect(233,237,206,22))
 
         self.Imbue_Label = QLabel(self.Neck,'Imbue_Label')
         self.Imbue_Label.setGeometry(QRect(380,160,76,14))
@@ -899,13 +901,8 @@ class B_SC(QMainWindow):
         self.SaveItem.setGeometry(QRect(596,157,79,26))
         self.SaveItem.setText(self.tr("Save Item"))
 
-        self.ItemName_Label = QLabel(self.Neck,'ItemName_Label')
-        self.ItemName_Label.setEnabled(1)
-        self.ItemName_Label.setGeometry(QRect(498,43,59,16))
-        self.ItemName_Label.setText(self.tr("Item Name:"))
-
         self.ItemName = QLineEdit(self.Neck,'ItemName')
-        self.ItemName.setGeometry(QRect(494,61,160,22))
+        self.ItemName.setGeometry(QRect(562,48,200,22))
 
         self.CraftButton = QPushButton(self.Neck,'CraftButton')
         self.CraftButton.setGeometry(QRect(662,2,69,26))

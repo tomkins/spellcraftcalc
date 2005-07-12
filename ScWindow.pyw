@@ -75,6 +75,7 @@ class SCApp(B_SC):
             'Focus'  : []
         }
         self.dropeffectlists = self.effectlists.copy()
+        self.dropeffectlists['Stat'] = DropStatList
         self.dropeffectlists['Cap Increase'] = CapIncreaseList
         self.dropeffectlists['PvE Bonus'] = PvEBonusList
         self.dropeffectlists['Other Bonus'] = OtherBonusList
@@ -84,6 +85,8 @@ class SCApp(B_SC):
         self.coop = False
 
         B_SC.__init__(self,parent=None,name="SpellCraft Calulator",fl=Qt.WDestructiveClose)
+
+        self.EffectWidths = [self.Effect_1.width(), self.Effect_5.width()]
 
         self.menuBar = QMenuBar(self)
         pal = QPalette(self.palette().copy())
@@ -317,7 +320,6 @@ class SCApp(B_SC):
         self.switchOnType['drop'].append(self.Effect_9)
         self.switchOnType['drop'].append(self.Effect_10)
         self.switchOnType['drop'].append(self.SaveItem)
-        self.switchOnType['drop'].append(self.ItemName_Label)
         self.switchOnType['drop'].append(self.ItemName)
 
         self.switchOnType['player'].append(self.QualDrop)
@@ -340,7 +342,6 @@ class SCApp(B_SC):
         self.switchOnType['player'].append(self.Cost_2)
         self.switchOnType['player'].append(self.Cost_3)
         self.switchOnType['player'].append(self.Cost_4)
-        self.switchOnType['player'].append(self.Name_Label)
         self.switchOnType['player'].append(self.Name_1)
         self.switchOnType['player'].append(self.Name_2)
         self.switchOnType['player'].append(self.Name_3)
@@ -571,7 +572,7 @@ class SCApp(B_SC):
             self.QualEdit.setText(item.getAttr('ItemQuality'))
             self.ItemName.setText(item.getAttr('ItemName'))
         else:
-            if item.getAttr('ItemQuality') != '':
+            if item.getAttr('ItemQuality') in QualityValues:
                 self.QualDrop.setCurrentItem(
                     QualityValues.index(item.getAttr('ItemQuality')))
         self.save = 1
@@ -800,7 +801,10 @@ class SCApp(B_SC):
                         if rr != '-':
                             val += int(rr[1:-1])
                 if self.capTotals.has_key(key):
+                  if self.capTotals[key] > 0:
                     getattr(self, key+'Cap').setText('('+str(self.capTotals[key])+')')
+                  else:
+                    getattr(self, key+'Cap').setText('-')
                 getattr(self, key).setText(unicode(val))
             else:
                 if HighCapBonusList.has_key(key):
@@ -985,11 +989,13 @@ class SCApp(B_SC):
         race = str(self.CharRace.currentText())
         for rt in ResistList:
             if RacialResists[race].has_key(rt):
+              if self.includeRacials:
                 getattr(self, rt + 'RR').setText('('+str(RacialResists[race][rt])+')')
+              else:
+                getattr(self, rt + 'RR').setText('+'+str(RacialResists[race][rt]))
             else:
                 getattr(self, rt + 'RR').setText('-')
-        if self.includeRacials:
-            self.calculate()
+        self.calculate()
 
     def CharClassChanged(self,a0):
         self.charclass = str(self.CharClass.currentText())
@@ -1010,7 +1016,10 @@ class SCApp(B_SC):
         if race in Races[self.realm]:
           self.CharRace.setCurrentItem(Races[self.realm].index(race))
         self.RaceChanged('')
-        self.restoreItem(self.itemattrlist.get(self.currentTabLabel()))
+        item = self.itemattrlist.get(self.currentTabLabel(), Item(self.currentTabLabel()))
+        item.loadAttr('ActiveState','player')
+        if self.save:
+            self.restoreItem(item)
         self.calculate()
 
     def RealmChanged(self):
@@ -1051,22 +1060,30 @@ class SCApp(B_SC):
     def Type_10_Changed(self,a0):
         self.TypeChanged(10)
 
+
+    def showWideEffects(self, wide):
+        width = self.EffectWidths[wide]
+        for num in range(1, 5):
+          eff = getattr(self, 'Effect_%d' % num)
+          eff.setGeometry(eff.x(), eff.y(), width, eff.height())
+
     def showDropWidgets(self):
         for w in self.switchOnType['player']:
             w.hide()
         for w in self.switchOnType['drop']:
             w.show()
+        self.showWideEffects(1)
         self.Gem_Label_1.setEnabled(1)
         self.Gem_Label_2.setEnabled(1)
         self.Gem_Label_3.setEnabled(1)
         self.Gem_Label_4.setEnabled(1)
-
 
     def showPlayerWidgets(self):
         for w in self.switchOnType['player']:
             w.show()
         for w in self.switchOnType['drop']:
             w.hide()
+        self.showWideEffects(0)
 
     def DropToggled(self,a0):
         self.modified = 1
@@ -1087,6 +1104,7 @@ class SCApp(B_SC):
         item.loadAttr('ActiveState','player')
         if self.save:
             self.restoreItem(item)
+
 
     def TypeTabChanged(self,a0):
         if (str(self.TypeTab.tabLabel(self.currentTypeTab)) == str(self.TypeTab.tabLabel(a0))) or self.currentTypeTab is None:
@@ -1451,12 +1469,15 @@ class SCApp(B_SC):
         
     def openOptions(self):
         self.modified = 1
+        self.nocalc = 1
         res = Options.Options(self, '', 1).exec_loop()
         if res == 2:
              self.RealmChanged()
         elif res == 1:
              self.CharClassChanged('')
-        
+        self.nocalc = 0
+        self.calculate()
+
     def OpenCraftWindow(self):
         self.storeItem(self.itemattrlist.get(self.currentTabLabel()))
         CW = CraftWindow.CraftWindow(self, '', 1)

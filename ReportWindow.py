@@ -195,11 +195,23 @@ class ReportWindow(B_ReportWindow):
     def collectStats(self, itemlist):
         skillTotals = { }
         focusTotals = { }
-        totals = { 'str' : 0, 'con' : 0, 'dex' : 0, 'qui' : 0,
-            'int' : 0, 'pie' : 0, 'cha' : 0, 'emp' : 0, 'hits' : 0,
-            'power' : 0, 'body' : 0, 'cold' : 0, 'heat' : 0,
+        totals = { 
+            'str' : 0, 'con' : 0, 'dex' : 0, 'qui' : 0,
+            'int' : 0, 'pie' : 0, 'cha' : 0, 'emp' : 0, 
+            'hits' : 0,   'power' : 0,
+            'body' : 0,   'cold' : 0,   'heat' : 0,
             'energy' : 0, 'matter' : 0, 'spirit' : 0, 
-            'crush' : 0, 'thrust' : 0, 'slash' : 0}
+            'crush' : 0,  'thrust' : 0, 'slash' : 0
+        }
+        for key in StatTable.keys():
+          totals[key] = 0
+        for key in HitsTable.keys():
+          totals[key] = 0
+        for key in PowerTable.keys():
+          totals[key] = 0
+        for key in ResistTable.keys():
+          totals[key] = 0
+        totals['AF'] = 0
         capTotals = { }
         otherTotals = { }
         iteminfo = { }
@@ -254,8 +266,7 @@ class ReportWindow(B_ReportWindow):
                 amount = item.getSlotAttr(activestate, slot, 'Amount')
                 effect = item.getSlotAttr(activestate, slot, 'Effect')
                 qua = item.getSlotAttr(activestate, slot, 'Qua')
-                gemtype = re.sub(' ' , '', gemtype)
-                gemtype = string.lower(gemtype)
+                #gemtype = re.sub(' ' , '', gemtype)
                 amount = re.sub('[^\d]', '', amount)
                 if amount == '':
                     amount = 0
@@ -264,14 +275,14 @@ class ReportWindow(B_ReportWindow):
                 iteminfo[key][gemnum]['type'] = gemtype
                 iteminfo[key][gemnum]['amount'] = amount
                 iteminfo[key][gemnum]['effect'] = effect
-                if gemtype == 'capincrease':
+                if gemtype == 'Cap Increase':
                     iteminfo[key][gemnum]['effect'] += ' Cap Increase'
                 iteminfo[key][gemnum]['quality'] = qua
                 if activestate == 'player':
                     iteminfo[key][gemnum]['name'] = SC.getGemName(item, slot)
                 else:
                     iteminfo[key][gemnum]['name'] = ''
-                if gemtype == 'skill':
+                if gemtype == 'Skill':
                         if effect == 'All Magic Skills'\
                             or effect == 'All Melee Weapon Skills'\
                             or effect == 'All Dual Wield Skills'\
@@ -296,48 +307,53 @@ class ReportWindow(B_ReportWindow):
                                     skillTotals[effect] = amount
                                 else:
                                     skillTotals[effect] += amount
-                elif gemtype == 'focus':
+                elif gemtype == 'Focus':
                     utility += 1
                     if equipped == '1':
                         if effect == 'All Spell Lines':
-                            for f in AllBonusList[self.parent.realm][self.parent.charclass][effect]:
+                            for f in AllBonusList[self.parent.realm][self.parent.charclass][effect][1:]:
                                 focusTotals[f] = amount
                         else:
                             focusTotals[effect] = amount
-                elif gemtype == 'power':
+                elif gemtype == 'Power':
                     utility += amount * 2
                     if equipped == '1':
                         totals[gemtype] += amount
-                elif gemtype == 'hits':
+                        totals[gemtype.lower()] += amount
+                elif gemtype == 'Hits':
                     utility += amount / 4.0
                     if equipped == '1':
                         totals[gemtype] += amount
-                elif gemtype == 'resist':
+                        totals[gemtype.lower()] += amount
+                elif gemtype == 'Resist':
                     utility += amount * 2
                     if equipped == '1':
-                        totals[string.lower(effect)] += amount
-                elif gemtype == 'stat':
+                        totals[effect] += amount
+                        totals[effect.lower()] += amount
+                elif gemtype == 'Stat':
                     if effect == 'Acuity':
                         for e in AllBonusList[self.parent.realm][self.parent.charclass][effect]:
                             utility += amount * 2.0 / 3.0
                             if equipped == '1':
-                                totals[string.lower(e)] += amount
+                                totals[e] += amount
+                                totals[e[:3].lower()] += amount
                     else:
                         utility += amount * 2.0 / 3.0
                         if equipped == '1':
-                            totals[string.lower(effect[:3])] += amount
-                elif gemtype == 'otherbonus':
+                            totals[effect] += amount
+                            totals[effect[:3].lower()] += amount
+                elif gemtype == 'Other Bonus':
                     if equipped == '1':
+                        if effect == 'AF':
+                            totals[effect] += amount
                         if not otherTotals.has_key(effect):
                             otherTotals[effect] = amount
                         else:
                             otherTotals[effect] += amount
-                elif gemtype == 'capincrease':
+                elif gemtype == 'Cap Increase':
                     if equipped == '1':
                         if effect == 'Acuity':
-                            effect = AllBonusList[self.parent.realm][self.parent.charclass][effect][0][:3]
-                        elif effect != 'Hits' and effect != 'Power' and effect != 'AF':
-                            effect = effect[:3]
+                            effect = AllBonusList[self.parent.realm][self.parent.charclass][effect][0]
                         if not capTotals.has_key(effect):
                             capTotals[effect] = amount
                         else:
@@ -351,7 +367,7 @@ class ReportWindow(B_ReportWindow):
 
         for (key, val) in totals.items():
             if self.parent.includeRacials:
-                if key in map(lambda(x): string.lower(x[0]), ResistList):
+                if ResistTable.has_key(string.capitalize(key)):
                     rr = str(getattr(self.parent, string.capitalize(key)+'RR').text())
                     if rr != '-':
                         val += int(rr[1:-1])
