@@ -199,10 +199,9 @@ class Item:
                             slotnum = int(slot_match.group(1))
                         for attr in slot.childNodes:
                             if attr.nodeType == Node.TEXT_NODE: continue
-                            t = XMLHelper.getText(attr.childNodes)
-                            attrval = re.sub('Bonedancing', 'Bone Army', t)
-                            attrval = re.sub('PainWorking', 'Painworking', t)
-                            attrval = re.sub('Casting Range', 'Spell Range', t)
+                            attrval = XMLHelper.getText(attr.childNodes)
+                            if FixEffectsTable.has_key(attrval):
+                                attrval = FixEffectsTable[attrval]
                             self.slots[type][slotnum][attr.tagName] = attrval
 
     def importLela(self, f):

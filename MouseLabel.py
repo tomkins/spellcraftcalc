@@ -34,7 +34,6 @@ class MouseLabel(QLabel):
         if self.effect == '': return
         if e is None: return
         self.locs = []
-        charclass = str(self.parent.CharClass.currentText())
         for key, item in self.parent.itemattrlist.items():
             activestate = item.getAttr('ActiveState')
             if activestate == 'drop':
@@ -48,8 +47,8 @@ class MouseLabel(QLabel):
                 if self.effect == effect and type != 'Cap Increase'\
                         and type != 'Unused':
                     self.locs.append([key, amount])
-                elif effect in AllBonusList[charclass].keys():
-                    if self.effect in AllBonusList[charclass][effect]:
+                elif effect in AllBonusList[self.parent.realm][self.parent.charclass].keys():
+                    if self.effect in AllBonusList[self.parent.realm][self.parent.charclass][effect]:
                         self.locs.append([key, amount])
         DW = DisplayWindow.DisplayWindow(self.parent, '', 1)
         DW.setCaption('Slots With %s' % self.effect)

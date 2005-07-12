@@ -277,7 +277,7 @@
             <class>QLabel</class>
             <property stdset="1">
                 <name>name</name>
-                <cstring>StrLabel</cstring>
+                <cstring>StrengthLabel</cstring>
             </property>
             <property stdset="1">
                 <name>geometry</name>
@@ -297,7 +297,7 @@
             <class>QLabel</class>
             <property stdset="1">
                 <name>name</name>
-                <cstring>Str</cstring>
+                <cstring>Strength</cstring>
             </property>
             <property stdset="1">
                 <name>geometry</name>
@@ -321,7 +321,7 @@
             <class>QLabel</class>
             <property stdset="1">
                 <name>name</name>
-                <cstring>StrCap</cstring>
+                <cstring>StrengthCap</cstring>
             </property>
             <property stdset="1">
                 <name>geometry</name>
@@ -345,7 +345,7 @@
             <class>QLabel</class>
             <property stdset="1">
                 <name>name</name>
-                <cstring>ConLabel</cstring>
+                <cstring>ConstitutionLabel</cstring>
             </property>
             <property stdset="1">
                 <name>geometry</name>
@@ -365,7 +365,7 @@
             <class>QLabel</class>
             <property stdset="1">
                 <name>name</name>
-                <cstring>Con</cstring>
+                <cstring>Constitution</cstring>
             </property>
             <property stdset="1">
                 <name>geometry</name>
@@ -389,7 +389,7 @@
             <class>QLabel</class>
             <property stdset="1">
                 <name>name</name>
-                <cstring>ConCap</cstring>
+                <cstring>ConstitutionCap</cstring>
             </property>
             <property stdset="1">
                 <name>geometry</name>
@@ -413,7 +413,7 @@
             <class>QLabel</class>
             <property stdset="1">
                 <name>name</name>
-                <cstring>DexLabel</cstring>
+                <cstring>DexterityLabel</cstring>
             </property>
             <property stdset="1">
                 <name>geometry</name>
@@ -433,7 +433,7 @@
             <class>QLabel</class>
             <property stdset="1">
                 <name>name</name>
-                <cstring>Dex</cstring>
+                <cstring>Dexterity</cstring>
             </property>
             <property stdset="1">
                 <name>geometry</name>
@@ -457,7 +457,7 @@
             <class>QLabel</class>
             <property stdset="1">
                 <name>name</name>
-                <cstring>DexCap</cstring>
+                <cstring>DexterityCap</cstring>
             </property>
             <property stdset="1">
                 <name>geometry</name>
@@ -481,7 +481,7 @@
             <class>QLabel</class>
             <property stdset="1">
                 <name>name</name>
-                <cstring>QuiLabel</cstring>
+                <cstring>QuicknessLabel</cstring>
             </property>
             <property stdset="1">
                 <name>geometry</name>
@@ -501,7 +501,7 @@
             <class>QLabel</class>
             <property stdset="1">
                 <name>name</name>
-                <cstring>Qui</cstring>
+                <cstring>Quickness</cstring>
             </property>
             <property stdset="1">
                 <name>geometry</name>
@@ -525,7 +525,7 @@
             <class>QLabel</class>
             <property stdset="1">
                 <name>name</name>
-                <cstring>QuiCap</cstring>
+                <cstring>QuicknessCap</cstring>
             </property>
             <property stdset="1">
                 <name>geometry</name>
@@ -549,7 +549,7 @@
             <class>QLabel</class>
             <property stdset="1">
                 <name>name</name>
-                <cstring>IntLabel</cstring>
+                <cstring>IntelligenceLabel</cstring>
             </property>
             <property stdset="1">
                 <name>geometry</name>
@@ -569,7 +569,7 @@
             <class>QLabel</class>
             <property stdset="1">
                 <name>name</name>
-                <cstring>Int</cstring>
+                <cstring>Intelligence</cstring>
             </property>
             <property stdset="1">
                 <name>geometry</name>
@@ -593,7 +593,7 @@
             <class>QLabel</class>
             <property stdset="1">
                 <name>name</name>
-                <cstring>IntCap</cstring>
+                <cstring>IntelligenceCap</cstring>
             </property>
             <property stdset="1">
                 <name>geometry</name>
@@ -617,7 +617,7 @@
             <class>QLabel</class>
             <property stdset="1">
                 <name>name</name>
-                <cstring>PieLabel</cstring>
+                <cstring>PietyLabel</cstring>
             </property>
             <property stdset="1">
                 <name>geometry</name>
@@ -637,7 +637,7 @@
             <class>QLabel</class>
             <property stdset="1">
                 <name>name</name>
-                <cstring>Pie</cstring>
+                <cstring>Piety</cstring>
             </property>
             <property stdset="1">
                 <name>geometry</name>
@@ -661,7 +661,7 @@
             <class>QLabel</class>
             <property stdset="1">
                 <name>name</name>
-                <cstring>PieCap</cstring>
+                <cstring>PietyCap</cstring>
             </property>
             <property stdset="1">
                 <name>geometry</name>
@@ -685,7 +685,7 @@
             <class>QLabel</class>
             <property stdset="1">
                 <name>name</name>
-                <cstring>ChaLabel</cstring>
+                <cstring>CharismaLabel</cstring>
             </property>
             <property stdset="1">
                 <name>geometry</name>
@@ -705,7 +705,7 @@
             <class>QLabel</class>
             <property stdset="1">
                 <name>name</name>
-                <cstring>Cha</cstring>
+                <cstring>Charisma</cstring>
             </property>
             <property stdset="1">
                 <name>geometry</name>
@@ -729,7 +729,7 @@
             <class>QLabel</class>
             <property stdset="1">
                 <name>name</name>
-                <cstring>ChaCap</cstring>
+                <cstring>CharismaCap</cstring>
             </property>
             <property stdset="1">
                 <name>geometry</name>
@@ -753,7 +753,7 @@
             <class>QLabel</class>
             <property stdset="1">
                 <name>name</name>
-                <cstring>EmpLabel</cstring>
+                <cstring>EmpathyLabel</cstring>
             </property>
             <property stdset="1">
                 <name>geometry</name>
@@ -773,7 +773,7 @@
             <class>QLabel</class>
             <property stdset="1">
                 <name>name</name>
-                <cstring>Emp</cstring>
+                <cstring>Empathy</cstring>
             </property>
             <property stdset="1">
                 <name>geometry</name>
@@ -797,7 +797,7 @@
             <class>QLabel</class>
             <property stdset="1">
                 <name>name</name>
-                <cstring>EmpCap</cstring>
+                <cstring>EmpathyCap</cstring>
             </property>
             <property stdset="1">
                 <name>geometry</name>
@@ -4840,7 +4840,7 @@
         <sender>CharClass</sender>
         <signal>activated(const QString&amp;)</signal>
         <receiver>B_SC</receiver>
-        <slot>recalculate(const QString&amp;)</slot>
+        <slot>CharClassChanged(const QString&amp;)</slot>
     </connection>
     <connection>
         <sender>AFDPS_Edit</sender>
@@ -4945,6 +4945,7 @@
         <slot>RaceChanged(const QString&amp;)</slot>
     </connection>
     <slot access="public">AmountChanged(const QString&amp;)</slot>
+    <slot access="public">CharClassChanged(const QString&amp;)</slot>
     <slot access="public">ClearCurrentItem()</slot>
     <slot access="public">DistanceCapSet()</slot>
     <slot access="public">DropToggled(bool)</slot>

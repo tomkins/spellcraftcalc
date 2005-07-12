@@ -1,4 +1,16 @@
 
+Ehrayn Updated 3/14/05 - Patch 1.0.5
+Ultra-Unstable Experimental Patch - use at your own risk.
+Allows change of Realm under options, WITHOUT erasing the template.
+Have refactored MANY tables, eliminated redundancy, support co-op templates.
+Renamed MANY effects, with new translation table (constants.py FixEffectsTable).
+Table changes provide new -faster- hash lookups.  Feel the burn.
+Filter the player-crafted drop-down effect list to class-specific skills.
+'Unrecognized' skills are added to the drop down list for information.
+Paladin and Reaver gain Piety as their classes Acuity stat.  
+Add Shield skill for Armsman and Valkyrie.  
+Removed non-Warden Nature skill from Wardens.
+
 Ehrayn Updated 3/08/05 - Patch 1.0.4
 HUGE speedup: prevent recursive/mutiple invocations of 'calculate()'
 Properly refresh + to Cap Stat/Pow/Hits when 'unset' to zero.

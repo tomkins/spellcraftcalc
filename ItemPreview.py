@@ -12,7 +12,6 @@ class Preview(QFilePreview):
         self.scwin = scwin
 
     def previewUrl(self, url):
-        charclass = unicode(self.scwin.CharClass.currentText())
         self.item.load(unicode(url.toString()), 1)  
         state = self.item.getAttr('ActiveState')
         utility = 0
@@ -43,11 +42,11 @@ class Preview(QFilePreview):
                 statstr += ' Cap Increase'
             stattext.setText(statstr)
             if gemtype == 'Skill':
-                if effect == 'All Magic Skill Bonus'\
-                    or effect == 'All Melee Skill Bonus'\
-                    or effect == 'All Dual Wield Skill Bonus'\
-                    or effect == 'Archery Skill Bonus':
-                    for e in AllBonusList[charclass][effect]:
+                if effect == 'All Magic Skills'\
+                    or effect == 'All Melee Weapon Skills'\
+                    or effect == 'All Dual Wield Skills'\
+                    or effect == 'All Archery Skills':
+                    for e in AllBonusList[self.scwin.realm][self.scwin.charclass][effect]:
                         utility += amount * 5
                 else:
                     utility += amount * 5

@@ -41,19 +41,20 @@ def getGemName(item, slot):
     gemstate = item.getAttr('ActiveState')
     gemtype = item.getSlotAttr(gemstate, slot, 'Type')
     realm = item.getAttr('Realm')
-    if gemtype == '' or gemtype == 'Unused': return ''
-    gemlist = eval('%sList' % ''.join(gemtype.split(' ')), globals(), globals())
-    amountlist = eval('%sValues' % gemtype, globals(), globals())
-    amountindex = amountlist.index(item.getSlotAttr(gemstate, slot, 'Amount'))
+    if not GemTables.has_key(realm): return ''
+    if not GemTables[realm].has_key(gemtype): return ''
+    gemlist = GemTables[realm][gemtype]
+    amount = item.getSlotAttr(gemstate, slot, 'Amount')
+    amountlist = ValuesLists[gemtype]
+    if not amount in amountlist: return ''
+    amountindex = amountlist.index(amount)
     effect = item.getSlotAttr(gemstate, slot, 'Effect')
+    if not gemlist.has_key(effect): 
+      gemlist = GemTables['All'][gemtype]
+      if not gemlist.has_key(effect): return ''
     gemname = GemNames[amountindex]
+    gemmiddle = gemlist[effect]
     gemend = GemSubName[gemtype]
-    if type(gemlist) == types.ListType:
-        effectindex = map(lambda(x):x[0], gemlist).index(effect)
-        gemmiddle = gemlist[effectindex][1]
-    else:
-        effectindex = map(lambda(x):x[0], gemlist[realm]).index(effect)
-        gemmiddle = gemlist[realm][effectindex][1]
     gemname += ' ' + gemmiddle + ' ' + gemend
     return string.strip(gemname)
 
@@ -82,9 +83,10 @@ def getGemNameParts(gemname):
     return gemwords
 
 def getGemMaterials(item, slot, realm):
+    ret = { 'Gems' : { }, 'Dusts' : { }, 'Liquids' : { } }
     gemstate = item.getAttr('ActiveState')
     gemname = getGemName(item, slot)
-    ret = { 'Gems' : { }, 'Dusts' : { }, 'Liquids' : { } }
+    if gemname == '': return ret
     gemlevel, gemliquid, gemdust = getGemNameParts(gemname)
     if gemlevel == '': return ret
 
@@ -175,10 +177,10 @@ def computeGemCost(item, i):
         costindex = 0
         return (0, 1)
     gemname = getGemName(item, i)
+    if gemname == '': return (0, 1)
     gemlevel, gemliquid, gemdust = getGemNameParts(gemname)
-    if gemlevel == '':
-	return (0, 1)
-    costindex = eval('%sValues' % gemtype, globals(), globals()).index(str(amount))
+    if gemlevel == '': return (0, 1)
+    costindex = ValuesLists[gemtype].index(str(amount))
     cost = GemCosts[costindex]
     remakecost = RemakeCosts[costindex] * int(item.getSlotAttr(itemtype, i, 'Remakes'))
     if gemliquid == 'Brilliant' or gemliquid == 'Finesse':

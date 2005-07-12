@@ -23,26 +23,6 @@
         <class>QPushButton</class>
         <property stdset="1">
             <name>name</name>
-            <cstring>Cancel</cstring>
-        </property>
-        <property stdset="1">
-            <name>geometry</name>
-            <rect>
-                <x>207</x>
-                <y>265</y>
-                <width>93</width>
-                <height>26</height>
-            </rect>
-        </property>
-        <property stdset="1">
-            <name>text</name>
-            <string>Cancel</string>
-        </property>
-    </widget>
-    <widget>
-        <class>QPushButton</class>
-        <property stdset="1">
-            <name>name</name>
             <cstring>OK</cstring>
         </property>
         <property stdset="1">
@@ -57,6 +37,26 @@
         <property stdset="1">
             <name>text</name>
             <string>OK</string>
+        </property>
+    </widget>
+    <widget>
+        <class>QPushButton</class>
+        <property stdset="1">
+            <name>name</name>
+            <cstring>Cancel</cstring>
+        </property>
+        <property stdset="1">
+            <name>geometry</name>
+            <rect>
+                <x>207</x>
+                <y>265</y>
+                <width>93</width>
+                <height>26</height>
+            </rect>
+        </property>
+        <property stdset="1">
+            <name>text</name>
+            <string>Cancel</string>
         </property>
     </widget>
     <widget>
@@ -92,56 +92,20 @@
                 <class>QLabel</class>
                 <property stdset="1">
                     <name>name</name>
-                    <cstring>TextLabel1</cstring>
-                </property>
-                <property stdset="1">
-                    <name>geometry</name>
-                    <rect>
-                        <x>17</x>
-                        <y>19</y>
-                        <width>61</width>
-                        <height>16</height>
-                    </rect>
-                </property>
-                <property stdset="1">
-                    <name>text</name>
-                    <string>Crafter Skill:</string>
-                </property>
-            </widget>
-            <widget>
-                <class>QLabel</class>
-                <property stdset="1">
-                    <name>name</name>
                     <cstring>TextLabel2</cstring>
                 </property>
                 <property stdset="1">
                     <name>geometry</name>
                     <rect>
-                        <x>36</x>
-                        <y>56</y>
+                        <x>19</x>
+                        <y>17</y>
                         <width>36</width>
-                        <height>16</height>
+                        <height>22</height>
                     </rect>
                 </property>
                 <property stdset="1">
                     <name>text</name>
                     <string>Realm:</string>
-                </property>
-            </widget>
-            <widget>
-                <class>QComboBox</class>
-                <property stdset="1">
-                    <name>name</name>
-                    <cstring>Skill</cstring>
-                </property>
-                <property stdset="1">
-                    <name>geometry</name>
-                    <rect>
-                        <x>83</x>
-                        <y>17</y>
-                        <width>81</width>
-                        <height>22</height>
-                    </rect>
                 </property>
             </widget>
             <widget>
@@ -171,8 +135,44 @@
                 <property stdset="1">
                     <name>geometry</name>
                     <rect>
-                        <x>83</x>
-                        <y>55</y>
+                        <x>65</x>
+                        <y>17</y>
+                        <width>81</width>
+                        <height>22</height>
+                    </rect>
+                </property>
+            </widget>
+            <widget>
+                <class>QLabel</class>
+                <property stdset="1">
+                    <name>name</name>
+                    <cstring>TextLabel1</cstring>
+                </property>
+                <property stdset="1">
+                    <name>geometry</name>
+                    <rect>
+                        <x>185</x>
+                        <y>17</y>
+                        <width>61</width>
+                        <height>22</height>
+                    </rect>
+                </property>
+                <property stdset="1">
+                    <name>text</name>
+                    <string>Crafter Skill:</string>
+                </property>
+            </widget>
+            <widget>
+                <class>QComboBox</class>
+                <property stdset="1">
+                    <name>name</name>
+                    <cstring>Skill</cstring>
+                </property>
+                <property stdset="1">
+                    <name>geometry</name>
+                    <rect>
+                        <x>256</x>
+                        <y>17</y>
                         <width>81</width>
                         <height>22</height>
                     </rect>

@@ -1,6 +1,6 @@
 # Form implementation generated from reading ui file 'Options.ui'
 #
-# Created: Tue Mar 8 21:25:43 2005
+# Created: Sat Mar 12 23:31:45 2005
 #      by: The Python User Interface Compiler (pyuic) 3.8
 #
 # WARNING! All changes made in this file will be lost!
@@ -19,13 +19,13 @@ class B_Options(QDialog):
         self.resize(364,295)
         self.setCaption(self.tr("Options"))
 
-        self.Cancel = QPushButton(self,'Cancel')
-        self.Cancel.setGeometry(QRect(207,265,93,26))
-        self.Cancel.setText(self.tr("Cancel"))
-
         self.OK = QPushButton(self,'OK')
         self.OK.setGeometry(QRect(52,265,93,26))
         self.OK.setText(self.tr("OK"))
+
+        self.Cancel = QPushButton(self,'Cancel')
+        self.Cancel.setGeometry(QRect(207,265,93,26))
+        self.Cancel.setText(self.tr("Cancel"))
 
         self.Tab = QTabWidget(self,'Tab')
         self.Tab.setEnabled(1)
@@ -33,22 +33,22 @@ class B_Options(QDialog):
 
         self.General = QWidget(self.Tab,'General')
 
-        self.TextLabel1 = QLabel(self.General,'TextLabel1')
-        self.TextLabel1.setGeometry(QRect(17,19,61,16))
-        self.TextLabel1.setText(self.tr("Crafter Skill:"))
-
         self.TextLabel2 = QLabel(self.General,'TextLabel2')
-        self.TextLabel2.setGeometry(QRect(36,56,36,16))
+        self.TextLabel2.setGeometry(QRect(19,17,36,22))
         self.TextLabel2.setText(self.tr("Realm:"))
-
-        self.Skill = QComboBox(0,self.General,'Skill')
-        self.Skill.setGeometry(QRect(83,17,81,22))
 
         self.Realm = QComboBox(0,self.General,'Realm')
         self.Realm.insertItem(self.tr("Albion"))
         self.Realm.insertItem(self.tr("Hibernia"))
         self.Realm.insertItem(self.tr("Midgard"))
-        self.Realm.setGeometry(QRect(83,55,81,22))
+        self.Realm.setGeometry(QRect(65,17,81,22))
+
+        self.TextLabel1 = QLabel(self.General,'TextLabel1')
+        self.TextLabel1.setGeometry(QRect(185,17,61,22))
+        self.TextLabel1.setText(self.tr("Crafter Skill:"))
+
+        self.Skill = QComboBox(0,self.General,'Skill')
+        self.Skill.setGeometry(QRect(256,17,81,22))
 
         self.ShowDoneGems = QCheckBox(self.General,'ShowDoneGems')
         self.ShowDoneGems.setGeometry(QRect(18,100,250,17))
