@@ -5,24 +5,23 @@ import sys
 
 if __name__ == "__main__":
     sys.argv.append('py2exe')
-    ##sys.argv.append('-w')
-    #sys.argv.append('-p encodings')
-    #sys.argv.append('-i encodings.*')
-    #sys.argv.append('--force-imports encodings')
-    #sys.argv.append('-icon py.ico')
 
 sc = dict(
-        script="ScWindow.pyw",
-        icon_resources=[(100, 'py.ico')],)
+    script="ScWindow.pyw",
+    icon_resources=[(100, 'ScWindow.ico')],)
+
 setup(name="testsetup", 
     windows=[sc],
     #scripts=["ScWindow.pyw"],
-    data_files=[('.', ['./LICENSE.txt']),
+    data_files=[
+        ('.', ['./LICENSE.txt']),
+        ('.', ['./CHANGES.txt']),
         ('reports', ['reports/Reports.txt']), 
         ('reports', glob.glob("reports/*"))],
-    #icon='py.ico',
+    icon='ScWindow.ico',
     options = {'py2exe': {'includes': 'encodings, encodings.*', 
                           'packages' : ['encodings.*'],
-                          'dll_excludes' : ['ddraw.dll', 'opengl32.dll', 'glu32.dll']}},
-    )
-
+                          'excludes' : ['_ssl', '_socket'], 
+                          'dll_excludes' : ['ddraw.dll', 'opengl32.dll', 'glu32.dll']}
+    },
+)
