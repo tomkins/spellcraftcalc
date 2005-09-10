@@ -1277,58 +1277,74 @@ Races = {
       'Stats' :   (45, 45, 60, 70, 80, 60, 60, 60),
     }),
     'Briton' : d2({
-      'Resists' : d2({'Slash'  : 3, 'Crush'  : 2, 'Spirit' : 5}),      'Stats' :   (60, 60, 60, 60, 60, 60, 60, 60),
+      'Resists' : d2({'Slash'  : 3, 'Crush'  : 2, 'Spirit' : 5}),
+      'Stats' :   (60, 60, 60, 60, 60, 60, 60, 60),
     }),
     'Half Ogre' : d2({
-      'Resists' : d2({'Slash'  : 3, 'Thrust' : 2, 'Matter' : 5}),      'Stats' :   (90, 70, 40, 40, 60, 60, 60, 60),
+      'Resists' : d2({'Slash'  : 3, 'Thrust' : 2, 'Matter' : 5}),
+      'Stats' :   (90, 70, 40, 40, 60, 60, 60, 60),
     }),
     'Highlander' : d2({
-      'Resists' : d2({'Crush'  : 3, 'Slash'  : 2, 'Cold'   : 5}),      'Stats' :   (70, 70, 50, 50, 60, 60, 60, 60),
+      'Resists' : d2({'Crush'  : 3, 'Slash'  : 2, 'Cold'   : 5}),
+      'Stats' :   (70, 70, 50, 50, 60, 60, 60, 60),
     }),
     'Inconnu' : d2({
-      'Resists' : d2({'Thrust' : 3, 'Crush'  : 2, 'Heat'   : 5, 'Spirit' : 5}),      'Stats' :   (50, 60, 70, 50, 70, 60, 60, 60),
+      'Resists' : d2({'Thrust' : 3, 'Crush'  : 2, 'Heat'   : 5, 'Spirit' : 5}),
+      'Stats' :   (50, 60, 70, 50, 70, 60, 60, 60),
     }),
     'Saracen' : d2({
-      'Resists' : d2({'Thrust' : 3, 'Slash'  : 2, 'Heat'   : 5}),      'Stats' :   (50, 50, 80, 60, 60, 60, 60, 60),
+      'Resists' : d2({'Thrust' : 3, 'Slash'  : 2, 'Heat'   : 5}),
+      'Stats' :   (50, 50, 80, 60, 60, 60, 60, 60),
     }),
   }),
 
   'Hibernia' : d2({
     'Celt' : d2({
-      'Resists' : d2({'Slash'  : 3, 'Crush'  : 2, 'Spirit' : 5}),      'Stats' :   (60, 60, 60, 60, 60, 60, 60, 60),
+      'Resists' : d2({'Slash'  : 3, 'Crush'  : 2, 'Spirit' : 5}),
+      'Stats' :   (60, 60, 60, 60, 60, 60, 60, 60),
     }),
     'Elf' : d2({
-      'Resists' : d2({'Thrust' : 3, 'Slash'  : 2, 'Spirit' : 5}),      'Stats' :   (40, 40, 75, 75, 70, 60, 60, 60),
+      'Resists' : d2({'Thrust' : 3, 'Slash'  : 2, 'Spirit' : 5}),
+      'Stats' :   (40, 40, 75, 75, 70, 60, 60, 60),
     }),
     'Firbolg' : d2({
-      'Resists' : d2({'Crush'  : 3, 'Slash'  : 2, 'Heat'   : 5}),      'Stats' :   (90, 60, 40, 40, 60, 60, 70, 60),
+      'Resists' : d2({'Crush'  : 3, 'Slash'  : 2, 'Heat'   : 5}),
+      'Stats' :   (90, 60, 40, 40, 60, 60, 70, 60),
     }),
     'Lurikeen' : d2({
-      'Resists' : d2({'Crush'  : 5, 'Energy' : 5}),      'Stats' :   (40, 40, 80, 80, 60, 60, 60, 60),
+      'Resists' : d2({'Crush'  : 5, 'Energy' : 5}),
+      'Stats' :   (40, 40, 80, 80, 60, 60, 60, 60),
     }),
     'Shar' : d2({
-      'Resists' : d2({'Crush'  : 5, 'Energy' : 5}),      'Stats' :   (60, 80, 50, 50, 60, 60, 60, 60),
+      'Resists' : d2({'Crush'  : 5, 'Energy' : 5}),
+      'Stats' :   (60, 80, 50, 50, 60, 60, 60, 60),
     }),
     'Sylvan' : d2({
-      'Resists' : d2({'Crush'  : 3, 'Thrust' : 2, 'Energy' : 5, 'Matter' : 5}),      'Stats' :   (70, 60, 55, 45, 70, 60, 60, 60),
+      'Resists' : d2({'Crush'  : 3, 'Thrust' : 2, 'Energy' : 5, 'Matter' : 5}),
+      'Stats' :   (70, 60, 55, 45, 70, 60, 60, 60),
     }),
   }),
 
   'Midgard' : d2({
     'Dwarf' : d2({
-      'Resists' : d2({'Thrust' : 3, 'Slash'  : 2, 'Body'   : 5}),      'Stats' :   (60, 80, 50, 50, 60, 60, 60, 60),
+      'Resists' : d2({'Thrust' : 3, 'Slash'  : 2, 'Body'   : 5}),
+      'Stats' :   (60, 80, 50, 50, 60, 60, 60, 60),
     }),
     'Frostalf' : d2({
-      'Resists' : d2({'Thrust' : 3, 'Slash'  : 2, 'Spirit' : 5}),      'Stats' :   (55, 55, 55, 60, 60, 75, 60, 60),
+      'Resists' : d2({'Thrust' : 3, 'Slash'  : 2, 'Spirit' : 5}),
+      'Stats' :   (55, 55, 55, 60, 60, 75, 60, 60),
     }),
     'Kobold' : d2({
-      'Resists' : d2({'Crush'  : 5, 'Energy' : 5}),      'Stats' :   (50, 50, 70, 70, 60, 60, 60, 60),
+      'Resists' : d2({'Crush'  : 5, 'Energy' : 5}),
+      'Stats' :   (50, 50, 70, 70, 60, 60, 60, 60),
     }),
     'Norseman' : d2({
-      'Resists' : d2({'Slash'  : 3, 'Crush'  : 2, 'Cold'   : 5}),      'Stats' :   (70, 70, 50, 50, 60, 60, 60, 60),
+      'Resists' : d2({'Slash'  : 3, 'Crush'  : 2, 'Cold'   : 5}),
+      'Stats' :   (70, 70, 50, 50, 60, 60, 60, 60),
     }),
     'Troll' : d2({
-      'Resists' : d2({'Slash'  : 3, 'Thrust' : 2, 'Matter' : 5}),      'Stats' :   (100, 70, 35, 35, 60, 60, 60, 60),
+      'Resists' : d2({'Slash'  : 3, 'Thrust' : 2, 'Matter' : 5}),
+      'Stats' :   (100, 70, 35, 35, 60, 60, 60, 60),
     }),
     'Valkyn' : d2({
       'Resists' : d2({'Slash'  : 3, 'Thrust' : 2, 'Cold'   : 5, 'Body'   : 5}),
