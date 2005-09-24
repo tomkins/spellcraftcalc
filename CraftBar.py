@@ -24,38 +24,9 @@ import os
 import os.path
 import glob
 import re
-import dempak
 import string
 import SC
 import ConfigParser
-
-servercodes = {
-    '100' : 'Bors', '85' : 'Bedevere',
-    '55' : 'Galahad', '135' : 'Gaheris',
-    '105' : 'Iseult', '130' : 'Igraine',
-    '60' : 'Lancelot', '120' : 'Kay',
-    '95' : 'Gawaine', '155' : 'Mordred',
-    '115' : 'Nimue', '50' : 'Pendragon',
-    '70' : 'Palomides', '65' : 'Percival',
-    '110' : 'Pellinor', '90' : 'Morgan Le Fey',
-    '75' : 'Merlin', '80' : 'Gwenivere',
-    '150' : 'Pendragon',
-    '125' : 'Tristan',
-    '33' : 'Excalibur', '177' : 'Prydwen',
-    '45' : 'Avalon', '11' : 'Lyonesse',
-    '14' : 'Stonehenge', '134' : 'Logres',
-    '153' : 'Dartmoor', '147' : 'Camlann',
-    '34' : 'Broceliande', '12' : 'Ys',
-    '139' : 'Orcanie', '171' : 'Carnac',
-    '148' : 'Gorr'}
-
-euroservers = ['Excalibur', 'Prydwen',
-     'Avalon',  'Lyonesse',
-     'Stonehenge',  'Logres',
-     'Dartmoor',  'Camlann',
-     'Broceliande',  'Ys',
-     'Orcanie',  'Carnac',
-     'Gorr']
 
 class CharItem(QListViewItem):
     def __init__(self, parent = None, charname = '', server = '', filename = ''):
@@ -79,7 +50,6 @@ class CraftBar(B_CraftBar):
         self.mythicdir = path
 
     def loadGems(self):
-        slotcounter = (self.HotbarNum.value() - 1) * 10 + self.HotbarPos.value() - 1
         char = self.CharList.selectedItem()
         if char is None: return
         self.LoadGemsButton.setEnabled(0)
@@ -93,25 +63,29 @@ class CraftBar(B_CraftBar):
         g.close()
         CP = ConfigParser.SafeConfigParser()
         CP.read([filename])
-        try:
-            mpak = dempak.MPAKFile(str(self.DaocPath.text())+'/data/ifd.mpk')
-        except:
-            QMessageBox.critical(None, 'Error!', 
-                'Error opening data Daoc file. Check your Daoc path.', 'OK')
-            self.LoadGemsButton.setEnabled(1)
-            self.LoadGemsButton.repaint(self.LoadGemsButton.visibleRect())
-            return
-
-        for e in mpak.entries:
-            mpaklist = mpak.open(e).readlines()
-        mpak.close()
-        itemlist = {}
-        for line in mpaklist:
+        buttons = [-1, -1, -1]
+        newbuttons = []
+        slotcounter = 0
+        while slotcounter <= 99:
             try:
-                n, key, num, realm, p, q, lvl, name, rest = string.split(line, ',', 8)
-                itemlist[name+str(realm)] = [key, num, realm]
-            except: pass
+                buttonstr=CP.get('Macros', 'Macro_%d' % slotcounter)
+            except:
+                if len(newbuttons) < 3:
+                    newbuttons.append(slotcounter)
+            else:
+                buttonval = string.split(buttonstr, ',', 1)
+                if len(buttonval) > 1 and buttonval[1][:7].lower() == '/craft ':
+                    if buttonval[1][7].lower() in "ahm":
+                        buttons['ahm'.index(buttonval[1][7].lower())] = slotcounter
+            slotcounter += 1
+        for i in (0, 1, 2):
+            if buttons[i] < 0 and len(newbuttons) > 0:
+                buttons[i] = newbuttons.pop(0)
+                CP.set('Macros', 'Macro_%d' % buttons[i],
+                       "%s,/craft %s" % (Realms[i][0:3], Realms[i]))
         
+        realm = self.scwin.realm
+        slotcounter = (self.HotbarNum.value() - 1) * 10 + self.HotbarPos.value() - 1
         for loc in TabList:
             item = self.piecelist.get(loc, None)
             if item is None: continue
@@ -119,19 +93,33 @@ class CraftBar(B_CraftBar):
                 for slot in range(0, 4):
                     if item.getSlotAttr('player', slot, 'Type') != 'Unused':
                         gemlvl, gemname = string.split(SC.getGemName(item, slot), ' ', 1)
-                        for name in itemlist.keys():
-                            m = re.compile(re.escape(gemname), re.IGNORECASE).search(name)
-                            if m is not None:
-                                if self.scwin.realm == 'Albion' and name[-1] != '1': continue
-                                if self.scwin.realm == 'Hibernia' and name[-1] != '3': continue
-                                if self.scwin.realm == 'Midgard' and name[-1] != '2': continue
-                                vals = itemlist[name]   
-                                #if server in euroservers:
-                                #    buttonstr = '45,%s%02d%02d' % (vals[0], (int(vals[1]) - 1), GemNames.index(gemlvl))
-                                #else:
-                                buttonstr = '45,%s%03d%02d' % (vals[0], (int(vals[1]) - 1) * 2, GemNames.index(gemlvl))
+                        if slotcounter >= 300:
+                            continue
+                        if not HotkeyGems[realm].has_key(gemname):
+                            for i in (0, 1, 2):
+                                if realm == Realms[i]:
+                                    continue
+                                if HotkeyGems[Realms[i]].has_key(gemname):
+                                    realm = Realms[i]
+                                    buttonstr = 'Hotkey_%d' % buttons[i]
+                                    if slotcounter >= 200:
+                                        CP.set('Quickbar3', 'Hotkey_%d' % slotcounter - 200, buttonstr)
+                                    elif slotcounter >= 100:
+                                        CP.set('Quickbar2', 'Hotkey_%d' % slotcounter - 100, buttonstr)
+                                    else:
+                                        CP.set('Quickbar', 'Hotkey_%d' % slotcounter, buttonstr)
+                                    slotcounter += 1
+                                    break
+                        if HotkeyGems[realm].has_key(gemname):
+                            val = HotkeyGems[realm][gemname]
+                            buttonstr = '45,13%03d%02d' % (val, GemNames.index(gemlvl))
+                            if slotcounter >= 200: 
+                                CP.set('Quickbar3', 'Hotkey_%d' % (slotcounter - 200), buttonstr)
+                            elif slotcounter >= 100:
+                                CP.set('Quickbar2', 'Hotkey_%d' % (slotcounter - 100), buttonstr)
+                            else:
                                 CP.set('Quickbar', 'Hotkey_%d' % slotcounter, buttonstr)
-                                slotcounter += 1
+                            slotcounter += 1
         f = open(filename, 'w')
         CP.write(f)
         f.close()
@@ -146,7 +134,7 @@ class CraftBar(B_CraftBar):
             for file in filelist: 
                 m = re.compile("(\w+)-(\d+)\.ini$").search(file)
                 if m is not None:
-                    server = servercodes[m.group(2)]
+                    server = ServerCodes[m.group(2)]
                     self.CharList.insertItem(CharItem(self.CharList, m.group(1),
                         server, file))
             self.CharList.setColumnWidthMode(0, QListView.Maximum)
@@ -162,7 +150,7 @@ class CraftBar(B_CraftBar):
         if ep == 0: 
             ep = 10
             eb -= 1
-        if eb > 10 or self.gemcount == 0:
+        if eb > 30 or self.gemcount == 0:
             self.LoadGemsButton.setEnabled(0)
             self.EndBar.setText('-')
             self.EndPos.setText('-')
