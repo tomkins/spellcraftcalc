@@ -1875,9 +1875,9 @@
         <property stdset="1">
             <name>geometry</name>
             <rect>
-                <x>315</x>
+                <x>312</x>
                 <y>142</y>
-                <width>285</width>
+                <width>296</width>
                 <height>14</height>
             </rect>
         </property>
@@ -1895,9 +1895,9 @@
         <property stdset="1">
             <name>geometry</name>
             <rect>
-                <x>315</x>
-                <y>157</y>
-                <width>285</width>
+                <x>312</x>
+                <y>156</y>
+                <width>296</width>
                 <height>14</height>
             </rect>
         </property>
@@ -1915,9 +1915,9 @@
         <property stdset="1">
             <name>geometry</name>
             <rect>
-                <x>315</x>
-                <y>173</y>
-                <width>285</width>
+                <x>312</x>
+                <y>170</y>
+                <width>296</width>
                 <height>14</height>
             </rect>
         </property>

@@ -100,10 +100,10 @@ class SCApp(B_SC):
         self.setGeometry(self.x(), self.y(), self.width() + 5, 
 			 self.height() + 10)
 
-        # Dummy widget, makes things look nicer on linux
-        #q = QWidget(self.scroller)
-        #q.setGeometry(0, 0, 2000, 2000)
-        #self.scroller.addChild(q, 0, 0)
+        # Dummy widget, makes things look nicer on X-Windows
+        q = QWidget(self.scroller)
+        q.setGeometry(0, 0, 2000, 2000)
+        self.scroller.addChild(q, 0, 0)
 
         for c in self.children():
             if isinstance(c, QTabWidget) or isinstance(c, QGroupBox) \
