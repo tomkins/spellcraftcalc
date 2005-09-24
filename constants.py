@@ -30,7 +30,7 @@ __all__ = [
   'StatTable', 'TabList', 'GemCosts', 'FocusValues', 'DropStatTableOrdered', 
   'OCStartPercentages', 'UnusedValues', 'ShieldTypes', 'ResistTable', 'SkillList', 
   'SkillTable', 'UnusedList', 'ImbueMultipliers', 'PvEBonusTable', 'DropTypeList', 
-  'MaterialGems', 'FocusList', 'OtherBonusTable', 'LiquidsOrder'
+  'MaterialGems', 'FocusList', 'OtherBonusTable', 'LiquidsOrder', 'ServerCodes',
 ]
 
 ScVersion = "Kort 1.43 (dev)"
@@ -1569,6 +1569,51 @@ RaceList = d2(RaceList)
 
 Races['All'] = d2(Races['All'])
 Races = d2(Races)
+
+
+ServerCodes = d2({
+     '85' : 'Bedevere',
+    '100' : 'Bors',
+     '27' : 'Ector',
+    '135' : 'Gaheris',
+     '55' : 'Galahad',
+    '220' : 'Gareth',
+     '95' : 'Gawaine',
+     '80' : 'Gwinevere',
+    '130' : 'Igraine',
+    '105' : 'Iseult',
+    '120' : 'Kay',
+     '60' : 'Lancelot',
+    '192' : 'Lamorak',
+     '75' : 'Merlin',
+    '140' : 'Mordred',
+     '90' : 'Morgan Le Fey',
+    '115' : 'Nimue',
+     '70' : 'Palomides',
+    '110' : 'Pellinor',
+     '50' : 'Pendragon',
+    '150' : 'Hector',
+     '65' : 'Percival',
+    '125' : 'Tristan',
+
+#Euro
+     '33' : 'Excalibur',
+    '177' : 'Prydwen',
+     '45' : 'Avalon',
+    '153' : 'Dartmoor',
+     '11' : 'Lyonesse',
+    '134' : 'Logres',
+     '14' : 'Stonehenge',
+     '34' : 'Broceliande',
+     '12' : 'Ys',
+    '139' : 'Orcanie',
+    '171' : 'Carnac',
+#   '???' : 'Cumbria',
+#   '???' : 'Deira',
+    '148' : 'Gorr',
+    '147' : 'Camlann',
+#   '???' : 'Akatsuki', 
+})
 
 
 # Rename old skills to new skills, from previously saved template files
