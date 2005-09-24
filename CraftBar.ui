@@ -327,7 +327,7 @@ Removing the _bak will restore your settings.</string>
             </property>
             <property stdset="1">
                 <name>maxValue</name>
-                <number>10</number>
+                <number>30</number>
             </property>
             <property stdset="1">
                 <name>minValue</name>
