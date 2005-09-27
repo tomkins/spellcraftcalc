@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'Craft.ui'
 #
-# Created: Sat Sep 24 00:50:58 2005
+# Created: Tue Sep 27 10:36:59 2005
 #      by: The PyQt User Interface Compiler (pyuic) 3.15
 #
 # WARNING! All changes made in this file will be lost!

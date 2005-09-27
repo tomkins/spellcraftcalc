@@ -1,6 +1,11 @@
-Updated 4/10/04 - Version 1.43 (dev)
-Redid all of the tables to make them read-only (protection from bugs),
-reformatted and fixed some values (Briton Spirit resist, etc.)
+Updated 9/24/05 - Version 1.43 (dev)
+Changed to a two-row-tabs layout of body & jewelry, without using tab 
+pages which required all of the controls to be shifted back and forth.
+Recoded the const tables to make them read-only (protection from bugs).
+Reformatted tables and fixed some values (Briton Spirit resist, etc.)
+Fixed SC Quickbar tables, but will be broken by future Mythic changes.
+Extended Quickbars to 30 bars (1-10 on 1st bar, 11-30 on 2nd/3rd bars).
+Added some of the new servers for the Fill in Quickbars feature.
 
 Ehrayn Updated 3/18/05 - Patch 1.0.7
 Display Racial Resists as +# when not included in total.

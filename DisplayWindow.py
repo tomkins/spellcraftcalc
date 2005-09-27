@@ -34,17 +34,14 @@ class DisplayWindow(B_DisplayWindow):
 		self.DisplayText.insertStrList(strlist)
 
 	def CloseWindow(self):
-		self.done(1)	
+		self.done(1)
 
 	def LocationClicked(self,a0):
 		if a0 is None: return
 		tabname, rest = string.split(str(a0.text()), ':', 1)
 		tabindex = TabList.index(tabname)
 		if tabindex > 10:
-			self.scwindow.TypeTab.setCurrentPage(1)
 			self.scwindow.JewelTab.setCurrentPage(tabindex-11)
 		else:
-			self.scwindow.TypeTab.setCurrentPage(0)
 			self.scwindow.PieceTab.setCurrentPage(tabindex)
-
 		self.done(1)

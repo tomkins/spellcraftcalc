@@ -61,7 +61,6 @@ class SCApp(B_SC):
         self.capTotals = { }
         self.currentPieceTab = None
         self.currentJewelTab = None
-        self.currentTypeTab = None
         self.extraSlotsOpen = False
         self.recentFiles = []
         self.effectlists = {
@@ -111,7 +110,6 @@ class SCApp(B_SC):
                 c.reparent(self.scroller.viewport(), c.pos(), 1)
                 self.scroller.addChild(c, c.pos().x(), c.pos().y())
         self.scroller.show()
-        self.TypeTab.setFocusPolicy(QWidget.StrongFocus)
         self.PieceTab.setFocusPolicy(QWidget.StrongFocus)
         self.JewelTab.setFocusPolicy(QWidget.StrongFocus)
 
@@ -265,27 +263,32 @@ class SCApp(B_SC):
         self.FileNameLabel.setText('Unnamed')
         self.filename = None
 
-        self.PieceTab.setCurrentPage(0)
-        self.currentPieceTab = self.PieceTab.currentPage()
+        self.currentTab = None
         self.JewelTab.setCurrentPage(0)
         self.currentJewelTab = self.JewelTab.currentPage()
-        self.TypeTab.setCurrentPage(0)
-        self.currentTypeTab = self.TypeTab.currentPage()
-        self.currentPage = self.PieceTab.currentPage()
+        self.PieceTab.setCurrentPage(0)
+        self.currentPieceTab = self.PieceTab.currentPage()
         self.currentTab = self.PieceTab
-        
+        self.currentPage = self.PieceTab.currentPage()
+        self.currentTabLabel = string.strip(str(self.currentTab.tabLabel(self.currentPage)))
+        self.restoreItem(self.itemattrlist.get(self.currentTabLabel, Item(self.currentTabLabel)))
+        item = self.itemattrlist.get(self.currentTabLabel, Item(self.currentTabLabel))
+
+        self.tabGeometry = [{
+            'x': self.PieceTab.x(), 'width':  self.PieceTab.width(), 
+            'y': self.PieceTab.y(), 'height': self.PieceTab.height(), 
+          }, {
+            'x': self.JewelTab.x(), 'width':  self.JewelTab.width(), 
+            'y': self.JewelTab.y(), 'height': self.JewelTab.height(), 
+        }]
+
         self.Equipped.setChecked(1)
-        #self.Equipped.hide()
 
         self.itemattrlist = { }
         for tab in TabList:
             self.itemattrlist[tab] = Item(tab)
         self.ItemLevel.setText('51')
         self.CharLevel.setText('50')
-
-        # move it around because i screwed up the UI file :)
-        for child in self.currentJewelTab.children():
-            child.reparent(self.currentPieceTab, 0, child.pos(), 1)
 
         self.extraSlots = []
         self.switchOnType = {'drop' : [], 'player' : [] }
@@ -401,45 +404,49 @@ class SCApp(B_SC):
             self.PlayerToggled(1)
             self.startup = 0
     
-    def currentTabLabel(self):
-        return str(self.currentTab.tabLabel(self.currentPage))
-
     def PieceTabChanged(self,a0):
-        if self.currentPieceTab is None: return
-        if self.currentTab != self.PieceTab: return
-        self.swapGems.setItemEnabled(TabList.index(self.currentTabLabel()), True)
-        item = self.itemattrlist.get(self.currentTabLabel(), Item(self.currentTabLabel()))
+        if self.currentTab is None: return
+        if self.currentTab != self.PieceTab:
+            self.JewelTab.setGeometry(self.tabGeometry[1]['x'], 
+                                      self.tabGeometry[1]['y'], 
+                                      self.tabGeometry[1]['width'], 
+                                      self.tabGeometry[1]['height'])
+            self.PieceTab.setGeometry(self.tabGeometry[0]['x'], 
+                                      self.tabGeometry[0]['y'], 
+                                      self.tabGeometry[0]['width'], 
+                                      self.tabGeometry[0]['height'])
+            self.currentTab = self.PieceTab
+        item = self.itemattrlist.get(self.currentTabLabel, Item(self.currentTabLabel))
         self.storeItem(item)
-        for child in self.currentPieceTab.children():
-            child.reparent(a0, 0, child.pos(), 1)
-        #if str(self.PieceTab.tabLabel(a0)) == 'Right Hand' \
-        #        or str(self.PieceTab.tabLabel(a0)) == 'Left Hand' \
-        #        or str(self.PieceTab.tabLabel(a0)) == '2 Handed' \
-        #        or str(self.PieceTab.tabLabel(a0)) == 'Ranged' \
-        #        or str(self.PieceTab.tabLabel(a0)) == 'Spare':
-        #    self.Equipped.show()
-        #    self.Equipped.setChecked(0)
-        #else:
-        #    self.Equipped.hide()
-        self.Equipped.show()
+
         self.currentPieceTab = a0
         self.currentPage = a0
-        self.swapGems.setItemEnabled(TabList.index(self.currentTabLabel()), False)
-        self.restoreItem(self.itemattrlist.get(self.currentTabLabel(), Item(self.currentTabLabel())))
-        item = self.itemattrlist.get(self.currentTabLabel(), Item(self.currentTabLabel()))
+        self.currentTabLabel = string.strip(str(self.currentTab.tabLabel(a0)))
+
+        self.restoreItem(self.itemattrlist.get(self.currentTabLabel, Item(self.currentTabLabel)))
+        item = self.itemattrlist.get(self.currentTabLabel, Item(self.currentTabLabel))
 
     def JewelTabChanged(self,a0):
-        if self.currentJewelTab is None: return
-        if self.currentTab != self.JewelTab: return
-        item = self.itemattrlist.get(self.currentTabLabel(), Item(self.currentTabLabel()))
+        if self.currentTab is None: return
+        if self.currentTab != self.JewelTab: 
+            self.PieceTab.setGeometry(self.tabGeometry[1]['x'], 
+                                      self.tabGeometry[1]['y'], 
+                                      self.tabGeometry[1]['width'], 
+                                      self.tabGeometry[1]['height'])
+            self.JewelTab.setGeometry(self.tabGeometry[0]['x'], 
+                                      self.tabGeometry[0]['y'], 
+                                      self.tabGeometry[0]['width'], 
+                                      self.tabGeometry[0]['height'])
+            self.currentTab = self.JewelTab
+        item = self.itemattrlist.get(self.currentTabLabel, Item(self.currentTabLabel))
         self.storeItem(item)
-        for child in self.currentJewelTab.children():
-            child.reparent(a0, 0, child.pos(), 1)
-       #self.Equipped.hide()
-        self.currentJewelTab = a0
+
+        self.currentPieceTab = a0
         self.currentPage = a0
-        item = self.itemattrlist.get(self.currentTabLabel(), Item(self.currentTabLabel()))
-        self.restoreItem(self.itemattrlist.get(self.currentTabLabel(), Item(self.currentTabLabel())))
+        self.currentTabLabel = string.strip(str(self.currentTab.tabLabel(a0)))
+
+        self.restoreItem(self.itemattrlist.get(self.currentTabLabel, Item(self.currentTabLabel)))
+        item = self.itemattrlist.get(self.currentTabLabel, Item(self.currentTabLabel))
 
     def FixupItemLevel(self):
         if str(self.ItemLevel.text()) == '' \
@@ -454,7 +461,7 @@ class SCApp(B_SC):
     def storeItem(self, item):
         if item is None: return
         self.FixupItemLevel()
-        item.loadAttr('Location', self.currentTabLabel())
+        item.loadAttr('Location', self.currentTabLabel)
         item.loadAttr('Realm', self.realm)
         item.loadAttr('Level', unicode(self.ItemLevel.text()))
         if self.Equipped.isChecked():
@@ -499,7 +506,7 @@ class SCApp(B_SC):
                     item.getSlotAttr(state, slot-1, 'Time'),
                     item.getSlotAttr(state, slot-1, 'Remakes'),
                     item.getSlotAttr(state, slot-1, 'Done'))
-        self.itemattrlist[self.currentTabLabel()] = item
+        self.itemattrlist[self.currentTabLabel] = item
 
     def restoreItem(self, item):
         if item is None: return
@@ -519,13 +526,6 @@ class SCApp(B_SC):
             typelist = DropTypeList
         self.ItemLevel.setText(item.getAttr('Level'))
         location = item.getAttr('Location')
-        #if location != 'Right Hand' \
-        #        and location != 'Left Hand' \
-        #        and location != '2 Handed' \
-        #        and location != 'Ranged' \
-        #        and location != 'Spare':
-        #    item.loadAttr('Equipped', '1')
-        #if self.Equipped.isVisible():
         self.Equipped.setChecked(int(item.getAttr('Equipped')))
         for slot in range(1, toprng):
             typecombo = getattr(self, 'Type_%d' % slot)
@@ -614,12 +614,6 @@ class SCApp(B_SC):
         totalutility = 0.0
         totalcost = 0
         for key, item in self.itemattrlist.items():
-           # if key != '2 Handed' and \
-           #         key != 'Right Hand' and \
-           #         key != 'Left Hand' and \
-           #         key != 'Ranged' and \
-           #         key != 'Spare':
-           #     item.loadAttr('Equipped', '1')
             utility = 0.0
             itemtype = item.getAttr('ActiveState')
             itemcost = 0
@@ -659,7 +653,7 @@ class SCApp(B_SC):
                         if remakecost > 0:
                             remakecost += 60 * costindex
                     itemcost += cost + remakecost
-                if itemtype == 'player' and key == self.currentTabLabel():
+                if itemtype == 'player' and key == self.currentTabLabel:
                     getattr(self, 'Cost_%d' % (i+1)).setText(SC.formatCost(cost+remakecost))
                 if gemtype == 'Skill':
                     if effect == 'All Magic Skills'\
@@ -757,7 +751,7 @@ class SCApp(B_SC):
             totalcost += itemcost
             if itemtype == 'player':
                 itemimbue = self.getItemImbue(item)
-                imbue = self.calcImbue(item, key == self.currentTabLabel())
+                imbue = self.calcImbue(item, key == self.currentTabLabel)
                 if (imbue - itemimbue) >= 6:
                     self.OcErrorString.setText('Impossible Overcharge on %s' % key)
                 elif imbue > (itemimbue+0.5):
@@ -770,7 +764,7 @@ class SCApp(B_SC):
                     success += ItemQualOCModifiers[unicode(self.QualDrop.currentText())]
                     success += (self.crafterSkill - 500) / 10
                     if self.crafterSkill <= 50: success -= 450
-            if key == self.currentTabLabel():
+            if key == self.currentTabLabel:
                 self.Utility.setText('%3.1f' % utility)
                 if self.PlayerMade.isChecked():
                     self.Total_Imbue.setText(unicode(itemimbue))
@@ -1020,7 +1014,7 @@ class SCApp(B_SC):
         if race in racelist:
           self.CharRace.setCurrentItem(racelist.index(race))
         self.RaceChanged('')
-        item = self.itemattrlist.get(self.currentTabLabel(), Item(self.currentTabLabel()))
+        item = self.itemattrlist.get(self.currentTabLabel, Item(self.currentTabLabel))
         item.loadAttr('ActiveState','player')
         if self.save:
             self.restoreItem(item)
@@ -1038,7 +1032,7 @@ class SCApp(B_SC):
         self.nocalc = 1
         self.modified = 1
         self.UpdateCombo(index)
-        item = self.itemattrlist.get(self.currentTabLabel(), Item(self.currentTabLabel()))
+        item = self.itemattrlist.get(self.currentTabLabel, Item(self.currentTabLabel))
         self.storeItem(item)
         self.nocalc = wascalc
         self.calculate()
@@ -1094,7 +1088,7 @@ class SCApp(B_SC):
         if not a0: 
             return
         self.showDropWidgets()
-        item = self.itemattrlist.get(self.currentTabLabel(), Item(self.currentTabLabel()))
+        item = self.itemattrlist.get(self.currentTabLabel, Item(self.currentTabLabel))
         item.loadAttr('ActiveState','drop')
         if self.save:
             self.restoreItem(item)
@@ -1104,71 +1098,28 @@ class SCApp(B_SC):
         if not a0: 
             return
         self.showPlayerWidgets()
-        item = self.itemattrlist.get(self.currentTabLabel(), Item(self.currentTabLabel()))
+        item = self.itemattrlist.get(self.currentTabLabel, Item(self.currentTabLabel))
         item.loadAttr('ActiveState','player')
         if self.save:
             self.restoreItem(item)
 
-
-    def TypeTabChanged(self,a0):
-        if (str(self.TypeTab.tabLabel(self.currentTypeTab)) == str(self.TypeTab.tabLabel(a0))) or self.currentTypeTab is None:
-            return
-        wascacl = self.nocalc
-        self.nocalc = 1
-        if str(self.TypeTab.tabLabel(self.currentTypeTab)) == 'Jewelry':
-            curtab = self.JewelTab
-            othertab = self.PieceTab
-            for i in range(0, 11):
-                self.swapGems.setItemEnabled(i, True)
-        else:
-            curtab = self.PieceTab
-            othertab = self.JewelTab
-            for i in range(0, 11):
-                self.swapGems.setItemEnabled(i, False)
-
-        item = self.itemattrlist.get(self.currentTabLabel(), Item(self.currentTabLabel()))
-        self.storeItem(item)
-        for child in curtab.currentPage().children():
-            child.reparent(othertab.currentPage(), 0, child.pos(), 1)
-        self.currentTypeTab = a0
-        self.currentPage = othertab.currentPage()
-        self.currentTab = othertab
-        if self.currentTab == self.JewelTab:
-            #self.Equipped.hide()
-            pass
-        else:
-            self.swapGems.setItemEnabled(TabList.index(self.currentTabLabel()), False)
-            #if self.currentTabLabel() == 'Right Hand' \
-            #        or self.currentTabLabel() == 'Left Hand' \
-            #        or self.currentTabLabel() == '2 Handed' \
-            #        or self.currentTabLabel() == 'Ranged' \
-            #        or self.currentTabLabel() == 'Spare':
-            #    self.Equipped.show()
-            #    self.Equipped.setChecked(0)
-            #else:
-            #    self.Equipped.hide()
-        self.Equipped.show()
-        item = self.itemattrlist.get(self.currentTabLabel(), Item(self.currentTabLabel()))
-        self.nocalc = wascacl
-        self.restoreItem(item)
-
     def AmountChanged(self,a0):
         self.modified = 1
         if self.save:
-            item = self.itemattrlist.get(self.currentTabLabel(), Item(self.currentTabLabel()))
+            item = self.itemattrlist.get(self.currentTabLabel, Item(self.currentTabLabel))
             self.storeItem(item)
         self.calculate()
 
     def recalculate(self,a0):
         self.modified = 1
         if self.save:
-            item = self.itemattrlist.get(self.currentTabLabel(), Item(self.currentTabLabel()))
+            item = self.itemattrlist.get(self.currentTabLabel, Item(self.currentTabLabel))
             self.storeItem(item)
         self.calculate()
 
     def ClearCurrentItem(self):
-        item = Item(self.currentTabLabel())
-        self.itemattrlist[self.currentTabLabel()] = item
+        item = Item(self.currentTabLabel)
+        self.itemattrlist[self.currentTabLabel] = item
         self.restoreItem(item)
 
     def DistanceCapSet(self):
@@ -1183,9 +1134,9 @@ class SCApp(B_SC):
             QMessageBox.critical(None, 'Error!', 
                 'Cannot save item - You must specifify a name!', 'OK')
             return
-        item = self.itemattrlist.get(self.currentTabLabel(), Item(self.currentTabLabel()))
+        item = self.itemattrlist.get(self.currentTabLabel, Item(self.currentTabLabel))
         self.storeItem(item)
-        ext = FileExt[self.currentTabLabel()]
+        ext = FileExt[self.currentTabLabel]
         if type(ext) == types.ListType:
             ext = ext[0]
         itemdir = os.path.join(os.path.dirname(os.path.abspath(sys.argv[0])), 'items', self.realm, ext)
@@ -1199,7 +1150,7 @@ class SCApp(B_SC):
                 '%s successfully saved!' % itemname, 'OK')
         
     def Load_Item(self):
-        ext = FileExt[self.currentTabLabel()]
+        ext = FileExt[self.currentTabLabel]
         extstr = ''
         if type(ext) == types.ListType:
             for e in ext:
@@ -1218,7 +1169,7 @@ class SCApp(B_SC):
         if Qfd.exec_loop():
             filename = Qfd.selectedFile()
             if filename is not None and unicode(filename) != '':
-                item = Item(self.currentTabLabel())
+                item = Item(self.currentTabLabel)
                 item.loadAttr('Realm', self.realm)
                 if item.load(unicode(filename)) == -1 : return
                 if string.lower(item.getAttr('Realm')) != string.lower(self.realm)\
@@ -1226,8 +1177,8 @@ class SCApp(B_SC):
                     and not self.coop:
                     QMessageBox.critical(None, 'Error!', 'You are trying to load an item for another realm!', 'OK')
                     return
-                item.loadAttr('Location', self.currentTabLabel())
-                self.itemattrlist[self.currentTabLabel()] = item
+                item.loadAttr('Location', self.currentTabLabel)
+                self.itemattrlist[self.currentTabLabel] = item
                 self.restoreItem(item)
                 self.modified = 1
 
@@ -1237,35 +1188,8 @@ class SCApp(B_SC):
             self.ItemLevel.setText(str(level))
 
     def EquippedClicked(self):
-        item = self.itemattrlist.get(self.currentTabLabel(), Item(self.currentTabLabel()))
+        item = self.itemattrlist.get(self.currentTabLabel, Item(self.currentTabLabel))
         self.storeItem(item)
-        # Someone said this feature existed in Leladia's, but it doesn't seem to be....
-        #if (self.currentTabLabel() == '2 Handed'\
-        #       or self.currentTabLabel() == 'Ranged')\
-        #       and self.Equipped.isChecked():
-        #    i = self.itemattrlist.get('Left Hand', Item('Left Hand'))
-        #    i.loadAttr('Equipped', '0')
-        #    self.itemattrlist['Left Hand'] = i
-        #    i = self.itemattrlist.get('Right Hand', Item('Right Hand'))
-        #    i.loadAttr('Equipped', '0')
-        #    self.itemattrlist['Right Hand'] = i
-        #    if self.currentTabLabel() == '2 Handed':
-        #        i = self.itemattrlist.get('Ranged', Item('Ranged'))
-        #        i.loadAttr('Equipped', '0')
-        #        self.itemattrlist['Ranged'] = i
-        #    else:
-        #        i = self.itemattrlist.get('2 Handed', Item('2 Handed'))
-        #        i.loadAttr('Equipped', '0')
-        #        self.itemattrlist['2 Handed'] = i
-        #elif (self.currentTabLabel() == 'Right Hand'\
-        #       or self.currentTabLabel() == 'Left Hand')\
-        #       and self.Equipped.isChecked():
-        #    i = self.itemattrlist.get('2 Handed', Item('2 Handed'))
-        #    i.loadAttr('Equipped', '0')
-        #    self.itemattrlist['2 Handed'] = i
-        #    i = self.itemattrlist.get('Ranged', Item('Ranged'))
-        #    i.loadAttr('Equipped', '0')
-        #    self.itemattrlist['Ranged'] = i
         self.calculate()
     
     def newFile(self):
@@ -1434,7 +1358,7 @@ class SCApp(B_SC):
             self.CharRace.setCurrentItem(AllBonusList[self.realm][self.charclass]['Races'].index(racename))
             self.RaceChanged('')
         self.nocalc = wascalc
-        self.restoreItem(self.itemattrlist.get(self.currentTabLabel()))
+        self.restoreItem(self.itemattrlist.get(self.currentTabLabel))
         self.modified = 0
         
     def loadFromLela(self, scclines):
@@ -1469,7 +1393,7 @@ class SCApp(B_SC):
             item.loadLelaItemFromSCC(itemnum, scclines, self.realm)
             self.itemattrlist[item.getAttr('Location')] = item
         self.nocalc = wascalc
-        self.restoreItem(self.itemattrlist.get(self.currentTabLabel()))                        
+        self.restoreItem(self.itemattrlist.get(self.currentTabLabel))                        
         
     def openOptions(self):
         self.modified = 1
@@ -1483,9 +1407,9 @@ class SCApp(B_SC):
         self.calculate()
 
     def OpenCraftWindow(self):
-        self.storeItem(self.itemattrlist.get(self.currentTabLabel()))
+        self.storeItem(self.itemattrlist.get(self.currentTabLabel))
         CW = CraftWindow.CraftWindow(self, '', 1)
-        CW.loadItem(self.itemattrlist.get(self.currentTabLabel()))
+        CW.loadItem(self.itemattrlist.get(self.currentTabLabel))
         CW.ExpMultiplier.setValue(self.craftMultiplier)
         CW.exec_loop()
         self.craftMultiplier = int(CW.ExpMultiplier.value())
@@ -1553,11 +1477,11 @@ class SCApp(B_SC):
         QMainWindow.resizeEvent(self, e)
 
     def swapWith(self, part):
-        cur = self.itemattrlist.get(self.currentTabLabel(), Item(self.currentTabLabel()))
+        cur = self.itemattrlist.get(self.currentTabLabel, Item(self.currentTabLabel))
         swap = self.itemattrlist.get(part, Item(part))
         self.itemattrlist[part] = cur
-        self.itemattrlist[self.currentTabLabel()] = swap
-        self.restoreItem(self.itemattrlist[self.currentTabLabel()])
+        self.itemattrlist[self.currentTabLabel] = swap
+        self.restoreItem(self.itemattrlist[self.currentTabLabel])
 
     def swapWithChest(self):
         self.swapWith('Chest')
