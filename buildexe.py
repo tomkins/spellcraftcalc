@@ -6,13 +6,15 @@ import sys
 if __name__ == "__main__":
     sys.argv.append('py2exe')
 
-sc = dict(
-    script="ScWindow.pyw",
-    icon_resources=[(100, 'ScWindow.ico')],)
+sc = {
+    "script" : "ScWindow.pyw",
+    "icon_resources" : [(100, 'ScWindow.ico')],
+    }
 
 setup(name="testsetup", 
     zipfile=None,
     windows=[sc],
+    icon='ScWindow.ico',
     data_files=[
         ('.', ['./LICENSE.txt']),
         ('.', ['./CHANGES.txt']),

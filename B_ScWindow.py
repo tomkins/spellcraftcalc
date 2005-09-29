@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'ScWindow.ui'
 #
-# Created: Tue Sep 27 10:36:58 2005
+# Created: Wed Sep 28 18:57:23 2005
 #      by: The PyQt User Interface Compiler (pyuic) 3.15
 #
 # WARNING! All changes made in this file will be lost!
@@ -719,7 +719,7 @@ class B_SC(QMainWindow):
 
         self.languageChange()
 
-        self.resize(QSize(782,521).expandedTo(self.minimumSizeHint()))
+        self.resize(QSize(781,533).expandedTo(self.minimumSizeHint()))
         self.clearWState(Qt.WState_Polished)
 
         self.connect(self.JewelTab,SIGNAL("currentChanged(QWidget*)"),self.JewelTabChanged)

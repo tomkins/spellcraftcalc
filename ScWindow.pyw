@@ -95,9 +95,9 @@ class SCApp(B_SC):
         self.scroller.setGeometry(QRect(0, self.menuBar.height(), self.width(), 
                                         self.height() - self.menuBar.height()))
         self.scroller.resizeContents(self.width() - 2, 
-                                     self.height() - self.menuBar.height() - 2)
-        self.setGeometry(self.x(), self.y(), self.width() + 5, 
-			 self.height() + 10)
+                                     self.height() - self.menuBar.height())
+        self.setGeometry(self.x(), self.y(), self.width() + 2,
+			 self.height() + 1)
 
         # Dummy widget, makes things look nicer on X-Windows
         q = QWidget(self.scroller)
@@ -271,8 +271,6 @@ class SCApp(B_SC):
         self.currentTab = self.PieceTab
         self.currentPage = self.PieceTab.currentPage()
         self.currentTabLabel = string.strip(str(self.currentTab.tabLabel(self.currentPage)))
-        self.restoreItem(self.itemattrlist.get(self.currentTabLabel, Item(self.currentTabLabel)))
-        item = self.itemattrlist.get(self.currentTabLabel, Item(self.currentTabLabel))
 
         self.tabGeometry = [{
             'x': self.PieceTab.x(), 'width':  self.PieceTab.width(), 
@@ -424,7 +422,6 @@ class SCApp(B_SC):
         self.currentTabLabel = string.strip(str(self.currentTab.tabLabel(a0)))
 
         self.restoreItem(self.itemattrlist.get(self.currentTabLabel, Item(self.currentTabLabel)))
-        item = self.itemattrlist.get(self.currentTabLabel, Item(self.currentTabLabel))
 
     def JewelTabChanged(self,a0):
         if self.currentTab is None: return
@@ -446,7 +443,6 @@ class SCApp(B_SC):
         self.currentTabLabel = string.strip(str(self.currentTab.tabLabel(a0)))
 
         self.restoreItem(self.itemattrlist.get(self.currentTabLabel, Item(self.currentTabLabel)))
-        item = self.itemattrlist.get(self.currentTabLabel, Item(self.currentTabLabel))
 
     def FixupItemLevel(self):
         if str(self.ItemLevel.text()) == '' \
