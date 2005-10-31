@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'ScWindow.ui'
 #
-# Created: Wed Sep 28 18:57:23 2005
+# Created: Mon Oct 31 13:36:26 2005
 #      by: The PyQt User Interface Compiler (pyuic) 3.15
 #
 # WARNING! All changes made in this file will be lost!
@@ -168,13 +168,13 @@ class B_SC(QMainWindow):
         self.HitsLabel = QLabel(self.GroupBox1,"HitsLabel")
         self.HitsLabel.setGeometry(QRect(6,160,20,16))
 
+        self.Hits = QLabel(self.GroupBox1,"Hits")
+        self.Hits.setGeometry(QRect(29,160,20,16))
+        self.Hits.setAlignment(QLabel.AlignVCenter | QLabel.AlignRight)
+
         self.HitsCap = QLabel(self.GroupBox1,"HitsCap")
         self.HitsCap.setGeometry(QRect(49,160,28,16))
         self.HitsCap.setAlignment(QLabel.AlignVCenter | QLabel.AlignRight)
-
-        self.Hits = QLabel(self.GroupBox1,"Hits")
-        self.Hits.setGeometry(QRect(35,160,20,16))
-        self.Hits.setAlignment(QLabel.AlignVCenter | QLabel.AlignRight)
 
         self.GroupBox2 = QGroupBox(self,"GroupBox2")
         self.GroupBox2.setGeometry(QRect(91,3,90,182))
@@ -886,8 +886,8 @@ class B_SC(QMainWindow):
         self.Power.setText(self.__tr("0"))
         self.PowerCap.setText(self.__tr("-"))
         self.HitsLabel.setText(self.__tr("Hits:"))
-        self.HitsCap.setText(self.__tr("-"))
         self.Hits.setText(self.__tr("0"))
+        self.HitsCap.setText(self.__tr("-"))
         self.GroupBox2.setTitle(self.__tr("Resists"))
         self.BodyLabel.setText(self.__tr("Body:"))
         self.Body.setText(self.__tr("0"))
