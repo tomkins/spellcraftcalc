@@ -1009,7 +1009,7 @@ HighCapBonusList = d2({
     'Hits'                      : ( 4.00,  0 ),
     'Power'                     : (  .50,  1 ),
     'Skill'                     : (  .20,  1 ),
-    'Cap'                       : (  .50,  1 ),
+    'Cap'                       : (  .50,  0 ),
     'Hits Cap'                  : ( 4.00,  0 ),
     'Power Cap'                 : ( 1.00,  0 ),
     'AF Cap'                    : ( 1.00,  0 ),
@@ -1592,7 +1592,7 @@ ServerCodes = d2({
      '70' : 'Palomides',
     '110' : 'Pellinor',
      '50' : 'Pendragon',
-    '150' : 'Hector',
+     '51' : 'Hector',
      '65' : 'Percival',
     '125' : 'Tristan',
 
@@ -1608,8 +1608,8 @@ ServerCodes = d2({
      '12' : 'Ys',
     '139' : 'Orcanie',
     '171' : 'Carnac',
-#   '???' : 'Cumbria',
-#   '???' : 'Deira',
+    '163' : 'Cumbria',
+    '103' : 'Deira',
     '148' : 'Gorr',
     '147' : 'Camlann',
 #   '???' : 'Akatsuki', 
@@ -1663,6 +1663,8 @@ FixEffectsTable = {
     'Reactionary Style Damage Bonus' :  'Reactionary Style Damage',
     'Death XP Loss Reduction' :         'Death Experience Loss Reduction',
     'Blocking' :                        'Block',
+
+    'PvE' : 'PvE Bonus',
 
     'Body Resist' :     'Body', 
     'Cold Resist' :     'Cold', 
