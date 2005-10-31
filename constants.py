@@ -567,13 +567,10 @@ for realm in Realms:
     skills.extend(AllBonusList[realm][charclass]['All Archery Skills'])
     skills.extend(AllBonusList[realm][charclass]['Other Skills'])
 
-    AllBonusList[realm][charclass]['Skills Hash'] = {}
-    AllBonusList[realm][charclass]['Skills Hash'].fromkeys(skills)
-    AllBonusList[realm][charclass]['Skills Hash'] = d2(AllBonusList[realm][charclass]['Skills Hash'])
+    AllBonusList[realm][charclass]['Skills Hash'] = d2(dict.fromkeys(skills))
 
-    AllBonusList[realm][charclass]['Focus Hash'] = {}
-    AllBonusList[realm][charclass]['Focus Hash'].fromkeys(AllBonusList[realm][charclass]['All Spell Lines'])
-    AllBonusList[realm][charclass]['Focus Hash'] = d2(AllBonusList[realm][charclass]['Focus Hash'])
+    AllBonusList[realm][charclass]['Focus Hash'] \
+        = d2(dict.fromkeys(AllBonusList[realm][charclass]['All Spell Lines']))
 
     if len(AllBonusList[realm][charclass]['All Spell Lines']):
       AllBonusList[realm][charclass]['All Focus'] = t2(('All Spell Lines',) +
@@ -892,9 +889,7 @@ CapIncreaseList = t2(DropStatList + (
     'AF',
 ))
 
-CapIncreaseTable = {}
-CapIncreaseTable.fromkeys(CapIncreaseList)
-CapIncreaseTable = d2(CapIncreaseTable)
+CapIncreaseTable = d2(dict.fromkeys(CapIncreaseList))
 
 
 OtherBonusTable = d2({
@@ -987,15 +982,9 @@ ValuesLists = d2({
 })
 
 
-Caps = {}
-Caps.fromkeys(ResistList, 'Resist')
-Caps.fromkeys(StatList,   'Stat')
+Caps = dict.fromkeys(ResistList, 'Resist')
+Caps.update(Caps.fromkeys(StatList, 'Stat'))
 Caps = d2(Caps)
-
-#for resist in ResistList:
-#  Caps[resist] = 'Resist'
-#for stat in StatList:
-#  Caps[stat] = 'Stat'
 
 
 # Bonuses are given as % of level + add constant
