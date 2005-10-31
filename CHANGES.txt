@@ -1,4 +1,7 @@
-Updated 9/24/05 - Version 1.43 (dev)
+Updated 10/31/05 - Version 1.43 (dev)
+Added server codes for Hector, Deria, Cumbria.
+Import non-Kort 'PvE' category as 'PvE Bonus' to be clear & flexible.
+Fix stat-cap cap (max +25 stat cap items at level 50).
 Changed to a two-row-tabs layout of body & jewelry, without using tab 
 pages which required all of the controls to be shifted back and forth.
 Recoded the const tables to make them read-only (protection from bugs).
