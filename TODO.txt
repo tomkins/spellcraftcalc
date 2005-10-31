@@ -1,0 +1,9 @@
+Things to fix before next release is announced;
+
+  Clicking on the 'current tab' of the 'non-current tabbar'
+  won't register a change message, so we don't switch tabbars
+  correctly.  E.g. choose Arms, then Jewel, then Arms again,
+  and we are stuck still on the Jewel slot.
+
+Things to fix before 2.0 final (non-beta) is announced;
+
