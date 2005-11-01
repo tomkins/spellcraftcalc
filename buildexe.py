@@ -11,7 +11,7 @@ sc = {
     "icon_resources" : [(100, 'ScWindow.ico')],
     }
 
-setup(name="testsetup", 
+setup(name="kscraftsetup", 
     zipfile=None,
     windows=[sc],
     icon='ScWindow.ico',
@@ -27,3 +27,7 @@ setup(name="testsetup",
         }
     },
 )
+
+#UserWarning: Unknown distribution option: 'icon'
+#
+#hmmm... how to fix?
