@@ -1455,10 +1455,9 @@ class SCApp(B_SC):
     def aboutBox(self):
         QMessageBox.information(None, "Kort's Spellcrafting Calculator", 
               "Verison " + ScVersion + "\n\n" 
-            + "Homepage http://sc.aod.net\n"
-            + "Author's Email kortsc@hotmail.com\n\n"
-            + "Bugs/Features discussed on the IGN Trade Skill Forum\n"
-            + "http://vnboards.ign.com/Trade_Skills/b20673/", 'Close')
+            + "Official URI  http://kscraft.sf.net/\n"
+            + "Project Home  http://sf.net/projects/kscraft\n\n"
+            + "Report Bugs/Request Features on the project Users Forum", 'Close')
 
     def openCraftBars(self):
         CB = CraftBar.CraftBar(self.DaocPath, self, '', 1)
