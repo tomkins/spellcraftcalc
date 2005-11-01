@@ -33,7 +33,7 @@ __all__ = [
   'MaterialGems', 'FocusList', 'OtherBonusTable', 'LiquidsOrder', 'ServerCodes',
 ]
 
-ScVersion = "Kort 1.43 (dev)"
+ScVersion = "Kort 1.43.0010 (dev)"
 
 from tuple2 import * 
 from dict2 import * 
