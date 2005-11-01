@@ -31,6 +31,7 @@ __all__ = [
   'OCStartPercentages', 'UnusedValues', 'ShieldTypes', 'ResistTable', 'SkillList', 
   'SkillTable', 'UnusedList', 'ImbueMultipliers', 'PvEBonusTable', 'DropTypeList', 
   'MaterialGems', 'FocusList', 'OtherBonusTable', 'LiquidsOrder', 'ServerCodes',
+  'BodyHitOdds', 
 ]
 
 ScVersion = "Kort 1.43.0010 (dev)"
@@ -1417,6 +1418,15 @@ ImbuePts = (
     (10,15,18,21,24,28,32),
 )
 
+
+BodyHitOdds = {
+    'Chest' : .40,
+    'Legs'  : .25,
+    'Arms'  : .15,
+    'Head'  : .10,
+    'Hands' : .05,
+    'Feet'  : .05,
+}
 
 TabList = t2((
     'Chest', 'Arms', 'Head', 'Legs', 'Hands', 'Feet', 
