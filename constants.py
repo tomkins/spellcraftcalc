@@ -1425,15 +1425,15 @@ TabList = t2((
     'Left Ring', 'Right Ring', 'Left Wrist', 'Right Wrist',
 ))
 
-FileExt = { 
+FileExt = d2({ 
     'Neck' :         'neck', 
     'Cloak' :        'cloak', 
     'Belt' :         'belt', 
     'Jewel' :        'jewel',
     'Left Ring' :    'ring', 
     'Right Ring' :   'ring', 
-    'Left Wrist' :  ['bracer', 'wrist'],
-    'Right Wrist' : ['bracer', 'wrist'], 
+    'Left Wrist' :  ('bracer', 'wrist',),
+    'Right Wrist' : ('bracer', 'wrist',), 
     'Chest' :        'chest', 
     'Arms' :         'arms', 
     'Head' :         'helm', 
@@ -1441,11 +1441,12 @@ FileExt = {
     'Feet' :         'boots', 
     'Hands' :        'hands',
     'Right Hand' :   'wep', 
-    'Left Hand' :   ['lhwep', 'shield'],
-    '2 Handed' :    ['2hwep', 'lhwep', 'wep'],
+    'Left Hand' :   ('lhwep', 'shield',),
+    '2 Handed' :    ('2hwep', 'lhwep', 'wep',),
     'Ranged' :       'ranged', 
     'Spare' :        '*', 
-}
+})
+
 
 ShieldTypes = t2((
     'Rowan',     'Elm',       'Oaken',     'Ironwood',  'Heartwood', 

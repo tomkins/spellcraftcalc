@@ -1133,7 +1133,7 @@ class SCApp(B_SC):
         item = self.itemattrlist.get(self.currentTabLabel, Item(self.currentTabLabel))
         self.storeItem(item)
         ext = FileExt[self.currentTabLabel]
-        if type(ext) == types.ListType:
+        if not isinstance(ext, types.StringType):
             ext = ext[0]
         itemdir = os.path.join(os.path.dirname(os.path.abspath(sys.argv[0])), 'items', self.realm, ext)
         if not os.path.exists(itemdir):
@@ -1148,7 +1148,7 @@ class SCApp(B_SC):
     def Load_Item(self):
         ext = FileExt[self.currentTabLabel]
         extstr = ''
-        if type(ext) == types.ListType:
+        if not isinstance(ext, types.StringType):
             for e in ext:
                 extstr += '*%s.xml *.%s ' % (e, e)
             ext = ext[0]
