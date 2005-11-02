@@ -1419,14 +1419,14 @@ ImbuePts = (
 )
 
 
-BodyHitOdds = {
+BodyHitOdds = d2({
     'Chest' : .40,
     'Legs'  : .25,
     'Arms'  : .15,
     'Head'  : .10,
     'Hands' : .05,
     'Feet'  : .05,
-}
+})
 
 TabList = t2((
     'Chest', 'Arms', 'Head', 'Legs', 'Hands', 'Feet', 
