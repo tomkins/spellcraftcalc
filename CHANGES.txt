@@ -1,4 +1,6 @@
-Updated 10/31/05 - Version 1.43 (dev)
+Updated 11/02/05 - Version 1.43 (dev)
+Fixed the Load item window, simplified the preview to display correctly.
+Fixed the Power cap broken just in 1.43.0009.
 Added server codes for Hector, Deria, Cumbria.
 Import non-Kort 'PvE' category as 'PvE Bonus' to be clear & flexible.
 Fix stat-cap cap (max +25 stat cap items at level 50).
