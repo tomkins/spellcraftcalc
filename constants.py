@@ -997,7 +997,7 @@ HighCapBonusList = d2({
     'Stat'                      : ( 1.50,  0 ),
     'Resist'                    : (  .50,  1 ),
     'Hits'                      : ( 4.00,  0 ),
-    'Power'                     : (  .50,  0 ),
+    'Power'                     : (  .50,  1 ),
     'Skill'                     : (  .20,  1 ),
     'Cap'                       : (  .50,  1 ),
     'Hits Cap'                  : ( 4.00,  0 ),
