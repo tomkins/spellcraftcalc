@@ -43,7 +43,7 @@ import SearchingCombo
 import UIXML
 import os
 import os.path
-import ItemPreview
+import ItemList
 import time
 import locale
 import traceback
@@ -1156,11 +1156,12 @@ class SCApp(B_SC):
             extstr = '*%s.xml *.%s' % (ext, ext)
         itemdir = os.path.join(os.path.dirname(os.path.abspath(sys.argv[0])), 'items', self.realm, ext)
         Qfd = QFileDialog(itemdir, "Items (%s)" % extstr, self, None, 1)
-        Qfp = ItemPreview.ItemPreview(Qfd, self)
+        Qfp = ItemList.ItemList(Qfd, self)
         Qfd.setMode(QFileDialog.ExistingFile)
         Qfd.setInfoPreviewEnabled(1)
-        Qfd.setInfoPreview(Qfp, Qfp.pu)
+        Qfd.setInfoPreview(Qfp, Qfp.preview)
         Qfd.setPreviewMode(QFileDialog.Info)
+        ## Qfp is nested in a QWidgetStack within a QSplitter, which we will tweak:
         Qfp.parent().parent().setSizes([165, 150])
         if Qfd.exec_loop():
             filename = Qfd.selectedFile()

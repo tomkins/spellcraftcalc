@@ -150,7 +150,7 @@ class Item:
             if not silent:
                 QMessageBox.critical(None, 'Error!', 
                     'Error opening item file: ' + filename, 'OK')
-            return -1
+            return -2
 
         docstr = f.read()
         if re.compile('^<\?xml').match(docstr) is not None:

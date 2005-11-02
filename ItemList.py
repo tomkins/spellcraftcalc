@@ -1,37 +1,29 @@
 from qt import *
 from Item import *
 from constants import *
-from B_ItemPreview import *
 
 class Preview(QFilePreview):
-    def __init__(self, parent, scwin):
+    def __init__(self, itemlist, scwin):
         QFilePreview.__init__(self)
-        self.parent = parent
+        self.itemlist = itemlist
         self.item = Item()
         self.item.loadAttr('Realm', scwin.realm)
         self.scwin = scwin
 
     def previewUrl(self, url):
-        self.item.load(unicode(url.toString()), 1)  
+        self.itemlist.clear()
+        if self.item.load(unicode(url.toString()), 1) == -2:
+            return
+
         state = self.item.getAttr('ActiveState')
+        if state == 'drop': 
+            toprng = 10
+        else:
+            toprng = 4
         utility = 0
-        for i in range(0, 6):
-            stattext = getattr(self.parent, 'Stat%d' % (i+1))
-            stattext.setText('')
-        if state == 'drop': toprng = 6
-        else: toprng = 4
-        for i in range(0, 6):
-            stattext = getattr(self.parent, 'Stat%d' % (i+1))
-            if i >= 4 and state == 'player':
-                stattext.setText('')
-                self.parent.ItemName.setText('')
-                self.parent.ItemLevel.setText('')
-                self.parent.ItemQua.setText('')
-                self.parent.ItemAF.setText('')
-                self.parent.ItemBonus.setText('')
-                self.parent.ItemUtility.setText('')
-                continue
-            
+        stattext = []
+
+        for i in range(0, toprng):
             effect = self.item.getSlotAttr(state, i, 'Effect')
             gemtype = self.item.getSlotAttr(state, i, 'Type')
             if gemtype != 'Unused':
@@ -40,7 +32,8 @@ class Preview(QFilePreview):
             statstr += ' ' + self.item.getSlotAttr(state, i, 'Effect')
             if self.item.getSlotAttr(state, i, 'Type') == 'Cap Increase':
                 statstr += ' Cap Increase'
-            stattext.setText(statstr)
+            stattext.append(statstr)
+            ## This code must GO AWAY to Item.py:
             if gemtype == 'Skill':
                 if effect == 'All Magic Skills'\
                     or effect == 'All Melee Weapon Skills'\
@@ -60,16 +53,20 @@ class Preview(QFilePreview):
                 utility += amount * 2
             elif gemtype == 'Stat':
                 utility += amount * 2.0 / 3.0
-        self.parent.ItemName.setText(self.item.getAttr('ItemName'))
-        self.parent.ItemLevel.setText(self.item.getAttr('Level'))
-        self.parent.ItemQua.setText(self.item.getAttr('ItemQuality'))
-        self.parent.ItemAF.setText(self.item.getAttr('AFDPS'))
-        self.parent.ItemBonus.setText(self.item.getAttr('Bonus'))
-        self.parent.ItemUtility.setText('%4.2f' % utility)
-    
-class ItemPreview(B_ItemPreview):
-    def __init__(self,parent = None, scwin = None,fl = 0):
-        print scwin
-        B_ItemPreview.__init__(self,parent = None,name = None,fl = 0)
-        self.pu = Preview(self, scwin)
 
+        listtext = [
+            "Name:   %s" % self.item.getAttr('ItemName'),
+            "Level:  %s  Quality: %s" % (self.item.getAttr('Level'),
+                                         self.item.getAttr('ItemQuality')),
+            "AF/DPS: %s  Speed:   %s" % (self.item.getAttr('AFDPS'),
+                                         self.item.getAttr('Speed')),
+            "Bonus:  %s  Utility: %4.2f" % (self.item.getAttr('Bonus'), utility),
+        ]
+        listtext.extend(stattext)
+        self.itemlist.insertStrList(listtext)
+
+    
+class ItemList(QListBox):
+    def __init__(self, parent = None, scwin = None, fl = 0):
+        QListBox.__init__(self, parent)
+        self.preview = Preview(self, scwin)
