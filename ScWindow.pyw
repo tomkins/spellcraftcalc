@@ -1156,12 +1156,12 @@ class SCApp(B_SC):
             extstr = '*%s.xml *.%s' % (ext, ext)
         itemdir = os.path.join(os.path.dirname(os.path.abspath(sys.argv[0])), 'items', self.realm, ext)
         Qfd = QFileDialog(itemdir, "Items (%s)" % extstr, self, None, 1)
-        Qfp = ItemPreview.ItemPreview(Qfd, self) 
-        Qfd.setInfoPreview(Qfp, Qfp.pu)
-        Qfd.setInfoPreviewEnabled(1)
-        Qfd.setPreviewMode(QFileDialog.Info)
+        Qfp = ItemPreview.ItemPreview(Qfd, self)
         Qfd.setMode(QFileDialog.ExistingFile)
-        Qfd.child('unnamed', 'QSplitter').setSizes([165, 150])
+        Qfd.setInfoPreviewEnabled(1)
+        Qfd.setInfoPreview(Qfp, Qfp.pu)
+        Qfd.setPreviewMode(QFileDialog.Info)
+        Qfp.parent().parent().setSizes([165, 150])
         if Qfd.exec_loop():
             filename = Qfd.selectedFile()
             if filename is not None and unicode(filename) != '':
