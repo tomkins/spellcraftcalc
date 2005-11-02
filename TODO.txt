@@ -5,5 +5,9 @@ Things to fix before next release is announced;
   correctly.  E.g. choose Arms, then Jewel, then Arms again,
   and we are stuck still on the Jewel slot.
 
+  DisplayWindow:  Will sometimes show a bonus for slot '' (empty) 
+  pointing at nothing, al la [: 3] (double-counting a listed slot?)
+
+
 Things to fix before 2.0 final (non-beta) is announced;
 
