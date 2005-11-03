@@ -7,8 +7,8 @@ files = [ ['ScWindow.ui', 'B_ScWindow.py'],
     ['ReportWindow.ui', 'B_ReportWindow.py'],
     ['ItemLevel.ui', 'B_ItemLevel.py'],
     ['CraftBar.ui', 'B_CraftBar.py'],
-    ['ItemPreview.ui', 'B_ItemPreview.py'],
-    ['Options.ui', 'B_Options.py'] ]
+    ['Options.ui', 'B_Options.py'],
+]
 
 for ui, py in files:
     os.system('pyuic -o %s %s' % (py, ui))
