@@ -77,6 +77,12 @@ class SCApp(B_SC):
         self.dropeffectlists['Cap Increase'] = CapIncreaseList
         self.dropeffectlists['PvE Bonus'] =    PvEBonusList
         self.dropeffectlists['Other Bonus'] =  OtherBonusList
+        # for the moment, every other ability will be Unique
+        self.dropeffectlists['Other Ability'] = ("Unique Ability...",)
+
+        for effect in EffectItemNames.keys():
+            self.effectlists[effect] =     EffectItemNames[effect][0]
+            self.dropeffectlists[effect] = EffectItemList
 
         self.reportFile = os.path.join(os.path.dirname(os.path.abspath(sys.argv[0])),
                                        'reports', 'Default_Config_Report.xml')
@@ -953,8 +959,6 @@ class SCApp(B_SC):
         else:
             amountedit = getattr(self, 'Amount_Edit_%d' % num)
         if typetext != 'Unused':
-
-
             if self.Drop.isChecked():
                 effectlist = self.dropeffectlists[typetext]
             else:

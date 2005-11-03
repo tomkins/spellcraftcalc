@@ -31,7 +31,8 @@ __all__ = [
   'OCStartPercentages', 'UnusedValues', 'ShieldTypes', 'ResistTable', 'SkillList', 
   'SkillTable', 'UnusedList', 'ImbueMultipliers', 'PvEBonusTable', 'DropTypeList', 
   'MaterialGems', 'FocusList', 'OtherBonusTable', 'LiquidsOrder', 'ServerCodes',
-  'BodyHitOdds', 
+  'EffectTable', 'EffectRequiredLevel', 'EffectMetal', 'EffectItemNames',
+  'EffectItemList', 'BodyHitOdds',
 ]
 
 ScVersion = "Kort 1.43.0010 (dev)"
@@ -607,12 +608,23 @@ TypeList = t2((
     'Skill',
 ))
 
-# Duplicate the TypeList, add non-craftable categories
+# This list is only for the 5th Alchemy imbue slot
 #
-DropTypeList = t2(TypeList + (
+EffectTypeList = t2((
+    'Offensive Effect',
+    'Reactive Effect',
+    'Charged Effect',
+))
+
+# Duplicate the TypeList, plus non-craftable categories
+#
+DropTypeList = t2(
+     TypeList + (
     'Cap Increase', 
     'PvE Bonus', 
-    'Other Bonus'
+    'Other Bonus',
+ ) + EffectTypeList + (
+    'Other Ability',
 ))
 
 
@@ -910,6 +922,7 @@ OtherBonusTable = d2({
     'Melee Damage' :              '',
     'Melee Combat Speed' :        '',   
     '% Power Pool' :              '', 
+    'Unique Bonus...':            '',
 })
 
 OtherBonusList = OtherBonusTable.keys()
@@ -933,11 +946,84 @@ PvEBonusTable = d2({
     'Style Cost Reduction' :               '', 
     'Death Experience Loss Reduction' :    '', 
     'Arrow Recovery' :                     '', 
+    'Unique PvE Bonus...':                 '',
 })
 
 PvEBonusList = PvEBonusTable.keys()
 PvEBonusList.sort()
 PvEBonusList = t2(PvEBonusList)
+
+DDEffectDamageSubtable = t2(("41", "50", "59", "68", "77", "86", "95"))
+EffectRequiredLevel =    t2(("20", "25", "30", "35", "40", "43", "47"))
+
+DDTinctureMetalCommon =  t2(("Alloy", "Fine Alloy", "Mithril", "Adamantium", 
+                             "Asterite", "Netherium", "Arcanium",))
+EffectMetal = d2({
+    'Albion'   : DDTinctureMetalCommon,
+    'Hibernia' : t2(("Dolomite", "Cobolt", "Carbide", "Sapphire", 
+                     "Diamond", "Netherite", "Arcanite",)),
+    'Midgard'  : DDTinctureMetalCommon,
+})
+
+DDEffectSubtable = d2({
+    'Charged Effect':     DDEffectDamageSubtable,
+    'Reactive Effect': t2(DDEffectDamageSubtable[-3:]),
+    'Offensive Effect':   DDEffectDamageSubtable,
+})
+
+EffectTable = {
+    'Direct Damage (Fire)' :     ('Fire',   DDEffectSubtable),
+    'Direct Damage (Cold)' :     ('Cold',   DDEffectSubtable),
+    'Direct Damage (Energy)' :   ('Energy', DDEffectSubtable),
+    'Direct Damage (Spirit)' :   ('Spirit', DDEffectSubtable),
+    'Damage Over Time' :         ('Eroding',   "64 X 6"),
+    'Self AF Buff' :             ('Hardening', "75"),
+    'Self Melee Health Buffer' : ('Ablative', d2({
+                                      'Charged Effect':   "50",
+                                      'Reactive Effect':  "100",
+                                      'Offensive Effect': "50", })),
+    'Self Melee Haste Buff' :    ('Celeric', d2({
+                                      'Charged Effect':   "17",
+                                      'Reactive Effect':  "20",
+                                      'Offensive Effect': "20", })),
+    'Self Damage Shield Buff' :  ('Shard', d2({
+                                      'Charged Effect':   "4",
+                                      'Reactive Effect':  "5",
+                                      'Offensive Effect': "5", })),
+}
+
+ProcEffectList = EffectTable.keys()
+ProcEffectList.sort()
+ProcEffectList = t2(ProcEffectList)
+
+
+EffectTable.update({
+    'Lifedrain' :                ('Leeching',     "65/100%"),
+    'Str/Con Debuff' :           ('Withering',    "56"),
+    'Dex/Qui Debuff' :           ('Crippling',    "56"),
+    'Self Damage Add Buff' :     ('Honing',       "11"),
+    'Self Acuity Buff' :         ('Enlightening', "75"),
+})
+EffectTable = d2(EffectTable)
+
+StableEffectList = EffectTable.keys()
+StableEffectList.sort()
+StableEffectList = t2(StableEffectList)
+
+
+EffectItemNames = d2({
+    'Charged Effect':   (StableEffectList, "Stable",   "Tincture"),
+    'Reactive Effect':  (ProcEffectList,   "Reactive", "Armor Tincture"),
+    'Offensive Effect': (ProcEffectList,   "Volatile", "Weapon Tincture"),
+})
+
+
+# Borrowed from Stable which is the most complete crafted list,
+# add more non-craftable effect types here:
+#
+EffectItemList = t2(StableEffectList + (
+    "Unique Effect...",
+))
 
 
 # Placeholder
