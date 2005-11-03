@@ -1,4 +1,5 @@
 Updated 11/02/05 - Version 1.43 (dev)
+Ranger's Pathfinding skill changed from +all magic, to an 'other' skill.
 Fixed the Load item window, simplified the preview to display correctly.
 Fixed the Power cap broken just in 1.43.0009.
 Added server codes for Hector, Deria, Cumbria.
