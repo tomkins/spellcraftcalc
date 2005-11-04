@@ -32,7 +32,7 @@ __all__ = [
   'SkillTable', 'UnusedList', 'ImbueMultipliers', 'PvEBonusTable', 'DropTypeList', 
   'MaterialGems', 'FocusList', 'OtherBonusTable', 'LiquidsOrder', 'ServerCodes',
   'EffectTable', 'EffectRequiredLevel', 'EffectMetal', 'EffectItemNames',
-  'EffectItemList', 'BodyHitOdds',
+  'EffectItemList', 'EffectTypeList', 'UniqueAbilityList', 'BodyHitOdds',
 ]
 
 ScVersion = "Kort 1.43.0010 (dev)"
@@ -41,6 +41,14 @@ from tuple2 import *
 from dict2 import * 
 
 Realms = t2(('Albion', 'Hibernia', 'Midgard'))
+
+
+# Placeholder
+UnusedTable = d2({})
+
+UnusedList = t2()
+
+UnusedValues = t2()
 
 
 AllBonusList = { 
@@ -627,6 +635,11 @@ DropTypeList = t2(
     'Other Ability',
 ))
 
+EffectTypeList = t2((
+    'Unused',
+ ) + EffectTypeList
+)
+
 
 StatTableOrdered = (
     ('Strength',     'Fiery'   ), 
@@ -976,20 +989,20 @@ EffectTable = {
     'Direct Damage (Cold)' :     ('Cold',   DDEffectSubtable),
     'Direct Damage (Energy)' :   ('Energy', DDEffectSubtable),
     'Direct Damage (Spirit)' :   ('Spirit', DDEffectSubtable),
-    'Damage Over Time' :         ('Eroding',   "64 X 6"),
-    'Self AF Buff' :             ('Hardening', "75"),
+    'Damage Over Time' :         ('Eroding',   t2(("64",))),
+    'Self AF Buff' :             ('Hardening', t2(("75",))),
     'Self Melee Health Buffer' : ('Ablative', d2({
-                                      'Charged Effect':   "50",
-                                      'Reactive Effect':  "100",
-                                      'Offensive Effect': "50", })),
+                                      'Charged Effect':   t2(("50",)),
+                                      'Reactive Effect':  t2(("100",)),
+                                      'Offensive Effect': t2(("50",)), })),
     'Self Melee Haste Buff' :    ('Celeric', d2({
-                                      'Charged Effect':   "17",
-                                      'Reactive Effect':  "20",
-                                      'Offensive Effect': "20", })),
+                                      'Charged Effect':   t2(("17",)),
+                                      'Reactive Effect':  t2(("20",)),
+                                      'Offensive Effect': t2(("20",)), })),
     'Self Damage Shield Buff' :  ('Shard', d2({
-                                      'Charged Effect':   "4",
-                                      'Reactive Effect':  "5",
-                                      'Offensive Effect': "5", })),
+                                      'Charged Effect':   t2(("4",)),
+                                      'Reactive Effect':  t2(("5",)),
+                                      'Offensive Effect': t2(("5",)), })),
 }
 
 ProcEffectList = EffectTable.keys()
@@ -998,40 +1011,37 @@ ProcEffectList = t2(ProcEffectList)
 
 
 EffectTable.update({
-    'Lifedrain' :                ('Leeching',     "65/100%"),
-    'Str/Con Debuff' :           ('Withering',    "56"),
-    'Dex/Qui Debuff' :           ('Crippling',    "56"),
-    'Self Damage Add Buff' :     ('Honing',       "11"),
-    'Self Acuity Buff' :         ('Enlightening', "75"),
+    'Lifedrain' :                ('Leeching',     t2(("65",))),
+    'Str/Con Debuff' :           ('Withering',    t2(("56",))),
+    'Dex/Qui Debuff' :           ('Crippling',    t2(("56",))),
+    'Self Damage Add Buff' :     ('Honing',       t2(("11",))),
+    'Self Acuity Buff' :         ('Enlightening', t2(("75",))),
 })
-EffectTable = d2(EffectTable)
 
 StableEffectList = EffectTable.keys()
 StableEffectList.sort()
 StableEffectList = t2(StableEffectList)
 
+EffectTable['Unused'] = (UnusedList,)
+EffectTable = d2(EffectTable)
 
 EffectItemNames = d2({
-    'Charged Effect':   (StableEffectList, "Stable",   "Tincture"),
-    'Reactive Effect':  (ProcEffectList,   "Reactive", "Armor Tincture"),
-    'Offensive Effect': (ProcEffectList,   "Volatile", "Weapon Tincture"),
+    'Charged Effect' :   (StableEffectList, "Stable",   "Tincture",),
+    'Reactive Effect' :  (ProcEffectList,   "Reactive", "Armor Tincture",),
+    'Offensive Effect' : (ProcEffectList,   "Volatile", "Weapon Tincture",),
 })
 
 
 # Borrowed from Stable which is the most complete crafted list,
 # add more non-craftable effect types here:
 #
-EffectItemList = t2(StableEffectList + (
-    "Unique Effect...",
+EffectItemList = t2(
+     StableEffectList 
+ + ('Unique Effect...',
 ))
 
 
-# Placeholder
-UnusedTable = d2({})
-
-UnusedList = t2()
-
-UnusedValues = t2()
+UniqueAbilityList = t2(("Unique Ability...",))
 
 
 GemTables = {
