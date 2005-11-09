@@ -26,6 +26,8 @@
 #   * Haven't even considered tab scrolling (that's the point of multiple
 #     bars, isn't it?)
 #   * Small artifact to left/right of top rows, could be cleaned up.
+#   * Small artifact through top of current tab in 2 rows or more.
+#   * Remove tabs/bars (we don't need no stinkin' remove - someone else might)
 
 import sys
 from qt import *
