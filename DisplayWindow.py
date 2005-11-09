@@ -40,8 +40,5 @@ class DisplayWindow(B_DisplayWindow):
 		if a0 is None: return
 		tabname, rest = string.split(str(a0.text()), ':', 1)
 		tabindex = TabList.index(tabname)
-		if tabindex > 10:
-			self.scwindow.JewelTab.setCurrentPage(tabindex-11)
-		else:
-			self.scwindow.PieceTab.setCurrentPage(tabindex)
+		self.scwindow.PieceTab.setCurrentTab(tabindex)
 		self.done(1)
