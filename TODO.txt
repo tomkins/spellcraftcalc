@@ -1,13 +1,44 @@
 Things to fix before next release is announced;
 
-  Clicking on the 'current tab' of the 'non-current tabbar'
-  won't register a change message, so we don't switch tabbars
-  correctly.  E.g. choose Arms, then Jewel, then Arms again,
-  and we are stuck still on the Jewel slot.
+  LoadTemplate:  Some report that old templates don't load properly.
+  Noticed more often on crafted rather than drop gear, probably bad
+  lookups.  Good fix would be to scream bloody murder during the load
+  to sys.stderr so the user can give us a log.
 
-  DisplayWindow:  Will sometimes show a bonus for slot '' (empty) 
-  pointing at nothing, al la [: 3] (double-counting a listed slot?)
+  LoadTemplate:  Loading a template doesn't update the most recently
+  used list, nor the directory to load templates from.
+
+  LoadItem:  Is /very/ slow (trying item preview for everything in the
+  whole list?), and doesn't remember the directory used.
 
 
 Things to fix before 2.0 final (non-beta) is announced;
 
+  A guildy suggested that the user could fix all of the body armor
+  pieces or all the weapons which are crafted, based on popping up
+  the itemlevel window only once (cool!!!)  Something similar for 
+  item quality?
+
+  Fill in AF/DPS based on itemlevel dialog, if provided.  Perhaps
+  even bonus, when known by material level.  
+
+  Move the magic choose-realm to the main window from options.
+
+  Damned modified = 1 events ... gotta mop those up, keep unchanged
+  templates unmodified.
+
+  Calculate Piece Ablative as an average based on chance-to-hit-body-part.
+
+  Clean up some messy graphics on the tab buttons.
+
+  Accelerator keys for tabs.
+
+  DisplayWindow:  Will sometimes show a bonus for slot '' (empty) 
+  pointing at nothing, al la [: 3] (double-counting a listed slot?)
+
+  Merge in the Effects development branch;
+
+    Make the typeable combobox just work correctly.
+    Let users type in their own 'other effects...'
+    Figure costing of crafted tinctures as a seperate subtotal,
+    price by SC markup rules.
