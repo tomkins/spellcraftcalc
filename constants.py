@@ -33,6 +33,7 @@ __all__ = [
   'MaterialGems', 'FocusList', 'OtherBonusTable', 'LiquidsOrder', 'ServerCodes',
   'EffectTable', 'EffectRequiredLevel', 'EffectMetal', 'EffectItemNames',
   'EffectItemList', 'EffectTypeList', 'UniqueAbilityList', 'BodyHitOdds',
+  'PieceTabList', 'JewelTabList', 
 ]
 
 ScVersion = "Kort 1.43.0010 (dev)"
@@ -1524,12 +1525,17 @@ BodyHitOdds = d2({
     'Feet'  : .05,
 })
 
-TabList = t2((
+PieceTabList = t2((
     'Chest', 'Arms', 'Head', 'Legs', 'Hands', 'Feet', 
-    'Right Hand', 'Left Hand', '2 Handed', 'Ranged', 'Spare', 
+    'Right Hand', 'Left Hand', '2 Handed', 'Ranged', 'Spare',
+))
+
+JewelTabList = t2((
     'Neck', 'Cloak', 'Jewel', 'Belt', 
     'Left Ring', 'Right Ring', 'Left Wrist', 'Right Wrist',
 ))
+
+TabList = t2(PieceTabList + JewelTabList)
 
 FileExt = d2({ 
     'Neck' :         'neck', 
