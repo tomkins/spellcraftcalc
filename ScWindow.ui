@@ -9,7 +9,7 @@
             <x>0</x>
             <y>0</y>
             <width>781</width>
-            <height>533</height>
+            <height>526</height>
         </rect>
     </property>
     <property name="font">
@@ -1546,9 +1546,9 @@
         <property name="geometry">
             <rect>
                 <x>2</x>
-                <y>240</y>
+                <y>235</y>
                 <width>776</width>
-                <height>267</height>
+                <height>265</height>
             </rect>
         </property>
         <property name="frameShape">
@@ -1567,13 +1567,26 @@
             <property name="geometry">
                 <rect>
                     <x>7</x>
-                    <y>2</y>
+                    <y>5</y>
                     <width>59</width>
                     <height>22</height>
                 </rect>
             </property>
             <property name="text">
                 <string>Item Level:</string>
+            </property>
+        </widget>
+        <widget class="QLineEdit">
+            <property name="name">
+                <cstring>ItemLevel</cstring>
+            </property>
+            <property name="geometry">
+                <rect>
+                    <x>63</x>
+                    <y>5</y>
+                    <width>35</width>
+                    <height>22</height>
+                </rect>
             </property>
         </widget>
         <widget class="QPushButton">
@@ -1583,7 +1596,7 @@
             <property name="geometry">
                 <rect>
                     <x>98</x>
-                    <y>4</y>
+                    <y>7</y>
                     <width>18</width>
                     <height>18</height>
                 </rect>
@@ -1599,7 +1612,7 @@
             <property name="geometry">
                 <rect>
                     <x>136</x>
-                    <y>2</y>
+                    <y>5</y>
                     <width>50</width>
                     <height>22</height>
                 </rect>
@@ -1608,6 +1621,54 @@
                 <string>Quality:</string>
             </property>
         </widget>
+        <widget class="QComboBox">
+            <property name="name">
+                <cstring>QualDrop</cstring>
+            </property>
+            <property name="geometry">
+                <rect>
+                    <x>177</x>
+                    <y>5</y>
+                    <width>52</width>
+                    <height>22</height>
+                </rect>
+            </property>
+            <item>
+                <property name="text">
+                    <string>94</string>
+                </property>
+            </item>
+            <item>
+                <property name="text">
+                    <string>95</string>
+                </property>
+            </item>
+            <item>
+                <property name="text">
+                    <string>96</string>
+                </property>
+            </item>
+            <item>
+                <property name="text">
+                    <string>97</string>
+                </property>
+            </item>
+            <item>
+                <property name="text">
+                    <string>98</string>
+                </property>
+            </item>
+            <item>
+                <property name="text">
+                    <string>99</string>
+                </property>
+            </item>
+            <item>
+                <property name="text">
+                    <string>100</string>
+                </property>
+            </item>
+        </widget>
         <widget class="QLineEdit">
             <property name="name">
                 <cstring>QualEdit</cstring>
@@ -1615,10 +1676,39 @@
             <property name="geometry">
                 <rect>
                     <x>177</x>
-                    <y>2</y>
+                    <y>5</y>
                     <width>51</width>
                     <height>22</height>
                 </rect>
+            </property>
+        </widget>
+        <widget class="QLineEdit">
+            <property name="name">
+                <cstring>ItemName</cstring>
+            </property>
+            <property name="geometry">
+                <rect>
+                    <x>562</x>
+                    <y>48</y>
+                    <width>200</width>
+                    <height>22</height>
+                </rect>
+            </property>
+        </widget>
+        <widget class="QLabel">
+            <property name="name">
+                <cstring>Bonus_Label</cstring>
+            </property>
+            <property name="geometry">
+                <rect>
+                    <x>244</x>
+                    <y>5</y>
+                    <width>40</width>
+                    <height>22</height>
+                </rect>
+            </property>
+            <property name="text">
+                <string>Bonus:</string>
             </property>
         </widget>
         <widget class="QLineEdit">
@@ -1628,7 +1718,7 @@
             <property name="geometry">
                 <rect>
                     <x>284</x>
-                    <y>2</y>
+                    <y>5</y>
                     <width>35</width>
                     <height>22</height>
                 </rect>
@@ -1641,7 +1731,7 @@
             <property name="geometry">
                 <rect>
                     <x>330</x>
-                    <y>2</y>
+                    <y>5</y>
                     <width>55</width>
                     <height>22</height>
                 </rect>
@@ -1657,7 +1747,7 @@
             <property name="geometry">
                 <rect>
                     <x>375</x>
-                    <y>2</y>
+                    <y>5</y>
                     <width>35</width>
                     <height>22</height>
                 </rect>
@@ -1670,7 +1760,7 @@
             <property name="geometry">
                 <rect>
                     <x>420</x>
-                    <y>2</y>
+                    <y>5</y>
                     <width>40</width>
                     <height>22</height>
                 </rect>
@@ -1686,7 +1776,7 @@
             <property name="geometry">
                 <rect>
                     <x>460</x>
-                    <y>2</y>
+                    <y>5</y>
                     <width>35</width>
                     <height>22</height>
                 </rect>
@@ -1699,9 +1789,9 @@
             <property name="geometry">
                 <rect>
                     <x>507</x>
-                    <y>2</y>
+                    <y>3</y>
                     <width>35</width>
-                    <height>16</height>
+                    <height>14</height>
                 </rect>
             </property>
             <property name="text">
@@ -1715,9 +1805,9 @@
             <property name="geometry">
                 <rect>
                     <x>545</x>
-                    <y>2</y>
+                    <y>3</y>
                     <width>28</width>
-                    <height>16</height>
+                    <height>14</height>
                 </rect>
             </property>
             <property name="text">
@@ -1763,13 +1853,29 @@
             <property name="geometry">
                 <rect>
                     <x>579</x>
-                    <y>2</y>
+                    <y>7</y>
                     <width>71</width>
                     <height>22</height>
                 </rect>
             </property>
             <property name="text">
                 <string>Equipped</string>
+            </property>
+        </widget>
+        <widget class="QPushButton">
+            <property name="name">
+                <cstring>CraftButton</cstring>
+            </property>
+            <property name="geometry">
+                <rect>
+                    <x>683</x>
+                    <y>5</y>
+                    <width>79</width>
+                    <height>26</height>
+                </rect>
+            </property>
+            <property name="text">
+                <string>Craft...</string>
             </property>
         </widget>
         <widget class="QLabel">
@@ -1802,6 +1908,22 @@
             </property>
             <property name="text">
                 <string>Amount</string>
+            </property>
+        </widget>
+        <widget class="QLabel">
+            <property name="name">
+                <cstring>Effect_Label</cstring>
+            </property>
+            <property name="geometry">
+                <rect>
+                    <x>237</x>
+                    <y>33</y>
+                    <width>142</width>
+                    <height>14</height>
+                </rect>
+            </property>
+            <property name="text">
+                <string>Effect</string>
             </property>
         </widget>
         <widget class="QLabel">
@@ -1841,19 +1963,95 @@
         </widget>
         <widget class="QLabel">
             <property name="name">
+                <cstring>Cost_Label</cstring>
+            </property>
+            <property name="geometry">
+                <rect>
+                    <x>482</x>
+                    <y>33</y>
+                    <width>70</width>
+                    <height>14</height>
+                </rect>
+            </property>
+            <property name="text">
+                <string>Cost</string>
+            </property>
+            <property name="alignment">
+                <set>AlignVCenter|AlignRight</set>
+            </property>
+        </widget>
+        <widget class="QLabel">
+            <property name="name">
                 <cstring>Name_Label</cstring>
             </property>
             <property name="geometry">
                 <rect>
                     <x>562</x>
                     <y>33</y>
-                    <width>200</width>
+                    <width>40</width>
                     <height>14</height>
                 </rect>
             </property>
             <property name="text">
                 <string>Name</string>
             </property>
+        </widget>
+        <widget class="QButtonGroup">
+            <property name="name">
+                <cstring>ButtonGroup1</cstring>
+            </property>
+            <property name="enabled">
+                <bool>true</bool>
+            </property>
+            <property name="geometry">
+                <rect>
+                    <x>615</x>
+                    <y>31</y>
+                    <width>138</width>
+                    <height>19</height>
+                </rect>
+            </property>
+            <property name="lineWidth">
+                <number>0</number>
+            </property>
+            <property name="title">
+                <string></string>
+            </property>
+            <widget class="QRadioButton">
+                <property name="name">
+                    <cstring>PlayerMade</cstring>
+                </property>
+                <property name="geometry">
+                    <rect>
+                        <x>2</x>
+                        <y>2</y>
+                        <width>85</width>
+                        <height>17</height>
+                    </rect>
+                </property>
+                <property name="text">
+                    <string>Player Made</string>
+                </property>
+            </widget>
+            <widget class="QRadioButton">
+                <property name="name">
+                    <cstring>Drop</cstring>
+                </property>
+                <property name="geometry">
+                    <rect>
+                        <x>92</x>
+                        <y>2</y>
+                        <width>52</width>
+                        <height>17</height>
+                    </rect>
+                </property>
+                <property name="text">
+                    <string>Drop</string>
+                </property>
+                <property name="checked">
+                    <bool>true</bool>
+                </property>
+            </widget>
         </widget>
         <widget class="QLabel">
             <property name="name">
@@ -2521,6 +2719,22 @@
                 <set>AlignVCenter|AlignRight</set>
             </property>
             <property name="hAlign" stdset="0">
+            </property>
+        </widget>
+        <widget class="QLabel">
+            <property name="name">
+                <cstring>Name_4</cstring>
+            </property>
+            <property name="geometry">
+                <rect>
+                    <x>562</x>
+                    <y>111</y>
+                    <width>200</width>
+                    <height>22</height>
+                </rect>
+            </property>
+            <property name="text">
+                <string></string>
             </property>
         </widget>
         <widget class="QLabel">
@@ -3202,63 +3416,6 @@
             <property name="hAlign" stdset="0">
             </property>
         </widget>
-        <widget class="QButtonGroup">
-            <property name="name">
-                <cstring>ButtonGroup1</cstring>
-            </property>
-            <property name="enabled">
-                <bool>true</bool>
-            </property>
-            <property name="geometry">
-                <rect>
-                    <x>607</x>
-                    <y>30</y>
-                    <width>146</width>
-                    <height>19</height>
-                </rect>
-            </property>
-            <property name="lineWidth">
-                <number>0</number>
-            </property>
-            <property name="title">
-                <string></string>
-            </property>
-            <widget class="QRadioButton">
-                <property name="name">
-                    <cstring>Drop</cstring>
-                </property>
-                <property name="geometry">
-                    <rect>
-                        <x>100</x>
-                        <y>2</y>
-                        <width>52</width>
-                        <height>17</height>
-                    </rect>
-                </property>
-                <property name="text">
-                    <string>Drop</string>
-                </property>
-                <property name="checked">
-                    <bool>true</bool>
-                </property>
-            </widget>
-            <widget class="QRadioButton">
-                <property name="name">
-                    <cstring>PlayerMade</cstring>
-                </property>
-                <property name="geometry">
-                    <rect>
-                        <x>10</x>
-                        <y>2</y>
-                        <width>85</width>
-                        <height>17</height>
-                    </rect>
-                </property>
-                <property name="text">
-                    <string>Player Made</string>
-                </property>
-            </widget>
-        </widget>
         <widget class="QPushButton">
             <property name="name">
                 <cstring>ClearItem</cstring>
@@ -3307,259 +3464,17 @@
                 <string>Save Item</string>
             </property>
         </widget>
-        <widget class="QLineEdit">
-            <property name="name">
-                <cstring>ItemName</cstring>
-            </property>
-            <property name="geometry">
-                <rect>
-                    <x>562</x>
-                    <y>48</y>
-                    <width>200</width>
-                    <height>22</height>
-                </rect>
-            </property>
-        </widget>
-        <widget class="QPushButton">
-            <property name="name">
-                <cstring>CraftButton</cstring>
-            </property>
-            <property name="geometry">
-                <rect>
-                    <x>662</x>
-                    <y>2</y>
-                    <width>69</width>
-                    <height>26</height>
-                </rect>
-            </property>
-            <property name="text">
-                <string>Craft...</string>
-            </property>
-        </widget>
-        <widget class="QLabel">
-            <property name="name">
-                <cstring>Bonus_Label</cstring>
-            </property>
-            <property name="geometry">
-                <rect>
-                    <x>244</x>
-                    <y>2</y>
-                    <width>40</width>
-                    <height>22</height>
-                </rect>
-            </property>
-            <property name="text">
-                <string>Bonus:</string>
-            </property>
-        </widget>
-        <widget class="QLabel">
-            <property name="name">
-                <cstring>Effect_Label</cstring>
-            </property>
-            <property name="geometry">
-                <rect>
-                    <x>237</x>
-                    <y>33</y>
-                    <width>142</width>
-                    <height>14</height>
-                </rect>
-            </property>
-            <property name="text">
-                <string>Effect</string>
-            </property>
-        </widget>
-        <widget class="QLabel">
-            <property name="name">
-                <cstring>Cost_Label</cstring>
-            </property>
-            <property name="geometry">
-                <rect>
-                    <x>482</x>
-                    <y>33</y>
-                    <width>70</width>
-                    <height>14</height>
-                </rect>
-            </property>
-            <property name="text">
-                <string>Cost</string>
-            </property>
-            <property name="alignment">
-                <set>AlignVCenter|AlignRight</set>
-            </property>
-        </widget>
-        <widget class="QLineEdit">
-            <property name="name">
-                <cstring>ItemLevel</cstring>
-            </property>
-            <property name="geometry">
-                <rect>
-                    <x>63</x>
-                    <y>2</y>
-                    <width>35</width>
-                    <height>22</height>
-                </rect>
-            </property>
-        </widget>
-        <widget class="QComboBox">
-            <item>
-                <property name="text">
-                    <string>94</string>
-                </property>
-            </item>
-            <item>
-                <property name="text">
-                    <string>95</string>
-                </property>
-            </item>
-            <item>
-                <property name="text">
-                    <string>96</string>
-                </property>
-            </item>
-            <item>
-                <property name="text">
-                    <string>97</string>
-                </property>
-            </item>
-            <item>
-                <property name="text">
-                    <string>98</string>
-                </property>
-            </item>
-            <item>
-                <property name="text">
-                    <string>99</string>
-                </property>
-            </item>
-            <item>
-                <property name="text">
-                    <string>100</string>
-                </property>
-            </item>
-            <property name="name">
-                <cstring>QualDrop</cstring>
-            </property>
-            <property name="geometry">
-                <rect>
-                    <x>177</x>
-                    <y>2</y>
-                    <width>52</width>
-                    <height>22</height>
-                </rect>
-            </property>
-        </widget>
-        <widget class="QLabel">
-            <property name="name">
-                <cstring>Name_4</cstring>
-            </property>
-            <property name="geometry">
-                <rect>
-                    <x>562</x>
-                    <y>111</y>
-                    <width>200</width>
-                    <height>22</height>
-                </rect>
-            </property>
-            <property name="text">
-                <string></string>
-            </property>
-        </widget>
     </widget>
-    <widget class="QTabWidget">
-        <property name="name">
-            <cstring>JewelTab</cstring>
-        </property>
-        <property name="geometry">
-            <rect>
-                <x>2</x>
-                <y>190</y>
-                <width>776</width>
-                <height>23</height>
-            </rect>
-        </property>
-        <property name="sizePolicy">
-            <sizepolicy>
-                <hsizetype>0</hsizetype>
-                <vsizetype>0</vsizetype>
-                <horstretch>0</horstretch>
-                <verstretch>0</verstretch>
-            </sizepolicy>
-        </property>
-        <widget class="QWidget">
-            <property name="name">
-                <cstring>Neck</cstring>
-            </property>
-            <attribute name="title">
-                <string>Neck      </string>
-            </attribute>
-        </widget>
-        <widget class="QWidget">
-            <property name="name">
-                <cstring>Cloak</cstring>
-            </property>
-            <attribute name="title">
-                <string>Cloak      </string>
-            </attribute>
-        </widget>
-        <widget class="QWidget">
-            <property name="name">
-                <cstring>Jewel</cstring>
-            </property>
-            <attribute name="title">
-                <string>Jewel      </string>
-            </attribute>
-        </widget>
-        <widget class="QWidget">
-            <property name="name">
-                <cstring>Belt</cstring>
-            </property>
-            <attribute name="title">
-                <string>Belt      </string>
-            </attribute>
-        </widget>
-        <widget class="QWidget">
-            <property name="name">
-                <cstring>Left_Ring</cstring>
-            </property>
-            <attribute name="title">
-                <string>Left Ring      </string>
-            </attribute>
-        </widget>
-        <widget class="QWidget">
-            <property name="name">
-                <cstring>Right_Ring</cstring>
-            </property>
-            <attribute name="title">
-                <string>Right Ring      </string>
-            </attribute>
-        </widget>
-        <widget class="QWidget">
-            <property name="name">
-                <cstring>Left_Wrist</cstring>
-            </property>
-            <attribute name="title">
-                <string>Left Wrist      </string>
-            </attribute>
-        </widget>
-        <widget class="QWidget">
-            <property name="name">
-                <cstring>Right_Wrist</cstring>
-            </property>
-            <attribute name="title">
-                <string>Right Wrist     </string>
-            </attribute>
-        </widget>
-    </widget>
-    <widget class="QTabWidget">
+    <widget class="MultiTabBar">
         <property name="name">
             <cstring>PieceTab</cstring>
         </property>
         <property name="geometry">
             <rect>
                 <x>2</x>
-                <y>213</y>
+                <y>190</y>
                 <width>776</width>
-                <height>28</height>
+                <height>46</height>
             </rect>
         </property>
         <property name="sizePolicy">
@@ -3570,108 +3485,14 @@
                 <verstretch>0</verstretch>
             </sizepolicy>
         </property>
-        <widget class="QWidget">
-            <property name="name">
-                <cstring>Chest</cstring>
-            </property>
-            <attribute name="title">
-                <string>Chest</string>
-            </attribute>
-        </widget>
-        <widget class="QWidget">
-            <property name="name">
-                <cstring>Arms</cstring>
-            </property>
-            <attribute name="title">
-                <string>Arms</string>
-            </attribute>
-        </widget>
-        <widget class="QWidget">
-            <property name="name">
-                <cstring>Head</cstring>
-            </property>
-            <attribute name="title">
-                <string>Head</string>
-            </attribute>
-        </widget>
-        <widget class="QWidget">
-            <property name="name">
-                <cstring>Legs</cstring>
-            </property>
-            <attribute name="title">
-                <string>Legs</string>
-            </attribute>
-        </widget>
-        <widget class="QWidget">
-            <property name="name">
-                <cstring>Hands</cstring>
-            </property>
-            <attribute name="title">
-                <string>Hands</string>
-            </attribute>
-        </widget>
-        <widget class="QWidget">
-            <property name="name">
-                <cstring>Feet</cstring>
-            </property>
-            <attribute name="title">
-                <string>Feet</string>
-            </attribute>
-        </widget>
-        <widget class="QWidget">
-            <property name="name">
-                <cstring>Right_Hand</cstring>
-            </property>
-            <attribute name="title">
-                <string>Right Hand</string>
-            </attribute>
-        </widget>
-        <widget class="QWidget">
-            <property name="name">
-                <cstring>Left_Hand</cstring>
-            </property>
-            <attribute name="title">
-                <string>Left Hand</string>
-            </attribute>
-        </widget>
-        <widget class="QWidget">
-            <property name="name">
-                <cstring>Two_Handed</cstring>
-            </property>
-            <attribute name="title">
-                <string>2 Handed</string>
-            </attribute>
-        </widget>
-        <widget class="QWidget">
-            <property name="name">
-                <cstring>Ranged</cstring>
-            </property>
-            <attribute name="title">
-                <string>Ranged</string>
-            </attribute>
-        </widget>
-        <widget class="QWidget">
-            <property name="name">
-                <cstring>Spare</cstring>
-            </property>
-            <attribute name="title">
-                <string>Spare</string>
-            </attribute>
-        </widget>
     </widget>
 </widget>
 <connections>
     <connection>
-        <sender>JewelTab</sender>
-        <signal>currentChanged(QWidget*)</signal>
-        <receiver>B_SC</receiver>
-        <slot>JewelTabChanged(QWidget*)</slot>
-    </connection>
-    <connection>
         <sender>PieceTab</sender>
-        <signal>currentChanged(QWidget*)</signal>
+        <signal>selected(int)</signal>
         <receiver>B_SC</receiver>
-        <slot>PieceTabChanged(QWidget*)</slot>
+        <slot>PieceTabChanged(int)</slot>
     </connection>
     <connection>
         <sender>PlayerMade</sender>
@@ -4029,7 +3850,6 @@
     <tabstop>CharRace</tabstop>
     <tabstop>TotalBonus</tabstop>
     <tabstop>CapDistance</tabstop>
-    <tabstop>JewelTab</tabstop>
     <tabstop>PieceTab</tabstop>
     <tabstop>ItemLevel</tabstop>
     <tabstop>ItemLevelButton</tabstop>
@@ -4098,8 +3918,7 @@
     <slot>ItemLevelShow()</slot>
     <slot>Load_Item()</slot>
     <slot>OpenCraftWindow()</slot>
-    <slot>PieceTabChanged(QWidget*)</slot>
-    <slot>JewelTabChanged(QWidget*)</slot>
+    <slot>PieceTabChanged(int)</slot>
     <slot>PlayerToggled(bool)</slot>
     <slot>QualityChanged(const QString&amp;)</slot>
     <slot>Save_Item()</slot>

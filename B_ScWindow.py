@@ -2,13 +2,14 @@
 
 # Form implementation generated from reading ui file 'ScWindow.ui'
 #
-# Created: Mon Oct 31 13:36:26 2005
+# Created: Tue Nov 8 23:53:13 2005
 #      by: The PyQt User Interface Compiler (pyuic) 3.15
 #
 # WARNING! All changes made in this file will be lost!
 
 
 from qt import *
+from MultiTabBar import *
 from SearchingCombo import *
 
 
@@ -332,42 +333,54 @@ class B_SC(QMainWindow):
         self.DupErrorString.setGeometry(QRect(315,173,285,14))
 
         self.frame3 = QGroupBox(self,"frame3")
-        self.frame3.setGeometry(QRect(2,240,776,267))
+        self.frame3.setGeometry(QRect(2,235,776,265))
         self.frame3.setFrameShape(QGroupBox.StyledPanel)
         self.frame3.setFrameShadow(QGroupBox.Raised)
 
         self.ItemLevelLabel = QLabel(self.frame3,"ItemLevelLabel")
-        self.ItemLevelLabel.setGeometry(QRect(7,2,59,22))
+        self.ItemLevelLabel.setGeometry(QRect(7,5,59,22))
+
+        self.ItemLevel = QLineEdit(self.frame3,"ItemLevel")
+        self.ItemLevel.setGeometry(QRect(63,5,35,22))
 
         self.ItemLevelButton = QPushButton(self.frame3,"ItemLevelButton")
-        self.ItemLevelButton.setGeometry(QRect(98,4,18,18))
+        self.ItemLevelButton.setGeometry(QRect(98,7,18,18))
 
         self.ItemQualityLabel = QLabel(self.frame3,"ItemQualityLabel")
-        self.ItemQualityLabel.setGeometry(QRect(136,2,50,22))
+        self.ItemQualityLabel.setGeometry(QRect(136,5,50,22))
+
+        self.QualDrop = SearchingCombo(0,self.frame3,"QualDrop")
+        self.QualDrop.setGeometry(QRect(177,5,52,22))
 
         self.QualEdit = QLineEdit(self.frame3,"QualEdit")
-        self.QualEdit.setGeometry(QRect(177,2,51,22))
+        self.QualEdit.setGeometry(QRect(177,5,51,22))
+
+        self.ItemName = QLineEdit(self.frame3,"ItemName")
+        self.ItemName.setGeometry(QRect(562,48,200,22))
+
+        self.Bonus_Label = QLabel(self.frame3,"Bonus_Label")
+        self.Bonus_Label.setGeometry(QRect(244,5,40,22))
 
         self.Bonus_Edit = QLineEdit(self.frame3,"Bonus_Edit")
-        self.Bonus_Edit.setGeometry(QRect(284,2,35,22))
+        self.Bonus_Edit.setGeometry(QRect(284,5,35,22))
 
         self.AFDPS_Label = QLabel(self.frame3,"AFDPS_Label")
-        self.AFDPS_Label.setGeometry(QRect(330,2,55,22))
+        self.AFDPS_Label.setGeometry(QRect(330,5,55,22))
 
         self.AFDPS_Edit = QLineEdit(self.frame3,"AFDPS_Edit")
-        self.AFDPS_Edit.setGeometry(QRect(375,2,35,22))
+        self.AFDPS_Edit.setGeometry(QRect(375,5,35,22))
 
         self.Speed_Label = QLabel(self.frame3,"Speed_Label")
-        self.Speed_Label.setGeometry(QRect(420,2,40,22))
+        self.Speed_Label.setGeometry(QRect(420,5,40,22))
 
         self.Speed_Edit = QLineEdit(self.frame3,"Speed_Edit")
-        self.Speed_Edit.setGeometry(QRect(460,2,35,22))
+        self.Speed_Edit.setGeometry(QRect(460,5,35,22))
 
         self.Utility_Label = QLabel(self.frame3,"Utility_Label")
-        self.Utility_Label.setGeometry(QRect(507,2,35,16))
+        self.Utility_Label.setGeometry(QRect(507,3,35,14))
 
         self.Utility = QLabel(self.frame3,"Utility")
-        self.Utility.setGeometry(QRect(545,2,28,16))
+        self.Utility.setGeometry(QRect(545,3,28,14))
 
         self.TotalUtility = QLabel(self.frame3,"TotalUtility")
         self.TotalUtility.setGeometry(QRect(545,17,73,14))
@@ -376,13 +389,19 @@ class B_SC(QMainWindow):
         self.Total_Label.setGeometry(QRect(507,17,34,14))
 
         self.Equipped = QCheckBox(self.frame3,"Equipped")
-        self.Equipped.setGeometry(QRect(579,2,71,22))
+        self.Equipped.setGeometry(QRect(579,7,71,22))
+
+        self.CraftButton = QPushButton(self.frame3,"CraftButton")
+        self.CraftButton.setGeometry(QRect(683,5,79,26))
 
         self.Type_Label = QLabel(self.frame3,"Type_Label")
         self.Type_Label.setGeometry(QRect(50,33,119,14))
 
         self.Amount_Label = QLabel(self.frame3,"Amount_Label")
         self.Amount_Label.setGeometry(QRect(181,33,44,14))
+
+        self.Effect_Label = QLabel(self.frame3,"Effect_Label")
+        self.Effect_Label.setGeometry(QRect(237,33,142,14))
 
         self.Quality_Label = QLabel(self.frame3,"Quality_Label")
         self.Quality_Label.setGeometry(QRect(391,33,44,14))
@@ -391,8 +410,24 @@ class B_SC(QMainWindow):
         self.Points_Label.setGeometry(QRect(443,33,35,14))
         self.Points_Label.setAlignment(QLabel.AlignVCenter | QLabel.AlignRight)
 
+        self.Cost_Label = QLabel(self.frame3,"Cost_Label")
+        self.Cost_Label.setGeometry(QRect(482,33,70,14))
+        self.Cost_Label.setAlignment(QLabel.AlignVCenter | QLabel.AlignRight)
+
         self.Name_Label = QLabel(self.frame3,"Name_Label")
-        self.Name_Label.setGeometry(QRect(562,33,200,14))
+        self.Name_Label.setGeometry(QRect(562,33,40,14))
+
+        self.ButtonGroup1 = QButtonGroup(self.frame3,"ButtonGroup1")
+        self.ButtonGroup1.setEnabled(1)
+        self.ButtonGroup1.setGeometry(QRect(615,31,138,19))
+        self.ButtonGroup1.setLineWidth(0)
+
+        self.PlayerMade = QRadioButton(self.ButtonGroup1,"PlayerMade")
+        self.PlayerMade.setGeometry(QRect(2,2,85,17))
+
+        self.Drop = QRadioButton(self.ButtonGroup1,"Drop")
+        self.Drop.setGeometry(QRect(92,2,52,17))
+        self.Drop.setChecked(1)
 
         self.Gem_Label_1 = QLabel(self.frame3,"Gem_Label_1")
         self.Gem_Label_1.setGeometry(QRect(7,48,34,22))
@@ -507,6 +542,9 @@ class B_SC(QMainWindow):
         self.Cost_4.setGeometry(QRect(482,111,70,22))
         self.Cost_4.setAlignment(QLabel.AlignVCenter | QLabel.AlignRight)
 
+        self.Name_4 = QLabel(self.frame3,"Name_4")
+        self.Name_4.setGeometry(QRect(562,111,200,22))
+
         self.Gem_Label_5 = QLabel(self.frame3,"Gem_Label_5")
         self.Gem_Label_5.setGeometry(QRect(7,132,34,22))
 
@@ -606,18 +644,6 @@ class B_SC(QMainWindow):
         self.ItemCost.setGeometry(QRect(482,196,70,14))
         self.ItemCost.setAlignment(QLabel.AlignVCenter | QLabel.AlignRight)
 
-        self.ButtonGroup1 = QButtonGroup(self.frame3,"ButtonGroup1")
-        self.ButtonGroup1.setEnabled(1)
-        self.ButtonGroup1.setGeometry(QRect(607,30,146,19))
-        self.ButtonGroup1.setLineWidth(0)
-
-        self.Drop = QRadioButton(self.ButtonGroup1,"Drop")
-        self.Drop.setGeometry(QRect(100,2,52,17))
-        self.Drop.setChecked(1)
-
-        self.PlayerMade = QRadioButton(self.ButtonGroup1,"PlayerMade")
-        self.PlayerMade.setGeometry(QRect(10,2,85,17))
-
         self.ClearItem = QPushButton(self.frame3,"ClearItem")
         self.ClearItem.setGeometry(QRect(683,209,79,26))
 
@@ -627,103 +653,16 @@ class B_SC(QMainWindow):
         self.SaveItem = QPushButton(self.frame3,"SaveItem")
         self.SaveItem.setGeometry(QRect(596,157,79,26))
 
-        self.ItemName = QLineEdit(self.frame3,"ItemName")
-        self.ItemName.setGeometry(QRect(562,48,200,22))
-
-        self.CraftButton = QPushButton(self.frame3,"CraftButton")
-        self.CraftButton.setGeometry(QRect(662,2,69,26))
-
-        self.Bonus_Label = QLabel(self.frame3,"Bonus_Label")
-        self.Bonus_Label.setGeometry(QRect(244,2,40,22))
-
-        self.Effect_Label = QLabel(self.frame3,"Effect_Label")
-        self.Effect_Label.setGeometry(QRect(237,33,142,14))
-
-        self.Cost_Label = QLabel(self.frame3,"Cost_Label")
-        self.Cost_Label.setGeometry(QRect(482,33,70,14))
-        self.Cost_Label.setAlignment(QLabel.AlignVCenter | QLabel.AlignRight)
-
-        self.ItemLevel = QLineEdit(self.frame3,"ItemLevel")
-        self.ItemLevel.setGeometry(QRect(63,2,35,22))
-
-        self.QualDrop = SearchingCombo(0,self.frame3,"QualDrop")
-        self.QualDrop.setGeometry(QRect(177,2,52,22))
-
-        self.Name_4 = QLabel(self.frame3,"Name_4")
-        self.Name_4.setGeometry(QRect(562,111,200,22))
-
-        self.JewelTab = QTabWidget(self,"JewelTab")
-        self.JewelTab.setGeometry(QRect(2,190,776,23))
-        self.JewelTab.setSizePolicy(QSizePolicy(QSizePolicy.Fixed,QSizePolicy.Fixed,0,0,self.JewelTab.sizePolicy().hasHeightForWidth()))
-
-        self.Neck = QWidget(self.JewelTab,"Neck")
-        self.JewelTab.insertTab(self.Neck,QString.fromLatin1(""))
-
-        self.Cloak = QWidget(self.JewelTab,"Cloak")
-        self.JewelTab.insertTab(self.Cloak,QString.fromLatin1(""))
-
-        self.Jewel = QWidget(self.JewelTab,"Jewel")
-        self.JewelTab.insertTab(self.Jewel,QString.fromLatin1(""))
-
-        self.Belt = QWidget(self.JewelTab,"Belt")
-        self.JewelTab.insertTab(self.Belt,QString.fromLatin1(""))
-
-        self.Left_Ring = QWidget(self.JewelTab,"Left_Ring")
-        self.JewelTab.insertTab(self.Left_Ring,QString.fromLatin1(""))
-
-        self.Right_Ring = QWidget(self.JewelTab,"Right_Ring")
-        self.JewelTab.insertTab(self.Right_Ring,QString.fromLatin1(""))
-
-        self.Left_Wrist = QWidget(self.JewelTab,"Left_Wrist")
-        self.JewelTab.insertTab(self.Left_Wrist,QString.fromLatin1(""))
-
-        self.Right_Wrist = QWidget(self.JewelTab,"Right_Wrist")
-        self.JewelTab.insertTab(self.Right_Wrist,QString.fromLatin1(""))
-
-        self.PieceTab = QTabWidget(self,"PieceTab")
-        self.PieceTab.setGeometry(QRect(2,213,776,28))
+        self.PieceTab = MultiTabBar(self,"PieceTab")
+        self.PieceTab.setGeometry(QRect(2,190,776,46))
         self.PieceTab.setSizePolicy(QSizePolicy(QSizePolicy.Fixed,QSizePolicy.Fixed,0,0,self.PieceTab.sizePolicy().hasHeightForWidth()))
-
-        self.Chest = QWidget(self.PieceTab,"Chest")
-        self.PieceTab.insertTab(self.Chest,QString.fromLatin1(""))
-
-        self.Arms = QWidget(self.PieceTab,"Arms")
-        self.PieceTab.insertTab(self.Arms,QString.fromLatin1(""))
-
-        self.Head = QWidget(self.PieceTab,"Head")
-        self.PieceTab.insertTab(self.Head,QString.fromLatin1(""))
-
-        self.Legs = QWidget(self.PieceTab,"Legs")
-        self.PieceTab.insertTab(self.Legs,QString.fromLatin1(""))
-
-        self.Hands = QWidget(self.PieceTab,"Hands")
-        self.PieceTab.insertTab(self.Hands,QString.fromLatin1(""))
-
-        self.Feet = QWidget(self.PieceTab,"Feet")
-        self.PieceTab.insertTab(self.Feet,QString.fromLatin1(""))
-
-        self.Right_Hand = QWidget(self.PieceTab,"Right_Hand")
-        self.PieceTab.insertTab(self.Right_Hand,QString.fromLatin1(""))
-
-        self.Left_Hand = QWidget(self.PieceTab,"Left_Hand")
-        self.PieceTab.insertTab(self.Left_Hand,QString.fromLatin1(""))
-
-        self.Two_Handed = QWidget(self.PieceTab,"Two_Handed")
-        self.PieceTab.insertTab(self.Two_Handed,QString.fromLatin1(""))
-
-        self.Ranged = QWidget(self.PieceTab,"Ranged")
-        self.PieceTab.insertTab(self.Ranged,QString.fromLatin1(""))
-
-        self.Spare = QWidget(self.PieceTab,"Spare")
-        self.PieceTab.insertTab(self.Spare,QString.fromLatin1(""))
 
         self.languageChange()
 
-        self.resize(QSize(781,533).expandedTo(self.minimumSizeHint()))
+        self.resize(QSize(781,526).expandedTo(self.minimumSizeHint()))
         self.clearWState(Qt.WState_Polished)
 
-        self.connect(self.JewelTab,SIGNAL("currentChanged(QWidget*)"),self.JewelTabChanged)
-        self.connect(self.PieceTab,SIGNAL("currentChanged(QWidget*)"),self.PieceTabChanged)
+        self.connect(self.PieceTab,SIGNAL("selected(int)"),self.PieceTabChanged)
         self.connect(self.PlayerMade,SIGNAL("toggled(bool)"),self.PlayerToggled)
         self.connect(self.Drop,SIGNAL("toggled(bool)"),self.DropToggled)
         self.connect(self.Type_1,SIGNAL("activated(const QString&)"),self.Type_1_Changed)
@@ -788,8 +727,7 @@ class B_SC(QMainWindow):
         self.setTabOrder(self.CharLevel,self.CharRace)
         self.setTabOrder(self.CharRace,self.TotalBonus)
         self.setTabOrder(self.TotalBonus,self.CapDistance)
-        self.setTabOrder(self.CapDistance,self.JewelTab)
-        self.setTabOrder(self.JewelTab,self.PieceTab)
+        self.setTabOrder(self.CapDistance,self.PieceTab)
         self.setTabOrder(self.PieceTab,self.ItemLevel)
         self.setTabOrder(self.ItemLevel,self.ItemLevelButton)
         self.setTabOrder(self.ItemLevelButton,self.QualEdit)
@@ -935,6 +873,15 @@ class B_SC(QMainWindow):
         self.ItemLevelLabel.setText(self.__tr("Item Level:"))
         self.ItemLevelButton.setText(self.__tr("..."))
         self.ItemQualityLabel.setText(self.__tr("Quality:"))
+        self.QualDrop.clear()
+        self.QualDrop.insertItem(self.__tr("94"))
+        self.QualDrop.insertItem(self.__tr("95"))
+        self.QualDrop.insertItem(self.__tr("96"))
+        self.QualDrop.insertItem(self.__tr("97"))
+        self.QualDrop.insertItem(self.__tr("98"))
+        self.QualDrop.insertItem(self.__tr("99"))
+        self.QualDrop.insertItem(self.__tr("100"))
+        self.Bonus_Label.setText(self.__tr("Bonus:"))
         self.AFDPS_Label.setText(self.__tr("AF/DPS:"))
         self.Speed_Label.setText(self.__tr("Speed:"))
         self.Utility_Label.setText(self.__tr("Utility:"))
@@ -942,11 +889,17 @@ class B_SC(QMainWindow):
         self.TotalUtility.setText(self.__tr("0.0"))
         self.Total_Label.setText(self.__tr("Total:"))
         self.Equipped.setText(self.__tr("Equipped"))
+        self.CraftButton.setText(self.__tr("Craft..."))
         self.Type_Label.setText(self.__tr("Type"))
         self.Amount_Label.setText(self.__tr("Amount"))
+        self.Effect_Label.setText(self.__tr("Effect"))
         self.Quality_Label.setText(self.__tr("Quality"))
         self.Points_Label.setText(self.__tr("Points"))
+        self.Cost_Label.setText(self.__tr("Cost"))
         self.Name_Label.setText(self.__tr("Name"))
+        self.ButtonGroup1.setTitle(QString.null)
+        self.PlayerMade.setText(self.__tr("Player Made"))
+        self.Drop.setText(self.__tr("Drop"))
         self.Gem_Label_1.setText(self.__tr("Gem 1:"))
         self.Type_1.clear()
         self.Type_1.insertItem(self.__tr("Unused"))
@@ -994,6 +947,7 @@ class B_SC(QMainWindow):
         self.Type_4.insertItem(self.__tr("Skill"))
         self.Points_4.setText(self.__tr("0.0"))
         self.Cost_4.setText(self.__tr("0c"))
+        self.Name_4.setText(QString.null)
         self.Gem_Label_5.setText(self.__tr("Gem 5:"))
         self.Type_5.clear()
         self.Type_5.insertItem(self.__tr("Unused"))
@@ -1056,44 +1010,9 @@ class B_SC(QMainWindow):
         self.Overcharge.setText(self.__tr("None"))
         self.ItemCost_Label.setText(self.__tr("Item Cost:"))
         self.ItemCost.setText(QString.null)
-        self.ButtonGroup1.setTitle(QString.null)
-        self.Drop.setText(self.__tr("Drop"))
-        self.PlayerMade.setText(self.__tr("Player Made"))
         self.ClearItem.setText(self.__tr("Clear Item"))
         self.LoadItem.setText(self.__tr("Load Item"))
         self.SaveItem.setText(self.__tr("Save Item"))
-        self.CraftButton.setText(self.__tr("Craft..."))
-        self.Bonus_Label.setText(self.__tr("Bonus:"))
-        self.Effect_Label.setText(self.__tr("Effect"))
-        self.Cost_Label.setText(self.__tr("Cost"))
-        self.QualDrop.clear()
-        self.QualDrop.insertItem(self.__tr("94"))
-        self.QualDrop.insertItem(self.__tr("95"))
-        self.QualDrop.insertItem(self.__tr("96"))
-        self.QualDrop.insertItem(self.__tr("97"))
-        self.QualDrop.insertItem(self.__tr("98"))
-        self.QualDrop.insertItem(self.__tr("99"))
-        self.QualDrop.insertItem(self.__tr("100"))
-        self.Name_4.setText(QString.null)
-        self.JewelTab.changeTab(self.Neck,self.__tr("Neck      "))
-        self.JewelTab.changeTab(self.Cloak,self.__tr("Cloak      "))
-        self.JewelTab.changeTab(self.Jewel,self.__tr("Jewel      "))
-        self.JewelTab.changeTab(self.Belt,self.__tr("Belt      "))
-        self.JewelTab.changeTab(self.Left_Ring,self.__tr("Left Ring      "))
-        self.JewelTab.changeTab(self.Right_Ring,self.__tr("Right Ring      "))
-        self.JewelTab.changeTab(self.Left_Wrist,self.__tr("Left Wrist      "))
-        self.JewelTab.changeTab(self.Right_Wrist,self.__tr("Right Wrist     "))
-        self.PieceTab.changeTab(self.Chest,self.__tr("Chest"))
-        self.PieceTab.changeTab(self.Arms,self.__tr("Arms"))
-        self.PieceTab.changeTab(self.Head,self.__tr("Head"))
-        self.PieceTab.changeTab(self.Legs,self.__tr("Legs"))
-        self.PieceTab.changeTab(self.Hands,self.__tr("Hands"))
-        self.PieceTab.changeTab(self.Feet,self.__tr("Feet"))
-        self.PieceTab.changeTab(self.Right_Hand,self.__tr("Right Hand"))
-        self.PieceTab.changeTab(self.Left_Hand,self.__tr("Left Hand"))
-        self.PieceTab.changeTab(self.Two_Handed,self.__tr("2 Handed"))
-        self.PieceTab.changeTab(self.Ranged,self.__tr("Ranged"))
-        self.PieceTab.changeTab(self.Spare,self.__tr("Spare"))
 
 
     def AmountChanged(self,a0):
@@ -1127,10 +1046,7 @@ class B_SC(QMainWindow):
         print "B_SC.OpenCraftWindow(): Not implemented yet"
 
     def PieceTabChanged(self,a0):
-        print "B_SC.PieceTabChanged(QWidget*): Not implemented yet"
-
-    def JewelTabChanged(self,a0):
-        print "B_SC.JewelTabChanged(QWidget*): Not implemented yet"
+        print "B_SC.PieceTabChanged(int): Not implemented yet"
 
     def PlayerToggled(self,a0):
         print "B_SC.PlayerToggled(bool): Not implemented yet"

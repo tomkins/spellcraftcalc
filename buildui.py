@@ -16,7 +16,9 @@ for ui, py in files:
         f = open(py, 'r')
         scstr = f.read()
         f.close()
-        scstr = re.sub('from qt import \*', 'from qt import *\nfrom SearchingCombo import *', scstr)
+        scstr = re.sub('from qt import \*', 'from qt import *\n' \
+                     + 'from MultiTabBar import *\n' \
+                     + 'from SearchingCombo import *', scstr)
         scstr = re.sub('QDialog', 'QMainWindow', scstr)
         scstr = re.sub('QComboBox', 'SearchingCombo', scstr)
         scstr = re.sub('modal[^,]*,', '', scstr)

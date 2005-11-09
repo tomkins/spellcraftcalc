@@ -60,7 +60,6 @@ class SCApp(B_SC):
         self.totals = { }
         self.capTotals = { }
         self.currentPieceTab = None
-        self.currentJewelTab = None
         self.extraSlotsOpen = False
         self.recentFiles = []
         self.effectlists = {
@@ -111,13 +110,23 @@ class SCApp(B_SC):
         self.scroller.addChild(q, 0, 0)
 
         for c in self.children():
-            if isinstance(c, QTabWidget) or isinstance(c, QGroupBox) \
+            if isinstance(c, QTabBar) or isinstance(c, QGroupBox) \
                     or isinstance(c, QLabel):
                 c.reparent(self.scroller.viewport(), c.pos(), 1)
                 self.scroller.addChild(c, c.pos().x(), c.pos().y())
         self.scroller.show()
+
         self.PieceTab.setFocusPolicy(QWidget.StrongFocus)
-        self.JewelTab.setFocusPolicy(QWidget.StrongFocus)
+        for tabname in PieceTabList:
+            newtab = QTab(qApp.translate("B_SC",tabname,None))
+            self.PieceTab.insertTab(newtab, row = 0)
+        for tabname in JewelTabList:
+            newtab = QTab(qApp.translate("B_SC",tabname,None))
+            self.PieceTab.insertTab(newtab, row = 1)
+        self.PieceTab.setFixedSize(self.PieceTab.sizeHint())
+        # Quick hack so that we switch tabs
+        self.PieceTab.setCurrentTab(1)
+        self.PieceTab.setCurrentTab(0)
 
         # Change text color to red for error strings
         pal = QPalette(self.OcErrorString.palette().copy())
@@ -269,22 +278,10 @@ class SCApp(B_SC):
         self.FileNameLabel.setText('Unnamed')
         self.filename = None
 
-        self.currentTab = None
-        self.JewelTab.setCurrentPage(0)
-        self.currentJewelTab = self.JewelTab.currentPage()
-        self.PieceTab.setCurrentPage(0)
-        self.currentPieceTab = self.PieceTab.currentPage()
+        self.PieceTab.setCurrentTab(0)
         self.currentTab = self.PieceTab
-        self.currentPage = self.PieceTab.currentPage()
-        self.currentTabLabel = string.strip(str(self.currentTab.tabLabel(self.currentPage)))
-
-        self.tabGeometry = [{
-            'x': self.PieceTab.x(), 'width':  self.PieceTab.width(), 
-            'y': self.PieceTab.y(), 'height': self.PieceTab.height(), 
-          }, {
-            'x': self.JewelTab.x(), 'width':  self.JewelTab.width(), 
-            'y': self.JewelTab.y(), 'height': self.JewelTab.height(), 
-        }]
+        self.currentPieceTab = self.PieceTab.currentTab()
+        self.currentTabLabel = string.strip(str(self.PieceTab.tab(0).text()))
 
         self.Equipped.setChecked(1)
 
@@ -409,45 +406,12 @@ class SCApp(B_SC):
             self.startup = 0
     
     def PieceTabChanged(self,a0):
-        if self.currentTab is None: return
-        if self.currentTab != self.PieceTab:
-            self.JewelTab.setGeometry(self.tabGeometry[1]['x'], 
-                                      self.tabGeometry[1]['y'], 
-                                      self.tabGeometry[1]['width'], 
-                                      self.tabGeometry[1]['height'])
-            self.PieceTab.setGeometry(self.tabGeometry[0]['x'], 
-                                      self.tabGeometry[0]['y'], 
-                                      self.tabGeometry[0]['width'], 
-                                      self.tabGeometry[0]['height'])
-            self.currentTab = self.PieceTab
+        if self.nocalc:
+            return
         item = self.itemattrlist.get(self.currentTabLabel, Item(self.currentTabLabel))
         self.storeItem(item)
-
         self.currentPieceTab = a0
-        self.currentPage = a0
-        self.currentTabLabel = string.strip(str(self.currentTab.tabLabel(a0)))
-
-        self.restoreItem(self.itemattrlist.get(self.currentTabLabel, Item(self.currentTabLabel)))
-
-    def JewelTabChanged(self,a0):
-        if self.currentTab is None: return
-        if self.currentTab != self.JewelTab: 
-            self.PieceTab.setGeometry(self.tabGeometry[1]['x'], 
-                                      self.tabGeometry[1]['y'], 
-                                      self.tabGeometry[1]['width'], 
-                                      self.tabGeometry[1]['height'])
-            self.JewelTab.setGeometry(self.tabGeometry[0]['x'], 
-                                      self.tabGeometry[0]['y'], 
-                                      self.tabGeometry[0]['width'], 
-                                      self.tabGeometry[0]['height'])
-            self.currentTab = self.JewelTab
-        item = self.itemattrlist.get(self.currentTabLabel, Item(self.currentTabLabel))
-        self.storeItem(item)
-
-        self.currentPieceTab = a0
-        self.currentPage = a0
-        self.currentTabLabel = string.strip(str(self.currentTab.tabLabel(a0)))
-
+        self.currentTabLabel = string.strip(str(self.PieceTab.tab(a0).text()))
         self.restoreItem(self.itemattrlist.get(self.currentTabLabel, Item(self.currentTabLabel)))
 
     def FixupItemLevel(self):
