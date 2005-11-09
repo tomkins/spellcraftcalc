@@ -123,10 +123,9 @@ class SCApp(B_SC):
         for tabname in JewelTabList:
             newtab = QTab(qApp.translate("B_SC",tabname,None))
             self.PieceTab.insertTab(newtab, row = 1)
+        # Quick hack because 2 row MultiTabBar displays don't yet
+        # fill out the bottom border
         self.PieceTab.setFixedSize(self.PieceTab.sizeHint())
-        # Quick hack so that we switch tabs
-        self.PieceTab.setCurrentTab(1)
-        self.PieceTab.setCurrentTab(0)
 
         # Change text color to red for error strings
         pal = QPalette(self.OcErrorString.palette().copy())

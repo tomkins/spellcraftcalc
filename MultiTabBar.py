@@ -23,10 +23,9 @@
 # TODO:
 #   * New control fails to draw the horizontal-bottom continuation bar 
 #     for > 1 rows.
-#   * Initial selection is wrong, but it seems we need two arrays, one
-#     for the original rows, one for the current row order.  Item 0 should
-#     be on the row [-1]
-#
+#   * Haven't even considered tab scrolling (that's the point of multiple
+#     bars, isn't it?)
+#   * Small artifact to left/right of top rows, could be cleaned up.
 
 import sys
 from qt import *
@@ -48,52 +47,33 @@ class MultiTabBar(QTabBar):
     def __init__(self, parent, name):
         QTabBar.__init__(self, parent, name)
         self.tabrows = []
+        self.currows = []
 
     def insertTab(self, index = -1, row = 0):
         newindex = QTabBar.insertTab(self, index)
         while row >= len(self.tabrows):
+            self.currows.insert(0, len(self.tabrows) - 1)
             self.tabrows.append([])
         self.tabrows[row].append(newindex)
 
     def setCurrentTab(self, tab):
-        if not tab or self.count() == 0:
+        if self.count() == 0:
             return
         if isinstance(tab, int):
             tab = self.tab(tab)
         if tab == self.currentTab():
             return;
         index = self.indexOf(tab.identifier())
-        if index not in self.tabrows[-1]:
-            for row in range(len(self.tabrows) - 2, -1, -1):
-                if index in self.tabrows[row]:
-                    saverow = self.tabrows[row]
-                    self.tabrows[row] = self.tabrows[-1]
-                    self.tabrows[-1] = saverow
+        if index not in self.tabrows[self.currows[-1]]:
+            for row in range(0, len(self.tabrows)):
+                if index in self.tabrows[self.currows[row]]:
+                    saverow = self.currows[row]
+                    self.currows[row] = self.currows[-1]
+                    self.currows[-1] = saverow
                     self.layoutTabs()
                     self.repaint()
                     break
         QTabBar.setCurrentTab(self, tab)
-
-    def newlayoutTabs(self):
-        r = self.tabList()[0].rect()
-        for t in self.tabList()[1:]:
-	    r = r.unite(t.rect())
-	oldSh = r.size()
-
-        hframe  = self.style().pixelMetric(QStyle.PM_TabBarTabHSpace, self)
-        vframe  = self.style().pixelMetric(QStyle.PM_TabBarTabVSpace, self)
-        overlap = self.style().pixelMetric(QStyle.PM_TabBarTabOverlap, self)
-
-
-        tabrect = self.PieceTab.tab(0).rect()
-        taboverlap = tabrect.width() - self.PieceTab.tab(0).rect().left()
-        tabrect.setWidth((self.PieceTab.rect().width() \
-                        + taboverlap * (len(PieceTabList) - 1)) \
-                       / len(PieceTabList))
-
-        for tabid in range(0,len(PieceTabList)):
-            self.PieceTab.tab(tabid).setRect(tabrect)
-            tabrect.setLeft(tabrect.left() + taboverlap)
 
     def layoutTabs(self):
         if self.count() < 1:
@@ -117,13 +97,13 @@ class MultiTabBar(QTabBar):
         maxx = 0
         for row in range(0, lastrow + 1):
             if reverse:
-                telts = range(len(self.tabrows[row]) - 1, -1, -1)
+                telts = range(len(self.tabrows[self.currows[row]]) - 1, -1, -1)
             else:
-                telts = range(0, len(self.tabrows[row]))
+                telts = range(0, len(self.tabrows[self.currows[row]]))
             x = 0
             offset = 0
             for telt in telts:
-                t = self.tabAt(self.tabrows[row][telt])
+                t = self.tabAt(self.tabrows[self.currows[row]][telt])
                 w = fm.width(noamptext(str(t.text())));
                 h = max(fm.height(), QApplication.globalStrut().height() )
                 if t.iconSet():
@@ -143,15 +123,15 @@ class MultiTabBar(QTabBar):
 
         for row in range(0, lastrow + 1):
             if reverse:
-                telts = range(len(self.tabrows[row]) - 1, -1, -1)
+                telts = range(len(self.tabrows[self.currows[row]]) - 1, -1, -1)
             else:
-                telts = range(0, len(self.tabrows[row]))
-            addx = maxx - self.tabAt(self.tabrows[row][-1]).rect().right()
+                telts = range(0, len(self.tabrows[self.currows[row]]))
+            addx = maxx - self.tabAt(self.tabrows[self.currows[row]][-1]).rect().right()
             adjx = 0
             if addx <= 0: telts = []
             while len(telts) > 0:
                 fixx = ((addx + len(telts) - 1) / len(telts))
-                t = self.tabAt(self.tabrows[row][telts[0]])
+                t = self.tabAt(self.tabrows[self.currows[row]][telts[0]])
                 newrect = t.rect()
                 newrect.moveLeft(newrect.left() + adjx)
                 newrect.setWidth(newrect.width() + fixx)
@@ -170,19 +150,24 @@ class MultiTabBar(QTabBar):
             offset = 0
 
         for row in range(0, len(self.tabrows)):
-            telts = range(0, len(self.tabrows[row]))
+            telts = range(0, len(self.tabrows[self.currows[row]]))
             for telt in telts:
-                t = self.tabAt(self.tabrows[row][telt])
+                t = self.tabAt(self.tabrows[self.currows[row]][telt])
                 t.rect().moveBy( offset, 0 )
-#                sys.stdout.write(str(row) + ", " + str(telt) + ": " + str(self.tabrows[row][telt]) \
-#                    + " (" + str(t.rect().top())    + ", " + str(t.rect().left()) \
-#                    + "), (" + str(t.rect().bottom()) + ", " + str(t.rect().right()) + ")\r\n")
+#               sys.stdout.write(str(row) + ", " + str(telt) + ": " \
+#                              + str(self.tabrows[row][telt]) \
+#                              + " (" + str(t.rect().top())    + ", " \
+#                                     + str(t.rect().left()) \
+#                            + "), (" + str(t.rect().bottom()) + ", " \
+#                                     + str(t.rect().right()) + ")\r\n")
 
         if self.sizeHint() != oldSh:
             self.updateGeometry()
 
-        sys.stdout.write("(" + str(self.rect().top())    + ", " + str(self.rect().left()) \
-                    + "), (" + str(self.rect().bottom()) + ", " + str(self.rect().right()) + ")\r\n")
+#       sys.stdout.write("(" + str(self.rect().top())    + ", " \
+#                            + str(self.rect().left()) \
+#                   + "), (" + str(self.rect().bottom()) + ", " \
+#                            + str(self.rect().right()) + ")\r\n")
 
         self.emit(PYSIGNAL("sigLayoutChanged"),(self,))
 
