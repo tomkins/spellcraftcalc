@@ -21,13 +21,14 @@
 # Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
 # TODO:
-#   * New control fails to draw the horizontal-bottom continuation bar 
-#     for > 1 rows.
+#   * We draw the horizontal-bottom continuation bar for > 1 rows, but...
+#     really should use the style itself to determine it's look (we use the
+#     style''s color preference, but the width is wrong in the CDE skin.)
 #   * Haven't even considered tab scrolling (that's the point of multiple
 #     bars, isn't it?)
-#   * Small artifact to left/right of top rows, could be cleaned up.
-#   * Small artifact through top of current tab in 2 rows or more.
 #   * Remove tabs/bars (we don't need no stinkin' remove - someone else might)
+#   * Need to check the scope for identifiers v.s. indexes throughout the code,
+#     especially before providing a remove feature which reorders indexes
 
 import sys
 from qt import *
@@ -66,16 +67,57 @@ class MultiTabBar(QTabBar):
         if tab == self.currentTab():
             return;
         index = self.indexOf(tab.identifier())
-        if index not in self.tabrows[self.currows[-1]]:
+        if index in self.tabrows[self.currows[-1]]:
+            QTabBar.setCurrentTab(self, tab)
+        else:
             for row in range(0, len(self.tabrows)):
                 if index in self.tabrows[self.currows[row]]:
                     saverow = self.currows[row]
                     self.currows[row] = self.currows[-1]
                     self.currows[-1] = saverow
+                    QTabBar.setCurrentTab(self, tab)
                     self.layoutTabs()
                     self.repaint()
                     break
-        QTabBar.setCurrentTab(self, tab)
+
+    def paintEvent(self, e):
+        if e.rect().isNull():
+	    return
+        ct = self.tabAt(self.currentTab())
+        painter = QPainter()
+        painter.begin(self)
+        cliprect = e.rect()
+        if not e.erased():
+            painter.eraseRect(e.rect())
+        for row in range(0, len(self.tabrows)):
+            telts = range(0, len(self.tabrows[self.currows[row]]))
+            ft = self.tabAt(self.tabrows[self.currows[row]][0])
+            lt = self.tabAt(self.tabrows[self.currows[row]][-1])
+            rowrect = QRect(ft.rect().topLeft(), lt.rect().bottomRight())
+            if row < len(self.tabrows) - 1:
+                rowrect.setHeight(rowrect.height() - 2)
+            if not cliprect.intersects(rowrect):
+                continue
+            rowrect = cliprect.intersect(rowrect)
+            painter.setClipRect(rowrect, QPainter.CoordPainter)
+            for telt in telts:
+                t = self.tabAt(self.tabrows[self.currows[row]][telt])
+                if t == ct: 
+                    continue
+                if t.rect().intersects(rowrect):
+                    self.paint(painter, t, 0);
+        painter.setClipRect(cliprect, QPainter.CoordPainter)
+        if ct.rect().intersects(cliprect):
+            self.paint(painter, ct, 1);
+        rowrect = QRect(lt.rect().right() + 1, lt.rect().bottom() - 1, 
+                        self.rect().width() - lt.rect().right() - 1, 2) 
+        if rowrect.intersects(cliprect):
+            rowrect.setHeight(1)
+            painter.fillRect(rowrect, QBrush(self.colorGroup().light()));
+            rowrect.moveTop(rowrect.top() + 1)
+            rowrect.setWidth(rowrect.width() - 1)
+            painter.fillRect(rowrect, QBrush(self.colorGroup().midlight()));
+        painter.end()
 
     def layoutTabs(self):
         if self.count() < 1:
@@ -143,8 +185,6 @@ class MultiTabBar(QTabBar):
                 r = r.unite(t.rect())
                 telts = telts[1:]
 
-        ## if d.scrolls: w = d.leftB.x()
-        ## else: 
         w = self.width()
         if maxx < w:
             offset = w - maxx
@@ -156,20 +196,9 @@ class MultiTabBar(QTabBar):
             for telt in telts:
                 t = self.tabAt(self.tabrows[self.currows[row]][telt])
                 t.rect().moveBy( offset, 0 )
-#               sys.stdout.write(str(row) + ", " + str(telt) + ": " \
-#                              + str(self.tabrows[row][telt]) \
-#                              + " (" + str(t.rect().top())    + ", " \
-#                                     + str(t.rect().left()) \
-#                            + "), (" + str(t.rect().bottom()) + ", " \
-#                                     + str(t.rect().right()) + ")\r\n")
 
         if self.sizeHint() != oldSh:
             self.updateGeometry()
-
-#       sys.stdout.write("(" + str(self.rect().top())    + ", " \
-#                            + str(self.rect().left()) \
-#                   + "), (" + str(self.rect().bottom()) + ", " \
-#                            + str(self.rect().right()) + ")\r\n")
 
         self.emit(PYSIGNAL("sigLayoutChanged"),(self,))
 
