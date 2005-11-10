@@ -8,8 +8,9 @@ Things to fix before next release is announced;
   LoadTemplate:  Loading a template doesn't update the most recently
   used list, nor the directory to load templates from.
 
-  LoadItem:  Is /very/ slow (trying item preview for everything in the
-  whole list?), and doesn't remember the directory used.
+  LoadItem:  Is /very/ slow (populating the list, it's not in the
+  preview, perhaps matching to the file extensions), and doesn't 
+  remember the directory used.
 
 
 Things to fix before 2.0 final (non-beta) is announced;
