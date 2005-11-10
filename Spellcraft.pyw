@@ -31,14 +31,14 @@ if __name__ == '__main__':
     app = QApplication(sys.argv)
     QObject.connect(app,SIGNAL('lastWindowClosed()'),app,SLOT('quit()'))
 
-    pixmap = QPixmap("Spellcraft.png")
-    splash = QSplashScreen(pixmap);
+    splash = QSplashScreen(QPixmap("Spellcraft.png"));
     splash.show()
 
     import ScWindow
     scw = ScWindow.SCApp()
     app.setMainWidget(scw)
     scw.setCaption("Kort's Spellcrafting Calculator")
+    scw.setIcon(QPixmap("ScWindow.png"));
     scw.show()
 
     splash.finish(scw);
