@@ -19,8 +19,6 @@
 # Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
 
-
-
 from qt import *
 from B_ScWindow import *
 from Item import *
@@ -51,7 +49,6 @@ import encodings
 import codecs
 import sys
 
-import psyco
 
 class SCApp(B_SC):
     def __init__(self):
@@ -1479,14 +1476,3 @@ class SCApp(B_SC):
 
     def generateUIXML(self):
         UIXML.uixml(self)
-
-if __name__ == '__main__':
-    psyco.full()
-    locale.setlocale(locale.LC_ALL, '')
-    a = QApplication(sys.argv)
-    QObject.connect(a,SIGNAL('lastWindowClosed()'),a,SLOT('quit()'))
-    w = SCApp()
-    a.setMainWidget(w)
-    w.show()
-    w.setCaption('Spellcrafting')
-    a.exec_loop()

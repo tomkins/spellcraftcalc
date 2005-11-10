@@ -7,7 +7,7 @@ if __name__ == "__main__":
     sys.argv.append('py2exe')
 
 sc = {
-    "script" : "ScWindow.pyw",
+    "script" : "Spellcraft.pyw",
     "icon_resources" : [(100, 'ScWindow.ico')],
     }
 
