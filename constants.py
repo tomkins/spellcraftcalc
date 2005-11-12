@@ -191,12 +191,12 @@ AllBonusList = {
 
     'Sorcerer' : {
         'All Spell Lines' : ('Body Magic', 'Mind Magic', 'Matter Magic',),
-        'All Magic Skills' : ('Body Magic', 'Matter Magic',),
+        'All Magic Skills' : ('Body Magic', 'Mind Magic', 'Matter Magic',),
         'All Melee Weapon Skills' : (),
         'All Dual Wield Skills' : (),
         'All Archery Skills' : (),
         'Other Skills' : (),
-        'No Skill Effect' : ('Mind Magic',),
+        'No Skill Effect' : (),
         'Races' : t2(('Avalonian', 'Briton', 'Half Ogre', 'Inconnu', 'Saracen',)),
         'Acuity' : ('Intelligence',),
     },
@@ -1038,8 +1038,8 @@ EffectItemNames = d2({
 # add more non-craftable effect types here:
 #
 EffectItemList = t2(
-     StableEffectList 
- + ('Unique Effect...',
+     StableEffectList + (
+    'Unique Effect...',
 ))
 
 
