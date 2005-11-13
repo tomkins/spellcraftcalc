@@ -14,10 +14,11 @@ sc = {
 setup(name="kscraftsetup", 
     zipfile=None,
     windows=[sc],
-    icon='ScWindow.ico',
     data_files=[
         ('.', ['./LICENSE.txt']),
         ('.', ['./CHANGES.txt']),
+        ('.', ['./ScWindow.png']),
+        ('.', ['./Spellcraft.png']),
         ('reports', ['reports/Reports.txt']), 
         ('reports', glob.glob("reports/*.xml"))],
     options = {'py2exe': {'excludes' : ['_ssl', '_socket'], 
@@ -27,7 +28,3 @@ setup(name="kscraftsetup",
         }
     },
 )
-
-#UserWarning: Unknown distribution option: 'icon'
-#
-#hmmm... how to fix?
