@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/local/bin/pythonw
 # ScWindow.py: Dark Age of Camelot Spellcrafting Calculator (main Window)
 # See http://sc.aod.net for updates
 
@@ -23,13 +23,23 @@ import psyco
 if __name__ == '__main__':
     psyco.full()
 
+    import os
     import sys
     import locale
     locale.setlocale(locale.LC_ALL, '')
 
+    args = sys.argv
+    if not os.path.isabs(args[0]):
+        args[0] = os.path.abspath(args[0])
+
     from qt import *
-    app = QApplication(sys.argv)
+    app = QApplication(args)
     QObject.connect(app,SIGNAL('lastWindowClosed()'),app,SLOT('quit()'))
+    if QApplication.style().name() == "Macintosh (Aqua)" and \
+       sys.platform == "darwin":
+        f = QFont(self.font())
+        f.setPointSize(11)
+        self.setFont(f)
 
     splash = QSplashScreen(QPixmap("Spellcraft.png"));
     splash.show()
