@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'ScWindow.ui'
 #
-# Created: Tue Nov 8 23:53:13 2005
+# Created: Sat Nov 12 19:38:37 2005
 #      by: The PyQt User Interface Compiler (pyuic) 3.15
 #
 # WARNING! All changes made in this file will be lost!
@@ -703,6 +703,7 @@ class B_SC(QMainWindow):
         self.connect(self.CharLevel,SIGNAL("textChanged(const QString&)"),self.recalculate)
         self.connect(self.CraftButton,SIGNAL("clicked()"),self.OpenCraftWindow)
         self.connect(self.SkillsList,SIGNAL("clicked(QListBoxItem*)"),self.SkillClicked)
+        self.connect(self.OtherBonusList,SIGNAL("clicked(QListBoxItem*)"),self.SkillClicked)
         self.connect(self.CharClass,SIGNAL("activated(const QString&)"),self.CharClassChanged)
         self.connect(self.AFDPS_Edit,SIGNAL("textChanged(const QString&)"),self.recalculate)
         self.connect(self.Speed_Edit,SIGNAL("textChanged(const QString&)"),self.recalculate)

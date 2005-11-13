@@ -3735,6 +3735,12 @@
         <slot>SkillClicked(QListBoxItem*)</slot>
     </connection>
     <connection>
+        <sender>OtherBonusList</sender>
+        <signal>clicked(QListBoxItem*)</signal>
+        <receiver>B_SC</receiver>
+        <slot>SkillClicked(QListBoxItem*)</slot>
+    </connection>
+    <connection>
         <sender>CharClass</sender>
         <signal>activated(const QString&amp;)</signal>
         <receiver>B_SC</receiver>
