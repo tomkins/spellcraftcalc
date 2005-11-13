@@ -101,6 +101,23 @@ class SCApp(B_SC):
         self.setGeometry(self.x(), self.y(), self.width() + 2,
 			 self.height() + 1)
 
+        # Darwin labels don't inherit base font, and there are many
+        # more bits of uglyness, not all of which can be fixed.
+        if QApplication.style().name() == "Macintosh (Aqua)" and \
+           sys.platform == "darwin":
+            for c in self.children():
+                if isinstance(c, QLabel):
+                    c.setFont(self.font())
+                if isinstance(c, QGroupBox):
+                    crect = c.geometry()
+                    crect.setHeight(crect.height() + 2)
+                    c.setGeometry(crect)
+                    for cc in c.children():
+                        if isinstance(cc, QLabel) or \
+                           isinstance(cc, QButton) or \
+                           isinstance(cc, QListBox):
+                            cc.setFont(self.font())
+
         # Dummy widget, makes things look nicer on X-Windows
         q = QWidget(self.scroller)
         q.setGeometry(0, 0, 2000, 2000)
@@ -122,16 +139,8 @@ class SCApp(B_SC):
             self.PieceTab.insertTab(newtab, row = 1)
 
         # Change text color to red for error strings
-        pal = QPalette(self.OcErrorString.palette().copy())
-        cg = QColorGroup(self.DupErrorString.colorGroup())
-        cg.setColor(QColorGroup.Foreground, QColor(255, 0, 0))
-        pal.setActive(cg)
-        self.DupErrorString.setPalette(pal)
-        pal = QPalette(self.OcErrorString.palette().copy())
-        cg = QColorGroup(self.OcErrorString.colorGroup())
-        cg.setColor(QColorGroup.Foreground, QColor(255, 0, 0))
-        pal.setActive(cg)
-        self.OcErrorString.setPalette(pal)
+        self.OcErrorString.setPaletteForegroundColor(QColor(255, 0, 0))
+        self.DupErrorString.setPaletteForegroundColor(QColor(255, 0, 0))
 
         self.startup = 1
         self.pricingInfo = {}
@@ -249,7 +258,8 @@ class SCApp(B_SC):
     def replaceLabel(self, lbl, eff):
         ml = MouseLabel.MouseLabel(eff, self, '', lbl.parent())
         ml.setText(lbl.text())
-        ml.setGeometry(lbl.x(), lbl.y(), lbl.width(), lbl.height())
+        ml.setFont(lbl.font())
+        ml.setGeometry(lbl.geometry())
         lbl.hide()
         ml.show()
         return ml
@@ -257,7 +267,8 @@ class SCApp(B_SC):
     def replaceGemLabel(self, lbl):
         ml = MouseLabel.GemLabel(None, 0, self, '', lbl.parent())
         ml.setText(lbl.text())
-        ml.setGeometry(lbl.x(), lbl.y(), lbl.width(), lbl.height())
+        ml.setFont(lbl.font())
+        ml.setGeometry(lbl.geometry())
         lbl.hide()
         ml.show()
         return ml
