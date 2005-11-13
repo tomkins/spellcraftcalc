@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'ScWindow.ui'
 #
-# Created: Sat Nov 12 19:38:37 2005
+# Created: Sat Nov 12 22:29:26 2005
 #      by: The PyQt User Interface Compiler (pyuic) 3.15
 #
 # WARNING! All changes made in this file will be lost!
@@ -20,9 +20,6 @@ class B_SC(QMainWindow):
         if not name:
             self.setName("B_SC")
 
-        f = QFont(self.font())
-        f.setFamily("Arial")
-        self.setFont(f)
 
 
         self.GroupBox9 = QGroupBox(self,"GroupBox9")
