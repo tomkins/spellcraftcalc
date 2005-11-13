@@ -49,6 +49,13 @@ def noamptext(text):
 class MultiTabBar(QTabBar):
     def __init__(self, parent, name):
         QTabBar.__init__(self, parent, name)
+        if QApplication.style().name() == "Macintosh (Aqua)" and \
+           sys.platform == 'darwin':
+            self.rowoverlap = 3
+            self.cropheight = -1
+        else:
+            self.rowoverlap = 3
+            self.cropheight = 2
         self.tabrows = []
         self.currows = []
 
@@ -88,35 +95,57 @@ class MultiTabBar(QTabBar):
         painter.begin(self)
         cliprect = e.rect()
         if not e.erased():
-            painter.eraseRect(e.rect())
+             # self.erase(cliprect)
+             painter.fillRect(cliprect, self.backgroundBrush())
         for row in range(0, len(self.tabrows)):
             telts = range(0, len(self.tabrows[self.currows[row]]))
             ft = self.tabAt(self.tabrows[self.currows[row]][0])
             lt = self.tabAt(self.tabrows[self.currows[row]][-1])
             rowrect = QRect(ft.rect().topLeft(), lt.rect().bottomRight())
-            if row < len(self.tabrows) - 1:
-                rowrect.setHeight(rowrect.height() - 2)
+            rowrect.setRight(self.rect().right())
             if not cliprect.intersects(rowrect):
                 continue
-            rowrect = cliprect.intersect(rowrect)
-            painter.setClipRect(rowrect, QPainter.CoordPainter)
+            if self.cropheight > -1:
+                if row < len(self.tabrows) - 1:
+                    rowrect.setHeight(rowrect.height() - self.cropheight)
+                rowrect = cliprect.intersect(rowrect)
+                painter.setClipRect(rowrect, QPainter.CoordPainter)
             for telt in telts:
                 t = self.tabAt(self.tabrows[self.currows[row]][telt])
                 if t == ct: 
                     continue
                 if t.rect().intersects(rowrect):
                     self.paint(painter, t, 0);
-        painter.setClipRect(cliprect, QPainter.CoordPainter)
         if ct.rect().intersects(cliprect):
             self.paint(painter, ct, 1);
+        if self.cropheight > -1:
+            painter.setClipRect(cliprect, QPainter.CoordPainter)
         rowrect = QRect(lt.rect().right() + 1, lt.rect().bottom() - 1, 
-                        self.rect().width() - lt.rect().right() - 1, 2) 
+                        self.rect().width() - lt.rect().right() - 1, 2)
         if rowrect.intersects(cliprect):
             rowrect.setHeight(1)
             painter.fillRect(rowrect, QBrush(self.colorGroup().light()));
             rowrect.moveTop(rowrect.top() + 1)
-            rowrect.setWidth(rowrect.width() - 1)
             painter.fillRect(rowrect, QBrush(self.colorGroup().midlight()));
+        
+        # rowrect = QRect(lt.rect().right() + 1, 0, 
+        #               self.rect().width() - lt.rect().right() - 1,
+        #               self.rect().height())
+        # if rowrect.intersects(cliprect):
+        #     flags = QStyle.Style_Default
+        #     if self.shape() == QTabBar.RoundedAbove or \
+        #        self.shape() == QTabBar.TriangularAbove:
+        #         flags |= QStyle.Style_Top;
+        #     elif self.shape() == QTabBar.RoundedBelow or \
+        #          self.shape() == QTabBar.TriangularBelow:
+        #         flags |= QStyle.Style_Bottom
+        #     if self.isEnabled():
+        #         flags |= QStyle.Style_Enabled
+        #     sys.stdout.write("(%d, %d, %d, %d)\n" % (
+        #                      rowrect.left(), rowrect.top(), 
+        #                      rowrect.width(), rowrect.height()))
+        #     self.style().drawPrimitive(QStyle.PE_TabBarBase, painter, 
+        #                                rowrect, self.colorGroup(), flags)
         painter.end()
 
     def layoutTabs(self):
@@ -135,7 +164,6 @@ class MultiTabBar(QTabBar):
 
         fm = self.fontMetrics()
         reverse = QApplication.reverseLayout()
-        ## if t and self.d.scrolls: t.r.x()
         lastrow = len(self.tabrows) - 1
         y = 0
         maxx = 0
@@ -161,9 +189,9 @@ class MultiTabBar(QTabBar):
                                     QSize(w, h), QStyleOption(t))))
                 x += t.rect().width() - overlap
                 r = r.unite(t.rect())
-            y += h - 4
+            y += h - self.rowoverlap
             maxx = max(maxx, x + overlap - 1)
-        y += overlap;
+        y += self.rowoverlap;
 
         for row in range(0, lastrow + 1):
             if reverse:
@@ -201,6 +229,4 @@ class MultiTabBar(QTabBar):
             self.updateGeometry()
 
         self.emit(PYSIGNAL("sigLayoutChanged"),(self,))
-
-
 
