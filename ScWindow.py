@@ -82,7 +82,10 @@ class SCApp(B_SC):
                                        'reports', 'Default_Config_Report.xml')
         self.coop = False
 
-        B_SC.__init__(self,parent=None,name="SpellCraft Calulator",fl=Qt.WDestructiveClose)
+        B_SC.__init__(self,parent=None,name="SpellCraft Calulator",
+                      fl=Qt.WDestructiveClose|Qt.WStyle_Customize 
+                        |Qt.WStyle_DialogBorder|Qt.WStyle_Title
+                        |Qt.WStyle_SysMenu|Qt.WStyle_Minimize)
 
         self.statusBar().hide()
 
