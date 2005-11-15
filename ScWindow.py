@@ -34,7 +34,6 @@ import SC
 import CraftWindow
 import ReportWindow
 import ReportParser
-import MouseLabel
 import DisplayWindow
 import CraftBar
 import SearchingCombo
@@ -53,7 +52,6 @@ import sys
 class SCApp(B_SC):
     def __init__(self):
         self.nocalc = 1
-	self.scroller = None
         self.totals = { }
         self.capTotals = { }
         self.currentPieceTab = None
@@ -86,20 +84,9 @@ class SCApp(B_SC):
 
         B_SC.__init__(self,parent=None,name="SpellCraft Calulator",fl=Qt.WDestructiveClose)
 
+        self.statusBar().hide()
+
         self.EffectWidths = [self.Effect_1.width(), self.Effect_5.width()]
-
-        self.menuBar = QMenuBar(self)
-        pal = QPalette(self.palette().copy())
-        self.menuBar.setPalette(pal)
-
-        self.scroller = QScrollView(self)
-        self.scroller.enableClipper(True)
-        self.scroller.setGeometry(QRect(0, self.menuBar.height(), self.width(), 
-                                        self.height() - self.menuBar.height()))
-        self.scroller.resizeContents(self.width() - 2, 
-                                     self.height() - self.menuBar.height())
-        self.setGeometry(self.x(), self.y(), self.width() + 2,
-			 self.height() + 1)
 
         # Darwin labels don't inherit base font, and there are many
         # more bits of uglyness, not all of which can be fixed.
@@ -118,18 +105,6 @@ class SCApp(B_SC):
                            isinstance(cc, QListBox):
                             cc.setFont(self.font())
 
-        # Dummy widget, makes things look nicer on X-Windows
-        q = QWidget(self.scroller)
-        q.setGeometry(0, 0, 2000, 2000)
-        self.scroller.addChild(q, 0, 0)
-
-        for c in self.children():
-            if isinstance(c, QTabBar) or isinstance(c, QGroupBox) \
-                    or isinstance(c, QLabel):
-                c.reparent(self.scroller.viewport(), c.pos(), 1)
-                self.scroller.addChild(c, c.pos().x(), c.pos().y())
-        self.scroller.show()
-
         self.PieceTab.setFocusPolicy(QWidget.StrongFocus)
         for tabname in PieceTabList:
             newtab = QTab(qApp.translate("B_SC",tabname,None))
@@ -138,6 +113,8 @@ class SCApp(B_SC):
             newtab = QTab(qApp.translate("B_SC",tabname,None))
             self.PieceTab.insertTab(newtab, row = 1)
 
+        self.updateGeometry()
+
         # Change text color to red for error strings
         self.OcErrorString.setPaletteForegroundColor(QColor(255, 0, 0))
         self.DupErrorString.setPaletteForegroundColor(QColor(255, 0, 0))
@@ -145,35 +122,6 @@ class SCApp(B_SC):
         self.startup = 1
         self.pricingInfo = {}
 	
-        self.StrengthLabel = self.replaceLabel(self.StrengthLabel, 'Strength')
-        self.ConstitutionLabel = self.replaceLabel(self.ConstitutionLabel, 'Constitution')
-        self.DexterityLabel = self.replaceLabel(self.DexterityLabel, 'Dexterity')
-        self.QuicknessLabel = self.replaceLabel(self.QuicknessLabel, 'Quickness')
-        self.IntelligenceLabel = self.replaceLabel(self.IntelligenceLabel, 'Intelligence')
-        self.PietyLabel = self.replaceLabel(self.PietyLabel, 'Piety')
-        self.CharismaLabel = self.replaceLabel(self.CharismaLabel, 'Charisma')
-        self.EmpathyLabel = self.replaceLabel(self.EmpathyLabel, 'Empathy')
-        self.BodyLabel = self.replaceLabel(self.BodyLabel, 'Body')
-        self.ColdLabel = self.replaceLabel(self.ColdLabel, 'Cold')
-        self.HeatLabel = self.replaceLabel(self.HeatLabel, 'Heat')
-        self.EnergyLabel = self.replaceLabel(self.EnergyLabel, 'Energy')
-        self.MatterLabel = self.replaceLabel(self.MatterLabel, 'Matter')
-        self.SpiritLabel = self.replaceLabel(self.SpiritLabel, 'Spirit')
-        self.CrushLabel = self.replaceLabel(self.CrushLabel, 'Crush')
-        self.ThrustLabel = self.replaceLabel(self.ThrustLabel, 'Thrust')
-        self.SlashLabel = self.replaceLabel(self.SlashLabel, 'Slash')
-        self.HitsLabel = self.replaceLabel(self.HitsLabel, 'Hits')
-        self.PowerLabel = self.replaceLabel(self.PowerLabel, 'Power')
-        self.Focus_1 = self.replaceLabel(self.Focus_1, '')
-        self.Focus_2 = self.replaceLabel(self.Focus_2, '')
-        self.Focus_3 = self.replaceLabel(self.Focus_3, '')
-        self.Focus_4 = self.replaceLabel(self.Focus_4, '')
-
-        self.Name_1 = self.replaceGemLabel(self.Name_1)
-        self.Name_2 = self.replaceGemLabel(self.Name_2)
-        self.Name_3 = self.replaceGemLabel(self.Name_3)
-        self.Name_4 = self.replaceGemLabel(self.Name_4)
-
         self.ItemLevelWindow = ItemLevel.ItemLevel(self, '', 1)
         self.DaocPath = ''
         self.realm = 'Albion'
@@ -195,7 +143,7 @@ class SCApp(B_SC):
         self.updateRecentFiles(None)
         self.filemenu.insertItem('&Recent Files', self.rf_menu)
         self.filemenu.insertItem('E&xit', self, SLOT('close()'), Qt.CTRL+Qt.Key_X)
-        self.menuBar.insertItem('&File', self.filemenu)
+        self.menuBar().insertItem('&File', self.filemenu)
 
         self.reportmenu = QPopupMenu(self, 'FileMenu')
         self.reportmenu.insertItem('Choose Config Format...', self.chooseReportFile)
@@ -203,7 +151,7 @@ class SCApp(B_SC):
         self.reportmenu.insertItem('&Materials', self.openMaterialsReport, Qt.CTRL+Qt.Key_M)
         self.reportmenu.insertItem('&Set up Craft Bars...', self.openCraftBars)
         self.reportmenu.insertItem('&Generate UI XML (Beta)', self.generateUIXML)
-        self.menuBar.insertItem('&Reports', self.reportmenu)
+        self.menuBar().insertItem('&Reports', self.reportmenu)
 
         self.swapGems = QPopupMenu(self, "SwapGems")
         self.swapGems.insertItem('Chest', 0)
@@ -232,11 +180,11 @@ class SCApp(B_SC):
         self.toolsmenu = QPopupMenu(self, 'ToolsMenu')
         self.toolsmenu.insertItem('S&wap Gems With...', self.swapGems)
         self.toolsmenu.insertItem('&Options...', self.openOptions)
-        self.menuBar.insertItem('&Tools', self.toolsmenu)
+        self.menuBar().insertItem('&Tools', self.toolsmenu)
 
         self.helpmenu = QPopupMenu(self, 'HelpMenu')
         self.helpmenu.insertItem('&About', self.aboutBox)
-        self.menuBar.insertItem('&Help', self.helpmenu)
+        self.menuBar().insertItem('&Help', self.helpmenu)
 
         self.initialize()
         self.pricingInfo = OW.getPriceInfo()
@@ -254,24 +202,6 @@ class SCApp(B_SC):
             else:
                 return False
         else: return QMainWindow.close(self, 1)
-
-    def replaceLabel(self, lbl, eff):
-        ml = MouseLabel.MouseLabel(eff, self, '', lbl.parent())
-        ml.setText(lbl.text())
-        ml.setFont(lbl.font())
-        ml.setGeometry(lbl.geometry())
-        lbl.hide()
-        ml.show()
-        return ml
-
-    def replaceGemLabel(self, lbl):
-        ml = MouseLabel.GemLabel(None, 0, self, '', lbl.parent())
-        ml.setText(lbl.text())
-        ml.setFont(lbl.font())
-        ml.setGeometry(lbl.geometry())
-        lbl.hide()
-        ml.show()
-        return ml
 
     def initialize(self):
 
@@ -543,6 +473,7 @@ class SCApp(B_SC):
             self.QualEdit.setText(item.getAttr('ItemQuality'))
             self.ItemName.setText(item.getAttr('ItemName'))
         else:
+            self.QualDrop.insertStrList(list(QualityValues))
             if item.getAttr('ItemQuality') in QualityValues:
                 self.QualDrop.setCurrentItem(
                     QualityValues.index(item.getAttr('ItemQuality')))
@@ -743,8 +674,6 @@ class SCApp(B_SC):
                     for i in range(1, 5):
                         n = getattr(self, 'Name_%d' % i)
                         n.setText(SC.getGemName(item, i-1))
-                        n.item = item
-                        n.itemslot = i-1
                         if item.getSlotAttr(itemtype, i-1, 'Done') == '1':
                             getattr(self, 'Gem_Label_%d' % i).setEnabled(0)
                         else:
@@ -1437,11 +1366,60 @@ class SCApp(B_SC):
         CB.exec_loop()
         self.DaocPath = str(CB.DaocPath.text())
 
+    def labelClicked(self, find):
+        if find in ['', 'Cost', 'Dup', 'File', 'Gem', 'Item', 'Name', 'Oc', 'Points', 
+                    'Text', 'Total', 'Utility']: return
+        locs = []
+        for key, item in self.itemattrlist.items():
+            activestate = item.getAttr('ActiveState')
+            if activestate == 'drop':
+                toprng = 10
+            else:
+                toprng = 4
+            for slot in range(0, toprng):
+                type = item.getSlotAttr(activestate, slot, 'Type')
+                if type == 'Unused': continue
+                effect = item.getSlotAttr(activestate, slot, 'Effect')
+                if effect != find: continue
+                amount = item.getSlotAttr(activestate, slot, 'Amount')
+                if type == 'Cap Increase':
+                    locs.append([key, str(amount) + ' cap'])
+                else:
+                    locs.append([key, amount])
+                #elif effect in AllBonusList[self.realm][self.charclass].keys():
+                #    if effect in AllBonusList[self.realm][self.charclass][effect]:
+                #        locs.append([key, amount])
+        DW = DisplayWindow.DisplayWindow(self, modal = 1)
+        DW.setCaption('Slots With %s' % find)
+        DW.loadLocations(locs)
+        DW.exec_loop()
+
+    def gemClicked(self, item, slot):
+        RW = ReportWindow.ReportWindow(self, '', 1)
+        RW.setCaption('Materials')
+        RW.materialsReport({item: self.itemattrlist[item]}, slot)
+        RW.exec_loop()
+
+    def mousePressEvent(self, e):
+        if e is None: return
+        child = self.childAt(e.pos(), False)
+        if child is None: return
+        if not isinstance(child, QLabel): return
+        if len(child.name()) == 6 and child.name()[0:5] == "Name_":
+            self.gemClicked(self.currentTabLabel, int(child.name()[5:]))
+            return
+        nameidx = 1
+        shortname = child.name()
+        while nameidx < len(shortname):
+            if shortname[nameidx] < 'a' or shortname[nameidx] > 'z':
+                shortname = shortname[0:nameidx]
+            sys.stdout.write(shortname[0:nameidx]+"\r")
+            nameidx += 1
+        sys.stdout.write("\n")
+        self.labelClicked(shortname)
+
     def resizeEvent(self, e):
         sz = e.size()
-        if self.scroller is not None:
-            self.scroller.setGeometry(0, 0 + self.menuBar.height(), 
-				      sz.width(), sz.height() - self.menuBar.height())
         QMainWindow.resizeEvent(self, e)
 
     def swapWith(self, part):

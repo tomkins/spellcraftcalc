@@ -2,13 +2,14 @@
 
 # Form implementation generated from reading ui file 'ScWindow.ui'
 #
-# Created: Sat Nov 12 22:29:26 2005
+# Created: Tue Nov 15 02:38:20 2005
 #      by: The PyQt User Interface Compiler (pyuic) 3.15
 #
 # WARNING! All changes made in this file will be lost!
 
 
 from qt import *
+#Import the Custom Widgets
 from MultiTabBar import *
 from SearchingCombo import *
 
@@ -16,13 +17,15 @@ from SearchingCombo import *
 class B_SC(QMainWindow):
     def __init__(self,parent = None,name = None,fl = 0):
         QMainWindow.__init__(self,parent,name,fl)
+        self.statusBar()
 
         if not name:
             self.setName("B_SC")
 
 
+        self.setCentralWidget(QWidget(self,"qt_central_widget"))
 
-        self.GroupBox9 = QGroupBox(self,"GroupBox9")
+        self.GroupBox9 = QGroupBox(self.centralWidget(),"GroupBox9")
         self.GroupBox9.setGeometry(QRect(613,3,165,111))
 
         self.TextLabel1_2 = QLabel(self.GroupBox9,"TextLabel1_2")
@@ -37,7 +40,7 @@ class B_SC(QMainWindow):
         self.TextLabel3_2_2 = QLabel(self.GroupBox9,"TextLabel3_2_2")
         self.TextLabel3_2_2.setGeometry(QRect(6,88,38,16))
 
-        self.CharClass = SearchingCombo(0,self.GroupBox9,"CharClass")
+        self.CharClass = SearchingCombo(self.GroupBox9,"CharClass")
         self.CharClass.setGeometry(QRect(46,38,114,22))
 
         self.CharName = QLineEdit(self.GroupBox9,"CharName")
@@ -48,10 +51,10 @@ class B_SC(QMainWindow):
         self.CharLevel = QLineEdit(self.GroupBox9,"CharLevel")
         self.CharLevel.setGeometry(QRect(46,61,37,22))
 
-        self.CharRace = SearchingCombo(0,self.GroupBox9,"CharRace")
+        self.CharRace = SearchingCombo(self.GroupBox9,"CharRace")
         self.CharRace.setGeometry(QRect(46,84,114,22))
 
-        self.ButtonGroup2 = QButtonGroup(self,"ButtonGroup2")
+        self.ButtonGroup2 = QButtonGroup(self.centralWidget(),"ButtonGroup2")
         self.ButtonGroup2.setGeometry(QRect(613,114,165,51))
 
         self.TotalBonus = QRadioButton(self.ButtonGroup2,"TotalBonus")
@@ -61,7 +64,7 @@ class B_SC(QMainWindow):
         self.CapDistance = QRadioButton(self.ButtonGroup2,"CapDistance")
         self.CapDistance.setGeometry(QRect(11,32,109,17))
 
-        self.GroupBox1 = QGroupBox(self,"GroupBox1")
+        self.GroupBox1 = QGroupBox(self.centralWidget(),"GroupBox1")
         self.GroupBox1.setGeometry(QRect(5,3,85,182))
 
         self.StrengthLabel = QLabel(self.GroupBox1,"StrengthLabel")
@@ -174,7 +177,7 @@ class B_SC(QMainWindow):
         self.HitsCap.setGeometry(QRect(49,160,28,16))
         self.HitsCap.setAlignment(QLabel.AlignVCenter | QLabel.AlignRight)
 
-        self.GroupBox2 = QGroupBox(self,"GroupBox2")
+        self.GroupBox2 = QGroupBox(self.centralWidget(),"GroupBox2")
         self.GroupBox2.setGeometry(QRect(91,3,90,182))
 
         self.BodyLabel = QLabel(self.GroupBox2,"BodyLabel")
@@ -276,7 +279,7 @@ class B_SC(QMainWindow):
         self.SlashRR.setGeometry(QRect(66,160,17,16))
         self.SlashRR.setAlignment(QLabel.AlignVCenter | QLabel.AlignRight)
 
-        self.GroupBox4 = QGroupBox(self,"GroupBox4")
+        self.GroupBox4 = QGroupBox(self.centralWidget(),"GroupBox4")
         self.GroupBox4.setGeometry(QRect(182,3,124,136))
 
         self.Focus_1 = QLabel(self.GroupBox4,"Focus_1")
@@ -291,7 +294,7 @@ class B_SC(QMainWindow):
         self.Focus_4 = QLabel(self.GroupBox4,"Focus_4")
         self.Focus_4.setGeometry(QRect(6,72,112,16))
 
-        self.GroupBox5 = QGroupBox(self,"GroupBox5")
+        self.GroupBox5 = QGroupBox(self.centralWidget(),"GroupBox5")
         self.GroupBox5.setGeometry(QRect(182,138,124,47))
 
         self.TotalCostLabel = QLabel(self.GroupBox5,"TotalCostLabel")
@@ -308,28 +311,28 @@ class B_SC(QMainWindow):
         self.TotalPrice.setGeometry(QRect(36,28,82,16))
         self.TotalPrice.setAlignment(QLabel.AlignVCenter | QLabel.AlignRight)
 
-        self.GroupSkillsList = QGroupBox(self,"GroupSkillsList")
+        self.GroupSkillsList = QGroupBox(self.centralWidget(),"GroupSkillsList")
         self.GroupSkillsList.setGeometry(QRect(307,3,140,136))
 
         self.SkillsList = QListBox(self.GroupSkillsList,"SkillsList")
         self.SkillsList.setGeometry(QRect(5,15,130,116))
 
-        self.GroupOtherBonusList = QGroupBox(self,"GroupOtherBonusList")
+        self.GroupOtherBonusList = QGroupBox(self.centralWidget(),"GroupOtherBonusList")
         self.GroupOtherBonusList.setGeometry(QRect(448,3,164,136))
 
         self.OtherBonusList = QListBox(self.GroupOtherBonusList,"OtherBonusList")
         self.OtherBonusList.setGeometry(QRect(5,15,154,116))
 
-        self.FileNameLabel = QLabel(self,"FileNameLabel")
+        self.FileNameLabel = QLabel(self.centralWidget(),"FileNameLabel")
         self.FileNameLabel.setGeometry(QRect(315,142,285,14))
 
-        self.OcErrorString = QLabel(self,"OcErrorString")
+        self.OcErrorString = QLabel(self.centralWidget(),"OcErrorString")
         self.OcErrorString.setGeometry(QRect(315,157,285,14))
 
-        self.DupErrorString = QLabel(self,"DupErrorString")
+        self.DupErrorString = QLabel(self.centralWidget(),"DupErrorString")
         self.DupErrorString.setGeometry(QRect(315,173,285,14))
 
-        self.frame3 = QGroupBox(self,"frame3")
+        self.frame3 = QGroupBox(self.centralWidget(),"frame3")
         self.frame3.setGeometry(QRect(2,235,776,265))
         self.frame3.setFrameShape(QGroupBox.StyledPanel)
         self.frame3.setFrameShadow(QGroupBox.Raised)
@@ -346,7 +349,7 @@ class B_SC(QMainWindow):
         self.ItemQualityLabel = QLabel(self.frame3,"ItemQualityLabel")
         self.ItemQualityLabel.setGeometry(QRect(136,5,50,22))
 
-        self.QualDrop = SearchingCombo(0,self.frame3,"QualDrop")
+        self.QualDrop = SearchingCombo(self.frame3,"QualDrop")
         self.QualDrop.setGeometry(QRect(177,5,52,22))
 
         self.QualEdit = QLineEdit(self.frame3,"QualEdit")
@@ -429,19 +432,19 @@ class B_SC(QMainWindow):
         self.Gem_Label_1 = QLabel(self.frame3,"Gem_Label_1")
         self.Gem_Label_1.setGeometry(QRect(7,48,34,22))
 
-        self.Type_1 = SearchingCombo(0,self.frame3,"Type_1")
+        self.Type_1 = SearchingCombo(self.frame3,"Type_1")
         self.Type_1.setGeometry(QRect(46,48,127,22))
 
         self.Amount_Edit_1 = QLineEdit(self.frame3,"Amount_Edit_1")
         self.Amount_Edit_1.setGeometry(QRect(177,48,51,22))
 
-        self.Amount_Drop_1 = SearchingCombo(0,self.frame3,"Amount_Drop_1")
+        self.Amount_Drop_1 = SearchingCombo(self.frame3,"Amount_Drop_1")
         self.Amount_Drop_1.setGeometry(QRect(177,48,52,22))
 
-        self.Effect_1 = SearchingCombo(0,self.frame3,"Effect_1")
+        self.Effect_1 = SearchingCombo(self.frame3,"Effect_1")
         self.Effect_1.setGeometry(QRect(233,48,150,22))
 
-        self.Quality_1 = SearchingCombo(0,self.frame3,"Quality_1")
+        self.Quality_1 = SearchingCombo(self.frame3,"Quality_1")
         self.Quality_1.setGeometry(QRect(387,48,52,22))
 
         self.Points_1 = QLabel(self.frame3,"Points_1")
@@ -461,16 +464,16 @@ class B_SC(QMainWindow):
         self.Amount_Edit_2 = QLineEdit(self.frame3,"Amount_Edit_2")
         self.Amount_Edit_2.setGeometry(QRect(177,69,51,22))
 
-        self.Amount_Drop_2 = SearchingCombo(0,self.frame3,"Amount_Drop_2")
+        self.Amount_Drop_2 = SearchingCombo(self.frame3,"Amount_Drop_2")
         self.Amount_Drop_2.setGeometry(QRect(177,69,52,22))
 
-        self.Type_2 = SearchingCombo(0,self.frame3,"Type_2")
+        self.Type_2 = SearchingCombo(self.frame3,"Type_2")
         self.Type_2.setGeometry(QRect(46,69,127,22))
 
-        self.Effect_2 = SearchingCombo(0,self.frame3,"Effect_2")
+        self.Effect_2 = SearchingCombo(self.frame3,"Effect_2")
         self.Effect_2.setGeometry(QRect(233,69,150,22))
 
-        self.Quality_2 = SearchingCombo(0,self.frame3,"Quality_2")
+        self.Quality_2 = SearchingCombo(self.frame3,"Quality_2")
         self.Quality_2.setGeometry(QRect(387,69,52,22))
 
         self.Points_2 = QLabel(self.frame3,"Points_2")
@@ -487,19 +490,19 @@ class B_SC(QMainWindow):
         self.Gem_Label_3 = QLabel(self.frame3,"Gem_Label_3")
         self.Gem_Label_3.setGeometry(QRect(7,90,34,22))
 
-        self.Type_3 = SearchingCombo(0,self.frame3,"Type_3")
+        self.Type_3 = SearchingCombo(self.frame3,"Type_3")
         self.Type_3.setGeometry(QRect(46,90,127,22))
 
         self.Amount_Edit_3 = QLineEdit(self.frame3,"Amount_Edit_3")
         self.Amount_Edit_3.setGeometry(QRect(177,90,51,22))
 
-        self.Amount_Drop_3 = SearchingCombo(0,self.frame3,"Amount_Drop_3")
+        self.Amount_Drop_3 = SearchingCombo(self.frame3,"Amount_Drop_3")
         self.Amount_Drop_3.setGeometry(QRect(177,90,52,22))
 
-        self.Effect_3 = SearchingCombo(0,self.frame3,"Effect_3")
+        self.Effect_3 = SearchingCombo(self.frame3,"Effect_3")
         self.Effect_3.setGeometry(QRect(233,90,150,22))
 
-        self.Quality_3 = SearchingCombo(0,self.frame3,"Quality_3")
+        self.Quality_3 = SearchingCombo(self.frame3,"Quality_3")
         self.Quality_3.setGeometry(QRect(387,90,52,22))
 
         self.Points_3 = QLabel(self.frame3,"Points_3")
@@ -516,19 +519,19 @@ class B_SC(QMainWindow):
         self.Gem_Label_4 = QLabel(self.frame3,"Gem_Label_4")
         self.Gem_Label_4.setGeometry(QRect(7,111,34,22))
 
-        self.Type_4 = SearchingCombo(0,self.frame3,"Type_4")
+        self.Type_4 = SearchingCombo(self.frame3,"Type_4")
         self.Type_4.setGeometry(QRect(46,111,127,22))
 
         self.Amount_Edit_4 = QLineEdit(self.frame3,"Amount_Edit_4")
         self.Amount_Edit_4.setGeometry(QRect(177,111,51,22))
 
-        self.Amount_Drop_4 = SearchingCombo(0,self.frame3,"Amount_Drop_4")
+        self.Amount_Drop_4 = SearchingCombo(self.frame3,"Amount_Drop_4")
         self.Amount_Drop_4.setGeometry(QRect(177,111,52,22))
 
-        self.Effect_4 = SearchingCombo(0,self.frame3,"Effect_4")
+        self.Effect_4 = SearchingCombo(self.frame3,"Effect_4")
         self.Effect_4.setGeometry(QRect(233,111,150,22))
 
-        self.Quality_4 = SearchingCombo(0,self.frame3,"Quality_4")
+        self.Quality_4 = SearchingCombo(self.frame3,"Quality_4")
         self.Quality_4.setGeometry(QRect(387,111,52,22))
 
         self.Points_4 = QLabel(self.frame3,"Points_4")
@@ -545,73 +548,73 @@ class B_SC(QMainWindow):
         self.Gem_Label_5 = QLabel(self.frame3,"Gem_Label_5")
         self.Gem_Label_5.setGeometry(QRect(7,132,34,22))
 
-        self.Type_5 = SearchingCombo(0,self.frame3,"Type_5")
+        self.Type_5 = SearchingCombo(self.frame3,"Type_5")
         self.Type_5.setGeometry(QRect(46,132,127,22))
 
         self.Amount_Edit_5 = QLineEdit(self.frame3,"Amount_Edit_5")
         self.Amount_Edit_5.setGeometry(QRect(177,132,51,22))
 
-        self.Effect_5 = SearchingCombo(0,self.frame3,"Effect_5")
+        self.Effect_5 = SearchingCombo(self.frame3,"Effect_5")
         self.Effect_5.setGeometry(QRect(233,132,206,22))
 
         self.Gem_Label_6 = QLabel(self.frame3,"Gem_Label_6")
         self.Gem_Label_6.setGeometry(QRect(7,153,34,22))
 
-        self.Type_6 = SearchingCombo(0,self.frame3,"Type_6")
+        self.Type_6 = SearchingCombo(self.frame3,"Type_6")
         self.Type_6.setGeometry(QRect(46,153,127,22))
 
         self.Amount_Edit_6 = QLineEdit(self.frame3,"Amount_Edit_6")
         self.Amount_Edit_6.setGeometry(QRect(177,153,51,22))
 
-        self.Effect_6 = SearchingCombo(0,self.frame3,"Effect_6")
+        self.Effect_6 = SearchingCombo(self.frame3,"Effect_6")
         self.Effect_6.setGeometry(QRect(233,153,206,22))
 
         self.Gem_Label_7 = QLabel(self.frame3,"Gem_Label_7")
         self.Gem_Label_7.setGeometry(QRect(7,174,34,22))
 
-        self.Type_7 = SearchingCombo(0,self.frame3,"Type_7")
+        self.Type_7 = SearchingCombo(self.frame3,"Type_7")
         self.Type_7.setGeometry(QRect(46,174,127,22))
 
         self.Amount_Edit_7 = QLineEdit(self.frame3,"Amount_Edit_7")
         self.Amount_Edit_7.setGeometry(QRect(177,174,51,22))
 
-        self.Effect_7 = SearchingCombo(0,self.frame3,"Effect_7")
+        self.Effect_7 = SearchingCombo(self.frame3,"Effect_7")
         self.Effect_7.setGeometry(QRect(233,174,206,22))
 
         self.Gem_Label_8 = QLabel(self.frame3,"Gem_Label_8")
         self.Gem_Label_8.setGeometry(QRect(7,195,34,22))
 
-        self.Type_8 = SearchingCombo(0,self.frame3,"Type_8")
+        self.Type_8 = SearchingCombo(self.frame3,"Type_8")
         self.Type_8.setGeometry(QRect(46,195,127,22))
 
         self.Amount_Edit_8 = QLineEdit(self.frame3,"Amount_Edit_8")
         self.Amount_Edit_8.setGeometry(QRect(177,195,51,22))
 
-        self.Effect_8 = SearchingCombo(0,self.frame3,"Effect_8")
+        self.Effect_8 = SearchingCombo(self.frame3,"Effect_8")
         self.Effect_8.setGeometry(QRect(233,195,206,22))
 
         self.Gem_Label_9 = QLabel(self.frame3,"Gem_Label_9")
         self.Gem_Label_9.setGeometry(QRect(7,216,34,22))
 
-        self.Type_9 = SearchingCombo(0,self.frame3,"Type_9")
+        self.Type_9 = SearchingCombo(self.frame3,"Type_9")
         self.Type_9.setGeometry(QRect(46,216,127,22))
 
         self.Amount_Edit_9 = QLineEdit(self.frame3,"Amount_Edit_9")
         self.Amount_Edit_9.setGeometry(QRect(177,216,51,22))
 
-        self.Effect_9 = SearchingCombo(0,self.frame3,"Effect_9")
+        self.Effect_9 = SearchingCombo(self.frame3,"Effect_9")
         self.Effect_9.setGeometry(QRect(233,216,206,22))
 
         self.Gem_Label_10 = QLabel(self.frame3,"Gem_Label_10")
         self.Gem_Label_10.setGeometry(QRect(7,237,41,22))
 
-        self.Type_10 = SearchingCombo(0,self.frame3,"Type_10")
+        self.Type_10 = SearchingCombo(self.frame3,"Type_10")
         self.Type_10.setGeometry(QRect(46,237,127,22))
 
         self.Amount_Edit_10 = QLineEdit(self.frame3,"Amount_Edit_10")
         self.Amount_Edit_10.setGeometry(QRect(177,237,51,22))
 
-        self.Effect_10 = SearchingCombo(0,self.frame3,"Effect_10")
+        self.Effect_10 = SearchingCombo(self.frame3,"Effect_10")
         self.Effect_10.setGeometry(QRect(233,237,206,22))
 
         self.Imbue_Label = QLabel(self.frame3,"Imbue_Label")
@@ -650,7 +653,7 @@ class B_SC(QMainWindow):
         self.SaveItem = QPushButton(self.frame3,"SaveItem")
         self.SaveItem.setGeometry(QRect(596,157,79,26))
 
-        self.PieceTab = MultiTabBar(self,"PieceTab")
+        self.PieceTab = MultiTabBar(self.centralWidget(),"PieceTab")
         self.PieceTab.setGeometry(QRect(2,190,776,46))
         self.PieceTab.setSizePolicy(QSizePolicy(QSizePolicy.Fixed,QSizePolicy.Fixed,0,0,self.PieceTab.sizePolicy().hasHeightForWidth()))
 
@@ -871,14 +874,6 @@ class B_SC(QMainWindow):
         self.ItemLevelLabel.setText(self.__tr("Item Level:"))
         self.ItemLevelButton.setText(self.__tr("..."))
         self.ItemQualityLabel.setText(self.__tr("Quality:"))
-        self.QualDrop.clear()
-        self.QualDrop.insertItem(self.__tr("94"))
-        self.QualDrop.insertItem(self.__tr("95"))
-        self.QualDrop.insertItem(self.__tr("96"))
-        self.QualDrop.insertItem(self.__tr("97"))
-        self.QualDrop.insertItem(self.__tr("98"))
-        self.QualDrop.insertItem(self.__tr("99"))
-        self.QualDrop.insertItem(self.__tr("100"))
         self.Bonus_Label.setText(self.__tr("Bonus:"))
         self.AFDPS_Label.setText(self.__tr("AF/DPS:"))
         self.Speed_Label.setText(self.__tr("Speed:"))
@@ -899,107 +894,27 @@ class B_SC(QMainWindow):
         self.PlayerMade.setText(self.__tr("Player Made"))
         self.Drop.setText(self.__tr("Drop"))
         self.Gem_Label_1.setText(self.__tr("Gem 1:"))
-        self.Type_1.clear()
-        self.Type_1.insertItem(self.__tr("Unused"))
-        self.Type_1.insertItem(self.__tr("Stat"))
-        self.Type_1.insertItem(self.__tr("Resist"))
-        self.Type_1.insertItem(self.__tr("Hits"))
-        self.Type_1.insertItem(self.__tr("Power"))
-        self.Type_1.insertItem(self.__tr("Focus"))
-        self.Type_1.insertItem(self.__tr("Skill"))
         self.Points_1.setText(self.__tr("0.0"))
         self.Cost_1.setText(self.__tr("0c"))
         self.Name_1.setText(QString.null)
         self.Gem_Label_2.setText(self.__tr("Gem 2:"))
-        self.Type_2.clear()
-        self.Type_2.insertItem(self.__tr("Unused"))
-        self.Type_2.insertItem(self.__tr("Stat"))
-        self.Type_2.insertItem(self.__tr("Resist"))
-        self.Type_2.insertItem(self.__tr("Hits"))
-        self.Type_2.insertItem(self.__tr("Power"))
-        self.Type_2.insertItem(self.__tr("Focus"))
-        self.Type_2.insertItem(self.__tr("Skill"))
         self.Points_2.setText(self.__tr("0.0"))
         self.Cost_2.setText(self.__tr("0c"))
         self.Name_2.setText(QString.null)
         self.Gem_Label_3.setText(self.__tr("Gem 3:"))
-        self.Type_3.clear()
-        self.Type_3.insertItem(self.__tr("Unused"))
-        self.Type_3.insertItem(self.__tr("Stat"))
-        self.Type_3.insertItem(self.__tr("Resist"))
-        self.Type_3.insertItem(self.__tr("Hits"))
-        self.Type_3.insertItem(self.__tr("Power"))
-        self.Type_3.insertItem(self.__tr("Focus"))
-        self.Type_3.insertItem(self.__tr("Skill"))
         self.Points_3.setText(self.__tr("0.0"))
         self.Cost_3.setText(self.__tr("0c"))
         self.Name_3.setText(QString.null)
         self.Gem_Label_4.setText(self.__tr("Gem 4:"))
-        self.Type_4.clear()
-        self.Type_4.insertItem(self.__tr("Unused"))
-        self.Type_4.insertItem(self.__tr("Stat"))
-        self.Type_4.insertItem(self.__tr("Resist"))
-        self.Type_4.insertItem(self.__tr("Hits"))
-        self.Type_4.insertItem(self.__tr("Power"))
-        self.Type_4.insertItem(self.__tr("Focus"))
-        self.Type_4.insertItem(self.__tr("Skill"))
         self.Points_4.setText(self.__tr("0.0"))
         self.Cost_4.setText(self.__tr("0c"))
         self.Name_4.setText(QString.null)
         self.Gem_Label_5.setText(self.__tr("Gem 5:"))
-        self.Type_5.clear()
-        self.Type_5.insertItem(self.__tr("Unused"))
-        self.Type_5.insertItem(self.__tr("Stat"))
-        self.Type_5.insertItem(self.__tr("Resist"))
-        self.Type_5.insertItem(self.__tr("Hits"))
-        self.Type_5.insertItem(self.__tr("Power"))
-        self.Type_5.insertItem(self.__tr("Focus"))
-        self.Type_5.insertItem(self.__tr("Skill"))
         self.Gem_Label_6.setText(self.__tr("Gem 6:"))
-        self.Type_6.clear()
-        self.Type_6.insertItem(self.__tr("Unused"))
-        self.Type_6.insertItem(self.__tr("Stat"))
-        self.Type_6.insertItem(self.__tr("Resist"))
-        self.Type_6.insertItem(self.__tr("Hits"))
-        self.Type_6.insertItem(self.__tr("Power"))
-        self.Type_6.insertItem(self.__tr("Focus"))
-        self.Type_6.insertItem(self.__tr("Skill"))
         self.Gem_Label_7.setText(self.__tr("Gem 7:"))
-        self.Type_7.clear()
-        self.Type_7.insertItem(self.__tr("Unused"))
-        self.Type_7.insertItem(self.__tr("Stat"))
-        self.Type_7.insertItem(self.__tr("Resist"))
-        self.Type_7.insertItem(self.__tr("Hits"))
-        self.Type_7.insertItem(self.__tr("Power"))
-        self.Type_7.insertItem(self.__tr("Focus"))
-        self.Type_7.insertItem(self.__tr("Skill"))
         self.Gem_Label_8.setText(self.__tr("Gem 8:"))
-        self.Type_8.clear()
-        self.Type_8.insertItem(self.__tr("Unused"))
-        self.Type_8.insertItem(self.__tr("Stat"))
-        self.Type_8.insertItem(self.__tr("Resist"))
-        self.Type_8.insertItem(self.__tr("Hits"))
-        self.Type_8.insertItem(self.__tr("Power"))
-        self.Type_8.insertItem(self.__tr("Focus"))
-        self.Type_8.insertItem(self.__tr("Skill"))
         self.Gem_Label_9.setText(self.__tr("Gem 9:"))
-        self.Type_9.clear()
-        self.Type_9.insertItem(self.__tr("Unused"))
-        self.Type_9.insertItem(self.__tr("Stat"))
-        self.Type_9.insertItem(self.__tr("Resist"))
-        self.Type_9.insertItem(self.__tr("Hits"))
-        self.Type_9.insertItem(self.__tr("Power"))
-        self.Type_9.insertItem(self.__tr("Focus"))
-        self.Type_9.insertItem(self.__tr("Skill"))
         self.Gem_Label_10.setText(self.__tr("Gem10:"))
-        self.Type_10.clear()
-        self.Type_10.insertItem(self.__tr("Unused"))
-        self.Type_10.insertItem(self.__tr("Stat"))
-        self.Type_10.insertItem(self.__tr("Resist"))
-        self.Type_10.insertItem(self.__tr("Hits"))
-        self.Type_10.insertItem(self.__tr("Power"))
-        self.Type_10.insertItem(self.__tr("Focus"))
-        self.Type_10.insertItem(self.__tr("Skill"))
         self.Imbue_Label.setText(self.__tr("Imbue Points:"))
         self.Imbue.setText(self.__tr("0.0"))
         self.Slash_Label.setText(self.__tr("/"))

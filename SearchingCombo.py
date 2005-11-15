@@ -2,8 +2,8 @@ from qt import *
 import sys
 import string
 class SearchingCombo(QComboBox):
-    def __init__(self, rw, parent=None, name=None):
-        QComboBox.__init__(self, rw, parent, name)
+    def __init__(self, parent=None, name=None):
+        QComboBox.__init__(self, 0, parent, name)
         
     def buildItemList(self):
         lst = []
