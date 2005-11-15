@@ -108,18 +108,22 @@ class ReportWindow(B_ReportWindow):
         self.prevMultiplier = 1
         self.totalcost = 0
         
-    def materialsReport(self, itemlist):
+    def materialsReport(self, itemlist, slot = 0):
         self.MMLabel.show()
         self.MatMultiplier.show()
         self.setCaption('Materials Report')
         self.materials = { 'Gems' : { }, 'Liquids' : {}, 'Dusts': {} }
         self.gemnames = { }
         self.totalcost = 0
+        if slot == 0:
+            lastslot = 4
+        else:
+            lastslot = slot
         for loc, item in itemlist.items():
             activestate = item.getAttr('ActiveState')
             equipped = item.getAttr('Equipped')
             if activestate == 'player':
-                for slot in range(0, 4):
+                for slot in range(max(slot - 1,0), lastslot):
                     if item.getSlotAttr(activestate, slot, 'Done') == '1'\
                             and self.parent.showDoneInMatsList:
                         continue
