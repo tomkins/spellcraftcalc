@@ -49,9 +49,10 @@ class ScApplication(QApplication):
         if QApplication.style().name()[0:9] == "Macintosh" and \
            sys.platform == "darwin":
             font.setFamily("Lucida Grande")
+            font.setPointSize(11)
         else:
-            font.setFamily("Arial")
-        font.setPointSize(11)
+            font.setFamily("Trebuchet MS")
+            font.setPointSize(8)
         self.setFont(font)
 
         import ScWindow
