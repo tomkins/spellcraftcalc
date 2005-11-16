@@ -49,7 +49,7 @@ def noamptext(text):
 class MultiTabBar(QTabBar):
     def __init__(self, parent, name):
         QTabBar.__init__(self, parent, name)
-        if QApplication.style().name() == "Macintosh (Aqua)" and \
+        if QApplication.style().name()[0:9] == "Macintosh" and \
            sys.platform == 'darwin':
             self.rowoverlap = 3
             self.cropheight = -1
