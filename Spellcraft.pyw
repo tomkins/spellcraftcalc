@@ -50,7 +50,7 @@ class ScApplication(QApplication):
            sys.platform == "darwin":
             font.setFamily("Lucida Grande")
             font.setPointSize(11)
-        else:
+        elif sys.platform == "win32":
             font.setFamily("Trebuchet MS")
             font.setPointSize(8)
         self.setFont(font)
