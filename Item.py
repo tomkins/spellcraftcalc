@@ -93,9 +93,9 @@ class Item:
 
     def makeEmptyItem(self):
         for i in range(0, 10):
-            self.loadSlotAttrs('drop', i, 'Unused', '0', '', '99') 
+            self.loadSlotAttrs('drop', i, 'Unused', '', '', '99') 
         for i in range(0, 4):
-            self.loadSlotAttrs('player', i, 'Unused', '0', '', '99')
+            self.loadSlotAttrs('player', i, 'Unused', '', '', '99')
 
     def loadSlotAttr(self, type, slotnum, attr, val):
         self.slots[type][slotnum][attr] = val
