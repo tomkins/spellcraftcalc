@@ -24,11 +24,7 @@
 #   * We draw the horizontal-bottom continuation bar for > 1 rows, but...
 #     really should use the style itself to determine it's look (we use the
 #     style''s color preference, but the width is wrong in the CDE skin.)
-#   * Haven't even considered tab scrolling (that's the point of multiple
-#     bars, isn't it?)
-#   * Remove tabs/bars (we don't need no stinkin' remove - someone else might)
-#   * Need to check the scope for identifiers v.s. indexes throughout the code,
-#     especially before providing a remove feature which reorders indexes
+#   * Won't consider tab scrolling (that's the point of multiple bars)
 
 import sys
 from qt import *
@@ -59,94 +55,118 @@ class MultiTabBar(QTabBar):
         self.tabrows = []
         self.currows = []
 
-    def insertTab(self, index = -1, row = 0):
-        newindex = QTabBar.insertTab(self, index)
-        while row >= len(self.tabrows):
-            self.currows.insert(0, len(self.tabrows) - 1)
-            self.tabrows.append([])
-        self.tabrows[row].append(newindex)
+    def insertTab(self, tab, index = -1, row = -1):
+        if index >= 0:
+            row = 0
+            rowindex = index
+            for tabrow in self.tabrows:
+                if rowindex < len(tabrow):
+                    break
+                row += 1
+                rowindex -= len(tabrow)
+            else:
+                index = -1
+        newid = QTabBar.insertTab(self, tab, index)
+        if index >= 0:
+            self.tabrows[row].insert(rowindex, newid)
+        else:
+            row = min(row, len(self.tabrows))
+            if row < 0: row = max(0, len(self.tabrows))
+            if row == len(self.tabrows):
+                self.currows.insert(0, len(self.tabrows) - 1)
+                self.tabrows.append([])
+            self.tabrows[row].append(newid)
+        return newid
+
+    def addTab(self, tab, row = -1):
+        return insertTab(self, tab, -1, row)
+
+    def removeTab(self, tab):
+        oldindex = self.indexOf(tab.identifier())
+        if oldindex < 0: return
+        row = 0
+        rowindex = index
+        for row in self.tabrows:
+            if rowindex < len(tabrow):
+                break
+            row += 1
+            rowindex -= len(tabrow)
+        else:
+            oldindex = -1 # Well that's wacked
+        if oldindex >= 0:
+            del self.tabrows[row][rowindex]
+            if len(self.tabrows[row]) == 0:
+                self.currows.remove(row)
+                del self.tabrows[row]
+        QTabBar.removeTab(self, tab)
 
     def setCurrentTab(self, tab):
         if self.count() == 0:
             return
         if isinstance(tab, int):
             tab = self.tab(tab)
-        if tab == self.currentTab():
-            return;
-        index = self.indexOf(tab.identifier())
-        if index in self.tabrows[self.currows[-1]]:
+        #if tab == self.currentTab():
+        #    return;
+        id = tab.identifier()
+        if id in self.tabrows[self.currows[-1]]:
             QTabBar.setCurrentTab(self, tab)
         else:
             for row in range(0, len(self.tabrows)):
-                if index in self.tabrows[self.currows[row]]:
+                if id in self.tabrows[self.currows[row]]:
                     saverow = self.currows[row]
                     self.currows[row] = self.currows[-1]
                     self.currows[-1] = saverow
-                    QTabBar.setCurrentTab(self, tab)
                     self.layoutTabs()
                     self.repaint()
+                    QTabBar.setCurrentTab(self, tab)
                     break
 
     def paintEvent(self, e):
         if e.rect().isNull():
 	    return
-        ct = self.tabAt(self.currentTab())
-        painter = QPainter()
-        painter.begin(self)
+        ct = self.tab(self.currentTab())
+        painter = QPainter(self)
         cliprect = e.rect()
         if not e.erased():
-             # self.erase(cliprect)
-             painter.fillRect(cliprect, self.backgroundBrush())
+             self.erase(cliprect)
+             #painter.fillRect(cliprect, self.backgroundBrush())
         for row in range(0, len(self.tabrows)):
             telts = range(0, len(self.tabrows[self.currows[row]]))
-            ft = self.tabAt(self.tabrows[self.currows[row]][0])
-            lt = self.tabAt(self.tabrows[self.currows[row]][-1])
-            rowrect = QRect(ft.rect().topLeft(), lt.rect().bottomRight())
+            ft = self.tab(self.tabrows[self.currows[row]][0])
+            lt = self.tab(self.tabrows[self.currows[row]][-1])
+            rowrect = ft.rect()
             rowrect.setRight(self.rect().right())
             if not cliprect.intersects(rowrect):
                 continue
             if self.cropheight > -1:
                 if row < len(self.tabrows) - 1:
                     rowrect.setHeight(rowrect.height() - self.cropheight)
-                rowrect = cliprect.intersect(rowrect)
-                painter.setClipRect(rowrect, QPainter.CoordPainter)
+                    rowrect = cliprect.intersect(rowrect)
+                    painter.setClipRect(rowrect, QPainter.CoordPainter)
+                else:
+                    painter.setClipping(0)
             for telt in telts:
-                t = self.tabAt(self.tabrows[self.currows[row]][telt])
+                t = self.tab(self.tabrows[self.currows[row]][telt])
                 if t == ct: 
                     continue
                 if t.rect().intersects(rowrect):
                     self.paint(painter, t, 0);
         if ct.rect().intersects(cliprect):
             self.paint(painter, ct, 1);
-        if self.cropheight > -1:
-            painter.setClipRect(cliprect, QPainter.CoordPainter)
         rowrect = QRect(lt.rect().right() + 1, lt.rect().bottom() - 1, 
-                        self.rect().width() - lt.rect().right() - 1, 2)
+                        self.rect().width() - lt.rect().right() - 2, 2)
         if rowrect.intersects(cliprect):
             rowrect.setHeight(1)
             painter.fillRect(rowrect, QBrush(self.colorGroup().light()));
             rowrect.moveTop(rowrect.top() + 1)
+            rowrect.setRight(rowrect.right() + 1)
             painter.fillRect(rowrect, QBrush(self.colorGroup().midlight()));
-        
-        # rowrect = QRect(lt.rect().right() + 1, 0, 
-        #               self.rect().width() - lt.rect().right() - 1,
-        #               self.rect().height())
-        # if rowrect.intersects(cliprect):
-        #     flags = QStyle.Style_Default
-        #     if self.shape() == QTabBar.RoundedAbove or \
-        #        self.shape() == QTabBar.TriangularAbove:
-        #         flags |= QStyle.Style_Top;
-        #     elif self.shape() == QTabBar.RoundedBelow or \
-        #          self.shape() == QTabBar.TriangularBelow:
-        #         flags |= QStyle.Style_Bottom
-        #     if self.isEnabled():
-        #         flags |= QStyle.Style_Enabled
-        #     sys.stdout.write("(%d, %d, %d, %d)\n" % (
-        #                      rowrect.left(), rowrect.top(), 
-        #                      rowrect.width(), rowrect.height()))
-        #     self.style().drawPrimitive(QStyle.PE_TabBarBase, painter, 
-        #                                rowrect, self.colorGroup(), flags)
-        painter.end()
+
+    def sizeHint(self):
+        size = QTabBar.sizeHint(self)
+        size.setHeight(size.height() \
+                     + self.style().pixelMetric(QStyle.PM_TabBarBaseHeight, self))
+        return size
 
     def layoutTabs(self):
         if self.count() < 1:
@@ -161,6 +181,7 @@ class MultiTabBar(QTabBar):
         hframe  = self.style().pixelMetric(QStyle.PM_TabBarTabHSpace, self)
         vframe  = self.style().pixelMetric(QStyle.PM_TabBarTabVSpace, self)
         overlap = self.style().pixelMetric(QStyle.PM_TabBarTabOverlap, self)
+        baseh = self.style().pixelMetric(QStyle.PM_TabBarBaseHeight, self)
 
         fm = self.fontMetrics()
         reverse = QApplication.reverseLayout()
@@ -175,7 +196,7 @@ class MultiTabBar(QTabBar):
             x = 0
             offset = 0
             for telt in telts:
-                t = self.tabAt(self.tabrows[self.currows[row]][telt])
+                t = self.tab(self.tabrows[self.currows[row]][telt])
                 w = fm.width(noamptext(str(t.text())));
                 h = max(fm.height(), QApplication.globalStrut().height() )
                 if t.iconSet():
@@ -198,12 +219,12 @@ class MultiTabBar(QTabBar):
                 telts = range(len(self.tabrows[self.currows[row]]) - 1, -1, -1)
             else:
                 telts = range(0, len(self.tabrows[self.currows[row]]))
-            addx = maxx - self.tabAt(self.tabrows[self.currows[row]][-1]).rect().right()
+            addx = maxx - self.tab(self.tabrows[self.currows[row]][-1]).rect().right()
             adjx = 0
             if addx <= 0: telts = []
             while len(telts) > 0:
                 fixx = ((addx + len(telts) - 1) / len(telts))
-                t = self.tabAt(self.tabrows[self.currows[row]][telts[0]])
+                t = self.tab(self.tabrows[self.currows[row]][telts[0]])
                 newrect = t.rect()
                 newrect.moveLeft(newrect.left() + adjx)
                 newrect.setWidth(newrect.width() + fixx)
@@ -222,7 +243,7 @@ class MultiTabBar(QTabBar):
         for row in range(0, len(self.tabrows)):
             telts = range(0, len(self.tabrows[self.currows[row]]))
             for telt in telts:
-                t = self.tabAt(self.tabrows[self.currows[row]][telt])
+                t = self.tab(self.tabrows[self.currows[row]][telt])
                 t.rect().moveBy( offset, 0 )
 
         if self.sizeHint() != oldSh:
