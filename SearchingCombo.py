@@ -18,10 +18,12 @@ class SearchingCombo(QComboBox):
             ci = self.currentItem()
             if ci > 0: ci -= 1
             self.setCurrentItem(ci)
+            self.emit(SIGNAL("activated(const QString&)"),(self.currentText(),))
         elif keycode == Qt.Key_Down:
             ci = self.currentItem()
             if ci != (self.count() - 1): ci += 1
             self.setCurrentItem(ci)
+            self.emit(SIGNAL("activated(const QString&)"),(self.currentText(),))
         else:
             key = str(e.text())
             itemlist = self.buildItemList()
@@ -29,10 +31,12 @@ class SearchingCombo(QComboBox):
             for i in range(0, len(itemlist)):
                 if string.lower(itemlist[i][0]) == string.lower(key):
                     indexlist.append(i)
-            if len(indexlist) == 0: return
+            if len(indexlist) == 0:
+                QComboBox.keyPressEvent(self, e)
+                return
             if self.currentItem() >= indexlist[-1]:
                 self.setCurrentItem(indexlist[0])
             else:
                 i = filter(lambda x: x > self.currentItem(), indexlist)[0]
                 self.setCurrentItem(i)
-        self.emit(SIGNAL("activated(const QString&)"), (self.currentText(),))
+            self.emit(SIGNAL("activated(const QString&)"),(self.currentText(),))
