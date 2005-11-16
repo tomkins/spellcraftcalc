@@ -93,18 +93,20 @@ def getGemMaterials(item, slot, realm):
     gemtype = item.getSlotAttr(gemstate, slot, 'Type')
     gemindex = GemNames.index(gemlevel)
 
-    if gemliquid == 'Brilliant' or gemliquid == 'Finesse':
+    if gemliquid == 'Brilliant':
         ret['Gems'][MaterialGems[gemindex]] = 3
+    else:
+        ret['Gems'][MaterialGems[gemindex]] = 1
+
+    if gemliquid == 'Brilliant' or gemliquid == 'Finesse':
         ret['Dusts'][GemDusts[gemdust]] = (gemindex * 5) + 1
         ret['Liquids'][GemLiquids[gemliquid][0]] = (gemindex * 6) + 2
         ret['Liquids'][GemLiquids[gemliquid][1]] = (gemindex * 6) + 2
         ret['Liquids'][GemLiquids[gemliquid][2]] = (gemindex * 6) + 2
     elif gemtype == 'Focus' or gemtype == 'Resist':
-        ret['Gems'][MaterialGems[gemindex]] = 1
         ret['Dusts'][GemDusts[gemdust]] = (gemindex * 5) + 1
         ret['Liquids'][GemLiquids[gemliquid]] = gemindex + 1
     else:
-        ret['Gems'][MaterialGems[gemindex]] = 1
         ret['Dusts'][GemDusts[gemdust]] = (gemindex * 4) + 1
         ret['Liquids'][GemLiquids[gemliquid]] = gemindex + 1
     
@@ -183,11 +185,14 @@ def computeGemCost(item, i):
     costindex = ValuesLists[gemtype].index(str(amount))
     cost = GemCosts[costindex]
     remakecost = RemakeCosts[costindex] * int(item.getSlotAttr(itemtype, i, 'Remakes'))
-    if gemliquid == 'Brilliant' or gemliquid == 'Finesse':
-        cost += 60 * costindex
-        cost = cost * 3
+    if gemliquid == 'Brilliant':
+        cost += 60 * costindex * 3
         if remakecost > 0:
-            remakecost += 180 * costindex
+            remakecost += 180 * costindex * 3
+    elif gemliquid == 'Finesse':
+        cost += 60 * costindex * 2.25
+        if remakecost > 0:
+            remakecost += 180 * costindex * 2.25
     elif gemtype == 'Resist' or gemtype == 'Focus':
         cost += 60 * costindex
         if remakecost > 0:
