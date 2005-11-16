@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'ScWindow.ui'
 #
-# Created: Tue Nov 15 13:41:07 2005
+# Created: Tue Nov 15 19:39:45 2005
 #      by: The PyQt User Interface Compiler (pyuic) 3.15
 #
 # WARNING! All changes made in this file will be lost!
@@ -655,7 +655,6 @@ class B_SC(QMainWindow):
 
         self.PieceTab = MultiTabBar(self.centralWidget(),"PieceTab")
         self.PieceTab.setGeometry(QRect(3,190,776,46))
-        self.PieceTab.setSizePolicy(QSizePolicy(QSizePolicy.Fixed,QSizePolicy.Fixed,0,0,self.PieceTab.sizePolicy().hasHeightForWidth()))
 
         self.languageChange()
 
