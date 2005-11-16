@@ -23,35 +23,64 @@ import psyco
 if __name__ == '__main__':
     psyco.full()
 
-    import os
-    import sys
-    import locale
-    locale.setlocale(locale.LC_ALL, '')
+import os
+import sys
+import locale
+from qt import *
 
-    args = sys.argv
-    if not os.path.isabs(args[0]):
-        args[0] = os.path.abspath(args[0])
+QApplication.setDesktopSettingsAware(0)
+locale.setlocale(locale.LC_ALL, '')
 
-    from qt import *
-    app = QApplication(args)
-    QObject.connect(app,SIGNAL('lastWindowClosed()'),app,SLOT('quit()'))
-    if QApplication.style().name() == "Macintosh (Aqua)" and \
-       sys.platform == "darwin":
-        f = QFont(self.font())
-        f.setPointSize(11)
-        self.setFont(f)
+class ScApplication(QApplication):
+    def __init__(self):
+        args = sys.argv
+        if not os.path.isabs(args[0]):
+             args[0] = os.path.abspath(args[0])
 
-    splash = QSplashScreen(QPixmap("Spellcraft.png"));
-    splash.show()
+        QApplication.__init__(self, args)
+        # QObject.connect(self, SIGNAL('lastWindowClosed()'), 
+        #                 self, SLOT('quit()'))
 
-    import ScWindow
-    scw = ScWindow.SCApp()
-    app.setMainWidget(scw)
-    scw.setCaption("Kort's Spellcrafting Calculator")
-    scw.setIcon(QPixmap("ScWindow.png"));
-    scw.show()
+    def start(self):
+        splash = QSplashScreen(QPixmap("Spellcraft.png"));
+        splash.show()
 
-    splash.finish(scw);
-    del splash
+        font = QFont(self.font())
+        if QApplication.style().name()[0:9] == "Macintosh" and \
+           sys.platform == "darwin":
+            font.setFamily("Lucida Grande")
+        else:
+            font.setFamily("Arial")
+        font.setPointSize(11)
+        self.setFont(font)
 
+        import ScWindow
+        scw = ScWindow.ScWindow()
+        app.setMainWidget(scw)
+        scw.setCaption("Kort's Spellcrafting Calculator")
+        scw.setIcon(QPixmap("ScWindow.png"));
+        scw.show()
+
+        splash.finish(scw);
+
+    def polish(self, widget):
+        # Fix Mac bits of uglyness, not all of which can be fixed.
+        QApplication.polish(self, widget)
+        if self.style().name()[0:9] != "Macintosh": return
+        if sys.platform != "darwin": return
+        if widget.className() == 'QGroupBox':
+            crect = widget.geometry()
+            crect.setHeight(crect.height() + 3)
+            widget.setGeometry(crect)
+        if widget.className() == 'QPushButton':
+            crect = widget.geometry()
+            crect.moveBy(-3, -3)
+            crect.setHeight(crect.height() + 6)
+            crect.setWidth(crect.width() + 6)
+            widget.setGeometry(crect)
+
+if __name__ == '__main__':
+    app=ScApplication()
+    app.start()
     sys.exit(app.exec_loop())
+

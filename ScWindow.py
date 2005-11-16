@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#
 # ScWindow.py: Dark Age of Camelot Spellcrafting Calculator (main Window)
 # See http://sc.aod.net for updates
 
@@ -49,7 +49,7 @@ import codecs
 import sys
 
 
-class SCApp(B_SC):
+class ScWindow(B_SC):
     def __init__(self):
         self.nocalc = 1
         self.totals = { }
@@ -87,26 +87,10 @@ class SCApp(B_SC):
                         |Qt.WStyle_DialogBorder|Qt.WStyle_Title
                         |Qt.WStyle_SysMenu|Qt.WStyle_Minimize)
 
+        self.statusBar().setSizeGripEnabled(0)
         self.statusBar().hide()
 
         self.EffectWidths = [self.Effect_1.width(), self.Effect_5.width()]
-
-        # Darwin labels don't inherit base font, and there are many
-        # more bits of uglyness, not all of which can be fixed.
-        if QApplication.style().name() == "Macintosh (Aqua)" and \
-           sys.platform == "darwin":
-            for c in self.children():
-                if isinstance(c, QLabel):
-                    c.setFont(self.font())
-                if isinstance(c, QGroupBox):
-                    crect = c.geometry()
-                    crect.setHeight(crect.height() + 2)
-                    c.setGeometry(crect)
-                    for cc in c.children():
-                        if isinstance(cc, QLabel) or \
-                           isinstance(cc, QButton) or \
-                           isinstance(cc, QListBox):
-                            cc.setFont(self.font())
 
         self.PieceTab.setFocusPolicy(QWidget.StrongFocus)
         for tabname in PieceTabList:
@@ -116,11 +100,12 @@ class SCApp(B_SC):
             newtab = QTab(qApp.translate("B_SC",tabname,None))
             self.PieceTab.insertTab(newtab, row = 1)
 
-        self.updateGeometry()
-
         # Change text color to red for error strings
         self.OcErrorString.setPaletteForegroundColor(QColor(255, 0, 0))
         self.DupErrorString.setPaletteForegroundColor(QColor(255, 0, 0))
+
+        self.updateGeometry()
+        self.setFixedSize(self.sizeHint())
 
         self.startup = 1
         self.pricingInfo = {}
@@ -195,6 +180,10 @@ class SCApp(B_SC):
         self.nocalc = 0
         self.calculate()
         self.modified = 0
+
+    def sizeHint(self):
+        return QSize(self.frame3.geometry().right() + 3, 
+                     self.frame3.geometry().bottom() + 4)
     
     def close(self, args):
         Options.Options(self).OK_pressed() # write out app config data to disk
@@ -476,6 +465,7 @@ class SCApp(B_SC):
             self.QualEdit.setText(item.getAttr('ItemQuality'))
             self.ItemName.setText(item.getAttr('ItemName'))
         else:
+            self.QualDrop.clear()
             self.QualDrop.insertStrList(list(QualityValues))
             if item.getAttr('ItemQuality') in QualityValues:
                 self.QualDrop.setCurrentItem(

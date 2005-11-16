@@ -165,7 +165,7 @@ Python:from SearchingCombo import *
         <property name="geometry">
             <rect>
                 <x>613</x>
-                <y>114</y>
+                <y>134</y>
                 <width>165</width>
                 <height>51</height>
             </rect>
@@ -180,7 +180,7 @@ Python:from SearchingCombo import *
             <property name="geometry">
                 <rect>
                     <x>11</x>
-                    <y>15</y>
+                    <y>14</y>
                     <width>85</width>
                     <height>17</height>
                 </rect>
@@ -199,7 +199,7 @@ Python:from SearchingCombo import *
             <property name="geometry">
                 <rect>
                     <x>11</x>
-                    <y>32</y>
+                    <y>30</y>
                     <width>109</width>
                     <height>17</height>
                 </rect>
@@ -1354,9 +1354,9 @@ Python:from SearchingCombo import *
         <property name="geometry">
             <rect>
                 <x>182</x>
-                <y>138</y>
+                <y>134</y>
                 <width>124</width>
-                <height>47</height>
+                <height>51</height>
             </rect>
         </property>
         <property name="title">
@@ -1545,7 +1545,7 @@ Python:from SearchingCombo import *
         </property>
         <property name="geometry">
             <rect>
-                <x>2</x>
+                <x>3</x>
                 <y>235</y>
                 <width>776</width>
                 <height>265</height>
@@ -3086,7 +3086,7 @@ Python:from SearchingCombo import *
         </property>
         <property name="geometry">
             <rect>
-                <x>2</x>
+                <x>3</x>
                 <y>190</y>
                 <width>776</width>
                 <height>46</height>

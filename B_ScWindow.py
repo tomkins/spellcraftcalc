@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'ScWindow.ui'
 #
-# Created: Tue Nov 15 02:38:20 2005
+# Created: Tue Nov 15 13:41:07 2005
 #      by: The PyQt User Interface Compiler (pyuic) 3.15
 #
 # WARNING! All changes made in this file will be lost!
@@ -55,14 +55,14 @@ class B_SC(QMainWindow):
         self.CharRace.setGeometry(QRect(46,84,114,22))
 
         self.ButtonGroup2 = QButtonGroup(self.centralWidget(),"ButtonGroup2")
-        self.ButtonGroup2.setGeometry(QRect(613,114,165,51))
+        self.ButtonGroup2.setGeometry(QRect(613,134,165,51))
 
         self.TotalBonus = QRadioButton(self.ButtonGroup2,"TotalBonus")
-        self.TotalBonus.setGeometry(QRect(11,15,85,17))
+        self.TotalBonus.setGeometry(QRect(11,14,85,17))
         self.TotalBonus.setChecked(1)
 
         self.CapDistance = QRadioButton(self.ButtonGroup2,"CapDistance")
-        self.CapDistance.setGeometry(QRect(11,32,109,17))
+        self.CapDistance.setGeometry(QRect(11,30,109,17))
 
         self.GroupBox1 = QGroupBox(self.centralWidget(),"GroupBox1")
         self.GroupBox1.setGeometry(QRect(5,3,85,182))
@@ -295,7 +295,7 @@ class B_SC(QMainWindow):
         self.Focus_4.setGeometry(QRect(6,72,112,16))
 
         self.GroupBox5 = QGroupBox(self.centralWidget(),"GroupBox5")
-        self.GroupBox5.setGeometry(QRect(182,138,124,47))
+        self.GroupBox5.setGeometry(QRect(182,134,124,51))
 
         self.TotalCostLabel = QLabel(self.GroupBox5,"TotalCostLabel")
         self.TotalCostLabel.setGeometry(QRect(6,13,30,16))
@@ -333,7 +333,7 @@ class B_SC(QMainWindow):
         self.DupErrorString.setGeometry(QRect(315,173,285,14))
 
         self.frame3 = QGroupBox(self.centralWidget(),"frame3")
-        self.frame3.setGeometry(QRect(2,235,776,265))
+        self.frame3.setGeometry(QRect(3,235,776,265))
         self.frame3.setFrameShape(QGroupBox.StyledPanel)
         self.frame3.setFrameShadow(QGroupBox.Raised)
 
@@ -654,7 +654,7 @@ class B_SC(QMainWindow):
         self.SaveItem.setGeometry(QRect(596,157,79,26))
 
         self.PieceTab = MultiTabBar(self.centralWidget(),"PieceTab")
-        self.PieceTab.setGeometry(QRect(2,190,776,46))
+        self.PieceTab.setGeometry(QRect(3,190,776,46))
         self.PieceTab.setSizePolicy(QSizePolicy(QSizePolicy.Fixed,QSizePolicy.Fixed,0,0,self.PieceTab.sizePolicy().hasHeightForWidth()))
 
         self.languageChange()
