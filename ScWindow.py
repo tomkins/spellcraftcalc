@@ -100,12 +100,20 @@ class ScWindow(B_SC):
             newtab = QTab(qApp.translate("B_SC",tabname,None))
             self.PieceTab.insertTab(newtab, row = 1)
 
+        size = self.PieceTab.size()
+        size.setHeight(self.PieceTab.sizeHint().height())
+        self.PieceTab.setFixedSize(size)
+
+        self.frame3.move(self.frame3.pos().x(), self.PieceTab.geometry().bottom())
+
         # Change text color to red for error strings
         self.OcErrorString.setPaletteForegroundColor(QColor(255, 0, 0))
         self.DupErrorString.setPaletteForegroundColor(QColor(255, 0, 0))
 
         self.updateGeometry()
-        self.setFixedSize(self.sizeHint())
+        self.centralWidget().setFixedSize(
+             QSize(self.frame3.frameGeometry().right() + 4, 
+                   self.frame3.frameGeometry().bottom() + 4))
 
         self.startup = 1
         self.pricingInfo = {}
@@ -180,10 +188,6 @@ class ScWindow(B_SC):
         self.nocalc = 0
         self.calculate()
         self.modified = 0
-
-    def sizeHint(self):
-        return QSize(self.frame3.geometry().right() + 3, 
-                     self.frame3.geometry().bottom() + 4)
     
     def close(self, args):
         Options.Options(self).OK_pressed() # write out app config data to disk
