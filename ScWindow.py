@@ -71,12 +71,10 @@ class ScWindow(B_SC):
         self.dropeffectlists['Cap Increase'] = CapIncreaseList
         self.dropeffectlists['PvE Bonus'] =    PvEBonusList
         self.dropeffectlists['Other Bonus'] =  OtherBonusList
-        # for the moment, every other ability will be Unique
-        self.dropeffectlists['Other Ability'] = ("Unique Ability...",)
-
         for effect in EffectItemNames.keys():
             self.effectlists[effect] =     EffectItemNames[effect][0]
             self.dropeffectlists[effect] = EffectItemList
+        self.dropeffectlists['Other Effect'] = EffectItemList
 
         self.reportFile = os.path.join(os.path.dirname(os.path.abspath(sys.argv[0])),
                                        'reports', 'Default_Config_Report.xml')
@@ -427,9 +425,12 @@ class ScWindow(B_SC):
             typecombo = getattr(self, 'Type_%d' % slot)
             typecombo.clear()
             typecombo.insertStrList(list(typelist))
-            gemtype = item.getSlotAttr(itemtype, slot-1, 'Type')
-            gemeffect = item.getSlotAttr(itemtype, slot-1, 'Effect')
-            typecombo.setCurrentItem(typelist.index(gemtype))
+            gemtype = str(item.getSlotAttr(itemtype, slot-1, 'Type'))
+            gemeffect = str(item.getSlotAttr(itemtype, slot-1, 'Effect'))
+            if gemtype in typelist:
+                typecombo.setCurrentItem(typelist.index(gemtype))
+            else:
+                gemtype = 'Unused'
             self.UpdateCombo(slot)
             effcombo = getattr(self, 'Effect_%d' % slot)
             if self.Drop.isChecked():
@@ -522,7 +523,7 @@ class ScWindow(B_SC):
             gemeffects = []
             for i in range(0, toprng):
                 gemtype = item.getSlotAttr(itemtype, i, 'Type')
-                if item.getSlotAttr(itemtype, i, 'Amount') == '':
+                if str(item.getSlotAttr(itemtype, i, 'Amount')) == '':
                     amount = 0
                 else:
                     amount = re.sub('[^\d]', '', item.getSlotAttr(itemtype, i, 'Amount'))
@@ -909,7 +910,6 @@ class ScWindow(B_SC):
           self.CharRace.setCurrentItem(racelist.index(race))
         self.RaceChanged('')
         item = self.itemattrlist.get(self.currentTabLabel, Item(self.currentTabLabel))
-        item.loadAttr('ActiveState','player')
         if self.save:
             self.restoreItem(item)
         self.calculate()

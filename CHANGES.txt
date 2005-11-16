@@ -1,9 +1,25 @@
-Updated 11/02/05 - Version 1.43 (dev)
+Updated 11/16/05 - Version 1.43.0011 (dev)
+Fixed loading a template, such that the chest piece doesn't become
+a crafted item upon loading a saved template with a drop chest.
+Fix materials window when clicking a gem name, so the multiplier works.
+'Other Bonuses' list is now clickable (delves items with other skill).
+Improve display on Mac/Aqua (still looks odd, and breaks Aqua rules).
+Now importing older 'PvE' category as 'PvE Bonus' category.
+Corrected caps for imported 'Healing Effectiveness', 'Duration of Spells'
+and added 'Spell Piercing' bonus (as Mythic named it, not Resist Pierce).
+Sorcerer +Mind fixed (it does display for +All Magic, no real benefit).
 Ranger's Pathfinding skill changed from +all magic, to an 'other' skill.
+Fixed two-row TabBar so all the quirks since 1.43.0009 are cleaned up.
+Added Offensive/Reactive/Charged/Other Effects slot types
+for drop items.  (Effects for player crafted items come later.)
+
+Updated 11/02/05 - Version 1.43.0010 (dev)
 Fixed the Load item window, simplified the preview to display correctly.
-Fixed the Power cap broken just in 1.43.0009.
+Fixed the Power cap (broken only in 1.43.0009).
+
+Updated 10/31/05 - Version 1.43.0009 (dev)
 Added server codes for Hector, Deria, Cumbria.
-Import non-Kort 'PvE' category as 'PvE Bonus' to be clear & flexible.
+Import non-Kort 'PvE' category as 'PvE Bonus' category.
 Fix stat-cap cap (max +25 stat cap items at level 50).
 Changed to a two-row-tabs layout of body & jewelry, without using tab 
 pages which required all of the controls to be shifted back and forth.
