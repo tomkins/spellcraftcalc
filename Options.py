@@ -178,9 +178,9 @@ class Options(B_Options):
             elif child.tagName == 'WindowY':
                 y = int(XMLHelper.getText(child.childNodes))
             elif child.tagName == 'WindowW':
-                w = int(XMLHelper.getText(child.childNodes))
+                pass # was w = int(XMLHelper.getText(child.childNodes))
             elif child.tagName == 'WindowH':
-                h = int(XMLHelper.getText(child.childNodes))
+                pass # was h = int(XMLHelper.getText(child.childNodes))
             elif child.tagName == 'RecentFiles':
                 for pchild in child.childNodes:
                     if pchild.nodeType == Node.TEXT_NODE: continue
@@ -191,11 +191,11 @@ class Options(B_Options):
             elif child.tagName == 'ConfigReportFile':
                 self.parent.reportFile = XMLHelper.getText(child.childNodes)
                 
-        if w == 0:
-            w = 760
-        if h == 0:
-            h = 517
-        self.parent.resize(w, h)
+        #if w == 0:
+        #    w = 760
+        #if h == 0:
+        #    h = 517
+        #self.parent.resize(w, h)
         self.parent.move(x, y)
         self.loadPriceInfo(pricing)
         self.OK_pressed()
