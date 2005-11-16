@@ -478,6 +478,7 @@ class ScWindow(B_SC):
         if self.nocalc:
             return
         self.nocalc = 1
+        focusnum = 1
         charleveltext = str(self.CharLevel.text())
         if charleveltext == '': 
             charlevel = 1
@@ -498,6 +499,10 @@ class ScWindow(B_SC):
         self.capTotals['AF'] = 0
         skillTotals = {}
         otherTotals = {}
+        self.Focus_1.setText('')
+        self.Focus_2.setText('')
+        self.Focus_3.setText('')
+        self.Focus_4.setText('')
         self.DupErrorString.setText('')
         self.OcErrorString.setText('')
         totalutility = 0.0
@@ -577,9 +582,19 @@ class ScWindow(B_SC):
                     if item.getAttr('Equipped') == '1':
                         if effect == 'All Spell Lines':
                             for f in AllBonusList[self.realm][self.charclass][effect]:
-                                skillTotals[f + ' Focus'] = amount
+                                if focusnum <= 4:
+                                    getattr(self, 'Focus_%d' % focusnum).setText(
+                                        '%s %s' % (amount, f)) 
+                                    setattr(getattr(self, 'Focus_%d' % focusnum), 'effect', f)
+                                    #exec('self.Focus_%d.effect = "%s"' 
+                                    #    % (focusnum, f))
+                                focusnum += 1
                         else:
-                            skillTotals[effect + ' Focus'] = amount
+                            if focusnum <= 4:
+                                getattr(self, 'Focus_%d' % focusnum).setText(
+                                    '%s %s' % (amount, effect)) 
+                                setattr(getattr(self, 'Focus_%d' % focusnum), 'effect', effect)
+                            focusnum += 1
                 elif gemtype == 'Power':
                     utility += amount * 2
                     if item.getAttr('Equipped') == '1':
