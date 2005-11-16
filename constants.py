@@ -32,8 +32,7 @@ __all__ = [
   'SkillTable', 'UnusedList', 'ImbueMultipliers', 'PvEBonusTable', 'DropTypeList', 
   'MaterialGems', 'FocusList', 'OtherBonusTable', 'LiquidsOrder', 'ServerCodes',
   'EffectTable', 'EffectRequiredLevel', 'EffectMetal', 'EffectItemNames',
-  'EffectItemList', 'EffectTypeList', 'UniqueAbilityList', 'BodyHitOdds',
-  'PieceTabList', 'JewelTabList', 
+  'EffectItemList', 'EffectTypeList', 'BodyHitOdds', 'PieceTabList', 'JewelTabList', 
 ]
 
 ScVersion = "Kort 1.43.0010 (dev)"
@@ -633,7 +632,7 @@ DropTypeList = t2(
     'PvE Bonus', 
     'Other Bonus',
  ) + EffectTypeList + (
-    'Other Ability',
+    'Other Effect',
 ))
 
 EffectTypeList = t2((
@@ -1041,9 +1040,6 @@ EffectItemList = t2(
      StableEffectList + (
     'Unique Effect...',
 ))
-
-
-UniqueAbilityList = t2(("Unique Ability...",))
 
 
 GemTables = {
