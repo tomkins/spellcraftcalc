@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
 
-# Form implementation generated from reading ui file 'Craft.ui'
+# Form implementation generated from reading ui file 'CraftWindow.ui'
 #
-# Created: Wed Sep 28 18:57:24 2005
+# Created: Wed Nov 16 22:00:51 2005
 #      by: The PyQt User Interface Compiler (pyuic) 3.15
 #
 # WARNING! All changes made in this file will be lost!
