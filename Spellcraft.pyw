@@ -48,7 +48,8 @@ class ScApplication(QApplication):
         font = QFont(self.font())
         if QApplication.style().name()[0:9] == "Macintosh" and \
            sys.platform == "darwin":
-            font.setFamily("Lucida Grande")
+            font.setFamily("Trebuchet MS")
+            #font.setFamily("Lucida Grande")
             font.setPointSize(11)
         elif sys.platform == "win32":
             font.setFamily("Trebuchet MS")
