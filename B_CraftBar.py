@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'CraftBar.ui'
 #
-# Created: Wed Sep 28 18:57:25 2005
+# Created: Wed Nov 16 21:38:32 2005
 #      by: The PyQt User Interface Compiler (pyuic) 3.15
 #
 # WARNING! All changes made in this file will be lost!
@@ -45,10 +45,6 @@ class B_CraftBar(QDialog):
 
         self.TextLabel14 = QLabel(self,"TextLabel14")
         self.TextLabel14.setGeometry(QRect(39,304,154,41))
-        TextLabel14_font = QFont(self.TextLabel14.font())
-        TextLabel14_font.setPointSize(9)
-        TextLabel14_font.setBold(1)
-        self.TextLabel14.setFont(TextLabel14_font)
         self.TextLabel14.setAlignment(QLabel.AlignTop | QLabel.AlignLeft)
 
         self.GroupBox21 = QGroupBox(self,"GroupBox21")

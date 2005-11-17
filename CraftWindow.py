@@ -25,7 +25,7 @@ import SC
 class CraftWindow(B_CraftWindow):
     def __init__(self,parent = None,name = None,modal = 0,fl = 0):
         B_CraftWindow.__init__(self,parent,name,modal,fl)
-        self.font().setPointSize(8)
+        #self.font().setPointSize(8)
         self.currentItem = None
         self.totalCost = 0
         self.prevVals = [0, 0, 0, 0]

@@ -25,7 +25,7 @@ import string
 class DisplayWindow(B_DisplayWindow):
 	def __init__(self,parent = None,name = None,modal = 0,fl = 0):
 		B_DisplayWindow.__init__(self,parent,name,modal,fl)
-                self.font().setPointSize(8)
+                #self.font().setPointSize(8)
 		self.scwindow = parent
 
 	def loadLocations(self, locs):

@@ -195,13 +195,6 @@
             </rect>
         </property>
         <property stdset="1">
-            <name>font</name>
-            <font>
-                <pointsize>9</pointsize>
-                <bold>1</bold>
-            </font>
-        </property>
-        <property stdset="1">
             <name>text</name>
             <string>You must be logged out of 
 the selected character for 
