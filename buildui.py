@@ -20,7 +20,8 @@ for ui, py in files:
         # as we will error on a missing input file, and go
         # quietly on if the output file was missing
         pass
-    os.system('pyuic -o %s %s' % (py, ui))
+    os.system('%s -o %s %s' % (
+              os.path.join(os.path.dirname(sys.executable),'pyuic'), py, ui))
 
     # Make this Win32 text
     if os.name == 'nt':
