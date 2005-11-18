@@ -1,9 +1,12 @@
 Things to fix before next release is announced;
 
-  Just make sure the blinking switch from player to drop and back
-  doesn't mess up someones crafted gear.  It's good to move the
-  stats when they started entering the wrong kind of gear, and
-  to 'almost' copy a drop item.
+  Ensure we save/load PC and drop items (something's wrong).
+
+  Fix the blinking switch from player to drop and back.  Made the
+  chest bug look like a feature.
+
+  Fix the prices, it's just wonked with all the different cost
+  changes to gems since cats gems.  
 
 Things to fix before 2.0 final (non-beta) is announced;
 
