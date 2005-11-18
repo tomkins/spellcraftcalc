@@ -37,7 +37,7 @@ Python:from SearchingCombo import *
         </property>
         <widget class="QLabel">
             <property name="name">
-                <cstring>TextLabel1_2</cstring>
+                <cstring>LabelCharName</cstring>
             </property>
             <property name="geometry">
                 <rect>
@@ -53,7 +53,7 @@ Python:from SearchingCombo import *
         </widget>
         <widget class="QLabel">
             <property name="name">
-                <cstring>TextLabel2_2</cstring>
+                <cstring>LabelCharClass</cstring>
             </property>
             <property name="geometry">
                 <rect>
@@ -69,7 +69,7 @@ Python:from SearchingCombo import *
         </widget>
         <widget class="QLabel">
             <property name="name">
-                <cstring>TextLabel3_2</cstring>
+                <cstring>LabelCharLevel</cstring>
             </property>
             <property name="geometry">
                 <rect>
@@ -85,7 +85,7 @@ Python:from SearchingCombo import *
         </widget>
         <widget class="QLabel">
             <property name="name">
-                <cstring>TextLabel3_2_2</cstring>
+                <cstring>LabelCharRace</cstring>
             </property>
             <property name="geometry">
                 <rect>
@@ -97,19 +97,6 @@ Python:from SearchingCombo import *
             </property>
             <property name="text">
                 <string>Race:</string>
-            </property>
-        </widget>
-        <widget class="SearchingCombo">
-            <property name="name">
-                <cstring>CharClass</cstring>
-            </property>
-            <property name="geometry">
-                <rect>
-                    <x>46</x>
-                    <y>38</y>
-                    <width>114</width>
-                    <height>22</height>
-                </rect>
             </property>
         </widget>
         <widget class="QLineEdit">
@@ -129,6 +116,19 @@ Python:from SearchingCombo import *
             </property>
             <property name="frameShadow">
                 <enum>Sunken</enum>
+            </property>
+        </widget>
+        <widget class="SearchingCombo">
+            <property name="name">
+                <cstring>CharClass</cstring>
+            </property>
+            <property name="geometry">
+                <rect>
+                    <x>46</x>
+                    <y>38</y>
+                    <width>114</width>
+                    <height>22</height>
+                </rect>
             </property>
         </widget>
         <widget class="QLineEdit">
@@ -1493,7 +1493,7 @@ Python:from SearchingCombo import *
     </widget>
     <widget class="QLabel">
         <property name="name">
-            <cstring>FileNameLabel</cstring>
+            <cstring>LabelFileName</cstring>
         </property>
         <property name="geometry">
             <rect>
@@ -1509,7 +1509,7 @@ Python:from SearchingCombo import *
     </widget>
     <widget class="QLabel">
         <property name="name">
-            <cstring>OcErrorString</cstring>
+            <cstring>LabelOcError</cstring>
         </property>
         <property name="geometry">
             <rect>
@@ -1525,7 +1525,7 @@ Python:from SearchingCombo import *
     </widget>
     <widget class="QLabel">
         <property name="name">
-            <cstring>DupErrorString</cstring>
+            <cstring>LabelDupError</cstring>
         </property>
         <property name="geometry">
             <rect>
@@ -1662,7 +1662,7 @@ Python:from SearchingCombo import *
         </widget>
         <widget class="QLabel">
             <property name="name">
-                <cstring>Bonus_Label</cstring>
+                <cstring>ItemBonusLabel</cstring>
             </property>
             <property name="geometry">
                 <rect>
@@ -1691,7 +1691,7 @@ Python:from SearchingCombo import *
         </widget>
         <widget class="QLabel">
             <property name="name">
-                <cstring>AFDPS_Label</cstring>
+                <cstring>ItemAFDPSLabel</cstring>
             </property>
             <property name="geometry">
                 <rect>
@@ -1720,7 +1720,7 @@ Python:from SearchingCombo import *
         </widget>
         <widget class="QLabel">
             <property name="name">
-                <cstring>Speed_Label</cstring>
+                <cstring>ItemSpeedLabel</cstring>
             </property>
             <property name="geometry">
                 <rect>
@@ -1749,7 +1749,7 @@ Python:from SearchingCombo import *
         </widget>
         <widget class="QLabel">
             <property name="name">
-                <cstring>Utility_Label</cstring>
+                <cstring>ItemUtilityLabel</cstring>
             </property>
             <property name="geometry">
                 <rect>
@@ -1765,7 +1765,7 @@ Python:from SearchingCombo import *
         </widget>
         <widget class="QLabel">
             <property name="name">
-                <cstring>Utility</cstring>
+                <cstring>ItemUtility</cstring>
             </property>
             <property name="geometry">
                 <rect>
@@ -1781,23 +1781,7 @@ Python:from SearchingCombo import *
         </widget>
         <widget class="QLabel">
             <property name="name">
-                <cstring>TotalUtility</cstring>
-            </property>
-            <property name="geometry">
-                <rect>
-                    <x>545</x>
-                    <y>17</y>
-                    <width>73</width>
-                    <height>14</height>
-                </rect>
-            </property>
-            <property name="text">
-                <string>0.0</string>
-            </property>
-        </widget>
-        <widget class="QLabel">
-            <property name="name">
-                <cstring>Total_Label</cstring>
+                <cstring>ItemTotalUtilityLabel</cstring>
             </property>
             <property name="geometry">
                 <rect>
@@ -1809,6 +1793,22 @@ Python:from SearchingCombo import *
             </property>
             <property name="text">
                 <string>Total:</string>
+            </property>
+        </widget>
+        <widget class="QLabel">
+            <property name="name">
+                <cstring>ItemTotalUtility</cstring>
+            </property>
+            <property name="geometry">
+                <rect>
+                    <x>545</x>
+                    <y>17</y>
+                    <width>73</width>
+                    <height>14</height>
+                </rect>
+            </property>
+            <property name="text">
+                <string>0.0</string>
             </property>
         </widget>
         <widget class="QCheckBox">
@@ -1845,7 +1845,7 @@ Python:from SearchingCombo import *
         </widget>
         <widget class="QLabel">
             <property name="name">
-                <cstring>Type_Label</cstring>
+                <cstring>LabelGemType</cstring>
             </property>
             <property name="geometry">
                 <rect>
@@ -1861,7 +1861,7 @@ Python:from SearchingCombo import *
         </widget>
         <widget class="QLabel">
             <property name="name">
-                <cstring>Amount_Label</cstring>
+                <cstring>LabelGemAmount</cstring>
             </property>
             <property name="geometry">
                 <rect>
@@ -1893,7 +1893,7 @@ Python:from SearchingCombo import *
         </widget>
         <widget class="QLabel">
             <property name="name">
-                <cstring>Quality_Label</cstring>
+                <cstring>LabelGemQuality</cstring>
             </property>
             <property name="geometry">
                 <rect>
@@ -1909,7 +1909,7 @@ Python:from SearchingCombo import *
         </widget>
         <widget class="QLabel">
             <property name="name">
-                <cstring>Points_Label</cstring>
+                <cstring>LabelGemPoints</cstring>
             </property>
             <property name="geometry">
                 <rect>
@@ -1928,7 +1928,7 @@ Python:from SearchingCombo import *
         </widget>
         <widget class="QLabel">
             <property name="name">
-                <cstring>Cost_Label</cstring>
+                <cstring>LabelGemCost</cstring>
             </property>
             <property name="geometry">
                 <rect>
@@ -1947,7 +1947,7 @@ Python:from SearchingCombo import *
         </widget>
         <widget class="QLabel">
             <property name="name">
-                <cstring>Name_Label</cstring>
+                <cstring>ItemNameLabel</cstring>
             </property>
             <property name="geometry">
                 <rect>
@@ -2894,7 +2894,7 @@ Python:from SearchingCombo import *
         </widget>
         <widget class="QLabel">
             <property name="name">
-                <cstring>Imbue_Label</cstring>
+                <cstring>ItemImbueLabel</cstring>
             </property>
             <property name="geometry">
                 <rect>
@@ -2910,7 +2910,7 @@ Python:from SearchingCombo import *
         </widget>
         <widget class="QLabel">
             <property name="name">
-                <cstring>Imbue</cstring>
+                <cstring>ItemImbue</cstring>
             </property>
             <property name="geometry">
                 <rect>
@@ -2929,7 +2929,7 @@ Python:from SearchingCombo import *
         </widget>
         <widget class="QLabel">
             <property name="name">
-                <cstring>Slash_Label</cstring>
+                <cstring>ItemImbueSlashLabel</cstring>
             </property>
             <property name="geometry">
                 <rect>
@@ -2945,7 +2945,7 @@ Python:from SearchingCombo import *
         </widget>
         <widget class="QLabel">
             <property name="name">
-                <cstring>Total_Imbue</cstring>
+                <cstring>ItemImbueTotal</cstring>
             </property>
             <property name="geometry">
                 <rect>
@@ -2961,7 +2961,7 @@ Python:from SearchingCombo import *
         </widget>
         <widget class="QLabel">
             <property name="name">
-                <cstring>Overcharge_Label</cstring>
+                <cstring>ItemOverchargeLabel</cstring>
             </property>
             <property name="geometry">
                 <rect>
@@ -2977,7 +2977,7 @@ Python:from SearchingCombo import *
         </widget>
         <widget class="QLabel">
             <property name="name">
-                <cstring>Overcharge</cstring>
+                <cstring>ItemOvercharge</cstring>
             </property>
             <property name="geometry">
                 <rect>
@@ -2996,7 +2996,7 @@ Python:from SearchingCombo import *
         </widget>
         <widget class="QLabel">
             <property name="name">
-                <cstring>ItemCost_Label</cstring>
+                <cstring>ItemCostLabel</cstring>
             </property>
             <property name="geometry">
                 <rect>

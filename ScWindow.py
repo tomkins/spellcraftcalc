@@ -105,8 +105,8 @@ class ScWindow(B_SC):
         self.frame3.move(self.frame3.pos().x(), self.PieceTab.geometry().bottom())
 
         # Change text color to red for error strings
-        self.OcErrorString.setPaletteForegroundColor(QColor(255, 0, 0))
-        self.DupErrorString.setPaletteForegroundColor(QColor(255, 0, 0))
+        self.LabelOcError.setPaletteForegroundColor(QColor(255, 0, 0))
+        self.LabelDupError.setPaletteForegroundColor(QColor(255, 0, 0))
 
         self.updateGeometry()
         self.centralWidget().setFixedSize(
@@ -203,7 +203,7 @@ class ScWindow(B_SC):
         self.noteText = ''
         self.craftMultiplier = 6
         self.save = 1
-        self.FileNameLabel.setText('Unnamed')
+        self.LabelFileName.setText('Unnamed')
         self.filename = None
 
         self.PieceTab.setCurrentTab(0)
@@ -258,17 +258,17 @@ class ScWindow(B_SC):
         self.switchOnType['player'].append(self.Amount_Drop_2)
         self.switchOnType['player'].append(self.Amount_Drop_3)
         self.switchOnType['player'].append(self.Amount_Drop_4)
-        self.switchOnType['player'].append(self.Quality_Label)
+        self.switchOnType['player'].append(self.LabelGemQuality)
         self.switchOnType['player'].append(self.Quality_1)
         self.switchOnType['player'].append(self.Quality_2)
         self.switchOnType['player'].append(self.Quality_3)
         self.switchOnType['player'].append(self.Quality_4)
-        self.switchOnType['player'].append(self.Points_Label)
+        self.switchOnType['player'].append(self.LabelGemPoints)
         self.switchOnType['player'].append(self.Points_1)
         self.switchOnType['player'].append(self.Points_2)
         self.switchOnType['player'].append(self.Points_3)
         self.switchOnType['player'].append(self.Points_4)
-        self.switchOnType['player'].append(self.Cost_Label)
+        self.switchOnType['player'].append(self.LabelGemCost)
         self.switchOnType['player'].append(self.Cost_1)
         self.switchOnType['player'].append(self.Cost_2)
         self.switchOnType['player'].append(self.Cost_3)
@@ -277,13 +277,13 @@ class ScWindow(B_SC):
         self.switchOnType['player'].append(self.Name_2)
         self.switchOnType['player'].append(self.Name_3)
         self.switchOnType['player'].append(self.Name_4)
-        self.switchOnType['player'].append(self.Imbue_Label)
-        self.switchOnType['player'].append(self.Imbue)
-        self.switchOnType['player'].append(self.Slash_Label)
-        self.switchOnType['player'].append(self.Total_Imbue)
-        self.switchOnType['player'].append(self.Overcharge_Label)
-        self.switchOnType['player'].append(self.Overcharge)
-        self.switchOnType['player'].append(self.ItemCost_Label)
+        self.switchOnType['player'].append(self.ItemImbueLabel)
+        self.switchOnType['player'].append(self.ItemImbue)
+        self.switchOnType['player'].append(self.ItemImbueSlashLabel)
+        self.switchOnType['player'].append(self.ItemImbueTotal)
+        self.switchOnType['player'].append(self.ItemOverchargeLabel)
+        self.switchOnType['player'].append(self.ItemOvercharge)
+        self.switchOnType['player'].append(self.ItemCostLabel)
         self.switchOnType['player'].append(self.ItemCost)
         self.switchOnType['player'].append(self.CraftButton)
         self.RealmChanged()
@@ -508,8 +508,8 @@ class ScWindow(B_SC):
         self.Focus_2.setText('')
         self.Focus_3.setText('')
         self.Focus_4.setText('')
-        self.DupErrorString.setText('')
-        self.OcErrorString.setText('')
+        self.LabelDupError.setText('')
+        self.LabelOcError.setText('')
         totalutility = 0.0
         totalcost = 0
         for key, item in self.itemattrlist.items():
@@ -531,7 +531,7 @@ class ScWindow(B_SC):
                     amount = int(amount)
                 effect = item.getSlotAttr(itemtype, i, 'Effect')
                 if effect != '' and [gemtype, effect] in gemeffects:
-                    self.DupErrorString.setText('Two of same type of gem on %s' % key)
+                    self.LabelDupError.setText('Two of same type of gem on %s' % key)
                 gemeffects.append([gemtype, effect])
                 if amount == '' or gemtype == 'Unused' or amount == 0 or itemtype == 'drop':
                     cost = 0    
@@ -546,7 +546,7 @@ class ScWindow(B_SC):
                         if remakecost > 0:
                             remakecost += 180 * costindex
                         if effect != 'All Spell Lines' and amount > 1:
-                            self.DupErrorString.setText('Invalid ' + effect + ' on ' + key)
+                            self.LabelDupError.setText('Invalid ' + effect + ' on ' + key)
                     elif gemtype == 'Resist' or gemtype == 'Focus':
                         cost += 60 * costindex
                         if remakecost > 0:
@@ -652,7 +652,7 @@ class ScWindow(B_SC):
                 itemimbue = self.getItemImbue(item)
                 imbue = self.calcImbue(item, key == self.currentTabLabel)
                 if (imbue - itemimbue) >= 6:
-                    self.OcErrorString.setText('Impossible Overcharge on %s' % key)
+                    self.LabelOcError.setText('Impossible Overcharge on %s' % key)
                 elif imbue > (itemimbue+0.5):
                     success = -OCStartPercentages[int(imbue-itemimbue)]
                     for i in range(0, 4):
@@ -664,10 +664,10 @@ class ScWindow(B_SC):
                     success += (self.crafterSkill - 500) / 10
                     if self.crafterSkill <= 50: success -= 450
             if key == self.currentTabLabel:
-                self.Utility.setText('%3.1f' % utility)
+                self.ItemUtility.setText('%3.1f' % utility)
                 if self.PlayerMade.isChecked():
-                    self.Total_Imbue.setText(unicode(itemimbue))
-                    self.Imbue.setText('%3.1f' % imbue)
+                    self.ItemImbue.setText('%3.1f' % imbue)
+                    self.ItemImbueTotal.setText(unicode(itemimbue))
                     self.ItemCost.setText(SC.formatCost(itemcost))
                     for i in range(1, 5):
                         n = getattr(self, 'Name_%d' % i)
@@ -677,14 +677,14 @@ class ScWindow(B_SC):
                         else:
                             getattr(self, 'Gem_Label_%d' % i).setEnabled(1)
                     if (imbue - itemimbue) >= 6:
-                        self.Overcharge.setText('Impossible!')
+                        self.ItemOvercharge.setText('Impossible!')
                     elif imbue > (itemimbue+0.5):
                         if success < 0:
-                            self.Overcharge.setText('BOOM! (%d%%)' % success)
+                            self.ItemOvercharge.setText('BOOM! (%d%%)' % success)
                         else:
-                            self.Overcharge.setText('%d%%' % success)
+                            self.ItemOvercharge.setText('%d%%' % success)
                     else:
-                        self.Overcharge.setText('None')
+                        self.ItemOvercharge.setText('None')
         for (key, val) in self.totals.items():
             if self.TotalBonus.isChecked():
                 if self.includeRacials:
@@ -719,7 +719,7 @@ class ScWindow(B_SC):
                 else:
                     capmod = 0
                 getattr(self, key).setText(unicode(int(basecap + capmod) - val))
-        self.TotalUtility.setText('%3.1f' % totalutility)
+        self.ItemTotalUtility.setText('%3.1f' % totalutility)
         self.TotalCost.setText(SC.formatCost(totalcost))
         self.SkillsList.clear()
         self.OtherBonusList.clear()
@@ -1110,7 +1110,7 @@ class ScWindow(B_SC):
                 f.write(XMLHelper.writexml(self.asXML(), UnicodeStringIO(), '', '\t', '\n'))
                 self.modified = 0
                 f.close()
-                self.FileNameLabel.setText(os.path.basename(self.filename))
+                self.LabelFileName.setText(os.path.basename(self.filename))
             except IOError:
                 QMessageBox.critical(None, 'Error!', 
                     'Error writing to file: ' + self.filename, 'OK')
@@ -1142,7 +1142,7 @@ class ScWindow(B_SC):
                 f.write(XMLHelper.writexml(self.asXML(), UnicodeStringIO(), '', '\t', '\n'))
                 self.modified = 0
                 f.close()
-                self.FileNameLabel.setText(os.path.basename(filename))
+                self.LabelFileName.setText(os.path.basename(filename))
             except IOError:
                 QMessageBox.critical(None, 'Error!', 
                     'Error writing to file: ' + filename, 'OK')
@@ -1187,7 +1187,7 @@ class ScWindow(B_SC):
                     'Error loading template', 'OK')
                 f.close()
                 return
-            self.FileNameLabel.setText(os.path.basename(unicode(filename)))
+            self.LabelFileName.setText(os.path.basename(unicode(filename)))
             self.updateRecentFiles(unicode(filename))
             self.filename = unicode(filename)
 
@@ -1364,8 +1364,7 @@ class ScWindow(B_SC):
         self.DaocPath = str(CB.DaocPath.text())
 
     def labelClicked(self, find):
-        if find in ['', 'Cost', 'Dup', 'File', 'Gem', 'Item', 'Name', 'Oc', 'Points', 
-                    'Text', 'Total', 'Utility']: return
+        if find in ['', 'Label', 'Total', 'Item', 'Gem']: return
         locs = []
         for key, item in self.itemattrlist.items():
             activestate = item.getAttr('ActiveState')
@@ -1410,10 +1409,8 @@ class ScWindow(B_SC):
         while nameidx < len(shortname):
             if shortname[nameidx] < 'a' or shortname[nameidx] > 'z':
                 shortname = shortname[0:nameidx]
-            sys.stdout.write(shortname[0:nameidx]+"\r")
             nameidx += 1
-        sys.stdout.write("\n")
-        self.labelClicked(shortname)
+        self.labelClicked(find)
 
     def resizeEvent(self, e):
         sz = e.size()
