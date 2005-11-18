@@ -1364,7 +1364,6 @@ class ScWindow(B_SC):
         self.DaocPath = str(CB.DaocPath.text())
 
     def labelClicked(self, find):
-        if find in ['', 'Label', 'Total', 'Item', 'Gem']: return
         locs = []
         for key, item in self.itemattrlist.items():
             activestate = item.getAttr('ActiveState')
@@ -1373,13 +1372,25 @@ class ScWindow(B_SC):
             else:
                 toprng = 4
             for slot in range(0, toprng):
-                type = item.getSlotAttr(activestate, slot, 'Type')
+                type = str(item.getSlotAttr(activestate, slot, 'Type'))
                 if type == 'Unused': continue
-                effect = item.getSlotAttr(activestate, slot, 'Effect')
-                if effect != find: continue
-                amount = item.getSlotAttr(activestate, slot, 'Amount')
-                if type == 'Cap Increase':
+                effect = str(item.getSlotAttr(activestate, slot, 'Effect'))
+                if effect != find: 
+                    if find == 'Power' or find == '% Power Pool':
+                       if effect != 'Power' and effect != '% Power Pool':
+                           continue
+                    elif effect == 'Acuity':
+                       if not find in AllBonusList[self.realm][self.charclass][effect]:
+                           continue
+                    else:
+                        continue
+                amount = str(item.getSlotAttr(activestate, slot, 'Amount'))
+                if effect != find and type == 'Cap Increase':
+                    locs.append([key, str(amount) + ' ' + effect + ' Cap'])
+                elif type == 'Cap Increase':
                     locs.append([key, str(amount) + ' Cap'])
+                elif effect != find: 
+                    locs.append([key, str(amount) + ' ' + effect])
                 else:
                     locs.append([key, amount])
                 #elif effect in AllBonusList[self.realm][self.charclass].keys():
@@ -1410,7 +1421,8 @@ class ScWindow(B_SC):
             if shortname[nameidx] < 'a' or shortname[nameidx] > 'z':
                 shortname = shortname[0:nameidx]
             nameidx += 1
-        self.labelClicked(find)
+        if shortname in ['', 'Label', 'Total', 'Item']: return
+        self.labelClicked(shortname)
 
     def resizeEvent(self, e):
         sz = e.size()
