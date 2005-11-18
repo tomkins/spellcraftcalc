@@ -29,7 +29,7 @@ Python:from SearchingCombo import *
                 <x>613</x>
                 <y>3</y>
                 <width>165</width>
-                <height>111</height>
+                <height>134</height>
             </rect>
         </property>
         <property name="title">
@@ -53,23 +53,23 @@ Python:from SearchingCombo import *
         </widget>
         <widget class="QLabel">
             <property name="name">
-                <cstring>LabelCharClass</cstring>
+                <cstring>LabelRealm</cstring>
             </property>
             <property name="geometry">
                 <rect>
                     <x>6</x>
                     <y>40</y>
-                    <width>33</width>
+                    <width>38</width>
                     <height>16</height>
                 </rect>
             </property>
             <property name="text">
-                <string>Class:</string>
+                <string>Realm:</string>
             </property>
         </widget>
         <widget class="QLabel">
             <property name="name">
-                <cstring>LabelCharLevel</cstring>
+                <cstring>LabelCharClass</cstring>
             </property>
             <property name="geometry">
                 <rect>
@@ -80,7 +80,7 @@ Python:from SearchingCombo import *
                 </rect>
             </property>
             <property name="text">
-                <string>Level:</string>
+                <string>Class:</string>
             </property>
         </widget>
         <widget class="QLabel">
@@ -97,6 +97,22 @@ Python:from SearchingCombo import *
             </property>
             <property name="text">
                 <string>Race:</string>
+            </property>
+        </widget>
+        <widget class="QLabel">
+            <property name="name">
+                <cstring>LabelCharLevel</cstring>
+            </property>
+            <property name="geometry">
+                <rect>
+                    <x>6</x>
+                    <y>111</y>
+                    <width>38</width>
+                    <height>16</height>
+                </rect>
+            </property>
+            <property name="text">
+                <string>Level:</string>
             </property>
         </widget>
         <widget class="QLineEdit">
@@ -120,7 +136,7 @@ Python:from SearchingCombo import *
         </widget>
         <widget class="SearchingCombo">
             <property name="name">
-                <cstring>CharClass</cstring>
+                <cstring>Realm</cstring>
             </property>
             <property name="geometry">
                 <rect>
@@ -131,15 +147,15 @@ Python:from SearchingCombo import *
                 </rect>
             </property>
         </widget>
-        <widget class="QLineEdit">
+        <widget class="SearchingCombo">
             <property name="name">
-                <cstring>CharLevel</cstring>
+                <cstring>CharClass</cstring>
             </property>
             <property name="geometry">
                 <rect>
                     <x>46</x>
                     <y>61</y>
-                    <width>37</width>
+                    <width>114</width>
                     <height>22</height>
                 </rect>
             </property>
@@ -153,6 +169,19 @@ Python:from SearchingCombo import *
                     <x>46</x>
                     <y>84</y>
                     <width>114</width>
+                    <height>22</height>
+                </rect>
+            </property>
+        </widget>
+        <widget class="QLineEdit">
+            <property name="name">
+                <cstring>CharLevel</cstring>
+            </property>
+            <property name="geometry">
+                <rect>
+                    <x>46</x>
+                    <y>107</y>
+                    <width>37</width>
                     <height>22</height>
                 </rect>
             </property>
@@ -3348,6 +3377,12 @@ Python:from SearchingCombo import *
         <slot>SkillClicked(QListBoxItem*)</slot>
     </connection>
     <connection>
+        <sender>Realm</sender>
+        <signal>activated(const QString&amp;)</signal>
+        <receiver>B_SC</receiver>
+        <slot>RealmChanged(const QString&amp;)</slot>
+    </connection>
+    <connection>
         <sender>CharClass</sender>
         <signal>activated(const QString&amp;)</signal>
         <receiver>B_SC</receiver>
@@ -3458,9 +3493,10 @@ Python:from SearchingCombo import *
 </connections>
 <tabstops>
     <tabstop>CharName</tabstop>
+    <tabstop>Realm</tabstop>
     <tabstop>CharClass</tabstop>
-    <tabstop>CharLevel</tabstop>
     <tabstop>CharRace</tabstop>
+    <tabstop>CharLevel</tabstop>
     <tabstop>TotalBonus</tabstop>
     <tabstop>CapDistance</tabstop>
     <tabstop>PieceTab</tabstop>
@@ -3522,6 +3558,7 @@ Python:from SearchingCombo import *
 </tabstops>
 <slots>
     <slot>AmountChanged(const QString&amp;)</slot>
+    <slot>RealmChanged(const QString&amp;)</slot>
     <slot>CharClassChanged(const QString&amp;)</slot>
     <slot>ClearCurrentItem()</slot>
     <slot>DistanceCapSet()</slot>

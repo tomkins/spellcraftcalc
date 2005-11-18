@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'ScWindow.ui'
 #
-# Created: Fri Nov 18 00:43:53 2005
+# Created: Fri Nov 18 04:27:57 2005
 #      by: The PyQt User Interface Compiler (pyuic) 3.15
 #
 # WARNING! All changes made in this file will be lost!
@@ -26,33 +26,39 @@ class B_SC(QMainWindow):
         self.setCentralWidget(QWidget(self,"qt_central_widget"))
 
         self.GroupBox9 = QGroupBox(self.centralWidget(),"GroupBox9")
-        self.GroupBox9.setGeometry(QRect(613,3,165,111))
+        self.GroupBox9.setGeometry(QRect(613,3,165,134))
 
         self.LabelCharName = QLabel(self.GroupBox9,"LabelCharName")
         self.LabelCharName.setGeometry(QRect(6,16,37,16))
 
-        self.LabelCharClass = QLabel(self.GroupBox9,"LabelCharClass")
-        self.LabelCharClass.setGeometry(QRect(6,40,33,16))
+        self.LabelRealm = QLabel(self.GroupBox9,"LabelRealm")
+        self.LabelRealm.setGeometry(QRect(6,40,38,16))
 
-        self.LabelCharLevel = QLabel(self.GroupBox9,"LabelCharLevel")
-        self.LabelCharLevel.setGeometry(QRect(6,65,38,16))
+        self.LabelCharClass = QLabel(self.GroupBox9,"LabelCharClass")
+        self.LabelCharClass.setGeometry(QRect(6,65,38,16))
 
         self.LabelCharRace = QLabel(self.GroupBox9,"LabelCharRace")
         self.LabelCharRace.setGeometry(QRect(6,88,38,16))
+
+        self.LabelCharLevel = QLabel(self.GroupBox9,"LabelCharLevel")
+        self.LabelCharLevel.setGeometry(QRect(6,111,38,16))
 
         self.CharName = QLineEdit(self.GroupBox9,"CharName")
         self.CharName.setGeometry(QRect(46,14,114,22))
         self.CharName.setFrameShape(QLineEdit.LineEditPanel)
         self.CharName.setFrameShadow(QLineEdit.Sunken)
 
-        self.CharClass = SearchingCombo(self.GroupBox9,"CharClass")
-        self.CharClass.setGeometry(QRect(46,38,114,22))
+        self.Realm = SearchingCombo(self.GroupBox9,"Realm")
+        self.Realm.setGeometry(QRect(46,38,114,22))
 
-        self.CharLevel = QLineEdit(self.GroupBox9,"CharLevel")
-        self.CharLevel.setGeometry(QRect(46,61,37,22))
+        self.CharClass = SearchingCombo(self.GroupBox9,"CharClass")
+        self.CharClass.setGeometry(QRect(46,61,114,22))
 
         self.CharRace = SearchingCombo(self.GroupBox9,"CharRace")
         self.CharRace.setGeometry(QRect(46,84,114,22))
+
+        self.CharLevel = QLineEdit(self.GroupBox9,"CharLevel")
+        self.CharLevel.setGeometry(QRect(46,107,37,22))
 
         self.ButtonGroup2 = QButtonGroup(self.centralWidget(),"ButtonGroup2")
         self.ButtonGroup2.setGeometry(QRect(613,134,165,51))
@@ -703,6 +709,7 @@ class B_SC(QMainWindow):
         self.connect(self.CraftButton,SIGNAL("clicked()"),self.OpenCraftWindow)
         self.connect(self.SkillsList,SIGNAL("clicked(QListBoxItem*)"),self.SkillClicked)
         self.connect(self.OtherBonusList,SIGNAL("clicked(QListBoxItem*)"),self.SkillClicked)
+        self.connect(self.Realm,SIGNAL("activated(const QString&)"),self.RealmChanged)
         self.connect(self.CharClass,SIGNAL("activated(const QString&)"),self.CharClassChanged)
         self.connect(self.AFDPS_Edit,SIGNAL("textChanged(const QString&)"),self.recalculate)
         self.connect(self.Speed_Edit,SIGNAL("textChanged(const QString&)"),self.recalculate)
@@ -722,10 +729,11 @@ class B_SC(QMainWindow):
         self.connect(self.Effect_10,SIGNAL("activated(const QString&)"),self.recalculate)
         self.connect(self.CharRace,SIGNAL("activated(const QString&)"),self.RaceChanged)
 
-        self.setTabOrder(self.CharName,self.CharClass)
-        self.setTabOrder(self.CharClass,self.CharLevel)
-        self.setTabOrder(self.CharLevel,self.CharRace)
-        self.setTabOrder(self.CharRace,self.TotalBonus)
+        self.setTabOrder(self.CharName,self.Realm)
+        self.setTabOrder(self.Realm,self.CharClass)
+        self.setTabOrder(self.CharClass,self.CharRace)
+        self.setTabOrder(self.CharRace,self.CharLevel)
+        self.setTabOrder(self.CharLevel,self.TotalBonus)
         self.setTabOrder(self.TotalBonus,self.CapDistance)
         self.setTabOrder(self.CapDistance,self.PieceTab)
         self.setTabOrder(self.PieceTab,self.ItemLevel)
@@ -789,9 +797,10 @@ class B_SC(QMainWindow):
         self.setCaption(self.__tr("Spellcrafting Calculator"))
         self.GroupBox9.setTitle(self.__tr("Char Info"))
         self.LabelCharName.setText(self.__tr("Name:"))
+        self.LabelRealm.setText(self.__tr("Realm:"))
         self.LabelCharClass.setText(self.__tr("Class:"))
-        self.LabelCharLevel.setText(self.__tr("Level:"))
         self.LabelCharRace.setText(self.__tr("Race:"))
+        self.LabelCharLevel.setText(self.__tr("Level:"))
         self.ButtonGroup2.setTitle(self.__tr("Display"))
         self.TotalBonus.setText(self.__tr("Total Bonus"))
         self.CapDistance.setText(self.__tr("Distance To Cap"))
@@ -929,6 +938,9 @@ class B_SC(QMainWindow):
 
     def AmountChanged(self,a0):
         print "B_SC.AmountChanged(const QString&): Not implemented yet"
+
+    def RealmChanged(self,a0):
+        print "B_SC.RealmChanged(const QString&): Not implemented yet"
 
     def CharClassChanged(self,a0):
         print "B_SC.CharClassChanged(const QString&): Not implemented yet"

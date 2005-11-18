@@ -32,16 +32,10 @@ class Options(B_Options):
     def __init__(self,parent = None,name = None,modal = 0,fl = 0):
         B_Options.__init__(self,parent,name,modal,fl)
 #       self.Tab.setTabEnabled(self.Price, 0)
+        self.parent = parent
         skilllist = range(1001, 51, -50)
         self.Skill.clear()
         self.Skill.insertStrList(map(lambda(x):str(x), skilllist))
-        self.parent = parent
-        if parent.realm == 'Albion':
-            self.Realm.setCurrentItem(0)
-        elif parent.realm == 'Hibernia':
-            self.Realm.setCurrentItem(1)
-        elif parent.realm == 'Midgard':
-            self.Realm.setCurrentItem(2)
         li = self.Skill.listBox().findItem(str(self.parent.crafterSkill))
         self.Skill.setCurrentItem(self.Skill.listBox().index(li))
         self.NoteText.setText(self.parent.noteText)
@@ -74,7 +68,7 @@ class Options(B_Options):
         rootnode = document.createElement('DefaultOptions')
         document.appendChild(rootnode)
         realmnode = document.createElement('Realm')
-        realmnode.appendChild(document.createTextNode(str(self.Realm.currentText())))
+        realmnode.appendChild(document.createTextNode(str(self.parent.Realm.currentText())))
         rootnode.appendChild(realmnode)
         showdone = document.createElement('DontShowDoneGems')
         showdone.appendChild(document.createTextNode(str(self.ShowDoneGems.isChecked())))
@@ -139,11 +133,11 @@ class Options(B_Options):
             if child.tagName == 'Realm':
                 realm = XMLHelper.getText(child.childNodes)
                 if realm == 'Albion':
-                    self.Realm.setCurrentItem(0)
+                    self.parent.Realm.setCurrentItem(0)
                 if realm == 'Hibernia':
-                    self.Realm.setCurrentItem(1)
+                    self.parent.Realm.setCurrentItem(1)
                 if realm == 'Midgard':
-                    self.Realm.setCurrentItem(2)
+                    self.parent.Realm.setCurrentItem(2)
             elif child.tagName == 'DontShowDoneGems':
                 if XMLHelper.getText(child.childNodes) == 'True':
                     self.ShowDoneGems.setChecked(1)
@@ -215,7 +209,6 @@ class Options(B_Options):
                 #traceback.print_exc()
         
     def OK_pressed(self):
-        realm = str(self.Realm.currentText())
         self.parent.crafterSkill = int(str(self.Skill.currentText()))
         self.parent.showDoneInMatsList = self.ShowDoneGems.isChecked()
         self.parent.includeRacials = self.IncludeRR.isChecked()
@@ -233,11 +226,7 @@ class Options(B_Options):
             except:
                 pass
                 #traceback.print_exc()
-        if realm != self.parent.realm:
-            self.parent.realm = realm
-            self.done(2)
-        else:
-            self.done(1)
+        self.done(1)
 
     def Cancel_pressed(self):
         self.done(-1)

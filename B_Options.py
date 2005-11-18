@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'Options.ui'
 #
-# Created: Wed Sep 28 18:57:26 2005
+# Created: Fri Nov 18 04:00:44 2005
 #      by: The PyQt User Interface Compiler (pyuic) 3.15
 #
 # WARNING! All changes made in this file will be lost!
@@ -31,12 +31,6 @@ class B_Options(QDialog):
         self.Tab.setGeometry(QRect(10,6,353,259))
 
         self.General = QWidget(self.Tab,"General")
-
-        self.TextLabel2 = QLabel(self.General,"TextLabel2")
-        self.TextLabel2.setGeometry(QRect(19,17,36,22))
-
-        self.Realm = QComboBox(0,self.General,"Realm")
-        self.Realm.setGeometry(QRect(65,17,81,22))
 
         self.TextLabel1 = QLabel(self.General,"TextLabel1")
         self.TextLabel1.setGeometry(QRect(185,17,61,22))
@@ -220,11 +214,6 @@ class B_Options(QDialog):
         self.setCaption(self.__tr("Options"))
         self.OK.setText(self.__tr("OK"))
         self.Cancel.setText(self.__tr("Cancel"))
-        self.TextLabel2.setText(self.__tr("Realm:"))
-        self.Realm.clear()
-        self.Realm.insertItem(self.__tr("Albion"))
-        self.Realm.insertItem(self.__tr("Hibernia"))
-        self.Realm.insertItem(self.__tr("Midgard"))
         self.TextLabel1.setText(self.__tr("Crafter Skill:"))
         self.ShowDoneGems.setText(self.__tr("\"Done\" Gems do not show up in Materials List"))
         self.IncludeRR.setText(self.__tr("Include Racial Resists in Totals"))

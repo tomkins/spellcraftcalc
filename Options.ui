@@ -92,60 +92,6 @@
                 <class>QLabel</class>
                 <property stdset="1">
                     <name>name</name>
-                    <cstring>TextLabel2</cstring>
-                </property>
-                <property stdset="1">
-                    <name>geometry</name>
-                    <rect>
-                        <x>19</x>
-                        <y>17</y>
-                        <width>36</width>
-                        <height>22</height>
-                    </rect>
-                </property>
-                <property stdset="1">
-                    <name>text</name>
-                    <string>Realm:</string>
-                </property>
-            </widget>
-            <widget>
-                <class>QComboBox</class>
-                <item>
-                    <property>
-                        <name>text</name>
-                        <string>Albion</string>
-                    </property>
-                </item>
-                <item>
-                    <property>
-                        <name>text</name>
-                        <string>Hibernia</string>
-                    </property>
-                </item>
-                <item>
-                    <property>
-                        <name>text</name>
-                        <string>Midgard</string>
-                    </property>
-                </item>
-                <property stdset="1">
-                    <name>name</name>
-                    <cstring>Realm</cstring>
-                </property>
-                <property stdset="1">
-                    <name>geometry</name>
-                    <rect>
-                        <x>65</x>
-                        <y>17</y>
-                        <width>81</width>
-                        <height>22</height>
-                    </rect>
-                </property>
-            </widget>
-            <widget>
-                <class>QLabel</class>
-                <property stdset="1">
-                    <name>name</name>
                     <cstring>TextLabel1</cstring>
                 </property>
                 <property stdset="1">

@@ -108,6 +108,12 @@ class ScWindow(B_SC):
         self.LabelOcError.setPaletteForegroundColor(QColor(255, 0, 0))
         self.LabelDupError.setPaletteForegroundColor(QColor(255, 0, 0))
 
+        self.Realm.insertStrList(list(Realms))
+        self.Realm.setCurrentItem(0)
+
+        self.QualDrop.insertStrList(list(QualityValues))
+        self.QualDrop.setCurrentItem(0)
+
         self.updateGeometry()
         self.centralWidget().setFixedSize(
              QSize(self.frame3.frameGeometry().right() + 4, 
@@ -286,7 +292,7 @@ class ScWindow(B_SC):
         self.switchOnType['player'].append(self.ItemCostLabel)
         self.switchOnType['player'].append(self.ItemCost)
         self.switchOnType['player'].append(self.CraftButton)
-        self.RealmChanged()
+        self.RealmChanged(self.realm)
         #self.connect(self, SLOT('show()'), self.shown)
 
     def asXML(self):
@@ -470,8 +476,6 @@ class ScWindow(B_SC):
             self.QualEdit.setText(item.getAttr('ItemQuality'))
             self.ItemName.setText(item.getAttr('ItemName'))
         else:
-            self.QualDrop.clear()
-            self.QualDrop.insertStrList(list(QualityValues))
             if item.getAttr('ItemQuality') in QualityValues:
                 self.QualDrop.setCurrentItem(
                     QualityValues.index(item.getAttr('ItemQuality')))
@@ -660,7 +664,7 @@ class ScWindow(B_SC):
                             success += GemQualOCModifiers['94']
                         else:
                             success += GemQualOCModifiers[item.getSlotAttr(itemtype, i, 'Qua')]
-                    success += ItemQualOCModifiers[unicode(self.QualDrop.currentText())]
+                    success += ItemQualOCModifiers[str(self.QualDrop.currentText())]
                     success += (self.crafterSkill - 500) / 10
                     if self.crafterSkill <= 50: success -= 450
             if key == self.currentTabLabel:
@@ -914,7 +918,8 @@ class ScWindow(B_SC):
             self.restoreItem(item)
         self.calculate()
 
-    def RealmChanged(self):
+    def RealmChanged(self,a0):
+        self.realm = str(self.Realm.currentText())
         self.CharClass.clear()
         self.CharClass.insertStrList(list(ClassList[self.realm]))
         if self.charclass in ClassList[self.realm]:
@@ -1245,7 +1250,8 @@ class ScWindow(B_SC):
             elif child.tagName == 'Coop':
                 self.coop = eval(XMLHelper.getText(child.childNodes), 
                                  globals(), globals())
-        self.RealmChanged()
+        self.Realm.setCurrentItem(Realms.index(self.realm))
+        self.RealmChanged(self.realm)
         if AllBonusList[self.realm].has_key(charclass):
             self.CharClass.setCurrentItem(ClassList[self.realm].index(charclass))
             self.CharClassChanged('')
@@ -1277,7 +1283,8 @@ class ScWindow(B_SC):
                     self.realm = 'Albion'
                 elif self.realm == 'MID':
                     self.realm = 'Midgard'
-                self.RealmChanged()
+                self.Realm.setCurrentItem(Realms.index(self.realm))
+                self.RealmChanged(self.realm)
                 if AllBonusList[self.realm].has_key(charclass):
                    self.CharClass.setCurrentItem(ClassList[self.realm].index(charclass))
                    self.CharClassChanged('')
@@ -1294,9 +1301,7 @@ class ScWindow(B_SC):
         self.modified = 1
         self.nocalc = 1
         res = Options.Options(self, '', 1).exec_loop()
-        if res == 2:
-             self.RealmChanged()
-        elif res == 1:
+        if res == 1:
              self.CharClassChanged('')
         self.nocalc = 0
         self.calculate()
