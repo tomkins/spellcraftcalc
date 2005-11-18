@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'ScWindow.ui'
 #
-# Created: Fri Nov 18 00:19:35 2005
+# Created: Fri Nov 18 00:43:53 2005
 #      by: The PyQt User Interface Compiler (pyuic) 3.15
 #
 # WARNING! All changes made in this file will be lost!
@@ -644,14 +644,14 @@ class B_SC(QMainWindow):
         self.ItemCost.setGeometry(QRect(482,196,70,14))
         self.ItemCost.setAlignment(QLabel.AlignVCenter | QLabel.AlignRight)
 
-        self.ClearItem = QPushButton(self.frame3,"ClearItem")
-        self.ClearItem.setGeometry(QRect(683,209,79,26))
-
         self.LoadItem = QPushButton(self.frame3,"LoadItem")
         self.LoadItem.setGeometry(QRect(683,157,79,26))
 
         self.SaveItem = QPushButton(self.frame3,"SaveItem")
-        self.SaveItem.setGeometry(QRect(596,157,79,26))
+        self.SaveItem.setGeometry(QRect(683,189,79,26))
+
+        self.ClearItem = QPushButton(self.frame3,"ClearItem")
+        self.ClearItem.setGeometry(QRect(683,233,79,26))
 
         self.PieceTab = MultiTabBar(self.centralWidget(),"PieceTab")
         self.PieceTab.setGeometry(QRect(3,190,776,46))
@@ -778,9 +778,9 @@ class B_SC(QMainWindow):
         self.setTabOrder(self.Type_10,self.Amount_Edit_10)
         self.setTabOrder(self.Amount_Edit_10,self.Effect_10)
         self.setTabOrder(self.Effect_10,self.ItemName)
-        self.setTabOrder(self.ItemName,self.SaveItem)
-        self.setTabOrder(self.SaveItem,self.LoadItem)
-        self.setTabOrder(self.LoadItem,self.ClearItem)
+        self.setTabOrder(self.ItemName,self.LoadItem)
+        self.setTabOrder(self.LoadItem,self.SaveItem)
+        self.setTabOrder(self.SaveItem,self.ClearItem)
         self.setTabOrder(self.ClearItem,self.SkillsList)
         self.setTabOrder(self.SkillsList,self.OtherBonusList)
 
@@ -922,9 +922,9 @@ class B_SC(QMainWindow):
         self.ItemOvercharge.setText(self.__tr("None"))
         self.ItemCostLabel.setText(self.__tr("Item Cost:"))
         self.ItemCost.setText(QString.null)
-        self.ClearItem.setText(self.__tr("Clear Item"))
         self.LoadItem.setText(self.__tr("Load Item"))
         self.SaveItem.setText(self.__tr("Save Item"))
+        self.ClearItem.setText(self.__tr("Clear Item"))
 
 
     def AmountChanged(self,a0):

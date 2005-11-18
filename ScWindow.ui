@@ -3033,22 +3033,6 @@ Python:from SearchingCombo import *
         </widget>
         <widget class="QPushButton">
             <property name="name">
-                <cstring>ClearItem</cstring>
-            </property>
-            <property name="geometry">
-                <rect>
-                    <x>683</x>
-                    <y>209</y>
-                    <width>79</width>
-                    <height>26</height>
-                </rect>
-            </property>
-            <property name="text">
-                <string>Clear Item</string>
-            </property>
-        </widget>
-        <widget class="QPushButton">
-            <property name="name">
                 <cstring>LoadItem</cstring>
             </property>
             <property name="geometry">
@@ -3069,14 +3053,30 @@ Python:from SearchingCombo import *
             </property>
             <property name="geometry">
                 <rect>
-                    <x>596</x>
-                    <y>157</y>
+                    <x>683</x>
+                    <y>189</y>
                     <width>79</width>
                     <height>26</height>
                 </rect>
             </property>
             <property name="text">
                 <string>Save Item</string>
+            </property>
+        </widget>
+        <widget class="QPushButton">
+            <property name="name">
+                <cstring>ClearItem</cstring>
+            </property>
+            <property name="geometry">
+                <rect>
+                    <x>683</x>
+                    <y>233</y>
+                    <width>79</width>
+                    <height>26</height>
+                </rect>
+            </property>
+            <property name="text">
+                <string>Clear Item</string>
             </property>
         </widget>
     </widget>
@@ -3514,8 +3514,8 @@ Python:from SearchingCombo import *
     <tabstop>Amount_Edit_10</tabstop>
     <tabstop>Effect_10</tabstop>
     <tabstop>ItemName</tabstop>
-    <tabstop>SaveItem</tabstop>
     <tabstop>LoadItem</tabstop>
+    <tabstop>SaveItem</tabstop>
     <tabstop>ClearItem</tabstop>
     <tabstop>SkillsList</tabstop>
     <tabstop>OtherBonusList</tabstop>
