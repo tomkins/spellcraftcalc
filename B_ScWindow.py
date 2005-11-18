@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'ScWindow.ui'
 #
-# Created: Thu Nov 17 18:20:57 2005
+# Created: Fri Nov 18 00:19:35 2005
 #      by: The PyQt User Interface Compiler (pyuic) 3.15
 #
 # WARNING! All changes made in this file will be lost!
@@ -400,8 +400,8 @@ class B_SC(QMainWindow):
         self.LabelGemAmount = QLabel(self.frame3,"LabelGemAmount")
         self.LabelGemAmount.setGeometry(QRect(181,33,44,14))
 
-        self.Effect_Label = QLabel(self.frame3,"Effect_Label")
-        self.Effect_Label.setGeometry(QRect(237,33,142,14))
+        self.LabelGemEffect = QLabel(self.frame3,"LabelGemEffect")
+        self.LabelGemEffect.setGeometry(QRect(237,33,142,14))
 
         self.LabelGemQuality = QLabel(self.frame3,"LabelGemQuality")
         self.LabelGemQuality.setGeometry(QRect(391,33,44,14))
@@ -884,7 +884,7 @@ class B_SC(QMainWindow):
         self.CraftButton.setText(self.__tr("Craft..."))
         self.LabelGemType.setText(self.__tr("Type"))
         self.LabelGemAmount.setText(self.__tr("Amount"))
-        self.Effect_Label.setText(self.__tr("Effect"))
+        self.LabelGemEffect.setText(self.__tr("Effect"))
         self.LabelGemQuality.setText(self.__tr("Quality"))
         self.LabelGemPoints.setText(self.__tr("Points"))
         self.LabelGemCost.setText(self.__tr("Cost"))
