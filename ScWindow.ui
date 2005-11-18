@@ -1877,7 +1877,7 @@ Python:from SearchingCombo import *
         </widget>
         <widget class="QLabel">
             <property name="name">
-                <cstring>Effect_Label</cstring>
+                <cstring>LabelGemEffect</cstring>
             </property>
             <property name="geometry">
                 <rect>
