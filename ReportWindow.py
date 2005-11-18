@@ -412,7 +412,7 @@ class ReportWindow(B_ReportWindow):
                     'Error writing to file: ' + filename, 'OK')
 
     def saveToText(self):
-        filename = QFileDialog.getSaveFileName(None, "Text (*.txt)")
+        filename = QFileDialog.getSaveFileName('', "Text (*.txt)")
         if filename is not None and str(filename) != '':
             try:
                 if re.compile('\.txt$').search(str(filename)) is None:
