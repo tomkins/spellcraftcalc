@@ -1,4 +1,8 @@
 Updated 11/16/05 - Version 1.43.0011 (dev)
+Fixed the 'delve', when clicking on stats, to pull up stat caps,
+and when clicking on this toon's casting stat, also pulls up all 
+of the 'Acuity' stat and cap bonuses, and when clicking any power
+bonus pull up all related power, % power pool and power cap bonuses.
 Fixed loading a template, such that the chest piece doesn't become
 a crafted item upon loading a saved template with a drop chest.
 Fix materials window when clicking a gem name, so the multiplier works.
