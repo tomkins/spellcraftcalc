@@ -109,10 +109,11 @@ class ScWindow(B_SC):
         self.LabelDupError.setPaletteForegroundColor(QColor(255, 0, 0))
 
         self.Realm.insertStrList(list(Realms))
-        self.Realm.setCurrentItem(0)
-
         self.QualDrop.insertStrList(list(QualityValues))
-        self.QualDrop.setCurrentItem(0)
+        self.Quality_1.insertStrList(list(QualityValues))
+        self.Quality_2.insertStrList(list(QualityValues))
+        self.Quality_3.insertStrList(list(QualityValues))
+        self.Quality_4.insertStrList(list(QualityValues))
 
         self.updateGeometry()
         self.centralWidget().setFixedSize(
@@ -877,8 +878,6 @@ class ScWindow(B_SC):
                 amountedit.clear()
         if self.PlayerMade.isChecked():
             qualcombo = getattr(self, 'Quality_%d' % num)
-            qualcombo.clear()
-            qualcombo.insertStrList(list(QualityValues))
             qualcombo.setCurrentItem(len(QualityValues)-2)
 
     def RaceChanged(self, a0):
