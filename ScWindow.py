@@ -1326,31 +1326,6 @@ class ScWindow(B_SC):
         if filename is not None and str(filename) != '':
             self.reportFile = str(filename)
 
-    def SkillClicked(self,a0):
-        if a0 is None: return
-        skilltext = str(a0.text())
-        num, effectstr = string.split(skilltext, ' ', 1)
-        locs = []
-        for key, item in self.itemattrlist.items():
-            activestate = item.getAttr('ActiveState')
-            if activestate == 'drop':
-                toprng = 10
-            else:
-                toprng = 4
-            for slot in range(0, toprng):
-                effect = item.getSlotAttr(activestate, slot, 'Effect')
-                amount = item.getSlotAttr(activestate, slot, 'Amount')
-                if effectstr == effect:
-                    locs.append([key, amount])
-                elif effect in AllBonusList[self.realm][self.charclass].keys():
-                    if effectstr in AllBonusList[self.realm][self.charclass][effect]:
-                        locs.append([key, amount])
-
-        DW = DisplayWindow.DisplayWindow(self, '', 1)
-        DW.setCaption('Slots With %s' % effectstr)
-        DW.loadLocations(locs)
-        DW.exec_loop()
-
     def aboutBox(self):
         QMessageBox.information(None, "Kort's Spellcrafting Calculator", 
               "Verison " + ScVersion + "\n\n" 
@@ -1363,7 +1338,7 @@ class ScWindow(B_SC):
         CB.exec_loop()
         self.DaocPath = str(CB.DaocPath.text())
 
-    def labelClicked(self, find):
+    def DelveItemsDialog(self, find):
         locs = []
         for key, item in self.itemattrlist.items():
             activestate = item.getAttr('ActiveState')
@@ -1382,24 +1357,25 @@ class ScWindow(B_SC):
                     elif effect == 'Acuity':
                        if not find in AllBonusList[self.realm][self.charclass][effect]:
                            continue
+                    elif (type == 'Skill' or type == 'Focus') and effect[0:4] == 'All ' \
+                            and effect in AllBonusList[self.realm][self.charclass].keys():
+                        if not find in AllBonusList[self.realm][self.charclass][effect]:
+                            continue
                     else:
                         continue
                 amount = str(item.getSlotAttr(activestate, slot, 'Amount'))
-                if effect != find and type == 'Cap Increase':
-                    locs.append([key, str(amount) + ' ' + effect + ' Cap'])
-                elif type == 'Cap Increase':
-                    locs.append([key, str(amount) + ' Cap'])
-                elif effect != find: 
-                    locs.append([key, str(amount) + ' ' + effect])
-                else:
-                    locs.append([key, amount])
-                #elif effect in AllBonusList[self.realm][self.charclass].keys():
-                #    if effect in AllBonusList[self.realm][self.charclass][effect]:
-                #        locs.append([key, amount])
+                if type == 'Focus':
+                    amount += ' Levels Focus'
+                if effect != find: 
+                    amount += ' ' + effect
+                if type == 'Cap Increase':
+                    amount += ' Cap'
+                locs.append([key, amount])
         DW = DisplayWindow.DisplayWindow(self, modal = 1)
         DW.setCaption('Slots With %s' % find)
         DW.loadLocations(locs)
         DW.exec_loop()
+
 
     def gemClicked(self, item, slot):
         RW = ReportWindow.ReportWindow(self, '', 1)
@@ -1412,7 +1388,7 @@ class ScWindow(B_SC):
         child = self.childAt(e.pos(), False)
         if child is None: return
         if not isinstance(child, QLabel): return
-        shortname = child.name()
+        shortname = str(child.name())
         nameidx = 1
         while nameidx < len(shortname):
             if shortname[nameidx] < 'a' or shortname[nameidx] > 'z':
@@ -1425,11 +1401,20 @@ class ScWindow(B_SC):
             self.gemClicked(self.currentTabLabel, int(slot))
             return
         if shortname in ['', 'Label', 'Total', 'Item']: return
-        self.labelClicked(shortname)
+        if shortname == 'Focus':
+           if not ' ' in str(child.text()): return
+           amount, shortname = string.split(str(child.text()), ' ', 1)
+        self.DelveItemsDialog(shortname)
 
     def resizeEvent(self, e):
         sz = e.size()
         QMainWindow.resizeEvent(self, e)
+
+    def SkillClicked(self,a0):
+        if a0 is None: return
+        if not ' ' in str(a0.text()): return
+        amount, effect = string.split(str(a0.text()), ' ', 1)
+        self.DelveItemsDialog(effect)
 
     def swapWith(self, part):
         cur = self.itemattrlist.get(self.currentTabLabel, Item(self.currentTabLabel))
