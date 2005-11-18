@@ -23,7 +23,9 @@
 # TODO:
 #   * We draw the horizontal-bottom continuation bar for > 1 rows, but...
 #     really should use the style itself to determine it's look (we use the
-#     style''s color preference, but the width is wrong in the CDE skin.)
+#     style''s color preference, but the width is wrong in the CDE skin - a
+#     thin 1 pixel style, and in the Aqua skins - uses gradient tone.)
+#
 #   * Won't consider tab scrolling (that's the point of multiple bars)
 
 import sys
@@ -105,8 +107,6 @@ class MultiTabBar(QTabBar):
             return
         if isinstance(tab, int):
             tab = self.tab(tab)
-        #if tab == self.currentTab():
-        #    return;
         id = tab.identifier()
         if id in self.tabrows[self.currows[-1]]:
             QTabBar.setCurrentTab(self, tab)
@@ -120,6 +120,25 @@ class MultiTabBar(QTabBar):
                     self.repaint()
                     QTabBar.setCurrentTab(self, tab)
                     break
+
+    def keyPressEvent(self, e):
+        if e.key() == Qt.Key_Up:
+            if len(self.currows) <= 1: return
+            newrow = self.tabrows[self.currows[-2]]
+        elif e.key() == Qt.Key_Down:
+            if len(self.currows) <= 1: return
+            newrow = self.tabrows[self.currows[0]]
+        else:
+            QTabBar.keyPressEvent(self, e)
+            return
+        fr = self.tab(self.currentTab()).rect()
+        fr.setLeft(fr.left() + fr.width() / 2)
+        fr.setTop(0)
+        for id in newrow:
+            tab = self.tab(id)
+            if tab.rect().intersects(fr):
+                self.setCurrentTab(tab)
+                return
 
     def paintEvent(self, e):
         if e.rect().isNull():
