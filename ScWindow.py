@@ -1412,15 +1412,18 @@ class ScWindow(B_SC):
         child = self.childAt(e.pos(), False)
         if child is None: return
         if not isinstance(child, QLabel): return
-        if len(child.name()) == 6 and child.name()[0:5] == "Name_":
-            self.gemClicked(self.currentTabLabel, int(child.name()[5:]))
-            return
-        nameidx = 1
         shortname = child.name()
+        nameidx = 1
         while nameidx < len(shortname):
             if shortname[nameidx] < 'a' or shortname[nameidx] > 'z':
                 shortname = shortname[0:nameidx]
             nameidx += 1
+        if shortname in ['Gem', 'Points', 'Cost', 'Name']:
+            slot = child.name()[-2:]
+            if str(slot[0:1]) == '_':
+                slot = slot[1:]
+            self.gemClicked(self.currentTabLabel, int(slot))
+            return
         if shortname in ['', 'Label', 'Total', 'Item']: return
         self.labelClicked(shortname)
 
