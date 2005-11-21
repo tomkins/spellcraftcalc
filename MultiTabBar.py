@@ -117,8 +117,8 @@ class MultiTabBar(QTabBar):
                     self.currows[row] = self.currows[-1]
                     self.currows[-1] = saverow
                     self.layoutTabs()
-                    self.repaint()
                     QTabBar.setCurrentTab(self, tab)
+                    self.repaint()
                     break
 
     def keyPressEvent(self, e):
