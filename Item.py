@@ -200,10 +200,10 @@ class Item:
                         for attr in slot.childNodes:
                             if attr.nodeType == Node.TEXT_NODE: continue
                             attrval = XMLHelper.getText(attr.childNodes)
-                            if len(attrval) > 6 and attrval[-6:] == ' Focus':
-                                attrval = attrval[:-6]
                             if FixEffectsTable.has_key(attrval):
                                 attrval = FixEffectsTable[attrval]
+                            if len(attrval) > 6 and attrval[-6:] == ' Focus':
+                                attrval = attrval[:-6]
                             self.slots[type][slotnum][attr.tagName] = attrval
 
     def importLela(self, f):
