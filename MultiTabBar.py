@@ -23,10 +23,9 @@
 # TODO:
 #   * We draw the horizontal-bottom continuation bar for > 1 rows, but...
 #     really should use the style itself to determine it's look (we use the
-#     style''s color preference, but the width is wrong in the CDE skin - a
-#     thin 1 pixel style, and in the Aqua skins - uses gradient tone.)
-#
-#   * Won't consider tab scrolling (that's the point of multiple bars)
+#     style''s color preference, but in Mac skins should use gradient tone.)
+
+# [Won't consider tab scrolling - that's the point of multiple bars]
 
 import sys
 from qt import *
@@ -47,8 +46,7 @@ def noamptext(text):
 class MultiTabBar(QTabBar):
     def __init__(self, parent, name):
         QTabBar.__init__(self, parent, name)
-        if QApplication.style().name()[0:9] == "Macintosh (Aqua)" and \
-           sys.platform == 'darwin':
+        if QApplication.style().name()[0:9] == "Macintosh":
             self.rowoverlap = 3
             self.cropheight = -1
         else:
@@ -117,8 +115,12 @@ class MultiTabBar(QTabBar):
                     self.currows[row] = self.currows[-1]
                     self.currows[-1] = saverow
                     self.layoutTabs()
-                    QTabBar.setCurrentTab(self, tab)
-                    self.repaint()
+                    if QApplication.style().name()[0:9] == "Macintosh":
+                        QTabBar.setCurrentTab(self, tab)
+                        self.repaint()
+                    else:
+                        self.repaint()
+                        QTabBar.setCurrentTab(self, tab)
                     break
 
     def keyPressEvent(self, e):
@@ -172,14 +174,14 @@ class MultiTabBar(QTabBar):
                     self.paint(painter, t, 0);
         if ct.rect().intersects(cliprect):
             self.paint(painter, ct, 1);
-        rowrect = QRect(lt.rect().right() + 1, lt.rect().bottom() - 1, 
-                        self.rect().width() - lt.rect().right() - 2, 2)
+        rowrect = QRect(lt.rect().right() + 1, lt.rect().bottom(), 
+                        self.rect().width() - lt.rect().right() - 1, 1)
         if rowrect.intersects(cliprect):
-            rowrect.setHeight(1)
+            if not QApplication.style().name() == "CDE":
+                painter.fillRect(rowrect, QBrush(self.colorGroup().midlight()));
+                rowrect.moveTop(rowrect.top() - 1)
+                rowrect.setRight(rowrect.right() - 1)
             painter.fillRect(rowrect, QBrush(self.colorGroup().light()));
-            rowrect.moveTop(rowrect.top() + 1)
-            rowrect.setRight(rowrect.right() + 1)
-            painter.fillRect(rowrect, QBrush(self.colorGroup().midlight()));
 
     def sizeHint(self):
         size = QTabBar.sizeHint(self)
