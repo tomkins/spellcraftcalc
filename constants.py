@@ -1726,7 +1726,7 @@ FixEffectsTable = {
     'Arboreal Focus' : 'Arboreal Path',
     'Body Focus' :     'Body Magic', 
     'Cold Focus' :     'Cold Magic', 
-    'Earth Focus' :    'Earth Magic'',
+    'Earth Focus' :    'Earth Magic',
     'Fire Focus' :     'Fire Magic',
     'Matter Focus' :   'Matter Magic',
     'Mind Focus' :     'Mind Magic',
