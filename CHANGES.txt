@@ -1,4 +1,6 @@
 Updated 11/16/05 - Version 1.43.0011 (dev)
+Cloth armor (any item with the same DPSAF as it's level) will be
+reduced one level for computation of available imbue points.
 Fixed the materials 'save as text' feature.
 Fixed the 'delve', when clicking on stats, to pull up stat caps,
 and when clicking on this toon's casting stat; also pulls up all 

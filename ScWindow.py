@@ -797,14 +797,17 @@ class ScWindow(B_SC):
             return int(cost + price)
 
     def getItemImbue(self, item):
-        itemlevel = item.getAttr('Level')
+        itemlevel = int(item.getAttr('Level'))
+        if (item.getAttr('Level') == item.getAttr('AFDPS')) \
+                and (itemlevel % 2 == 1) and (itemlevel != 51):
+            itemlevel = itemlevel - 1
         if item.getAttr('ItemQuality') == '':
             item.loadAttr('ItemQuality', '94')
         if itemlevel == '':
             itemimbue = 0
         else:
-            itemimbue = ImbuePts[int(itemlevel)-1]\
-                    [int(item.getAttr('ItemQuality'))-94]
+            itemimbue = ImbuePts[itemlevel - 1]\
+                                [int(item.getAttr('ItemQuality'))-94]
 
         return itemimbue
             
