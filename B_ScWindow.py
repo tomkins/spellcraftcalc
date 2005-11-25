@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'ScWindow.ui'
 #
-# Created: Fri Nov 25 03:00:06 2005
+# Created: Fri Nov 25 04:33:47 2005
 #      by: The PyQt User Interface Compiler (pyuic) 3.15
 #
 # WARNING! All changes made in this file will be lost!
@@ -71,7 +71,7 @@ class B_SC(QMainWindow):
         self.CapDistance.setGeometry(QRect(11,30,109,17))
 
         self.GroupBox1 = QGroupBox(self.centralWidget(),"GroupBox1")
-        self.GroupBox1.setGeometry(QRect(5,3,85,182))
+        self.GroupBox1.setGeometry(QRect(5,3,94,182))
 
         self.StrengthLabel = QLabel(self.GroupBox1,"StrengthLabel")
         self.StrengthLabel.setGeometry(QRect(6,16,28,16))
@@ -81,7 +81,7 @@ class B_SC(QMainWindow):
         self.Strength.setAlignment(QLabel.AlignVCenter | QLabel.AlignRight)
 
         self.StrengthCap = QLabel(self.GroupBox1,"StrengthCap")
-        self.StrengthCap.setGeometry(QRect(57,16,20,16))
+        self.StrengthCap.setGeometry(QRect(57,16,29,16))
         self.StrengthCap.setAlignment(QLabel.AlignVCenter | QLabel.AlignRight)
 
         self.ConstitutionLabel = QLabel(self.GroupBox1,"ConstitutionLabel")
@@ -92,7 +92,7 @@ class B_SC(QMainWindow):
         self.Constitution.setAlignment(QLabel.AlignVCenter | QLabel.AlignRight)
 
         self.ConstitutionCap = QLabel(self.GroupBox1,"ConstitutionCap")
-        self.ConstitutionCap.setGeometry(QRect(57,32,20,16))
+        self.ConstitutionCap.setGeometry(QRect(57,32,29,16))
         self.ConstitutionCap.setAlignment(QLabel.AlignVCenter | QLabel.AlignRight)
 
         self.DexterityLabel = QLabel(self.GroupBox1,"DexterityLabel")
@@ -103,7 +103,7 @@ class B_SC(QMainWindow):
         self.Dexterity.setAlignment(QLabel.AlignVCenter | QLabel.AlignRight)
 
         self.DexterityCap = QLabel(self.GroupBox1,"DexterityCap")
-        self.DexterityCap.setGeometry(QRect(57,48,20,16))
+        self.DexterityCap.setGeometry(QRect(57,48,29,16))
         self.DexterityCap.setAlignment(QLabel.AlignVCenter | QLabel.AlignRight)
 
         self.QuicknessLabel = QLabel(self.GroupBox1,"QuicknessLabel")
@@ -114,7 +114,7 @@ class B_SC(QMainWindow):
         self.Quickness.setAlignment(QLabel.AlignVCenter | QLabel.AlignRight)
 
         self.QuicknessCap = QLabel(self.GroupBox1,"QuicknessCap")
-        self.QuicknessCap.setGeometry(QRect(57,64,20,16))
+        self.QuicknessCap.setGeometry(QRect(57,64,29,16))
         self.QuicknessCap.setAlignment(QLabel.AlignVCenter | QLabel.AlignRight)
 
         self.IntelligenceLabel = QLabel(self.GroupBox1,"IntelligenceLabel")
@@ -125,7 +125,7 @@ class B_SC(QMainWindow):
         self.Intelligence.setAlignment(QLabel.AlignVCenter | QLabel.AlignRight)
 
         self.IntelligenceCap = QLabel(self.GroupBox1,"IntelligenceCap")
-        self.IntelligenceCap.setGeometry(QRect(57,80,20,16))
+        self.IntelligenceCap.setGeometry(QRect(57,80,29,16))
         self.IntelligenceCap.setAlignment(QLabel.AlignVCenter | QLabel.AlignRight)
 
         self.PietyLabel = QLabel(self.GroupBox1,"PietyLabel")
@@ -136,7 +136,7 @@ class B_SC(QMainWindow):
         self.Piety.setAlignment(QLabel.AlignVCenter | QLabel.AlignRight)
 
         self.PietyCap = QLabel(self.GroupBox1,"PietyCap")
-        self.PietyCap.setGeometry(QRect(57,96,20,16))
+        self.PietyCap.setGeometry(QRect(57,96,29,16))
         self.PietyCap.setAlignment(QLabel.AlignVCenter | QLabel.AlignRight)
 
         self.CharismaLabel = QLabel(self.GroupBox1,"CharismaLabel")
@@ -147,7 +147,7 @@ class B_SC(QMainWindow):
         self.Charisma.setAlignment(QLabel.AlignVCenter | QLabel.AlignRight)
 
         self.CharismaCap = QLabel(self.GroupBox1,"CharismaCap")
-        self.CharismaCap.setGeometry(QRect(57,112,20,16))
+        self.CharismaCap.setGeometry(QRect(57,112,29,16))
         self.CharismaCap.setAlignment(QLabel.AlignVCenter | QLabel.AlignRight)
 
         self.EmpathyLabel = QLabel(self.GroupBox1,"EmpathyLabel")
@@ -158,7 +158,7 @@ class B_SC(QMainWindow):
         self.Empathy.setAlignment(QLabel.AlignVCenter | QLabel.AlignRight)
 
         self.EmpathyCap = QLabel(self.GroupBox1,"EmpathyCap")
-        self.EmpathyCap.setGeometry(QRect(57,128,20,16))
+        self.EmpathyCap.setGeometry(QRect(57,128,29,16))
         self.EmpathyCap.setAlignment(QLabel.AlignVCenter | QLabel.AlignRight)
 
         self.PowerLabel = QLabel(self.GroupBox1,"PowerLabel")
@@ -169,22 +169,22 @@ class B_SC(QMainWindow):
         self.Power.setAlignment(QLabel.AlignVCenter | QLabel.AlignRight)
 
         self.PowerCap = QLabel(self.GroupBox1,"PowerCap")
-        self.PowerCap.setGeometry(QRect(57,144,20,16))
+        self.PowerCap.setGeometry(QRect(57,144,29,16))
         self.PowerCap.setAlignment(QLabel.AlignVCenter | QLabel.AlignRight)
 
         self.HitsLabel = QLabel(self.GroupBox1,"HitsLabel")
-        self.HitsLabel.setGeometry(QRect(6,160,20,16))
+        self.HitsLabel.setGeometry(QRect(6,160,28,16))
 
         self.Hits = QLabel(self.GroupBox1,"Hits")
-        self.Hits.setGeometry(QRect(29,160,20,16))
+        self.Hits.setGeometry(QRect(35,160,20,16))
         self.Hits.setAlignment(QLabel.AlignVCenter | QLabel.AlignRight)
 
         self.HitsCap = QLabel(self.GroupBox1,"HitsCap")
-        self.HitsCap.setGeometry(QRect(49,160,28,16))
+        self.HitsCap.setGeometry(QRect(57,160,29,16))
         self.HitsCap.setAlignment(QLabel.AlignVCenter | QLabel.AlignRight)
 
         self.GroupBox2 = QGroupBox(self.centralWidget(),"GroupBox2")
-        self.GroupBox2.setGeometry(QRect(91,3,90,182))
+        self.GroupBox2.setGeometry(QRect(105,3,90,182))
 
         self.BodyLabel = QLabel(self.GroupBox2,"BodyLabel")
         self.BodyLabel.setGeometry(QRect(6,16,36,16))
@@ -285,23 +285,14 @@ class B_SC(QMainWindow):
         self.SlashRR.setGeometry(QRect(66,160,17,16))
         self.SlashRR.setAlignment(QLabel.AlignVCenter | QLabel.AlignRight)
 
-        self.GroupBox4 = QGroupBox(self.centralWidget(),"GroupBox4")
-        self.GroupBox4.setGeometry(QRect(182,3,124,136))
+        self.GroupSkillsList = QGroupBox(self.centralWidget(),"GroupSkillsList")
+        self.GroupSkillsList.setGeometry(QRect(201,3,160,136))
 
-        self.Focus_1 = QLabel(self.GroupBox4,"Focus_1")
-        self.Focus_1.setGeometry(QRect(6,18,112,16))
-
-        self.Focus_2 = QLabel(self.GroupBox4,"Focus_2")
-        self.Focus_2.setGeometry(QRect(6,36,112,16))
-
-        self.Focus_3 = QLabel(self.GroupBox4,"Focus_3")
-        self.Focus_3.setGeometry(QRect(6,54,112,16))
-
-        self.Focus_4 = QLabel(self.GroupBox4,"Focus_4")
-        self.Focus_4.setGeometry(QRect(6,72,112,16))
+        self.SkillsList = QListBox(self.GroupSkillsList,"SkillsList")
+        self.SkillsList.setGeometry(QRect(5,15,150,116))
 
         self.GroupBox5 = QGroupBox(self.centralWidget(),"GroupBox5")
-        self.GroupBox5.setGeometry(QRect(182,134,124,51))
+        self.GroupBox5.setGeometry(QRect(201,134,124,51))
 
         self.TotalCostLabel = QLabel(self.GroupBox5,"TotalCostLabel")
         self.TotalCostLabel.setGeometry(QRect(6,13,30,16))
@@ -317,26 +308,20 @@ class B_SC(QMainWindow):
         self.TotalPrice.setGeometry(QRect(36,28,82,16))
         self.TotalPrice.setAlignment(QLabel.AlignVCenter | QLabel.AlignRight)
 
-        self.GroupSkillsList = QGroupBox(self.centralWidget(),"GroupSkillsList")
-        self.GroupSkillsList.setGeometry(QRect(307,3,140,136))
-
-        self.SkillsList = QListBox(self.GroupSkillsList,"SkillsList")
-        self.SkillsList.setGeometry(QRect(5,15,130,116))
-
         self.GroupOtherBonusList = QGroupBox(self.centralWidget(),"GroupOtherBonusList")
-        self.GroupOtherBonusList.setGeometry(QRect(448,3,164,136))
+        self.GroupOtherBonusList.setGeometry(QRect(367,3,240,136))
 
         self.OtherBonusList = QListBox(self.GroupOtherBonusList,"OtherBonusList")
-        self.OtherBonusList.setGeometry(QRect(5,15,154,116))
+        self.OtherBonusList.setGeometry(QRect(5,15,230,116))
 
         self.LabelFileName = QLabel(self.centralWidget(),"LabelFileName")
-        self.LabelFileName.setGeometry(QRect(315,142,285,14))
+        self.LabelFileName.setGeometry(QRect(362,142,240,14))
 
         self.LabelOcError = QLabel(self.centralWidget(),"LabelOcError")
-        self.LabelOcError.setGeometry(QRect(315,157,285,14))
+        self.LabelOcError.setGeometry(QRect(362,157,240,14))
 
         self.LabelDupError = QLabel(self.centralWidget(),"LabelDupError")
-        self.LabelDupError.setGeometry(QRect(315,173,285,14))
+        self.LabelDupError.setGeometry(QRect(362,173,240,14))
 
         self.frame3 = QGroupBox(self.centralWidget(),"frame3")
         self.frame3.setGeometry(QRect(3,235,776,265))
@@ -863,17 +848,12 @@ class B_SC(QMainWindow):
         self.SlashLabel.setText(self.__tr("Slash:"))
         self.Slash.setText(self.__tr("0"))
         self.SlashRR.setText(self.__tr("-"))
-        self.GroupBox4.setTitle(self.__tr("Focus"))
-        self.Focus_1.setText(QString.null)
-        self.Focus_2.setText(QString.null)
-        self.Focus_3.setText(QString.null)
-        self.Focus_4.setText(QString.null)
+        self.GroupSkillsList.setTitle(self.__tr("Skills"))
         self.GroupBox5.setTitle(self.__tr("Totals"))
         self.TotalCostLabel.setText(self.__tr("Cost:"))
         self.TotalCost.setText(self.__tr("0"))
         self.TotalPriceLabel.setText(self.__tr("Price:"))
         self.TotalPrice.setText(self.__tr("0"))
-        self.GroupSkillsList.setTitle(self.__tr("Skills"))
         self.GroupOtherBonusList.setTitle(self.__tr("Other Bonuses"))
         self.LabelFileName.setText(QString.null)
         self.LabelOcError.setText(QString.null)
