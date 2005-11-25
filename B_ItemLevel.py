@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'ItemLevel.ui'
 #
-# Created: Fri Nov 25 02:51:32 2005
+# Created: Fri Nov 25 03:00:07 2005
 #      by: The PyQt User Interface Compiler (pyuic) 3.15
 #
 # WARNING! All changes made in this file will be lost!
