@@ -1,5 +1,9 @@
 <!DOCTYPE UI><UI>
 <class>B_ItemLevel</class>
+<comment>
+Python:#Import the Custom Widgets
+Python:from SearchingCombo import *
+</comment>
 <widget>
     <class>QDialog</class>
     <property stdset="1">
@@ -11,7 +15,7 @@
         <rect>
             <x>0</x>
             <y>0</y>
-            <width>235</width>
+            <width>250</width>
             <height>158</height>
         </rect>
     </property>
@@ -28,8 +32,8 @@
         <property stdset="1">
             <name>geometry</name>
             <rect>
-                <x>20</x>
-                <y>9</y>
+                <x>6</x>
+                <y>6</y>
                 <width>117</width>
                 <height>111</height>
             </rect>
@@ -51,7 +55,7 @@
             <property stdset="1">
                 <name>geometry</name>
                 <rect>
-                    <x>3</x>
+                    <x>5</x>
                     <y>2</y>
                     <width>85</width>
                     <height>20</height>
@@ -75,7 +79,7 @@
             <property stdset="1">
                 <name>geometry</name>
                 <rect>
-                    <x>3</x>
+                    <x>5</x>
                     <y>23</y>
                     <width>85</width>
                     <height>20</height>
@@ -115,7 +119,7 @@
             <property stdset="1">
                 <name>geometry</name>
                 <rect>
-                    <x>3</x>
+                    <x>5</x>
                     <y>66</y>
                     <width>85</width>
                     <height>20</height>
@@ -135,7 +139,7 @@
             <property stdset="1">
                 <name>geometry</name>
                 <rect>
-                    <x>3</x>
+                    <x>5</x>
                     <y>87</y>
                     <width>108</width>
                     <height>20</height>
@@ -151,20 +155,88 @@
         <class>QLabel</class>
         <property stdset="1">
             <name>name</name>
-            <cstring>TextLabel1</cstring>
+            <cstring>LevelLabel</cstring>
         </property>
         <property stdset="1">
             <name>geometry</name>
             <rect>
-                <x>151</x>
-                <y>14</y>
-                <width>53</width>
-                <height>13</height>
+                <x>130</x>
+                <y>10</y>
+                <width>45</width>
+                <height>16</height>
             </rect>
         </property>
         <property stdset="1">
             <name>text</name>
-            <string>AF or DPS</string>
+            <string>Level:</string>
+        </property>
+    </widget>
+    <widget>
+        <class>QLineEdit</class>
+        <property stdset="1">
+            <name>name</name>
+            <cstring>Level</cstring>
+        </property>
+        <property stdset="1">
+            <name>geometry</name>
+            <rect>
+                <x>185</x>
+                <y>7</y>
+                <width>60</width>
+                <height>22</height>
+            </rect>
+        </property>
+    </widget>
+    <widget>
+        <class>QLabel</class>
+        <property stdset="1">
+            <name>name</name>
+            <cstring>AFDPSLabel</cstring>
+        </property>
+        <property stdset="1">
+            <name>geometry</name>
+            <rect>
+                <x>130</x>
+                <y>53</y>
+                <width>45</width>
+                <height>16</height>
+            </rect>
+        </property>
+        <property stdset="1">
+            <name>text</name>
+            <string>AF/DPS:</string>
+        </property>
+    </widget>
+    <widget>
+        <class>QLineEdit</class>
+        <property stdset="1">
+            <name>name</name>
+            <cstring>AFDPS</cstring>
+        </property>
+        <property stdset="1">
+            <name>geometry</name>
+            <rect>
+                <x>185</x>
+                <y>50</y>
+                <width>60</width>
+                <height>22</height>
+            </rect>
+        </property>
+    </widget>
+    <widget>
+        <class>SearchingCombo</class>
+        <property stdset="1">
+            <name>name</name>
+            <cstring>ShieldType</cstring>
+        </property>
+        <property stdset="1">
+            <name>geometry</name>
+            <rect>
+                <x>135</x>
+                <y>93</y>
+                <width>110</width>
+                <height>22</height>
+            </rect>
         </property>
     </widget>
     <widget>
@@ -176,9 +248,9 @@
         <property stdset="1">
             <name>geometry</name>
             <rect>
-                <x>30</x>
+                <x>11</x>
                 <y>124</y>
-                <width>81</width>
+                <width>58</width>
                 <height>26</height>
             </rect>
         </property>
@@ -196,9 +268,9 @@
         <property stdset="1">
             <name>geometry</name>
             <rect>
-                <x>130</x>
+                <x>187</x>
                 <y>124</y>
-                <width>79</width>
+                <width>58</width>
                 <height>26</height>
             </rect>
         </property>
@@ -207,40 +279,14 @@
             <string>Cancel</string>
         </property>
     </widget>
-    <widget>
-        <class>QComboBox</class>
-        <property stdset="1">
-            <name>name</name>
-            <cstring>ShieldType</cstring>
-        </property>
-        <property stdset="1">
-            <name>geometry</name>
-            <rect>
-                <x>105</x>
-                <y>61</y>
-                <width>113</width>
-                <height>22</height>
-            </rect>
-        </property>
-    </widget>
-    <widget>
-        <class>QLineEdit</class>
-        <property stdset="1">
-            <name>name</name>
-            <cstring>AFDPS</cstring>
-        </property>
-        <property stdset="1">
-            <name>geometry</name>
-            <rect>
-                <x>140</x>
-                <y>31</y>
-                <width>74</width>
-                <height>22</height>
-            </rect>
-        </property>
-    </widget>
 </widget>
 <connections>
+    <connection>
+        <sender>Armor</sender>
+        <signal>clicked()</signal>
+        <receiver>B_ItemLevel</receiver>
+        <slot>TypeChanged()</slot>
+    </connection>
     <connection>
         <sender>ClothArmor</sender>
         <signal>clicked()</signal>
@@ -266,26 +312,54 @@
         <slot>TypeChanged()</slot>
     </connection>
     <connection>
-        <sender>OK</sender>
-        <signal>clicked()</signal>
+        <sender>Level</sender>
+        <signal>textChanged(const QString&amp;)</signal>
         <receiver>B_ItemLevel</receiver>
-        <slot>OK_pressed()</slot>
+        <slot>LevelChanged(const QString&amp;)</slot>
     </connection>
     <connection>
-        <sender>Cancel</sender>
-        <signal>clicked()</signal>
+        <sender>Level</sender>
+        <signal>lostFocus()</signal>
         <receiver>B_ItemLevel</receiver>
-        <slot>Cancel_pressed()</slot>
+        <slot>LevelDone()</slot>
     </connection>
     <connection>
         <sender>AFDPS</sender>
         <signal>textChanged(const QString&amp;)</signal>
         <receiver>B_ItemLevel</receiver>
-        <slot>FixInput(const QString&amp;)</slot>
+        <slot>AFDPSChanged(const QString&amp;)</slot>
     </connection>
-    <slot access="public">Cancel_pressed()</slot>
-    <slot access="public">OK_pressed()</slot>
+    <connection>
+        <sender>AFDPS</sender>
+        <signal>lostFocus()</signal>
+        <receiver>B_ItemLevel</receiver>
+        <slot>AFDPSDone()</slot>
+    </connection>
+    <connection>
+        <sender>ShieldType</sender>
+        <signal>activated(const QString&amp;)</signal>
+        <receiver>B_ItemLevel</receiver>
+        <slot>ShieldChanged(const QString&amp;)</slot>
+    </connection>
+    <connection>
+        <sender>OK</sender>
+        <signal>clicked()</signal>
+        <receiver>B_ItemLevel</receiver>
+        <slot>OkClicked()</slot>
+    </connection>
+    <connection>
+        <sender>Cancel</sender>
+        <signal>clicked()</signal>
+        <receiver>B_ItemLevel</receiver>
+        <slot>CancelClicked()</slot>
+    </connection>
     <slot access="public">TypeChanged()</slot>
-    <slot access="public">FixInput(const QString&amp;)</slot>
+    <slot access="public">LevelChanged(const QString&amp;)</slot>
+    <slot access="public">LevelDone()</slot>
+    <slot access="public">AFDPSChanged(const QString&amp;)</slot>
+    <slot access="public">AFDPSDone()</slot>
+    <slot access="public">ShieldChanged(const QString&amp;)</slot>
+    <slot access="public">OkClicked()</slot>
+    <slot access="public">CancelClicked()</slot>
 </connections>
 </UI>
