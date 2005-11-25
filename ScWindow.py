@@ -488,7 +488,6 @@ class ScWindow(B_SC):
         if self.nocalc:
             return
         self.nocalc = 1
-        focusnum = 1
         charleveltext = str(self.CharLevel.text())
         if charleveltext == '': 
             charlevel = 1
@@ -509,10 +508,6 @@ class ScWindow(B_SC):
         self.capTotals['AF'] = 0
         skillTotals = {}
         otherTotals = {}
-        self.Focus_1.setText('')
-        self.Focus_2.setText('')
-        self.Focus_3.setText('')
-        self.Focus_4.setText('')
         self.LabelDupError.setText('')
         self.LabelOcError.setText('')
         totalutility = 0.0
@@ -592,19 +587,9 @@ class ScWindow(B_SC):
                     if item.getAttr('Equipped') == '1':
                         if effect == 'All Spell Lines':
                             for f in AllBonusList[self.realm][self.charclass][effect]:
-                                if focusnum <= 4:
-                                    getattr(self, 'Focus_%d' % focusnum).setText(
-                                        '%s %s' % (amount, f)) 
-                                    setattr(getattr(self, 'Focus_%d' % focusnum), 'effect', f)
-                                    #exec('self.Focus_%d.effect = "%s"' 
-                                    #    % (focusnum, f))
-                                focusnum += 1
+                                skillTotals[f + ' Focus'] = amount
                         else:
-                            if focusnum <= 4:
-                                getattr(self, 'Focus_%d' % focusnum).setText(
-                                    '%s %s' % (amount, effect)) 
-                                setattr(getattr(self, 'Focus_%d' % focusnum), 'effect', effect)
-                            focusnum += 1
+                            skillTotals[effect + ' Focus'] = amount
                 elif gemtype == 'Power':
                     utility += amount * 2
                     if item.getAttr('Equipped') == '1':
@@ -797,6 +782,8 @@ class ScWindow(B_SC):
             return int(cost + price)
 
     def getItemImbue(self, item):
+        if str(item.getAttr('Level')) == '':
+            return 0
         itemlevel = int(item.getAttr('Level'))
         if (item.getAttr('Level') == item.getAttr('AFDPS')) \
                 and (itemlevel % 2 == 1) and (itemlevel != 51):
@@ -1088,6 +1075,7 @@ class ScWindow(B_SC):
         level = self.ItemLevelWindow.exec_loop()
         if level != -1:
             self.ItemLevel.setText(str(level))
+            self.AFDPS_Edit.setText(str(self.ItemLevelWindow.afdps))
 
     def EquippedClicked(self):
         item = self.itemattrlist.get(self.currentTabLabel, Item(self.currentTabLabel))
