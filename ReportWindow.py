@@ -108,49 +108,52 @@ class ReportWindow(B_ReportWindow):
         self.prevMultiplier = 1
         self.totalcost = 0
         
-    def materialsReport(self, itemlist, slot = 0):
+    def materialsReport(self, itemlist, showslot = 0):
         self.MMLabel.show()
         self.MatMultiplier.show()
         self.setCaption('Materials Report')
         self.materials = { 'Gems' : { }, 'Liquids' : {}, 'Dusts': {} }
         self.gemnames = { }
         self.totalcost = 0
-        if slot == 0:
+        if showslot == 0:
             lastslot = 4
         else:
-            lastslot = slot
+            lastslot = showslot
         for loc, item in itemlist.items():
             activestate = item.getAttr('ActiveState')
             equipped = item.getAttr('Equipped')
-            if activestate == 'player':
-                for slot in range(max(slot - 1,0), lastslot):
-                    if item.getSlotAttr(activestate, slot, 'Done') == '1'\
-                            and self.parent.showDoneInMatsList:
-                        continue
-                    gemtype = item.getSlotAttr('player', slot, 'Type')
-                    effect = item.getSlotAttr('player', slot, 'Effect')
-                    amount = item.getSlotAttr('player', slot, 'Amount')
-                    for mattype, matl in SC.getGemMaterials(item, slot, self.parent.realm).items():
-                        for mat, val in matl.items():
-                            if self.materials[mattype].has_key(mat):
-                                self.materials[mattype][mat] += val
-                            else:
-                                self.materials[mattype][mat] = val
-        
-                    if gemtype != 'Unused':
-                        gemname = SC.getGemName(item, slot)
-                        if self.gemnames.has_key(gemname):
-                            self.gemnames[gemname] += 1
+            if activestate != 'player':
+                continue
+            for slot in range(max(showslot - 1,0), lastslot):
+                if item.getSlotAttr(activestate, slot, 'Done') == '1'\
+                        and self.parent.showDoneInMatsList:
+                    continue
+                gemtype = item.getSlotAttr('player', slot, 'Type')
+                effect = item.getSlotAttr('player', slot, 'Effect')
+                amount = item.getSlotAttr('player', slot, 'Amount')
+                for mattype, matl in SC.getGemMaterials(item, slot, self.parent.realm).items():
+                    for mat, val in matl.items():
+                        if self.materials[mattype].has_key(mat):
+                            self.materials[mattype][mat] += val
                         else:
-                            self.gemnames[gemname] = 1
-                        costindex = ValuesLists[gemtype].index(amount)
-                        cost = GemCosts[costindex]
-                        if effect[0:4] == 'All ':
-                            cost += 60 * max(costindex - 1, 0)
-                            cost = cost * 3
-                        if gemtype == 'Resist' or gemtype == 'Focus':
-                            cost += 60 * max(costindex - 1, 0)
-                        self.totalcost += cost
+                            self.materials[mattype][mat] = val
+        
+                if gemtype == 'Unused':
+                    continue
+                gemname = SC.getGemName(item, slot)
+                if self.gemnames.has_key(gemname):
+                    self.gemnames[gemname] += 1
+                else:
+                    self.gemnames[gemname] = 1
+
+                costindex = ValuesLists[gemtype].index(amount)
+                cost = GemCosts[costindex]
+                if effect[0:4] == 'All ':
+                    cost += 60 * max(costindex - 1, 0)
+                    cost = cost * 3
+                if gemtype == 'Resist' or gemtype == 'Focus':
+                    cost += 60 * max(costindex - 1, 0)
+                self.totalcost += cost
         keys = self.gemnames.keys()
         keys.sort(gemNameSort)
         self.gemnames = map(lambda(x): [x, self.gemnames.get(x)], keys)
