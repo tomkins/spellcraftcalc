@@ -125,7 +125,8 @@ class ReportWindow(B_ReportWindow):
             if activestate != 'player':
                 continue
             for slot in range(max(showslot - 1,0), lastslot):
-                if item.getSlotAttr(activestate, slot, 'Done') == '1'\
+                if item.getSlotAttr(activestate, slot, 'Done') == '1' \
+                        and showslot == 0 \
                         and self.parent.showDoneInMatsList:
                     continue
                 gemtype = item.getSlotAttr('player', slot, 'Type')
