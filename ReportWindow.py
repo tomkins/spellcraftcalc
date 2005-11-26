@@ -319,7 +319,7 @@ class ReportWindow(B_ReportWindow):
                     utility += 1
                     if equipped == '1':
                         if effect == 'All Spell Lines':
-                            for f in AllBonusList[self.parent.realm][self.parent.charclass][effect][1:]:
+                            for f in AllBonusList[self.parent.realm][self.parent.charclass][effect]:
                                 focusTotals[f] = amount
                         else:
                             focusTotals[effect] = amount
