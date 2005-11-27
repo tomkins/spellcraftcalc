@@ -1,9 +1,11 @@
-Updated 11/16/05 - Version 1.43.0011 (dev)
+Updated 11/27/05 - Version 1.43.0011 (dev)
+Fixed the materials/costs of the Catacombs Brilliant and Finesse gems.
+Axed the 'Focus' display, all Focuses are now listed under Skills.
 Fixed the config report for 'All Spell Lines Focus' to show all focuses.
-The [...] button for an item's level is a bit more useful.
+The [...] button for an item's level is a bit more useful & informative.
 Cloth armor (any item with the same DPSAF as it's level) will be
 reduced one level for computation of available imbue points.
-Fixed the materials 'save as text' feature.
+Fixed the materials 'save as text' button, broken since the new Qt.
 Fixed the 'delve', when clicking on stats, to pull up stat caps,
 and when clicking on this toon's casting stat; also pulls up all 
 of the 'Acuity' stat and cap bonuses; when clicking any power bonus
@@ -11,7 +13,7 @@ pulls up all related power, % power pool and power cap bonuses; and
 includes Skill and Focus bonuses when delving either on a caster.
 Fixed loading a template, such that the chest piece doesn't become
 a crafted item upon loading a saved template with a drop chest.
-Fix materials window when clicking a gem name, so the multiplier works.
+Fix materials window, when clicking a gem name, so the multiplier works.
 'Other Bonuses' list is now clickable (delves items with other skill).
 Improve display on Mac/Aqua (still looks odd, and breaks Aqua rules).
 Now importing older 'PvE' category as 'PvE Bonus' category.
@@ -20,8 +22,7 @@ and added 'Spell Piercing' bonus (as Mythic named it, not Resist Pierce).
 Sorcerer +Mind fixed (it does display for +All Magic, no real benefit).
 Ranger's Pathfinding skill changed from +all magic, to an 'other' skill.
 Fixed two-row TabBar so all the quirks since 1.43.0009 are cleaned up.
-Added Offensive/Reactive/Charged/Other Effects slot types
-for drop items.  (Effects for player crafted items come later.)
+Added Offensive/Reactive/Charged/Other Effects slot types for drop items.
 
 Updated 11/02/05 - Version 1.43.0010 (dev)
 Fixed the Load item window, simplified the preview to display correctly.

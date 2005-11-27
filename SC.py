@@ -187,19 +187,17 @@ def computeGemCost(item, i):
     if gemlevel == '': return (0, 1)
     costindex = ValuesLists[gemtype].index(str(amount))
     cost = GemCosts[costindex]
-    remakecost = RemakeCosts[costindex] * int(item.getSlotAttr(itemtype, i, 'Remakes'))
-    if gemliquid == 'Brilliant':
-        cost += 60 * costindex * 3
-        if remakecost > 0:
-            remakecost += 180 * costindex * 3
-    elif gemliquid == 'Finesse':
-        cost += 60 * costindex * 2.25
-        if remakecost > 0:
-            remakecost += 180 * costindex * 2.25
-    elif gemtype == 'Resist' or gemtype == 'Focus':
+    remakecost = RemakeCosts[costindex]
+    if gemtype == 'Resist' or gemtype == 'Focus':
         cost += 60 * costindex
-        if remakecost > 0:
-            remakecost += 60 * costindex
-    return (cost + remakecost, costindex+1)
+        remakecost += 60 * costindex
+    elif gemliquid == 'Finesse':
+        cost += 200 + 180 * costindex
+        remakecost += 120 + 180 * costindex
+    elif gemliquid == 'Brilliant':
+        cost = cost * 3 + 180 * costindex
+        remakecost = remakecost * 3 + 180 * costindex
+    cost += remakecost * int(item.getSlotAttr(itemtype, i, 'Remakes'))
+    return (cost, costindex+1)
 
 # vim: set ts=4 sw=4 et:

@@ -149,11 +149,14 @@ class ReportWindow(B_ReportWindow):
 
                 costindex = ValuesLists[gemtype].index(amount)
                 cost = GemCosts[costindex]
-                if effect[0:4] == 'All ':
-                    cost += 60 * max(costindex - 1, 0)
-                    cost = cost * 3
                 if gemtype == 'Resist' or gemtype == 'Focus':
-                    cost += 60 * max(costindex - 1, 0)
+                    cost += 60 * costindex
+                elif gemtype == 'Skill' and effect[0:4] == 'All ':
+                    cost += 200 + 180 * costindex
+                    #remakecost += 120 + 180 * costindex
+                elif gemtype == 'Focus' and effect[0:4] == 'All ':
+                    cost = cost * 3 + 180 * costindex
+                    #remakecost = remakecost * 3 + 180 * costindex
                 self.totalcost += cost
         keys = self.gemnames.keys()
         keys.sort(gemNameSort)

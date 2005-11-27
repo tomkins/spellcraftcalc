@@ -533,27 +533,31 @@ class ScWindow(B_SC):
                 if effect != '' and [gemtype, effect] in gemeffects:
                     self.LabelDupError.setText('Two of same type of gem on %s' % key)
                 gemeffects.append([gemtype, effect])
-                if amount == '' or gemtype == 'Unused' or amount == 0 or itemtype == 'drop':
-                    cost = 0    
-                    remakecost = 0
-                else:
+                if itemtype == 'player':
+                  if amount == '' or gemtype == 'Unused' or amount == 0:
+                    if key == self.currentTabLabel:
+                        getattr(self, 'Cost_%d' % (i+1)).setText('')
+                  else:
+                    if key == self.currentTabLabel:
+                        getattr(self, 'Cost_%d' % (i+1)).setText('')
                     costindex = ValuesLists[gemtype].index(str(amount))
                     cost = GemCosts[costindex]
-                    remakecost = RemakeCosts[costindex] * int(item.getSlotAttr(itemtype, i, 'Remakes'))
-                    if effect[0:4] == 'All ':
+                    remakecost = RemakeCosts[costindex]
+                    if gemtype == 'Resist' or gemtype == 'Focus':
                         cost += 60 * costindex
-                        cost = cost * 3
-                        if remakecost > 0:
-                            remakecost += 180 * costindex
-                        if effect != 'All Spell Lines' and amount > 1:
+                        remakecost += 60 * costindex
+                    elif gemtype == 'Skill' and effect[0:4] == 'All ':
+                        cost += 200 + 180 * costindex
+                        remakecost += 120 + 180 * costindex
+                        if amount > 1:
                             self.LabelDupError.setText('Invalid ' + effect + ' on ' + key)
-                    elif gemtype == 'Resist' or gemtype == 'Focus':
-                        cost += 60 * costindex
-                        if remakecost > 0:
-                            remakecost += 60 * costindex
-                    itemcost += cost + remakecost
-                if itemtype == 'player' and key == self.currentTabLabel:
-                    getattr(self, 'Cost_%d' % (i+1)).setText(SC.formatCost(cost+remakecost))
+                    elif gemtype == 'Focus' and effect[0:4] == 'All ':
+                        cost = cost * 3 + 180 * costindex
+                        remakecost = remakecost * 3 + 180 * costindex
+                    cost += remakecost * int(item.getSlotAttr(itemtype, i, 'Remakes'))
+                    itemcost += cost
+                    if key == self.currentTabLabel:
+                        getattr(self, 'Cost_%d' % (i+1)).setText(SC.formatCost(cost))
                 if gemtype == 'Skill':
                     if effect == 'All Magic Skills'\
                         or effect == 'All Melee Weapon Skills'\

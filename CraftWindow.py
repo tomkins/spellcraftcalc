@@ -100,14 +100,20 @@ class CraftWindow(B_CraftWindow):
     def computeRemakesCost(self, slotindex, remakes):
         gemtype = self.currentItem.getSlotAttr('player', slotindex, 'Type')
         if gemtype == 'Unused': return 0
+        effect = item.getSlotAttr(itemtype, slotindex, 'Effect')
         gemamount = self.currentItem.getSlotAttr('player', slotindex, 'Amount')
         costindex = ValuesLists[gemtype].index(gemamount)
         basecost = GemCosts[costindex]
         remakecost = RemakeCosts[costindex]
         if gemtype == 'Resist' or gemtype == 'Focus':
             basecost += 60 * costindex
-            if remakecost > 0:
-                remakecost += 60 * costindex
+            remakecost += 60 * costindex
+        elif gemtype == 'Skill' and effect[0:4] == 'All ':
+            basecost += 200 + 180 * costindex
+            remakecost += 120 + 180 * costindex
+        elif gemtype == 'Focus' and effect[0:4] == 'All ':
+            basecost = basecost * 3 + 180 * costindex
+            remakecost = remakecost * 3 + 180 * costindex
         cost = int(basecost + (remakes * remakecost))
         self.currentItem.loadSlotAttr('player', slotindex, 'Remakes', remakes)
         return cost
