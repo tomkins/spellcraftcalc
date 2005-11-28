@@ -1,4 +1,6 @@
 Updated 11/27/05 - Version 1.43.0011 (dev)
+Remember the preference for Options - Include Done in Material list,
+and Options - Coop/PvP server items check boxes.
 Fixed the materials/costs of the Catacombs Brilliant and Finesse gems.
 Axed the 'Focus' display, all Focuses are now listed under Skills.
 Fixed the config report for 'All Spell Lines Focus' to show all focuses.

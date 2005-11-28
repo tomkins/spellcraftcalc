@@ -72,12 +72,16 @@ class Options(B_Options):
         rootnode.appendChild(realmnode)
         showdone = document.createElement('DontShowDoneGems')
         showdone.appendChild(document.createTextNode(str(self.ShowDoneGems.isChecked())))
+        rootnode.appendChild(showdone)
         includerr = document.createElement('IncludeRRInTotals')
         includerr.appendChild(document.createTextNode(str(self.IncludeRR.isChecked())))
         rootnode.appendChild(includerr)
         hideskill = document.createElement('HideNonClassSkills')
         hideskill.appendChild(document.createTextNode(str(self.HideNonClassSkills.isChecked())))
         rootnode.appendChild(hideskill)
+        coopnode = document.createElement('Coop')
+        coopnode.appendChild(document.createTextNode(str(self.Coop.isChecked())))
+        rootnode.appendChild(coopnode)
         cskill = document.createElement('CrafterSkill')
         cskill.appendChild(document.createTextNode(str(self.Skill.currentText())))
         rootnode.appendChild(cskill)
@@ -153,6 +157,11 @@ class Options(B_Options):
                     self.HideNonClassSkills.setChecked(1)
                 else:
                     self.HideNonClassSkills.setChecked(0)
+            elif child.tagName == 'Coop':
+                if XMLHelper.getText(child.childNodes) == 'True':
+                    self.Coop.setChecked(1)
+                else:
+                    self.Coop.setChecked(0)
             elif child.tagName == 'CrafterSkill':
                 li = self.Skill.listBox().findItem(XMLHelper.getText(child.childNodes))
                 self.Skill.setCurrentItem(self.Skill.listBox().index(li))
