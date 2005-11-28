@@ -786,22 +786,21 @@ class ScWindow(B_SC):
             return int(cost + price)
 
     def getItemImbue(self, item):
-        if str(item.getAttr('Level')) == '':
-            return 0
-        itemlevel = int(item.getAttr('Level'))
+        try: itemlevel = int(item.getAttr('Level'))
+        except: itemlevel = 0
+        if itemlevel < 1 or itemlevel > 51:
+            itemlevel = 1
+            item.loadAttr('Level', '1')
         if (item.getAttr('Level') == item.getAttr('AFDPS')) \
-                and (itemlevel % 2 == 1) and (itemlevel != 51):
+                and (itemlevel % 2 == 1) and (itemlevel > 1) and (itemlevel != 51):
             itemlevel = itemlevel - 1
-        if item.getAttr('ItemQuality') == '':
+        try: itemqual = int(item.getAttr('ItemQuality')) - 94
+        except: itemqual = -1
+        if itemqual < 0 or itemqual >= len(ImbuePts[itemlevel - 1]):
+            itemqual = 0
             item.loadAttr('ItemQuality', '94')
-        if itemlevel == '':
-            itemimbue = 0
-        else:
-            itemimbue = ImbuePts[itemlevel - 1]\
-                                [int(item.getAttr('ItemQuality'))-94]
-
+        itemimbue = ImbuePts[itemlevel - 1][itemqual]
         return itemimbue
-            
 
     def calcImbue(self, item, display):
         itemtype = item.getAttr('ActiveState')
