@@ -332,14 +332,6 @@ class ScWindow(B_SC):
             rootnode.appendChild(item.asXML().firstChild)
         return document
 
-    def show(self):
-        QMainWindow.show(self)
-        self.PlayerMade.setChecked(1)
-        if self.startup:
-            # Kludge...major kludge.
-            self.PlayerToggled(1)
-            self.startup = 0
-    
     def PieceTabChanged(self,a0):
         if self.nocalc:
             return
@@ -975,9 +967,11 @@ class ScWindow(B_SC):
         self.showWideEffects(0)
 
     def DropToggled(self,a0):
-        self.modified = 1
+        if self.nocalc:
+            return
         if not a0: 
             return
+        self.modified = 1
         self.showDropWidgets()
         item = self.itemattrlist.get(self.currentTabLabel, Item(self.currentTabLabel))
         item.loadAttr('ActiveState','drop')
@@ -985,9 +979,11 @@ class ScWindow(B_SC):
             self.restoreItem(item)
 
     def PlayerToggled(self, a0):
-        self.modified = 1
+        if self.nocalc:
+            return
         if not a0: 
             return
+        self.modified = 1
         self.showPlayerWidgets()
         item = self.itemattrlist.get(self.currentTabLabel, Item(self.currentTabLabel))
         item.loadAttr('ActiveState','player')
@@ -1086,13 +1082,12 @@ class ScWindow(B_SC):
         self.calculate()
     
     def newFile(self):
-        wascalc = self.nocalc
-        self.nocalc = 1
         if self.modified:
             ret = QMessageBox.warning(self, 'Save Changes?', 'Some changes may not have been saved. Are you sure you want to discard these changes?', 'Yes', 'No')
             if ret == 1:
-                self.nocalc = wascalc
                 return
+        wascalc = self.nocalc
+        self.nocalc = 1
         self.initialize()
         self.ClearCurrentItem()
         self.nocalc = wascalc
