@@ -57,6 +57,11 @@ class Options(B_Options):
         else:
             self.IncludeRR.setChecked(0)
 
+        if self.parent.capDistance:
+            self.CapDistance.setChecked(1)
+        else:
+            self.CapDistance.setChecked(0)
+
         if self.parent.hideNonClassSkills:
             self.HideNonClassSkills.setChecked(1)
         else:
@@ -76,6 +81,9 @@ class Options(B_Options):
         includerr = document.createElement('IncludeRRInTotals')
         includerr.appendChild(document.createTextNode(str(self.IncludeRR.isChecked())))
         rootnode.appendChild(includerr)
+        capnode = document.createElement('DistanceToCap')
+        capnode.appendChild(document.createTextNode(str(self.CapDistance.isChecked())))
+        rootnode.appendChild(capnode)
         hideskill = document.createElement('HideNonClassSkills')
         hideskill.appendChild(document.createTextNode(str(self.HideNonClassSkills.isChecked())))
         rootnode.appendChild(hideskill)
@@ -152,6 +160,11 @@ class Options(B_Options):
                     self.IncludeRR.setChecked(1)
                 else:
                     self.IncludeRR.setChecked(0)
+            elif child.tagName == 'DistanceToCap':
+                if XMLHelper.getText(child.childNodes) == 'True':
+                    self.CapDistance.setChecked(1)
+                else:
+                    self.CapDistance.setChecked(0)
             elif child.tagName == 'HideNonClassSkills':
                 if XMLHelper.getText(child.childNodes) == 'True':
                     self.HideNonClassSkills.setChecked(1)
@@ -221,6 +234,7 @@ class Options(B_Options):
         self.parent.crafterSkill = int(str(self.Skill.currentText()))
         self.parent.showDoneInMatsList = self.ShowDoneGems.isChecked()
         self.parent.includeRacials = self.IncludeRR.isChecked()
+        self.parent.capDistance = self.CapDistance.isChecked()
         self.parent.hideNonClassSkills = self.HideNonClassSkills.isChecked()
         self.parent.noteText = str(self.NoteText.text())
         self.parent.pricingInfo = self.getPriceInfo()

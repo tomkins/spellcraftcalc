@@ -130,7 +130,8 @@ class ScWindow(B_SC):
         self.crafterSkill = 1001
         self.showDoneInMatsList = 0
         self.noteText = ''
-        self.includeRacials = True
+        self.capDistance = False
+        self.includeRacials = False
         self.hideNonClassSkills = False
         OW = Options.Options(self, '', 0)
         OW.load()
@@ -672,7 +673,7 @@ class ScWindow(B_SC):
                     else:
                         self.ItemOvercharge.setText('None')
         for (key, val) in self.totals.items():
-            if self.TotalBonus.isChecked():
+            if not self.capDistance:
                 if self.includeRacials:
                     if ResistTable.has_key(key):
                         rr = str(getattr(self, key+'RR').text())
@@ -710,14 +711,14 @@ class ScWindow(B_SC):
         self.SkillsList.clear()
         self.OtherBonusList.clear()
         for skill, amount in skillTotals.items():
-            if self.TotalBonus.isChecked():
+            if not self.capDistance:
                 self.SkillsList.insertItem('%d %s' % (amount, skill))
             else:
                 capcalc = HighCapBonusList['Skill']
                 thiscap = int(charlevel * capcalc[0]) + capcalc[1]
                 self.SkillsList.insertItem('%d %s' % (thiscap - amount, skill))
         for bonus, amount in otherTotals.items():
-            if self.TotalBonus.isChecked():
+            if not self.capDistance:
                 self.OtherBonusList.insertItem('%d %s' % (amount, bonus))
             else:
                 if HighCapBonusList.has_key(bonus):
@@ -1008,12 +1009,6 @@ class ScWindow(B_SC):
         item = Item(self.currentTabLabel)
         self.itemattrlist[self.currentTabLabel] = item
         self.restoreItem(item)
-
-    def DistanceCapSet(self):
-        self.calculate()
-
-    def TotalBonusSet(self):
-        self.calculate()
 
     def Save_Item(self):
         itemname = unicode(self.ItemName.text())

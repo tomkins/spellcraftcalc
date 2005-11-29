@@ -29,7 +29,7 @@ Python:from SearchingCombo import *
                 <x>613</x>
                 <y>3</y>
                 <width>165</width>
-                <height>134</height>
+                <height>182</height>
             </rect>
         </property>
         <property name="title">
@@ -51,6 +51,25 @@ Python:from SearchingCombo import *
                 <string>Name:</string>
             </property>
         </widget>
+        <widget class="QLineEdit">
+            <property name="name">
+                <cstring>CharName</cstring>
+            </property>
+            <property name="geometry">
+                <rect>
+                    <x>46</x>
+                    <y>14</y>
+                    <width>114</width>
+                    <height>22</height>
+                </rect>
+            </property>
+            <property name="frameShape">
+                <enum>LineEditPanel</enum>
+            </property>
+            <property name="frameShadow">
+                <enum>Sunken</enum>
+            </property>
+        </widget>
         <widget class="QLabel">
             <property name="name">
                 <cstring>LabelRealm</cstring>
@@ -65,6 +84,19 @@ Python:from SearchingCombo import *
             </property>
             <property name="text">
                 <string>Realm:</string>
+            </property>
+        </widget>
+        <widget class="SearchingCombo">
+            <property name="name">
+                <cstring>Realm</cstring>
+            </property>
+            <property name="geometry">
+                <rect>
+                    <x>46</x>
+                    <y>38</y>
+                    <width>114</width>
+                    <height>22</height>
+                </rect>
             </property>
         </widget>
         <widget class="QLabel">
@@ -83,6 +115,19 @@ Python:from SearchingCombo import *
                 <string>Class:</string>
             </property>
         </widget>
+        <widget class="SearchingCombo">
+            <property name="name">
+                <cstring>CharClass</cstring>
+            </property>
+            <property name="geometry">
+                <rect>
+                    <x>46</x>
+                    <y>61</y>
+                    <width>114</width>
+                    <height>22</height>
+                </rect>
+            </property>
+        </widget>
         <widget class="QLabel">
             <property name="name">
                 <cstring>LabelCharRace</cstring>
@@ -97,6 +142,19 @@ Python:from SearchingCombo import *
             </property>
             <property name="text">
                 <string>Race:</string>
+            </property>
+        </widget>
+        <widget class="SearchingCombo">
+            <property name="name">
+                <cstring>CharRace</cstring>
+            </property>
+            <property name="geometry">
+                <rect>
+                    <x>46</x>
+                    <y>84</y>
+                    <width>114</width>
+                    <height>22</height>
+                </rect>
             </property>
         </widget>
         <widget class="QLabel">
@@ -117,64 +175,6 @@ Python:from SearchingCombo import *
         </widget>
         <widget class="QLineEdit">
             <property name="name">
-                <cstring>CharName</cstring>
-            </property>
-            <property name="geometry">
-                <rect>
-                    <x>46</x>
-                    <y>14</y>
-                    <width>114</width>
-                    <height>22</height>
-                </rect>
-            </property>
-            <property name="frameShape">
-                <enum>LineEditPanel</enum>
-            </property>
-            <property name="frameShadow">
-                <enum>Sunken</enum>
-            </property>
-        </widget>
-        <widget class="SearchingCombo">
-            <property name="name">
-                <cstring>Realm</cstring>
-            </property>
-            <property name="geometry">
-                <rect>
-                    <x>46</x>
-                    <y>38</y>
-                    <width>114</width>
-                    <height>22</height>
-                </rect>
-            </property>
-        </widget>
-        <widget class="SearchingCombo">
-            <property name="name">
-                <cstring>CharClass</cstring>
-            </property>
-            <property name="geometry">
-                <rect>
-                    <x>46</x>
-                    <y>61</y>
-                    <width>114</width>
-                    <height>22</height>
-                </rect>
-            </property>
-        </widget>
-        <widget class="SearchingCombo">
-            <property name="name">
-                <cstring>CharRace</cstring>
-            </property>
-            <property name="geometry">
-                <rect>
-                    <x>46</x>
-                    <y>84</y>
-                    <width>114</width>
-                    <height>22</height>
-                </rect>
-            </property>
-        </widget>
-        <widget class="QLineEdit">
-            <property name="name">
                 <cstring>CharLevel</cstring>
             </property>
             <property name="geometry">
@@ -186,55 +186,74 @@ Python:from SearchingCombo import *
                 </rect>
             </property>
         </widget>
-    </widget>
-    <widget class="QButtonGroup">
-        <property name="name">
-            <cstring>ButtonGroup2</cstring>
-        </property>
-        <property name="geometry">
-            <rect>
-                <x>613</x>
-                <y>134</y>
-                <width>165</width>
-                <height>51</height>
-            </rect>
-        </property>
-        <property name="title">
-            <string>Display</string>
-        </property>
-        <widget class="QRadioButton">
+        <widget class="QLabel">
             <property name="name">
-                <cstring>TotalBonus</cstring>
+                <cstring>TotalCostLabel</cstring>
             </property>
             <property name="geometry">
                 <rect>
-                    <x>11</x>
-                    <y>14</y>
-                    <width>85</width>
-                    <height>17</height>
+                    <x>6</x>
+                    <y>134</y>
+                    <width>30</width>
+                    <height>16</height>
                 </rect>
             </property>
             <property name="text">
-                <string>Total Bonus</string>
-            </property>
-            <property name="checked">
-                <bool>true</bool>
+                <string>Cost:</string>
             </property>
         </widget>
-        <widget class="QRadioButton">
+        <widget class="QLabel">
             <property name="name">
-                <cstring>CapDistance</cstring>
+                <cstring>TotalCost</cstring>
             </property>
             <property name="geometry">
                 <rect>
-                    <x>11</x>
-                    <y>30</y>
-                    <width>109</width>
-                    <height>17</height>
+                    <x>46</x>
+                    <y>134</y>
+                    <width>114</width>
+                    <height>16</height>
                 </rect>
             </property>
             <property name="text">
-                <string>Distance To Cap</string>
+                <string>0</string>
+            </property>
+            <property name="alignment">
+                <set>AlignVCenter|AlignRight</set>
+            </property>
+        </widget>
+        <widget class="QLabel">
+            <property name="name">
+                <cstring>TotalPriceLabel</cstring>
+            </property>
+            <property name="geometry">
+                <rect>
+                    <x>6</x>
+                    <y>157</y>
+                    <width>30</width>
+                    <height>16</height>
+                </rect>
+            </property>
+            <property name="text">
+                <string>Price:</string>
+            </property>
+        </widget>
+        <widget class="QLabel">
+            <property name="name">
+                <cstring>TotalPrice</cstring>
+            </property>
+            <property name="geometry">
+                <rect>
+                    <x>46</x>
+                    <y>157</y>
+                    <width>114</width>
+                    <height>16</height>
+                </rect>
+            </property>
+            <property name="text">
+                <string>0</string>
+            </property>
+            <property name="alignment">
+                <set>AlignVCenter|AlignRight</set>
             </property>
         </widget>
     </widget>
@@ -1305,7 +1324,7 @@ Python:from SearchingCombo import *
                 <x>201</x>
                 <y>3</y>
                 <width>160</width>
-                <height>136</height>
+                <height>182</height>
             </rect>
         </property>
         <property name="title">
@@ -1318,96 +1337,10 @@ Python:from SearchingCombo import *
             <property name="geometry">
                 <rect>
                     <x>5</x>
-                    <y>15</y>
+                    <y>16</y>
                     <width>150</width>
-                    <height>116</height>
+                    <height>160</height>
                 </rect>
-            </property>
-        </widget>
-    </widget>
-    <widget class="QGroupBox">
-        <property name="name">
-            <cstring>GroupBox5</cstring>
-        </property>
-        <property name="geometry">
-            <rect>
-                <x>201</x>
-                <y>134</y>
-                <width>124</width>
-                <height>51</height>
-            </rect>
-        </property>
-        <property name="title">
-            <string>Totals</string>
-        </property>
-        <widget class="QLabel">
-            <property name="name">
-                <cstring>TotalCostLabel</cstring>
-            </property>
-            <property name="geometry">
-                <rect>
-                    <x>6</x>
-                    <y>13</y>
-                    <width>30</width>
-                    <height>16</height>
-                </rect>
-            </property>
-            <property name="text">
-                <string>Cost:</string>
-            </property>
-        </widget>
-        <widget class="QLabel">
-            <property name="name">
-                <cstring>TotalCost</cstring>
-            </property>
-            <property name="geometry">
-                <rect>
-                    <x>36</x>
-                    <y>14</y>
-                    <width>82</width>
-                    <height>16</height>
-                </rect>
-            </property>
-            <property name="text">
-                <string>0</string>
-            </property>
-            <property name="alignment">
-                <set>AlignVCenter|AlignRight</set>
-            </property>
-        </widget>
-        <widget class="QLabel">
-            <property name="name">
-                <cstring>TotalPriceLabel</cstring>
-            </property>
-            <property name="geometry">
-                <rect>
-                    <x>6</x>
-                    <y>28</y>
-                    <width>30</width>
-                    <height>16</height>
-                </rect>
-            </property>
-            <property name="text">
-                <string>Price:</string>
-            </property>
-        </widget>
-        <widget class="QLabel">
-            <property name="name">
-                <cstring>TotalPrice</cstring>
-            </property>
-            <property name="geometry">
-                <rect>
-                    <x>36</x>
-                    <y>28</y>
-                    <width>82</width>
-                    <height>16</height>
-                </rect>
-            </property>
-            <property name="text">
-                <string>0</string>
-            </property>
-            <property name="alignment">
-                <set>AlignVCenter|AlignRight</set>
             </property>
         </widget>
     </widget>
@@ -1446,7 +1379,7 @@ Python:from SearchingCombo import *
         </property>
         <property name="geometry">
             <rect>
-                <x>362</x>
+                <x>367</x>
                 <y>142</y>
                 <width>240</width>
                 <height>14</height>
@@ -1462,7 +1395,7 @@ Python:from SearchingCombo import *
         </property>
         <property name="geometry">
             <rect>
-                <x>362</x>
+                <x>367</x>
                 <y>157</y>
                 <width>240</width>
                 <height>14</height>
@@ -3207,18 +3140,6 @@ Python:from SearchingCombo import *
         <slot>EquippedClicked()</slot>
     </connection>
     <connection>
-        <sender>TotalBonus</sender>
-        <signal>clicked()</signal>
-        <receiver>B_SC</receiver>
-        <slot>TotalBonusSet()</slot>
-    </connection>
-    <connection>
-        <sender>CapDistance</sender>
-        <signal>clicked()</signal>
-        <receiver>B_SC</receiver>
-        <slot>DistanceCapSet()</slot>
-    </connection>
-    <connection>
         <sender>ItemLevelButton</sender>
         <signal>clicked()</signal>
         <receiver>B_SC</receiver>
@@ -3417,8 +3338,6 @@ Python:from SearchingCombo import *
     <tabstop>CharClass</tabstop>
     <tabstop>CharRace</tabstop>
     <tabstop>CharLevel</tabstop>
-    <tabstop>TotalBonus</tabstop>
-    <tabstop>CapDistance</tabstop>
     <tabstop>PieceTab</tabstop>
     <tabstop>ItemLevel</tabstop>
     <tabstop>ItemLevelButton</tabstop>
@@ -3493,7 +3412,6 @@ Python:from SearchingCombo import *
     <slot>QualityChanged(const QString&amp;)</slot>
     <slot>Save_Item()</slot>
     <slot>SkillClicked(QListBoxItem*)</slot>
-    <slot>TotalBonusSet()</slot>
     <slot>Type_10_Changed(const QString&amp;)</slot>
     <slot>Type_1_Changed(const QString&amp;)</slot>
     <slot>Type_2_Changed(const QString&amp;)</slot>

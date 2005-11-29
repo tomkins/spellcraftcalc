@@ -128,6 +128,26 @@
                 <class>QCheckBox</class>
                 <property stdset="1">
                     <name>name</name>
+                    <cstring>CapDistance</cstring>
+                </property>
+                <property stdset="1">
+                    <name>geometry</name>
+                    <rect>
+                        <x>18</x>
+                        <y>75</y>
+                        <width>250</width>
+                        <height>17</height>
+                    </rect>
+                </property>
+                <property stdset="1">
+                    <name>text</name>
+                    <string>Show Distance To Cap (instead of total)</string>
+                </property>
+            </widget>
+            <widget>
+                <class>QCheckBox</class>
+                <property stdset="1">
+                    <name>name</name>
                     <cstring>ShowDoneGems</cstring>
                 </property>
                 <property stdset="1">
