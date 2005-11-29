@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'ScWindow.ui'
 #
-# Created: Fri Nov 25 04:33:47 2005
+# Created: Mon Nov 28 19:40:29 2005
 #      by: The PyQt User Interface Compiler (pyuic) 3.15
 #
 # WARNING! All changes made in this file will be lost!
@@ -26,49 +26,53 @@ class B_SC(QMainWindow):
         self.setCentralWidget(QWidget(self,"qt_central_widget"))
 
         self.GroupBox9 = QGroupBox(self.centralWidget(),"GroupBox9")
-        self.GroupBox9.setGeometry(QRect(613,3,165,134))
+        self.GroupBox9.setGeometry(QRect(613,3,165,182))
 
         self.LabelCharName = QLabel(self.GroupBox9,"LabelCharName")
         self.LabelCharName.setGeometry(QRect(6,16,37,16))
-
-        self.LabelRealm = QLabel(self.GroupBox9,"LabelRealm")
-        self.LabelRealm.setGeometry(QRect(6,40,38,16))
-
-        self.LabelCharClass = QLabel(self.GroupBox9,"LabelCharClass")
-        self.LabelCharClass.setGeometry(QRect(6,65,38,16))
-
-        self.LabelCharRace = QLabel(self.GroupBox9,"LabelCharRace")
-        self.LabelCharRace.setGeometry(QRect(6,88,38,16))
-
-        self.LabelCharLevel = QLabel(self.GroupBox9,"LabelCharLevel")
-        self.LabelCharLevel.setGeometry(QRect(6,111,38,16))
 
         self.CharName = QLineEdit(self.GroupBox9,"CharName")
         self.CharName.setGeometry(QRect(46,14,114,22))
         self.CharName.setFrameShape(QLineEdit.LineEditPanel)
         self.CharName.setFrameShadow(QLineEdit.Sunken)
 
+        self.LabelRealm = QLabel(self.GroupBox9,"LabelRealm")
+        self.LabelRealm.setGeometry(QRect(6,40,38,16))
+
         self.Realm = SearchingCombo(self.GroupBox9,"Realm")
         self.Realm.setGeometry(QRect(46,38,114,22))
+
+        self.LabelCharClass = QLabel(self.GroupBox9,"LabelCharClass")
+        self.LabelCharClass.setGeometry(QRect(6,65,38,16))
 
         self.CharClass = SearchingCombo(self.GroupBox9,"CharClass")
         self.CharClass.setGeometry(QRect(46,61,114,22))
 
+        self.LabelCharRace = QLabel(self.GroupBox9,"LabelCharRace")
+        self.LabelCharRace.setGeometry(QRect(6,88,38,16))
+
         self.CharRace = SearchingCombo(self.GroupBox9,"CharRace")
         self.CharRace.setGeometry(QRect(46,84,114,22))
+
+        self.LabelCharLevel = QLabel(self.GroupBox9,"LabelCharLevel")
+        self.LabelCharLevel.setGeometry(QRect(6,111,38,16))
 
         self.CharLevel = QLineEdit(self.GroupBox9,"CharLevel")
         self.CharLevel.setGeometry(QRect(46,107,37,22))
 
-        self.ButtonGroup2 = QButtonGroup(self.centralWidget(),"ButtonGroup2")
-        self.ButtonGroup2.setGeometry(QRect(613,134,165,51))
+        self.TotalCostLabel = QLabel(self.GroupBox9,"TotalCostLabel")
+        self.TotalCostLabel.setGeometry(QRect(6,134,30,16))
 
-        self.TotalBonus = QRadioButton(self.ButtonGroup2,"TotalBonus")
-        self.TotalBonus.setGeometry(QRect(11,14,85,17))
-        self.TotalBonus.setChecked(1)
+        self.TotalCost = QLabel(self.GroupBox9,"TotalCost")
+        self.TotalCost.setGeometry(QRect(46,134,114,16))
+        self.TotalCost.setAlignment(QLabel.AlignVCenter | QLabel.AlignRight)
 
-        self.CapDistance = QRadioButton(self.ButtonGroup2,"CapDistance")
-        self.CapDistance.setGeometry(QRect(11,30,109,17))
+        self.TotalPriceLabel = QLabel(self.GroupBox9,"TotalPriceLabel")
+        self.TotalPriceLabel.setGeometry(QRect(6,157,30,16))
+
+        self.TotalPrice = QLabel(self.GroupBox9,"TotalPrice")
+        self.TotalPrice.setGeometry(QRect(46,157,114,16))
+        self.TotalPrice.setAlignment(QLabel.AlignVCenter | QLabel.AlignRight)
 
         self.GroupBox1 = QGroupBox(self.centralWidget(),"GroupBox1")
         self.GroupBox1.setGeometry(QRect(5,3,94,182))
@@ -286,27 +290,10 @@ class B_SC(QMainWindow):
         self.SlashRR.setAlignment(QLabel.AlignVCenter | QLabel.AlignRight)
 
         self.GroupSkillsList = QGroupBox(self.centralWidget(),"GroupSkillsList")
-        self.GroupSkillsList.setGeometry(QRect(201,3,160,136))
+        self.GroupSkillsList.setGeometry(QRect(201,3,160,182))
 
         self.SkillsList = QListBox(self.GroupSkillsList,"SkillsList")
-        self.SkillsList.setGeometry(QRect(5,15,150,116))
-
-        self.GroupBox5 = QGroupBox(self.centralWidget(),"GroupBox5")
-        self.GroupBox5.setGeometry(QRect(201,134,124,51))
-
-        self.TotalCostLabel = QLabel(self.GroupBox5,"TotalCostLabel")
-        self.TotalCostLabel.setGeometry(QRect(6,13,30,16))
-
-        self.TotalCost = QLabel(self.GroupBox5,"TotalCost")
-        self.TotalCost.setGeometry(QRect(36,14,82,16))
-        self.TotalCost.setAlignment(QLabel.AlignVCenter | QLabel.AlignRight)
-
-        self.TotalPriceLabel = QLabel(self.GroupBox5,"TotalPriceLabel")
-        self.TotalPriceLabel.setGeometry(QRect(6,28,30,16))
-
-        self.TotalPrice = QLabel(self.GroupBox5,"TotalPrice")
-        self.TotalPrice.setGeometry(QRect(36,28,82,16))
-        self.TotalPrice.setAlignment(QLabel.AlignVCenter | QLabel.AlignRight)
+        self.SkillsList.setGeometry(QRect(5,16,150,160))
 
         self.GroupOtherBonusList = QGroupBox(self.centralWidget(),"GroupOtherBonusList")
         self.GroupOtherBonusList.setGeometry(QRect(367,3,240,136))
@@ -315,10 +302,10 @@ class B_SC(QMainWindow):
         self.OtherBonusList.setGeometry(QRect(5,15,230,116))
 
         self.LabelFileName = QLabel(self.centralWidget(),"LabelFileName")
-        self.LabelFileName.setGeometry(QRect(362,142,240,14))
+        self.LabelFileName.setGeometry(QRect(367,142,240,14))
 
         self.LabelOcError = QLabel(self.centralWidget(),"LabelOcError")
-        self.LabelOcError.setGeometry(QRect(362,157,240,14))
+        self.LabelOcError.setGeometry(QRect(367,157,240,14))
 
         self.LabelDupError = QLabel(self.centralWidget(),"LabelDupError")
         self.LabelDupError.setGeometry(QRect(362,173,240,14))
@@ -679,8 +666,6 @@ class B_SC(QMainWindow):
         self.connect(self.Quality_4,SIGNAL("activated(const QString&)"),self.recalculate)
         self.connect(self.ClearItem,SIGNAL("clicked()"),self.ClearCurrentItem)
         self.connect(self.Equipped,SIGNAL("clicked()"),self.EquippedClicked)
-        self.connect(self.TotalBonus,SIGNAL("clicked()"),self.TotalBonusSet)
-        self.connect(self.CapDistance,SIGNAL("clicked()"),self.DistanceCapSet)
         self.connect(self.ItemLevelButton,SIGNAL("clicked()"),self.ItemLevelShow)
         self.connect(self.Amount_Edit_5,SIGNAL("textChanged(const QString&)"),self.AmountChanged)
         self.connect(self.Amount_Edit_6,SIGNAL("textChanged(const QString&)"),self.AmountChanged)
@@ -718,9 +703,7 @@ class B_SC(QMainWindow):
         self.setTabOrder(self.Realm,self.CharClass)
         self.setTabOrder(self.CharClass,self.CharRace)
         self.setTabOrder(self.CharRace,self.CharLevel)
-        self.setTabOrder(self.CharLevel,self.TotalBonus)
-        self.setTabOrder(self.TotalBonus,self.CapDistance)
-        self.setTabOrder(self.CapDistance,self.PieceTab)
+        self.setTabOrder(self.CharLevel,self.PieceTab)
         self.setTabOrder(self.PieceTab,self.ItemLevel)
         self.setTabOrder(self.ItemLevel,self.ItemLevelButton)
         self.setTabOrder(self.ItemLevelButton,self.QualEdit)
@@ -786,9 +769,10 @@ class B_SC(QMainWindow):
         self.LabelCharClass.setText(self.__tr("Class:"))
         self.LabelCharRace.setText(self.__tr("Race:"))
         self.LabelCharLevel.setText(self.__tr("Level:"))
-        self.ButtonGroup2.setTitle(self.__tr("Display"))
-        self.TotalBonus.setText(self.__tr("Total Bonus"))
-        self.CapDistance.setText(self.__tr("Distance To Cap"))
+        self.TotalCostLabel.setText(self.__tr("Cost:"))
+        self.TotalCost.setText(self.__tr("0"))
+        self.TotalPriceLabel.setText(self.__tr("Price:"))
+        self.TotalPrice.setText(self.__tr("0"))
         self.GroupBox1.setTitle(self.__tr("Stats"))
         self.StrengthLabel.setText(self.__tr("STR:"))
         self.Strength.setText(self.__tr("0"))
@@ -849,11 +833,6 @@ class B_SC(QMainWindow):
         self.Slash.setText(self.__tr("0"))
         self.SlashRR.setText(self.__tr("-"))
         self.GroupSkillsList.setTitle(self.__tr("Skills"))
-        self.GroupBox5.setTitle(self.__tr("Totals"))
-        self.TotalCostLabel.setText(self.__tr("Cost:"))
-        self.TotalCost.setText(self.__tr("0"))
-        self.TotalPriceLabel.setText(self.__tr("Price:"))
-        self.TotalPrice.setText(self.__tr("0"))
         self.GroupOtherBonusList.setTitle(self.__tr("Other Bonuses"))
         self.LabelFileName.setText(QString.null)
         self.LabelOcError.setText(QString.null)
@@ -963,9 +942,6 @@ class B_SC(QMainWindow):
 
     def SkillClicked(self,a0):
         print "B_SC.SkillClicked(QListBoxItem*): Not implemented yet"
-
-    def TotalBonusSet(self):
-        print "B_SC.TotalBonusSet(): Not implemented yet"
 
     def Type_10_Changed(self,a0):
         print "B_SC.Type_10_Changed(const QString&): Not implemented yet"

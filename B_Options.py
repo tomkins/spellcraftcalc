@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'Options.ui'
 #
-# Created: Fri Nov 25 03:00:07 2005
+# Created: Mon Nov 28 18:49:34 2005
 #      by: The PyQt User Interface Compiler (pyuic) 3.15
 #
 # WARNING! All changes made in this file will be lost!
@@ -37,6 +37,9 @@ class B_Options(QDialog):
 
         self.Skill = QComboBox(0,self.General,"Skill")
         self.Skill.setGeometry(QRect(256,17,81,22))
+
+        self.CapDistance = QCheckBox(self.General,"CapDistance")
+        self.CapDistance.setGeometry(QRect(18,75,250,17))
 
         self.ShowDoneGems = QCheckBox(self.General,"ShowDoneGems")
         self.ShowDoneGems.setGeometry(QRect(18,100,250,17))
@@ -215,6 +218,7 @@ class B_Options(QDialog):
         self.OK.setText(self.__tr("OK"))
         self.Cancel.setText(self.__tr("Cancel"))
         self.TextLabel1.setText(self.__tr("Crafter Skill:"))
+        self.CapDistance.setText(self.__tr("Show Distance To Cap (instead of total)"))
         self.ShowDoneGems.setText(self.__tr("\"Done\" Gems do not show up in Materials List"))
         self.IncludeRR.setText(self.__tr("Include Racial Resists in Totals"))
         self.HideNonClassSkills.setText(self.__tr("Hide Skills not usable by this Class"))

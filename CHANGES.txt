@@ -1,4 +1,5 @@
 Updated 11/27/05 - Version 1.43.0011 (dev)
+Moved 'Distance To Cap' to the Options window, save user's preference.
 Remember the preference for Options - Include Done in Material list,
 and Options - Coop/PvP server items check boxes.
 Fixed the materials/costs of the Catacombs Brilliant and Finesse gems.
