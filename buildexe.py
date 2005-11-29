@@ -16,6 +16,7 @@ setup(name="kscraftsetup",
     windows=[sc],
     data_files=[
         ('.', ['./LICENSE.txt']),
+        ('.', ['./NOTICE.txt']),
         ('.', ['./CHANGES.txt']),
         ('.', ['./ScWindow.png']),
         ('.', ['./Spellcraft.png']),
