@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'CraftBar.ui'
 #
-# Created: Wed Nov 16 21:38:32 2005
+# Created: Mon Nov 28 22:02:16 2005
 #      by: The PyQt User Interface Compiler (pyuic) 3.15
 #
 # WARNING! All changes made in this file will be lost!
