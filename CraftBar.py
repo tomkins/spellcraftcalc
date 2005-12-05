@@ -141,7 +141,7 @@ class CraftBar(B_CraftBar):
             self.CharList.setColumnWidthMode(1, QListView.Maximum)
 
     def openFileDialog(self):
-        daocdir = QFileDialog.getExistingDirectory(None, self, '', 'Select DAoC Directory')
+        daocdir = QFileDialog.getExistingDirectory('', self, '', 'Select DAoC Directory')
         self.DaocPath.setText(daocdir)
 
     def computeBarEnd(self):
