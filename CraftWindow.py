@@ -100,7 +100,7 @@ class CraftWindow(B_CraftWindow):
     def computeRemakesCost(self, slotindex, remakes):
         gemtype = self.currentItem.getSlotAttr('player', slotindex, 'Type')
         if gemtype == 'Unused': return 0
-        effect = item.getSlotAttr(itemtype, slotindex, 'Effect')
+        effect = self.currentItem.getSlotAttr('player', slotindex, 'Effect')
         gemamount = self.currentItem.getSlotAttr('player', slotindex, 'Amount')
         costindex = ValuesLists[gemtype].index(gemamount)
         basecost = GemCosts[costindex]
