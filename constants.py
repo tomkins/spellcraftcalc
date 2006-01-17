@@ -265,7 +265,7 @@ AllBonusList = {
         'All Dual Wield Skills' : ('Celtic Dual',),
         'All Archery Skills' : (),
         'Other Skills' : ('Parry', 'Shield',),
-        'Races' : t2(('Celt', 'Firbolg', 'Shar',)),
+        'Races' : t2(('Celt', 'Elf', 'Firbolg', 'Shar',)),
         'Acuity' : (),
     },
 
