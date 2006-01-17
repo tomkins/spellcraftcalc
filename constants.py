@@ -358,7 +358,7 @@ AllBonusList = {
     },
 
     'Valewalker' : {
-        'All Spell Lines' : ('Arboreal Path',),
+        'All Spell Lines' : (),
         'All Magic Skills' : ('Arboreal Path',),
         'All Melee Weapon Skills' : ('Scythe',),
         'All Dual Wield Skills' : (),

@@ -1,5 +1,7 @@
 Updated 11/28/05 - Version 1.43.0011 (dev)
 
+  Add 'Elf' to 'Blademaster' classes choice of races.
+
   Moved 'Distance To Cap' to the Options window, save user's preference.
 
   Remember the preference for Options - Include Done in Material list,
@@ -8,7 +10,7 @@ Updated 11/28/05 - Version 1.43.0011 (dev)
   Fixed the materials/costs of the Catacombs Brilliant and Finesse gems.
   Fix materials window, when clicking a gem name, so the multiplier works.
 
-  Axed the 'Focus' list, all Focuses are now listed under the Skills list.
+  Axed the 'Focus' list.  All Focuses are now listed under the Skills list.
 
   Fixed the config report for 'All Spell Lines Focus' to show all focuses
   (was dropping the first focus for the class.)
@@ -39,6 +41,7 @@ Updated 11/28/05 - Version 1.43.0011 (dev)
 
   Sorcerer +Mind fixed to display for +All Magic (even with no real benefit).
   Ranger's Pathfinding skill changed from +all magic, to an 'other' skill.
+  Removed Valewalker Aboreal Focus, testing shows -no- gain, anymore.
 
   Fixed two-row MultiTabBar so all the quirks since 1.43.0009 are cleaned up.
 
