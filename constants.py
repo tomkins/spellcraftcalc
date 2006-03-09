@@ -1711,7 +1711,7 @@ ServerCodes = d2({
     '103' : 'Deira',
     '148' : 'Gorr',
     '147' : 'Camlann',
-#   '???' : 'Akatsuki', 
+    '145' : 'Akatsuki', 
 })
 
 
