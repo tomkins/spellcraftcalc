@@ -193,7 +193,7 @@ Python:from SearchingCombo import *
             <property name="geometry">
                 <rect>
                     <x>6</x>
-                    <y>134</y>
+                    <y>128</y>
                     <width>30</width>
                     <height>16</height>
                 </rect>
@@ -208,8 +208,8 @@ Python:from SearchingCombo import *
             </property>
             <property name="geometry">
                 <rect>
-                    <x>46</x>
-                    <y>134</y>
+                    <x>44</x>
+                    <y>128</y>
                     <width>114</width>
                     <height>16</height>
                 </rect>
@@ -228,7 +228,7 @@ Python:from SearchingCombo import *
             <property name="geometry">
                 <rect>
                     <x>6</x>
-                    <y>157</y>
+                    <y>144</y>
                     <width>30</width>
                     <height>16</height>
                 </rect>
@@ -243,14 +243,49 @@ Python:from SearchingCombo import *
             </property>
             <property name="geometry">
                 <rect>
-                    <x>46</x>
-                    <y>157</y>
+                    <x>44</x>
+                    <y>144</y>
                     <width>114</width>
                     <height>16</height>
                 </rect>
             </property>
             <property name="text">
                 <string>0</string>
+            </property>
+            <property name="alignment">
+                <set>AlignVCenter|AlignRight</set>
+            </property>
+        </widget>
+        <widget class="QLabel">
+            <property name="name">
+                <cstring>ItemTotalUtilityLabel</cstring>
+            </property>
+            <property name="geometry">
+                <rect>
+                    <x>6</x>
+                    <y>160</y>
+                    <width>70</width>
+                    <height>16</height>
+                </rect>
+            </property>
+            <property name="text">
+                <string>Total Utility:</string>
+            </property>
+        </widget>
+        <widget class="QLabel">
+            <property name="name">
+                <cstring>ItemTotalUtility</cstring>
+            </property>
+            <property name="geometry">
+                <rect>
+                    <x>84</x>
+                    <y>160</y>
+                    <width>74</width>
+                    <height>16</height>
+                </rect>
+            </property>
+            <property name="text">
+                <string>0.0</string>
             </property>
             <property name="alignment">
                 <set>AlignVCenter|AlignRight</set>
@@ -1449,13 +1484,13 @@ Python:from SearchingCombo import *
             <property name="geometry">
                 <rect>
                     <x>7</x>
-                    <y>5</y>
-                    <width>59</width>
-                    <height>22</height>
+                    <y>8</y>
+                    <width>34</width>
+                    <height>16</height>
                 </rect>
             </property>
             <property name="text">
-                <string>Item Level:</string>
+                <string>Level:</string>
             </property>
         </widget>
         <widget class="QLineEdit">
@@ -1464,7 +1499,7 @@ Python:from SearchingCombo import *
             </property>
             <property name="geometry">
                 <rect>
-                    <x>63</x>
+                    <x>46</x>
                     <y>5</y>
                     <width>35</width>
                     <height>22</height>
@@ -1477,7 +1512,7 @@ Python:from SearchingCombo import *
             </property>
             <property name="geometry">
                 <rect>
-                    <x>98</x>
+                    <x>81</x>
                     <y>7</y>
                     <width>18</width>
                     <height>18</height>
@@ -1493,10 +1528,10 @@ Python:from SearchingCombo import *
             </property>
             <property name="geometry">
                 <rect>
-                    <x>136</x>
-                    <y>5</y>
-                    <width>50</width>
-                    <height>22</height>
+                    <x>115</x>
+                    <y>8</y>
+                    <width>54</width>
+                    <height>16</height>
                 </rect>
             </property>
             <property name="text">
@@ -1509,7 +1544,7 @@ Python:from SearchingCombo import *
             </property>
             <property name="geometry">
                 <rect>
-                    <x>177</x>
+                    <x>160</x>
                     <y>5</y>
                     <width>52</width>
                     <height>22</height>
@@ -1522,22 +1557,9 @@ Python:from SearchingCombo import *
             </property>
             <property name="geometry">
                 <rect>
-                    <x>177</x>
+                    <x>160</x>
                     <y>5</y>
                     <width>51</width>
-                    <height>22</height>
-                </rect>
-            </property>
-        </widget>
-        <widget class="QLineEdit">
-            <property name="name">
-                <cstring>ItemName</cstring>
-            </property>
-            <property name="geometry">
-                <rect>
-                    <x>562</x>
-                    <y>48</y>
-                    <width>200</width>
                     <height>22</height>
                 </rect>
             </property>
@@ -1548,10 +1570,10 @@ Python:from SearchingCombo import *
             </property>
             <property name="geometry">
                 <rect>
-                    <x>244</x>
-                    <y>5</y>
+                    <x>232</x>
+                    <y>8</y>
                     <width>40</width>
-                    <height>22</height>
+                    <height>16</height>
                 </rect>
             </property>
             <property name="text">
@@ -1564,7 +1586,7 @@ Python:from SearchingCombo import *
             </property>
             <property name="geometry">
                 <rect>
-                    <x>284</x>
+                    <x>272</x>
                     <y>5</y>
                     <width>35</width>
                     <height>22</height>
@@ -1577,10 +1599,10 @@ Python:from SearchingCombo import *
             </property>
             <property name="geometry">
                 <rect>
-                    <x>330</x>
-                    <y>5</y>
+                    <x>315</x>
+                    <y>8</y>
                     <width>55</width>
-                    <height>22</height>
+                    <height>16</height>
                 </rect>
             </property>
             <property name="text">
@@ -1593,7 +1615,7 @@ Python:from SearchingCombo import *
             </property>
             <property name="geometry">
                 <rect>
-                    <x>375</x>
+                    <x>360</x>
                     <y>5</y>
                     <width>35</width>
                     <height>22</height>
@@ -1606,10 +1628,10 @@ Python:from SearchingCombo import *
             </property>
             <property name="geometry">
                 <rect>
-                    <x>420</x>
-                    <y>5</y>
+                    <x>403</x>
+                    <y>8</y>
                     <width>40</width>
-                    <height>22</height>
+                    <height>16</height>
                 </rect>
             </property>
             <property name="text">
@@ -1622,75 +1644,11 @@ Python:from SearchingCombo import *
             </property>
             <property name="geometry">
                 <rect>
-                    <x>460</x>
+                    <x>443</x>
                     <y>5</y>
                     <width>35</width>
                     <height>22</height>
                 </rect>
-            </property>
-        </widget>
-        <widget class="QLabel">
-            <property name="name">
-                <cstring>ItemUtilityLabel</cstring>
-            </property>
-            <property name="geometry">
-                <rect>
-                    <x>507</x>
-                    <y>3</y>
-                    <width>35</width>
-                    <height>14</height>
-                </rect>
-            </property>
-            <property name="text">
-                <string>Utility:</string>
-            </property>
-        </widget>
-        <widget class="QLabel">
-            <property name="name">
-                <cstring>ItemUtility</cstring>
-            </property>
-            <property name="geometry">
-                <rect>
-                    <x>545</x>
-                    <y>3</y>
-                    <width>28</width>
-                    <height>14</height>
-                </rect>
-            </property>
-            <property name="text">
-                <string>0.0</string>
-            </property>
-        </widget>
-        <widget class="QLabel">
-            <property name="name">
-                <cstring>ItemTotalUtilityLabel</cstring>
-            </property>
-            <property name="geometry">
-                <rect>
-                    <x>507</x>
-                    <y>17</y>
-                    <width>34</width>
-                    <height>14</height>
-                </rect>
-            </property>
-            <property name="text">
-                <string>Total:</string>
-            </property>
-        </widget>
-        <widget class="QLabel">
-            <property name="name">
-                <cstring>ItemTotalUtility</cstring>
-            </property>
-            <property name="geometry">
-                <rect>
-                    <x>545</x>
-                    <y>17</y>
-                    <width>73</width>
-                    <height>14</height>
-                </rect>
-            </property>
-            <property name="text">
-                <string>0.0</string>
             </property>
         </widget>
         <widget class="QCheckBox">
@@ -1699,8 +1657,8 @@ Python:from SearchingCombo import *
             </property>
             <property name="geometry">
                 <rect>
-                    <x>579</x>
-                    <y>7</y>
+                    <x>526</x>
+                    <y>6</y>
                     <width>71</width>
                     <height>22</height>
                 </rect>
@@ -1709,20 +1667,74 @@ Python:from SearchingCombo import *
                 <string>Equipped</string>
             </property>
         </widget>
-        <widget class="QPushButton">
+        <widget class="QButtonGroup">
             <property name="name">
-                <cstring>CraftButton</cstring>
+                <cstring>ButtonGroup1</cstring>
+            </property>
+            <property name="enabled">
+                <bool>true</bool>
             </property>
             <property name="geometry">
                 <rect>
-                    <x>683</x>
-                    <y>5</y>
-                    <width>79</width>
-                    <height>26</height>
+                    <x>615</x>
+                    <y>6</y>
+                    <width>138</width>
+                    <height>19</height>
                 </rect>
             </property>
-            <property name="text">
-                <string>Craft...</string>
+            <property name="lineWidth">
+                <number>0</number>
+            </property>
+            <property name="title">
+                <string></string>
+            </property>
+            <widget class="QRadioButton">
+                <property name="name">
+                    <cstring>PlayerMade</cstring>
+                </property>
+                <property name="geometry">
+                    <rect>
+                        <x>2</x>
+                        <y>2</y>
+                        <width>85</width>
+                        <height>17</height>
+                    </rect>
+                </property>
+                <property name="text">
+                    <string>Player Made</string>
+                </property>
+            </widget>
+            <widget class="QRadioButton">
+                <property name="name">
+                    <cstring>Drop</cstring>
+                </property>
+                <property name="geometry">
+                    <rect>
+                        <x>92</x>
+                        <y>2</y>
+                        <width>52</width>
+                        <height>17</height>
+                    </rect>
+                </property>
+                <property name="text">
+                    <string>Drop</string>
+                </property>
+                <property name="checked">
+                    <bool>true</bool>
+                </property>
+            </widget>
+        </widget>
+        <widget class="QLineEdit">
+            <property name="name">
+                <cstring>ItemName</cstring>
+            </property>
+            <property name="geometry">
+                <rect>
+                    <x>562</x>
+                    <y>48</y>
+                    <width>200</width>
+                    <height>22</height>
+                </rect>
             </property>
         </widget>
         <widget class="QLabel">
@@ -1842,63 +1854,6 @@ Python:from SearchingCombo import *
             <property name="text">
                 <string>Name</string>
             </property>
-        </widget>
-        <widget class="QButtonGroup">
-            <property name="name">
-                <cstring>ButtonGroup1</cstring>
-            </property>
-            <property name="enabled">
-                <bool>true</bool>
-            </property>
-            <property name="geometry">
-                <rect>
-                    <x>615</x>
-                    <y>31</y>
-                    <width>138</width>
-                    <height>19</height>
-                </rect>
-            </property>
-            <property name="lineWidth">
-                <number>0</number>
-            </property>
-            <property name="title">
-                <string></string>
-            </property>
-            <widget class="QRadioButton">
-                <property name="name">
-                    <cstring>PlayerMade</cstring>
-                </property>
-                <property name="geometry">
-                    <rect>
-                        <x>2</x>
-                        <y>2</y>
-                        <width>85</width>
-                        <height>17</height>
-                    </rect>
-                </property>
-                <property name="text">
-                    <string>Player Made</string>
-                </property>
-            </widget>
-            <widget class="QRadioButton">
-                <property name="name">
-                    <cstring>Drop</cstring>
-                </property>
-                <property name="geometry">
-                    <rect>
-                        <x>92</x>
-                        <y>2</y>
-                        <width>52</width>
-                        <height>17</height>
-                    </rect>
-                </property>
-                <property name="text">
-                    <string>Drop</string>
-                </property>
-                <property name="checked">
-                    <bool>true</bool>
-                </property>
-            </widget>
         </widget>
         <widget class="QLabel">
             <property name="name">
@@ -2488,6 +2443,19 @@ Python:from SearchingCombo import *
         </widget>
         <widget class="SearchingCombo">
             <property name="name">
+                <cstring>Amount_Drop_5</cstring>
+            </property>
+            <property name="geometry">
+                <rect>
+                    <x>177</x>
+                    <y>132</y>
+                    <width>52</width>
+                    <height>22</height>
+                </rect>
+            </property>
+        </widget>
+        <widget class="SearchingCombo">
+            <property name="name">
                 <cstring>Effect_5</cstring>
             </property>
             <property name="geometry">
@@ -2497,6 +2465,75 @@ Python:from SearchingCombo import *
                     <width>206</width>
                     <height>22</height>
                 </rect>
+            </property>
+        </widget>
+        <widget class="SearchingCombo">
+            <property name="name">
+                <cstring>Quality_5</cstring>
+            </property>
+            <property name="geometry">
+                <rect>
+                    <x>387</x>
+                    <y>132</y>
+                    <width>52</width>
+                    <height>22</height>
+                </rect>
+            </property>
+        </widget>
+        <widget class="QLabel">
+            <property name="name">
+                <cstring>Points_5</cstring>
+            </property>
+            <property name="geometry">
+                <rect>
+                    <x>443</x>
+                    <y>132</y>
+                    <width>35</width>
+                    <height>22</height>
+                </rect>
+            </property>
+            <property name="text">
+                <string>0.0</string>
+            </property>
+            <property name="alignment">
+                <set>AlignVCenter|AlignRight</set>
+            </property>
+        </widget>
+        <widget class="QLabel">
+            <property name="name">
+                <cstring>Cost_5</cstring>
+            </property>
+            <property name="geometry">
+                <rect>
+                    <x>482</x>
+                    <y>132</y>
+                    <width>70</width>
+                    <height>22</height>
+                </rect>
+            </property>
+            <property name="text">
+                <string>0c</string>
+            </property>
+            <property name="alignment">
+                <set>AlignVCenter|AlignRight</set>
+            </property>
+            <property name="hAlign" stdset="0">
+            </property>
+        </widget>
+        <widget class="QLabel">
+            <property name="name">
+                <cstring>Name_5</cstring>
+            </property>
+            <property name="geometry">
+                <rect>
+                    <x>562</x>
+                    <y>132</y>
+                    <width>200</width>
+                    <height>22</height>
+                </rect>
+            </property>
+            <property name="text">
+                <string></string>
             </property>
         </widget>
         <widget class="QLabel">
@@ -2780,9 +2817,9 @@ Python:from SearchingCombo import *
             </property>
             <property name="geometry">
                 <rect>
-                    <x>380</x>
+                    <x>370</x>
                     <y>160</y>
-                    <width>76</width>
+                    <width>73</width>
                     <height>14</height>
                 </rect>
             </property>
@@ -2843,13 +2880,45 @@ Python:from SearchingCombo import *
         </widget>
         <widget class="QLabel">
             <property name="name">
+                <cstring>ItemUtilityLabel</cstring>
+            </property>
+            <property name="geometry">
+                <rect>
+                    <x>562</x>
+                    <y>160</y>
+                    <width>35</width>
+                    <height>14</height>
+                </rect>
+            </property>
+            <property name="text">
+                <string>Utility:</string>
+            </property>
+        </widget>
+        <widget class="QLabel">
+            <property name="name">
+                <cstring>ItemUtility</cstring>
+            </property>
+            <property name="geometry">
+                <rect>
+                    <x>615</x>
+                    <y>160</y>
+                    <width>35</width>
+                    <height>14</height>
+                </rect>
+            </property>
+            <property name="text">
+                <string>0.0</string>
+            </property>
+        </widget>
+        <widget class="QLabel">
+            <property name="name">
                 <cstring>ItemOverchargeLabel</cstring>
             </property>
             <property name="geometry">
                 <rect>
-                    <x>380</x>
+                    <x>370</x>
                     <y>178</y>
-                    <width>59</width>
+                    <width>73</width>
                     <height>14</height>
                 </rect>
             </property>
@@ -2882,9 +2951,9 @@ Python:from SearchingCombo import *
             </property>
             <property name="geometry">
                 <rect>
-                    <x>380</x>
+                    <x>370</x>
                     <y>196</y>
-                    <width>50</width>
+                    <width>73</width>
                     <height>14</height>
                 </rect>
             </property>
@@ -2927,6 +2996,22 @@ Python:from SearchingCombo import *
             </property>
             <property name="text">
                 <string>Load Item</string>
+            </property>
+        </widget>
+        <widget class="QPushButton">
+            <property name="name">
+                <cstring>CraftButton</cstring>
+            </property>
+            <property name="geometry">
+                <rect>
+                    <x>683</x>
+                    <y>189</y>
+                    <width>79</width>
+                    <height>26</height>
+                </rect>
+            </property>
+            <property name="text">
+                <string>Craft...</string>
             </property>
         </widget>
         <widget class="QPushButton">
@@ -2999,37 +3084,61 @@ Python:from SearchingCombo import *
         <sender>Type_1</sender>
         <signal>activated(const QString&amp;)</signal>
         <receiver>B_SC</receiver>
-        <slot>Type_1_Changed(const QString&amp;)</slot>
+        <slot>TypeChanged(const QString&amp;)</slot>
     </connection>
     <connection>
         <sender>Type_2</sender>
         <signal>activated(const QString&amp;)</signal>
         <receiver>B_SC</receiver>
-        <slot>Type_2_Changed(const QString&amp;)</slot>
+        <slot>TypeChanged(const QString&amp;)</slot>
     </connection>
     <connection>
         <sender>Type_3</sender>
         <signal>activated(const QString&amp;)</signal>
         <receiver>B_SC</receiver>
-        <slot>Type_3_Changed(const QString&amp;)</slot>
+        <slot>TypeChanged(const QString&amp;)</slot>
     </connection>
     <connection>
         <sender>Type_4</sender>
         <signal>activated(const QString&amp;)</signal>
         <receiver>B_SC</receiver>
-        <slot>Type_4_Changed(const QString&amp;)</slot>
+        <slot>TypeChanged(const QString&amp;)</slot>
     </connection>
     <connection>
         <sender>Type_5</sender>
         <signal>activated(const QString&amp;)</signal>
         <receiver>B_SC</receiver>
-        <slot>Type_5_Changed(const QString&amp;)</slot>
+        <slot>TypeChanged(const QString&amp;)</slot>
     </connection>
     <connection>
         <sender>Type_6</sender>
         <signal>activated(const QString&amp;)</signal>
         <receiver>B_SC</receiver>
-        <slot>Type_6_Changed(const QString&amp;)</slot>
+        <slot>TypeChanged(const QString&amp;)</slot>
+    </connection>
+    <connection>
+        <sender>Type_7</sender>
+        <signal>activated(const QString&amp;)</signal>
+        <receiver>B_SC</receiver>
+        <slot>TypeChanged(const QString&amp;)</slot>
+    </connection>
+    <connection>
+        <sender>Type_8</sender>
+        <signal>activated(const QString&amp;)</signal>
+        <receiver>B_SC</receiver>
+        <slot>TypeChanged(const QString&amp;)</slot>
+    </connection>
+    <connection>
+        <sender>Type_9</sender>
+        <signal>activated(const QString&amp;)</signal>
+        <receiver>B_SC</receiver>
+        <slot>TypeChanged(const QString&amp;)</slot>
+    </connection>
+    <connection>
+        <sender>Type_10</sender>
+        <signal>activated(const QString&amp;)</signal>
+        <receiver>B_SC</receiver>
+        <slot>TypeChanged(const QString&amp;)</slot>
     </connection>
     <connection>
         <sender>Amount_Drop_1</sender>
@@ -3056,40 +3165,70 @@ Python:from SearchingCombo import *
         <slot>AmountChanged(const QString&amp;)</slot>
     </connection>
     <connection>
+        <sender>Amount_Drop_5</sender>
+        <signal>activated(const QString&amp;)</signal>
+        <receiver>B_SC</receiver>
+        <slot>AmountChanged(const QString&amp;)</slot>
+    </connection>
+    <connection>
         <sender>Effect_1</sender>
         <signal>activated(const QString&amp;)</signal>
         <receiver>B_SC</receiver>
-        <slot>recalculate(const QString&amp;)</slot>
+        <slot>EffectChanged(const QString&amp;)</slot>
     </connection>
     <connection>
         <sender>Effect_2</sender>
         <signal>activated(const QString&amp;)</signal>
         <receiver>B_SC</receiver>
-        <slot>recalculate(const QString&amp;)</slot>
+        <slot>EffectChanged(const QString&amp;)</slot>
     </connection>
     <connection>
         <sender>Effect_3</sender>
         <signal>activated(const QString&amp;)</signal>
         <receiver>B_SC</receiver>
-        <slot>recalculate(const QString&amp;)</slot>
+        <slot>EffectChanged(const QString&amp;)</slot>
     </connection>
     <connection>
         <sender>Effect_4</sender>
         <signal>activated(const QString&amp;)</signal>
         <receiver>B_SC</receiver>
-        <slot>recalculate(const QString&amp;)</slot>
+        <slot>EffectChanged(const QString&amp;)</slot>
     </connection>
     <connection>
         <sender>Effect_5</sender>
         <signal>activated(const QString&amp;)</signal>
         <receiver>B_SC</receiver>
-        <slot>recalculate(const QString&amp;)</slot>
+        <slot>EffectChanged(const QString&amp;)</slot>
     </connection>
     <connection>
         <sender>Effect_6</sender>
         <signal>activated(const QString&amp;)</signal>
         <receiver>B_SC</receiver>
-        <slot>recalculate(const QString&amp;)</slot>
+        <slot>EffectChanged(const QString&amp;)</slot>
+    </connection>
+    <connection>
+        <sender>Effect_7</sender>
+        <signal>activated(const QString&amp;)</signal>
+        <receiver>B_SC</receiver>
+        <slot>EffectChanged(const QString&amp;)</slot>
+    </connection>
+    <connection>
+        <sender>Effect_8</sender>
+        <signal>activated(const QString&amp;)</signal>
+        <receiver>B_SC</receiver>
+        <slot>EffectChanged(const QString&amp;)</slot>
+    </connection>
+    <connection>
+        <sender>Effect_9</sender>
+        <signal>activated(const QString&amp;)</signal>
+        <receiver>B_SC</receiver>
+        <slot>EffectChanged(const QString&amp;)</slot>
+    </connection>
+    <connection>
+        <sender>Effect_10</sender>
+        <signal>activated(const QString&amp;)</signal>
+        <receiver>B_SC</receiver>
+        <slot>EffectChanged(const QString&amp;)</slot>
     </connection>
     <connection>
         <sender>QualDrop</sender>
@@ -3128,6 +3267,12 @@ Python:from SearchingCombo import *
         <slot>recalculate(const QString&amp;)</slot>
     </connection>
     <connection>
+        <sender>Quality_5</sender>
+        <signal>activated(const QString&amp;)</signal>
+        <receiver>B_SC</receiver>
+        <slot>recalculate(const QString&amp;)</slot>
+    </connection>
+    <connection>
         <sender>ClearItem</sender>
         <signal>clicked()</signal>
         <receiver>B_SC</receiver>
@@ -3144,18 +3289,6 @@ Python:from SearchingCombo import *
         <signal>clicked()</signal>
         <receiver>B_SC</receiver>
         <slot>ItemLevelShow()</slot>
-    </connection>
-    <connection>
-        <sender>Amount_Edit_5</sender>
-        <signal>textChanged(const QString&amp;)</signal>
-        <receiver>B_SC</receiver>
-        <slot>AmountChanged(const QString&amp;)</slot>
-    </connection>
-    <connection>
-        <sender>Amount_Edit_6</sender>
-        <signal>textChanged(const QString&amp;)</signal>
-        <receiver>B_SC</receiver>
-        <slot>AmountChanged(const QString&amp;)</slot>
     </connection>
     <connection>
         <sender>Amount_Edit_1</sender>
@@ -3177,6 +3310,42 @@ Python:from SearchingCombo import *
     </connection>
     <connection>
         <sender>Amount_Edit_4</sender>
+        <signal>textChanged(const QString&amp;)</signal>
+        <receiver>B_SC</receiver>
+        <slot>AmountChanged(const QString&amp;)</slot>
+    </connection>
+    <connection>
+        <sender>Amount_Edit_5</sender>
+        <signal>textChanged(const QString&amp;)</signal>
+        <receiver>B_SC</receiver>
+        <slot>AmountChanged(const QString&amp;)</slot>
+    </connection>
+    <connection>
+        <sender>Amount_Edit_6</sender>
+        <signal>textChanged(const QString&amp;)</signal>
+        <receiver>B_SC</receiver>
+        <slot>AmountChanged(const QString&amp;)</slot>
+    </connection>
+    <connection>
+        <sender>Amount_Edit_7</sender>
+        <signal>textChanged(const QString&amp;)</signal>
+        <receiver>B_SC</receiver>
+        <slot>AmountChanged(const QString&amp;)</slot>
+    </connection>
+    <connection>
+        <sender>Amount_Edit_8</sender>
+        <signal>textChanged(const QString&amp;)</signal>
+        <receiver>B_SC</receiver>
+        <slot>AmountChanged(const QString&amp;)</slot>
+    </connection>
+    <connection>
+        <sender>Amount_Edit_9</sender>
+        <signal>textChanged(const QString&amp;)</signal>
+        <receiver>B_SC</receiver>
+        <slot>AmountChanged(const QString&amp;)</slot>
+    </connection>
+    <connection>
+        <sender>Amount_Edit_10</sender>
         <signal>textChanged(const QString&amp;)</signal>
         <receiver>B_SC</receiver>
         <slot>AmountChanged(const QString&amp;)</slot>
@@ -3254,78 +3423,6 @@ Python:from SearchingCombo import *
         <slot>recalculate(const QString&amp;)</slot>
     </connection>
     <connection>
-        <sender>Type_7</sender>
-        <signal>activated(const QString&amp;)</signal>
-        <receiver>B_SC</receiver>
-        <slot>Type_7_Changed(const QString&amp;)</slot>
-    </connection>
-    <connection>
-        <sender>Type_8</sender>
-        <signal>activated(const QString&amp;)</signal>
-        <receiver>B_SC</receiver>
-        <slot>Type_8_Changed(const QString&amp;)</slot>
-    </connection>
-    <connection>
-        <sender>Type_9</sender>
-        <signal>activated(const QString&amp;)</signal>
-        <receiver>B_SC</receiver>
-        <slot>Type_9_Changed(const QString&amp;)</slot>
-    </connection>
-    <connection>
-        <sender>Type_10</sender>
-        <signal>activated(const QString&amp;)</signal>
-        <receiver>B_SC</receiver>
-        <slot>Type_10_Changed(const QString&amp;)</slot>
-    </connection>
-    <connection>
-        <sender>Amount_Edit_7</sender>
-        <signal>textChanged(const QString&amp;)</signal>
-        <receiver>B_SC</receiver>
-        <slot>AmountChanged(const QString&amp;)</slot>
-    </connection>
-    <connection>
-        <sender>Amount_Edit_8</sender>
-        <signal>textChanged(const QString&amp;)</signal>
-        <receiver>B_SC</receiver>
-        <slot>AmountChanged(const QString&amp;)</slot>
-    </connection>
-    <connection>
-        <sender>Amount_Edit_9</sender>
-        <signal>textChanged(const QString&amp;)</signal>
-        <receiver>B_SC</receiver>
-        <slot>AmountChanged(const QString&amp;)</slot>
-    </connection>
-    <connection>
-        <sender>Amount_Edit_10</sender>
-        <signal>textChanged(const QString&amp;)</signal>
-        <receiver>B_SC</receiver>
-        <slot>AmountChanged(const QString&amp;)</slot>
-    </connection>
-    <connection>
-        <sender>Effect_7</sender>
-        <signal>activated(const QString&amp;)</signal>
-        <receiver>B_SC</receiver>
-        <slot>recalculate(const QString&amp;)</slot>
-    </connection>
-    <connection>
-        <sender>Effect_8</sender>
-        <signal>activated(const QString&amp;)</signal>
-        <receiver>B_SC</receiver>
-        <slot>recalculate(const QString&amp;)</slot>
-    </connection>
-    <connection>
-        <sender>Effect_9</sender>
-        <signal>activated(const QString&amp;)</signal>
-        <receiver>B_SC</receiver>
-        <slot>recalculate(const QString&amp;)</slot>
-    </connection>
-    <connection>
-        <sender>Effect_10</sender>
-        <signal>activated(const QString&amp;)</signal>
-        <receiver>B_SC</receiver>
-        <slot>recalculate(const QString&amp;)</slot>
-    </connection>
-    <connection>
         <sender>CharRace</sender>
         <signal>activated(const QString&amp;)</signal>
         <receiver>B_SC</receiver>
@@ -3372,7 +3469,9 @@ Python:from SearchingCombo import *
     <tabstop>Quality_4</tabstop>
     <tabstop>Type_5</tabstop>
     <tabstop>Amount_Edit_5</tabstop>
+    <tabstop>Amount_Drop_5</tabstop>
     <tabstop>Effect_5</tabstop>
+    <tabstop>Quality_5</tabstop>
     <tabstop>Type_6</tabstop>
     <tabstop>Amount_Edit_6</tabstop>
     <tabstop>Effect_6</tabstop>
@@ -3412,16 +3511,8 @@ Python:from SearchingCombo import *
     <slot>QualityChanged(const QString&amp;)</slot>
     <slot>Save_Item()</slot>
     <slot>SkillClicked(QListBoxItem*)</slot>
-    <slot>Type_10_Changed(const QString&amp;)</slot>
-    <slot>Type_1_Changed(const QString&amp;)</slot>
-    <slot>Type_2_Changed(const QString&amp;)</slot>
-    <slot>Type_3_Changed(const QString&amp;)</slot>
-    <slot>Type_4_Changed(const QString&amp;)</slot>
-    <slot>Type_5_Changed(const QString&amp;)</slot>
-    <slot>Type_6_Changed(const QString&amp;)</slot>
-    <slot>Type_7_Changed(const QString&amp;)</slot>
-    <slot>Type_8_Changed(const QString&amp;)</slot>
-    <slot>Type_9_Changed(const QString&amp;)</slot>
+    <slot>TypeChanged(const QString&amp;)</slot>
+    <slot>EffectChanged(const QString&amp;)</slot>
     <slot>newFile()</slot>
     <slot>RaceChanged(const QString&amp;)</slot>
     <slot>recalculate(const QString&amp;)</slot>

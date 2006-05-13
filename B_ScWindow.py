@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'ScWindow.ui'
 #
-# Created: Mon Nov 28 19:40:29 2005
+# Created: Sat May 13 01:57:43 2006
 #      by: The PyQt User Interface Compiler (pyuic) 3.15
 #
 # WARNING! All changes made in this file will be lost!
@@ -61,18 +61,25 @@ class B_SC(QMainWindow):
         self.CharLevel.setGeometry(QRect(46,107,37,22))
 
         self.TotalCostLabel = QLabel(self.GroupBox9,"TotalCostLabel")
-        self.TotalCostLabel.setGeometry(QRect(6,134,30,16))
+        self.TotalCostLabel.setGeometry(QRect(6,128,30,16))
 
         self.TotalCost = QLabel(self.GroupBox9,"TotalCost")
-        self.TotalCost.setGeometry(QRect(46,134,114,16))
+        self.TotalCost.setGeometry(QRect(44,128,114,16))
         self.TotalCost.setAlignment(QLabel.AlignVCenter | QLabel.AlignRight)
 
         self.TotalPriceLabel = QLabel(self.GroupBox9,"TotalPriceLabel")
-        self.TotalPriceLabel.setGeometry(QRect(6,157,30,16))
+        self.TotalPriceLabel.setGeometry(QRect(6,144,30,16))
 
         self.TotalPrice = QLabel(self.GroupBox9,"TotalPrice")
-        self.TotalPrice.setGeometry(QRect(46,157,114,16))
+        self.TotalPrice.setGeometry(QRect(44,144,114,16))
         self.TotalPrice.setAlignment(QLabel.AlignVCenter | QLabel.AlignRight)
+
+        self.ItemTotalUtilityLabel = QLabel(self.GroupBox9,"ItemTotalUtilityLabel")
+        self.ItemTotalUtilityLabel.setGeometry(QRect(6,160,70,16))
+
+        self.ItemTotalUtility = QLabel(self.GroupBox9,"ItemTotalUtility")
+        self.ItemTotalUtility.setGeometry(QRect(84,160,74,16))
+        self.ItemTotalUtility.setAlignment(QLabel.AlignVCenter | QLabel.AlignRight)
 
         self.GroupBox1 = QGroupBox(self.centralWidget(),"GroupBox1")
         self.GroupBox1.setGeometry(QRect(5,3,94,182))
@@ -316,61 +323,58 @@ class B_SC(QMainWindow):
         self.frame3.setFrameShadow(QGroupBox.Raised)
 
         self.ItemLevelLabel = QLabel(self.frame3,"ItemLevelLabel")
-        self.ItemLevelLabel.setGeometry(QRect(7,5,59,22))
+        self.ItemLevelLabel.setGeometry(QRect(7,8,34,16))
 
         self.ItemLevel = QLineEdit(self.frame3,"ItemLevel")
-        self.ItemLevel.setGeometry(QRect(63,5,35,22))
+        self.ItemLevel.setGeometry(QRect(46,5,35,22))
 
         self.ItemLevelButton = QPushButton(self.frame3,"ItemLevelButton")
-        self.ItemLevelButton.setGeometry(QRect(98,7,18,18))
+        self.ItemLevelButton.setGeometry(QRect(81,7,18,18))
 
         self.ItemQualityLabel = QLabel(self.frame3,"ItemQualityLabel")
-        self.ItemQualityLabel.setGeometry(QRect(136,5,50,22))
+        self.ItemQualityLabel.setGeometry(QRect(115,8,54,16))
 
         self.QualDrop = SearchingCombo(self.frame3,"QualDrop")
-        self.QualDrop.setGeometry(QRect(177,5,52,22))
+        self.QualDrop.setGeometry(QRect(160,5,52,22))
 
         self.QualEdit = QLineEdit(self.frame3,"QualEdit")
-        self.QualEdit.setGeometry(QRect(177,5,51,22))
+        self.QualEdit.setGeometry(QRect(160,5,51,22))
+
+        self.ItemBonusLabel = QLabel(self.frame3,"ItemBonusLabel")
+        self.ItemBonusLabel.setGeometry(QRect(232,8,40,16))
+
+        self.Bonus_Edit = QLineEdit(self.frame3,"Bonus_Edit")
+        self.Bonus_Edit.setGeometry(QRect(272,5,35,22))
+
+        self.ItemAFDPSLabel = QLabel(self.frame3,"ItemAFDPSLabel")
+        self.ItemAFDPSLabel.setGeometry(QRect(315,8,55,16))
+
+        self.AFDPS_Edit = QLineEdit(self.frame3,"AFDPS_Edit")
+        self.AFDPS_Edit.setGeometry(QRect(360,5,35,22))
+
+        self.ItemSpeedLabel = QLabel(self.frame3,"ItemSpeedLabel")
+        self.ItemSpeedLabel.setGeometry(QRect(403,8,40,16))
+
+        self.Speed_Edit = QLineEdit(self.frame3,"Speed_Edit")
+        self.Speed_Edit.setGeometry(QRect(443,5,35,22))
+
+        self.Equipped = QCheckBox(self.frame3,"Equipped")
+        self.Equipped.setGeometry(QRect(526,6,71,22))
+
+        self.ButtonGroup1 = QButtonGroup(self.frame3,"ButtonGroup1")
+        self.ButtonGroup1.setEnabled(1)
+        self.ButtonGroup1.setGeometry(QRect(615,6,138,19))
+        self.ButtonGroup1.setLineWidth(0)
+
+        self.PlayerMade = QRadioButton(self.ButtonGroup1,"PlayerMade")
+        self.PlayerMade.setGeometry(QRect(2,2,85,17))
+
+        self.Drop = QRadioButton(self.ButtonGroup1,"Drop")
+        self.Drop.setGeometry(QRect(92,2,52,17))
+        self.Drop.setChecked(1)
 
         self.ItemName = QLineEdit(self.frame3,"ItemName")
         self.ItemName.setGeometry(QRect(562,48,200,22))
-
-        self.ItemBonusLabel = QLabel(self.frame3,"ItemBonusLabel")
-        self.ItemBonusLabel.setGeometry(QRect(244,5,40,22))
-
-        self.Bonus_Edit = QLineEdit(self.frame3,"Bonus_Edit")
-        self.Bonus_Edit.setGeometry(QRect(284,5,35,22))
-
-        self.ItemAFDPSLabel = QLabel(self.frame3,"ItemAFDPSLabel")
-        self.ItemAFDPSLabel.setGeometry(QRect(330,5,55,22))
-
-        self.AFDPS_Edit = QLineEdit(self.frame3,"AFDPS_Edit")
-        self.AFDPS_Edit.setGeometry(QRect(375,5,35,22))
-
-        self.ItemSpeedLabel = QLabel(self.frame3,"ItemSpeedLabel")
-        self.ItemSpeedLabel.setGeometry(QRect(420,5,40,22))
-
-        self.Speed_Edit = QLineEdit(self.frame3,"Speed_Edit")
-        self.Speed_Edit.setGeometry(QRect(460,5,35,22))
-
-        self.ItemUtilityLabel = QLabel(self.frame3,"ItemUtilityLabel")
-        self.ItemUtilityLabel.setGeometry(QRect(507,3,35,14))
-
-        self.ItemUtility = QLabel(self.frame3,"ItemUtility")
-        self.ItemUtility.setGeometry(QRect(545,3,28,14))
-
-        self.ItemTotalUtilityLabel = QLabel(self.frame3,"ItemTotalUtilityLabel")
-        self.ItemTotalUtilityLabel.setGeometry(QRect(507,17,34,14))
-
-        self.ItemTotalUtility = QLabel(self.frame3,"ItemTotalUtility")
-        self.ItemTotalUtility.setGeometry(QRect(545,17,73,14))
-
-        self.Equipped = QCheckBox(self.frame3,"Equipped")
-        self.Equipped.setGeometry(QRect(579,7,71,22))
-
-        self.CraftButton = QPushButton(self.frame3,"CraftButton")
-        self.CraftButton.setGeometry(QRect(683,5,79,26))
 
         self.LabelGemType = QLabel(self.frame3,"LabelGemType")
         self.LabelGemType.setGeometry(QRect(50,33,119,14))
@@ -394,18 +398,6 @@ class B_SC(QMainWindow):
 
         self.ItemNameLabel = QLabel(self.frame3,"ItemNameLabel")
         self.ItemNameLabel.setGeometry(QRect(562,33,40,14))
-
-        self.ButtonGroup1 = QButtonGroup(self.frame3,"ButtonGroup1")
-        self.ButtonGroup1.setEnabled(1)
-        self.ButtonGroup1.setGeometry(QRect(615,31,138,19))
-        self.ButtonGroup1.setLineWidth(0)
-
-        self.PlayerMade = QRadioButton(self.ButtonGroup1,"PlayerMade")
-        self.PlayerMade.setGeometry(QRect(2,2,85,17))
-
-        self.Drop = QRadioButton(self.ButtonGroup1,"Drop")
-        self.Drop.setGeometry(QRect(92,2,52,17))
-        self.Drop.setChecked(1)
 
         self.Gem_Label_1 = QLabel(self.frame3,"Gem_Label_1")
         self.Gem_Label_1.setGeometry(QRect(7,48,34,22))
@@ -532,8 +524,25 @@ class B_SC(QMainWindow):
         self.Amount_Edit_5 = QLineEdit(self.frame3,"Amount_Edit_5")
         self.Amount_Edit_5.setGeometry(QRect(177,132,51,22))
 
+        self.Amount_Drop_5 = SearchingCombo(self.frame3,"Amount_Drop_5")
+        self.Amount_Drop_5.setGeometry(QRect(177,132,52,22))
+
         self.Effect_5 = SearchingCombo(self.frame3,"Effect_5")
         self.Effect_5.setGeometry(QRect(233,132,206,22))
+
+        self.Quality_5 = SearchingCombo(self.frame3,"Quality_5")
+        self.Quality_5.setGeometry(QRect(387,132,52,22))
+
+        self.Points_5 = QLabel(self.frame3,"Points_5")
+        self.Points_5.setGeometry(QRect(443,132,35,22))
+        self.Points_5.setAlignment(QLabel.AlignVCenter | QLabel.AlignRight)
+
+        self.Cost_5 = QLabel(self.frame3,"Cost_5")
+        self.Cost_5.setGeometry(QRect(482,132,70,22))
+        self.Cost_5.setAlignment(QLabel.AlignVCenter | QLabel.AlignRight)
+
+        self.Name_5 = QLabel(self.frame3,"Name_5")
+        self.Name_5.setGeometry(QRect(562,132,200,22))
 
         self.Gem_Label_6 = QLabel(self.frame3,"Gem_Label_6")
         self.Gem_Label_6.setGeometry(QRect(7,153,34,22))
@@ -596,7 +605,7 @@ class B_SC(QMainWindow):
         self.Effect_10.setGeometry(QRect(233,237,206,22))
 
         self.ItemImbueLabel = QLabel(self.frame3,"ItemImbueLabel")
-        self.ItemImbueLabel.setGeometry(QRect(380,160,76,14))
+        self.ItemImbueLabel.setGeometry(QRect(370,160,73,14))
 
         self.ItemImbue = QLabel(self.frame3,"ItemImbue")
         self.ItemImbue.setGeometry(QRect(443,160,35,14))
@@ -608,15 +617,21 @@ class B_SC(QMainWindow):
         self.ItemImbueTotal = QLabel(self.frame3,"ItemImbueTotal")
         self.ItemImbueTotal.setGeometry(QRect(498,160,29,14))
 
+        self.ItemUtilityLabel = QLabel(self.frame3,"ItemUtilityLabel")
+        self.ItemUtilityLabel.setGeometry(QRect(562,160,35,14))
+
+        self.ItemUtility = QLabel(self.frame3,"ItemUtility")
+        self.ItemUtility.setGeometry(QRect(615,160,35,14))
+
         self.ItemOverchargeLabel = QLabel(self.frame3,"ItemOverchargeLabel")
-        self.ItemOverchargeLabel.setGeometry(QRect(380,178,59,14))
+        self.ItemOverchargeLabel.setGeometry(QRect(370,178,73,14))
 
         self.ItemOvercharge = QLabel(self.frame3,"ItemOvercharge")
         self.ItemOvercharge.setGeometry(QRect(443,178,90,14))
         self.ItemOvercharge.setAlignment(QLabel.AlignCenter)
 
         self.ItemCostLabel = QLabel(self.frame3,"ItemCostLabel")
-        self.ItemCostLabel.setGeometry(QRect(380,196,50,14))
+        self.ItemCostLabel.setGeometry(QRect(370,196,73,14))
 
         self.ItemCost = QLabel(self.frame3,"ItemCost")
         self.ItemCost.setGeometry(QRect(482,196,70,14))
@@ -624,6 +639,9 @@ class B_SC(QMainWindow):
 
         self.LoadItem = QPushButton(self.frame3,"LoadItem")
         self.LoadItem.setGeometry(QRect(683,157,79,26))
+
+        self.CraftButton = QPushButton(self.frame3,"CraftButton")
+        self.CraftButton.setGeometry(QRect(683,189,79,26))
 
         self.SaveItem = QPushButton(self.frame3,"SaveItem")
         self.SaveItem.setGeometry(QRect(683,189,79,26))
@@ -642,37 +660,51 @@ class B_SC(QMainWindow):
         self.connect(self.PieceTab,SIGNAL("selected(int)"),self.PieceTabChanged)
         self.connect(self.PlayerMade,SIGNAL("toggled(bool)"),self.PlayerToggled)
         self.connect(self.Drop,SIGNAL("toggled(bool)"),self.DropToggled)
-        self.connect(self.Type_1,SIGNAL("activated(const QString&)"),self.Type_1_Changed)
-        self.connect(self.Type_2,SIGNAL("activated(const QString&)"),self.Type_2_Changed)
-        self.connect(self.Type_3,SIGNAL("activated(const QString&)"),self.Type_3_Changed)
-        self.connect(self.Type_4,SIGNAL("activated(const QString&)"),self.Type_4_Changed)
-        self.connect(self.Type_5,SIGNAL("activated(const QString&)"),self.Type_5_Changed)
-        self.connect(self.Type_6,SIGNAL("activated(const QString&)"),self.Type_6_Changed)
+        self.connect(self.Type_1,SIGNAL("activated(const QString&)"),self.TypeChanged)
+        self.connect(self.Type_2,SIGNAL("activated(const QString&)"),self.TypeChanged)
+        self.connect(self.Type_3,SIGNAL("activated(const QString&)"),self.TypeChanged)
+        self.connect(self.Type_4,SIGNAL("activated(const QString&)"),self.TypeChanged)
+        self.connect(self.Type_5,SIGNAL("activated(const QString&)"),self.TypeChanged)
+        self.connect(self.Type_6,SIGNAL("activated(const QString&)"),self.TypeChanged)
+        self.connect(self.Type_7,SIGNAL("activated(const QString&)"),self.TypeChanged)
+        self.connect(self.Type_8,SIGNAL("activated(const QString&)"),self.TypeChanged)
+        self.connect(self.Type_9,SIGNAL("activated(const QString&)"),self.TypeChanged)
+        self.connect(self.Type_10,SIGNAL("activated(const QString&)"),self.TypeChanged)
         self.connect(self.Amount_Drop_1,SIGNAL("activated(const QString&)"),self.AmountChanged)
         self.connect(self.Amount_Drop_2,SIGNAL("activated(const QString&)"),self.AmountChanged)
         self.connect(self.Amount_Drop_3,SIGNAL("activated(const QString&)"),self.AmountChanged)
         self.connect(self.Amount_Drop_4,SIGNAL("activated(const QString&)"),self.AmountChanged)
-        self.connect(self.Effect_1,SIGNAL("activated(const QString&)"),self.recalculate)
-        self.connect(self.Effect_2,SIGNAL("activated(const QString&)"),self.recalculate)
-        self.connect(self.Effect_3,SIGNAL("activated(const QString&)"),self.recalculate)
-        self.connect(self.Effect_4,SIGNAL("activated(const QString&)"),self.recalculate)
-        self.connect(self.Effect_5,SIGNAL("activated(const QString&)"),self.recalculate)
-        self.connect(self.Effect_6,SIGNAL("activated(const QString&)"),self.recalculate)
+        self.connect(self.Amount_Drop_5,SIGNAL("activated(const QString&)"),self.AmountChanged)
+        self.connect(self.Effect_1,SIGNAL("activated(const QString&)"),self.EffectChanged)
+        self.connect(self.Effect_2,SIGNAL("activated(const QString&)"),self.EffectChanged)
+        self.connect(self.Effect_3,SIGNAL("activated(const QString&)"),self.EffectChanged)
+        self.connect(self.Effect_4,SIGNAL("activated(const QString&)"),self.EffectChanged)
+        self.connect(self.Effect_5,SIGNAL("activated(const QString&)"),self.EffectChanged)
+        self.connect(self.Effect_6,SIGNAL("activated(const QString&)"),self.EffectChanged)
+        self.connect(self.Effect_7,SIGNAL("activated(const QString&)"),self.EffectChanged)
+        self.connect(self.Effect_8,SIGNAL("activated(const QString&)"),self.EffectChanged)
+        self.connect(self.Effect_9,SIGNAL("activated(const QString&)"),self.EffectChanged)
+        self.connect(self.Effect_10,SIGNAL("activated(const QString&)"),self.EffectChanged)
         self.connect(self.QualDrop,SIGNAL("activated(const QString&)"),self.recalculate)
         self.connect(self.ItemLevel,SIGNAL("textChanged(const QString&)"),self.recalculate)
         self.connect(self.Quality_1,SIGNAL("activated(const QString&)"),self.recalculate)
         self.connect(self.Quality_2,SIGNAL("activated(const QString&)"),self.recalculate)
         self.connect(self.Quality_3,SIGNAL("activated(const QString&)"),self.recalculate)
         self.connect(self.Quality_4,SIGNAL("activated(const QString&)"),self.recalculate)
+        self.connect(self.Quality_5,SIGNAL("activated(const QString&)"),self.recalculate)
         self.connect(self.ClearItem,SIGNAL("clicked()"),self.ClearCurrentItem)
         self.connect(self.Equipped,SIGNAL("clicked()"),self.EquippedClicked)
         self.connect(self.ItemLevelButton,SIGNAL("clicked()"),self.ItemLevelShow)
-        self.connect(self.Amount_Edit_5,SIGNAL("textChanged(const QString&)"),self.AmountChanged)
-        self.connect(self.Amount_Edit_6,SIGNAL("textChanged(const QString&)"),self.AmountChanged)
         self.connect(self.Amount_Edit_1,SIGNAL("textChanged(const QString&)"),self.AmountChanged)
         self.connect(self.Amount_Edit_2,SIGNAL("textChanged(const QString&)"),self.AmountChanged)
         self.connect(self.Amount_Edit_3,SIGNAL("textChanged(const QString&)"),self.AmountChanged)
         self.connect(self.Amount_Edit_4,SIGNAL("textChanged(const QString&)"),self.AmountChanged)
+        self.connect(self.Amount_Edit_5,SIGNAL("textChanged(const QString&)"),self.AmountChanged)
+        self.connect(self.Amount_Edit_6,SIGNAL("textChanged(const QString&)"),self.AmountChanged)
+        self.connect(self.Amount_Edit_7,SIGNAL("textChanged(const QString&)"),self.AmountChanged)
+        self.connect(self.Amount_Edit_8,SIGNAL("textChanged(const QString&)"),self.AmountChanged)
+        self.connect(self.Amount_Edit_9,SIGNAL("textChanged(const QString&)"),self.AmountChanged)
+        self.connect(self.Amount_Edit_10,SIGNAL("textChanged(const QString&)"),self.AmountChanged)
         self.connect(self.LoadItem,SIGNAL("clicked()"),self.Load_Item)
         self.connect(self.SaveItem,SIGNAL("clicked()"),self.Save_Item)
         self.connect(self.CharLevel,SIGNAL("textChanged(const QString&)"),self.recalculate)
@@ -685,18 +717,6 @@ class B_SC(QMainWindow):
         self.connect(self.Speed_Edit,SIGNAL("textChanged(const QString&)"),self.recalculate)
         self.connect(self.Bonus_Edit,SIGNAL("textChanged(const QString&)"),self.recalculate)
         self.connect(self.ItemName,SIGNAL("textChanged(const QString&)"),self.recalculate)
-        self.connect(self.Type_7,SIGNAL("activated(const QString&)"),self.Type_7_Changed)
-        self.connect(self.Type_8,SIGNAL("activated(const QString&)"),self.Type_8_Changed)
-        self.connect(self.Type_9,SIGNAL("activated(const QString&)"),self.Type_9_Changed)
-        self.connect(self.Type_10,SIGNAL("activated(const QString&)"),self.Type_10_Changed)
-        self.connect(self.Amount_Edit_7,SIGNAL("textChanged(const QString&)"),self.AmountChanged)
-        self.connect(self.Amount_Edit_8,SIGNAL("textChanged(const QString&)"),self.AmountChanged)
-        self.connect(self.Amount_Edit_9,SIGNAL("textChanged(const QString&)"),self.AmountChanged)
-        self.connect(self.Amount_Edit_10,SIGNAL("textChanged(const QString&)"),self.AmountChanged)
-        self.connect(self.Effect_7,SIGNAL("activated(const QString&)"),self.recalculate)
-        self.connect(self.Effect_8,SIGNAL("activated(const QString&)"),self.recalculate)
-        self.connect(self.Effect_9,SIGNAL("activated(const QString&)"),self.recalculate)
-        self.connect(self.Effect_10,SIGNAL("activated(const QString&)"),self.recalculate)
         self.connect(self.CharRace,SIGNAL("activated(const QString&)"),self.RaceChanged)
 
         self.setTabOrder(self.CharName,self.Realm)
@@ -737,8 +757,10 @@ class B_SC(QMainWindow):
         self.setTabOrder(self.Effect_4,self.Quality_4)
         self.setTabOrder(self.Quality_4,self.Type_5)
         self.setTabOrder(self.Type_5,self.Amount_Edit_5)
-        self.setTabOrder(self.Amount_Edit_5,self.Effect_5)
-        self.setTabOrder(self.Effect_5,self.Type_6)
+        self.setTabOrder(self.Amount_Edit_5,self.Amount_Drop_5)
+        self.setTabOrder(self.Amount_Drop_5,self.Effect_5)
+        self.setTabOrder(self.Effect_5,self.Quality_5)
+        self.setTabOrder(self.Quality_5,self.Type_6)
         self.setTabOrder(self.Type_6,self.Amount_Edit_6)
         self.setTabOrder(self.Amount_Edit_6,self.Effect_6)
         self.setTabOrder(self.Effect_6,self.Type_7)
@@ -773,6 +795,8 @@ class B_SC(QMainWindow):
         self.TotalCost.setText(self.__tr("0"))
         self.TotalPriceLabel.setText(self.__tr("Price:"))
         self.TotalPrice.setText(self.__tr("0"))
+        self.ItemTotalUtilityLabel.setText(self.__tr("Total Utility:"))
+        self.ItemTotalUtility.setText(self.__tr("0.0"))
         self.GroupBox1.setTitle(self.__tr("Stats"))
         self.StrengthLabel.setText(self.__tr("STR:"))
         self.Strength.setText(self.__tr("0"))
@@ -838,18 +862,16 @@ class B_SC(QMainWindow):
         self.LabelOcError.setText(QString.null)
         self.LabelDupError.setText(QString.null)
         self.frame3.setTitle(QString.null)
-        self.ItemLevelLabel.setText(self.__tr("Item Level:"))
+        self.ItemLevelLabel.setText(self.__tr("Level:"))
         self.ItemLevelButton.setText(self.__tr("..."))
         self.ItemQualityLabel.setText(self.__tr("Quality:"))
         self.ItemBonusLabel.setText(self.__tr("Bonus:"))
         self.ItemAFDPSLabel.setText(self.__tr("AF/DPS:"))
         self.ItemSpeedLabel.setText(self.__tr("Speed:"))
-        self.ItemUtilityLabel.setText(self.__tr("Utility:"))
-        self.ItemUtility.setText(self.__tr("0.0"))
-        self.ItemTotalUtilityLabel.setText(self.__tr("Total:"))
-        self.ItemTotalUtility.setText(self.__tr("0.0"))
         self.Equipped.setText(self.__tr("Equipped"))
-        self.CraftButton.setText(self.__tr("Craft..."))
+        self.ButtonGroup1.setTitle(QString.null)
+        self.PlayerMade.setText(self.__tr("Player Made"))
+        self.Drop.setText(self.__tr("Drop"))
         self.LabelGemType.setText(self.__tr("Type"))
         self.LabelGemAmount.setText(self.__tr("Amount"))
         self.LabelGemEffect.setText(self.__tr("Effect"))
@@ -857,9 +879,6 @@ class B_SC(QMainWindow):
         self.LabelGemPoints.setText(self.__tr("Points"))
         self.LabelGemCost.setText(self.__tr("Cost"))
         self.ItemNameLabel.setText(self.__tr("Name"))
-        self.ButtonGroup1.setTitle(QString.null)
-        self.PlayerMade.setText(self.__tr("Player Made"))
-        self.Drop.setText(self.__tr("Drop"))
         self.Gem_Label_1.setText(self.__tr("Gem 1:"))
         self.Points_1.setText(self.__tr("0.0"))
         self.Cost_1.setText(self.__tr("0c"))
@@ -877,6 +896,9 @@ class B_SC(QMainWindow):
         self.Cost_4.setText(self.__tr("0c"))
         self.Name_4.setText(QString.null)
         self.Gem_Label_5.setText(self.__tr("Gem 5:"))
+        self.Points_5.setText(self.__tr("0.0"))
+        self.Cost_5.setText(self.__tr("0c"))
+        self.Name_5.setText(QString.null)
         self.Gem_Label_6.setText(self.__tr("Gem 6:"))
         self.Gem_Label_7.setText(self.__tr("Gem 7:"))
         self.Gem_Label_8.setText(self.__tr("Gem 8:"))
@@ -886,11 +908,14 @@ class B_SC(QMainWindow):
         self.ItemImbue.setText(self.__tr("0.0"))
         self.ItemImbueSlashLabel.setText(self.__tr("/"))
         self.ItemImbueTotal.setText(self.__tr("0.0"))
+        self.ItemUtilityLabel.setText(self.__tr("Utility:"))
+        self.ItemUtility.setText(self.__tr("0.0"))
         self.ItemOverchargeLabel.setText(self.__tr("Overcharge:"))
         self.ItemOvercharge.setText(self.__tr("None"))
         self.ItemCostLabel.setText(self.__tr("Item Cost:"))
         self.ItemCost.setText(QString.null)
         self.LoadItem.setText(self.__tr("Load Item"))
+        self.CraftButton.setText(self.__tr("Craft..."))
         self.SaveItem.setText(self.__tr("Save Item"))
         self.ClearItem.setText(self.__tr("Clear Item"))
 
@@ -943,35 +968,11 @@ class B_SC(QMainWindow):
     def SkillClicked(self,a0):
         print "B_SC.SkillClicked(QListBoxItem*): Not implemented yet"
 
-    def Type_10_Changed(self,a0):
-        print "B_SC.Type_10_Changed(const QString&): Not implemented yet"
+    def TypeChanged(self,a0):
+        print "B_SC.TypeChanged(const QString&): Not implemented yet"
 
-    def Type_1_Changed(self,a0):
-        print "B_SC.Type_1_Changed(const QString&): Not implemented yet"
-
-    def Type_2_Changed(self,a0):
-        print "B_SC.Type_2_Changed(const QString&): Not implemented yet"
-
-    def Type_3_Changed(self,a0):
-        print "B_SC.Type_3_Changed(const QString&): Not implemented yet"
-
-    def Type_4_Changed(self,a0):
-        print "B_SC.Type_4_Changed(const QString&): Not implemented yet"
-
-    def Type_5_Changed(self,a0):
-        print "B_SC.Type_5_Changed(const QString&): Not implemented yet"
-
-    def Type_6_Changed(self,a0):
-        print "B_SC.Type_6_Changed(const QString&): Not implemented yet"
-
-    def Type_7_Changed(self,a0):
-        print "B_SC.Type_7_Changed(const QString&): Not implemented yet"
-
-    def Type_8_Changed(self,a0):
-        print "B_SC.Type_8_Changed(const QString&): Not implemented yet"
-
-    def Type_9_Changed(self,a0):
-        print "B_SC.Type_9_Changed(const QString&): Not implemented yet"
+    def EffectChanged(self,a0):
+        print "B_SC.EffectChanged(const QString&): Not implemented yet"
 
     def newFile(self):
         print "B_SC.newFile(): Not implemented yet"
