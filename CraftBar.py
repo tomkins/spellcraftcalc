@@ -1,5 +1,5 @@
 # CraftBar.py: Dark Age of Camelot Spellcrafting Calculator 
-# See http://www.ugcs.caltech.edu/~jlamanna/daoc/sccalc/index.html for updates
+# See http://kscraft.sourceforge.net/ for updates
 
 # Copyright (C) 2003,  James Lamanna (jlamanna@ugcs.caltech.edu)
 
