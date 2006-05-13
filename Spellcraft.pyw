@@ -18,10 +18,13 @@
 # along with this program; if not, write to the Free Software
 # Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
-import psyco
+try:
+    import psyco
 
-if __name__ == '__main__':
-    psyco.full()
+    if __name__ == '__main__':
+        psyco.full()
+except:
+    pass
 
 import os
 import sys
@@ -45,6 +48,10 @@ class ScApplication(QApplication):
         splash = QSplashScreen(QPixmap("Spellcraft.png"));
         splash.show()
 
+        # Font sizes are strange things on Mac, while our favorite
+        # medeval font, Trebuchet MS, can only be counted on for
+        # Mac and Windows NT+ (on Windows 98 it just blows up)
+        #
         font = QFont(self.font())
         if QApplication.style().name()[0:9] == "Macintosh" and \
            sys.platform == "darwin":
@@ -52,7 +59,10 @@ class ScApplication(QApplication):
             #font.setFamily("Lucida Grande")
             font.setPointSize(11)
         elif sys.platform == "win32":
-            font.setFamily("Trebuchet MS")
+            if sys.getwindowsversion()[3] < 2:
+                font.setFamily("Arial")
+            else:
+                font.setFamily("Trebuchet MS")
             font.setPointSize(8)
         self.setFont(font)
 
