@@ -57,24 +57,8 @@ class ScWindow(B_SC):
         self.currentPieceTab = None
         self.extraSlotsOpen = False
         self.recentFiles = []
-        self.effectlists = {
-            'Unused' : UnusedList,
-            'Stat'   : StatList, 
-            'Resist' : ResistList, 
-            'Hits'   : HitsList, 
-            'Power'  : PowerList,
-            'Skill'  : [],
-            'Focus'  : []
-        }
-        self.dropeffectlists = self.effectlists.copy()
-        self.dropeffectlists['Stat'] =         DropStatList
-        self.dropeffectlists['Cap Increase'] = CapIncreaseList
-        self.dropeffectlists['PvE Bonus'] =    PvEBonusList
-        self.dropeffectlists['Other Bonus'] =  OtherBonusList
-        for effect in EffectItemNames.keys():
-            self.effectlists[effect] =     EffectItemNames[effect][0]
-            self.dropeffectlists[effect] = EffectItemList
-        self.dropeffectlists['Other Effect'] = EffectItemList
+        self.effectlists = GemLists['All'].copy()
+        self.dropeffectlists = DropLists['All'].copy()
 
         self.reportFile = os.path.join(os.path.dirname(os.path.abspath(sys.argv[0])),
                                        'reports', 'Default_Config_Report.xml')
@@ -88,7 +72,7 @@ class ScWindow(B_SC):
         self.statusBar().setSizeGripEnabled(0)
         self.statusBar().hide()
 
-        self.EffectWidths = [self.Effect_1.width(), self.Effect_5.width()]
+        self.EffectWidths = [self.Effect_1.width(), self.Effect_10.width()]
 
         self.PieceTab.setFocusPolicy(QWidget.StrongFocus)
         for tabname in PieceTabList:
@@ -110,10 +94,31 @@ class ScWindow(B_SC):
 
         self.Realm.insertStrList(list(Realms))
         self.QualDrop.insertStrList(list(QualityValues))
-        self.Quality_1.insertStrList(list(QualityValues))
-        self.Quality_2.insertStrList(list(QualityValues))
-        self.Quality_3.insertStrList(list(QualityValues))
-        self.Quality_4.insertStrList(list(QualityValues))
+
+
+        self.GemLabel = []
+        self.Type = []
+        self.Effect = []
+        self.AmountEdit = []
+        self.AmountDrop = []
+        self.Quality = []
+        self.Points = []
+        self.Cost = []
+        self.Name = []
+
+        for i in range(0, 10):
+            idx = i + 1
+            self.GemLabel.append(getattr(self, 'Gem_Label_%d' % idx))
+            self.Type.append(getattr(self, 'Type_%d' % idx))
+            self.Effect.append(getattr(self, 'Effect_%d' % idx))
+            self.AmountEdit.append(getattr(self, 'Amount_Edit_%d' % idx))
+            if i < 5:
+                self.AmountDrop.append(getattr(self, 'Amount_Drop_%d' % idx))
+                self.Quality.append(getattr(self, 'Quality_%d' % idx))
+                self.Quality[i].insertStrList(list(QualityValues))
+                self.Points.append(getattr(self, 'Points_%d' % idx))
+                self.Cost.append(getattr(self, 'Cost_%d' % idx))
+                self.Name.append(getattr(self, 'Name_%d' % idx))
 
         self.updateGeometry()
         self.centralWidget().setFixedSize(
@@ -229,73 +234,45 @@ class ScWindow(B_SC):
 
         self.extraSlots = []
         self.switchOnType = {'drop' : [], 'player' : [] }
-        self.switchOnType['drop'].append(self.QualEdit)
-        self.switchOnType['drop'].append(self.Amount_Edit_1)
-        self.switchOnType['drop'].append(self.Amount_Edit_2)
-        self.switchOnType['drop'].append(self.Amount_Edit_3)
-        self.switchOnType['drop'].append(self.Amount_Edit_4)
-        self.switchOnType['drop'].append(self.Amount_Edit_5)
-        self.switchOnType['drop'].append(self.Amount_Edit_6)
-        self.switchOnType['drop'].append(self.Amount_Edit_7)
-        self.switchOnType['drop'].append(self.Amount_Edit_8)
-        self.switchOnType['drop'].append(self.Amount_Edit_9)
-        self.switchOnType['drop'].append(self.Amount_Edit_10)
-        self.switchOnType['drop'].append(self.Gem_Label_5)
-        self.switchOnType['drop'].append(self.Gem_Label_6)
-        self.switchOnType['drop'].append(self.Gem_Label_7)
-        self.switchOnType['drop'].append(self.Gem_Label_8)
-        self.switchOnType['drop'].append(self.Gem_Label_9)
-        self.switchOnType['drop'].append(self.Gem_Label_10)
-        self.switchOnType['drop'].append(self.Type_5)
-        self.switchOnType['drop'].append(self.Type_6)
-        self.switchOnType['drop'].append(self.Type_7)
-        self.switchOnType['drop'].append(self.Type_8)
-        self.switchOnType['drop'].append(self.Type_9)
-        self.switchOnType['drop'].append(self.Type_10)
-        self.switchOnType['drop'].append(self.Effect_5)
-        self.switchOnType['drop'].append(self.Effect_6)
-        self.switchOnType['drop'].append(self.Effect_7)
-        self.switchOnType['drop'].append(self.Effect_8)
-        self.switchOnType['drop'].append(self.Effect_9)
-        self.switchOnType['drop'].append(self.Effect_10)
-        self.switchOnType['drop'].append(self.SaveItem)
-        self.switchOnType['drop'].append(self.ItemName)
+        self.switchOnType['drop'] = [ 
+            self.QualEdit, self.SaveItem, self.ItemName,
+            self.Amount_Edit_1, self.Amount_Edit_2,
+            self.Amount_Edit_3, self.Amount_Edit_4,
+            self.Amount_Edit_5, self.Amount_Edit_6,
+            self.Amount_Edit_7, self.Amount_Edit_8,
+            self.Amount_Edit_9, self.Amount_Edit_10,
+            #self.Gem_Label_5, 
+            self.Gem_Label_6,
+            self.Gem_Label_7, self.Gem_Label_8,
+            self.Gem_Label_9, self.Gem_Label_10,
+            #self.Type_5, 
+            self.Type_6, self.Type_7,
+            self.Type_8, self.Type_9, self.Type_10,
+            #self.Effect_5, 
+            self.Effect_6, self.Effect_7,
+            self.Effect_8, self.Effect_9, self.Effect_10,
+        ]
+        self.switchOnType['player'] = [
+            self.QualDrop, self.CraftButton, 
+            self.LabelGemQuality, self.LabelGemPoints, self.LabelGemCost,
+            self.Amount_Drop_1, self.Amount_Drop_2,
+            self.Amount_Drop_3, self.Amount_Drop_4,
+            self.Amount_Drop_5,
+            self.Quality_1, self.Quality_2, self.Quality_3, self.Quality_4,
+            self.Quality_5,
+            self.Points_1, self.Points_2, self.Points_3, self.Points_4,
+            self.Points_5,
+            self.Cost_1, self.Cost_2, self.Cost_3, self.Cost_4,
+            self.Cost_5,
+            self.Name_1, self.Name_2, self.Name_3, self.Name_4,
+            self.Name_5,
+            self.ItemImbueLabel, self.ItemImbue,
+            self.ItemImbueSlashLabel, self.ItemImbueTotal,
+            self.ItemOverchargeLabel, self.ItemOvercharge,
+            self.ItemCostLabel, self.ItemCost,
+        ]
 
-        self.switchOnType['player'].append(self.QualDrop)
-        self.switchOnType['player'].append(self.Amount_Drop_1)
-        self.switchOnType['player'].append(self.Amount_Drop_2)
-        self.switchOnType['player'].append(self.Amount_Drop_3)
-        self.switchOnType['player'].append(self.Amount_Drop_4)
-        self.switchOnType['player'].append(self.LabelGemQuality)
-        self.switchOnType['player'].append(self.Quality_1)
-        self.switchOnType['player'].append(self.Quality_2)
-        self.switchOnType['player'].append(self.Quality_3)
-        self.switchOnType['player'].append(self.Quality_4)
-        self.switchOnType['player'].append(self.LabelGemPoints)
-        self.switchOnType['player'].append(self.Points_1)
-        self.switchOnType['player'].append(self.Points_2)
-        self.switchOnType['player'].append(self.Points_3)
-        self.switchOnType['player'].append(self.Points_4)
-        self.switchOnType['player'].append(self.LabelGemCost)
-        self.switchOnType['player'].append(self.Cost_1)
-        self.switchOnType['player'].append(self.Cost_2)
-        self.switchOnType['player'].append(self.Cost_3)
-        self.switchOnType['player'].append(self.Cost_4)
-        self.switchOnType['player'].append(self.Name_1)
-        self.switchOnType['player'].append(self.Name_2)
-        self.switchOnType['player'].append(self.Name_3)
-        self.switchOnType['player'].append(self.Name_4)
-        self.switchOnType['player'].append(self.ItemImbueLabel)
-        self.switchOnType['player'].append(self.ItemImbue)
-        self.switchOnType['player'].append(self.ItemImbueSlashLabel)
-        self.switchOnType['player'].append(self.ItemImbueTotal)
-        self.switchOnType['player'].append(self.ItemOverchargeLabel)
-        self.switchOnType['player'].append(self.ItemOvercharge)
-        self.switchOnType['player'].append(self.ItemCostLabel)
-        self.switchOnType['player'].append(self.ItemCost)
-        self.switchOnType['player'].append(self.CraftButton)
         self.RealmChanged(self.realm)
-        #self.connect(self, SLOT('show()'), self.shown)
 
     def asXML(self):
         document = Document()
@@ -368,38 +345,38 @@ class ScWindow(B_SC):
             item.loadAttr('ItemQuality', unicode(self.QualDrop.currentText()))
         else:
             state = 'drop'
-            toprng = 11
+            toprng = 10
             item.loadAttr('ItemName', unicode(self.ItemName.text())) 
             item.loadAttr('ItemQuality', unicode(self.QualEdit.text()))
         item.loadAttr('AFDPS', unicode(self.AFDPS_Edit.text()))
         item.loadAttr('Speed', unicode(self.Speed_Edit.text())) 
         item.loadAttr('Bonus', unicode(self.Bonus_Edit.text()))
         item.loadAttr('ActiveState', state)
-        for slot in range(1, toprng):
-            typectrl = getattr(self, 'Type_%d' % slot)
-            effectctrl = getattr(self, 'Effect_%d' % slot)
+        for slot in range(0, toprng):
+            typectrl = self.Type[slot]
+            effectctrl = self.Effect[slot]
             if state == 'drop':
-                amountctrl = getattr(self, 'Amount_Edit_%d' % slot)
+                amountctrl = self.AmountEdit[slot]
                 qua = '99'
-                item.loadSlotAttrs(state, slot-1, 
+                item.loadSlotAttrs(state, slot, 
                     typectrl.currentText(), 
                     amountctrl.text(),
                     effectctrl.currentText(), 
                     qua,
-                    item.getSlotAttr(state, slot-1, 'Time'),
-                    item.getSlotAttr(state, slot-1, 'Remakes'),
-                    item.getSlotAttr(state, slot-1, 'Done'))
+                    item.getSlotAttr(state, slot, 'Time'),
+                    item.getSlotAttr(state, slot, 'Remakes'),
+                    item.getSlotAttr(state, slot, 'Done'))
             else:
-                amountctrl = getattr(self, 'Amount_Drop_%d' % slot)
-                qua = getattr(self, 'Quality_%d' % slot).currentText()
-                item.loadSlotAttrs(state, slot-1, 
+                amountctrl = self.AmountDrop[slot]
+                qua = self.Quality[slot].currentText()
+                item.loadSlotAttrs(state, slot, 
                     typectrl.currentText(), 
                     amountctrl.currentText(),
                     effectctrl.currentText(), 
                     qua,
-                    item.getSlotAttr(state, slot-1, 'Time'),
-                    item.getSlotAttr(state, slot-1, 'Remakes'),
-                    item.getSlotAttr(state, slot-1, 'Done'))
+                    item.getSlotAttr(state, slot, 'Time'),
+                    item.getSlotAttr(state, slot, 'Remakes'),
+                    item.getSlotAttr(state, slot, 'Done'))
         self.itemattrlist[self.currentTabLabel] = item
 
     def restoreItem(self, item):
@@ -416,23 +393,23 @@ class ScWindow(B_SC):
         else:
             self.Drop.setChecked(1)
             self.showDropWidgets()
-            toprng = 11
+            toprng = 10
             typelist = DropTypeList
         self.ItemLevel.setText(item.getAttr('Level'))
         location = item.getAttr('Location')
         self.Equipped.setChecked(int(item.getAttr('Equipped')))
-        for slot in range(1, toprng):
-            typecombo = getattr(self, 'Type_%d' % slot)
+        for slot in range(0, toprng):
+            typecombo = self.Type[slot]
             typecombo.clear()
             typecombo.insertStrList(list(typelist))
-            gemtype = str(item.getSlotAttr(itemtype, slot-1, 'Type'))
-            gemeffect = str(item.getSlotAttr(itemtype, slot-1, 'Effect'))
+            gemtype = str(item.getSlotAttr(itemtype, slot, 'Type'))
+            gemeffect = str(item.getSlotAttr(itemtype, slot, 'Effect'))
             if gemtype in typelist:
                 typecombo.setCurrentItem(typelist.index(gemtype))
             else:
                 gemtype = 'Unused'
             self.UpdateCombo(slot)
-            effcombo = getattr(self, 'Effect_%d' % slot)
+            effcombo = self.Effect[slot]
             if self.Drop.isChecked():
                 if not gemeffect in self.dropeffectlists[gemtype]:
                     if not isinstance(self.dropeffectlists[gemtype], list):
@@ -447,22 +424,24 @@ class ScWindow(B_SC):
                     self.effectlists[gemtype].append(gemeffect)
                     effcombo.insertStrList( [gemeffect] )
                 effectlist = self.effectlists[gemtype]
-            effcombo.setCurrentItem(effectlist.index(gemeffect))
+            if gemeffect in effectlist:
+                effcombo.setCurrentItem(effectlist.index(gemeffect))
             if itemtype == 'drop':
-                am = item.getSlotAttr(itemtype, slot-1, 'Amount')
-                amedit = getattr(self, 'Amount_Edit_%d' % slot)
+                am = item.getSlotAttr(itemtype, slot, 'Amount')
+                amedit = self.AmountEdit[slot]
                 amedit.setText(am)
             else:
-                gemamount = item.getSlotAttr(itemtype, slot-1, 'Amount')
+                gemamount = item.getSlotAttr(itemtype, slot, 'Amount')
                 amountlist = ValuesLists[gemtype]
                 if gemamount in amountlist:
-                    getattr(self, 'Amount_Drop_%d' % slot).setCurrentItem(
+                    self.AmountDrop[slot].setCurrentItem(
                             amountlist.index(gemamount))
-                quacombo = getattr(self, 'Quality_%d' % slot)
-                gemqua = item.getSlotAttr(itemtype, slot-1, 'Qua')
+                quacombo = self.Quality[slot]
+                gemqua = item.getSlotAttr(itemtype, slot, 'Qua')
                 if gemqua in QualityValues:
                     if quacombo.count() > 0:
                         quacombo.setCurrentItem(QualityValues.index(gemqua))
+                
         self.AFDPS_Edit.setText(item.getAttr('AFDPS'))
         self.Speed_Edit.setText(item.getAttr('Speed'))
         self.Bonus_Edit.setText(item.getAttr('Bonus'))
@@ -473,6 +452,33 @@ class ScWindow(B_SC):
             if item.getAttr('ItemQuality') in QualityValues:
                 self.QualDrop.setCurrentItem(
                     QualityValues.index(item.getAttr('ItemQuality')))
+            typecombo = self.Type[4]
+            typecombo.clear()
+            typelist = list(EffectTypeList)
+            typecombo.insertStrList(typelist)
+            gemtype = item.getSlotAttr(itemtype, 4, 'Type')
+            gemeffect = item.getSlotAttr(itemtype, 4, 'Effect')
+            gemamount = item.getSlotAttr(itemtype, 4, 'Amount')
+            typecombo.setCurrentItem(typelist.index(gemtype))
+            self.UpdateCombo(4)
+            effcombo = self.Effect[4]
+            effectlist = self.effectlists[gemtype]
+            if not gemeffect in effectlist:
+                if not isinstance(self.effectlists[gemtype], list):
+                    self.effectlists[gemtype] = list(self.effectlists[gemtype])
+                effectlist.append(gemeffect)
+                effcombo.insertStrList( [gemeffect] )
+            if gemeffect in effectlist:
+                effcombo.setCurrentItem(effectlist.index(gemeffect))
+            if ValuesLists.has_key(gemtype):
+                if isinstance(ValuesLists[gemtype], tuple):
+                    amountlist = ValuesLists[gemtype]
+                else:
+                    if ValuesLists[gemtype].has_key(gemeffect):
+                        amountlist = ValuesLists[gemtype][gemeffect]
+                if gemamount in amountlist:
+                    self.AmountDrop[4].setCurrentItem(
+                            amountlist.index(gemamount))
         self.save = 1
         self.nocalc = wascalc
         self.calculate()
@@ -489,9 +495,9 @@ class ScWindow(B_SC):
         self.CharLevel.setText(str(charlevel))
         self.totals = { }
         self.capTotals = { }
-        for effect in ResistList:
+        for effect in GemLists['All']['Resist']:
             self.totals[effect] = 0
-        for effect in StatList:
+        for effect in GemLists['All']['Stat']:
             self.totals[effect] = 0
             self.capTotals[effect] = 0
         self.totals['Hits'] = 0
@@ -529,10 +535,10 @@ class ScWindow(B_SC):
                 if itemtype == 'player':
                   if amount == '' or gemtype == 'Unused' or amount == 0:
                     if key == self.currentTabLabel:
-                        getattr(self, 'Cost_%d' % (i+1)).setText('')
+                        self.Cost[i].setText('')
                   else:
                     if key == self.currentTabLabel:
-                        getattr(self, 'Cost_%d' % (i+1)).setText('')
+                        self.Cost[i].setText('')
                     costindex = ValuesLists[gemtype].index(str(amount))
                     cost = GemCosts[costindex]
                     remakecost = RemakeCosts[costindex]
@@ -550,7 +556,7 @@ class ScWindow(B_SC):
                     cost += remakecost * int(item.getSlotAttr(itemtype, i, 'Remakes'))
                     itemcost += cost
                     if key == self.currentTabLabel:
-                        getattr(self, 'Cost_%d' % (i+1)).setText(SC.formatCost(cost))
+                        self.Cost[i].setText(SC.formatCost(cost))
                 if gemtype == 'Skill':
                     if effect == 'All Magic Skills'\
                         or effect == 'All Melee Weapon Skills'\
@@ -656,13 +662,13 @@ class ScWindow(B_SC):
                     self.ItemImbue.setText('%3.1f' % imbue)
                     self.ItemImbueTotal.setText(unicode(itemimbue))
                     self.ItemCost.setText(SC.formatCost(itemcost))
-                    for i in range(1, 5):
-                        n = getattr(self, 'Name_%d' % i)
-                        n.setText(SC.getGemName(item, i-1))
-                        if item.getSlotAttr(itemtype, i-1, 'Done') == '1':
-                            getattr(self, 'Gem_Label_%d' % i).setEnabled(0)
+                    for i in range(0, 4):
+                        n = self.Name[i]
+                        n.setText(SC.getGemName(item, i))
+                        if item.getSlotAttr(itemtype, i, 'Done') == '1':
+                            self.GemLabel[i].setEnabled(0)
                         else:
-                            getattr(self, 'Gem_Label_%d' % i).setEnabled(1)
+                            self.GemLabel[i].setEnabled(1)
                     if (imbue - itemimbue) >= 6:
                         self.ItemOvercharge.setText('Impossible!')
                     elif imbue > (itemimbue+0.5):
@@ -675,7 +681,7 @@ class ScWindow(B_SC):
         for (key, val) in self.totals.items():
             if not self.capDistance:
                 if self.includeRacials:
-                    if ResistTable.has_key(key):
+                    if GemTables['All']['Resist'].has_key(key):
                         rr = str(getattr(self, key+'RR').text())
                         if rr != '-':
                             val += int(rr[1:-1])
@@ -746,7 +752,6 @@ class ScWindow(B_SC):
             itemcost = 0
             itemtype = item.getAttr('ActiveState')
             if itemtype == 'drop': continue
-            #if item.getAttr('Equipped') == '0': continue
             for i in range(0, 4):
                 gemcost, tierlvl = SC.computeGemCost(item, i)
                 cost += gemcost
@@ -819,15 +824,15 @@ class ScWindow(B_SC):
                 mval = (int(amount) - 1) * 5.0
                 if mval == 0: mval = 1.0    
             if display:
-                getattr(self, 'Points_%d' % (i+1)).setText('%3.1f' % mval)
+                self.Points[i].setText('%3.1f' % mval)
             mvals.append(mval)
         maximbue = max(mvals)
         if display:
             for j in range(0, len(mvals)):
                 if j != mvals.index(maximbue):
-                    getattr(self, 'Points_%d' % (j+1)).setText('%3.1f' % (mvals[j] / 2.0))
+                    self.Points[j].setText('%3.1f' % (mvals[j] / 2.0))
                 else:
-                    getattr(self, 'Points_%d' % (j+1)).setText('%3.1f' % mvals[j])
+                    self.Points[j].setText('%3.1f' % mvals[j])
         mvals.remove(maximbue)
         totalimbue = ((maximbue * 2 + sum(mvals)) / 2.0)
         return totalimbue
@@ -836,14 +841,15 @@ class ScWindow(B_SC):
         return ImbueMultipliers[type]
 
     def UpdateCombo(self, num):
-        effcombo = getattr(self, 'Effect_%d' % num)
-        typecombo = getattr(self, 'Type_%d' % num)
+        effcombo = self.Effect[num]
+        typecombo = self.Type[num]
+        efftext = unicode(effcombo.currentText())
         effcombo.clear()
         typetext = unicode(typecombo.currentText())
         if self.PlayerMade.isChecked():
-            amountcombo = getattr(self, 'Amount_Drop_%d' % num)
+            amountcombo = self.AmountDrop[num]
         else:
-            amountedit = getattr(self, 'Amount_Edit_%d' % num)
+            amountedit = self.AmountEdit[num]
         if typetext != 'Unused':
             if self.Drop.isChecked():
                 effectlist = self.dropeffectlists[typetext]
@@ -851,24 +857,38 @@ class ScWindow(B_SC):
                 effectlist = self.effectlists[typetext]
             if len(effectlist) > 0:
                 effcombo.insertStrList(list(effectlist))
+                if efftext in effectlist:
+                    effcombo.setCurrentItem(effectlist.index(efftext))
+                else:
+                    efftext = unicode(effcombo.currentText())
             if self.PlayerMade.isChecked():
-                valueslist = ValuesLists[typetext]
+                amtindex = amountcombo.currentItem()
                 amountcombo.clear()
-                amountcombo.insertStrList(list(valueslist))
-            else:
-                amountedit.setText('0')
+                if ValuesLists.has_key(typetext):
+                    if isinstance(ValuesLists[typetext], tuple):
+                        valueslist = ValuesLists[typetext]
+                    else:
+                        if ValuesLists[typetext].has_key(efftext):
+                            valueslist = ValuesLists[typetext][efftext]
+                if len(valueslist) > 0:
+                    amountcombo.insertStrList(list(valueslist))
+                if amtindex < len(valueslist):
+                    amountcombo.setCurrentItem(amtindex)
+#           kill an irritation, if switching type/effect, retain amount!
+#           else:
+#               amountedit.setText('')
         else:
             if self.PlayerMade.isChecked():
                 amountcombo.clear()
             else:
                 amountedit.clear()
         if self.PlayerMade.isChecked():
-            qualcombo = getattr(self, 'Quality_%d' % num)
+            qualcombo = self.Quality[num]
             qualcombo.setCurrentItem(len(QualityValues)-2)
 
     def RaceChanged(self, a0):
         race = str(self.CharRace.currentText())
-        for rt in ResistList:
+        for rt in GemLists['All']['Resist']:
             if Races['All'][race]['Resists'].has_key(rt):
               if self.includeRacials:
                 getattr(self, rt + 'RR').setText('('+str(Races['All'][race]['Resists'][rt])+')')
@@ -883,14 +903,14 @@ class ScWindow(B_SC):
         showrealm = self.realm
         if self.coop:
             showrealm = 'All'
-        self.dropeffectlists['Skill'] = DropSkillList[showrealm]
-        self.dropeffectlists['Focus'] = FocusList[showrealm]
+        self.dropeffectlists['Skill'] = DropLists[showrealm]['Skill']
+        self.dropeffectlists['Focus'] = DropLists[showrealm]['Focus']
         if self.hideNonClassSkills:
             self.effectlists['Skill'] = AllBonusList['All'][self.charclass]['All Skills']
             self.effectlists['Focus'] = AllBonusList['All'][self.charclass]['All Focus']
         else:
-            self.effectlists['Skill'] = SkillList[showrealm]
-            self.effectlists['Focus'] = FocusList[showrealm]
+            self.effectlists['Skill'] = GemLists[showrealm]['Skill']
+            self.effectlists['Focus'] = GemLists[showrealm]['Focus']
         race = str(self.CharRace.currentText())
         self.CharRace.clear()
         racelist = AllBonusList[self.realm][self.charclass]['Races']
@@ -911,42 +931,34 @@ class ScWindow(B_SC):
           self.CharClass.setCurrentItem(ClassList[self.realm].index(self.charclass))
         self.CharClassChanged('')
     
-    def TypeChanged(self, index):
+    def TypeChanged(self, Value):
+        index = self.focusWidget().name()[-2:]
+        if index[0] == '_': index = index[1:]
         wascalc = self.nocalc
         self.nocalc = 1
         self.modified = 1
-        self.UpdateCombo(index)
+        self.UpdateCombo(int(index) - 1)
         item = self.itemattrlist.get(self.currentTabLabel, Item(self.currentTabLabel))
         self.storeItem(item)
         self.nocalc = wascalc
         self.calculate()
 
-    def Type_1_Changed(self,a0):
-        self.TypeChanged(1)
-    def Type_2_Changed(self,a0):
-        self.TypeChanged(2)
-    def Type_3_Changed(self,a0):
-        self.TypeChanged(3)
-    def Type_4_Changed(self,a0):
-        self.TypeChanged(4)
-    def Type_5_Changed(self,a0):
-        self.TypeChanged(5)
-    def Type_6_Changed(self,a0):
-        self.TypeChanged(6)
-    def Type_7_Changed(self,a0):
-        self.TypeChanged(7)
-    def Type_8_Changed(self,a0):
-        self.TypeChanged(8)
-    def Type_9_Changed(self,a0):
-        self.TypeChanged(9)
-    def Type_10_Changed(self,a0):
-        self.TypeChanged(10)
-
+    def EffectChanged(self, value):
+        index = self.focusWidget().name()[-2:]
+        if index[0] == '_': index = index[1:]
+        wascalc = self.nocalc
+        self.nocalc = 1
+        self.modified = 1
+        self.UpdateCombo(int(index) - 1)
+        item = self.itemattrlist.get(self.currentTabLabel, Item(self.currentTabLabel))
+        self.storeItem(item)
+        self.nocalc = wascalc
+        self.calculate()
 
     def showWideEffects(self, wide):
         width = self.EffectWidths[wide]
-        for num in range(1, 5):
-          eff = getattr(self, 'Effect_%d' % num)
+        for num in range(0, 5):
+          eff = self.Effect[num]
           eff.setGeometry(eff.x(), eff.y(), width, eff.height())
 
     def showDropWidgets(self):
@@ -959,6 +971,8 @@ class ScWindow(B_SC):
         self.Gem_Label_2.setEnabled(1)
         self.Gem_Label_3.setEnabled(1)
         self.Gem_Label_4.setEnabled(1)
+        self.Gem_Label_5.setEnabled(1)
+        self.Gem_Label_5.setText('Gem 5:')
 
     def showPlayerWidgets(self):
         for w in self.switchOnType['player']:
@@ -966,6 +980,7 @@ class ScWindow(B_SC):
         for w in self.switchOnType['drop']:
             w.hide()
         self.showWideEffects(0)
+        self.Gem_Label_5.setText('Proc:')
 
     def DropToggled(self,a0):
         if self.nocalc:
@@ -1212,8 +1227,7 @@ class ScWindow(B_SC):
             if child.tagName == 'Name':
                 self.CharName.setText(XMLHelper.getText(child.childNodes))
             elif child.tagName == 'Class':
-                # defer for the moment
-                charclass = XMLHelper.getText(child.childNodes)
+                self.charclass = XMLHelper.getText(child.childNodes)
             elif child.tagName == 'Race':
                 racename = XMLHelper.getText(child.childNodes)
             elif child.tagName == 'Realm':
@@ -1235,8 +1249,8 @@ class ScWindow(B_SC):
                                  globals(), globals())
         self.Realm.setCurrentItem(Realms.index(self.realm))
         self.RealmChanged(self.realm)
-        if AllBonusList[self.realm].has_key(charclass):
-            self.CharClass.setCurrentItem(ClassList[self.realm].index(charclass))
+        if AllBonusList[self.realm].has_key(self.charclass):
+            self.CharClass.setCurrentItem(ClassList[self.realm].index(self.charclass))
             self.CharClassChanged('')
         if racename in AllBonusList[self.realm][self.charclass]['Races']:
             self.CharRace.setCurrentItem(AllBonusList[self.realm][self.charclass]['Races'].index(racename))
@@ -1259,7 +1273,7 @@ class ScWindow(B_SC):
                 self.CharName.setText(value)
             elif attr == 'CHAR_CLASS':
                 self.realm, charclass = string.split(value, '_', 1)
-                charclass = charclass[0]+string.lower(charclass[1:])
+                self.charclass = charclass[0]+string.lower(charclass[1:])
                 if self.realm == 'HIB':
                     self.realm = 'Hibernia'
                 elif self.realm == 'ALB':
@@ -1268,8 +1282,8 @@ class ScWindow(B_SC):
                     self.realm = 'Midgard'
                 self.Realm.setCurrentItem(Realms.index(self.realm))
                 self.RealmChanged(self.realm)
-                if AllBonusList[self.realm].has_key(charclass):
-                   self.CharClass.setCurrentItem(ClassList[self.realm].index(charclass))
+                if AllBonusList[self.realm].has_key(self.charclass):
+                   self.CharClass.setCurrentItem(ClassList[self.realm].index(self.charclass))
                    self.CharClassChanged('')
 
         for itemnum in range(0, 19):

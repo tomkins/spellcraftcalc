@@ -1,5 +1,5 @@
 # ReportWindow.py: Dark Age of Camelot Spellcrafting Calculator
-# See http://www.ugcs.caltech.edu/~jlamanna/daoc/sccalc/index.html for updates
+# See http://kscraft.sourceforge.net/ for updates
 
 # Copyright (C) 2003,  James Lamanna (jlamanna@ugcs.caltech.edu)
 
@@ -214,13 +214,13 @@ class ReportWindow(B_ReportWindow):
             'energy' : 0, 'matter' : 0, 'spirit' : 0, 
             'crush' : 0,  'thrust' : 0, 'slash' : 0
         }
-        for key in StatTable.keys():
+        for key in GemLists['All']['Stat']:
           totals[key] = 0
-        for key in HitsTable.keys():
+        for key in GemLists['All']['Hits']:
           totals[key] = 0
-        for key in PowerTable.keys():
+        for key in GemLists['All']['Power']:
           totals[key] = 0
-        for key in ResistTable.keys():
+        for key in GemLists['All']['Resist']:
           totals[key] = 0
         totals['AF'] = 0
         capTotals = { }
@@ -378,7 +378,7 @@ class ReportWindow(B_ReportWindow):
 
         for (key, val) in totals.items():
             if self.parent.includeRacials:
-                if ResistTable.has_key(string.capitalize(key)):
+                if GemTables['All']['Resist'].has_key(string.capitalize(key)):
                     rr = str(getattr(self.parent, string.capitalize(key)+'RR').text())
                     if rr != '-':
                         val += int(rr[1:-1])

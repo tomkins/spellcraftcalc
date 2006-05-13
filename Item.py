@@ -1,5 +1,5 @@
 # Item.py: Dark Age of Camelot Spellcrafting Calculator 
-# See http://www.ugcs.caltech.edu/~jlamanna/daoc/sccalc/index.html for updates
+# See http://kscraft.sourceforge.net/ for updates
 
 # Copyright (C) 2003,  James Lamanna (jlamanna@ugcs.caltech.edu)
 
@@ -35,7 +35,7 @@ class Item:
             'ItemQuality' : '',
             'Equipped' : '', 'Level' : ''}
         self.slots = { 'drop' : range(1, 11), 
-            'player' : range(1, 5) }
+            'player' : range(1, 6) }
 
         if loc == 'Neck' \
                 or loc == 'Cloak' \
@@ -96,6 +96,7 @@ class Item:
             self.loadSlotAttrs('drop', i, 'Unused', '', '', '99') 
         for i in range(0, 4):
             self.loadSlotAttrs('player', i, 'Unused', '', '', '99')
+        self.loadSlotAttrs('player', 4, 'Unused', '', '', '94')
 
     def loadSlotAttr(self, type, slotnum, attr, val):
         self.slots[type][slotnum][attr] = val
