@@ -1,12 +1,12 @@
 # constants.py: Dark Age of Camelot Spellcrafting Calculator
-# See http://www.ugcs.caltech.edu/~jlamanna/daoc/sccalc/index.html for updates
+# See http://kscraft.sourceforge.net/ for updates
 
-# Copyright t2(C) 2003,  James Lamanna t2(jlamanna@ugcs.caltech.edu)
+# Copyright (C) 2003,  James Lamanna
 
 # This program is free software; you can redistribute it and/or
 # modify it under the terms of the GNU General Public License
 # as published by the Free Software Foundation; either version 2
-# of the License, or t2(at your option) any later version.
+# of the License, or (at your option) any later version.
 
 # This program is distributed in the hope that it will be useful,
 # but WITHOUT ANY WARRANTY; without even the implied warranty of
@@ -18,24 +18,26 @@
 # Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
 __all__ = [
-  'QualityValues', 'CapIncreaseTable', 'HitsList', 'StatTableOrdered', 
-  'GemQualOCModifiers', 'ItemQualOCModifiers', 'ClassList', 'PowerTable', 
-  'Races', 'GemLiquids', 'GemNames', 'ImbuePts', 'HitsValues', 'RaceList', 
-  'DropStatTable', 'PvEBonusList', 'PowerList', 'ScVersion', 'FileExt', 'StatList', 
-  'ResistValues', 'OtherBonusList', 'HighCapBonusList', 'TypeList', 'UnusedTable',
-  'AllBonusList', 'DustsOrder', 'PowerValues', 'Caps', 'ResistList', 'GemDusts', 
-  'StatValues', 'DropSkillList', 'Realms', 'ValuesLists', 'SkillValues', 
-  'HitsTable', 'CapIncreaseList', 'FixEffectsTable', 'GemSubName', 'HotkeyGems', 
-  'RemakeCosts', 'FocusTable', 'DropStatList', 'GemTables', 'ResistTableOrdered', 
-  'StatTable', 'TabList', 'GemCosts', 'FocusValues', 'DropStatTableOrdered', 
-  'OCStartPercentages', 'UnusedValues', 'ShieldTypes', 'ResistTable', 'SkillList', 
-  'SkillTable', 'UnusedList', 'ImbueMultipliers', 'PvEBonusTable', 'DropTypeList', 
-  'MaterialGems', 'FocusList', 'OtherBonusTable', 'LiquidsOrder', 'ServerCodes',
-  'EffectTable', 'EffectRequiredLevel', 'EffectMetal', 'EffectItemNames',
-  'EffectItemList', 'EffectTypeList', 'BodyHitOdds', 'PieceTabList', 'JewelTabList', 
+  'ScVersion', 
+  'Realms', 'Races', 'RaceList', 'ClassList', 
+  'TypeList', 'EffectTypeList', 'DropTypeList', 'GemLists', 'DropLists', 
+  'QualityValues', 'ImbuePts', 'GemQualOCModifiers', 'ItemQualOCModifiers', 
+  'ServerCodes', 'FileExt', 
+  'HighCapBonusList', 
+  'AllBonusList', 'DustsOrder', 'Caps', 'GemDusts', 
+  'ValuesLists', 
+  'GemTables', 'GemSubName', 'HotkeyGems', 
+  'RemakeCosts', 
+  'TabList', 'GemCosts',
+  'OCStartPercentages', 'ShieldTypes',
+  'ImbueMultipliers',  
+  'GemLiquids', 'GemNames', 'MaterialGems', 'LiquidsOrder', 
+  'FixEffectsTable', 
+  'EffectRequiredLevel', 'EffectMetal', 'EffectItemNames',
+  'PieceTabList', 'JewelTabList', 'BodyHitOdds', 
 ]
 
-ScVersion = "Kort 1.43.0010 (dev)"
+ScVersion = "Kort 1.43.0012 (dev)"
 
 from tuple2 import * 
 from dict2 import * 
@@ -44,11 +46,11 @@ Realms = t2(('Albion', 'Hibernia', 'Midgard'))
 
 
 # Placeholder
-UnusedTable = d2({})
+unusedTable = d2({})
 
-UnusedList = t2()
+unusedList = t2()
 
-UnusedValues = t2()
+unusedValues = t2()
 
 
 AllBonusList = { 
@@ -641,7 +643,7 @@ EffectTypeList = t2((
 )
 
 
-StatTableOrdered = (
+statTableOrdered = (
     ('Strength',     'Fiery'   ), 
     ('Constitution', 'Earthen' ), 
     ('Dexterity',    'Vapor'   ), 
@@ -652,25 +654,25 @@ StatTableOrdered = (
     ('Empathy',      'Heated'  ),
 )
 
-StatTable = d2(StatTableOrdered)
+statTable = d2(statTableOrdered)
 
-StatList = t2(map(lambda(x): x[0], StatTableOrdered))
+statList = t2(map(lambda(x): x[0], statTableOrdered))
 
-StatValues = t2(('1', '4', '7', '10', '13', '16', '19', '22', '25', '28',))
+statValues = t2(('1', '4', '7', '10', '13', '16', '19', '22', '25', '28',))
 
 
 # Duplicate the Stat lists as DropStat lists, add non-craftable 'Acuity' stat
 #
-DropStatTableOrdered = t2(StatTableOrdered + (
+statTableOrdered = t2(statTableOrdered + (
     ('Acuity',       ''        ),
 ))
 
-DropStatTable = d2(DropStatTableOrdered)
+dropStatTable = d2(statTableOrdered)
 
-DropStatList = t2(map(lambda(x): x[0], DropStatTableOrdered))
+dropStatList = t2(map(lambda(x): x[0], statTableOrdered))
 
 
-ResistTableOrdered = (
+resistTableOrdered = (
     ('Body',   'Dusty'   ), 
     ('Cold',   'Icy'     ), 
     ('Heat',   'Heated'  ), 
@@ -682,32 +684,32 @@ ResistTableOrdered = (
     ('Slash',  'Watery'  ),
 )
 
-ResistTable = d2(ResistTableOrdered)
+resistTable = d2(resistTableOrdered)
 
-ResistList = map(lambda(x): x[0], ResistTableOrdered)
+resistList = map(lambda(x): x[0], resistTableOrdered)
 
-ResistValues = t2(('1', '2', '3', '5', '7', '9', '11', '13', '15', '17',))
+resistValues = t2(('1', '2', '3', '5', '7', '9', '11', '13', '15', '17',))
 
 
-HitsTable = d2((
+hitsTable = d2((
     ('Hits',   'Blood'   ),
 ))
 
-HitsList = t2(HitsTable.keys())
+hitsList = t2(hitsTable.keys())
 
-HitsValues = t2(('4', '12', '20', '28', '36', '44', '52', '60', '68', '76',))
+hitsValues = t2(('4', '12', '20', '28', '36', '44', '52', '60', '68', '76',))
 
 
-PowerTable = d2((
+powerTable = d2((
     ('Power',  'Mystical'),
 ))
 
-PowerList = t2(PowerTable.keys())
+powerList = t2(powerTable.keys())
 
-PowerValues = t2(('1', '2', '3', '5', '7', '9', '11', '13', '15', '17'))
+powerValues = t2(('1', '2', '3', '5', '7', '9', '11', '13', '15', '17'))
 
 
-FocusTable = {
+focusTable = {
 
     'Albion' : d2({
 
@@ -753,23 +755,23 @@ FocusTable = {
     }),
 }
 
-FocusTable['All'] = {}
+focusTable['All'] = {}
 for realm in Realms:
-  FocusTable['All'].update(FocusTable[realm])
-FocusTable['All'] = d2(FocusTable['All'])
-FocusTable = d2(FocusTable)
+  focusTable['All'].update(focusTable[realm])
+focusTable['All'] = d2(focusTable['All'])
+focusTable = d2(focusTable)
 
-FocusList = {}
-for realm in FocusTable.keys():
-  FocusList[realm] = FocusTable[realm].keys()
-  FocusList[realm].sort()
-  FocusList[realm] = t2(FocusList[realm])
-FocusList = d2(FocusList)
+focusList = {}
+for realm in focusTable.keys():
+  focusList[realm] = focusTable[realm].keys()
+  focusList[realm].sort()
+  focusList[realm] = t2(focusList[realm])
+focusList = d2(focusList)
 
-FocusValues = t2(('5', '10', '15', '20', '25', '30', '35', '40', '45', '50',))
+focusValues = t2(('5', '10', '15', '20', '25', '30', '35', '40', '45', '50',))
 
 
-SkillTable = { 
+skillTable = { 
 
     'Albion' : d2({
 
@@ -869,7 +871,6 @@ SkillTable = {
         'Left Axe' :          'Icy War Rune',
         'Mending' :           'Watery Chaos Rune',
         'Odin\'s Will' :      'Valiant Primal Rune', 
-        'Pacification' :      'Earthen Chaos Rune',
         'Parry' :             'Vapor Battle Jewel',
         'Runecarving' :       'Heated Chaos Rune',
         'Shield' :            'Fiery Battle Jewel',
@@ -884,172 +885,198 @@ SkillTable = {
     }),
 }
 
-SkillTable['All'] = {}
+skillTable['All'] = {}
 for realm in Realms:
-  SkillTable['All'].update(SkillTable[realm])
-SkillTable['All'] = d2(SkillTable['All'])
-SkillTable = d2(SkillTable)
+  skillTable['All'].update(skillTable[realm])
+skillTable['All'] = d2(skillTable['All'])
+skillTable = d2(skillTable)
 
-SkillList = {}
-DropSkillList = {}
+skillList = {}
+dropSkillList = {}
 
-for realm in SkillTable.keys():
-  skills = SkillTable[realm].keys()
+for realm in skillTable.keys():
+  skills = skillTable[realm].keys()
   skills.sort()
-  SkillList[realm] = t2(skills)
+  skillList[realm] = t2(skills)
   skills.insert(2, 'All Dual Wield Skills')
   skills.insert(3, 'All Archery Skills')
   # bug - CM Explorer shows +Witchcraft, but no craftable gem
   if realm == 'Midgard': skills.append('Witchcraft')
-  DropSkillList[realm] = t2(skills)
+  dropSkillList[realm] = t2(skills)
 
-SkillList = d2(SkillList)
-DropSkillList = d2(DropSkillList)
+skillList = d2(skillList)
+dropSkillList = d2(dropSkillList)
 
-SkillValues = t2(('1', '2', '3', '4', '5', '6', '7', '8',))
+skillValues = t2(('1', '2', '3', '4', '5', '6', '7', '8',))
 
 
-CapIncreaseList = t2(DropStatList + (
+capIncreaseList = t2(dropStatList + (
     'Hits', 
     'Power', 
     'AF',
 ))
 
-CapIncreaseTable = d2(dict.fromkeys(CapIncreaseList))
 
-
-OtherBonusTable = d2({
-    'AF' :                        '',
-    'Archery Damage' :            '',
-    'Archery Range' :             '',
-    'Archery Speed' :             '',
-    'Stat Buff Effectiveness' :   '',
-    'Casting Speed' :             '',
-    'Stat Debuff Effectiveness' : '',
-    'Fatigue' :                   '', 
-    'Healing Effectiveness' :     '',
-    'Spell Damage' :              '',
-    'Duration of Spells' :        '',
-    'Spell Range' :               '',
-    'Spell Piercing' :            '',
-    'Style Damage' :              '',
-    'Melee Damage' :              '',
-    'Melee Combat Speed' :        '',   
-    '% Power Pool' :              '', 
-    'Unique Bonus...':            '',
-})
-
-OtherBonusList = OtherBonusTable.keys()
-OtherBonusList.sort()
-OtherBonusList = t2(OtherBonusList)
-
-
-PvEBonusTable = d2({
-    'Defensive' :                          '',
-    'Concentration' :                      '', 
-    'Block' :                              '', 
-    'Evade' :                              '', 
-    'Parry' :                              '', 
-    'Negative Effect Duration Reduction' : '', 
-    'Bladeturn Reinforcement' :            '', 
-    'Piece Ablative' :                     '', 
-    'Damage Reduction' :                   '', 
-    'Reactionary Style Damage' :           '', 
-    'To Hit' :                             '', 
-    'Spell Power Cost Reduction' :         '', 
-    'Style Cost Reduction' :               '', 
-    'Death Experience Loss Reduction' :    '', 
-    'Arrow Recovery' :                     '', 
-    'Unique PvE Bonus...':                 '',
-})
-
-PvEBonusList = PvEBonusTable.keys()
-PvEBonusList.sort()
-PvEBonusList = t2(PvEBonusList)
-
-DDEffectDamageSubtable = t2(("41", "50", "59", "68", "77", "86", "95"))
-EffectRequiredLevel =    t2(("20", "25", "30", "35", "40", "43", "47"))
-
-DDTinctureMetalCommon =  t2(("Alloy", "Fine Alloy", "Mithril", "Adamantium", 
-                             "Asterite", "Netherium", "Arcanium",))
-EffectMetal = d2({
-    'Albion'   : DDTinctureMetalCommon,
-    'Hibernia' : t2(("Dolomite", "Cobolt", "Carbide", "Sapphire", 
-                     "Diamond", "Netherite", "Arcanite",)),
-    'Midgard'  : DDTinctureMetalCommon,
-})
-
-DDEffectSubtable = d2({
-    'Charged Effect':     DDEffectDamageSubtable,
-    'Reactive Effect': t2(DDEffectDamageSubtable[-3:]),
-    'Offensive Effect':   DDEffectDamageSubtable,
-})
-
-EffectTable = {
-    'Direct Damage (Fire)' :     ('Fire',   DDEffectSubtable),
-    'Direct Damage (Cold)' :     ('Cold',   DDEffectSubtable),
-    'Direct Damage (Energy)' :   ('Energy', DDEffectSubtable),
-    'Direct Damage (Spirit)' :   ('Spirit', DDEffectSubtable),
-    'Damage Over Time' :         ('Eroding',   t2(("64",))),
-    'Self AF Buff' :             ('Hardening', t2(("75",))),
-    'Self Melee Health Buffer' : ('Ablative', d2({
-                                      'Charged Effect':   t2(("50",)),
-                                      'Reactive Effect':  t2(("100",)),
-                                      'Offensive Effect': t2(("50",)), })),
-    'Self Melee Haste Buff' :    ('Celeric', d2({
-                                      'Charged Effect':   t2(("17",)),
-                                      'Reactive Effect':  t2(("20",)),
-                                      'Offensive Effect': t2(("20",)), })),
-    'Self Damage Shield Buff' :  ('Shard', d2({
-                                      'Charged Effect':   t2(("4",)),
-                                      'Reactive Effect':  t2(("5",)),
-                                      'Offensive Effect': t2(("5",)), })),
-}
-
-ProcEffectList = EffectTable.keys()
-ProcEffectList.sort()
-ProcEffectList = t2(ProcEffectList)
-
-
-EffectTable.update({
-    'Lifedrain' :                ('Leeching',     t2(("65",))),
-    'Str/Con Debuff' :           ('Withering',    t2(("56",))),
-    'Dex/Qui Debuff' :           ('Crippling',    t2(("56",))),
-    'Self Damage Add Buff' :     ('Honing',       t2(("11",))),
-    'Self Acuity Buff' :         ('Enlightening', t2(("75",))),
-})
-
-StableEffectList = EffectTable.keys()
-StableEffectList.sort()
-StableEffectList = t2(StableEffectList)
-
-EffectTable['Unused'] = (UnusedList,)
-EffectTable = d2(EffectTable)
-
-EffectItemNames = d2({
-    'Charged Effect' :   (StableEffectList, "Stable",   "Tincture",),
-    'Reactive Effect' :  (ProcEffectList,   "Reactive", "Armor Tincture",),
-    'Offensive Effect' : (ProcEffectList,   "Volatile", "Weapon Tincture",),
-})
-
-
-# Borrowed from Stable which is the most complete crafted list,
-# add more non-craftable effect types here:
-#
-EffectItemList = t2(
-     StableEffectList + (
-    'Unique Effect...',
+otherBonusList = t2((
+    '% Power Pool',
+    'AF',
+    'Archery Damage',
+    'Archery Range',
+    'Archery Speed',
+    'Casting Speed',
+    'Duration of Spells',
+    'Fatigue',
+    'Healing Effectiveness',
+    'Melee Damage',
+    'Melee Combat Speed',
+    'Spell Damage',
+    'Spell Piercing',
+    'Spell Range',
+    'Stat Buff Effectiveness',
+    'Stat Debuff Effectiveness',
+    'Style Damage',
+    'Unique Bonus...',
 ))
 
 
-GemTables = {
+pveBonusList = t2((
+    'Arrow Recovery',
+    'Bladeturn Reinforcement',
+    'Block',
+    'Concentration',
+    'Damage Reduction',
+    'Death Experience Loss Reduction',
+    'Defensive',
+    'Evade',
+    'Negative Effect Duration Reduction',
+    'Parry',
+    'Piece Ablative',
+    'Reactionary Style Damage',
+    'Spell Power Cost Reduction',
+    'Style Cost Reduction',
+    'To Hit',
+    'Unique PvE Bonus...',
+))
 
+
+EffectRequiredLevel =    t2(("20", "25", "30", "35", "40", "43", "47"))
+
+ddTinctureMetalCommon =  t2(("Alloy", "Fine Alloy", "Mithril", "Adamantium", 
+                             "Asterite", "Netherium", "Arcanium",))
+EffectMetal = d2({
+    'Albion'   : ddTinctureMetalCommon,
+    'Hibernia' : t2(("Dolomite", "Cobolt", "Carbide", "Sapphire", 
+                     "Diamond", "Netherite", "Arcanite",)),
+    'Midgard'  : ddTinctureMetalCommon,
+})
+
+ddEffectDamageSubtable = t2(("41", "50", "59", "68", "77", "86", "95"))
+
+offensiveEffectValues = d2({
+        'Direct Damage (Fire)' :     ddEffectDamageSubtable,
+        'Direct Damage (Cold)' :     ddEffectDamageSubtable,
+        'Direct Damage (Energy)' :   ddEffectDamageSubtable,
+        'Direct Damage (Spirit)' :   ddEffectDamageSubtable,
+        'Damage Over Time' :         t2(("64",)),
+        'Self AF Shield' :           t2(("75",)),
+        'Self Melee Health Buffer' : t2(("50",)),
+        'Self Melee Haste' :         t2(("20%",)),
+        'Self Damage Shield' :       t2(("5.1",)),
+})
+
+reactiveEffectValues = offensiveEffectValues.copy()
+reactiveEffectValues.update({
+        'Direct Damage (Fire)' :     t2(ddEffectDamageSubtable[-3:]),
+        'Direct Damage (Cold)' :     t2(ddEffectDamageSubtable[-3:]),
+        'Direct Damage (Energy)' :   t2(ddEffectDamageSubtable[-3:]),
+        'Direct Damage (Spirit)' :   t2(ddEffectDamageSubtable[-3:]),
+        'Self Melee Health Buffer' : t2(("100",)),
+})
+reactiveEffectValues = d2(reactiveEffectValues)
+
+chargedEffectValues = offensiveEffectValues.copy()
+chargedEffectValues.update({
+        'Self Melee Haste' :         t2(("17%",)),
+        'Self Damage Shield' :       t2(("4.2",)),
+        'Lifedrain' :                t2(("65",)),
+        'Str/Con Debuff' :           t2(("56",)),
+        'Dex/Qui Debuff' :           t2(("56",)),
+        'Self Damage Add' :          t2(("11.3",)),
+        'Self Acuity Buff' :         t2(("75",)),
+})
+chargedEffectValues = d2(chargedEffectValues)
+
+procEffectList = offensiveEffectValues.keys()
+procEffectList.sort()
+procEffectList = t2(procEffectList)
+
+stableEffectList = chargedEffectValues.keys()
+stableEffectList.sort()
+stableEffectList = t2(stableEffectList)
+
+otherEffectList = t2(stableEffectList[:])
+
+EffectItemNames = d2({
+    'Direct Damage (Fire)' :     'Fire',
+    'Direct Damage (Cold)' :     'Cold',
+    'Direct Damage (Energy)' :   'Energy',
+    'Direct Damage (Spirit)' :   'Spirit',
+    'Damage Over Time' :         'Eroding',
+    'Self AF Shield' :           'Hardening',
+    'Self Melee Health Buffer' : 'Ablative',
+    'Self Melee Haste' :         'Celeric',
+    'Self Damage Shield' :       'Shard',
+    'Lifedrain' :                'Leeching',
+    'Str/Con Debuff' :           'Withering',
+    'Dex/Qui Debuff' :           'Crippling',
+    'Self Damage Add' :          'Honing',
+    'Self Acuity Buff' :         'Enlightening',
+})
+
+EffectTypeNames = d2({
+    'Charged Effect' :   t2(("Stable",   "Tincture",)),
+    'Reactive Effect' :  t2(("Reactive", "Armor Tincture",)),
+    'Offensive Effect' : t2(("Volatile", "Weapon Tincture",)),
+})
+
+
+GemLists = {
   'All': {
-    'Stat' :    StatTable,
-    'Resist' :  ResistTable,
-    'Hits' :    HitsTable,
-    'Power' :   PowerTable,
-    'Unused' :  UnusedTable
+    'Stat' :             statList,
+    'Resist' :           resistList,
+    'Hits' :             hitsList,
+    'Power' :            powerList,
+    'Charged Effect' :   stableEffectList,
+    'Reactive Effect' :  procEffectList,
+    'Offensive Effect' : procEffectList,
+    'Unused' :           unusedList
+  }
+}
+
+DropLists = {
+  'All': {
+    'Resist' :           resistList,
+    'Hits' :             hitsList,
+    'Power' :            powerList,
+    'Unused' :           unusedList,
+    'Stat' :             dropStatList,
+    'Cap Increase' :     capIncreaseList,
+    'PvE Bonus' :        pveBonusList,
+    'Other Bonus' :      otherBonusList,
+    'Charged Effect' :   otherEffectList,
+    'Reactive Effect' :  otherEffectList,
+    'Offensive Effect' : otherEffectList,
+    'Other Effect' :     otherEffectList,
+  }
+}
+
+GemTables = {
+  'All': {
+    'Stat' :    statTable,
+    'Resist' :  resistTable,
+    'Hits' :    hitsTable,
+    'Power' :   powerTable,
+    'Unused' :  unusedTable
   }
 }
 
@@ -1059,26 +1086,41 @@ GemTables = {
 for realm in Realms:
   GemTables[realm] = {}
   GemTables[realm].update(GemTables['All'])
+  GemLists[realm] = {}
+  GemLists[realm].update(GemLists['All'])
+  DropLists[realm] = {}
+  DropLists[realm].update(DropLists['All'])
 for realm in GemTables.keys():
-  GemTables[realm]['Focus'] = FocusTable[realm]
-  GemTables[realm]['Skill'] = SkillTable[realm]
+  GemTables[realm]['Focus'] = focusTable[realm]
+  GemTables[realm]['Skill'] = skillTable[realm]
   GemTables[realm] = d2(GemTables[realm])
+  GemLists[realm]['Focus'] = focusList[realm]
+  DropLists[realm]['Focus'] = focusList[realm]
+  GemLists[realm]['Skill'] = skillList[realm]
+  DropLists[realm]['Skill'] = dropSkillList[realm]
+  GemLists[realm] = d2(GemLists[realm])
+  DropLists[realm] = d2(DropLists[realm])
 GemTables = d2(GemTables)
+GemLists =  d2(GemLists)
+DropLists = d2(DropLists)
 
 
 ValuesLists = d2({
-    'Stat' :    StatValues,
-    'Resist' :  ResistValues,
-    'Hits' :    HitsValues,
-    'Power' :   PowerValues,
-    'Focus' :   FocusValues,
-    'Skill' :   SkillValues,
-    'Unused' :  UnusedValues,
+    'Stat' :             statValues,
+    'Resist' :           resistValues,
+    'Hits' :             hitsValues,
+    'Power' :            powerValues,
+    'Focus' :            focusValues,
+    'Skill' :            skillValues,
+    'Unused' :           unusedValues,
+    'Offensive Effect':  offensiveEffectValues,
+    'Reactive Effect':   reactiveEffectValues,
+    'Charged Effect':    chargedEffectValues,
 })
 
 
-Caps = dict.fromkeys(ResistList, 'Resist')
-Caps.update(Caps.fromkeys(StatList, 'Stat'))
+Caps = dict.fromkeys(resistList, 'Resist')
+Caps.update(Caps.fromkeys(statList, 'Stat'))
 Caps = d2(Caps)
 
 
@@ -1413,7 +1455,7 @@ HotkeyGems = d2({
         'Lightning Charged War Rune' :     94,
         'Ashen Primal Rune' :              96,
         'Ashen Rune' :                     98,
-        'Blighted Rune' :                 100 ,
+        'Blighted Rune' :                 100,
         'Valiant Primal Rune' :           104,
         'Blighted Primal Rune' :          106,
         'Unholy Primal Rune' :            108,
@@ -1712,12 +1754,13 @@ ServerCodes = d2({
     '148' : 'Gorr',
     '147' : 'Camlann',
     '145' : 'Akatsuki', 
+     '20' : 'Glastonbury',
 })
 
 
 # Rename old skills to new skills, from previously saved template files
 #
-FixEffectsTable = {
+FixEffectsTable = d2({
     'Bonedancing' :    'Bone Army',
     'PainWorking' :    'Painworking', 
     'Subterranean' :   'Cave Magic',
@@ -1785,4 +1828,11 @@ FixEffectsTable = {
     'Crush Resist' :    'Crush', 
     'Thrust Resist' :   'Thrust', 
     'Slash Resist' :    'Slash', 
-}
+})
+
+if __name__ == "__main__":
+    import gnosis.xml.pickle
+    constants = {}
+    for v in __all__:
+        constants[v] = locals()[v]
+    print gnosis.xml.pickle.dumps(constants)
