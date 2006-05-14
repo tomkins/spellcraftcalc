@@ -147,16 +147,7 @@ class ReportWindow(B_ReportWindow):
                 else:
                     self.gemnames[gemname] = 1
 
-                costindex = ValuesLists[gemtype].index(amount)
-                cost = GemCosts[costindex]
-                if gemtype == 'Resist' or gemtype == 'Focus':
-                    cost += 60 * costindex
-                elif gemtype == 'Skill' and effect[0:4] == 'All ':
-                    cost += 200 + 180 * costindex
-                    #remakecost += 120 + 180 * costindex
-                elif gemtype == 'Focus' and effect[0:4] == 'All ':
-                    cost = cost * 3 + 180 * costindex
-                    #remakecost = remakecost * 3 + 180 * costindex
+                (cost, costindex) = SC.computeGemCost(item, slot)
                 self.totalcost += cost
         keys = self.gemnames.keys()
         keys.sort(gemNameSort)
