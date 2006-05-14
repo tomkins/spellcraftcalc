@@ -27,6 +27,7 @@ import re
 import string
 import SC
 import ConfigParser
+import sys
 
 class CharItem(QListViewItem):
     def __init__(self, parent = None, charname = '', server = '', filename = ''):
@@ -57,7 +58,7 @@ class CraftBar(B_CraftBar):
         filename = char.filename
         server = char.server
         f = open(filename, 'r')
-        g = open(re.sub(r'(\w+)-(\d+)\.ini$', r'\1_bak-\2.ini', filename), 'w')
+        g = open(re.sub(r'(\w+)-(\d+)\.ini$', r'\1-\2.ini.bak', filename), 'w')
         g.write(f.read())
         f.close()
         g.close()
@@ -94,6 +95,7 @@ class CraftBar(B_CraftBar):
                     if item.getSlotAttr('player', slot, 'Type') != 'Unused':
                         gemlvl, gemname = string.split(SC.getGemName(item, slot), ' ', 1)
                         if slotcounter >= 300:
+                            sys.stdout.write("Out of slots!\n")
                             continue
                         if not HotkeyGems[realm].has_key(gemname):
                             for i in (0, 1, 2):
@@ -120,6 +122,8 @@ class CraftBar(B_CraftBar):
                             else:
                                 CP.set('Quickbar', 'Hotkey_%d' % slotcounter, buttonstr)
                             slotcounter += 1
+                        else:
+                            sys.stdout.write(realm + " has no '" + gemname + "' gem\n")
         f = open(filename, 'w')
         CP.write(f)
         f.close()
