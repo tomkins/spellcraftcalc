@@ -51,6 +51,7 @@ import sys
 
 class ScWindow(B_SC):
     def __init__(self):
+        self.newcount = 0
         self.nocalc = 1
         self.totals = { }
         self.capTotals = { }
@@ -216,8 +217,11 @@ class ScWindow(B_SC):
         self.noteText = ''
         self.craftMultiplier = 6
         self.save = 1
-        self.LabelFileName.setText('Unnamed')
         self.filename = None
+        self.newcount = self.newcount + 1
+        filetitle = unicode("Template" + str(self.newcount))
+        self.LabelFileName.setText(filetitle)
+        self.setCaption(filetitle + " - Kort's Spellcraft Calculator")
 
         self.PieceTab.setCurrentTab(0)
         self.currentTab = self.PieceTab
@@ -1110,16 +1114,17 @@ class ScWindow(B_SC):
                     "Templates (*.xml)")
         else:
             filename = QFileDialog.getSaveFileName(self.filename, "Templates (*.xml)")
-        while unicode(filename) != '':
-            if unicode(filename) != '' and os.path.exists(unicode(filename)):
+        filename = unicode(filename)
+        while filename != '':
+            if filename != '' and os.path.exists(filename):
                 ret = QMessageBox.warning(self, 'Overwrite?', 'Do you want to overwrite the selected file?', 'Yes', 'No')
                 if ret == 1:
                     filename = QFileDialog.getSaveFileName(filename, "Templates (*.xml)")
+                    filename = unicode(filename)
                 else:
                     break
             else: break
-        if unicode(filename) != '':
-            filename = unicode(filename)
+        if filename != '':
             if filename[-4:] != '.xml':
                 filename += '.xml'
             try:
@@ -1127,12 +1132,16 @@ class ScWindow(B_SC):
                 f.write(XMLHelper.writexml(self.asXML(), UnicodeStringIO(), '', '\t', '\n'))
                 self.modified = 0
                 f.close()
-                self.LabelFileName.setText(os.path.basename(filename))
             except IOError:
                 QMessageBox.critical(None, 'Error!', 
                     'Error writing to file: ' + filename, 'OK')
-        self.filename = filename
-        self.updateRecentFiles(filename)
+                return
+            self.filename = filename
+            self.updateRecentFiles(filename)
+            filetitle = os.path.basename(filename)
+            self.LabelFileName.setText(filetitle)
+            self.setCaption(filetitle + " - Kort's Spellcraft Calculator")
+            
 
     def openFile(self, *args):
         if self.modified:
@@ -1144,13 +1153,14 @@ class ScWindow(B_SC):
             filename = QFileDialog.getOpenFileName(templatedir, "Templates (*.xml *.scc)")
         else:
             filename = args[0]
-        if filename is not None and unicode(filename) != '':
+        filename = unicode(filename)
+        if filename is not None and filename != '':
             try:
-                f = open(unicode(filename), 'r')
+                f = open(filename, 'r')
             except IOError:
                 traceback.print_exc()
                 QMessageBox.critical(None, 'Error!', 
-                    'Error opening file: ' + unicode(filename), 'OK')
+                    'Error opening file: ' + filename, 'OK')
                 return
             try:
                 docstr = f.read()
@@ -1172,9 +1182,11 @@ class ScWindow(B_SC):
                     'Error loading template', 'OK')
                 f.close()
                 return
-            self.LabelFileName.setText(os.path.basename(unicode(filename)))
-            self.updateRecentFiles(unicode(filename))
-            self.filename = unicode(filename)
+            self.filename = filename
+            self.updateRecentFiles(filename)
+            filetitle = os.path.basename(filename)
+            self.LabelFileName.setText(filetitle)
+            self.setCaption(filetitle + " - Kort's Spellcraft Calculator")
 
     def updateRecentFiles(self, fn):
         if len(self.recentFiles) > 5:

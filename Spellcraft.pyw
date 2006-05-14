@@ -69,7 +69,6 @@ class ScApplication(QApplication):
         import ScWindow
         scw = ScWindow.ScWindow()
         app.setMainWidget(scw)
-        scw.setCaption("Kort's Spellcrafting Calculator")
         scw.setIcon(QPixmap("ScWindow.png"));
         scw.show()
 
