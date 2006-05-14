@@ -40,23 +40,34 @@ def formatCost(cost):
 def getGemName(item, slot):
     gemstate = item.getAttr('ActiveState')
     gemtype = item.getSlotAttr(gemstate, slot, 'Type')
+    effect = item.getSlotAttr(gemstate, slot, 'Effect')
+    amount = item.getSlotAttr(gemstate, slot, 'Amount')
     realm = item.getAttr('Realm')
+    if not ValuesLists.has_key(gemtype): return ''
+    amountlist = ValuesLists[gemtype]
+    if not isinstance(amountlist, tuple):
+        if not amountlist.has_key(effect): return ''
+        amountlist = amountlist[effect]
+    if not amount in amountlist: return ''
+    amountindex = amountlist.index(amount)
+    if slot == 4:
+        if not EffectMetal.has_key(realm): return ''
+        if not EffectTypeNames.has_key(gemtype): return ''
+        if not EffectItemNames.has_key(effect): return ''
+        return string.strip(EffectItemNames[effect][0]
+                    + ' ' + EffectTypeNames[gemtype][0]
+                    + ' ' + EffectItemNames[effect][1]
+                    + ' ' + EffectMetal[realm][amountindex]
+                    + ' ' + EffectTypeNames[gemtype][1])
     if not GemTables.has_key(realm): return ''
     if not GemTables[realm].has_key(gemtype): return ''
     gemlist = GemTables[realm][gemtype]
-    amount = item.getSlotAttr(gemstate, slot, 'Amount')
-    amountlist = ValuesLists[gemtype]
-    if not amount in amountlist: return ''
-    amountindex = amountlist.index(amount)
-    effect = item.getSlotAttr(gemstate, slot, 'Effect')
     if not gemlist.has_key(effect): 
-      gemlist = GemTables['All'][gemtype]
-      if not gemlist.has_key(effect): return ''
-    gemname = GemNames[amountindex]
-    gemmiddle = gemlist[effect]
-    gemend = GemSubName[gemtype]
-    gemname += ' ' + gemmiddle + ' ' + gemend
-    return string.strip(gemname)
+        gemlist = GemTables['All'][gemtype]
+        if not gemlist.has_key(effect): return ''
+    return string.strip(GemNames[amountindex]
+                + ' ' + gemlist[effect]
+                + ' ' + GemSubName[gemtype])
 
 def getGemNameParts(gemname):
     #returns level, liquid prefix and dust suffix
@@ -168,20 +179,20 @@ def computeOverchargeSuccess(imbue, itemimbue, item, crafterskill):
     if crafterSkill <= 50: success -= 450
     return success
 
-def computeGemCost(item, i):
+def computeGemCost(item, slot):
     itemtype = item.getAttr('ActiveState')
 
-    gemtype = re.sub(' ', '', item.getSlotAttr(itemtype, i, 'Type'))
-    if item.getSlotAttr(itemtype, i, 'Amount') == '':
+    gemtype = re.sub(' ', '', item.getSlotAttr(itemtype, slot, 'Type'))
+    if item.getSlotAttr(itemtype, slot, 'Amount') == '':
         amount = 0
     else:
-        amount = int(item.getSlotAttr(itemtype, i, 'Amount'))
+        amount = int(item.getSlotAttr(itemtype, slot, 'Amount'))
     if amount == '' or gemtype == 'Unused' or amount == 0 or itemtype == 'drop':
         cost = 0    
         remakecost = 0
         costindex = 0
         return (0, 1)
-    gemname = getGemName(item, i)
+    gemname = getGemName(item, slot)
     if gemname == '': return (0, 1)
     gemlevel, gemliquid, gemdust = getGemNameParts(gemname)
     if gemlevel == '': return (0, 1)
@@ -197,7 +208,7 @@ def computeGemCost(item, i):
     elif gemliquid == 'Brilliant':
         cost = cost * 3 + 180 * costindex
         remakecost = remakecost * 3 + 180 * costindex
-    cost += remakecost * int(item.getSlotAttr(itemtype, i, 'Remakes'))
+    cost += remakecost * int(item.getSlotAttr(itemtype, slot, 'Remakes'))
     return (cost, costindex+1)
 
 # vim: set ts=4 sw=4 et:

@@ -516,7 +516,7 @@ class ScWindow(B_SC):
             itemtype = item.getAttr('ActiveState')
             itemcost = 0
             if itemtype == 'player':
-                toprng = 4
+                toprng = 5
             else:
                 toprng = 10
             gemeffects = []
@@ -533,7 +533,8 @@ class ScWindow(B_SC):
                     self.LabelDupError.setText('Two of same type of gem on %s' % key)
                 gemeffects.append([gemtype, effect])
                 if itemtype == 'player':
-                  if amount == '' or gemtype == 'Unused' or amount == 0:
+                  # XXX: not ready to compute cost-of-proc (i == 4)
+                  if amount == '' or gemtype == 'Unused' or amount == 0 or i == 4:
                     if key == self.currentTabLabel:
                         self.Cost[i].setText('')
                   else:
@@ -648,7 +649,7 @@ class ScWindow(B_SC):
                     self.LabelOcError.setText('Impossible Overcharge on %s' % key)
                 elif imbue > (itemimbue+0.5):
                     success = -OCStartPercentages[int(imbue-itemimbue)]
-                    for i in range(0, 4):
+                    for i in range(0, 5):
                         if item.getSlotAttr(itemtype, i, 'Type') == 'Unused':
                             success += GemQualOCModifiers['94']
                         else:
@@ -662,7 +663,7 @@ class ScWindow(B_SC):
                     self.ItemImbue.setText('%3.1f' % imbue)
                     self.ItemImbueTotal.setText(unicode(itemimbue))
                     self.ItemCost.setText(SC.formatCost(itemcost))
-                    for i in range(0, 4):
+                    for i in range(0, 5):
                         n = self.Name[i]
                         n.setText(SC.getGemName(item, i))
                         if item.getSlotAttr(itemtype, i, 'Done') == '1':
@@ -752,7 +753,7 @@ class ScWindow(B_SC):
             itemcost = 0
             itemtype = item.getAttr('ActiveState')
             if itemtype == 'drop': continue
-            for i in range(0, 4):
+            for i in range(0, 5):
                 gemcost, tierlvl = SC.computeGemCost(item, i)
                 cost += gemcost
                 itemcost += gemcost
@@ -804,7 +805,7 @@ class ScWindow(B_SC):
         itemtype = item.getAttr('ActiveState')
         if itemtype == 'drop': return 0
         mvals = []
-        for i in range(0, 4):
+        for i in range(0, 5):
             type = item.getSlotAttr(itemtype, i, 'Type')
             amount = item.getSlotAttr(itemtype, i, 'Amount')
             if amount == '': 
@@ -1347,7 +1348,7 @@ class ScWindow(B_SC):
             if activestate == 'drop':
                 toprng = 10
             else:
-                toprng = 4
+                toprng = 5
             for slot in range(0, toprng):
                 type = str(item.getSlotAttr(activestate, slot, 'Type'))
                 if type == 'Unused': continue
@@ -1400,7 +1401,8 @@ class ScWindow(B_SC):
             slot = child.name()[-2:]
             if str(slot[0:1]) == '_':
                 slot = slot[1:]
-            self.gemClicked(self.currentTabLabel, int(slot))
+            if self.PlayerMade.isChecked() and slot < 5:
+                self.gemClicked(self.currentTabLabel, int(slot))
             return
         if shortname in ['', 'Label', 'Total', 'Item']: return
         if shortname == 'Focus':

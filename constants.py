@@ -25,15 +25,16 @@ __all__ = [
   'ServerCodes', 'FileExt', 
   'HighCapBonusList', 
   'AllBonusList', 'DustsOrder', 'Caps', 'GemDusts', 
-  'ValuesLists', 
-  'GemTables', 'GemSubName', 'HotkeyGems', 
-  'RemakeCosts', 
-  'TabList', 'GemCosts',
-  'OCStartPercentages', 'ShieldTypes',
-  'ImbueMultipliers',  
+  'ValuesLists',
+  'TabList', 
+  'OCStartPercentages', 
+  'GemTables', 'GemSubName',
   'GemLiquids', 'GemNames', 'MaterialGems', 'LiquidsOrder', 
+  'EffectTypeNames', 'EffectItemNames', 'EffectMetal', 'EffectRequiredLevel', 
+  'GemCosts', 'RemakeCosts', 
   'FixEffectsTable', 
-  'EffectRequiredLevel', 'EffectMetal', 'EffectItemNames',
+  'HotkeyGems', 'ImbueMultipliers',  
+  'ShieldTypes',
   'PieceTabList', 'JewelTabList', 'BodyHitOdds', 
 ]
 
@@ -959,18 +960,18 @@ pveBonusList = t2((
 ))
 
 
-EffectRequiredLevel =    t2(("20", "25", "30", "35", "40", "43", "47"))
+EffectRequiredLevel =    t2(("47", "43", "40", "35", "30", "25", "20",))
 
-ddTinctureMetalCommon =  t2(("Alloy", "Fine Alloy", "Mithril", "Adamantium", 
-                             "Asterite", "Netherium", "Arcanium",))
+ddMetalCommon =  t2(("Arcanium", "Netherium", "Asterite", 
+                     "Adamantium", "Mithril", "Fine Alloy", "Alloy",))
 EffectMetal = d2({
-    'Albion'   : ddTinctureMetalCommon,
-    'Hibernia' : t2(("Dolomite", "Cobolt", "Carbide", "Sapphire", 
-                     "Diamond", "Netherite", "Arcanite",)),
-    'Midgard'  : ddTinctureMetalCommon,
+    'Albion'   : ddMetalCommon,
+    'Hibernia' : t2(("Arcanite", "Netherite", "Diamond", 
+                     "Sapphire", "Carbide", "Cobolt", "Dolomite",)),
+    'Midgard'  : ddMetalCommon,
 })
 
-ddEffectDamageSubtable = t2(("41", "50", "59", "68", "77", "86", "95"))
+ddEffectDamageSubtable = t2(("95", "86", "77", "68", "59", "50", "41",))
 
 offensiveEffectValues = d2({
         'Direct Damage (Fire)' :     ddEffectDamageSubtable,
@@ -986,10 +987,10 @@ offensiveEffectValues = d2({
 
 reactiveEffectValues = offensiveEffectValues.copy()
 reactiveEffectValues.update({
-        'Direct Damage (Fire)' :     t2(ddEffectDamageSubtable[-3:]),
-        'Direct Damage (Cold)' :     t2(ddEffectDamageSubtable[-3:]),
-        'Direct Damage (Energy)' :   t2(ddEffectDamageSubtable[-3:]),
-        'Direct Damage (Spirit)' :   t2(ddEffectDamageSubtable[-3:]),
+        'Direct Damage (Fire)' :     t2(ddEffectDamageSubtable[0:3]),
+        'Direct Damage (Cold)' :     t2(ddEffectDamageSubtable[0:3]),
+        'Direct Damage (Energy)' :   t2(ddEffectDamageSubtable[0:3]),
+        'Direct Damage (Spirit)' :   t2(ddEffectDamageSubtable[0:3]),
         'Self Melee Health Buffer' : t2(("100",)),
 })
 reactiveEffectValues = d2(reactiveEffectValues)
@@ -1014,23 +1015,26 @@ stableEffectList = chargedEffectValues.keys()
 stableEffectList.sort()
 stableEffectList = t2(stableEffectList)
 
-otherEffectList = t2(stableEffectList[:])
+otherEffectList = t2(stableEffectList[:] + (
+    "Unique Effect...",
+))
 
 EffectItemNames = d2({
-    'Direct Damage (Fire)' :     'Fire',
-    'Direct Damage (Cold)' :     'Cold',
-    'Direct Damage (Energy)' :   'Energy',
-    'Direct Damage (Spirit)' :   'Spirit',
-    'Damage Over Time' :         'Eroding',
-    'Self AF Shield' :           'Hardening',
-    'Self Melee Health Buffer' : 'Ablative',
-    'Self Melee Haste' :         'Celeric',
-    'Self Damage Shield' :       'Shard',
-    'Lifedrain' :                'Leeching',
-    'Str/Con Debuff' :           'Withering',
-    'Dex/Qui Debuff' :           'Crippling',
-    'Self Damage Add' :          'Honing',
-    'Self Acuity Buff' :         'Enlightening',
+    'Direct Damage (Fire)' :     t2(('Fiery', 'Fire',)),
+    'Direct Damage (Cold)' :     t2(('', 'Cold',)),
+    'Direct Damage (Energy)' :   t2(('', 'Energy',)),
+    'Direct Damage (Spirit)' :   t2(('', 'Spirit',)),
+    # Stables are Illbane's but don't confuse readers of Reactive/Volatile
+    'Damage Over Time' :         t2(('', 'Eroding',)),
+    'Self AF Shield' :           t2(('', 'Hardening',)),
+    'Self Melee Health Buffer' : t2(('', 'Ablative',)),
+    'Self Melee Haste' :         t2(('', 'Celeric',)),
+    'Self Damage Shield' :       t2(('Barbed', 'Shard',)),
+    'Lifedrain' :                t2(('Soul Drinker', 'Leeching',)),
+    'Str/Con Debuff' :           t2(('', 'Withering',)),
+    'Dex/Qui Debuff' :           t2(('Crippling', 'Crippling',)),
+    'Self Damage Add' :          t2(('Keen', 'Honing',)),
+    'Self Acuity Buff' :         t2(('Owl-runed', 'Enlightening',)),
 })
 
 EffectTypeNames = d2({
