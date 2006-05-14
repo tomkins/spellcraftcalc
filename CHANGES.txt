@@ -6,6 +6,9 @@ Updated ../../.. - Version 1.43.0012 (dev)
   Remember the 'amount' when switching from type to type, such as when
   the user changes 5 str to 5 dex.
 
+  Fix export-toolbars to export stats and resists, these were missing
+  the suffix ' Jewel' in the name of the gems.
+
   Very experimental 'effects' added, for craftable items allows choice
   of one Alchemy Tincture to apply, for drop items allows to choose the
   various offensive/reactive/charged or other (such as cast) effects.

@@ -1240,8 +1240,8 @@ GemLiquids = d2({
 })
 
 GemDusts = d2({ 
-    'Essence' :            'Essence of Life',
-    'Shielding' :          'Ground Draconic Scales',
+    'Essence Jewel' :      'Essence of Life',
+    'Shielding Jewel' :    'Ground Draconic Scales',
     'Spell Stone' :        'Ground Draconic Scales',
     'Sigil' :              'Ground Draconic Scales',
     'Rune' :               'Ground Draconic Scales',
@@ -1258,10 +1258,10 @@ GemDusts = d2({
 })
 
 GemSubName = d2({ 
-    'Stat' :   'Essence', 
-    'Resist' : 'Shielding', 
-    'Hits' :   'Essence', 
-    'Power' :  'Essence', 
+    'Stat' :   'Essence Jewel', 
+    'Resist' : 'Shielding Jewel', 
+    'Hits' :   'Essence Jewel', 
+    'Power' :  'Essence Jewel', 
     'Focus' :  '', 
     'Skill' :  '', 
 })
