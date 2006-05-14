@@ -181,22 +181,20 @@ def computeOverchargeSuccess(imbue, itemimbue, item, crafterskill):
 
 def computeGemCost(item, slot):
     itemtype = item.getAttr('ActiveState')
-
     gemtype = re.sub(' ', '', item.getSlotAttr(itemtype, slot, 'Type'))
-    if item.getSlotAttr(itemtype, slot, 'Amount') == '':
-        amount = 0
-    else:
-        amount = int(item.getSlotAttr(itemtype, slot, 'Amount'))
-    if amount == '' or gemtype == 'Unused' or amount == 0 or itemtype == 'drop':
-        cost = 0    
-        remakecost = 0
-        costindex = 0
-        return (0, 1)
+    if gemtype == 'Unused' or itemtype == 'drop': return (0, 1)
+    amount = item.getSlotAttr(itemtype, slot, 'Amount')
+    if not ValuesLists.has_key(gemtype): return (0, 1)
+    amountlist = ValuesLists[gemtype]
+    if not isinstance(amountlist, tuple):
+        if not amountlist.has_key(effect):  (0, 1)
+        amountlist = amountlist[effect]
+    if not amount in amountlist: return (0, 1)
     gemname = getGemName(item, slot)
     if gemname == '': return (0, 1)
     gemlevel, gemliquid, gemdust = getGemNameParts(gemname)
     if gemlevel == '': return (0, 1)
-    costindex = ValuesLists[gemtype].index(str(amount))
+    costindex = ValuesLists[gemtype].index(amount)
     cost = GemCosts[costindex]
     remakecost = RemakeCosts[costindex]
     if gemtype == 'Resist' or gemtype == 'Focus':

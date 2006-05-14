@@ -533,28 +533,9 @@ class ScWindow(B_SC):
                     self.LabelDupError.setText('Two of same type of gem on %s' % key)
                 gemeffects.append([gemtype, effect])
                 if itemtype == 'player':
-                  # XXX: not ready to compute cost-of-proc (i == 4)
-                  if amount == '' or gemtype == 'Unused' or amount == 0 or i == 4:
                     if key == self.currentTabLabel:
                         self.Cost[i].setText('')
-                  else:
-                    if key == self.currentTabLabel:
-                        self.Cost[i].setText('')
-                    costindex = ValuesLists[gemtype].index(str(amount))
-                    cost = GemCosts[costindex]
-                    remakecost = RemakeCosts[costindex]
-                    if gemtype == 'Resist' or gemtype == 'Focus':
-                        cost += 60 * costindex
-                        remakecost += 60 * costindex
-                    elif gemtype == 'Skill' and effect[0:4] == 'All ':
-                        cost += 200 + 180 * costindex
-                        remakecost += 120 + 180 * costindex
-                        if amount > 1:
-                            self.LabelDupError.setText('Invalid ' + effect + ' on ' + key)
-                    elif gemtype == 'Focus' and effect[0:4] == 'All ':
-                        cost = cost * 3 + 180 * costindex
-                        remakecost = remakecost * 3 + 180 * costindex
-                    cost += remakecost * int(item.getSlotAttr(itemtype, i, 'Remakes'))
+                    (cost, costindex) = SC.computeGemCost(item, i)
                     itemcost += cost
                     if key == self.currentTabLabel:
                         self.Cost[i].setText(SC.formatCost(cost))
@@ -649,7 +630,7 @@ class ScWindow(B_SC):
                     self.LabelOcError.setText('Impossible Overcharge on %s' % key)
                 elif imbue > (itemimbue+0.5):
                     success = -OCStartPercentages[int(imbue-itemimbue)]
-                    for i in range(0, 5):
+                    for i in range(0, 4):
                         if item.getSlotAttr(itemtype, i, 'Type') == 'Unused':
                             success += GemQualOCModifiers['94']
                         else:
@@ -805,7 +786,7 @@ class ScWindow(B_SC):
         itemtype = item.getAttr('ActiveState')
         if itemtype == 'drop': return 0
         mvals = []
-        for i in range(0, 5):
+        for i in range(0, 4):
             type = item.getSlotAttr(itemtype, i, 'Type')
             amount = item.getSlotAttr(itemtype, i, 'Amount')
             if amount == '': 
@@ -1401,7 +1382,7 @@ class ScWindow(B_SC):
             slot = child.name()[-2:]
             if str(slot[0:1]) == '_':
                 slot = slot[1:]
-            if self.PlayerMade.isChecked() and slot < 5:
+            if self.PlayerMade.isChecked():
                 self.gemClicked(self.currentTabLabel, int(slot))
             return
         if shortname in ['', 'Label', 'Total', 'Item']: return
