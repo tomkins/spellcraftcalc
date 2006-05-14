@@ -1,14 +1,34 @@
-Things to fix before next release is announced;
+Things to fix before next beta release is announced;
 
-  Ensure we save/load PC and drop items (something's wrong).
-
-  Fix the blinking switch from player to drop and back.  Made the
-  chest bug look like a feature.
+  Ensure we save/load PC and drop items (something is/was wrong).
 
   Fix the prices, it's just wonked with all the different cost
-  changes to gems since cats gems.  
+  changes to gems since cats gems.  This means using SC.py from
+  ScWindow.py instead of duplicating the code.
+
+  Make a typeable combobox just works correctly, or offer a popup
+  for users type in their own 'other bonus...', 'other effect...',
+  requires unwinding the SearchableCombo a bit.  The code already
+  handles this 'other...' custom named bonus just fine, it adds to
+  the table of effects, temporarally.
+
+  Stop saving unused slots in the template.xml?
+
+  Make sure 5th player slot saves/loads - might use slightly different
+  xml field to designate 'Effect'.
+
+  Display 5th slot proc by level requirement.  Make it selectable?
+  (E.g. choose an effect amount or the proc level).
+
 
 Things to fix before 2.0 final (non-beta) is announced;
+
+  Untangle modified events ... gotta mop those up, so unchanged
+  templates remain unchanged.  Perhaps use Item.py to track this,
+  and compare with new/last saved details?
+
+  Figure costing of crafted tinctures as a seperate subtotal,
+  price by SC markup rules but base on 94 qual (it doesn't matter).
 
   LoadTemplate:  Some report that old templates don't load properly.
   Noticed more often on crafted rather than drop gear, probably bad
@@ -16,12 +36,30 @@ Things to fix before 2.0 final (non-beta) is announced;
   to sys.stderr so the user can give us a log.
 
   LoadTemplate:  Loading a template doesn't update the most recently
-  used list, nor the directory to load templates from.  At least
-  ensure the template defaults to cwd()+'/templates/*.xml'
+  used list, nor the directory to load templates from (saving does).
+  At least ensure the template defaults to cwd()+'/templates/*.xml'
 
   LoadItem:  Is /very/ slow (populating the list, it's not in the
-  preview, perhaps matching to the file extensions), and doesn't 
+  preview, perhaps matching to the file extensions?), and doesn't 
   remember the directory used.
+
+  Prevent user from choosing > tier 1 Finesse all magic/all melee skills.
+
+  Accelerator keys for tabs, and other things.
+
+
+Extreme features, perhaps post-2.0
+
+  Replace '[V] Equipped   (o) crafted   (o) drop' with a drop down of
+  multiple items in the player's 'queue' based on slot.  Loading another
+  item adds it to the selectable 'queue'.  'Crafted' is one choice, and
+  perhaps user can add a second 'Crafted 2' or give them names.  The
+  final choice is 'None' which does the same thing as 'unequipping'.
+  The items in the drop down list are the item names.
+
+  Add 'requirements' in general (beyond 5th crafted slot) for drop items
+  by each gem slot.  Track 'Artifact Level' in this same field (none of
+  them appear to be arti level + required level).
 
   A guildy suggested that the user could fix all of the body armor
   pieces or all the weapons which are crafted, based on popping up
@@ -32,26 +70,4 @@ Things to fix before 2.0 final (non-beta) is announced;
   Fill in AF/DPS based on itemlevel dialog, if provided.  Perhaps
   even bonus, when known by material level.  
 
-  Move the magic choose-realm to the main window from options.
-
-  Untangle modified events ... gotta mop those up, so unchanged
-  templates remain unchanged.  Perhaps use Item.py to track this?
-
   Calculate Piece Ablative as an average based on chance-to-hit-body-part.
-
-  Accelerator keys for tabs, and other things.  Add up/down arrow
-  behavior to tab bar (to jump rows quickly).
-
-  DisplayWindow:  Will sometimes show a bonus for slot '' (empty) 
-  pointing at nothing, al la [: 3] (double-counting a listed slot?)
-  Unsure if this is still a bug.
-
-  Make a typeable combobox just work correctly, or offer a popup
-  for users type in their own 'other bonus...', 'other effect...',
-  requires unwinding the SearchableCombo a bit.
-
-  Merge in the Effects development branch;
-
-    Figure costing of crafted tinctures as a seperate subtotal,
-    price by SC markup rules but base on 94 qual (it doesn't matter).
-    Make sure 5th player slot saves/loads.
