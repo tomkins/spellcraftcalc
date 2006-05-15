@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'ScWindow.ui'
 #
-# Created: Sat May 13 01:57:43 2006
+# Created: Mon May 15 13:57:01 2006
 #      by: The PyQt User Interface Compiler (pyuic) 3.15
 #
 # WARNING! All changes made in this file will be lost!
@@ -303,19 +303,16 @@ class B_SC(QMainWindow):
         self.SkillsList.setGeometry(QRect(5,16,150,160))
 
         self.GroupOtherBonusList = QGroupBox(self.centralWidget(),"GroupOtherBonusList")
-        self.GroupOtherBonusList.setGeometry(QRect(367,3,240,136))
+        self.GroupOtherBonusList.setGeometry(QRect(367,3,240,151))
 
         self.OtherBonusList = QListBox(self.GroupOtherBonusList,"OtherBonusList")
-        self.OtherBonusList.setGeometry(QRect(5,15,230,116))
-
-        self.LabelFileName = QLabel(self.centralWidget(),"LabelFileName")
-        self.LabelFileName.setGeometry(QRect(367,142,240,14))
+        self.OtherBonusList.setGeometry(QRect(5,15,230,131))
 
         self.LabelOcError = QLabel(self.centralWidget(),"LabelOcError")
         self.LabelOcError.setGeometry(QRect(367,157,240,14))
 
         self.LabelDupError = QLabel(self.centralWidget(),"LabelDupError")
-        self.LabelDupError.setGeometry(QRect(362,173,240,14))
+        self.LabelDupError.setGeometry(QRect(367,173,240,14))
 
         self.frame3 = QGroupBox(self.centralWidget(),"frame3")
         self.frame3.setGeometry(QRect(3,235,776,265))
@@ -858,7 +855,6 @@ class B_SC(QMainWindow):
         self.SlashRR.setText(self.__tr("-"))
         self.GroupSkillsList.setTitle(self.__tr("Skills"))
         self.GroupOtherBonusList.setTitle(self.__tr("Other Bonuses"))
-        self.LabelFileName.setText(QString.null)
         self.LabelOcError.setText(QString.null)
         self.LabelDupError.setText(QString.null)
         self.frame3.setTitle(QString.null)

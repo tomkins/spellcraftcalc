@@ -220,7 +220,6 @@ class ScWindow(B_SC):
         self.filename = None
         self.newcount = self.newcount + 1
         filetitle = unicode("Template" + str(self.newcount))
-        self.LabelFileName.setText(filetitle)
         self.setCaption(filetitle + " - Kort's Spellcraft Calculator")
 
         self.PieceTab.setCurrentTab(0)
@@ -1099,7 +1098,6 @@ class ScWindow(B_SC):
                 f.write(XMLHelper.writexml(self.asXML(), UnicodeStringIO(), '', '\t', '\n'))
                 self.modified = 0
                 f.close()
-                self.LabelFileName.setText(os.path.basename(self.filename))
             except IOError:
                 QMessageBox.critical(None, 'Error!', 
                     'Error writing to file: ' + self.filename, 'OK')
@@ -1139,7 +1137,6 @@ class ScWindow(B_SC):
             self.filename = filename
             self.updateRecentFiles(filename)
             filetitle = os.path.basename(filename)
-            self.LabelFileName.setText(filetitle)
             self.setCaption(filetitle + " - Kort's Spellcraft Calculator")
             
 
@@ -1185,7 +1182,6 @@ class ScWindow(B_SC):
             self.filename = filename
             self.updateRecentFiles(filename)
             filetitle = os.path.basename(filename)
-            self.LabelFileName.setText(filetitle)
             self.setCaption(filetitle + " - Kort's Spellcraft Calculator")
 
     def updateRecentFiles(self, fn):
