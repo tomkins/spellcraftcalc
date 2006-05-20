@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'ScWindow.ui'
 #
-# Created: Tue May 16 05:19:17 2006
+# Created: Sat May 20 15:01:51 2006
 #      by: The PyQt User Interface Compiler (pyuic) 3.15
 #
 # WARNING! All changes made in this file will be lost!
@@ -29,49 +29,49 @@ class B_SC(QMainWindow):
         self.GroupBox9.setGeometry(QRect(613,3,165,182))
 
         self.LabelCharName = QLabel(self.GroupBox9,"LabelCharName")
-        self.LabelCharName.setGeometry(QRect(6,16,37,16))
+        self.LabelCharName.setGeometry(QRect(6,16,37,21))
 
         self.CharName = QLineEdit(self.GroupBox9,"CharName")
-        self.CharName.setGeometry(QRect(46,14,114,22))
+        self.CharName.setGeometry(QRect(46,16,114,21))
         self.CharName.setFrameShape(QLineEdit.LineEditPanel)
         self.CharName.setFrameShadow(QLineEdit.Sunken)
 
         self.LabelRealm = QLabel(self.GroupBox9,"LabelRealm")
-        self.LabelRealm.setGeometry(QRect(6,40,38,16))
+        self.LabelRealm.setGeometry(QRect(6,37,38,21))
 
         self.Realm = SearchingCombo(self.GroupBox9,"Realm")
-        self.Realm.setGeometry(QRect(46,38,114,22))
+        self.Realm.setGeometry(QRect(46,37,114,21))
 
         self.LabelCharClass = QLabel(self.GroupBox9,"LabelCharClass")
-        self.LabelCharClass.setGeometry(QRect(6,65,38,16))
+        self.LabelCharClass.setGeometry(QRect(6,59,38,21))
 
         self.CharClass = SearchingCombo(self.GroupBox9,"CharClass")
-        self.CharClass.setGeometry(QRect(46,61,114,22))
+        self.CharClass.setGeometry(QRect(46,59,114,21))
 
         self.LabelCharRace = QLabel(self.GroupBox9,"LabelCharRace")
-        self.LabelCharRace.setGeometry(QRect(6,88,38,16))
+        self.LabelCharRace.setGeometry(QRect(6,81,38,21))
 
         self.CharRace = SearchingCombo(self.GroupBox9,"CharRace")
-        self.CharRace.setGeometry(QRect(46,84,114,22))
+        self.CharRace.setGeometry(QRect(46,81,114,21))
 
         self.LabelCharLevel = QLabel(self.GroupBox9,"LabelCharLevel")
-        self.LabelCharLevel.setGeometry(QRect(6,111,38,16))
+        self.LabelCharLevel.setGeometry(QRect(6,103,38,21))
 
         self.CharLevel = QLineEdit(self.GroupBox9,"CharLevel")
-        self.CharLevel.setGeometry(QRect(46,107,37,22))
+        self.CharLevel.setGeometry(QRect(46,103,37,21))
 
         self.TotalCostLabel = QLabel(self.GroupBox9,"TotalCostLabel")
-        self.TotalCostLabel.setGeometry(QRect(6,128,30,16))
+        self.TotalCostLabel.setGeometry(QRect(6,126,30,16))
 
         self.TotalCost = QLabel(self.GroupBox9,"TotalCost")
-        self.TotalCost.setGeometry(QRect(44,128,114,16))
+        self.TotalCost.setGeometry(QRect(44,126,114,16))
         self.TotalCost.setAlignment(QLabel.AlignVCenter | QLabel.AlignRight)
 
         self.TotalPriceLabel = QLabel(self.GroupBox9,"TotalPriceLabel")
-        self.TotalPriceLabel.setGeometry(QRect(6,144,30,16))
+        self.TotalPriceLabel.setGeometry(QRect(6,143,30,16))
 
         self.TotalPrice = QLabel(self.GroupBox9,"TotalPrice")
-        self.TotalPrice.setGeometry(QRect(44,144,114,16))
+        self.TotalPrice.setGeometry(QRect(44,143,114,16))
         self.TotalPrice.setAlignment(QLabel.AlignVCenter | QLabel.AlignRight)
 
         self.ItemTotalUtilityLabel = QLabel(self.GroupBox9,"ItemTotalUtilityLabel")
@@ -314,47 +314,47 @@ class B_SC(QMainWindow):
         self.frame3.setFrameShadow(QGroupBox.Raised)
 
         self.ItemLevelLabel = QLabel(self.frame3,"ItemLevelLabel")
-        self.ItemLevelLabel.setGeometry(QRect(7,8,34,16))
+        self.ItemLevelLabel.setGeometry(QRect(7,5,34,21))
 
         self.ItemLevel = QLineEdit(self.frame3,"ItemLevel")
-        self.ItemLevel.setGeometry(QRect(46,5,35,22))
+        self.ItemLevel.setGeometry(QRect(46,5,35,21))
 
         self.ItemLevelButton = QPushButton(self.frame3,"ItemLevelButton")
-        self.ItemLevelButton.setGeometry(QRect(81,7,18,18))
+        self.ItemLevelButton.setGeometry(QRect(81,5,21,21))
 
         self.ItemQualityLabel = QLabel(self.frame3,"ItemQualityLabel")
-        self.ItemQualityLabel.setGeometry(QRect(115,8,54,16))
+        self.ItemQualityLabel.setGeometry(QRect(115,5,54,21))
 
         self.QualDrop = SearchingCombo(self.frame3,"QualDrop")
-        self.QualDrop.setGeometry(QRect(160,5,52,22))
+        self.QualDrop.setGeometry(QRect(160,5,52,21))
 
         self.QualEdit = QLineEdit(self.frame3,"QualEdit")
-        self.QualEdit.setGeometry(QRect(160,5,51,22))
+        self.QualEdit.setGeometry(QRect(160,5,51,21))
 
         self.ItemBonusLabel = QLabel(self.frame3,"ItemBonusLabel")
-        self.ItemBonusLabel.setGeometry(QRect(232,8,40,16))
+        self.ItemBonusLabel.setGeometry(QRect(232,5,40,21))
 
         self.Bonus_Edit = QLineEdit(self.frame3,"Bonus_Edit")
-        self.Bonus_Edit.setGeometry(QRect(272,5,35,22))
+        self.Bonus_Edit.setGeometry(QRect(272,5,35,21))
 
         self.ItemAFDPSLabel = QLabel(self.frame3,"ItemAFDPSLabel")
-        self.ItemAFDPSLabel.setGeometry(QRect(315,8,55,16))
+        self.ItemAFDPSLabel.setGeometry(QRect(315,5,55,21))
 
         self.AFDPS_Edit = QLineEdit(self.frame3,"AFDPS_Edit")
-        self.AFDPS_Edit.setGeometry(QRect(360,5,35,22))
+        self.AFDPS_Edit.setGeometry(QRect(360,5,35,21))
 
         self.ItemSpeedLabel = QLabel(self.frame3,"ItemSpeedLabel")
-        self.ItemSpeedLabel.setGeometry(QRect(403,8,40,16))
+        self.ItemSpeedLabel.setGeometry(QRect(403,5,40,21))
 
         self.Speed_Edit = QLineEdit(self.frame3,"Speed_Edit")
-        self.Speed_Edit.setGeometry(QRect(443,5,35,22))
+        self.Speed_Edit.setGeometry(QRect(443,5,35,21))
 
         self.Equipped = QCheckBox(self.frame3,"Equipped")
-        self.Equipped.setGeometry(QRect(526,6,71,22))
+        self.Equipped.setGeometry(QRect(509,5,71,21))
 
         self.ButtonGroup1 = QButtonGroup(self.frame3,"ButtonGroup1")
         self.ButtonGroup1.setEnabled(1)
-        self.ButtonGroup1.setGeometry(QRect(615,6,138,19))
+        self.ButtonGroup1.setGeometry(QRect(615,5,138,21))
         self.ButtonGroup1.setLineWidth(0)
 
         self.PlayerMade = QRadioButton(self.ButtonGroup1,"PlayerMade")
@@ -365,277 +365,285 @@ class B_SC(QMainWindow):
         self.Drop.setChecked(1)
 
         self.ItemName = QLineEdit(self.frame3,"ItemName")
-        self.ItemName.setGeometry(QRect(562,48,200,22))
+        self.ItemName.setGeometry(QRect(562,48,200,21))
 
         self.LabelGemType = QLabel(self.frame3,"LabelGemType")
-        self.LabelGemType.setGeometry(QRect(50,33,119,14))
+        self.LabelGemType.setGeometry(QRect(50,31,119,17))
 
         self.LabelGemAmount = QLabel(self.frame3,"LabelGemAmount")
-        self.LabelGemAmount.setGeometry(QRect(181,33,44,14))
+        self.LabelGemAmount.setGeometry(QRect(181,31,44,17))
 
         self.LabelGemEffect = QLabel(self.frame3,"LabelGemEffect")
-        self.LabelGemEffect.setGeometry(QRect(237,33,142,14))
+        self.LabelGemEffect.setGeometry(QRect(237,31,142,17))
 
         self.LabelGemQuality = QLabel(self.frame3,"LabelGemQuality")
-        self.LabelGemQuality.setGeometry(QRect(391,33,44,14))
+        self.LabelGemQuality.setGeometry(QRect(391,31,44,17))
 
         self.LabelGemPoints = QLabel(self.frame3,"LabelGemPoints")
-        self.LabelGemPoints.setGeometry(QRect(443,33,35,14))
+        self.LabelGemPoints.setGeometry(QRect(443,31,35,17))
         self.LabelGemPoints.setAlignment(QLabel.AlignVCenter | QLabel.AlignRight)
 
         self.LabelGemCost = QLabel(self.frame3,"LabelGemCost")
-        self.LabelGemCost.setGeometry(QRect(482,33,70,14))
+        self.LabelGemCost.setGeometry(QRect(482,31,70,17))
         self.LabelGemCost.setAlignment(QLabel.AlignVCenter | QLabel.AlignRight)
 
         self.ItemNameLabel = QLabel(self.frame3,"ItemNameLabel")
-        self.ItemNameLabel.setGeometry(QRect(562,33,40,14))
+        self.ItemNameLabel.setGeometry(QRect(562,31,70,17))
 
         self.Gem_Label_1 = QLabel(self.frame3,"Gem_Label_1")
-        self.Gem_Label_1.setGeometry(QRect(7,48,34,22))
+        self.Gem_Label_1.setGeometry(QRect(7,48,34,21))
 
         self.Type_1 = SearchingCombo(self.frame3,"Type_1")
-        self.Type_1.setGeometry(QRect(46,48,127,22))
+        self.Type_1.setGeometry(QRect(46,48,127,21))
 
         self.Amount_Edit_1 = QLineEdit(self.frame3,"Amount_Edit_1")
-        self.Amount_Edit_1.setGeometry(QRect(177,48,51,22))
+        self.Amount_Edit_1.setGeometry(QRect(177,48,51,21))
 
         self.Amount_Drop_1 = SearchingCombo(self.frame3,"Amount_Drop_1")
-        self.Amount_Drop_1.setGeometry(QRect(177,48,52,22))
+        self.Amount_Drop_1.setGeometry(QRect(177,48,52,21))
 
         self.Effect_1 = SearchingCombo(self.frame3,"Effect_1")
-        self.Effect_1.setGeometry(QRect(233,48,150,22))
+        self.Effect_1.setGeometry(QRect(233,48,150,21))
 
         self.Quality_1 = SearchingCombo(self.frame3,"Quality_1")
-        self.Quality_1.setGeometry(QRect(387,48,52,22))
+        self.Quality_1.setGeometry(QRect(387,48,52,21))
 
         self.Points_1 = QLabel(self.frame3,"Points_1")
-        self.Points_1.setGeometry(QRect(443,48,35,22))
+        self.Points_1.setGeometry(QRect(443,48,35,21))
         self.Points_1.setAlignment(QLabel.AlignVCenter | QLabel.AlignRight)
 
         self.Cost_1 = QLabel(self.frame3,"Cost_1")
-        self.Cost_1.setGeometry(QRect(482,48,70,22))
+        self.Cost_1.setGeometry(QRect(482,48,70,21))
         self.Cost_1.setAlignment(QLabel.AlignVCenter | QLabel.AlignRight)
 
         self.Name_1 = QLabel(self.frame3,"Name_1")
-        self.Name_1.setGeometry(QRect(562,48,200,22))
+        self.Name_1.setGeometry(QRect(562,48,200,21))
 
         self.Gem_Label_2 = QLabel(self.frame3,"Gem_Label_2")
-        self.Gem_Label_2.setGeometry(QRect(7,69,34,22))
+        self.Gem_Label_2.setGeometry(QRect(7,69,34,21))
 
         self.Amount_Edit_2 = QLineEdit(self.frame3,"Amount_Edit_2")
-        self.Amount_Edit_2.setGeometry(QRect(177,69,51,22))
+        self.Amount_Edit_2.setGeometry(QRect(177,69,51,21))
 
         self.Amount_Drop_2 = SearchingCombo(self.frame3,"Amount_Drop_2")
-        self.Amount_Drop_2.setGeometry(QRect(177,69,52,22))
+        self.Amount_Drop_2.setGeometry(QRect(177,69,52,21))
 
         self.Type_2 = SearchingCombo(self.frame3,"Type_2")
-        self.Type_2.setGeometry(QRect(46,69,127,22))
+        self.Type_2.setGeometry(QRect(46,69,127,21))
 
         self.Effect_2 = SearchingCombo(self.frame3,"Effect_2")
-        self.Effect_2.setGeometry(QRect(233,69,150,22))
+        self.Effect_2.setGeometry(QRect(233,69,150,21))
 
         self.Quality_2 = SearchingCombo(self.frame3,"Quality_2")
-        self.Quality_2.setGeometry(QRect(387,69,52,22))
+        self.Quality_2.setGeometry(QRect(387,69,52,21))
 
         self.Points_2 = QLabel(self.frame3,"Points_2")
-        self.Points_2.setGeometry(QRect(443,69,35,22))
+        self.Points_2.setGeometry(QRect(443,69,35,21))
         self.Points_2.setAlignment(QLabel.AlignVCenter | QLabel.AlignRight)
 
         self.Cost_2 = QLabel(self.frame3,"Cost_2")
-        self.Cost_2.setGeometry(QRect(482,69,70,22))
+        self.Cost_2.setGeometry(QRect(482,69,70,21))
         self.Cost_2.setAlignment(QLabel.AlignVCenter | QLabel.AlignRight)
 
         self.Name_2 = QLabel(self.frame3,"Name_2")
-        self.Name_2.setGeometry(QRect(562,69,200,22))
+        self.Name_2.setGeometry(QRect(562,69,200,21))
 
         self.Gem_Label_3 = QLabel(self.frame3,"Gem_Label_3")
-        self.Gem_Label_3.setGeometry(QRect(7,90,34,22))
+        self.Gem_Label_3.setGeometry(QRect(7,90,34,21))
 
         self.Type_3 = SearchingCombo(self.frame3,"Type_3")
-        self.Type_3.setGeometry(QRect(46,90,127,22))
+        self.Type_3.setGeometry(QRect(46,90,127,21))
 
         self.Amount_Edit_3 = QLineEdit(self.frame3,"Amount_Edit_3")
-        self.Amount_Edit_3.setGeometry(QRect(177,90,51,22))
+        self.Amount_Edit_3.setGeometry(QRect(177,90,51,21))
 
         self.Amount_Drop_3 = SearchingCombo(self.frame3,"Amount_Drop_3")
-        self.Amount_Drop_3.setGeometry(QRect(177,90,52,22))
+        self.Amount_Drop_3.setGeometry(QRect(177,90,52,21))
 
         self.Effect_3 = SearchingCombo(self.frame3,"Effect_3")
-        self.Effect_3.setGeometry(QRect(233,90,150,22))
+        self.Effect_3.setGeometry(QRect(233,90,150,21))
 
         self.Quality_3 = SearchingCombo(self.frame3,"Quality_3")
-        self.Quality_3.setGeometry(QRect(387,90,52,22))
+        self.Quality_3.setGeometry(QRect(387,90,52,21))
 
         self.Points_3 = QLabel(self.frame3,"Points_3")
-        self.Points_3.setGeometry(QRect(443,90,35,22))
+        self.Points_3.setGeometry(QRect(443,90,35,21))
         self.Points_3.setAlignment(QLabel.AlignVCenter | QLabel.AlignRight)
 
         self.Cost_3 = QLabel(self.frame3,"Cost_3")
-        self.Cost_3.setGeometry(QRect(482,90,70,22))
+        self.Cost_3.setGeometry(QRect(482,90,70,21))
         self.Cost_3.setAlignment(QLabel.AlignVCenter | QLabel.AlignRight)
 
         self.Name_3 = QLabel(self.frame3,"Name_3")
-        self.Name_3.setGeometry(QRect(562,90,200,22))
+        self.Name_3.setGeometry(QRect(562,90,200,21))
 
         self.Gem_Label_4 = QLabel(self.frame3,"Gem_Label_4")
-        self.Gem_Label_4.setGeometry(QRect(7,111,34,22))
+        self.Gem_Label_4.setGeometry(QRect(7,111,34,21))
 
         self.Type_4 = SearchingCombo(self.frame3,"Type_4")
-        self.Type_4.setGeometry(QRect(46,111,127,22))
+        self.Type_4.setGeometry(QRect(46,111,127,21))
 
         self.Amount_Edit_4 = QLineEdit(self.frame3,"Amount_Edit_4")
-        self.Amount_Edit_4.setGeometry(QRect(177,111,51,22))
+        self.Amount_Edit_4.setGeometry(QRect(177,111,51,21))
 
         self.Amount_Drop_4 = SearchingCombo(self.frame3,"Amount_Drop_4")
-        self.Amount_Drop_4.setGeometry(QRect(177,111,52,22))
+        self.Amount_Drop_4.setGeometry(QRect(177,111,52,21))
 
         self.Effect_4 = SearchingCombo(self.frame3,"Effect_4")
-        self.Effect_4.setGeometry(QRect(233,111,150,22))
+        self.Effect_4.setGeometry(QRect(233,111,150,21))
 
         self.Quality_4 = SearchingCombo(self.frame3,"Quality_4")
-        self.Quality_4.setGeometry(QRect(387,111,52,22))
+        self.Quality_4.setGeometry(QRect(387,111,52,21))
 
         self.Points_4 = QLabel(self.frame3,"Points_4")
-        self.Points_4.setGeometry(QRect(443,111,35,22))
+        self.Points_4.setGeometry(QRect(443,111,35,21))
         self.Points_4.setAlignment(QLabel.AlignVCenter | QLabel.AlignRight)
 
         self.Cost_4 = QLabel(self.frame3,"Cost_4")
-        self.Cost_4.setGeometry(QRect(482,111,70,22))
+        self.Cost_4.setGeometry(QRect(482,111,70,21))
         self.Cost_4.setAlignment(QLabel.AlignVCenter | QLabel.AlignRight)
 
         self.Name_4 = QLabel(self.frame3,"Name_4")
-        self.Name_4.setGeometry(QRect(562,111,200,22))
+        self.Name_4.setGeometry(QRect(562,111,200,21))
 
         self.Gem_Label_5 = QLabel(self.frame3,"Gem_Label_5")
-        self.Gem_Label_5.setGeometry(QRect(7,132,34,22))
+        self.Gem_Label_5.setGeometry(QRect(7,132,34,21))
 
         self.Type_5 = SearchingCombo(self.frame3,"Type_5")
-        self.Type_5.setGeometry(QRect(46,132,127,22))
+        self.Type_5.setGeometry(QRect(46,132,127,21))
 
         self.Amount_Edit_5 = QLineEdit(self.frame3,"Amount_Edit_5")
-        self.Amount_Edit_5.setGeometry(QRect(177,132,51,22))
+        self.Amount_Edit_5.setGeometry(QRect(177,132,51,21))
 
         self.Amount_Drop_5 = SearchingCombo(self.frame3,"Amount_Drop_5")
-        self.Amount_Drop_5.setGeometry(QRect(177,132,52,22))
+        self.Amount_Drop_5.setGeometry(QRect(177,132,52,21))
 
         self.Effect_5 = SearchingCombo(self.frame3,"Effect_5")
-        self.Effect_5.setGeometry(QRect(233,132,206,22))
+        self.Effect_5.setGeometry(QRect(233,132,206,21))
 
         self.Quality_5 = SearchingCombo(self.frame3,"Quality_5")
-        self.Quality_5.setGeometry(QRect(387,132,52,22))
+        self.Quality_5.setGeometry(QRect(387,132,52,21))
 
         self.Points_5 = QLabel(self.frame3,"Points_5")
-        self.Points_5.setGeometry(QRect(443,132,35,22))
+        self.Points_5.setGeometry(QRect(443,132,35,21))
         self.Points_5.setAlignment(QLabel.AlignVCenter | QLabel.AlignRight)
 
         self.Cost_5 = QLabel(self.frame3,"Cost_5")
-        self.Cost_5.setGeometry(QRect(482,132,70,22))
+        self.Cost_5.setGeometry(QRect(482,132,70,21))
         self.Cost_5.setAlignment(QLabel.AlignVCenter | QLabel.AlignRight)
 
         self.Name_5 = QLabel(self.frame3,"Name_5")
-        self.Name_5.setGeometry(QRect(562,132,200,22))
+        self.Name_5.setGeometry(QRect(562,132,200,21))
 
         self.Gem_Label_6 = QLabel(self.frame3,"Gem_Label_6")
-        self.Gem_Label_6.setGeometry(QRect(7,153,34,22))
+        self.Gem_Label_6.setGeometry(QRect(7,153,34,21))
 
         self.Type_6 = SearchingCombo(self.frame3,"Type_6")
-        self.Type_6.setGeometry(QRect(46,153,127,22))
+        self.Type_6.setGeometry(QRect(46,153,127,21))
 
         self.Amount_Edit_6 = QLineEdit(self.frame3,"Amount_Edit_6")
-        self.Amount_Edit_6.setGeometry(QRect(177,153,51,22))
+        self.Amount_Edit_6.setGeometry(QRect(177,153,51,21))
 
         self.Effect_6 = SearchingCombo(self.frame3,"Effect_6")
-        self.Effect_6.setGeometry(QRect(233,153,206,22))
+        self.Effect_6.setGeometry(QRect(233,153,206,21))
 
         self.Gem_Label_7 = QLabel(self.frame3,"Gem_Label_7")
-        self.Gem_Label_7.setGeometry(QRect(7,174,34,22))
+        self.Gem_Label_7.setGeometry(QRect(7,174,34,21))
 
         self.Type_7 = SearchingCombo(self.frame3,"Type_7")
-        self.Type_7.setGeometry(QRect(46,174,127,22))
+        self.Type_7.setGeometry(QRect(46,174,127,21))
 
         self.Amount_Edit_7 = QLineEdit(self.frame3,"Amount_Edit_7")
-        self.Amount_Edit_7.setGeometry(QRect(177,174,51,22))
+        self.Amount_Edit_7.setGeometry(QRect(177,174,51,21))
 
         self.Effect_7 = SearchingCombo(self.frame3,"Effect_7")
-        self.Effect_7.setGeometry(QRect(233,174,206,22))
+        self.Effect_7.setGeometry(QRect(233,174,206,21))
 
         self.Gem_Label_8 = QLabel(self.frame3,"Gem_Label_8")
-        self.Gem_Label_8.setGeometry(QRect(7,195,34,22))
+        self.Gem_Label_8.setGeometry(QRect(7,195,34,21))
 
         self.Type_8 = SearchingCombo(self.frame3,"Type_8")
-        self.Type_8.setGeometry(QRect(46,195,127,22))
+        self.Type_8.setGeometry(QRect(46,195,127,21))
 
         self.Amount_Edit_8 = QLineEdit(self.frame3,"Amount_Edit_8")
-        self.Amount_Edit_8.setGeometry(QRect(177,195,51,22))
+        self.Amount_Edit_8.setGeometry(QRect(177,195,51,21))
 
         self.Effect_8 = SearchingCombo(self.frame3,"Effect_8")
-        self.Effect_8.setGeometry(QRect(233,195,206,22))
+        self.Effect_8.setGeometry(QRect(233,195,206,21))
 
         self.Gem_Label_9 = QLabel(self.frame3,"Gem_Label_9")
-        self.Gem_Label_9.setGeometry(QRect(7,216,34,22))
+        self.Gem_Label_9.setGeometry(QRect(7,216,34,21))
 
         self.Type_9 = SearchingCombo(self.frame3,"Type_9")
-        self.Type_9.setGeometry(QRect(46,216,127,22))
+        self.Type_9.setGeometry(QRect(46,216,127,21))
 
         self.Amount_Edit_9 = QLineEdit(self.frame3,"Amount_Edit_9")
-        self.Amount_Edit_9.setGeometry(QRect(177,216,51,22))
+        self.Amount_Edit_9.setGeometry(QRect(177,216,51,21))
 
         self.Effect_9 = SearchingCombo(self.frame3,"Effect_9")
-        self.Effect_9.setGeometry(QRect(233,216,206,22))
+        self.Effect_9.setGeometry(QRect(233,216,206,21))
 
         self.Gem_Label_10 = QLabel(self.frame3,"Gem_Label_10")
-        self.Gem_Label_10.setGeometry(QRect(7,237,41,22))
+        self.Gem_Label_10.setGeometry(QRect(7,237,41,21))
 
         self.Type_10 = SearchingCombo(self.frame3,"Type_10")
-        self.Type_10.setGeometry(QRect(46,237,127,22))
+        self.Type_10.setGeometry(QRect(46,237,127,21))
 
         self.Amount_Edit_10 = QLineEdit(self.frame3,"Amount_Edit_10")
-        self.Amount_Edit_10.setGeometry(QRect(177,237,51,22))
+        self.Amount_Edit_10.setGeometry(QRect(177,237,51,21))
 
         self.Effect_10 = SearchingCombo(self.frame3,"Effect_10")
-        self.Effect_10.setGeometry(QRect(233,237,206,22))
+        self.Effect_10.setGeometry(QRect(233,237,206,21))
 
         self.ItemImbueLabel = QLabel(self.frame3,"ItemImbueLabel")
-        self.ItemImbueLabel.setGeometry(QRect(370,160,73,14))
+        self.ItemImbueLabel.setGeometry(QRect(370,178,73,17))
 
         self.ItemImbue = QLabel(self.frame3,"ItemImbue")
-        self.ItemImbue.setGeometry(QRect(443,160,35,14))
+        self.ItemImbue.setGeometry(QRect(443,178,35,17))
         self.ItemImbue.setAlignment(QLabel.AlignVCenter | QLabel.AlignRight)
 
         self.ItemImbueSlashLabel = QLabel(self.frame3,"ItemImbueSlashLabel")
-        self.ItemImbueSlashLabel.setGeometry(QRect(487,160,8,14))
+        self.ItemImbueSlashLabel.setGeometry(QRect(487,178,8,17))
 
         self.ItemImbueTotal = QLabel(self.frame3,"ItemImbueTotal")
-        self.ItemImbueTotal.setGeometry(QRect(498,160,29,14))
-
-        self.ItemUtilityLabel = QLabel(self.frame3,"ItemUtilityLabel")
-        self.ItemUtilityLabel.setGeometry(QRect(562,160,35,14))
-
-        self.ItemUtility = QLabel(self.frame3,"ItemUtility")
-        self.ItemUtility.setGeometry(QRect(615,160,35,14))
+        self.ItemImbueTotal.setGeometry(QRect(498,178,29,17))
 
         self.ItemOverchargeLabel = QLabel(self.frame3,"ItemOverchargeLabel")
-        self.ItemOverchargeLabel.setGeometry(QRect(370,178,73,14))
+        self.ItemOverchargeLabel.setGeometry(QRect(370,195,73,17))
 
         self.ItemOvercharge = QLabel(self.frame3,"ItemOvercharge")
-        self.ItemOvercharge.setGeometry(QRect(443,178,90,14))
+        self.ItemOvercharge.setGeometry(QRect(443,195,90,17))
         self.ItemOvercharge.setAlignment(QLabel.AlignCenter)
 
         self.ItemCostLabel = QLabel(self.frame3,"ItemCostLabel")
-        self.ItemCostLabel.setGeometry(QRect(370,196,73,14))
+        self.ItemCostLabel.setGeometry(QRect(370,220,73,17))
 
         self.ItemCost = QLabel(self.frame3,"ItemCost")
-        self.ItemCost.setGeometry(QRect(482,196,70,14))
+        self.ItemCost.setGeometry(QRect(482,220,70,17))
         self.ItemCost.setAlignment(QLabel.AlignVCenter | QLabel.AlignRight)
 
+        self.ItemPriceLabel = QLabel(self.frame3,"ItemPriceLabel")
+        self.ItemPriceLabel.setGeometry(QRect(370,237,73,17))
+
+        self.ItemPrice = QLabel(self.frame3,"ItemPrice")
+        self.ItemPrice.setGeometry(QRect(482,237,70,17))
+        self.ItemPrice.setAlignment(QLabel.AlignVCenter | QLabel.AlignRight)
+
+        self.ItemUtilityLabel = QLabel(self.frame3,"ItemUtilityLabel")
+        self.ItemUtilityLabel.setGeometry(QRect(585,237,35,17))
+
+        self.ItemUtility = QLabel(self.frame3,"ItemUtility")
+        self.ItemUtility.setGeometry(QRect(625,237,30,17))
+        self.ItemUtility.setAlignment(QLabel.AlignVCenter | QLabel.AlignRight)
+
         self.LoadItem = QPushButton(self.frame3,"LoadItem")
-        self.LoadItem.setGeometry(QRect(683,157,79,26))
+        self.LoadItem.setGeometry(QRect(683,165,79,26))
 
         self.CraftButton = QPushButton(self.frame3,"CraftButton")
-        self.CraftButton.setGeometry(QRect(683,189,79,26))
+        self.CraftButton.setGeometry(QRect(683,199,79,26))
 
         self.SaveItem = QPushButton(self.frame3,"SaveItem")
-        self.SaveItem.setGeometry(QRect(683,189,79,26))
+        self.SaveItem.setGeometry(QRect(683,199,79,26))
 
         self.ClearItem = QPushButton(self.frame3,"ClearItem")
         self.ClearItem.setGeometry(QRect(683,233,79,26))
@@ -645,7 +653,7 @@ class B_SC(QMainWindow):
 
         self.languageChange()
 
-        self.resize(QSize(781,526).expandedTo(self.minimumSizeHint()))
+        self.resize(QSize(781,525).expandedTo(self.minimumSizeHint()))
         self.clearWState(Qt.WState_Polished)
 
         self.connect(self.PieceTab,SIGNAL("selected(int)"),self.PieceTabChanged)
@@ -896,12 +904,14 @@ class B_SC(QMainWindow):
         self.ItemImbue.setText(self.__tr("0.0"))
         self.ItemImbueSlashLabel.setText(self.__tr("/"))
         self.ItemImbueTotal.setText(self.__tr("0.0"))
-        self.ItemUtilityLabel.setText(self.__tr("Utility:"))
-        self.ItemUtility.setText(self.__tr("0.0"))
         self.ItemOverchargeLabel.setText(self.__tr("Overcharge:"))
         self.ItemOvercharge.setText(self.__tr("None"))
         self.ItemCostLabel.setText(self.__tr("Item Cost:"))
         self.ItemCost.setText(QString.null)
+        self.ItemPriceLabel.setText(self.__tr("Item Price:"))
+        self.ItemPrice.setText(QString.null)
+        self.ItemUtilityLabel.setText(self.__tr("Utility:"))
+        self.ItemUtility.setText(self.__tr("0.0"))
         self.LoadItem.setText(self.__tr("Load Item"))
         self.CraftButton.setText(self.__tr("Craft..."))
         self.SaveItem.setText(self.__tr("Save Item"))
