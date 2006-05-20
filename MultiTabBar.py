@@ -28,6 +28,7 @@
 # [Won't consider tab scrolling - that's the point of multiple bars]
 
 import sys
+import string
 from qt import *
 
 def noamptext(text):
@@ -123,6 +124,13 @@ class MultiTabBar(QTabBar):
                         QTabBar.setCurrentTab(self, tab)
                     break
 
+    def buildTabKeys(self):
+        keys = []
+        for i in range(0, self.count()):
+            txt = str(self.tabAt(i).text())
+            keys.append(string.join(map(lambda s: s[0], str(txt).split()), "").upper())
+        return keys
+
     def keyPressEvent(self, e):
         if e.key() == Qt.Key_Up:
             if len(self.currows) <= 1: return
@@ -131,7 +139,22 @@ class MultiTabBar(QTabBar):
             if len(self.currows) <= 1: return
             newrow = self.tabrows[self.currows[0]]
         else:
-            QTabBar.keyPressEvent(self, e)
+            key = str(e.text()).upper()
+            tabkeys = self.buildTabKeys()
+            indexlist = []
+            for i in range(0, len(tabkeys)):
+                if key in tabkeys[i]:
+                    indexlist.append(i)
+            if len(indexlist) == 0:
+                QTabBar.keyPressEvent(self, e)
+                return
+            if self.currentTab() >= indexlist[-1]:
+                self.setCurrentTab(indexlist[0])
+            else:
+                i = filter(lambda x: x > self.currentTab(), indexlist)[0]
+                self.setCurrentTab(i)
+            #need to verify this isn't needed for tabs (v.s. QListBox)
+            #self.emit(SIGNAL("activated(const QString&)"),(self.currentText(),))
             return
         fr = self.tab(self.currentTab()).rect()
         fr.setLeft(fr.left() + fr.width() / 2)
