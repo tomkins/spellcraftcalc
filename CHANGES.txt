@@ -10,6 +10,9 @@ Updated ../../.. - Version 1.43.0012 (dev)
   Removed the error label fields from the window, displaying more
   of the Other Bonuses list at one time.
 
+  Restore everyone's favorite quick-change, view Distance to Cap,
+  as a View menu item (with a check mark to indicate when active).
+
   Remember the 'amount' when switching from type to type, such as when
   the user changes 5 str to 5 dex.
 

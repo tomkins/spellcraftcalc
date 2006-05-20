@@ -1,10 +1,12 @@
 Things to fix before next beta release is announced;
 
-  Ensure we save/load PC and drop items (something is/was wrong).
+  Ensure we save/load PC and drop items (something was(?) wrong).
 
   Fix the prices, it's just wonked with all the different cost
   changes to gems since cats gems.  This means using SC.py from
   ScWindow.py instead of duplicating the code.
+
+  Price (in addition to cost) per-item.
 
   Make a typeable combobox just works correctly, or offer a popup
   for users type in their own 'other bonus...', 'other effect...',
@@ -14,11 +16,11 @@ Things to fix before next beta release is announced;
 
   Stop saving unused slots in the template.xml?
 
-  Make sure 5th player slot saves/loads - might use slightly different
-  xml field to designate 'Effect'.
+  Stop displaying unused slots in the reports!
 
   Display 5th slot proc by level requirement.  Make it selectable?
-  (E.g. choose an effect amount or the proc level).
+  (E.g. choose an effect amount or the proc level).  There's room
+  where the 'quality' on other gem slots isn't needed.
 
 
 Things to fix before 2.0 final (non-beta) is announced;
@@ -28,7 +30,7 @@ Things to fix before 2.0 final (non-beta) is announced;
   and compare with new/last saved details?
 
   Figure costing of crafted tinctures as a seperate subtotal,
-  price by SC markup rules but base on 94 qual (it doesn't matter).
+  priced by their own rules, based on 94 qual (it doesn't matter).
 
   LoadTemplate:  Some report that old templates don't load properly.
   Noticed more often on crafted rather than drop gear, probably bad
@@ -43,9 +45,11 @@ Things to fix before 2.0 final (non-beta) is announced;
   preview, perhaps matching to the file extensions?), and doesn't 
   remember the directory used.
 
-  Prevent user from choosing > tier 1 Finesse all magic/all melee skills.
+  Prevent user from choosing > tier 1 Finesse all magic/all melee 
+  skills (the recent code for tinctures -should- make this a little
+  bit easier, but not simple.)
 
-  Accelerator keys for tabs, and other things.
+  Accelerator keys to jump around the page, especially to tabs.
 
 
 Extreme features, perhaps post-2.0
@@ -59,12 +63,14 @@ Extreme features, perhaps post-2.0
 
   Add 'requirements' in general (beyond 5th crafted slot) for drop items
   by each gem slot.  Track 'Artifact Level' in this same field (none of
-  them appear to be arti level + required level).
+  them appear to be arti level + required level).  Such as, Spell Range
+  - requirement against Animals, or Spell Range - requirement artifact
+  level 50.
 
   A guildy suggested that the user could fix all of the body armor
   pieces or all the weapons which are crafted, based on popping up
-  the itemlevel window only once (cool!!!)  Something similar for 
-  item quality?  Or a Copy drop menu to fill one other slot, all armor,
+  the itemlevel window only once (cool!!!)  Something similar for item 
+  quality?  Or a Copy drop menu to fill one other slot, all armor,
   all (four) weapons, or all gems (for quick-lv 51)?
 
   Fill in AF/DPS based on itemlevel dialog, if provided.  Perhaps
