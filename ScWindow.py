@@ -195,6 +195,9 @@ class ScWindow(B_SC):
         self.menuBar().insertItem('&Edit', self.editmenu)
 
         self.viewmenu = QPopupMenu(self, 'ViewMenu')
+        self.showcapmenuid = self.viewmenu.insertItem('Distance to &Cap', self.showCap)
+        self.viewmenu.setItemChecked(self.showcapmenuid, self.capDistance)
+        self.viewmenu.insertSeparator()
         self.viewmenu.insertItem('&Configuration', self.openConfigReport, Qt.CTRL+Qt.Key_C)
         self.viewmenu.insertItem('Choose Format...', self.chooseReportFile)
         self.viewmenu.insertSeparator()
@@ -1417,6 +1420,11 @@ class ScWindow(B_SC):
         if not ' ' in str(a0.text()): return
         amount, effect = string.split(str(a0.text()), ' ', 1)
         self.DelveItemsDialog(effect)
+
+    def showCap(self):
+        self.capDistance = not self.capDistance
+        self.viewmenu.setItemChecked(self.showcapmenuid, self.capDistance)
+        self.calculate()
 
     def swapWith(self, part):
         cur = self.itemattrlist.get(self.currentTabLabel, Item(self.currentTabLabel))
