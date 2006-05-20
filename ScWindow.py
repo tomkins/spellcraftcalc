@@ -89,10 +89,6 @@ class ScWindow(B_SC):
 
         self.frame3.move(self.frame3.pos().x(), self.PieceTab.geometry().bottom())
 
-        # Change text color to red for error strings
-        self.LabelOcError.setPaletteForegroundColor(QColor(255, 0, 0))
-        self.LabelDupError.setPaletteForegroundColor(QColor(255, 0, 0))
-
         self.Realm.insertStrList(list(Realms))
         self.QualDrop.insertStrList(list(QualityValues))
 
@@ -142,26 +138,24 @@ class ScWindow(B_SC):
         OW = Options.Options(self, '', 0)
         OW.load()
 
-        self.filemenu = QPopupMenu(self, 'FileMenu')
-        self.filemenu.insertItem('&New', self.newFile, Qt.CTRL+Qt.Key_N)
-        self.filemenu.insertItem('&Open', self.openFile, Qt.CTRL+Qt.Key_O)
-        self.filemenu.insertItem('&Save', self.saveFile, Qt.CTRL+Qt.Key_S)
-        self.filemenu.insertItem('Save &As...', self.saveAsFile)
         self.rf_menu = QPopupMenu(self, "Recent Files")
         self.updateRecentFiles(None)
+
+        self.filemenu = QPopupMenu(self, 'FileMenu')
+        self.filemenu.insertItem('&New', self.newFile, Qt.CTRL+Qt.Key_N)
+        self.filemenu.insertItem('&Open...', self.openFile, Qt.CTRL+Qt.Key_O)
+        self.filemenu.insertItem('&Save', self.saveFile, Qt.CTRL+Qt.Key_S)
+        self.filemenu.insertItem('Save &As...', self.saveAsFile)
+        self.filemenu.insertSeparator()
+        self.filemenu.insertItem('Export &Quickbars...', self.openCraftBars)
+        self.filemenu.insertItem('Export UI &XML (Beta)...', self.generateUIXML)
+        self.filemenu.insertSeparator()
         self.filemenu.insertItem('&Recent Files', self.rf_menu)
+        self.filemenu.insertSeparator()
         self.filemenu.insertItem('E&xit', self, SLOT('close()'), Qt.CTRL+Qt.Key_X)
         self.menuBar().insertItem('&File', self.filemenu)
 
-        self.reportmenu = QPopupMenu(self, 'FileMenu')
-        self.reportmenu.insertItem('Choose Config Format...', self.chooseReportFile)
-        self.reportmenu.insertItem('&Configuration', self.openConfigReport, Qt.CTRL+Qt.Key_C)
-        self.reportmenu.insertItem('&Materials', self.openMaterialsReport, Qt.CTRL+Qt.Key_M)
-        self.reportmenu.insertItem('&Set up Craft Bars...', self.openCraftBars)
-        self.reportmenu.insertItem('&Generate UI XML (Beta)', self.generateUIXML)
-        self.menuBar().insertItem('&Reports', self.reportmenu)
-
-        self.swapGems = QPopupMenu(self, "SwapGems")
+        self.swapGems = QPopupMenu(self, "SwapGemsMenu")
         self.swapGems.insertItem('Chest', 0)
         self.swapGems.connectItem(0, self.swapWithChest)
         self.swapGems.insertItem('Arms', 1)
@@ -185,10 +179,24 @@ class ScWindow(B_SC):
         self.swapGems.insertItem('Spare', 10)
         self.swapGems.connectItem(10, self.swapWithSpare)
         self.swapGems.setItemEnabled(0, False)
-        self.toolsmenu = QPopupMenu(self, 'ToolsMenu')
-        self.toolsmenu.insertItem('S&wap Gems With...', self.swapGems)
-        self.toolsmenu.insertItem('&Options...', self.openOptions)
-        self.menuBar().insertItem('&Tools', self.toolsmenu)
+
+        self.editmenu = QPopupMenu(self, 'EditMenu')
+        self.editmenu.insertItem('S&wap Gems With...', self.swapGems)
+        self.filemenu.insertSeparator()
+        self.editmenu.insertItem('&Options...', self.openOptions)
+        self.menuBar().insertItem('&Edit', self.editmenu)
+
+        self.viewmenu = QPopupMenu(self, 'ViewMenu')
+        self.viewmenu.insertItem('&Configuration', self.openConfigReport, Qt.CTRL+Qt.Key_C)
+        self.viewmenu.insertItem('Choose Format...', self.chooseReportFile)
+        self.filemenu.insertSeparator()
+        self.viewmenu.insertItem('&Materials', self.openMaterialsReport, Qt.CTRL+Qt.Key_M)
+        self.menuBar().insertItem('&View', self.viewmenu)
+
+        self.errorsmenu = QPopupMenu(self, "Errors")
+        self.errorsmenu.insertSeparator()
+        self.errorsmenuid = self.menuBar().insertItem('&Errors', self.errorsmenu)
+        self.menuBar().setItemEnabled(self.errorsmenuid, False)
 
         self.helpmenu = QPopupMenu(self, 'HelpMenu')
         self.helpmenu.insertItem('&About', self.aboutBox)
@@ -321,6 +329,9 @@ class ScWindow(B_SC):
         self.currentPieceTab = a0
         self.currentTabLabel = string.strip(str(self.PieceTab.tab(a0).text()))
         self.restoreItem(self.itemattrlist.get(self.currentTabLabel, Item(self.currentTabLabel)))
+
+    def changePieceTab(self,a0):
+        self.PieceTab.setCurrentTab(self.PieceTab.tab(a0))
 
     def FixupItemLevel(self):
         if str(self.ItemLevel.text()) == '' \
@@ -510,8 +521,8 @@ class ScWindow(B_SC):
         self.capTotals['AF'] = 0
         skillTotals = {}
         otherTotals = {}
-        self.LabelDupError.setText('')
-        self.LabelOcError.setText('')
+        errorcount = 0
+        self.errorsmenu.clear()
         totalutility = 0.0
         totalcost = 0
         for key, item in self.itemattrlist.items():
@@ -533,7 +544,10 @@ class ScWindow(B_SC):
                     amount = int(amount)
                 effect = item.getSlotAttr(itemtype, i, 'Effect')
                 if effect != '' and [gemtype, effect] in gemeffects:
-                    self.LabelDupError.setText('Two of same type of gem on %s' % key)
+                    self.errorsmenu.insertItem('Two of same type of gem on %s' % key, errorcount)
+                    self.errorsmenu.connectItem(errorcount, self.changePieceTab)
+                    self.errorsmenu.setItemParameter(errorcount, TabList.index(key))
+                    errorcount = errorcount + 1
                 gemeffects.append([gemtype, effect])
                 if itemtype == 'player':
                     if key == self.currentTabLabel:
@@ -630,7 +644,10 @@ class ScWindow(B_SC):
                 itemimbue = self.getItemImbue(item)
                 imbue = self.calcImbue(item, key == self.currentTabLabel)
                 if (imbue - itemimbue) >= 6:
-                    self.LabelOcError.setText('Impossible Overcharge on %s' % key)
+                    self.errorsmenu.insertItem('Impossible Overcharge on %s' % key, errorcount)
+                    self.errorsmenu.connectItem(errorcount, self.changePieceTab)
+                    self.errorsmenu.setItemParameter(errorcount, TabList.index(key))
+                    errorcount = errorcount + 1
                 elif imbue > (itemimbue+0.5):
                     success = -OCStartPercentages[int(imbue-itemimbue)]
                     for i in range(0, 4):
@@ -728,6 +745,8 @@ class ScWindow(B_SC):
                     capmod = 0
                 self.OtherBonusList.insertItem('%d %s' % (cap + capmod - amount, bonus))        
         self.TotalPrice.setText(SC.formatCost(self.computePrice()))
+        self.menuBar().setItemEnabled(self.errorsmenuid, (errorcount > 0))
+
         self.nocalc = 0
 
     def computePrice(self):
