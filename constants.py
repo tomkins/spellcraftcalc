@@ -1134,26 +1134,26 @@ Caps = d2(Caps)
 #      [   4,  0] is the level * 4
 #
 HighCapBonusList = d2({
-    'Stat'                      : ( 1.50,  0 ),
-    'Resist'                    : (  .50,  1 ),
     'Hits'                      : ( 4.00,  0 ),
-    'Power'                     : (  .50,  1 ),
-    'Skill'                     : (  .20,  1 ),
-    'Cap'                       : (  .50,  1 ),
     'Hits Cap'                  : ( 4.00,  0 ),
+    'Stat'                      : ( 1.50,  0 ),
     'Power Cap'                 : ( 1.00,  0 ),
     'AF Cap'                    : ( 1.00,  0 ),
-    'PvE Bonus'                 : (  .20,  0 ),
-    'Other Bonus'               : (  .20,  0 ),
+    'AF'                        : ( 1.00,  0 ),
+    'Arrow Recovery'            : ( 1.00,  0 ), 
+    'Death Experience Loss Reduction' : ( 1.00,  0 ),
+    'Resist'                    : (  .50,  1 ),
+    'Power'                     : (  .50,  1 ),
+    'Cap'                       : (  .50,  1 ),
     '% Power Pool'              : (  .50,  0 ),
     'Stat Buff Effectiveness'   : (  .50,  0 ),
     'Stat Debuff Effectiveness' : (  .50,  0 ),
     'Healing Effectiveness'     : (  .50,  0 ),
     'Duration of Spells'        : (  .50,  0 ),
     'Fatigue'                   : (  .50,  0 ),
-    'AF'                        : ( 1.00,  0 ),
-    'Arrow Recovery'            : ( 1.00,  0 ), 
-    'Death Experience Loss Reduction' : ( 1.00,  0 ),
+    'Skill'                     : (  .20,  1 ),
+    'PvE Bonus'                 : (  .20,  0 ),
+    'Other Bonus'               : (  .20,  0 ),
 })
 
 
