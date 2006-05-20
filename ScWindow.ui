@@ -1388,7 +1388,7 @@ Python:from SearchingCombo import *
                 <x>367</x>
                 <y>3</y>
                 <width>240</width>
-                <height>151</height>
+                <height>182</height>
             </rect>
         </property>
         <property name="title">
@@ -1403,42 +1403,10 @@ Python:from SearchingCombo import *
                     <x>5</x>
                     <y>15</y>
                     <width>230</width>
-                    <height>131</height>
+                    <height>160</height>
                 </rect>
             </property>
         </widget>
-    </widget>
-    <widget class="QLabel">
-        <property name="name">
-            <cstring>LabelOcError</cstring>
-        </property>
-        <property name="geometry">
-            <rect>
-                <x>367</x>
-                <y>157</y>
-                <width>240</width>
-                <height>14</height>
-            </rect>
-        </property>
-        <property name="text">
-            <string></string>
-        </property>
-    </widget>
-    <widget class="QLabel">
-        <property name="name">
-            <cstring>LabelDupError</cstring>
-        </property>
-        <property name="geometry">
-            <rect>
-                <x>367</x>
-                <y>173</y>
-                <width>240</width>
-                <height>14</height>
-            </rect>
-        </property>
-        <property name="text">
-            <string></string>
-        </property>
     </widget>
     <widget class="QGroupBox">
         <property name="name">
