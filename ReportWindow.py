@@ -53,49 +53,58 @@ def dustSort(a, b):
         return 0
     
 def gemNameSort(a, b):
+    ## XXX need to be static singletons...
     essence_re = re.compile("essence", re.IGNORECASE);
     shielding_re = re.compile("shielding", re.IGNORECASE);
     battle_re = re.compile("battle", re.IGNORECASE);
     war_re = re.compile("war", re.IGNORECASE);
+    tincture_re = re.compile("tincture", re.IGNORECASE);
     
+    t_a = tincture_re.search(a)
+    t_b = tincture_re.search(b)
+    if not (t_a is None and t_b is None):
+        if t_a is None: return  -1
+        if t_b is None: return  1
+        return cmp(a, b)
+        
     gemlevel_a, r = string.split(a, ' ', 1)
     gemlevel_b, r = string.split(b, ' ', 1)
-    e_a = essence_re.search(a)
-    s_a = shielding_re.search(a)
-    b_a = battle_re.search(a)
-    w_a = war_re.search(a)
-    e_b = essence_re.search(b)
-    s_b = shielding_re.search(b)
-    b_b = battle_re.search(b)
-    w_b = war_re.search(b)
     if GemNames.index(gemlevel_a) < GemNames.index(gemlevel_b):
-        ret = -1
+        return -1
     elif GemNames.index(gemlevel_a) > GemNames.index(gemlevel_b):
-        ret = 1
-    else:
-        ret = 0
+        return 1
 
-    if ret != 0: return ret
-
+    e_a = essence_re.search(a)
+    e_b = essence_re.search(b)
     if e_a is not None:
-        if e_b is not None: return ret
+        if e_b is not None: return cmp(a, b)
         else: return -1
+
+    s_a = shielding_re.search(a)
+    s_b = shielding_re.search(b)
     if s_a is not None:
-        if s_b is not None: return ret
+        if s_b is not None: return cmp(a, b)
         elif e_b is not None: return 1
         else: return -1
+
+    b_a = battle_re.search(a)
+    b_b = battle_re.search(b)
     if b_a is not None:
         if s_b is not None: return 1
         elif e_b is not None: return 1
-        elif b_b is not None: return ret
+        elif b_b is not None: return cmp(a, b)
         else: return -1
+
+    w_a = war_re.search(a)
+    w_b = war_re.search(b)
     if w_a is not None:
         if s_b is not None: return 1
         elif e_b is not None: return 1
         elif b_b is not None: return 1
-        elif w_b is not None: return ret
+        elif w_b is not None: return cmp(a, b)
         else: return -1
-    else: return ret
+    
+    return cmp(a, b)
 
 class ReportWindow(B_ReportWindow):
     def __init__(self,parent = None,name = None,modal = 0,fl = 0):
@@ -116,7 +125,7 @@ class ReportWindow(B_ReportWindow):
         self.gemnames = { }
         self.totalcost = 0
         if showslot == 0:
-            lastslot = 4
+            lastslot = 5
         else:
             lastslot = showslot
         for loc, item in itemlist.items():
@@ -235,7 +244,7 @@ class ReportWindow(B_ReportWindow):
                 iteminfo[key]['availablepoints'] = 0
                 iteminfo[key]['overcharge'] = 0
             else:
-                endrng = 4
+                endrng = 5
                 imbue = SC.calcImbue(item)
                 itemimbue = SC.getItemImbue(item)
                 if (imbue - itemimbue) >= 6:
