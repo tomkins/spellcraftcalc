@@ -419,8 +419,11 @@ class ScWindow(B_SC):
         location = item.getAttr('Location')
         self.Equipped.setChecked(int(item.getAttr('Equipped')))
         for slot in range(0, toprng):
+
             typecombo = self.Type[slot]
             typecombo.clear()
+            if typelist == TypeList and slot == 4:
+                typelist = list(EffectTypeList)
             typecombo.insertStrList(list(typelist))
             gemtype = str(item.getSlotAttr(itemtype, slot, 'Type'))
             gemeffect = str(item.getSlotAttr(itemtype, slot, 'Effect'))
@@ -452,7 +455,12 @@ class ScWindow(B_SC):
                 amedit.setText(am)
             else:
                 gemamount = item.getSlotAttr(itemtype, slot, 'Amount')
-                amountlist = ValuesLists[gemtype]
+                if ValuesLists.has_key(gemtype):
+                    if isinstance(ValuesLists[gemtype], tuple):
+                        amountlist = ValuesLists[gemtype]
+                    else:
+                        if ValuesLists[gemtype].has_key(gemeffect):
+                            amountlist = ValuesLists[gemtype][gemeffect]
                 if gemamount in amountlist:
                     self.AmountDrop[slot].setCurrentItem(
                             amountlist.index(gemamount))
@@ -472,33 +480,6 @@ class ScWindow(B_SC):
             if item.getAttr('ItemQuality') in QualityValues:
                 self.QualDrop.setCurrentItem(
                     QualityValues.index(item.getAttr('ItemQuality')))
-            typecombo = self.Type[4]
-            typecombo.clear()
-            typelist = list(EffectTypeList)
-            typecombo.insertStrList(typelist)
-            gemtype = item.getSlotAttr(itemtype, 4, 'Type')
-            gemeffect = item.getSlotAttr(itemtype, 4, 'Effect')
-            gemamount = item.getSlotAttr(itemtype, 4, 'Amount')
-            typecombo.setCurrentItem(typelist.index(gemtype))
-            self.UpdateCombo(4)
-            effcombo = self.Effect[4]
-            effectlist = self.effectlists[gemtype]
-            if not gemeffect in effectlist:
-                if not isinstance(self.effectlists[gemtype], list):
-                    self.effectlists[gemtype] = list(self.effectlists[gemtype])
-                effectlist.append(gemeffect)
-                effcombo.insertStrList( [gemeffect] )
-            if gemeffect in effectlist:
-                effcombo.setCurrentItem(effectlist.index(gemeffect))
-            if ValuesLists.has_key(gemtype):
-                if isinstance(ValuesLists[gemtype], tuple):
-                    amountlist = ValuesLists[gemtype]
-                else:
-                    if ValuesLists[gemtype].has_key(gemeffect):
-                        amountlist = ValuesLists[gemtype][gemeffect]
-                if gemamount in amountlist:
-                    self.AmountDrop[4].setCurrentItem(
-                            amountlist.index(gemamount))
         self.save = 1
         self.nocalc = wascalc
         self.calculate()
