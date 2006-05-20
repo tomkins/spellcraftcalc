@@ -33,7 +33,7 @@ class Options(B_Options):
         B_Options.__init__(self,parent,name,modal,fl)
 #       self.Tab.setTabEnabled(self.Price, 0)
         self.parent = parent
-        skilllist = range(1001, 51, -50)
+        skilllist = range(1051, 0, -50)
         self.Skill.clear()
         self.Skill.insertStrList(map(lambda(x):str(x), skilllist))
         li = self.Skill.listBox().findItem(str(self.parent.crafterSkill))

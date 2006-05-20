@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'Options.ui'
 #
-# Created: Mon Nov 28 18:49:34 2005
+# Created: Sat May 20 15:12:03 2006
 #      by: The PyQt User Interface Compiler (pyuic) 3.15
 #
 # WARNING! All changes made in this file will be lost!
@@ -33,10 +33,10 @@ class B_Options(QDialog):
         self.General = QWidget(self.Tab,"General")
 
         self.TextLabel1 = QLabel(self.General,"TextLabel1")
-        self.TextLabel1.setGeometry(QRect(185,17,61,22))
+        self.TextLabel1.setGeometry(QRect(18,17,61,22))
 
         self.Skill = QComboBox(0,self.General,"Skill")
-        self.Skill.setGeometry(QRect(256,17,81,22))
+        self.Skill.setGeometry(QRect(89,17,81,22))
 
         self.CapDistance = QCheckBox(self.General,"CapDistance")
         self.CapDistance.setGeometry(QRect(18,75,250,17))
