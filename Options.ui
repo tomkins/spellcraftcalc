@@ -97,7 +97,7 @@
                 <property stdset="1">
                     <name>geometry</name>
                     <rect>
-                        <x>185</x>
+                        <x>18</x>
                         <y>17</y>
                         <width>61</width>
                         <height>22</height>
@@ -117,7 +117,7 @@
                 <property stdset="1">
                     <name>geometry</name>
                     <rect>
-                        <x>256</x>
+                        <x>89</x>
                         <y>17</y>
                         <width>81</width>
                         <height>22</height>
