@@ -1,5 +1,13 @@
 Updated ../../.. - Version 1.43.0012 (dev)
 
+  Create a more windows-like list of Menu tabs, File Edit View etc...
+
+  Remove the error label fields from the window, growing the number
+  of visible 'other bonus' entries.
+
+  And create an Errors menu item to collect all of the template errors, 
+  clickable to jump straight to the item that has the error.
+
   Fixed Windows 98/ME font selection.  With Unicode for Windows, Qt was
   getting horribly confused by the standard font 'Trebuchet MS'.
 
