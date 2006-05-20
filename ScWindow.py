@@ -73,6 +73,14 @@ class ScWindow(B_SC):
         self.statusBar().setSizeGripEnabled(0)
         self.statusBar().hide()
 
+        # This doesn't matter for tinctures, keep hidden
+        self.Quality_5.hide()
+
+        ## XXX not calculated yet - we must hide :)
+        self.Cost_5.hide()
+        self.ItemPriceLabel.hide()
+        self.ItemPrice.hide()
+
         self.EffectWidths = [self.Effect_1.width(), self.Effect_10.width()]
 
         self.PieceTab.setFocusPolicy(QWidget.StrongFocus)
@@ -120,7 +128,7 @@ class ScWindow(B_SC):
         self.updateGeometry()
         self.centralWidget().setFixedSize(
              QSize(self.frame3.frameGeometry().right() + 4, 
-                   self.frame3.frameGeometry().bottom() + 4))
+                   self.frame3.frameGeometry().bottom() + 3))
 
         self.startup = 1
         self.pricingInfo = {}
@@ -148,7 +156,7 @@ class ScWindow(B_SC):
         self.filemenu.insertItem('Save &As...', self.saveAsFile)
         self.filemenu.insertSeparator()
         self.filemenu.insertItem('Export &Quickbars...', self.openCraftBars)
-        self.filemenu.insertItem('Export UI &XML (Beta)...', self.generateUIXML)
+        self.filemenu.insertItem('Export &UI XML (Beta)...', self.generateUIXML)
         self.filemenu.insertSeparator()
         self.filemenu.insertItem('&Recent Files', self.rf_menu)
         self.filemenu.insertSeparator()
@@ -182,14 +190,14 @@ class ScWindow(B_SC):
 
         self.editmenu = QPopupMenu(self, 'EditMenu')
         self.editmenu.insertItem('S&wap Gems With...', self.swapGems)
-        self.filemenu.insertSeparator()
+        self.editmenu.insertSeparator()
         self.editmenu.insertItem('&Options...', self.openOptions)
         self.menuBar().insertItem('&Edit', self.editmenu)
 
         self.viewmenu = QPopupMenu(self, 'ViewMenu')
         self.viewmenu.insertItem('&Configuration', self.openConfigReport, Qt.CTRL+Qt.Key_C)
         self.viewmenu.insertItem('Choose Format...', self.chooseReportFile)
-        self.filemenu.insertSeparator()
+        self.viewmenu.insertSeparator()
         self.viewmenu.insertItem('&Materials', self.openMaterialsReport, Qt.CTRL+Qt.Key_M)
         self.menuBar().insertItem('&View', self.viewmenu)
 
@@ -252,14 +260,11 @@ class ScWindow(B_SC):
             self.Amount_Edit_5, self.Amount_Edit_6,
             self.Amount_Edit_7, self.Amount_Edit_8,
             self.Amount_Edit_9, self.Amount_Edit_10,
-            #self.Gem_Label_5, 
             self.Gem_Label_6,
             self.Gem_Label_7, self.Gem_Label_8,
             self.Gem_Label_9, self.Gem_Label_10,
-            #self.Type_5, 
             self.Type_6, self.Type_7,
             self.Type_8, self.Type_9, self.Type_10,
-            #self.Effect_5, 
             self.Effect_6, self.Effect_7,
             self.Effect_8, self.Effect_9, self.Effect_10,
         ]
@@ -270,17 +275,18 @@ class ScWindow(B_SC):
             self.Amount_Drop_3, self.Amount_Drop_4,
             self.Amount_Drop_5,
             self.Quality_1, self.Quality_2, self.Quality_3, self.Quality_4,
-            self.Quality_5,
+            ## self.Quality_5, (doesn't matter for tinctures, keep hidden)
             self.Points_1, self.Points_2, self.Points_3, self.Points_4,
             self.Points_5,
             self.Cost_1, self.Cost_2, self.Cost_3, self.Cost_4,
-            self.Cost_5,
+            ## self.Cost_5, XXX not calculated yet
             self.Name_1, self.Name_2, self.Name_3, self.Name_4,
             self.Name_5,
             self.ItemImbueLabel, self.ItemImbue,
             self.ItemImbueSlashLabel, self.ItemImbueTotal,
             self.ItemOverchargeLabel, self.ItemOvercharge,
             self.ItemCostLabel, self.ItemCost,
+            ## self.ItemPriceLabel, self.ItemPrice, XXX not calculated yet
         ]
 
         self.RealmChanged(self.realm)
