@@ -1,5 +1,8 @@
 Updated ../../.. - Version 1.43.0012 (dev)
 
+  Fixed Windows 98/ME font selection.  With Unicode for Windows, Qt was
+  getting horribly confused by the standard font 'Trebuchet MS'.
+
   Create a more windows-like list of Menu tabs, File Edit View etc...
   and create an Errors menu item to collect a clickable menu list
   off all the template errors.
@@ -7,19 +10,19 @@ Updated ../../.. - Version 1.43.0012 (dev)
   Removed the error label fields from the window, displaying more
   of the Other Bonuses list at one time.
 
-  Fixed Windows 98/ME font selection.  With Unicode for Windows, Qt was
-  getting horribly confused by the standard font 'Trebuchet MS'.
-
   Remember the 'amount' when switching from type to type, such as when
   the user changes 5 str to 5 dex.
-
-  Fix export-toolbars to export stats and resists!  These were missing
-  the suffix ' Jewel' in the name of the gems causing only skills and
-  focus gems to be exported.
 
   Add 'Elf' to Blademaster's choice of races, 'Shield' skill to Wardens, 
   removed Arborial Path Focus from VW (not affected anymore), and
   identified servers Akatsuki #145 and Glastonbury #20 for export gems.
+
+  Fix distance-to-cap of Focus pseudo-skill.  Now compares focus level
+  to the character's level.
+
+  Fix export-toolbars to export stats and resists!  These were missing
+  the suffix ' Jewel' in the name of the gems causing only skills and
+  focus gems to be exported.
 
   Very experimental 'other...' bonus or effect added, allowing choice
   of an unusual (user named) bonus or effect.

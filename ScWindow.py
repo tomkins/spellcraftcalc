@@ -709,7 +709,10 @@ class ScWindow(B_SC):
             if not self.capDistance:
                 self.SkillsList.insertItem('%d %s' % (amount, skill))
             else:
-                capcalc = HighCapBonusList['Skill']
+                if skill[-6:] == " Focus":
+                    capcalc = HighCapBonusList['Focus']
+                else:
+                    capcalc = HighCapBonusList['Skill']
                 thiscap = int(charlevel * capcalc[0]) + capcalc[1]
                 self.SkillsList.insertItem('%d %s' % (thiscap - amount, skill))
         for bonus, amount in otherTotals.items():

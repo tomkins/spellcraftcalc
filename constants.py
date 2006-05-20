@@ -1137,6 +1137,7 @@ HighCapBonusList = d2({
     'Hits'                      : ( 4.00,  0 ),
     'Hits Cap'                  : ( 4.00,  0 ),
     'Stat'                      : ( 1.50,  0 ),
+    'Focus'                     : ( 1.00,  0 ),
     'Power Cap'                 : ( 1.00,  0 ),
     'AF Cap'                    : ( 1.00,  0 ),
     'AF'                        : ( 1.00,  0 ),
