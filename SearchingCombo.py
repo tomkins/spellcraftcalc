@@ -5,12 +5,12 @@ class SearchingCombo(QComboBox):
     def __init__(self, parent=None, name=None):
         QComboBox.__init__(self, 0, parent, name)
         
-    def buildItemList(self):
-        lst = []
+    def buildItemKeys(self):
+        keys = []
         for i in range(0, self.count()):
-            li = self.listBox().item(i)
-            lst.append(str(li.text()))  
-        return lst
+            txt = str(self.listBox().item(i).text())
+            keys.append(string.join(map(lambda s: s[0], str(txt).split()), "").upper())
+        return keys
 
     def keyPressEvent(self, e):
         keycode = e.key()
@@ -25,11 +25,11 @@ class SearchingCombo(QComboBox):
             self.setCurrentItem(ci)
             self.emit(SIGNAL("activated(const QString&)"),(self.currentText(),))
         else:
-            key = str(e.text())
-            itemlist = self.buildItemList()
+            key = str(e.text()).upper()
+            itemkeys = self.buildItemKeys()
             indexlist = []
-            for i in range(0, len(itemlist)):
-                if string.lower(itemlist[i][0]) == string.lower(key):
+            for i in range(0, len(itemkeys)):
+                if key in itemkeys[i]:
                     indexlist.append(i)
             if len(indexlist) == 0:
                 QComboBox.keyPressEvent(self, e)
