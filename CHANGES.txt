@@ -1,12 +1,11 @@
 Updated ../../.. - Version 1.43.0012 (dev)
 
   Create a more windows-like list of Menu tabs, File Edit View etc...
+  and create an Errors menu item to collect a clickable menu list
+  off all the template errors.
 
-  Remove the error label fields from the window, growing the number
-  of visible 'other bonus' entries.
-
-  And create an Errors menu item to collect all of the template errors, 
-  clickable to jump straight to the item that has the error.
+  Removed the error label fields from the window, displaying more
+  of the Other Bonuses list at one time.
 
   Fixed Windows 98/ME font selection.  With Unicode for Windows, Qt was
   getting horribly confused by the standard font 'Trebuchet MS'.
@@ -14,19 +13,26 @@ Updated ../../.. - Version 1.43.0012 (dev)
   Remember the 'amount' when switching from type to type, such as when
   the user changes 5 str to 5 dex.
 
-  Fix export-toolbars to export stats and resists, these were missing
-  the suffix ' Jewel' in the name of the gems.
+  Fix export-toolbars to export stats and resists!  These were missing
+  the suffix ' Jewel' in the name of the gems causing only skills and
+  focus gems to be exported.
 
-  Very experimental 'effects' added, for craftable items allows choice
-  of one Alchemy Tincture to apply, for drop items allows to choose the
-  various offensive/reactive/charged or other (such as cast) effects.
+  Add 'Elf' to Blademaster's choice of races, 'Shield' skill to Wardens, 
+  removed Arborial Path Focus from VW (not affected anymore), and
+  identified servers Akatsuki #145 and Glastonbury #20 for export gems.
 
   Very experimental 'other...' bonus or effect added, allowing choice
   of an unusual (user named) bonus or effect.
 
-  Add 'Elf' to 'Blademaster' classes choice of races.
+  Very experimental 'Effects' added.  Craftable items allows the choice
+  of one Alchemy Tincture to apply. For drop items allows to choose the
+  various offensive/reactive/charged or other (such as casted) effects.
+  These are not priced now, because the cost and price of the tincture
+  might not follow the costing rules of the current cost options, or
+  they might be customer-provided or even customer-applied.
 
-  Behave nicely if the source user doesn't choose to install psyco.
+  Behave nicely if the source-code user doesn't choose to install psyco.
+  This has no effect on folks who grab the installer.
 
 Updated 11/28/05 - Version 1.43.0011 (dev)
 
