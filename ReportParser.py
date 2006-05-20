@@ -54,7 +54,7 @@ class ReportParser:
             if items.has_key(piece):
                 empty = True
                 if items[piece]['activestate'] == 'player':
-                    endrng = 4
+                    endrng = 5
                 else:
                     endrng = 10
                 for slot in range(0, endrng):

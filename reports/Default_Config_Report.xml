@@ -33,6 +33,7 @@
 <dd>Gem 2: <chest gem2 amount 2> <chest gem2 effect> - <chest gem2 quality> <chest gem2 name>
 <dd>Gem 3: <chest gem3 amount 2> <chest gem3 effect> - <chest gem3 quality> <chest gem3 name>
 <dd>Gem 4: <chest gem4 amount 2> <chest gem4 effect> - <chest gem4 quality> <chest gem4 name>
+<dd>Proc: <chest gem5 amount 2> <chest gem5 effect> - <chest gem5 name>
 <dd>Utility: <chest utility>
 <endif>
 <if chest drop>
@@ -59,6 +60,7 @@
 <dd>Gem 2: <arms gem2 amount 2> <arms gem2 effect> - <arms gem2 quality> <arms gem2 name>
 <dd>Gem 3: <arms gem3 amount 2> <arms gem3 effect> - <arms gem3 quality> <arms gem3 name>
 <dd>Gem 4: <arms gem4 amount 2> <arms gem4 effect> - <arms gem4 quality> <arms gem4 name>
+<dd>Proc: <arms gem5 amount 2> <arms gem5 effect> - <arms gem5 name>
 <dd>Utility: <arms utility>
 <endif>
 <if arms drop>
@@ -84,6 +86,7 @@
 <dd>Gem 2: <head gem2 amount 2> <head gem2 effect> - <head gem2 quality> <head gem2 name>
 <dd>Gem 3: <head gem3 amount 2> <head gem3 effect> - <head gem3 quality> <head gem3 name>
 <dd>Gem 4: <head gem4 amount 2> <head gem4 effect> - <head gem4 quality> <head gem4 name>
+<dd>Proc: <head gem5 amount 2> <head gem5 effect> - <head gem5 name>
 <dd>Utility: <head utility>
 <endif>
 <if head drop>
@@ -109,6 +112,7 @@
 <dd>Gem 2: <legs gem2 amount 2> <legs gem2 effect> - <legs gem2 quality> <legs gem2 name>
 <dd>Gem 3: <legs gem3 amount 2> <legs gem3 effect> - <legs gem3 quality> <legs gem3 name>
 <dd>Gem 4: <legs gem4 amount 2> <legs gem4 effect> - <legs gem4 quality> <legs gem4 name>
+<dd>Proc: <legs gem5 amount 2> <legs gem5 effect> - <legs gem5 name>
 <dd>Utility: <legs utility>
 <endif>
 <if legs drop>
@@ -134,6 +138,7 @@
 <dd>Gem 2: <hands gem2 amount 2> <hands gem2 effect> - <hands gem2 quality> <hands gem2 name>
 <dd>Gem 3: <hands gem3 amount 2> <hands gem3 effect> - <hands gem3 quality> <hands gem3 name>
 <dd>Gem 4: <hands gem4 amount 2> <hands gem4 effect> - <hands gem4 quality> <hands gem4 name>
+<dd>Proc: <hands gem5 amount 2> <hands gem5 effect> - <hands gem5 name>
 <dd>Utility: <hands utility>
 <endif>
 <if hands drop>
@@ -159,6 +164,7 @@
 <dd>Gem 2: <feet gem2 amount 2> <feet gem2 effect> - <feet gem2 quality> <feet gem2 name>
 <dd>Gem 3: <feet gem3 amount 2> <feet gem3 effect> - <feet gem3 quality> <feet gem3 name>
 <dd>Gem 4: <feet gem4 amount 2> <feet gem4 effect> - <feet gem4 quality> <feet gem4 name>
+<dd>Proc: <feet gem5 amount 2> <feet gem5 effect> - <feet gem5 name>
 <dd>Utility: <feet utility>
 <endif>
 <if feet drop>
@@ -184,6 +190,7 @@
 <dd>Gem 2: <rweapon gem2 amount 2> <rweapon gem2 effect> - <rweapon gem2 quality> <rweapon gem2 name>
 <dd>Gem 3: <rweapon gem3 amount 2> <rweapon gem3 effect> - <rweapon gem3 quality> <rweapon gem3 name>
 <dd>Gem 4: <rweapon gem4 amount 2> <rweapon gem4 effect> - <rweapon gem4 quality> <rweapon gem4 name>
+<dd>Proc: <rweapon gem5 amount 2> <rweapon gem5 effect> - <rweapon gem5 name>
 <dd>Utility: <rweapon utility>
 <endif>
 <if rweapon drop>
@@ -209,6 +216,7 @@
 <dd>Gem 2: <lweapon gem2 amount 2> <lweapon gem2 effect> - <lweapon gem2 quality> <lweapon gem2 name>
 <dd>Gem 3: <lweapon gem3 amount 2> <lweapon gem3 effect> - <lweapon gem3 quality> <lweapon gem3 name>
 <dd>Gem 4: <lweapon gem4 amount 2> <lweapon gem4 effect> - <lweapon gem4 quality> <lweapon gem4 name>
+<dd>Proc: <lweapon gem5 amount 2> <lweapon gem5 effect> - <lweapon gem5 name>
 <dd>Utility: <lweapon utility>
 <endif>
 <if lweapon drop>
@@ -234,6 +242,7 @@
 <dd>Gem 2: <2handed gem2 amount 2> <2handed gem2 effect> - <2handed gem2 quality> <2handed gem2 name>
 <dd>Gem 3: <2handed gem3 amount 2> <2handed gem3 effect> - <2handed gem3 quality> <2handed gem3 name>
 <dd>Gem 4: <2handed gem4 amount 2> <2handed gem4 effect> - <2handed gem4 quality> <2handed gem4 name>
+<dd>Proc: <2handed gem5 amount 2> <2handed gem5 effect> - <2handed gem5 name>
 <dd>Utility: <2handed utility>
 <endif>
 <if 2handed drop>
@@ -259,6 +268,7 @@
 <dd>Gem 2: <ranged gem2 amount 2> <ranged gem2 effect> - <ranged gem2 quality> <ranged gem2 name>
 <dd>Gem 3: <ranged gem3 amount 2> <ranged gem3 effect> - <ranged gem3 quality> <ranged gem3 name>
 <dd>Gem 4: <ranged gem4 amount 2> <ranged gem4 effect> - <ranged gem4 quality> <ranged gem4 name>
+<dd>Proc: <ranged gem5 amount 2> <ranged gem5 effect> - <ranged gem5 name>
 <dd>Utility: <ranged utility>
 <endif>
 <if ranged drop>
