@@ -388,7 +388,7 @@ AllBonusList = {
         'All Melee Weapon Skills' : ('Blades', 'Blunt',),
         'All Dual Wield Skills' : (),
         'All Archery Skills' : (),
-        'Other Skills' : ('Parry',),
+        'Other Skills' : ('Parry', 'Shield',),
         'Races' : t2(('Celt', 'Firbolg', 'Sylvan',)),
         'Acuity' : ('Empathy',),
     },
