@@ -65,13 +65,22 @@ class ScWindow(B_SC):
                                        'reports', 'Default_Config_Report.xml')
         self.coop = False
 
+        self.fixedtaborder = False
+
         B_SC.__init__(self,parent=None,name="SpellCraft Calulator",
                       fl=Qt.WDestructiveClose|Qt.WStyle_Customize 
                         |Qt.WStyle_DialogBorder|Qt.WStyle_Title
                         |Qt.WStyle_SysMenu|Qt.WStyle_Minimize)
 
+        self.fixtabs = True
+
         self.statusBar().setSizeGripEnabled(0)
         self.statusBar().hide()
+
+        self.CharLevel.setValidator(QIntValidator(0, 99, self))
+        self.ItemLevel.setValidator(QIntValidator(0, 99, self))
+        self.QualEdit.setValidator(QIntValidator(0, 100, self))
+        self.Bonus_Edit.setValidator(QIntValidator(0, 99, self))
 
         # This doesn't matter for tinctures, keep hidden
         self.Quality_5.hide()
@@ -100,7 +109,6 @@ class ScWindow(B_SC):
         self.Realm.insertStrList(list(Realms))
         self.QualDrop.insertStrList(list(QualityValues))
 
-
         self.GemLabel = []
         self.Type = []
         self.Effect = []
@@ -111,12 +119,16 @@ class ScWindow(B_SC):
         self.Cost = []
         self.Name = []
 
+        editAmountValidator = QIntValidator(-999, +999, self)
+
         for i in range(0, 10):
             idx = i + 1
             self.GemLabel.append(getattr(self, 'Gem_Label_%d' % idx))
             self.Type.append(getattr(self, 'Type_%d' % idx))
             self.Effect.append(getattr(self, 'Effect_%d' % idx))
+            self.Effect[i].setInsertionPolicy(QComboBox.BeforeCurrent)
             self.AmountEdit.append(getattr(self, 'Amount_Edit_%d' % idx))
+            self.AmountEdit[i].setValidator(editAmountValidator)
             if i < 5:
                 self.AmountDrop.append(getattr(self, 'Amount_Drop_%d' % idx))
                 self.Quality.append(getattr(self, 'Quality_%d' % idx))
@@ -219,7 +231,33 @@ class ScWindow(B_SC):
         self.nocalc = 0
         self.calculate()
         self.modified = 0
-    
+
+    def fix_taborder(self, line):
+        if line > 4:
+            prev = self.Effect[line - 1]
+        elif line > 0:
+            prev = self.Quality[line - 1]
+        else: 
+            prev = self.ItemName
+        for i in range(line, 10):
+            # Create the (sometimes used) edit boxes
+            self.setTabOrder(prev,self.Type[i])
+            self.setTabOrder(self.Type[i],self.AmountEdit[i])
+            if i > 4:
+                self.setTabOrder(self.AmountEdit[i],self.Effect[i])
+                prev = self.Effect[i]
+            else:
+                self.setTabOrder(self.AmountEdit[i],self.AmountDrop[i])
+                self.setTabOrder(self.AmountDrop[i],self.Effect[i])
+                self.setTabOrder(self.Effect[i],self.Quality[i])
+                prev = self.Quality[i]
+        self.setTabOrder(prev,self.CraftButton)
+        self.setTabOrder(self.CraftButton,self.LoadItem)
+        self.setTabOrder(self.CraftButton,self.SaveItem)
+        self.setTabOrder(self.SaveItem,self.ClearItem)
+        self.setTabOrder(self.ClearItem,self.SkillsList)
+        self.setTabOrder(self.SkillsList,self.OtherBonusList)
+
     def close(self, args):
         Options.Options(self).OK_pressed() # write out app config data to disk
         if self.modified:
@@ -412,46 +450,31 @@ class ScWindow(B_SC):
             self.PlayerMade.setChecked(1)
             self.showPlayerWidgets()
             toprng = 5
-            typelist = TypeList
+            typelist = list(TypeList)
         else:
             self.Drop.setChecked(1)
             self.showDropWidgets()
             toprng = 10
-            typelist = DropTypeList
+            typelist = list(DropTypeList)
         self.ItemLevel.setText(item.getAttr('Level'))
         location = item.getAttr('Location')
         self.Equipped.setChecked(int(item.getAttr('Equipped')))
         for slot in range(0, toprng):
-
             typecombo = self.Type[slot]
             typecombo.clear()
             if typelist == TypeList and slot == 4:
                 typelist = list(EffectTypeList)
-            typecombo.insertStrList(list(typelist))
             gemtype = str(item.getSlotAttr(itemtype, slot, 'Type'))
+            if not gemtype in typelist:
+                typelist.append(gemtype)
+            typecombo.insertStrList(typelist)
+            typecombo.setCurrentItem(typelist.index(gemtype))
+            self.UpdateCombo(0, slot)
+            if gemtype == 'Unused':
+                continue
             gemeffect = str(item.getSlotAttr(itemtype, slot, 'Effect'))
-            if gemtype in typelist:
-                typecombo.setCurrentItem(typelist.index(gemtype))
-            else:
-                gemtype = 'Unused'
-            self.UpdateCombo(slot)
-            effcombo = self.Effect[slot]
-            if self.Drop.isChecked():
-                if not gemeffect in self.dropeffectlists[gemtype]:
-                    if not isinstance(self.dropeffectlists[gemtype], list):
-                        self.dropeffectlists[gemtype] = list(self.dropeffectlists[gemtype])
-                    self.dropeffectlists[gemtype].append(gemeffect)
-                    effcombo.insertStrList( [gemeffect] )
-                effectlist = self.dropeffectlists[gemtype]
-            else:
-                if not gemeffect in self.effectlists[gemtype]:
-                    if not isinstance(self.effectlists[gemtype], list):
-                        self.effectlists[gemtype] = list(self.effectlists[gemtype])
-                    self.effectlists[gemtype].append(gemeffect)
-                    effcombo.insertStrList( [gemeffect] )
-                effectlist = self.effectlists[gemtype]
-            if gemeffect in effectlist:
-                effcombo.setCurrentItem(effectlist.index(gemeffect))
+            self.Effect[slot].setCurrentText(gemeffect)
+            self.UpdateCombo(1, slot)
             if itemtype == 'drop':
                 am = item.getSlotAttr(itemtype, slot, 'Amount')
                 amedit = self.AmountEdit[slot]
@@ -472,7 +495,6 @@ class ScWindow(B_SC):
                 if gemqua in QualityValues:
                     if quacombo.count() > 0:
                         quacombo.setCurrentItem(QualityValues.index(gemqua))
-                
         self.AFDPS_Edit.setText(item.getAttr('AFDPS'))
         self.Speed_Edit.setText(item.getAttr('Speed'))
         self.Bonus_Edit.setText(item.getAttr('Bonus'))
@@ -837,51 +859,73 @@ class ScWindow(B_SC):
     def getMultiplier(self, type):
         return ImbueMultipliers[type]
 
-    def UpdateCombo(self, num):
-        effcombo = self.Effect[num]
+    def UpdateCombo(self, type, num):
         typecombo = self.Type[num]
-        efftext = unicode(effcombo.currentText())
-        effcombo.clear()
-        typetext = unicode(typecombo.currentText())
+        typetext = str(typecombo.currentText())
+        effcombo = self.Effect[num]
+        efftext = str(effcombo.currentText())
         if self.PlayerMade.isChecked():
-            amountcombo = self.AmountDrop[num]
+            amount = self.AmountDrop[num]
         else:
-            amountedit = self.AmountEdit[num]
-        if typetext != 'Unused':
-            if self.Drop.isChecked():
-                effectlist = self.dropeffectlists[typetext]
+            amount = self.AmountEdit[num]
+        if typetext == 'Unused':
+            if type == 0:
+                effcombo.clear()
+                if effcombo.editable():
+                    effcombo.setEditable(False)
+                    self.fix_taborder(num)
+                amount.clear()
+                if self.PlayerMade.isChecked():
+                    self.Quality[num].setCurrentItem(0)
+        else:
+            if self.PlayerMade.isChecked():
+                effectlist = self.effectlists
             else:
-                effectlist = self.effectlists[typetext]
-            if len(effectlist) > 0:
-                effcombo.insertStrList(list(effectlist))
-                if efftext in effectlist:
+                effectlist = self.dropeffectlists
+            if effectlist.has_key(typetext):
+                effectlist = effectlist[typetext]
+            else:
+                effectlist = list()
+            if type == 0:
+                effcombo.clear()
+                if len(effectlist) > 0:
+                    effcombo.insertStrList(list(effectlist))
+                    effcombo.setCurrentItem(0)
+            if type == 1:
+                unique = (not efftext in effectlist) or (len(efftext) > 3 and efftext[-3:] == "...")
+                if effcombo.editable() and not unique:
+                    refocus = self.Effect[num].hasFocus()
+                    effcombo.setEditable(False)
                     effcombo.setCurrentItem(effectlist.index(efftext))
+                    self.fix_taborder(num)
+                elif unique and not effcombo.editable():
+                    refocus = self.Effect[num].hasFocus()
+                    effcombo.setEditable(True)
+                    effcombo.setCurrentText(efftext)
+                    self.fix_taborder(num)
                 else:
-                    efftext = unicode(effcombo.currentText())
+                    refocus = False
+                if refocus:
+                    flip = self.Effect[num].setFocus()
             if self.PlayerMade.isChecked():
-                amtindex = amountcombo.currentItem()
-                amountcombo.clear()
+                amtindex = amount.currentItem()
+                amount.clear()
                 if ValuesLists.has_key(typetext):
-                    if isinstance(ValuesLists[typetext], tuple):
-                        valueslist = ValuesLists[typetext]
-                    else:
-                        if ValuesLists[typetext].has_key(efftext):
-                            valueslist = ValuesLists[typetext][efftext]
-                if len(valueslist) > 0:
-                    amountcombo.insertStrList(list(valueslist))
-                if amtindex < len(valueslist):
-                    amountcombo.setCurrentItem(amtindex)
-#           kill an irritation, if switching type/effect, retain amount!
-#           else:
-#               amountedit.setText('')
-        else:
-            if self.PlayerMade.isChecked():
-                amountcombo.clear()
-            else:
-                amountedit.clear()
-        if self.PlayerMade.isChecked():
-            qualcombo = self.Quality[num]
-            qualcombo.setCurrentItem(len(QualityValues)-2)
+                    valueslist = ValuesLists[typetext]
+                    efftext = str(effcombo.currentText())
+                    if isinstance(valueslist, dict):
+                        if valueslist.has_key(efftext):
+                            valueslist = valueslist[efftext]
+                        else:
+                            valueslist = tuple()
+                    elif efftext[0:5] == "All M":
+                        valueslist = ("1",)
+                    if len(valueslist) > 0:
+                        amount.insertStrList(list(valueslist))
+                    if amtindex < len(valueslist):
+                        amount.setCurrentItem(amtindex)
+                if type == 0:
+                    self.Quality[num].setCurrentItem(len(QualityValues)-2)
 
     def RaceChanged(self, a0):
         race = str(self.CharRace.currentText())
@@ -934,19 +978,21 @@ class ScWindow(B_SC):
         wascalc = self.nocalc
         self.nocalc = 1
         self.modified = 1
-        self.UpdateCombo(int(index) - 1)
+        self.UpdateCombo(0, int(index) - 1)
         item = self.itemattrlist.get(self.currentTabLabel, Item(self.currentTabLabel))
         self.storeItem(item)
         self.nocalc = wascalc
         self.calculate()
 
     def EffectChanged(self, value):
-        index = self.focusWidget().name()[-2:]
-        if index[0] == '_': index = index[1:]
+        index = str(self.focusWidget().name())[-2:]
+        if not index[-1].isdigit():
+            index = str(self.focusWidget().parentWidget().name())[-2:]
+        if not index[0].isdigit(): index = index[1:]
         wascalc = self.nocalc
         self.nocalc = 1
         self.modified = 1
-        self.UpdateCombo(int(index) - 1)
+        self.UpdateCombo(1, int(index) - 1)
         item = self.itemattrlist.get(self.currentTabLabel, Item(self.currentTabLabel))
         self.storeItem(item)
         self.nocalc = wascalc
