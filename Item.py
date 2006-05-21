@@ -93,10 +93,9 @@ class Item:
 
     def makeEmptyItem(self):
         for i in range(0, 10):
-            self.loadSlotAttrs('drop', i, 'Unused', '', '', '99') 
-        for i in range(0, 4):
-            self.loadSlotAttrs('player', i, 'Unused', '', '', '99')
-        self.loadSlotAttrs('player', 4, 'Unused', '', '', '94')
+            self.loadSlotAttrs('drop', i, 'Unused', '', '', '94') 
+        for i in range(0, 5):
+            self.loadSlotAttrs('player', i, 'Unused', '', '', '94')
 
     def loadSlotAttr(self, type, slotnum, attr, val):
         self.slots[type][slotnum][attr] = val
@@ -123,6 +122,7 @@ class Item:
             statenode = document.createElement(unicode(string.upper(key)+'ITEM'))
             rootnode.appendChild(statenode)
             for slot in range(0, len(val)):
+                if val[slot]["Type"] == "Unused": continue
                 slotnode = document.createElement(unicode('SLOT'))
                 slotnode.setAttribute(unicode("Number"), unicode(slot))
                 statenode.appendChild(slotnode)
@@ -201,11 +201,16 @@ class Item:
                         for attr in slot.childNodes:
                             if attr.nodeType == Node.TEXT_NODE: continue
                             attrval = XMLHelper.getText(attr.childNodes)
-                            if FixEffectsTable.has_key(attrval):
-                                attrval = FixEffectsTable[attrval]
-                            if len(attrval) > 6 and attrval[-6:] == ' Focus':
-                                attrval = attrval[:-6]
                             self.slots[type][slotnum][attr.tagName] = attrval
+                        if FixEffectsTable.has_key(self.slots[type][slotnum]["Effect"]):
+                            attrval = FixEffectsTable[self.slots[type][slotnum]["Effect"]]
+                            self.slots[type][slotnum]["Effect"] = attrval
+                        if len(self.slots[type][slotnum]["Effect"]) > 6 and \
+                           self.slots[type][slotnum]["Effect"][-6:] == ' Focus':
+                            attrval = FixEffectsTable[self.slots[type][slotnum]["Effect"]][:-6]
+                            self.slots[type][slotnum]["Effect"] = attrval
+                        if self.slots[type][slotnum]["Type"] == 'Unused':
+                            self.slots[type][slotnum]["Qua"] = "94"
 
     def importLela(self, f):
         f.seek(0)
