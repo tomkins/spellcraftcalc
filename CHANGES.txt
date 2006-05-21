@@ -13,6 +13,9 @@ Updated ../../.. - Version 1.43.0012 (dev)
   Restore everyone's favorite quick-change, view Distance to Cap,
   as a View menu item (with a check mark to indicate when active).
 
+  Eliminate the possibility of > 94 quality 'Unused' gems, unused are
+  always 94 for blowup computation.
+
   Remember the 'amount' when switching from type to type, such as when
   the user changes 5 str to 5 dex.
 
