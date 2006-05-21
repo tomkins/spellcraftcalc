@@ -153,8 +153,6 @@ class MultiTabBar(QTabBar):
             else:
                 i = filter(lambda x: x > self.currentTab(), indexlist)[0]
                 self.setCurrentTab(i)
-            #need to verify this isn't needed for tabs (v.s. QListBox)
-            #self.emit(SIGNAL("activated(const QString&)"),(self.currentText(),))
             return
         fr = self.tab(self.currentTab()).rect()
         fr.setLeft(fr.left() + fr.width() / 2)
