@@ -1,3 +1,8 @@
+#
+# Copyright 2005 by Ehrayn <ehrayn@sourceforge.net>
+# Granted 2006 by Ehrayn to the public domain
+#
+
 import sys
 import types
 
