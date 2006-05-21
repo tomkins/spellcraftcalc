@@ -27,8 +27,8 @@ Updated ../../.. - Version 1.43.0012 (dev)
   the suffix ' Jewel' in the name of the gems causing only skills and
   focus gems to be exported.
 
-  Very experimental 'other...' bonus or effect added, allowing choice
-  of an unusual (user named) bonus or effect.
+  Very experimental 'other...' bonuses and effects added, allowing the
+  unusual bonus or effect to be typed in by the user.
 
   Very experimental 'Effects' added.  Craftable items allows the choice
   of one Alchemy Tincture to apply. For drop items allows to choose the
@@ -36,6 +36,9 @@ Updated ../../.. - Version 1.43.0012 (dev)
   These are not priced now, because the cost and price of the tincture
   might not follow the costing rules of the current cost options, or
   they might be customer-provided or even customer-applied.
+
+  Shrunk the size of saved template files by omitting any slot with no
+  effect ('Unused').
 
   Behave nicely if the source-code user doesn't choose to install psyco.
   This has no effect on folks who grab the installer.

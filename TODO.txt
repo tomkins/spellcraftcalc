@@ -8,19 +8,13 @@ Things to fix before next beta release is announced;
 
   Price (in addition to cost) per-item.
 
-  Make a typeable combobox just works correctly, or offer a popup
-  for users type in their own 'other bonus...', 'other effect...',
-  requires unwinding the SearchableCombo a bit.  The code already
-  handles this 'other...' custom named bonus just fine, it adds to
-  the table of effects, temporarally.
-
-  Stop saving unused slots in the template.xml?
-
   Stop displaying unused slots in the reports!
 
   Display 5th slot proc by level requirement.  Make it selectable?
   (E.g. choose an effect amount or the proc level).  There's room
   where the 'quality' on other gem slots isn't needed.
+
+  Add 5th slot Drop tinctures (from epic dungeons) for crafted gear.
 
 
 Things to fix before 2.0 final (non-beta) is announced;
@@ -44,10 +38,6 @@ Things to fix before 2.0 final (non-beta) is announced;
   LoadItem:  Is /very/ slow (populating the list, it's not in the
   preview, perhaps matching to the file extensions?), and doesn't 
   remember the directory used.
-
-  Prevent user from choosing > tier 1 Finesse all magic/all melee 
-  skills (the recent code for tinctures -should- make this a little
-  bit easier, but not simple.)
 
   Accelerator keys to jump around the page, especially to tabs.
 
