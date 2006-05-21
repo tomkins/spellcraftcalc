@@ -1866,6 +1866,9 @@ Python:from SearchingCombo import *
             <property name="name">
                 <cstring>Effect_1</cstring>
             </property>
+            <property name="editable">
+                <bool>true</bool>
+            </property>
             <property name="geometry">
                 <rect>
                     <x>233</x>
@@ -2001,6 +2004,9 @@ Python:from SearchingCombo import *
             <property name="name">
                 <cstring>Effect_2</cstring>
             </property>
+            <property name="editable">
+                <bool>true</bool>
+            </property>
             <property name="geometry">
                 <rect>
                     <x>233</x>
@@ -2135,6 +2141,9 @@ Python:from SearchingCombo import *
         <widget class="SearchingCombo">
             <property name="name">
                 <cstring>Effect_3</cstring>
+            </property>
+            <property name="editable">
+                <bool>true</bool>
             </property>
             <property name="geometry">
                 <rect>
@@ -2273,6 +2282,9 @@ Python:from SearchingCombo import *
             <property name="name">
                 <cstring>Effect_4</cstring>
             </property>
+            <property name="editable">
+                <bool>true</bool>
+            </property>
             <property name="geometry">
                 <rect>
                     <x>233</x>
@@ -2410,6 +2422,9 @@ Python:from SearchingCombo import *
             <property name="name">
                 <cstring>Effect_5</cstring>
             </property>
+            <property name="editable">
+                <bool>true</bool>
+            </property>
             <property name="geometry">
                 <rect>
                     <x>233</x>
@@ -2534,6 +2549,9 @@ Python:from SearchingCombo import *
             <property name="name">
                 <cstring>Effect_6</cstring>
             </property>
+            <property name="editable">
+                <bool>true</bool>
+            </property>
             <property name="geometry">
                 <rect>
                     <x>233</x>
@@ -2588,6 +2606,9 @@ Python:from SearchingCombo import *
         <widget class="SearchingCombo">
             <property name="name">
                 <cstring>Effect_7</cstring>
+            </property>
+            <property name="editable">
+                <bool>true</bool>
             </property>
             <property name="geometry">
                 <rect>
@@ -2644,6 +2665,9 @@ Python:from SearchingCombo import *
             <property name="name">
                 <cstring>Effect_8</cstring>
             </property>
+            <property name="editable">
+                <bool>true</bool>
+            </property>
             <property name="geometry">
                 <rect>
                     <x>233</x>
@@ -2699,6 +2723,9 @@ Python:from SearchingCombo import *
             <property name="name">
                 <cstring>Effect_9</cstring>
             </property>
+            <property name="editable">
+                <bool>true</bool>
+            </property>
             <property name="geometry">
                 <rect>
                     <x>233</x>
@@ -2753,6 +2780,9 @@ Python:from SearchingCombo import *
         <widget class="SearchingCombo">
             <property name="name">
                 <cstring>Effect_10</cstring>
+            </property>
+            <property name="editable">
+                <bool>true</bool>
             </property>
             <property name="geometry">
                 <rect>
@@ -3436,9 +3466,9 @@ Python:from SearchingCombo import *
     <tabstop>AFDPS_Edit</tabstop>
     <tabstop>Speed_Edit</tabstop>
     <tabstop>Equipped</tabstop>
-    <tabstop>CraftButton</tabstop>
-    <tabstop>Drop</tabstop>
     <tabstop>PlayerMade</tabstop>
+    <tabstop>Drop</tabstop>
+    <tabstop>ItemName</tabstop>
     <tabstop>Type_1</tabstop>
     <tabstop>Amount_Edit_1</tabstop>
     <tabstop>Amount_Drop_1</tabstop>
@@ -3479,7 +3509,7 @@ Python:from SearchingCombo import *
     <tabstop>Type_10</tabstop>
     <tabstop>Amount_Edit_10</tabstop>
     <tabstop>Effect_10</tabstop>
-    <tabstop>ItemName</tabstop>
+    <tabstop>CraftButton</tabstop>
     <tabstop>LoadItem</tabstop>
     <tabstop>SaveItem</tabstop>
     <tabstop>ClearItem</tabstop>
