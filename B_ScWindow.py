@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'ScWindow.ui'
 #
-# Created: Sat May 20 15:01:51 2006
+# Created: Sun May 21 16:59:24 2006
 #      by: The PyQt User Interface Compiler (pyuic) 3.15
 #
 # WARNING! All changes made in this file will be lost!
@@ -403,6 +403,7 @@ class B_SC(QMainWindow):
         self.Amount_Drop_1.setGeometry(QRect(177,48,52,21))
 
         self.Effect_1 = SearchingCombo(self.frame3,"Effect_1")
+        self.Effect_1.setEditable(1)
         self.Effect_1.setGeometry(QRect(233,48,150,21))
 
         self.Quality_1 = SearchingCombo(self.frame3,"Quality_1")
@@ -432,6 +433,7 @@ class B_SC(QMainWindow):
         self.Type_2.setGeometry(QRect(46,69,127,21))
 
         self.Effect_2 = SearchingCombo(self.frame3,"Effect_2")
+        self.Effect_2.setEditable(1)
         self.Effect_2.setGeometry(QRect(233,69,150,21))
 
         self.Quality_2 = SearchingCombo(self.frame3,"Quality_2")
@@ -461,6 +463,7 @@ class B_SC(QMainWindow):
         self.Amount_Drop_3.setGeometry(QRect(177,90,52,21))
 
         self.Effect_3 = SearchingCombo(self.frame3,"Effect_3")
+        self.Effect_3.setEditable(1)
         self.Effect_3.setGeometry(QRect(233,90,150,21))
 
         self.Quality_3 = SearchingCombo(self.frame3,"Quality_3")
@@ -490,6 +493,7 @@ class B_SC(QMainWindow):
         self.Amount_Drop_4.setGeometry(QRect(177,111,52,21))
 
         self.Effect_4 = SearchingCombo(self.frame3,"Effect_4")
+        self.Effect_4.setEditable(1)
         self.Effect_4.setGeometry(QRect(233,111,150,21))
 
         self.Quality_4 = SearchingCombo(self.frame3,"Quality_4")
@@ -519,6 +523,7 @@ class B_SC(QMainWindow):
         self.Amount_Drop_5.setGeometry(QRect(177,132,52,21))
 
         self.Effect_5 = SearchingCombo(self.frame3,"Effect_5")
+        self.Effect_5.setEditable(1)
         self.Effect_5.setGeometry(QRect(233,132,206,21))
 
         self.Quality_5 = SearchingCombo(self.frame3,"Quality_5")
@@ -545,6 +550,7 @@ class B_SC(QMainWindow):
         self.Amount_Edit_6.setGeometry(QRect(177,153,51,21))
 
         self.Effect_6 = SearchingCombo(self.frame3,"Effect_6")
+        self.Effect_6.setEditable(1)
         self.Effect_6.setGeometry(QRect(233,153,206,21))
 
         self.Gem_Label_7 = QLabel(self.frame3,"Gem_Label_7")
@@ -557,6 +563,7 @@ class B_SC(QMainWindow):
         self.Amount_Edit_7.setGeometry(QRect(177,174,51,21))
 
         self.Effect_7 = SearchingCombo(self.frame3,"Effect_7")
+        self.Effect_7.setEditable(1)
         self.Effect_7.setGeometry(QRect(233,174,206,21))
 
         self.Gem_Label_8 = QLabel(self.frame3,"Gem_Label_8")
@@ -569,6 +576,7 @@ class B_SC(QMainWindow):
         self.Amount_Edit_8.setGeometry(QRect(177,195,51,21))
 
         self.Effect_8 = SearchingCombo(self.frame3,"Effect_8")
+        self.Effect_8.setEditable(1)
         self.Effect_8.setGeometry(QRect(233,195,206,21))
 
         self.Gem_Label_9 = QLabel(self.frame3,"Gem_Label_9")
@@ -581,6 +589,7 @@ class B_SC(QMainWindow):
         self.Amount_Edit_9.setGeometry(QRect(177,216,51,21))
 
         self.Effect_9 = SearchingCombo(self.frame3,"Effect_9")
+        self.Effect_9.setEditable(1)
         self.Effect_9.setGeometry(QRect(233,216,206,21))
 
         self.Gem_Label_10 = QLabel(self.frame3,"Gem_Label_10")
@@ -593,6 +602,7 @@ class B_SC(QMainWindow):
         self.Amount_Edit_10.setGeometry(QRect(177,237,51,21))
 
         self.Effect_10 = SearchingCombo(self.frame3,"Effect_10")
+        self.Effect_10.setEditable(1)
         self.Effect_10.setGeometry(QRect(233,237,206,21))
 
         self.ItemImbueLabel = QLabel(self.frame3,"ItemImbueLabel")
@@ -731,10 +741,10 @@ class B_SC(QMainWindow):
         self.setTabOrder(self.Bonus_Edit,self.AFDPS_Edit)
         self.setTabOrder(self.AFDPS_Edit,self.Speed_Edit)
         self.setTabOrder(self.Speed_Edit,self.Equipped)
-        self.setTabOrder(self.Equipped,self.CraftButton)
-        self.setTabOrder(self.CraftButton,self.Drop)
-        self.setTabOrder(self.Drop,self.PlayerMade)
-        self.setTabOrder(self.PlayerMade,self.Type_1)
+        self.setTabOrder(self.Equipped,self.PlayerMade)
+        self.setTabOrder(self.PlayerMade,self.Drop)
+        self.setTabOrder(self.Drop,self.ItemName)
+        self.setTabOrder(self.ItemName,self.Type_1)
         self.setTabOrder(self.Type_1,self.Amount_Edit_1)
         self.setTabOrder(self.Amount_Edit_1,self.Amount_Drop_1)
         self.setTabOrder(self.Amount_Drop_1,self.Effect_1)
@@ -774,8 +784,8 @@ class B_SC(QMainWindow):
         self.setTabOrder(self.Effect_9,self.Type_10)
         self.setTabOrder(self.Type_10,self.Amount_Edit_10)
         self.setTabOrder(self.Amount_Edit_10,self.Effect_10)
-        self.setTabOrder(self.Effect_10,self.ItemName)
-        self.setTabOrder(self.ItemName,self.LoadItem)
+        self.setTabOrder(self.Effect_10,self.CraftButton)
+        self.setTabOrder(self.CraftButton,self.LoadItem)
         self.setTabOrder(self.LoadItem,self.SaveItem)
         self.setTabOrder(self.SaveItem,self.ClearItem)
         self.setTabOrder(self.ClearItem,self.SkillsList)
