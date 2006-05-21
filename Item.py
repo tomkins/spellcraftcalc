@@ -71,6 +71,14 @@ class Item:
             #    print 'loadAttr ' + attrval
             #    print 'loadAttr direct ' + self.ItemName
 
+    def fixslot(self, slot):
+        if FixEffectsTable.has_key(slot['Effect']):
+            slot['Effect'] = FixEffectsTable[slot['Effect']]
+        if slot['Type'] == 'Focus' and len(slot['Effect']) > 6 and slot['Effect'][-6:] == ' Focus':
+            slot['Effect'] = slot['Effect'][:-6]
+        if slot['Type'] == 'Unused':
+            slot['Qua'] = "94"
+
     def loadSlotAttrs(self, type, slotnum, stattype, amount, effect, qua, 
             time='0', remakes='0', done='0'):
         self.slots[type][slotnum] = { }
@@ -82,6 +90,7 @@ class Item:
         attr['Time'] = unicode(time)
         attr['Remakes'] = unicode(remakes)
         attr['Done'] = unicode(done)
+        self.fixslot(attr)
     
     def getSlotAttr(self, type, slotnum, attr):
         return self.slots[type][slotnum][attr]
@@ -202,15 +211,7 @@ class Item:
                             if attr.nodeType == Node.TEXT_NODE: continue
                             attrval = XMLHelper.getText(attr.childNodes)
                             self.slots[type][slotnum][attr.tagName] = attrval
-                        if FixEffectsTable.has_key(self.slots[type][slotnum]["Effect"]):
-                            attrval = FixEffectsTable[self.slots[type][slotnum]["Effect"]]
-                            self.slots[type][slotnum]["Effect"] = attrval
-                        if len(self.slots[type][slotnum]["Effect"]) > 6 and \
-                           self.slots[type][slotnum]["Effect"][-6:] == ' Focus':
-                            attrval = FixEffectsTable[self.slots[type][slotnum]["Effect"]][:-6]
-                            self.slots[type][slotnum]["Effect"] = attrval
-                        if self.slots[type][slotnum]["Type"] == 'Unused':
-                            self.slots[type][slotnum]["Qua"] = "94"
+                        self.fixslot(self.slots[type][slotnum])
 
     def importLela(self, f):
         f.seek(0)
