@@ -1,7 +1,7 @@
 Kort's Spellcrafting Calculator for Dark Age of Camelot
 
-Copyright (C) 2003-2005  James Lamanna (jlamanna@ugcs.caltech.edu)
-Copyright (C) 2004-2005  Eharyn (ehrayn@users.sourceforge.net)
+Portions Copyright (C) 2003-2005 James Lamanna (kort@users.sourceforge.net)
+Portions Copyright (C) 2004-2006 Ehrayn (ehrayn@users.sourceforge.net)
 
 This program is free software; you can redistribute it and/or
 modify it under the terms of the GNU General Public License

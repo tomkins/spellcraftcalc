@@ -1,3 +1,9 @@
+# SearchingCombo.py
+#
+# See http://kscraft.sourceforge.net/ for updates
+#
+# See NOTICE.txt for copyrights and grant of license
+
 from qt import *
 import sys
 import string

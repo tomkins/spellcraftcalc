@@ -1,3 +1,9 @@
+# ItemLevel.py: Dark Age of Camelot Spellcrafting Calculator 
+#
+# See http://kscraft.sourceforge.net/ for updates
+#
+# See NOTICE.txt for copyrights and grant of license
+
 from qt import *
 from constants import *
 from B_ItemLevel import *
