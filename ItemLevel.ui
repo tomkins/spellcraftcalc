@@ -1,0 +1,365 @@
+<!DOCTYPE UI><UI>
+<class>B_ItemLevel</class>
+<comment>
+Python:#Import the Custom Widgets
+Python:from SearchingCombo import *
+</comment>
+<widget>
+    <class>QDialog</class>
+    <property stdset="1">
+        <name>name</name>
+        <cstring>B_ItemLevel</cstring>
+    </property>
+    <property stdset="1">
+        <name>geometry</name>
+        <rect>
+            <x>0</x>
+            <y>0</y>
+            <width>250</width>
+            <height>158</height>
+        </rect>
+    </property>
+    <property stdset="1">
+        <name>caption</name>
+        <string>Item Level</string>
+    </property>
+    <widget>
+        <class>QButtonGroup</class>
+        <property stdset="1">
+            <name>name</name>
+            <cstring>ButtonGroup3</cstring>
+        </property>
+        <property stdset="1">
+            <name>geometry</name>
+            <rect>
+                <x>6</x>
+                <y>6</y>
+                <width>117</width>
+                <height>111</height>
+            </rect>
+        </property>
+        <property stdset="1">
+            <name>lineWidth</name>
+            <number>0</number>
+        </property>
+        <property stdset="1">
+            <name>title</name>
+            <string></string>
+        </property>
+        <widget>
+            <class>QRadioButton</class>
+            <property stdset="1">
+                <name>name</name>
+                <cstring>Armor</cstring>
+            </property>
+            <property stdset="1">
+                <name>geometry</name>
+                <rect>
+                    <x>5</x>
+                    <y>2</y>
+                    <width>85</width>
+                    <height>20</height>
+                </rect>
+            </property>
+            <property stdset="1">
+                <name>text</name>
+                <string>Armor</string>
+            </property>
+            <property stdset="1">
+                <name>checked</name>
+                <bool>true</bool>
+            </property>
+        </widget>
+        <widget>
+            <class>QRadioButton</class>
+            <property stdset="1">
+                <name>name</name>
+                <cstring>ClothArmor</cstring>
+            </property>
+            <property stdset="1">
+                <name>geometry</name>
+                <rect>
+                    <x>5</x>
+                    <y>23</y>
+                    <width>85</width>
+                    <height>20</height>
+                </rect>
+            </property>
+            <property stdset="1">
+                <name>text</name>
+                <string>Cloth Armor</string>
+            </property>
+        </widget>
+        <widget>
+            <class>QRadioButton</class>
+            <property stdset="1">
+                <name>name</name>
+                <cstring>Weapon</cstring>
+            </property>
+            <property stdset="1">
+                <name>geometry</name>
+                <rect>
+                    <x>3</x>
+                    <y>45</y>
+                    <width>85</width>
+                    <height>20</height>
+                </rect>
+            </property>
+            <property stdset="1">
+                <name>text</name>
+                <string>Weapon</string>
+            </property>
+        </widget>
+        <widget>
+            <class>QRadioButton</class>
+            <property stdset="1">
+                <name>name</name>
+                <cstring>Shield</cstring>
+            </property>
+            <property stdset="1">
+                <name>geometry</name>
+                <rect>
+                    <x>5</x>
+                    <y>66</y>
+                    <width>85</width>
+                    <height>20</height>
+                </rect>
+            </property>
+            <property stdset="1">
+                <name>text</name>
+                <string>Shield</string>
+            </property>
+        </widget>
+        <widget>
+            <class>QRadioButton</class>
+            <property stdset="1">
+                <name>name</name>
+                <cstring>ReinforcedShield</cstring>
+            </property>
+            <property stdset="1">
+                <name>geometry</name>
+                <rect>
+                    <x>5</x>
+                    <y>87</y>
+                    <width>108</width>
+                    <height>20</height>
+                </rect>
+            </property>
+            <property stdset="1">
+                <name>text</name>
+                <string>Reinforced Sheild</string>
+            </property>
+        </widget>
+    </widget>
+    <widget>
+        <class>QLabel</class>
+        <property stdset="1">
+            <name>name</name>
+            <cstring>LevelLabel</cstring>
+        </property>
+        <property stdset="1">
+            <name>geometry</name>
+            <rect>
+                <x>130</x>
+                <y>10</y>
+                <width>45</width>
+                <height>16</height>
+            </rect>
+        </property>
+        <property stdset="1">
+            <name>text</name>
+            <string>Level:</string>
+        </property>
+    </widget>
+    <widget>
+        <class>QLineEdit</class>
+        <property stdset="1">
+            <name>name</name>
+            <cstring>Level</cstring>
+        </property>
+        <property stdset="1">
+            <name>geometry</name>
+            <rect>
+                <x>185</x>
+                <y>7</y>
+                <width>60</width>
+                <height>22</height>
+            </rect>
+        </property>
+    </widget>
+    <widget>
+        <class>QLabel</class>
+        <property stdset="1">
+            <name>name</name>
+            <cstring>AFDPSLabel</cstring>
+        </property>
+        <property stdset="1">
+            <name>geometry</name>
+            <rect>
+                <x>130</x>
+                <y>53</y>
+                <width>45</width>
+                <height>16</height>
+            </rect>
+        </property>
+        <property stdset="1">
+            <name>text</name>
+            <string>AF/DPS:</string>
+        </property>
+    </widget>
+    <widget>
+        <class>QLineEdit</class>
+        <property stdset="1">
+            <name>name</name>
+            <cstring>AFDPS</cstring>
+        </property>
+        <property stdset="1">
+            <name>geometry</name>
+            <rect>
+                <x>185</x>
+                <y>50</y>
+                <width>60</width>
+                <height>22</height>
+            </rect>
+        </property>
+    </widget>
+    <widget>
+        <class>SearchingCombo</class>
+        <property stdset="1">
+            <name>name</name>
+            <cstring>ShieldType</cstring>
+        </property>
+        <property stdset="1">
+            <name>geometry</name>
+            <rect>
+                <x>135</x>
+                <y>93</y>
+                <width>110</width>
+                <height>22</height>
+            </rect>
+        </property>
+    </widget>
+    <widget>
+        <class>QPushButton</class>
+        <property stdset="1">
+            <name>name</name>
+            <cstring>OK</cstring>
+        </property>
+        <property stdset="1">
+            <name>geometry</name>
+            <rect>
+                <x>11</x>
+                <y>124</y>
+                <width>58</width>
+                <height>26</height>
+            </rect>
+        </property>
+        <property stdset="1">
+            <name>text</name>
+            <string>OK</string>
+        </property>
+    </widget>
+    <widget>
+        <class>QPushButton</class>
+        <property stdset="1">
+            <name>name</name>
+            <cstring>Cancel</cstring>
+        </property>
+        <property stdset="1">
+            <name>geometry</name>
+            <rect>
+                <x>187</x>
+                <y>124</y>
+                <width>58</width>
+                <height>26</height>
+            </rect>
+        </property>
+        <property stdset="1">
+            <name>text</name>
+            <string>Cancel</string>
+        </property>
+    </widget>
+</widget>
+<connections>
+    <connection>
+        <sender>Armor</sender>
+        <signal>clicked()</signal>
+        <receiver>B_ItemLevel</receiver>
+        <slot>TypeChanged()</slot>
+    </connection>
+    <connection>
+        <sender>ClothArmor</sender>
+        <signal>clicked()</signal>
+        <receiver>B_ItemLevel</receiver>
+        <slot>TypeChanged()</slot>
+    </connection>
+    <connection>
+        <sender>Weapon</sender>
+        <signal>clicked()</signal>
+        <receiver>B_ItemLevel</receiver>
+        <slot>TypeChanged()</slot>
+    </connection>
+    <connection>
+        <sender>Shield</sender>
+        <signal>clicked()</signal>
+        <receiver>B_ItemLevel</receiver>
+        <slot>TypeChanged()</slot>
+    </connection>
+    <connection>
+        <sender>ReinforcedShield</sender>
+        <signal>clicked()</signal>
+        <receiver>B_ItemLevel</receiver>
+        <slot>TypeChanged()</slot>
+    </connection>
+    <connection>
+        <sender>Level</sender>
+        <signal>textChanged(const QString&amp;)</signal>
+        <receiver>B_ItemLevel</receiver>
+        <slot>LevelChanged(const QString&amp;)</slot>
+    </connection>
+    <connection>
+        <sender>Level</sender>
+        <signal>lostFocus()</signal>
+        <receiver>B_ItemLevel</receiver>
+        <slot>LevelDone()</slot>
+    </connection>
+    <connection>
+        <sender>AFDPS</sender>
+        <signal>textChanged(const QString&amp;)</signal>
+        <receiver>B_ItemLevel</receiver>
+        <slot>AFDPSChanged(const QString&amp;)</slot>
+    </connection>
+    <connection>
+        <sender>AFDPS</sender>
+        <signal>lostFocus()</signal>
+        <receiver>B_ItemLevel</receiver>
+        <slot>AFDPSDone()</slot>
+    </connection>
+    <connection>
+        <sender>ShieldType</sender>
+        <signal>activated(const QString&amp;)</signal>
+        <receiver>B_ItemLevel</receiver>
+        <slot>ShieldChanged(const QString&amp;)</slot>
+    </connection>
+    <connection>
+        <sender>OK</sender>
+        <signal>clicked()</signal>
+        <receiver>B_ItemLevel</receiver>
+        <slot>OkClicked()</slot>
+    </connection>
+    <connection>
+        <sender>Cancel</sender>
+        <signal>clicked()</signal>
+        <receiver>B_ItemLevel</receiver>
+        <slot>CancelClicked()</slot>
+    </connection>
+    <slot access="public">TypeChanged()</slot>
+    <slot access="public">LevelChanged(const QString&amp;)</slot>
+    <slot access="public">LevelDone()</slot>
+    <slot access="public">AFDPSChanged(const QString&amp;)</slot>
+    <slot access="public">AFDPSDone()</slot>
+    <slot access="public">ShieldChanged(const QString&amp;)</slot>
+    <slot access="public">OkClicked()</slot>
+    <slot access="public">CancelClicked()</slot>
+</connections>
+</UI>

@@ -1,0 +1,121 @@
+Kort's Spellcrafting Calculator for Dark Age of Camelot
+
+Portions Copyright (C) 2003-2005 James Lamanna (kort@users.sourceforge.net)
+Portions Copyright (C) 2004-2006 Ehrayn (ehrayn@users.sourceforge.net)
+
+This program is free software; you can redistribute it and/or
+modify it under the terms of the GNU General Public License
+Version 2 as published by the Free Software Foundation.
+
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License
+LICENSE.txt with this program; if not, write to 
+Free Software Foundation, Inc.
+59 Temple Place Suite 330, Boston, MA  02111-1307, USA.
+
+See https://sourceforge.net/project/showfiles.php?group_id=127264
+for the sourceforge.net kscraft project source files if you obtained
+the binary package.  This includes the pyqt-toolchain of pyqt-patches
+which modify the PyQt and SIP packages to be compatible with the win32
+qt-x11-free port, authored by the KDE qt porters.
+
+The following components of the binary distribution of this
+program are sublicensed from and Copyright (C) by their 
+respective owners under the license stated below;
+
+Qt/X11 GUI Toolkit, Open Source Edition, version release 3.3.5
+Copyright (C) 2000-2004 TrollTech AS.  All Rights Reserved.
+Sublicensed under the GNU General Public License Version 2
+
+  http://www.trolltech.com/products/qt/opensource.html
+  ftp://ftp.trolltech.com/qt/source/qt-x11-free-3.3.5.tar.gz
+
+  Trolltech and Qt are registered trademarks of Trolltech AS.
+
+Qt/Win Free, version release 3.3.4
+Sublicensed under the GNU General Public License Version 2
+
+  http://sourceforge.net/projects/qtwin/
+  http://prdownloads.sourceforge.net/qtwin/qt-win-free-3.3.4-3-src.tar.bz2
+
+PyQt, Python Bindings for the Qt Library, version release 3.15
+Copyright (c) 2005 Riverbank Computing Limited.  All Rights Reserved.
+Sublicensed under the GNU General Public License Version 2
+
+  http://www.riverbankcomputing.co.uk/pyqt/index.php
+  http://www.river-bank.demon.co.uk/download/PyQt/PyQt-x11-gpl-3.15.tar.gz
+
+SIP, Python C/C++ Bindings Generator, version release 4.3.1
+Copyright (c) 2005 Riverbank Computing Limited; All Rights Reserved.
+Sublicensed under the RIVERBANK COMPUTING LIMITED LICENSE AGREEMENT.
+
+  http://www.riverbankcomputing.co.uk/sip/index.php
+  http://www.river-bank.demon.co.uk/download/sip/sip-4.3.2.tar.gz
+
+  RIVERBANK COMPUTING LIMITED LICENSE AGREEMENT FOR SIP 4.3.1
+
+  1. This LICENSE AGREEMENT is between Riverbank Computing Limited
+  ("Riverbank"), and the Individual or Organization ("Licensee") accessing
+  and otherwise using SIP 4.3.1 software in source or binary form and its
+  associated documentation.
+
+  2. Subject to the terms and conditions of this License Agreement, Riverbank
+  hereby grants Licensee a nonexclusive, royalty-free, world-wide license
+  to reproduce, analyze, test, perform and/or display publicly, prepare
+  derivative works, distribute, and otherwise use SIP 4.3.1 alone or in
+  any derivative version, provided, however, that Riverbank's License
+  Agreement and Riverbank's notice of copyright, i.e., "Copyright (c) 2004
+  Riverbank Computing Limited; All Rights Reserved" are retained in
+  SIP 4.3.1 alone or in any derivative version prepared by Licensee.
+
+  3. In the event Licensee prepares a derivative work that is based on
+  or incorporates SIP 4.3.1 or any part thereof, and wants to make
+  the derivative work available to others as provided herein, then
+  Licensee hereby agrees to include in any such work a brief summary of
+  the changes made to SIP 4.3.1.
+
+  4. Riverbank is making SIP 4.3.1 available to Licensee on an "AS IS"
+  basis.  RIVERBANK MAKES NO REPRESENTATIONS OR WARRANTIES, EXPRESS OR
+  IMPLIED.  BY WAY OF EXAMPLE, BUT NOT LIMITATION, RIVERBANK MAKES NO AND
+  DISCLAIMS ANY REPRESENTATION OR WARRANTY OF MERCHANTABILITY OR FITNESS
+  FOR ANY PARTICULAR PURPOSE OR THAT THE USE OF SIP 4.3.1 WILL NOT
+  INFRINGE ANY THIRD PARTY RIGHTS.
+
+  5. RIVERBANK SHALL NOT BE LIABLE TO LICENSEE OR ANY OTHER USERS OF
+  SIP 4.3.1 FOR ANY INCIDENTAL, SPECIAL, OR CONSEQUENTIAL DAMAGES OR LOSS
+  AS A RESULT OF MODIFYING, DISTRIBUTING, OR OTHERWISE USING SIP 4.3.1,
+  OR ANY DERIVATIVE THEREOF, EVEN IF ADVISED OF THE POSSIBILITY THEREOF.
+
+  6. This License Agreement will automatically terminate upon a material
+  breach of its terms and conditions.
+
+  7. Nothing in this License Agreement shall be deemed to create any
+  relationship of agency, partnership, or joint venture between Riverbank
+  and Licensee.  This License Agreement does not grant permission to use
+  Riverbank trademarks or trade name in a trademark sense to endorse or
+  promote products or services of Licensee, or any third party.
+
+  8. By copying, installing or otherwise using SIP 4.3.1, Licensee
+  agrees to be bound by the terms and conditions of this License Agreement.
+
+
+  Please do not try to build the GPL version of QScintilla under 
+  Windows.  It will not work and you would be contravening the GPL.
+
+The authors/distributors of this program dispute this claim, and
+find no evidence thereof in the License granted by Riverbank Computing.
+
+Mythic Entertainment; Dark Age of Camelot Shrouded Isles; DAOC; 
+Trials of Atlantis; Dark Age of Camelot:Catacombs, and Dark Age 
+of Camelot: New Frontiers are registered trademarks and service 
+marks of Mythic Entertainment in the United States or other 
+countries.  Darkness Rising and Realm vs. Realm are trademarks 
+and service marks of Mythic Entertainment.
+
+This program is entirely the effort of the kscraft project, hosted
+by Sourceforge, and is not affiliated with Mythic Entertainment nor
+any other entity, including the authors of these bundled components.

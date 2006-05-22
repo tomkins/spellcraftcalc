@@ -1,0 +1,77 @@
+Configurable Reports
+
+My configurable reports work pretty much the same way as Leladia's.
+The only caveat is that the file gets rendered as an HTML file.
+So, in order to do line breaks, you must use <br>, but this allows you to use
+<table>, <hr>, etc... in your report to make it look really nice.
+
+The available tags are:
+<attribute #>
+Where attribute can be:
+str con dex qui pie int hits power cha emp
+body energy crush thrust slash cold matter heat spirit
+
+Attribute tags will change depending on whether you have Total Bonus or Distance to Cap
+selected.
+
+The # is the field width, and it uses max(#, width of text) as the field width.
+(of course you don't really ened this if you use <table>s everywhere!
+
+Focus Tags
+Same as Leladia's:
+<focus1> <focus2> <focus3> <focus4>
+
+Also <foci>  - lists all the focuses on separate lines
+
+Skill Tags
+Same as Leladia's:
+<skill#> so <skill1> <skill2> etc...
+And <skills> - lists all the skills on separate lines
+
+Other Bonus Tags
+<otherbonuses> - lists all the Other Bonuses (from ToA) on separate lines
+
+Cap Increase Tags
+<capbonuses> - lists all the Cap Increase bonuses (from ToA) on separate lines
+
+Piece/Jewelry tags:
+These tags are of the form:
+<location prop>
+location can be one of:
+chest arms head legs hands feet rweapon lweapon 2handed ranged
+heck cloak jewel belt rring lring rwrist lwrist
+
+prop can be one of:
+name (drop only)
+level
+quality
+bonus (drop only)
+af (drop only) - this tag has a dual meaning (AF for armor and DPS for weapons)
+utility
+usedpoints (PC made only)
+availablepoints (PC made only)
+overcharge (PC made only)
+<chest quality> <arms af> etc..
+
+Gem/Effect tags:
+<location gem# prop>
+See above for location values
+
+gem# can be: gem1 gem2 gem3 gem4 gem5 (drop only) gem6 (drop only)
+
+prop can be:
+quality (PC made only) - gem quality
+amount - amount of bonus
+name (PC made only) - name of the gem
+effect - what stat/skill/etc
+<chest gem1 amount> <chest gem1 name>, etc
+
+Conditionals:
+<if location pcmade>.......<endif>
+<if location drop>.........<endif>
+Report generation is based on which radio button you have pressed at time of the report.
+
+Also there is <ifnotempty location>.....<endif>
+This excludes an item from printing in the config report if the slot is totally empty.
+
+The default report file (which pretty much shows everything) is in: reports\Default_Config_Report.xml

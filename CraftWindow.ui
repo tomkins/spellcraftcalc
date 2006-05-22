@@ -1,0 +1,931 @@
+<!DOCTYPE UI><UI>
+<class>B_CraftWindow</class>
+<widget>
+    <class>QDialog</class>
+    <property stdset="1">
+        <name>name</name>
+        <cstring>B_CraftWindow</cstring>
+    </property>
+    <property stdset="1">
+        <name>geometry</name>
+        <rect>
+            <x>0</x>
+            <y>0</y>
+            <width>523</width>
+            <height>373</height>
+        </rect>
+    </property>
+    <property stdset="1">
+        <name>caption</name>
+        <string>Working Item Detail</string>
+    </property>
+    <widget>
+        <class>QLabel</class>
+        <property stdset="1">
+            <name>name</name>
+            <cstring>TextLabel8</cstring>
+        </property>
+        <property stdset="1">
+            <name>geometry</name>
+            <rect>
+                <x>365</x>
+                <y>338</y>
+                <width>57</width>
+                <height>16</height>
+            </rect>
+        </property>
+        <property stdset="1">
+            <name>text</name>
+            <string>Total Cost:</string>
+        </property>
+    </widget>
+    <widget>
+        <class>QPushButton</class>
+        <property stdset="1">
+            <name>name</name>
+            <cstring>Close</cstring>
+        </property>
+        <property stdset="1">
+            <name>geometry</name>
+            <rect>
+                <x>228</x>
+                <y>336</y>
+                <width>84</width>
+                <height>29</height>
+            </rect>
+        </property>
+        <property stdset="1">
+            <name>text</name>
+            <string>Close</string>
+        </property>
+    </widget>
+    <widget>
+        <class>QLabel</class>
+        <property stdset="1">
+            <name>name</name>
+            <cstring>TotalCost</cstring>
+        </property>
+        <property stdset="1">
+            <name>geometry</name>
+            <rect>
+                <x>421</x>
+                <y>338</y>
+                <width>103</width>
+                <height>16</height>
+            </rect>
+        </property>
+        <property stdset="1">
+            <name>text</name>
+            <string>0c</string>
+        </property>
+    </widget>
+    <widget>
+        <class>QGroupBox</class>
+        <property stdset="1">
+            <name>name</name>
+            <cstring>GroupBox1</cstring>
+        </property>
+        <property stdset="1">
+            <name>geometry</name>
+            <rect>
+                <x>9</x>
+                <y>7</y>
+                <width>523</width>
+                <height>324</height>
+            </rect>
+        </property>
+        <property stdset="1">
+            <name>title</name>
+            <string>Gems</string>
+        </property>
+        <widget>
+            <class>QLabel</class>
+            <property stdset="1">
+                <name>name</name>
+                <cstring>TextLabel1</cstring>
+            </property>
+            <property stdset="1">
+                <name>geometry</name>
+                <rect>
+                    <x>15</x>
+                    <y>20</y>
+                    <width>36</width>
+                    <height>16</height>
+                </rect>
+            </property>
+            <property stdset="1">
+                <name>text</name>
+                <string>Done:</string>
+            </property>
+        </widget>
+        <widget>
+            <class>QLabel</class>
+            <property stdset="1">
+                <name>name</name>
+                <cstring>TextLabel5</cstring>
+            </property>
+            <property stdset="1">
+                <name>geometry</name>
+                <rect>
+                    <x>323</x>
+                    <y>20</y>
+                    <width>50</width>
+                    <height>16</height>
+                </rect>
+            </property>
+            <property stdset="1">
+                <name>text</name>
+                <string>Remakes:</string>
+            </property>
+        </widget>
+        <widget>
+            <class>QLabel</class>
+            <property stdset="1">
+                <name>name</name>
+                <cstring>TextLabel6</cstring>
+            </property>
+            <property stdset="1">
+                <name>geometry</name>
+                <rect>
+                    <x>382</x>
+                    <y>20</y>
+                    <width>46</width>
+                    <height>16</height>
+                </rect>
+            </property>
+            <property stdset="1">
+                <name>text</name>
+                <string>Time (m):</string>
+            </property>
+        </widget>
+        <widget>
+            <class>QLabel</class>
+            <property stdset="1">
+                <name>name</name>
+                <cstring>TextLabel7</cstring>
+            </property>
+            <property stdset="1">
+                <name>geometry</name>
+                <rect>
+                    <x>438</x>
+                    <y>20</y>
+                    <width>30</width>
+                    <height>16</height>
+                </rect>
+            </property>
+            <property stdset="1">
+                <name>text</name>
+                <string>Cost:</string>
+            </property>
+        </widget>
+        <widget>
+            <class>QLabel</class>
+            <property stdset="1">
+                <name>name</name>
+                <cstring>Gem1Cost</cstring>
+            </property>
+            <property stdset="1">
+                <name>geometry</name>
+                <rect>
+                    <x>442</x>
+                    <y>41</y>
+                    <width>73</width>
+                    <height>21</height>
+                </rect>
+            </property>
+            <property stdset="1">
+                <name>text</name>
+                <string>0c</string>
+            </property>
+            <property stdset="1">
+                <name>alignment</name>
+                <set>AlignVCenter|AlignLeft</set>
+            </property>
+            <property>
+                <name>hAlign</name>
+            </property>
+        </widget>
+        <widget>
+            <class>QLabel</class>
+            <property stdset="1">
+                <name>name</name>
+                <cstring>Gem3Cost</cstring>
+            </property>
+            <property stdset="1">
+                <name>geometry</name>
+                <rect>
+                    <x>442</x>
+                    <y>88</y>
+                    <width>73</width>
+                    <height>21</height>
+                </rect>
+            </property>
+            <property stdset="1">
+                <name>text</name>
+                <string>0c</string>
+            </property>
+            <property stdset="1">
+                <name>alignment</name>
+                <set>AlignVCenter|AlignLeft</set>
+            </property>
+            <property>
+                <name>hAlign</name>
+            </property>
+        </widget>
+        <widget>
+            <class>QLabel</class>
+            <property stdset="1">
+                <name>name</name>
+                <cstring>Gem3Name</cstring>
+            </property>
+            <property stdset="1">
+                <name>geometry</name>
+                <rect>
+                    <x>138</x>
+                    <y>88</y>
+                    <width>163</width>
+                    <height>21</height>
+                </rect>
+            </property>
+            <property stdset="1">
+                <name>text</name>
+                <string>None</string>
+            </property>
+        </widget>
+        <widget>
+            <class>QLabel</class>
+            <property stdset="1">
+                <name>name</name>
+                <cstring>Gem4Name</cstring>
+            </property>
+            <property stdset="1">
+                <name>geometry</name>
+                <rect>
+                    <x>138</x>
+                    <y>112</y>
+                    <width>163</width>
+                    <height>21</height>
+                </rect>
+            </property>
+            <property stdset="1">
+                <name>text</name>
+                <string>None</string>
+            </property>
+        </widget>
+        <widget>
+            <class>QLineEdit</class>
+            <property stdset="1">
+                <name>name</name>
+                <cstring>Gem3Time</cstring>
+            </property>
+            <property stdset="1">
+                <name>geometry</name>
+                <rect>
+                    <x>382</x>
+                    <y>88</y>
+                    <width>47</width>
+                    <height>21</height>
+                </rect>
+            </property>
+            <property stdset="1">
+                <name>text</name>
+                <string>0</string>
+            </property>
+        </widget>
+        <widget>
+            <class>QLineEdit</class>
+            <property stdset="1">
+                <name>name</name>
+                <cstring>Gem4Time</cstring>
+            </property>
+            <property stdset="1">
+                <name>geometry</name>
+                <rect>
+                    <x>382</x>
+                    <y>111</y>
+                    <width>47</width>
+                    <height>21</height>
+                </rect>
+            </property>
+            <property stdset="1">
+                <name>text</name>
+                <string>0</string>
+            </property>
+        </widget>
+        <widget>
+            <class>QLabel</class>
+            <property stdset="1">
+                <name>name</name>
+                <cstring>TextLabel2</cstring>
+            </property>
+            <property stdset="1">
+                <name>geometry</name>
+                <rect>
+                    <x>108</x>
+                    <y>20</y>
+                    <width>36</width>
+                    <height>16</height>
+                </rect>
+            </property>
+            <property stdset="1">
+                <name>text</name>
+                <string>Name:</string>
+            </property>
+        </widget>
+        <widget>
+            <class>QCheckBox</class>
+            <property stdset="1">
+                <name>name</name>
+                <cstring>Gem2Done</cstring>
+            </property>
+            <property stdset="1">
+                <name>geometry</name>
+                <rect>
+                    <x>15</x>
+                    <y>64</y>
+                    <width>59</width>
+                    <height>21</height>
+                </rect>
+            </property>
+            <property stdset="1">
+                <name>text</name>
+                <string>Gem 2:</string>
+            </property>
+        </widget>
+        <widget>
+            <class>QCheckBox</class>
+            <property stdset="1">
+                <name>name</name>
+                <cstring>Gem3Done</cstring>
+            </property>
+            <property stdset="1">
+                <name>geometry</name>
+                <rect>
+                    <x>15</x>
+                    <y>88</y>
+                    <width>57</width>
+                    <height>21</height>
+                </rect>
+            </property>
+            <property stdset="1">
+                <name>text</name>
+                <string>Gem 3:</string>
+            </property>
+        </widget>
+        <widget>
+            <class>QCheckBox</class>
+            <property stdset="1">
+                <name>name</name>
+                <cstring>Gem4Done</cstring>
+            </property>
+            <property stdset="1">
+                <name>geometry</name>
+                <rect>
+                    <x>15</x>
+                    <y>112</y>
+                    <width>57</width>
+                    <height>21</height>
+                </rect>
+            </property>
+            <property stdset="1">
+                <name>text</name>
+                <string>Gem 4:</string>
+            </property>
+        </widget>
+        <widget>
+            <class>QLabel</class>
+            <property stdset="1">
+                <name>name</name>
+                <cstring>Gem1Qua</cstring>
+            </property>
+            <property stdset="1">
+                <name>geometry</name>
+                <rect>
+                    <x>103</x>
+                    <y>41</y>
+                    <width>28</width>
+                    <height>21</height>
+                </rect>
+            </property>
+            <property stdset="1">
+                <name>text</name>
+                <string>99%</string>
+            </property>
+            <property stdset="1">
+                <name>alignment</name>
+                <set>AlignVCenter|AlignRight</set>
+            </property>
+            <property>
+                <name>hAlign</name>
+            </property>
+        </widget>
+        <widget>
+            <class>QSpinBox</class>
+            <property stdset="1">
+                <name>name</name>
+                <cstring>Gem3Remakes</cstring>
+            </property>
+            <property stdset="1">
+                <name>geometry</name>
+                <rect>
+                    <x>321</x>
+                    <y>88</y>
+                    <width>54</width>
+                    <height>21</height>
+                </rect>
+            </property>
+        </widget>
+        <widget>
+            <class>QSpinBox</class>
+            <property stdset="1">
+                <name>name</name>
+                <cstring>Gem4Remakes</cstring>
+            </property>
+            <property stdset="1">
+                <name>geometry</name>
+                <rect>
+                    <x>321</x>
+                    <y>112</y>
+                    <width>54</width>
+                    <height>21</height>
+                </rect>
+            </property>
+        </widget>
+        <widget>
+            <class>QLabel</class>
+            <property stdset="1">
+                <name>name</name>
+                <cstring>Gem2Qua</cstring>
+            </property>
+            <property stdset="1">
+                <name>geometry</name>
+                <rect>
+                    <x>103</x>
+                    <y>64</y>
+                    <width>28</width>
+                    <height>21</height>
+                </rect>
+            </property>
+            <property stdset="1">
+                <name>text</name>
+                <string>99%</string>
+            </property>
+            <property stdset="1">
+                <name>alignment</name>
+                <set>AlignVCenter|AlignRight</set>
+            </property>
+            <property>
+                <name>hAlign</name>
+            </property>
+        </widget>
+        <widget>
+            <class>QLabel</class>
+            <property stdset="1">
+                <name>name</name>
+                <cstring>Gem3Qua</cstring>
+            </property>
+            <property stdset="1">
+                <name>geometry</name>
+                <rect>
+                    <x>103</x>
+                    <y>88</y>
+                    <width>28</width>
+                    <height>21</height>
+                </rect>
+            </property>
+            <property stdset="1">
+                <name>text</name>
+                <string>99%</string>
+            </property>
+            <property stdset="1">
+                <name>alignment</name>
+                <set>AlignVCenter|AlignRight</set>
+            </property>
+            <property>
+                <name>hAlign</name>
+            </property>
+        </widget>
+        <widget>
+            <class>QLabel</class>
+            <property stdset="1">
+                <name>name</name>
+                <cstring>Gem4Qua</cstring>
+            </property>
+            <property stdset="1">
+                <name>geometry</name>
+                <rect>
+                    <x>103</x>
+                    <y>112</y>
+                    <width>28</width>
+                    <height>21</height>
+                </rect>
+            </property>
+            <property stdset="1">
+                <name>text</name>
+                <string>99%</string>
+            </property>
+            <property stdset="1">
+                <name>alignment</name>
+                <set>AlignVCenter|AlignRight</set>
+            </property>
+            <property>
+                <name>hAlign</name>
+            </property>
+        </widget>
+        <widget>
+            <class>QLabel</class>
+            <property stdset="1">
+                <name>name</name>
+                <cstring>Gem1Name</cstring>
+            </property>
+            <property stdset="1">
+                <name>geometry</name>
+                <rect>
+                    <x>138</x>
+                    <y>41</y>
+                    <width>163</width>
+                    <height>21</height>
+                </rect>
+            </property>
+            <property stdset="1">
+                <name>text</name>
+                <string>None</string>
+            </property>
+        </widget>
+        <widget>
+            <class>QLabel</class>
+            <property stdset="1">
+                <name>name</name>
+                <cstring>Gem2Name</cstring>
+            </property>
+            <property stdset="1">
+                <name>geometry</name>
+                <rect>
+                    <x>138</x>
+                    <y>64</y>
+                    <width>163</width>
+                    <height>21</height>
+                </rect>
+            </property>
+            <property stdset="1">
+                <name>text</name>
+                <string>None</string>
+            </property>
+        </widget>
+        <widget>
+            <class>QSpinBox</class>
+            <property stdset="1">
+                <name>name</name>
+                <cstring>Gem1Remakes</cstring>
+            </property>
+            <property stdset="1">
+                <name>geometry</name>
+                <rect>
+                    <x>321</x>
+                    <y>41</y>
+                    <width>54</width>
+                    <height>21</height>
+                </rect>
+            </property>
+        </widget>
+        <widget>
+            <class>QSpinBox</class>
+            <property stdset="1">
+                <name>name</name>
+                <cstring>Gem2Remakes</cstring>
+            </property>
+            <property stdset="1">
+                <name>geometry</name>
+                <rect>
+                    <x>321</x>
+                    <y>64</y>
+                    <width>54</width>
+                    <height>21</height>
+                </rect>
+            </property>
+        </widget>
+        <widget>
+            <class>QLineEdit</class>
+            <property stdset="1">
+                <name>name</name>
+                <cstring>Gem1Time</cstring>
+            </property>
+            <property stdset="1">
+                <name>geometry</name>
+                <rect>
+                    <x>382</x>
+                    <y>41</y>
+                    <width>47</width>
+                    <height>21</height>
+                </rect>
+            </property>
+            <property stdset="1">
+                <name>text</name>
+                <string>0</string>
+            </property>
+        </widget>
+        <widget>
+            <class>QLineEdit</class>
+            <property stdset="1">
+                <name>name</name>
+                <cstring>Gem2Time</cstring>
+            </property>
+            <property stdset="1">
+                <name>geometry</name>
+                <rect>
+                    <x>382</x>
+                    <y>64</y>
+                    <width>47</width>
+                    <height>21</height>
+                </rect>
+            </property>
+            <property stdset="1">
+                <name>text</name>
+                <string>0</string>
+            </property>
+        </widget>
+        <widget>
+            <class>QLabel</class>
+            <property stdset="1">
+                <name>name</name>
+                <cstring>Gem2Cost</cstring>
+            </property>
+            <property stdset="1">
+                <name>geometry</name>
+                <rect>
+                    <x>442</x>
+                    <y>64</y>
+                    <width>73</width>
+                    <height>21</height>
+                </rect>
+            </property>
+            <property stdset="1">
+                <name>text</name>
+                <string>0c</string>
+            </property>
+            <property stdset="1">
+                <name>alignment</name>
+                <set>AlignVCenter|AlignLeft</set>
+            </property>
+            <property>
+                <name>hAlign</name>
+            </property>
+        </widget>
+        <widget>
+            <class>QLabel</class>
+            <property stdset="1">
+                <name>name</name>
+                <cstring>Gem4Cost</cstring>
+            </property>
+            <property stdset="1">
+                <name>geometry</name>
+                <rect>
+                    <x>442</x>
+                    <y>112</y>
+                    <width>73</width>
+                    <height>21</height>
+                </rect>
+            </property>
+            <property stdset="1">
+                <name>text</name>
+                <string>0c</string>
+            </property>
+            <property stdset="1">
+                <name>alignment</name>
+                <set>AlignVCenter|AlignLeft</set>
+            </property>
+            <property>
+                <name>hAlign</name>
+            </property>
+        </widget>
+        <widget>
+            <class>QCheckBox</class>
+            <property stdset="1">
+                <name>name</name>
+                <cstring>Gem1Done</cstring>
+            </property>
+            <property stdset="1">
+                <name>geometry</name>
+                <rect>
+                    <x>15</x>
+                    <y>41</y>
+                    <width>59</width>
+                    <height>21</height>
+                </rect>
+            </property>
+            <property stdset="1">
+                <name>text</name>
+                <string>Gem 1:</string>
+            </property>
+        </widget>
+        <widget>
+            <class>QGroupBox</class>
+            <property stdset="1">
+                <name>name</name>
+                <cstring>GroupBox2_2</cstring>
+            </property>
+            <property stdset="1">
+                <name>geometry</name>
+                <rect>
+                    <x>266</x>
+                    <y>142</y>
+                    <width>240</width>
+                    <height>175</height>
+                </rect>
+            </property>
+            <property stdset="1">
+                <name>title</name>
+                <string>Materials (used)</string>
+            </property>
+            <widget>
+                <class>QMultiLineEdit</class>
+                <property stdset="1">
+                    <name>name</name>
+                    <cstring>MatsUsed</cstring>
+                </property>
+                <property stdset="1">
+                    <name>geometry</name>
+                    <rect>
+                        <x>8</x>
+                        <y>16</y>
+                        <width>225</width>
+                        <height>153</height>
+                    </rect>
+                </property>
+            </widget>
+        </widget>
+        <widget>
+            <class>QGroupBox</class>
+            <property stdset="1">
+                <name>name</name>
+                <cstring>GroupBox2_2_2</cstring>
+            </property>
+            <property stdset="1">
+                <name>geometry</name>
+                <rect>
+                    <x>13</x>
+                    <y>141</y>
+                    <width>240</width>
+                    <height>175</height>
+                </rect>
+            </property>
+            <property stdset="1">
+                <name>title</name>
+                <string>Materials (expected)</string>
+            </property>
+            <widget>
+                <class>QMultiLineEdit</class>
+                <property stdset="1">
+                    <name>name</name>
+                    <cstring>MatsExpected</cstring>
+                </property>
+                <property stdset="1">
+                    <name>geometry</name>
+                    <rect>
+                        <x>8</x>
+                        <y>16</y>
+                        <width>225</width>
+                        <height>153</height>
+                    </rect>
+                </property>
+            </widget>
+        </widget>
+    </widget>
+    <widget>
+        <class>QLabel</class>
+        <property stdset="1">
+            <name>name</name>
+            <cstring>TextLabel1_2</cstring>
+        </property>
+        <property stdset="1">
+            <name>geometry</name>
+            <rect>
+                <x>35</x>
+                <y>341</y>
+                <width>94</width>
+                <height>16</height>
+            </rect>
+        </property>
+        <property stdset="1">
+            <name>text</name>
+            <string>Expected Multiplier</string>
+        </property>
+    </widget>
+    <widget>
+        <class>QSpinBox</class>
+        <property stdset="1">
+            <name>name</name>
+            <cstring>ExpMultiplier</cstring>
+        </property>
+        <property stdset="1">
+            <name>geometry</name>
+            <rect>
+                <x>130</x>
+                <y>339</y>
+                <width>54</width>
+                <height>21</height>
+            </rect>
+        </property>
+    </widget>
+</widget>
+<connections>
+    <connection>
+        <sender>Gem2Remakes</sender>
+        <signal>valueChanged(int)</signal>
+        <receiver>B_CraftWindow</receiver>
+        <slot>Remake2Changed(int)</slot>
+    </connection>
+    <connection>
+        <sender>Gem3Remakes</sender>
+        <signal>valueChanged(int)</signal>
+        <receiver>B_CraftWindow</receiver>
+        <slot>Remake3Changed(int)</slot>
+    </connection>
+    <connection>
+        <sender>Gem4Remakes</sender>
+        <signal>valueChanged(int)</signal>
+        <receiver>B_CraftWindow</receiver>
+        <slot>Remake4Changed(int)</slot>
+    </connection>
+    <connection>
+        <sender>Gem1Done</sender>
+        <signal>clicked()</signal>
+        <receiver>B_CraftWindow</receiver>
+        <slot>Gem1Clicked()</slot>
+    </connection>
+    <connection>
+        <sender>Gem2Done</sender>
+        <signal>clicked()</signal>
+        <receiver>B_CraftWindow</receiver>
+        <slot>Gem2Clicked()</slot>
+    </connection>
+    <connection>
+        <sender>Gem3Done</sender>
+        <signal>clicked()</signal>
+        <receiver>B_CraftWindow</receiver>
+        <slot>Gem3Clicked()</slot>
+    </connection>
+    <connection>
+        <sender>Gem4Done</sender>
+        <signal>clicked()</signal>
+        <receiver>B_CraftWindow</receiver>
+        <slot>Gem4Clicked()</slot>
+    </connection>
+    <connection>
+        <sender>Gem1Remakes</sender>
+        <signal>valueChanged(int)</signal>
+        <receiver>B_CraftWindow</receiver>
+        <slot>Remake1Changed(int)</slot>
+    </connection>
+    <connection>
+        <sender>Close</sender>
+        <signal>clicked()</signal>
+        <receiver>B_CraftWindow</receiver>
+        <slot>CloseWindow()</slot>
+    </connection>
+    <connection>
+        <sender>ExpMultiplier</sender>
+        <signal>valueChanged(int)</signal>
+        <receiver>B_CraftWindow</receiver>
+        <slot>computeMaterials()</slot>
+    </connection>
+    <connection>
+        <sender>Gem1Time</sender>
+        <signal>textChanged(const QString&amp;)</signal>
+        <receiver>B_CraftWindow</receiver>
+        <slot>Time1Changed(const QString&amp;)</slot>
+    </connection>
+    <connection>
+        <sender>Gem2Time</sender>
+        <signal>textChanged(const QString&amp;)</signal>
+        <receiver>B_CraftWindow</receiver>
+        <slot>Time2Changed(const QString&amp;)</slot>
+    </connection>
+    <connection>
+        <sender>Gem3Time</sender>
+        <signal>textChanged(const QString&amp;)</signal>
+        <receiver>B_CraftWindow</receiver>
+        <slot>Time3Changed(const QString&amp;)</slot>
+    </connection>
+    <connection>
+        <sender>Gem4Time</sender>
+        <signal>textChanged(const QString&amp;)</signal>
+        <receiver>B_CraftWindow</receiver>
+        <slot>Time4Changed(const QString&amp;)</slot>
+    </connection>
+    <slot access="public">CloseWindow()</slot>
+    <slot access="public">Gem1Clicked()</slot>
+    <slot access="public">Gem2Clicked()</slot>
+    <slot access="public">Gem3Clicked()</slot>
+    <slot access="public">Gem4Clicked()</slot>
+    <slot access="public">Remake1Changed(int)</slot>
+    <slot access="public">Remake2Changed(int)</slot>
+    <slot access="public">Remake3Changed(int)</slot>
+    <slot access="public">Remake4Changed(int)</slot>
+    <slot access="public">Time1Changed(const QString&amp;)</slot>
+    <slot access="public">Time2Changed(const QString&amp;)</slot>
+    <slot access="public">Time3Changed(const QString&amp;)</slot>
+    <slot access="public">computeMaterials()</slot>
+    <slot access="public">Time4Changed(const QString&amp;)</slot>
+</connections>
+</UI>
