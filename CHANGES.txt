@@ -1,3 +1,7 @@
+Updated ??/??/???? - Version 1.45
+
+
+
 Updated 05/21/2006 - Version 1.44
 
   Fixed Windows 98/ME font selection.  With Unicode for Windows, Qt was
