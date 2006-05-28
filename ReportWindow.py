@@ -272,9 +272,12 @@ class ReportWindow(B_ReportWindow):
                     amount = int(amount)
                 iteminfo[key][gemnum]['type'] = gemtype
                 iteminfo[key][gemnum]['amount'] = amount
-                iteminfo[key][gemnum]['effect'] = effect
-                if gemtype == 'Cap Increase':
-                    iteminfo[key][gemnum]['effect'] += ' Cap Increase'
+                if gemtype in ('Unused', 'Stat', 'Hits', 'Power', 'Skill',):
+                    iteminfo[key][gemnum]['effect'] = effect
+                elif gemtype[0:5] == 'Other':
+                    iteminfo[key][gemnum]['effect'] = effect +' '+ gemtype[6:]
+                else:
+                    iteminfo[key][gemnum]['effect'] = effect +' '+ gemtype
                 iteminfo[key][gemnum]['quality'] = qua
                 if activestate == 'player':
                     iteminfo[key][gemnum]['name'] = SC.getGemName(item, slot)
@@ -348,6 +351,12 @@ class ReportWindow(B_ReportWindow):
                             otherTotals[effect] = amount
                         else:
                             otherTotals[effect] += amount
+                elif gemtype == 'PvE Bonus':
+                    if equipped == '1':
+                        if not otherTotals.has_key(effect + " PvE"):
+                            otherTotals[effect + " PvE"] = amount
+                        else:
+                            otherTotals[effect + " PvE"] += amount
                 elif gemtype == 'Cap Increase':
                     if equipped == '1':
                         if effect == 'Acuity':
