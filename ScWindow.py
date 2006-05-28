@@ -19,7 +19,6 @@ import Options
 import SC
 import CraftWindow
 import ReportWindow
-import ReportParser
 import DisplayWindow
 import CraftBar
 import SearchingCombo
