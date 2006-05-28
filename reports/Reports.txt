@@ -2,20 +2,28 @@ Configurable Reports
 
 My configurable reports work pretty much the same way as Leladia's.
 The only caveat is that the file gets rendered as an HTML file.
-So, in order to do line breaks, you must use <br>, but this allows you to use
-<table>, <hr>, etc... in your report to make it look really nice.
+So, in order to do line breaks, you must use <br />, but this allows you 
+to use <table>, <hr />, etc... in your report to make it look really nice.
 
 The available tags are:
-<attribute #>
+<attribute #/>
 Where attribute can be:
 str con dex qui pie int hits power cha emp
 body energy crush thrust slash cold matter heat spirit
 
-Attribute tags will change depending on whether you have Total Bonus or Distance to Cap
-selected.
+And # is the field width, and it uses max(#, width of text) as the field width.
+Of course, you don't really need this if you use <table>s everywhere, and you
+don't export to text often.
 
-The # is the field width, and it uses max(#, width of text) as the field width.
-(of course you don't really ened this if you use <table>s everywhere!
+And the trailing / in <something/> tells XML parsers the tag stands on it's own
+(it doesn't have a matching </something> to close it).  These are not required!
+But they are encouraged for every tag listed here, because some .xml editors 
+will groan without them.
+
+Note that good html style is encouraged.  Some browsers won't show <br/> and
+<hr/> - but they must all correctly show <br /> and <hr />, so we just add the
+extra space before the /> to close every unmatched html tag, for compatibility, 
+clarity and style.
 
 Focus Tags
 Same as Leladia's:
@@ -29,7 +37,7 @@ Same as Leladia's:
 And <skills> - lists all the skills on separate lines
 
 Other Bonus Tags
-<otherbonuses> - lists all the Other Bonuses (from ToA) on separate lines
+<otherbonuses> - lists all the Other Bonuses (from ToA/PvE) on separate lines
 
 Cap Increase Tags
 <capbonuses> - lists all the Cap Increase bonuses (from ToA) on separate lines
@@ -39,14 +47,14 @@ These tags are of the form:
 <location prop>
 location can be one of:
 chest arms head legs hands feet rweapon lweapon 2handed ranged
-heck cloak jewel belt rring lring rwrist lwrist
+neck cloak jewel belt rring lring rwrist lwrist
 
 prop can be one of:
 name (drop only)
 level
 quality
-bonus (drop only)
-af (drop only) - this tag has a dual meaning (AF for armor and DPS for weapons)
+bonus
+af - this tag has a dual meaning (AF for armor and DPS for weapons)
 utility
 usedpoints (PC made only)
 availablepoints (PC made only)
@@ -57,7 +65,7 @@ Gem/Effect tags:
 <location gem# prop>
 See above for location values
 
-gem# can be: gem1 gem2 gem3 gem4 gem5 (drop only) gem6 (drop only)
+gem# can be: gem1 gem2 gem3 gem4 gem5 (and gem6 through gem10 for drop only)
 
 prop can be:
 quality (PC made only) - gem quality
@@ -67,11 +75,16 @@ effect - what stat/skill/etc
 <chest gem1 amount> <chest gem1 name>, etc
 
 Conditionals:
-<if location pcmade>.......<endif>
-<if location drop>.........<endif>
-Report generation is based on which radio button you have pressed at time of the report.
+<if location pcmade>.......</if>
+<if location drop>.........</if>
+Report generation is based on which radio button, drop or player crafted,
+that you have selected at time of the report.  The old <endif> instead of
+</if> is still supported, but not recommended, as it isn't valid xml/sgml.
 
 Also there is <ifnotempty location>.....<endif>
-This excludes an item from printing in the config report if the slot is totally empty.
+This excludes an item from printing in the config report if the slots are
+all completed 'Unused'.  The old <endifnotempty> instead of </ifnotempty>
+is still supported, but not recommended, as it isn't valid xml/sgml.
 
-The default report file (which pretty much shows everything) is in: reports\Default_Config_Report.xml
+The default report file (which pretty much shows everything) is in: 
+reports\Default_Config_Report.xml
