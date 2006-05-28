@@ -24,7 +24,7 @@ class ReportParser:
         totals = iteminfo['Stats']
         items = iteminfo['Items']
 
-        regex = re.compile("<ifnotempty\s+(\w+)>(.*?)<endifnotempty>", re.DOTALL|re.IGNORECASE)
+        regex = re.compile("<ifnotempty\s+(\w+)>(.*?)(<endifnotempty>|</ifnotempty>)", re.DOTALL|re.IGNORECASE)
         index = 0
         match = regex.search(reporttext[index:])
         while match is not None:
@@ -61,7 +61,7 @@ class ReportParser:
             index = match.end()
             match = regex.search(reporttext[index:])
 
-        regex = re.compile("<if\s+(\w+)\s+(\w+)>(.*?)<endif>", re.DOTALL|re.IGNORECASE)
+        regex = re.compile("<if\s+(\w+)\s+(\w+)>(.*?)(<endif>|</if>)", re.DOTALL|re.IGNORECASE)
         index = 0
         match = regex.search(reporttext[index:])
         while match is not None:
@@ -116,13 +116,17 @@ class ReportParser:
             tag = docstrings[i]
             if tag[0] != '<': continue
             tagpieces = string.split(tag, ' ', 1)
+            if tagpieces[-1][-1] == '>': 
+                if tagpieces[-1][-2:-1] == '/': 
+                    tagpieces[-1] = tagpieces[-1][:-2]
+                else:
+                    tagpieces[-1] = tagpieces[-1][:-1]
             tagname = tagpieces[0][1:]
-            if tagname[-1] == '>': tagname = tagname[:-1]
             if string.lower(tagname) == 'foci':
                 focuslist = iteminfo['Focus']
                 replstr = ''
                 for focus, val in focuslist.items():
-                    replstr += '%d %s<br>\n' % (val, focus)
+                    replstr += '%d %s<br />\n' % (val, focus)
                 docstrings[i] = replstr
             elif string.lower(tagname[:5]) == 'focus':
                 focusnum = tagname[5:]
@@ -140,19 +144,19 @@ class ReportParser:
                 otherlist = iteminfo['Other']
                 replstr = ''
                 for other, val in otherlist.items():
-                    replstr += '%d %s<br>\n' % (val, other)
+                    replstr += '%d %s<br />\n' % (val, other)
                 docstrings[i] = replstr
             elif string.lower(tagname) == 'capbonuses':
                 caplist = iteminfo['Caps']
                 replstr = ''
                 for cap, val in caplist.items():
-                    replstr += '%d %s<br>\n' % (val, cap)
+                    replstr += '%d %s<br />\n' % (val, cap)
                 docstrings[i] = replstr
             elif string.lower(tagname) == 'skills':
                 skilllist = iteminfo['Skills']
                 replstr = ''
                 for skill, val in skilllist.items():
-                    replstr += '%d %s<br>\n' % (val, skill)
+                    replstr += '%d %s<br />\n' % (val, skill)
                 docstrings[i] = replstr
             elif string.lower(tagname[:5]) == 'skill':
                 skillnum = tagname[5:]
@@ -167,7 +171,7 @@ class ReportParser:
                 else:
                     docstrings[i] = ''
             elif string.lower(tagname) in totals.keys():
-                docstrings[i] = self.matchRegex("<%s\s*(\d+)?\s*>" % string.lower(tagname),
+                docstrings[i] = self.matchRegex("<%s\s*(\d+)?\s*/?>" % string.lower(tagname),
                     totals[string.lower(tagname)], docstrings[i])
                 
             elif string.lower(tagname) in modtablist:
@@ -175,10 +179,9 @@ class ReportParser:
                 lst = items[TabList[modtablist.index(cat)]]
                 props = string.split(tagpieces[1], ' ', 1)
                 prop = props[0] 
-                if prop[-1] == '>': prop = prop[:-1]
                 if prop in lst.keys():
                     if prop[:3] != 'gem':
-                        docstrings[i] = self.matchRegex("<%s %s\s*(\d+)?\s*>" % (cat, prop), 
+                        docstrings[i] = self.matchRegex("<%s %s\s*(\d+)?\s*/?>" % (cat, prop), 
                             lst[prop], docstrings[i])   
                     else:
                         gemprops = lst[prop]
@@ -192,7 +195,7 @@ class ReportParser:
                                 gemval = ''
                             else:
                                 gemval = gemprops[gemprop]
-                            docstrings[i] = self.matchRegex("<%s %s %s\s*(\d+)?\s*>" % (cat, prop, gemprop),
+                            docstrings[i] = self.matchRegex("<%s %s %s\s*(\d+)?\s*/?>" % (cat, prop, gemprop),
                                 gemval, docstrings[i])
                         else:
                             docstrings[i] = ''
@@ -215,7 +218,3 @@ class ReportParser:
             formatstr = '%%%ds' % width
             return formatstr % valstr
         return ''
-#d = {'Chest' : {'Quality' : '99'} , 'Stats' : { 'Str' : 5, 'Dex' : 2 }}
-#rep = '<chest quality> <str> aaa <dex> bbbb <str 5>aaaaa<dex 10>asdfadsf'
-#rp = ReportParser()
-#print rp.parse(rep, d)
