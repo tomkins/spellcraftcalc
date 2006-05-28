@@ -11,7 +11,6 @@ import os.path
 import string
 
 import ReportWindow
-import ReportParser
 
 def uixml(scwin):
     pwd = os.path.dirname(os.path.abspath(sys.argv[0]))
