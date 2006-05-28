@@ -46,7 +46,7 @@ class ReportParser:
                     endrng = 10
                 for slot in range(0, endrng):
                     gemnum = 'gem%d' % (slot+1)
-                    if items[piece][gemnum]['type'] != 'unused':
+                    if items[piece][gemnum]['type'] != 'Unused':
                         empty = False
                         break
                 if not empty:

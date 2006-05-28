@@ -1,41 +1,38 @@
-<center><b>Config Report</b></center><br><br>
-<center><b>Stats</b></center><hr>
+<center><b>Config Report</b></center><br /><br />
+<center><b>Stats</b></center><hr />
 <table cellspacing=10 cellpadding=0>
-<tr><td>Str:<td><str><td>Int:<td><int><td>Hits:<td><hits></tr>
-<tr><td>Con:<td><con><td>Pie:<td><pie><td>Power:<td><power></tr>
-<tr><td>Dex:<td><dex><td>Cha:<td><cha></tr>
-<tr><td>Qui:<td><qui><td>Emp:<td><emp></tr>
-</table><br>
-<center><b>Resists</b></center><hr>
+<tr><td>Str:<td><str/><td>Int:<td><int/><td>Hits:<td><hits/></tr>
+<tr><td>Con:<td><con/><td>Pie:<td><pie/><td>Power:<td><power/></tr>
+<tr><td>Dex:<td><dex/><td>Cha:<td><cha/></tr>
+<tr><td>Qui:<td><qui/><td>Emp:<td><emp/></tr>
+</table><br />
+<center><b>Resists</b></center><hr />
 <table cellspacing=10 cellpadding=0>
-<tr><td>Body:<td><body><td>Energy:<td><energy><td>Crush:<td><crush></tr>
-<tr><td>Cold:<td><cold><td>Matter:<td><matter><td>Thrust:<td><thrust></tr>
-<tr><td>Heat:<td><heat><td>Spirit:<td><spirit><td>Slash:<td><slash></tr>
-</table><br>
-<center><b>Skills</b></center><hr>
-<skills>
-<center><b>Focus</b></center><hr>
-<focus1><br>
-<focus2><br>
-<focus3><br>
-<focus4><br>
-<center><b>Cap Increases</b></center><hr>
-<capbonuses>
-<center><b>Other Bonuses</b></center><hr>
-<otherbonuses>
-<center><b>Piece Listing</b></center><hr>
+<tr><td>Body:<td><body/>/<bodycap/><td>Energy:<td><energy/><td>Crush:<td><crush/></tr>
+<tr><td>Cold:<td><cold/><td>Matter:<td><matter/><td>Thrust:<td><thrust/></tr>
+<tr><td>Heat:<td><heat/><td>Spirit:<td><spirit/><td>Slash:<td><slash/></tr>
+</table><br />
+<center><b>Skills</b></center><hr />
+<skills/>
+<center><b>Focus</b></center><hr />
+<foci>
+<center><b>Cap Increases</b></center><hr />
+<capbonuses/>
+<center><b>Other Bonuses</b></center><hr />
+<otherbonuses/>
+<center><b>Piece Listing</b></center><hr />
 <dl>
 <ifnotempty chest>
 <dt><b>Chest</b></dt>
 <if chest pcmade>
-<dd>Imbue Points: <chest usedpoints> of <chest availablepoints> (<chest quality> Qual) Overcharge: <chest overcharge>
-<dd>Gem 1: <chest gem1 amount 2> <chest gem1 effect> - <chest gem1 quality> <chest gem1 name>
-<dd>Gem 2: <chest gem2 amount 2> <chest gem2 effect> - <chest gem2 quality> <chest gem2 name>
-<dd>Gem 3: <chest gem3 amount 2> <chest gem3 effect> - <chest gem3 quality> <chest gem3 name>
-<dd>Gem 4: <chest gem4 amount 2> <chest gem4 effect> - <chest gem4 quality> <chest gem4 name>
-<dd>Proc: <chest gem5 amount 2> <chest gem5 effect> - <chest gem5 name>
-<dd>Utility: <chest utility>
-<endif>
+<dd>Imbue Points: <chest usedpoints> of <chest availablepoints/> (<chest quality/> Qual) Overcharge: <chest overcharge/>
+<dd>Gem 1: <chest gem1 amount 2/> <chest gem1 effect/> - <chest gem1 quality/> <chest gem1 name/>
+<dd>Gem 2: <chest gem2 amount 2/> <chest gem2 effect/> - <chest gem2 quality/> <chest gem2 name/>
+<dd>Gem 3: <chest gem3 amount 2/> <chest gem3 effect/> - <chest gem3 quality/> <chest gem3 name/>
+<dd>Gem 4: <chest gem4 amount 2/> <chest gem4 effect/> - <chest gem4 quality/> <chest gem4 name/>
+<dd>Proc: <chest gem5 amount 2/> <chest gem5 effect/> - <chest gem5 name/>
+<dd>Utility: <chest utility/>
+</if>
 <if chest drop>
 <dd>Name: <chest name>
 <dd>Level: <chest level 2>  Quality: <chest quality>
@@ -51,8 +48,8 @@
 <dd>Effect 9: <chest gem9 amount 3> <chest gem9 effect>
 <dd>Effect 10: <chest gem10 amount 3> <chest gem10 effect>
 <dd>Utility: <chest utility>
-<endif>
-<endifnotempty>
+</if>
+</ifnotempty>
 <dt><b>Arms</b></dt>
 <if arms pcmade>
 <dd>Imbue Points: <arms usedpoints> of <arms availablepoints> (<arms quality> Qual) Overcharge: <arms overcharge>
@@ -62,7 +59,7 @@
 <dd>Gem 4: <arms gem4 amount 2> <arms gem4 effect> - <arms gem4 quality> <arms gem4 name>
 <dd>Proc: <arms gem5 amount 2> <arms gem5 effect> - <arms gem5 name>
 <dd>Utility: <arms utility>
-<endif>
+</if>
 <if arms drop>
 <dd>Name: <arms name>
 <dd>Level: <arms level 2>  Quality: <arms quality>
@@ -78,7 +75,7 @@
 <dd>Effect 9: <arms gem9 amount 3> <arms gem9 effect>
 <dd>Effect 10: <arms gem10 amount 3> <arms gem10 effect>
 <dd>Utility: <arms utility>
-<endif>
+</if>
 <dt><b>Head</b></dt>
 <if head pcmade>
 <dd>Imbue Points: <head usedpoints> of <head availablepoints> (<head quality> Qual) Overcharge: <head overcharge>
@@ -88,7 +85,7 @@
 <dd>Gem 4: <head gem4 amount 2> <head gem4 effect> - <head gem4 quality> <head gem4 name>
 <dd>Proc: <head gem5 amount 2> <head gem5 effect> - <head gem5 name>
 <dd>Utility: <head utility>
-<endif>
+</if>
 <if head drop>
 <dd>Name: <head name>
 <dd>Level: <head level 2>  Quality: <head quality>
@@ -104,7 +101,7 @@
 <dd>Effect 9: <head gem9 amount 3> <head gem9 effect>
 <dd>Effect 10: <head gem10 amount 3> <head gem10 effect>
 <dd>Utility: <head utility>
-<endif>
+</if>
 <dt><b>Legs</b></dt>
 <if legs pcmade>
 <dd>Imbue Points: <legs usedpoints> of <legs availablepoints> (<legs quality> Qual) Overcharge: <legs overcharge>
@@ -114,7 +111,7 @@
 <dd>Gem 4: <legs gem4 amount 2> <legs gem4 effect> - <legs gem4 quality> <legs gem4 name>
 <dd>Proc: <legs gem5 amount 2> <legs gem5 effect> - <legs gem5 name>
 <dd>Utility: <legs utility>
-<endif>
+</if>
 <if legs drop>
 <dd>Name: <legs name>
 <dd>Level: <legs level 2>  Quality: <legs quality>
@@ -130,7 +127,7 @@
 <dd>Effect 9: <legs gem9 amount 3> <legs gem9 effect>
 <dd>Effect 10: <legs gem10 amount 3> <legs gem10 effect>
 <dd>Utility: <legs utility>
-<endif>
+</if>
 <dt><b>Hands</b></dt>
 <if hands pcmade>
 <dd>Imbue Points: <hands usedpoints> of <hands availablepoints> (<hands quality> Qual) Overcharge: <hands overcharge>
@@ -140,7 +137,7 @@
 <dd>Gem 4: <hands gem4 amount 2> <hands gem4 effect> - <hands gem4 quality> <hands gem4 name>
 <dd>Proc: <hands gem5 amount 2> <hands gem5 effect> - <hands gem5 name>
 <dd>Utility: <hands utility>
-<endif>
+</if>
 <if hands drop>
 <dd>Name: <hands name>
 <dd>Level: <hands level 2>  Quality: <hands quality>
@@ -156,7 +153,7 @@
 <dd>Effect 9: <hands gem9 amount 3> <hands gem9 effect>
 <dd>Effect 10: <hands gem10 amount 3> <hands gem10 effect>
 <dd>Utility: <hands utility>
-<endif>
+</if>
 <dt><b>Feet</b></dt>
 <if feet pcmade>
 <dd>Imbue Points: <feet usedpoints> of <feet availablepoints> (<feet quality> Qual) Overcharge: <feet overcharge>
@@ -166,7 +163,7 @@
 <dd>Gem 4: <feet gem4 amount 2> <feet gem4 effect> - <feet gem4 quality> <feet gem4 name>
 <dd>Proc: <feet gem5 amount 2> <feet gem5 effect> - <feet gem5 name>
 <dd>Utility: <feet utility>
-<endif>
+</if>
 <if feet drop>
 <dd>Name: <feet name>
 <dd>Level: <feet level 2>  Quality: <feet quality>
@@ -182,7 +179,7 @@
 <dd>Effect 9: <feet gem9 amount 3> <feet gem9 effect>
 <dd>Effect 10: <feet gem10 amount 3> <feet gem10 effect>
 <dd>Utility: <feet utility>
-<endif>
+</if>
 <dt><b>Right Hand</b></dt>
 <if rweapon pcmade>
 <dd>Imbue Points: <rweapon usedpoints> of <rweapon availablepoints> (<rweapon quality> Qual) Overcharge: <rweapon overcharge>
@@ -192,7 +189,7 @@
 <dd>Gem 4: <rweapon gem4 amount 2> <rweapon gem4 effect> - <rweapon gem4 quality> <rweapon gem4 name>
 <dd>Proc: <rweapon gem5 amount 2> <rweapon gem5 effect> - <rweapon gem5 name>
 <dd>Utility: <rweapon utility>
-<endif>
+</if>
 <if rweapon drop>
 <dd>Name: <rweapon name>
 <dd>Level: <rweapon level 2>  Quality: <rweapon quality>
@@ -208,7 +205,7 @@
 <dd>Effect 9: <rweapon gem9 amount 3> <rweapon gem9 effect>
 <dd>Effect 10: <rweapon gem10 amount 3> <rweapon gem10 effect>
 <dd>Utility: <rweapon utility>
-<endif>
+</if>
 <dt><b>Left Hand</b></dt>
 <if lweapon pcmade>
 <dd>Imbue Points: <lweapon usedpoints> of <lweapon availablepoints> (<lweapon quality> Qual) Overcharge: <lweapon overcharge>
@@ -218,7 +215,7 @@
 <dd>Gem 4: <lweapon gem4 amount 2> <lweapon gem4 effect> - <lweapon gem4 quality> <lweapon gem4 name>
 <dd>Proc: <lweapon gem5 amount 2> <lweapon gem5 effect> - <lweapon gem5 name>
 <dd>Utility: <lweapon utility>
-<endif>
+</if>
 <if lweapon drop>
 <dd>Name: <lweapon name>
 <dd>Level: <lweapon level 2>  Quality: <lweapon quality>
@@ -234,7 +231,7 @@
 <dd>Effect 9: <lweapon gem9 amount 3> <lweapon gem9 effect>
 <dd>Effect 10: <lweapon gem10 amount 3> <lweapon gem10 effect>
 <dd>Utility: <lweapon utility>
-<endif>
+</if>
 <dt><b>Two Handed</b></dt>
 <if 2handed pcmade>
 <dd>Imbue Points: <2handed usedpoints> of <2handed availablepoints> (<2handed quality> Qual) Overcharge: <2handed overcharge>
@@ -244,7 +241,7 @@
 <dd>Gem 4: <2handed gem4 amount 2> <2handed gem4 effect> - <2handed gem4 quality> <2handed gem4 name>
 <dd>Proc: <2handed gem5 amount 2> <2handed gem5 effect> - <2handed gem5 name>
 <dd>Utility: <2handed utility>
-<endif>
+</if>
 <if 2handed drop>
 <dd>Name: <2handed name>
 <dd>Level: <2handed level 2>  Quality: <2handed quality>
@@ -260,7 +257,7 @@
 <dd>Effect 9: <2handed gem9 amount 3> <2handed gem9 effect>
 <dd>Effect 10: <2handed gem10 amount 3> <2handed gem10 effect>
 <dd>Utility: <2handed utility>
-<endif>
+</if>
 <dt><b>Ranged</b></dt>
 <if ranged pcmade>
 <dd>Imbue Points: <ranged usedpoints> of <ranged availablepoints> (<ranged quality> Qual) Overcharge: <ranged overcharge>
@@ -270,7 +267,7 @@
 <dd>Gem 4: <ranged gem4 amount 2> <ranged gem4 effect> - <ranged gem4 quality> <ranged gem4 name>
 <dd>Proc: <ranged gem5 amount 2> <ranged gem5 effect> - <ranged gem5 name>
 <dd>Utility: <ranged utility>
-<endif>
+</if>
 <if ranged drop>
 <dd>Name: <ranged name>
 <dd>Level: <ranged level 2>  Quality: <ranged quality>
@@ -286,7 +283,7 @@
 <dd>Effect 9: <ranged gem9 amount 3> <ranged gem9 effect>
 <dd>Effect 10: <ranged gem10 amount 3> <ranged gem10 effect>
 <dd>Utility: <ranged utility>
-<endif>
+</if>
 <dt><b>Neck</b></dt>
 <dd>Name: <neck name>
 <dd>Level: <neck level 2>  Quality: <neck quality>
