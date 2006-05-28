@@ -247,9 +247,9 @@ class ReportWindow(B_ReportWindow):
                     success += (self.parent.crafterSkill - 500) / 10
                     if self.parent.crafterSkill <= 50: success -= 450
                     if success < 0:
-                        success = '<font color="#FF0000">BOOM! (%d%%)</font>\n' % success
+                        success = '%d%% (BOOM!)' % success
                     else:
-                        success = '<font color="#00FF00">%d%%</font>\n' % success
+                        success = '%d%%' % success
                 else:
                     success = 'None'
                 iteminfo[key]['usedpoints'] = imbue
