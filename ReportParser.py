@@ -187,18 +187,16 @@ class ReportParser:
                         gemprops = lst[prop]
                         spl = string.split(props[1], ' ', 1)
                         gemprop = spl[0]
-                        if gemprop[-1] == '>': gemprop = gemprop[:-1]
-                        if gemprop in gemprops.keys():
-                            if gemprop == 'effect' and gemprops[gemprop] == '':
-                                gemval = 'Empty'
-                            elif gemprops['effect'] == '':
-                                gemval = ''
-                            else:
-                                gemval = gemprops[gemprop]
-                            docstrings[i] = self.matchRegex("<%s %s %s\s*(\d+)?\s*/?>" % (cat, prop, gemprop),
-                                gemval, docstrings[i])
+                        if not gemprop in gemprops.keys():
+                            gemval = ''
+                        elif gemprop == 'effect' and gemprops[gemprop] == '':
+                            gemval = 'Empty'
+                        elif gemprops['effect'] == '':
+                            gemval = ''
                         else:
-                            docstrings[i] = ''
+                            gemval = gemprops[gemprop]
+                        docstrings[i] = self.matchRegex("<%s %s %s\s*(\d+)?\s*/?>" % (cat, prop, gemprop),
+                            gemval, docstrings[i])
                 else:
                     docstrings[i] = ''
                 
