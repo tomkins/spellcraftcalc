@@ -21,13 +21,13 @@ class SearchingCombo(QComboBox):
 
     def keyPressEvent(self, e):
         keycode = e.key()
-        if keycode == Qt.Key_Up:
+        if keycode == Qt.Key_Up and not e.state():
             ci = self.currentItem()
             if ci > 0: ci -= 1
             self.setCurrentItem(ci)
             self.emit(SIGNAL("activated(const QString&)"),(self.currentText(),))
             return
-        elif keycode == Qt.Key_Down:
+        elif keycode == Qt.Key_Down and not e.state():
             ci = self.currentItem()
             if ci != (self.count() - 1): ci += 1
             self.setCurrentItem(ci)
@@ -35,11 +35,12 @@ class SearchingCombo(QComboBox):
             return
         elif not self.editable():
             key = str(e.text()).upper()
-            itemkeys = self.buildItemKeys()
             indexlist = []
-            for i in range(0, len(itemkeys)):
-                if key in itemkeys[i]:
-                    indexlist.append(i)
+            if len(key) == 1:
+                itemkeys = self.buildItemKeys()
+                for i in range(0, len(itemkeys)):
+                    if key in itemkeys[i]:
+                        indexlist.append(i)
             if len(indexlist):
                 if self.currentItem() >= indexlist[-1]:
                     self.setCurrentItem(indexlist[0])

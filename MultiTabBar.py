@@ -116,36 +116,37 @@ class MultiTabBar(QTabBar):
         return keys
 
     def keyPressEvent(self, e):
-        if e.key() == Qt.Key_Up:
+        if (e.key() == Qt.Key_Up or e.key() == Qt.Key_Down) and not e.state():
             if len(self.currows) <= 1: return
-            newrow = self.tabrows[self.currows[-2]]
-        elif e.key() == Qt.Key_Down:
-            if len(self.currows) <= 1: return
-            newrow = self.tabrows[self.currows[0]]
+            if e.key() == Qt.Key_Up:
+                newrow = self.tabrows[self.currows[-2]]
+            else:
+                newrow = self.tabrows[self.currows[0]]
+            fr = self.tab(self.currentTab()).rect()
+            fr.setLeft(fr.left() + fr.width() / 2)
+            fr.setTop(0)
+            for id in newrow:
+                tab = self.tab(id)
+                if tab.rect().intersects(fr):
+                    self.setCurrentTab(tab)
+                    return
         else:
             key = str(e.text()).upper()
-            tabkeys = self.buildTabKeys()
             indexlist = []
-            for i in range(0, len(tabkeys)):
-                if key in tabkeys[i]:
-                    indexlist.append(i)
-            if len(indexlist) == 0:
-                QTabBar.keyPressEvent(self, e)
+            if len(key) == 1:
+                tabkeys = self.buildTabKeys()
+                for i in range(0, len(tabkeys)):
+                    if key in tabkeys[i]:
+                        indexlist.append(i)
+            if len(indexlist) > 0:
+                if self.currentTab() >= indexlist[-1]:
+                    self.setCurrentTab(indexlist[0])
+                else:
+                    i = filter(lambda x: x > self.currentTab(), indexlist)[0]
+                    self.setCurrentTab(i)
                 return
-            if self.currentTab() >= indexlist[-1]:
-                self.setCurrentTab(indexlist[0])
-            else:
-                i = filter(lambda x: x > self.currentTab(), indexlist)[0]
-                self.setCurrentTab(i)
-            return
-        fr = self.tab(self.currentTab()).rect()
-        fr.setLeft(fr.left() + fr.width() / 2)
-        fr.setTop(0)
-        for id in newrow:
-            tab = self.tab(id)
-            if tab.rect().intersects(fr):
-                self.setCurrentTab(tab)
-                return
+        QTabBar.keyPressEvent(self, e)
+        return
 
     def paintEvent(self, e):
         if e.rect().isNull():
