@@ -1,6 +1,10 @@
-Updated ??/??/???? - Version 1.45
+Updated ??/??/2006 - Version 1.45
 
+  Fixed keys on the drop lists and tab buttons, the Alt key amoung others
+  was switching choices, causing alot of frustration for alt-tabbers.
 
+  Improved the Config reports.  Added PvE Bonus entries under other bonuses.
+  Got unused items dropped from the list.
 
 Updated 05/21/2006 - Version 1.44
 
