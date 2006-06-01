@@ -66,7 +66,7 @@ class Item:
         if slot['Type'] == 'Unused':
             slot['Qua'] = "94"
 
-    def loadSlotAttrs(self, type, slotnum, stattype, amount, effect, qua, 
+    def loadSlotAttrs(self, type, slotnum, stattype='Unused', amount='', effect='', qua='94', 
             time='0', remakes='0', done='0'):
         self.slots[type][slotnum] = { }
         attr = self.slots[type][slotnum]
@@ -89,9 +89,9 @@ class Item:
 
     def makeEmptyItem(self):
         for i in range(0, 10):
-            self.loadSlotAttrs('drop', i, 'Unused', '', '', '94') 
+            self.loadSlotAttrs('drop', i) 
         for i in range(0, 5):
-            self.loadSlotAttrs('player', i, 'Unused', '', '', '94')
+            self.loadSlotAttrs('player', i)
 
     def loadSlotAttr(self, type, slotnum, attr, val):
         self.slots[type][slotnum][attr] = val
