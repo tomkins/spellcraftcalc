@@ -188,11 +188,11 @@ class Options(B_Options):
                 for pchild in child.childNodes:
                     if pchild.nodeType == Node.TEXT_NODE: continue
                     if pchild.tagName == 'File':
-                        self.parent.recentFiles.append(XMLHelper.getText(pchild.childNodes))
+                        self.parent.recentFiles.append(unicode(XMLHelper.getText(pchild.childNodes)))
             elif child.tagName == 'DaocPath':
-                self.parent.DaocPath = XMLHelper.getText(child.childNodes)
+                self.parent.DaocPath = unicode(XMLHelper.getText(child.childNodes))
             elif child.tagName == 'ConfigReportFile':
-                self.parent.reportFile = XMLHelper.getText(child.childNodes)
+                self.parent.reportFile = unicode(XMLHelper.getText(child.childNodes))
                 
         #if w == 0:
         #    w = 760
