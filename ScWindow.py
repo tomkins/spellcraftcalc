@@ -161,29 +161,10 @@ class ScWindow(B_SC):
         self.menuBar().insertItem('&File', self.filemenu)
 
         self.swapGems = QPopupMenu(self, "SwapGemsMenu")
-        self.swapGems.insertItem('Chest', 0)
-        self.swapGems.connectItem(0, self.swapWithChest)
-        self.swapGems.insertItem('Arms', 1)
-        self.swapGems.connectItem(1, self.swapWithArms)
-        self.swapGems.insertItem('Head', 2)
-        self.swapGems.connectItem(2, self.swapWithHead)
-        self.swapGems.insertItem('Legs', 3)
-        self.swapGems.connectItem(3, self.swapWithLegs)
-        self.swapGems.insertItem('Hands', 4)
-        self.swapGems.connectItem(4, self.swapWithHands)
-        self.swapGems.insertItem('Feet', 5)
-        self.swapGems.connectItem(5, self.swapWithFeet)
-        self.swapGems.insertItem('Right Hand', 6)
-        self.swapGems.connectItem(6, self.swapWithRH)
-        self.swapGems.insertItem('Left Hand', 7)
-        self.swapGems.connectItem(7, self.swapWithLH)
-        self.swapGems.insertItem('2 Handed', 8)
-        self.swapGems.connectItem(8, self.swapWith2H)
-        self.swapGems.insertItem('Ranged', 9)
-        self.swapGems.connectItem(9, self.swapWithRanged)
-        self.swapGems.insertItem('Spare', 10)
-        self.swapGems.connectItem(10, self.swapWithSpare)
-        self.swapGems.setItemEnabled(0, False)
+        for piece in range(0,len(PieceTabList)):
+            self.swapGems.insertItem(PieceTabList[piece], piece)
+            self.swapGems.connectItem(piece, self.swapWith)
+            self.swapGems.setItemParameter(piece, piece)
 
         self.editmenu = QPopupMenu(self, 'EditMenu')
         self.editmenu.insertItem('S&wap Gems With...', self.swapGems)
@@ -1146,7 +1127,6 @@ class ScWindow(B_SC):
                     'Error writing to file: ' + self.filename, 'OK')
             self.updateRecentFiles(self.filename)
 
-
     def saveAsFile(self):
         if self.filename is None:
             templatedir = os.path.join(os.path.dirname(os.path.abspath(sys.argv[0])), 'templates')
@@ -1228,25 +1208,17 @@ class ScWindow(B_SC):
             self.setCaption(filetitle + " - Kort's Spellcraft Calculator")
 
     def updateRecentFiles(self, fn):
-        if len(self.recentFiles) > 5:
-            l = len(self.recentFiles)
-            del self.recentFiles[5:l]
         if fn is not None:
-            if len(self.recentFiles) > 0:
-                if self.recentFiles[0] != fn:
-                    self.recentFiles.insert(0, fn)
-                    if len(self.recentFiles) > 5:
-                        l = len(self.recentFiles)
-                        del self.recentFiles[5:l]
-            else:
-                self.recentFiles.insert(0, fn)
+            while fn in self.recentFiles:
+                self.recentFiles.remove(fn)
+            self.recentFiles.insert(0, fn)
+        if len(self.recentFiles) > 5:
+            del self.recentFiles[5:]
         self.rf_menu.clear()
-        count = 1
-        for f in self.recentFiles:
-            if count < 6:
-                self.rf_menu.insertItem('&%d %s' % (count, f), count-1)
-                self.rf_menu.connectItem(count-1, getattr(self, 'recentFile%d' % count))
-            count += 1
+        for count in range(0, len(self.recentFiles)):
+            self.rf_menu.insertItem('&%d %s' % (count + 1, self.recentFiles[count]), count)
+            self.rf_menu.connectItem(count, self.loadRecentFile)
+            self.rf_menu.setItemParameter(count, count)
 
     def loadFromXML(self, template):
         wascalc = self.nocalc
@@ -1457,46 +1429,16 @@ class ScWindow(B_SC):
         self.viewmenu.setItemChecked(self.showcapmenuid, self.capDistance)
         self.calculate()
 
-    def swapWith(self, part):
+    def swapWith(self, piece):
+        part = TabList[piece]
         cur = self.itemattrlist.get(self.currentTabLabel, Item(self.currentTabLabel))
         swap = self.itemattrlist.get(part, Item(part))
         self.itemattrlist[part] = cur
         self.itemattrlist[self.currentTabLabel] = swap
         self.restoreItem(self.itemattrlist[self.currentTabLabel])
 
-    def swapWithChest(self):
-        self.swapWith('Chest')
-    def swapWithArms(self):
-        self.swapWith('Arms')
-    def swapWithHead(self):
-        self.swapWith('Head')
-    def swapWithLegs(self):
-        self.swapWith('Legs')
-    def swapWithFeet(self):
-        self.swapWith('Feet')
-    def swapWithHands(self):
-        self.swapWith('Hands')
-    def swapWithRH(self):
-        self.swapWith('Right Hand')
-    def swapWithLH(self):
-        self.swapWith('Left Hand')
-    def swapWith2H(self):
-        self.swapWith('2 Handed')
-    def swapWithRanged(self):
-        self.swapWith('Ranged')
-    def swapWithSpare(self):
-        self.swapWith('Spare')
-
-    def recentFile1(self):
-        self.openFile(self.recentFiles[0], True)
-    def recentFile2(self):
-        self.openFile(self.recentFiles[1], True)
-    def recentFile3(self):
-        self.openFile(self.recentFiles[2], True)
-    def recentFile4(self):
-        self.openFile(self.recentFiles[3], True)
-    def recentFile5(self):
-        self.openFile(self.recentFiles[4], True)
+    def loadRecentFile(self, index):
+        self.openFile(self.recentFiles[index], True)
 
     def generateUIXML(self):
         UIXML.uixml(self)
