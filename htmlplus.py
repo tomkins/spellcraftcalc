@@ -181,7 +181,7 @@ if __name__ == '__main__':
     f = open('test.txt', 'w')
     w = DimWriter(f, 36)
     s = ObtuseFormatter(w)
-    p = HTMLTableParser(s)
+    p = HTMLPlusParser(s)
     t = f1.read()
     p.feed(t)
     p.close()
