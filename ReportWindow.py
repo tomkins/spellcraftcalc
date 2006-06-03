@@ -7,6 +7,7 @@
 from qt import *
 from B_ReportWindow import *
 from constants import *
+from htmlplus import *
 import Item
 import SC
 import string
@@ -92,6 +93,7 @@ def gemNameSort(a, b):
         else: return -1
     
     return cmp(a, b)
+
 
 class ReportWindow(B_ReportWindow):
     def __init__(self,parent = None,name = None,modal = 0,fl = 0):
@@ -422,17 +424,12 @@ class ReportWindow(B_ReportWindow):
                     filename = str(filename)
                     filename += '.txt'
                 f = open(str(filename), 'w')
-                txt = str(self.ReportText.text())
-                txt = re.sub('<br>', '\n', txt)
-                txt = re.sub('<td>', '    ', txt)
-                #txt = re.sub('<tr>', '\n', txt)
-                txt = re.sub('<hr>', '\n', txt)
-                txt = re.sub('<li>', '\n', txt)
-                txt = re.sub('<dt>', '\n', txt)
-                #txt = re.sub('<dd>', '\n', txt)
-                txt = re.sub('<.*?>', '', txt)
-                txt = re.sub('\n\n(\n+)', '\n\n', txt)
-                f.write(txt)
+                w = DimWriter(f)
+                s = ObtuseFormatter(w)
+                p = HTMLPlusParser(s)
+                p.feed(str(self.ReportText.text()))
+                p.close()
+                w.flush()
                 f.close()
             except IOError:
                 QMessageBox.critical(None, 'Error!', 
