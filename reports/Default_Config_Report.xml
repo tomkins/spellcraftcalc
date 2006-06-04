@@ -1,16 +1,16 @@
-<center><b>Config Report</b></center><br /><br />
+<center><b>Config Report</b></center><br />
 <center><b>Stats</b></center><hr />
 <table cellspacing=10 cellpadding=0>
-<tr><td>Str:<td><str 3/></td><td>Int:<td><int 3/></td><td>Hits:<td><hits 4/></td></tr>
-<tr><td>Con:<td><con 3/></td><td>Pie:<td><pie 3/></td><td>Power:<td><power 3/></td></tr>
-<tr><td>Dex:<td><dex 3/></td><td>Cha:<td><cha 3/></td></tr>
-<tr><td>Qui:<td><qui 3/></td><td>Emp:<td><emp 3/></td></tr>
+<tr><td>Str:</td><td><str 3/></td><td>Int:</td><td><int 3/></td><td>Hits:</td><td><hits 4/></td></tr>
+<tr><td>Con:</td><td><con 3/></td><td>Pie:</td><td><pie 3/></td><td>Power:</td><td><power 3/></td></tr>
+<tr><td>Dex:</td><td><dex 3/></td><td>Cha:</td><td><cha 3/></td></tr>
+<tr><td>Qui:</td><td><qui 3/></td><td>Emp:</td><td><emp 3/></td></tr>
 </table><br />
 <center><b>Resists</b></center><hr />
 <table cellspacing=10 cellpadding=0>
-<tr><td>Body:<td><body 2/></td><td>Energy:<td><energy 2/></td><td>Crush:<td><crush 3/></td></tr>
-<tr><td>Cold:<td><cold 2/></td><td>Matter:<td><matter 2/></td><td>Thrust:<td><thrust 2/></td></tr>
-<tr><td>Heat:<td><heat 2/></td><td>Spirit:<td><spirit 2/></td><td>Slash:<td><slash 3/></td></tr>
+<tr><td>Body:</td><td><body 2/></td><td>Energy:</td><td><energy 2/></td><td>Crush:</td><td><crush 3/></td></tr>
+<tr><td>Cold:</td><td><cold 2/></td><td>Matter:</td><td><matter 2/></td><td>Thrust:</td><td><thrust 2/></td></tr>
+<tr><td>Heat:</td><td><heat 2/></td><td>Spirit:</td><td><spirit 2/></td><td>Slash:</td><td><slash 3/></td></tr>
 </table><br />
 <center><b>Skills</b></center><hr />
 <skills/><br />
