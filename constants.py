@@ -25,7 +25,7 @@ __all__ = [
   'PieceTabList', 'JewelTabList', 'BodyHitOdds', 
 ]
 
-ScVersion = "Kort 1.45 (dev)"
+ScVersion = "Kort's Spellcrafting Calulator 1.45"
 
 from tuple2 import * 
 from dict2 import * 
