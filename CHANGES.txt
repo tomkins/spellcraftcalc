@@ -1,10 +1,20 @@
-Updated ??/??/2006 - Version 1.45
+Updated 06/09/2006 - Version 1.45
+
+  Thanks to Mythic's generous policy and their specific permission to this
+  project to borrow their in-game gem toolbar artwork with the appropriate 
+  acknowledgement, redo the introduction splash screen and About box!  /salute
 
   Fixed keys on the drop lists and tab buttons, the Alt key amoung others
   was switching choices, causing alot of frustration for alt-tabbers.
 
+  When using the Open Item dialog, only a list, not file details (date, type
+  etc) will be displayed next to the preview window.
+
+  If a filename is given to Spellcraft.pyw or the compiled program, open
+  it on startup (loaded before the window is displayed).
+
   Improved the Config reports.  Added PvE Bonus entries under other bonuses.
-  Got unused items dropped from the list.
+  Have dropped unused items (not slots) from the list.
 
 Updated 05/21/2006 - Version 1.44
 
