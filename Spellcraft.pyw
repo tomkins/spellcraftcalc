@@ -23,15 +23,22 @@ locale.setlocale(locale.LC_ALL, '')
 class ScApplication(QApplication):
     def __init__(self):
         args = sys.argv
-        if not os.path.isabs(args[0]):
-             args[0] = os.path.abspath(args[0])
+        self.curPath = QDir.cleanDirPath(QDir.currentDirPath())
+        if args[0]:
+             args[0] = unicode(QDir(self.curPath).absFilePath(args[0], True))
+        else:
+             args[0] = unicode(QDir(self.curPath).absFilePath(__file__, True))
+        self.appPath = unicode(QDir.cleanDirPath(QDir(args[0]).absFilePath("..")))
+
+        self.splashFile = unicode(QDir(self.appPath).absFilePath("Spellcraft.png"))
+ 
+        if len(args) > 1:
+           args[1] = unicode(QDir.cleanDirPath(QDir(self.curPath).absFilePath(args[1], True)))
 
         QApplication.__init__(self, args)
-        # QObject.connect(self, SIGNAL('lastWindowClosed()'), 
-        #                 self, SLOT('quit()'))
 
     def start(self):
-        splash = QSplashScreen(QPixmap("Spellcraft.png"));
+        splash = QSplashScreen(QPixmap(self.splashFile))
         splash.show()
 
         # Font sizes are strange things on Mac, while our favorite
@@ -54,8 +61,11 @@ class ScApplication(QApplication):
 
         import ScWindow
         scw = ScWindow.ScWindow()
+        scw.splashFile = self.splashFile
         app.setMainWidget(scw)
         scw.setIcon(QPixmap("ScWindow.png"));
+        if len(app.argv()) > 1:
+            scw.openFile(app.argv()[1], True)
         scw.show()
 
         splash.finish(scw);

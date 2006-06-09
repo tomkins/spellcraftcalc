@@ -37,7 +37,7 @@ import sys
 class AboutScreen(QDialog):
     def __init__(self,parent = None,name = "About",modal = True,fl = 0):
         QDialog.__init__(self,parent,name,modal,fl)
-        pixmap = QPixmap("Spellcraft.png")
+        pixmap = QPixmap(parent.splashFile)
         self.setPaletteBackgroundPixmap(pixmap)
         self.resize(QSize(480,340).expandedTo(pixmap.size()))
         self.clearWState(Qt.WState_Polished)
@@ -54,6 +54,7 @@ class AboutScreen(QDialog):
 
 class ScWindow(B_SC):
     def __init__(self):
+        self.splashFile = None
         self.newcount = 0
         self.nocalc = 1
         self.totals = { }
@@ -70,7 +71,7 @@ class ScWindow(B_SC):
 
         self.fixedtaborder = False
 
-        B_SC.__init__(self,parent=None,name="SpellCraft Calulator",
+        B_SC.__init__(self,parent=None,name="Kort's Spellcrafting Calulator",
                       fl=Qt.WDestructiveClose|Qt.WStyle_Customize 
                         |Qt.WStyle_DialogBorder|Qt.WStyle_Title
                         |Qt.WStyle_SysMenu|Qt.WStyle_Minimize)
@@ -261,7 +262,7 @@ class ScWindow(B_SC):
         self.filename = None
         self.newcount = self.newcount + 1
         filetitle = unicode("Template" + str(self.newcount))
-        self.setCaption(filetitle + " - Kort's Spellcraft Calculator")
+        self.setCaption(filetitle + " - Kort's Spellcrafting Calculator")
 
         self.PieceTab.setCurrentTab(0)
         self.currentTab = self.PieceTab
@@ -1179,7 +1180,7 @@ class ScWindow(B_SC):
             self.filename = filename
             self.updateRecentFiles(filename)
             filetitle = os.path.basename(filename)
-            self.setCaption(filetitle + " - Kort's Spellcraft Calculator")
+            self.setCaption(filetitle + " - Kort's Spellcrafting Calculator")
             
 
     def openFile(self, *args):
@@ -1224,7 +1225,7 @@ class ScWindow(B_SC):
             self.filename = filename
             self.updateRecentFiles(filename)
             filetitle = os.path.basename(filename)
-            self.setCaption(filetitle + " - Kort's Spellcraft Calculator")
+            self.setCaption(filetitle + " - Kort's Spellcrafting Calculator")
 
     def updateRecentFiles(self, fn):
         if fn is not None:
