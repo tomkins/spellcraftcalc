@@ -34,6 +34,24 @@ import codecs
 import sys
 
 
+class AboutScreen(QDialog):
+    def __init__(self,parent = None,name = "About",modal = True,fl = 0):
+        QDialog.__init__(self,parent,name,modal,fl)
+        pixmap = QPixmap("Spellcraft.png")
+        self.setPaletteBackgroundPixmap(pixmap)
+        self.resize(QSize(480,340).expandedTo(pixmap.size()))
+        self.clearWState(Qt.WState_Polished)
+        self.show()
+
+    def mouseReleaseEvent(self, e):
+        # a little lame, e should match a mouseDown event in our window
+        self.close()
+
+    def keyPressEvent(self, e):
+        if len(e.text()):
+            self.close()
+
+
 class ScWindow(B_SC):
     def __init__(self):
         self.newcount = 0
@@ -1071,6 +1089,7 @@ class ScWindow(B_SC):
         Qfd.setInfoPreviewEnabled(1)
         Qfd.setInfoPreview(Qfp, Qfp.preview)
         Qfd.setPreviewMode(QFileDialog.Info)
+        Qfd.setViewMode(QFileDialog.List)
         ## Qfp is nested in a QWidgetStack within a QSplitter, which we will tweak:
         Qfp.parent().parent().setSizes([165, 150])
         if Qfd.exec_loop():
@@ -1334,11 +1353,8 @@ class ScWindow(B_SC):
             self.reportFile = str(filename)
 
     def aboutBox(self):
-        QMessageBox.information(None, "Kort's Spellcrafting Calculator", 
-              "Verison " + ScVersion + "\n\n" 
-            + "Official URI  http://kscraft.sf.net/\n"
-            + "Project Home  http://sf.net/projects/kscraft\n\n"
-            + "Report Bugs/Request Features on the project Users Forum", 'Close')
+        splash = AboutScreen(parent=self,modal=True)
+        splash.exec_loop()
 
     def openCraftBars(self):
         CB = CraftBar.CraftBar(self.DaocPath, self, '', 1)
