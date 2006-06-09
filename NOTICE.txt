@@ -109,12 +109,13 @@ Sublicensed under the RIVERBANK COMPUTING LIMITED LICENSE AGREEMENT.
 The authors/distributors of this program dispute this claim, and
 find no evidence thereof in the License granted by Riverbank Computing.
 
-Mythic Entertainment; Dark Age of Camelot Shrouded Isles; DAOC; 
-Trials of Atlantis; Dark Age of Camelot:Catacombs, and Dark Age 
-of Camelot: New Frontiers are registered trademarks and service 
-marks of Mythic Entertainment in the United States or other 
-countries.  Darkness Rising and Realm vs. Realm are trademarks 
-and service marks of Mythic Entertainment.
+Artwork and screen shots Copyright (C) 2001-2006 Mythic Entertainment, Inc. 
+All rights reserved. Used with permission of Mythic Entertainment. 
+
+Mythic Entertainment, the Mythic Entertainment logo, "Dark Age of Camelot," 
+"Shrouded Isles," "Foundations," "New Frontiers," "Trials of Atlantis," 
+"Catacombs," "Darkness Rising," the Dark Age of Camelot and subsequent logos, 
+and the stylized Celtic knot are trademarks of Mythic Entertainment, Inc.
 
 This program is entirely the effort of the kscraft project, hosted
 by Sourceforge, and is not affiliated with Mythic Entertainment nor
