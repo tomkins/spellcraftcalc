@@ -57,6 +57,9 @@ class ScApplication(QApplication):
             else:
                 font.setFamily("Trebuchet MS")
             font.setPointSize(8)
+        else:
+            font.setFamily("Trebuchet MS")
+            font.setPointSize(8)
         self.setFont(font)
 
         import ScWindow
