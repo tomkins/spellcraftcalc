@@ -1,3 +1,13 @@
+Updated ??/??/2006 - Version 1.46
+
+    
+
+  Split Character.py tables apart from the constants.py module,
+  so these Realm / Class / Race / Server lists might be used 
+  for other kinds of DAoC programs.
+
+  Fixed fifth slot tinctures (had reverted to SC bonuses).
+
 Updated 06/09/2006 - Version 1.45
 
   Thanks to Mythic's generous policy and their specific permission to this
