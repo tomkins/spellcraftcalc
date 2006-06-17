@@ -1,6 +1,7 @@
 Things to fix before next beta release is announced;
 
-  Ensure we save/load PC and drop items (something was(?) wrong).
+  Quit crashing when Tab bar / Drop list accelerator keys are
+  pressed, while load item dialog is open.
 
   Fix the prices, it's just wonked with all the different cost
   changes to gems since cats gems.  This means using SC.py from
@@ -15,7 +16,15 @@ Things to fix before next beta release is announced;
   where the 'quality' on other gem slots isn't needed.
 
   Add 5th slot Drop tinctures (from epic dungeons) for crafted gear.
+  According to various searchs of alakazahm and the the autobestiary,
+  Prissy's lists are (were) complete.
 
+  Add 1.84 Crafted staves (fifth slot Focus 50, sixth slot becomes
+  the added tincture?)
+
+  Add 1.84 Legendary Weapons (fourth slot 2% melee / magic / archery 
+  damage bonus against All Monsters, fifth slot AF 10 / 50 All Focus, 
+  sixth slot becomes selectable specific charges/proc effects)
 
 Things to fix before 2.0 final (non-beta) is announced;
 
