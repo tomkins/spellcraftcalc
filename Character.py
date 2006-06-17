@@ -551,6 +551,7 @@ ServerCodes = d2({
 
 
 if __name__ == "__main__":
+    pass
     #import gnosis.xml.pickle
     #constants = {}
     #for v in __all__:
