@@ -1823,8 +1823,8 @@ FixEffectsTable = d2({
 })
 
 if __name__ == "__main__":
-    import gnosis.xml.pickle
-    constants = {}
-    for v in __all__:
-        constants[v] = locals()[v]
-    print gnosis.xml.pickle.dumps(constants)
+    #import gnosis.xml.pickle
+    #constants = {}
+    #for v in __all__:
+    #    constants[v] = locals()[v]
+    #print gnosis.xml.pickle.dumps(constants)
