@@ -447,7 +447,7 @@ class ScWindow(B_SC):
         for slot in range(0, toprng):
             typecombo = self.Type[slot]
             typecombo.clear()
-            if typelist == TypeList and slot == 4:
+            if slot == 4 and itemtype == 'player':
                 typelist = list(EffectTypeList)
             gemtype = str(item.getSlotAttr(itemtype, slot, 'Type'))
             if not gemtype in typelist:
