@@ -6,6 +6,7 @@
 
 from qt import *
 from B_CraftBar import *
+from Character import *
 from constants import *
 import os
 import os.path

@@ -8,6 +8,7 @@
 from qt import *
 from B_ScWindow import *
 from Item import *
+from Character import *
 from constants import *
 from xml.dom.minidom import *
 from MyStringIO import UnicodeStringIO

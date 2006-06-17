@@ -6,6 +6,7 @@
 
 from qt import *
 from Item import *
+from Character import *
 from constants import *
 
 class Preview(QFilePreview):

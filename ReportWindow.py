@@ -6,6 +6,7 @@
 
 from qt import *
 from B_ReportWindow import *
+from Character import *
 from constants import *
 from htmlplus import *
 import Item
