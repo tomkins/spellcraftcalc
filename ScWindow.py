@@ -154,7 +154,7 @@ class ScWindow(B_SC):
         self.DaocPath = ''
         self.realm = 'Albion'
         self.charclass = 'Armsman'
-        self.crafterSkill = 1001
+        self.crafterSkill = 1000
         self.showDoneInMatsList = 0
         self.noteText = ''
         self.capDistance = False
@@ -654,8 +654,9 @@ class ScWindow(B_SC):
                         else:
                             success += GemQualOCModifiers[item.getSlotAttr(itemtype, i, 'Qua')]
                     success += ItemQualOCModifiers[str(self.QualDrop.currentText())]
-                    success += (self.crafterSkill - 500) / 10
-                    if self.crafterSkill <= 50: success -= 450
+                    skillbonus = (int(self.crafterSkill / 50) - 10) * 5
+                    if skillbonus > 50: skillbonus = 50
+                    success += skillbonus
             if key == self.currentTabLabel:
                 self.ItemUtility.setText('%3.1f' % utility)
                 if self.PlayerMade.isChecked():

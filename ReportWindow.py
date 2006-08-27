@@ -247,8 +247,9 @@ class ReportWindow(B_ReportWindow):
                         else:
                             success += GemQualOCModifiers[item.getSlotAttr(activestate, i, 'Qua')]
                     success += ItemQualOCModifiers[item.getAttr('ItemQuality')]
-                    success += (self.parent.crafterSkill - 500) / 10
-                    if self.parent.crafterSkill <= 50: success -= 450
+                    skillbonus = (int(self.parent.crafterSkill / 50) - 10) * 5
+                    if skillbonus > 50: skillbonus = 50
+                    success += skillbonus
                     if success < 0:
                         success = '%d%% (BOOM!)' % success
                     else:
@@ -371,8 +372,8 @@ class ReportWindow(B_ReportWindow):
                         if effect == 'Hits':
                             if capTotals['Hits'] > 200:
                                 capTotals['Hits'] = 200 
-                        elif capTotals[effect] > 25:
-                            capTotals[effect] = 25
+                        elif capTotals[effect] > 26:
+                            capTotals[effect] = 26
             iteminfo[key]['utility'] = utility
 
         for (key, val) in totals.items():

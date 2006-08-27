@@ -20,6 +20,7 @@ class SearchingCombo(QComboBox):
         return keys
 
     def keyPressEvent(self, e):
+        sys.stderr.write("Combo key "+e.key().hex()+"\n")
         keycode = e.key()
         if keycode == Qt.Key_Up and not e.state():
             ci = self.currentItem()

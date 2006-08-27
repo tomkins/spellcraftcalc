@@ -8,7 +8,7 @@ __all__ = [
   'ScVersion', 
   'TypeList', 'EffectTypeList', 'DropTypeList', 'GemLists', 'DropLists', 
   'QualityValues', 'ImbuePts', 'GemQualOCModifiers', 'ItemQualOCModifiers', 
-  'ServerCodes', 'FileExt', 
+  'FileExt', 
   'HighCapBonusList', 
   'DustsOrder', 'Caps', 'GemDusts', 
   'ValuesLists',
@@ -898,8 +898,6 @@ HotkeyGems = d2({
     }),
 })
 
-OCStartPercentages = (0, 10, 20, 30, 50, 70)
-
 ImbueMultipliers = d2({ 
     'Stat' :   1.0, 
     'Resist' : 2.0, 
@@ -909,6 +907,8 @@ ImbueMultipliers = d2({
     'Focus' :  1.0, 
     'Unused' : 0.0, 
 })
+
+OCStartPercentages = (0, 10, 20, 30, 50, 70)
 
 QualityValues = t2(('94', '95', '96', '97', '98', '99', '100'))
 

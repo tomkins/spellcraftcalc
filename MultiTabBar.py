@@ -116,6 +116,7 @@ class MultiTabBar(QTabBar):
         return keys
 
     def keyPressEvent(self, e):
+        sys.stderr.write("Tab key "+e.key().hex()+"\n")
         if (e.key() == Qt.Key_Up or e.key() == Qt.Key_Down) and not e.state():
             if len(self.currows) <= 1: return
             if e.key() == Qt.Key_Up:

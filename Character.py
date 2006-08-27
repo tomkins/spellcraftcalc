@@ -6,6 +6,7 @@
 
 __all__ = [
   'AllBonusList', 'ClassList', 'RaceList', 'Races', 'Realms', 
+  'ServerCodes', 
 ]
 
 from tuple2 import * 
