@@ -109,7 +109,7 @@ class ScWindow(B_SC):
         size.setHeight(self.PieceTab.sizeHint().height())
         self.PieceTab.setFixedSize(size)
 
-        self.frame3.move(self.frame3.pos().x(), self.PieceTab.geometry().bottom())
+        self.GroupItemFrame.move(self.GroupItemFrame.pos().x(), self.PieceTab.geometry().bottom())
 
         self.Realm.insertStrList(list(Realms))
         self.QualDrop.insertStrList(list(QualityValues))
@@ -144,8 +144,8 @@ class ScWindow(B_SC):
 
         self.updateGeometry()
         self.centralWidget().setFixedSize(
-             QSize(self.frame3.frameGeometry().right() + 4, 
-                   self.frame3.frameGeometry().bottom() + 3))
+             QSize(self.GroupItemFrame.frameGeometry().right() + 4, 
+                   self.GroupItemFrame.frameGeometry().bottom() + 3))
 
         self.startup = 1
         self.pricingInfo = {}
@@ -1364,7 +1364,7 @@ class ScWindow(B_SC):
         CB.exec_loop()
         self.DaocPath = str(CB.DaocPath.text())
 
-    def DelveItemsDialog(self, find):
+    def DelveItemsDialog(self, find, findtype = None):
         locs = []
         for key, item in self.itemattrlist.items():
             activestate = item.getAttr('ActiveState')
@@ -1375,6 +1375,8 @@ class ScWindow(B_SC):
             for slot in range(0, toprng):
                 type = str(item.getSlotAttr(activestate, slot, 'Type'))
                 if type == 'Unused': continue
+                if (findtype and type != findtype) or \
+                   (not findtype and type in ('Resist',)): continue
                 effect = str(item.getSlotAttr(activestate, slot, 'Effect'))
                 if effect != find: 
                     if find == 'Power' or find == '% Power Pool':
@@ -1398,7 +1400,10 @@ class ScWindow(B_SC):
                     amount += ' Cap'
                 locs.append([key, amount])
         DW = DisplayWindow.DisplayWindow(self, modal = 1)
-        DW.setCaption('Slots With %s' % find)
+        if findtype:
+            DW.setCaption('Slots With %s %s' % (find, findtype))
+        else:
+            DW.setCaption('Slots With %s' % find)
         DW.loadLocations(locs)
         DW.exec_loop()
 
@@ -1418,6 +1423,7 @@ class ScWindow(B_SC):
         nameidx = 1
         while nameidx < len(shortname):
             if shortname[nameidx] < 'a' or shortname[nameidx] > 'z':
+                shorttype = shortname[nameidx:]
                 shortname = shortname[0:nameidx]
             nameidx += 1
         if shortname in ['Gem', 'Points', 'Cost', 'Name']:
@@ -1428,10 +1434,10 @@ class ScWindow(B_SC):
                 self.gemClicked(self.currentTabLabel, int(slot))
             return
         if shortname in ['', 'Label', 'Total', 'Item']: return
-        if shortname == 'Focus':
-           if not ' ' in str(child.text()): return
-           amount, shortname = string.split(str(child.text()), ' ', 1)
-        self.DelveItemsDialog(shortname)
+        if child.parent().name() == 'GroupResists':
+           self.DelveItemsDialog(shortname, 'Resist')
+        else:
+           self.DelveItemsDialog(shortname)
 
     def resizeEvent(self, e):
         sz = e.size()

@@ -1,12 +1,16 @@
 Updated ??/??/2006 - Version 1.46
 
-    
+  Prevent albion tank templates from showing Slash/Crush/Thrust resists
+  while delving skills or showing skills while delving those resists.
 
   Split Character.py tables apart from the constants.py module,
   so these Realm / Class / Race / Server lists might be used 
   for other kinds of DAoC programs.
 
   Fixed fifth slot tinctures (had reverted to SC bonuses).
+
+  More minor corrections to MultiTabBar and SearchingCombo so these
+  controls don't do 'unexpected' things.
 
 Updated 06/09/2006 - Version 1.45
 

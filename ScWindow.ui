@@ -22,7 +22,7 @@ Python:from SearchingCombo import *
     </property>
     <widget class="QGroupBox">
         <property name="name">
-            <cstring>GroupBox9</cstring>
+            <cstring>GroupCharInfo</cstring>
         </property>
         <property name="geometry">
             <rect>
@@ -294,7 +294,7 @@ Python:from SearchingCombo import *
     </widget>
     <widget class="QGroupBox">
         <property name="name">
-            <cstring>GroupBox1</cstring>
+            <cstring>GroupStats</cstring>
         </property>
         <property name="geometry">
             <rect>
@@ -850,7 +850,7 @@ Python:from SearchingCombo import *
     </widget>
     <widget class="QGroupBox">
         <property name="name">
-            <cstring>GroupBox2</cstring>
+            <cstring>GroupResists</cstring>
         </property>
         <property name="geometry">
             <rect>
@@ -1410,7 +1410,7 @@ Python:from SearchingCombo import *
     </widget>
     <widget class="QGroupBox">
         <property name="name">
-            <cstring>frame3</cstring>
+            <cstring>GroupItemFrame</cstring>
         </property>
         <property name="geometry">
             <rect>
