@@ -117,6 +117,7 @@ class MultiTabBar(QTabBar):
 
     def keyPressEvent(self, e):
         if (e.key() == Qt.Key_Up or e.key() == Qt.Key_Down) and not e.state():
+	    e.accept()
             if len(self.currows) <= 1: return
             if e.key() == Qt.Key_Up:
                 newrow = self.tabrows[self.currows[-2]]
@@ -129,8 +130,9 @@ class MultiTabBar(QTabBar):
                 tab = self.tab(id)
                 if tab.rect().intersects(fr):
                     self.setCurrentTab(tab)
-                    return
-        else:
+            e.accept()
+            return
+        elif len(e.text()) > 0:
             key = str(e.text()).upper()
             indexlist = []
             if len(key) == 1:
@@ -144,7 +146,8 @@ class MultiTabBar(QTabBar):
                 else:
                     i = filter(lambda x: x > self.currentTab(), indexlist)[0]
                     self.setCurrentTab(i)
-                return
+            e.accept()
+            return
         QTabBar.keyPressEvent(self, e)
         return
 
