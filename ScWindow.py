@@ -463,7 +463,13 @@ class ScWindow(QMainWindow, Ui_B_SC):
             if gemtype == 'Unused':
                 continue
             gemeffect = str(item.getSlotAttr(itemtype, slot, 'Effect'))
-            self.Effect[slot].setCurrentText(gemeffect)
+            effect = self.Effect[slot].findText(gemeffect)
+            if effect < 0:
+                if not self.Effect[slot].isEditable():
+                    self.Effect[slot].setEditable(True)
+                self.Effect[slot].setEditText(gemeffect)
+            else:
+                self.Effect[slot].setCurrentIndex(effect)
             self.UpdateCombo(1, slot)
             if itemtype == 'drop':
                 am = item.getSlotAttr(itemtype, slot, 'Amount')
@@ -723,17 +729,17 @@ class ScWindow(QMainWindow, Ui_B_SC):
         self.OtherBonusList.clear()
         for skill, amount in skillTotals.items():
             if not self.capDistance:
-                self.SkillsList.insertItem('%d %s' % (amount, skill))
+                self.SkillsList.addItem('%d %s' % (amount, skill))
             else:
                 if skill[-6:] == " Focus":
                     capcalc = HighCapBonusList['Focus']
                 else:
                     capcalc = HighCapBonusList['Skill']
                 thiscap = int(charlevel * capcalc[0]) + capcalc[1]
-                self.SkillsList.insertItem('%d %s' % (thiscap - amount, skill))
+                self.SkillsList.addItem('%d %s' % (thiscap - amount, skill))
         for bonus, amount in otherTotals.items():
             if not self.capDistance:
-                self.OtherBonusList.insertItem('%d %s' % (amount, bonus))
+                self.OtherBonusList.addItem('%d %s' % (amount, bonus))
             else:
                 if HighCapBonusList.has_key(bonus):
                     capcalc = HighCapBonusList[bonus]
@@ -749,7 +755,7 @@ class ScWindow(QMainWindow, Ui_B_SC):
                     if capmod > addcap:  capmod = addcap
                 else:
                     capmod = 0
-                self.OtherBonusList.insertItem('%d %s' % (cap + capmod - amount, bonus))        
+                self.OtherBonusList.addItem('%d %s' % (cap + capmod - amount, bonus))        
         self.TotalPrice.setText(SC.formatCost(self.computePrice()))
         self.errorsmenuid.setEnabled(errorcount > 0)
 
@@ -884,15 +890,15 @@ class ScWindow(QMainWindow, Ui_B_SC):
                     effcombo.setCurrentIndex(0)
             if type == 1:
                 unique = (not efftext in effectlist) or (len(efftext) > 3 and efftext[-3:] == "...")
-                if effcombo.editable() and not unique:
+                if effcombo.isEditable() and not unique:
                     refocus = self.Effect[num].hasFocus()
                     effcombo.setEditable(False)
                     effcombo.setCurrentIndex(effectlist.index(efftext))
                     self.fix_taborder(num)
-                elif unique and not effcombo.editable():
+                elif unique and not effcombo.isEditable():
                     refocus = self.Effect[num].hasFocus()
                     effcombo.setEditable(True)
-                    effcombo.setCurrentText(efftext)
+                    effcombo.setEditText(efftext)
                     self.fix_taborder(num)
                 else:
                     refocus = False
