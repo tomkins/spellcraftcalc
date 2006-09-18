@@ -1,10 +1,9 @@
 <ui version="4.0" stdsetdef="1" >
   <author></author>
-  <comment>
-Python:#Import the Custom Widgets
-Python:from MultiTabBar import *
-Python:from SearchingCombo import *
-</comment>
+  <customwidgets>
+    <customwidget><class>MultiTabBar</class><header>MultiTabBar.h</header></customwidget>
+    <customwidget><class>SearchingCombo</class><header>SearchingCombo.h</header></customwidget>
+  </customwidgets>
   <exportmacro></exportmacro>
   <class>B_SC</class>
   <widget class="QMainWindow" name="B_SC" >
