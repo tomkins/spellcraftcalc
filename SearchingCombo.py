@@ -8,6 +8,7 @@ import sys
 import string
 
 from PyQt4.QtGui import QComboBox
+from PyQt4.QtCore import SIGNAL
 
 class SearchingCombo(QComboBox):
     def __init__(self, parent=None, name=None, editable=False):
@@ -32,12 +33,12 @@ class SearchingCombo(QComboBox):
                     if key in itemkeys[i]:
                         indexlist.append(i)
             if len(indexlist):
-                if self.currentItem() >= indexlist[-1]:
+                if self.currentIndex() >= indexlist[-1]:
                     self.setCurrentIndex(indexlist[0])
                 else:
                     i = filter(lambda x: x > self.currentIndex(), indexlist)[0]
                     self.setCurrentIndex(i)
-                self.emit(SIGNAL("activated(const QString&)"),(self.currentText(),))
+                self.emit(SIGNAL("activated(const QString &)"),self.currentText())
             e.accept()
             return
         QComboBox.keyPressEvent(self, e)
