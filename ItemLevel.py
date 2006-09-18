@@ -37,9 +37,9 @@ class ItemLevel(QDialog, Ui_B_ItemLevel):
         self.inchange = True
 
         if self.Shield.isChecked():
-            self.level = max(self.ShieldType.currentItem() * 5, 2)
+            self.level = max(self.ShieldType.currentIndex() * 5, 2)
         elif self.ReinforcedShield.isChecked():
-            self.level = self.ShieldType.currentItem() * 5 + 26
+            self.level = self.ShieldType.currentIndex() * 5 + 26
         self.Level.setText(str(self.level))
 
         self.afdps = float(self.level) * 0.3 + 1.2
@@ -71,14 +71,14 @@ class ItemLevel(QDialog, Ui_B_ItemLevel):
                 if self.Shield.isChecked():
                     tier = min(int(self.level / 5), 9)
                     self.level = max(tier * 5, 2)
-                    self.ShieldType.setCurrentItem(tier)
+                    self.ShieldType.setCurrentIndex(tier)
                 elif self.ReinforcedShield.isChecked():
                     tier = max(int((self.level - 26) / 5), 0)
                     self.level = tier * 5 + 26
-                    self.ShieldType.setCurrentItem(tier)
+                    self.ShieldType.setCurrentIndex(tier)
         except:
             self.level = 1
-            self.ShieldType.setCurrentItem(0)
+            self.ShieldType.setCurrentIndex(0)
 
         self.Level.setText(str(self.level))
 
@@ -108,11 +108,11 @@ class ItemLevel(QDialog, Ui_B_ItemLevel):
         if self.Shield.isChecked():
             tier = min(int(self.level / 5), 9)
             self.level = max(tier * 5, 2)
-            self.ShieldType.setCurrentItem(tier)
+            self.ShieldType.setCurrentIndex(tier)
         elif self.ReinforcedShield.isChecked():
             tier = max(int((self.level - 26) / 5), 0)
             self.level = tier * 5 + 26
-            self.ShieldType.setCurrentItem(tier)
+            self.ShieldType.setCurrentIndex(tier)
 
         if self.Armor.isChecked():
             self.afdps = self.level * 2
