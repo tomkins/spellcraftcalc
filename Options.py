@@ -17,8 +17,12 @@ from MyStringIO import UnicodeStringIO
 
 class Options(QDialog, Ui_B_Options):
     def __init__(self,parent = None,name = None,modal = 0,fl = 0):
-        QDialog.__init__(self,parent,name,modal,fl)
+        QDialog.__init__(self,parent,fl)
         Ui_B_Options.setupUi(self,self)
+        if (name):
+            self.setObjectName(name)
+        if (modal):
+            self.setModal(modal)
 #       self.Tab.setTabEnabled(self.Price, 0)
         self.parent = parent
         skilllist = range(1000, -1, -50)

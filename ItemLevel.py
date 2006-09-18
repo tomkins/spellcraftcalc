@@ -10,7 +10,7 @@ from B_ItemLevel import *
 import re
 
 class ItemLevel(QDialog, Ui_B_ItemLevel):
-    def __init__(self,parent = None,name = None,modal = False,fl = 0):
+    def __init__(self,parent = None,name = None,modal = False,fl = None):
         QDialog.__init__(self,parent,fl)
         Ui_B_ItemLevel.setupUi(self,self)
         if (name):

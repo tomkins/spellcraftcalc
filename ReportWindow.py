@@ -97,9 +97,13 @@ def gemNameSort(a, b):
 
 
 class ReportWindow(QDialog, Ui_B_ReportWindow):
-    def __init__(self,parent = None,name = None,modal = 0,fl = 0):
-        QDialog.__init__(self,parent,name,modal,fl)
+    def __init__(self,parent = None,name = None,modal = False,fl = 0):
+        QDialog.__init__(self,parent,fl)
         Ui_B_ReportWindow.setupUi(self,self)
+        if (name):
+            self.setObjectName(name)
+        if (modal):
+            self.setModal(modal)
         #self.font().setPointSize(8)
         self.ReportText.setTextFormat(Qt.RichText)
         self.parent = parent

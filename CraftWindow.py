@@ -11,8 +11,12 @@ import SC
 
 class CraftWindow(QDialog, Ui_B_CraftWindow):
     def __init__(self,parent = None,name = None,modal = 0,fl = 0):
-        QDialog.__init__(self,parent,name,modal,fl)
+        QDialog.__init__(self,parent,fl)
         Ui_B_CraftWindow.setupUi(self,self)
+        if (name):
+            self.setObjectName(name)
+        if (modal):
+            self.setModal(modal)
         #self.font().setPointSize(8)
         self.currentItem = None
         self.totalCost = 0

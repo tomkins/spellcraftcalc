@@ -27,8 +27,12 @@ class CharItem(Q3ListViewItem):
 
 class CraftBar(QDialog, Ui_B_CraftBar):
     def __init__(self,path = '', parent = None,name = None,modal = 0,fl = 0):
-        QDialog.__init__(self, parent, name, modal, fl)
+        QDialog.__init__(self, parent, fl)
         Ui_B_CraftBar.setupUi(self,self)
+        if (name):
+            self.setObjectName(name)
+        if (modal):
+            self.setModal(modal)
         self.scwin = parent
         self.gemcount = 0
         self.piecelist = { }
