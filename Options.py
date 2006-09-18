@@ -4,6 +4,7 @@
 #
 # See NOTICE.txt for copyrights and grant of license
 
+from PyQt4.QtCore import *
 from PyQt4.QtGui import *
 from B_Options import *
 import re
@@ -16,7 +17,7 @@ from xml.dom.minidom import *
 from MyStringIO import UnicodeStringIO
 
 class Options(QDialog, Ui_B_Options):
-    def __init__(self,parent = None,name = None,modal = 0,fl = 0):
+    def __init__(self,parent = None,name = None,modal = False,fl = Qt.Widget):
         QDialog.__init__(self,parent,fl)
         Ui_B_Options.setupUi(self,self)
         if (name):

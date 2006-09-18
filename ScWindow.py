@@ -38,7 +38,7 @@ import sys
 
 
 class AboutScreen(QDialog):
-    def __init__(self,parent = None,name = "About",modal = True,fl = 0):
+    def __init__(self,parent = None,name = "About",modal = True,fl = Qt.Widget):
         QDialog.__init__(self,parent,name,modal,fl)
         pixmap = QPixmap(parent.splashFile)
         self.setPaletteBackgroundPixmap(pixmap)
@@ -151,7 +151,7 @@ class ScWindow(QMainWindow, Ui_B_SC):
         self.startup = 1
         self.pricingInfo = {}
 	
-        self.ItemLevelWindow = ItemLevel.ItemLevel(self, '', 1)
+        self.ItemLevelWindow = ItemLevel.ItemLevel(self.window(), '', 1)
         self.DaocPath = ''
         self.realm = 'Albion'
         self.charclass = 'Armsman'

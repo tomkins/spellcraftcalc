@@ -4,13 +4,14 @@
 #
 # See NOTICE.txt for copyrights and grant of license
 
+from PyQt4.QtCore import *
 from PyQt4.QtGui import *
 from constants import *
 from B_ItemLevel import *
 import re
 
 class ItemLevel(QDialog, Ui_B_ItemLevel):
-    def __init__(self,parent = None,name = None,modal = False,fl = None):
+    def __init__(self,parent = None,name = None,modal = False,fl = Qt.Widget):
         QDialog.__init__(self,parent,fl)
         Ui_B_ItemLevel.setupUi(self,self)
         if (name):

@@ -4,6 +4,7 @@
 #
 # See NOTICE.txt for copyrights and grant of license
 
+from PyQt4.QtCore import *
 from PyQt4.QtGui import *
 from PyQt4.Qt3Support import *
 from B_CraftBar import *
@@ -26,7 +27,7 @@ class CharItem(Q3ListViewItem):
         self.filename = filename
 
 class CraftBar(QDialog, Ui_B_CraftBar):
-    def __init__(self,path = '', parent = None,name = None,modal = 0,fl = 0):
+    def __init__(self,path = '',parent = None,name = None,modal = False,fl = Qt.Widget):
         QDialog.__init__(self, parent, fl)
         Ui_B_CraftBar.setupUi(self,self)
         if (name):

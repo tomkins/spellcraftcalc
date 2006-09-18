@@ -4,13 +4,14 @@
 #
 # See NOTICE.txt for copyrights and grant of license
 
+from PyQt4.QtCore import *
 from PyQt4.QtGui import *
 from B_DisplayWindow import *
 from constants import *
 import string
 
 class DisplayWindow(QDialog, Ui_B_DisplayWindow):
-	def __init__(self,parent = None,name = None,modal = 0,fl = 0):
+	def __init__(self,parent = None,name = None,modal = False,fl = Qt.Widget):
                 QDialog.__init__(self,parent,fl)
                 Ui_B_DisplayWindow.setupUi(self,self)
                 if (name):
