@@ -42,7 +42,11 @@ class MultiTabBar(QTabBar):
         self.tabrows = []
         self.currows = []
 
+    def currentTab(self): return None
+    def tab(self, idx): return QLabel("")
+
     def insertTab(self, name, icon = None, index = -1, row = -1):
+        """
         if index >= 0:
             row = 0
             rowindex = index
@@ -67,6 +71,8 @@ class MultiTabBar(QTabBar):
                 self.tabrows.append([])
             self.tabrows[row].append(newid)
         return newid
+        """
+        return 0
 
     def addTab(self, name, icon = None, row = -1):
 	if (icon):
@@ -74,6 +80,7 @@ class MultiTabBar(QTabBar):
         else:
             return insertTab(self, name, -1, row)
 
+    """
     def removeTab(self, tab):
         oldindex = self.indexOf(tab.identifier())
         if oldindex < 0: return
@@ -92,8 +99,10 @@ class MultiTabBar(QTabBar):
                 self.currows.remove(row)
                 del self.tabrows[row]
         QTabBar.removeTab(self, tab)
+    """
 
     def setCurrentTab(self, tab):
+        """
         if self.count() == 0:
             return
         if isinstance(tab, int):
@@ -115,15 +124,20 @@ class MultiTabBar(QTabBar):
                         self.repaint()
                         QTabBar.setCurrentTab(self, tab)
                     break
+        """
 
     def buildTabKeys(self):
+        """
         keys = []
         for i in range(0, self.count()):
             txt = str(self.tabAt(i).text())
             keys.append(string.join(map(lambda s: s[0], str(txt).split()), "").upper())
         return keys
+        """
+        return []
 
     def keyPressEvent(self, e):
+        """
         if (e.key() == Qt.Key_Up or e.key() == Qt.Key_Down) and not e.state():
 	    e.accept()
             if len(self.currows) <= 1: return
@@ -158,8 +172,10 @@ class MultiTabBar(QTabBar):
             return
         QTabBar.keyPressEvent(self, e)
         return
+        """
 
     def paintEvent(self, e):
+        """
         if e.rect().isNull():
 	    return
         ct = self.tab(self.currentTab())
@@ -199,7 +215,9 @@ class MultiTabBar(QTabBar):
                 rowrect.moveTop(rowrect.top() - 1)
                 rowrect.setRight(rowrect.right() - 1)
             painter.fillRect(rowrect, QBrush(self.colorGroup().light()));
+        """
 
+    """
     def sizeHint(self):
         size = QTabBar.sizeHint(self)
         size.setHeight(size.height() \
@@ -288,4 +306,5 @@ class MultiTabBar(QTabBar):
             self.updateGeometry()
 
         self.emit(PYSIGNAL("sigLayoutChanged"),(self,))
+    """
 
