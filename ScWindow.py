@@ -1154,23 +1154,19 @@ class ScWindow(QMainWindow, Ui_B_SC):
             self.updateRecentFiles(self.filename)
 
     def saveAsFile(self):
-        if self.filename is None:
-            templatedir = os.path.join(os.path.dirname(os.path.abspath(sys.argv[0])), 'templates')
-            filename = QFileDialog.getSaveFileName(
-                    os.path.join(templatedir,str(self.CharName.text())+'_template.xml'), 
-                    "Templates (*.xml)")
-        else:
-            filename = QFileDialog.getSaveFileName(self.filename, "Templates (*.xml)")
+        filename = self.filename
+        if filename is None:
+            templatedir = os.path.join(os.path.dirname(os.path.abspath(sys.argv[0])), "templates")
+            filename = os.path.join(templatedir, str(self.CharName.text()) + "_template.xml")
         filename = unicode(filename)
         while filename != '':
+            filename = QFileDialog.getSaveFileName(self, "Save Template", filename, "Templates (*.xml)")
+            filename = unicode(filename)
             if filename != '' and os.path.exists(filename):
-                ret = QMessageBox.warning(self, 'Overwrite?', 'Do you want to overwrite the selected file?', 'Yes', 'No')
-                if ret == 1:
-                    filename = QFileDialog.getSaveFileName(filename, "Templates (*.xml)")
-                    filename = unicode(filename)
-                else:
-                    break
-            else: break
+                ret = QMessageBox.warning(self, "Overwrite?", "Do you want to overwrite the selected file?", "Yes", "No")
+                if ret != 1:
+                    continue
+            break
         if filename != '':
             if filename[-4:] != '.xml':
                 filename += '.xml'
@@ -1195,8 +1191,8 @@ class ScWindow(QMainWindow, Ui_B_SC):
             if ret == 1:
                 return
         if len(args) == 0:
-            templatedir = os.path.join(os.path.dirname(os.path.abspath(sys.argv[0])), 'templates')
-            filename = QFileDialog.getOpenFileName(self, templatedir, "Templates (*.xml *.scc)")
+            templatedir = os.path.join(os.path.dirname(os.path.abspath(sys.argv[0])), 'templates/')
+            filename = QFileDialog.getOpenFileName(self, "Open Template", templatedir, "Templates (*.xml *.scc)")
         else:
             filename = args[0]
         filename = unicode(filename)
@@ -1355,7 +1351,7 @@ class ScWindow(QMainWindow, Ui_B_SC):
         RW.exec_()
 
     def chooseReportFile(self):
-	filename = QFileDialog.getOpenFileName(self, './reports', "Reports (*.xml *.rpt)")
+	filename = QFileDialog.getOpenFileName(self, "Choose Report Format", "reports/", "Reports (*.xml *.rpt)")
         if filename is not None and str(filename) != '':
             self.reportFile = str(filename)
 
