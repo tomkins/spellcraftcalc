@@ -116,7 +116,7 @@ class ReportWindow(QDialog, Ui_B_ReportWindow):
     def materialsReport(self, itemlist, showslot = 0):
         self.MMLabel.show()
         self.MatMultiplier.show()
-        self.setCaption('Materials Report')
+        self.setWindowTitle('Materials Report')
         self.materials = { 'Gems' : { }, 'Liquids' : {}, 'Dusts': {} }
         self.gemnames = { }
         self.totalcost = 0
@@ -404,7 +404,7 @@ class ReportWindow(QDialog, Ui_B_ReportWindow):
 
         self.MMLabel.hide()
         self.MatMultiplier.hide()
-        self.setCaption('Config Report')
+        self.setWindowTitle('Config Report')
         info = self.collectStats(itemlist)
         rp = ReportParser.ReportParser()
         self.ReportText.setText(rp.parse(reportstr, info), "html")
