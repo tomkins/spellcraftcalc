@@ -62,7 +62,6 @@ class ScWindow(QMainWindow, Ui_B_SC):
         self.nocalc = 1
         self.totals = { }
         self.capTotals = { }
-        self.currentPieceTab = None
         self.extraSlotsOpen = False
         self.recentFiles = []
         self.effectlists = GemLists['All'].copy()
@@ -271,10 +270,9 @@ class ScWindow(QMainWindow, Ui_B_SC):
         filetitle = unicode("Template" + str(self.newcount))
         self.setWindowTitle(filetitle + " - Kort's Spellcrafting Calculator")
 
-        self.PieceTab.setCurrentTab(0)
+        self.PieceTab.setCurrentIndex(0)
         self.currentTab = self.PieceTab
-        self.currentPieceTab = self.PieceTab.currentTab()
-        self.currentTabLabel = string.strip(str(self.PieceTab.tab(0).text()))
+        self.currentTabLabel = string.strip(str(self.PieceTab.tabText(0)))
 
         self.Equipped.setChecked(1)
 
@@ -365,12 +363,11 @@ class ScWindow(QMainWindow, Ui_B_SC):
             return
         item = self.itemattrlist.get(self.currentTabLabel, Item(self.currentTabLabel))
         self.storeItem(item)
-        self.currentPieceTab = a0
-        self.currentTabLabel = string.strip(str(self.PieceTab.tab(a0).text()))
+        self.currentTabLabel = string.strip(str(self.PieceTab.tabText(a0)))
         self.restoreItem(self.itemattrlist.get(self.currentTabLabel, Item(self.currentTabLabel)))
 
     def changePieceTab(self,a0):
-        self.PieceTab.setCurrentTab(self.PieceTab.tab(a0))
+        self.PieceTab.setCurrentIndex(a0)
 
     def FixupItemLevel(self):
         if str(self.ItemLevel.text()) == '' \
