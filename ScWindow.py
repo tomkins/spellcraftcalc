@@ -460,7 +460,7 @@ class ScWindow(QMainWindow, Ui_B_SC):
             if not gemtype in typelist:
                 typelist.append(gemtype)
             typecombo.insertItems(0, list(typelist))
-            typecombo.setCurrentItem(typelist.index(gemtype))
+            typecombo.setCurrentIndex(typelist.index(gemtype))
             self.UpdateCombo(0, slot)
             if gemtype == 'Unused':
                 continue
@@ -753,7 +753,7 @@ class ScWindow(QMainWindow, Ui_B_SC):
                     capmod = 0
                 self.OtherBonusList.insertItem('%d %s' % (cap + capmod - amount, bonus))        
         self.TotalPrice.setText(SC.formatCost(self.computePrice()))
-        self.menuBar().setItemEnabled(self.errorsmenuid, (errorcount > 0))
+        self.errorsmenuid.setEnabled(errorcount > 0)
 
         self.nocalc = 0
 
@@ -864,12 +864,12 @@ class ScWindow(QMainWindow, Ui_B_SC):
         if typetext == 'Unused':
             if type == 0:
                 effcombo.clear()
-                if effcombo.editable():
+                if effcombo.isEditable():
                     effcombo.setEditable(False)
                     self.fix_taborder(num)
                 amount.clear()
                 if self.PlayerMade.isChecked():
-                    self.Quality[num].setCurrentItem(0)
+                    self.Quality[num].setCurrentIndex(0)
         else:
             if self.PlayerMade.isChecked():
                 effectlist = self.effectlists
@@ -962,7 +962,7 @@ class ScWindow(QMainWindow, Ui_B_SC):
         self.CharClass.clear()
         self.CharClass.insertItems(0, list(ClassList[self.realm]))
         if self.charclass in ClassList[self.realm]:
-          self.CharClass.setCurrentItem(ClassList[self.realm].index(self.charclass))
+          self.CharClass.setCurrentIndex(ClassList[self.realm].index(self.charclass))
         self.CharClassChanged('')
     
     def TypeChanged(self, Value):

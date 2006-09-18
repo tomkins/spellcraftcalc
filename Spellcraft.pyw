@@ -66,8 +66,8 @@ class ScApplication(QApplication):
         import ScWindow
         scw = ScWindow.ScWindow()
         scw.splashFile = self.splashFile
-        app.setMainWidget(scw)
-        scw.setIcon(QPixmap("ScWindow.png"));
+        app.setActiveWindow(scw)
+        scw.setWindowIcon(QIcon(QPixmap("ScWindow.png")));
         if len(app.argv()) > 1:
             scw.openFile(app.argv()[1], True)
         scw.show()
@@ -93,5 +93,5 @@ class ScApplication(QApplication):
 if __name__ == '__main__':
     app=ScApplication()
     app.start()
-    sys.exit(app.exec_loop())
+    sys.exit(app.exec_())
 
