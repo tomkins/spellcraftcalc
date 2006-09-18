@@ -112,8 +112,8 @@ class ScWindow(QMainWindow, Ui_B_SC):
 
         self.GroupItemFrame.move(self.GroupItemFrame.pos().x(), self.PieceTab.geometry().bottom())
 
-        self.Realm.insertItems(list(Realms))
-        self.QualDrop.insertItems(list(QualityValues))
+        self.Realm.insertItems(0, list(Realms))
+        self.QualDrop.insertItems(0, list(QualityValues))
 
         self.GemLabel = []
         self.Type = []
@@ -138,7 +138,7 @@ class ScWindow(QMainWindow, Ui_B_SC):
             if i < 5:
                 self.AmountDrop.append(getattr(self, 'Amount_Drop_%d' % idx))
                 self.Quality.append(getattr(self, 'Quality_%d' % idx))
-                self.Quality[i].insertItems(list(QualityValues))
+                self.Quality[i].insertItems(0, list(QualityValues))
                 self.Points.append(getattr(self, 'Points_%d' % idx))
                 self.Cost.append(getattr(self, 'Cost_%d' % idx))
                 self.Name.append(getattr(self, 'Name_%d' % idx))
@@ -454,7 +454,7 @@ class ScWindow(QMainWindow, Ui_B_SC):
             gemtype = str(item.getSlotAttr(itemtype, slot, 'Type'))
             if not gemtype in typelist:
                 typelist.append(gemtype)
-            typecombo.insertItems(list(typelist))
+            typecombo.insertItems(0, list(typelist))
             typecombo.setCurrentItem(typelist.index(gemtype))
             self.UpdateCombo(0, slot)
             if gemtype == 'Unused':
@@ -877,7 +877,7 @@ class ScWindow(QMainWindow, Ui_B_SC):
             if type == 0:
                 effcombo.clear()
                 if len(effectlist) > 0:
-                    effcombo.insertItems(list(effectlist))
+                    effcombo.insertItems(0, list(effectlist))
                     effcombo.setCurrentItem(0)
             if type == 1:
                 unique = (not efftext in effectlist) or (len(efftext) > 3 and efftext[-3:] == "...")
@@ -909,7 +909,7 @@ class ScWindow(QMainWindow, Ui_B_SC):
                     elif efftext[0:5] == "All M":
                         valueslist = ("1",)
                     if len(valueslist) > 0:
-                        amount.insertItems(list(valueslist))
+                        amount.insertItems(0, list(valueslist))
                     if amtindex < len(valueslist):
                         amount.setCurrentItem(amtindex)
                 if type == 0:
@@ -943,7 +943,7 @@ class ScWindow(QMainWindow, Ui_B_SC):
         race = str(self.CharRace.currentText())
         self.CharRace.clear()
         racelist = AllBonusList[self.realm][self.charclass]['Races']
-        self.CharRace.insertItems(list(racelist))
+        self.CharRace.insertItems(0, list(racelist))
         if race in racelist:
           self.CharRace.setCurrentItem(racelist.index(race))
         self.RaceChanged('')
@@ -955,7 +955,7 @@ class ScWindow(QMainWindow, Ui_B_SC):
     def RealmChanged(self,a0):
         self.realm = str(self.Realm.currentText())
         self.CharClass.clear()
-        self.CharClass.insertItems(list(ClassList[self.realm]))
+        self.CharClass.insertItems(0, list(ClassList[self.realm]))
         if self.charclass in ClassList[self.realm]:
           self.CharClass.setCurrentItem(ClassList[self.realm].index(self.charclass))
         self.CharClassChanged('')
