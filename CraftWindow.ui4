@@ -1,0 +1,530 @@
+<ui version="4.0" stdsetdef="1" >
+  <author></author>
+  <comment></comment>
+  <exportmacro></exportmacro>
+  <class>B_CraftWindow</class>
+  <widget class="QDialog" name="B_CraftWindow" >
+    <property name="geometry" >
+      <rect>
+        <x>0</x>
+        <y>0</y>
+        <width>523</width>
+        <height>373</height>
+      </rect>
+    </property>
+    <property name="windowTitle" >
+      <string>Working Item Detail</string>
+    </property>
+    <widget class="QLabel" name="TextLabel8" >
+      <property name="geometry" >
+        <rect>
+          <x>365</x>
+          <y>338</y>
+          <width>57</width>
+          <height>16</height>
+        </rect>
+      </property>
+      <property name="text" >
+        <string>Total Cost:</string>
+      </property>
+    </widget>
+    <widget class="QPushButton" name="Close" >
+      <property name="geometry" >
+        <rect>
+          <x>228</x>
+          <y>336</y>
+          <width>84</width>
+          <height>29</height>
+        </rect>
+      </property>
+      <property name="text" >
+        <string>Close</string>
+      </property>
+    </widget>
+    <widget class="QLabel" name="TotalCost" >
+      <property name="geometry" >
+        <rect>
+          <x>421</x>
+          <y>338</y>
+          <width>103</width>
+          <height>16</height>
+        </rect>
+      </property>
+      <property name="text" >
+        <string>0c</string>
+      </property>
+    </widget>
+    <widget class="QGroupBox" name="GroupBox1" >
+      <property name="geometry" >
+        <rect>
+          <x>9</x>
+          <y>7</y>
+          <width>523</width>
+          <height>324</height>
+        </rect>
+      </property>
+      <property name="title" >
+        <string>Gems</string>
+      </property>
+      <widget class="QLabel" name="TextLabel1" >
+        <property name="geometry" >
+          <rect>
+            <x>15</x>
+            <y>20</y>
+            <width>36</width>
+            <height>16</height>
+          </rect>
+        </property>
+        <property name="text" >
+          <string>Done:</string>
+        </property>
+      </widget>
+      <widget class="QLabel" name="TextLabel5" >
+        <property name="geometry" >
+          <rect>
+            <x>323</x>
+            <y>20</y>
+            <width>50</width>
+            <height>16</height>
+          </rect>
+        </property>
+        <property name="text" >
+          <string>Remakes:</string>
+        </property>
+      </widget>
+      <widget class="QLabel" name="TextLabel6" >
+        <property name="geometry" >
+          <rect>
+            <x>382</x>
+            <y>20</y>
+            <width>46</width>
+            <height>16</height>
+          </rect>
+        </property>
+        <property name="text" >
+          <string>Time (m):</string>
+        </property>
+      </widget>
+      <widget class="QLabel" name="TextLabel7" >
+        <property name="geometry" >
+          <rect>
+            <x>438</x>
+            <y>20</y>
+            <width>30</width>
+            <height>16</height>
+          </rect>
+        </property>
+        <property name="text" >
+          <string>Cost:</string>
+        </property>
+      </widget>
+      <widget class="QLabel" name="Gem1Cost" >
+        <property name="geometry" >
+          <rect>
+            <x>442</x>
+            <y>41</y>
+            <width>73</width>
+            <height>21</height>
+          </rect>
+        </property>
+        <property name="text" >
+          <string>0c</string>
+        </property>
+        <property name="alignment" >
+          <set>Qt::AlignVCenter|Qt::AlignLeft</set>
+        </property>
+      </widget>
+      <widget class="QLabel" name="Gem3Cost" >
+        <property name="geometry" >
+          <rect>
+            <x>442</x>
+            <y>88</y>
+            <width>73</width>
+            <height>21</height>
+          </rect>
+        </property>
+        <property name="text" >
+          <string>0c</string>
+        </property>
+        <property name="alignment" >
+          <set>Qt::AlignVCenter|Qt::AlignLeft</set>
+        </property>
+      </widget>
+      <widget class="QLabel" name="Gem3Name" >
+        <property name="geometry" >
+          <rect>
+            <x>138</x>
+            <y>88</y>
+            <width>163</width>
+            <height>21</height>
+          </rect>
+        </property>
+        <property name="text" >
+          <string>None</string>
+        </property>
+      </widget>
+      <widget class="QLabel" name="Gem4Name" >
+        <property name="geometry" >
+          <rect>
+            <x>138</x>
+            <y>112</y>
+            <width>163</width>
+            <height>21</height>
+          </rect>
+        </property>
+        <property name="text" >
+          <string>None</string>
+        </property>
+      </widget>
+      <widget class="QLineEdit" name="Gem3Time" >
+        <property name="geometry" >
+          <rect>
+            <x>382</x>
+            <y>88</y>
+            <width>47</width>
+            <height>21</height>
+          </rect>
+        </property>
+        <property name="text" >
+          <string>0</string>
+        </property>
+      </widget>
+      <widget class="QLineEdit" name="Gem4Time" >
+        <property name="geometry" >
+          <rect>
+            <x>382</x>
+            <y>111</y>
+            <width>47</width>
+            <height>21</height>
+          </rect>
+        </property>
+        <property name="text" >
+          <string>0</string>
+        </property>
+      </widget>
+      <widget class="QLabel" name="TextLabel2" >
+        <property name="geometry" >
+          <rect>
+            <x>108</x>
+            <y>20</y>
+            <width>36</width>
+            <height>16</height>
+          </rect>
+        </property>
+        <property name="text" >
+          <string>Name:</string>
+        </property>
+      </widget>
+      <widget class="QCheckBox" name="Gem2Done" >
+        <property name="geometry" >
+          <rect>
+            <x>15</x>
+            <y>64</y>
+            <width>59</width>
+            <height>21</height>
+          </rect>
+        </property>
+        <property name="text" >
+          <string>Gem 2:</string>
+        </property>
+      </widget>
+      <widget class="QCheckBox" name="Gem3Done" >
+        <property name="geometry" >
+          <rect>
+            <x>15</x>
+            <y>88</y>
+            <width>57</width>
+            <height>21</height>
+          </rect>
+        </property>
+        <property name="text" >
+          <string>Gem 3:</string>
+        </property>
+      </widget>
+      <widget class="QCheckBox" name="Gem4Done" >
+        <property name="geometry" >
+          <rect>
+            <x>15</x>
+            <y>112</y>
+            <width>57</width>
+            <height>21</height>
+          </rect>
+        </property>
+        <property name="text" >
+          <string>Gem 4:</string>
+        </property>
+      </widget>
+      <widget class="QLabel" name="Gem1Qua" >
+        <property name="geometry" >
+          <rect>
+            <x>103</x>
+            <y>41</y>
+            <width>28</width>
+            <height>21</height>
+          </rect>
+        </property>
+        <property name="text" >
+          <string>99%</string>
+        </property>
+        <property name="alignment" >
+          <set>Qt::AlignVCenter|Qt::AlignRight</set>
+        </property>
+      </widget>
+      <widget class="QSpinBox" name="Gem3Remakes" >
+        <property name="geometry" >
+          <rect>
+            <x>321</x>
+            <y>88</y>
+            <width>54</width>
+            <height>21</height>
+          </rect>
+        </property>
+      </widget>
+      <widget class="QSpinBox" name="Gem4Remakes" >
+        <property name="geometry" >
+          <rect>
+            <x>321</x>
+            <y>112</y>
+            <width>54</width>
+            <height>21</height>
+          </rect>
+        </property>
+      </widget>
+      <widget class="QLabel" name="Gem2Qua" >
+        <property name="geometry" >
+          <rect>
+            <x>103</x>
+            <y>64</y>
+            <width>28</width>
+            <height>21</height>
+          </rect>
+        </property>
+        <property name="text" >
+          <string>99%</string>
+        </property>
+        <property name="alignment" >
+          <set>Qt::AlignVCenter|Qt::AlignRight</set>
+        </property>
+      </widget>
+      <widget class="QLabel" name="Gem3Qua" >
+        <property name="geometry" >
+          <rect>
+            <x>103</x>
+            <y>88</y>
+            <width>28</width>
+            <height>21</height>
+          </rect>
+        </property>
+        <property name="text" >
+          <string>99%</string>
+        </property>
+        <property name="alignment" >
+          <set>Qt::AlignVCenter|Qt::AlignRight</set>
+        </property>
+      </widget>
+      <widget class="QLabel" name="Gem4Qua" >
+        <property name="geometry" >
+          <rect>
+            <x>103</x>
+            <y>112</y>
+            <width>28</width>
+            <height>21</height>
+          </rect>
+        </property>
+        <property name="text" >
+          <string>99%</string>
+        </property>
+        <property name="alignment" >
+          <set>Qt::AlignVCenter|Qt::AlignRight</set>
+        </property>
+      </widget>
+      <widget class="QLabel" name="Gem1Name" >
+        <property name="geometry" >
+          <rect>
+            <x>138</x>
+            <y>41</y>
+            <width>163</width>
+            <height>21</height>
+          </rect>
+        </property>
+        <property name="text" >
+          <string>None</string>
+        </property>
+      </widget>
+      <widget class="QLabel" name="Gem2Name" >
+        <property name="geometry" >
+          <rect>
+            <x>138</x>
+            <y>64</y>
+            <width>163</width>
+            <height>21</height>
+          </rect>
+        </property>
+        <property name="text" >
+          <string>None</string>
+        </property>
+      </widget>
+      <widget class="QSpinBox" name="Gem1Remakes" >
+        <property name="geometry" >
+          <rect>
+            <x>321</x>
+            <y>41</y>
+            <width>54</width>
+            <height>21</height>
+          </rect>
+        </property>
+      </widget>
+      <widget class="QSpinBox" name="Gem2Remakes" >
+        <property name="geometry" >
+          <rect>
+            <x>321</x>
+            <y>64</y>
+            <width>54</width>
+            <height>21</height>
+          </rect>
+        </property>
+      </widget>
+      <widget class="QLineEdit" name="Gem1Time" >
+        <property name="geometry" >
+          <rect>
+            <x>382</x>
+            <y>41</y>
+            <width>47</width>
+            <height>21</height>
+          </rect>
+        </property>
+        <property name="text" >
+          <string>0</string>
+        </property>
+      </widget>
+      <widget class="QLineEdit" name="Gem2Time" >
+        <property name="geometry" >
+          <rect>
+            <x>382</x>
+            <y>64</y>
+            <width>47</width>
+            <height>21</height>
+          </rect>
+        </property>
+        <property name="text" >
+          <string>0</string>
+        </property>
+      </widget>
+      <widget class="QLabel" name="Gem2Cost" >
+        <property name="geometry" >
+          <rect>
+            <x>442</x>
+            <y>64</y>
+            <width>73</width>
+            <height>21</height>
+          </rect>
+        </property>
+        <property name="text" >
+          <string>0c</string>
+        </property>
+        <property name="alignment" >
+          <set>Qt::AlignVCenter|Qt::AlignLeft</set>
+        </property>
+      </widget>
+      <widget class="QLabel" name="Gem4Cost" >
+        <property name="geometry" >
+          <rect>
+            <x>442</x>
+            <y>112</y>
+            <width>73</width>
+            <height>21</height>
+          </rect>
+        </property>
+        <property name="text" >
+          <string>0c</string>
+        </property>
+        <property name="alignment" >
+          <set>Qt::AlignVCenter|Qt::AlignLeft</set>
+        </property>
+      </widget>
+      <widget class="QCheckBox" name="Gem1Done" >
+        <property name="geometry" >
+          <rect>
+            <x>15</x>
+            <y>41</y>
+            <width>59</width>
+            <height>21</height>
+          </rect>
+        </property>
+        <property name="text" >
+          <string>Gem 1:</string>
+        </property>
+      </widget>
+      <widget class="QGroupBox" name="GroupBox2_2" >
+        <property name="geometry" >
+          <rect>
+            <x>266</x>
+            <y>142</y>
+            <width>240</width>
+            <height>175</height>
+          </rect>
+        </property>
+        <property name="title" >
+          <string>Materials (used)</string>
+        </property>
+        <widget class="QTextEdit" name="MatsUsed" >
+          <property name="geometry" >
+            <rect>
+              <x>8</x>
+              <y>16</y>
+              <width>225</width>
+              <height>153</height>
+            </rect>
+          </property>
+        </widget>
+      </widget>
+      <widget class="QGroupBox" name="GroupBox2_2_2" >
+        <property name="geometry" >
+          <rect>
+            <x>13</x>
+            <y>141</y>
+            <width>240</width>
+            <height>175</height>
+          </rect>
+        </property>
+        <property name="title" >
+          <string>Materials (expected)</string>
+        </property>
+        <widget class="QTextEdit" name="MatsExpected" >
+          <property name="geometry" >
+            <rect>
+              <x>8</x>
+              <y>16</y>
+              <width>225</width>
+              <height>153</height>
+            </rect>
+          </property>
+        </widget>
+      </widget>
+    </widget>
+    <widget class="QLabel" name="TextLabel1_2" >
+      <property name="geometry" >
+        <rect>
+          <x>35</x>
+          <y>341</y>
+          <width>94</width>
+          <height>16</height>
+        </rect>
+      </property>
+      <property name="text" >
+        <string>Expected Multiplier</string>
+      </property>
+    </widget>
+    <widget class="QSpinBox" name="ExpMultiplier" >
+      <property name="geometry" >
+        <rect>
+          <x>130</x>
+          <y>339</y>
+          <width>54</width>
+          <height>21</height>
+        </rect>
+      </property>
+    </widget>
+  </widget>
+  <pixmapfunction>qPixmapFromMimeSource</pixmapfunction>
+</ui>
