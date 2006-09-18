@@ -899,7 +899,7 @@ class ScWindow(QMainWindow, Ui_B_SC):
                 if refocus:
                     flip = self.Effect[num].setFocus()
             if self.PlayerMade.isChecked():
-                amtindex = amount.currentItem()
+                amtindex = amount.currentIndex()
                 amount.clear()
                 if ValuesLists.has_key(typetext):
                     valueslist = ValuesLists[typetext]
