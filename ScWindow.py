@@ -477,13 +477,13 @@ class ScWindow(QMainWindow, Ui_B_SC):
                         if ValuesLists[gemtype].has_key(gemeffect):
                             amountlist = ValuesLists[gemtype][gemeffect]
                 if gemamount in amountlist:
-                    self.AmountDrop[slot].setCurrentItem(
+                    self.AmountDrop[slot].setCurrentIndex(
                             amountlist.index(gemamount))
                 quacombo = self.Quality[slot]
                 gemqua = item.getSlotAttr(itemtype, slot, 'Qua')
                 if gemqua in QualityValues:
                     if quacombo.count() > 0:
-                        quacombo.setCurrentItem(QualityValues.index(gemqua))
+                        quacombo.setCurrentIndex(QualityValues.index(gemqua))
         self.AFDPS_Edit.setText(item.getAttr('AFDPS'))
         self.Speed_Edit.setText(item.getAttr('Speed'))
         self.Bonus_Edit.setText(item.getAttr('Bonus'))
@@ -492,7 +492,7 @@ class ScWindow(QMainWindow, Ui_B_SC):
             self.ItemName.setText(item.getAttr('ItemName'))
         else:
             if item.getAttr('ItemQuality') in QualityValues:
-                self.QualDrop.setCurrentItem(
+                self.QualDrop.setCurrentIndex(
                     QualityValues.index(item.getAttr('ItemQuality')))
         self.save = 1
         self.nocalc = wascalc
@@ -880,13 +880,13 @@ class ScWindow(QMainWindow, Ui_B_SC):
                 effcombo.clear()
                 if len(effectlist) > 0:
                     effcombo.insertItems(0, list(effectlist))
-                    effcombo.setCurrentItem(0)
+                    effcombo.setCurrentIndex(0)
             if type == 1:
                 unique = (not efftext in effectlist) or (len(efftext) > 3 and efftext[-3:] == "...")
                 if effcombo.editable() and not unique:
                     refocus = self.Effect[num].hasFocus()
                     effcombo.setEditable(False)
-                    effcombo.setCurrentItem(effectlist.index(efftext))
+                    effcombo.setCurrentIndex(effectlist.index(efftext))
                     self.fix_taborder(num)
                 elif unique and not effcombo.editable():
                     refocus = self.Effect[num].hasFocus()
@@ -913,9 +913,9 @@ class ScWindow(QMainWindow, Ui_B_SC):
                     if len(valueslist) > 0:
                         amount.insertItems(0, list(valueslist))
                     if amtindex < len(valueslist):
-                        amount.setCurrentItem(amtindex)
+                        amount.setCurrentIndex(amtindex)
                 if type == 0:
-                    self.Quality[num].setCurrentItem(len(QualityValues)-2)
+                    self.Quality[num].setCurrentIndex(len(QualityValues)-2)
 
     def RaceChanged(self, a0):
         race = str(self.CharRace.currentText())
@@ -947,7 +947,7 @@ class ScWindow(QMainWindow, Ui_B_SC):
         racelist = AllBonusList[self.realm][self.charclass]['Races']
         self.CharRace.insertItems(0, list(racelist))
         if race in racelist:
-          self.CharRace.setCurrentItem(racelist.index(race))
+          self.CharRace.setCurrentIndex(racelist.index(race))
         self.RaceChanged('')
         item = self.itemattrlist.get(self.currentTabLabel, Item(self.currentTabLabel))
         if self.save:
@@ -1277,13 +1277,13 @@ class ScWindow(QMainWindow, Ui_B_SC):
             elif child.tagName == 'Coop':
                 self.coop = eval(XMLHelper.getText(child.childNodes), 
                                  globals(), globals())
-        self.Realm.setCurrentItem(Realms.index(self.realm))
+        self.Realm.setCurrentIndex(Realms.index(self.realm))
         self.RealmChanged(self.realm)
         if AllBonusList[self.realm].has_key(self.charclass):
-            self.CharClass.setCurrentItem(ClassList[self.realm].index(self.charclass))
+            self.CharClass.setCurrentIndex(ClassList[self.realm].index(self.charclass))
             self.CharClassChanged('')
         if racename in AllBonusList[self.realm][self.charclass]['Races']:
-            self.CharRace.setCurrentItem(AllBonusList[self.realm][self.charclass]['Races'].index(racename))
+            self.CharRace.setCurrentIndex(AllBonusList[self.realm][self.charclass]['Races'].index(racename))
             self.RaceChanged('')
         self.nocalc = wascalc
         self.restoreItem(self.itemattrlist.get(self.currentTabLabel))
@@ -1310,10 +1310,10 @@ class ScWindow(QMainWindow, Ui_B_SC):
                     self.realm = 'Albion'
                 elif self.realm == 'MID':
                     self.realm = 'Midgard'
-                self.Realm.setCurrentItem(Realms.index(self.realm))
+                self.Realm.setCurrentIndex(Realms.index(self.realm))
                 self.RealmChanged(self.realm)
                 if AllBonusList[self.realm].has_key(self.charclass):
-                   self.CharClass.setCurrentItem(ClassList[self.realm].index(self.charclass))
+                   self.CharClass.setCurrentIndex(ClassList[self.realm].index(self.charclass))
                    self.CharClassChanged('')
 
         for itemnum in range(0, 19):
@@ -1458,7 +1458,7 @@ class ScWindow(QMainWindow, Ui_B_SC):
         self.calculate()
 
     def swapWith(self, action):
-        piece = str(action.data().toString())
+        piece = action.data().toInt()[0]
         part = TabList[piece]
         cur = self.itemattrlist.get(self.currentTabLabel, Item(self.currentTabLabel))
         swap = self.itemattrlist.get(part, Item(part))
