@@ -34,6 +34,24 @@ class CraftBar(QDialog, Ui_B_CraftBar):
             self.setObjectName(name)
         if (modal):
             self.setModal(modal)
+
+        self.connect(self.PathSelectButton,SIGNAL("clicked()"),self.openFileDialog)
+        self.connect(self.PushButton19,SIGNAL("clicked()"),self.accept)
+        self.connect(self.LoadGemsButton,SIGNAL("clicked()"),self.loadGems)
+        self.connect(self.DaocPath,SIGNAL("textChanged(const QString&)"),self.findPath)
+        self.connect(self.HotbarNum,SIGNAL("valueChanged(int)"),self.hotbarNumChanged)
+        self.connect(self.HotbarPos,SIGNAL("valueChanged(int)"),self.hotbarPosChanged)
+        self.connect(self.ChestSelect,SIGNAL("clicked()"),self.PieceBoxChanged)
+        self.connect(self.ArmsSelect,SIGNAL("clicked()"),self.PieceBoxChanged)
+        self.connect(self.HeadSelect,SIGNAL("clicked()"),self.PieceBoxChanged)
+        self.connect(self.LegsSelect,SIGNAL("clicked()"),self.PieceBoxChanged)
+        self.connect(self.HandsSelect,SIGNAL("clicked()"),self.PieceBoxChanged)
+        self.connect(self.FeetSelect,SIGNAL("clicked()"),self.PieceBoxChanged)
+        self.connect(self.RangedSelect,SIGNAL("clicked()"),self.PieceBoxChanged)
+        self.connect(self.RHSelect,SIGNAL("clicked()"),self.PieceBoxChanged)
+        self.connect(self.LHSelect,SIGNAL("clicked()"),self.PieceBoxChanged)
+        self.connect(self.THSelect,SIGNAL("clicked()"),self.PieceBoxChanged)
+
         self.scwin = parent
         self.gemcount = 0
         self.piecelist = { }

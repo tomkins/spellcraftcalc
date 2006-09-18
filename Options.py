@@ -24,6 +24,14 @@ class Options(QDialog, Ui_B_Options):
             self.setObjectName(name)
         if (modal):
             self.setModal(modal)
+
+        self.connect(self.OK,SIGNAL("clicked()"),self.OK_pressed)
+        self.connect(self.Cancel,SIGNAL("clicked()"),self.Cancel_pressed)
+        self.connect(self.Tier,SIGNAL("activated(const QString&)"),self.TierMarkupChanged)
+        self.connect(self.QualLevel,SIGNAL("activated(const QString&)"),self.QualMarkupChanged)
+        self.connect(self.QualMarkup,SIGNAL("textChanged(const QString&)"),self.QualMarkupSet)
+        self.connect(self.TierPrice,SIGNAL("textChanged(const QString&)"),self.TierMarkupSet)
+
 #       self.Tab.setTabEnabled(self.Price, 0)
         self.parent = parent
         skilllist = range(1000, -1, -50)

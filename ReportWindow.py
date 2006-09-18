@@ -105,6 +105,12 @@ class ReportWindow(QDialog, Ui_B_ReportWindow):
             self.setObjectName(name)
         if (modal):
             self.setModal(modal)
+
+        self.connect(self.PushButton2,SIGNAL("clicked()"),self.closeWindow)
+        self.connect(self.PushButton1,SIGNAL("clicked()"),self.saveToHTML)
+        self.connect(self.PushButton1_2,SIGNAL("clicked()"),self.saveToText)
+        self.connect(self.MatMultiplier,SIGNAL("valueChanged(int)"),self.matMultiplierUpdate)
+
         #self.font().setPointSize(8)
         self.ReportText.setTextFormat(Qt.RichText)
         self.parent = parent

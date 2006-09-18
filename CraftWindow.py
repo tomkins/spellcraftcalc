@@ -18,6 +18,20 @@ class CraftWindow(QDialog, Ui_B_CraftWindow):
             self.setObjectName(name)
         if (modal):
             self.setModal(modal)
+        self.connect(self.Gem1Remakes,SIGNAL("valueChanged(int)"),self.Remake1Changed)
+        self.connect(self.Gem2Remakes,SIGNAL("valueChanged(int)"),self.Remake2Changed)
+        self.connect(self.Gem3Remakes,SIGNAL("valueChanged(int)"),self.Remake3Changed)
+        self.connect(self.Gem4Remakes,SIGNAL("valueChanged(int)"),self.Remake4Changed)
+        self.connect(self.Gem1Done,SIGNAL("clicked()"),self.Gem1Clicked)
+        self.connect(self.Gem2Done,SIGNAL("clicked()"),self.Gem2Clicked)
+        self.connect(self.Gem3Done,SIGNAL("clicked()"),self.Gem3Clicked)
+        self.connect(self.Gem4Done,SIGNAL("clicked()"),self.Gem4Clicked)
+        self.connect(self.Gem1Time,SIGNAL("textChanged(const QString&)"),self.Time1Changed)
+        self.connect(self.Gem2Time,SIGNAL("textChanged(const QString&)"),self.Time2Changed)
+        self.connect(self.Gem3Time,SIGNAL("textChanged(const QString&)"),self.Time3Changed)
+        self.connect(self.Gem4Time,SIGNAL("textChanged(const QString&)"),self.Time4Changed)
+        self.connect(self.ExpMultiplier,SIGNAL("valueChanged(int)"),self.computeMaterials)
+        self.connect(self.Close,SIGNAL("clicked()"),self.CloseWindow)
         #self.font().setPointSize(8)
         self.currentItem = None
         self.totalCost = 0

@@ -18,6 +18,10 @@ class DisplayWindow(QDialog, Ui_B_DisplayWindow):
                     self.setObjectName(name)
                 if (modal):
                     self.setModal(modal)
+
+	        self.connect(self.PushButton1,SIGNAL("clicked()"),self.CloseWindow)
+        	self.connect(self.DisplayText,SIGNAL("clicked(QListBoxItem*)"),self.LocationClicked)
+
                 #self.font().setPointSize(8)
 		self.scwindow = parent
 

@@ -18,6 +18,20 @@ class ItemLevel(QDialog, Ui_B_ItemLevel):
             self.setObjectName(name)
         if (modal):
             self.setModal(modal)
+
+        self.connect(self.Armor,SIGNAL("clicked()"),self.TypeChanged)
+        self.connect(self.ClothArmor,SIGNAL("clicked()"),self.TypeChanged)
+        self.connect(self.Weapon,SIGNAL("clicked()"),self.TypeChanged)
+        self.connect(self.Shield,SIGNAL("clicked()"),self.TypeChanged)
+        self.connect(self.ReinforcedShield,SIGNAL("clicked()"),self.TypeChanged)
+        self.connect(self.Level,SIGNAL("textChanged(const QString&)"),self.LevelChanged)
+        self.connect(self.Level,SIGNAL("lostFocus()"),self.LevelDone)
+        self.connect(self.AFDPS,SIGNAL("textChanged(const QString&)"),self.AFDPSChanged)
+        self.connect(self.AFDPS,SIGNAL("lostFocus()"),self.AFDPSDone)
+        self.connect(self.ShieldType,SIGNAL("activated(const QString&)"),self.ShieldChanged)
+        self.connect(self.OK,SIGNAL("clicked()"),self.OkClicked)
+        self.connect(self.Cancel,SIGNAL("clicked()"),self.CancelClicked)
+
         self.ShieldType.hide()
         self.level = 51
         self.afdps = 102
@@ -146,9 +160,9 @@ class ItemLevel(QDialog, Ui_B_ItemLevel):
 
         if self.Shield.isChecked():
             self.ShieldType.clear()
-            self.ShieldType.insertStrList(list(ShieldTypes))
+            self.ShieldType.insertItems(0, list(ShieldTypes))
         elif self.ReinforcedShield.isChecked():
             self.ShieldType.clear()
-            self.ShieldType.insertStrList(list(ShieldTypes[4:]))
+            self.ShieldType.insertItems(0, list(ShieldTypes[4:]))
         self.LevelChanged(True)
         self.ShieldType.show()
