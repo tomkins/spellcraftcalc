@@ -40,11 +40,10 @@ import sys
 
 class AboutScreen(QDialog):
     def __init__(self,parent = None,name = "About",modal = True,fl = Qt.Widget):
-        QDialog.__init__(self,parent,name,modal,fl)
+        QDialog.__init__(self,parent,fl)
         pixmap = QPixmap(parent.splashFile)
-        self.setPaletteBackgroundPixmap(pixmap)
+        self.palette().setBrush(self.backgroundRole(), QBrush(pixmap))
         self.resize(QSize(480,340).expandedTo(pixmap.size()))
-        self.clearWState(Qt.WState_Polished)
         self.show()
 
     def mouseReleaseEvent(self, e):
