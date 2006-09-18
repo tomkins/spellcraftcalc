@@ -28,7 +28,7 @@ class Options(QDialog, Ui_B_Options):
         self.parent = parent
         skilllist = range(1000, -1, -50)
         self.Skill.clear()
-        self.Skill.insertStrList(map(lambda(x):str(x), skilllist))
+        self.Skill.insertItems(0, map(lambda(x):str(x), skilllist))
         li = self.Skill.listBox().findItem(str(self.parent.crafterSkill))
         self.Skill.setCurrentItem(self.Skill.listBox().index(li))
         self.NoteText.setText(self.parent.noteText)
