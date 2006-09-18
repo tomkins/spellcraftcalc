@@ -41,6 +41,8 @@ import sys
 class AboutScreen(QDialog):
     def __init__(self,parent = None,name = "About",modal = True,fl = Qt.Widget):
         QDialog.__init__(self,parent,fl)
+        self.setModal(modal)
+        self.setObjectName(name)
         pixmap = QPixmap(parent.splashFile)
         self.palette().setBrush(self.backgroundRole(), QBrush(pixmap))
         self.resize(QSize(480,340).expandedTo(pixmap.size()))
