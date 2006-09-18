@@ -13,7 +13,7 @@
 
 import sys
 import string
-from qt import *
+from PyQt4.QtGui import *
 
 def noamptext(text):
     start = str.find(text, '&')
@@ -29,9 +29,11 @@ def noamptext(text):
 
 
 class MultiTabBar(QTabBar):
-    def __init__(self, parent, name):
-        QTabBar.__init__(self, parent, name)
-        if QApplication.style().name()[0:9] == "Macintosh":
+    def __init__(self, parent = None, name = None):
+        QTabBar.__init__(self, parent)
+        if (name):
+            self.setObjectName(name)
+        if QApplication.style().objectName()[0:9] == "Macintosh":
             self.rowoverlap = 3
             self.cropheight = -1
         else:
@@ -40,7 +42,7 @@ class MultiTabBar(QTabBar):
         self.tabrows = []
         self.currows = []
 
-    def insertTab(self, tab, index = -1, row = -1):
+    def insertTab(self, name, icon = None, index = -1, row = -1):
         if index >= 0:
             row = 0
             rowindex = index
@@ -51,7 +53,10 @@ class MultiTabBar(QTabBar):
                 rowindex -= len(tabrow)
             else:
                 index = -1
-        newid = QTabBar.insertTab(self, tab, index)
+        if (icon):
+            newid = QTabBar.insertTab(self, index, name, icon)
+        else:
+            newid = QTabBar.insertTab(self, index, name)
         if index >= 0:
             self.tabrows[row].insert(rowindex, newid)
         else:
@@ -63,8 +68,11 @@ class MultiTabBar(QTabBar):
             self.tabrows[row].append(newid)
         return newid
 
-    def addTab(self, tab, row = -1):
-        return insertTab(self, tab, -1, row)
+    def addTab(self, name, icon = None, row = -1):
+	if (icon):
+            return insertTab(self, name, icon, -1, row)
+        else:
+            return insertTab(self, name, -1, row)
 
     def removeTab(self, tab):
         oldindex = self.indexOf(tab.identifier())
@@ -195,7 +203,7 @@ class MultiTabBar(QTabBar):
     def sizeHint(self):
         size = QTabBar.sizeHint(self)
         size.setHeight(size.height() \
-                     + self.style().pixelMetric(QStyle.PM_TabBarBaseHeight, self))
+                     + self.style().pixelMetric(QStyle.PM_TabBarBaseHeight, None, self))
         return size
 
     def layoutTabs(self):
