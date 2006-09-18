@@ -4,7 +4,7 @@
 #
 # See NOTICE.txt for copyrights and grant of license
 
-from qt import *
+from PyQt4.QtGui import *
 import sys
 import re
 import os.path

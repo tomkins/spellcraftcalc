@@ -4,14 +4,19 @@
 #
 # See NOTICE.txt for copyrights and grant of license
 
-from qt import *
+from PyQt4.QtGui import *
 from constants import *
 from B_ItemLevel import *
 import re
 
-class ItemLevel(B_ItemLevel):
-    def __init__(self,parent = None,name = None,modal = 0,fl = 0):
-        B_ItemLevel.__init__(self,parent,name,modal,fl)
+class ItemLevel(QDialog, Ui_B_ItemLevel):
+    def __init__(self,parent = None,name = None,modal = False,fl = 0):
+        QDialog.__init__(self,parent,fl)
+        Ui_B_ItemLevel.setupUi(self,self)
+        if (name):
+            self.setObjectName(name)
+        if (modal):
+            self.setModal(modal)
         self.ShieldType.hide()
         self.level = 51
         self.afdps = 102

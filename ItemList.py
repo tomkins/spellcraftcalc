@@ -4,14 +4,15 @@
 #
 # See NOTICE.txt for copyrights and grant of license
 
-from qt import *
+from PyQt4.QtGui import *
+from PyQt4.Qt3Support import *
 from Item import *
 from Character import *
 from constants import *
 
-class Preview(QFilePreview):
+class Preview(Q3FilePreview):
     def __init__(self, itemlist, scwin):
-        QFilePreview.__init__(self)
+        Q3FilePreview.__init__(self)
         self.itemlist = itemlist
         self.item = Item()
         self.item.loadAttr('Realm', scwin.realm)
@@ -73,7 +74,7 @@ class Preview(QFilePreview):
         self.itemlist.insertStrList(listtext)
 
     
-class ItemList(QListBox):
+class ItemList(Q3ListBox):
     def __init__(self, parent = None, scwin = None, fl = 0):
-        QListBox.__init__(self, parent)
+        Q3ListBox.__init__(self, parent)
         self.preview = Preview(self, scwin)

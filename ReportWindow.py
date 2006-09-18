@@ -4,7 +4,7 @@
 #
 # See NOTICE.txt for copyrights and grant of license
 
-from qt import *
+from PyQt4.QtGui import *
 from B_ReportWindow import *
 from Character import *
 from constants import *
@@ -96,9 +96,10 @@ def gemNameSort(a, b):
     return cmp(a, b)
 
 
-class ReportWindow(B_ReportWindow):
+class ReportWindow(QWidget, Ui_B_ReportWindow):
     def __init__(self,parent = None,name = None,modal = 0,fl = 0):
-        B_ReportWindow.__init__(self,parent,name,modal,fl)
+        QWidget.__init__(self,parent,name,modal,fl)
+        Ui_B_ReportWindow.setupUi(self,self)
         #self.font().setPointSize(8)
         self.ReportText.setTextFormat(Qt.RichText)
         self.parent = parent

@@ -15,7 +15,8 @@ except:
 import os
 import sys
 import locale
-from qt import *
+from PyQt4.QtCore import *
+from PyQt4.QtGui import *
 
 QApplication.setDesktopSettingsAware(0)
 locale.setlocale(locale.LC_ALL, '')
@@ -23,17 +24,17 @@ locale.setlocale(locale.LC_ALL, '')
 class ScApplication(QApplication):
     def __init__(self):
         args = sys.argv
-        self.curPath = QDir.cleanDirPath(QDir.currentDirPath())
+        self.curPath = QDir.cleanPath(QDir.currentPath())
         if args[0]:
-             args[0] = unicode(QDir(self.curPath).absFilePath(args[0], True))
+             args[0] = unicode(QDir(self.curPath).absoluteFilePath(args[0]))
         else:
-             args[0] = unicode(QDir(self.curPath).absFilePath(__file__, True))
-        self.appPath = unicode(QDir.cleanDirPath(QDir(args[0]).absFilePath("..")))
+             args[0] = unicode(QDir(self.curPath).absoluteFilePath(__file__, True))
+        self.appPath = unicode(QDir.cleanPath(QDir(args[0]).absoluteFilePath("..")))
 
-        self.splashFile = unicode(QDir(self.appPath).absFilePath("Spellcraft.png"))
+        self.splashFile = unicode(QDir(self.appPath).absoluteFilePath("Spellcraft.png"))
  
         if len(args) > 1:
-           args[1] = unicode(QDir.cleanDirPath(QDir(self.curPath).absFilePath(args[1], True)))
+           args[1] = unicode(QDir.cleanPath(QDir(self.curPath).absoluteFilePath(args[1], True)))
 
         QApplication.__init__(self, args)
 
@@ -46,7 +47,7 @@ class ScApplication(QApplication):
         # Mac and Windows NT+ (on Windows 98 it just blows up)
         #
         font = QFont(self.font())
-        if QApplication.style().name()[0:9] == "Macintosh" and \
+        if QApplication.style().objectName()[0:9] == "Macintosh" and \
            sys.platform == "darwin":
             font.setFamily("Trebuchet MS")
             #font.setFamily("Lucida Grande")

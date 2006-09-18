@@ -10,7 +10,7 @@ import string
 import XMLHelper
 import re
 import types
-from qt import *
+from PyQt4.QtGui import *
 from MyStringIO import UnicodeStringIO
 
 class Item:

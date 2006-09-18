@@ -4,7 +4,8 @@
 #
 # See NOTICE.txt for copyrights and grant of license
 
-from qt import *
+from PyQt4.QtGui import *
+from PyQt4.Qt3Support import *
 from B_CraftBar import *
 from Character import *
 from constants import *
@@ -17,16 +18,17 @@ import SC
 import ConfigParser
 import sys
 
-class CharItem(QListViewItem):
+class CharItem(Q3ListViewItem):
     def __init__(self, parent = None, charname = '', server = '', filename = ''):
-        QListViewItem.__init__(self, parent, charname, server)
+        Q3ListViewItem.__init__(self, parent, charname, server)
         self.charname = charname
         self.server = server
         self.filename = filename
 
-class CraftBar(B_CraftBar):
+class CraftBar(QWidget, Ui_B_CraftBar):
     def __init__(self,path = '', parent = None,name = None,modal = 0,fl = 0):
-        B_CraftBar.__init__(self, parent, name, modal, fl)
+        QWidget.__init__(self, parent, name, modal, fl)
+        Ui_B_CraftBar.setupUi(self,self)
         self.scwin = parent
         self.gemcount = 0
         self.piecelist = { }
@@ -129,11 +131,11 @@ class CraftBar(B_CraftBar):
                     server = ServerCodes[m.group(2)]
                     self.CharList.insertItem(CharItem(self.CharList, m.group(1),
                         server, file))
-            self.CharList.setColumnWidthMode(0, QListView.Maximum)
-            self.CharList.setColumnWidthMode(1, QListView.Maximum)
+            self.CharList.setColumnWidthMode(0, Q3ListView.Maximum)
+            self.CharList.setColumnWidthMode(1, Q3ListView.Maximum)
 
     def openFileDialog(self):
-        daocdir = QFileDialog.getExistingDirectory('', self, '', 'Select DAoC Directory')
+        daocdir = Q3FileDialog.getExistingDirectory('', self, '', 'Select DAoC Directory')
         self.DaocPath.setText(daocdir)
 
     def computeBarEnd(self):

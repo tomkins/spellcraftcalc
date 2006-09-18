@@ -5,7 +5,8 @@
 # See NOTICE.txt for copyrights and grant of license
 
 
-from qt import *
+from PyQt4.QtCore import *
+from PyQt4.QtGui import *
 from B_ScWindow import *
 from Item import *
 from Character import *
@@ -23,6 +24,7 @@ import ReportWindow
 import DisplayWindow
 import CraftBar
 import SearchingCombo
+import MultiTabBar
 import UIXML
 import os
 import os.path
@@ -53,7 +55,7 @@ class AboutScreen(QDialog):
             self.close()
 
 
-class ScWindow(B_SC):
+class ScWindow(QMainWindow, Ui_B_SC):
     def __init__(self):
         self.splashFile = None
         self.newcount = 0
@@ -72,11 +74,12 @@ class ScWindow(B_SC):
 
         self.fixedtaborder = False
 
-        B_SC.__init__(self,parent=None,name="Kort's Spellcrafting Calulator",
-                      fl=Qt.WDestructiveClose|Qt.WStyle_Customize 
-                        |Qt.WStyle_DialogBorder|Qt.WStyle_Title
-                        |Qt.WStyle_SysMenu|Qt.WStyle_Minimize)
-
+        QMainWindow.__init__(self,None,Qt.Dialog|Qt.MSWindowsFixedSizeDialogHint|
+                                       Qt.WindowTitleHint|Qt.WindowMinimizeButtonHint|
+                                       Qt.WindowSystemMenuHint)
+        self.setAttribute(Qt.WA_DeleteOnClose)
+	Ui_B_SC.setupUi(self,self)
+        self.setWindowTitle("Kort's Spellcrafting Calulator")
         self.fixtabs = True
 
         self.statusBar().setSizeGripEnabled(0)
@@ -97,13 +100,11 @@ class ScWindow(B_SC):
 
         self.EffectWidths = [self.Effect_1.width(), self.Effect_10.width()]
 
-        self.PieceTab.setFocusPolicy(QWidget.StrongFocus)
+        self.PieceTab.setFocusPolicy(Qt.StrongFocus)
         for tabname in PieceTabList:
-            newtab = QTab(qApp.translate("B_SC",tabname,None))
-            self.PieceTab.insertTab(newtab, row = 0)
+            self.PieceTab.insertTab(qApp.translate("B_SC",tabname,None), row = 0)
         for tabname in JewelTabList:
-            newtab = QTab(qApp.translate("B_SC",tabname,None))
-            self.PieceTab.insertTab(newtab, row = 1)
+            self.PieceTab.insertTab(qApp.translate("B_SC",tabname,None), row = 1)
 
         size = self.PieceTab.size()
         size.setHeight(self.PieceTab.sizeHint().height())
@@ -111,8 +112,8 @@ class ScWindow(B_SC):
 
         self.GroupItemFrame.move(self.GroupItemFrame.pos().x(), self.PieceTab.geometry().bottom())
 
-        self.Realm.insertStrList(list(Realms))
-        self.QualDrop.insertStrList(list(QualityValues))
+        self.Realm.insertItems(list(Realms))
+        self.QualDrop.insertItems(list(QualityValues))
 
         self.GemLabel = []
         self.Type = []
@@ -131,13 +132,13 @@ class ScWindow(B_SC):
             self.GemLabel.append(getattr(self, 'Gem_Label_%d' % idx))
             self.Type.append(getattr(self, 'Type_%d' % idx))
             self.Effect.append(getattr(self, 'Effect_%d' % idx))
-            self.Effect[i].setInsertionPolicy(QComboBox.BeforeCurrent)
+# XXX       self.Effect[i].setInsertionPolicy(QComboBox.BeforeCurrent)
             self.AmountEdit.append(getattr(self, 'Amount_Edit_%d' % idx))
             self.AmountEdit[i].setValidator(editAmountValidator)
             if i < 5:
                 self.AmountDrop.append(getattr(self, 'Amount_Drop_%d' % idx))
                 self.Quality.append(getattr(self, 'Quality_%d' % idx))
-                self.Quality[i].insertStrList(list(QualityValues))
+                self.Quality[i].insertItems(list(QualityValues))
                 self.Points.append(getattr(self, 'Points_%d' % idx))
                 self.Cost.append(getattr(self, 'Cost_%d' % idx))
                 self.Name.append(getattr(self, 'Name_%d' % idx))
@@ -453,7 +454,7 @@ class ScWindow(B_SC):
             gemtype = str(item.getSlotAttr(itemtype, slot, 'Type'))
             if not gemtype in typelist:
                 typelist.append(gemtype)
-            typecombo.insertStrList(typelist)
+            typecombo.insertItems(list(typelist))
             typecombo.setCurrentItem(typelist.index(gemtype))
             self.UpdateCombo(0, slot)
             if gemtype == 'Unused':
@@ -876,7 +877,7 @@ class ScWindow(B_SC):
             if type == 0:
                 effcombo.clear()
                 if len(effectlist) > 0:
-                    effcombo.insertStrList(list(effectlist))
+                    effcombo.insertItems(list(effectlist))
                     effcombo.setCurrentItem(0)
             if type == 1:
                 unique = (not efftext in effectlist) or (len(efftext) > 3 and efftext[-3:] == "...")
@@ -908,7 +909,7 @@ class ScWindow(B_SC):
                     elif efftext[0:5] == "All M":
                         valueslist = ("1",)
                     if len(valueslist) > 0:
-                        amount.insertStrList(list(valueslist))
+                        amount.insertItems(list(valueslist))
                     if amtindex < len(valueslist):
                         amount.setCurrentItem(amtindex)
                 if type == 0:
@@ -942,7 +943,7 @@ class ScWindow(B_SC):
         race = str(self.CharRace.currentText())
         self.CharRace.clear()
         racelist = AllBonusList[self.realm][self.charclass]['Races']
-        self.CharRace.insertStrList(list(racelist))
+        self.CharRace.insertItems(list(racelist))
         if race in racelist:
           self.CharRace.setCurrentItem(racelist.index(race))
         self.RaceChanged('')
@@ -954,7 +955,7 @@ class ScWindow(B_SC):
     def RealmChanged(self,a0):
         self.realm = str(self.Realm.currentText())
         self.CharClass.clear()
-        self.CharClass.insertStrList(list(ClassList[self.realm]))
+        self.CharClass.insertItems(list(ClassList[self.realm]))
         if self.charclass in ClassList[self.realm]:
           self.CharClass.setCurrentItem(ClassList[self.realm].index(self.charclass))
         self.CharClassChanged('')
