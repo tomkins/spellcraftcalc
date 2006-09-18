@@ -1036,7 +1036,7 @@ class ScWindow(QMainWindow, Ui_B_SC):
         self.CharClassChanged('')
     
     def TypeChanged(self, Value):
-        index = self.focusWidget().name()[-2:]
+        index = self.focusWidget().objectName()[-2:]
         if index[0] == '_': index = index[1:]
         wascalc = self.nocalc
         self.nocalc = 1
@@ -1048,9 +1048,9 @@ class ScWindow(QMainWindow, Ui_B_SC):
         self.calculate()
 
     def EffectChanged(self, value):
-        index = str(self.focusWidget().name())[-2:]
+        index = str(self.focusWidget().objectName())[-2:]
         if not index[-1].isdigit():
-            index = str(self.focusWidget().parentWidget().name())[-2:]
+            index = str(self.focusWidget().parentWidget().objectName())[-2:]
         if not index[0].isdigit(): index = index[1:]
         wascalc = self.nocalc
         self.nocalc = 1
@@ -1490,7 +1490,7 @@ class ScWindow(QMainWindow, Ui_B_SC):
         child = self.childAt(e.pos())
         if child is None: return
         if not isinstance(child, QLabel): return
-        shortname = str(child.name())
+        shortname = str(child.objectName())
         nameidx = 1
         while nameidx < len(shortname):
             if shortname[nameidx] < 'a' or shortname[nameidx] > 'z':
@@ -1498,14 +1498,14 @@ class ScWindow(QMainWindow, Ui_B_SC):
                 shortname = shortname[0:nameidx]
             nameidx += 1
         if shortname in ['Gem', 'Points', 'Cost', 'Name']:
-            slot = child.name()[-2:]
+            slot = child.objectName()[-2:]
             if str(slot[0:1]) == '_':
                 slot = slot[1:]
             if self.PlayerMade.isChecked():
                 self.gemClicked(self.currentTabLabel, int(slot))
             return
         if shortname in ['', 'Label', 'Total', 'Item']: return
-        if child.parent().name() == 'GroupResists':
+        if child.parent().objectName() == 'GroupResists':
            self.DelveItemsDialog(shortname, 'Resist')
         else:
            self.DelveItemsDialog(shortname)
