@@ -1,310 +1,327 @@
 # -*- coding: utf-8 -*-
 
-# Form implementation generated from reading ui file 'Options.ui'
+# Form implementation generated from reading ui file 'Options.ui4'
 #
-# Created: Sat May 20 15:12:03 2006
-#      by: The PyQt User Interface Compiler (pyuic) 3.15
+# Created: Wed Sep 06 17:41:39 2006
+#      by: PyQt4 UI code generator 4.0.1
 #
 # WARNING! All changes made in this file will be lost!
 
+import sys
+from PyQt4 import QtCore, QtGui
+
+class Ui_B_Options(object):
+    def setupUi(self, B_Options):
+        B_Options.setObjectName("B_Options")
+        B_Options.resize(QtCore.QSize(QtCore.QRect(0,0,364,295).size()).expandedTo(B_Options.minimumSizeHint()))
+
+        self.OK = QtGui.QPushButton(B_Options)
+        self.OK.setGeometry(QtCore.QRect(52,265,93,26))
+        self.OK.setObjectName("OK")
+
+        self.Cancel = QtGui.QPushButton(B_Options)
+        self.Cancel.setGeometry(QtCore.QRect(207,265,93,26))
+        self.Cancel.setObjectName("Cancel")
+
+        self.Tab = QtGui.QTabWidget(B_Options)
+        self.Tab.setEnabled(True)
+        self.Tab.setGeometry(QtCore.QRect(10,6,353,259))
+        self.Tab.setObjectName("Tab")
+
+        self.General = QtGui.QWidget()
+        self.General.setObjectName("General")
+
+        self.TextLabel1 = QtGui.QLabel(self.General)
+        self.TextLabel1.setGeometry(QtCore.QRect(18,17,61,22))
+        self.TextLabel1.setObjectName("TextLabel1")
+
+        self.Skill = QtGui.QComboBox(self.General)
+        self.Skill.setGeometry(QtCore.QRect(89,17,81,22))
+        self.Skill.setObjectName("Skill")
+
+        self.CapDistance = QtGui.QCheckBox(self.General)
+        self.CapDistance.setGeometry(QtCore.QRect(18,75,250,17))
+        self.CapDistance.setObjectName("CapDistance")
+
+        self.ShowDoneGems = QtGui.QCheckBox(self.General)
+        self.ShowDoneGems.setGeometry(QtCore.QRect(18,100,250,17))
+        self.ShowDoneGems.setObjectName("ShowDoneGems")
+
+        self.IncludeRR = QtGui.QCheckBox(self.General)
+        self.IncludeRR.setGeometry(QtCore.QRect(18,125,250,17))
+        self.IncludeRR.setChecked(True)
+        self.IncludeRR.setObjectName("IncludeRR")
+
+        self.HideNonClassSkills = QtGui.QCheckBox(self.General)
+        self.HideNonClassSkills.setGeometry(QtCore.QRect(18,150,250,17))
+        self.HideNonClassSkills.setChecked(True)
+        self.HideNonClassSkills.setObjectName("HideNonClassSkills")
+
+        self.Coop = QtGui.QCheckBox(self.General)
+        self.Coop.setGeometry(QtCore.QRect(18,175,250,17))
+        self.Coop.setObjectName("Coop")
+
+        self.TextLabel2_5 = QtGui.QLabel(self.General)
+        self.TextLabel2_5.setGeometry(QtCore.QRect(40,192,250,14))
+        self.TextLabel2_5.setObjectName("TextLabel2_5")
+        self.Tab.addTab(self.General, "")
+
+        self.Notes = QtGui.QWidget()
+        self.Notes.setObjectName("Notes")
+
+        self.TextLabel2_2 = QtGui.QLabel(self.Notes)
+        self.TextLabel2_2.setGeometry(QtCore.QRect(12,6,82,16))
+        self.TextLabel2_2.setObjectName("TextLabel2_2")
+
+        self.NoteText = QtGui.QTextEdit(self.Notes)
+        self.NoteText.setGeometry(QtCore.QRect(13,26,321,154))
+        self.NoteText.setObjectName("NoteText")
+        self.Tab.addTab(self.Notes, "")
+
+        self.Price = QtGui.QWidget()
+        self.Price.setObjectName("Price")
+
+        self.GroupBox1 = QtGui.QGroupBox(self.Price)
+        self.GroupBox1.setGeometry(QtCore.QRect(4,1,95,115))
+        self.GroupBox1.setObjectName("GroupBox1")
+
+        self.TextLabel1_2 = QtGui.QLabel(self.GroupBox1)
+        self.TextLabel1_2.setGeometry(QtCore.QRect(5,15,28,16))
+        self.TextLabel1_2.setAlignment(QtCore.Qt.AlignVCenter|QtCore.Qt.AlignRight)
+        self.TextLabel1_2.setObjectName("TextLabel1_2")
+
+        self.TextLabel1_2_3 = QtGui.QLabel(self.GroupBox1)
+        self.TextLabel1_2_3.setGeometry(QtCore.QRect(2,71,31,16))
+        self.TextLabel1_2_3.setAlignment(QtCore.Qt.AlignVCenter|QtCore.Qt.AlignRight)
+        self.TextLabel1_2_3.setObjectName("TextLabel1_2_3")
+
+        self.TextLabel1_2_2 = QtGui.QLabel(self.GroupBox1)
+        self.TextLabel1_2_2.setGeometry(QtCore.QRect(8,42,24,16))
+        self.TextLabel1_2_2.setAlignment(QtCore.Qt.AlignVCenter|QtCore.Qt.AlignRight)
+        self.TextLabel1_2_2.setObjectName("TextLabel1_2_2")
+
+        self.TextLabel2_3 = QtGui.QLabel(self.GroupBox1)
+        self.TextLabel2_3.setGeometry(QtCore.QRect(26,94,43,16))
+        self.TextLabel2_3.setObjectName("TextLabel2_3")
+
+        self.PPGem = QtGui.QLineEdit(self.GroupBox1)
+        self.PPGem.setGeometry(QtCore.QRect(37,14,52,22))
+        self.PPGem.setObjectName("PPGem")
+
+        self.PPItem = QtGui.QLineEdit(self.GroupBox1)
+        self.PPItem.setGeometry(QtCore.QRect(37,41,52,22))
+        self.PPItem.setObjectName("PPItem")
 
-from qt import *
+        self.PPOrder = QtGui.QLineEdit(self.GroupBox1)
+        self.PPOrder.setGeometry(QtCore.QRect(37,69,52,22))
+        self.PPOrder.setObjectName("PPOrder")
 
+        self.GroupBox2 = QtGui.QGroupBox(self.Price)
+        self.GroupBox2.setGeometry(QtCore.QRect(101,1,109,115))
+        self.GroupBox2.setObjectName("GroupBox2")
 
-class B_Options(QDialog):
-    def __init__(self,parent = None,name = None,modal = 0,fl = 0):
-        QDialog.__init__(self,parent,name,modal,fl)
-
-        if not name:
-            self.setName("B_Options")
-
-
-
-        self.OK = QPushButton(self,"OK")
-        self.OK.setGeometry(QRect(52,265,93,26))
-
-        self.Cancel = QPushButton(self,"Cancel")
-        self.Cancel.setGeometry(QRect(207,265,93,26))
-
-        self.Tab = QTabWidget(self,"Tab")
-        self.Tab.setEnabled(1)
-        self.Tab.setGeometry(QRect(10,6,353,259))
-
-        self.General = QWidget(self.Tab,"General")
-
-        self.TextLabel1 = QLabel(self.General,"TextLabel1")
-        self.TextLabel1.setGeometry(QRect(18,17,61,22))
-
-        self.Skill = QComboBox(0,self.General,"Skill")
-        self.Skill.setGeometry(QRect(89,17,81,22))
-
-        self.CapDistance = QCheckBox(self.General,"CapDistance")
-        self.CapDistance.setGeometry(QRect(18,75,250,17))
-
-        self.ShowDoneGems = QCheckBox(self.General,"ShowDoneGems")
-        self.ShowDoneGems.setGeometry(QRect(18,100,250,17))
-
-        self.IncludeRR = QCheckBox(self.General,"IncludeRR")
-        self.IncludeRR.setGeometry(QRect(18,125,250,17))
-        self.IncludeRR.setChecked(1)
-
-        self.HideNonClassSkills = QCheckBox(self.General,"HideNonClassSkills")
-        self.HideNonClassSkills.setGeometry(QRect(18,150,250,17))
-        self.HideNonClassSkills.setChecked(1)
-
-        self.Coop = QCheckBox(self.General,"Coop")
-        self.Coop.setGeometry(QRect(18,175,250,17))
-
-        self.TextLabel2_5 = QLabel(self.General,"TextLabel2_5")
-        self.TextLabel2_5.setGeometry(QRect(40,192,250,14))
-        self.Tab.insertTab(self.General,QString.fromLatin1(""))
-
-        self.Notes = QWidget(self.Tab,"Notes")
-
-        self.TextLabel2_2 = QLabel(self.Notes,"TextLabel2_2")
-        self.TextLabel2_2.setGeometry(QRect(12,6,82,16))
-
-        self.NoteText = QMultiLineEdit(self.Notes,"NoteText")
-        self.NoteText.setGeometry(QRect(13,26,321,154))
-        self.Tab.insertTab(self.Notes,QString.fromLatin1(""))
-
-        self.Price = QWidget(self.Tab,"Price")
-
-        self.GroupBox1 = QGroupBox(self.Price,"GroupBox1")
-        self.GroupBox1.setGeometry(QRect(4,1,95,115))
-
-        self.TextLabel1_2 = QLabel(self.GroupBox1,"TextLabel1_2")
-        self.TextLabel1_2.setGeometry(QRect(5,15,28,16))
-        self.TextLabel1_2.setAlignment(QLabel.AlignVCenter | QLabel.AlignRight)
-
-        self.TextLabel1_2_3 = QLabel(self.GroupBox1,"TextLabel1_2_3")
-        self.TextLabel1_2_3.setGeometry(QRect(2,71,31,16))
-        self.TextLabel1_2_3.setAlignment(QLabel.AlignVCenter | QLabel.AlignRight)
-
-        self.TextLabel1_2_2 = QLabel(self.GroupBox1,"TextLabel1_2_2")
-        self.TextLabel1_2_2.setGeometry(QRect(8,42,24,16))
-        self.TextLabel1_2_2.setAlignment(QLabel.AlignVCenter | QLabel.AlignRight)
-
-        self.TextLabel2_3 = QLabel(self.GroupBox1,"TextLabel2_3")
-        self.TextLabel2_3.setGeometry(QRect(26,94,43,16))
-
-        self.PPGem = QLineEdit(self.GroupBox1,"PPGem")
-        self.PPGem.setGeometry(QRect(37,14,52,22))
-
-        self.PPItem = QLineEdit(self.GroupBox1,"PPItem")
-        self.PPItem.setGeometry(QRect(37,41,52,22))
-
-        self.PPOrder = QLineEdit(self.GroupBox1,"PPOrder")
-        self.PPOrder.setGeometry(QRect(37,69,52,22))
-
-        self.GroupBox2 = QGroupBox(self.Price,"GroupBox2")
-        self.GroupBox2.setGeometry(QRect(101,1,109,115))
-
-        self.TextLabel3 = QLabel(self.GroupBox2,"TextLabel3")
-        self.TextLabel3.setGeometry(QRect(4,17,41,13))
-        self.TextLabel3.setAlignment(QLabel.AlignVCenter | QLabel.AlignRight)
-
-        self.TextLabel4 = QLabel(self.GroupBox2,"TextLabel4")
-        self.TextLabel4.setGeometry(QRect(6,44,36,13))
-        self.TextLabel4.setAlignment(QLabel.AlignVCenter | QLabel.AlignRight)
-
-        self.TextLabel5 = QLabel(self.GroupBox2,"TextLabel5")
-        self.TextLabel5.setGeometry(QRect(91,17,16,16))
-
-        self.TextLabel6 = QLabel(self.GroupBox2,"TextLabel6")
-        self.TextLabel6.setGeometry(QRect(9,94,92,16))
-
-        self.QualLevel = QComboBox(0,self.GroupBox2,"QualLevel")
-        self.QualLevel.setGeometry(QRect(48,41,50,22))
-
-        self.QualMarkup = QLineEdit(self.GroupBox2,"QualMarkup")
-        self.QualMarkup.setGeometry(QRect(49,14,40,22))
-
-        self.QualInclude = QCheckBox(self.GroupBox2,"QualInclude")
-        self.QualInclude.setGeometry(QRect(8,72,59,17))
-
-        self.GroupBox3 = QGroupBox(self.Price,"GroupBox3")
-        self.GroupBox3.setGeometry(QRect(214,1,131,115))
-
-        self.TextLabel7 = QLabel(self.GroupBox3,"TextLabel7")
-        self.TextLabel7.setGeometry(QRect(60,16,44,16))
-
-        self.TextLabel8 = QLabel(self.GroupBox3,"TextLabel8")
-        self.TextLabel8.setGeometry(QRect(59,43,63,16))
-
-        self.TextLabel9 = QLabel(self.GroupBox3,"TextLabel9")
-        self.TextLabel9.setGeometry(QRect(60,71,66,16))
-
-        self.TextLabel10 = QLabel(self.GroupBox3,"TextLabel10")
-        self.TextLabel10.setGeometry(QRect(77,93,47,16))
-
-        self.PPImbue = QLineEdit(self.GroupBox3,"PPImbue")
-        self.PPImbue.setGeometry(QRect(5,41,50,22))
-
-        self.PPInclude = QCheckBox(self.GroupBox3,"PPInclude")
-        self.PPInclude.setGeometry(QRect(5,94,59,17))
-
-        self.PPLevel = QLineEdit(self.GroupBox3,"PPLevel")
-        self.PPLevel.setGeometry(QRect(5,14,50,22))
-
-        self.PPOC = QLineEdit(self.GroupBox3,"PPOC")
-        self.PPOC.setGeometry(QRect(5,69,50,22))
-
-        self.GroupBox4 = QGroupBox(self.Price,"GroupBox4")
-        self.GroupBox4.setGeometry(QRect(4,119,98,65))
-
-        self.TextLabel11 = QLabel(self.GroupBox4,"TextLabel11")
-        self.TextLabel11.setGeometry(QRect(59,19,16,16))
-
-        self.TextLabel12 = QLabel(self.GroupBox4,"TextLabel12")
-        self.TextLabel12.setGeometry(QRect(5,43,90,16))
-
-        self.GenMarkup = QLineEdit(self.GroupBox4,"GenMarkup")
-        self.GenMarkup.setGeometry(QRect(8,16,46,22))
-
-        self.GroupBox5 = QGroupBox(self.Price,"GroupBox5")
-        self.GroupBox5.setGeometry(QRect(106,120,166,64))
-
-        self.TextLabel13 = QLabel(self.GroupBox5,"TextLabel13")
-        self.TextLabel13.setGeometry(QRect(7,17,25,16))
-
-        self.TextLabel14 = QLabel(self.GroupBox5,"TextLabel14")
-        self.TextLabel14.setGeometry(QRect(85,17,31,16))
-
-        self.TextLabel15 = QLabel(self.GroupBox5,"TextLabel15")
-        self.TextLabel15.setGeometry(QRect(99,42,51,16))
-
-        self.Tier = QComboBox(0,self.GroupBox5,"Tier")
-        self.Tier.setGeometry(QRect(32,15,40,22))
-
-        self.TierPrice = QLineEdit(self.GroupBox5,"TierPrice")
-        self.TierPrice.setGeometry(QRect(118,15,42,22))
-
-        self.TierInclude = QCheckBox(self.GroupBox5,"TierInclude")
-        self.TierInclude.setGeometry(QRect(6,42,59,17))
-
-        self.GroupBox6 = QGroupBox(self.Price,"GroupBox6")
-        self.GroupBox6.setGeometry(QRect(274,120,69,64))
-
-        self.HourInclude = QCheckBox(self.GroupBox6,"HourInclude")
-        self.HourInclude.setGeometry(QRect(4,42,59,17))
-
-        self.HourPrice = QLineEdit(self.GroupBox6,"HourPrice")
-        self.HourPrice.setGeometry(QRect(4,15,58,22))
-
-        self.TextLabel2_4 = QLabel(self.Price,"TextLabel2_4")
-        self.TextLabel2_4.setGeometry(QRect(44,209,276,16))
-
-        self.CostInPrice = QCheckBox(self.Price,"CostInPrice")
-        self.CostInPrice.setGeometry(QRect(112,189,119,17))
-        self.CostInPrice.setChecked(1)
-        self.Tab.insertTab(self.Price,QString.fromLatin1(""))
-
-        self.languageChange()
-
-        self.resize(QSize(364,295).expandedTo(self.minimumSizeHint()))
-        self.clearWState(Qt.WState_Polished)
-
-        self.connect(self.OK,SIGNAL("clicked()"),self.OK_pressed)
-        self.connect(self.Cancel,SIGNAL("clicked()"),self.Cancel_pressed)
-        self.connect(self.Tier,SIGNAL("activated(const QString&)"),self.TierMarkupChanged)
-        self.connect(self.QualLevel,SIGNAL("activated(const QString&)"),self.QualMarkupChanged)
-        self.connect(self.QualMarkup,SIGNAL("textChanged(const QString&)"),self.QualMarkupSet)
-        self.connect(self.TierPrice,SIGNAL("textChanged(const QString&)"),self.TierMarkupSet)
-
-
-    def languageChange(self):
-        self.setCaption(self.__tr("Options"))
-        self.OK.setText(self.__tr("OK"))
-        self.Cancel.setText(self.__tr("Cancel"))
-        self.TextLabel1.setText(self.__tr("Crafter Skill:"))
-        self.CapDistance.setText(self.__tr("Show Distance To Cap (instead of total)"))
-        self.ShowDoneGems.setText(self.__tr("\"Done\" Gems do not show up in Materials List"))
-        self.IncludeRR.setText(self.__tr("Include Racial Resists in Totals"))
-        self.HideNonClassSkills.setText(self.__tr("Hide Skills not usable by this Class"))
-        self.Coop.setText(self.__tr("Co-op / PvP Server"))
-        self.TextLabel2_5.setText(self.__tr("(Lets you access items from all realms)"))
-        self.Tab.changeTab(self.General,self.__tr("General"))
-        self.TextLabel2_2.setText(self.__tr("Template Notes:"))
-        self.Tab.changeTab(self.Notes,self.__tr("Notes"))
-        self.GroupBox1.setTitle(self.__tr("Price per"))
-        self.TextLabel1_2.setText(self.__tr("Gem:"))
-        self.TextLabel1_2_3.setText(self.__tr("Order:"))
-        self.TextLabel1_2_2.setText(self.__tr("Item:"))
-        self.TextLabel2_3.setText(self.__tr("(cost+ X)"))
-        self.PPGem.setText(self.__tr("0"))
-        self.PPItem.setText(self.__tr("0"))
-        self.PPOrder.setText(self.__tr("0"))
-        self.GroupBox2.setTitle(self.__tr("Gem qual markup"))
-        self.TextLabel3.setText(self.__tr("Markup:"))
-        self.TextLabel4.setText(self.__tr("Quality:"))
-        self.TextLabel5.setText(self.__tr("%"))
-        self.TextLabel6.setText(self.__tr("(cost + (cost * X%))"))
-        self.QualLevel.clear()
-        self.QualLevel.insertItem(self.__tr("94"))
-        self.QualLevel.insertItem(self.__tr("95"))
-        self.QualLevel.insertItem(self.__tr("96"))
-        self.QualLevel.insertItem(self.__tr("97"))
-        self.QualLevel.insertItem(self.__tr("98"))
-        self.QualLevel.insertItem(self.__tr("99"))
-        self.QualLevel.insertItem(self.__tr("100"))
-        self.QualMarkup.setText(self.__tr("0"))
-        self.QualInclude.setText(self.__tr("Include"))
-        self.GroupBox3.setTitle(self.__tr("Price per lvl/point"))
-        self.TextLabel7.setText(self.__tr("per level"))
-        self.TextLabel8.setText(self.__tr("per imbue pt."))
-        self.TextLabel9.setText(self.__tr("per O/C pt."))
-        self.TextLabel10.setText(self.__tr("(cost + X)"))
-        self.PPImbue.setText(self.__tr("0"))
-        self.PPInclude.setText(self.__tr("Include"))
-        self.PPLevel.setText(self.__tr("0"))
-        self.PPOC.setText(self.__tr("0"))
-        self.GroupBox4.setTitle(self.__tr("General Markup"))
-        self.TextLabel11.setText(self.__tr("%"))
-        self.TextLabel12.setText(self.__tr("(cost + (cost * X%))"))
-        self.GenMarkup.setText(self.__tr("50"))
-        self.GroupBox5.setTitle(self.__tr("Price by gem tier"))
-        self.TextLabel13.setText(self.__tr("Tier:"))
-        self.TextLabel14.setText(self.__tr("Price:"))
-        self.TextLabel15.setText(self.__tr("(cost + X)"))
-        self.Tier.clear()
-        self.Tier.insertItem(self.__tr("1"))
-        self.Tier.insertItem(self.__tr("2"))
-        self.Tier.insertItem(self.__tr("3"))
-        self.Tier.insertItem(self.__tr("4"))
-        self.Tier.insertItem(self.__tr("5"))
-        self.Tier.insertItem(self.__tr("6"))
-        self.Tier.insertItem(self.__tr("7"))
-        self.Tier.insertItem(self.__tr("8"))
-        self.Tier.insertItem(self.__tr("9"))
-        self.Tier.insertItem(self.__tr("10"))
-        self.TierPrice.setText(self.__tr("0"))
-        self.TierInclude.setText(self.__tr("Include"))
-        self.GroupBox6.setTitle(self.__tr("Per hour"))
-        self.HourInclude.setText(self.__tr("Include"))
-        self.HourPrice.setText(self.__tr("0"))
-        self.TextLabel2_4.setText(self.__tr("All numbers (except percentages) are in amounts of Gold."))
-        self.CostInPrice.setText(self.__tr("Include cost in price"))
-        self.Tab.changeTab(self.Price,self.__tr("Price"))
-
-
-    def Cancel_pressed(self):
-        print "B_Options.Cancel_pressed(): Not implemented yet"
-
-    def OK_pressed(self):
-        print "B_Options.OK_pressed(): Not implemented yet"
-
-    def QualMarkupChanged(self,a0):
-        print "B_Options.QualMarkupChanged(const QString&): Not implemented yet"
-
-    def QualMarkupSet(self,a0):
-        print "B_Options.QualMarkupSet(const QString&): Not implemented yet"
-
-    def TierMarkupChanged(self,a0):
-        print "B_Options.TierMarkupChanged(const QString&): Not implemented yet"
-
-    def TierMarkupSet(self,a0):
-        print "B_Options.TierMarkupSet(const QString&): Not implemented yet"
-
-    def __tr(self,s,c = None):
-        return qApp.translate("B_Options",s,c)
+        self.TextLabel3 = QtGui.QLabel(self.GroupBox2)
+        self.TextLabel3.setGeometry(QtCore.QRect(4,17,41,13))
+        self.TextLabel3.setAlignment(QtCore.Qt.AlignVCenter|QtCore.Qt.AlignRight)
+        self.TextLabel3.setObjectName("TextLabel3")
+
+        self.TextLabel4 = QtGui.QLabel(self.GroupBox2)
+        self.TextLabel4.setGeometry(QtCore.QRect(6,44,36,13))
+        self.TextLabel4.setAlignment(QtCore.Qt.AlignVCenter|QtCore.Qt.AlignRight)
+        self.TextLabel4.setObjectName("TextLabel4")
+
+        self.TextLabel5 = QtGui.QLabel(self.GroupBox2)
+        self.TextLabel5.setGeometry(QtCore.QRect(91,17,16,16))
+        self.TextLabel5.setObjectName("TextLabel5")
+
+        self.TextLabel6 = QtGui.QLabel(self.GroupBox2)
+        self.TextLabel6.setGeometry(QtCore.QRect(9,94,92,16))
+        self.TextLabel6.setObjectName("TextLabel6")
+
+        self.QualLevel = QtGui.QComboBox(self.GroupBox2)
+        self.QualLevel.setGeometry(QtCore.QRect(48,41,50,22))
+        self.QualLevel.setObjectName("QualLevel")
+
+        self.QualMarkup = QtGui.QLineEdit(self.GroupBox2)
+        self.QualMarkup.setGeometry(QtCore.QRect(49,14,40,22))
+        self.QualMarkup.setObjectName("QualMarkup")
+
+        self.QualInclude = QtGui.QCheckBox(self.GroupBox2)
+        self.QualInclude.setGeometry(QtCore.QRect(8,72,59,17))
+        self.QualInclude.setObjectName("QualInclude")
+
+        self.GroupBox3 = QtGui.QGroupBox(self.Price)
+        self.GroupBox3.setGeometry(QtCore.QRect(214,1,131,115))
+        self.GroupBox3.setObjectName("GroupBox3")
+
+        self.TextLabel7 = QtGui.QLabel(self.GroupBox3)
+        self.TextLabel7.setGeometry(QtCore.QRect(60,16,44,16))
+        self.TextLabel7.setObjectName("TextLabel7")
+
+        self.TextLabel8 = QtGui.QLabel(self.GroupBox3)
+        self.TextLabel8.setGeometry(QtCore.QRect(59,43,63,16))
+        self.TextLabel8.setObjectName("TextLabel8")
+
+        self.TextLabel9 = QtGui.QLabel(self.GroupBox3)
+        self.TextLabel9.setGeometry(QtCore.QRect(60,71,66,16))
+        self.TextLabel9.setObjectName("TextLabel9")
+
+        self.TextLabel10 = QtGui.QLabel(self.GroupBox3)
+        self.TextLabel10.setGeometry(QtCore.QRect(77,93,47,16))
+        self.TextLabel10.setObjectName("TextLabel10")
+
+        self.PPImbue = QtGui.QLineEdit(self.GroupBox3)
+        self.PPImbue.setGeometry(QtCore.QRect(5,41,50,22))
+        self.PPImbue.setObjectName("PPImbue")
+
+        self.PPInclude = QtGui.QCheckBox(self.GroupBox3)
+        self.PPInclude.setGeometry(QtCore.QRect(5,94,59,17))
+        self.PPInclude.setObjectName("PPInclude")
+
+        self.PPLevel = QtGui.QLineEdit(self.GroupBox3)
+        self.PPLevel.setGeometry(QtCore.QRect(5,14,50,22))
+        self.PPLevel.setObjectName("PPLevel")
+
+        self.PPOC = QtGui.QLineEdit(self.GroupBox3)
+        self.PPOC.setGeometry(QtCore.QRect(5,69,50,22))
+        self.PPOC.setObjectName("PPOC")
+
+        self.GroupBox4 = QtGui.QGroupBox(self.Price)
+        self.GroupBox4.setGeometry(QtCore.QRect(4,119,98,65))
+        self.GroupBox4.setObjectName("GroupBox4")
+
+        self.TextLabel11 = QtGui.QLabel(self.GroupBox4)
+        self.TextLabel11.setGeometry(QtCore.QRect(59,19,16,16))
+        self.TextLabel11.setObjectName("TextLabel11")
+
+        self.TextLabel12 = QtGui.QLabel(self.GroupBox4)
+        self.TextLabel12.setGeometry(QtCore.QRect(5,43,90,16))
+        self.TextLabel12.setObjectName("TextLabel12")
+
+        self.GenMarkup = QtGui.QLineEdit(self.GroupBox4)
+        self.GenMarkup.setGeometry(QtCore.QRect(8,16,46,22))
+        self.GenMarkup.setObjectName("GenMarkup")
+
+        self.GroupBox5 = QtGui.QGroupBox(self.Price)
+        self.GroupBox5.setGeometry(QtCore.QRect(106,120,166,64))
+        self.GroupBox5.setObjectName("GroupBox5")
+
+        self.TextLabel13 = QtGui.QLabel(self.GroupBox5)
+        self.TextLabel13.setGeometry(QtCore.QRect(7,17,25,16))
+        self.TextLabel13.setObjectName("TextLabel13")
+
+        self.TextLabel14 = QtGui.QLabel(self.GroupBox5)
+        self.TextLabel14.setGeometry(QtCore.QRect(85,17,31,16))
+        self.TextLabel14.setObjectName("TextLabel14")
+
+        self.TextLabel15 = QtGui.QLabel(self.GroupBox5)
+        self.TextLabel15.setGeometry(QtCore.QRect(99,42,51,16))
+        self.TextLabel15.setObjectName("TextLabel15")
+
+        self.Tier = QtGui.QComboBox(self.GroupBox5)
+        self.Tier.setGeometry(QtCore.QRect(32,15,40,22))
+        self.Tier.setObjectName("Tier")
+
+        self.TierPrice = QtGui.QLineEdit(self.GroupBox5)
+        self.TierPrice.setGeometry(QtCore.QRect(118,15,42,22))
+        self.TierPrice.setObjectName("TierPrice")
+
+        self.TierInclude = QtGui.QCheckBox(self.GroupBox5)
+        self.TierInclude.setGeometry(QtCore.QRect(6,42,59,17))
+        self.TierInclude.setObjectName("TierInclude")
+
+        self.GroupBox6 = QtGui.QGroupBox(self.Price)
+        self.GroupBox6.setGeometry(QtCore.QRect(274,120,69,64))
+        self.GroupBox6.setObjectName("GroupBox6")
+
+        self.HourInclude = QtGui.QCheckBox(self.GroupBox6)
+        self.HourInclude.setGeometry(QtCore.QRect(4,42,59,17))
+        self.HourInclude.setObjectName("HourInclude")
+
+        self.HourPrice = QtGui.QLineEdit(self.GroupBox6)
+        self.HourPrice.setGeometry(QtCore.QRect(4,15,58,22))
+        self.HourPrice.setObjectName("HourPrice")
+
+        self.TextLabel2_4 = QtGui.QLabel(self.Price)
+        self.TextLabel2_4.setGeometry(QtCore.QRect(44,209,276,16))
+        self.TextLabel2_4.setObjectName("TextLabel2_4")
+
+        self.CostInPrice = QtGui.QCheckBox(self.Price)
+        self.CostInPrice.setGeometry(QtCore.QRect(112,189,119,17))
+        self.CostInPrice.setChecked(True)
+        self.CostInPrice.setObjectName("CostInPrice")
+        self.Tab.addTab(self.Price, "")
+
+        self.retranslateUi(B_Options)
+
+    def retranslateUi(self, B_Options):
+        B_Options.setWindowTitle(QtGui.QApplication.translate("B_Options", "Options", None, QtGui.QApplication.UnicodeUTF8))
+        self.OK.setText(QtGui.QApplication.translate("B_Options", "OK", None, QtGui.QApplication.UnicodeUTF8))
+        self.Cancel.setText(QtGui.QApplication.translate("B_Options", "Cancel", None, QtGui.QApplication.UnicodeUTF8))
+        self.TextLabel1.setText(QtGui.QApplication.translate("B_Options", "Crafter Skill:", None, QtGui.QApplication.UnicodeUTF8))
+        self.CapDistance.setText(QtGui.QApplication.translate("B_Options", "Show Distance To Cap (instead of total)", None, QtGui.QApplication.UnicodeUTF8))
+        self.ShowDoneGems.setText(QtGui.QApplication.translate("B_Options", "\"Done\" Gems do not show up in Materials List", None, QtGui.QApplication.UnicodeUTF8))
+        self.IncludeRR.setText(QtGui.QApplication.translate("B_Options", "Include Racial Resists in Totals", None, QtGui.QApplication.UnicodeUTF8))
+        self.HideNonClassSkills.setText(QtGui.QApplication.translate("B_Options", "Hide Skills not usable by this Class", None, QtGui.QApplication.UnicodeUTF8))
+        self.Coop.setText(QtGui.QApplication.translate("B_Options", "Co-op / PvP Server", None, QtGui.QApplication.UnicodeUTF8))
+        self.TextLabel2_5.setText(QtGui.QApplication.translate("B_Options", "(Lets you access items from all realms)", None, QtGui.QApplication.UnicodeUTF8))
+        self.Tab.setTabText(self.Tab.indexOf(self.General), QtGui.QApplication.translate("B_Options", "General", None, QtGui.QApplication.UnicodeUTF8))
+        self.TextLabel2_2.setText(QtGui.QApplication.translate("B_Options", "Template Notes:", None, QtGui.QApplication.UnicodeUTF8))
+        self.Tab.setTabText(self.Tab.indexOf(self.Notes), QtGui.QApplication.translate("B_Options", "Notes", None, QtGui.QApplication.UnicodeUTF8))
+        self.GroupBox1.setTitle(QtGui.QApplication.translate("B_Options", "Price per", None, QtGui.QApplication.UnicodeUTF8))
+        self.TextLabel1_2.setText(QtGui.QApplication.translate("B_Options", "Gem:", None, QtGui.QApplication.UnicodeUTF8))
+        self.TextLabel1_2_3.setText(QtGui.QApplication.translate("B_Options", "Order:", None, QtGui.QApplication.UnicodeUTF8))
+        self.TextLabel1_2_2.setText(QtGui.QApplication.translate("B_Options", "Item:", None, QtGui.QApplication.UnicodeUTF8))
+        self.TextLabel2_3.setText(QtGui.QApplication.translate("B_Options", "(cost+ X)", None, QtGui.QApplication.UnicodeUTF8))
+        self.PPGem.setText(QtGui.QApplication.translate("B_Options", "0", None, QtGui.QApplication.UnicodeUTF8))
+        self.PPItem.setText(QtGui.QApplication.translate("B_Options", "0", None, QtGui.QApplication.UnicodeUTF8))
+        self.PPOrder.setText(QtGui.QApplication.translate("B_Options", "0", None, QtGui.QApplication.UnicodeUTF8))
+        self.GroupBox2.setTitle(QtGui.QApplication.translate("B_Options", "Gem qual markup", None, QtGui.QApplication.UnicodeUTF8))
+        self.TextLabel3.setText(QtGui.QApplication.translate("B_Options", "Markup:", None, QtGui.QApplication.UnicodeUTF8))
+        self.TextLabel4.setText(QtGui.QApplication.translate("B_Options", "Quality:", None, QtGui.QApplication.UnicodeUTF8))
+        self.TextLabel5.setText(QtGui.QApplication.translate("B_Options", "%", None, QtGui.QApplication.UnicodeUTF8))
+        self.TextLabel6.setText(QtGui.QApplication.translate("B_Options", "(cost + (cost * X%))", None, QtGui.QApplication.UnicodeUTF8))
+        self.QualLevel.addItem(QtGui.QApplication.translate("B_Options", "94", None, QtGui.QApplication.UnicodeUTF8))
+        self.QualLevel.addItem(QtGui.QApplication.translate("B_Options", "95", None, QtGui.QApplication.UnicodeUTF8))
+        self.QualLevel.addItem(QtGui.QApplication.translate("B_Options", "96", None, QtGui.QApplication.UnicodeUTF8))
+        self.QualLevel.addItem(QtGui.QApplication.translate("B_Options", "97", None, QtGui.QApplication.UnicodeUTF8))
+        self.QualLevel.addItem(QtGui.QApplication.translate("B_Options", "98", None, QtGui.QApplication.UnicodeUTF8))
+        self.QualLevel.addItem(QtGui.QApplication.translate("B_Options", "99", None, QtGui.QApplication.UnicodeUTF8))
+        self.QualLevel.addItem(QtGui.QApplication.translate("B_Options", "100", None, QtGui.QApplication.UnicodeUTF8))
+        self.QualMarkup.setText(QtGui.QApplication.translate("B_Options", "0", None, QtGui.QApplication.UnicodeUTF8))
+        self.QualInclude.setText(QtGui.QApplication.translate("B_Options", "Include", None, QtGui.QApplication.UnicodeUTF8))
+        self.GroupBox3.setTitle(QtGui.QApplication.translate("B_Options", "Price per lvl/point", None, QtGui.QApplication.UnicodeUTF8))
+        self.TextLabel7.setText(QtGui.QApplication.translate("B_Options", "per level", None, QtGui.QApplication.UnicodeUTF8))
+        self.TextLabel8.setText(QtGui.QApplication.translate("B_Options", "per imbue pt.", None, QtGui.QApplication.UnicodeUTF8))
+        self.TextLabel9.setText(QtGui.QApplication.translate("B_Options", "per O/C pt.", None, QtGui.QApplication.UnicodeUTF8))
+        self.TextLabel10.setText(QtGui.QApplication.translate("B_Options", "(cost + X)", None, QtGui.QApplication.UnicodeUTF8))
+        self.PPImbue.setText(QtGui.QApplication.translate("B_Options", "0", None, QtGui.QApplication.UnicodeUTF8))
+        self.PPInclude.setText(QtGui.QApplication.translate("B_Options", "Include", None, QtGui.QApplication.UnicodeUTF8))
+        self.PPLevel.setText(QtGui.QApplication.translate("B_Options", "0", None, QtGui.QApplication.UnicodeUTF8))
+        self.PPOC.setText(QtGui.QApplication.translate("B_Options", "0", None, QtGui.QApplication.UnicodeUTF8))
+        self.GroupBox4.setTitle(QtGui.QApplication.translate("B_Options", "General Markup", None, QtGui.QApplication.UnicodeUTF8))
+        self.TextLabel11.setText(QtGui.QApplication.translate("B_Options", "%", None, QtGui.QApplication.UnicodeUTF8))
+        self.TextLabel12.setText(QtGui.QApplication.translate("B_Options", "(cost + (cost * X%))", None, QtGui.QApplication.UnicodeUTF8))
+        self.GenMarkup.setText(QtGui.QApplication.translate("B_Options", "50", None, QtGui.QApplication.UnicodeUTF8))
+        self.GroupBox5.setTitle(QtGui.QApplication.translate("B_Options", "Price by gem tier", None, QtGui.QApplication.UnicodeUTF8))
+        self.TextLabel13.setText(QtGui.QApplication.translate("B_Options", "Tier:", None, QtGui.QApplication.UnicodeUTF8))
+        self.TextLabel14.setText(QtGui.QApplication.translate("B_Options", "Price:", None, QtGui.QApplication.UnicodeUTF8))
+        self.TextLabel15.setText(QtGui.QApplication.translate("B_Options", "(cost + X)", None, QtGui.QApplication.UnicodeUTF8))
+        self.Tier.addItem(QtGui.QApplication.translate("B_Options", "1", None, QtGui.QApplication.UnicodeUTF8))
+        self.Tier.addItem(QtGui.QApplication.translate("B_Options", "2", None, QtGui.QApplication.UnicodeUTF8))
+        self.Tier.addItem(QtGui.QApplication.translate("B_Options", "3", None, QtGui.QApplication.UnicodeUTF8))
+        self.Tier.addItem(QtGui.QApplication.translate("B_Options", "4", None, QtGui.QApplication.UnicodeUTF8))
+        self.Tier.addItem(QtGui.QApplication.translate("B_Options", "5", None, QtGui.QApplication.UnicodeUTF8))
+        self.Tier.addItem(QtGui.QApplication.translate("B_Options", "6", None, QtGui.QApplication.UnicodeUTF8))
+        self.Tier.addItem(QtGui.QApplication.translate("B_Options", "7", None, QtGui.QApplication.UnicodeUTF8))
+        self.Tier.addItem(QtGui.QApplication.translate("B_Options", "8", None, QtGui.QApplication.UnicodeUTF8))
+        self.Tier.addItem(QtGui.QApplication.translate("B_Options", "9", None, QtGui.QApplication.UnicodeUTF8))
+        self.Tier.addItem(QtGui.QApplication.translate("B_Options", "10", None, QtGui.QApplication.UnicodeUTF8))
+        self.TierPrice.setText(QtGui.QApplication.translate("B_Options", "0", None, QtGui.QApplication.UnicodeUTF8))
+        self.TierInclude.setText(QtGui.QApplication.translate("B_Options", "Include", None, QtGui.QApplication.UnicodeUTF8))
+        self.GroupBox6.setTitle(QtGui.QApplication.translate("B_Options", "Per hour", None, QtGui.QApplication.UnicodeUTF8))
+        self.HourInclude.setText(QtGui.QApplication.translate("B_Options", "Include", None, QtGui.QApplication.UnicodeUTF8))
+        self.HourPrice.setText(QtGui.QApplication.translate("B_Options", "0", None, QtGui.QApplication.UnicodeUTF8))
+        self.TextLabel2_4.setText(QtGui.QApplication.translate("B_Options", "All numbers (except percentages) are in amounts of Gold.", None, QtGui.QApplication.UnicodeUTF8))
+        self.CostInPrice.setText(QtGui.QApplication.translate("B_Options", "Include cost in price", None, QtGui.QApplication.UnicodeUTF8))
+        self.Tab.setTabText(self.Tab.indexOf(self.Price), QtGui.QApplication.translate("B_Options", "Price", None, QtGui.QApplication.UnicodeUTF8))

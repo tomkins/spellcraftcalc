@@ -1,75 +1,51 @@
 # -*- coding: utf-8 -*-
 
-# Form implementation generated from reading ui file 'ReportWindow.ui'
+# Form implementation generated from reading ui file 'ReportWindow.ui4'
 #
-# Created: Wed Sep 28 18:57:24 2005
-#      by: The PyQt User Interface Compiler (pyuic) 3.15
+# Created: Wed Sep 06 17:41:33 2006
+#      by: PyQt4 UI code generator 4.0.1
 #
 # WARNING! All changes made in this file will be lost!
 
+import sys
+from PyQt4 import QtCore, QtGui
 
-from qt import *
+class Ui_B_ReportWindow(object):
+    def setupUi(self, B_ReportWindow):
+        B_ReportWindow.setObjectName("B_ReportWindow")
+        B_ReportWindow.resize(QtCore.QSize(QtCore.QRect(0,0,573,480).size()).expandedTo(B_ReportWindow.minimumSizeHint()))
 
+        self.ReportText = QtGui.QTextBrowser(B_ReportWindow)
+        self.ReportText.setGeometry(QtCore.QRect(10,9,569,430))
+        self.ReportText.setObjectName("ReportText")
 
-class B_ReportWindow(QDialog):
-    def __init__(self,parent = None,name = None,modal = 0,fl = 0):
-        QDialog.__init__(self,parent,name,modal,fl)
+        self.PushButton1 = QtGui.QPushButton(B_ReportWindow)
+        self.PushButton1.setGeometry(QtCore.QRect(35,447,93,26))
+        self.PushButton1.setObjectName("PushButton1")
 
-        if not name:
-            self.setName("B_ReportWindow")
+        self.PushButton1_2 = QtGui.QPushButton(B_ReportWindow)
+        self.PushButton1_2.setGeometry(QtCore.QRect(149,447,93,26))
+        self.PushButton1_2.setObjectName("PushButton1_2")
 
+        self.PushButton2 = QtGui.QPushButton(B_ReportWindow)
+        self.PushButton2.setGeometry(QtCore.QRect(446,448,93,26))
+        self.PushButton2.setObjectName("PushButton2")
 
+        self.MMLabel = QtGui.QLabel(B_ReportWindow)
+        self.MMLabel.setGeometry(QtCore.QRect(298,451,91,16))
+        self.MMLabel.setObjectName("MMLabel")
 
-        self.ReportText = QTextBrowser(self,"ReportText")
-        self.ReportText.setGeometry(QRect(10,9,569,430))
+        self.MatMultiplier = QtGui.QSpinBox(B_ReportWindow)
+        self.MatMultiplier.setGeometry(QtCore.QRect(256,449,37,21))
+        self.MatMultiplier.setMinimum(1)
+        self.MatMultiplier.setProperty("value",QtCore.QVariant(1))
+        self.MatMultiplier.setObjectName("MatMultiplier")
 
-        self.PushButton1 = QPushButton(self,"PushButton1")
-        self.PushButton1.setGeometry(QRect(35,447,93,26))
+        self.retranslateUi(B_ReportWindow)
 
-        self.PushButton1_2 = QPushButton(self,"PushButton1_2")
-        self.PushButton1_2.setGeometry(QRect(149,447,93,26))
-
-        self.PushButton2 = QPushButton(self,"PushButton2")
-        self.PushButton2.setGeometry(QRect(446,448,93,26))
-
-        self.MMLabel = QLabel(self,"MMLabel")
-        self.MMLabel.setGeometry(QRect(298,451,91,16))
-
-        self.MatMultiplier = QSpinBox(self,"MatMultiplier")
-        self.MatMultiplier.setGeometry(QRect(256,449,37,21))
-        self.MatMultiplier.setMinValue(1)
-        self.MatMultiplier.setValue(1)
-
-        self.languageChange()
-
-        self.resize(QSize(573,480).expandedTo(self.minimumSizeHint()))
-        self.clearWState(Qt.WState_Polished)
-
-        self.connect(self.PushButton2,SIGNAL("clicked()"),self.closeWindow)
-        self.connect(self.PushButton1,SIGNAL("clicked()"),self.saveToHTML)
-        self.connect(self.PushButton1_2,SIGNAL("clicked()"),self.saveToText)
-        self.connect(self.MatMultiplier,SIGNAL("valueChanged(int)"),self.matMultiplierUpdate)
-
-
-    def languageChange(self):
-        self.setCaption(self.__tr("B_ReportWindow"))
-        self.PushButton1.setText(self.__tr("Save As HTML"))
-        self.PushButton1_2.setText(self.__tr("Save As Text"))
-        self.PushButton2.setText(self.__tr("Close"))
-        self.MMLabel.setText(self.__tr("Materials Multiplier"))
-
-
-    def closeWindow(self):
-        print "B_ReportWindow.closeWindow(): Not implemented yet"
-
-    def matMultiplierUpdate(self,a0):
-        print "B_ReportWindow.matMultiplierUpdate(int): Not implemented yet"
-
-    def saveToHTML(self):
-        print "B_ReportWindow.saveToHTML(): Not implemented yet"
-
-    def saveToText(self):
-        print "B_ReportWindow.saveToText(): Not implemented yet"
-
-    def __tr(self,s,c = None):
-        return qApp.translate("B_ReportWindow",s,c)
+    def retranslateUi(self, B_ReportWindow):
+        B_ReportWindow.setWindowTitle(QtGui.QApplication.translate("B_ReportWindow", "B_ReportWindow", None, QtGui.QApplication.UnicodeUTF8))
+        self.PushButton1.setText(QtGui.QApplication.translate("B_ReportWindow", "Save As HTML", None, QtGui.QApplication.UnicodeUTF8))
+        self.PushButton1_2.setText(QtGui.QApplication.translate("B_ReportWindow", "Save As Text", None, QtGui.QApplication.UnicodeUTF8))
+        self.PushButton2.setText(QtGui.QApplication.translate("B_ReportWindow", "Close", None, QtGui.QApplication.UnicodeUTF8))
+        self.MMLabel.setText(QtGui.QApplication.translate("B_ReportWindow", "Materials Multiplier", None, QtGui.QApplication.UnicodeUTF8))

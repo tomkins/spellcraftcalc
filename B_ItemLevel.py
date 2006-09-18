@@ -1,124 +1,84 @@
 # -*- coding: utf-8 -*-
 
-# Form implementation generated from reading ui file 'ItemLevel.ui'
+# Form implementation generated from reading ui file 'ItemLevel.ui4'
 #
-# Created: Fri Nov 25 03:00:07 2005
-#      by: The PyQt User Interface Compiler (pyuic) 3.15
+# Created: Sun Sep 17 21:38:49 2006
+#      by: PyQt4 UI code generator 4.0.1
 #
 # WARNING! All changes made in this file will be lost!
 
+import sys
+from SearchingCombo import SearchingCombo
+from PyQt4 import QtCore, QtGui, Qt3Support
 
-from qt import *
-#Import the Custom Widgets
-from SearchingCombo import *
+class Ui_B_ItemLevel(object):
+    def setupUi(self, B_ItemLevel):
+        B_ItemLevel.setObjectName("B_ItemLevel")
+        B_ItemLevel.resize(QtCore.QSize(QtCore.QRect(0,0,250,158).size()).expandedTo(B_ItemLevel.minimumSizeHint()))
 
+        self.ButtonGroup3 = QtGui.QGroupBox(B_ItemLevel)
+        self.ButtonGroup3.setGeometry(QtCore.QRect(6,6,117,111))
+        self.ButtonGroup3.setObjectName("ButtonGroup3")
 
-class B_ItemLevel(QDialog):
-    def __init__(self,parent = None,name = None,modal = 0,fl = 0):
-        QDialog.__init__(self,parent,name,modal,fl)
+        self.Armor = QtGui.QRadioButton(self.ButtonGroup3)
+        self.Armor.setGeometry(QtCore.QRect(5,2,85,20))
+        self.Armor.setChecked(True)
+        self.Armor.setObjectName("Armor")
 
-        if not name:
-            self.setName("B_ItemLevel")
+        self.ClothArmor = QtGui.QRadioButton(self.ButtonGroup3)
+        self.ClothArmor.setGeometry(QtCore.QRect(5,23,85,20))
+        self.ClothArmor.setObjectName("ClothArmor")
 
+        self.Weapon = QtGui.QRadioButton(self.ButtonGroup3)
+        self.Weapon.setGeometry(QtCore.QRect(3,45,85,20))
+        self.Weapon.setObjectName("Weapon")
 
+        self.Shield = QtGui.QRadioButton(self.ButtonGroup3)
+        self.Shield.setGeometry(QtCore.QRect(5,66,85,20))
+        self.Shield.setObjectName("Shield")
 
-        self.ButtonGroup3 = QButtonGroup(self,"ButtonGroup3")
-        self.ButtonGroup3.setGeometry(QRect(6,6,117,111))
-        self.ButtonGroup3.setLineWidth(0)
+        self.ReinforcedShield = QtGui.QRadioButton(self.ButtonGroup3)
+        self.ReinforcedShield.setGeometry(QtCore.QRect(5,87,108,20))
+        self.ReinforcedShield.setObjectName("ReinforcedShield")
 
-        self.Armor = QRadioButton(self.ButtonGroup3,"Armor")
-        self.Armor.setGeometry(QRect(5,2,85,20))
-        self.Armor.setChecked(1)
+        self.LevelLabel = QtGui.QLabel(B_ItemLevel)
+        self.LevelLabel.setGeometry(QtCore.QRect(130,10,45,16))
+        self.LevelLabel.setObjectName("LevelLabel")
 
-        self.ClothArmor = QRadioButton(self.ButtonGroup3,"ClothArmor")
-        self.ClothArmor.setGeometry(QRect(5,23,85,20))
+        self.Level = QtGui.QLineEdit(B_ItemLevel)
+        self.Level.setGeometry(QtCore.QRect(185,7,60,22))
+        self.Level.setObjectName("Level")
 
-        self.Weapon = QRadioButton(self.ButtonGroup3,"Weapon")
-        self.Weapon.setGeometry(QRect(3,45,85,20))
+        self.AFDPSLabel = QtGui.QLabel(B_ItemLevel)
+        self.AFDPSLabel.setGeometry(QtCore.QRect(130,53,45,16))
+        self.AFDPSLabel.setObjectName("AFDPSLabel")
 
-        self.Shield = QRadioButton(self.ButtonGroup3,"Shield")
-        self.Shield.setGeometry(QRect(5,66,85,20))
+        self.AFDPS = QtGui.QLineEdit(B_ItemLevel)
+        self.AFDPS.setGeometry(QtCore.QRect(185,50,60,22))
+        self.AFDPS.setObjectName("AFDPS")
 
-        self.ReinforcedShield = QRadioButton(self.ButtonGroup3,"ReinforcedShield")
-        self.ReinforcedShield.setGeometry(QRect(5,87,108,20))
+        self.ShieldType = SearchingCombo(B_ItemLevel)
+        self.ShieldType.setGeometry(QtCore.QRect(135,93,110,22))
+        self.ShieldType.setObjectName("ShieldType")
 
-        self.LevelLabel = QLabel(self,"LevelLabel")
-        self.LevelLabel.setGeometry(QRect(130,10,45,16))
+        self.OK = QtGui.QPushButton(B_ItemLevel)
+        self.OK.setGeometry(QtCore.QRect(11,124,58,26))
+        self.OK.setObjectName("OK")
 
-        self.Level = QLineEdit(self,"Level")
-        self.Level.setGeometry(QRect(185,7,60,22))
+        self.Cancel = QtGui.QPushButton(B_ItemLevel)
+        self.Cancel.setGeometry(QtCore.QRect(187,124,58,26))
+        self.Cancel.setObjectName("Cancel")
 
-        self.AFDPSLabel = QLabel(self,"AFDPSLabel")
-        self.AFDPSLabel.setGeometry(QRect(130,53,45,16))
+        self.retranslateUi(B_ItemLevel)
 
-        self.AFDPS = QLineEdit(self,"AFDPS")
-        self.AFDPS.setGeometry(QRect(185,50,60,22))
-
-        self.ShieldType = SearchingCombo(self,"ShieldType")
-        self.ShieldType.setGeometry(QRect(135,93,110,22))
-
-        self.OK = QPushButton(self,"OK")
-        self.OK.setGeometry(QRect(11,124,58,26))
-
-        self.Cancel = QPushButton(self,"Cancel")
-        self.Cancel.setGeometry(QRect(187,124,58,26))
-
-        self.languageChange()
-
-        self.resize(QSize(250,158).expandedTo(self.minimumSizeHint()))
-        self.clearWState(Qt.WState_Polished)
-
-        self.connect(self.Armor,SIGNAL("clicked()"),self.TypeChanged)
-        self.connect(self.ClothArmor,SIGNAL("clicked()"),self.TypeChanged)
-        self.connect(self.Weapon,SIGNAL("clicked()"),self.TypeChanged)
-        self.connect(self.Shield,SIGNAL("clicked()"),self.TypeChanged)
-        self.connect(self.ReinforcedShield,SIGNAL("clicked()"),self.TypeChanged)
-        self.connect(self.Level,SIGNAL("textChanged(const QString&)"),self.LevelChanged)
-        self.connect(self.Level,SIGNAL("lostFocus()"),self.LevelDone)
-        self.connect(self.AFDPS,SIGNAL("textChanged(const QString&)"),self.AFDPSChanged)
-        self.connect(self.AFDPS,SIGNAL("lostFocus()"),self.AFDPSDone)
-        self.connect(self.ShieldType,SIGNAL("activated(const QString&)"),self.ShieldChanged)
-        self.connect(self.OK,SIGNAL("clicked()"),self.OkClicked)
-        self.connect(self.Cancel,SIGNAL("clicked()"),self.CancelClicked)
-
-
-    def languageChange(self):
-        self.setCaption(self.__tr("Item Level"))
-        self.ButtonGroup3.setTitle(QString.null)
-        self.Armor.setText(self.__tr("Armor"))
-        self.ClothArmor.setText(self.__tr("Cloth Armor"))
-        self.Weapon.setText(self.__tr("Weapon"))
-        self.Shield.setText(self.__tr("Shield"))
-        self.ReinforcedShield.setText(self.__tr("Reinforced Sheild"))
-        self.LevelLabel.setText(self.__tr("Level:"))
-        self.AFDPSLabel.setText(self.__tr("AF/DPS:"))
-        self.OK.setText(self.__tr("OK"))
-        self.Cancel.setText(self.__tr("Cancel"))
-
-
-    def TypeChanged(self):
-        print "B_ItemLevel.TypeChanged(): Not implemented yet"
-
-    def LevelChanged(self,a0):
-        print "B_ItemLevel.LevelChanged(const QString&): Not implemented yet"
-
-    def LevelDone(self):
-        print "B_ItemLevel.LevelDone(): Not implemented yet"
-
-    def AFDPSChanged(self,a0):
-        print "B_ItemLevel.AFDPSChanged(const QString&): Not implemented yet"
-
-    def AFDPSDone(self):
-        print "B_ItemLevel.AFDPSDone(): Not implemented yet"
-
-    def ShieldChanged(self,a0):
-        print "B_ItemLevel.ShieldChanged(const QString&): Not implemented yet"
-
-    def OkClicked(self):
-        print "B_ItemLevel.OkClicked(): Not implemented yet"
-
-    def CancelClicked(self):
-        print "B_ItemLevel.CancelClicked(): Not implemented yet"
-
-    def __tr(self,s,c = None):
-        return qApp.translate("B_ItemLevel",s,c)
+    def retranslateUi(self, B_ItemLevel):
+        B_ItemLevel.setWindowTitle(QtGui.QApplication.translate("B_ItemLevel", "Item Level", None, QtGui.QApplication.UnicodeUTF8))
+        self.Armor.setText(QtGui.QApplication.translate("B_ItemLevel", "Armor", None, QtGui.QApplication.UnicodeUTF8))
+        self.ClothArmor.setText(QtGui.QApplication.translate("B_ItemLevel", "Cloth Armor", None, QtGui.QApplication.UnicodeUTF8))
+        self.Weapon.setText(QtGui.QApplication.translate("B_ItemLevel", "Weapon", None, QtGui.QApplication.UnicodeUTF8))
+        self.Shield.setText(QtGui.QApplication.translate("B_ItemLevel", "Shield", None, QtGui.QApplication.UnicodeUTF8))
+        self.ReinforcedShield.setText(QtGui.QApplication.translate("B_ItemLevel", "Reinforced Sheild", None, QtGui.QApplication.UnicodeUTF8))
+        self.LevelLabel.setText(QtGui.QApplication.translate("B_ItemLevel", "Level:", None, QtGui.QApplication.UnicodeUTF8))
+        self.AFDPSLabel.setText(QtGui.QApplication.translate("B_ItemLevel", "AF/DPS:", None, QtGui.QApplication.UnicodeUTF8))
+        self.OK.setText(QtGui.QApplication.translate("B_ItemLevel", "OK", None, QtGui.QApplication.UnicodeUTF8))
+        self.Cancel.setText(QtGui.QApplication.translate("B_ItemLevel", "Cancel", None, QtGui.QApplication.UnicodeUTF8))
