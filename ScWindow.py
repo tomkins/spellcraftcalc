@@ -1194,9 +1194,9 @@ class ScWindow(QMainWindow, Ui_B_SC):
             ret = QMessageBox.warning(self, 'Save Changes?', 'Some changes may not have been saved. Are you sure you want to discard these changes?', 'Yes', 'No')
             if ret == 1:
                 return
-        if len(args) == 1:
+        if len(args) == 0:
             templatedir = os.path.join(os.path.dirname(os.path.abspath(sys.argv[0])), 'templates')
-            filename = QFileDialog.getOpenFileName(templatedir, "Templates (*.xml *.scc)")
+            filename = QFileDialog.getOpenFileName(self, templatedir, "Templates (*.xml *.scc)")
         else:
             filename = args[0]
         filename = unicode(filename)
@@ -1355,7 +1355,7 @@ class ScWindow(QMainWindow, Ui_B_SC):
         RW.exec_()
 
     def chooseReportFile(self):
-	filename = QFileDialog.getOpenFileName('./reports', "Reports (*.xml *.rpt)")
+	filename = QFileDialog.getOpenFileName(self, './reports', "Reports (*.xml *.rpt)")
         if filename is not None and str(filename) != '':
             self.reportFile = str(filename)
 
