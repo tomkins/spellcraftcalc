@@ -7,6 +7,7 @@
 
 from PyQt4.QtCore import *
 from PyQt4.QtGui import *
+from PyQt4.Qt3Support import Q3FileDialog
 from B_ScWindow import *
 from Item import *
 from Character import *
@@ -810,26 +811,26 @@ class ScWindow(QMainWindow, Ui_B_SC):
         return itemimbue
 
     def calcImbue(self, item, display):
-        itemtype = item.getAttr('ActiveState')
-        if itemtype == 'drop': return 0
+        itemstate = item.getAttr('ActiveState')
+        if itemstate == 'drop': return 0
         mvals = []
         for i in range(0, 4):
-            type = item.getSlotAttr(itemtype, i, 'Type')
-            amount = item.getSlotAttr(itemtype, i, 'Amount')
+            itemtype = item.getSlotAttr(itemstate, i, 'Type')
+            amount = item.getSlotAttr(itemstate, i, 'Amount')
             if amount == '': 
                 mval = 0.0
-            elif type == 'Focus':
+            elif itemtype == 'Focus':
                 mval = 1.0
-            elif type == 'Unused':
+            elif itemtype == 'Unused':
                 mval = 0.0
-            elif type == 'Stat':
+            elif itemtype == 'Stat':
                 mval = ((int(amount) - 1) / 3.0) * 2 + 1
-            elif type == 'Resist' or type == 'Power':
+            elif itemtype == 'Resist' or itemtype == 'Power':
                 mval = (int(amount) - 1) * 2
                 if mval == 0: mval = 1.0
-            elif type == 'Hits':
+            elif itemtype == 'Hits':
                 mval = int(amount) / 4.0
-            elif type == 'Skill':
+            elif itemtype == 'Skill':
                 mval = (int(amount) - 1) * 5.0
                 if mval == 0: mval = 1.0    
             if display:
@@ -1089,16 +1090,16 @@ class ScWindow(QMainWindow, Ui_B_SC):
         else:
             extstr = '*%s.xml *.%s' % (ext, ext)
         itemdir = os.path.join(os.path.dirname(os.path.abspath(sys.argv[0])), 'items', self.realm, ext)
-        Qfd = QFileDialog(itemdir, "Items (%s)" % extstr, self, None, 1)
+        Qfd = Q3FileDialog(itemdir, "Items (%s)" % extstr, self, None, 1)
         Qfp = ItemList.ItemList(Qfd, self)
-        Qfd.setMode(QFileDialog.ExistingFile)
+        Qfd.setMode(Q3FileDialog.ExistingFile)
         Qfd.setInfoPreviewEnabled(1)
         Qfd.setInfoPreview(Qfp, Qfp.preview)
-        Qfd.setPreviewMode(QFileDialog.Info)
-        Qfd.setViewMode(QFileDialog.List)
+        Qfd.setPreviewMode(Q3FileDialog.Info)
+        Qfd.setViewMode(Q3FileDialog.List)
         ## Qfp is nested in a QWidgetStack within a QSplitter, which we will tweak:
         Qfp.parent().parent().setSizes([165, 150])
-        if Qfd.exec_loop():
+        if Qfd.exec_():
             filename = Qfd.selectedFile()
             if filename is not None and unicode(filename) != '':
                 item = Item(self.currentTabLabel)
@@ -1115,7 +1116,7 @@ class ScWindow(QMainWindow, Ui_B_SC):
                 self.modified = 1
 
     def ItemLevelShow(self):
-        level = self.ItemLevelWindow.exec_loop()
+        level = self.ItemLevelWindow.exec_()
         if level != -1:
             self.ItemLevel.setText(str(level))
             self.AFDPS_Edit.setText(str(self.ItemLevelWindow.afdps))
@@ -1185,7 +1186,7 @@ class ScWindow(QMainWindow, Ui_B_SC):
             self.filename = filename
             self.updateRecentFiles(filename)
             filetitle = os.path.basename(filename)
-            self.setCaption(filetitle + " - Kort's Spellcrafting Calculator")
+            self.setWindowTitle(filetitle + " - Kort's Spellcrafting Calculator")
             
 
     def openFile(self, *args):
@@ -1230,7 +1231,7 @@ class ScWindow(QMainWindow, Ui_B_SC):
             self.filename = filename
             self.updateRecentFiles(filename)
             filetitle = os.path.basename(filename)
-            self.setCaption(filetitle + " - Kort's Spellcrafting Calculator")
+            self.setWindowTitle(filetitle + " - Kort's Spellcrafting Calculator")
 
     def updateRecentFiles(self, fn):
         if fn is not None:
@@ -1327,7 +1328,7 @@ class ScWindow(QMainWindow, Ui_B_SC):
     def openOptions(self):
         self.modified = 1
         self.nocalc = 1
-        res = Options.Options(self, '', 1).exec_loop()
+        res = Options.Options(self, '', 1).exec_()
         if res == 1:
              self.CharClassChanged('')
         self.nocalc = 0
@@ -1338,7 +1339,7 @@ class ScWindow(QMainWindow, Ui_B_SC):
         CW = CraftWindow.CraftWindow(self, '', 1)
         CW.loadItem(self.itemattrlist.get(self.currentTabLabel))
         CW.ExpMultiplier.setValue(self.craftMultiplier)
-        CW.exec_loop()
+        CW.exec_()
         self.craftMultiplier = int(CW.ExpMultiplier.value())
         self.calculate()
         self.modified = 1
@@ -1346,12 +1347,12 @@ class ScWindow(QMainWindow, Ui_B_SC):
     def openMaterialsReport(self):
         RW = ReportWindow.ReportWindow(self, '', 1)
         RW.materialsReport(self.itemattrlist)
-        RW.exec_loop()
+        RW.exec_()
 
     def openConfigReport(self):
         RW = ReportWindow.ReportWindow(self, '', 1)
         RW.parseConfigReport(self.reportFile, self.itemattrlist)
-        RW.exec_loop()
+        RW.exec_()
 
     def chooseReportFile(self):
 	filename = QFileDialog.getOpenFileName('./reports', "Reports (*.xml *.rpt)")
@@ -1360,11 +1361,11 @@ class ScWindow(QMainWindow, Ui_B_SC):
 
     def aboutBox(self):
         splash = AboutScreen(parent=self,modal=True)
-        splash.exec_loop()
+        splash.exec_()
 
     def openCraftBars(self):
         CB = CraftBar.CraftBar(self.DaocPath, self, '', 1)
-        CB.exec_loop()
+        CB.exec_()
         self.DaocPath = str(CB.DaocPath.text())
 
     def DelveItemsDialog(self, find, findtype = None):
@@ -1376,10 +1377,10 @@ class ScWindow(QMainWindow, Ui_B_SC):
             else:
                 toprng = 5
             for slot in range(0, toprng):
-                type = str(item.getSlotAttr(activestate, slot, 'Type'))
-                if type == 'Unused': continue
-                if (findtype and type != findtype) or \
-                   (not findtype and type in ('Resist',)): continue
+                itemtype = str(item.getSlotAttr(activestate, slot, 'Type'))
+                if itemtype == 'Unused': continue
+                if (findtype and itemtype != findtype) or \
+                   (not findtype and itemtype in ('Resist',)): continue
                 effect = str(item.getSlotAttr(activestate, slot, 'Effect'))
                 if effect != find: 
                     if find == 'Power' or find == '% Power Pool':
@@ -1388,7 +1389,7 @@ class ScWindow(QMainWindow, Ui_B_SC):
                     elif effect == 'Acuity':
                        if not find in AllBonusList[self.realm][self.charclass][effect]:
                            continue
-                    elif (type == 'Skill' or type == 'Focus') and effect[0:4] == 'All ' \
+                    elif (type == 'Skill' or itemtype == 'Focus') and effect[0:4] == 'All ' \
                             and effect in AllBonusList[self.realm][self.charclass].keys():
                         if not find in AllBonusList[self.realm][self.charclass][effect]:
                             continue
@@ -1399,27 +1400,27 @@ class ScWindow(QMainWindow, Ui_B_SC):
                     amount += ' Levels Focus'
                 if effect != find: 
                     amount += ' ' + effect
-                if type == 'Cap Increase':
+                if itemtype == 'Cap Increase':
                     amount += ' Cap'
                 locs.append([key, amount])
-        DW = DisplayWindow.DisplayWindow(self, modal = 1)
+        DW = DisplayWindow.DisplayWindow(self)
         if findtype:
-            DW.setCaption('Slots With %s %s' % (find, findtype))
+            DW.setWindowTitle('Slots With %s %s' % (find, findtype))
         else:
-            DW.setCaption('Slots With %s' % find)
+            DW.setWindowTitle('Slots With %s' % find)
         DW.loadLocations(locs)
-        DW.exec_loop()
+        DW.exec_()
 
 
     def gemClicked(self, item, slot):
-        RW = ReportWindow.ReportWindow(self, '', 1)
-        RW.setCaption('Materials')
+        RW = ReportWindow.ReportWindow(self, '', True)
+        RW.setWindowTitle('Materials')
         RW.materialsReport({item: self.itemattrlist[item]}, slot)
-        RW.exec_loop()
+        RW.exec_()
 
     def mousePressEvent(self, e):
         if e is None: return
-        child = self.childAt(e.pos(), False)
+        child = self.childAt(e.pos())
         if child is None: return
         if not isinstance(child, QLabel): return
         shortname = str(child.name())
