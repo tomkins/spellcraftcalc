@@ -237,7 +237,7 @@ class Options(QDialog, Ui_B_Options):
         self.parent.includeRacials = self.IncludeRR.isChecked()
         self.parent.capDistance = self.CapDistance.isChecked()
         self.parent.hideNonClassSkills = self.HideNonClassSkills.isChecked()
-        self.parent.noteText = str(self.NoteText.text())
+        self.parent.noteText = str(self.NoteText.toPlainText())
         self.parent.pricingInfo = self.getPriceInfo()
         self.parent.coop = self.Coop.isChecked()
         scfile = os.path.join(os.path.dirname(os.path.abspath(sys.argv[0])),

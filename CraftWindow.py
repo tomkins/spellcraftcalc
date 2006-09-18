@@ -92,17 +92,17 @@ class CraftWindow(QDialog, Ui_B_CraftWindow):
         self.MatsUsed.clear()
         self.MatsExpected.clear()
         for mat, val in materials['Used']['Gems'].items():
-            self.MatsUsed.insertLine('%d %s Gem' % (val, mat))
+            self.MatsUsed.append("%d %s Gem" % (val, mat))
         for mat, val in materials['Used']['Dusts'].items():
-            self.MatsUsed.insertLine('%d %s' % (val, mat))
+            self.MatsUsed.append("%d %s" % (val, mat))
         for mat, val in materials['Used']['Liquids'].items():
-            self.MatsUsed.insertLine('%d %s' % (val, mat))
+            self.MatsUsed.append("%d %s" % (val, mat))
         for mat, val in materials['Expected']['Gems'].items():
-            self.MatsExpected.insertLine('%d %s Gem' % (val, mat))
+            self.MatsExpected.append("%d %s Gem" % (val, mat))
         for mat, val in materials['Expected']['Dusts'].items():
-            self.MatsExpected.insertLine('%d %s' % (val, mat))
+            self.MatsExpected.append("%d %s" % (val, mat))
         for mat, val in materials['Expected']['Liquids'].items():
-            self.MatsExpected.insertLine('%d %s' % (val, mat))
+            self.MatsExpected.append("%d %s" % (val, mat))
 
     def computeRemakesCost(self, slotindex, remakes):
         gemtype = self.currentItem.getSlotAttr('player', slotindex, 'Type')

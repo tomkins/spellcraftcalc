@@ -112,7 +112,7 @@ class ReportWindow(QDialog, Ui_B_ReportWindow):
         self.connect(self.MatMultiplier,SIGNAL("valueChanged(int)"),self.matMultiplierUpdate)
 
         #self.font().setPointSize(8)
-        self.ReportText.setTextFormat(Qt.RichText)
+        #self.ReportText.setTextFormat(Qt.RichText)
         self.parent = parent
         self.gemnames = None
         self.materials = None
@@ -191,7 +191,7 @@ class ReportWindow(QDialog, Ui_B_ReportWindow):
             for matl, val in matlist:
                 materialsstr += '<dd>%d %s</dd>\n' % (val, matl)
         materialsstr += '</dl>\n'
-        self.ReportText.setText(materialsstr, "html")
+        self.ReportText.setHtml(materialsstr)
 
     def matMultiplierUpdate(self, multiplier):
         for i in range(0, len(self.gemnames)):
@@ -413,7 +413,7 @@ class ReportWindow(QDialog, Ui_B_ReportWindow):
         self.setWindowTitle('Config Report')
         info = self.collectStats(itemlist)
         rp = ReportParser.ReportParser()
-        self.ReportText.setText(rp.parse(reportstr, info), "html")
+        self.ReportText.setHtml(rp.parse(reportstr, info))
         
 
     def saveToHTML(self):
