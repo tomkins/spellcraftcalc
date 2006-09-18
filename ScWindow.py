@@ -165,9 +165,9 @@ class ScWindow(QMainWindow, Ui_B_SC):
         OW = Options.Options(self, '', 0)
         OW.load()
 
-        self.rf_menu = QMenu('&Recent Files', self)
-        self.updateRecentFiles(None)
-
+        self.rf_menu = QMenu('&Recent Files')
+        self.connect(self.rf_menu, SIGNAL("triggered(QAction*)"), self.loadRecentFile)
+        
         self.filemenu = QMenu('&File', self)
         self.filemenu.addAction('&New', self.newFile, QKeySequence(Qt.CTRL+Qt.Key_N))
         self.filemenu.addAction('&Open...', self.openFile, QKeySequence(Qt.CTRL+Qt.Key_O))
@@ -177,20 +177,22 @@ class ScWindow(QMainWindow, Ui_B_SC):
         self.filemenu.addAction('Export &Quickbars...', self.openCraftBars)
         self.filemenu.addAction('Export &UI XML (Beta)...', self.generateUIXML)
         self.filemenu.addSeparator()
-        self.filemenu.addMenu('&Recent Files')
+        self.filemenu.addMenu(self.rf_menu)
         self.filemenu.addSeparator()
         self.filemenu.addAction('E&xit', self, SLOT('close()'), QKeySequence(Qt.CTRL+Qt.Key_X))
         self.menuBar().addMenu(self.filemenu)
 
+        self.updateRecentFiles(None)
+
         self.swapGems = QMenu('S&wap Gems With...', self)
         for piece in range(0,len(PieceTabList)):
-            act = QAction('&File', self)
+            act = QAction(PieceTabList[piece], self)
             act.setData(QVariant(piece))
-            self.connect(self.menuBar(), SIGNAL("triggered(QAction*)"), self.swapWith)
             self.swapGems.addAction(act)
-            #self.swapGems.addAction(PieceTabList[piece], piece)
-            #self.swapGems.connectItem(piece, self.swapWith)
-            #self.swapGems.setItemParameter(piece, piece)
+        self.connect(self.swapGems, SIGNAL("triggered(QAction*)"), self.swapWith)
+        #self.swapGems.addAction(PieceTabList[piece], piece)
+        #self.swapGems.connectItem(piece, self.swapWith)
+        #self.swapGems.setItemParameter(piece, piece)
 
         self.editmenu = QMenu('&Edit', self)
         self.editmenu.addMenu(self.swapGems)
@@ -1245,9 +1247,8 @@ class ScWindow(QMainWindow, Ui_B_SC):
             del self.recentFiles[5:]
         self.rf_menu.clear()
         for count in range(0, len(self.recentFiles)):
-            self.rf_menu.insertItem('&%d %s' % (count + 1, self.recentFiles[count]), count)
-            self.rf_menu.connectItem(count, self.loadRecentFile)
-            self.rf_menu.setItemParameter(count, count)
+            rf_item = self.rf_menu.addAction('&%d %s' % (count + 1, self.recentFiles[count]), self.loadRecentFile)
+            rf_item.setData(QVariant(count))
 
     def loadFromXML(self, template):
         wascalc = self.nocalc
@@ -1470,7 +1471,8 @@ class ScWindow(QMainWindow, Ui_B_SC):
         self.itemattrlist[self.currentTabLabel] = swap
         self.restoreItem(self.itemattrlist[self.currentTabLabel])
 
-    def loadRecentFile(self, index):
+    def loadRecentFile(self, action):
+        index = action.data().toInt()[0]
         self.openFile(self.recentFiles[index], True)
 
     def generateUIXML(self):
