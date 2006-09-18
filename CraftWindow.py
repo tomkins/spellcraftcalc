@@ -9,9 +9,9 @@ from B_CraftWindow import *
 from constants import *
 import SC
 
-class CraftWindow(QWidget, Ui_B_CraftWindow):
+class CraftWindow(QDialog, Ui_B_CraftWindow):
     def __init__(self,parent = None,name = None,modal = 0,fl = 0):
-        QWidget.__init__(self,parent,name,modal,fl)
+        QDialog.__init__(self,parent,name,modal,fl)
         Ui_B_CraftWindow.setupUi(self,self)
         #self.font().setPointSize(8)
         self.currentItem = None

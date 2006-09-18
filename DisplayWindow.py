@@ -9,9 +9,9 @@ from B_DisplayWindow import *
 from constants import *
 import string
 
-class DisplayWindow(QWidget, Ui_B_DisplayWindow):
+class DisplayWindow(QDialog, Ui_B_DisplayWindow):
 	def __init__(self,parent = None,name = None,modal = 0,fl = 0):
-                QWidget.__init__(self,parent,name,modal,fl)
+                QDialog.__init__(self,parent,name,modal,fl)
                 Ui_B_DisplayWindow.setupUi(self,self)
                 #self.font().setPointSize(8)
 		self.scwindow = parent

@@ -15,9 +15,9 @@ import traceback
 from xml.dom.minidom import *
 from MyStringIO import UnicodeStringIO
 
-class Options(QWidget, Ui_B_Options):
+class Options(QDialog, Ui_B_Options):
     def __init__(self,parent = None,name = None,modal = 0,fl = 0):
-        QWidget.__init__(self,parent,name,modal,fl)
+        QDialog.__init__(self,parent,name,modal,fl)
         Ui_B_Options.setupUi(self,self)
 #       self.Tab.setTabEnabled(self.Price, 0)
         self.parent = parent

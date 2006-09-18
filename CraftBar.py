@@ -25,9 +25,9 @@ class CharItem(Q3ListViewItem):
         self.server = server
         self.filename = filename
 
-class CraftBar(QWidget, Ui_B_CraftBar):
+class CraftBar(QDialog, Ui_B_CraftBar):
     def __init__(self,path = '', parent = None,name = None,modal = 0,fl = 0):
-        QWidget.__init__(self, parent, name, modal, fl)
+        QDialog.__init__(self, parent, name, modal, fl)
         Ui_B_CraftBar.setupUi(self,self)
         self.scwin = parent
         self.gemcount = 0
