@@ -28,10 +28,10 @@ class Options(QDialog, Ui_B_Options):
         self.parent = parent
         skilllist = range(1000, -1, -50)
         self.Skill.clear()
-        self.Skill.insertItems(0, map(lambda(x):str(x), skilllist))
-        li = self.Skill.listBox().findItem(str(self.parent.crafterSkill))
-        self.Skill.setCurrentItem(self.Skill.listBox().index(li))
-        self.NoteText.setText(self.parent.noteText)
+        self.Skill.addItems(map(lambda(x):str(x), skilllist))
+        li = self.Skill.findText(str(self.parent.crafterSkill))
+        self.Skill.setCurrentIndex(li)
+        self.NoteText.setHtml(self.parent.noteText)
         self.ShowDoneGems.setChecked(self.parent.showDoneInMatsList)
         self.TierPricing = {}
         self.QualPricing = {}
