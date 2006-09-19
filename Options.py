@@ -146,11 +146,11 @@ class Options(QDialog, Ui_B_Options):
             if child.tagName == 'Realm':
                 realm = XMLHelper.getText(child.childNodes)
                 if realm == 'Albion':
-                    self.parent.Realm.setCurrentItem(0)
+                    self.parent.Realm.setCurrentIndex(0)
                 if realm == 'Hibernia':
-                    self.parent.Realm.setCurrentItem(1)
+                    self.parent.Realm.setCurrentIndex(1)
                 if realm == 'Midgard':
-                    self.parent.Realm.setCurrentItem(2)
+                    self.parent.Realm.setCurrentIndex(2)
             elif child.tagName == 'DontShowDoneGems':
                 if XMLHelper.getText(child.childNodes) == 'True':
                     self.ShowDoneGems.setChecked(1)
@@ -178,7 +178,7 @@ class Options(QDialog, Ui_B_Options):
                     self.Coop.setChecked(0)
             elif child.tagName == 'CrafterSkill':
                 li = self.Skill.listBox().findItem(XMLHelper.getText(child.childNodes))
-                self.Skill.setCurrentItem(self.Skill.listBox().index(li))
+                self.Skill.setCurrentIndex(self.Skill.listBox().index(li))
             elif child.tagName == 'Pricing':
                 for pchild in child.childNodes:
                     if pchild.nodeType == Node.TEXT_NODE: continue
@@ -228,8 +228,8 @@ class Options(QDialog, Ui_B_Options):
                 self.loadFromXML(template[0])
                 f.close()
             except: 
+                traceback.print_exc()
                 pass
-                #traceback.print_exc()
         
     def OK_pressed(self):
         self.parent.crafterSkill = int(str(self.Skill.currentText()))
@@ -248,8 +248,8 @@ class Options(QDialog, Ui_B_Options):
                 f.write(XMLHelper.writexml(self.asXML(), UnicodeStringIO(), '', '\t', '\n'))
                 f.close()
             except:
+                traceback.print_exc()
                 pass
-                #traceback.print_exc()
         self.done(1)
 
     def Cancel_pressed(self):
