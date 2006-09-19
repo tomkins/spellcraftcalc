@@ -112,14 +112,14 @@ class Options(QDialog, Ui_B_Options):
         recentFiles = document.createElement('RecentFiles')
         for f in self.parent.recentFiles:
             fnode = document.createElement('File')
-            fnode.appendChild(document.createTextNode(f))
+            fnode.appendChild(document.createTextNode(unicode(f)))
             recentFiles.appendChild(fnode)
         rootnode.appendChild(recentFiles)
         camelotpath = document.createElement('DaocPath')
-        camelotpath.appendChild(document.createTextNode(str(self.parent.DaocPath)))
+        camelotpath.appendChild(document.createTextNode(unicode(self.parent.DaocPath)))
         rootnode.appendChild(camelotpath)
         c_reportpath = document.createElement('ConfigReportFile')
-        c_reportpath.appendChild(document.createTextNode(os.path.abspath(str(self.parent.reportFile))))
+        c_reportpath.appendChild(document.createTextNode(os.path.abspath(unicode(self.parent.reportFile))))
         rootnode.appendChild(c_reportpath)
         for key, val in pricing.items():
             node = document.createElement(key)
