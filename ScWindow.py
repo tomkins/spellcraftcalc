@@ -47,6 +47,8 @@ class AboutScreen(QDialog):
         self.palette().setBrush(self.backgroundRole(), QBrush(pixmap))
         self.resize(QSize(480,340).expandedTo(pixmap.size()))
         self.show()
+        if not self.hasFocus():
+            self.setFocus(Qt.ActiveWindowFocusReason)
 
     def mouseReleaseEvent(self, e):
         # a little lame, e should match a mouseDown event in our window
