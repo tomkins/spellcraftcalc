@@ -1462,7 +1462,6 @@ class ScWindow(QMainWindow, Ui_B_SC):
         RW.exec_()
 
     def mousePressEvent(self, e):
-        sys.stdout.write("OUTCH")
         if e is None: return
         child = self.childAt(e.pos())
         if child is None: return
