@@ -28,7 +28,7 @@ class DisplayWindow(QDialog, Ui_B_DisplayWindow):
 	def loadLocations(self, locs):
 		strlist = map(lambda(x): '%s: %s' % (x[0], x[1]), locs)
 		self.DisplayText.clear()
-		self.DisplayText.insertStrList(strlist)
+		self.DisplayText.insertItems(0, strlist)
 
 	def CloseWindow(self):
 		self.done(1)
