@@ -8,7 +8,7 @@ import sys
 import string
 
 from PyQt4.QtGui import QComboBox
-from PyQt4.QtCore import SIGNAL
+from PyQt4.QtCore import SIGNAL, Qt
 
 class SearchingCombo(QComboBox):
     def __init__(self, parent=None, name=None, editable=False):
@@ -25,20 +25,27 @@ class SearchingCombo(QComboBox):
     def keyPressEvent(self, e):
         keycode = e.key()
         if len(e.text()) > 0 and not self.isEditable():
-            key = str(e.text()).upper()
-            indexlist = []
-            if len(key) == 1:
-                itemkeys = self.buildItemKeys()
-                for i in range(0, len(itemkeys)):
-                    if key in itemkeys[i]:
-                        indexlist.append(i)
-            if len(indexlist):
-                if self.currentIndex() >= indexlist[-1]:
-                    self.setCurrentIndex(indexlist[0])
-                else:
-                    i = filter(lambda x: x > self.currentIndex(), indexlist)[0]
-                    self.setCurrentIndex(i)
+            if keycode == Qt.Key_Up and self.currentIndex() > 0:
+                self.setCurrentIndex(self.currentIndex()-1)
                 self.emit(SIGNAL("activated(const QString &)"),self.currentText())
+            elif keycode == Qt.Key_Down and self.currentIndex() < self.count()-1:
+                self.setCurrentIndex(self.currentIndex()+1)
+                self.emit(SIGNAL("activated(const QString &)"),self.currentText())
+            else:
+                key = str(e.text()).upper()
+                indexlist = []
+                if len(key) == 1:
+                    itemkeys = self.buildItemKeys()
+                    for i in range(0, len(itemkeys)):
+                        if key in itemkeys[i]:
+                            indexlist.append(i)
+                if len(indexlist):
+                    if self.currentIndex() >= indexlist[-1]:
+                        self.setCurrentIndex(indexlist[0])
+                    else:
+                        i = filter(lambda x: x > self.currentIndex(), indexlist)[0]
+                        self.setCurrentIndex(i)
+                    self.emit(SIGNAL("activated(const QString &)"),self.currentText())
             e.accept()
             return
         QComboBox.keyPressEvent(self, e)
