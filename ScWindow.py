@@ -83,6 +83,10 @@ class ScWindow(QMainWindow, Ui_B_SC):
         self.setAttribute(Qt.WA_DeleteOnClose)
 	Ui_B_SC.setupUi(self,self)
 
+        self.GroupStats.mousePressEvent = self.ignoreMouseEvent
+        self.GroupResists.mousePressEvent = self.ignoreMouseEvent
+        self.GroupItemFrame.mousePressEvent = self.ignoreMouseEvent
+
         self.connect(self.GroupStats,SIGNAL("mousePressEvent(QMouseEvent*)"),self.mousePressEvent)
         self.connect(self.GroupResists,SIGNAL("mousePressEvent(QMouseEvent*)"),self.mousePressEvent)
         self.connect(self.GroupItemFrame,SIGNAL("mousePressEvent(QMouseEvent*)"),self.mousePressEvent)
@@ -1516,3 +1520,5 @@ class ScWindow(QMainWindow, Ui_B_SC):
 
     def generateUIXML(self):
         UIXML.uixml(self)
+   
+    def ignoreMouseEvent(self, e): e.ignore()
