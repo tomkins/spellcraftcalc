@@ -417,21 +417,21 @@ class ReportWindow(QDialog, Ui_B_ReportWindow):
         
 
     def saveToHTML(self):
-        filename = QFileDialog.getSaveFileName('', "HTML (*.html)")
+        filename = QFileDialog.getSaveFileName(self, "Save HTML Report", "", "HTML (*.html)")
         if filename is not None and str(filename) != '':
             try:
                 if re.compile('\.html$').search(str(filename)) is None:
                     filename = str(filename)
                     filename += '.html'
                 f = open(str(filename), 'w')
-                f.write('<HTML>'+str(self.ReportText.text())+'</HTML>')
+                f.write('<HTML>'+str(self.ReportText.toHtml())+'</HTML>')
                 f.close()
             except IOError:
                 QMessageBox.critical(None, 'Error!', 
                     'Error writing to file: ' + filename, 'OK')
 
     def saveToText(self):
-        filename = QFileDialog.getSaveFileName('', "Text (*.txt)")
+        filename = QFileDialog.getSaveFileName(self, "Save Text Report", "", "Text (*.txt)")
         if filename is not None and str(filename) != '':
             try:
                 if re.compile('\.txt$').search(str(filename)) is None:
@@ -441,7 +441,7 @@ class ReportWindow(QDialog, Ui_B_ReportWindow):
                 w = DimWriter(f)
                 s = ObtuseFormatter(w)
                 p = HTMLPlusParser(s)
-                p.feed(str(self.ReportText.text()))
+                p.feed(str(self.ReportText.toPlainText()))
                 p.close()
                 w.flush()
                 f.close()
