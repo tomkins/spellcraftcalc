@@ -177,8 +177,9 @@ class Options(QDialog, Ui_B_Options):
                 else:
                     self.Coop.setChecked(0)
             elif child.tagName == 'CrafterSkill':
-                li = self.Skill.listBox().findItem(XMLHelper.getText(child.childNodes))
-                self.Skill.setCurrentIndex(self.Skill.listBox().index(li))
+                li = self.Skill.findText(XMLHelper.getText(child.childNodes))
+                if li >= 0:
+                    self.Skill.setCurrentIndex(li)
             elif child.tagName == 'Pricing':
                 for pchild in child.childNodes:
                     if pchild.nodeType == Node.TEXT_NODE: continue
@@ -230,16 +231,8 @@ class Options(QDialog, Ui_B_Options):
             except: 
                 traceback.print_exc()
                 pass
-        
-    def OK_pressed(self):
-        self.parent.crafterSkill = int(str(self.Skill.currentText()))
-        self.parent.showDoneInMatsList = self.ShowDoneGems.isChecked()
-        self.parent.includeRacials = self.IncludeRR.isChecked()
-        self.parent.capDistance = self.CapDistance.isChecked()
-        self.parent.hideNonClassSkills = self.HideNonClassSkills.isChecked()
-        self.parent.noteText = str(self.NoteText.toPlainText())
-        self.parent.pricingInfo = self.getPriceInfo()
-        self.parent.coop = self.Coop.isChecked()
+
+    def save(self):        
         scfile = os.path.join(os.path.dirname(os.path.abspath(sys.argv[0])),
                               'Spellcraft.xml')
         if os.access(os.path.dirname(scfile), os.W_OK):
@@ -250,6 +243,17 @@ class Options(QDialog, Ui_B_Options):
             except:
                 traceback.print_exc()
                 pass
+
+    def OK_pressed(self):
+        self.parent.crafterSkill = int(str(self.Skill.currentText()))
+        self.parent.showDoneInMatsList = self.ShowDoneGems.isChecked()
+        self.parent.includeRacials = self.IncludeRR.isChecked()
+        self.parent.capDistance = self.CapDistance.isChecked()
+        self.parent.hideNonClassSkills = self.HideNonClassSkills.isChecked()
+        self.parent.noteText = str(self.NoteText.toPlainText())
+        self.parent.pricingInfo = self.getPriceInfo()
+        self.parent.coop = self.Coop.isChecked()
+        self.save()
         self.done(1)
 
     def Cancel_pressed(self):
