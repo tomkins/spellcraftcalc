@@ -81,6 +81,10 @@ class ScWindow(QMainWindow, Ui_B_SC):
         self.setAttribute(Qt.WA_DeleteOnClose)
 	Ui_B_SC.setupUi(self,self)
 
+        self.connect(self.GroupStats,SIGNAL("mousePressEvent(QMouseEvent*)"),self.mousePressEvent)
+        self.connect(self.GroupResists,SIGNAL("mousePressEvent(QMouseEvent*)"),self.mousePressEvent)
+        self.connect(self.GroupItemFrame,SIGNAL("mousePressEvent(QMouseEvent*)"),self.mousePressEvent)
+
         self.connect(self.Realm,SIGNAL("activated(const QString&)"),self.RealmChanged)
         self.connect(self.CharClass,SIGNAL("activated(const QString&)"),self.CharClassChanged)
         self.connect(self.CharRace,SIGNAL("activated(const QString&)"),self.RaceChanged)
@@ -190,7 +194,7 @@ class ScWindow(QMainWindow, Ui_B_SC):
         self.capDistance = False
         self.includeRacials = False
         self.hideNonClassSkills = False
-        OW = Options.Options(self, '', 0)
+        OW = Options.Options(self)
         OW.load()
 
         self.rf_menu = QMenu('&Recent Files')
@@ -207,7 +211,7 @@ class ScWindow(QMainWindow, Ui_B_SC):
         self.filemenu.addSeparator()
         self.filemenu.addMenu(self.rf_menu)
         self.filemenu.addSeparator()
-        self.filemenu.addAction('E&xit', self, SLOT('close()'), QKeySequence(Qt.CTRL+Qt.Key_X))
+        self.filemenu.addAction('E&xit', self.close, QKeySequence(Qt.CTRL+Qt.Key_X))
         self.menuBar().addMenu(self.filemenu)
 
         self.updateRecentFiles(None)
@@ -281,15 +285,16 @@ class ScWindow(QMainWindow, Ui_B_SC):
         self.setTabOrder(self.ClearItem,self.SkillsList)
         self.setTabOrder(self.SkillsList,self.OtherBonusList)
 
-    def close(self, args):
-        Options.Options(self).OK_pressed() # write out app config data to disk
+    def close(self):
+        OW = Options.Options(self)
+        OW.save()
         if self.modified:
             ret = QMessageBox.warning(self, 'Save Changes?', 'Some changes may not have been saved. Are you sure you want to quit?', 'Yes', 'No')
             if ret == 0:
-                return QMainWindow.close(self, 1)
+                return QMainWindow.close(self)
             else:
                 return False
-        else: return QMainWindow.close(self, 1)
+        else: return QMainWindow.close(self)
 
     def initialize(self):
 
@@ -1360,7 +1365,7 @@ class ScWindow(QMainWindow, Ui_B_SC):
     def openOptions(self):
         self.modified = 1
         self.nocalc = 1
-        res = Options.Options(self, '', 1).exec_()
+        res = Options.Options(self).exec_()
         if res == 1:
              self.CharClassChanged('')
         self.nocalc = 0
@@ -1451,6 +1456,7 @@ class ScWindow(QMainWindow, Ui_B_SC):
         RW.exec_()
 
     def mousePressEvent(self, e):
+        sys.stdout.write("OUTCH")
         if e is None: return
         child = self.childAt(e.pos())
         if child is None: return
