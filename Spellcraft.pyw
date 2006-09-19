@@ -39,7 +39,7 @@ class ScApplication(QApplication):
         QApplication.__init__(self, args)
 
     def start(self):
-        splash = QSplashScreen(QPixmap(self.splashFile))
+        splash = QSplashScreen(QPixmap(self.splashFile),Qt.SplashScreen|Qt.MSWindowsFixedSizeDialogHint)
         splash.show()
 
         # Font sizes are strange things on Mac, while our favorite

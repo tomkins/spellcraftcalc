@@ -39,7 +39,7 @@ import sys
 
 
 class AboutScreen(QDialog):
-    def __init__(self,parent = None,name = "About",modal = True,fl = Qt.Widget):
+    def __init__(self,parent = None,name = "About",modal = True,fl = Qt.SplashScreen|Qt.MSWindowsFixedSizeDialogHint):
         QDialog.__init__(self,parent,fl)
         self.setModal(modal)
         self.setObjectName(name)
