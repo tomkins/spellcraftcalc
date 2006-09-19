@@ -1502,7 +1502,7 @@ class ScWindow(QMainWindow, Ui_B_SC):
 
     def showCap(self):
         self.capDistance = not self.capDistance
-        self.viewmenu.setItemChecked(self.showcapmenuid, self.capDistance)
+        self.showcapmenuid.setChecked(self.capDistance)
         self.calculate()
 
     def swapWith(self, action):
