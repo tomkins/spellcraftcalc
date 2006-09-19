@@ -24,29 +24,31 @@ class SearchingCombo(QComboBox):
 
     def keyPressEvent(self, e):
         keycode = e.key()
-        if len(e.text()) > 0 and not self.isEditable():
-            if keycode == Qt.Key_Up and self.currentIndex() > 0:
-                self.setCurrentIndex(self.currentIndex()-1)
+        if keycode == Qt.Key_Up and not e.modifiers() and self.currentIndex() > 0:
+            self.setCurrentIndex(self.currentIndex()-1)
+            self.emit(SIGNAL("activated(const QString &)"),self.currentText())
+            e.accept()
+            return
+        if keycode == Qt.Key_Down and not e.modifiers() and self.currentIndex() < self.count()-1:
+            self.setCurrentIndex(self.currentIndex()+1)
+            self.emit(SIGNAL("activated(const QString &)"),self.currentText())
+            e.accept()
+            return
+        if not self.isEditable() and len(e.text()) > 0:
+            key = str(e.text()).upper()
+            indexlist = []
+            if len(key) == 1:
+                itemkeys = self.buildItemKeys()
+                for i in range(0, len(itemkeys)):
+                    if key in itemkeys[i]:
+                        indexlist.append(i)
+            if len(indexlist):
+                if self.currentIndex() >= indexlist[-1]:
+                    self.setCurrentIndex(indexlist[0])
+                else:
+                    i = filter(lambda x: x > self.currentIndex(), indexlist)[0]
+                    self.setCurrentIndex(i)
                 self.emit(SIGNAL("activated(const QString &)"),self.currentText())
-            elif keycode == Qt.Key_Down and self.currentIndex() < self.count()-1:
-                self.setCurrentIndex(self.currentIndex()+1)
-                self.emit(SIGNAL("activated(const QString &)"),self.currentText())
-            else:
-                key = str(e.text()).upper()
-                indexlist = []
-                if len(key) == 1:
-                    itemkeys = self.buildItemKeys()
-                    for i in range(0, len(itemkeys)):
-                        if key in itemkeys[i]:
-                            indexlist.append(i)
-                if len(indexlist):
-                    if self.currentIndex() >= indexlist[-1]:
-                        self.setCurrentIndex(indexlist[0])
-                    else:
-                        i = filter(lambda x: x > self.currentIndex(), indexlist)[0]
-                        self.setCurrentIndex(i)
-                    self.emit(SIGNAL("activated(const QString &)"),self.currentText())
             e.accept()
             return
         QComboBox.keyPressEvent(self, e)
-        return
