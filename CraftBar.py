@@ -57,7 +57,7 @@ class CraftBar(QDialog, Ui_B_CraftBar):
         self.piecelist = { }
         self.HotbarNum.setValue(1)
         self.HotbarPos.setValue(1)
-        self.CharList.setAllColumnsShowFocus(1)
+        #self.CharList.setAllColumnsShowFocus(1)
         self.DaocPath.setText(path)
         self.computeGemCount()
         self.computeBarEnd()

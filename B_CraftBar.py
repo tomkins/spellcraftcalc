@@ -173,28 +173,17 @@ class Ui_B_CraftBar(object):
         self.GroupBox20.setTitle(QtGui.QApplication.translate("B_CraftBar", "Character", None, QtGui.QApplication.UnicodeUTF8))
         self.TextLabel4.setText(QtGui.QApplication.translate("B_CraftBar", "Select Character to Modify:", None, QtGui.QApplication.UnicodeUTF8))
         self.TextLabel14.setText(QtGui.QApplication.translate("B_CraftBar", "You must be logged out of \n"
-        "\n"
         "the selected character for \n"
-        "\n"
         "the changes to be made", None, QtGui.QApplication.UnicodeUTF8))
         self.TextLabel9.setText(QtGui.QApplication.translate("B_CraftBar", "This dialog lets you automatically set up hotbars for \n"
-        "\n"
         "crafting gems. It takes all \"non-finished\" gems and \n"
-        "\n"
         "places them in order on your hotbars starting at the \n"
-        "\n"
         "bar and position you specify. It will place all the gems \n"
-        "\n"
         "consecutively, so make sure you do not have \n"
-        "\n"
         "anything on your bars in that range. If you do not \n"
-        "\n"
         "leave enough space, it will error w/o changing your \n"
-        "\n"
         "bars. A backup copy of your character will be saved \n"
-        "\n"
         "in [charname]_bak-[server].ini in your DAoC folder.\n"
-        "\n"
         "Removing the _bak will restore your settings.", None, QtGui.QApplication.UnicodeUTF8))
         self.GroupBox19.setTitle(QtGui.QApplication.translate("B_CraftBar", "Hotbar", None, QtGui.QApplication.UnicodeUTF8))
         self.TextLabel1_2.setText(QtGui.QApplication.translate("B_CraftBar", "Gems to Load:", None, QtGui.QApplication.UnicodeUTF8))
