@@ -47,11 +47,11 @@ class ScApplication(QApplication):
         # Mac and Windows NT+ (on Windows 98 it just blows up)
         #
         font = QFont(self.font())
-        if QApplication.style().objectName()[0:9] == "Macintosh" and \
+        if str(QApplication.style().objectName()[0:9]).lower() == "macintosh" and \
            sys.platform == "darwin":
             font.setFamily("Trebuchet MS")
             #font.setFamily("Lucida Grande")
-            font.setPointSize(11)
+            font.setPointSize(10)
         elif sys.platform == "win32":
             if sys.getwindowsversion()[3] < 2:
                 font.setFamily("Arial")
@@ -77,7 +77,7 @@ class ScApplication(QApplication):
     def polish(self, widget):
         # Fix Mac bits of uglyness, not all of which can be fixed.
         QApplication.polish(self, widget)
-        if self.style().name()[0:9] != "Macintosh": return
+        if str(self.style().name()[0:9]).lower() != "macintosh": return
         if sys.platform != "darwin": return
         if widget.className() == 'QGroupBox':
             crect = widget.geometry()

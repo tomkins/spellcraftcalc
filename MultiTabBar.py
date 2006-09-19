@@ -33,7 +33,7 @@ class MultiTabBar(QTabBar):
         QTabBar.__init__(self, parent)
         if (name):
             self.setObjectName(name)
-        if QApplication.style().objectName()[0:9] == "Macintosh":
+        if str(QApplication.style().objectName()[0:9]).lower() == "macintosh":
             self.rowoverlap = 3
             self.cropheight = -1
         else:
@@ -114,7 +114,7 @@ class MultiTabBar(QTabBar):
                     self.currows[row] = self.currows[-1]
                     self.currows[-1] = saverow
                     self.layoutTabs()
-                    if QApplication.style().name()[0:9] == "Macintosh":
+                    if str(QApplication.style().name()[0:9]).lower() == "macintosh":
                         QTabBar.setCurrentTab(self, tab)
                         self.repaint()
                     else:
