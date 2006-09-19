@@ -110,8 +110,8 @@ class ScWindow(QMainWindow, Ui_B_SC):
         self.connect(self.SaveItem,SIGNAL("clicked()"),self.Save_Item)
         self.connect(self.CraftButton,SIGNAL("clicked()"),self.OpenCraftWindow)
         self.connect(self.ClearItem,SIGNAL("clicked()"),self.ClearCurrentItem)
-        self.connect(self.SkillsList,SIGNAL("clicked(QListBoxItem*)"),self.SkillClicked)
-        self.connect(self.OtherBonusList,SIGNAL("clicked(QListBoxItem*)"),self.SkillClicked)
+        self.connect(self.SkillsList,SIGNAL("itemActivated(QListWidgetItem*)"),self.SkillClicked)
+        self.connect(self.OtherBonusList,SIGNAL("itemActivated(QListWidgetItem*)"),self.SkillClicked)
 
         self.setWindowTitle("Kort's Spellcrafting Calulator")
         self.fixtabs = True

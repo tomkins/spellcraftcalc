@@ -20,7 +20,7 @@ class DisplayWindow(QDialog, Ui_B_DisplayWindow):
                     self.setModal(modal)
 
 	        self.connect(self.PushButton1,SIGNAL("clicked()"),self.CloseWindow)
-        	self.connect(self.DisplayText,SIGNAL("clicked(QListBoxItem*)"),self.LocationClicked)
+        	self.connect(self.DisplayText,SIGNAL("itemActivated(QListWidgetItem*)"),self.LocationClicked)
 
                 #self.font().setPointSize(8)
 		self.scwindow = parent
@@ -37,5 +37,5 @@ class DisplayWindow(QDialog, Ui_B_DisplayWindow):
 		if a0 is None: return
 		tabname, rest = string.split(str(a0.text()), ':', 1)
 		tabindex = TabList.index(tabname)
-		self.scwindow.PieceTab.setCurrentTab(tabindex)
+		self.scwindow.PieceTab.setCurrentIndex(tabindex)
 		self.done(1)
