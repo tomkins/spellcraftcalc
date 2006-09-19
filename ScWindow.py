@@ -164,7 +164,7 @@ class ScWindow(QMainWindow, Ui_B_SC):
             self.connect(self.AmountEdit[i],SIGNAL("textChanged(const QString&)"),self.AmountChanged)
             if i < 5:
                 self.AmountDrop.append(getattr(self, 'Amount_Drop_%d' % idx))
-                self.connect(self.Amount_Drop[i],SIGNAL("activated(const QString&)"),self.AmountChanged)
+                self.connect(self.AmountDrop[i],SIGNAL("activated(const QString&)"),self.AmountChanged)
                 self.Quality.append(getattr(self, 'Quality_%d' % idx))
                 self.Quality[i].insertItems(0, list(QualityValues))
                 self.connect(self.Quality[i],SIGNAL("activated(const QString&)"),self.recalculate)
