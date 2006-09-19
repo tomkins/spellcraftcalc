@@ -404,7 +404,7 @@ class ScWindow(QMainWindow, Ui_B_SC):
         self.restoreItem(self.itemattrlist.get(self.currentTabLabel, Item(self.currentTabLabel)))
 
     def changePieceTab(self,a0):
-        self.PieceTab.setCurrentIndex(a0)
+        self.PieceTab.setCurrentIndex(a0.data().toInt()[0])
 
     def FixupItemLevel(self):
         if str(self.ItemLevel.text()) == '' \
@@ -588,9 +588,10 @@ class ScWindow(QMainWindow, Ui_B_SC):
                     amount = int(amount)
                 effect = item.getSlotAttr(itemtype, i, 'Effect')
                 if effect != '' and [gemtype, effect] in gemeffects:
-                    self.errorsmenu.insertItem('Two of same type of gem on %s' % key, errorcount)
-                    self.errorsmenu.connectItem(errorcount, self.changePieceTab)
-                    self.errorsmenu.setItemParameter(errorcount, TabList.index(key))
+                    error_act = QAction('Two of same type of gem on %s' % key, self)
+                    error_act.setData(QVariant(errorcount))
+                    self.errorsmenu.addAction(error_act)
+                    self.connect(self.errorsmenu, SIGNAL('triggered(QAction*)'), self.changePieceTab)
                     errorcount = errorcount + 1
                 gemeffects.append([gemtype, effect])
                 if itemtype == 'player':
@@ -688,9 +689,10 @@ class ScWindow(QMainWindow, Ui_B_SC):
                 itemimbue = self.getItemImbue(item)
                 imbue = self.calcImbue(item, key == self.currentTabLabel)
                 if (imbue - itemimbue) >= 6:
-                    self.errorsmenu.insertItem('Impossible Overcharge on %s' % key, errorcount)
-                    self.errorsmenu.connectItem(errorcount, self.changePieceTab)
-                    self.errorsmenu.setItemParameter(errorcount, TabList.index(key))
+                    error_act = QAction('Impossible Overcharge on %s' % key, self)
+                    error_act.setData(QVariant(errorcount))
+                    self.errorsmenu.addAction(error_act)
+                    self.connect(self.errorsmenu, SIGNAL('triggered(QAction*)'), self.changePieceTab)
                     errorcount = errorcount + 1
                 elif imbue > (itemimbue+0.5):
                     success = -OCStartPercentages[int(imbue-itemimbue)]
@@ -955,6 +957,8 @@ class ScWindow(QMainWindow, Ui_B_SC):
                         valueslist = ("1",)
                     if len(valueslist) > 0:
                         amount.insertItems(0, list(valueslist))
+                    if amtindex < 0:
+                        amtindex = 0
                     if amtindex < len(valueslist):
                         amount.setCurrentIndex(amtindex)
                 if type == 0:
