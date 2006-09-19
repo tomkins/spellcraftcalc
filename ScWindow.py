@@ -1290,8 +1290,9 @@ class ScWindow(QMainWindow, Ui_B_SC):
             del self.recentFiles[5:]
         self.rf_menu.clear()
         for count in range(0, len(self.recentFiles)):
-            rf_item = self.rf_menu.addAction('&%d %s' % (count + 1, self.recentFiles[count]), self.loadRecentFile)
-            rf_item.setData(QVariant(count))
+            act = QAction('&%d %s' % (count + 1, self.recentFiles[count]), self)
+            act.setData(QVariant(count))
+            self.rf_menu.addAction(act)
 
     def loadFromXML(self, template):
         wascalc = self.nocalc
