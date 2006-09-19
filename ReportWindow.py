@@ -191,7 +191,8 @@ class ReportWindow(QDialog, Ui_B_ReportWindow):
             for matl, val in matlist:
                 materialsstr += '<dd>%d %s</dd>\n' % (val, matl)
         materialsstr += '</dl>\n'
-        self.ReportText.setHtml(materialsstr)
+        self.reportHtml = materialsstr
+        self.ReportText.setHtml(self.reportHtml)
 
     def matMultiplierUpdate(self, multiplier):
         for i in range(0, len(self.gemnames)):
@@ -413,8 +414,8 @@ class ReportWindow(QDialog, Ui_B_ReportWindow):
         self.setWindowTitle('Config Report')
         info = self.collectStats(itemlist)
         rp = ReportParser.ReportParser()
-        self.ReportText.setHtml(rp.parse(reportstr, info))
-        
+        self.reportHtml = rp.parse(reportstr, info)
+        self.ReportText.setHtml(self.reportHtml)
 
     def saveToHTML(self):
         filename = QFileDialog.getSaveFileName(self, "Save HTML Report", "", "HTML (*.html)")
@@ -424,7 +425,7 @@ class ReportWindow(QDialog, Ui_B_ReportWindow):
                     filename = str(filename)
                     filename += '.html'
                 f = open(str(filename), 'w')
-                f.write('<HTML>'+str(self.ReportText.toHtml())+'</HTML>')
+                f.write('<HTML>'+self.reportHtml+'</HTML>')
                 f.close()
             except IOError:
                 QMessageBox.critical(None, 'Error!', 
@@ -438,10 +439,11 @@ class ReportWindow(QDialog, Ui_B_ReportWindow):
                     filename = str(filename)
                     filename += '.txt'
                 f = open(str(filename), 'w')
+                #f.write(str(self.ReportText.toPlainText()))
                 w = DimWriter(f)
                 s = ObtuseFormatter(w)
                 p = HTMLPlusParser(s)
-                p.feed(str(self.ReportText.toPlainText()))
+                p.feed(self.reportHtml)
                 p.close()
                 w.flush()
                 f.close()
