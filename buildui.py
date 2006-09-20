@@ -7,8 +7,10 @@ files = (
     ('DisplayWindow.ui4', 'B_DisplayWindow.py'),
     ('ReportWindow.ui4', 'B_ReportWindow.py'),
     ('ItemLevel.ui4', 'B_ItemLevel.py'),
+    ('ItemLevel4.ui', 'B_ItemLevel4.py'),
     ('CraftBar.ui4', 'B_CraftBar.py'),
     ('Options.ui4', 'B_Options.py'),
+    ('CraftBar3.ui4', 'B_CraftBar3.py'),
 )
 
 for ui, py in files:
@@ -20,7 +22,8 @@ for ui, py in files:
         # as we will error on a missing input file, and go
         # quietly on if the output file was missing
         pass
-    os.system('%s -d -o %s %s' % (
+    # Add -d to the .system command if you want gory details
+    os.system('%s -o %s %s' % (
               os.path.join(os.path.dirname(sys.executable),'pyuic4'), py, ui))
 
     # Make this Win32 text
