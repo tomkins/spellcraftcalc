@@ -158,8 +158,9 @@ class CraftBar(QDialog, Ui_B_CraftBar):
             self.CharList.setColumnWidthMode(1, Q3ListView.Maximum)
 
     def openFileDialog(self):
-        daocdir = Q3FileDialog.getExistingDirectory('', self, '', 'Select DAoC Directory')
-        self.DaocPath.setText(daocdir)
+        daocdir = QFileDialog.getExistingDirectory(self, 'Select DAoC Directory', self.DaocPath.text())
+        if (daocdir):
+            self.DaocPath.setText(daocdir)
 
     def computeBarEnd(self):
         eb = int((self.HotbarNum.value() * 10 + self.HotbarPos.value() + self.gemcount - 1) / 10)
