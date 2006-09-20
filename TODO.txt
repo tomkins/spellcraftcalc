@@ -1,5 +1,17 @@
 Things to fix before next beta release is announced;
 
+  Reimplement the MultiTabBar for Q4, if possible, or find another
+  representation for selecting a slot.
+
+  Unhook the old Q3FileDialog/Q3FilePreview model for a customized
+  QFileDialog with "Load Item" Preview, if possible.
+
+  Unhook the old Q3ListView model for the new Q4 list model for
+  the CraftBar CharList, if possible.
+
+  Promote Item.py attributes such as Name, Level, Bonus etc. into
+  the per-item scope (for each drop, crafted, and other named items).
+
   Quit crashing when Tab bar / Drop list accelerator keys are
   pressed, while load item dialog is open.
 
@@ -19,8 +31,9 @@ Things to fix before next beta release is announced;
   According to various searchs of alakazahm and the the autobestiary,
   Prissy's lists are (were) complete.
 
-  Add 1.84 Crafted staves (fifth slot Focus 50, sixth slot becomes
-  the added tincture?)
+  Add 1.85 Crafted armor bonuses (sixth slot becomes custom bonus?)
+
+  Add 1.84 Crafted staves (sixth slot for Focus 50?)
 
   Add 1.84 Legendary Weapons (fourth slot 2% melee / magic / archery 
   damage bonus against All Monsters, fifth slot AF 10 / 50 All Focus, 
