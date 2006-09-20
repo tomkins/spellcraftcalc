@@ -22,10 +22,9 @@ setup(name="kscraftsetup",
         ('.', ['./Spellcraft.png']),
         ('reports', ['reports/Reports.txt']), 
         ('reports', glob.glob("reports/*.xml"))],
-    options = {'py2exe': {'excludes' : ['_ssl', '_socket'], 
-                          'includes' : ['sip'],
+    options = {'py2exe': {'excludes' : ['_ssl', '_socket',], 
+                          'includes' : ['sip',],
                           'bundle_files' : 3,
-                          #'dll_excludes' : ['ddraw.dll', 'opengl32.dll', 'glu32.dll']
         }
     },
 )
