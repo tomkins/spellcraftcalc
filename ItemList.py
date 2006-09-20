@@ -5,7 +5,7 @@
 # See NOTICE.txt for copyrights and grant of license
 
 from PyQt4.QtGui import *
-from PyQt4.Qt3Support import *
+from PyQt4.Qt3Support import Q3FilePreview
 from Item import *
 from Character import *
 from constants import *
