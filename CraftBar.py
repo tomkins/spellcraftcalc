@@ -30,6 +30,8 @@ class CraftBar(QDialog, Ui_B_CraftBar):
     def __init__(self,path = '',parent = None,name = None,modal = False,fl = Qt.Widget):
         QDialog.__init__(self, parent, fl)
         Ui_B_CraftBar.setupUi(self,self)
+        self.CharList.addColumn("Server")
+        self.CharList.addColumn("Char Name")
         if (name):
             self.setObjectName(name)
         if (modal):
