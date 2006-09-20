@@ -1,5 +1,13 @@
 Updated ??/??/2006 - Version 1.46
 
+  Completely overhauled the UI from Qt3 to Qt4.  Some of the controls 
+  and options change behavior slightly because Qt4 is vastly changed.
+  Two last elements, the "Load Item" window (because of its preview) 
+  and the "Export Quickbars..." (because of its characters list) have
+  yet to be converted, so source code users will need to grab our
+  patches to sip and pyqt.  Folks who download the .msi installer 
+  won't need to grab anything else.
+
   Prevent albion tank templates from showing Slash/Crush/Thrust resists
   while delving skills or showing skills while delving those resists.
 
