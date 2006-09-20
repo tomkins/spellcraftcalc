@@ -89,7 +89,7 @@
           <string>Select Character to Modify:</string>
         </property>
       </widget>
-      <widget class="Q3ListView" name="CharList" >
+      <widget class="QTableView" name="CharList" >
         <property name="geometry" >
           <rect>
             <x>5</x>

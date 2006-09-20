@@ -7,7 +7,7 @@
 from PyQt4.QtCore import *
 from PyQt4.QtGui import *
 from PyQt4.Qt3Support import *
-from B_CraftBar import *
+from B_CraftBar4 import *
 from Character import *
 from constants import *
 import os
@@ -19,19 +19,23 @@ import SC
 import ConfigParser
 import sys
 
-class CharItem(Q3ListViewItem):
-    def __init__(self, parent = None, charname = '', server = '', filename = ''):
-        Q3ListViewItem.__init__(self, parent, charname, server)
-        self.charname = charname
-        self.server = server
-        self.filename = filename
-
 class CraftBar(QDialog, Ui_B_CraftBar):
     def __init__(self,path = '',parent = None,name = None,modal = False,fl = Qt.Widget):
         QDialog.__init__(self, parent, fl)
         Ui_B_CraftBar.setupUi(self,self)
-        self.CharList.addColumn("Server")
-        self.CharList.addColumn("Char Name")
+
+        self.model = QStandardItemModel(0, 3)
+        self.model.setHeaderData(0, Qt.Horizontal, QVariant('Server'), Qt.DisplayRole)
+        self.model.setHeaderData(1, Qt.Horizontal, QVariant('Char Name'), Qt.DisplayRole)
+        self.CharList.setModel(self.model)
+        self.CharList.setEditTriggers(QAbstractItemView.NoEditTriggers)
+        self.CharList.setShowGrid(False)
+        self.CharList.verticalHeader().hide()
+        self.CharList.horizontalHeader().setResizeMode(QHeaderView.Stretch)
+        self.CharList.setSelectionBehavior(QAbstractItemView.SelectRows)
+        self.CharList.setSelectionMode(QAbstractItemView.SingleSelection)
+        self.CharList.setColumnHidden(2, True)
+
         if (name):
             self.setObjectName(name)
         if (modal):
@@ -59,19 +63,25 @@ class CraftBar(QDialog, Ui_B_CraftBar):
         self.piecelist = { }
         self.HotbarNum.setValue(1)
         self.HotbarPos.setValue(1)
-        #self.CharList.setAllColumnsShowFocus(1)
         self.DaocPath.setText(path)
         self.computeGemCount()
         self.computeBarEnd()
         self.mythicdir = path
 
     def loadGems(self):
-        char = self.CharList.selectedItem()
-        if char is None: return
+        indexList = self.CharList.selectedIndexes()
+        if len(indexList) == 0: return
+        for idx in indexList:
+            if idx.column() == 0: server = str(idx.data().toString())
+
+        # file column is hidden so we have to fetch it
+        row = indexList[0].row()
+        fileIndex = self.model.index(row, 2)
+        filename = str(self.model.data(fileIndex).toString())
+        
         self.LoadGemsButton.setEnabled(0)
-        self.LoadGemsButton.repaint(self.LoadGemsButton.visibleRect())
-        filename = char.filename
-        server = char.server
+        self.LoadGemsButton.update()
+
         f = open(filename, 'r')
         g = open(re.sub(r'(\w+)-(\d+)\.ini$', r'\1-\2.ini.bak', filename), 'w')
         g.write(f.read())
@@ -148,16 +158,20 @@ class CraftBar(QDialog, Ui_B_CraftBar):
     def findPath(self,a0):
         if os.path.isdir(str(a0)):
             self.mythicdir = str(a0)
-            self.CharList.clear()
+            self.model.removeRows(0, self.model.rowCount())
             filelist = glob.glob(str(a0)+'/*-*.ini')
             for file in filelist: 
                 m = re.compile("(\w+)-(\d+)\.ini$").search(file)
                 if m is not None:
                     server = ServerCodes[m.group(2)]
-                    self.CharList.insertItem(CharItem(self.CharList, m.group(1),
-                        server, file))
-        self.CharList.setColumnWidthMode(0, Q3ListView.Maximum)
-        self.CharList.setColumnWidthMode(1, Q3ListView.Maximum)
+                    self.model.insertRows(self.model.rowCount(), 1)
+                    index = self.model.index(self.model.rowCount()-1, 0, QModelIndex())
+                    self.model.setData(index, QVariant(server), Qt.DisplayRole)
+                    index = self.model.index(self.model.rowCount()-1, 1, QModelIndex())
+                    self.model.setData(index, QVariant(m.group(1)), Qt.DisplayRole)
+                    index = self.model.index(self.model.rowCount()-1, 2, QModelIndex())
+                    self.model.setData(index, QVariant(file), Qt.DisplayRole)
+        self.CharList.resizeRowsToContents()
 
     def openFileDialog(self):
         daocdir = QFileDialog.getExistingDirectory(self, 'Select DAoC Directory', self.DaocPath.text())
