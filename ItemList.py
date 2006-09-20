@@ -32,10 +32,11 @@ class Preview(Q3FilePreview):
         stattext = []
 
         for i in range(0, toprng):
-            effect = self.item.getSlotAttr(state, i, 'Effect')
             gemtype = self.item.getSlotAttr(state, i, 'Type')
-            if gemtype != 'Unused':
-                amount = int(self.item.getSlotAttr(state, i, 'Amount'))
+            if not gemtype or gemtype == 'Unused':
+                continue
+            effect = self.item.getSlotAttr(state, i, 'Effect')
+            amount = int(self.item.getSlotAttr(state, i, 'Amount'))
             statstr = self.item.getSlotAttr(state, i, 'Amount')
             statstr += ' ' + self.item.getSlotAttr(state, i, 'Effect')
             if self.item.getSlotAttr(state, i, 'Type') == 'Cap Increase':
@@ -63,18 +64,18 @@ class Preview(Q3FilePreview):
                 utility += amount * 2.0 / 3.0
 
         listtext = [
-            "Name:   %s" % self.item.getAttr('ItemName'),
-            "Level:  %s  Quality: %s" % (self.item.getAttr('Level'),
-                                         self.item.getAttr('ItemQuality')),
-            "AF/DPS: %s  Speed:   %s" % (self.item.getAttr('AFDPS'),
-                                         self.item.getAttr('Speed')),
-            "Bonus:  %s  Utility: %4.2f" % (self.item.getAttr('Bonus'), utility),
+            str(self.item.getAttr('ItemName')),
+            "Level: %s   Quality: %s   Utility: %.1f" % (self.item.getAttr('Level'),
+                                         self.item.getAttr('ItemQuality'), utility),
+            "AF/DPS: %s   Speed: %s   Bonus:  %s" % (self.item.getAttr('AFDPS'),
+                                         self.item.getAttr('Speed'),
+                                         self.item.getAttr('Bonus')),
         ]
         listtext.extend(stattext)
-        self.itemlist.insertStrList(listtext)
+        self.itemlist.insertItems(0, listtext)
 
     
-class ItemList(Q3ListBox):
+class ItemList(QListWidget):
     def __init__(self, parent = None, scwin = None, fl = 0):
-        Q3ListBox.__init__(self, parent)
+        QListWidget.__init__(self, parent)
         self.preview = Preview(self, scwin)
