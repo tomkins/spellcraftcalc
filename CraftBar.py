@@ -156,8 +156,8 @@ class CraftBar(QDialog, Ui_B_CraftBar):
                     server = ServerCodes[m.group(2)]
                     self.CharList.insertItem(CharItem(self.CharList, m.group(1),
                         server, file))
-            self.CharList.setColumnWidthMode(0, Q3ListView.Maximum)
-            self.CharList.setColumnWidthMode(1, Q3ListView.Maximum)
+        self.CharList.setColumnWidthMode(0, Q3ListView.Maximum)
+        self.CharList.setColumnWidthMode(1, Q3ListView.Maximum)
 
     def openFileDialog(self):
         daocdir = QFileDialog.getExistingDirectory(self, 'Select DAoC Directory', self.DaocPath.text())
