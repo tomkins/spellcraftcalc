@@ -6,8 +6,7 @@
 
 from PyQt4.QtCore import *
 from PyQt4.QtGui import *
-from PyQt4.Qt3Support import *
-from B_CraftBar4 import *
+from B_CraftBar import *
 from Character import *
 from constants import *
 import os

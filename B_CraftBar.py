@@ -2,13 +2,13 @@
 
 # Form implementation generated from reading ui file 'CraftBar.ui4'
 #
-# Created: Tue Sep 19 20:14:29 2006
+# Created: Wed Sep 20 18:12:04 2006
 #      by: PyQt4 UI code generator 4.0.1
 #
 # WARNING! All changes made in this file will be lost!
 
 import sys
-from PyQt4 import QtCore, QtGui, Qt3Support
+from PyQt4 import QtCore, QtGui
 
 class Ui_B_CraftBar(object):
     def setupUi(self, B_CraftBar):
@@ -39,7 +39,7 @@ class Ui_B_CraftBar(object):
         self.TextLabel4.setGeometry(QtCore.QRect(38,20,134,16))
         self.TextLabel4.setObjectName("TextLabel4")
 
-        self.CharList = Qt3Support.Q3ListView(self.GroupBox20)
+        self.CharList = QtGui.QTableView(self.GroupBox20)
         self.CharList.setGeometry(QtCore.QRect(5,44,205,193))
         self.CharList.setObjectName("CharList")
 
