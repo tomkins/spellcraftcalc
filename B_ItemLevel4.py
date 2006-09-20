@@ -2,14 +2,14 @@
 
 # Form implementation generated from reading ui file 'ItemLevel4.ui'
 #
-# Created: Mon Sep 18 23:13:34 2006
+# Created: Wed Sep 20 18:36:30 2006
 #      by: PyQt4 UI code generator 4.0.1
 #
 # WARNING! All changes made in this file will be lost!
 
 import sys
 from SearchingCombo import SearchingCombo
-from PyQt4 import QtCore, QtGui, Qt3Support
+from PyQt4 import QtCore, QtGui
 
 class Ui_B_ItemLevel(object):
     def setupUi(self, B_ItemLevel):
