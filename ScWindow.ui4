@@ -2485,7 +2485,7 @@
           </property>
         </widget>
       </widget>
-      <widget class="QWidget" name="PieceTab" >
+      <widget class="MultiTabBar" name="PieceTab" >
         <property name="geometry" >
           <rect>
             <x>3</x>
@@ -2501,17 +2501,17 @@
   <pixmapfunction>qPixmapFromMimeSource</pixmapfunction>
  <customwidgets>
    <customwidget>
-     <class>SearchingCombo</class>
-     <extends>QComboBox</extends>
-     <header>searchingcombo.h</header>
-     <container>1</container>
-     <pixmap></pixmap>
-   </customwidget>
-   <customwidget>
      <class>MultiTabBar</class>
      <extends>QTabBar</extends>
      <header>multitabbar.h</header>
      <container>0</container>
+     <pixmap></pixmap>
+   </customwidget>
+   <customwidget>
+     <class>SearchingCombo</class>
+     <extends>QComboBox</extends>
+     <header>searchingcombo.h</header>
+     <container>1</container>
      <pixmap></pixmap>
    </customwidget>
   </customwidgets>
