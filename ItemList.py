@@ -6,6 +6,8 @@
 
 from PyQt4.QtGui import *
 from PyQt4.Qt3Support import Q3FilePreview
+#strictly for PyQt Q3Support support, identify some dependencies
+from PyQt4 import QtNetwork, QtSql, QtXml
 from Item import *
 from Character import *
 from constants import *
