@@ -90,8 +90,8 @@ class ItemPreview(QListWidget):
                                          self.item.getAttr('Speed'),
                                          self.item.getAttr('Bonus')),
         ]
-        listtext.extend(stattext)
-        self.itemlist.insertItems(0, listtext)
+        self.addItems(listtext)
+        self.addItems(stattext)
 
     
 class ItemListDialog(QFileDialog):
@@ -102,20 +102,6 @@ class ItemListDialog(QFileDialog):
         self.setViewMode(QFileDialog.List)
         self.preview = ItemPreview(self, realm, charclass)
         self.connect(self,SIGNAL("currentChanged(const QString&)"),self.currentChanged)
-        self.connect(self,SIGNAL("filesSelected(const QStringList &)"),self.filesSelected)
 
     def currentChanged(self, file):
         self.preview.preView(file)
-
-    def filesSelected(self, files):
-        if files.count() == 1:
-            self.preview.preView(files[0])
-
-if __name__ == "__main__":
-    QApplication.setDesktopSettingsAware(0)
-    mine = QApplication(sys.argv)
-    extstr = 'XML Files (*.xml)'
-    itemdir = ''
-    Qfd = ItemListDialog(None, "Open Item", itemdir, extstr, "Albion", "Armsman")
-    if Qfd.exec_():
-        filename = Qfd.selectedFile()
