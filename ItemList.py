@@ -5,24 +5,42 @@
 # See NOTICE.txt for copyrights and grant of license
 
 from PyQt4.QtGui import *
-from PyQt4.Qt3Support import Q3FilePreview
-#strictly for PyQt Q3Support support, identify some dependencies
-from PyQt4 import QtNetwork, QtSql, QtXml
+from PyQt4.QtCore import *
 from Item import *
 from Character import *
 from constants import *
+from sys import stdout 
 
-class Preview(Q3FilePreview):
-    def __init__(self, itemlist, scwin):
-        Q3FilePreview.__init__(self)
-        self.itemlist = itemlist
+def fixlayout(parent):
+    index = 0
+    while (index < parent.count()):
+        (row, col, rowSpan, colSpan) = parent.getItemPosition(index)
+        if (colSpan == parent.columnCount()):
+            # Take the List/Tree controls and squish them down...
+            alignment = parent.itemAt(index).alignment()
+            moveItem = parent.takeAt(index)
+            parent.addItem(moveItem, row, col, rowSpan, colSpan - 2, alignment)
+        else:
+            # Fix the buttons' location, column 5 just grew wider...
+            if (col == parent.columnCount() - 1):
+                parent.itemAt(index).setAlignment(Qt.AlignRight)
+            index += 1
+        
+
+class ItemPreview(QListWidget):
+    def __init__(self, parent, realm, charclass):
+        fixlayout(parent.layout())
+        QListWidget.__init__(self, None)
+        parent.layout().addWidget(self, 1, 4, 1, 2)
         self.item = Item()
-        self.item.loadAttr('Realm', scwin.realm)
-        self.scwin = scwin
+        self.item.loadAttr('Realm', realm)
+        self.realm = realm
+        self.charclass = charclass
 
-    def previewUrl(self, url):
-        self.itemlist.clear()
-        if self.item.load(unicode(url.toString()), 1) == -2:
+    def preView(self, file):
+        sys.stdout.write(str(file.toString()))
+        self.clear()
+        if self.item.load(unicode(file.toString()), 1) == -2:
             return
 
         state = self.item.getAttr('ActiveState')
@@ -50,7 +68,7 @@ class Preview(Q3FilePreview):
                     or effect == 'All Melee Weapon Skills'\
                     or effect == 'All Dual Wield Skills'\
                     or effect == 'All Archery Skills':
-                    for e in AllBonusList[self.scwin.realm][self.scwin.charclass][effect]:
+                    for e in AllBonusList[self.realm][self.charclass][effect]:
                         utility += amount * 5
                 else:
                     utility += amount * 5
@@ -77,7 +95,24 @@ class Preview(Q3FilePreview):
         self.itemlist.insertItems(0, listtext)
 
     
-class ItemList(QListWidget):
-    def __init__(self, parent = None, scwin = None, fl = 0):
-        QListWidget.__init__(self, parent)
-        self.preview = Preview(self, scwin)
+class ItemListDialog(QFileDialog):
+    def __init__(self, parent = None, caption = None, itemdir = None, filter = None, realm = None, charclass = None):
+        QFileDialog.__init__(self, parent, caption, itemdir, filter)
+        self.setAcceptMode(QFileDialog.AcceptOpen)
+        self.setFileMode(QFileDialog.ExistingFile)
+        self.setViewMode(QFileDialog.List)
+        self.preview = ItemPreview(self, realm, charclass)
+        QFileDialog 
+
+    def currentChanged(self, file):
+        self.preview.viewFile(file)
+
+if __name__ == "__main__":
+    QApplication.setDesktopSettingsAware(0)
+    import sys
+    mine = QApplication(sys.argv)
+    extstr = 'XML Files (*.xml)'
+    itemdir = ''
+    Qfd = ItemListDialog(None, "Open Item", itemdir, extstr, "Albion", "Armsman")
+    if Qfd.exec_():
+        filename = Qfd.selectedFile()

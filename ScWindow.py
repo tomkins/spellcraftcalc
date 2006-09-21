@@ -7,7 +7,6 @@
 
 from PyQt4.QtCore import *
 from PyQt4.QtGui import *
-from PyQt4.Qt3Support import Q3FileDialog
 from B_ScWindow import *
 from Item import *
 from Character import *
@@ -1141,22 +1140,15 @@ class ScWindow(QMainWindow, Ui_B_SC):
             ext = ext[0]
         else:
             extstr = '*%s.xml *.%s' % (ext, ext)
+        extstr = "Items (%s)" % extstr
         itemdir = os.path.join(os.path.dirname(os.path.abspath(sys.argv[0])), 'items', self.realm, ext)
-        Qfd = Q3FileDialog(itemdir, "Items (%s)" % extstr, self, None, 1)
-        Qfp = ItemList.ItemList(Qfd, self)
-        Qfd.setMode(Q3FileDialog.ExistingFile)
-        Qfd.setInfoPreviewEnabled(1)
-        Qfd.setInfoPreview(Qfp, Qfp.preview)
-        Qfd.setPreviewMode(Q3FileDialog.Info)
-        Qfd.setViewMode(Q3FileDialog.List)
-        ## Qfp is nested in a QWidgetStack within a QSplitter, which we will tweak:
-        Qfp.parent().parent().setSizes([165, 150])
+        Qfd = ItemList.ItemListDialog(self, "Load Item", itemdir, extstr, self.realm, self.charclass)
         if Qfd.exec_():
-            filename = Qfd.selectedFile()
-            if filename is not None and unicode(filename) != '':
+            if Qfd.selectedFiles().count() > 0:
+                filename = unicode(Qfd.selectedFiles()[0])
                 item = Item(self.currentTabLabel)
                 item.loadAttr('Realm', self.realm)
-                if item.load(unicode(filename)) == -1 : return
+                if item.load(filename) == -1 : return
                 if string.lower(item.getAttr('Realm')) != string.lower(self.realm)\
                     and string.lower(item.getAttr('Realm')) != 'all'\
                     and not self.coop:
