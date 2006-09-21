@@ -37,10 +37,9 @@ class ItemPreview(QListWidget):
         self.realm = realm
         self.charclass = charclass
 
-    def preView(self, file):
-        sys.stdout.write(str(file.toString()))
+    def preView(self, filename):
         self.clear()
-        if self.item.load(unicode(file.toString()), 1) == -2:
+        if self.item.load(unicode(filename), 1) == -2:
             return
 
         state = self.item.getAttr('ActiveState')
@@ -102,7 +101,7 @@ class ItemListDialog(QFileDialog):
         self.setFileMode(QFileDialog.ExistingFile)
         self.setViewMode(QFileDialog.List)
         self.preview = ItemPreview(self, realm, charclass)
-        self.connect(self,SIGNAL("currentChanged(QString&)"),self.currentChanged)
+        self.connect(self,SIGNAL("currentChanged(const QString&)"),self.currentChanged)
 
     def currentChanged(self, file):
         self.preview.preView(file)
