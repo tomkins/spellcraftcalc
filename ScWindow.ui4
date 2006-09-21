@@ -1161,7 +1161,13 @@
           </property>
         </widget>
       </widget>
-      <widget class="QGroupBox" name="GroupItemFrame" >
+      <widget class="QFrame" name="GroupItemFrame" >
+        <property name="frameShape" >
+          <enum>QFrame::StyledPanel</enum>
+        </property>
+        <property name="frameShadow" >
+          <enum>QFrame::Raised</enum>
+        </property>
         <property name="geometry" >
           <rect>
             <x>3</x>
@@ -1169,9 +1175,6 @@
             <width>776</width>
             <height>265</height>
           </rect>
-        </property>
-        <property name="title" >
-          <string/>
         </property>
         <widget class="QLabel" name="ItemLevelLabel" >
           <property name="geometry" >
@@ -1324,7 +1327,7 @@
             <string>Equipped</string>
           </property>
         </widget>
-        <widget class="QGroupBox" name="ButtonGroup1" >
+        <widget class="QFrame" name="DropCraftButtonFrame" >
           <property name="enabled" >
             <bool>true</bool>
           </property>
@@ -1336,8 +1339,8 @@
               <height>21</height>
             </rect>
           </property>
-          <property name="title" >
-            <string/>
+          <property name="frameShape" >
+            <enum>QFrame::NoFrame</enum>
           </property>
           <widget class="QRadioButton" name="PlayerMade" >
             <property name="geometry" >
@@ -2504,7 +2507,7 @@
      <class>MultiTabBar</class>
      <extends>QTabBar</extends>
      <header>multitabbar.h</header>
-     <container>0</container>
+     <container>1</container>
      <pixmap></pixmap>
    </customwidget>
    <customwidget>
