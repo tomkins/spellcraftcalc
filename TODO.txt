@@ -3,14 +3,8 @@ Things to fix before next beta release is announced;
   Reimplement the MultiTabBar for Q4, if possible, or find another
   representation for selecting a slot.
 
-  Unhook the old Q3FileDialog/Q3FilePreview model for a customized
-  QFileDialog with "Load Item" Preview, if possible.
-
   Promote Item.py attributes such as Name, Level, Bonus etc. into
   the per-item scope (for each drop, crafted, and other named items).
-
-  Quit crashing when Tab bar / Drop list accelerator keys are
-  pressed, while load item dialog is open.
 
   Fix the prices, it's just wonked with all the different cost
   changes to gems since cats gems.  This means using SC.py from
@@ -53,10 +47,6 @@ Things to fix before 2.0 final (non-beta) is announced;
   LoadTemplate:  Loading a template doesn't update the most recently
   used list, nor the directory to load templates from (saving does).
   At least ensure the template defaults to cwd()+'/templates/*.xml'
-
-  LoadItem:  Is /very/ slow (populating the list, it's not in the
-  preview, perhaps matching to the file extensions?), and doesn't 
-  remember the directory used.
 
   Accelerator keys to jump around the page, especially to tabs.
 
