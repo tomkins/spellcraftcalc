@@ -84,6 +84,16 @@ class MultiTabBar4(QWidget):
         tab = self.__tabAt(row, col)
         if tab: return tab.text
         return None
+
+    def setTabData(self, row, col, data):
+        tab = self.__tabAt(row, col)
+        if tab: 
+            tab.data = data
+
+    def tabData(self, row, col):
+        tab = self.__tabAt(row, col)
+        if tab: return tab.data
+        return None
     
     def tabSizeHint(self, row, col):
         tab = self.__tabAt(row, col)
