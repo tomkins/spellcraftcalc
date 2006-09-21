@@ -102,9 +102,14 @@ class ItemListDialog(QFileDialog):
         self.setViewMode(QFileDialog.List)
         self.preview = ItemPreview(self, realm, charclass)
         self.connect(self,SIGNAL("currentChanged(const QString&)"),self.currentChanged)
+        self.connect(self,SIGNAL("filesSelected(const QStringList &)"),self.filesSelected)
 
     def currentChanged(self, file):
         self.preview.preView(file)
+
+    def filesSelected(self, files):
+        if files.count() == 1:
+            self.preview.preView(files[0])
 
 if __name__ == "__main__":
     QApplication.setDesktopSettingsAware(0)
