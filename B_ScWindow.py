@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'ScWindow.ui4'
 #
-# Created: Wed Sep 20 18:36:20 2006
+# Created: Thu Sep 21 03:20:59 2006
 #      by: PyQt4 UI code generator 4.0.1
 #
 # WARNING! All changes made in this file will be lost!
@@ -381,7 +381,13 @@ class Ui_B_SC(object):
         self.OtherBonusList.setGeometry(QtCore.QRect(5,15,230,160))
         self.OtherBonusList.setObjectName("OtherBonusList")
 
-        self.GroupItemFrame = QtGui.QGroupBox(self.ScWinFrame)
+        self.PieceTab = MultiTabBar(self.ScWinFrame)
+        self.PieceTab.setGeometry(QtCore.QRect(3,190,776,46))
+        self.PieceTab.setObjectName("PieceTab")
+
+        self.GroupItemFrame = QtGui.QFrame(self.ScWinFrame)
+        self.GroupItemFrame.setFrameShape(QtGui.QFrame.StyledPanel)
+        self.GroupItemFrame.setFrameShadow(QtGui.QFrame.Raised)
         self.GroupItemFrame.setGeometry(QtCore.QRect(3,235,776,265))
         self.GroupItemFrame.setObjectName("GroupItemFrame")
 
@@ -437,16 +443,17 @@ class Ui_B_SC(object):
         self.Equipped.setGeometry(QtCore.QRect(509,5,71,21))
         self.Equipped.setObjectName("Equipped")
 
-        self.ButtonGroup1 = QtGui.QGroupBox(self.GroupItemFrame)
-        self.ButtonGroup1.setEnabled(True)
-        self.ButtonGroup1.setGeometry(QtCore.QRect(615,5,138,21))
-        self.ButtonGroup1.setObjectName("ButtonGroup1")
+        self.DropCraftButtonFrame = QtGui.QFrame(self.GroupItemFrame)
+        self.DropCraftButtonFrame.setEnabled(True)
+        self.DropCraftButtonFrame.setGeometry(QtCore.QRect(615,5,138,21))
+        self.DropCraftButtonFrame.setFrameShape(QtGui.QFrame.NoFrame)
+        self.DropCraftButtonFrame.setObjectName("DropCraftButtonFrame")
 
-        self.PlayerMade = QtGui.QRadioButton(self.ButtonGroup1)
+        self.PlayerMade = QtGui.QRadioButton(self.DropCraftButtonFrame)
         self.PlayerMade.setGeometry(QtCore.QRect(2,2,85,17))
         self.PlayerMade.setObjectName("PlayerMade")
 
-        self.Drop = QtGui.QRadioButton(self.ButtonGroup1)
+        self.Drop = QtGui.QRadioButton(self.DropCraftButtonFrame)
         self.Drop.setGeometry(QtCore.QRect(92,2,52,17))
         self.Drop.setChecked(True)
         self.Drop.setObjectName("Drop")
@@ -833,10 +840,6 @@ class Ui_B_SC(object):
         self.ClearItem = QtGui.QPushButton(self.GroupItemFrame)
         self.ClearItem.setGeometry(QtCore.QRect(683,233,79,26))
         self.ClearItem.setObjectName("ClearItem")
-
-        self.PieceTab = MultiTabBar(self.ScWinFrame)
-        self.PieceTab.setGeometry(QtCore.QRect(3,190,776,46))
-        self.PieceTab.setObjectName("PieceTab")
         B_SC.setCentralWidget(self.ScWinFrame)
 
         self.retranslateUi(B_SC)
