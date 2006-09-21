@@ -9,7 +9,7 @@ from PyQt4.QtCore import *
 from Item import *
 from Character import *
 from constants import *
-from sys import stdout 
+import sys
 
 def fixlayout(parent):
     index = 0
@@ -102,14 +102,13 @@ class ItemListDialog(QFileDialog):
         self.setFileMode(QFileDialog.ExistingFile)
         self.setViewMode(QFileDialog.List)
         self.preview = ItemPreview(self, realm, charclass)
-        QFileDialog 
+        self.connect(self,SIGNAL("currentChanged(QString&)"),self.currentChanged)
 
     def currentChanged(self, file):
-        self.preview.viewFile(file)
+        self.preview.preView(file)
 
 if __name__ == "__main__":
     QApplication.setDesktopSettingsAware(0)
-    import sys
     mine = QApplication(sys.argv)
     extstr = 'XML Files (*.xml)'
     itemdir = ''
