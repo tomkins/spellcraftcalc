@@ -25,168 +25,66 @@ class MultiTabBar4(QWidget):
             self.rowoverlap = 3
             self.cropheight = 2
 
-        self.tabList = []
-        self.selectedIndex = (0, 0)
-        self.pressedIndex = (-1, -1)
-        self.hoverRect = QRect()
+        self.__tabList = []
+        self.__selectedIndex = (0, 0)
+        self.__pressedIndex = (-1, -1)
+        self.__hoverRect = QRect()
         self.__layoutDirty = False
 
 
     def addTab(self, text, row):
-        while len(self.tabList) <= row:
-            self.tabList.append([])
+        while len(self.__tabList) <= row:
+            self.__tabList.append([])
 
         tab = MultiTab()
         tab.text = text
-        self.tabList[row].append(tab)
+        self.__tabList[row].append(tab)
 
         self.__layoutTabs()
 
     def removeTab(self, text):
-        for row in self.tabList:
+        for row in self.__tabList:
             for tab in row:
                 if tab.text == text:
                     row.remove(tab)
+                    self.__layoutTabs()
                     return
 
+    def removeTab(self, row, col):
+        if len(self.__tabList) <= row:
+            return None
+        if len(self.__tabList[row]) <= col:
+            return None
+
+        del self.__tabList[row][col]
+    
     def tabRect(self, row, col):
-        if len(self.tabList) < row:
-            return None
-        if len(self.tabList[row]) < col:
-            return None
+        tab = self.__tabAt(row, col)
+        if tab:
+            return tab.rect
+        return None
 
-        return self.tabList[row][col].rect
-
-    def currentSelection(self):
-        return self.selectedIndex
-
-    def setCurrentSelection(self, row, col):
-        self.selectedIndex = (row, col)
+    def currentIndex(self):
+        return self.__selectedIndex
 
     def setCurrentIndex(self, row, col):
-        self.setCurrentSelection(row, col)
+        self.__selectedIndex = (row, col)
         self.update()
 
-    def tabsInRow(self, row):
-        if len(self.tabList) < row: return 0
-        return len(self.tabList[row])
-        
-    
-#### HELPERS (private) ####
-    def __tabAt(self, row, col):
-        if len(self.tabList) < row:
-            return None
-        if len(self.tabList[row]) < col:
-            return None
-        return self.tabList[row][col]
+    def numTabsInRow(self, row):
+        if len(self.__tabList) <= row: return 0
+        return len(self.__tabList[row])
 
-    def __layoutTabs(self):
-        self.__layoutDirty = False
-
-        numrows = len(self.tabList)
-        # Horizontal tabs only for now
-        mx = 0
-        mx_row = -1
-        x = 0
-        maxHeight = 0
-
-        for i in range(numrows):
-            if self.tabsInRow(i) > mx:
-                mx_row = i
-                mx = self.tabsInRow(i)
-        
-        for i in range(mx):
-            sz = self.tabSizeHint(mx_row, i)
-            self.tabList[mx_row][i].rect = QRect(x, 0, sz.width(),
-                sz.height())
-            maxHeight = max(maxHeight, sz.height())
-            x += sz.width()
-        maxWidth = x
-
-        for r in range(numrows):
-            if r == mx_row: continue
-            num = self.tabsInRow(r)
-            w = maxWidth / num
-            x = 0
-
-            for i in range(num):
-                self.tabList[r][i].rect = QRect(x, r * maxHeight, w, maxHeight)
-                x += w
-
-        for j in range(len(self.tabList[mx_row])):
-            self.tabList[mx_row][j].rect.setHeight(maxHeight)
-            self.tabList[mx_row][j].rect.setY(mx_row * maxHeight)
-
-        self.tabLayoutChange()
-
-    def __getStyleOption(self, row, col):
+    def setTabText(self, row, col, text):
         tab = self.__tabAt(row, col)
-        if not tab: return None
+        if tab: 
+            tab.text = text
 
-        opt = QStyleOptionTabV2()
-        opt.initFrom(self)
-        opt.state &= ~(QStyle.State_HasFocus | QStyle.State_MouseOver)
-        opt.rect = self.tabRect(row, col)
-
-        isCurrent = (row, col) == self.currentSelection()
-        opt.row = 0
-
-        if (row, col) == self.pressedIndex:
-            opt.state |= QStyle.State_Sunken
-        if isCurrent:
-            opt.state |= QStyle.State_Selected
-        if isCurrent and self.hasFocus():
-            opt.state |= QStyle.State_HasFocus
-        if not tab.enabled:
-            opt.state &= ~QStyle.State_Enabled
-        if self.isActiveWindow():
-            opt.state |= QStyle.State_Active
-        if opt.rect == self.hoverRect:
-            opt.state |= QStyle.State_MouseOver
-        opt.shape = QTabBar.RoundedNorth
-        opt.text = tab.text
-
-        if tab.textColor.isValid():
-            opt.palette.setColor(self.foregroundRole(), tab.textColor)
-
-        opt.icon = tab.icon
-        opt.iconSize = self.iconSize()
-        if row == self.currentSelection()[0]:
-            if col > 0 and col - 1 == self.currentSelection()[1]:
-                opt.selectedPosition = QStyleOptionTab.PreviousIsSelected
-            elif col < self.tabsInRow(row) - 1 and \
-                    col + 1 == self.currentSelection()[1]:
-                opt.selectedPosition = QStyleOptionTab.NextIsSelected
-            else:
-                opt.selectedPosition = QStyleOptionTab.NotAdjacent
-        else:
-            opt.selectedPosition = QStyleOptionTab.NotAdjacent
-
-        if col == 0:
-            if self.tabsInRow(row) > 1:
-                opt.position = QStyleOptionTab.Beginning
-            else:
-                opt.position = QStyleOptionTab.OnlyOneTab
-        elif col == self.tabsInRow(row) - 1:
-            opt.position = QStyleOptionTab.End
-        else:
-            opt.position = QStyleOptionTab.Middle
-
-        return opt
-
-    def __indexAtPos(self, p):
-        if self.tabRect(self.currentSelection()[0],
-                self.currentSelection()[1]).contains(p):
-            return self.currentSelection()
-
-        for i in range(len(self.tabList)):
-            for j in range(len(self.tabList[i])):
-                if self.__tabAt(i, j).enabled and self.tabRect(i,
-                        j).contains(p):
-                    return (i, j)
-
-        return (-1, -1)
-
+    def tabText(self, row, col, text):
+        tab = self.__tabAt(row, col)
+        if tab: return tab.text
+        return None
+    
     def tabSizeHint(self, row, col):
         tab = self.__tabAt(row, col)
         if (tab):
@@ -218,7 +116,7 @@ class MultiTabBar4(QWidget):
             self.__layoutTabs()
 
         r = QRect()
-        for i in range(self.tabsInRow(0)):
+        for i in range(self.numTabsInRow(0)):
             r = r.unite(self.__tabAt(0, i).rect)
         sz = QApplication.globalStrut()
         return r.size().expandedTo(sz)
@@ -254,15 +152,15 @@ class MultiTabBar4(QWidget):
         cutTab = QStyleOptionTab()
         selectedTab = QStyleOptionTab()
 
-        #for i in range(len(self.tabList)):
-        for i in range(len(self.tabList)):
-            for j in range(len(self.tabList[i])):
+        #for i in range(len(self.__tabList)):
+        for i in range(len(self.__tabList)):
+            for j in range(len(self.__tabList[i])):
                 tab = self.__getStyleOption(i, j)
                 if not (tab.state & QStyle.State_Enabled):
                     tab.palette.setCurrentColorGroup(QPalette.Disabled)
 
                 optTabBase.tabBarRect |= tab.rect
-                if (i, j) == self.currentSelection():
+                if (i, j) == self.__selectedIndex:
                     selected = (i, j)
                     selectedTab = tab
                     optTabBase.selectedTabRect = tab.rect
@@ -282,12 +180,12 @@ class MultiTabBar4(QWidget):
             e.ignore()
             return
 
-        self.pressedIndex = self.__indexAtPos(e.pos())
-        if self.pressedIndex != (-1, -1):
+        self.__pressedIndex = self.__indexAtPos(e.pos())
+        if self.__pressedIndex != (-1, -1):
             if e.type() == self.style().styleHint(QStyle.SH_TabBar_SelectMouseType, None, self):
-                self.setCurrentSelection(pressedIndex)
+                self.__selectedIndex = self.__pressedIndex
             else:
-                self.repaint(self.tabRect(self.pressedIndex[0], self.pressedIndex[1]))
+                self.repaint(self.tabRect(self.__pressedIndex[0], self.__pressedIndex[1]))
 
     def mouseMoveEvent(self, e):
         if e.buttons() != Qt.LeftButton:
@@ -297,24 +195,24 @@ class MultiTabBar4(QWidget):
         if self.style().styleHint(QStyle.SH_TabBar_SelectMouseType, None, self) \
                 == QEvent.MouseButtonRelease:
             i = self.__indexAtPos(e.pos())
-            if i != self.pressedIndex:
-                oldIndex = self.pressedIndex
+            if i != self.__pressedIndex:
+                oldIndex = self.__pressedIndex
                 pressedIndex = (-1, -1)
                 if oldIndex != (-1, -1):
                     self.repaint(self.tabRect(oldIndex[0], oldIndex[1]))
-                if self.pressedIndex != (-1, -1):
-                    self.repaint(self.tabRect(self.pressedIndex[0],
-                        self.pressedIndex[1]))
+                if self.__pressedIndex != (-1, -1):
+                    self.repaint(self.tabRect(self.__pressedIndex[0],
+                        self.__pressedIndex[1]))
 
     def mouseReleaseEvent(self, e):
         if e.button() != Qt.LeftButton:
             e.ignore()
 
-        if self.__indexAtPos(e.pos()) == self.pressedIndex:
-            i = self.pressedIndex
+        if self.__indexAtPos(e.pos()) == self.__pressedIndex:
+            i = self.__pressedIndex
         else:
             i = (-1, -1)
-        self.pressedIndex = (-1, -1)
+        self.__pressedIndex = (-1, -1)
         if e.type() == \
                 self.style().styleHint(QStyle.SH_TabBar_SelectMouseType, None,
                 self):
@@ -327,8 +225,33 @@ class MultiTabBar4(QWidget):
     def showEvent(self, e):
         if self.__layoutDirty:
             self.__layoutTabs()
-        if self.currentSelection() == (-1, -1):
+        if self.__selectedIndex == (-1, -1):
             self.setCurrentIndex(0, 0)
+
+    def resizeEvent(self, e):
+        self.__layoutTabs()
+
+    def event(self, e):
+        if e.type() == QEvent.HoverMove or e.type == QEvent.HoverEnter:
+            if self.__hoverRect.contains(e.pos()):
+                oldHoverRect = self.__hoverRect
+                for i in range(len(self.__tabList)):
+                    for j in range(len(self.__tabList[i])):
+                        area = self.tabRect(i, j)
+                        if area.contains(e.pos()):
+                            self.__hoverRect = area
+                            break
+                if e.oldPos() != QPoint(-1, -1):
+                    self.update(oldHoverRect)
+                update(self.__hoverRect)
+            return True
+        elif e.type() == QEvent.HoverLeave:
+            oldHoverRect = self.__hoverRect
+            self.__hoverRect = QRect()
+            self.update(oldHoverRect)
+            return True
+
+        return QWidget.event(self, e)
 
     def refresh(self):
         if not self.isVisible():
@@ -338,6 +261,123 @@ class MultiTabBar4(QWidget):
             self.update()
             self.updateGeometry()
         
+#### HELPERS (private) ####
+    def __tabAt(self, row, col):
+        if len(self.__tabList) <= row:
+            return None
+        if len(self.__tabList[row]) <= col:
+            return None
+        return self.__tabList[row][col]
+
+    def __layoutTabs(self):
+        self.__layoutDirty = False
+
+        numrows = len(self.__tabList)
+        # Horizontal tabs only for now
+        mx = 0
+        mx_row = -1
+        x = 0
+        maxHeight = 0
+
+        for i in range(numrows):
+            if self.numTabsInRow(i) > mx:
+                mx_row = i
+                mx = self.numTabsInRow(i)
+        
+        for i in range(mx):
+            sz = self.tabSizeHint(mx_row, i)
+            self.__tabList[mx_row][i].rect = QRect(x, 0, sz.width(),
+                sz.height())
+            maxHeight = max(maxHeight, sz.height())
+            x += sz.width()
+        maxWidth = x
+
+        for r in range(numrows):
+            if r == mx_row: continue
+            num = self.numTabsInRow(r)
+            w = 0
+            if num > 0:
+                w = maxWidth / num
+            x = 0
+
+            for i in range(num):
+                self.__tabList[r][i].rect = QRect(x, r * maxHeight, w, maxHeight)
+                x += w
+
+        for j in range(len(self.__tabList[mx_row])):
+            self.__tabList[mx_row][j].rect.setHeight(maxHeight)
+            self.__tabList[mx_row][j].rect.setY(mx_row * maxHeight)
+
+        self.tabLayoutChange()
+
+    def __getStyleOption(self, row, col):
+        tab = self.__tabAt(row, col)
+        if not tab: return None
+
+        opt = QStyleOptionTabV2()
+        opt.initFrom(self)
+        opt.state &= ~(QStyle.State_HasFocus | QStyle.State_MouseOver)
+        opt.rect = self.tabRect(row, col)
+
+        isCurrent = (row, col) == self.__selectedIndex
+        opt.row = 0
+
+        if (row, col) == self.__pressedIndex:
+            opt.state |= QStyle.State_Sunken
+        if isCurrent:
+            opt.state |= QStyle.State_Selected
+        if isCurrent and self.hasFocus():
+            opt.state |= QStyle.State_HasFocus
+        if not tab.enabled:
+            opt.state &= ~QStyle.State_Enabled
+        if self.isActiveWindow():
+            opt.state |= QStyle.State_Active
+        if opt.rect == self.__hoverRect:
+            opt.state |= QStyle.State_MouseOver
+        opt.shape = QTabBar.RoundedNorth
+        opt.text = tab.text
+
+        if tab.textColor.isValid():
+            opt.palette.setColor(self.foregroundRole(), tab.textColor)
+
+        opt.icon = tab.icon
+        opt.iconSize = self.iconSize()
+        if row == self.__selectedIndex[0]:
+            if col > 0 and col - 1 == self.__selectedIndex[1]:
+                opt.selectedPosition = QStyleOptionTab.PreviousIsSelected
+            elif col < self.numTabsInRow(row) - 1 and \
+                    col + 1 == self.__selectedIndex[1]:
+                opt.selectedPosition = QStyleOptionTab.NextIsSelected
+            else:
+                opt.selectedPosition = QStyleOptionTab.NotAdjacent
+        else:
+            opt.selectedPosition = QStyleOptionTab.NotAdjacent
+
+        if col == 0:
+            if self.numTabsInRow(row) > 1:
+                opt.position = QStyleOptionTab.Beginning
+            else:
+                opt.position = QStyleOptionTab.OnlyOneTab
+        elif col == self.numTabsInRow(row) - 1:
+            opt.position = QStyleOptionTab.End
+        else:
+            opt.position = QStyleOptionTab.Middle
+
+        return opt
+
+    def __indexAtPos(self, p):
+        if self.tabRect(self.__selectedIndex[0],
+                self.__selectedIndex[1]).contains(p):
+            return self.__selectedIndex
+
+        for i in range(len(self.__tabList)):
+            for j in range(len(self.__tabList[i])):
+                if self.__tabAt(i, j).enabled and self.tabRect(i,
+                        j).contains(p):
+                    return (i, j)
+
+        return (-1, -1)
+
             
 if __name__ == '__main__':
     QApplication.setDesktopSettingsAware(0)
