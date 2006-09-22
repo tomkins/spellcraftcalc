@@ -196,13 +196,13 @@ class ScWindow(QMainWindow, Ui_B_SC):
                     self.ItemQualityLabel, self.QualDrop, self.QualEdit, 
                     self.ItemBonusLabel, self.Bonus_Edit, self.ItemAFDPSLabel, 
                     self.AFDPS_Edit, self.ItemSpeedLabel, self.Speed_Edit, 
-                    self.Equipped, self.DropCraftButtonFrame):
-            if col and str(obj.objectName)[-5:] == 'Label':
-                self.itemcontrollayout.addSpacing(10)
-                col += 1
+                    self.Equipped):
             self.itemcontrollayout.addWidget(obj)
             col += 1
-
+            if col > 2 and str(obj.objectName())[-5:] != 'Label':
+                self.itemcontrollayout.addSpacing(10)
+                col += 1
+        self.itemcontrollayout.addWidget(self.DropCraftButtonFrame)
         self.itemlayout = QtGui.QGridLayout(self.GroupItemFrame)
         self.itemlayout.setMargin(2)
         self.itemlayout.setSpacing(0)
