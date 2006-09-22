@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'ScWindow.ui4'
 #
-# Created: Thu Sep 21 03:20:59 2006
+# Created: Fri Sep 22 00:19:23 2006
 #      by: PyQt4 UI code generator 4.0.1
 #
 # WARNING! All changes made in this file will be lost!
@@ -381,10 +381,6 @@ class Ui_B_SC(object):
         self.OtherBonusList.setGeometry(QtCore.QRect(5,15,230,160))
         self.OtherBonusList.setObjectName("OtherBonusList")
 
-        self.PieceTab = MultiTabBar(self.ScWinFrame)
-        self.PieceTab.setGeometry(QtCore.QRect(3,190,776,46))
-        self.PieceTab.setObjectName("PieceTab")
-
         self.GroupItemFrame = QtGui.QFrame(self.ScWinFrame)
         self.GroupItemFrame.setFrameShape(QtGui.QFrame.StyledPanel)
         self.GroupItemFrame.setFrameShadow(QtGui.QFrame.Raised)
@@ -445,16 +441,16 @@ class Ui_B_SC(object):
 
         self.DropCraftButtonFrame = QtGui.QFrame(self.GroupItemFrame)
         self.DropCraftButtonFrame.setEnabled(True)
-        self.DropCraftButtonFrame.setGeometry(QtCore.QRect(615,5,138,21))
+        self.DropCraftButtonFrame.setGeometry(QtCore.QRect(617,5,136,21))
         self.DropCraftButtonFrame.setFrameShape(QtGui.QFrame.NoFrame)
         self.DropCraftButtonFrame.setObjectName("DropCraftButtonFrame")
 
         self.PlayerMade = QtGui.QRadioButton(self.DropCraftButtonFrame)
-        self.PlayerMade.setGeometry(QtCore.QRect(2,2,85,17))
+        self.PlayerMade.setGeometry(QtCore.QRect(0,0,85,21))
         self.PlayerMade.setObjectName("PlayerMade")
 
         self.Drop = QtGui.QRadioButton(self.DropCraftButtonFrame)
-        self.Drop.setGeometry(QtCore.QRect(92,2,52,17))
+        self.Drop.setGeometry(QtCore.QRect(86,0,52,21))
         self.Drop.setChecked(True)
         self.Drop.setObjectName("Drop")
 
@@ -488,9 +484,9 @@ class Ui_B_SC(object):
         self.LabelGemCost.setAlignment(QtCore.Qt.AlignVCenter|QtCore.Qt.AlignRight)
         self.LabelGemCost.setObjectName("LabelGemCost")
 
-        self.ItemNameLabel = QtGui.QLabel(self.GroupItemFrame)
-        self.ItemNameLabel.setGeometry(QtCore.QRect(562,31,70,17))
-        self.ItemNameLabel.setObjectName("ItemNameLabel")
+        self.LabelItemName = QtGui.QLabel(self.GroupItemFrame)
+        self.LabelItemName.setGeometry(QtCore.QRect(562,31,70,17))
+        self.LabelItemName.setObjectName("LabelItemName")
 
         self.Gem_Label_1 = QtGui.QLabel(self.GroupItemFrame)
         self.Gem_Label_1.setGeometry(QtCore.QRect(7,48,34,21))
@@ -781,12 +777,8 @@ class Ui_B_SC(object):
         self.ItemImbue.setAlignment(QtCore.Qt.AlignVCenter|QtCore.Qt.AlignRight)
         self.ItemImbue.setObjectName("ItemImbue")
 
-        self.ItemImbueSlashLabel = QtGui.QLabel(self.GroupItemFrame)
-        self.ItemImbueSlashLabel.setGeometry(QtCore.QRect(487,178,8,17))
-        self.ItemImbueSlashLabel.setObjectName("ItemImbueSlashLabel")
-
         self.ItemImbueTotal = QtGui.QLabel(self.GroupItemFrame)
-        self.ItemImbueTotal.setGeometry(QtCore.QRect(498,178,29,17))
+        self.ItemImbueTotal.setGeometry(QtCore.QRect(487,178,40,17))
         self.ItemImbueTotal.setObjectName("ItemImbueTotal")
 
         self.ItemOverchargeLabel = QtGui.QLabel(self.GroupItemFrame)
@@ -840,6 +832,10 @@ class Ui_B_SC(object):
         self.ClearItem = QtGui.QPushButton(self.GroupItemFrame)
         self.ClearItem.setGeometry(QtCore.QRect(683,233,79,26))
         self.ClearItem.setObjectName("ClearItem")
+
+        self.PieceTab = MultiTabBar(self.ScWinFrame)
+        self.PieceTab.setGeometry(QtCore.QRect(3,190,776,46))
+        self.PieceTab.setObjectName("PieceTab")
         B_SC.setCentralWidget(self.ScWinFrame)
 
         self.retranslateUi(B_SC)
@@ -996,7 +992,7 @@ class Ui_B_SC(object):
         self.LabelGemQuality.setText(QtGui.QApplication.translate("B_SC", "Quality", None, QtGui.QApplication.UnicodeUTF8))
         self.LabelGemPoints.setText(QtGui.QApplication.translate("B_SC", "Points", None, QtGui.QApplication.UnicodeUTF8))
         self.LabelGemCost.setText(QtGui.QApplication.translate("B_SC", "Cost", None, QtGui.QApplication.UnicodeUTF8))
-        self.ItemNameLabel.setText(QtGui.QApplication.translate("B_SC", "Name", None, QtGui.QApplication.UnicodeUTF8))
+        self.LabelItemName.setText(QtGui.QApplication.translate("B_SC", "Name", None, QtGui.QApplication.UnicodeUTF8))
         self.Gem_Label_1.setText(QtGui.QApplication.translate("B_SC", "Gem 1:", None, QtGui.QApplication.UnicodeUTF8))
         self.Points_1.setText(QtGui.QApplication.translate("B_SC", "0.0", None, QtGui.QApplication.UnicodeUTF8))
         self.Cost_1.setText(QtGui.QApplication.translate("B_SC", "0c", None, QtGui.QApplication.UnicodeUTF8))
@@ -1019,8 +1015,7 @@ class Ui_B_SC(object):
         self.Gem_Label_10.setText(QtGui.QApplication.translate("B_SC", "Gem10:", None, QtGui.QApplication.UnicodeUTF8))
         self.ItemImbueLabel.setText(QtGui.QApplication.translate("B_SC", "Imbue Points:", None, QtGui.QApplication.UnicodeUTF8))
         self.ItemImbue.setText(QtGui.QApplication.translate("B_SC", "0.0", None, QtGui.QApplication.UnicodeUTF8))
-        self.ItemImbueSlashLabel.setText(QtGui.QApplication.translate("B_SC", "/", None, QtGui.QApplication.UnicodeUTF8))
-        self.ItemImbueTotal.setText(QtGui.QApplication.translate("B_SC", "0.0", None, QtGui.QApplication.UnicodeUTF8))
+        self.ItemImbueTotal.setText(QtGui.QApplication.translate("B_SC", " / 0.0", None, QtGui.QApplication.UnicodeUTF8))
         self.ItemOverchargeLabel.setText(QtGui.QApplication.translate("B_SC", "Overcharge:", None, QtGui.QApplication.UnicodeUTF8))
         self.ItemOvercharge.setText(QtGui.QApplication.translate("B_SC", "None", None, QtGui.QApplication.UnicodeUTF8))
         self.ItemCostLabel.setText(QtGui.QApplication.translate("B_SC", "Item Cost:", None, QtGui.QApplication.UnicodeUTF8))
