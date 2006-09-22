@@ -41,7 +41,7 @@
             </rect>
           </property>
           <property name="text" >
-            <string>Name:</string>
+            <string>Name: </string>
           </property>
         </widget>
         <widget class="QLineEdit" name="CharName" >
@@ -64,7 +64,7 @@
             </rect>
           </property>
           <property name="text" >
-            <string>Realm:</string>
+            <string>Realm: </string>
           </property>
         </widget>
         <widget class="SearchingCombo" name="Realm" >
@@ -87,7 +87,7 @@
             </rect>
           </property>
           <property name="text" >
-            <string>Class:</string>
+            <string>Class: </string>
           </property>
         </widget>
         <widget class="SearchingCombo" name="CharClass" >
@@ -110,7 +110,7 @@
             </rect>
           </property>
           <property name="text" >
-            <string>Race:</string>
+            <string>Race: </string>
           </property>
         </widget>
         <widget class="SearchingCombo" name="CharRace" >
@@ -133,7 +133,7 @@
             </rect>
           </property>
           <property name="text" >
-            <string>Level:</string>
+            <string>Level: </string>
           </property>
         </widget>
         <widget class="QLineEdit" name="CharLevel" >
@@ -156,7 +156,7 @@
             </rect>
           </property>
           <property name="text" >
-            <string>Cost:</string>
+            <string>Cost: </string>
           </property>
           <property name="alignment" >
             <set>Qt::AlignVCenter|Qt::AlignLeft</set>
@@ -188,7 +188,7 @@
             </rect>
           </property>
           <property name="text" >
-            <string>Price:</string>
+            <string>Price: </string>
           </property>
           <property name="alignment" >
             <set>Qt::AlignVCenter|Qt::AlignLeft</set>
@@ -220,7 +220,7 @@
             </rect>
           </property>
           <property name="text" >
-            <string>Total Utility:</string>
+            <string>Total Utility: </string>
           </property>
           <property name="alignment" >
             <set>Qt::AlignVCenter|Qt::AlignLeft</set>
@@ -265,7 +265,7 @@
             </rect>
           </property>
           <property name="text" >
-            <string>STR:</string>
+            <string>STR: </string>
           </property>
         </widget>
         <widget class="QLabel" name="Strength" >
@@ -310,7 +310,7 @@
             </rect>
           </property>
           <property name="text" >
-            <string>CON:</string>
+            <string>CON: </string>
           </property>
         </widget>
         <widget class="QLabel" name="Constitution" >
@@ -355,7 +355,7 @@
             </rect>
           </property>
           <property name="text" >
-            <string>DEX:</string>
+            <string>DEX: </string>
           </property>
         </widget>
         <widget class="QLabel" name="Dexterity" >
@@ -400,7 +400,7 @@
             </rect>
           </property>
           <property name="text" >
-            <string>QUI:</string>
+            <string>QUI: </string>
           </property>
         </widget>
         <widget class="QLabel" name="Quickness" >
@@ -445,7 +445,7 @@
             </rect>
           </property>
           <property name="text" >
-            <string>INT:</string>
+            <string>INT: </string>
           </property>
         </widget>
         <widget class="QLabel" name="Intelligence" >
@@ -490,7 +490,7 @@
             </rect>
           </property>
           <property name="text" >
-            <string>PIE:</string>
+            <string>PIE: </string>
           </property>
         </widget>
         <widget class="QLabel" name="Piety" >
@@ -535,7 +535,7 @@
             </rect>
           </property>
           <property name="text" >
-            <string>CHA:</string>
+            <string>CHA: </string>
           </property>
         </widget>
         <widget class="QLabel" name="Charisma" >
@@ -580,7 +580,7 @@
             </rect>
           </property>
           <property name="text" >
-            <string>EMP:</string>
+            <string>EMP: </string>
           </property>
         </widget>
         <widget class="QLabel" name="Empathy" >
@@ -625,7 +625,7 @@
             </rect>
           </property>
           <property name="text" >
-            <string>Pow:</string>
+            <string>Pow: </string>
           </property>
         </widget>
         <widget class="QLabel" name="Power" >
@@ -670,7 +670,7 @@
             </rect>
           </property>
           <property name="text" >
-            <string>Hits:</string>
+            <string>Hits: </string>
           </property>
         </widget>
         <widget class="QLabel" name="Hits" >
@@ -728,7 +728,7 @@
             </rect>
           </property>
           <property name="text" >
-            <string>Body:</string>
+            <string>Body: </string>
           </property>
         </widget>
         <widget class="QLabel" name="Body" >
@@ -773,7 +773,7 @@
             </rect>
           </property>
           <property name="text" >
-            <string>Cold:</string>
+            <string>Cold: </string>
           </property>
         </widget>
         <widget class="QLabel" name="Cold" >
@@ -818,7 +818,7 @@
             </rect>
           </property>
           <property name="text" >
-            <string>Heat:</string>
+            <string>Heat: </string>
           </property>
         </widget>
         <widget class="QLabel" name="Heat" >
@@ -863,7 +863,7 @@
             </rect>
           </property>
           <property name="text" >
-            <string>Energy:</string>
+            <string>Energy: </string>
           </property>
         </widget>
         <widget class="QLabel" name="Energy" >
@@ -908,7 +908,7 @@
             </rect>
           </property>
           <property name="text" >
-            <string>Matter:</string>
+            <string>Matter: </string>
           </property>
         </widget>
         <widget class="QLabel" name="Matter" >
@@ -953,7 +953,7 @@
             </rect>
           </property>
           <property name="text" >
-            <string>Spirit:</string>
+            <string>Spirit: </string>
           </property>
         </widget>
         <widget class="QLabel" name="Spirit" >
@@ -998,7 +998,7 @@
             </rect>
           </property>
           <property name="text" >
-            <string>Crush:</string>
+            <string>Crush: </string>
           </property>
         </widget>
         <widget class="QLabel" name="Crush" >
@@ -1043,7 +1043,7 @@
             </rect>
           </property>
           <property name="text" >
-            <string>Thrust:</string>
+            <string>Thrust: </string>
           </property>
         </widget>
         <widget class="QLabel" name="Thrust" >
@@ -1088,7 +1088,7 @@
             </rect>
           </property>
           <property name="text" >
-            <string>Slash:</string>
+            <string>Slash: </string>
           </property>
         </widget>
         <widget class="QLabel" name="Slash" >
@@ -1195,7 +1195,7 @@
             </rect>
           </property>
           <property name="text" >
-            <string>Level:</string>
+            <string>Level: </string>
           </property>
         </widget>
         <widget class="QLineEdit" name="ItemLevel" >
@@ -1217,6 +1217,12 @@
               <height>21</height>
             </rect>
           </property>
+          <property name="maximumSize" >
+           <size>
+            <width>21</width>
+            <height>21</height>
+           </size>
+          </property>
           <property name="text" >
             <string>...</string>
           </property>
@@ -1231,7 +1237,7 @@
             </rect>
           </property>
           <property name="text" >
-            <string>Quality:</string>
+            <string>Quality: </string>
           </property>
         </widget>
         <widget class="SearchingCombo" name="QualDrop" >
@@ -1264,7 +1270,7 @@
             </rect>
           </property>
           <property name="text" >
-            <string>Bonus:</string>
+            <string>Bonus: </string>
           </property>
         </widget>
         <widget class="QLineEdit" name="Bonus_Edit" >
@@ -1287,7 +1293,7 @@
             </rect>
           </property>
           <property name="text" >
-            <string>AF/DPS:</string>
+            <string>AF/DPS: </string>
           </property>
         </widget>
         <widget class="QLineEdit" name="AFDPS_Edit" >
@@ -1310,7 +1316,7 @@
             </rect>
           </property>
           <property name="text" >
-            <string>Speed:</string>
+            <string>Speed: </string>
           </property>
         </widget>
         <widget class="QLineEdit" name="Speed_Edit" >
@@ -1498,7 +1504,7 @@
             </rect>
           </property>
           <property name="text" >
-            <string>Gem 1:</string>
+            <string>Gem 1: </string>
           </property>
         </widget>
         <widget class="SearchingCombo" name="Type_1" >
@@ -1609,7 +1615,7 @@
             </rect>
           </property>
           <property name="text" >
-            <string>Gem 2:</string>
+            <string>Gem 2: </string>
           </property>
         </widget>
         <widget class="QLineEdit" name="Amount_Edit_2" >
@@ -1720,7 +1726,7 @@
             </rect>
           </property>
           <property name="text" >
-            <string>Gem 3:</string>
+            <string>Gem 3: </string>
           </property>
         </widget>
         <widget class="SearchingCombo" name="Type_3" >
@@ -1831,7 +1837,7 @@
             </rect>
           </property>
           <property name="text" >
-            <string>Gem 4:</string>
+            <string>Gem 4: </string>
           </property>
         </widget>
         <widget class="SearchingCombo" name="Type_4" >
@@ -1942,7 +1948,7 @@
             </rect>
           </property>
           <property name="text" >
-            <string>Gem 5:</string>
+            <string>Gem 5: </string>
           </property>
         </widget>
         <widget class="SearchingCombo" name="Type_5" >
@@ -2053,7 +2059,7 @@
             </rect>
           </property>
           <property name="text" >
-            <string>Gem 6:</string>
+            <string>Gem 6: </string>
           </property>
         </widget>
         <widget class="SearchingCombo" name="Type_6" >
@@ -2099,7 +2105,7 @@
             </rect>
           </property>
           <property name="text" >
-            <string>Gem 7:</string>
+            <string>Gem 7: </string>
           </property>
         </widget>
         <widget class="SearchingCombo" name="Type_7" >
@@ -2145,7 +2151,7 @@
             </rect>
           </property>
           <property name="text" >
-            <string>Gem 8:</string>
+            <string>Gem 8: </string>
           </property>
         </widget>
         <widget class="SearchingCombo" name="Type_8" >
@@ -2191,7 +2197,7 @@
             </rect>
           </property>
           <property name="text" >
-            <string>Gem 9:</string>
+            <string>Gem 9: </string>
           </property>
         </widget>
         <widget class="SearchingCombo" name="Type_9" >
@@ -2283,7 +2289,7 @@
             </rect>
           </property>
           <property name="text" >
-            <string>Imbue Points:</string>
+            <string>Imbue Points: </string>
           </property>
           <property name="alignment" >
             <set>Qt::AlignVCenter|Qt::AlignRight</set>
@@ -2331,7 +2337,7 @@
             </rect>
           </property>
           <property name="text" >
-            <string>Overcharge:</string>
+            <string>Overcharge: </string>
           </property>
           <property name="alignment" >
             <set>Qt::AlignVCenter|Qt::AlignRight</set>
@@ -2363,7 +2369,7 @@
             </rect>
           </property>
           <property name="text" >
-            <string>Item Cost:</string>
+            <string>Item Cost: </string>
           </property>
           <property name="alignment" >
             <set>Qt::AlignVCenter|Qt::AlignRight</set>
@@ -2395,7 +2401,7 @@
             </rect>
           </property>
           <property name="text" >
-            <string>Item Price:</string>
+            <string>Item Price: </string>
           </property>
           <property name="alignment" >
             <set>Qt::AlignVCenter|Qt::AlignRight</set>
@@ -2427,7 +2433,7 @@
             </rect>
           </property>
           <property name="text" >
-            <string>Utility:</string>
+            <string>Utility: </string>
           </property>
           <property name="alignment" >
             <set>Qt::AlignVCenter|Qt::AlignLeft</set>
