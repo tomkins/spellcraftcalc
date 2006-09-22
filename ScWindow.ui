@@ -1619,7 +1619,7 @@ Python:from SearchingCombo import *
                 <string>Equipped</string>
             </property>
         </widget>
-        <widget class="QButtonGroup">
+        <widget class="QFrame">
             <property name="name">
                 <cstring>ButtonGroup1</cstring>
             </property>
@@ -1634,8 +1634,8 @@ Python:from SearchingCombo import *
                     <height>21</height>
                 </rect>
             </property>
-            <property name="lineWidth">
-                <number>0</number>
+            <property name="frameShape" >
+                <enum>QFrame::NoFrame</enum>
             </property>
             <property name="title">
                 <string></string>
