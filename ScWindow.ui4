@@ -158,6 +158,9 @@
           <property name="text" >
             <string>Cost:</string>
           </property>
+          <property name="alignment" >
+            <set>Qt::AlignVCenter|Qt::AlignLeft</set>
+          </property>
         </widget>
         <widget class="QLabel" name="TotalCost" >
           <property name="geometry" >
@@ -187,6 +190,9 @@
           <property name="text" >
             <string>Price:</string>
           </property>
+          <property name="alignment" >
+            <set>Qt::AlignVCenter|Qt::AlignLeft</set>
+          </property>
         </widget>
         <widget class="QLabel" name="TotalPrice" >
           <property name="geometry" >
@@ -215,6 +221,9 @@
           </property>
           <property name="text" >
             <string>Total Utility:</string>
+          </property>
+          <property name="alignment" >
+            <set>Qt::AlignVCenter|Qt::AlignLeft</set>
           </property>
         </widget>
         <widget class="QLabel" name="ItemTotalUtility" >
@@ -2276,6 +2285,9 @@
           <property name="text" >
             <string>Imbue Points:</string>
           </property>
+          <property name="alignment" >
+            <set>Qt::AlignVCenter|Qt::AlignRight</set>
+          </property>
         </widget>
         <widget class="QLabel" name="ItemImbue" >
           <property name="geometry" >
@@ -2305,6 +2317,9 @@
           <property name="text" >
             <string> / 0.0</string>
           </property>
+          <property name="alignment" >
+            <set>Qt::AlignVCenter|Qt::AlignLeft</set>
+          </property>
         </widget>
         <widget class="QLabel" name="ItemOverchargeLabel" >
           <property name="geometry" >
@@ -2317,6 +2332,9 @@
           </property>
           <property name="text" >
             <string>Overcharge:</string>
+          </property>
+          <property name="alignment" >
+            <set>Qt::AlignVCenter|Qt::AlignRight</set>
           </property>
         </widget>
         <widget class="QLabel" name="ItemOvercharge" >
@@ -2332,7 +2350,7 @@
             <string>None</string>
           </property>
           <property name="alignment" >
-            <set>Qt::AlignCenter</set>
+            <set>Qt::AlignVCenter|Qt::AlignCenter</set>
           </property>
         </widget>
         <widget class="QLabel" name="ItemCostLabel" >
@@ -2346,6 +2364,9 @@
           </property>
           <property name="text" >
             <string>Item Cost:</string>
+          </property>
+          <property name="alignment" >
+            <set>Qt::AlignVCenter|Qt::AlignRight</set>
           </property>
         </widget>
         <widget class="QLabel" name="ItemCost" >
@@ -2376,6 +2397,9 @@
           <property name="text" >
             <string>Item Price:</string>
           </property>
+          <property name="alignment" >
+            <set>Qt::AlignVCenter|Qt::AlignRight</set>
+          </property>
         </widget>
         <widget class="QLabel" name="ItemPrice" >
           <property name="geometry" >
@@ -2404,6 +2428,9 @@
           </property>
           <property name="text" >
             <string>Utility:</string>
+          </property>
+          <property name="alignment" >
+            <set>Qt::AlignVCenter|Qt::AlignLeft</set>
           </property>
         </widget>
         <widget class="QLabel" name="ItemUtility" >
