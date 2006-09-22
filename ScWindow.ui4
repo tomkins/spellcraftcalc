@@ -1333,9 +1333,9 @@
           </property>
           <property name="geometry" >
             <rect>
-              <x>615</x>
+              <x>617</x>
               <y>5</y>
-              <width>138</width>
+              <width>136</width>
               <height>21</height>
             </rect>
           </property>
@@ -1345,10 +1345,10 @@
           <widget class="QRadioButton" name="PlayerMade" >
             <property name="geometry" >
               <rect>
-                <x>2</x>
-                <y>2</y>
+                <x>0</x>
+                <y>0</y>
                 <width>85</width>
-                <height>17</height>
+                <height>21</height>
               </rect>
             </property>
             <property name="text" >
@@ -1358,10 +1358,10 @@
           <widget class="QRadioButton" name="Drop" >
             <property name="geometry" >
               <rect>
-                <x>92</x>
-                <y>2</y>
+                <x>86</x>
+                <y>0</y>
                 <width>52</width>
-                <height>17</height>
+                <height>21</height>
               </rect>
             </property>
             <property name="text" >
@@ -1466,7 +1466,7 @@
             <set>Qt::AlignVCenter|Qt::AlignRight</set>
           </property>
         </widget>
-        <widget class="QLabel" name="ItemNameLabel" >
+        <widget class="QLabel" name="LabelItemName" >
           <property name="geometry" >
             <rect>
               <x>562</x>
@@ -2293,30 +2293,17 @@
             <set>Qt::AlignVCenter|Qt::AlignRight</set>
           </property>
         </widget>
-        <widget class="QLabel" name="ItemImbueSlashLabel" >
+        <widget class="QLabel" name="ItemImbueTotal" >
           <property name="geometry" >
             <rect>
               <x>487</x>
               <y>178</y>
-              <width>8</width>
+              <width>40</width>
               <height>17</height>
             </rect>
           </property>
           <property name="text" >
-            <string>/</string>
-          </property>
-        </widget>
-        <widget class="QLabel" name="ItemImbueTotal" >
-          <property name="geometry" >
-            <rect>
-              <x>498</x>
-              <y>178</y>
-              <width>29</width>
-              <height>17</height>
-            </rect>
-          </property>
-          <property name="text" >
-            <string>0.0</string>
+            <string> / 0.0</string>
           </property>
         </widget>
         <widget class="QLabel" name="ItemOverchargeLabel" >
