@@ -2,15 +2,16 @@
 
 # Form implementation generated from reading ui file 'ScWindow.ui4'
 #
+# Created: Thu Sep 21 23:57:30 2006
 # Created: Fri Sep 22 02:32:26 2006
 #      by: PyQt4 UI code generator 4.0.1
 #
 # WARNING! All changes made in this file will be lost!
 
 import sys
-from MultiTabBar import MultiTabBar
+from MultiTabBar4 import MultiTabBar4
 from SearchingCombo import SearchingCombo
-from PyQt4 import QtCore, QtGui
+from PyQt4 import QtCore, QtGui, Qt3Support
 
 class Ui_B_SC(object):
     def setupUi(self, B_SC):
@@ -843,7 +844,7 @@ class Ui_B_SC(object):
         self.ClearItem.setGeometry(QtCore.QRect(683,233,79,26))
         self.ClearItem.setObjectName("ClearItem")
 
-        self.PieceTab = MultiTabBar(self.ScWinFrame)
+        self.PieceTab = MultiTabBar4(self.ScWinFrame)
         self.PieceTab.setGeometry(QtCore.QRect(3,190,776,46))
         self.PieceTab.setObjectName("PieceTab")
         B_SC.setCentralWidget(self.ScWinFrame)

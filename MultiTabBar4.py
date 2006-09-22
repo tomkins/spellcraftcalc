@@ -31,13 +31,20 @@ class MultiTabBar4(QWidget):
             self.rowoverlap = 3
             self.cropheight = 2
         
-    def addTab(self, text, row):
+    def addTab(self, row, text):
+        self.insertTab(row, -1, text)
+
+    def insertTab(self, row, col, text):
         while len(self.__tabList) <= row:
             self.__tabList.append([])
 
         tab = MultiTab()
         tab.text = text
-        self.__tabList[row].append(tab)
+
+        if col >= len(self.__tabList[row]) or col == -1:
+            self.__tabList[row].append(tab)
+        else:
+            self.__tabList[row].insert(col, tab)
 
         self.refresh()
 
@@ -73,6 +80,8 @@ class MultiTabBar4(QWidget):
             self.__layoutTabs()
         self.update()
 
+        self.emit(SIGNAL('currentChanged'), row, col)
+
     def numTabsInRow(self, row):
         if len(self.__tabList) <= row: return 0
         return len(self.__tabList[row])
@@ -82,7 +91,7 @@ class MultiTabBar4(QWidget):
         if tab: 
             tab.text = text
 
-    def tabText(self, row, col, text):
+    def tabText(self, row, col):
         tab = self.__tabAt(row, col)
         if tab: return tab.text
         return None
@@ -128,8 +137,9 @@ class MultiTabBar4(QWidget):
             self.__layoutTabs()
 
         r = QRect()
-        for i in range(self.numTabsInRow(0)):
-            r = r.unite(self.__tabAt(0, i).rect)
+        for i in range(len(self.__tabList)):
+            for j in range(len(self.__tabList[i])):
+                r = r.unite(self.__tabAt(i, j).rect)
         sz = QApplication.globalStrut()
         return r.size().expandedTo(sz)
 
@@ -159,6 +169,7 @@ class MultiTabBar4(QWidget):
 
         #p = QStylePainter(self)
         selected = (-1, -1)
+        selected = (0, 0)
         cut = -1
         rtl = False
         verticalTabs = False
@@ -298,15 +309,23 @@ class MultiTabBar4(QWidget):
         maxWidth = 0
         maxHeight = 0
         maxNumTabs = 0
+        maxRowWidth = 0
         mx_row = -1
         x = 0
+        rowpcts = []
 
         for i in range(numrows):
             maxNumTabs = max(self.numTabsInRow(i), maxNumTabs)
+            mw = 0
+            rowpcts.append([])
             for j in range(len(self.__tabList[i])):
                 sz = self.tabSizeHint(i, j)
+                mw += sz.width()
                 maxWidth = max(sz.width(), maxWidth)
                 maxHeight = max(maxHeight, sz.height())
+                rowpcts[i].append(sz.width())
+            rowpcts[i] = map(lambda x: float(x) / mw, rowpcts[i])
+            maxRowWidth = max(mw, maxRowWidth)
 
         for i in range(numrows):
             x = 0
@@ -318,8 +337,9 @@ class MultiTabBar4(QWidget):
                 y = (i - 1) * maxHeight
                 
             for j in range(len(self.__tabList[i])):
-                self.__tabList[i][j].rect = QRect(x, y, maxWidth, maxHeight)
-                x += maxWidth
+                w = rowpcts[i][j] * maxRowWidth
+                self.__tabList[i][j].rect = QRect(x, y, int(w), maxHeight)
+                x += int(w)
 
         self.tabLayoutChange()
 
@@ -391,27 +411,28 @@ class MultiTabBar4(QWidget):
 
         return (-1, -1)
 
-            
 if __name__ == '__main__':
     QApplication.setDesktopSettingsAware(0)
     app = QApplication(sys.argv)
 
     w = QMainWindow()
     bar = MultiTabBar4(w)
-    bar.addTab('One', 0)
-    bar.addTab('two', 0)
-    bar.addTab('three', 0)
-    bar.addTab('four', 0)
-    bar.addTab('five', 0)
-    bar.addTab('One1', 1)
-    bar.addTab('two1', 1)
-    bar.addTab('three1', 1)
-    bar.addTab('four1', 1)
-    bar.addTab('five1', 1)
+    bar.addTab(0, 'One')
+    bar.addTab(0, 'two')
+    bar.addTab(0, 'three')
+    bar.addTab(0, 'four')
+    bar.addTab(0, 'five')
+    bar.addTab(1, 'One1')
+    bar.addTab(1, 'two1')
+    bar.addTab(1, 'three1')
+    bar.addTab(1, 'four1')
+    bar.addTab(1, 'five1')
 
     bar.setGeometry(QRect(10, 10, 300, 80))
-    
+
     w.resize(600, 400)
+
+    bar.setCurrentIndex(0, 0)
 
     #bar.show()
 
@@ -419,21 +440,5 @@ if __name__ == '__main__':
     w.show()
 
     app.exec_()
-        
-
-
-
-
-
-        
-
-
-            
-
-
-
-
-
-
 
 # vim: set ts=4 sw=4 et:

@@ -1,7 +1,7 @@
 <ui version="4.0" stdsetdef="1" >
   <author></author>
   <customwidgets>
-    <customwidget><class>MultiTabBar</class><header>MultiTabBar.h</header></customwidget>
+    <customwidget><class>MultiTabBar4</class><header>MultiTabBar4.h</header></customwidget>
     <customwidget><class>SearchingCombo</class><header>SearchingCombo.h</header></customwidget>
   </customwidgets>
   <exportmacro></exportmacro>
@@ -2508,7 +2508,7 @@
           </property>
         </widget>
       </widget>
-      <widget class="MultiTabBar" name="PieceTab" >
+      <widget class="MultiTabBar4" name="PieceTab" >
         <property name="geometry" >
           <rect>
             <x>3</x>
@@ -2524,9 +2524,9 @@
   <pixmapfunction>qPixmapFromMimeSource</pixmapfunction>
  <customwidgets>
    <customwidget>
-     <class>MultiTabBar</class>
-     <extends>QTabBar</extends>
-     <header>multitabbar.h</header>
+     <class>MultiTabBar4</class>
+     <extends>QWidget</extends>
+     <header>multitabbar4.h</header>
      <container>1</container>
      <pixmap></pixmap>
    </customwidget>

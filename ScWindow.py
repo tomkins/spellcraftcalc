@@ -156,9 +156,9 @@ class ScWindow(QMainWindow, Ui_B_SC):
 
         self.PieceTab.setFocusPolicy(Qt.StrongFocus)
         for tabname in PieceTabList:
-            self.PieceTab.insertTab(qApp.translate("B_SC",tabname,None), row = 0)
+            self.PieceTab.addTab(0, qApp.translate("B_SC",tabname,None))
         for tabname in JewelTabList:
-            self.PieceTab.insertTab(qApp.translate("B_SC",tabname,None), row = 1)
+            self.PieceTab.addTab(1, qApp.translate("B_SC",tabname,None))
 
         size = self.PieceTab.size()
         size.setHeight(self.PieceTab.sizeHint().height())
@@ -313,7 +313,7 @@ class ScWindow(QMainWindow, Ui_B_SC):
                      self.RaceChanged)
         self.connect(self.CharLevel,SIGNAL("textChanged(const QString&)"),
                      self.recalculate)
-        self.connect(self.PieceTab,SIGNAL("selected(int)"),self.PieceTabChanged)
+        self.connect(self.PieceTab,SIGNAL("currentChanged"),self.PieceTabChanged)
         self.connect(self.ItemLevel,SIGNAL("textChanged(const QString&)"),
                      self.recalculate)
         self.connect(self.ItemLevelButton,SIGNAL("clicked()"),self.ItemLevelShow)
@@ -445,7 +445,18 @@ class ScWindow(QMainWindow, Ui_B_SC):
         self.setTabOrder(self.ClearItem,self.SkillsList)
         self.setTabOrder(self.SkillsList,self.OtherBonusList)
 
-    def oldclose(self):
+    #def close(self):
+    #    OW = Options.Options(self)
+    #    OW.save()
+    #    if self.modified:
+    #        ret = QMessageBox.warning(self, 'Save Changes?', 'Some changes may not have been saved. Are you sure you want to quit?', 'Yes', 'No')
+    #        if ret == 0:
+    #            return QMainWindow.close(self)
+    #        else:
+    #            return False
+    #    else: return QMainWindow.close(self)
+
+    def closeEvent(self, e):
         OW = Options.Options(self)
         OW.save()
         if self.modified:
@@ -453,10 +464,12 @@ class ScWindow(QMainWindow, Ui_B_SC):
                                       'Some changes may not have been saved. '
                                     + 'Are you sure you want to quit?', 'Yes', 'No')
             if ret == 0:
-                return QMainWindow.close(self)
+                e.accept()
             else:
-                return False
-        else: return QMainWindow.close(self)
+                e.ignore()
+        else: 
+            e.accept()
+
 
     def initialize(self):
 
@@ -469,9 +482,9 @@ class ScWindow(QMainWindow, Ui_B_SC):
         filetitle = unicode("Template" + str(self.newcount))
         self.setWindowTitle(filetitle + " - Kort's Spellcrafting Calculator")
 
-        self.PieceTab.setCurrentIndex(0)
+        self.PieceTab.setCurrentIndex(0, 0)
         self.currentTab = self.PieceTab
-        self.currentTabLabel = string.strip(str(self.PieceTab.tabText(0)))
+        self.currentTabLabel = string.strip(str(self.PieceTab.tabText(0, 0)))
 
         self.Equipped.setChecked(1)
 
@@ -556,17 +569,20 @@ class ScWindow(QMainWindow, Ui_B_SC):
             rootnode.appendChild(item.asXML().firstChild)
         return document
 
-    def PieceTabChanged(self,a0):
+    def PieceTabChanged(self, row, col):
         if self.nocalc:
             return
         item = self.itemattrlist.get(self.currentTabLabel, Item(self.currentTabLabel))
         self.storeItem(item)
-        self.currentTabLabel = string.strip(str(self.PieceTab.tabText(a0)))
+        self.currentTabLabel = string.strip(str(self.PieceTab.tabText(row, col)))
         self.restoreItem(self.itemattrlist.get(self.currentTabLabel, 
                                                Item(self.currentTabLabel)))
 
     def changePieceTab(self,a0):
-        self.PieceTab.setCurrentIndex(a0.data().toInt()[0])
+        mask = a0.data().toInt()[0]
+        row = (mask >> 8) & 0xff
+        col = mask & 0xff
+        self.PieceTab.setCurrentIndex(row, col)
 
     def FixupItemLevel(self):
         if str(self.ItemLevel.text()) == '' \
@@ -751,7 +767,13 @@ class ScWindow(QMainWindow, Ui_B_SC):
                 effect = item.getSlotAttr(itemtype, i, 'Effect')
                 if effect != '' and [gemtype, effect] in gemeffects:
                     error_act = QAction('Two of same type of gem on %s' % key, self)
-                    error_act.setData(QVariant(errorcount))
+                    if item.Location in JewelTabList:
+                        row = 1
+                        col = JewelTabList.index(item.Location)
+                    else:
+                        row = 0
+                        col = PieceTabList.index(item.Location)
+                    error_act.setData(QVariant((row << 8) | col))
                     self.errorsmenu.addAction(error_act)
                     self.connect(self.errorsmenu, SIGNAL('triggered(QAction*)'), 
                                  self.changePieceTab)
@@ -854,7 +876,14 @@ class ScWindow(QMainWindow, Ui_B_SC):
                 imbue = self.calcImbue(item, key == self.currentTabLabel)
                 if (imbue - itemimbue) >= 6:
                     error_act = QAction('Impossible Overcharge on %s' % key, self)
-                    error_act.setData(QVariant(errorcount))
+                    if item.Location in JewelTabList:
+                        row = 1
+                        col = JewelTabList.index(item.Location)
+                    else:
+                        row = 0
+                        col = PieceTabList.index(item.Location)
+                    error_act.setData(QVariant((row << 8) | col))
+                    #error_act.setData(QVariant(errorcount))
                     self.errorsmenu.addAction(error_act)
                     self.connect(self.errorsmenu, SIGNAL('triggered(QAction*)'), 
                                  self.changePieceTab)
@@ -1210,9 +1239,9 @@ class ScWindow(QMainWindow, Ui_B_SC):
           eff.setGeometry(eff.x(), eff.y(), width, eff.height())
 
     def showDropWidgets(self):
-        #restoreUpdates = self.updatesEnabled()
-        #if restoreUpdates:
-        #    self.setUpdatesEnabled(false)
+        restoreUpdates = self.updatesEnabled()
+        if restoreUpdates:
+            self.setUpdatesEnabled(False)
         for w in self.switchOnType['player']:
             w.hide()
         for w in self.switchOnType['drop']:
@@ -1221,21 +1250,21 @@ class ScWindow(QMainWindow, Ui_B_SC):
         for i in range(0,5):
             self.GemLabel[i].setEnabled(1)
         self.GemLabel[4].setText('Gem 5:')
-        #if restoreUpdates:
-        #   self.setUpdatesEnabled(true)
+        if restoreUpdates:
+            self.setUpdatesEnabled(True)
 
     def showPlayerWidgets(self):
-        #restoreUpdates = self.updatesEnabled()
-        #if restoreUpdates:
-        #    self.setUpdatesEnabled(false)
+        restoreUpdates = self.updatesEnabled()
+        if restoreUpdates:
+            self.setUpdatesEnabled(False)
         for w in self.switchOnType['player']:
             w.show()
         for w in self.switchOnType['drop']:
             w.hide()
         #self.showWideEffects(0)
         self.GemLabel[4].setText('Proc:')
-        #if restoreUpdates:
-        #    self.setUpdatesEnabled(true)
+        if restoreUpdates:
+            self.setUpdatesEnabled(True)
 
     def DropToggled(self,a0):
         if self.nocalc:
