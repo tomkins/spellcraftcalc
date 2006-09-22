@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'ScWindow.ui4'
 #
-# Created: Fri Sep 22 00:19:23 2006
+# Created: Fri Sep 22 01:30:50 2006
 #      by: PyQt4 UI code generator 4.0.1
 #
 # WARNING! All changes made in this file will be lost!
@@ -66,6 +66,7 @@ class Ui_B_SC(object):
 
         self.TotalCostLabel = QtGui.QLabel(self.GroupCharInfo)
         self.TotalCostLabel.setGeometry(QtCore.QRect(6,126,30,16))
+        self.TotalCostLabel.setAlignment(QtCore.Qt.AlignVCenter|QtCore.Qt.AlignLeft)
         self.TotalCostLabel.setObjectName("TotalCostLabel")
 
         self.TotalCost = QtGui.QLabel(self.GroupCharInfo)
@@ -75,6 +76,7 @@ class Ui_B_SC(object):
 
         self.TotalPriceLabel = QtGui.QLabel(self.GroupCharInfo)
         self.TotalPriceLabel.setGeometry(QtCore.QRect(6,143,30,16))
+        self.TotalPriceLabel.setAlignment(QtCore.Qt.AlignVCenter|QtCore.Qt.AlignLeft)
         self.TotalPriceLabel.setObjectName("TotalPriceLabel")
 
         self.TotalPrice = QtGui.QLabel(self.GroupCharInfo)
@@ -84,6 +86,7 @@ class Ui_B_SC(object):
 
         self.ItemTotalUtilityLabel = QtGui.QLabel(self.GroupCharInfo)
         self.ItemTotalUtilityLabel.setGeometry(QtCore.QRect(6,160,70,16))
+        self.ItemTotalUtilityLabel.setAlignment(QtCore.Qt.AlignVCenter|QtCore.Qt.AlignLeft)
         self.ItemTotalUtilityLabel.setObjectName("ItemTotalUtilityLabel")
 
         self.ItemTotalUtility = QtGui.QLabel(self.GroupCharInfo)
@@ -770,6 +773,7 @@ class Ui_B_SC(object):
 
         self.ItemImbueLabel = QtGui.QLabel(self.GroupItemFrame)
         self.ItemImbueLabel.setGeometry(QtCore.QRect(370,178,73,17))
+        self.ItemImbueLabel.setAlignment(QtCore.Qt.AlignVCenter|QtCore.Qt.AlignRight)
         self.ItemImbueLabel.setObjectName("ItemImbueLabel")
 
         self.ItemImbue = QtGui.QLabel(self.GroupItemFrame)
@@ -779,19 +783,22 @@ class Ui_B_SC(object):
 
         self.ItemImbueTotal = QtGui.QLabel(self.GroupItemFrame)
         self.ItemImbueTotal.setGeometry(QtCore.QRect(487,178,40,17))
+        self.ItemImbueTotal.setAlignment(QtCore.Qt.AlignVCenter|QtCore.Qt.AlignLeft)
         self.ItemImbueTotal.setObjectName("ItemImbueTotal")
 
         self.ItemOverchargeLabel = QtGui.QLabel(self.GroupItemFrame)
         self.ItemOverchargeLabel.setGeometry(QtCore.QRect(370,195,73,17))
+        self.ItemOverchargeLabel.setAlignment(QtCore.Qt.AlignVCenter|QtCore.Qt.AlignRight)
         self.ItemOverchargeLabel.setObjectName("ItemOverchargeLabel")
 
         self.ItemOvercharge = QtGui.QLabel(self.GroupItemFrame)
         self.ItemOvercharge.setGeometry(QtCore.QRect(443,195,90,17))
-        self.ItemOvercharge.setAlignment(QtCore.Qt.AlignCenter)
+        self.ItemOvercharge.setAlignment(QtCore.Qt.AlignVCenter|QtCore.Qt.AlignCenter)
         self.ItemOvercharge.setObjectName("ItemOvercharge")
 
         self.ItemCostLabel = QtGui.QLabel(self.GroupItemFrame)
         self.ItemCostLabel.setGeometry(QtCore.QRect(370,220,73,17))
+        self.ItemCostLabel.setAlignment(QtCore.Qt.AlignVCenter|QtCore.Qt.AlignRight)
         self.ItemCostLabel.setObjectName("ItemCostLabel")
 
         self.ItemCost = QtGui.QLabel(self.GroupItemFrame)
@@ -801,6 +808,7 @@ class Ui_B_SC(object):
 
         self.ItemPriceLabel = QtGui.QLabel(self.GroupItemFrame)
         self.ItemPriceLabel.setGeometry(QtCore.QRect(370,237,73,17))
+        self.ItemPriceLabel.setAlignment(QtCore.Qt.AlignVCenter|QtCore.Qt.AlignRight)
         self.ItemPriceLabel.setObjectName("ItemPriceLabel")
 
         self.ItemPrice = QtGui.QLabel(self.GroupItemFrame)
@@ -810,6 +818,7 @@ class Ui_B_SC(object):
 
         self.ItemUtilityLabel = QtGui.QLabel(self.GroupItemFrame)
         self.ItemUtilityLabel.setGeometry(QtCore.QRect(585,237,35,17))
+        self.ItemUtilityLabel.setAlignment(QtCore.Qt.AlignVCenter|QtCore.Qt.AlignLeft)
         self.ItemUtilityLabel.setObjectName("ItemUtilityLabel")
 
         self.ItemUtility = QtGui.QLabel(self.GroupItemFrame)
