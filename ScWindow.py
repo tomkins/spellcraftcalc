@@ -38,7 +38,8 @@ import sys
 
 
 class AboutScreen(QDialog):
-    def __init__(self,parent = None,name = "About",modal = True,fl = Qt.SplashScreen|Qt.MSWindowsFixedSizeDialogHint):
+    def __init__(self,parent = None,name = "About",modal = True,
+                 fl = Qt.SplashScreen|Qt.MSWindowsFixedSizeDialogHint):
         QDialog.__init__(self,parent,fl)
         self.setModal(modal)
         self.setObjectName(name)
@@ -76,46 +77,66 @@ class ScWindow(QMainWindow, Ui_B_SC):
 
         self.fixedtaborder = False
 
-        QMainWindow.__init__(self,None,Qt.Dialog|Qt.MSWindowsFixedSizeDialogHint|
-                                       Qt.WindowTitleHint|Qt.WindowMinimizeButtonHint|
-                                       Qt.WindowSystemMenuHint)
+        QMainWindow.__init__(self,None,Qt.Window)
+        # |Qt.WindowSystemMenuHint|Qt.WindowTitleHint|Qt.WindowMinimizeButtonHint
         self.setAttribute(Qt.WA_DeleteOnClose)
-	Ui_B_SC.setupUi(self,self)
+        Ui_B_SC.setupUi(self,self)
 
-        self.GroupStats.mousePressEvent = self.ignoreMouseEvent
-        self.GroupResists.mousePressEvent = self.ignoreMouseEvent
-        self.GroupItemFrame.mousePressEvent = self.ignoreMouseEvent
+        self.hspacer = QSpacerItem(5,0,QSizePolicy.Fixed,QSizePolicy.Minimum)
+        self.vspacer = QSpacerItem(0,3,QSizePolicy.Minimum,QSizePolicy.Fixed)
 
-        self.connect(self.GroupStats,SIGNAL("mousePressEvent(QMouseEvent*)"),self.mousePressEvent)
-        self.connect(self.GroupResists,SIGNAL("mousePressEvent(QMouseEvent*)"),self.mousePressEvent)
-        self.connect(self.GroupItemFrame,SIGNAL("mousePressEvent(QMouseEvent*)"),self.mousePressEvent)
+        self.statlayout = QtGui.QGridLayout(self.GroupStats)
+        self.statlayout.setMargin(3)
+        self.statlayout.setSpacing(0)
+        row = 0
+        for stat in (GemLists['All']['Stat'] + ('Power', 'Hits',)):
+            self.statlayout.addWidget(getattr(self, stat + 'Label'),row,0,1,1)
+            self.statlayout.addWidget(getattr(self, stat + ''),row,1,1,1)
+            self.statlayout.addWidget(getattr(self, stat + 'Cap'),row,2,1,1)
+            row += 1
 
-        self.connect(self.Realm,SIGNAL("activated(const QString&)"),self.RealmChanged)
-        self.connect(self.CharClass,SIGNAL("activated(const QString&)"),self.CharClassChanged)
-        self.connect(self.CharRace,SIGNAL("activated(const QString&)"),self.RaceChanged)
-        self.connect(self.CharLevel,SIGNAL("textChanged(const QString&)"),self.recalculate)
-        self.connect(self.PieceTab,SIGNAL("selected(int)"),self.PieceTabChanged)
-        self.connect(self.ItemLevel,SIGNAL("textChanged(const QString&)"),self.recalculate)
-        self.connect(self.ItemLevelButton,SIGNAL("clicked()"),self.ItemLevelShow)
-        self.connect(self.QualDrop,SIGNAL("activated(const QString&)"),self.recalculate)
-        self.connect(self.ItemName,SIGNAL("textChanged(const QString&)"),self.recalculate)
-        self.connect(self.Bonus_Edit,SIGNAL("textChanged(const QString&)"),self.recalculate)
-        self.connect(self.AFDPS_Edit,SIGNAL("textChanged(const QString&)"),self.recalculate)
-        self.connect(self.Speed_Edit,SIGNAL("textChanged(const QString&)"),self.recalculate)
-        self.connect(self.PlayerMade,SIGNAL("toggled(bool)"),self.PlayerToggled)
-        self.connect(self.Drop,SIGNAL("toggled(bool)"),self.DropToggled)
-        self.connect(self.Equipped,SIGNAL("clicked()"),self.EquippedClicked)
-        self.connect(self.LoadItem,SIGNAL("clicked()"),self.Load_Item)
-        self.connect(self.SaveItem,SIGNAL("clicked()"),self.Save_Item)
-        self.connect(self.CraftButton,SIGNAL("clicked()"),self.OpenCraftWindow)
-        self.connect(self.ClearItem,SIGNAL("clicked()"),self.ClearCurrentItem)
-        self.connect(self.SkillsList,SIGNAL("itemActivated(QListWidgetItem*)"),self.SkillClicked)
-        self.connect(self.OtherBonusList,SIGNAL("itemActivated(QListWidgetItem*)"),self.SkillClicked)
+        self.resistlayout = QtGui.QGridLayout(self.GroupResists)
+        self.resistlayout.setMargin(3)
+        self.resistlayout.setSpacing(0)
+        row = 0
+        for stat in (GemLists['All']['Resist']):
+            self.resistlayout.addWidget(getattr(self, stat + 'Label'),row,0,1,1)
+            self.resistlayout.addWidget(getattr(self, stat + ''),row,1,1,1)
+            self.resistlayout.addWidget(getattr(self, stat + 'RR'),row,2,1,1)
+            row += 1
+
+        self.skilllayout = QtGui.QGridLayout(self.GroupSkillsList)
+        self.skilllayout.setMargin(3)
+        self.skilllayout.setSpacing(0)
+        self.skilllayout.addWidget(self.SkillsList,0,0)
+
+        self.otherlayout = QtGui.QGridLayout(self.GroupOtherBonusList)
+        self.otherlayout.setMargin(3)
+        self.otherlayout.setSpacing(0)
+        self.otherlayout.addWidget(self.OtherBonusList,0,0)
+
+        self.charlayout = QtGui.QGridLayout(self.GroupCharInfo)
+        self.charlayout.setMargin(3)
+        self.charlayout.setSpacing(0)
+        row = 0
+        for stat in ('CharName', 'Realm', 'CharClass', 'CharRace', ):
+            self.charlayout.addWidget(getattr(self, 'Label' + stat),row,0,1,1)
+            self.charlayout.addWidget(getattr(self, stat),row,1,1,2)
+            row += 1
+        self.charlayout.addWidget(self.LabelCharLevel,row,0,1,1)
+        self.charlayout.addWidget(self.CharLevel,row,1,1,1)
+        row += 1
+        for stat in ('TotalCost', 'TotalPrice',):
+            self.charlayout.addWidget(getattr(self, stat + 'Label'),row,0,1,1)
+            self.charlayout.addWidget(getattr(self, stat),row,1,1,2)
+            row += 1
+        self.charlayout.addWidget(self.ItemTotalUtilityLabel,row,0,1,2)
+        self.charlayout.addWidget(self.ItemTotalUtility,row,2,1,1)
 
         self.setWindowTitle("Kort's Spellcrafting Calulator")
         self.fixtabs = True
 
-        self.statusBar().setSizeGripEnabled(0)
+        #self.statusBar().setSizeGripEnabled(0)
         self.statusBar().hide()
 
         self.CharLevel.setValidator(QIntValidator(0, 99, self))
@@ -143,7 +164,8 @@ class ScWindow(QMainWindow, Ui_B_SC):
         size.setHeight(self.PieceTab.sizeHint().height())
         self.PieceTab.setFixedSize(size)
 
-        self.GroupItemFrame.move(self.GroupItemFrame.pos().x(), self.PieceTab.geometry().bottom())
+        self.GroupItemFrame.move(self.GroupItemFrame.pos().x(), 
+                                 self.PieceTab.geometry().bottom())
 
         self.Realm.insertItems(0, list(Realms))
         self.QualDrop.insertItems(0, list(QualityValues))
@@ -160,35 +182,166 @@ class ScWindow(QMainWindow, Ui_B_SC):
 
         editAmountValidator = QIntValidator(-999, +999, self)
 
+        self.itemgrouplayout = QtGui.QHBoxLayout(self.DropCraftButtonFrame)
+        self.itemgrouplayout.setMargin(0)
+        self.itemgrouplayout.setSpacing(0)
+        self.itemgrouplayout.addWidget(self.PlayerMade)
+        self.itemgrouplayout.addWidget(self.Drop)
+
+        self.itemcontrollayout = QtGui.QHBoxLayout()
+        self.itemcontrollayout.setMargin(0)
+        self.itemcontrollayout.setSpacing(0)
+        col = 0
+        for obj in (self.ItemLevelLabel, self.ItemLevel, self.ItemLevelButton, 
+                    self.ItemQualityLabel, self.QualDrop, self.QualEdit, 
+                    self.ItemBonusLabel, self.Bonus_Edit, self.ItemAFDPSLabel, 
+                    self.AFDPS_Edit, self.ItemSpeedLabel, self.Speed_Edit, 
+                    self.Equipped, self.DropCraftButtonFrame):
+            if col and str(obj.objectName)[-5:] == 'Label':
+                self.itemcontrollayout.addSpacing(10)
+                col += 1
+            self.itemcontrollayout.addWidget(obj)
+            col += 1
+
+        self.itemlayout = QtGui.QGridLayout(self.GroupItemFrame)
+        self.itemlayout.setMargin(2)
+        self.itemlayout.setSpacing(0)
+        row = 0
+        self.itemlayout.addLayout(self.itemcontrollayout,row,0,1,10)
+        row += 1
+        col = 1
+        for obj in (self.LabelGemType, self.LabelGemAmount, self.LabelGemEffect,
+                    self.LabelGemQuality, self.LabelGemPoints, self.LabelGemCost,):
+            self.itemlayout.addWidget(obj,row,col,1,1)
+            col += 1
+        self.itemlayout.addItem(self.hspacer,row,7,1,1)
+        self.itemlayout.addWidget(self.LabelItemName,row,8,1,2)
+        row += 1
+        self.itemlayout.addWidget(self.ItemName,row,8,1,2)
         for i in range(0, 10):
             idx = i + 1
             self.GemLabel.append(getattr(self, 'Gem_Label_%d' % idx))
             self.Type.append(getattr(self, 'Type_%d' % idx))
-            self.connect(self.Type[i],SIGNAL("activated(const QString&)"),self.TypeChanged)
+            self.connect(self.Type[i],SIGNAL("activated(const QString&)"),
+                         self.TypeChanged)
             self.Effect.append(getattr(self, 'Effect_%d' % idx))
 # XXX       self.Effect[i].setInsertionPolicy(QComboBox.BeforeCurrent)
-            self.connect(self.Effect[i],SIGNAL("activated(const QString&)"),self.EffectChanged)
+            self.connect(self.Effect[i],SIGNAL("activated(const QString&)"),
+                         self.EffectChanged)
             self.AmountEdit.append(getattr(self, 'Amount_Edit_%d' % idx))
             self.AmountEdit[i].setValidator(editAmountValidator)
-            self.connect(self.AmountEdit[i],SIGNAL("textChanged(const QString&)"),self.AmountChanged)
+            self.connect(self.AmountEdit[i],SIGNAL("textChanged(const QString&)"),
+                         self.AmountChanged)
+            self.itemlayout.addWidget(self.GemLabel[i],row,0,1,1)
+            self.itemlayout.addWidget(self.Type[i],row,1,1,1)
+            self.itemlayout.addWidget(self.AmountEdit[i],row,2,1,1)
+            self.itemlayout.addWidget(self.Effect[i],row,3,1,1)
             if i < 5:
                 self.AmountDrop.append(getattr(self, 'Amount_Drop_%d' % idx))
-                self.connect(self.AmountDrop[i],SIGNAL("activated(const QString&)"),self.AmountChanged)
+                self.connect(self.AmountDrop[i],SIGNAL("activated(const QString&)"),
+                             self.AmountChanged)
                 self.Quality.append(getattr(self, 'Quality_%d' % idx))
                 self.Quality[i].insertItems(0, list(QualityValues))
-                self.connect(self.Quality[i],SIGNAL("activated(const QString&)"),self.recalculate)
+                self.connect(self.Quality[i],SIGNAL("activated(const QString&)"),
+                             self.recalculate)
                 self.Points.append(getattr(self, 'Points_%d' % idx))
                 self.Cost.append(getattr(self, 'Cost_%d' % idx))
                 self.Name.append(getattr(self, 'Name_%d' % idx))
+                self.itemlayout.addWidget(self.AmountDrop[i],row,2,1,1)
+                self.itemlayout.addWidget(self.Quality[i],row,4,1,1)
+                self.itemlayout.addWidget(self.Points[i],row,5,1,1)
+                self.itemlayout.addWidget(self.Cost[i],row,6,1,1)
+                self.itemlayout.addWidget(self.Name[i],row,8,1,2)
+            row += 1
+
+        self.itembuttonlayout = QtGui.QGridLayout()
+        self.itembuttonlayout.setMargin(0)
+        self.itembuttonlayout.setSpacing(3)
+        self.itembuttonlayout.addWidget(self.ItemUtilityLabel,0,0,1,1)
+        self.itembuttonlayout.addWidget(self.ItemUtility,0,1,1,1)
+        self.itembuttonlayout.addWidget(self.LoadItem,1,0,1,2)
+        self.itembuttonlayout.addWidget(self.CraftButton,2,0,1,2)
+        self.itembuttonlayout.addWidget(self.SaveItem,2,0,1,2)
+        self.itembuttonlayout.addWidget(self.ClearItem,3,0,1,2)
+        self.itemlayout.addLayout(self.itembuttonlayout,row-5,9,5,1)
+
+        self.itemlayout.addWidget(self.ItemImbueLabel,row-4,3,1,2)
+        self.itemlayout.addWidget(self.ItemImbue,row-4,5,1,1)
+        self.itemlayout.addWidget(self.ItemImbueTotal,row-4,6,1,1)
+        self.itemlayout.addWidget(self.ItemOverchargeLabel,row-3,3,1,2)
+        self.itemlayout.addWidget(self.ItemOvercharge,row-3,5,1,2)
+        self.itemlayout.addWidget(self.ItemCostLabel,row-2,3,1,2)
+        self.itemlayout.addWidget(self.ItemCost,row-2,6,1,1)
+        self.itemlayout.addWidget(self.ItemPriceLabel,row-1,3,1,2)
+        self.itemlayout.addWidget(self.ItemPrice,row-1,6,1,1)
+
+        self.mainlayout = QGridLayout(self.ScWinFrame)
+        self.mainlayout.setMargin(3)
+        self.mainlayout.setSpacing(0)
+        self.mainlayout.addWidget(self.GroupStats,0,0,1,1)
+        self.mainlayout.addItem(self.hspacer,0,1,1,1)
+        self.mainlayout.addWidget(self.GroupResists,0,2,1,1)
+        self.mainlayout.addItem(self.hspacer,0,3,1,1)
+        self.mainlayout.addWidget(self.GroupSkillsList,0,4,1,1)
+        self.mainlayout.addItem(self.hspacer,0,5,1,1)
+        self.mainlayout.addWidget(self.GroupOtherBonusList,0,6,1,1)
+        self.mainlayout.addItem(self.hspacer,0,7,1,1)
+        self.mainlayout.addWidget(self.GroupCharInfo,0,8,1,1)
+        self.mainlayout.addItem(self.vspacer,1,0,1,9)
+        self.GroupItemFrame.stackUnder(self.PieceTab)
+        self.mainlayout.addWidget(self.PieceTab,2,0,1,9)
+        self.mainlayout.addWidget(self.GroupItemFrame,3,0,1,9)
 
         self.updateGeometry()
-        self.centralWidget().setFixedSize(
-             QSize(self.GroupItemFrame.frameGeometry().right() + 4, 
-                   self.GroupItemFrame.frameGeometry().bottom() + 3))
+
+        self.GroupStats.mousePressEvent = self.ignoreMouseEvent
+        self.GroupResists.mousePressEvent = self.ignoreMouseEvent
+        self.GroupItemFrame.mousePressEvent = self.ignoreMouseEvent
+
+        self.connect(self.GroupStats,SIGNAL("mousePressEvent(QMouseEvent*)"),
+                     self.mousePressEvent)
+        self.connect(self.GroupResists,SIGNAL("mousePressEvent(QMouseEvent*)"),
+                     self.mousePressEvent)
+        self.connect(self.GroupItemFrame,SIGNAL("mousePressEvent(QMouseEvent*)"),
+                     self.mousePressEvent)
+
+        self.connect(self.Realm,SIGNAL("activated(const QString&)"),
+                     self.RealmChanged)
+        self.connect(self.CharClass,SIGNAL("activated(const QString&)"),
+                     self.CharClassChanged)
+        self.connect(self.CharRace,SIGNAL("activated(const QString&)"),
+                     self.RaceChanged)
+        self.connect(self.CharLevel,SIGNAL("textChanged(const QString&)"),
+                     self.recalculate)
+        self.connect(self.PieceTab,SIGNAL("selected(int)"),self.PieceTabChanged)
+        self.connect(self.ItemLevel,SIGNAL("textChanged(const QString&)"),
+                     self.recalculate)
+        self.connect(self.ItemLevelButton,SIGNAL("clicked()"),self.ItemLevelShow)
+        self.connect(self.QualDrop,SIGNAL("activated(const QString&)"),
+                     self.recalculate)
+        self.connect(self.ItemName,SIGNAL("textChanged(const QString&)"),
+                     self.recalculate)
+        self.connect(self.Bonus_Edit,SIGNAL("textChanged(const QString&)"),
+                     self.recalculate)
+        self.connect(self.AFDPS_Edit,SIGNAL("textChanged(const QString&)"),
+                     self.recalculate)
+        self.connect(self.Speed_Edit,SIGNAL("textChanged(const QString&)"),
+                     self.recalculate)
+        self.connect(self.PlayerMade,SIGNAL("toggled(bool)"),self.PlayerToggled)
+        self.connect(self.Drop,SIGNAL("toggled(bool)"),self.DropToggled)
+        self.connect(self.Equipped,SIGNAL("clicked()"),self.EquippedClicked)
+        self.connect(self.LoadItem,SIGNAL("clicked()"),self.Load_Item)
+        self.connect(self.SaveItem,SIGNAL("clicked()"),self.Save_Item)
+        self.connect(self.CraftButton,SIGNAL("clicked()"),self.OpenCraftWindow)
+        self.connect(self.ClearItem,SIGNAL("clicked()"),self.ClearCurrentItem)
+        self.connect(self.SkillsList,SIGNAL("itemActivated(QListWidgetItem*)"),
+                     self.SkillClicked)
+        self.connect(self.OtherBonusList,SIGNAL("itemActivated(QListWidgetItem*)"),
+                     self.SkillClicked)
 
         self.startup = 1
         self.pricingInfo = {}
-	
+
         self.ItemLevelWindow = ItemLevel.ItemLevel(self.window(), '', 1)
         self.DaocPath = ''
         self.realm = 'Albion'
@@ -242,10 +395,12 @@ class ScWindow(QMainWindow, Ui_B_SC):
         self.showcapmenuid.setCheckable(True)
         self.showcapmenuid.setChecked(self.capDistance)
         self.viewmenu.addSeparator()
-        self.viewmenu.addAction('Conf. Report', self.openConfigReport, QKeySequence(Qt.CTRL+Qt.Key_C))
+        self.viewmenu.addAction('Conf. Report', self.openConfigReport,
+                                QKeySequence(Qt.CTRL+Qt.Key_C))
         self.viewmenu.addAction('Choose Format...', self.chooseReportFile)
         self.viewmenu.addSeparator()
-        self.viewmenu.addAction('&Materials', self.openMaterialsReport, QKeySequence(Qt.CTRL+Qt.Key_M))
+        self.viewmenu.addAction('&Materials', self.openMaterialsReport,
+                                QKeySequence(Qt.CTRL+Qt.Key_M))
         self.menuBar().addMenu(self.viewmenu)
 
         self.errorsmenu = QMenu('Errors', self)
@@ -290,11 +445,13 @@ class ScWindow(QMainWindow, Ui_B_SC):
         self.setTabOrder(self.ClearItem,self.SkillsList)
         self.setTabOrder(self.SkillsList,self.OtherBonusList)
 
-    def close(self):
+    def oldclose(self):
         OW = Options.Options(self)
         OW.save()
         if self.modified:
-            ret = QMessageBox.warning(self, 'Save Changes?', 'Some changes may not have been saved. Are you sure you want to quit?', 'Yes', 'No')
+            ret = QMessageBox.warning(self, 'Save Changes?',
+                                      'Some changes may not have been saved. '
+                                    + 'Are you sure you want to quit?', 'Yes', 'No')
             if ret == 0:
                 return QMainWindow.close(self)
             else:
@@ -355,8 +512,7 @@ class ScWindow(QMainWindow, Ui_B_SC):
             ## self.Cost_5, XXX not calculated yet
             self.Name_1, self.Name_2, self.Name_3, self.Name_4,
             self.Name_5,
-            self.ItemImbueLabel, self.ItemImbue,
-            self.ItemImbueSlashLabel, self.ItemImbueTotal,
+            self.ItemImbueLabel, self.ItemImbue, self.ItemImbueTotal,
             self.ItemOverchargeLabel, self.ItemOvercharge,
             self.ItemCostLabel, self.ItemCost,
             ## self.ItemPriceLabel, self.ItemPrice, XXX not calculated yet
@@ -406,7 +562,8 @@ class ScWindow(QMainWindow, Ui_B_SC):
         item = self.itemattrlist.get(self.currentTabLabel, Item(self.currentTabLabel))
         self.storeItem(item)
         self.currentTabLabel = string.strip(str(self.PieceTab.tabText(a0)))
-        self.restoreItem(self.itemattrlist.get(self.currentTabLabel, Item(self.currentTabLabel)))
+        self.restoreItem(self.itemattrlist.get(self.currentTabLabel, 
+                                               Item(self.currentTabLabel)))
 
     def changePieceTab(self,a0):
         self.PieceTab.setCurrentIndex(a0.data().toInt()[0])
@@ -596,7 +753,8 @@ class ScWindow(QMainWindow, Ui_B_SC):
                     error_act = QAction('Two of same type of gem on %s' % key, self)
                     error_act.setData(QVariant(errorcount))
                     self.errorsmenu.addAction(error_act)
-                    self.connect(self.errorsmenu, SIGNAL('triggered(QAction*)'), self.changePieceTab)
+                    self.connect(self.errorsmenu, SIGNAL('triggered(QAction*)'), 
+                                 self.changePieceTab)
                     errorcount = errorcount + 1
                 gemeffects.append([gemtype, effect])
                 if itemtype == 'player':
@@ -628,7 +786,8 @@ class ScWindow(QMainWindow, Ui_B_SC):
                         utility += amount * 5
                         if item.getAttr('Equipped') == '1':
                             if self.hideNonClassSkills:
-                                if not AllBonusList[self.realm][self.charclass]['Skills Hash'].has_key(effect):
+                                if not AllBonusList[self.realm][self.charclass] \
+                                                   ['Skills Hash'].has_key(effect):
                                     continue
                             if not skillTotals.has_key(effect):
                                 skillTotals[effect] = amount
@@ -652,7 +811,7 @@ class ScWindow(QMainWindow, Ui_B_SC):
                         self.totals[gemtype] += amount
                 elif gemtype == 'Resist':
                     utility += amount * 2
-		    if item.getAttr('Equipped') == '1':
+                    if item.getAttr('Equipped') == '1':
                         self.totals[effect] += amount
                 elif gemtype == 'Stat':
                     if effect == 'Acuity':
@@ -697,7 +856,8 @@ class ScWindow(QMainWindow, Ui_B_SC):
                     error_act = QAction('Impossible Overcharge on %s' % key, self)
                     error_act.setData(QVariant(errorcount))
                     self.errorsmenu.addAction(error_act)
-                    self.connect(self.errorsmenu, SIGNAL('triggered(QAction*)'), self.changePieceTab)
+                    self.connect(self.errorsmenu, SIGNAL('triggered(QAction*)'), 
+                                 self.changePieceTab)
                     errorcount = errorcount + 1
                 elif imbue > (itemimbue+0.5):
                     success = -OCStartPercentages[int(imbue-itemimbue)]
@@ -714,7 +874,7 @@ class ScWindow(QMainWindow, Ui_B_SC):
                 self.ItemUtility.setText('%3.1f' % utility)
                 if self.PlayerMade.isChecked():
                     self.ItemImbue.setText('%3.1f' % imbue)
-                    self.ItemImbueTotal.setText(unicode(itemimbue))
+                    self.ItemImbueTotal.setText(' / ' + unicode(itemimbue))
                     self.ItemCost.setText(SC.formatCost(itemcost))
                     for i in range(0, 5):
                         n = self.Name[i]
@@ -818,7 +978,8 @@ class ScWindow(QMainWindow, Ui_B_SC):
                 if gemcost > 0:
                     price += self.pricingInfo.get('PPGem', 0) * 10000
                     if self.pricingInfo.get('HourInclude', 0):
-                        price += self.pricingInfo.get('Hour', 0) * 10000 * int(item.getSlotAttr(itemtype, i, 'Time')) / 60.0
+                        price += self.pricingInfo.get('Hour', 0) * 10000 \
+                               * int(item.getSlotAttr(itemtype, i, 'Time')) / 60.0
                     if self.pricingInfo.get('TierInclude', 0):
                         tierp = self.pricingInfo.get('Tier', {})
                         price += float(tierp.get(str(tierlvl), 0)) * 10000
@@ -830,9 +991,10 @@ class ScWindow(QMainWindow, Ui_B_SC):
                 imbuepts = self.calcImbue(item, 0)
                 price += self.pricingInfo.get('PPImbue', 0) * 10000 * imbuepts
                 price += self.pricingInfo.get('PPOC', 0) * 10000 \
-                    * max(0, int(imbuepts - self.getItemImbue(item)))
+                       * max(0, int(imbuepts - self.getItemImbue(item)))
                 if itemcost > 0:
-                    price += self.pricingInfo.get('PPLevel', 0) * 10000 * int(item.getAttr('Level'))
+                    price += self.pricingInfo.get('PPLevel', 0) * 10000 \
+                           * int(item.getAttr('Level'))
             if itemcost > 0:
                 price += self.pricingInfo.get('PPItem', 0) * 10000
         price += self.pricingInfo.get('PPOrder', 0) * 10000
@@ -932,7 +1094,8 @@ class ScWindow(QMainWindow, Ui_B_SC):
                     effcombo.insertItems(0, list(effectlist))
                     effcombo.setCurrentIndex(0)
             if type == 1:
-                unique = (not efftext in effectlist) or (len(efftext) > 3 and efftext[-3:] == "...")
+                unique = (not efftext in effectlist) \
+                      or (len(efftext) > 3 and efftext[-3:] == "...")
                 if effcombo.isEditable() and not unique:
                     refocus = self.Effect[num].hasFocus()
                     effcombo.setEditable(False)
@@ -1047,25 +1210,32 @@ class ScWindow(QMainWindow, Ui_B_SC):
           eff.setGeometry(eff.x(), eff.y(), width, eff.height())
 
     def showDropWidgets(self):
+        #restoreUpdates = self.updatesEnabled()
+        #if restoreUpdates:
+        #    self.setUpdatesEnabled(false)
         for w in self.switchOnType['player']:
             w.hide()
         for w in self.switchOnType['drop']:
             w.show()
-        self.showWideEffects(1)
-        self.Gem_Label_1.setEnabled(1)
-        self.Gem_Label_2.setEnabled(1)
-        self.Gem_Label_3.setEnabled(1)
-        self.Gem_Label_4.setEnabled(1)
-        self.Gem_Label_5.setEnabled(1)
-        self.Gem_Label_5.setText('Gem 5:')
+        #self.showWideEffects(1)
+        for i in range(0,5):
+            self.GemLabel[i].setEnabled(1)
+        self.GemLabel[4].setText('Gem 5:')
+        #if restoreUpdates:
+        #   self.setUpdatesEnabled(true)
 
     def showPlayerWidgets(self):
+        #restoreUpdates = self.updatesEnabled()
+        #if restoreUpdates:
+        #    self.setUpdatesEnabled(false)
         for w in self.switchOnType['player']:
             w.show()
         for w in self.switchOnType['drop']:
             w.hide()
-        self.showWideEffects(0)
-        self.Gem_Label_5.setText('Proc:')
+        #self.showWideEffects(0)
+        self.GemLabel[4].setText('Proc:')
+        #if restoreUpdates:
+        #    self.setUpdatesEnabled(true)
 
     def DropToggled(self,a0):
         if self.nocalc:
@@ -1121,7 +1291,8 @@ class ScWindow(QMainWindow, Ui_B_SC):
         ext = FileExt[self.currentTabLabel]
         if not isinstance(ext, types.StringType):
             ext = ext[0]
-        itemdir = os.path.join(os.path.dirname(os.path.abspath(sys.argv[0])), 'items', self.realm, ext)
+        itemdir = os.path.join(os.path.dirname(os.path.abspath(sys.argv[0])), 
+                               'items', self.realm, ext)
         if not os.path.exists(itemdir):
             os.makedirs(itemdir)
         filename = os.path.join(itemdir, string.replace(itemname, ' ', '_') + '_' \
@@ -1141,8 +1312,10 @@ class ScWindow(QMainWindow, Ui_B_SC):
         else:
             extstr = '*%s.xml *.%s' % (ext, ext)
         extstr = "Items (%s)" % extstr
-        itemdir = os.path.join(os.path.dirname(os.path.abspath(sys.argv[0])), 'items', self.realm, ext)
-        Qfd = ItemList.ItemListDialog(self, "Load Item", itemdir, extstr, self.realm, self.charclass)
+        itemdir = os.path.join(os.path.dirname(os.path.abspath(sys.argv[0])), 
+                               'items', self.realm, ext)
+        Qfd = ItemList.ItemListDialog(self, "Load Item", itemdir, extstr, 
+                                      self.realm, self.charclass)
         if Qfd.exec_():
             if Qfd.selectedFiles().count() > 0:
                 filename = unicode(Qfd.selectedFiles()[0])
@@ -1152,7 +1325,8 @@ class ScWindow(QMainWindow, Ui_B_SC):
                 if string.lower(item.getAttr('Realm')) != string.lower(self.realm)\
                     and string.lower(item.getAttr('Realm')) != 'all'\
                     and not self.coop:
-                    QMessageBox.critical(None, 'Error!', 'You are trying to load an item for another realm!', 'OK')
+                    QMessageBox.critical(None, 'Error!', 'You are trying to load an '
+                                                       + 'item for another realm!', 'OK')
                     return
                 item.loadAttr('Location', self.currentTabLabel)
                 self.itemattrlist[self.currentTabLabel] = item
@@ -1172,7 +1346,9 @@ class ScWindow(QMainWindow, Ui_B_SC):
     
     def newFile(self):
         if self.modified:
-            ret = QMessageBox.warning(self, 'Save Changes?', 'Some changes may not have been saved. Are you sure you want to discard these changes?', 'Yes', 'No')
+            ret = QMessageBox.warning(self, 'Save Changes?', 
+                                      'Some changes may not have been saved. Are you '
+                                    + 'sure you want to discard these changes?', 'Yes', 'No')
             if ret == 1:
                 return
         wascalc = self.nocalc
@@ -1204,10 +1380,12 @@ class ScWindow(QMainWindow, Ui_B_SC):
             filename = os.path.join(templatedir, str(self.CharName.text()) + "_template.xml")
         filename = unicode(filename)
         while filename != '':
-            filename = QFileDialog.getSaveFileName(self, "Save Template", filename, "Templates (*.xml)")
+            filename = QFileDialog.getSaveFileName(self, "Save Template", filename, 
+                                                   "Templates (*.xml)")
             filename = unicode(filename)
             if filename != '' and os.path.exists(filename):
-                ret = QMessageBox.warning(self, "Overwrite?", "Do you want to overwrite the selected file?", "Yes", "No")
+                ret = QMessageBox.warning(self, "Overwrite?", "Do you want to overwrite the "
+                                                            + "selected file?", "Yes", "No")
                 if ret != 1:
                     continue
             break
@@ -1231,12 +1409,16 @@ class ScWindow(QMainWindow, Ui_B_SC):
 
     def openFile(self, *args):
         if self.modified:
-            ret = QMessageBox.warning(self, 'Save Changes?', 'Some changes may not have been saved. Are you sure you want to discard these changes?', 'Yes', 'No')
+            ret = QMessageBox.warning(self, 'Save Changes?', 
+                                      'Some changes may not have been saved. Are you sure '
+                                    + 'you want to discard these changes?', 'Yes', 'No')
             if ret == 1:
                 return
         if len(args) == 0:
-            templatedir = os.path.join(os.path.dirname(os.path.abspath(sys.argv[0])), 'templates/')
-            filename = QFileDialog.getOpenFileName(self, "Open Template", templatedir, "Templates (*.xml *.scc)")
+            templatedir = os.path.join(os.path.dirname(os.path.abspath(sys.argv[0])), 
+                                       'templates')
+            filename = QFileDialog.getOpenFileName(self, "Open Template", templatedir, 
+                                                   "Templates (*.xml *.scc)")
         else:
             filename = args[0]
         filename = unicode(filename)
@@ -1324,7 +1506,8 @@ class ScWindow(QMainWindow, Ui_B_SC):
             self.CharClass.setCurrentIndex(ClassList[self.realm].index(self.charclass))
             self.CharClassChanged('')
         if racename in AllBonusList[self.realm][self.charclass]['Races']:
-            self.CharRace.setCurrentIndex(AllBonusList[self.realm][self.charclass]['Races'].index(racename))
+            self.CharRace.setCurrentIndex(AllBonusList[self.realm][self.charclass] \
+                                                      ['Races'].index(racename))
             self.RaceChanged('')
         self.nocalc = wascalc
         self.restoreItem(self.itemattrlist.get(self.currentTabLabel))
@@ -1395,7 +1578,8 @@ class ScWindow(QMainWindow, Ui_B_SC):
         RW.exec_()
 
     def chooseReportFile(self):
-	filename = QFileDialog.getOpenFileName(self, "Choose Report Format", "reports/", "Reports (*.xml *.rpt)")
+        filename = QFileDialog.getOpenFileName(self, "Choose Report Format", "reports", 
+                                               "Reports (*.xml *.rpt)")
         if filename is not None and str(filename) != '':
             self.reportFile = str(filename)
 
