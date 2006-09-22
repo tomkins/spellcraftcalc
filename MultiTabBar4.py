@@ -14,6 +14,12 @@ class MultiTab:
 
 class MultiTabBar4(QWidget):
     def __init__(self, parent = None, name = None):
+        self.__tabList = []
+        self.__selectedIndex = (0, 0)
+        self.__pressedIndex = (0, 0)
+        self.__hoverRect = QRect()
+        self.__layoutDirty = True
+
         QWidget.__init__(self, parent)
         if (name):
             self.setObjectName(name)
@@ -24,14 +30,7 @@ class MultiTabBar4(QWidget):
         else:
             self.rowoverlap = 3
             self.cropheight = 2
-
-        self.__tabList = []
-        self.__selectedIndex = (0, 0)
-        self.__pressedIndex = (-1, -1)
-        self.__hoverRect = QRect()
-        self.__layoutDirty = False
-
-
+        
     def addTab(self, text, row):
         while len(self.__tabList) <= row:
             self.__tabList.append([])
@@ -40,7 +39,7 @@ class MultiTabBar4(QWidget):
         tab.text = text
         self.__tabList[row].append(tab)
 
-        self.__layoutTabs()
+        self.refresh()
 
     def removeTab(self, text):
         for row in self.__tabList:
@@ -68,7 +67,10 @@ class MultiTabBar4(QWidget):
         return self.__selectedIndex
 
     def setCurrentIndex(self, row, col):
+        updatelayout = row != self.__selectedIndex[0]
         self.__selectedIndex = (row, col)
+        if updatelayout:
+            self.__layoutTabs()
         self.update()
 
     def numTabsInRow(self, row):
@@ -148,6 +150,7 @@ class MultiTabBar4(QWidget):
         optTabBase = QStyleOptionTabBarBase()
         optTabBase.initFrom(self)
         optTabBase.shape = QTabBar.RoundedNorth
+        optTabBase.tabBarRect = QRect()
         if theParent and overlap > 0:
             # FIXME
             QPainter.setRedirected(theParent, self, self.pos())
@@ -177,13 +180,20 @@ class MultiTabBar4(QWidget):
                     continue
                 self.style().drawControl(QStyle.CE_TabBarTab, tab,
                     QPainter(self), self)
-                #p.drawControl(QStyle.CE_TabBarTab, tab)
 
         if selected != (-1, -1):
-            tab = self.__getStyleOption(selected[0],
-                selected[1])
+            for j in range(len(self.__tabList[selected[0]])):
+                tab = self.__getStyleOption(selected[0], j)
+                self.style().drawControl(QStyle.CE_TabBarTab, tab,
+                    QPainter(self), self)
+            tab = self.__getStyleOption(selected[0], selected[1])
             self.style().drawControl(QStyle.CE_TabBarTab, tab,
                 QPainter(self), self)
+
+
+        #optTabBase.rect = optTabBase.tabBarRect
+        #self.style().drawPrimitive(QStyle.PE_FrameTabBarBase, optTabBase,
+        #    QPainter(self), self)
 
     def mousePressEvent(self, e):
         if e.button() != Qt.LeftButton:
@@ -225,7 +235,7 @@ class MultiTabBar4(QWidget):
         self.__pressedIndex = (-1, -1)
         if e.type() == \
                 self.style().styleHint(QStyle.SH_TabBar_SelectMouseType, None,
-                self):
+                self) and i != (-1, -1):
             self.setCurrentIndex(i[0], i[1])
 
     def changeEvent(self, e):
@@ -285,38 +295,31 @@ class MultiTabBar4(QWidget):
         numrows = len(self.__tabList)
         # Horizontal tabs only for now
         mx = 0
+        maxWidth = 0
+        maxHeight = 0
+        maxNumTabs = 0
         mx_row = -1
         x = 0
-        maxHeight = 0
 
         for i in range(numrows):
-            if self.numTabsInRow(i) > mx:
-                mx_row = i
-                mx = self.numTabsInRow(i)
-        
-        for i in range(mx):
-            sz = self.tabSizeHint(mx_row, i)
-            self.__tabList[mx_row][i].rect = QRect(x, 0, sz.width(),
-                sz.height())
-            maxHeight = max(maxHeight, sz.height())
-            x += sz.width()
-        maxWidth = x
+            maxNumTabs = max(self.numTabsInRow(i), maxNumTabs)
+            for j in range(len(self.__tabList[i])):
+                sz = self.tabSizeHint(i, j)
+                maxWidth = max(sz.width(), maxWidth)
+                maxHeight = max(maxHeight, sz.height())
 
-        for r in range(numrows):
-            if r == mx_row: continue
-            num = self.numTabsInRow(r)
-            w = 0
-            if num > 0:
-                w = maxWidth / num
+        for i in range(numrows):
             x = 0
-
-            for i in range(num):
-                self.__tabList[r][i].rect = QRect(x, r * maxHeight, w, maxHeight)
-                x += w
-
-        for j in range(len(self.__tabList[mx_row])):
-            self.__tabList[mx_row][j].rect.setHeight(maxHeight)
-            self.__tabList[mx_row][j].rect.setY(mx_row * maxHeight)
+            if i == self.__selectedIndex[0]:
+                y = (len(self.__tabList) - 1) * maxHeight
+            elif i < self.__selectedIndex[0] or self.__selectedIndex[0] == -1:
+                y = i * maxHeight
+            else:
+                y = (i - 1) * maxHeight
+                
+            for j in range(len(self.__tabList[i])):
+                self.__tabList[i][j].rect = QRect(x, y, maxWidth, maxHeight)
+                x += maxWidth
 
         self.tabLayoutChange()
 
