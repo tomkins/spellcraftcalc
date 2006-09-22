@@ -199,7 +199,7 @@ class ScWindow(QMainWindow, Ui_B_SC):
                     self.Equipped):
             self.itemcontrollayout.addWidget(obj)
             col += 1
-            if col > 2 and str(obj.objectName())[-5:] != 'Label':
+            if col == 3 or col > 6 and str(obj.objectName())[-5:] != 'Label':
                 self.itemcontrollayout.addSpacing(10)
                 col += 1
         self.itemcontrollayout.addWidget(self.DropCraftButtonFrame)
