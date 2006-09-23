@@ -82,9 +82,6 @@ class ScWindow(QMainWindow, Ui_B_SC):
         self.setAttribute(Qt.WA_DeleteOnClose)
         Ui_B_SC.setupUi(self,self)
 
-        self.hspacer = QSpacerItem(5,0,QSizePolicy.Fixed,QSizePolicy.Minimum)
-        self.vspacer = QSpacerItem(0,3,QSizePolicy.Minimum,QSizePolicy.Fixed)
-
         self.statlayout = QtGui.QGridLayout(self.GroupStats)
         self.statlayout.setMargin(3)
         self.statlayout.setSpacing(0)
@@ -97,7 +94,7 @@ class ScWindow(QMainWindow, Ui_B_SC):
 
         self.resistlayout = QtGui.QGridLayout(self.GroupResists)
         self.resistlayout.setMargin(3)
-        self.resistlayout.setSpacing(0)
+        self.resistlayout.setSpacing(1)
         row = 0
         for stat in (GemLists['All']['Resist']):
             self.resistlayout.addWidget(getattr(self, stat + 'Label'),row,0,1,1)
@@ -109,11 +106,13 @@ class ScWindow(QMainWindow, Ui_B_SC):
         self.skilllayout.setMargin(3)
         self.skilllayout.setSpacing(0)
         self.skilllayout.addWidget(self.SkillsList,0,0)
+#        self.skilllayout.setColumnStretch(0, 1)
 
         self.otherlayout = QtGui.QGridLayout(self.GroupOtherBonusList)
         self.otherlayout.setMargin(3)
         self.otherlayout.setSpacing(0)
         self.otherlayout.addWidget(self.OtherBonusList,0,0)
+#        self.otherlayout.setColumnStretch(0, 1)
 
         self.charlayout = QtGui.QGridLayout(self.GroupCharInfo)
         self.charlayout.setMargin(3)
@@ -182,6 +181,10 @@ class ScWindow(QMainWindow, Ui_B_SC):
 
         editAmountValidator = QIntValidator(-999, +999, self)
 
+        layout = True
+        hspacer = QSpacerItem(5,0,QSizePolicy.Fixed,QSizePolicy.Minimum)
+        vspacer = QSpacerItem(0,3,QSizePolicy.Minimum,QSizePolicy.Fixed)
+
         self.itemgrouplayout = QtGui.QHBoxLayout(self.DropCraftButtonFrame)
         self.itemgrouplayout.setMargin(0)
         self.itemgrouplayout.setSpacing(0)
@@ -214,10 +217,13 @@ class ScWindow(QMainWindow, Ui_B_SC):
                     self.LabelGemQuality, self.LabelGemPoints, self.LabelGemCost,):
             self.itemlayout.addWidget(obj,row,col,1,1)
             col += 1
-        self.itemlayout.addItem(self.hspacer,row,7,1,1)
+        self.itemlayout.addItem(QSpacerItem(hspacer),row,7,1,1)
         self.itemlayout.addWidget(self.LabelItemName,row,8,1,2)
+        self.itemlayout.setColumnStretch(3, 1)
+        self.itemlayout.setColumnStretch(8, 1)
         row += 1
         self.itemlayout.addWidget(self.ItemName,row,8,1,2)
+
         for i in range(0, 10):
             idx = i + 1
             self.GemLabel.append(getattr(self, 'Gem_Label_%d' % idx))
@@ -247,11 +253,12 @@ class ScWindow(QMainWindow, Ui_B_SC):
                 self.Points.append(getattr(self, 'Points_%d' % idx))
                 self.Cost.append(getattr(self, 'Cost_%d' % idx))
                 self.Name.append(getattr(self, 'Name_%d' % idx))
-                self.itemlayout.addWidget(self.AmountDrop[i],row,2,1,1)
-                self.itemlayout.addWidget(self.Quality[i],row,4,1,1)
-                self.itemlayout.addWidget(self.Points[i],row,5,1,1)
-                self.itemlayout.addWidget(self.Cost[i],row,6,1,1)
-                self.itemlayout.addWidget(self.Name[i],row,8,1,2)
+                if layout:
+                 self.itemlayout.addWidget(self.AmountDrop[i],row,2,1,1)
+                 self.itemlayout.addWidget(self.Quality[i],row,4,1,1)
+                 self.itemlayout.addWidget(self.Points[i],row,5,1,1)
+                 self.itemlayout.addWidget(self.Cost[i],row,6,1,1)
+                 self.itemlayout.addWidget(self.Name[i],row,8,1,2)
             row += 1
 
         self.itembuttonlayout = QtGui.QGridLayout()
@@ -279,18 +286,20 @@ class ScWindow(QMainWindow, Ui_B_SC):
         self.mainlayout.setMargin(3)
         self.mainlayout.setSpacing(0)
         self.mainlayout.addWidget(self.GroupStats,0,0,1,1)
-        self.mainlayout.addItem(self.hspacer,0,1,1,1)
+        self.mainlayout.addItem(QSpacerItem(hspacer),0,1,1,1)
         self.mainlayout.addWidget(self.GroupResists,0,2,1,1)
-        self.mainlayout.addItem(self.hspacer,0,3,1,1)
+        self.mainlayout.addItem(QSpacerItem(hspacer),0,3,1,1)
         self.mainlayout.addWidget(self.GroupSkillsList,0,4,1,1)
-        self.mainlayout.addItem(self.hspacer,0,5,1,1)
+        self.mainlayout.addItem(QSpacerItem(hspacer),0,5,1,1)
         self.mainlayout.addWidget(self.GroupOtherBonusList,0,6,1,1)
-        self.mainlayout.addItem(self.hspacer,0,7,1,1)
+        self.mainlayout.addItem(QSpacerItem(hspacer),0,7,1,1)
         self.mainlayout.addWidget(self.GroupCharInfo,0,8,1,1)
-        self.mainlayout.addItem(self.vspacer,1,0,1,9)
+        self.mainlayout.addItem(QSpacerItem(vspacer),1,0,1,9)
         self.GroupItemFrame.stackUnder(self.PieceTab)
         self.mainlayout.addWidget(self.PieceTab,2,0,1,9)
         self.mainlayout.addWidget(self.GroupItemFrame,3,0,1,9)
+        self.mainlayout.setColumnStretch(4, 1)
+        self.mainlayout.setColumnStretch(6, 1)
 
         self.updateGeometry()
 
