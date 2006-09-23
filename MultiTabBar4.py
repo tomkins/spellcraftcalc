@@ -30,6 +30,9 @@ class MultiTabBar4(QWidget):
         else:
             self.rowoverlap = 3
             self.cropheight = 2
+
+        self.setFocusPolicy(Qt.TabFocus)
+        self.setSizePolicy(QSizePolicy.Preferred, QSizePolicy.Fixed)
         
     def addTab(self, row, text):
         self.insertTab(row, -1, text)
@@ -74,10 +77,8 @@ class MultiTabBar4(QWidget):
         return self.__selectedIndex
 
     def setCurrentIndex(self, row, col):
-        updatelayout = row != self.__selectedIndex[0]
         self.__selectedIndex = (row, col)
-        if updatelayout:
-            self.__layoutTabs()
+        self.__layoutTabs()
         self.update()
 
         self.emit(SIGNAL('currentChanged'), row, col)
@@ -248,6 +249,37 @@ class MultiTabBar4(QWidget):
                 self.style().styleHint(QStyle.SH_TabBar_SelectMouseType, None,
                 self) and i != (-1, -1):
             self.setCurrentIndex(i[0], i[1])
+
+    def keyPressEvent(self, e):
+        if e.key() != Qt.Key_Left and e.key() != Qt.Key_Right \
+                and e.key() != Qt.Key_Up:
+            e.ignore()
+            return
+
+        if e.key() == Qt.Key_Left or e.key() == Qt.Key_Right:
+            dx = -1
+            if e.key() == Qt.Key_Right: dx = 1
+            index = self.__selectedIndex[1] + dx
+            while index < self.numTabsInRow(self.__selectedIndex[0]) and \
+                index >= 0:
+                if self.__tabAt(self.__selectedIndex[0], index).enabled:
+                    self.setCurrentIndex(self.__selectedIndex[0], index)
+                    break
+                index += dx
+
+        if e.key() == Qt.Key_Up:
+            if self.__selectedIndex[0] == len(self.__tabList) - 1:
+                index = self.__selectedIndex[0] - 1
+            else:
+                index = len(self.__tabList) - 1
+            if index < 0:
+                index = 0
+
+            col = self.__selectedIndex[1]
+            if col >= self.numTabsInRow(index):
+                col = self.numTabsInRow(index) - 1
+            
+            self.setCurrentIndex(index, col)
 
     def changeEvent(self, e):
         self.refresh()
