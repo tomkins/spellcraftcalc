@@ -423,7 +423,7 @@ class ScWindow(QMainWindow, Ui_B_SC):
 
         self.initialize()
         self.pricingInfo = OW.getPriceInfo()
-        self.restoreItem(Item())
+        self.restoreItem(self.itemattrlist[self.currentTabLabel])
         self.nocalc = 0
         self.calculate()
         self.modified = 0
@@ -454,16 +454,16 @@ class ScWindow(QMainWindow, Ui_B_SC):
         self.setTabOrder(self.ClearItem,self.SkillsList)
         self.setTabOrder(self.SkillsList,self.OtherBonusList)
 
-    #def close(self):
-    #    OW = Options.Options(self)
-    #    OW.save()
-    #    if self.modified:
-    #        ret = QMessageBox.warning(self, 'Save Changes?', 'Some changes may not have been saved. Are you sure you want to quit?', 'Yes', 'No')
-    #        if ret == 0:
-    #            return QMainWindow.close(self)
-    #        else:
-    #            return False
-    #    else: return QMainWindow.close(self)
+    def close(self):
+        OW = Options.Options(self)
+        OW.save()
+        if self.modified:
+            ret = QMessageBox.warning(self, 'Save Changes?', 'Some changes may not have been saved. Are you sure you want to quit?', 'Yes', 'No')
+            if ret == 0:
+                return QMainWindow.close(self)
+            else:
+                return False
+        else: return QMainWindow.close(self)
 
     def closeEvent(self, e):
         OW = Options.Options(self)
@@ -573,7 +573,7 @@ class ScWindow(QMainWindow, Ui_B_SC):
         rootnode.appendChild(skillnode)
         rootnode.appendChild(coopnode)
 
-        for key, item in self.itemattrlist.items():
+        for key, item in self.itemattrlist.iteritems():
             # use firstChild here because item.asXML() constructs a Document()
             rootnode.appendChild(item.asXML().firstChild)
         return document
@@ -581,11 +581,9 @@ class ScWindow(QMainWindow, Ui_B_SC):
     def PieceTabChanged(self, row, col):
         if self.nocalc:
             return
-        item = self.itemattrlist.get(self.currentTabLabel, Item(self.currentTabLabel))
-        self.storeItem(item)
+        self.storeItem(self.itemattrlist[self.currentTabLabel])
         self.currentTabLabel = string.strip(str(self.PieceTab.tabText(row, col)))
-        self.restoreItem(self.itemattrlist.get(self.currentTabLabel, 
-                                               Item(self.currentTabLabel)))
+        self.restoreItem(self.itemattrlist[self.currentTabLabel])
 
     def changePieceTab(self,a0):
         mask = a0.data().toInt()[0]
@@ -627,30 +625,13 @@ class ScWindow(QMainWindow, Ui_B_SC):
         item.loadAttr('Bonus', unicode(self.Bonus_Edit.text()))
         item.loadAttr('ActiveState', state)
         for slot in range(0, toprng):
-            typectrl = self.Type[slot]
-            effectctrl = self.Effect[slot]
+            item.slot(slot).setType(self.Type[slot].currentText())
+            item.slot(slot).setEffect(self.Effect[slot].currentText())
             if state == 'drop':
-                amountctrl = self.AmountEdit[slot]
-                qua = '99'
-                item.loadSlotAttrs(state, slot, 
-                    typectrl.currentText(), 
-                    amountctrl.text(),
-                    effectctrl.currentText(), 
-                    qua,
-                    item.getSlotAttr(state, slot, 'Time'),
-                    item.getSlotAttr(state, slot, 'Remakes'),
-                    item.getSlotAttr(state, slot, 'Done'))
+                item.slot(slot).setAmount(self.AmountEdit[slot].text())
             else:
-                amountctrl = self.AmountDrop[slot]
-                qua = self.Quality[slot].currentText()
-                item.loadSlotAttrs(state, slot, 
-                    typectrl.currentText(), 
-                    amountctrl.currentText(),
-                    effectctrl.currentText(), 
-                    qua,
-                    item.getSlotAttr(state, slot, 'Time'),
-                    item.getSlotAttr(state, slot, 'Remakes'),
-                    item.getSlotAttr(state, slot, 'Done'))
+                item.slot(slot).setAmount(self.AmountDrop[slot].currentText())
+                item.slot(slot).setQua(self.Quality[slot].currentText())
         self.itemattrlist[self.currentTabLabel] = item
 
     def restoreItem(self, item):
@@ -677,7 +658,7 @@ class ScWindow(QMainWindow, Ui_B_SC):
             typecombo.clear()
             if slot == 4 and itemtype == 'player':
                 typelist = list(EffectTypeList)
-            gemtype = str(item.getSlotAttr(itemtype, slot, 'Type'))
+            gemtype = str(item.slot(slot).type())
             if not gemtype in typelist:
                 typelist.append(gemtype)
             typecombo.insertItems(0, list(typelist))
@@ -685,7 +666,7 @@ class ScWindow(QMainWindow, Ui_B_SC):
             self.UpdateCombo(0, slot)
             if gemtype == 'Unused':
                 continue
-            gemeffect = str(item.getSlotAttr(itemtype, slot, 'Effect'))
+            gemeffect = str(item.slot(slot).effect())
             effect = self.Effect[slot].findText(gemeffect)
             if effect < 0:
                 if not self.Effect[slot].isEditable():
@@ -695,11 +676,11 @@ class ScWindow(QMainWindow, Ui_B_SC):
                 self.Effect[slot].setCurrentIndex(effect)
             self.UpdateCombo(1, slot)
             if itemtype == 'drop':
-                am = item.getSlotAttr(itemtype, slot, 'Amount')
+                am = item.slot(slot).amount()
                 amedit = self.AmountEdit[slot]
                 amedit.setText(am)
             else:
-                gemamount = item.getSlotAttr(itemtype, slot, 'Amount')
+                gemamount = item.slot(slot).amount()
                 if ValuesLists.has_key(gemtype):
                     if isinstance(ValuesLists[gemtype], tuple):
                         amountlist = ValuesLists[gemtype]
@@ -707,10 +688,9 @@ class ScWindow(QMainWindow, Ui_B_SC):
                         if ValuesLists[gemtype].has_key(gemeffect):
                             amountlist = ValuesLists[gemtype][gemeffect]
                 if gemamount in amountlist:
-                    self.AmountDrop[slot].setCurrentIndex(
-                            amountlist.index(gemamount))
+                    self.AmountDrop[slot].setCurrentIndex(amountlist.index(gemamount))
                 quacombo = self.Quality[slot]
-                gemqua = item.getSlotAttr(itemtype, slot, 'Qua')
+                gemqua = item.slot(slot).qua()
                 if gemqua in QualityValues:
                     if quacombo.count() > 0:
                         quacombo.setCurrentIndex(QualityValues.index(gemqua))
@@ -756,7 +736,7 @@ class ScWindow(QMainWindow, Ui_B_SC):
         self.errorsmenu.clear()
         totalutility = 0.0
         totalcost = 0
-        for key, item in self.itemattrlist.items():
+        for key, item in self.itemattrlist.iteritems():
             utility = 0.0
             itemtype = item.getAttr('ActiveState')
             itemcost = 0
@@ -766,14 +746,14 @@ class ScWindow(QMainWindow, Ui_B_SC):
                 toprng = 10
             gemeffects = []
             for i in range(0, toprng):
-                gemtype = item.getSlotAttr(itemtype, i, 'Type')
-                if str(item.getSlotAttr(itemtype, i, 'Amount')) == '':
+                gemtype = item.slot(i).type()
+                if str(item.slot(i).amount()) == '':
                     amount = 0
                 else:
-                    amount = re.sub('[^\d]', '', item.getSlotAttr(itemtype, i, 'Amount'))
+                    amount = re.sub('[^\d]', '', item.slot(i).amount())
                     if amount == '': amount = '0'
                     amount = int(amount)
-                effect = item.getSlotAttr(itemtype, i, 'Effect')
+                effect = item.slot(i).effect()
                 if effect != '' and [gemtype, effect] in gemeffects:
                     error_act = QAction('Two of same type of gem on %s' % key, self)
                     if item.Location in JewelTabList:
@@ -791,7 +771,7 @@ class ScWindow(QMainWindow, Ui_B_SC):
                 if itemtype == 'player':
                     if key == self.currentTabLabel:
                         self.Cost[i].setText('')
-                    (cost, costindex) = SC.computeGemCost(item, i)
+                    cost = item.slot(i).gemCost()
                     itemcost += cost
                     if key == self.currentTabLabel:
                         self.Cost[i].setText(SC.formatCost(cost))
@@ -900,10 +880,10 @@ class ScWindow(QMainWindow, Ui_B_SC):
                 elif imbue > (itemimbue+0.5):
                     success = -OCStartPercentages[int(imbue-itemimbue)]
                     for i in range(0, 4):
-                        if item.getSlotAttr(itemtype, i, 'Type') == 'Unused':
+                        if item.slot(i).type() == 'Unused':
                             success += GemQualOCModifiers['94']
                         else:
-                            success += GemQualOCModifiers[item.getSlotAttr(itemtype, i, 'Qua')]
+                            success += GemQualOCModifiers[item.slot(i).qua()]
                     success += ItemQualOCModifiers[str(self.QualDrop.currentText())]
                     skillbonus = (int(self.crafterSkill / 50) - 10) * 5
                     if skillbonus > 50: skillbonus = 50
@@ -916,8 +896,8 @@ class ScWindow(QMainWindow, Ui_B_SC):
                     self.ItemCost.setText(SC.formatCost(itemcost))
                     for i in range(0, 5):
                         n = self.Name[i]
-                        n.setText(SC.getGemName(item, i))
-                        if item.getSlotAttr(itemtype, i, 'Done') == '1':
+                        n.setText(item.slot(i).gemName())
+                        if item.slot(i).done() == "1":
                             self.GemLabel[i].setEnabled(0)
                         else:
                             self.GemLabel[i].setEnabled(1)
@@ -930,7 +910,7 @@ class ScWindow(QMainWindow, Ui_B_SC):
                             self.ItemOvercharge.setText('%d%%' % success)
                     else:
                         self.ItemOvercharge.setText('None')
-        for (key, val) in self.totals.items():
+        for (key, val) in self.totals.iteritems():
             if not self.capDistance:
                 if self.includeRacials:
                     if GemTables['All']['Resist'].has_key(key):
@@ -968,7 +948,7 @@ class ScWindow(QMainWindow, Ui_B_SC):
         self.TotalCost.setText(SC.formatCost(totalcost))
         self.SkillsList.clear()
         self.OtherBonusList.clear()
-        for skill, amount in skillTotals.items():
+        for skill, amount in skillTotals.iteritems():
             if not self.capDistance:
                 self.SkillsList.addItem('%d %s' % (amount, skill))
             else:
@@ -978,7 +958,7 @@ class ScWindow(QMainWindow, Ui_B_SC):
                     capcalc = HighCapBonusList['Skill']
                 thiscap = int(charlevel * capcalc[0]) + capcalc[1]
                 self.SkillsList.addItem('%d %s' % (thiscap - amount, skill))
-        for bonus, amount in otherTotals.items():
+        for bonus, amount in otherTotals.iteritems():
             if not self.capDistance:
                 self.OtherBonusList.addItem('%d %s' % (amount, bonus))
             else:
@@ -1005,24 +985,25 @@ class ScWindow(QMainWindow, Ui_B_SC):
     def computePrice(self):
         price = 0
         cost = 0
-        for key, item in self.itemattrlist.items():
+        for key, item in self.itemattrlist.iteritems():
             itemcost = 0
             itemtype = item.getAttr('ActiveState')
             if itemtype == 'drop': continue
             for i in range(0, 5):
-                gemcost, tierlvl = SC.computeGemCost(item, i)
+                gemcost = item.slot(i).gemCost()
+                gemlvl = item.slot(i).gemLevel()
                 cost += gemcost
                 itemcost += gemcost
                 if gemcost > 0:
                     price += self.pricingInfo.get('PPGem', 0) * 10000
                     if self.pricingInfo.get('HourInclude', 0):
                         price += self.pricingInfo.get('Hour', 0) * 10000 \
-                               * int(item.getSlotAttr(itemtype, i, 'Time')) / 60.0
+                               * int(item.slot(i).time()) / 60.0
                     if self.pricingInfo.get('TierInclude', 0):
                         tierp = self.pricingInfo.get('Tier', {})
-                        price += float(tierp.get(str(tierlvl), 0)) * 10000
+                        price += float(tierp.get(str(gemlvl), 0)) * 10000
                     if self.pricingInfo.get('QualInclude', 0):
-                        gemqual = item.getSlotAttr(itemtype, i, 'Qua')
+                        gemqual = item.slot(i).qua()
                         qualp = self.pricingInfo.get('Qual', {})
                         price += (gemcost * float(qualp.get(gemqual, 0)) / 100.0)
             if self.pricingInfo.get('PPInclude', 0):
@@ -1064,24 +1045,8 @@ class ScWindow(QMainWindow, Ui_B_SC):
         if itemstate == 'drop': return 0
         mvals = []
         for i in range(0, 4):
-            itemtype = item.getSlotAttr(itemstate, i, 'Type')
-            amount = item.getSlotAttr(itemstate, i, 'Amount')
-            if amount == '': 
-                mval = 0.0
-            elif itemtype == 'Focus':
-                mval = 1.0
-            elif itemtype == 'Unused':
-                mval = 0.0
-            elif itemtype == 'Stat':
-                mval = ((int(amount) - 1) / 3.0) * 2 + 1
-            elif itemtype == 'Resist' or itemtype == 'Power':
-                mval = (int(amount) - 1) * 2
-                if mval == 0: mval = 1.0
-            elif itemtype == 'Hits':
-                mval = int(amount) / 4.0
-            elif itemtype == 'Skill':
-                mval = (int(amount) - 1) * 5.0
-                if mval == 0: mval = 1.0    
+            itemtype = item.slot(i).type()
+            mval = item.slot(i).gemImbue()
             if display:
                 self.Points[i].setText('%3.1f' % mval)
             mvals.append(mval)
@@ -1202,9 +1167,8 @@ class ScWindow(QMainWindow, Ui_B_SC):
         if race in racelist:
           self.CharRace.setCurrentIndex(racelist.index(race))
         self.RaceChanged('')
-        item = self.itemattrlist.get(self.currentTabLabel, Item(self.currentTabLabel))
         if self.save:
-            self.restoreItem(item)
+            self.restoreItem(self.itemattrlist[self.currentTabLabel])
         self.calculate()
 
     def RealmChanged(self,a0):
@@ -1223,7 +1187,7 @@ class ScWindow(QMainWindow, Ui_B_SC):
         self.modified = 1
         self.UpdateCombo(0, int(index) - 1)
         item = self.itemattrlist.get(self.currentTabLabel, Item(self.currentTabLabel))
-        self.storeItem(item)
+        self.storeItem(self.itemattrlist[self.currentTabLabel])
         self.nocalc = wascalc
         self.calculate()
 
@@ -1236,8 +1200,7 @@ class ScWindow(QMainWindow, Ui_B_SC):
         self.nocalc = 1
         self.modified = 1
         self.UpdateCombo(1, int(index) - 1)
-        item = self.itemattrlist.get(self.currentTabLabel, Item(self.currentTabLabel))
-        self.storeItem(item)
+        self.storeItem(self.itemattrlist[self.currentTabLabel])
         self.nocalc = wascalc
         self.calculate()
 
@@ -1282,7 +1245,7 @@ class ScWindow(QMainWindow, Ui_B_SC):
             return
         self.modified = 1
         self.showDropWidgets()
-        item = self.itemattrlist.get(self.currentTabLabel, Item(self.currentTabLabel))
+        item = self.itemattrlist[self.currentTabLabel]
         item.loadAttr('ActiveState','drop')
         if self.save:
             self.restoreItem(item)
@@ -1294,7 +1257,7 @@ class ScWindow(QMainWindow, Ui_B_SC):
             return
         self.modified = 1
         self.showPlayerWidgets()
-        item = self.itemattrlist.get(self.currentTabLabel, Item(self.currentTabLabel))
+        item = self.itemattrlist[self.currentTabLabel]
         item.loadAttr('ActiveState','player')
         if self.save:
             self.restoreItem(item)
@@ -1302,19 +1265,19 @@ class ScWindow(QMainWindow, Ui_B_SC):
     def AmountChanged(self,a0):
         self.modified = 1
         if self.save:
-            item = self.itemattrlist.get(self.currentTabLabel, Item(self.currentTabLabel))
+            item = self.itemattrlist[self.currentTabLabel]
             self.storeItem(item)
         self.calculate()
 
     def recalculate(self,a0):
         self.modified = 1
         if self.save:
-            item = self.itemattrlist.get(self.currentTabLabel, Item(self.currentTabLabel))
+            item = self.itemattrlist[self.currentTabLabel]
             self.storeItem(item)
         self.calculate()
 
     def ClearCurrentItem(self):
-        item = Item(self.currentTabLabel)
+        item = self.itemattrlist[self.currentTabLabel]
         self.itemattrlist[self.currentTabLabel] = item
         self.restoreItem(item)
 
@@ -1324,7 +1287,7 @@ class ScWindow(QMainWindow, Ui_B_SC):
             QMessageBox.critical(None, 'Error!', 
                 'Cannot save item - You must specifify a name!', 'OK')
             return
-        item = self.itemattrlist.get(self.currentTabLabel, Item(self.currentTabLabel))
+        item = self.itemattrlist[self.currentTabLabel]
         self.storeItem(item)
         ext = FileExt[self.currentTabLabel]
         if not isinstance(ext, types.StringType):
@@ -1378,8 +1341,7 @@ class ScWindow(QMainWindow, Ui_B_SC):
             self.AFDPS_Edit.setText(str(self.ItemLevelWindow.afdps))
 
     def EquippedClicked(self):
-        item = self.itemattrlist.get(self.currentTabLabel, Item(self.currentTabLabel))
-        self.storeItem(item)
+        self.storeItem(self.itemattrlist[self.currentTabLabel])
         self.calculate()
     
     def newFile(self):
@@ -1548,7 +1510,7 @@ class ScWindow(QMainWindow, Ui_B_SC):
                                                       ['Races'].index(racename))
             self.RaceChanged('')
         self.nocalc = wascalc
-        self.restoreItem(self.itemattrlist.get(self.currentTabLabel))
+        self.restoreItem(self.itemattrlist[self.currentTabLabel])
         self.modified = 0
         
     def loadFromLela(self, scclines):
@@ -1584,7 +1546,7 @@ class ScWindow(QMainWindow, Ui_B_SC):
             item.loadLelaItemFromSCC(itemnum, scclines, self.realm)
             self.itemattrlist[item.getAttr('Location')] = item
         self.nocalc = wascalc
-        self.restoreItem(self.itemattrlist.get(self.currentTabLabel))                        
+        self.restoreItem(self.itemattrlist[self.currentTabLabel])
         
     def openOptions(self):
         self.modified = 1
@@ -1596,7 +1558,7 @@ class ScWindow(QMainWindow, Ui_B_SC):
         self.calculate()
 
     def OpenCraftWindow(self):
-        self.storeItem(self.itemattrlist.get(self.currentTabLabel))
+        self.storeItem(self.itemattrlist[self.currentTabLabel])
         CW = CraftWindow.CraftWindow(self, '', 1)
         CW.loadItem(self.itemattrlist.get(self.currentTabLabel))
         CW.ExpMultiplier.setValue(self.craftMultiplier)
@@ -1632,18 +1594,18 @@ class ScWindow(QMainWindow, Ui_B_SC):
 
     def DelveItemsDialog(self, find, findtype = None):
         locs = []
-        for key, item in self.itemattrlist.items():
+        for key, item in self.itemattrlist.iteritems():
             activestate = item.getAttr('ActiveState')
             if activestate == 'drop':
                 toprng = 10
             else:
                 toprng = 5
             for slot in range(0, toprng):
-                itemtype = str(item.getSlotAttr(activestate, slot, 'Type'))
+                itemtype = str(item.slot(slot).type())
                 if itemtype == 'Unused': continue
                 if (findtype and itemtype != findtype) or \
                    (not findtype and itemtype in ('Resist',)): continue
-                effect = str(item.getSlotAttr(activestate, slot, 'Effect'))
+                effect = item.slot(slot).effect()
                 if effect != find: 
                     if find == 'Power' or find == '% Power Pool':
                        if effect != 'Power' and effect != '% Power Pool':
@@ -1657,7 +1619,7 @@ class ScWindow(QMainWindow, Ui_B_SC):
                             continue
                     else:
                         continue
-                amount = str(item.getSlotAttr(activestate, slot, 'Amount'))
+                amount = item.slot(slot).amount()
                 if type == 'Focus':
                     amount += ' Levels Focus'
                 if effect != find: 
@@ -1693,11 +1655,11 @@ class ScWindow(QMainWindow, Ui_B_SC):
                 shortname = shortname[0:nameidx]
             nameidx += 1
         if shortname in ['Gem', 'Points', 'Cost', 'Name']:
-            slot = child.objectName()[-2:]
-            if str(slot[0:1]) == '_':
-                slot = slot[1:]
+            slotid = child.objectName()[-2:]
+            if str(slotid[0:1]) == '_':
+                slotid = slot[1:]
             if self.PlayerMade.isChecked():
-                self.gemClicked(self.currentTabLabel, int(slot))
+                self.gemClicked(self.currentTabLabel, int(slot_id))
             return
         if shortname in ['', 'Label', 'Total', 'Item']: return
         if child.parent().objectName() == 'GroupResists':

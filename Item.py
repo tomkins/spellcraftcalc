@@ -13,15 +13,211 @@ import types
 from PyQt4.QtGui import *
 from MyStringIO import UnicodeStringIO
 
+class ItemSlot:
+    def __init__(self, slottype='player', type='Unused', amount='', effect='', 
+                 qua='94', realm='All', time='0', remakes='0', done='0'):
+        self.SlotType = slottype
+        self.setAll(type, amount, effect, qua, realm, time, remakes, done)
+        self.CraftOk = False
+
+    def setAll(self, type='Unused', amount='', effect='', qua='94', 
+               realm='All', time='0', remakes='0', done='0'):
+        self.Type = unicode(type)
+        self.Amount = unicode(amount)
+        self.Effect = unicode(effect)
+        self.Realm = unicode(realm)
+        self.Qua = unicode(qua)
+        self.Time = unicode(time)
+        self.Remakes = unicode(remakes)
+        self.Done = unicode(done)
+        self.fixEffect()
+
+    def getAttr(self, attrname):
+        if self.__dict__.has_key(attrname):
+            return self.__dict__[attrname]
+    def setAttr(self, attrname, value):
+        self.CraftOk = False
+        if self.__dict__.has_key(attrname):
+            self.__dict__[attrname] = value
+
+    def fixEffect(self):
+        if FixEffectsTable.has_key(self.Effect):
+            self.Effect = FixEffectsTable[self.Effect]
+        if self.Type == 'Focus' and len(self.Effect) > 6 and self.Effect[-6:] == ' Focus':
+            self.Effect = self.Effect[:-6]
+
+    def type(self):
+        return self.Type
+    def setType(self, type):
+        self.CraftOk = False
+        if self.Type == 'Unused':
+            self.setAll(type=unicode(type))
+
+    def amount(self):
+        return self.Amount
+    def setAmount(self, amount):
+        self.CraftOk = False
+        self.Amount = unicode(amount)
+
+    def effect(self):
+        return self.Effect
+    def setEffect(self, effect):
+        self.CraftOk = False
+        self.Effect = unicode(effect)
+
+    def realm(self):
+        return self.Realm
+    def setRealm(self, realm):
+        self.CraftOk = False
+        if not GemTables.has_key(realm): raise ValueError()
+        self.Realm = unicode(realm)
+
+    def qua(self):
+        return self.Qua
+    def setQua(self, qua):
+        self.CraftOk = False
+        self.Type = unicode(qua)
+
+    def quaIndex(self):
+        if self.Qua in QualityValues:
+            return QualityValues.index(self.Qua)
+        return -1
+
+    def time(self):
+        return self.Time
+    def setTime(self, time):
+        self.CraftOk = False
+        self.Time = unicode(time)
+
+    def remakes(self):
+        return self.Remakes
+    def setRemakes(self, remakes):
+        self.CraftOk = False
+        self.Remakes = unicode(remakes)
+
+    def done(self):
+        return self.Done
+    def setDone(self, done):
+        self.CraftOk = False
+        self.Done = unicode(done)
+
+    def crafted(self):
+        if self.CraftOk: return True
+        if not self.SlotType == 'player': return False
+        if self.Type == 'Unused': return False
+        if self.Effect == '': return False
+        if self.Amount == '' or self.Amount == '0': return False
+        if self.gemLevel() < 0: return False
+        if self.quaIndex < 0: return False
+        if not GemTables.has_key(self.Realm): return False
+        self.CraftOk = True
+        return self.CraftOk
+
+    def gemLevel(self):
+        if not ValuesLists.has_key(self.Type): return -1
+        amountlist = ValuesLists[self.Type]
+        if not isinstance(amountlist, tuple):
+            if not amountlist.has_key(self.Effect): return -1
+            amountlist = amountlist[self.Effect]
+        if not self.Amount in amountlist: return ''
+        return amountlist.index(self.Amount) + 1
+
+    def gemImbue(self):
+        if not self.crafted(): return 0.0
+        if self.Type == 'Stat':
+            return ((int(self.Amount) - 1) / 3.0) * 2.0 + 1.0
+        if self.Type == 'Hits':
+            return int(self.Amount) / 4.0
+        if self.Type == 'Resist' or self.Type == 'Power':
+            mval = (int(self.Amount) - 1) * 2.0
+        elif self.Type == 'Skill':
+            mval = (int(self.Amount) - 1) * 5.0
+        if (mval < 1): return 1.0
+        return mval
+
+    def gemName(self):
+        if not self.crafted():
+            return ''
+        amountindex = self.gemLevel() - 1
+        if self.Type[-6:] == 'Effect':
+            if not EffectMetal.has_key(self.Realm): return ''
+            if not EffectTypeNames.has_key(self.Type): return ''
+            if not EffectItemNames.has_key(self.Effect): return ''
+            return string.strip(EffectItemNames[self.Effect][0]
+                    + ' ' + EffectTypeNames[self.Type][0]
+                    + ' ' + EffectItemNames[self.Effect][1]
+                    + ' ' + EffectMetal[self.Realm][amountindex]
+                    + ' ' + EffectTypeNames[self.Type][1])
+        if not GemTables.has_key(self.Realm): return ''
+        if not GemTables[self.Realm].has_key(self.Type): return ''
+        gemlist = GemTables[self.Realm][self.Type]
+        if not gemlist.has_key(self.Effect):
+            gemlist = GemTables['All'][self.Type]
+            if not gemlist.has_key(self.Effect): return ''
+        return string.strip(GemNames[amountindex]
+                + ' ' + gemlist[self.Effect][0]
+                + ' ' + gemlist[self.Effect][1]
+                + ' ' + GemSubName[self.Type])
+
+    def gemMaterials(self):
+        ret = { 'Gems' : { }, 'Dusts' : { }, 'Liquids' : { } }
+        if not self.crafted():
+            return ret
+        gemindex = self.gemLevel() - 1
+        gemlist = GemTables[self.Realm][self.Type]
+        if not gemlist.has_key(self.Effect):
+            gemlist = GemTables['All'][self.Type]
+            if not gemlist.has_key(self.Effect): return ''
+        gemdust = gemlist[self.Effect][2]
+        gemliquid = gemlist[self.Effect][3]
+        ret['Gems'][MaterialGems[gemindex]] = 1
+        if self.Effect[0:4] == 'All ':
+            if self.Type == 'Focus':
+                ret['Gems'][MaterialGems[gemindex]] = 3
+            ret['Dusts'][gemdust] = (gemindex * 5) + 1
+            ret['Liquids'][gemliquid][0] = (gemindex * 6) + 2
+            ret['Liquids'][gemliquid][1] = (gemindex * 6) + 2
+            ret['Liquids'][gemliquid][2] = (gemindex * 6) + 2
+        elif self.Type == 'Focus' or self.Type == 'Resist':
+            ret['Dusts'][gemdust] = (gemindex * 5) + 1
+            ret['Liquids'][gemliquid] = gemindex + 1
+        else:
+            ret['Dusts'][gemdust] = (gemindex * 4) + 1
+            ret['Liquids'][gemliquid] = gemindex + 1
+        return ret
+
+    def gemCost(self):
+        if not self.crafted():
+            return 0
+        remakes = int(self.Remakes)
+        if not self.Done:
+            remakes += EstimatedMakes[self.quaIndex] - 1
+        costindex = self.gemLevel() - 1
+        cost = GemCosts[costindex]
+        remakecost = RemakeCosts[costindex]
+        if self.Effect[0:4] == 'All ':
+            if self.Type == 'Focus':
+                cost = cost * 3 + 180 * costindex
+                remakecost = remakecost * 3 + 180 * costindex
+            else:
+                cost += 200 + 180 * costindex
+                remakecost += 120 + 180 * costindex
+        elif self.Type == 'Resist' or self.Type == 'Focus':
+            cost += 60 * costindex
+            remakecost += 60 * costindex
+        cost += remakecost * remakes
+        return cost
+
+
 class Item:
-    def __init__(self, loc=''):
-        self.__dict__ = { 'ActiveState' : '',
-            'Location': '', 'Realm' : '',
+    def __init__(self, realm='All', loc=''):
+        self.__dict__ = { 'ActiveState' : 'drop',
+            'Location': '', 'Realm' : realm,
             'ItemName' : '', 'AFDPS' : '',
             'Speed' : '', 'Bonus' : '',
             'ItemQuality' : '',
             'Equipped' : '', 'Level' : ''}
-        self.slots = { 'drop' : range(1, 11), 
+        self.slots = { 'drop' : range(1, 11),
             'player' : range(1, 6) }
 
         if loc == 'Neck' \
@@ -48,8 +244,13 @@ class Item:
         self.Level = '51'
         self.Quality = '99'
 
-        self.makeEmptyItem()
-            
+        for it in ('drop', 'player'):
+            for i in range(0, len(self.slots[it])):
+                self.slots[it][i] = ItemSlot(slottype=it, realm=realm)
+
+    def slot(self, index):
+        return self.slots[self.ActiveState][index]
+
     def loadAttr(self, attrname, attrval):
         if self.__dict__.has_key(attrname):
             self.__dict__[attrname] = attrval
@@ -58,43 +259,9 @@ class Item:
             #    print 'loadAttr ' + attrval
             #    print 'loadAttr direct ' + self.ItemName
 
-    def fixslot(self, slot):
-        if FixEffectsTable.has_key(slot['Effect']):
-            slot['Effect'] = FixEffectsTable[slot['Effect']]
-        if slot['Type'] == 'Focus' and len(slot['Effect']) > 6 and slot['Effect'][-6:] == ' Focus':
-            slot['Effect'] = slot['Effect'][:-6]
-        if slot['Type'] == 'Unused':
-            slot['Qua'] = "94"
-
-    def loadSlotAttrs(self, type, slotnum, stattype='Unused', amount='', effect='', qua='94', 
-            time='0', remakes='0', done='0'):
-        self.slots[type][slotnum] = { }
-        attr = self.slots[type][slotnum]
-        attr['Type'] = unicode(stattype)
-        attr['Amount'] = unicode(amount)
-        attr['Effect'] = unicode(effect)
-        attr['Qua'] = unicode(qua)
-        attr['Time'] = unicode(time)
-        attr['Remakes'] = unicode(remakes)
-        attr['Done'] = unicode(done)
-        self.fixslot(attr)
-    
-    def getSlotAttr(self, type, slotnum, attr):
-        return self.slots[type][slotnum][attr]
-
     def getAttr(self, attrname):
         if self.__dict__.has_key(attrname):
             return self.__dict__[attrname]
-            #return eval(self.attrs[attrname])
-
-    def makeEmptyItem(self):
-        for i in range(0, 10):
-            self.loadSlotAttrs('drop', i) 
-        for i in range(0, 5):
-            self.loadSlotAttrs('player', i)
-
-    def loadSlotAttr(self, type, slotnum, attr, val):
-        self.slots[type][slotnum][attr] = val
 
     def __repr__(self):
         return unicode(self.slots)
@@ -197,8 +364,8 @@ class Item:
                         for attr in slot.childNodes:
                             if attr.nodeType == Node.TEXT_NODE: continue
                             attrval = XMLHelper.getText(attr.childNodes)
-                            self.slots[type][slotnum][attr.tagName] = attrval
-                        self.fixslot(self.slots[type][slotnum])
+                            self.slots[type][slotnum].setAttr(attr.tagName, attrval)
+                        self.slots[type][slotnum].fixEffect()
 
     def importLela(self, f):
         f.seek(0)
