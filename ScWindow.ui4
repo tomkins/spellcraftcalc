@@ -1504,7 +1504,7 @@
             </rect>
           </property>
           <property name="text" >
-            <string>Gem 1: </string>
+            <string>Slot 1: </string>
           </property>
         </widget>
         <widget class="SearchingCombo" name="Type_1" >
@@ -1615,7 +1615,7 @@
             </rect>
           </property>
           <property name="text" >
-            <string>Gem 2: </string>
+            <string>Slot 2: </string>
           </property>
         </widget>
         <widget class="QLineEdit" name="Amount_Edit_2" >
@@ -1726,7 +1726,7 @@
             </rect>
           </property>
           <property name="text" >
-            <string>Gem 3: </string>
+            <string>Slot 3: </string>
           </property>
         </widget>
         <widget class="SearchingCombo" name="Type_3" >
@@ -1837,7 +1837,7 @@
             </rect>
           </property>
           <property name="text" >
-            <string>Gem 4: </string>
+            <string>Slot 4: </string>
           </property>
         </widget>
         <widget class="SearchingCombo" name="Type_4" >
@@ -1948,7 +1948,7 @@
             </rect>
           </property>
           <property name="text" >
-            <string>Gem 5: </string>
+            <string>Slot 5: </string>
           </property>
         </widget>
         <widget class="SearchingCombo" name="Type_5" >
@@ -2059,7 +2059,7 @@
             </rect>
           </property>
           <property name="text" >
-            <string>Gem 6: </string>
+            <string>Slot 6: </string>
           </property>
         </widget>
         <widget class="SearchingCombo" name="Type_6" >
@@ -2105,7 +2105,7 @@
             </rect>
           </property>
           <property name="text" >
-            <string>Gem 7: </string>
+            <string>Slot 7: </string>
           </property>
         </widget>
         <widget class="SearchingCombo" name="Type_7" >
@@ -2151,7 +2151,7 @@
             </rect>
           </property>
           <property name="text" >
-            <string>Gem 8: </string>
+            <string>Slot 8: </string>
           </property>
         </widget>
         <widget class="SearchingCombo" name="Type_8" >
@@ -2197,7 +2197,7 @@
             </rect>
           </property>
           <property name="text" >
-            <string>Gem 9: </string>
+            <string>Slot 9: </string>
           </property>
         </widget>
         <widget class="SearchingCombo" name="Type_9" >
@@ -2243,7 +2243,7 @@
             </rect>
           </property>
           <property name="text" >
-            <string>Gem10:</string>
+            <string>Slot 10:</string>
           </property>
         </widget>
         <widget class="SearchingCombo" name="Type_10" >
