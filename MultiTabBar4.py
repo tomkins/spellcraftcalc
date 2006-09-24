@@ -24,16 +24,24 @@ class MultiTabBar4(QWidget):
         if (name):
             self.setObjectName(name)
 
-        if str(QApplication.style().objectName()[0:9]).lower() == "macintosh":
-            self.rowoverlap = 3
-            self.cropheight = -1
-        else:
-            self.rowoverlap = 4
-            self.cropheight = 2
+        # Let's try the assumption that the vertical shift of a selected tab,
+        # plus the overlap to the tab box is the 'padding' we erase between rows.
+        taboverlap = QStyleOptionTab()
+        taboverlap.shape = QTabBar.RoundedNorth
+        self.baseoverlap = self.style().pixelMetric(QStyle.PM_TabBarBaseOverlap,
+                                                    taboverlap, self)
+        self.rowoverlap = self.style().pixelMetric(QStyle.PM_TabBarTabShiftVertical,
+                                                   taboverlap, self) + self.baseoverlap
 
         self.setFocusPolicy(Qt.TabFocus)
-        self.setSizePolicy(QSizePolicy.Preferred, QSizePolicy.Preferred)
-        
+        self.setSizePolicy(QSizePolicy.Preferred, QSizePolicy.Fixed)
+
+    def baseOverlap(self):
+        taboverlap = QStyleOptionTab()
+        taboverlap.shape = QTabBar.RoundedNorth
+        return self.style().pixelMetric(QStyle.PM_TabBarBaseOverlap,
+                                        taboverlap, self)
+
     def addTab(self, row, text):
         self.insertTab(row, -1, text)
 
@@ -137,10 +145,15 @@ class MultiTabBar4(QWidget):
         if self.__layoutDirty:
             self.__layoutTabs()
 
+        taboverlap = QStyleOptionTab()
+        taboverlap.shape = QTabBar.RoundedNorth
+        padwidth = self.style().pixelMetric(QStyle.PM_TabBarTabOverlap,
+                                            taboverlap, self)
         r = QRect()
         for i in range(len(self.__tabList)):
             for j in range(len(self.__tabList[i])):
                 r = r.unite(self.__tabAt(i, j).rect)
+        r.size().setWidth(r.size().width() + padwidth * 4)
         sz = QApplication.globalStrut()
         return r.size().expandedTo(sz)
 
@@ -154,21 +167,15 @@ class MultiTabBar4(QWidget):
     def paintEvent(self, e):
         tabOverlap = QStyleOptionTab()
         tabOverlap.shape = QTabBar.RoundedNorth
-        overlap = self.style().pixelMetric(QStyle.PM_TabBarBaseOverlap,
-            tabOverlap, self)
         overlap = 0
         theParent = self.parentWidget()
         optTabBase = QStyleOptionTabBarBase()
         optTabBase.initFrom(self)
         optTabBase.shape = QTabBar.RoundedNorth
         optTabBase.tabBarRect = QRect()
-        if theParent and overlap > 0:
-            # FIXME
-            QPainter.setRedirected(theParent, self, self.pos())
-            rect = QRect()
-            rect.setRect(0, self.height() - overlap, self.width(), overlap)
 
-        #p = QStylePainter(self)
+        painter = QPainter(self)
+
         selected = (-1, -1)
         selected = (0, 0)
         cut = -1
@@ -177,7 +184,6 @@ class MultiTabBar4(QWidget):
         cutTab = QStyleOptionTab()
         selectedTab = QStyleOptionTab()
 
-        #for i in range(len(self.__tabList)):
         for i in range(len(self.__tabList)):
             for j in range(len(self.__tabList[i])):
                 tab = self.__getStyleOption(i, j)
@@ -191,17 +197,17 @@ class MultiTabBar4(QWidget):
                     optTabBase.selectedTabRect = tab.rect
                     continue
                 self.style().drawControl(QStyle.CE_TabBarTab, tab,
-                    QPainter(self), self)
+                                         painter, self)
 
         if selected != (-1, -1):
             for j in range(len(self.__tabList[selected[0]])):
                 tab = self.__getStyleOption(selected[0], j)
                 self.style().drawControl(QStyle.CE_TabBarTab, tab,
-                    QPainter(self), self)
+                                         painter, self)
             tab = self.__getStyleOption(selected[0], selected[1])
+            painter.eraseRect(tab.rect)
             self.style().drawControl(QStyle.CE_TabBarTab, tab,
-                QPainter(self), self)
-
+                                     painter, self)
 
         #optTabBase.rect = optTabBase.tabBarRect
         #self.style().drawPrimitive(QStyle.PE_FrameTabBarBase, optTabBase,
@@ -337,6 +343,12 @@ class MultiTabBar4(QWidget):
         self.__layoutDirty = False
 
         numrows = len(self.__tabList)
+        taboverlap = QStyleOptionTab()
+        taboverlap.shape = QTabBar.RoundedNorth
+        baseoverlap = self.style().pixelMetric(QStyle.PM_TabBarBaseOverlap,
+                                               taboverlap, self)
+        rowoverlap = self.style().pixelMetric(QStyle.PM_TabBarTabShiftVertical,
+                                              taboverlap, self) + baseoverlap
         # Horizontal tabs only for now
         mx = 0
         maxWidth = 0
@@ -360,7 +372,7 @@ class MultiTabBar4(QWidget):
             rowpcts[i] = map(lambda x: float(x) / mw, rowpcts[i])
             maxRowWidth = max(mw, maxRowWidth)
 
-        maxHeight -= self.rowoverlap
+        maxHeight -= rowoverlap
 
         for i in range(numrows):
             x = 0
@@ -373,7 +385,7 @@ class MultiTabBar4(QWidget):
                 
             for j in range(len(self.__tabList[i])):
                 w = rowpcts[i][j] * maxRowWidth
-                self.__tabList[i][j].rect = QRect(x, y, int(w), maxHeight + self.rowoverlap)
+                self.__tabList[i][j].rect = QRect(x, y, int(w), maxHeight + rowoverlap)
                 x += int(w)
 
         self.tabLayoutChange()
@@ -450,8 +462,11 @@ if __name__ == '__main__':
     QApplication.setDesktopSettingsAware(0)
     app = QApplication(sys.argv)
 
-    w = QMainWindow()
-    bar = MultiTabBar4(w)
+    wind = QMainWindow()
+    child = QWidget(wind)
+    wind.setCentralWidget(child)
+
+    bar = MultiTabBar4(child)
     bar.addTab(0, 'One')
     bar.addTab(0, 'two')
     bar.addTab(0, 'three')
@@ -461,18 +476,27 @@ if __name__ == '__main__':
     bar.addTab(1, 'two1')
     bar.addTab(1, 'three1')
     bar.addTab(1, 'four1')
-    bar.addTab(1, 'five1')
+    bar.setGeometry(QRect(0, 0, bar.sizeHint().width(), 
+                                bar.sizeHint().height()))
 
-    bar.setGeometry(QRect(10, 10, 300, 80))
+    frame = QFrame(child)
+    frame.setFrameShape(QFrame.StyledPanel)
+    frame.setFrameShadow(QFrame.Raised)
+    frame.setGeometry(QRect(0, bar.sizeHint().height() - bar.baseOverlap(), 
+                            bar.sizeHint().width(), 200))
 
-    w.resize(600, 400)
+    frame.stackUnder(bar)
+
+    #layout = QVBoxLayout(child)
+    #layout.setSpacing(0)
+    #layout.setMargin(1)
+    #layout.addWidget(bar, 0)
+    #layout.addWidget(frame, 0)
+    wind.resize(600, 400)
 
     bar.setCurrentIndex(0, 0)
 
-    #bar.show()
-
-#    w.addWidget(bar)
-    w.show()
+    wind.show()
 
     app.exec_()
 
