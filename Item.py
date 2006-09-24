@@ -189,7 +189,7 @@ class ItemSlot:
         if tries > 0:
             remakes = tries
         else:
-            remakes = int(self.Remakes)
+            remakes = int(self.Remakes) + 1
             if self.Done == '0':
                 remakes += EstimatedMakes[self.quaIndex()] - 1
         costindex = self.gemLevel() - 1
@@ -404,7 +404,7 @@ class Item:
         s = 0
         self.ActiveState = 'drop'
         for type, amount, effect, qua in slots:
-            self.loadSlotAttrs('drop', s, type, amount, effect, qua)    
+            self.slot(s).setAll(type, amount, effect, qua, self.Realm) 
             s += 1
 
     def loadLelaItemFromSCC(self, itemnum, scclines, realm, sepitem=False):
@@ -472,10 +472,7 @@ class Item:
                 id = 'LIGHTNING CHARGED WAR RUNE'
             if id == 'MYSTIC ESSENCE':
                 id = 'MYSTICAL ESSENCE'
-            if id == '':
-                self.loadSlotAttrs(self.getAttr('ActiveState'), slotindex,
-                    'Unused', '0', '', '99')
-            else:
+            if not id == '':
                 for gem, subname in GemSubName.items():
                     namelist = GemTables[realm][gem]
                     gemamounts = ValuesLists[gem]
@@ -484,18 +481,15 @@ class Item:
                                 .search(string.strip(namelist[effect] + ' ' + subname))\
                                 is not None:
                             if (self.getAttr('ActiveState') == 'player'):
-                                self.loadSlotAttrs(self.getAttr('ActiveState'), 
-                                        slotindex,
-                                        gem, gemamounts[slot['Level']], 
+                                self.slot(slotindex).setAll(gem, 
+                                        gemamounts[slot['Level']], 
                                         string.strip(effect), slot['Qual'],
-                                        slot['Time'], slot['Remakes'], 
-                                        slot['Done'])
+                                        self.Realm, slot['Time'],
+                                        slot['Remakes'], slot['Done'])
                             else:
-                                self.loadSlotAttrs(self.getAttr('ActiveState'), 
-                                        slotindex,
-                                        gem, slot['Level'], 
+                                self.slot(slotindex).setAll(gem,  slot['Level'], 
                                         string.strip(effect), slot['Qual'],
-                                        slot['Time'], slot['Remakes'], 
-                                        slot['Done'])
+                                        self.Realm, slot['Time'], 
+                                        slot['Remakes'], slot['Done'])
                             break
             slotindex += 1
