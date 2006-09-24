@@ -66,7 +66,6 @@ class ScWindow(QMainWindow, Ui_B_SC):
         self.nocalc = 1
         self.totals = { }
         self.capTotals = { }
-        self.extraSlotsOpen = False
         self.recentFiles = []
         self.effectlists = GemLists['All'].copy()
         self.dropeffectlists = DropLists['All'].copy()
@@ -503,7 +502,6 @@ class ScWindow(QMainWindow, Ui_B_SC):
         self.ItemLevel.setText('51')
         self.CharLevel.setText('50')
 
-        self.extraSlots = []
         self.switchOnType = {'drop' : [], 'player' : [] }
         self.switchOnType['drop'] = [ 
             self.QualEdit, self.SaveItem, self.ItemName,
