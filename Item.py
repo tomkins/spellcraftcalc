@@ -76,7 +76,7 @@ class ItemSlot:
         return self.Qua
     def setQua(self, qua):
         self.CraftOk = False
-        self.Type = unicode(qua)
+        self.Qua = unicode(qua)
 
     def quaIndex(self):
         if self.Qua in QualityValues:
