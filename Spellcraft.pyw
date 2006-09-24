@@ -39,7 +39,8 @@ class ScApplication(QApplication):
         QApplication.__init__(self, args)
 
     def start(self):
-        splash = QSplashScreen(QPixmap(self.splashFile),Qt.SplashScreen|Qt.MSWindowsFixedSizeDialogHint)
+        splash = QSplashScreen(QPixmap(self.splashFile),
+                               Qt.SplashScreen|Qt.MSWindowsFixedSizeDialogHint)
         splash.show()
 
         # Font sizes are strange things on Mac, while our favorite
@@ -71,7 +72,6 @@ class ScApplication(QApplication):
         if len(app.argv()) > 1:
             scw.openFile(app.argv()[1], True)
         scw.show()
-
         splash.finish(scw);
 
     def polish(self, widget):
