@@ -679,6 +679,7 @@ class ScWindow(QMainWindow, Ui_B_SC):
                 amedit.setText(am)
             else:
                 gemamount = item.slot(slot).amount()
+                print gemtype
                 if ValuesLists.has_key(gemtype):
                     if isinstance(ValuesLists[gemtype], tuple):
                         amountlist = ValuesLists[gemtype]
@@ -1177,7 +1178,7 @@ class ScWindow(QMainWindow, Ui_B_SC):
         self.CharClassChanged('')
     
     def TypeChanged(self, Value):
-        index = self.focusWidget().objectName()[-2:]
+        index = self.sender().objectName()[-2:]
         if index[0] == '_': index = index[1:]
         wascalc = self.nocalc
         self.nocalc = 1
@@ -1189,9 +1190,9 @@ class ScWindow(QMainWindow, Ui_B_SC):
         self.calculate()
 
     def EffectChanged(self, value):
-        index = str(self.focusWidget().objectName())[-2:]
+        index = str(self.sender().objectName())[-2:]
         if not index[-1].isdigit():
-            index = str(self.focusWidget().parentWidget().objectName())[-2:]
+            index = str(self.sender().parentWidget().objectName())[-2:]
         if not index[0].isdigit(): index = index[1:]
         wascalc = self.nocalc
         self.nocalc = 1

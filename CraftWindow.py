@@ -112,7 +112,7 @@ class CraftWindow(QDialog, Ui_B_CraftWindow):
         self.TotalCost.setText(SC.formatCost(self.totalCost))
         
     def GemClicked(self):
-        i = int(self.focusWidget().objectName()[3]) - 1
+        i = int(self.sender().objectName()[3]) - 1
         if self.GemDone[i].isChecked():
             done = '1'
         else:
@@ -121,13 +121,13 @@ class CraftWindow(QDialog, Ui_B_CraftWindow):
         self.computeMaterials()
 
     def RemakeChanged(self, val):
-        i = int(self.focusWidget().objectName()[3]) - 1
+        i = int(self.sender().objectName()[3]) - 1
         self.currentItem.slot(i).setTime(self.GemRemakes[i].text())
         self.recomputeCosts(i, val)
         self.computeMaterials()
 
     def TimeChanged(self,a0):
-        i = int(self.focusWidget().objectName()[3]) - 1
+        i = int(self.sender().objectName()[3]) - 1
         self.currentItem.slot(i).setTime(self.GemTime[i].text())
 
     def CloseWindow(self):
