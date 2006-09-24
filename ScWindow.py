@@ -88,7 +88,6 @@ class ScWindow(QMainWindow, Ui_B_SC):
         for ctl in (self.GroupItemFrame.children() + self.GroupCharInfo.children()):
             if ctl.metaObject().className() == "QLineEdit" or \
                ctl.metaObject().className() == "QComboBox":
-                sys.stdout.write("fixing " + str(ctl.objectName()) + "\n")
                 size = ctl.size()
                 size.setHeight(height)
                 ctl.setSizePolicy(QSizePolicy(sizePolicy))
