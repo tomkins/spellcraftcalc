@@ -86,25 +86,22 @@ class ItemSlot:
     def time(self):
         return self.Time
     def setTime(self, time):
-        self.CraftOk = False
         self.Time = unicode(time)
 
     def remakes(self):
         return self.Remakes
     def setRemakes(self, remakes):
-        self.CraftOk = False
         self.Remakes = unicode(remakes)
 
     def done(self):
         return self.Done
     def setDone(self, done):
-        self.CraftOk = False
         self.Done = unicode(done)
 
     def crafted(self):
         if self.CraftOk: return True
         if not self.SlotType == 'player': return False
-        if self.Type == 'Unused': return False
+        if self.Type == '' or self.Type == 'Unused': return False
         if self.Effect == '': return False
         if self.Amount == '' or self.Amount == '0': return False
         if self.gemLevel() < 0: return False
@@ -186,12 +183,15 @@ class ItemSlot:
             ret['Liquids'][gemliquid] = gemindex + 1
         return ret
 
-    def gemCost(self):
+    def gemCost(self, tries=0):
         if not self.crafted():
             return 0
-        remakes = int(self.Remakes)
-        if not self.Done:
-            remakes += EstimatedMakes[self.quaIndex] - 1
+        if tries > 0:
+            remakes = tries
+        else:
+            remakes = int(self.Remakes)
+            if self.Done == '0':
+                remakes += EstimatedMakes[self.quaIndex()] - 1
         costindex = self.gemLevel() - 1
         cost = GemCosts[costindex]
         remakecost = RemakeCosts[costindex]

@@ -68,25 +68,7 @@ def calcImbue(item):
     if itemtype == 'drop': return 0
     mvals = []
     for i in range(0, 4):
-        type = item.getSlotAttr(itemtype, i, 'Type')
-        amount = item.getSlotAttr(itemtype, i, 'Amount')
-        if amount == '': 
-            mval = 0.0
-        elif type == 'Focus':
-            mval = 1.0
-        elif type == 'Unused':
-            mval = 0.0
-        elif type == 'Stat':
-            mval = ((int(amount) - 1) / 3.0) * 2 + 1
-        elif type == 'Resist' or type == 'Power':
-            mval = (int(amount) - 1) * 2
-            if mval == 0: mval = 1.0
-        elif type == 'Hits':
-            mval = int(amount) / 4.0
-        elif type == 'Skill':
-            mval = (int(amount) - 1) * 5.0
-            if mval == 0: mval = 1.0    
-        mvals.append(mval)
+        mvals.append(item.slot(i).gemImbue())
     maximbue = max(mvals)
     mvals.remove(maximbue)
     totalimbue = ((maximbue * 2 + sum(mvals)) / 2.0)
@@ -95,10 +77,8 @@ def calcImbue(item):
 def computeOverchargeSuccess(imbue, itemimbue, item, crafterskill):
     success = -OCStartPercentages[int(imbue-itemimbue)]
     for i in range(0, 4):
-        if item.getSlotAttr(activestate, i, 'Type') == 'Unused':
-            success += GemQualOCModifiers['94']
-        else:
-            success += GemQualOCModifiers[item.getSlotAttr(activestate, i, 'Qua')]
+        if item.slot(i).gemImbue() > 0 and GemQualOCModifiers.has_key(item.slot(i).qua()):
+            success += GemQualOCModifiers[item.slot(i).qua()]
     success += ItemQualOCModifiers[item.getAttr('ItemQuality')]
     skillbonus = (int(crafterSkill / 50) - 10) * 5
     if skillbonus > 50: skillbonus = 50
