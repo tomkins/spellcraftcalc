@@ -120,6 +120,7 @@ class ItemSlot:
         return amountlist.index(self.Amount) + 1
 
     def gemImbue(self):
+        mval = 0
         if not self.crafted(): return 0.0
         if self.Type == 'Stat':
             return ((int(self.Amount) - 1) / 3.0) * 2.0 + 1.0
