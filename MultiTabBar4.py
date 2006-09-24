@@ -215,9 +215,10 @@ class MultiTabBar4(QWidget):
         self.__pressedIndex = self.__indexAtPos(e.pos())
         if self.__pressedIndex != (-1, -1):
             if e.type() == self.style().styleHint(QStyle.SH_TabBar_SelectMouseType, None, self):
-                self.__selectedIndex = self.__pressedIndex
+                self.setCurrentIndex(self.__pressedIndex[0], self.__pressedIndex[1])
             else:
                 self.repaint(self.tabRect(self.__pressedIndex[0], self.__pressedIndex[1]))
+
 
     def mouseMoveEvent(self, e):
         if e.buttons() != Qt.LeftButton:
