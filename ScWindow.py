@@ -81,6 +81,18 @@ class ScWindow(QMainWindow, Ui_B_SC):
         self.setAttribute(Qt.WA_DeleteOnClose)
         Ui_B_SC.setupUi(self,self)
 
+        height = self.Realm.sizeHint().height()
+        sizePolicy = QSizePolicy(QSizePolicy.Fixed, QSizePolicy.Fixed)
+        for ctl in (self.GroupItemFrame.children() + self.GroupCharInfo.children()):
+            sys.stdout.write("testing " + str(ctl.objectName()) + "\n")
+            if ctl.metaObject().className() == "QLineEdit" or \
+               ctl.metaObject().className() == "QComboBox":
+                sys.stdout.write("fixing " + str(ctl.objectName()) + "\n")
+                size = ctl.size()
+                size.setHeight(height)
+                ctl.setSizePolicy(QSizePolicy(sizePolicy))
+                ctl.setMaximumSize(size)
+
         self.statlayout = QtGui.QGridLayout(self.GroupStats)
         self.statlayout.setMargin(3)
         self.statlayout.setSpacing(0)
@@ -252,12 +264,12 @@ class ScWindow(QMainWindow, Ui_B_SC):
                 self.Points.append(getattr(self, 'Points_%d' % idx))
                 self.Cost.append(getattr(self, 'Cost_%d' % idx))
                 self.Name.append(getattr(self, 'Name_%d' % idx))
-                if layout:
-                 self.itemlayout.addWidget(self.AmountDrop[i],row,2,1,1)
-                 self.itemlayout.addWidget(self.Quality[i],row,4,1,1)
-                 self.itemlayout.addWidget(self.Points[i],row,5,1,1)
-                 self.itemlayout.addWidget(self.Cost[i],row,6,1,1)
-                 self.itemlayout.addWidget(self.Name[i],row,8,1,2)
+                self.itemlayout.addWidget(self.AmountDrop[i],row,2,1,1)
+                self.itemlayout.addWidget(self.Quality[i],row,4,1,1)
+                self.itemlayout.addWidget(self.Points[i],row,5,1,1)
+                self.itemlayout.addWidget(self.Cost[i],row,6,1,1)
+                self.itemlayout.addWidget(self.Name[i],row,8,1,2)
+            self.itemlayout.setRowMinimumHeight(row, height)
             row += 1
 
         self.itembuttonlayout = QtGui.QGridLayout()
@@ -680,7 +692,6 @@ class ScWindow(QMainWindow, Ui_B_SC):
                 amedit.setText(am)
             else:
                 gemamount = item.slot(slot).amount()
-                print gemtype
                 if ValuesLists.has_key(gemtype):
                     if isinstance(ValuesLists[gemtype], tuple):
                         amountlist = ValuesLists[gemtype]
@@ -1179,7 +1190,7 @@ class ScWindow(QMainWindow, Ui_B_SC):
         self.CharClassChanged('')
     
     def TypeChanged(self, Value):
-        index = self.sender().objectName()[-2:]
+        index = self.focusWidget().objectName()[-2:]
         if index[0] == '_': index = index[1:]
         wascalc = self.nocalc
         self.nocalc = 1
@@ -1191,9 +1202,9 @@ class ScWindow(QMainWindow, Ui_B_SC):
         self.calculate()
 
     def EffectChanged(self, value):
-        index = str(self.sender().objectName())[-2:]
+        index = str(self.focusWidget().objectName())[-2:]
         if not index[-1].isdigit():
-            index = str(self.sender().parentWidget().objectName())[-2:]
+            index = str(self.focusWidget().parentWidget().objectName())[-2:]
         if not index[0].isdigit(): index = index[1:]
         wascalc = self.nocalc
         self.nocalc = 1
