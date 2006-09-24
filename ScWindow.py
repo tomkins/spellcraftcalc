@@ -81,6 +81,8 @@ class ScWindow(QMainWindow, Ui_B_SC):
         self.setAttribute(Qt.WA_DeleteOnClose)
         Ui_B_SC.setupUi(self,self)
 
+        testfont = QFontMetrics(qApp.font())
+
         height = self.Realm.sizeHint().height()
         sizePolicy = QSizePolicy(QSizePolicy.Fixed, QSizePolicy.Fixed)
         for ctl in (self.GroupItemFrame.children() + self.GroupCharInfo.children()):
@@ -102,6 +104,10 @@ class ScWindow(QMainWindow, Ui_B_SC):
             self.statlayout.addWidget(getattr(self, stat + ''),row,1,1,1)
             self.statlayout.addWidget(getattr(self, stat + 'Cap'),row,2,1,1)
             row += 1
+        width = testfont.size(Qt.TextSingleLine, "400").width()
+        self.statlayout.setColumnMinimumWidth(1,width)
+        width = testfont.size(Qt.TextSingleLine, " (400)").width()
+        self.statlayout.setColumnMinimumWidth(2,width)
 
         self.resistlayout = QtGui.QGridLayout(self.GroupResists)
         self.resistlayout.setMargin(3)
@@ -112,6 +118,10 @@ class ScWindow(QMainWindow, Ui_B_SC):
             self.resistlayout.addWidget(getattr(self, stat + ''),row,1,1,1)
             self.resistlayout.addWidget(getattr(self, stat + 'RR'),row,2,1,1)
             row += 1
+        width = testfont.size(Qt.TextSingleLine, "26").width()
+        self.resistlayout.setColumnMinimumWidth(1,width)
+        width = testfont.size(Qt.TextSingleLine, " (5)").width()
+        self.resistlayout.setColumnMinimumWidth(2,width)
 
         self.skilllayout = QtGui.QGridLayout(self.GroupSkillsList)
         self.skilllayout.setMargin(3)
@@ -223,6 +233,7 @@ class ScWindow(QMainWindow, Ui_B_SC):
         row = 0
         self.itemlayout.addLayout(self.itemcontrollayout,row,0,1,10)
         row += 1
+
         col = 1
         for obj in (self.LabelGemType, self.LabelGemAmount, self.LabelGemEffect,
                     self.LabelGemQuality, self.LabelGemPoints, self.LabelGemCost,):
@@ -232,9 +243,17 @@ class ScWindow(QMainWindow, Ui_B_SC):
         self.itemlayout.addWidget(self.LabelItemName,row,8,1,2)
         self.itemlayout.setColumnStretch(3, 1)
         self.itemlayout.setColumnStretch(8, 1)
+
+        width = max(testfont.size(Qt.TextSingleLine, " Gem 10:").width(),
+                    testfont.size(Qt.TextSingleLine, " Slot 10:").width())
+        self.itemlayout.setColumnMinimumWidth(0,width)
+        width = testfont.size(Qt.TextSingleLine, " Points").width()
+        self.itemlayout.setColumnMinimumWidth(5,width)
+        width = testfont.size(Qt.TextSingleLine, "  999g 00s 00c").width()
+        self.itemlayout.setColumnMinimumWidth(6,width)
+
         row += 1
         self.itemlayout.addWidget(self.ItemName,row,8,1,2)
-
         for i in range(0, 10):
             idx = i + 1
             self.GemLabel.append(getattr(self, 'Gem_Label_%d' % idx))
@@ -1221,9 +1240,7 @@ class ScWindow(QMainWindow, Ui_B_SC):
           eff.setGeometry(eff.x(), eff.y(), width, eff.height())
 
     def showDropWidgets(self):
-        restoreUpdates = self.updatesEnabled()
-        if restoreUpdates:
-            self.setUpdatesEnabled(False)
+        self.GroupItemFrame.hide()
         for w in self.switchOnType['player']:
             w.hide()
         for w in self.switchOnType['drop']:
@@ -1231,22 +1248,21 @@ class ScWindow(QMainWindow, Ui_B_SC):
         #self.showWideEffects(1)
         for i in range(0,5):
             self.GemLabel[i].setEnabled(1)
-        self.GemLabel[4].setText('Gem 5:')
-        if restoreUpdates:
-            self.setUpdatesEnabled(True)
+            self.GemLabel[i].setText('Slot %d:' % (i + 1))
+        self.GroupItemFrame.show()
 
     def showPlayerWidgets(self):
-        restoreUpdates = self.updatesEnabled()
-        if restoreUpdates:
-            self.setUpdatesEnabled(False)
+        self.GroupItemFrame.hide()
         for w in self.switchOnType['player']:
             w.show()
         for w in self.switchOnType['drop']:
             w.hide()
         #self.showWideEffects(0)
+        for i in range(0,4):
+            self.GemLabel[i].setEnabled(1)
+            self.GemLabel[i].setText('Gem %d:' % (i + 1))
         self.GemLabel[4].setText('Proc:')
-        if restoreUpdates:
-            self.setUpdatesEnabled(True)
+        self.GroupItemFrame.show()
 
     def DropToggled(self,a0):
         if self.nocalc:
@@ -1677,9 +1693,9 @@ class ScWindow(QMainWindow, Ui_B_SC):
         else:
            self.DelveItemsDialog(shortname)
 
-    def resizeEvent(self, e):
-        sz = e.size()
-        QMainWindow.resizeEvent(self, e)
+    #def resizeEvent(self, e):
+    #    sz = e.size()
+    #    QMainWindow.resizeEvent(self, e)
 
     def SkillClicked(self,a0):
         if a0 is None: return

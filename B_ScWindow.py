@@ -2,8 +2,7 @@
 
 # Form implementation generated from reading ui file 'ScWindow.ui4'
 #
-# Created: Thu Sep 21 23:57:30 2006
-# Created: Fri Sep 22 02:32:26 2006
+# Created: Sun Sep 24 01:19:52 2006
 #      by: PyQt4 UI code generator 4.0.1
 #
 # WARNING! All changes made in this file will be lost!
@@ -11,7 +10,7 @@
 import sys
 from MultiTabBar4 import MultiTabBar4
 from SearchingCombo import SearchingCombo
-from PyQt4 import QtCore, QtGui, Qt3Support
+from PyQt4 import QtCore, QtGui
 
 class Ui_B_SC(object):
     def setupUi(self, B_SC):
@@ -1004,26 +1003,26 @@ class Ui_B_SC(object):
         self.LabelGemPoints.setText(QtGui.QApplication.translate("B_SC", "Points", None, QtGui.QApplication.UnicodeUTF8))
         self.LabelGemCost.setText(QtGui.QApplication.translate("B_SC", "Cost", None, QtGui.QApplication.UnicodeUTF8))
         self.LabelItemName.setText(QtGui.QApplication.translate("B_SC", "Name", None, QtGui.QApplication.UnicodeUTF8))
-        self.Gem_Label_1.setText(QtGui.QApplication.translate("B_SC", "Gem 1: ", None, QtGui.QApplication.UnicodeUTF8))
+        self.Gem_Label_1.setText(QtGui.QApplication.translate("B_SC", "Slot 1: ", None, QtGui.QApplication.UnicodeUTF8))
         self.Points_1.setText(QtGui.QApplication.translate("B_SC", "0.0", None, QtGui.QApplication.UnicodeUTF8))
         self.Cost_1.setText(QtGui.QApplication.translate("B_SC", "0c", None, QtGui.QApplication.UnicodeUTF8))
-        self.Gem_Label_2.setText(QtGui.QApplication.translate("B_SC", "Gem 2: ", None, QtGui.QApplication.UnicodeUTF8))
+        self.Gem_Label_2.setText(QtGui.QApplication.translate("B_SC", "Slot 2: ", None, QtGui.QApplication.UnicodeUTF8))
         self.Points_2.setText(QtGui.QApplication.translate("B_SC", "0.0", None, QtGui.QApplication.UnicodeUTF8))
         self.Cost_2.setText(QtGui.QApplication.translate("B_SC", "0c", None, QtGui.QApplication.UnicodeUTF8))
-        self.Gem_Label_3.setText(QtGui.QApplication.translate("B_SC", "Gem 3: ", None, QtGui.QApplication.UnicodeUTF8))
+        self.Gem_Label_3.setText(QtGui.QApplication.translate("B_SC", "Slot 3: ", None, QtGui.QApplication.UnicodeUTF8))
         self.Points_3.setText(QtGui.QApplication.translate("B_SC", "0.0", None, QtGui.QApplication.UnicodeUTF8))
         self.Cost_3.setText(QtGui.QApplication.translate("B_SC", "0c", None, QtGui.QApplication.UnicodeUTF8))
-        self.Gem_Label_4.setText(QtGui.QApplication.translate("B_SC", "Gem 4: ", None, QtGui.QApplication.UnicodeUTF8))
+        self.Gem_Label_4.setText(QtGui.QApplication.translate("B_SC", "Slot 4: ", None, QtGui.QApplication.UnicodeUTF8))
         self.Points_4.setText(QtGui.QApplication.translate("B_SC", "0.0", None, QtGui.QApplication.UnicodeUTF8))
         self.Cost_4.setText(QtGui.QApplication.translate("B_SC", "0c", None, QtGui.QApplication.UnicodeUTF8))
-        self.Gem_Label_5.setText(QtGui.QApplication.translate("B_SC", "Gem 5: ", None, QtGui.QApplication.UnicodeUTF8))
+        self.Gem_Label_5.setText(QtGui.QApplication.translate("B_SC", "Slot 5: ", None, QtGui.QApplication.UnicodeUTF8))
         self.Points_5.setText(QtGui.QApplication.translate("B_SC", "0.0", None, QtGui.QApplication.UnicodeUTF8))
         self.Cost_5.setText(QtGui.QApplication.translate("B_SC", "0c", None, QtGui.QApplication.UnicodeUTF8))
-        self.Gem_Label_6.setText(QtGui.QApplication.translate("B_SC", "Gem 6: ", None, QtGui.QApplication.UnicodeUTF8))
-        self.Gem_Label_7.setText(QtGui.QApplication.translate("B_SC", "Gem 7: ", None, QtGui.QApplication.UnicodeUTF8))
-        self.Gem_Label_8.setText(QtGui.QApplication.translate("B_SC", "Gem 8: ", None, QtGui.QApplication.UnicodeUTF8))
-        self.Gem_Label_9.setText(QtGui.QApplication.translate("B_SC", "Gem 9: ", None, QtGui.QApplication.UnicodeUTF8))
-        self.Gem_Label_10.setText(QtGui.QApplication.translate("B_SC", "Gem10:", None, QtGui.QApplication.UnicodeUTF8))
+        self.Gem_Label_6.setText(QtGui.QApplication.translate("B_SC", "Slot 6: ", None, QtGui.QApplication.UnicodeUTF8))
+        self.Gem_Label_7.setText(QtGui.QApplication.translate("B_SC", "Slot 7: ", None, QtGui.QApplication.UnicodeUTF8))
+        self.Gem_Label_8.setText(QtGui.QApplication.translate("B_SC", "Slot 8: ", None, QtGui.QApplication.UnicodeUTF8))
+        self.Gem_Label_9.setText(QtGui.QApplication.translate("B_SC", "Slot 9: ", None, QtGui.QApplication.UnicodeUTF8))
+        self.Gem_Label_10.setText(QtGui.QApplication.translate("B_SC", "Slot 10:", None, QtGui.QApplication.UnicodeUTF8))
         self.ItemImbueLabel.setText(QtGui.QApplication.translate("B_SC", "Imbue Points: ", None, QtGui.QApplication.UnicodeUTF8))
         self.ItemImbue.setText(QtGui.QApplication.translate("B_SC", "0.0", None, QtGui.QApplication.UnicodeUTF8))
         self.ItemImbueTotal.setText(QtGui.QApplication.translate("B_SC", " / 0.0", None, QtGui.QApplication.UnicodeUTF8))
