@@ -18,26 +18,24 @@ class CraftWindow(QDialog, Ui_B_CraftWindow):
             self.setObjectName(name)
         if (modal):
             self.setModal(modal)
-        self.connect(self.Gem1Remakes,SIGNAL("valueChanged(int)"),self.Remake1Changed)
-        self.connect(self.Gem2Remakes,SIGNAL("valueChanged(int)"),self.Remake2Changed)
-        self.connect(self.Gem3Remakes,SIGNAL("valueChanged(int)"),self.Remake3Changed)
-        self.connect(self.Gem4Remakes,SIGNAL("valueChanged(int)"),self.Remake4Changed)
-        self.connect(self.Gem1Done,SIGNAL("clicked()"),self.Gem1Clicked)
-        self.connect(self.Gem2Done,SIGNAL("clicked()"),self.Gem2Clicked)
-        self.connect(self.Gem3Done,SIGNAL("clicked()"),self.Gem3Clicked)
-        self.connect(self.Gem4Done,SIGNAL("clicked()"),self.Gem4Clicked)
-        self.connect(self.Gem1Time,SIGNAL("textChanged(const QString&)"),self.Time1Changed)
-        self.connect(self.Gem2Time,SIGNAL("textChanged(const QString&)"),self.Time2Changed)
-        self.connect(self.Gem3Time,SIGNAL("textChanged(const QString&)"),self.Time3Changed)
-        self.connect(self.Gem4Time,SIGNAL("textChanged(const QString&)"),self.Time4Changed)
+        self.GemRemakes = []
+        self.GemDone = []
+        self.GemTime = []
+        for i in range (0, 4):
+            idx = i + 1
+            self.GemRemakes.append(getattr(self, 'Gem%dRemakes' % idx))
+            self.connect(self.GemRemakes[i],SIGNAL("valueChanged(int)"),self.RemakeChanged)
+            self.GemDone.append(getattr(self, 'Gem%dDone' % idx))
+            self.connect(self.GemDone[i],SIGNAL("clicked()"),self.GemClicked)
+            self.GemTime.append(getattr(self, 'Gem%dTime' % idx))
+            self.connect(self.GemTime[i],SIGNAL("textChanged(const QString&)"),self.TimeChanged)
         self.connect(self.ExpMultiplier,SIGNAL("valueChanged(int)"),self.computeMaterials)
         self.connect(self.Close,SIGNAL("clicked()"),self.CloseWindow)
-        #self.font().setPointSize(8)
         self.currentItem = None
         self.totalCost = 0
         self.prevVals = [0, 0, 0, 0]
         self.parent = parent
-        
+
     def loadItem(self, item):
         self.currentItem = item
         materials = { 'Gems': { }, 'Dusts' : { }, 'Liquids' : { } }
@@ -113,69 +111,25 @@ class CraftWindow(QDialog, Ui_B_CraftWindow):
         gemcost.setText(SC.formatCost(cost))
         self.TotalCost.setText(SC.formatCost(self.totalCost))
         
-    def Gem1Clicked(self):
-        if self.Gem1Done.isChecked():
+    def GemClicked(self):
+        i = int(self.focusWidget().objectName()[3]) - 1
+        if self.GemDone[i].isChecked():
             done = '1'
         else:
             done = '0'
-        self.currentItem.slot(0).setDone(done)
+        self.currentItem.slot(i).setDone(done)
         self.computeMaterials()
 
-    def Gem2Clicked(self):
-        if self.Gem2Done.isChecked():
-            done = '1'
-        else:
-            done = '0'
-        self.currentItem.slot(1).setDone(done)
+    def RemakeChanged(self, val):
+        i = int(self.focusWidget().objectName()[3]) - 1
+        self.currentItem.slot(i).setTime(self.GemRemakes[i].text())
+        self.recomputeCosts(i, val)
         self.computeMaterials()
 
-    def Gem3Clicked(self):
-        if self.Gem3Done.isChecked():
-            done = '1'
-        else:
-            done = '0'
-        self.currentItem.slot(2).setDone(done)
-        self.computeMaterials()
-
-    def Gem4Clicked(self):
-        if self.Gem4Done.isChecked():
-            done = '1'
-        else:
-            done = '0'
-        self.currentItem.slot(3).setDone(done)
-        self.computeMaterials()
-
-    def Remake1Changed(self, val):
-        self.currentItem.slot(0).setTime(self.Gem1Remakes.text())
-        self.recomputeCosts(0, val)
-        self.computeMaterials()
-
-    def Remake2Changed(self, val):
-        self.currentItem.slot(1).setTime(self.Gem1Remakes.text())
-        self.recomputeCosts(1, val)
-        self.computeMaterials()
-
-    def Remake3Changed(self, val):
-        self.currentItem.slot(2).setTime(self.Gem1Remakes.text())
-        self.recomputeCosts(2, val)
-        self.computeMaterials()
-
-    def Remake4Changed(self, val):
-        self.currentItem.slot(3).setTime(self.Gem1Remakes.text())
-        self.recomputeCosts(3, val)
-        self.computeMaterials()
+    def TimeChanged(self,a0):
+        i = int(self.focusWidget().objectName()[3]) - 1
+        self.currentItem.slot(i).setTime(self.GemTime[i].text())
 
     def CloseWindow(self):
         self.done(1)
 
-    def Time1Changed(self,a0):
-        self.currentItem.slot(0).setTime(self.Gem1Time.text())
-
-    def Time2Changed(self,a0):
-        self.currentItem.slot(1).setTime(self.Gem1Time.text())
-
-    def Time3Changed(self,a0):
-        self.currentItem.slot(2).setTime(self.Gem1Time.text())
-
-    def Time4Changed(self,a0):
-        self.currentItem.slot(3).setTime(self.Gem1Time.text())
