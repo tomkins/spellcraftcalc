@@ -453,16 +453,17 @@ class ScWindow(QMainWindow, Ui_B_SC):
         self.setTabOrder(self.ClearItem,self.SkillsList)
         self.setTabOrder(self.SkillsList,self.OtherBonusList)
 
-    def close(self):
-        OW = Options.Options(self)
-        OW.save()
-        if self.modified:
-            ret = QMessageBox.warning(self, 'Save Changes?', 'Some changes may not have been saved. Are you sure you want to quit?', 'Yes', 'No')
-            if ret == 0:
-                return QMainWindow.close(self)
-            else:
-                return False
-        else: return QMainWindow.close(self)
+    # comment out because we override closeEvent
+    #def close(self):
+    #    OW = Options.Options(self)
+    #    OW.save()
+    #    if self.modified:
+    #        ret = QMessageBox.warning(self, 'Save Changes?', 'Some changes may not have been saved. Are you sure you want to quit?', 'Yes', 'No')
+    #        if ret == 0:
+    #            return QMainWindow.close(self)
+    #        else:
+    #            return False
+    #    else: return QMainWindow.close(self)
 
     def closeEvent(self, e):
         OW = Options.Options(self)
