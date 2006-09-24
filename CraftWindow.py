@@ -48,16 +48,16 @@ class CraftWindow(QDialog, Ui_B_CraftWindow):
             gemtime = getattr(self, 'Gem%dTime' % (slot+1))
             gemcost = getattr(self, 'Gem%dCost' % (slot+1))
             gemdone = getattr(self, 'Gem%dDone' % (slot+1))
-            gemtype = item.getSlotAttr('player', slot, 'Type')
-            gemdone = int(item.getSlotAttr('player', slot, 'Done'))
-            gemamount = item.getSlotAttr('player', slot, 'Amount')
+            gemtype = item.slot(slot).type()
+            gemdone = int(item.slot(slot).done())
+            gemamount = item.slot(slot).amount()
             
-            gemqua.setText('%s%%' % item.getSlotAttr('player', slot, 'Qua'))
-            gemtime.setText(item.getSlotAttr('player', slot, 'Time'))
+            gemqua.setText('%s%%' % item.slot(slot).qua())
+            gemtime.setText(item.slot(slot).time())
 
-            numremakes = int(item.getSlotAttr('player', slot, 'Remakes'))
+            numremakes = int(item.slot(slot).remakes())
             self.prevVals[slot] = numremakes
-            cost = self.computeRemakesCost(slot, numremakes)
+            cost = item.slot(slot).gemCost(numremakes)
             self.totalCost += cost
             gemcost.setText(SC.formatCost(cost))
             
@@ -65,7 +65,7 @@ class CraftWindow(QDialog, Ui_B_CraftWindow):
                 getattr(self, 'Gem%dDone' % (slot+1)).setChecked(1)
 
             gemremakes.setValue(numremakes)
-            gemname.setText(SC.getGemName(item, slot))
+            gemname.setText(item.slot(slot).gemName())
 
         self.TotalCost.setText(SC.formatCost(self.totalCost))
         self.ExpMultiplier.setValue(6)
@@ -76,9 +76,9 @@ class CraftWindow(QDialog, Ui_B_CraftWindow):
             'Expected' : { 'Gems' : { }, 'Dusts' : {}, 'Liquids': {} } }
         expmultiplier = int(self.ExpMultiplier.value())
         for slot in range(0, 4):
-            numremakes = int(self.currentItem.getSlotAttr('player', slot, 'Remakes'))
-            done = int(self.currentItem.getSlotAttr('player', slot, 'Done'))
-            for mattype, matl in SC.getGemMaterials(self.currentItem, slot, self.parent.realm).items():
+            numremakes = int(self.currentItem.slot(slot).remakes())
+            done = int(self.currentItem.slot(slot).done())
+            for mattype, matl in self.currentItem.slot(slot).gemMaterials().items():
                 for mat, val in matl.items():
                     if materials['Used'][mattype].has_key(mat):
                         materials['Used'][mattype][mat] += val * (numremakes + 1)
@@ -104,31 +104,10 @@ class CraftWindow(QDialog, Ui_B_CraftWindow):
         for mat, val in materials['Expected']['Liquids'].items():
             self.MatsExpected.append("%d %s" % (val, mat))
 
-    def computeRemakesCost(self, slotindex, remakes):
-        gemtype = self.currentItem.getSlotAttr('player', slotindex, 'Type')
-        if gemtype == 'Unused': return 0
-        effect = self.currentItem.getSlotAttr('player', slotindex, 'Effect')
-        gemamount = self.currentItem.getSlotAttr('player', slotindex, 'Amount')
-        costindex = ValuesLists[gemtype].index(gemamount)
-        basecost = GemCosts[costindex]
-        remakecost = RemakeCosts[costindex]
-        if gemtype == 'Resist' or gemtype == 'Focus':
-            basecost += 60 * costindex
-            remakecost += 60 * costindex
-        elif gemtype == 'Skill' and effect[0:4] == 'All ':
-            basecost += 200 + 180 * costindex
-            remakecost += 120 + 180 * costindex
-        elif gemtype == 'Focus' and effect[0:4] == 'All ':
-            basecost = basecost * 3 + 180 * costindex
-            remakecost = remakecost * 3 + 180 * costindex
-        cost = int(basecost + (remakes * remakecost))
-        self.currentItem.loadSlotAttr('player', slotindex, 'Remakes', remakes)
-        return cost
-
     def recomputeCosts(self, slotindex, val):
-        prevcost = self.computeRemakesCost(slotindex, self.prevVals[slotindex])
+        prevcost = self.currentItem.slot(slotindex).gemCost(self.prevVals[slotindex])
         self.prevVals[slotindex] = val
-        cost = self.computeRemakesCost(slotindex, val)
+        cost = self.currentItem.slot(slotindex).gemCost(val)
         self.totalCost += (cost - prevcost)
         gemcost = getattr(self, 'Gem%dCost' % (slotindex+1))
         gemcost.setText(SC.formatCost(cost))
@@ -136,45 +115,53 @@ class CraftWindow(QDialog, Ui_B_CraftWindow):
         
     def Gem1Clicked(self):
         if self.Gem1Done.isChecked():
-            self.currentItem.loadSlotAttr('player', 0, 'Done', '1')
+            done = '1'
         else:
-            self.currentItem.loadSlotAttr('player', 0, 'Done', '0')
+            done = '0'
+        self.currentItem.slot(0).setDone(done)
         self.computeMaterials()
 
     def Gem2Clicked(self):
         if self.Gem2Done.isChecked():
-            self.currentItem.loadSlotAttr('player', 1, 'Done', '1')
+            done = '1'
         else:
-            self.currentItem.loadSlotAttr('player', 1, 'Done', '0')
+            done = '0'
+        self.currentItem.slot(1).setDone(done)
         self.computeMaterials()
 
     def Gem3Clicked(self):
         if self.Gem3Done.isChecked():
-            self.currentItem.loadSlotAttr('player', 2, 'Done', '1')
+            done = '1'
         else:
-            self.currentItem.loadSlotAttr('player', 2, 'Done', '0')
+            done = '0'
+        self.currentItem.slot(2).setDone(done)
         self.computeMaterials()
 
     def Gem4Clicked(self):
         if self.Gem4Done.isChecked():
-            self.currentItem.loadSlotAttr('player', 3, 'Done', '1')
+            done = '1'
         else:
-            self.currentItem.loadSlotAttr('player', 3, 'Done', '0')
+            done = '0'
+        self.currentItem.slot(3).setDone(done)
         self.computeMaterials()
 
     def Remake1Changed(self, val):
+        self.currentItem.slot(0).setTime(self.Gem1Remakes.text())
         self.recomputeCosts(0, val)
         self.computeMaterials()
 
     def Remake2Changed(self, val):
+        self.currentItem.slot(1).setTime(self.Gem1Remakes.text())
         self.recomputeCosts(1, val)
         self.computeMaterials()
 
     def Remake3Changed(self, val):
+        self.currentItem.slot(2).setTime(self.Gem1Remakes.text())
         self.recomputeCosts(2, val)
         self.computeMaterials()
 
     def Remake4Changed(self, val):
+        self.currentItem.slot(3).setTime(self.Gem1Remakes.text())
         self.recomputeCosts(3, val)
         self.computeMaterials()
 
@@ -182,13 +169,13 @@ class CraftWindow(QDialog, Ui_B_CraftWindow):
         self.done(1)
 
     def Time1Changed(self,a0):
-        self.currentItem.loadSlotAttr('player', 0, 'Time', str(self.Gem1Time.text()))
+        self.currentItem.slot(0).setTime(self.Gem1Time.text())
 
     def Time2Changed(self,a0):
-        self.currentItem.loadSlotAttr('player', 1, 'Time', str(self.Gem2Time.text()))
+        self.currentItem.slot(1).setTime(self.Gem1Time.text())
 
     def Time3Changed(self,a0):
-        self.currentItem.loadSlotAttr('player', 2, 'Time', str(self.Gem3Time.text()))
+        self.currentItem.slot(2).setTime(self.Gem1Time.text())
 
     def Time4Changed(self,a0):
-        self.currentItem.loadSlotAttr('player', 3, 'Time', str(self.Gem4Time.text()))
+        self.currentItem.slot(3).setTime(self.Gem1Time.text())

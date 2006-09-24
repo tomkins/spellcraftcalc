@@ -26,22 +26,6 @@ def gemTypeSort(a, b):
     else:
         return 0
 
-def liquidSort(a, b):
-    if LiquidsOrder.index(a) < LiquidsOrder.index(b):
-        return -1
-    elif LiquidsOrder.index(a) > LiquidsOrder.index(b):
-        return 1
-    else:
-        return 0
-
-def dustSort(a, b):
-    if DustsOrder.index(a) < DustsOrder.index(b):
-        return -1
-    elif DustsOrder.index(a) > DustsOrder.index(b):
-        return 1
-    else:
-        return 0
-    
 def gemNameSort(a, b):
     ## XXX need to be static singletons...
     essence_re = re.compile("essence", re.IGNORECASE);
@@ -136,14 +120,14 @@ class ReportWindow(QDialog, Ui_B_ReportWindow):
             if activestate != 'player':
                 continue
             for slot in range(max(showslot - 1,0), lastslot):
-                if item.getSlotAttr(activestate, slot, 'Done') == '1' \
+                if item.slot(slot).done() == '1' \
                         and showslot == 0 \
                         and self.parent.showDoneInMatsList:
                     continue
-                gemtype = item.getSlotAttr('player', slot, 'Type')
-                effect = item.getSlotAttr('player', slot, 'Effect')
-                amount = item.getSlotAttr('player', slot, 'Amount')
-                for mattype, matl in SC.getGemMaterials(item, slot, self.parent.realm).items():
+                gemtype = item.slot(slot).type()
+                effect = item.slot(slot).effect()
+                amount = item.slot(slot).amount()
+                for mattype, matl in item.slot(slot).gemMaterials().items():
                     for mat, val in matl.items():
                         if self.materials[mattype].has_key(mat):
                             self.materials[mattype][mat] += val
@@ -152,13 +136,13 @@ class ReportWindow(QDialog, Ui_B_ReportWindow):
         
                 if gemtype == 'Unused':
                     continue
-                gemname = SC.getGemName(item, slot)
+                gemname = item.slot(slot).gemName()
                 if self.gemnames.has_key(gemname):
                     self.gemnames[gemname] += 1
                 else:
                     self.gemnames[gemname] = 1
 
-                (cost, costindex) = SC.computeGemCost(item, slot)
+                cost = item.slot(slot).gemCost()
                 self.totalcost += cost
         keys = self.gemnames.keys()
         keys.sort(gemNameSort)
@@ -170,11 +154,11 @@ class ReportWindow(QDialog, Ui_B_ReportWindow):
                 matlist = map(lambda(x): [x, matlist.get(x)], keys)
             elif type == 'Liquids':
                 keys = matlist.keys()
-                keys.sort(liquidSort)
+                keys.sort()
                 matlist = map(lambda(x): [x, matlist.get(x)], keys)
             elif type == 'Dusts':
                 keys = matlist.keys()
-                keys.sort(dustSort)
+                keys.sort()
                 matlist = map(lambda(x): [x, matlist.get(x)], keys)
             self.materials[type] = matlist
         self.printMaterials()
@@ -255,10 +239,10 @@ class ReportWindow(QDialog, Ui_B_ReportWindow):
                 elif imbue > (itemimbue+0.5):
                     success = -OCStartPercentages[int(imbue-itemimbue)]
                     for i in range(0, 4):
-                        if item.getSlotAttr(activestate, i, 'Type') == 'Unused':
+                        if item.slot(i).type() == 'Unused':
                             success += GemQualOCModifiers['94']
                         else:
-                            success += GemQualOCModifiers[item.getSlotAttr(activestate, i, 'Qua')]
+                            success += GemQualOCModifiers[item.slot(slot).qua()]
                     success += ItemQualOCModifiers[item.getAttr('ItemQuality')]
                     skillbonus = (int(self.parent.crafterSkill / 50) - 10) * 5
                     if skillbonus > 50: skillbonus = 50
@@ -277,10 +261,10 @@ class ReportWindow(QDialog, Ui_B_ReportWindow):
                     
                 gemnum = 'gem%d' % (slot+1)
                 iteminfo[key][gemnum] = { }
-                gemtype = item.getSlotAttr(activestate, slot, 'Type')
-                amount = item.getSlotAttr(activestate, slot, 'Amount')
-                effect = item.getSlotAttr(activestate, slot, 'Effect')
-                qua = item.getSlotAttr(activestate, slot, 'Qua')
+                gemtype = item.slot(slot).type()
+                amount = item.slot(slot).amount()
+                effect = item.slot(slot).effect()
+                qua = item.slot(slot).qua()
                 #gemtype = re.sub(' ' , '', gemtype)
                 amount = re.sub('[^\d]', '', amount)
                 if amount == '':
@@ -297,7 +281,7 @@ class ReportWindow(QDialog, Ui_B_ReportWindow):
                     iteminfo[key][gemnum]['effect'] = effect +' '+ gemtype
                 iteminfo[key][gemnum]['quality'] = qua
                 if activestate == 'player':
-                    iteminfo[key][gemnum]['name'] = SC.getGemName(item, slot)
+                    iteminfo[key][gemnum]['name'] = item.slot(slot).gemName()
                 else:
                     iteminfo[key][gemnum]['name'] = ''
                 if gemtype == 'Skill':

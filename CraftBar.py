@@ -116,8 +116,8 @@ class CraftBar(QDialog, Ui_B_CraftBar):
             if item is None: continue
             if item.getAttr('ActiveState') == 'player':
                 for slot in range(0, 4):
-                    if item.getSlotAttr('player', slot, 'Type') != 'Unused':
-                        gemlvl, gemname = string.split(SC.getGemName(item, slot), ' ', 1)
+                    if item.slot(slot).crafted():
+                        gemname = item.slot(slot).gemName()
                         if slotcounter >= 300:
                             sys.stdout.write("Out of slots!\n")
                             continue
@@ -138,7 +138,7 @@ class CraftBar(QDialog, Ui_B_CraftBar):
                                     break
                         if HotkeyGems[realm].has_key(gemname):
                             val = HotkeyGems[realm][gemname]
-                            buttonstr = '45,13%03d%02d' % (val, GemNames.index(gemlvl))
+                            buttonstr = '45,13%03d%02d' % (val, item.slot(slot).gemLevel() - 1)
                             if slotcounter >= 200: 
                                 CP.set('Quickbar3', 'Hotkey_%d' % (slotcounter - 200), buttonstr)
                             elif slotcounter >= 100:
@@ -203,7 +203,7 @@ class CraftBar(QDialog, Ui_B_CraftBar):
         for loc, item in self.piecelist.items():
             if item.getAttr('ActiveState') == 'player':
                 for slot in range(0, 4):
-                    if item.getSlotAttr('player', slot, 'Type') != 'Unused':
+                    if item.slot(slot).type() != 'Unused':
                         self.gemcount += 1
         self.NumGems.setText(str(self.gemcount))
 

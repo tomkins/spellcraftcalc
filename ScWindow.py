@@ -1045,7 +1045,6 @@ class ScWindow(QMainWindow, Ui_B_SC):
         if itemstate == 'drop': return 0
         mvals = []
         for i in range(0, 4):
-            itemtype = item.slot(i).type()
             mval = item.slot(i).gemImbue()
             if display:
                 self.Points[i].setText('%3.1f' % mval)
@@ -1657,9 +1656,9 @@ class ScWindow(QMainWindow, Ui_B_SC):
         if shortname in ['Gem', 'Points', 'Cost', 'Name']:
             slotid = child.objectName()[-2:]
             if str(slotid[0:1]) == '_':
-                slotid = slot[1:]
+                slotid = slotid[1:]
             if self.PlayerMade.isChecked():
-                self.gemClicked(self.currentTabLabel, int(slot_id))
+                self.gemClicked(self.currentTabLabel, int(slotid))
             return
         if shortname in ['', 'Label', 'Total', 'Item']: return
         if child.parent().objectName() == 'GroupResists':

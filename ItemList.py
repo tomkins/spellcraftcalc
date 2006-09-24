@@ -51,14 +51,14 @@ class ItemPreview(QListWidget):
         stattext = []
 
         for i in range(0, toprng):
-            gemtype = self.item.getSlotAttr(state, i, 'Type')
+            gemtype = self.item.slot(i).type()
             if not gemtype or gemtype == 'Unused':
                 continue
-            effect = self.item.getSlotAttr(state, i, 'Effect')
-            amount = int(self.item.getSlotAttr(state, i, 'Amount'))
-            statstr = self.item.getSlotAttr(state, i, 'Amount')
-            statstr += ' ' + self.item.getSlotAttr(state, i, 'Effect')
-            if self.item.getSlotAttr(state, i, 'Type') == 'Cap Increase':
+            effect = self.item.slot(i).effect()
+            amount = int(self.item.slot(i).amount())
+            statstr = self.item.slot(i).amount()
+            statstr += ' ' + effect()
+            if self.item.slot(i).type() == 'Cap Increase':
                 statstr += ' Cap Increase'
             stattext.append(statstr)
             ## This code must GO AWAY to Item.py:
