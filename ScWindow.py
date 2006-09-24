@@ -1696,4 +1696,5 @@ class ScWindow(QMainWindow, Ui_B_SC):
     def generateUIXML(self):
         UIXML.uixml(self)
    
-    def ignoreMouseEvent(self, e): e.ignore()
+    def ignoreMouseEvent(self, e):
+        e.ignore()
