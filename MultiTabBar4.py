@@ -28,11 +28,11 @@ class MultiTabBar4(QWidget):
             self.rowoverlap = 3
             self.cropheight = -1
         else:
-            self.rowoverlap = 3
+            self.rowoverlap = 4
             self.cropheight = 2
 
         self.setFocusPolicy(Qt.TabFocus)
-        self.setSizePolicy(QSizePolicy.Preferred, QSizePolicy.Fixed)
+        self.setSizePolicy(QSizePolicy.Preferred, QSizePolicy.Preferred)
         
     def addTab(self, row, text):
         self.insertTab(row, -1, text)
@@ -360,6 +360,8 @@ class MultiTabBar4(QWidget):
             rowpcts[i] = map(lambda x: float(x) / mw, rowpcts[i])
             maxRowWidth = max(mw, maxRowWidth)
 
+        maxHeight -= self.rowoverlap
+
         for i in range(numrows):
             x = 0
             if i == self.__selectedIndex[0]:
@@ -371,7 +373,7 @@ class MultiTabBar4(QWidget):
                 
             for j in range(len(self.__tabList[i])):
                 w = rowpcts[i][j] * maxRowWidth
-                self.__tabList[i][j].rect = QRect(x, y, int(w), maxHeight)
+                self.__tabList[i][j].rect = QRect(x, y, int(w), maxHeight + self.rowoverlap)
                 x += int(w)
 
         self.tabLayoutChange()
