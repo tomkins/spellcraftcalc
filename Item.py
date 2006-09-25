@@ -218,7 +218,7 @@ class Item:
             'Speed' : '', 'Bonus' : '',
             'ItemQuality' : '',
             'Equipped' : '', 'Level' : ''}
-        self.slots = { 'drop' : range(1, 11),
+        self.itemslots = { 'drop' : range(1, 11),
             'player' : range(1, 6) }
 
         if loc == 'Neck' \
@@ -246,11 +246,17 @@ class Item:
         self.Quality = '99'
 
         for it in ('drop', 'player'):
-            for i in range(0, len(self.slots[it])):
-                self.slots[it][i] = ItemSlot(slottype=it, realm=realm)
+            for i in range(0, len(self.itemslots[it])):
+                self.itemslots[it][i] = ItemSlot(slottype=it, realm=realm)
 
     def slot(self, index):
-        return self.slots[self.ActiveState][index]
+        return self.itemslots[self.ActiveState][index]
+
+    def slotCount(self):
+        return len(self.itemslots[self.ActiveState])
+
+    def slots(self):
+        return self.itemslots[self.ActiveState]
 
     def loadAttr(self, attrname, attrval):
         if self.__dict__.has_key(attrname):
@@ -265,7 +271,7 @@ class Item:
             return self.__dict__[attrname]
 
     def __repr__(self):
-        return unicode(self.slots)
+        return unicode(self.itemslots)
         
     def asXML(self):
         document = Document()
@@ -281,7 +287,7 @@ class Item:
             elem.appendChild(document.createTextNode(val))
             rootnode.appendChild(elem)
 
-        for (key, val) in self.slots.items():
+        for (key, val) in self.itemslots.items():
             #if key != self.ActiveState: continue
             statenode = document.createElement(unicode(string.upper(key)+'ITEM'))
             rootnode.appendChild(statenode)
@@ -365,8 +371,8 @@ class Item:
                         for attr in slot.childNodes:
                             if attr.nodeType == Node.TEXT_NODE: continue
                             attrval = XMLHelper.getText(attr.childNodes)
-                            self.slots[type][slotnum].setAttr(attr.tagName, attrval)
-                        self.slots[type][slotnum].fixEffect()
+                            self.itemslots[type][slotnum].setAttr(attr.tagName, attrval)
+                        self.itemslots[type][slotnum].fixEffect()
 
     def importLela(self, f):
         f.seek(0)
