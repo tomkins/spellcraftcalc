@@ -21,6 +21,7 @@ class CraftWindow(QDialog, Ui_B_CraftWindow):
         self.GemRemakes = []
         self.GemDone = []
         self.GemTime = []
+        self.GemCost = []
         for i in range (0, 4):
             idx = i + 1
             self.GemRemakes.append(getattr(self, 'Gem%dRemakes' % idx))
@@ -29,11 +30,12 @@ class CraftWindow(QDialog, Ui_B_CraftWindow):
             self.connect(self.GemDone[i],SIGNAL("clicked()"),self.GemClicked)
             self.GemTime.append(getattr(self, 'Gem%dTime' % idx))
             self.connect(self.GemTime[i],SIGNAL("textChanged(const QString&)"),self.TimeChanged)
+            self.GemCost.append(getattr(self, 'Gem%dCost' % idx))
         self.connect(self.ExpMultiplier,SIGNAL("valueChanged(int)"),self.computeMaterials)
         self.connect(self.Close,SIGNAL("clicked()"),self.CloseWindow)
         self.currentItem = None
         self.totalCost = 0
-        self.prevVals = [0, 0, 0, 0]
+        self.gemCosts = [0, 0, 0, 0]
         self.parent = parent
 
     def loadItem(self, item):
@@ -50,10 +52,9 @@ class CraftWindow(QDialog, Ui_B_CraftWindow):
             self.GemTime[slot].setText(item.slot(slot).time())
 
             numremakes = int(item.slot(slot).remakes())
-            self.prevVals[slot] = numremakes
-            cost = item.slot(slot).gemCost(numremakes)
-            self.totalCost += cost
-            gemcost.setText(SC.formatCost(cost))
+            self.gemCosts[slot] = item.slot(slot).gemCost(numremakes)
+            self.totalCost += self.gemCosts[slot]
+            gemcost.setText(SC.formatCost(self.gemCosts[slot]))
             
             if item.slot(slot).done() == '1':
                 self.GemDone[slot].setChecked(1)
@@ -99,11 +100,11 @@ class CraftWindow(QDialog, Ui_B_CraftWindow):
             self.MatsExpected.append("%d %s" % (val, mat))
 
     def recomputeCosts(self, slotindex, val):
-        prevcost = self.currentItem.slot(slotindex).gemCost(self.prevVals[slotindex])
-        self.prevVals[slotindex] = val
-        cost = self.currentItem.slot(slotindex).gemCost(val)
-        self.totalCost += (cost - prevcost)
-        self.GemCost[slotindex].setText(SC.formatCost(cost))
+        self.gemCosts[slotindex] = self.currentItem.slot(slotindex).gemCost(val)
+        self.GemCost[slotindex].setText(SC.formatCost(self.gemCosts[slotindex]))
+        self.totalCost = 0
+        for slot in range(0, 4):
+            self.totalCost += self.gemCosts[slot]
         self.TotalCost.setText(SC.formatCost(self.totalCost))
         
     def GemClicked(self):
@@ -117,7 +118,7 @@ class CraftWindow(QDialog, Ui_B_CraftWindow):
 
     def RemakeChanged(self, val):
         i = int(self.sender().objectName()[3]) - 1
-        self.currentItem.slot(i).setTime(self.GemRemakes[i].text())
+        self.currentItem.slot(i).setRemakes(self.GemRemakes[i].text())
         self.recomputeCosts(i, val)
         self.computeMaterials()
 
