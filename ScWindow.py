@@ -4,7 +4,6 @@
 #
 # See NOTICE.txt for copyrights and grant of license
 
-
 from PyQt4.QtCore import *
 from PyQt4.QtGui import *
 from B_ScWindow import *
@@ -83,15 +82,31 @@ class ScWindow(QMainWindow, Ui_B_SC):
 
         testfont = QFontMetrics(qApp.font())
 
-        height = self.Realm.sizeHint().height()
+        self.EffectWidths = [self.Effect_1.width(), self.Effect_10.width()]
+
+        height = min(self.CharName.minimumSizeHint().height(),
+                     self.Realm.minimumSizeHint().height())
+
         sizePolicy = QSizePolicy(QSizePolicy.Fixed, QSizePolicy.Fixed)
-        for ctl in (self.GroupItemFrame.children() + self.GroupCharInfo.children()):
-            if ctl.metaObject().className() == "QLineEdit" or \
-               ctl.metaObject().className() == "QComboBox":
+        for ctl in (self.GroupItemFrame.children() + [self.CharLevel]):
+            if ((ctl.metaObject().className() == "QLineEdit" or 
+                 ctl.metaObject().className() == "QComboBox") and 
+                ctl.objectName() != "ItemName"):
                 size = ctl.size()
                 size.setHeight(height)
                 ctl.setSizePolicy(QSizePolicy(sizePolicy))
                 ctl.setMaximumSize(size)
+        height = min(self.CharName.minimumSizeHint().height(),
+                     self.Realm.minimumSizeHint().height())
+
+        sizePolicy = QSizePolicy(QSizePolicy.Expanding, QSizePolicy.Fixed)
+        for ctl in (self.GroupCharInfo.children() + [self.ItemName]):
+            if ((ctl.metaObject().className() == "QLineEdit" or 
+                 ctl.metaObject().className() == "QComboBox") and 
+                ctl.objectName() != "CharLevel"):
+                size.setHeight(height)
+                ctl.setSizePolicy(QSizePolicy(sizePolicy))
+                ctl.setMaximumHeight(height)
 
         self.statlayout = QtGui.QGridLayout(self.GroupStats)
         self.statlayout.setMargin(3)
@@ -125,13 +140,13 @@ class ScWindow(QMainWindow, Ui_B_SC):
         self.skilllayout.setMargin(3)
         self.skilllayout.setSpacing(0)
         self.skilllayout.addWidget(self.SkillsList,0,0)
-#        self.skilllayout.setColumnStretch(0, 1)
+        self.skilllayout.setColumnStretch(0, 1)
 
         self.otherlayout = QtGui.QGridLayout(self.GroupOtherBonusList)
         self.otherlayout.setMargin(3)
         self.otherlayout.setSpacing(0)
         self.otherlayout.addWidget(self.OtherBonusList,0,0)
-#        self.otherlayout.setColumnStretch(0, 1)
+        self.otherlayout.setColumnStretch(0, 1)
 
         self.charlayout = QtGui.QGridLayout(self.GroupCharInfo)
         self.charlayout.setMargin(3)
@@ -170,20 +185,11 @@ class ScWindow(QMainWindow, Ui_B_SC):
         self.ItemPriceLabel.hide()
         self.ItemPrice.hide()
 
-        self.EffectWidths = [self.Effect_1.width(), self.Effect_10.width()]
-
         self.PieceTab.setFocusPolicy(Qt.StrongFocus)
         for tabname in PieceTabList:
             self.PieceTab.addTab(0, qApp.translate("B_SC",tabname,None))
         for tabname in JewelTabList:
             self.PieceTab.addTab(1, qApp.translate("B_SC",tabname,None))
-
-        size = self.PieceTab.size()
-        size.setHeight(self.PieceTab.sizeHint().height())
-        self.PieceTab.setFixedSize(size)
-
-        self.GroupItemFrame.move(self.GroupItemFrame.pos().x(), 
-                                 self.PieceTab.geometry().bottom())
 
         self.Realm.insertItems(0, list(Realms))
         self.QualDrop.insertItems(0, list(QualityValues))
@@ -221,8 +227,8 @@ class ScWindow(QMainWindow, Ui_B_SC):
                     self.Equipped):
             self.itemcontrollayout.addWidget(obj)
             col += 1
-            if col == 3 or col > 6 and str(obj.objectName())[-5:] != 'Label':
-                self.itemcontrollayout.addSpacing(10)
+            if col == 3 or (col > 6 and str(obj.objectName())[-5:] != 'Label'):
+                self.itemcontrollayout.addStretch(1)
                 col += 1
         self.itemcontrollayout.addWidget(self.DropCraftButtonFrame)
         self.itemlayout = QtGui.QGridLayout(self.GroupItemFrame)
@@ -239,7 +245,7 @@ class ScWindow(QMainWindow, Ui_B_SC):
             col += 1
         self.itemlayout.addItem(QSpacerItem(hspacer),row,7,1,1)
         self.itemlayout.addWidget(self.LabelItemName,row,8,1,2)
-        self.itemlayout.setColumnStretch(3, 1)
+        #self.itemlayout.setColumnStretch(3, 1)
         self.itemlayout.setColumnStretch(8, 1)
 
         width = max(testfont.size(Qt.TextSingleLine, " Gem 10:").width(),
@@ -310,6 +316,13 @@ class ScWindow(QMainWindow, Ui_B_SC):
         self.itemlayout.addWidget(self.ItemPriceLabel,row-1,3,1,2)
         self.itemlayout.addWidget(self.ItemPrice,row-1,6,1,1)
 
+        self.tabslayout = QVBoxLayout()
+        self.GroupItemFrame.stackUnder(self.PieceTab)
+        self.tabslayout.addWidget(self.PieceTab)
+        self.tabslayout.addItem(QSpacerItem(1, -self.PieceTab.baseOverlap(),
+                                            QSizePolicy.Minimum, QSizePolicy.Fixed))
+        self.tabslayout.addWidget(self.GroupItemFrame)
+ 
         self.mainlayout = QGridLayout(self.ScWinFrame)
         self.mainlayout.setMargin(3)
         self.mainlayout.setSpacing(0)
@@ -323,9 +336,8 @@ class ScWindow(QMainWindow, Ui_B_SC):
         self.mainlayout.addItem(QSpacerItem(hspacer),0,7,1,1)
         self.mainlayout.addWidget(self.GroupCharInfo,0,8,1,1)
         self.mainlayout.addItem(QSpacerItem(vspacer),1,0,1,9)
-        self.GroupItemFrame.stackUnder(self.PieceTab)
-        self.mainlayout.addWidget(self.PieceTab,2,0,1,9)
-        self.mainlayout.addWidget(self.GroupItemFrame,3,0,1,9)
+        self.mainlayout.addLayout(self.tabslayout,2,0,1,9)
+
         self.mainlayout.setColumnStretch(4, 1)
         self.mainlayout.setColumnStretch(6, 1)
 
@@ -641,18 +653,16 @@ class ScWindow(QMainWindow, Ui_B_SC):
             item.loadAttr('Equipped', '0')
         if self.PlayerMade.isChecked():
             state = 'player'
-            toprng = 5
             item.loadAttr('ItemQuality', unicode(self.QualDrop.currentText()))
         else:
             state = 'drop'
-            toprng = 10
             item.loadAttr('ItemName', unicode(self.ItemName.text())) 
             item.loadAttr('ItemQuality', unicode(self.QualEdit.text()))
         item.loadAttr('AFDPS', unicode(self.AFDPS_Edit.text()))
         item.loadAttr('Speed', unicode(self.Speed_Edit.text())) 
         item.loadAttr('Bonus', unicode(self.Bonus_Edit.text()))
         item.loadAttr('ActiveState', state)
-        for slot in range(0, toprng):
+        for slot in range(0, item.slotCount()):
             item.slot(slot).setType(self.Type[slot].currentText())
             item.slot(slot).setEffect(self.Effect[slot].currentText())
             if state == 'drop':
@@ -671,17 +681,15 @@ class ScWindow(QMainWindow, Ui_B_SC):
         if itemtype == 'player':
             self.PlayerMade.setChecked(1)
             self.showPlayerWidgets()
-            toprng = 5
             typelist = list(TypeList)
         else:
             self.Drop.setChecked(1)
             self.showDropWidgets()
-            toprng = 10
             typelist = list(DropTypeList)
         self.ItemLevel.setText(item.getAttr('Level'))
         location = item.getAttr('Location')
         self.Equipped.setChecked(int(item.getAttr('Equipped')))
-        for slot in range(0, toprng):
+        for slot in range(0, item.slotCount()):
             typecombo = self.Type[slot]
             typecombo.clear()
             if slot == 4 and itemtype == 'player':
@@ -768,12 +776,8 @@ class ScWindow(QMainWindow, Ui_B_SC):
             utility = 0.0
             itemtype = item.getAttr('ActiveState')
             itemcost = 0
-            if itemtype == 'player':
-                toprng = 5
-            else:
-                toprng = 10
             gemeffects = []
-            for i in range(0, toprng):
+            for i in range(0, item.slotCount()):
                 gemtype = item.slot(i).type()
                 if str(item.slot(i).amount()) == '':
                     amount = 0
@@ -907,11 +911,11 @@ class ScWindow(QMainWindow, Ui_B_SC):
                     errorcount = errorcount + 1
                 elif imbue > (itemimbue+0.5):
                     success = -OCStartPercentages[int(imbue-itemimbue)]
-                    for i in range(0, 4):
-                        if item.slot(i).type() == 'Unused':
+                    for slot in item.slots():
+                        if slot.type() == 'Unused':
                             success += GemQualOCModifiers['94']
                         else:
-                            success += GemQualOCModifiers[item.slot(i).qua()]
+                            success += GemQualOCModifiers[slot.qua()]
                     success += ItemQualOCModifiers[str(self.QualDrop.currentText())]
                     skillbonus = (int(self.crafterSkill / 50) - 10) * 5
                     if skillbonus > 50: skillbonus = 50
@@ -922,7 +926,7 @@ class ScWindow(QMainWindow, Ui_B_SC):
                     self.ItemImbue.setText('%3.1f' % imbue)
                     self.ItemImbueTotal.setText(' / ' + unicode(itemimbue))
                     self.ItemCost.setText(SC.formatCost(itemcost))
-                    for i in range(0, 5):
+                    for i in range(0, item.slotCount()):
                         n = self.Name[i]
                         n.setText(item.slot(i).gemName())
                         if item.slot(i).done() == "1":
@@ -1017,21 +1021,21 @@ class ScWindow(QMainWindow, Ui_B_SC):
             itemcost = 0
             itemtype = item.getAttr('ActiveState')
             if itemtype == 'drop': continue
-            for i in range(0, 5):
-                gemcost = item.slot(i).gemCost()
-                gemlvl = item.slot(i).gemLevel()
+            for slot in item.slots():
+                gemcost = slot.gemCost()
+                gemlvl = slot.gemLevel()
                 cost += gemcost
                 itemcost += gemcost
                 if gemcost > 0:
                     price += self.pricingInfo.get('PPGem', 0) * 10000
                     if self.pricingInfo.get('HourInclude', 0):
                         price += self.pricingInfo.get('Hour', 0) * 10000 \
-                               * int(item.slot(i).time()) / 60.0
+                               * int(slot.time()) / 60.0
                     if self.pricingInfo.get('TierInclude', 0):
                         tierp = self.pricingInfo.get('Tier', {})
                         price += float(tierp.get(str(gemlvl), 0)) * 10000
                     if self.pricingInfo.get('QualInclude', 0):
-                        gemqual = item.slot(i).qua()
+                        gemqual = slot.qua()
                         qualp = self.pricingInfo.get('Qual', {})
                         price += (gemcost * float(qualp.get(gemqual, 0)) / 100.0)
             if self.pricingInfo.get('PPInclude', 0):
@@ -1072,10 +1076,8 @@ class ScWindow(QMainWindow, Ui_B_SC):
         itemstate = item.getAttr('ActiveState')
         if itemstate == 'drop': return 0
         mvals = []
-        for i in range(0, 4):
-            mval = item.slot(i).gemImbue()
-            if display:
-                self.Points[i].setText('%3.1f' % mval)
+        for slot in item.slots():
+            mval = slot.gemImbue()
             mvals.append(mval)
         maximbue = max(mvals)
         if display:
@@ -1234,16 +1236,16 @@ class ScWindow(QMainWindow, Ui_B_SC):
     def showWideEffects(self, wide):
         width = self.EffectWidths[wide]
         for num in range(0, 5):
-          eff = self.Effect[num]
-          eff.setGeometry(eff.x(), eff.y(), width, eff.height())
-
+            self.Effect[num].setMaximumWidth(width)
+        self.itemlayout.setColumnMinimumWidth(3,width)
+        
     def showDropWidgets(self):
         self.GroupItemFrame.hide()
         for w in self.switchOnType['player']:
             w.hide()
         for w in self.switchOnType['drop']:
             w.show()
-        #self.showWideEffects(1)
+        self.showWideEffects(1)
         for i in range(0,5):
             self.GemLabel[i].setEnabled(1)
             self.GemLabel[i].setText('Slot %d:' % (i + 1))
@@ -1255,8 +1257,8 @@ class ScWindow(QMainWindow, Ui_B_SC):
             w.show()
         for w in self.switchOnType['drop']:
             w.hide()
-        #self.showWideEffects(0)
-        for i in range(0,4):
+        self.showWideEffects(0)
+        for i in range(0,5):
             self.GemLabel[i].setEnabled(1)
             self.GemLabel[i].setText('Gem %d:' % (i + 1))
         self.GemLabel[4].setText('Proc:')
@@ -1620,11 +1622,7 @@ class ScWindow(QMainWindow, Ui_B_SC):
         locs = []
         for key, item in self.itemattrlist.iteritems():
             activestate = item.getAttr('ActiveState')
-            if activestate == 'drop':
-                toprng = 10
-            else:
-                toprng = 5
-            for slot in range(0, toprng):
+            for slot in range(0, item.slotCount()):
                 itemtype = str(item.slot(slot).type())
                 if itemtype == 'Unused': continue
                 if (findtype and itemtype != findtype) or \
