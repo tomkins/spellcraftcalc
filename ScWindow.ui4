@@ -1255,7 +1255,7 @@
             <rect>
               <x>160</x>
               <y>5</y>
-              <width>51</width>
+              <width>52</width>
               <height>21</height>
             </rect>
           </property>
@@ -1407,7 +1407,7 @@
             </rect>
           </property>
           <property name="text" >
-            <string>Type</string>
+            <string> Type</string>
           </property>
         </widget>
         <widget class="QLabel" name="LabelGemAmount" >
@@ -1420,7 +1420,7 @@
             </rect>
           </property>
           <property name="text" >
-            <string>Amount</string>
+            <string> Amount</string>
           </property>
         </widget>
         <widget class="QLabel" name="LabelGemEffect" >
@@ -1433,7 +1433,7 @@
             </rect>
           </property>
           <property name="text" >
-            <string>Effect</string>
+            <string> Effect</string>
           </property>
         </widget>
         <widget class="QLabel" name="LabelGemQuality" >
@@ -1446,7 +1446,7 @@
             </rect>
           </property>
           <property name="text" >
-            <string>Quality</string>
+            <string> Quality</string>
           </property>
         </widget>
         <widget class="QLabel" name="LabelGemPoints" >
