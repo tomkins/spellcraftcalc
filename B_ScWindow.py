@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'ScWindow.ui4'
 #
-# Created: Sun Sep 24 01:19:52 2006
+# Created: Sun Sep 24 19:49:58 2006
 #      by: PyQt4 UI code generator 4.0.1
 #
 # WARNING! All changes made in this file will be lost!
@@ -996,10 +996,10 @@ class Ui_B_SC(object):
         self.Equipped.setText(QtGui.QApplication.translate("B_SC", "Equipped", None, QtGui.QApplication.UnicodeUTF8))
         self.PlayerMade.setText(QtGui.QApplication.translate("B_SC", "Player Made", None, QtGui.QApplication.UnicodeUTF8))
         self.Drop.setText(QtGui.QApplication.translate("B_SC", "Drop", None, QtGui.QApplication.UnicodeUTF8))
-        self.LabelGemType.setText(QtGui.QApplication.translate("B_SC", "Type", None, QtGui.QApplication.UnicodeUTF8))
-        self.LabelGemAmount.setText(QtGui.QApplication.translate("B_SC", "Amount", None, QtGui.QApplication.UnicodeUTF8))
-        self.LabelGemEffect.setText(QtGui.QApplication.translate("B_SC", "Effect", None, QtGui.QApplication.UnicodeUTF8))
-        self.LabelGemQuality.setText(QtGui.QApplication.translate("B_SC", "Quality", None, QtGui.QApplication.UnicodeUTF8))
+        self.LabelGemType.setText(QtGui.QApplication.translate("B_SC", " Type", None, QtGui.QApplication.UnicodeUTF8))
+        self.LabelGemAmount.setText(QtGui.QApplication.translate("B_SC", " Amount", None, QtGui.QApplication.UnicodeUTF8))
+        self.LabelGemEffect.setText(QtGui.QApplication.translate("B_SC", " Effect", None, QtGui.QApplication.UnicodeUTF8))
+        self.LabelGemQuality.setText(QtGui.QApplication.translate("B_SC", " Quality", None, QtGui.QApplication.UnicodeUTF8))
         self.LabelGemPoints.setText(QtGui.QApplication.translate("B_SC", "Points", None, QtGui.QApplication.UnicodeUTF8))
         self.LabelGemCost.setText(QtGui.QApplication.translate("B_SC", "Cost", None, QtGui.QApplication.UnicodeUTF8))
         self.LabelItemName.setText(QtGui.QApplication.translate("B_SC", "Name", None, QtGui.QApplication.UnicodeUTF8))
