@@ -24,15 +24,6 @@ class MultiTabBar4(QWidget):
         if (name):
             self.setObjectName(name)
 
-        # Let's try the assumption that the vertical shift of a selected tab,
-        # plus the overlap to the tab box is the 'padding' we erase between rows.
-        taboverlap = QStyleOptionTab()
-        taboverlap.shape = QTabBar.RoundedNorth
-        self.baseoverlap = self.style().pixelMetric(QStyle.PM_TabBarBaseOverlap,
-                                                    taboverlap, self)
-        self.rowoverlap = self.style().pixelMetric(QStyle.PM_TabBarTabShiftVertical,
-                                                   taboverlap, self) + self.baseoverlap
-
         self.setFocusPolicy(Qt.TabFocus)
         self.setSizePolicy(QSizePolicy.Preferred, QSizePolicy.Fixed)
 
@@ -236,7 +227,7 @@ class MultiTabBar4(QWidget):
             i = self.__indexAtPos(e.pos())
             if i != self.__pressedIndex:
                 oldIndex = self.__pressedIndex
-                pressedIndex = (-1, -1)
+                self.__pressedIndex = (-1, -1)
                 if oldIndex != (-1, -1):
                     self.repaint(self.tabRect(oldIndex[0], oldIndex[1]))
                 if self.__pressedIndex != (-1, -1):
@@ -345,10 +336,18 @@ class MultiTabBar4(QWidget):
         numrows = len(self.__tabList)
         taboverlap = QStyleOptionTab()
         taboverlap.shape = QTabBar.RoundedNorth
+
+
         baseoverlap = self.style().pixelMetric(QStyle.PM_TabBarBaseOverlap,
                                                taboverlap, self)
         rowoverlap = self.style().pixelMetric(QStyle.PM_TabBarTabShiftVertical,
                                               taboverlap, self) + baseoverlap
+
+        # The overlap doesn't work on mac - it makes things too tight
+        if str(QApplication.style().objectName()[0:9]).lower() == "macintosh":
+            rowoverlap = 0
+
+
         # Horizontal tabs only for now
         mx = 0
         maxWidth = 0
@@ -485,6 +484,16 @@ if __name__ == '__main__':
     frame.setGeometry(QRect(0, bar.sizeHint().height() - bar.baseOverlap(), 
                             bar.sizeHint().width(), 200))
 
+    #w2 = QWidget(w)
+    #w2.setGeometry(QRect(300, 300, 100, 100))
+    #statlayout = QGridLayout(w2)
+    #statlayout.setMargin(3)
+    #statlayout.setSpacing(0)
+
+    #w3 = QWidget(w2)
+    #statlayout.addWidget(w3, 0, 0, 1, 1)
+
+    #w.resize(600, 400)
     frame.stackUnder(bar)
 
     #layout = QVBoxLayout(child)
