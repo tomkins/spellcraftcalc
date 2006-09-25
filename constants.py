@@ -1035,6 +1035,7 @@ PieceTabList = t2((
 JewelTabList = t2((
     'Neck', 'Cloak', 'Jewel', 'Belt', 
     'Left Ring', 'Right Ring', 'Left Wrist', 'Right Wrist',
+    'Mythical',
 ))
 
 TabList = t2(PieceTabList + JewelTabList)
