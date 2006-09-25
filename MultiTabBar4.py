@@ -136,15 +136,13 @@ class MultiTabBar4(QWidget):
         if self.__layoutDirty:
             self.__layoutTabs()
 
-        taboverlap = QStyleOptionTab()
-        taboverlap.shape = QTabBar.RoundedNorth
-        padwidth = self.style().pixelMetric(QStyle.PM_DefaultFrameWidth,
-                                            taboverlap, self) * 3
+        # small padding so when the right-tab has the focus, it looks cleaner
+        padwidth = self.style().pixelMetric(QStyle.PM_DefaultFrameWidth) * 2
         r = QRect()
         for i in range(len(self.__tabList)):
             for j in range(len(self.__tabList[i])):
                 r = r.unite(self.__tabAt(i, j).rect)
-        r.size().setWidth(r.size().width() + padwidth)
+        r.setRight(r.right() + padwidth)
         sz = QApplication.globalStrut()
         return r.size().expandedTo(sz)
 
