@@ -319,8 +319,9 @@ class ScWindow(QMainWindow, Ui_B_SC):
         self.tabslayout = QVBoxLayout()
         self.GroupItemFrame.stackUnder(self.PieceTab)
         self.tabslayout.addWidget(self.PieceTab)
-        self.tabslayout.addItem(QSpacerItem(1, -self.PieceTab.baseOverlap(),
-                                            QSizePolicy.Minimum, QSizePolicy.Fixed))
+        if not str(QApplication.style().objectName()[0:9]).lower() == "macintosh":
+            self.tabslayout.addItem(QSpacerItem(1, -self.PieceTab.baseOverlap(),
+                                                QSizePolicy.Minimum, QSizePolicy.Fixed))
         self.tabslayout.addWidget(self.GroupItemFrame)
  
         self.mainlayout = QGridLayout(self.ScWinFrame)
