@@ -63,6 +63,7 @@ class ScWindow(QMainWindow, Ui_B_SC):
         self.splashFile = None
         self.newcount = 0
         self.nocalc = 1
+        self.save = 0
         self.totals = { }
         self.capTotals = { }
         self.recentFiles = []
@@ -79,6 +80,19 @@ class ScWindow(QMainWindow, Ui_B_SC):
         # |Qt.WindowSystemMenuHint|Qt.WindowTitleHint|Qt.WindowMinimizeButtonHint
         self.setAttribute(Qt.WA_DeleteOnClose)
         Ui_B_SC.setupUi(self,self)
+
+        self.switchOnType = {'drop' : [], 'player' : [] }
+        self.switchOnType['drop'] = [ 
+            self.QualEdit, self.SaveItem, self.ItemName,
+        ]
+        self.switchOnType['player'] = [
+            self.QualDrop, self.CraftButton, 
+            self.LabelGemQuality, self.LabelGemPoints, self.LabelGemCost,
+            self.ItemImbueLabel, self.ItemImbue, self.ItemImbueTotal,
+            self.ItemOverchargeLabel, self.ItemOvercharge,
+            self.ItemCostLabel, self.ItemCost,
+            ## self.ItemPriceLabel, self.ItemPrice, XXX not calculated yet
+        ]
 
         testfont = QFontMetrics(qApp.font())
 
@@ -179,9 +193,10 @@ class ScWindow(QMainWindow, Ui_B_SC):
 
         # This doesn't matter for tinctures, keep hidden
         self.Quality_5.hide()
+        self.Points_5.hide()
+        self.Cost_5.hide()
 
         ## XXX not calculated yet - we must hide :)
-        self.Cost_5.hide()
         self.ItemPriceLabel.hide()
         self.ItemPrice.hide()
 
@@ -269,6 +284,7 @@ class ScWindow(QMainWindow, Ui_B_SC):
             self.connect(self.Effect[i],SIGNAL("activated(const QString&)"),
                          self.EffectChanged)
             self.AmountEdit.append(getattr(self, 'Amount_Edit_%d' % idx))
+            self.switchOnType['drop'].append(self.AmountEdit[i])
             self.AmountEdit[i].setValidator(editAmountValidator)
             self.connect(self.AmountEdit[i],SIGNAL("textChanged(const QString&)"),
                          self.AmountChanged)
@@ -283,7 +299,7 @@ class ScWindow(QMainWindow, Ui_B_SC):
                 self.Quality.append(getattr(self, 'Quality_%d' % idx))
                 self.Quality[i].insertItems(0, list(QualityValues))
                 self.connect(self.Quality[i],SIGNAL("activated(const QString&)"),
-                             self.recalculate)
+                             self.QualityChanged)
                 self.Points.append(getattr(self, 'Points_%d' % idx))
                 self.Cost.append(getattr(self, 'Cost_%d' % idx))
                 self.Name.append(getattr(self, 'Name_%d' % idx))
@@ -292,6 +308,15 @@ class ScWindow(QMainWindow, Ui_B_SC):
                 self.itemlayout.addWidget(self.Points[i],row,5,1,1)
                 self.itemlayout.addWidget(self.Cost[i],row,6,1,1)
                 self.itemlayout.addWidget(self.Name[i],row,8,1,2)
+                self.switchOnType['player'].extend([
+                    self.AmountDrop[i], self.Name[i]])
+                if i < 4:
+                    self.switchOnType['player'].extend([
+                        self.Quality[i], self.Points[i], self.Cost[i]])
+            else:
+                self.switchOnType['drop'].extend([
+                    self.GemLabel[i], self.Type[i], self.Effect[i]])
+
             self.itemlayout.setRowMinimumHeight(row, height)
             row += 1
 
@@ -355,6 +380,8 @@ class ScWindow(QMainWindow, Ui_B_SC):
         self.connect(self.GroupItemFrame,SIGNAL("mousePressEvent(QMouseEvent*)"),
                      self.mousePressEvent)
 
+        self.connect(self.CharName,SIGNAL("textChanged(const QString&)"),
+                     self.TemplateChanged)
         self.connect(self.Realm,SIGNAL("activated(const QString&)"),
                      self.RealmChanged)
         self.connect(self.CharClass,SIGNAL("activated(const QString&)"),
@@ -362,21 +389,22 @@ class ScWindow(QMainWindow, Ui_B_SC):
         self.connect(self.CharRace,SIGNAL("activated(const QString&)"),
                      self.RaceChanged)
         self.connect(self.CharLevel,SIGNAL("textChanged(const QString&)"),
-                     self.recalculate)
+                     self.TemplateChanged)
+
         self.connect(self.PieceTab,SIGNAL("currentChanged"),self.PieceTabChanged)
         self.connect(self.ItemLevel,SIGNAL("textChanged(const QString&)"),
-                     self.recalculate)
+                     self.ItemChanged)
         self.connect(self.ItemLevelButton,SIGNAL("clicked()"),self.ItemLevelShow)
         self.connect(self.QualDrop,SIGNAL("activated(const QString&)"),
-                     self.recalculate)
+                     self.ItemChanged)
         self.connect(self.ItemName,SIGNAL("textChanged(const QString&)"),
-                     self.recalculate)
+                     self.ItemChanged)
         self.connect(self.Bonus_Edit,SIGNAL("textChanged(const QString&)"),
-                     self.recalculate)
+                     self.ItemChanged)
         self.connect(self.AFDPS_Edit,SIGNAL("textChanged(const QString&)"),
-                     self.recalculate)
+                     self.ItemChanged)
         self.connect(self.Speed_Edit,SIGNAL("textChanged(const QString&)"),
-                     self.recalculate)
+                     self.ItemChanged)
         self.connect(self.PlayerMade,SIGNAL("toggled(bool)"),self.PlayerToggled)
         self.connect(self.Drop,SIGNAL("toggled(bool)"),self.DropToggled)
         self.connect(self.Equipped,SIGNAL("clicked()"),self.EquippedClicked)
@@ -462,12 +490,8 @@ class ScWindow(QMainWindow, Ui_B_SC):
         self.helpmenu.addAction('&About', self.aboutBox)
         self.menuBar().addMenu(self.helpmenu)
 
-        self.initialize()
         self.pricingInfo = OW.getPriceInfo()
-        self.restoreItem(self.itemattrlist[self.currentTabLabel])
-        self.nocalc = 0
-        self.calculate()
-        self.modified = 0
+        self.initialize()
 
     def fix_taborder(self, line):
         if line > 4:
@@ -495,17 +519,36 @@ class ScWindow(QMainWindow, Ui_B_SC):
         self.setTabOrder(self.ClearItem,self.SkillsList)
         self.setTabOrder(self.SkillsList,self.OtherBonusList)
 
-    # comment out because we override closeEvent
-    #def close(self):
-    #    OW = Options.Options(self)
-    #    OW.save()
-    #    if self.modified:
-    #        ret = QMessageBox.warning(self, 'Save Changes?', 'Some changes may not have been saved. Are you sure you want to quit?', 'Yes', 'No')
-    #        if ret == 0:
-    #            return QMainWindow.close(self)
-    #        else:
-    #            return False
-    #    else: return QMainWindow.close(self)
+    def showWideEffects(self, wide):
+        width = self.EffectWidths[wide]
+        for num in range(0, 5):
+            self.Effect[num].setMaximumWidth(width)
+        self.itemlayout.setColumnMinimumWidth(3,width)
+        
+    def showDropWidgets(self):
+        self.GroupItemFrame.hide()
+        for w in self.switchOnType['player']:
+            w.hide()
+        for w in self.switchOnType['drop']:
+            w.show()
+        self.showWideEffects(1)
+        for i in range(0,5):
+            self.GemLabel[i].setEnabled(1)
+            self.GemLabel[i].setText('Slot %d:' % (i + 1))
+        self.GroupItemFrame.show()
+
+    def showPlayerWidgets(self):
+        self.GroupItemFrame.hide()
+        for w in self.switchOnType['player']:
+            w.show()
+        for w in self.switchOnType['drop']:
+            w.hide()
+        self.showWideEffects(0)
+        for i in range(0,5):
+            self.GemLabel[i].setEnabled(1)
+            self.GemLabel[i].setText('Gem %d:' % (i + 1))
+        self.GemLabel[4].setText('Proc:')
+        self.GroupItemFrame.show()
 
     def closeEvent(self, e):
         OW = Options.Options(self)
@@ -527,7 +570,7 @@ class ScWindow(QMainWindow, Ui_B_SC):
 # Options passed over from the options box
         self.noteText = ''
         self.craftMultiplier = 6
-        self.save = 1
+        self.save = 0
         self.filename = None
         self.newcount = self.newcount + 1
         filetitle = unicode("Template" + str(self.newcount))
@@ -545,43 +588,12 @@ class ScWindow(QMainWindow, Ui_B_SC):
         self.ItemLevel.setText('51')
         self.CharLevel.setText('50')
 
-        self.switchOnType = {'drop' : [], 'player' : [] }
-        self.switchOnType['drop'] = [ 
-            self.QualEdit, self.SaveItem, self.ItemName,
-            self.Amount_Edit_1, self.Amount_Edit_2,
-            self.Amount_Edit_3, self.Amount_Edit_4,
-            self.Amount_Edit_5, self.Amount_Edit_6,
-            self.Amount_Edit_7, self.Amount_Edit_8,
-            self.Amount_Edit_9, self.Amount_Edit_10,
-            self.Gem_Label_6,
-            self.Gem_Label_7, self.Gem_Label_8,
-            self.Gem_Label_9, self.Gem_Label_10,
-            self.Type_6, self.Type_7,
-            self.Type_8, self.Type_9, self.Type_10,
-            self.Effect_6, self.Effect_7,
-            self.Effect_8, self.Effect_9, self.Effect_10,
-        ]
-        self.switchOnType['player'] = [
-            self.QualDrop, self.CraftButton, 
-            self.LabelGemQuality, self.LabelGemPoints, self.LabelGemCost,
-            self.Amount_Drop_1, self.Amount_Drop_2,
-            self.Amount_Drop_3, self.Amount_Drop_4,
-            self.Amount_Drop_5,
-            self.Quality_1, self.Quality_2, self.Quality_3, self.Quality_4,
-            ## self.Quality_5, (doesn't matter for tinctures, keep hidden)
-            self.Points_1, self.Points_2, self.Points_3, self.Points_4,
-            self.Points_5,
-            self.Cost_1, self.Cost_2, self.Cost_3, self.Cost_4,
-            ## self.Cost_5, XXX not calculated yet
-            self.Name_1, self.Name_2, self.Name_3, self.Name_4,
-            self.Name_5,
-            self.ItemImbueLabel, self.ItemImbue, self.ItemImbueTotal,
-            self.ItemOverchargeLabel, self.ItemOvercharge,
-            self.ItemCostLabel, self.ItemCost,
-            ## self.ItemPriceLabel, self.ItemPrice, XXX not calculated yet
-        ]
-
         self.RealmChanged(self.realm)
+        self.restoreItem(self.itemattrlist[self.currentTabLabel])
+        self.modified = 0
+        self.save = 1
+        self.nocalc = 0
+        self.calculate()
 
     def asXML(self):
         document = Document()
@@ -622,7 +634,6 @@ class ScWindow(QMainWindow, Ui_B_SC):
     def PieceTabChanged(self, row, col):
         if self.nocalc:
             return
-        self.storeItem(self.itemattrlist[self.currentTabLabel])
         self.currentTabLabel = string.strip(str(self.PieceTab.tabText(row, col)))
         self.restoreItem(self.itemattrlist[self.currentTabLabel])
 
@@ -677,6 +688,7 @@ class ScWindow(QMainWindow, Ui_B_SC):
         if item is None: return
         wascalc = self.nocalc
         self.nocalc = 1
+        wassave = self.save
         self.save = 0
         itemtype = item.getAttr('ActiveState')
         if itemtype == 'player':
@@ -741,8 +753,8 @@ class ScWindow(QMainWindow, Ui_B_SC):
             if item.getAttr('ItemQuality') in QualityValues:
                 self.QualDrop.setCurrentIndex(
                     QualityValues.index(item.getAttr('ItemQuality')))
-        self.save = 1
         self.nocalc = wascalc
+        self.save = wassave
         self.calculate()
 
     def calculate(self):
@@ -1094,6 +1106,11 @@ class ScWindow(QMainWindow, Ui_B_SC):
     def getMultiplier(self, type):
         return ImbueMultipliers[type]
 
+    def TemplateChanged(self,a0):
+        if self.save:
+            self.modified = 1
+        self.calculate()
+
     def UpdateCombo(self, type, num):
         typecombo = self.Type[num]
         typetext = str(typecombo.currentText())
@@ -1175,6 +1192,8 @@ class ScWindow(QMainWindow, Ui_B_SC):
                 getattr(self, rt + 'RR').setText('+'+str(Races['All'][race]['Resists'][rt]))
             else:
                 getattr(self, rt + 'RR').setText('-')
+        if self.save:
+            self.modified = 1
         self.calculate()
 
     def CharClassChanged(self,a0):
@@ -1197,9 +1216,6 @@ class ScWindow(QMainWindow, Ui_B_SC):
         if race in racelist:
           self.CharRace.setCurrentIndex(racelist.index(race))
         self.RaceChanged('')
-        if self.save:
-            self.restoreItem(self.itemattrlist[self.currentTabLabel])
-        self.calculate()
 
     def RealmChanged(self,a0):
         self.realm = str(self.Realm.currentText())
@@ -1209,101 +1225,77 @@ class ScWindow(QMainWindow, Ui_B_SC):
           self.CharClass.setCurrentIndex(ClassList[self.realm].index(self.charclass))
         self.CharClassChanged('')
     
+    def ItemChanged(self,a0):
+        if self.save:
+            self.modified = 1
+            item = self.itemattrlist[self.currentTabLabel]
+            self.storeItem(item)
+        self.calculate()
+
     def TypeChanged(self, Value):
         index = self.focusWidget().objectName()[-2:]
         if index[0] == '_': index = index[1:]
         wascalc = self.nocalc
         self.nocalc = 1
-        self.modified = 1
         self.UpdateCombo(0, int(index) - 1)
-        item = self.itemattrlist.get(self.currentTabLabel, Item(self.currentTabLabel))
-        self.storeItem(self.itemattrlist[self.currentTabLabel])
         self.nocalc = wascalc
+        if self.save:
+            self.modified = 1
+            self.storeItem(self.itemattrlist[self.currentTabLabel])
         self.calculate()
 
     def EffectChanged(self, value):
         index = str(self.focusWidget().objectName())[-2:]
-        if not index[-1].isdigit():
-            index = str(self.focusWidget().parentWidget().objectName())[-2:]
-        if not index[0].isdigit(): index = index[1:]
+        if index[0] == '_': index = index[1:]
         wascalc = self.nocalc
         self.nocalc = 1
-        self.modified = 1
         self.UpdateCombo(1, int(index) - 1)
-        self.storeItem(self.itemattrlist[self.currentTabLabel])
         self.nocalc = wascalc
+        if self.save:
+            self.modified = 1
+            self.storeItem(self.itemattrlist[self.currentTabLabel])
         self.calculate()
 
-    def showWideEffects(self, wide):
-        width = self.EffectWidths[wide]
-        for num in range(0, 5):
-            self.Effect[num].setMaximumWidth(width)
-        self.itemlayout.setColumnMinimumWidth(3,width)
-        
-    def showDropWidgets(self):
-        self.GroupItemFrame.hide()
-        for w in self.switchOnType['player']:
-            w.hide()
-        for w in self.switchOnType['drop']:
-            w.show()
-        self.showWideEffects(1)
-        for i in range(0,5):
-            self.GemLabel[i].setEnabled(1)
-            self.GemLabel[i].setText('Slot %d:' % (i + 1))
-        self.GroupItemFrame.show()
+    def AmountChanged(self,a0):
+        if self.save:
+            self.modified = 1
+        self.storeItem(self.itemattrlist[self.currentTabLabel])
+        self.calculate()
 
-    def showPlayerWidgets(self):
-        self.GroupItemFrame.hide()
-        for w in self.switchOnType['player']:
-            w.show()
-        for w in self.switchOnType['drop']:
-            w.hide()
-        self.showWideEffects(0)
-        for i in range(0,5):
-            self.GemLabel[i].setEnabled(1)
-            self.GemLabel[i].setText('Gem %d:' % (i + 1))
-        self.GemLabel[4].setText('Proc:')
-        self.GroupItemFrame.show()
+    def QualityChanged(self,a0):
+        if self.save:
+            self.modified = 1
+        self.storeItem(self.itemattrlist[self.currentTabLabel])
+        self.calculate()
 
+    def EquippedClicked(self):
+        if self.save:
+            self.modified = 1
+            self.storeItem(self.itemattrlist[self.currentTabLabel])
+        self.calculate()
+    
     def DropToggled(self,a0):
         if self.nocalc:
             return
         if not a0: 
             return
-        self.modified = 1
         self.showDropWidgets()
         item = self.itemattrlist[self.currentTabLabel]
         item.loadAttr('ActiveState','drop')
-        if self.save:
-            self.restoreItem(item)
+        self.restoreItem(item)
 
     def PlayerToggled(self, a0):
         if self.nocalc:
             return
         if not a0: 
             return
-        self.modified = 1
         self.showPlayerWidgets()
         item = self.itemattrlist[self.currentTabLabel]
         item.loadAttr('ActiveState','player')
-        if self.save:
-            self.restoreItem(item)
-
-    def AmountChanged(self,a0):
-        self.modified = 1
-        if self.save:
-            item = self.itemattrlist[self.currentTabLabel]
-            self.storeItem(item)
-        self.calculate()
-
-    def recalculate(self,a0):
-        self.modified = 1
-        if self.save:
-            item = self.itemattrlist[self.currentTabLabel]
-            self.storeItem(item)
-        self.calculate()
+        self.restoreItem(item)
 
     def ClearCurrentItem(self):
+        self.modified = 1
         item = self.itemattrlist[self.currentTabLabel]
         self.itemattrlist[self.currentTabLabel] = item
         self.restoreItem(item)
@@ -1367,10 +1359,6 @@ class ScWindow(QMainWindow, Ui_B_SC):
             self.ItemLevel.setText(str(level))
             self.AFDPS_Edit.setText(str(self.ItemLevelWindow.afdps))
 
-    def EquippedClicked(self):
-        self.storeItem(self.itemattrlist[self.currentTabLabel])
-        self.calculate()
-    
     def newFile(self):
         if self.modified:
             ret = QMessageBox.warning(self, 'Save Changes?', 
@@ -1381,10 +1369,6 @@ class ScWindow(QMainWindow, Ui_B_SC):
         wascalc = self.nocalc
         self.nocalc = 1
         self.initialize()
-        self.ClearCurrentItem()
-        self.nocalc = wascalc
-        self.calculate()
-        self.modified = 0
 
     def saveFile(self):
         if self.filename is None:
