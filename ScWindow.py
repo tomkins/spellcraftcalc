@@ -705,7 +705,7 @@ class ScWindow(QMainWindow, Ui_B_SC):
                 continue
             gemeffect = str(item.slot(slot).effect())
             effect = self.Effect[slot].findText(gemeffect)
-            if effect < 0:
+            if len(gemeffect) and effect < 0:
                 if not self.Effect[slot].isEditable():
                     self.Effect[slot].setEditable(True)
                 self.Effect[slot].setEditText(gemeffect)
