@@ -380,8 +380,12 @@ class MultiTabBar4(QWidget):
             else:
                 y = (i - 1) * maxHeight
                 
-            for j in range(len(self.__tabList[i])):
+            for j in range(self.numTabsInRow(i)):
                 w = rowpcts[i][j] * maxRowWidth
+                # Just pad at the end because Im' lazy
+                if j == self.numTabsInRow(i) - 1 and \
+                        (x + int(w)) < maxRowWidth:
+                    w = maxRowWidth - x
                 self.__tabList[i][j].rect = QRect(x, y, int(w), maxHeight + rowoverlap)
                 x += int(w)
 
