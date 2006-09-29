@@ -203,8 +203,9 @@ class MultiTabBar4(QWidget):
                                      painter, self)
 
         #optTabBase.rect = optTabBase.tabBarRect
-        #self.style().drawPrimitive(QStyle.PE_FrameTabBarBase, optTabBase,
-        #    QPainter(self), self)
+        #optTabBase.rect.setHeight(400)
+        self.style().drawPrimitive(QStyle.PE_FrameTabBarBase, optTabBase,
+            QPainter(self), self)
 
     def mousePressEvent(self, e):
         if e.button() != Qt.LeftButton:
