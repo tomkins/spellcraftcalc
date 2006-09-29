@@ -1175,7 +1175,7 @@
           <enum>QFrame::StyledPanel</enum>
         </property>
         <property name="frameShadow" >
-          <enum>QFrame::Raised</enum>
+          <enum>QFrame::Plain</enum>
         </property>
         <property name="geometry" >
           <rect>
