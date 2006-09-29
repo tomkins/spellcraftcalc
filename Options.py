@@ -214,7 +214,7 @@ class Options(QDialog, Ui_B_Options):
         #if h == 0:
         #    h = 517
         #self.parent.resize(w, h)
-        self.parent.move(x, y)
+        #self.parent.move(x, y)
         self.loadPriceInfo(pricing)
         self.OK_pressed()
             
