@@ -1,3 +1,4 @@
+#!/usr/bin/pythonw
 # CraftBar.py: Dark Age of Camelot Spellcrafting Calculator 
 #
 # See http://kscraft.sourceforge.net/ for updates
