@@ -18,8 +18,11 @@ import locale
 from PyQt4.QtCore import *
 from PyQt4.QtGui import *
 
-QApplication.setDesktopSettingsAware(True)
-QApplication.setApplicationName("Kscalc")
+#QApplication.setApplicationName("Kscalc")
+if sys.platform == "darwin":
+    QApplication.setDesktopSettingsAware(False)
+else:
+    QApplication.setDesktopSettingsAware(True)
 locale.setlocale(locale.LC_ALL, '')
 
 class ScApplication(QApplication):
