@@ -252,10 +252,15 @@ class ScWindow(QMainWindow, Ui_B_SC):
                 self.itemcontrollayout.addStretch(1)
                 col += 1
         self.itemcontrollayout.addWidget(self.DropCraftButtonFrame)
+
         self.itemlayout = QtGui.QGridLayout(self.GroupItemFrame)
         self.itemlayout.setMargin(2)
         self.itemlayout.setSpacing(0)
         row = 0
+        self.itemlayout.addItem(QSpacerItem(1, self.PieceTab.baseOverlap(),
+                                    QSizePolicy.Minimum, QSizePolicy.Fixed),
+                                row,0,1,10)
+        row += 1
         self.itemlayout.addLayout(self.itemcontrollayout,row,0,1,10)
         row += 1
 
@@ -351,6 +356,9 @@ class ScWindow(QMainWindow, Ui_B_SC):
 
         self.tabslayout = QVBoxLayout()
         self.GroupItemFrame.stackUnder(self.PieceTab)
+        #(left, top, right, bottom) = self.GroupItemFrame.getContentsMargins()
+        #top -= self.PieceTab.baseOverlap()
+        #self.GroupItemFrame.setContentsMargins(left, top, right, bottom)
         self.tabslayout.addWidget(self.PieceTab)
         self.tabslayout.addItem(QSpacerItem(1, -self.PieceTab.baseOverlap(),
                                             QSizePolicy.Minimum, QSizePolicy.Fixed))
