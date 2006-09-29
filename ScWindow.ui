@@ -2082,6 +2082,16 @@
             </rect>
           </property>
         </widget>
+        <widget class="SearchingCombo" name="Amount_Drop_6" >
+          <property name="geometry" >
+            <rect>
+              <x>177</x>
+              <y>153</y>
+              <width>52</width>
+              <height>21</height>
+            </rect>
+          </property>
+        </widget>
         <widget class="SearchingCombo" name="Effect_6" >
           <property name="editable" >
             <bool>true</bool>
@@ -2093,6 +2103,61 @@
               <width>206</width>
               <height>21</height>
             </rect>
+          </property>
+        </widget>
+        <widget class="SearchingCombo" name="Quality_6" >
+          <property name="geometry" >
+            <rect>
+              <x>387</x>
+              <y>153</y>
+              <width>52</width>
+              <height>21</height>
+            </rect>
+          </property>
+        </widget>
+        <widget class="QLabel" name="Points_6" >
+          <property name="geometry" >
+            <rect>
+              <x>443</x>
+              <y>153</y>
+              <width>35</width>
+              <height>21</height>
+            </rect>
+          </property>
+          <property name="text" >
+            <string>0.0</string>
+          </property>
+          <property name="alignment" >
+            <set>Qt::AlignVCenter|Qt::AlignRight</set>
+          </property>
+        </widget>
+        <widget class="QLabel" name="Cost_6" >
+          <property name="geometry" >
+            <rect>
+              <x>482</x>
+              <y>153</y>
+              <width>70</width>
+              <height>21</height>
+            </rect>
+          </property>
+          <property name="text" >
+            <string>0c</string>
+          </property>
+          <property name="alignment" >
+            <set>Qt::AlignVCenter|Qt::AlignRight</set>
+          </property>
+        </widget>
+        <widget class="QLabel" name="Name_6" >
+          <property name="geometry" >
+            <rect>
+              <x>562</x>
+              <y>153</y>
+              <width>200</width>
+              <height>21</height>
+            </rect>
+          </property>
+          <property name="text" >
+            <string/>
           </property>
         </widget>
         <widget class="QLabel" name="Gem_Label_7" >
