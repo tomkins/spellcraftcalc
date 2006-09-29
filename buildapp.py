@@ -1,3 +1,4 @@
+#!/usr/bin/python
 #"""
 #Minimal setup.py example, run with:
 #% python setup.py py2app

@@ -1,3 +1,4 @@
+#!/usr/bin/python
 import os
 import sys
 
@@ -10,7 +11,7 @@ files = (
     ('ItemLevel4.ui', 'B_ItemLevel4.py'),
     ('CraftBar.ui', 'B_CraftBar.py'),
     ('Options.ui', 'B_Options.py'),
-    ('CraftBar3.ui', 'B_CraftBar3.py'),
+#   ('CraftBar3.ui', 'B_CraftBar3.py'),
 )
 
 for ui, py in files:
