@@ -18,7 +18,8 @@ import locale
 from PyQt4.QtCore import *
 from PyQt4.QtGui import *
 
-QApplication.setDesktopSettingsAware(0)
+QApplication.setDesktopSettingsAware(True)
+QApplication.setApplicationName("Kscalc")
 locale.setlocale(locale.LC_ALL, '')
 
 class ScApplication(QApplication):
@@ -52,7 +53,8 @@ class ScApplication(QApplication):
            sys.platform == "darwin":
             font.setFamily("Trebuchet MS")
             #font.setFamily("Lucida Grande")
-            font.setPointSize(10)
+            font.setPointSize(12)
+            font.setWeight(QFont.Light)
         elif sys.platform == "win32":
             if sys.getwindowsversion()[3] < 2:
                 font.setFamily("Arial")
