@@ -198,6 +198,9 @@ class ScWindow(QMainWindow, Ui_B_SC):
         self.Quality_5.hide()
         self.Points_5.hide()
         self.Cost_5.hide()
+        self.Quality_6.hide()
+        self.Points_6.hide()
+        self.Cost_6.hide()
 
         ## XXX not calculated yet - we must hide :)
         self.ItemPriceLabel.hide()
@@ -295,7 +298,7 @@ class ScWindow(QMainWindow, Ui_B_SC):
             self.itemlayout.addWidget(self.Type[i],row,1,1,1)
             self.itemlayout.addWidget(self.AmountEdit[i],row,2,1,1)
             self.itemlayout.addWidget(self.Effect[i],row,3,1,1)
-            if i < 5:
+            if i < 6:
                 self.AmountDrop.append(getattr(self, 'Amount_Drop_%d' % idx))
                 self.connect(self.AmountDrop[i],SIGNAL("activated(const QString&)"),
                              self.AmountChanged)
@@ -349,9 +352,8 @@ class ScWindow(QMainWindow, Ui_B_SC):
         self.tabslayout = QVBoxLayout()
         self.GroupItemFrame.stackUnder(self.PieceTab)
         self.tabslayout.addWidget(self.PieceTab)
-        if not str(QApplication.style().objectName()[0:9]).lower() == "macintosh":
-            self.tabslayout.addItem(QSpacerItem(1, -self.PieceTab.baseOverlap(),
-                                                QSizePolicy.Minimum, QSizePolicy.Fixed))
+        self.tabslayout.addItem(QSpacerItem(1, -self.PieceTab.baseOverlap(),
+                                            QSizePolicy.Minimum, QSizePolicy.Fixed))
         self.tabslayout.addWidget(self.GroupItemFrame)
  
         self.mainlayout = QGridLayout(self.ScWinFrame)

@@ -30,8 +30,12 @@ class MultiTabBar4(QWidget):
     def baseOverlap(self):
         taboverlap = QStyleOptionTab()
         taboverlap.shape = QTabBar.RoundedNorth
-        return self.style().pixelMetric(QStyle.PM_TabBarBaseOverlap,
-                                        taboverlap, self)
+        # The overlap doesn't work on mac - it makes things too tight
+        if str(QApplication.style().objectName()[0:9]).lower() == "macintosh":
+            return 2
+        else:
+            return self.style().pixelMetric(QStyle.PM_TabBarBaseOverlap,
+                                            taboverlap, self)
 
     def addTab(self, row, text):
         self.insertTab(row, -1, text)
@@ -335,16 +339,9 @@ class MultiTabBar4(QWidget):
         taboverlap = QStyleOptionTab()
         taboverlap.shape = QTabBar.RoundedNorth
 
-
-        baseoverlap = self.style().pixelMetric(QStyle.PM_TabBarBaseOverlap,
-                                               taboverlap, self)
+        baseoverlap = self.baseOverlap()
         rowoverlap = self.style().pixelMetric(QStyle.PM_TabBarTabShiftVertical,
                                               taboverlap, self) + baseoverlap
-
-        # The overlap doesn't work on mac - it makes things too tight
-        if str(QApplication.style().objectName()[0:9]).lower() == "macintosh":
-            rowoverlap = 0
-
 
         # Horizontal tabs only for now
         mx = 0
