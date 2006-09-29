@@ -412,7 +412,7 @@ class Ui_B_SC(object):
         self.QualDrop.setObjectName("QualDrop")
 
         self.QualEdit = QtGui.QLineEdit(self.GroupItemFrame)
-        self.QualEdit.setGeometry(QtCore.QRect(160,5,51,21))
+        self.QualEdit.setGeometry(QtCore.QRect(160,5,52,21))
         self.QualEdit.setObjectName("QualEdit")
 
         self.ItemBonusLabel = QtGui.QLabel(self.GroupItemFrame)
@@ -699,10 +699,32 @@ class Ui_B_SC(object):
         self.Amount_Edit_6.setGeometry(QtCore.QRect(177,153,51,21))
         self.Amount_Edit_6.setObjectName("Amount_Edit_6")
 
+        self.Amount_Drop_6 = SearchingCombo(self.GroupItemFrame)
+        self.Amount_Drop_6.setGeometry(QtCore.QRect(177,153,52,21))
+        self.Amount_Drop_6.setObjectName("Amount_Drop_6")
+
         self.Effect_6 = SearchingCombo(self.GroupItemFrame)
         self.Effect_6.setEditable(True)
         self.Effect_6.setGeometry(QtCore.QRect(233,153,206,21))
         self.Effect_6.setObjectName("Effect_6")
+
+        self.Quality_6 = SearchingCombo(self.GroupItemFrame)
+        self.Quality_6.setGeometry(QtCore.QRect(387,153,52,21))
+        self.Quality_6.setObjectName("Quality_6")
+
+        self.Points_6 = QtGui.QLabel(self.GroupItemFrame)
+        self.Points_6.setGeometry(QtCore.QRect(443,153,35,21))
+        self.Points_6.setAlignment(QtCore.Qt.AlignVCenter|QtCore.Qt.AlignRight)
+        self.Points_6.setObjectName("Points_6")
+
+        self.Cost_6 = QtGui.QLabel(self.GroupItemFrame)
+        self.Cost_6.setGeometry(QtCore.QRect(482,153,70,21))
+        self.Cost_6.setAlignment(QtCore.Qt.AlignVCenter|QtCore.Qt.AlignRight)
+        self.Cost_6.setObjectName("Cost_6")
+
+        self.Name_6 = QtGui.QLabel(self.GroupItemFrame)
+        self.Name_6.setGeometry(QtCore.QRect(562,153,200,21))
+        self.Name_6.setObjectName("Name_6")
 
         self.Gem_Label_7 = QtGui.QLabel(self.GroupItemFrame)
         self.Gem_Label_7.setGeometry(QtCore.QRect(7,174,34,21))
@@ -1019,6 +1041,8 @@ class Ui_B_SC(object):
         self.Points_5.setText(QtGui.QApplication.translate("B_SC", "0.0", None, QtGui.QApplication.UnicodeUTF8))
         self.Cost_5.setText(QtGui.QApplication.translate("B_SC", "0c", None, QtGui.QApplication.UnicodeUTF8))
         self.Gem_Label_6.setText(QtGui.QApplication.translate("B_SC", "Slot 6: ", None, QtGui.QApplication.UnicodeUTF8))
+        self.Points_6.setText(QtGui.QApplication.translate("B_SC", "0.0", None, QtGui.QApplication.UnicodeUTF8))
+        self.Cost_6.setText(QtGui.QApplication.translate("B_SC", "0c", None, QtGui.QApplication.UnicodeUTF8))
         self.Gem_Label_7.setText(QtGui.QApplication.translate("B_SC", "Slot 7: ", None, QtGui.QApplication.UnicodeUTF8))
         self.Gem_Label_8.setText(QtGui.QApplication.translate("B_SC", "Slot 8: ", None, QtGui.QApplication.UnicodeUTF8))
         self.Gem_Label_9.setText(QtGui.QApplication.translate("B_SC", "Slot 9: ", None, QtGui.QApplication.UnicodeUTF8))
