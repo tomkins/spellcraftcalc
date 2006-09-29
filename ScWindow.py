@@ -596,7 +596,7 @@ class ScWindow(QMainWindow, Ui_B_SC):
 
         self.itemattrlist = { }
         for tab in TabList:
-            self.itemattrlist[tab] = Item(tab)
+            self.itemattrlist[tab] = Item(realm=self.realm,loc=tab)
         self.ItemLevel.setText('51')
         self.CharLevel.setText('50')
 
@@ -937,10 +937,9 @@ class ScWindow(QMainWindow, Ui_B_SC):
                 elif imbue > (itemimbue+0.5):
                     success = -OCStartPercentages[int(imbue-itemimbue)]
                     for slot in item.slots():
-                        if slot.type() == 'Unused':
-                            success += GemQualOCModifiers['94']
-                        else:
-                            success += GemQualOCModifiers[slot.qua()]
+                        if item.slot(i).slotType != 'crafted': continue
+                        if slot.type() == 'Unused': continue
+                        success += GemQualOCModifiers[slot.qua()]
                     success += ItemQualOCModifiers[str(self.QualDrop.currentText())]
                     skillbonus = (int(self.crafterSkill / 50) - 10) * 5
                     if skillbonus > 50: skillbonus = 50
@@ -952,6 +951,7 @@ class ScWindow(QMainWindow, Ui_B_SC):
                     self.ItemImbueTotal.setText(' / ' + unicode(itemimbue))
                     self.ItemCost.setText(SC.formatCost(itemcost))
                     for i in range(0, item.slotCount()):
+                        if item.slot(i).slotType != 'crafted': continue
                         n = self.Name[i]
                         n.setText(item.slot(i).gemName())
                         if item.slot(i).done() == "1":
@@ -1128,7 +1128,8 @@ class ScWindow(QMainWindow, Ui_B_SC):
         typetext = str(typecombo.currentText())
         effcombo = self.Effect[num]
         efftext = str(effcombo.currentText())
-        if self.PlayerMade.isChecked():
+        itemslot = self.itemattrlist[self.currentTabLabel].slot(num)
+        if itemslot.slotType() == 'crafted':
             amount = self.AmountDrop[num]
         else:
             amount = self.AmountEdit[num]
@@ -1291,9 +1292,9 @@ class ScWindow(QMainWindow, Ui_B_SC):
             return
         if not a0: 
             return
-        self.showDropWidgets()
         item = self.itemattrlist[self.currentTabLabel]
         item.loadAttr('ActiveState','drop')
+        self.showDropWidgets()
         self.restoreItem(item)
 
     def PlayerToggled(self, a0):
@@ -1301,16 +1302,15 @@ class ScWindow(QMainWindow, Ui_B_SC):
             return
         if not a0: 
             return
-        self.showPlayerWidgets()
         item = self.itemattrlist[self.currentTabLabel]
         item.loadAttr('ActiveState','player')
+        self.showPlayerWidgets()
         self.restoreItem(item)
 
     def ClearCurrentItem(self):
         self.modified = 1
-        item = self.itemattrlist[self.currentTabLabel]
-        self.itemattrlist[self.currentTabLabel] = item
-        self.restoreItem(item)
+        self.itemattrlist[self.currentTabLabel] = Item(realm=self.realm,loc=self.currentTabLabel)
+        self.restoreItem(self.itemattrlist[self.currentTabLabel])
 
     def Save_Item(self):
         itemname = unicode(self.ItemName.text())

@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
 
-# Form implementation generated from reading ui file 'DisplayWindow.ui4'
+# Form implementation generated from reading ui file 'DisplayWindow.ui'
 #
-# Created: Wed Sep 06 17:41:31 2006
+# Created: Fri Sep 29 17:30:13 2006
 #      by: PyQt4 UI code generator 4.0.1
 #
 # WARNING! All changes made in this file will be lost!

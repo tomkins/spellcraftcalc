@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
 
-# Form implementation generated from reading ui file 'ScWindow.ui4'
+# Form implementation generated from reading ui file 'ScWindow.ui'
 #
-# Created: Sun Sep 24 19:49:58 2006
+# Created: Fri Sep 29 17:30:10 2006
 #      by: PyQt4 UI code generator 4.0.1
 #
 # WARNING! All changes made in this file will be lost!
@@ -386,7 +386,7 @@ class Ui_B_SC(object):
 
         self.GroupItemFrame = QtGui.QFrame(self.ScWinFrame)
         self.GroupItemFrame.setFrameShape(QtGui.QFrame.StyledPanel)
-        self.GroupItemFrame.setFrameShadow(QtGui.QFrame.Raised)
+        self.GroupItemFrame.setFrameShadow(QtGui.QFrame.Plain)
         self.GroupItemFrame.setGeometry(QtCore.QRect(3,235,776,265))
         self.GroupItemFrame.setObjectName("GroupItemFrame")
 

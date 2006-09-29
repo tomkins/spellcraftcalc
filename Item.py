@@ -46,6 +46,12 @@ class ItemSlot:
         if self.Type == 'Focus' and len(self.Effect) > 6 and self.Effect[-6:] == ' Focus':
             self.Effect = self.Effect[:-6]
 
+    def slotType(self):
+        return self.SlotType
+    def setSlotType(self, slottype):
+        self.CraftOk = False
+        self.SlotType=unicode(slottype)
+
     def type(self):
         return self.Type
     def setType(self, type):
@@ -218,36 +224,29 @@ class Item:
             'Speed' : '', 'Bonus' : '',
             'ItemQuality' : '',
             'Equipped' : '', 'Level' : ''}
-        self.itemslots = { 'drop' : range(1, 11),
-            'player' : range(1, 6) }
+        self.itemslots = { 'drop' : range(1, 11), }
 
-        if loc == 'Neck' \
-                or loc == 'Cloak' \
-                or loc == 'Jewel' \
-                or loc == 'Belt' \
-                or loc == 'Left Ring' \
-                or loc == 'Right Ring' \
-                or loc == 'Left Wrist' \
-                or loc == 'Right Wrist':
+        if loc in JewelTabList:
             self.ActiveState = 'drop'
         else:
+            if loc == 'Right Hand' or loc == 'Left Hand' \
+                    or loc == '2 Handed' or loc == 'Ranged' \
+                    or loc == 'Spare':
+                self.Equipped = '0'
+            else:
+                self.Equipped = '1'
             self.ActiveState = 'player'
-        if loc == 'Right Hand' \
-                or loc == 'Left Hand' \
-                or loc == '2 Handed' \
-                or loc == 'Ranged' \
-                or loc == 'Spare':
-            self.Equipped = '0'
-        else:
-            self.Equipped = '1'
+	    self.itemslots['player'] = range(1, 7) 
 
         self.Location = loc
         self.Level = '51'
         self.Quality = '99'
 
-        for it in ('drop', 'player'):
+        for it in self.itemslots.keys():
+            slottype = it
             for i in range(0, len(self.itemslots[it])):
-                self.itemslots[it][i] = ItemSlot(slottype=it, realm=realm)
+                if i == 5: slottype = 'drop'
+                self.itemslots[it][i] = ItemSlot(slottype=slottype, realm=realm)
 
     def slot(self, index):
         return self.itemslots[self.ActiveState][index]
