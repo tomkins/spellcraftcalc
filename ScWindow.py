@@ -114,8 +114,6 @@ class ScWindow(QMainWindow, Ui_B_SC):
                 size.setHeight(height)
                 ctl.setSizePolicy(QSizePolicy(sizePolicy))
                 ctl.setMaximumSize(size)
-        height = min(self.CharName.minimumSizeHint().height(),
-                     self.Realm.minimumSizeHint().height())
 
         sizePolicy = QSizePolicy(QSizePolicy.Expanding, QSizePolicy.Fixed)
         for ctl in (self.GroupCharInfo.children() + [self.ItemName]):
