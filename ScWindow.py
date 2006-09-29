@@ -98,8 +98,12 @@ class ScWindow(QMainWindow, Ui_B_SC):
 
         self.EffectWidths = [self.Effect_1.width(), self.Effect_10.width()]
 
-        height = min(self.CharName.minimumSizeHint().height(),
-                     self.Realm.minimumSizeHint().height())
+        if str(QApplication.style().objectName()[0:9]).lower() == "macintosh":
+            height = max(self.CharName.sizeHint().height(),
+                         self.Realm.sizeHint().height())
+        else:
+            height = min(self.CharName.minimumSizeHint().height(),
+                         self.Realm.minimumSizeHint().height())
 
         sizePolicy = QSizePolicy(QSizePolicy.Fixed, QSizePolicy.Fixed)
         for ctl in (self.GroupItemFrame.children() + [self.CharLevel]):
@@ -183,8 +187,9 @@ class ScWindow(QMainWindow, Ui_B_SC):
         self.setWindowTitle("Kort's Spellcrafting Calulator")
         self.fixtabs = True
 
-        #self.statusBar().setSizeGripEnabled(0)
         self.statusBar().hide()
+        if str(QApplication.style().objectName()[0:9]).lower() == "macintosh":
+            self.sizegrip = QSizeGrip(self)
 
         self.CharLevel.setValidator(QIntValidator(0, 99, self))
         self.ItemLevel.setValidator(QIntValidator(0, 99, self))
@@ -329,6 +334,8 @@ class ScWindow(QMainWindow, Ui_B_SC):
         self.itembuttonlayout.addWidget(self.CraftButton,2,0,1,2)
         self.itembuttonlayout.addWidget(self.SaveItem,2,0,1,2)
         self.itembuttonlayout.addWidget(self.ClearItem,3,0,1,2)
+        if str(QApplication.style().objectName()[0:9]).lower() == "macintosh":
+            self.itembuttonlayout.addWidget(self.sizegrip,4,2,1,1)
         self.itemlayout.addLayout(self.itembuttonlayout,row-5,9,5,1)
 
         self.itemlayout.addWidget(self.ItemImbueLabel,row-4,3,1,2)
@@ -458,9 +465,6 @@ class ScWindow(QMainWindow, Ui_B_SC):
             act.setData(QVariant(piece))
             self.swapGems.addAction(act)
         self.connect(self.swapGems, SIGNAL("triggered(QAction*)"), self.swapWith)
-        #self.swapGems.addAction(PieceTabList[piece], piece)
-        #self.swapGems.connectItem(piece, self.swapWith)
-        #self.swapGems.setItemParameter(piece, piece)
 
         self.editmenu = QMenu('&Edit', self)
         self.editmenu.addMenu(self.swapGems)
@@ -1673,10 +1677,6 @@ class ScWindow(QMainWindow, Ui_B_SC):
            self.DelveItemsDialog(shortname, 'Resist')
         else:
            self.DelveItemsDialog(shortname)
-
-    #def resizeEvent(self, e):
-    #    sz = e.size()
-    #    QMainWindow.resizeEvent(self, e)
 
     def SkillClicked(self,a0):
         if a0 is None: return
