@@ -2,15 +2,15 @@ import os
 import sys
 
 files = (
-    ('ScWindow.ui4', 'B_ScWindow.py'),
-    ('CraftWindow.ui4', 'B_CraftWindow.py'),
-    ('DisplayWindow.ui4', 'B_DisplayWindow.py'),
-    ('ReportWindow.ui4', 'B_ReportWindow.py'),
-    ('ItemLevel.ui4', 'B_ItemLevel.py'),
+    ('ScWindow.ui', 'B_ScWindow.py'),
+    ('CraftWindow.ui', 'B_CraftWindow.py'),
+    ('DisplayWindow.ui', 'B_DisplayWindow.py'),
+    ('ReportWindow.ui', 'B_ReportWindow.py'),
+    ('ItemLevel.ui', 'B_ItemLevel.py'),
     ('ItemLevel4.ui', 'B_ItemLevel4.py'),
-    ('CraftBar.ui4', 'B_CraftBar.py'),
-    ('Options.ui4', 'B_Options.py'),
-    ('CraftBar3.ui4', 'B_CraftBar3.py'),
+    ('CraftBar.ui', 'B_CraftBar.py'),
+    ('Options.ui', 'B_Options.py'),
+    ('CraftBar3.ui', 'B_CraftBar3.py'),
 )
 
 for ui, py in files:
