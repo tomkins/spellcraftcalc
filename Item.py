@@ -46,6 +46,12 @@ class ItemSlot:
         if self.Type == 'Focus' and len(self.Effect) > 6 and self.Effect[-6:] == ' Focus':
             self.Effect = self.Effect[:-6]
 
+    def slotType(self):
+        return self.SlotType
+    def setSlotType(self, slottype):
+        self.CraftOk = False
+        self.SlotType=unicode(slottype)
+
     def type(self):
         return self.Type
     def setType(self, type):
@@ -218,8 +224,8 @@ class Item:
             'Speed' : '', 'Bonus' : '',
             'ItemQuality' : '',
             'Equipped' : '', 'Level' : ''}
-        self.itemslots = { 'drop' : range(1, 11),
-            'player' : range(1, 6) }
+        self.itemslots = { 'drop' : range(0, 12),
+            'player' : range(0, 6) }
 
         if loc == 'Neck' \
                 or loc == 'Cloak' \

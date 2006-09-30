@@ -12,7 +12,7 @@
         <x>0</x>
         <y>0</y>
         <width>781</width>
-        <height>525</height>
+        <height>567</height>
       </rect>
     </property>
     <property name="windowTitle" >
@@ -1182,7 +1182,7 @@
             <x>3</x>
             <y>235</y>
             <width>776</width>
-            <height>265</height>
+            <height>307</height>
           </rect>
         </property>
         <widget class="QLabel" name="ItemLevelLabel" >
@@ -1436,6 +1436,19 @@
             <string> Effect</string>
           </property>
         </widget>
+        <widget class="QLabel" name="LabelRequirement" >
+          <property name="geometry" >
+            <rect>
+              <x>391</x>
+              <y>31</y>
+              <width>100</width>
+              <height>21</height>
+            </rect>
+          </property>
+          <property name="text" >
+            <string>Requirement: </string>
+          </property>
+        </widget>
         <widget class="QLabel" name="LabelGemQuality" >
           <property name="geometry" >
             <rect>
@@ -1560,6 +1573,16 @@
             </rect>
           </property>
         </widget>
+        <widget class="QLineEdit" name="Requirement_1" >
+          <property name="geometry" >
+            <rect>
+              <x>387</x>
+              <y>48</y>
+              <width>165</width>
+              <height>21</height>
+            </rect>
+          </property>
+        </widget>
         <widget class="QLabel" name="Points_1" >
           <property name="geometry" >
             <rect>
@@ -1667,6 +1690,16 @@
               <x>387</x>
               <y>69</y>
               <width>52</width>
+              <height>21</height>
+            </rect>
+          </property>
+        </widget>
+        <widget class="QLineEdit" name="Requirement_2" >
+          <property name="geometry" >
+            <rect>
+              <x>387</x>
+              <y>69</y>
+              <width>165</width>
               <height>21</height>
             </rect>
           </property>
@@ -1782,6 +1815,16 @@
             </rect>
           </property>
         </widget>
+        <widget class="QLineEdit" name="Requirement_3" >
+          <property name="geometry" >
+            <rect>
+              <x>387</x>
+              <y>90</y>
+              <width>165</width>
+              <height>21</height>
+            </rect>
+          </property>
+        </widget>
         <widget class="QLabel" name="Points_3" >
           <property name="geometry" >
             <rect>
@@ -1893,6 +1936,16 @@
             </rect>
           </property>
         </widget>
+        <widget class="QLineEdit" name="Requirement_4" >
+          <property name="geometry" >
+            <rect>
+              <x>387</x>
+              <y>111</y>
+              <width>165</width>
+              <height>21</height>
+            </rect>
+          </property>
+        </widget>
         <widget class="QLabel" name="Points_4" >
           <property name="geometry" >
             <rect>
@@ -1989,51 +2042,19 @@
             <rect>
               <x>233</x>
               <y>132</y>
-              <width>206</width>
+              <width>150</width>
               <height>21</height>
             </rect>
           </property>
         </widget>
-        <widget class="SearchingCombo" name="Quality_5" >
+        <widget class="QLineEdit" name="Requirement_5" >
           <property name="geometry" >
             <rect>
               <x>387</x>
               <y>132</y>
-              <width>52</width>
+              <width>165</width>
               <height>21</height>
             </rect>
-          </property>
-        </widget>
-        <widget class="QLabel" name="Points_5" >
-          <property name="geometry" >
-            <rect>
-              <x>443</x>
-              <y>132</y>
-              <width>35</width>
-              <height>21</height>
-            </rect>
-          </property>
-          <property name="text" >
-            <string>0.0</string>
-          </property>
-          <property name="alignment" >
-            <set>Qt::AlignVCenter|Qt::AlignRight</set>
-          </property>
-        </widget>
-        <widget class="QLabel" name="Cost_5" >
-          <property name="geometry" >
-            <rect>
-              <x>482</x>
-              <y>132</y>
-              <width>70</width>
-              <height>21</height>
-            </rect>
-          </property>
-          <property name="text" >
-            <string>0c</string>
-          </property>
-          <property name="alignment" >
-            <set>Qt::AlignVCenter|Qt::AlignRight</set>
           </property>
         </widget>
         <widget class="QLabel" name="Name_5" >
@@ -2100,51 +2121,19 @@
             <rect>
               <x>233</x>
               <y>153</y>
-              <width>206</width>
+              <width>150</width>
               <height>21</height>
             </rect>
           </property>
         </widget>
-        <widget class="SearchingCombo" name="Quality_6" >
+        <widget class="QLineEdit" name="Requirement_6" >
           <property name="geometry" >
             <rect>
               <x>387</x>
               <y>153</y>
-              <width>52</width>
+              <width>165</width>
               <height>21</height>
             </rect>
-          </property>
-        </widget>
-        <widget class="QLabel" name="Points_6" >
-          <property name="geometry" >
-            <rect>
-              <x>443</x>
-              <y>153</y>
-              <width>35</width>
-              <height>21</height>
-            </rect>
-          </property>
-          <property name="text" >
-            <string>0.0</string>
-          </property>
-          <property name="alignment" >
-            <set>Qt::AlignVCenter|Qt::AlignRight</set>
-          </property>
-        </widget>
-        <widget class="QLabel" name="Cost_6" >
-          <property name="geometry" >
-            <rect>
-              <x>482</x>
-              <y>153</y>
-              <width>70</width>
-              <height>21</height>
-            </rect>
-          </property>
-          <property name="text" >
-            <string>0c</string>
-          </property>
-          <property name="alignment" >
-            <set>Qt::AlignVCenter|Qt::AlignRight</set>
           </property>
         </widget>
         <widget class="QLabel" name="Name_6" >
@@ -2201,7 +2190,17 @@
             <rect>
               <x>233</x>
               <y>174</y>
-              <width>206</width>
+              <width>150</width>
+              <height>21</height>
+            </rect>
+          </property>
+        </widget>
+        <widget class="QLineEdit" name="Requirement_7" >
+          <property name="geometry" >
+            <rect>
+              <x>387</x>
+              <y>174</y>
+              <width>165</width>
               <height>21</height>
             </rect>
           </property>
@@ -2247,7 +2246,17 @@
             <rect>
               <x>233</x>
               <y>195</y>
-              <width>206</width>
+              <width>150</width>
+              <height>21</height>
+            </rect>
+          </property>
+        </widget>
+        <widget class="QLineEdit" name="Requirement_8" >
+          <property name="geometry" >
+            <rect>
+              <x>387</x>
+              <y>195</y>
+              <width>165</width>
               <height>21</height>
             </rect>
           </property>
@@ -2293,7 +2302,17 @@
             <rect>
               <x>233</x>
               <y>216</y>
-              <width>206</width>
+              <width>150</width>
+              <height>21</height>
+            </rect>
+          </property>
+        </widget>
+        <widget class="QLineEdit" name="Requirement_9" >
+          <property name="geometry" >
+            <rect>
+              <x>387</x>
+              <y>216</y>
+              <width>165</width>
               <height>21</height>
             </rect>
           </property>
@@ -2339,7 +2358,129 @@
             <rect>
               <x>233</x>
               <y>237</y>
-              <width>206</width>
+              <width>150</width>
+              <height>21</height>
+            </rect>
+          </property>
+        </widget>
+        <widget class="QLineEdit" name="Requirement_10" >
+          <property name="geometry" >
+            <rect>
+              <x>387</x>
+              <y>237</y>
+              <width>165</width>
+              <height>21</height>
+            </rect>
+          </property>
+        </widget>
+        <widget class="QLabel" name="Gem_Label_11" >
+          <property name="geometry" >
+            <rect>
+              <x>7</x>
+              <y>258</y>
+              <width>41</width>
+              <height>21</height>
+            </rect>
+          </property>
+          <property name="text" >
+            <string>Slot 11:</string>
+          </property>
+        </widget>
+        <widget class="SearchingCombo" name="Type_11" >
+          <property name="geometry" >
+            <rect>
+              <x>46</x>
+              <y>258</y>
+              <width>127</width>
+              <height>21</height>
+            </rect>
+          </property>
+        </widget>
+        <widget class="QLineEdit" name="Amount_Edit_11" >
+          <property name="geometry" >
+            <rect>
+              <x>177</x>
+              <y>258</y>
+              <width>51</width>
+              <height>21</height>
+            </rect>
+          </property>
+        </widget>
+        <widget class="SearchingCombo" name="Effect_11" >
+          <property name="editable" >
+            <bool>true</bool>
+          </property>
+          <property name="geometry" >
+            <rect>
+              <x>233</x>
+              <y>258</y>
+              <width>150</width>
+              <height>21</height>
+            </rect>
+          </property>
+        </widget>
+        <widget class="QLineEdit" name="Requirement_11" >
+          <property name="geometry" >
+            <rect>
+              <x>387</x>
+              <y>258</y>
+              <width>165</width>
+              <height>21</height>
+            </rect>
+          </property>
+        </widget>
+        <widget class="QLabel" name="Gem_Label_12" >
+          <property name="geometry" >
+            <rect>
+              <x>7</x>
+              <y>279</y>
+              <width>41</width>
+              <height>21</height>
+            </rect>
+          </property>
+          <property name="text" >
+            <string>Slot 12:</string>
+          </property>
+        </widget>
+        <widget class="SearchingCombo" name="Type_12" >
+          <property name="geometry" >
+            <rect>
+              <x>46</x>
+              <y>279</y>
+              <width>127</width>
+              <height>21</height>
+            </rect>
+          </property>
+        </widget>
+        <widget class="QLineEdit" name="Amount_Edit_12" >
+          <property name="geometry" >
+            <rect>
+              <x>177</x>
+              <y>279</y>
+              <width>51</width>
+              <height>21</height>
+            </rect>
+          </property>
+        </widget>
+        <widget class="SearchingCombo" name="Effect_12" >
+          <property name="editable" >
+            <bool>true</bool>
+          </property>
+          <property name="geometry" >
+            <rect>
+              <x>233</x>
+              <y>279</y>
+              <width>150</width>
+              <height>21</height>
+            </rect>
+          </property>
+        </widget>
+        <widget class="QLineEdit" name="Requirement_12" >
+          <property name="geometry" >
+            <rect>
+              <x>387</x>
+              <y>279</y>
+              <width>165</width>
               <height>21</height>
             </rect>
           </property>
@@ -2626,41 +2767,59 @@
     <tabstop>Amount_Drop_1</tabstop>
     <tabstop>Effect_1</tabstop>
     <tabstop>Quality_1</tabstop>
+    <tabstop>Requirement_1</tabstop>
     <tabstop>Type_2</tabstop>
     <tabstop>Amount_Edit_2</tabstop>
     <tabstop>Amount_Drop_2</tabstop>
     <tabstop>Effect_2</tabstop>
     <tabstop>Quality_2</tabstop>
+    <tabstop>Requirement_2</tabstop>
     <tabstop>Type_3</tabstop>
     <tabstop>Amount_Edit_3</tabstop>
     <tabstop>Amount_Drop_3</tabstop>
     <tabstop>Effect_3</tabstop>
     <tabstop>Quality_3</tabstop>
+    <tabstop>Requirement_3</tabstop>
     <tabstop>Type_4</tabstop>
     <tabstop>Amount_Edit_4</tabstop>
     <tabstop>Amount_Drop_4</tabstop>
     <tabstop>Effect_4</tabstop>
     <tabstop>Quality_4</tabstop>
+    <tabstop>Requirement_4</tabstop>
     <tabstop>Type_5</tabstop>
     <tabstop>Amount_Edit_5</tabstop>
     <tabstop>Amount_Drop_5</tabstop>
     <tabstop>Effect_5</tabstop>
-    <tabstop>Quality_5</tabstop>
+    <tabstop>Requirement_5</tabstop>
     <tabstop>Type_6</tabstop>
     <tabstop>Amount_Edit_6</tabstop>
+    <tabstop>Amount_Drop_6</tabstop>
     <tabstop>Effect_6</tabstop>
+    <tabstop>Requirement_6</tabstop>
     <tabstop>Type_7</tabstop>
     <tabstop>Amount_Edit_7</tabstop>
     <tabstop>Effect_7</tabstop>
+    <tabstop>Requirement_7</tabstop>
     <tabstop>Type_8</tabstop>
     <tabstop>Amount_Edit_8</tabstop>
     <tabstop>Effect_8</tabstop>
+    <tabstop>Requirement_8</tabstop>
     <tabstop>Type_9</tabstop>
     <tabstop>Amount_Edit_9</tabstop>
     <tabstop>Effect_9</tabstop>
+    <tabstop>Requirement_9</tabstop>
     <tabstop>Type_10</tabstop>
     <tabstop>Amount_Edit_10</tabstop>
     <tabstop>Effect_10</tabstop>
+    <tabstop>Requirement_10</tabstop>
+    <tabstop>Type_11</tabstop>
+    <tabstop>Amount_Edit_11</tabstop>
+    <tabstop>Effect_11</tabstop>
+    <tabstop>Requirement_11</tabstop>
+    <tabstop>Type_12</tabstop>
+    <tabstop>Amount_Edit_12</tabstop>
+    <tabstop>Effect_12</tabstop>
+    <tabstop>Requirement_12</tabstop>
     <tabstop>CraftButton</tabstop>
     <tabstop>LoadItem</tabstop>
     <tabstop>SaveItem</tabstop>
