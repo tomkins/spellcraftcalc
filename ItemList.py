@@ -55,9 +55,8 @@ class ItemPreview(QListWidget):
             if not gemtype or gemtype == 'Unused':
                 continue
             effect = self.item.slot(i).effect()
-            amount = int(self.item.slot(i).amount())
-            statstr = self.item.slot(i).amount()
-            statstr += ' ' + effect()
+            amount = self.item.slot(i).amount()
+            statstr = amount + ' ' + effect
             if self.item.slot(i).type() == 'Cap Increase':
                 statstr += ' Cap Increase'
             stattext.append(statstr)
@@ -68,19 +67,19 @@ class ItemPreview(QListWidget):
                     or effect == 'All Dual Wield Skills'\
                     or effect == 'All Archery Skills':
                     for e in AllBonusList[self.realm][self.charclass][effect]:
-                        utility += amount * 5
+                        utility += int(amount) * 5
                 else:
-                    utility += amount * 5
+                    utility += int(amount) * 5
             elif gemtype == 'Focus':
                 utility += 1
             elif gemtype == 'Power':
-                utility += amount * 2
+                utility += int(amount) * 2
             elif gemtype == 'Hits':
-                utility += amount / 4.0
+                utility += int(amount) / 4.0
             elif gemtype == 'Resist':
-                utility += amount * 2
+                utility += int(amount) * 2
             elif gemtype == 'Stat':
-                utility += amount * 2.0 / 3.0
+                utility += int(amount) * 2.0 / 3.0
 
         listtext = [
             str(self.item.getAttr('ItemName')),

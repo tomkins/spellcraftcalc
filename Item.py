@@ -12,13 +12,18 @@ import re
 import types
 from PyQt4.QtGui import *
 from MyStringIO import UnicodeStringIO
+import sys
 
 class ItemSlot:
     def __init__(self, slottype='player', type='Unused', amount='', effect='', 
                  qua='94', realm='All', time='0', remakes='0', done='0'):
-        self.SlotType = slottype
+        self.__dict__ = { 
+            'SlotType' : unicode(slottype),
+            'Type': '',     'Effect' : '',
+            'Amount' : '',  'Realm' : '',
+            'Qua' : '',     'Time' : '',
+            'Remakes' : '', 'Done' : '', }
         self.setAll(type, amount, effect, qua, realm, time, remakes, done)
-        self.CraftOk = False
 
     def setAll(self, type='Unused', amount='', effect='', qua='94', 
                realm='All', time='0', remakes='0', done='0'):
@@ -31,14 +36,29 @@ class ItemSlot:
         self.Remakes = unicode(remakes)
         self.Done = unicode(done)
         self.fixEffect()
+        self.CraftOk = False
+
+    def asXML(self,document,slotnode,realm):
+        if self.SlotType == 'player':
+            keys = ['Type', 'Effect', 'Amount', 'Qua', 'Remakes', 'Time', 'Done', ]
+        else:
+            keys = ['Type', 'Effect', 'Amount', ]
+        if realm != self.Realm:
+            keys.append('Realm')
+        for attrkey in keys:
+            valnode = document.createElement(unicode(attrkey))
+            valtext = document.createTextNode(self.getAttr(attrkey))
+            valnode.appendChild(valtext)
+            slotnode.appendChild(valnode)
 
     def getAttr(self, attrname):
         if self.__dict__.has_key(attrname):
             return self.__dict__[attrname]
+
     def setAttr(self, attrname, value):
         self.CraftOk = False
         if self.__dict__.has_key(attrname):
-            self.__dict__[attrname] = value
+            self.__dict__[attrname] = unicode(value)
 
     def fixEffect(self):
         if FixEffectsTable.has_key(self.Effect):
@@ -56,8 +76,10 @@ class ItemSlot:
         return self.Type
     def setType(self, type):
         self.CraftOk = False
-        if self.Type == 'Unused':
-            self.setAll(type=unicode(type))
+        if self.Type == 'Unused' or self.Type == '':
+            self.setAll()
+        else:
+            self.Type=unicode(type)
 
     def amount(self):
         return self.Amount
@@ -293,21 +315,16 @@ class Item:
             elem.appendChild(document.createTextNode(val))
             rootnode.appendChild(elem)
 
-        for (key, val) in self.itemslots.items():
+        for (key, slots) in self.itemslots.iteritems():
             #if key != self.ActiveState: continue
             statenode = document.createElement(unicode(string.upper(key)+'ITEM'))
             rootnode.appendChild(statenode)
-            for slot in range(0, len(val)):
-                if val[slot]["Type"] == "Unused": continue
+            for num in range(0,len(slots)):
+                if slots[num].type() == "Unused": continue
                 slotnode = document.createElement(unicode('SLOT'))
-                slotnode.setAttribute(unicode("Number"), unicode(slot))
+                slotnode.setAttribute(unicode("Number"), unicode(num))
+                slots[num].asXML(document,slotnode,self.Realm)
                 statenode.appendChild(slotnode)
-                for (slotkey, slotval) in val[slot].items():
-                    valnode = document.createElement(unicode(slotkey))
-                    valtext = document.createTextNode(unicode(slotval))
-                    valnode.appendChild(valtext)
-                    slotnode.appendChild(valnode)
-
         return document
     
     def save(self, filename):
@@ -363,22 +380,25 @@ class Item:
                 item_match = re.compile("(\w+)ITEM").match(child.tagName)
                 if item_match is not None:
                     type = string.lower(item_match.group(1))
-                    type_node = child
-                    for slot in type_node.childNodes:
+                    slotnum = -1
+                    for slot in child.childNodes:
                         if slot.nodeType == Node.TEXT_NODE: continue
                         slot_match = re.compile("SLOT(\d+)").match(slot.tagName)
                         if slot_match is None:
-                            slotnum = slot.getAttribute("Number")
-                            if slotnum == '' or slotnum is None:
-                                continue
-                            slotnum = int(slotnum)
+                            slotval = slot.getAttribute("Number")
+                            if slotval == '' or slotval is None:
+                                slotnum = slotnum + 1
+                            else:
+                                slotnum = int(slotval)
                         else:
                             slotnum = int(slot_match.group(1))
+                        itemslot = self.itemslots[type][slotnum]
                         for attr in slot.childNodes:
                             if attr.nodeType == Node.TEXT_NODE: continue
-                            attrval = XMLHelper.getText(attr.childNodes)
-                            self.itemslots[type][slotnum].setAttr(attr.tagName, attrval)
-                        self.itemslots[type][slotnum].fixEffect()
+                            val = XMLHelper.getText(attr.childNodes)
+                            if itemslot.__dict__.has_key(attr.tagName):
+                                 itemslot.setAttr(attr.tagName, val)
+                        itemslot.fixEffect()
 
     def importLela(self, f):
         f.seek(0)
