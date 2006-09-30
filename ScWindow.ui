@@ -210,7 +210,7 @@
             <set>Qt::AlignVCenter|Qt::AlignRight</set>
           </property>
         </widget>
-        <widget class="QLabel" name="ItemTotalUtilityLabel" >
+        <widget class="QLabel" name="TotalUtilityLabel" >
           <property name="geometry" >
             <rect>
               <x>6</x>
@@ -226,7 +226,7 @@
             <set>Qt::AlignVCenter|Qt::AlignLeft</set>
           </property>
         </widget>
-        <widget class="QLabel" name="ItemTotalUtility" >
+        <widget class="QLabel" name="TotalUtility" >
           <property name="geometry" >
             <rect>
               <x>84</x>
@@ -2642,7 +2642,7 @@
             <string>Utility: </string>
           </property>
           <property name="alignment" >
-            <set>Qt::AlignVCenter|Qt::AlignLeft</set>
+            <set>Qt::AlignVCenter|Qt::AlignRight</set>
           </property>
         </widget>
         <widget class="QLabel" name="ItemUtility" >
