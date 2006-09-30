@@ -2661,58 +2661,6 @@
             <string>0.0</string>
           </property>
         </widget>
-        <widget class="QPushButton" name="LoadItem" >
-          <property name="geometry" >
-            <rect>
-              <x>683</x>
-              <y>165</y>
-              <width>79</width>
-              <height>26</height>
-            </rect>
-          </property>
-          <property name="text" >
-            <string>Load Item</string>
-          </property>
-        </widget>
-        <widget class="QPushButton" name="CraftButton" >
-          <property name="geometry" >
-            <rect>
-              <x>683</x>
-              <y>199</y>
-              <width>79</width>
-              <height>26</height>
-            </rect>
-          </property>
-          <property name="text" >
-            <string>Craft...</string>
-          </property>
-        </widget>
-        <widget class="QPushButton" name="SaveItem" >
-          <property name="geometry" >
-            <rect>
-              <x>683</x>
-              <y>199</y>
-              <width>79</width>
-              <height>26</height>
-            </rect>
-          </property>
-          <property name="text" >
-            <string>Save Item</string>
-          </property>
-        </widget>
-        <widget class="QPushButton" name="ClearItem" >
-          <property name="geometry" >
-            <rect>
-              <x>683</x>
-              <y>233</y>
-              <width>79</width>
-              <height>26</height>
-            </rect>
-          </property>
-          <property name="text" >
-            <string>Clear Item</string>
-          </property>
-        </widget>
       </widget>
       <widget class="MultiTabBar4" name="PieceTab" >
         <property name="geometry" >
