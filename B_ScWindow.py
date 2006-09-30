@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'ScWindow.ui'
 #
-# Created: Sat Sep 30 00:09:55 2006
+# Created: Sat Sep 30 01:23:32 2006
 #      by: PyQt4 UI code generator 4.0.1
 #
 # WARNING! All changes made in this file will be lost!
@@ -84,15 +84,15 @@ class Ui_B_SC(object):
         self.TotalPrice.setAlignment(QtCore.Qt.AlignVCenter|QtCore.Qt.AlignRight)
         self.TotalPrice.setObjectName("TotalPrice")
 
-        self.ItemTotalUtilityLabel = QtGui.QLabel(self.GroupCharInfo)
-        self.ItemTotalUtilityLabel.setGeometry(QtCore.QRect(6,160,70,16))
-        self.ItemTotalUtilityLabel.setAlignment(QtCore.Qt.AlignVCenter|QtCore.Qt.AlignLeft)
-        self.ItemTotalUtilityLabel.setObjectName("ItemTotalUtilityLabel")
+        self.TotalUtilityLabel = QtGui.QLabel(self.GroupCharInfo)
+        self.TotalUtilityLabel.setGeometry(QtCore.QRect(6,160,70,16))
+        self.TotalUtilityLabel.setAlignment(QtCore.Qt.AlignVCenter|QtCore.Qt.AlignLeft)
+        self.TotalUtilityLabel.setObjectName("TotalUtilityLabel")
 
-        self.ItemTotalUtility = QtGui.QLabel(self.GroupCharInfo)
-        self.ItemTotalUtility.setGeometry(QtCore.QRect(84,160,74,16))
-        self.ItemTotalUtility.setAlignment(QtCore.Qt.AlignVCenter|QtCore.Qt.AlignRight)
-        self.ItemTotalUtility.setObjectName("ItemTotalUtility")
+        self.TotalUtility = QtGui.QLabel(self.GroupCharInfo)
+        self.TotalUtility.setGeometry(QtCore.QRect(84,160,74,16))
+        self.TotalUtility.setAlignment(QtCore.Qt.AlignVCenter|QtCore.Qt.AlignRight)
+        self.TotalUtility.setObjectName("TotalUtility")
 
         self.GroupStats = QtGui.QGroupBox(self.ScWinFrame)
         self.GroupStats.setGeometry(QtCore.QRect(5,3,94,182))
@@ -899,7 +899,7 @@ class Ui_B_SC(object):
 
         self.ItemUtilityLabel = QtGui.QLabel(self.GroupItemFrame)
         self.ItemUtilityLabel.setGeometry(QtCore.QRect(585,237,35,17))
-        self.ItemUtilityLabel.setAlignment(QtCore.Qt.AlignVCenter|QtCore.Qt.AlignLeft)
+        self.ItemUtilityLabel.setAlignment(QtCore.Qt.AlignVCenter|QtCore.Qt.AlignRight)
         self.ItemUtilityLabel.setObjectName("ItemUtilityLabel")
 
         self.ItemUtility = QtGui.QLabel(self.GroupItemFrame)
@@ -1002,8 +1002,8 @@ class Ui_B_SC(object):
         self.TotalCost.setText(QtGui.QApplication.translate("B_SC", "0", None, QtGui.QApplication.UnicodeUTF8))
         self.TotalPriceLabel.setText(QtGui.QApplication.translate("B_SC", "Price: ", None, QtGui.QApplication.UnicodeUTF8))
         self.TotalPrice.setText(QtGui.QApplication.translate("B_SC", "0", None, QtGui.QApplication.UnicodeUTF8))
-        self.ItemTotalUtilityLabel.setText(QtGui.QApplication.translate("B_SC", "Total Utility: ", None, QtGui.QApplication.UnicodeUTF8))
-        self.ItemTotalUtility.setText(QtGui.QApplication.translate("B_SC", "0.0", None, QtGui.QApplication.UnicodeUTF8))
+        self.TotalUtilityLabel.setText(QtGui.QApplication.translate("B_SC", "Total Utility: ", None, QtGui.QApplication.UnicodeUTF8))
+        self.TotalUtility.setText(QtGui.QApplication.translate("B_SC", "0.0", None, QtGui.QApplication.UnicodeUTF8))
         self.GroupStats.setTitle(QtGui.QApplication.translate("B_SC", "Stats", None, QtGui.QApplication.UnicodeUTF8))
         self.StrengthLabel.setText(QtGui.QApplication.translate("B_SC", "STR: ", None, QtGui.QApplication.UnicodeUTF8))
         self.Strength.setText(QtGui.QApplication.translate("B_SC", "0", None, QtGui.QApplication.UnicodeUTF8))

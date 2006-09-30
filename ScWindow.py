@@ -97,8 +97,6 @@ class ScWindow(QMainWindow, Ui_B_SC):
 
         testfont = QFontMetrics(qApp.font())
 
-        self.EffectWidths = [self.Effect_1.width(), self.Effect_12.width()]
-
         if str(QApplication.style().objectName()[0:9]).lower() == "macintosh":
             height = max(self.CharName.sizeHint().height(),
                          self.Realm.sizeHint().height())
@@ -111,19 +109,14 @@ class ScWindow(QMainWindow, Ui_B_SC):
             if ((ctl.metaObject().className() == "QLineEdit" or 
                  ctl.metaObject().className() == "QComboBox") and 
                 ctl.objectName() != "ItemName"):
-                size = ctl.size()
-                size.setHeight(height)
-                ctl.setSizePolicy(QSizePolicy(sizePolicy))
-                ctl.setMaximumSize(size)
+                ctl.setFixedSize(QSize(ctl.width(), height))
 
         sizePolicy = QSizePolicy(QSizePolicy.Expanding, QSizePolicy.Fixed)
         for ctl in (self.GroupCharInfo.children() + [self.ItemName]):
             if ((ctl.metaObject().className() == "QLineEdit" or 
                  ctl.metaObject().className() == "QComboBox") and 
                 ctl.objectName() != "CharLevel"):
-                size.setHeight(height)
-                ctl.setSizePolicy(QSizePolicy(sizePolicy))
-                ctl.setMaximumHeight(height)
+                ctl.setFixedSize(QSize(ctl.width(), height))
 
         self.statlayout = QtGui.QGridLayout(self.GroupStats)
         self.statlayout.setMargin(3)
@@ -180,8 +173,8 @@ class ScWindow(QMainWindow, Ui_B_SC):
             self.charlayout.addWidget(getattr(self, stat + 'Label'),row,0,1,1)
             self.charlayout.addWidget(getattr(self, stat),row,1,1,2)
             row += 1
-        self.charlayout.addWidget(self.ItemTotalUtilityLabel,row,0,1,2)
-        self.charlayout.addWidget(self.ItemTotalUtility,row,2,1,1)
+        self.charlayout.addWidget(self.TotalUtilityLabel,row,0,1,2)
+        self.charlayout.addWidget(self.TotalUtility,row,2,1,1)
 
         self.setWindowTitle("Kort's Spellcrafting Calulator")
         self.fixtabs = True
@@ -348,8 +341,8 @@ class ScWindow(QMainWindow, Ui_B_SC):
         self.itemlayout.addWidget(self.ItemCost,row-3,6,1,1)
         self.itemlayout.addWidget(self.ItemPriceLabel,row-2,3,1,2)
         self.itemlayout.addWidget(self.ItemPrice,row-2,6,1,1)
-        self.itemlayout.addWidget(self.ItemUtilityLabel,row-1,3,1,1)
-        self.itemlayout.addWidget(self.ItemUtility,row-1,5,1,1)
+        self.itemlayout.addWidget(self.ItemUtilityLabel,row-2,8,1,1)
+        self.itemlayout.addWidget(self.ItemUtility,row-2,9,1,1)
         if str(QApplication.style().objectName()[0:9]).lower() == "macintosh":
             self.itemlayout.addWidget(self.sizegrip,row-1,9,1,1)
 
@@ -523,11 +516,14 @@ class ScWindow(QMainWindow, Ui_B_SC):
             # Create the (sometimes used) edit boxes
             self.setTabOrder(prev,self.Type[i])
             self.setTabOrder(self.Type[i],self.AmountEdit[i])
-            if i < 4:
+            if i < 6:
                 self.setTabOrder(self.AmountEdit[i],self.AmountDrop[i])
                 self.setTabOrder(self.AmountDrop[i],self.Effect[i])
-                self.setTabOrder(self.Effect[i],self.Quality[i])
-                self.setTabOrder(self.Quality[i],self.Requirement[i])
+                if i < 4:
+                    self.setTabOrder(self.Effect[i],self.Quality[i])
+                    self.setTabOrder(self.Quality[i],self.Requirement[i])
+                else:
+                    self.setTabOrder(self.Effect[i],self.Requirement[i])
             else:
                 self.setTabOrder(self.AmountEdit[i],self.Effect[i])
                 self.setTabOrder(self.Effect[i],self.Requirement[i])
@@ -539,20 +535,13 @@ class ScWindow(QMainWindow, Ui_B_SC):
         self.setTabOrder(prev,self.SkillsList)
         self.setTabOrder(self.SkillsList,self.OtherBonusList)
 
-    def showWideEffects(self, wide):
-        width = self.EffectWidths[wide]
-        for num in range(0, 5):
-            self.Effect[num].setMaximumWidth(width)
-        self.itemlayout.setColumnMinimumWidth(3,width)
-        
     def showDropWidgets(self):
         self.GroupItemFrame.hide()
         for w in self.switchOnType['player']:
             w.hide()
         for w in self.switchOnType['drop']:
             w.show()
-        self.showWideEffects(1)
-        for i in range(0,5):
+        for i in range(0,4):
             self.GemLabel[i].setEnabled(1)
             self.GemLabel[i].setText('Slot %d:' % (i + 1))
         self.GroupItemFrame.show()
@@ -563,11 +552,9 @@ class ScWindow(QMainWindow, Ui_B_SC):
             w.show()
         for w in self.switchOnType['drop']:
             w.hide()
-        self.showWideEffects(0)
-        for i in range(0,5):
+        for i in range(0,4):
             self.GemLabel[i].setEnabled(1)
             self.GemLabel[i].setText('Gem %d:' % (i + 1))
-        self.GemLabel[4].setText('Proc:')
         self.GroupItemFrame.show()
 
     def closeEvent(self, e):
@@ -1010,7 +997,7 @@ class ScWindow(QMainWindow, Ui_B_SC):
                 else:
                     capmod = 0
                 getattr(self, key).setText(unicode(int(basecap + capmod) - val))
-        self.ItemTotalUtility.setText('%3.1f' % totalutility)
+        self.TotalUtility.setText('%3.1f' % totalutility)
         self.TotalCost.setText(SC.formatCost(totalcost))
         self.SkillsList.clear()
         self.OtherBonusList.clear()
@@ -1201,7 +1188,7 @@ class ScWindow(QMainWindow, Ui_B_SC):
                         amtindex = 0
                     if amtindex < len(valueslist):
                         amount.setCurrentIndex(amtindex)
-                if type == 0:
+                if num < 4 and type == 0:
                     self.Quality[num].setCurrentIndex(len(QualityValues)-2)
 
     def RaceChanged(self, a0):
