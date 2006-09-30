@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'ScWindow.ui'
 #
-# Created: Fri Sep 29 20:09:26 2006
+# Created: Sat Sep 30 00:09:55 2006
 #      by: PyQt4 UI code generator 4.0.1
 #
 # WARNING! All changes made in this file will be lost!
@@ -907,22 +907,6 @@ class Ui_B_SC(object):
         self.ItemUtility.setAlignment(QtCore.Qt.AlignVCenter|QtCore.Qt.AlignRight)
         self.ItemUtility.setObjectName("ItemUtility")
 
-        self.LoadItem = QtGui.QPushButton(self.GroupItemFrame)
-        self.LoadItem.setGeometry(QtCore.QRect(683,165,79,26))
-        self.LoadItem.setObjectName("LoadItem")
-
-        self.CraftButton = QtGui.QPushButton(self.GroupItemFrame)
-        self.CraftButton.setGeometry(QtCore.QRect(683,199,79,26))
-        self.CraftButton.setObjectName("CraftButton")
-
-        self.SaveItem = QtGui.QPushButton(self.GroupItemFrame)
-        self.SaveItem.setGeometry(QtCore.QRect(683,199,79,26))
-        self.SaveItem.setObjectName("SaveItem")
-
-        self.ClearItem = QtGui.QPushButton(self.GroupItemFrame)
-        self.ClearItem.setGeometry(QtCore.QRect(683,233,79,26))
-        self.ClearItem.setObjectName("ClearItem")
-
         self.PieceTab = MultiTabBar4(self.ScWinFrame)
         self.PieceTab.setGeometry(QtCore.QRect(3,190,776,46))
         self.PieceTab.setObjectName("PieceTab")
@@ -1003,11 +987,7 @@ class Ui_B_SC(object):
         B_SC.setTabOrder(self.Type_12,self.Amount_Edit_12)
         B_SC.setTabOrder(self.Amount_Edit_12,self.Effect_12)
         B_SC.setTabOrder(self.Effect_12,self.Requirement_12)
-        B_SC.setTabOrder(self.Requirement_12,self.CraftButton)
-        B_SC.setTabOrder(self.CraftButton,self.LoadItem)
-        B_SC.setTabOrder(self.LoadItem,self.SaveItem)
-        B_SC.setTabOrder(self.SaveItem,self.ClearItem)
-        B_SC.setTabOrder(self.ClearItem,self.SkillsList)
+        B_SC.setTabOrder(self.Requirement_12,self.SkillsList)
         B_SC.setTabOrder(self.SkillsList,self.OtherBonusList)
 
     def retranslateUi(self, B_SC):
@@ -1131,7 +1111,3 @@ class Ui_B_SC(object):
         self.ItemPriceLabel.setText(QtGui.QApplication.translate("B_SC", "Item Price: ", None, QtGui.QApplication.UnicodeUTF8))
         self.ItemUtilityLabel.setText(QtGui.QApplication.translate("B_SC", "Utility: ", None, QtGui.QApplication.UnicodeUTF8))
         self.ItemUtility.setText(QtGui.QApplication.translate("B_SC", "0.0", None, QtGui.QApplication.UnicodeUTF8))
-        self.LoadItem.setText(QtGui.QApplication.translate("B_SC", "Load Item", None, QtGui.QApplication.UnicodeUTF8))
-        self.CraftButton.setText(QtGui.QApplication.translate("B_SC", "Craft...", None, QtGui.QApplication.UnicodeUTF8))
-        self.SaveItem.setText(QtGui.QApplication.translate("B_SC", "Save Item", None, QtGui.QApplication.UnicodeUTF8))
-        self.ClearItem.setText(QtGui.QApplication.translate("B_SC", "Clear Item", None, QtGui.QApplication.UnicodeUTF8))

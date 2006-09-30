@@ -83,14 +83,15 @@ class ScWindow(QMainWindow, Ui_B_SC):
 
         self.switchOnType = {'drop' : [], 'player' : [] }
         self.switchOnType['drop'] = [ 
-            self.QualEdit, self.SaveItem, self.ItemName, self.LabelRequirement,
+            self.QualEdit, self.ItemName, self.LabelRequirement,
+            ## self.SaveItem, XXX gone
         ]
         self.switchOnType['player'] = [
-            self.QualDrop, self.CraftButton, 
             self.LabelGemQuality, self.LabelGemPoints, self.LabelGemCost,
             self.ItemImbueLabel, self.ItemImbue, self.ItemImbueTotal,
-            self.ItemOverchargeLabel, self.ItemOvercharge,
-            self.ItemCostLabel, self.ItemCost,
+            self.ItemOverchargeLabel, self.ItemOvercharge, 
+            self.ItemCostLabel, self.ItemCost, self.QualDrop,
+            ## self.CraftButton, XXX gone
             ## self.ItemPriceLabel, self.ItemPrice, XXX not calculated yet
         ]
 
@@ -329,18 +330,14 @@ class ScWindow(QMainWindow, Ui_B_SC):
             self.itemlayout.setRowMinimumHeight(row, height)
             row += 1
 
-        self.itembuttonlayout = QtGui.QGridLayout()
-        self.itembuttonlayout.setMargin(0)
-        self.itembuttonlayout.setSpacing(3)
-        self.itembuttonlayout.addWidget(self.ItemUtilityLabel,0,0,1,1)
-        self.itembuttonlayout.addWidget(self.ItemUtility,0,1,1,1)
-        self.itembuttonlayout.addWidget(self.LoadItem,1,0,1,2)
-        self.itembuttonlayout.addWidget(self.CraftButton,2,0,1,2)
-        self.itembuttonlayout.addWidget(self.SaveItem,2,0,1,2)
-        self.itembuttonlayout.addWidget(self.ClearItem,3,0,1,2)
-        if str(QApplication.style().objectName()[0:9]).lower() == "macintosh":
-            self.itembuttonlayout.addWidget(self.sizegrip,4,2,1,1)
-        self.itemlayout.addLayout(self.itembuttonlayout,row-6,9,6,1)
+        #self.itembuttonlayout = QtGui.QGridLayout()
+        #self.itembuttonlayout.setMargin(0)
+        #self.itembuttonlayout.setSpacing(3)
+        #self.itembuttonlayout.addWidget(self.LoadItem,1,0,1,2)
+        #self.itembuttonlayout.addWidget(self.CraftButton,2,0,1,2)
+        #self.itembuttonlayout.addWidget(self.SaveItem,2,0,1,2)
+        #self.itembuttonlayout.addWidget(self.ClearItem,3,0,1,2)
+        #self.itemlayout.addLayout(self.itembuttonlayout,row-6,9,6,1)
 
         self.itemlayout.addWidget(self.ItemImbueLabel,row-5,3,1,2)
         self.itemlayout.addWidget(self.ItemImbue,row-5,5,1,1)
@@ -351,6 +348,10 @@ class ScWindow(QMainWindow, Ui_B_SC):
         self.itemlayout.addWidget(self.ItemCost,row-3,6,1,1)
         self.itemlayout.addWidget(self.ItemPriceLabel,row-2,3,1,2)
         self.itemlayout.addWidget(self.ItemPrice,row-2,6,1,1)
+        self.itemlayout.addWidget(self.ItemUtilityLabel,row-1,3,1,1)
+        self.itemlayout.addWidget(self.ItemUtility,row-1,5,1,1)
+        if str(QApplication.style().objectName()[0:9]).lower() == "macintosh":
+            self.itemlayout.addWidget(self.sizegrip,row-1,9,1,1)
 
         self.tabslayout = QVBoxLayout()
         self.GroupItemFrame.stackUnder(self.PieceTab)
@@ -421,10 +422,10 @@ class ScWindow(QMainWindow, Ui_B_SC):
         self.connect(self.PlayerMade,SIGNAL("toggled(bool)"),self.PlayerToggled)
         self.connect(self.Drop,SIGNAL("toggled(bool)"),self.DropToggled)
         self.connect(self.Equipped,SIGNAL("clicked()"),self.EquippedClicked)
-        self.connect(self.LoadItem,SIGNAL("clicked()"),self.Load_Item)
-        self.connect(self.SaveItem,SIGNAL("clicked()"),self.Save_Item)
-        self.connect(self.CraftButton,SIGNAL("clicked()"),self.OpenCraftWindow)
-        self.connect(self.ClearItem,SIGNAL("clicked()"),self.ClearCurrentItem)
+        #self.connect(self.LoadItem,SIGNAL("clicked()"),self.loadItem)
+        #self.connect(self.SaveItem,SIGNAL("clicked()"),self.saveItem)
+        #self.connect(self.CraftButton,SIGNAL("clicked()"),self.openCraftWindow)
+        #self.connect(self.ClearItem,SIGNAL("clicked()"),self.clearCurrentItem)
         self.connect(self.SkillsList,SIGNAL("itemActivated(QListWidgetItem*)"),
                      self.SkillClicked)
         self.connect(self.OtherBonusList,SIGNAL("itemActivated(QListWidgetItem*)"),
@@ -455,6 +456,11 @@ class ScWindow(QMainWindow, Ui_B_SC):
         self.filemenu.addAction('&Save', self.saveFile, QKeySequence(Qt.CTRL+Qt.Key_S))
         self.filemenu.addAction('Save &As...', self.saveAsFile)
         self.filemenu.addSeparator()
+        self.filemenu.addAction('&Load Item...', self.loadItem,
+                                QKeySequence(Qt.CTRL+Qt.SHIFT+Qt.Key_L))
+        self.filemenu.addAction('&Save Item...', self.saveItem,
+                                QKeySequence(Qt.CTRL+Qt.SHIFT+Qt.Key_S))
+        self.filemenu.addSeparator()
         self.filemenu.addAction('Export &Quickbars...', self.openCraftBars)
         self.filemenu.addAction('Export &UI XML (Beta)...', self.generateUIXML)
         self.filemenu.addSeparator()
@@ -465,7 +471,7 @@ class ScWindow(QMainWindow, Ui_B_SC):
 
         self.updateRecentFiles(None)
 
-        self.swapGems = QMenu('S&wap Gems With...', self)
+        self.swapGems = QMenu('S&wap Gems With', self)
         for piece in range(0,len(PieceTabList)):
             act = QAction(PieceTabList[piece], self)
             act.setData(QVariant(piece))
@@ -473,22 +479,27 @@ class ScWindow(QMainWindow, Ui_B_SC):
         self.connect(self.swapGems, SIGNAL("triggered(QAction*)"), self.swapWith)
 
         self.editmenu = QMenu('&Edit', self)
+        self.editmenu.addAction('&Clear Item', self.clearCurrentItem)
         self.editmenu.addMenu(self.swapGems)
         self.editmenu.addSeparator()
-        self.editmenu.addAction('&Options...', self.openOptions)
+        self.editmenu.addAction('&Options...', self.openOptions,
+                                QKeySequence(Qt.ALT+Qt.Key_O))
         self.menuBar().addMenu(self.editmenu)
 
         self.viewmenu = QMenu('&View', self)
-        self.showcapmenuid = self.viewmenu.addAction('Distance to &Cap', self.showCap)
-        self.showcapmenuid.setCheckable(True)
-        self.showcapmenuid.setChecked(self.capDistance)
-        self.viewmenu.addSeparator()
-        self.viewmenu.addAction('Conf. Report', self.openConfigReport,
-                                QKeySequence(Qt.CTRL+Qt.Key_C))
-        self.viewmenu.addAction('Choose Format...', self.chooseReportFile)
+        self.viewmenu.addAction('&Gem Crafting', self.openCraftWindow,
+                                QKeySequence(Qt.ALT+Qt.Key_G))
         self.viewmenu.addSeparator()
         self.viewmenu.addAction('&Materials', self.openMaterialsReport,
-                                QKeySequence(Qt.CTRL+Qt.Key_M))
+                                QKeySequence(Qt.ALT+Qt.Key_M))
+        self.viewmenu.addAction('&Configuration', self.openConfigReport,
+                                QKeySequence(Qt.ALT+Qt.Key_C))
+        self.viewmenu.addAction('Choose Format...', self.chooseReportFile)
+        self.viewmenu.addSeparator()
+        self.showcapmenuid = self.viewmenu.addAction('&Distance to Cap', self.showCap,
+                                                     QKeySequence(Qt.ALT+Qt.Key_D))
+        self.showcapmenuid.setCheckable(True)
+        self.showcapmenuid.setChecked(self.capDistance)
         self.menuBar().addMenu(self.viewmenu)
 
         self.errorsmenu = QMenu('Errors', self)
@@ -521,11 +532,11 @@ class ScWindow(QMainWindow, Ui_B_SC):
                 self.setTabOrder(self.AmountEdit[i],self.Effect[i])
                 self.setTabOrder(self.Effect[i],self.Requirement[i])
             prev = self.Requirement[i]
-        self.setTabOrder(prev,self.CraftButton)
-        self.setTabOrder(self.CraftButton,self.LoadItem)
-        self.setTabOrder(self.CraftButton,self.SaveItem)
-        self.setTabOrder(self.SaveItem,self.ClearItem)
-        self.setTabOrder(self.ClearItem,self.SkillsList)
+        #self.setTabOrder(prev,self.CraftButton)
+        #self.setTabOrder(self.CraftButton,self.LoadItem)
+        #self.setTabOrder(self.CraftButton,self.SaveItem)
+        #self.setTabOrder(self.SaveItem,self.ClearItem)
+        self.setTabOrder(prev,self.SkillsList)
         self.setTabOrder(self.SkillsList,self.OtherBonusList)
 
     def showWideEffects(self, wide):
@@ -690,7 +701,8 @@ class ScWindow(QMainWindow, Ui_B_SC):
                 item.slot(slot).setAmount(self.AmountEdit[slot].text())
             else:
                 item.slot(slot).setAmount(self.AmountDrop[slot].currentText())
-                item.slot(slot).setQua(self.Quality[slot].currentText())
+		if slot < 4:
+                    item.slot(slot).setQua(self.Quality[slot].currentText())
         self.itemattrlist[self.currentTabLabel] = item
 
     def restoreItem(self, item):
@@ -1126,7 +1138,7 @@ class ScWindow(QMainWindow, Ui_B_SC):
         effcombo = self.Effect[num]
         efftext = str(effcombo.currentText())
         itemslot = self.itemattrlist[self.currentTabLabel].slot(num)
-        if itemslot.slotType() == 'crafted':
+        if self.PlayerMade.isChecked():
             amount = self.AmountDrop[num]
         else:
             amount = self.AmountEdit[num]
@@ -1304,12 +1316,12 @@ class ScWindow(QMainWindow, Ui_B_SC):
         self.showPlayerWidgets()
         self.restoreItem(item)
 
-    def ClearCurrentItem(self):
+    def clearCurrentItem(self):
         self.modified = 1
         self.itemattrlist[self.currentTabLabel] = Item(realm=self.realm,loc=self.currentTabLabel)
         self.restoreItem(self.itemattrlist[self.currentTabLabel])
 
-    def Save_Item(self):
+    def saveItem(self):
         itemname = unicode(self.ItemName.text())
         if itemname == '':
             QMessageBox.critical(None, 'Error!', 
@@ -1331,7 +1343,7 @@ class ScWindow(QMainWindow, Ui_B_SC):
         QMessageBox.information(None, 'Success!',
                 '%s successfully saved!' % itemname, 'OK')
         
-    def Load_Item(self):
+    def loadItem(self):
         ext = FileExt[self.currentTabLabel]
         extstr = ''
         if not isinstance(ext, types.StringType):
@@ -1492,7 +1504,7 @@ class ScWindow(QMainWindow, Ui_B_SC):
         wascalc = self.nocalc
         self.nocalc = 1
         self.initialize()
-        self.ClearCurrentItem()
+        self.clearCurrentItem()
         racename = ''
         classname = ''
         for child in template.childNodes:
@@ -1537,7 +1549,7 @@ class ScWindow(QMainWindow, Ui_B_SC):
         wascalc = self.nocalc
         self.nocalc = 1
         self.initialize()
-        self.ClearCurrentItem()
+        self.clearCurrentItem()
         sublines = filter(lambda(x): re.compile('^ITEM').match(x) is None, scclines)
         for line in sublines:
             line = string.strip(line, " \n\r")
@@ -1577,7 +1589,7 @@ class ScWindow(QMainWindow, Ui_B_SC):
         self.nocalc = 0
         self.calculate()
 
-    def OpenCraftWindow(self):
+    def openCraftWindow(self):
         self.storeItem(self.itemattrlist[self.currentTabLabel])
         CW = CraftWindow.CraftWindow(self, '', 1)
         CW.loadItem(self.itemattrlist.get(self.currentTabLabel))
