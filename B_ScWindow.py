@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'ScWindow.ui'
 #
-# Created: Fri Sep 29 17:30:10 2006
+# Created: Fri Sep 29 20:09:26 2006
 #      by: PyQt4 UI code generator 4.0.1
 #
 # WARNING! All changes made in this file will be lost!
@@ -15,7 +15,7 @@ from PyQt4 import QtCore, QtGui
 class Ui_B_SC(object):
     def setupUi(self, B_SC):
         B_SC.setObjectName("B_SC")
-        B_SC.resize(QtCore.QSize(QtCore.QRect(0,0,781,525).size()).expandedTo(B_SC.minimumSizeHint()))
+        B_SC.resize(QtCore.QSize(QtCore.QRect(0,0,781,567).size()).expandedTo(B_SC.minimumSizeHint()))
 
         self.ScWinFrame = QtGui.QWidget(B_SC)
         self.ScWinFrame.setObjectName("ScWinFrame")
@@ -387,7 +387,7 @@ class Ui_B_SC(object):
         self.GroupItemFrame = QtGui.QFrame(self.ScWinFrame)
         self.GroupItemFrame.setFrameShape(QtGui.QFrame.StyledPanel)
         self.GroupItemFrame.setFrameShadow(QtGui.QFrame.Plain)
-        self.GroupItemFrame.setGeometry(QtCore.QRect(3,235,776,265))
+        self.GroupItemFrame.setGeometry(QtCore.QRect(3,235,776,307))
         self.GroupItemFrame.setObjectName("GroupItemFrame")
 
         self.ItemLevelLabel = QtGui.QLabel(self.GroupItemFrame)
@@ -474,6 +474,10 @@ class Ui_B_SC(object):
         self.LabelGemEffect.setGeometry(QtCore.QRect(237,31,142,17))
         self.LabelGemEffect.setObjectName("LabelGemEffect")
 
+        self.LabelRequirement = QtGui.QLabel(self.GroupItemFrame)
+        self.LabelRequirement.setGeometry(QtCore.QRect(391,31,100,21))
+        self.LabelRequirement.setObjectName("LabelRequirement")
+
         self.LabelGemQuality = QtGui.QLabel(self.GroupItemFrame)
         self.LabelGemQuality.setGeometry(QtCore.QRect(391,31,44,17))
         self.LabelGemQuality.setObjectName("LabelGemQuality")
@@ -517,6 +521,10 @@ class Ui_B_SC(object):
         self.Quality_1.setGeometry(QtCore.QRect(387,48,52,21))
         self.Quality_1.setObjectName("Quality_1")
 
+        self.Requirement_1 = QtGui.QLineEdit(self.GroupItemFrame)
+        self.Requirement_1.setGeometry(QtCore.QRect(387,48,165,21))
+        self.Requirement_1.setObjectName("Requirement_1")
+
         self.Points_1 = QtGui.QLabel(self.GroupItemFrame)
         self.Points_1.setGeometry(QtCore.QRect(443,48,35,21))
         self.Points_1.setAlignment(QtCore.Qt.AlignVCenter|QtCore.Qt.AlignRight)
@@ -555,6 +563,10 @@ class Ui_B_SC(object):
         self.Quality_2 = SearchingCombo(self.GroupItemFrame)
         self.Quality_2.setGeometry(QtCore.QRect(387,69,52,21))
         self.Quality_2.setObjectName("Quality_2")
+
+        self.Requirement_2 = QtGui.QLineEdit(self.GroupItemFrame)
+        self.Requirement_2.setGeometry(QtCore.QRect(387,69,165,21))
+        self.Requirement_2.setObjectName("Requirement_2")
 
         self.Points_2 = QtGui.QLabel(self.GroupItemFrame)
         self.Points_2.setGeometry(QtCore.QRect(443,69,35,21))
@@ -595,6 +607,10 @@ class Ui_B_SC(object):
         self.Quality_3.setGeometry(QtCore.QRect(387,90,52,21))
         self.Quality_3.setObjectName("Quality_3")
 
+        self.Requirement_3 = QtGui.QLineEdit(self.GroupItemFrame)
+        self.Requirement_3.setGeometry(QtCore.QRect(387,90,165,21))
+        self.Requirement_3.setObjectName("Requirement_3")
+
         self.Points_3 = QtGui.QLabel(self.GroupItemFrame)
         self.Points_3.setGeometry(QtCore.QRect(443,90,35,21))
         self.Points_3.setAlignment(QtCore.Qt.AlignVCenter|QtCore.Qt.AlignRight)
@@ -634,6 +650,10 @@ class Ui_B_SC(object):
         self.Quality_4.setGeometry(QtCore.QRect(387,111,52,21))
         self.Quality_4.setObjectName("Quality_4")
 
+        self.Requirement_4 = QtGui.QLineEdit(self.GroupItemFrame)
+        self.Requirement_4.setGeometry(QtCore.QRect(387,111,165,21))
+        self.Requirement_4.setObjectName("Requirement_4")
+
         self.Points_4 = QtGui.QLabel(self.GroupItemFrame)
         self.Points_4.setGeometry(QtCore.QRect(443,111,35,21))
         self.Points_4.setAlignment(QtCore.Qt.AlignVCenter|QtCore.Qt.AlignRight)
@@ -666,22 +686,12 @@ class Ui_B_SC(object):
 
         self.Effect_5 = SearchingCombo(self.GroupItemFrame)
         self.Effect_5.setEditable(True)
-        self.Effect_5.setGeometry(QtCore.QRect(233,132,206,21))
+        self.Effect_5.setGeometry(QtCore.QRect(233,132,150,21))
         self.Effect_5.setObjectName("Effect_5")
 
-        self.Quality_5 = SearchingCombo(self.GroupItemFrame)
-        self.Quality_5.setGeometry(QtCore.QRect(387,132,52,21))
-        self.Quality_5.setObjectName("Quality_5")
-
-        self.Points_5 = QtGui.QLabel(self.GroupItemFrame)
-        self.Points_5.setGeometry(QtCore.QRect(443,132,35,21))
-        self.Points_5.setAlignment(QtCore.Qt.AlignVCenter|QtCore.Qt.AlignRight)
-        self.Points_5.setObjectName("Points_5")
-
-        self.Cost_5 = QtGui.QLabel(self.GroupItemFrame)
-        self.Cost_5.setGeometry(QtCore.QRect(482,132,70,21))
-        self.Cost_5.setAlignment(QtCore.Qt.AlignVCenter|QtCore.Qt.AlignRight)
-        self.Cost_5.setObjectName("Cost_5")
+        self.Requirement_5 = QtGui.QLineEdit(self.GroupItemFrame)
+        self.Requirement_5.setGeometry(QtCore.QRect(387,132,165,21))
+        self.Requirement_5.setObjectName("Requirement_5")
 
         self.Name_5 = QtGui.QLabel(self.GroupItemFrame)
         self.Name_5.setGeometry(QtCore.QRect(562,132,200,21))
@@ -705,22 +715,12 @@ class Ui_B_SC(object):
 
         self.Effect_6 = SearchingCombo(self.GroupItemFrame)
         self.Effect_6.setEditable(True)
-        self.Effect_6.setGeometry(QtCore.QRect(233,153,206,21))
+        self.Effect_6.setGeometry(QtCore.QRect(233,153,150,21))
         self.Effect_6.setObjectName("Effect_6")
 
-        self.Quality_6 = SearchingCombo(self.GroupItemFrame)
-        self.Quality_6.setGeometry(QtCore.QRect(387,153,52,21))
-        self.Quality_6.setObjectName("Quality_6")
-
-        self.Points_6 = QtGui.QLabel(self.GroupItemFrame)
-        self.Points_6.setGeometry(QtCore.QRect(443,153,35,21))
-        self.Points_6.setAlignment(QtCore.Qt.AlignVCenter|QtCore.Qt.AlignRight)
-        self.Points_6.setObjectName("Points_6")
-
-        self.Cost_6 = QtGui.QLabel(self.GroupItemFrame)
-        self.Cost_6.setGeometry(QtCore.QRect(482,153,70,21))
-        self.Cost_6.setAlignment(QtCore.Qt.AlignVCenter|QtCore.Qt.AlignRight)
-        self.Cost_6.setObjectName("Cost_6")
+        self.Requirement_6 = QtGui.QLineEdit(self.GroupItemFrame)
+        self.Requirement_6.setGeometry(QtCore.QRect(387,153,165,21))
+        self.Requirement_6.setObjectName("Requirement_6")
 
         self.Name_6 = QtGui.QLabel(self.GroupItemFrame)
         self.Name_6.setGeometry(QtCore.QRect(562,153,200,21))
@@ -740,8 +740,12 @@ class Ui_B_SC(object):
 
         self.Effect_7 = SearchingCombo(self.GroupItemFrame)
         self.Effect_7.setEditable(True)
-        self.Effect_7.setGeometry(QtCore.QRect(233,174,206,21))
+        self.Effect_7.setGeometry(QtCore.QRect(233,174,150,21))
         self.Effect_7.setObjectName("Effect_7")
+
+        self.Requirement_7 = QtGui.QLineEdit(self.GroupItemFrame)
+        self.Requirement_7.setGeometry(QtCore.QRect(387,174,165,21))
+        self.Requirement_7.setObjectName("Requirement_7")
 
         self.Gem_Label_8 = QtGui.QLabel(self.GroupItemFrame)
         self.Gem_Label_8.setGeometry(QtCore.QRect(7,195,34,21))
@@ -757,8 +761,12 @@ class Ui_B_SC(object):
 
         self.Effect_8 = SearchingCombo(self.GroupItemFrame)
         self.Effect_8.setEditable(True)
-        self.Effect_8.setGeometry(QtCore.QRect(233,195,206,21))
+        self.Effect_8.setGeometry(QtCore.QRect(233,195,150,21))
         self.Effect_8.setObjectName("Effect_8")
+
+        self.Requirement_8 = QtGui.QLineEdit(self.GroupItemFrame)
+        self.Requirement_8.setGeometry(QtCore.QRect(387,195,165,21))
+        self.Requirement_8.setObjectName("Requirement_8")
 
         self.Gem_Label_9 = QtGui.QLabel(self.GroupItemFrame)
         self.Gem_Label_9.setGeometry(QtCore.QRect(7,216,34,21))
@@ -774,8 +782,12 @@ class Ui_B_SC(object):
 
         self.Effect_9 = SearchingCombo(self.GroupItemFrame)
         self.Effect_9.setEditable(True)
-        self.Effect_9.setGeometry(QtCore.QRect(233,216,206,21))
+        self.Effect_9.setGeometry(QtCore.QRect(233,216,150,21))
         self.Effect_9.setObjectName("Effect_9")
+
+        self.Requirement_9 = QtGui.QLineEdit(self.GroupItemFrame)
+        self.Requirement_9.setGeometry(QtCore.QRect(387,216,165,21))
+        self.Requirement_9.setObjectName("Requirement_9")
 
         self.Gem_Label_10 = QtGui.QLabel(self.GroupItemFrame)
         self.Gem_Label_10.setGeometry(QtCore.QRect(7,237,41,21))
@@ -791,8 +803,54 @@ class Ui_B_SC(object):
 
         self.Effect_10 = SearchingCombo(self.GroupItemFrame)
         self.Effect_10.setEditable(True)
-        self.Effect_10.setGeometry(QtCore.QRect(233,237,206,21))
+        self.Effect_10.setGeometry(QtCore.QRect(233,237,150,21))
         self.Effect_10.setObjectName("Effect_10")
+
+        self.Requirement_10 = QtGui.QLineEdit(self.GroupItemFrame)
+        self.Requirement_10.setGeometry(QtCore.QRect(387,237,165,21))
+        self.Requirement_10.setObjectName("Requirement_10")
+
+        self.Gem_Label_11 = QtGui.QLabel(self.GroupItemFrame)
+        self.Gem_Label_11.setGeometry(QtCore.QRect(7,258,41,21))
+        self.Gem_Label_11.setObjectName("Gem_Label_11")
+
+        self.Type_11 = SearchingCombo(self.GroupItemFrame)
+        self.Type_11.setGeometry(QtCore.QRect(46,258,127,21))
+        self.Type_11.setObjectName("Type_11")
+
+        self.Amount_Edit_11 = QtGui.QLineEdit(self.GroupItemFrame)
+        self.Amount_Edit_11.setGeometry(QtCore.QRect(177,258,51,21))
+        self.Amount_Edit_11.setObjectName("Amount_Edit_11")
+
+        self.Effect_11 = SearchingCombo(self.GroupItemFrame)
+        self.Effect_11.setEditable(True)
+        self.Effect_11.setGeometry(QtCore.QRect(233,258,150,21))
+        self.Effect_11.setObjectName("Effect_11")
+
+        self.Requirement_11 = QtGui.QLineEdit(self.GroupItemFrame)
+        self.Requirement_11.setGeometry(QtCore.QRect(387,258,165,21))
+        self.Requirement_11.setObjectName("Requirement_11")
+
+        self.Gem_Label_12 = QtGui.QLabel(self.GroupItemFrame)
+        self.Gem_Label_12.setGeometry(QtCore.QRect(7,279,41,21))
+        self.Gem_Label_12.setObjectName("Gem_Label_12")
+
+        self.Type_12 = SearchingCombo(self.GroupItemFrame)
+        self.Type_12.setGeometry(QtCore.QRect(46,279,127,21))
+        self.Type_12.setObjectName("Type_12")
+
+        self.Amount_Edit_12 = QtGui.QLineEdit(self.GroupItemFrame)
+        self.Amount_Edit_12.setGeometry(QtCore.QRect(177,279,51,21))
+        self.Amount_Edit_12.setObjectName("Amount_Edit_12")
+
+        self.Effect_12 = SearchingCombo(self.GroupItemFrame)
+        self.Effect_12.setEditable(True)
+        self.Effect_12.setGeometry(QtCore.QRect(233,279,150,21))
+        self.Effect_12.setObjectName("Effect_12")
+
+        self.Requirement_12 = QtGui.QLineEdit(self.GroupItemFrame)
+        self.Requirement_12.setGeometry(QtCore.QRect(387,279,165,21))
+        self.Requirement_12.setObjectName("Requirement_12")
 
         self.ItemImbueLabel = QtGui.QLabel(self.GroupItemFrame)
         self.ItemImbueLabel.setGeometry(QtCore.QRect(370,178,73,17))
@@ -892,42 +950,60 @@ class Ui_B_SC(object):
         B_SC.setTabOrder(self.Amount_Edit_1,self.Amount_Drop_1)
         B_SC.setTabOrder(self.Amount_Drop_1,self.Effect_1)
         B_SC.setTabOrder(self.Effect_1,self.Quality_1)
-        B_SC.setTabOrder(self.Quality_1,self.Type_2)
+        B_SC.setTabOrder(self.Quality_1,self.Requirement_1)
+        B_SC.setTabOrder(self.Requirement_1,self.Type_2)
         B_SC.setTabOrder(self.Type_2,self.Amount_Edit_2)
         B_SC.setTabOrder(self.Amount_Edit_2,self.Amount_Drop_2)
         B_SC.setTabOrder(self.Amount_Drop_2,self.Effect_2)
         B_SC.setTabOrder(self.Effect_2,self.Quality_2)
-        B_SC.setTabOrder(self.Quality_2,self.Type_3)
+        B_SC.setTabOrder(self.Quality_2,self.Requirement_2)
+        B_SC.setTabOrder(self.Requirement_2,self.Type_3)
         B_SC.setTabOrder(self.Type_3,self.Amount_Edit_3)
         B_SC.setTabOrder(self.Amount_Edit_3,self.Amount_Drop_3)
         B_SC.setTabOrder(self.Amount_Drop_3,self.Effect_3)
         B_SC.setTabOrder(self.Effect_3,self.Quality_3)
-        B_SC.setTabOrder(self.Quality_3,self.Type_4)
+        B_SC.setTabOrder(self.Quality_3,self.Requirement_3)
+        B_SC.setTabOrder(self.Requirement_3,self.Type_4)
         B_SC.setTabOrder(self.Type_4,self.Amount_Edit_4)
         B_SC.setTabOrder(self.Amount_Edit_4,self.Amount_Drop_4)
         B_SC.setTabOrder(self.Amount_Drop_4,self.Effect_4)
         B_SC.setTabOrder(self.Effect_4,self.Quality_4)
-        B_SC.setTabOrder(self.Quality_4,self.Type_5)
+        B_SC.setTabOrder(self.Quality_4,self.Requirement_4)
+        B_SC.setTabOrder(self.Requirement_4,self.Type_5)
         B_SC.setTabOrder(self.Type_5,self.Amount_Edit_5)
         B_SC.setTabOrder(self.Amount_Edit_5,self.Amount_Drop_5)
         B_SC.setTabOrder(self.Amount_Drop_5,self.Effect_5)
-        B_SC.setTabOrder(self.Effect_5,self.Quality_5)
-        B_SC.setTabOrder(self.Quality_5,self.Type_6)
+        B_SC.setTabOrder(self.Effect_5,self.Requirement_5)
+        B_SC.setTabOrder(self.Requirement_5,self.Type_6)
         B_SC.setTabOrder(self.Type_6,self.Amount_Edit_6)
-        B_SC.setTabOrder(self.Amount_Edit_6,self.Effect_6)
-        B_SC.setTabOrder(self.Effect_6,self.Type_7)
+        B_SC.setTabOrder(self.Amount_Edit_6,self.Amount_Drop_6)
+        B_SC.setTabOrder(self.Amount_Drop_6,self.Effect_6)
+        B_SC.setTabOrder(self.Effect_6,self.Requirement_6)
+        B_SC.setTabOrder(self.Requirement_6,self.Type_7)
         B_SC.setTabOrder(self.Type_7,self.Amount_Edit_7)
         B_SC.setTabOrder(self.Amount_Edit_7,self.Effect_7)
-        B_SC.setTabOrder(self.Effect_7,self.Type_8)
+        B_SC.setTabOrder(self.Effect_7,self.Requirement_7)
+        B_SC.setTabOrder(self.Requirement_7,self.Type_8)
         B_SC.setTabOrder(self.Type_8,self.Amount_Edit_8)
         B_SC.setTabOrder(self.Amount_Edit_8,self.Effect_8)
-        B_SC.setTabOrder(self.Effect_8,self.Type_9)
+        B_SC.setTabOrder(self.Effect_8,self.Requirement_8)
+        B_SC.setTabOrder(self.Requirement_8,self.Type_9)
         B_SC.setTabOrder(self.Type_9,self.Amount_Edit_9)
         B_SC.setTabOrder(self.Amount_Edit_9,self.Effect_9)
-        B_SC.setTabOrder(self.Effect_9,self.Type_10)
+        B_SC.setTabOrder(self.Effect_9,self.Requirement_9)
+        B_SC.setTabOrder(self.Requirement_9,self.Type_10)
         B_SC.setTabOrder(self.Type_10,self.Amount_Edit_10)
         B_SC.setTabOrder(self.Amount_Edit_10,self.Effect_10)
-        B_SC.setTabOrder(self.Effect_10,self.CraftButton)
+        B_SC.setTabOrder(self.Effect_10,self.Requirement_10)
+        B_SC.setTabOrder(self.Requirement_10,self.Type_11)
+        B_SC.setTabOrder(self.Type_11,self.Amount_Edit_11)
+        B_SC.setTabOrder(self.Amount_Edit_11,self.Effect_11)
+        B_SC.setTabOrder(self.Effect_11,self.Requirement_11)
+        B_SC.setTabOrder(self.Requirement_11,self.Type_12)
+        B_SC.setTabOrder(self.Type_12,self.Amount_Edit_12)
+        B_SC.setTabOrder(self.Amount_Edit_12,self.Effect_12)
+        B_SC.setTabOrder(self.Effect_12,self.Requirement_12)
+        B_SC.setTabOrder(self.Requirement_12,self.CraftButton)
         B_SC.setTabOrder(self.CraftButton,self.LoadItem)
         B_SC.setTabOrder(self.LoadItem,self.SaveItem)
         B_SC.setTabOrder(self.SaveItem,self.ClearItem)
@@ -1021,6 +1097,7 @@ class Ui_B_SC(object):
         self.LabelGemType.setText(QtGui.QApplication.translate("B_SC", " Type", None, QtGui.QApplication.UnicodeUTF8))
         self.LabelGemAmount.setText(QtGui.QApplication.translate("B_SC", " Amount", None, QtGui.QApplication.UnicodeUTF8))
         self.LabelGemEffect.setText(QtGui.QApplication.translate("B_SC", " Effect", None, QtGui.QApplication.UnicodeUTF8))
+        self.LabelRequirement.setText(QtGui.QApplication.translate("B_SC", "Requirement: ", None, QtGui.QApplication.UnicodeUTF8))
         self.LabelGemQuality.setText(QtGui.QApplication.translate("B_SC", " Quality", None, QtGui.QApplication.UnicodeUTF8))
         self.LabelGemPoints.setText(QtGui.QApplication.translate("B_SC", "Points", None, QtGui.QApplication.UnicodeUTF8))
         self.LabelGemCost.setText(QtGui.QApplication.translate("B_SC", "Cost", None, QtGui.QApplication.UnicodeUTF8))
@@ -1038,15 +1115,13 @@ class Ui_B_SC(object):
         self.Points_4.setText(QtGui.QApplication.translate("B_SC", "0.0", None, QtGui.QApplication.UnicodeUTF8))
         self.Cost_4.setText(QtGui.QApplication.translate("B_SC", "0c", None, QtGui.QApplication.UnicodeUTF8))
         self.Gem_Label_5.setText(QtGui.QApplication.translate("B_SC", "Slot 5: ", None, QtGui.QApplication.UnicodeUTF8))
-        self.Points_5.setText(QtGui.QApplication.translate("B_SC", "0.0", None, QtGui.QApplication.UnicodeUTF8))
-        self.Cost_5.setText(QtGui.QApplication.translate("B_SC", "0c", None, QtGui.QApplication.UnicodeUTF8))
         self.Gem_Label_6.setText(QtGui.QApplication.translate("B_SC", "Slot 6: ", None, QtGui.QApplication.UnicodeUTF8))
-        self.Points_6.setText(QtGui.QApplication.translate("B_SC", "0.0", None, QtGui.QApplication.UnicodeUTF8))
-        self.Cost_6.setText(QtGui.QApplication.translate("B_SC", "0c", None, QtGui.QApplication.UnicodeUTF8))
         self.Gem_Label_7.setText(QtGui.QApplication.translate("B_SC", "Slot 7: ", None, QtGui.QApplication.UnicodeUTF8))
         self.Gem_Label_8.setText(QtGui.QApplication.translate("B_SC", "Slot 8: ", None, QtGui.QApplication.UnicodeUTF8))
         self.Gem_Label_9.setText(QtGui.QApplication.translate("B_SC", "Slot 9: ", None, QtGui.QApplication.UnicodeUTF8))
         self.Gem_Label_10.setText(QtGui.QApplication.translate("B_SC", "Slot 10:", None, QtGui.QApplication.UnicodeUTF8))
+        self.Gem_Label_11.setText(QtGui.QApplication.translate("B_SC", "Slot 11:", None, QtGui.QApplication.UnicodeUTF8))
+        self.Gem_Label_12.setText(QtGui.QApplication.translate("B_SC", "Slot 12:", None, QtGui.QApplication.UnicodeUTF8))
         self.ItemImbueLabel.setText(QtGui.QApplication.translate("B_SC", "Imbue Points: ", None, QtGui.QApplication.UnicodeUTF8))
         self.ItemImbue.setText(QtGui.QApplication.translate("B_SC", "0.0", None, QtGui.QApplication.UnicodeUTF8))
         self.ItemImbueTotal.setText(QtGui.QApplication.translate("B_SC", " / 0.0", None, QtGui.QApplication.UnicodeUTF8))
