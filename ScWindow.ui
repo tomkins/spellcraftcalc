@@ -146,7 +146,7 @@
             </rect>
           </property>
         </widget>
-        <widget class="QLabel" name="TotalCostLabel" >
+        <widget class="QLabel" name="LabelTotalCost" >
           <property name="geometry" >
             <rect>
               <x>6</x>
@@ -178,7 +178,7 @@
             <set>Qt::AlignVCenter|Qt::AlignRight</set>
           </property>
         </widget>
-        <widget class="QLabel" name="TotalPriceLabel" >
+        <widget class="QLabel" name="LabelTotalPrice" >
           <property name="geometry" >
             <rect>
               <x>6</x>
@@ -210,7 +210,7 @@
             <set>Qt::AlignVCenter|Qt::AlignRight</set>
           </property>
         </widget>
-        <widget class="QLabel" name="TotalUtilityLabel" >
+        <widget class="QLabel" name="LabelTotalUtility" >
           <property name="geometry" >
             <rect>
               <x>6</x>
