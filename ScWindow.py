@@ -62,6 +62,7 @@ class ScWindow(QMainWindow, Ui_B_SC):
     def __init__(self):
         self.splashFile = None
         self.newcount = 0
+        self.startup = 1
         self.nocalc = 1
         self.save = 0
         self.totals = { }
@@ -70,10 +71,6 @@ class ScWindow(QMainWindow, Ui_B_SC):
         self.effectlists = GemLists['All'].copy()
         self.dropeffectlists = DropLists['All'].copy()
 
-        self.reportFile = os.path.join(os.path.dirname(os.path.abspath(sys.argv[0])),
-                                       'reports', 'Default_Config_Report.xml')
-        self.coop = False
-
         self.fixedtaborder = False
 
         QMainWindow.__init__(self,None,Qt.Window)
@@ -81,10 +78,38 @@ class ScWindow(QMainWindow, Ui_B_SC):
         self.setAttribute(Qt.WA_DeleteOnClose)
         Ui_B_SC.setupUi(self,self)
 
+        self.ItemLevelWindow = ItemLevel.ItemLevel(self.window(), '', 1)
+        self.DaocPath = ''
+        self.ItemPath = os.path.join(os.path.dirname(os.path.abspath(sys.argv[0])), "items")
+        self.TemplatePath = os.path.join(os.path.dirname(os.path.abspath(sys.argv[0])), "templates")
+        self.reportFile = os.path.join(os.path.dirname(os.path.abspath(sys.argv[0])),
+                                       'reports', 'Default_Config_Report.xml')
+        self.realm = 'Albion'
+        self.charclass = 'Armsman'
+        self.crafterSkill = 1000
+        self.showDoneInMatsList = 0
+        self.coop = False
+        self.noteText = ''
+        self.capDistance = False
+        self.includeRacials = False
+        self.hideNonClassSkills = False
+        self.pricingInfo = {}
+        self.initLayout()
+        self.initMenu()
+        self.initControls()
+        self.updateGeometry()
+        OW = Options.Options(self)
+        OW.load()
+        self.pricingInfo = OW.getPriceInfo()
+        self.updateRecentFiles(None)
+        self.initialize()
+
+    def initLayout(self):
+        testfont = QFontMetrics(qApp.font())
+
         self.switchOnType = {'drop' : [], 'player' : [] }
         self.switchOnType['drop'] = [ 
             self.QualEdit, self.ItemName, self.LabelRequirement,
-            ## self.SaveItem, XXX gone
         ]
         self.switchOnType['player'] = [
             self.LabelGemQuality, self.LabelGemPoints, self.LabelGemCost,
@@ -94,8 +119,6 @@ class ScWindow(QMainWindow, Ui_B_SC):
             ## self.ItemPriceLabel, self.ItemPrice, XXX not calculated yet
         ]
 
-        testfont = QFontMetrics(qApp.font())
-
         if str(QApplication.style().objectName()[0:9]).lower() == "macintosh":
             height = max(self.CharName.sizeHint().height(),
                          self.Realm.sizeHint().height())
@@ -103,14 +126,12 @@ class ScWindow(QMainWindow, Ui_B_SC):
             height = min(self.CharName.minimumSizeHint().height(),
                          self.Realm.minimumSizeHint().height())
 
-        sizePolicy = QSizePolicy(QSizePolicy.Fixed, QSizePolicy.Fixed)
         for ctl in (self.GroupItemFrame.children() + [self.CharLevel]):
             if ((ctl.metaObject().className() == "QLineEdit" or 
                  ctl.metaObject().className() == "QComboBox") and 
                 ctl.objectName() != "ItemName"):
                 ctl.setFixedSize(QSize(ctl.width(), height))
 
-        sizePolicy = QSizePolicy(QSizePolicy.Expanding, QSizePolicy.Fixed)
         for ctl in (self.GroupCharInfo.children() + [self.ItemName]):
             if ((ctl.metaObject().className() == "QLineEdit" or 
                  ctl.metaObject().className() == "QComboBox") and 
@@ -178,9 +199,6 @@ class ScWindow(QMainWindow, Ui_B_SC):
             self.charlayout.addWidget(getattr(self, stat),row,1,1,1)
             row += 1
 
-        self.setWindowTitle("Kort's Spellcrafting Calulator")
-        self.fixtabs = True
-
         self.statusBar().hide()
         if str(QApplication.style().objectName()[0:9]).lower() == "macintosh":
             self.sizegrip = QSizeGrip(self)
@@ -193,12 +211,6 @@ class ScWindow(QMainWindow, Ui_B_SC):
         ## XXX not calculated yet - we must hide :)
         self.ItemPriceLabel.hide()
         self.ItemPrice.hide()
-
-        self.PieceTab.setFocusPolicy(Qt.StrongFocus)
-        for tabname in PieceTabList:
-            self.PieceTab.addTab(0, qApp.translate("B_SC",tabname,None))
-        for tabname in JewelTabList:
-            self.PieceTab.addTab(1, qApp.translate("B_SC",tabname,None))
 
         self.Realm.insertItems(0, list(Realms))
         self.QualDrop.insertItems(0, list(QualityValues))
@@ -325,15 +337,6 @@ class ScWindow(QMainWindow, Ui_B_SC):
             self.itemlayout.setRowMinimumHeight(row, height)
             row += 1
 
-        #self.itembuttonlayout = QtGui.QGridLayout()
-        #self.itembuttonlayout.setMargin(0)
-        #self.itembuttonlayout.setSpacing(3)
-        #self.itembuttonlayout.addWidget(self.LoadItem,1,0,1,2)
-        #self.itembuttonlayout.addWidget(self.CraftButton,2,0,1,2)
-        #self.itembuttonlayout.addWidget(self.SaveItem,2,0,1,2)
-        #self.itembuttonlayout.addWidget(self.ClearItem,3,0,1,2)
-        #self.itemlayout.addLayout(self.itembuttonlayout,row-6,9,6,1)
-
         self.itemlayout.addWidget(self.ItemImbueLabel,row-5,3,1,2)
         self.itemlayout.addWidget(self.ItemImbue,row-5,5,1,1)
         self.itemlayout.addWidget(self.ItemImbueTotal,row-5,6,1,1)
@@ -348,10 +351,14 @@ class ScWindow(QMainWindow, Ui_B_SC):
         if str(QApplication.style().objectName()[0:9]).lower() == "macintosh":
             self.itemlayout.addWidget(self.sizegrip,row-1,9,1,1)
 
-        self.tabslayout = QVBoxLayout()
+        self.PieceTab.setFocusPolicy(Qt.StrongFocus)
+        for tabname in PieceTabList:
+            self.PieceTab.addTab(0, qApp.translate("B_SC",tabname,None))
+        for tabname in JewelTabList:
+            self.PieceTab.addTab(1, qApp.translate("B_SC",tabname,None))
         self.GroupItemFrame.stackUnder(self.PieceTab)
-        #(left, top, right, bottom) = self.GroupItemFrame.getContentsMargins()
-        #top -= self.PieceTab.baseOverlap()
+
+        self.tabslayout = QVBoxLayout()
         #self.GroupItemFrame.setContentsMargins(left, top, right, bottom)
         self.tabslayout.addWidget(self.PieceTab)
         self.tabslayout.addItem(QSpacerItem(1, -self.PieceTab.baseOverlap(),
@@ -376,8 +383,7 @@ class ScWindow(QMainWindow, Ui_B_SC):
         self.mainlayout.setColumnStretch(4, 1)
         self.mainlayout.setColumnStretch(6, 1)
 
-        self.updateGeometry()
-
+    def initControls(self):
         self.GroupStats.mousePressEvent = self.ignoreMouseEvent
         self.GroupResists.mousePressEvent = self.ignoreMouseEvent
         self.GroupItemFrame.mousePressEvent = self.ignoreMouseEvent
@@ -417,31 +423,12 @@ class ScWindow(QMainWindow, Ui_B_SC):
         self.connect(self.PlayerMade,SIGNAL("toggled(bool)"),self.PlayerToggled)
         self.connect(self.Drop,SIGNAL("toggled(bool)"),self.DropToggled)
         self.connect(self.Equipped,SIGNAL("clicked()"),self.EquippedClicked)
-        #self.connect(self.LoadItem,SIGNAL("clicked()"),self.loadItem)
-        #self.connect(self.SaveItem,SIGNAL("clicked()"),self.saveItem)
-        #self.connect(self.CraftButton,SIGNAL("clicked()"),self.openCraftWindow)
-        #self.connect(self.ClearItem,SIGNAL("clicked()"),self.clearCurrentItem)
         self.connect(self.SkillsList,SIGNAL("itemActivated(QListWidgetItem*)"),
                      self.SkillClicked)
         self.connect(self.OtherBonusList,SIGNAL("itemActivated(QListWidgetItem*)"),
                      self.SkillClicked)
 
-        self.startup = 1
-        self.pricingInfo = {}
-
-        self.ItemLevelWindow = ItemLevel.ItemLevel(self.window(), '', 1)
-        self.DaocPath = ''
-        self.realm = 'Albion'
-        self.charclass = 'Armsman'
-        self.crafterSkill = 1000
-        self.showDoneInMatsList = 0
-        self.noteText = ''
-        self.capDistance = False
-        self.includeRacials = False
-        self.hideNonClassSkills = False
-        OW = Options.Options(self)
-        OW.load()
-
+    def initMenu(self):
         self.rf_menu = QMenu('&Recent Files')
         self.connect(self.rf_menu, SIGNAL("triggered(QAction*)"), self.loadRecentFile)
         
@@ -463,8 +450,6 @@ class ScWindow(QMainWindow, Ui_B_SC):
         self.filemenu.addSeparator()
         self.filemenu.addAction('E&xit', self.close, QKeySequence(Qt.CTRL+Qt.Key_X))
         self.menuBar().addMenu(self.filemenu)
-
-        self.updateRecentFiles(None)
 
         self.swapGems = QMenu('S&wap Gems With', self)
         for piece in range(0,len(PieceTabList)):
@@ -505,9 +490,6 @@ class ScWindow(QMainWindow, Ui_B_SC):
         self.helpmenu = QMenu('&Help', self)
         self.helpmenu.addAction('&About', self.aboutBox)
         self.menuBar().addMenu(self.helpmenu)
-
-        self.pricingInfo = OW.getPriceInfo()
-        self.initialize()
 
     def fix_taborder(self, line):
         if line > 0:
@@ -763,9 +745,9 @@ class ScWindow(QMainWindow, Ui_B_SC):
             if item.ItemQuality in QualityValues:
                 self.QualDrop.setCurrentIndex(
                     QualityValues.index(item.ItemQuality))
+        self.calculate()
         self.nocalc = wascalc
         self.save = wassave
-        self.calculate()
 
     def calculate(self):
         if self.nocalc:
@@ -1344,8 +1326,7 @@ class ScWindow(QMainWindow, Ui_B_SC):
         else:
             extstr = '*%s.xml *.%s' % (ext, ext)
         extstr = "Items (%s)" % extstr
-        itemdir = os.path.join(os.path.dirname(os.path.abspath(sys.argv[0])), 
-                               'items', self.realm, ext)
+        itemdir = os.path.join(self.ItemPath, self.realm, ext)
         Qfd = ItemList.ItemListDialog(self, "Load Item", itemdir, extstr, 
                                       self.realm, self.charclass)
         if Qfd.exec_():
@@ -1399,8 +1380,7 @@ class ScWindow(QMainWindow, Ui_B_SC):
     def saveAsFile(self):
         filename = self.filename
         if filename is None:
-            templatedir = os.path.join(os.path.dirname(os.path.abspath(sys.argv[0])), "templates")
-            filename = os.path.join(templatedir, str(self.CharName.text()) + "_template.xml")
+            filename = os.path.join(self.TemplatePath, str(self.CharName.text()) + "_template.xml")
         filename = unicode(filename)
         while filename != '':
             filename = QFileDialog.getSaveFileName(self, "Save Template", filename, 
@@ -1420,6 +1400,7 @@ class ScWindow(QMainWindow, Ui_B_SC):
                 f.write(XMLHelper.writexml(self.asXML(), UnicodeStringIO(), '', '\t', '\n'))
                 self.modified = 0
                 f.close()
+                self.TemplatePath = os.path.dirname(os.path.abspath(filename))
             except IOError:
                 QMessageBox.critical(None, 'Error!', 
                     'Error writing to file: ' + filename, 'OK')

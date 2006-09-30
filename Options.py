@@ -118,6 +118,9 @@ class Options(QDialog, Ui_B_Options):
         camelotpath = document.createElement('DaocPath')
         camelotpath.appendChild(document.createTextNode(unicode(self.parent.DaocPath)))
         rootnode.appendChild(camelotpath)
+        itempath = document.createElement('ItemPath')
+        itempath.appendChild(document.createTextNode(unicode(self.parent.ItemPath)))
+        rootnode.appendChild(itempath)
         c_reportpath = document.createElement('ConfigReportFile')
         c_reportpath.appendChild(document.createTextNode(os.path.abspath(unicode(self.parent.reportFile))))
         rootnode.appendChild(c_reportpath)
@@ -205,6 +208,8 @@ class Options(QDialog, Ui_B_Options):
                     if pchild.tagName == 'File':
                         self.parent.recentFiles.append(unicode(XMLHelper.getText(pchild.childNodes)))
             elif child.tagName == 'DaocPath':
+                self.parent.DaocPath = unicode(XMLHelper.getText(child.childNodes))
+            elif child.tagName == 'ItemPath':
                 self.parent.DaocPath = unicode(XMLHelper.getText(child.childNodes))
             elif child.tagName == 'ConfigReportFile':
                 self.parent.reportFile = unicode(XMLHelper.getText(child.childNodes))
