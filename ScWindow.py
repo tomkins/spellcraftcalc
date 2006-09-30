@@ -83,7 +83,7 @@ class ScWindow(QMainWindow, Ui_B_SC):
 
         self.switchOnType = {'drop' : [], 'player' : [] }
         self.switchOnType['drop'] = [ 
-            self.QualEdit, self.SaveItem, self.ItemName,
+            self.QualEdit, self.SaveItem, self.ItemName, self.LabelRequirement,
         ]
         self.switchOnType['player'] = [
             self.QualDrop, self.CraftButton, 
@@ -96,7 +96,7 @@ class ScWindow(QMainWindow, Ui_B_SC):
 
         testfont = QFontMetrics(qApp.font())
 
-        self.EffectWidths = [self.Effect_1.width(), self.Effect_10.width()]
+        self.EffectWidths = [self.Effect_1.width(), self.Effect_12.width()]
 
         if str(QApplication.style().objectName()[0:9]).lower() == "macintosh":
             height = max(self.CharName.sizeHint().height(),
@@ -194,14 +194,6 @@ class ScWindow(QMainWindow, Ui_B_SC):
         self.QualEdit.setValidator(QIntValidator(0, 100, self))
         self.Bonus_Edit.setValidator(QIntValidator(0, 99, self))
 
-        # This doesn't matter for tinctures, keep hidden
-        self.Quality_5.hide()
-        self.Points_5.hide()
-        self.Cost_5.hide()
-        self.Quality_6.hide()
-        self.Points_6.hide()
-        self.Cost_6.hide()
-
         ## XXX not calculated yet - we must hide :)
         self.ItemPriceLabel.hide()
         self.ItemPrice.hide()
@@ -223,6 +215,7 @@ class ScWindow(QMainWindow, Ui_B_SC):
         self.Quality = []
         self.Points = []
         self.Cost = []
+        self.Requirement = []
         self.Name = []
 
         editAmountValidator = QIntValidator(-999, +999, self)
@@ -254,7 +247,7 @@ class ScWindow(QMainWindow, Ui_B_SC):
         self.itemcontrollayout.addWidget(self.DropCraftButtonFrame)
 
         self.itemlayout = QtGui.QGridLayout(self.GroupItemFrame)
-        self.itemlayout.setMargin(2)
+        self.itemlayout.setMargin(3)
         self.itemlayout.setSpacing(0)
         row = 0
         self.itemlayout.addItem(QSpacerItem(1, self.PieceTab.baseOverlap(),
@@ -270,28 +263,27 @@ class ScWindow(QMainWindow, Ui_B_SC):
             self.itemlayout.addWidget(obj,row,col,1,1)
             col += 1
         self.itemlayout.addItem(QSpacerItem(hspacer),row,7,1,1)
+        self.itemlayout.addWidget(self.LabelRequirement,row,4,1,3)
         self.itemlayout.addWidget(self.LabelItemName,row,8,1,2)
         #self.itemlayout.setColumnStretch(3, 1)
         self.itemlayout.setColumnStretch(8, 1)
 
-        width = max(testfont.size(Qt.TextSingleLine, " Gem 10:").width(),
-                    testfont.size(Qt.TextSingleLine, " Slot 10:").width())
+        width = testfont.size(Qt.TextSingleLine, " Slot 10:").width()
         self.itemlayout.setColumnMinimumWidth(0,width)
         width = testfont.size(Qt.TextSingleLine, " Points").width()
         self.itemlayout.setColumnMinimumWidth(5,width)
-        width = testfont.size(Qt.TextSingleLine, "  999g 00s 00c").width()
+        width = testfont.size(Qt.TextSingleLine, "999g 00s 00c").width()
         self.itemlayout.setColumnMinimumWidth(6,width)
 
         row += 1
         self.itemlayout.addWidget(self.ItemName,row,8,1,2)
-        for i in range(0, 10):
+        for i in range(0, 12):
             idx = i + 1
             self.GemLabel.append(getattr(self, 'Gem_Label_%d' % idx))
             self.Type.append(getattr(self, 'Type_%d' % idx))
             self.connect(self.Type[i],SIGNAL("activated(const QString&)"),
                          self.TypeChanged)
             self.Effect.append(getattr(self, 'Effect_%d' % idx))
-# XXX       self.Effect[i].setInsertionPolicy(QComboBox.BeforeCurrent)
             self.connect(self.Effect[i],SIGNAL("activated(const QString&)"),
                          self.EffectChanged)
             self.AmountEdit.append(getattr(self, 'Amount_Edit_%d' % idx))
@@ -299,35 +291,41 @@ class ScWindow(QMainWindow, Ui_B_SC):
             self.AmountEdit[i].setValidator(editAmountValidator)
             self.connect(self.AmountEdit[i],SIGNAL("textChanged(const QString&)"),
                          self.AmountChanged)
+            self.Requirement.append(getattr(self, 'Requirement_%d' % idx))
+            self.Requirement[i].setValidator(editAmountValidator)
+            self.connect(self.Requirement[i],SIGNAL("textChanged(const QString&)"),
+                         self.AmountChanged)
             self.itemlayout.addWidget(self.GemLabel[i],row,0,1,1)
             self.itemlayout.addWidget(self.Type[i],row,1,1,1)
             self.itemlayout.addWidget(self.AmountEdit[i],row,2,1,1)
             self.itemlayout.addWidget(self.Effect[i],row,3,1,1)
+            self.itemlayout.addWidget(self.Requirement[i],row,4,1,3)
+            self.switchOnType['drop'].append(self.AmountEdit[i])
             if i < 6:
                 self.AmountDrop.append(getattr(self, 'Amount_Drop_%d' % idx))
+                self.itemlayout.addWidget(self.AmountDrop[i],row,2,1,1)
+                self.Name.append(getattr(self, 'Name_%d' % idx))
+                self.itemlayout.addWidget(self.Name[i],row,8,1,2)
                 self.connect(self.AmountDrop[i],SIGNAL("activated(const QString&)"),
                              self.AmountChanged)
+                self.switchOnType['player'].extend([
+                    self.AmountDrop[i], self.Name[i], ])
+            else:
+                self.switchOnType['drop'].extend([
+                    self.GemLabel[i], self.Type[i], self.Effect[i], self.Requirement[i], ])
+            if i < 4:
                 self.Quality.append(getattr(self, 'Quality_%d' % idx))
                 self.Quality[i].insertItems(0, list(QualityValues))
                 self.connect(self.Quality[i],SIGNAL("activated(const QString&)"),
                              self.QualityChanged)
                 self.Points.append(getattr(self, 'Points_%d' % idx))
                 self.Cost.append(getattr(self, 'Cost_%d' % idx))
-                self.Name.append(getattr(self, 'Name_%d' % idx))
-                self.itemlayout.addWidget(self.AmountDrop[i],row,2,1,1)
                 self.itemlayout.addWidget(self.Quality[i],row,4,1,1)
                 self.itemlayout.addWidget(self.Points[i],row,5,1,1)
                 self.itemlayout.addWidget(self.Cost[i],row,6,1,1)
-                self.itemlayout.addWidget(self.Name[i],row,8,1,2)
                 self.switchOnType['player'].extend([
-                    self.AmountDrop[i], self.Name[i]])
-                if i < 4:
-                    self.switchOnType['player'].extend([
-                        self.Quality[i], self.Points[i], self.Cost[i]])
-            else:
-                self.switchOnType['drop'].extend([
-                    self.GemLabel[i], self.Type[i], self.Effect[i]])
-
+                    self.Quality[i], self.Points[i], self.Cost[i], ])
+                self.switchOnType['drop'].append(self.Requirement[i])
             self.itemlayout.setRowMinimumHeight(row, height)
             row += 1
 
@@ -342,17 +340,17 @@ class ScWindow(QMainWindow, Ui_B_SC):
         self.itembuttonlayout.addWidget(self.ClearItem,3,0,1,2)
         if str(QApplication.style().objectName()[0:9]).lower() == "macintosh":
             self.itembuttonlayout.addWidget(self.sizegrip,4,2,1,1)
-        self.itemlayout.addLayout(self.itembuttonlayout,row-5,9,5,1)
+        self.itemlayout.addLayout(self.itembuttonlayout,row-6,9,6,1)
 
-        self.itemlayout.addWidget(self.ItemImbueLabel,row-4,3,1,2)
-        self.itemlayout.addWidget(self.ItemImbue,row-4,5,1,1)
-        self.itemlayout.addWidget(self.ItemImbueTotal,row-4,6,1,1)
-        self.itemlayout.addWidget(self.ItemOverchargeLabel,row-3,3,1,2)
-        self.itemlayout.addWidget(self.ItemOvercharge,row-3,5,1,2)
-        self.itemlayout.addWidget(self.ItemCostLabel,row-2,3,1,2)
-        self.itemlayout.addWidget(self.ItemCost,row-2,6,1,1)
-        self.itemlayout.addWidget(self.ItemPriceLabel,row-1,3,1,2)
-        self.itemlayout.addWidget(self.ItemPrice,row-1,6,1,1)
+        self.itemlayout.addWidget(self.ItemImbueLabel,row-5,3,1,2)
+        self.itemlayout.addWidget(self.ItemImbue,row-5,5,1,1)
+        self.itemlayout.addWidget(self.ItemImbueTotal,row-5,6,1,1)
+        self.itemlayout.addWidget(self.ItemOverchargeLabel,row-4,3,1,2)
+        self.itemlayout.addWidget(self.ItemOvercharge,row-4,5,1,2)
+        self.itemlayout.addWidget(self.ItemCostLabel,row-3,3,1,2)
+        self.itemlayout.addWidget(self.ItemCost,row-3,6,1,1)
+        self.itemlayout.addWidget(self.ItemPriceLabel,row-2,3,1,2)
+        self.itemlayout.addWidget(self.ItemPrice,row-2,6,1,1)
 
         self.tabslayout = QVBoxLayout()
         self.GroupItemFrame.stackUnder(self.PieceTab)
@@ -506,24 +504,23 @@ class ScWindow(QMainWindow, Ui_B_SC):
         self.initialize()
 
     def fix_taborder(self, line):
-        if line > 4:
-            prev = self.Effect[line - 1]
-        elif line > 0:
-            prev = self.Quality[line - 1]
+        if line > 0:
+            prev = self.Requirement[line - 1]
         else: 
             prev = self.ItemName
-        for i in range(line, 10):
+        for i in range(line, 12):
             # Create the (sometimes used) edit boxes
             self.setTabOrder(prev,self.Type[i])
             self.setTabOrder(self.Type[i],self.AmountEdit[i])
-            if i > 4:
-                self.setTabOrder(self.AmountEdit[i],self.Effect[i])
-                prev = self.Effect[i]
-            else:
+            if i < 4:
                 self.setTabOrder(self.AmountEdit[i],self.AmountDrop[i])
                 self.setTabOrder(self.AmountDrop[i],self.Effect[i])
                 self.setTabOrder(self.Effect[i],self.Quality[i])
-                prev = self.Quality[i]
+                self.setTabOrder(self.Quality[i],self.Requirement[i])
+            else:
+                self.setTabOrder(self.AmountEdit[i],self.Effect[i])
+                self.setTabOrder(self.Effect[i],self.Requirement[i])
+            prev = self.Requirement[i]
         self.setTabOrder(prev,self.CraftButton)
         self.setTabOrder(self.CraftButton,self.LoadItem)
         self.setTabOrder(self.CraftButton,self.SaveItem)
@@ -596,7 +593,7 @@ class ScWindow(QMainWindow, Ui_B_SC):
 
         self.itemattrlist = { }
         for tab in TabList:
-            self.itemattrlist[tab] = Item(tab)
+            self.itemattrlist[tab] = Item(realm=self.realm,loc=tab)
         self.ItemLevel.setText('51')
         self.CharLevel.setText('50')
 
@@ -825,7 +822,7 @@ class ScWindow(QMainWindow, Ui_B_SC):
                                  self.changePieceTab)
                     errorcount = errorcount + 1
                 gemeffects.append([gemtype, effect])
-                if itemtype == 'player':
+                if i < 4 and itemtype == 'player':
                     if key == self.currentTabLabel:
                         self.Cost[i].setText('')
                     cost = item.slot(i).gemCost()
@@ -937,10 +934,9 @@ class ScWindow(QMainWindow, Ui_B_SC):
                 elif imbue > (itemimbue+0.5):
                     success = -OCStartPercentages[int(imbue-itemimbue)]
                     for slot in item.slots():
-                        if slot.type() == 'Unused':
-                            success += GemQualOCModifiers['94']
-                        else:
-                            success += GemQualOCModifiers[slot.qua()]
+                        if item.slot(i).slotType != 'crafted': continue
+                        if slot.type() == 'Unused': continue
+                        success += GemQualOCModifiers[slot.qua()]
                     success += ItemQualOCModifiers[str(self.QualDrop.currentText())]
                     skillbonus = (int(self.crafterSkill / 50) - 10) * 5
                     if skillbonus > 50: skillbonus = 50
@@ -952,6 +948,7 @@ class ScWindow(QMainWindow, Ui_B_SC):
                     self.ItemImbueTotal.setText(' / ' + unicode(itemimbue))
                     self.ItemCost.setText(SC.formatCost(itemcost))
                     for i in range(0, item.slotCount()):
+                        if item.slot(i).slotType != 'crafted': continue
                         n = self.Name[i]
                         n.setText(item.slot(i).gemName())
                         if item.slot(i).done() == "1":
@@ -1106,7 +1103,7 @@ class ScWindow(QMainWindow, Ui_B_SC):
             mvals.append(mval)
         maximbue = max(mvals)
         if display:
-            for j in range(0, len(mvals)):
+            for j in range(0, 4):
                 if j != mvals.index(maximbue):
                     self.Points[j].setText('%3.1f' % (mvals[j] / 2.0))
                 else:
@@ -1128,7 +1125,8 @@ class ScWindow(QMainWindow, Ui_B_SC):
         typetext = str(typecombo.currentText())
         effcombo = self.Effect[num]
         efftext = str(effcombo.currentText())
-        if self.PlayerMade.isChecked():
+        itemslot = self.itemattrlist[self.currentTabLabel].slot(num)
+        if itemslot.slotType() == 'crafted':
             amount = self.AmountDrop[num]
         else:
             amount = self.AmountEdit[num]
@@ -1139,7 +1137,7 @@ class ScWindow(QMainWindow, Ui_B_SC):
                     effcombo.setEditable(False)
                     self.fix_taborder(num)
                 amount.clear()
-                if self.PlayerMade.isChecked():
+                if num < 4 and self.PlayerMade.isChecked():
                     self.Quality[num].setCurrentIndex(0)
         else:
             if self.PlayerMade.isChecked():
@@ -1291,9 +1289,9 @@ class ScWindow(QMainWindow, Ui_B_SC):
             return
         if not a0: 
             return
-        self.showDropWidgets()
         item = self.itemattrlist[self.currentTabLabel]
         item.loadAttr('ActiveState','drop')
+        self.showDropWidgets()
         self.restoreItem(item)
 
     def PlayerToggled(self, a0):
@@ -1301,16 +1299,15 @@ class ScWindow(QMainWindow, Ui_B_SC):
             return
         if not a0: 
             return
-        self.showPlayerWidgets()
         item = self.itemattrlist[self.currentTabLabel]
         item.loadAttr('ActiveState','player')
+        self.showPlayerWidgets()
         self.restoreItem(item)
 
     def ClearCurrentItem(self):
         self.modified = 1
-        item = self.itemattrlist[self.currentTabLabel]
-        self.itemattrlist[self.currentTabLabel] = item
-        self.restoreItem(item)
+        self.itemattrlist[self.currentTabLabel] = Item(realm=self.realm,loc=self.currentTabLabel)
+        self.restoreItem(self.itemattrlist[self.currentTabLabel])
 
     def Save_Item(self):
         itemname = unicode(self.ItemName.text())
@@ -1715,3 +1712,8 @@ class ScWindow(QMainWindow, Ui_B_SC):
    
     def ignoreMouseEvent(self, e):
         e.ignore()
+
+if __name__ == '__main__':
+    app = QApplication([])
+    scw = ScWindow()
+
