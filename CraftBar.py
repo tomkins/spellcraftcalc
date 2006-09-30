@@ -175,7 +175,7 @@ class CraftBar(QDialog, Ui_B_CraftBar):
     def openFileDialog(self):
         daocdir = QFileDialog.getExistingDirectory(self, 'Select DAoC Directory', self.DaocPath.text())
         if (daocdir):
-            self.DaocPath.setText(daocdir)
+            self.DaocPath.setText(os.path.abspath(daocdir))
 
     def computeBarEnd(self):
         eb = int((self.HotbarNum.value() * 10 + self.HotbarPos.value() + self.gemcount - 1) / 10)

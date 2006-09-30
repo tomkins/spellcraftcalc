@@ -140,10 +140,10 @@ class Options(QDialog, Ui_B_Options):
 
     def loadFromXML(self, xmldoc):
         pricing = {}
-        x = 0
-        y = 0
-        w = 0
-        h = 0
+        x = self.parent.x()
+        y = self.parent.y()
+        w = self.parent.width()
+        h = self.parent.height()
         for child in xmldoc.childNodes:
             if child.nodeType == Node.TEXT_NODE: continue
             if child.tagName == 'Realm':
@@ -210,7 +210,9 @@ class Options(QDialog, Ui_B_Options):
             elif child.tagName == 'DaocPath':
                 self.parent.DaocPath = unicode(XMLHelper.getText(child.childNodes))
             elif child.tagName == 'ItemPath':
-                self.parent.DaocPath = unicode(XMLHelper.getText(child.childNodes))
+                self.parent.ItemPath = unicode(XMLHelper.getText(child.childNodes))
+            elif child.tagName == 'TemplatePath':
+                self.parent.TemplatePath = unicode(XMLHelper.getText(child.childNodes))
             elif child.tagName == 'ConfigReportFile':
                 self.parent.reportFile = unicode(XMLHelper.getText(child.childNodes))
                 
@@ -221,7 +223,7 @@ class Options(QDialog, Ui_B_Options):
         #self.parent.resize(w, h)
         #self.parent.move(x, y)
         self.loadPriceInfo(pricing)
-        self.OK_pressed()
+        self.setParent()
             
     def load(self):
         scfile = os.path.join(os.path.dirname(os.path.abspath(sys.argv[0])),
@@ -249,7 +251,7 @@ class Options(QDialog, Ui_B_Options):
                 traceback.print_exc()
                 pass
 
-    def OK_pressed(self):
+    def setParent(self):
         self.parent.crafterSkill = int(str(self.Skill.currentText()))
         self.parent.showDoneInMatsList = self.ShowDoneGems.isChecked()
         self.parent.includeRacials = self.IncludeRR.isChecked()
@@ -258,6 +260,9 @@ class Options(QDialog, Ui_B_Options):
         self.parent.noteText = str(self.NoteText.toPlainText())
         self.parent.pricingInfo = self.getPriceInfo()
         self.parent.coop = self.Coop.isChecked()
+
+    def OK_pressed(self):
+        self.setParent()
         self.save()
         self.done(1)
 

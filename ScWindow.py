@@ -1382,16 +1382,9 @@ class ScWindow(QMainWindow, Ui_B_SC):
         if filename is None:
             filename = os.path.join(self.TemplatePath, str(self.CharName.text()) + "_template.xml")
         filename = unicode(filename)
-        while filename != '':
-            filename = QFileDialog.getSaveFileName(self, "Save Template", filename, 
-                                                   "Templates (*.xml)")
-            filename = unicode(filename)
-            if filename != '' and os.path.exists(filename):
-                ret = QMessageBox.warning(self, "Overwrite?", "Do you want to overwrite the "
-                                                            + "selected file?", "Yes", "No")
-                if ret != 1:
-                    continue
-            break
+        filename = QFileDialog.getSaveFileName(self, "Save Template", filename, 
+                                               "Templates (*.xml)")
+        filename = unicode(filename)
         if filename != '':
             if filename[-4:] != '.xml':
                 filename += '.xml'
@@ -1400,14 +1393,14 @@ class ScWindow(QMainWindow, Ui_B_SC):
                 f.write(XMLHelper.writexml(self.asXML(), UnicodeStringIO(), '', '\t', '\n'))
                 self.modified = 0
                 f.close()
-                self.TemplatePath = os.path.dirname(os.path.abspath(filename))
             except IOError:
                 QMessageBox.critical(None, 'Error!', 
                     'Error writing to file: ' + filename, 'OK')
                 return
-            self.filename = filename
-            self.updateRecentFiles(filename)
-            filetitle = os.path.basename(filename)
+            self.filename = os.path.abspath(filename)
+            self.updateRecentFiles(self.filename)
+            self.TemplatePath = os.path.dirname(self.filename)
+            filetitle = os.path.basename(self.filename)
             self.setWindowTitle(filetitle + " - Kort's Spellcrafting Calculator")
             
 
@@ -1419,22 +1412,15 @@ class ScWindow(QMainWindow, Ui_B_SC):
             if ret == 1:
                 return
         if len(args) == 0:
-            templatedir = os.path.join(os.path.dirname(os.path.abspath(sys.argv[0])), 
-                                       'templates')
-            filename = QFileDialog.getOpenFileName(self, "Open Template", templatedir, 
+            filename = QFileDialog.getOpenFileName(self, "Open Template", self.TemplatePath, 
                                                    "Templates (*.xml *.scc)")
         else:
             filename = args[0]
         filename = unicode(filename)
         if filename is not None and filename != '':
+            f = None
             try:
                 f = open(filename, 'r')
-            except IOError:
-                traceback.print_exc()
-                QMessageBox.critical(None, 'Error!', 
-                    'Error opening file: ' + filename, 'OK')
-                return
-            try:
                 docstr = f.read()
                 if docstr[0:5] == '<?xml':
                     xmldoc = parseString(docstr)
@@ -1451,12 +1437,14 @@ class ScWindow(QMainWindow, Ui_B_SC):
             except:
                 traceback.print_exc()
                 QMessageBox.critical(None, 'Error!', 
-                    'Error loading template', 'OK')
-                f.close()
+                    'Error loading template file ' + unicode(filename), 'OK')
+                if f is not None: f.close()
                 return
-            self.filename = filename
-            self.updateRecentFiles(filename)
-            filetitle = os.path.basename(filename)
+            return
+            self.filename = os.path.abspath(filename)
+            self.updateRecentFiles(self.filename)
+            self.TemplatePath = os.path.dirname(self.filename)
+            filetitle = os.path.basename(self.filename)
             self.setWindowTitle(filetitle + " - Kort's Spellcrafting Calculator")
 
     def updateRecentFiles(self, fn):
