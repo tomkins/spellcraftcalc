@@ -122,7 +122,7 @@ class ItemSlot:
         if not isinstance(amountlist, tuple):
             if not amountlist.has_key(self.Effect): return -1
             amountlist = amountlist[self.Effect]
-        if not self.Amount in amountlist: return ''
+        if not self.Amount in amountlist: return -1
         return amountlist.index(self.Amount) + 1
 
     def gemImbue(self):
