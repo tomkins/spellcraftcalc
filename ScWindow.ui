@@ -2768,10 +2768,6 @@
     <tabstop>Amount_Edit_12</tabstop>
     <tabstop>Effect_12</tabstop>
     <tabstop>Requirement_12</tabstop>
-    <tabstop>CraftButton</tabstop>
-    <tabstop>LoadItem</tabstop>
-    <tabstop>SaveItem</tabstop>
-    <tabstop>ClearItem</tabstop>
     <tabstop>SkillsList</tabstop>
     <tabstop>OtherBonusList</tabstop>
   </tabstops>
