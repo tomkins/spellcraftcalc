@@ -278,7 +278,7 @@ class ScWindow(QMainWindow, Ui_B_SC):
         self.itemlayout.setColumnMinimumWidth(0,width)
         width = testfont.size(Qt.TextSingleLine, " Points").width()
         self.itemlayout.setColumnMinimumWidth(5,width)
-        width = testfont.size(Qt.TextSingleLine, "999g 00s 00c").width()
+        width = testfont.size(Qt.TextSingleLine, " 999g 00s 00c").width()
         self.itemlayout.setColumnMinimumWidth(6,width)
 
         row += 1
@@ -341,9 +341,9 @@ class ScWindow(QMainWindow, Ui_B_SC):
         self.itemlayout.addWidget(self.ItemOverchargeLabel,row-4,3,1,2)
         self.itemlayout.addWidget(self.ItemOvercharge,row-4,5,1,2)
         self.itemlayout.addWidget(self.ItemCostLabel,row-3,3,1,2)
-        self.itemlayout.addWidget(self.ItemCost,row-3,6,1,1)
+        self.itemlayout.addWidget(self.ItemCost,row-3,5,1,2)
         self.itemlayout.addWidget(self.ItemPriceLabel,row-2,3,1,2)
-        self.itemlayout.addWidget(self.ItemPrice,row-2,6,1,1)
+        self.itemlayout.addWidget(self.ItemPrice,row-2,5,1,2)
         self.itemlayout.addWidget(self.ItemUtilityLabel,row-2,8,1,1)
         self.itemlayout.addWidget(self.ItemUtility,row-2,9,1,1)
         if str(QApplication.style().objectName()[0:9]).lower() == "macintosh":
@@ -1008,7 +1008,6 @@ class ScWindow(QMainWindow, Ui_B_SC):
                 self.OtherBonusList.addItem('%d %s' % (cap + capmod - amount, bonus))        
         self.TotalPrice.setText(SC.formatCost(self.computePrice()))
         self.errorsmenuid.setEnabled(errorcount > 0)
-
         self.nocalc = 0
 
     def computePrice(self):
@@ -1529,11 +1528,11 @@ class ScWindow(QMainWindow, Ui_B_SC):
         self.calculate()
         
     def openOptions(self):
-        self.modified = 1
         self.nocalc = 1
         res = Options.Options(self).exec_()
         if res == 1:
              self.CharClassChanged('')
+             self.modified = 1
         self.nocalc = 0
         self.calculate()
 
