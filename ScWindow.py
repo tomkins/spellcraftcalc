@@ -100,7 +100,7 @@ class ScWindow(QMainWindow, Ui_B_SC):
         OW.load()
         self.pricingInfo = OW.getPriceInfo()
         self.updateRecentFiles(None)
-        self.initialize()
+        self.initialize(0)
 
     def initLayout(self):
         testfont = QFontMetrics(qApp.font())
@@ -558,12 +558,10 @@ class ScWindow(QMainWindow, Ui_B_SC):
         e.accept()
 
 
-    def initialize(self):
-
-# Options passed over from the options box
+    def initialize(self, moretodo):
+        self.nocalc = 1
         self.noteText = ''
         self.craftMultiplier = 6
-        self.nocalc = 1
         self.filename = None
         self.newcount = self.newcount + 1
         filetitle = unicode("Template" + str(self.newcount))
@@ -584,7 +582,8 @@ class ScWindow(QMainWindow, Ui_B_SC):
         self.RealmChanged(self.realm)
         self.restoreItem(self.itemattrlist[self.currentTabLabel])
         self.modified = 0
-        self.nocalc = 0
+        self.nocalc = moretodo
+        if self.nocalc: return
         self.calculate()
 
     def asXML(self):
@@ -736,8 +735,9 @@ class ScWindow(QMainWindow, Ui_B_SC):
             if item.ItemQuality in QualityValues:
                 self.QualDrop.setCurrentIndex(
                     QualityValues.index(item.ItemQuality))
-        self.calculate()
         self.nocalc = wascalc
+        if self.nocalc: return
+        self.calculate()
 
     def calculate(self):
         if self.nocalc:
@@ -1218,10 +1218,10 @@ class ScWindow(QMainWindow, Ui_B_SC):
         self.calculate()
 
     def TypeChanged(self, Value):
-        index = self.focusWidget().objectName()[-2:]
-        if index[0] == '_': index = index[1:]
         wasnocalc = self.nocalc
         self.nocalc = 1
+        index = self.focusWidget().objectName()[-2:]
+        if index[0] == '_': index = index[1:]
         self.UpdateCombo(0, int(index) - 1)
         self.nocalc = wascalc
         if self.nocalc : return
@@ -1230,10 +1230,10 @@ class ScWindow(QMainWindow, Ui_B_SC):
         self.calculate()
 
     def EffectChanged(self, value):
-        index = str(self.focusWidget().objectName())[-2:]
-        if index[0] == '_': index = index[1:]
         wasnocalc = self.nocalc
         self.nocalc = 1
+        index = str(self.focusWidget().objectName())[-2:]
+        if index[0] == '_': index = index[1:]
         self.UpdateCombo(1, int(index) - 1)
         self.nocalc = wascalc
         if self.nocalc : return
@@ -1349,7 +1349,7 @@ class ScWindow(QMainWindow, Ui_B_SC):
             if ret == QMessageBox.Yes:
                 self.saveFile()
                 if self.modified: return
-        self.initialize()
+        self.initialize(0)
 
     def saveFile(self):
         if self.filename is None:
@@ -1451,7 +1451,7 @@ class ScWindow(QMainWindow, Ui_B_SC):
             self.rf_menu.addAction(act)
 
     def loadFromXML(self, template):
-        self.initialize()
+        self.initialize(1)
         self.clearCurrentItem()
         racename = ''
         classname = ''
@@ -1489,14 +1489,13 @@ class ScWindow(QMainWindow, Ui_B_SC):
             self.CharRace.setCurrentIndex(AllBonusList[self.realm][self.charclass] \
                                                       ['Races'].index(racename))
             self.RaceChanged('')
-        self.nocalc = 0
-        self.modified = 0
         self.restoreItem(self.itemattrlist[self.currentTabLabel])
+        self.modified = 0
+        self.nocalc = 0
+        self.calculate()
         
     def loadFromLela(self, scclines):
-        wascalc = self.nocalc
-        self.nocalc = 1
-        self.initialize()
+        self.initialize(1)
         self.clearCurrentItem()
         sublines = filter(lambda(x): re.compile('^ITEM').match(x) is None, scclines)
         for line in sublines:
@@ -1519,14 +1518,15 @@ class ScWindow(QMainWindow, Ui_B_SC):
                 if AllBonusList[self.realm].has_key(self.charclass):
                    self.CharClass.setCurrentIndex(ClassList[self.realm].index(self.charclass))
                    self.CharClassChanged('')
-
         for itemnum in range(0, 19):
             item = Item(TabList[itemnum])
             #item.Location = TabList[itemnum]
             item.loadLelaItemFromSCC(itemnum, scclines, self.realm)
             self.itemattrlist[item.Location] = item
-        self.nocalc = wascalc
         self.restoreItem(self.itemattrlist[self.currentTabLabel])
+        self.modified = 0
+        self.nocalc = 0
+        self.calculate()
         
     def openOptions(self):
         self.modified = 1
