@@ -295,7 +295,7 @@ class Item:
             'ItemName', 'AFDPS', 'Speed', 'Bonus',
             'ItemQuality', 'Equipped', 'Level']:
             val = getattr(self, key)
-            if val = '': continue
+            if val == '': continue
             elem = document.createElement(key)
             elem.appendChild(document.createTextNode(val))
             rootnode.appendChild(elem)
