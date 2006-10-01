@@ -15,16 +15,17 @@ from MyStringIO import UnicodeStringIO
 import sys
 
 class ItemSlot:
-    def __init__(self, slottype='player', type='Unused', amount='', effect='', 
-                 qua='94', time='0', remakes='0', done='0'):
+    def __init__(self, slottype='player', type='Unused', amount='0', effect='',
+                 qua='94', time='0', remakes='0', done='0', requirement=''):
         self.__dict__ = { 
             'SlotType' : unicode(slottype),
-            'Type': '', 'Effect' : '', 'Amount' : '',
+            'Type': '', 'Effect' : '', 'Amount' : '', 'Requirement' : '',
             'Qua' : '', 'Time' : '',   'Remakes' : '', 'Done' : '', }
         self.setAll(type, amount, effect, qua, time, remakes, done)
 
-    def setAll(self, type='Unused', amount='', effect='', qua='94', 
-               time='0', remakes='0', done='0'):
+    def setAll(self, type='Unused', amount='0', effect='',
+               qua='94', time='0', remakes='0', done='0',
+               requirement=''):
         self.Type = unicode(type)
         self.Amount = unicode(amount)
         self.Effect = unicode(effect)
@@ -32,6 +33,7 @@ class ItemSlot:
         self.Time = unicode(time)
         self.Remakes = unicode(remakes)
         self.Done = unicode(done)
+        self.Requirement = unicode(requirement)
         self.fixEffect()
         self.CraftOk = False
 
@@ -39,7 +41,7 @@ class ItemSlot:
         if self.SlotType == 'player':
             keys = ['Type', 'Effect', 'Amount', 'Qua', 'Remakes', 'Time', 'Done', ]
         else:
-            keys = ['Type', 'Effect', 'Amount', ]
+            keys = ['Type', 'Effect', 'Amount', 'Requirement', ]
         for attrkey in keys:
             valnode = document.createElement(unicode(attrkey))
             valtext = document.createTextNode(self.getAttr(attrkey))
@@ -77,9 +79,11 @@ class ItemSlot:
             self.Type=unicode(type)
 
     def amount(self):
+        if self.Type == 'Unused': return ''
         return self.Amount
     def setAmount(self, amount):
         self.CraftOk = False
+        if amount == '': amount = '0'
         self.Amount = unicode(amount)
 
     def effect(self):
@@ -88,10 +92,17 @@ class ItemSlot:
         self.CraftOk = False
         self.Effect = unicode(effect)
 
+    def requirement(self):
+        return self.Requirement
+    def setEffect(self, requirement):
+        self.CraftOk = False
+        self.Requirement = unicode(requirement)
+
     def qua(self):
         return self.Qua
     def setQua(self, qua):
         self.CraftOk = False
+        if qua == '': qua = '94'
         self.Qua = unicode(qua)
 
     def quaIndex(self):
@@ -102,16 +113,19 @@ class ItemSlot:
     def time(self):
         return self.Time
     def setTime(self, time):
+        if time == '': time = '0'
         self.Time = unicode(time)
 
     def remakes(self):
         return self.Remakes
     def setRemakes(self, remakes):
+        if remakes == '': remakes = '0'
         self.Remakes = unicode(remakes)
 
     def done(self):
         return self.Done
     def setDone(self, done):
+        if done == '': done = '0'
         self.Done = unicode(done)
 
     def crafted(self):
@@ -135,6 +149,20 @@ class ItemSlot:
         return amountlist.index(self.Amount) + 1
 
     def gemImbue(self):
+        mval = 0
+        if not self.crafted(): return 0.0
+        if self.Type == 'Stat':
+            return ((int(self.Amount) - 1) / 3.0) * 2.0 + 1.0
+        if self.Type == 'Hits':
+            return int(self.Amount) / 4.0
+        if self.Type == 'Resist' or self.Type == 'Power':
+            mval = (int(self.Amount) - 1) * 2.0
+        elif self.Type == 'Skill':
+            mval = (int(self.Amount) - 1) * 5.0
+        if (mval < 1): return 1.0
+        return mval
+
+    def gemUtility(self):
         mval = 0
         if not self.crafted(): return 0.0
         if self.Type == 'Stat':
@@ -311,6 +339,30 @@ class Item:
                 slots[num].asXML(document,slotnode)
                 statenode.appendChild(slotnode)
         return document
+
+    def utility(self, skilltable):
+        utility = 0.0
+        for slot in self.slots():
+            gemtype = slot.type()
+            if gemtype == 'Unused': continue
+            amount = int(slot.amount())
+            if slot.type() == 'Skill':
+                #if slot.effect()[0:4] == 'All Magic Skills':
+                #    for e in skilltable[effect]:
+                #        utility += amount * 5
+                #else:
+                utility += amount * 5
+            elif gemtype == 'Focus':
+                utility += 1
+            elif gemtype == 'Power':
+                utility += amount * 2
+            elif gemtype == 'Hits':
+                utility += amount / 4.0
+            elif gemtype == 'Resist':
+                utility += amount * 2
+            elif gemtype == 'Stat':
+                utility += amount * 2.0 / 3.0
+        return utility
     
     def save(self, filename):
         try:
@@ -321,7 +373,7 @@ class Item:
             return
         f.write(XMLHelper.writexml(self.asXML(), UnicodeStringIO(), '', '\t', '\n'))
         f.close()
-    
+
     def load(self, filename, silent = 0):
         try:
             f = file(filename, 'r')
