@@ -16,21 +16,18 @@ import sys
 
 class ItemSlot:
     def __init__(self, slottype='player', type='Unused', amount='', effect='', 
-                 qua='94', realm='All', time='0', remakes='0', done='0'):
+                 qua='94', time='0', remakes='0', done='0'):
         self.__dict__ = { 
             'SlotType' : unicode(slottype),
-            'Type': '',     'Effect' : '',
-            'Amount' : '',  'Realm' : '',
-            'Qua' : '',     'Time' : '',
-            'Remakes' : '', 'Done' : '', }
-        self.setAll(type, amount, effect, qua, realm, time, remakes, done)
+            'Type': '', 'Effect' : '', 'Amount' : '',
+            'Qua' : '', 'Time' : '',   'Remakes' : '', 'Done' : '', }
+        self.setAll(type, amount, effect, qua, time, remakes, done)
 
     def setAll(self, type='Unused', amount='', effect='', qua='94', 
-               realm='All', time='0', remakes='0', done='0'):
+               time='0', remakes='0', done='0'):
         self.Type = unicode(type)
         self.Amount = unicode(amount)
         self.Effect = unicode(effect)
-        self.Realm = unicode(realm)
         self.Qua = unicode(qua)
         self.Time = unicode(time)
         self.Remakes = unicode(remakes)
@@ -38,13 +35,11 @@ class ItemSlot:
         self.fixEffect()
         self.CraftOk = False
 
-    def asXML(self,document,slotnode,realm):
+    def asXML(self,document,slotnode):
         if self.SlotType == 'player':
             keys = ['Type', 'Effect', 'Amount', 'Qua', 'Remakes', 'Time', 'Done', ]
         else:
             keys = ['Type', 'Effect', 'Amount', ]
-        if realm != self.Realm:
-            keys.append('Realm')
         for attrkey in keys:
             valnode = document.createElement(unicode(attrkey))
             valtext = document.createTextNode(self.getAttr(attrkey))
@@ -93,13 +88,6 @@ class ItemSlot:
         self.CraftOk = False
         self.Effect = unicode(effect)
 
-    def realm(self):
-        return self.Realm
-    def setRealm(self, realm):
-        self.CraftOk = False
-        if not GemTables.has_key(realm): raise ValueError()
-        self.Realm = unicode(realm)
-
     def qua(self):
         return self.Qua
     def setQua(self, qua):
@@ -134,7 +122,6 @@ class ItemSlot:
         if self.Amount == '' or self.Amount == '0': return False
         if self.gemLevel() < 0: return False
         if self.quaIndex < 0: return False
-        if not GemTables.has_key(self.Realm): return False
         self.CraftOk = True
         return self.CraftOk
 
@@ -161,22 +148,21 @@ class ItemSlot:
         if (mval < 1): return 1.0
         return mval
 
-    def gemName(self):
+    def gemName(self, realm):
+        if not GemTables.has_key(realm): return ''
         if not self.crafted():
             return ''
         amountindex = self.gemLevel() - 1
         if self.Type[-6:] == 'Effect':
-            if not EffectMetal.has_key(self.Realm): return ''
             if not EffectTypeNames.has_key(self.Type): return ''
             if not EffectItemNames.has_key(self.Effect): return ''
             return string.strip(EffectItemNames[self.Effect][0]
                     + ' ' + EffectTypeNames[self.Type][0]
                     + ' ' + EffectItemNames[self.Effect][1]
-                    + ' ' + EffectMetal[self.Realm][amountindex]
+                    + ' ' + EffectMetal[realm][amountindex]
                     + ' ' + EffectTypeNames[self.Type][1])
-        if not GemTables.has_key(self.Realm): return ''
-        if not GemTables[self.Realm].has_key(self.Type): return ''
-        gemlist = GemTables[self.Realm][self.Type]
+        if not GemTables[realm].has_key(self.Type): return ''
+        gemlist = GemTables[realm][self.Type]
         if not gemlist.has_key(self.Effect):
             gemlist = GemTables['All'][self.Type]
             if not gemlist.has_key(self.Effect): return ''
@@ -185,12 +171,12 @@ class ItemSlot:
                 + ' ' + gemlist[self.Effect][1]
                 + ' ' + GemSubName[self.Type])
 
-    def gemMaterials(self):
+    def gemMaterials(self, realm):
         ret = { 'Gems' : { }, 'Dusts' : { }, 'Liquids' : { } }
-        if not self.crafted():
+        if not self.crafted() or not GemTables.has_key(realm):
             return ret
         gemindex = self.gemLevel() - 1
-        gemlist = GemTables[self.Realm][self.Type]
+        gemlist = GemTables[realm][self.Type]
         if not gemlist.has_key(self.Effect):
             gemlist = GemTables['All'][self.Type]
             if not gemlist.has_key(self.Effect): return ''
@@ -275,7 +261,7 @@ class Item:
 
         for it in ('drop', 'player'):
             for i in range(0, len(self.itemslots[it])):
-                self.itemslots[it][i] = ItemSlot(slottype=it, realm=realm)
+                self.itemslots[it][i] = ItemSlot(slottype=it)
 
     def slot(self, index):
         return self.itemslots[self.ActiveState][index]
@@ -306,11 +292,10 @@ class Item:
         rootnode = document.createElement(unicode('SCItem'))
         document.appendChild(rootnode)
         for key in ['ActiveState', 'Location', 'Realm',
-            'ItemName', 'AFDPS',
-            'Speed', 'Bonus',
-            'ItemQuality',
-            'Equipped', 'Level']:
+            'ItemName', 'AFDPS', 'Speed', 'Bonus',
+            'ItemQuality', 'Equipped', 'Level']:
             val = getattr(self, key)
+            if val = '': continue
             elem = document.createElement(key)
             elem.appendChild(document.createTextNode(val))
             rootnode.appendChild(elem)
@@ -323,7 +308,7 @@ class Item:
                 if slots[num].type() == "Unused": continue
                 slotnode = document.createElement(unicode('SLOT'))
                 slotnode.setAttribute(unicode("Number"), unicode(num))
-                slots[num].asXML(document,slotnode,self.Realm)
+                slots[num].asXML(document,slotnode)
                 statenode.appendChild(slotnode)
         return document
     

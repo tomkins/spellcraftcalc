@@ -116,7 +116,7 @@ class CraftBar(QDialog, Ui_B_CraftBar):
             if item.getAttr('ActiveState') == 'player':
                 for slot in range(0, 4):
                     if item.slot(slot).crafted():
-                        gemname = item.slot(slot).gemName()
+                        gemname = item.slot(slot).gemName(realm)
                         if slotcounter >= 300:
                             sys.stdout.write("Out of slots!\n")
                             continue

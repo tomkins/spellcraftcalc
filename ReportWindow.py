@@ -127,7 +127,7 @@ class ReportWindow(QDialog, Ui_B_ReportWindow):
                 gemtype = item.slot(slot).type()
                 effect = item.slot(slot).effect()
                 amount = item.slot(slot).amount()
-                for mattype, matl in item.slot(slot).gemMaterials().items():
+                for mattype, matl in item.slot(slot).gemMaterials(self.parent.realm).items():
                     for mat, val in matl.items():
                         if self.materials[mattype].has_key(mat):
                             self.materials[mattype][mat] += val
@@ -136,7 +136,7 @@ class ReportWindow(QDialog, Ui_B_ReportWindow):
         
                 if gemtype == 'Unused':
                     continue
-                gemname = item.slot(slot).gemName()
+                gemname = item.slot(slot).gemName(self.parent.realm)
                 if self.gemnames.has_key(gemname):
                     self.gemnames[gemname] += 1
                 else:
@@ -281,7 +281,7 @@ class ReportWindow(QDialog, Ui_B_ReportWindow):
                     iteminfo[key][gemnum]['effect'] = effect +' '+ gemtype
                 iteminfo[key][gemnum]['quality'] = qua
                 if activestate == 'player':
-                    iteminfo[key][gemnum]['name'] = item.slot(slot).gemName()
+                    iteminfo[key][gemnum]['name'] = item.slot(slot).gemName(self.parent.realm)
                 else:
                     iteminfo[key][gemnum]['name'] = ''
                 if gemtype == 'Skill':

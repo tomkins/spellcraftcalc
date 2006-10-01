@@ -60,7 +60,7 @@ class CraftWindow(QDialog, Ui_B_CraftWindow):
                 self.GemDone[slot].setChecked(1)
 
             self.GemRemakes[slot].setValue(numremakes)
-            gemname.setText(item.slot(slot).gemName())
+            gemname.setText(item.slot(slot).gemName(self.parent.realm))
 
         self.TotalCost.setText(SC.formatCost(self.totalCost))
         self.ExpMultiplier.setValue(6)
@@ -73,7 +73,7 @@ class CraftWindow(QDialog, Ui_B_CraftWindow):
         for slot in range(0, 4):
             numremakes = int(self.currentItem.slot(slot).remakes())
             done = int(self.currentItem.slot(slot).done())
-            for mattype, matl in self.currentItem.slot(slot).gemMaterials().items():
+            for mattype, matl in self.currentItem.slot(slot).gemMaterials(self.parent.realm).items():
                 for mat, val in matl.items():
                     if materials['Used'][mattype].has_key(mat):
                         materials['Used'][mattype][mat] += val * (numremakes + 1)
