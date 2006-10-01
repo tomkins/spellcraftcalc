@@ -64,7 +64,6 @@ class ScWindow(QMainWindow, Ui_B_SC):
         self.newcount = 0
         self.startup = 1
         self.nocalc = 1
-        self.save = 0
         self.totals = { }
         self.capTotals = { }
         self.recentFiles = []
@@ -544,15 +543,19 @@ class ScWindow(QMainWindow, Ui_B_SC):
         OW = Options.Options(self)
         OW.save()
         if self.modified:
-            ret = QMessageBox.warning(self, 'Save Changes?',
-                                      'Some changes may not have been saved. '
-                                    + 'Are you sure you want to quit?', 'Yes', 'No')
-            if ret == 0:
-                e.accept()
-            else:
+            ret = QMessageBox.warning(self, 'Save Changes?', 
+                                      "This template has been changed.\n"
+                                      "Do you want to save these changes?", 
+                                      QMessageBox.Yes, QMessageBox.No, QMessageBox.Cancel)
+            if ret == QMessageBox.Cancel:
                 e.ignore()
-        else: 
-            e.accept()
+                return
+            if ret == QMessageBox.Yes:
+                self.saveFile()
+                if self.modified: 
+                    e.ignore()
+                    return
+        e.accept()
 
 
     def initialize(self):
@@ -560,7 +563,7 @@ class ScWindow(QMainWindow, Ui_B_SC):
 # Options passed over from the options box
         self.noteText = ''
         self.craftMultiplier = 6
-        self.save = 0
+        self.nocalc = 1
         self.filename = None
         self.newcount = self.newcount + 1
         filetitle = unicode("Template" + str(self.newcount))
@@ -581,7 +584,6 @@ class ScWindow(QMainWindow, Ui_B_SC):
         self.RealmChanged(self.realm)
         self.restoreItem(self.itemattrlist[self.currentTabLabel])
         self.modified = 0
-        self.save = 1
         self.nocalc = 0
         self.calculate()
 
@@ -673,8 +675,6 @@ class ScWindow(QMainWindow, Ui_B_SC):
         if item is None: return
         wascalc = self.nocalc
         self.nocalc = 1
-        wassave = self.save
-        self.save = 0
         itemtype = item.ActiveState
         if itemtype == 'player':
             self.PlayerMade.setChecked(1)
@@ -738,7 +738,6 @@ class ScWindow(QMainWindow, Ui_B_SC):
                     QualityValues.index(item.ItemQuality))
         self.calculate()
         self.nocalc = wascalc
-        self.save = wassave
 
     def calculate(self):
         if self.nocalc:
@@ -1092,8 +1091,8 @@ class ScWindow(QMainWindow, Ui_B_SC):
         return ImbueMultipliers[type]
 
     def TemplateChanged(self,a0):
-        if self.save:
-            self.modified = 1
+        if self.nocalc: return
+        self.modified = 1
         self.calculate()
 
     def UpdateCombo(self, type, num):
@@ -1178,8 +1177,8 @@ class ScWindow(QMainWindow, Ui_B_SC):
                 self.StatBonus[rt].setText('+'+str(Races['All'][race]['Resists'][rt]))
             else:
                 self.StatBonus[rt].setText('-')
-        if self.save:
-            self.modified = 1
+        if self.nocalc: return
+        self.modified = 1
         self.calculate()
 
     def CharClassChanged(self,a0):
@@ -1212,77 +1211,74 @@ class ScWindow(QMainWindow, Ui_B_SC):
         self.CharClassChanged('')
     
     def ItemChanged(self,a0):
-        if self.save:
-            self.modified = 1
-            item = self.itemattrlist[self.currentTabLabel]
-            self.storeItem(item)
+        if self.nocalc: return
+        self.modified = 1
+        item = self.itemattrlist[self.currentTabLabel]
+        self.storeItem(item)
         self.calculate()
 
     def TypeChanged(self, Value):
         index = self.focusWidget().objectName()[-2:]
         if index[0] == '_': index = index[1:]
-        wascalc = self.nocalc
+        wasnocalc = self.nocalc
         self.nocalc = 1
         self.UpdateCombo(0, int(index) - 1)
         self.nocalc = wascalc
-        if self.save:
-            self.modified = 1
-            self.storeItem(self.itemattrlist[self.currentTabLabel])
+        if self.nocalc : return
+        self.modified = 1
+        self.storeItem(self.itemattrlist[self.currentTabLabel])
         self.calculate()
 
     def EffectChanged(self, value):
         index = str(self.focusWidget().objectName())[-2:]
         if index[0] == '_': index = index[1:]
-        wascalc = self.nocalc
+        wasnocalc = self.nocalc
         self.nocalc = 1
         self.UpdateCombo(1, int(index) - 1)
         self.nocalc = wascalc
-        if self.save:
-            self.modified = 1
-            self.storeItem(self.itemattrlist[self.currentTabLabel])
+        if self.nocalc : return
+        self.modified = 1
+        self.storeItem(self.itemattrlist[self.currentTabLabel])
         self.calculate()
 
     def AmountChanged(self,a0):
-        if self.save:
-            self.modified = 1
+        if self.nocalc: return
+        self.modified = 1
         self.storeItem(self.itemattrlist[self.currentTabLabel])
         self.calculate()
 
     def QualityChanged(self,a0):
-        if self.save:
-            self.modified = 1
+        if self.nocalc: return
+        self.modified = 1
         self.storeItem(self.itemattrlist[self.currentTabLabel])
         self.calculate()
 
     def EquippedClicked(self):
-        if self.save:
-            self.modified = 1
-            self.storeItem(self.itemattrlist[self.currentTabLabel])
+        if self.nocalc: return
+        self.modified = 1
+        self.storeItem(self.itemattrlist[self.currentTabLabel])
         self.calculate()
     
     def DropToggled(self,a0):
-        if self.nocalc:
-            return
-        if not a0: 
-            return
+        if self.nocalc or not a0: return
+        self.modified = 1
         item = self.itemattrlist[self.currentTabLabel]
         item.ActiveState = 'drop'
         self.showDropWidgets()
         self.restoreItem(item)
 
     def PlayerToggled(self, a0):
-        if self.nocalc:
-            return
-        if not a0: 
-            return
+        if self.nocalc or not a0: return
+        self.modified = 1
         item = self.itemattrlist[self.currentTabLabel]
         item.ActiveState = 'player'
         self.showPlayerWidgets()
         self.restoreItem(item)
 
     def clearCurrentItem(self):
-        self.modified = 1
         self.itemattrlist[self.currentTabLabel] = Item(realm=self.realm,loc=self.currentTabLabel)
+        if self.nocalc: return
+        self.modified = 1
         self.restoreItem(self.itemattrlist[self.currentTabLabel])
 
     def saveItem(self):
@@ -1346,12 +1342,13 @@ class ScWindow(QMainWindow, Ui_B_SC):
     def newFile(self):
         if self.modified:
             ret = QMessageBox.warning(self, 'Save Changes?', 
-                                      'Some changes may not have been saved. Are you '
-                                    + 'sure you want to discard these changes?', 'Yes', 'No')
-            if ret == 1:
-                return
-        wascalc = self.nocalc
-        self.nocalc = 1
+                                      "This template has been changed.\n"
+                                      "Do you want to save these changes?", 
+                                      QMessageBox.Yes, QMessageBox.No, QMessageBox.Cancel)
+            if ret == QMessageBox.Cancel: return
+            if ret == QMessageBox.Yes:
+                self.saveFile()
+                if self.modified: return
         self.initialize()
 
     def saveFile(self):
@@ -1361,12 +1358,11 @@ class ScWindow(QMainWindow, Ui_B_SC):
             try:
                 f = open(self.filename, 'w')
                 f.write(XMLHelper.writexml(self.asXML(), UnicodeStringIO(), '', '\t', '\n'))
-                self.modified = 0
                 f.close()
+                self.modified = 0
             except IOError:
                 QMessageBox.critical(None, 'Error!', 
                     'Error writing to file: ' + self.filename, 'OK')
-            self.updateRecentFiles(self.filename)
 
     def saveAsFile(self):
         filename = self.filename
@@ -1382,12 +1378,12 @@ class ScWindow(QMainWindow, Ui_B_SC):
             try:
                 f = open(filename, 'w')
                 f.write(XMLHelper.writexml(self.asXML(), UnicodeStringIO(), '', '\t', '\n'))
-                self.modified = 0
                 f.close()
             except IOError:
                 QMessageBox.critical(None, 'Error!', 
                     'Error writing to file: ' + filename, 'OK')
                 return
+            self.modified = 0
             self.filename = os.path.abspath(filename)
             self.updateRecentFiles(self.filename)
             self.TemplatePath = os.path.dirname(self.filename)
@@ -1398,10 +1394,13 @@ class ScWindow(QMainWindow, Ui_B_SC):
     def openFile(self, *args):
         if self.modified:
             ret = QMessageBox.warning(self, 'Save Changes?', 
-                                      'Some changes may not have been saved. Are you sure '
-                                    + 'you want to discard these changes?', 'Yes', 'No')
-            if ret == 1:
-                return
+                                      "This template has been changed.\n"
+                                      "Do you want to save these changes?", 
+                                      QMessageBox.Yes, QMessageBox.No, QMessageBox.Cancel)
+            if ret == QMessageBox.Cancel: return
+            if ret == QMessageBox.Yes:
+                self.saveFile()
+                if self.modified: return
         if len(args) == 0:
             filename = QFileDialog.getOpenFileName(self, "Open Template", self.TemplatePath, 
                                                    "Templates (*.xml *.scc)")
@@ -1452,8 +1451,6 @@ class ScWindow(QMainWindow, Ui_B_SC):
             self.rf_menu.addAction(act)
 
     def loadFromXML(self, template):
-        wascalc = self.nocalc
-        self.nocalc = 1
         self.initialize()
         self.clearCurrentItem()
         racename = ''
@@ -1492,9 +1489,9 @@ class ScWindow(QMainWindow, Ui_B_SC):
             self.CharRace.setCurrentIndex(AllBonusList[self.realm][self.charclass] \
                                                       ['Races'].index(racename))
             self.RaceChanged('')
-        self.nocalc = wascalc
-        self.restoreItem(self.itemattrlist[self.currentTabLabel])
+        self.nocalc = 0
         self.modified = 0
+        self.restoreItem(self.itemattrlist[self.currentTabLabel])
         
     def loadFromLela(self, scclines):
         wascalc = self.nocalc
