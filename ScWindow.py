@@ -74,7 +74,6 @@ class ScWindow(QMainWindow, Ui_B_SC):
         self.fixedtaborder = False
 
         QMainWindow.__init__(self,None,Qt.Window)
-        # |Qt.WindowSystemMenuHint|Qt.WindowTitleHint|Qt.WindowMinimizeButtonHint
         self.setAttribute(Qt.WA_DeleteOnClose)
         Ui_B_SC.setupUi(self,self)
 
@@ -1572,9 +1571,8 @@ class ScWindow(QMainWindow, Ui_B_SC):
         splash.exec_()
 
     def openCraftBars(self):
-        CB = CraftBar.CraftBar(self.DaocPath, self, '', 1)
+        CB = CraftBar.CraftBar(self, '', 1)
         CB.exec_()
-        self.DaocPath = str(CB.DaocPath.text())
 
     def DelveItemsDialog(self, find, findtype = None):
         locs = []

@@ -154,9 +154,10 @@ class CraftBar(QDialog, Ui_B_CraftBar):
         self.LoadGemsButton.repaint(self.LoadGemsButton.visibleRect())
 
     def findPath(self,a0):
-        if os.path.isdir(str(a0)):
+        a0 = unicode(a0)
+        if os.path.isdir(a0):
             self.model.removeRows(0, self.model.rowCount())
-            filelist = glob.glob(str(a0)+'/*-*.ini')
+            filelist = glob.glob(a0+'/*-*.ini')
             for file in filelist:
                 m = re.compile("(\w+)-(\d+)\.ini$").search(file)
                 if m is not None:
