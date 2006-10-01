@@ -926,7 +926,7 @@ class ScWindow(QMainWindow, Ui_B_SC):
                     for i in range(0, item.slotCount()):
                         if item.slot(i).slotType != 'crafted': continue
                         n = self.Name[i]
-                        n.setText(item.slot(i).gemName())
+                        n.setText(item.slot(i).gemName(self.realm))
                         if item.slot(i).done() == "1":
                             self.GemLabel[i].setEnabled(0)
                         else:
