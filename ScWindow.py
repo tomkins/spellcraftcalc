@@ -672,7 +672,7 @@ class ScWindow(QMainWindow, Ui_B_SC):
 
     def restoreItem(self, item):
         if item is None: return
-        wascalc = self.nocalc
+        wasnocalc = self.nocalc
         self.nocalc = 1
         itemtype = item.ActiveState
         if itemtype == 'player':
@@ -735,7 +735,7 @@ class ScWindow(QMainWindow, Ui_B_SC):
             if item.ItemQuality in QualityValues:
                 self.QualDrop.setCurrentIndex(
                     QualityValues.index(item.ItemQuality))
-        self.nocalc = wascalc
+        self.nocalc = wasnocalc
         if self.nocalc: return
         self.calculate()
 
@@ -1223,7 +1223,7 @@ class ScWindow(QMainWindow, Ui_B_SC):
         index = self.focusWidget().objectName()[-2:]
         if index[0] == '_': index = index[1:]
         self.UpdateCombo(0, int(index) - 1)
-        self.nocalc = wascalc
+        self.nocalc = wasnocalc
         if self.nocalc : return
         self.modified = 1
         self.storeItem(self.itemattrlist[self.currentTabLabel])
@@ -1235,7 +1235,7 @@ class ScWindow(QMainWindow, Ui_B_SC):
         index = str(self.focusWidget().objectName())[-2:]
         if index[0] == '_': index = index[1:]
         self.UpdateCombo(1, int(index) - 1)
-        self.nocalc = wascalc
+        self.nocalc = wasnocalc
         if self.nocalc : return
         self.modified = 1
         self.storeItem(self.itemattrlist[self.currentTabLabel])
