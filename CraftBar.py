@@ -19,7 +19,7 @@ import ConfigParser
 import sys
 
 class CraftBar(QDialog, Ui_B_CraftBar):
-    def __init__(self,path = '',parent = None,name = None,modal = False,fl = Qt.Widget):
+    def __init__(self,parent = None,name = None,modal = False,fl = Qt.Widget):
         QDialog.__init__(self, parent, fl)
         Ui_B_CraftBar.setupUi(self,self)
 
@@ -57,15 +57,14 @@ class CraftBar(QDialog, Ui_B_CraftBar):
         self.connect(self.LHSelect,SIGNAL("clicked()"),self.PieceBoxChanged)
         self.connect(self.THSelect,SIGNAL("clicked()"),self.PieceBoxChanged)
 
-        self.scwin = parent
+        self.parent = parent
         self.gemcount = 0
         self.piecelist = { }
         self.HotbarNum.setValue(1)
         self.HotbarPos.setValue(1)
-        self.DaocPath.setText(path)
+        self.DaocPath.setText(self.parent.DaocPath)
         self.computeGemCount()
         self.computeBarEnd()
-        self.mythicdir = path
 
     def loadGems(self):
         indexList = self.CharList.selectedIndexes()
@@ -109,7 +108,7 @@ class CraftBar(QDialog, Ui_B_CraftBar):
                 CP.set('Macros', 'Macro_%d' % buttons[i],
                        "%s,/craft %s" % (Realms[i][0:3], Realms[i]))
         
-        realm = self.scwin.realm
+        realm = self.parent.realm
         slotcounter = (self.HotbarNum.value() - 1) * 10 + self.HotbarPos.value() - 1
         for loc in TabList:
             item = self.piecelist.get(loc, None)
@@ -156,10 +155,9 @@ class CraftBar(QDialog, Ui_B_CraftBar):
 
     def findPath(self,a0):
         if os.path.isdir(str(a0)):
-            self.mythicdir = str(a0)
             self.model.removeRows(0, self.model.rowCount())
             filelist = glob.glob(str(a0)+'/*-*.ini')
-            for file in filelist: 
+            for file in filelist:
                 m = re.compile("(\w+)-(\d+)\.ini$").search(file)
                 if m is not None:
                     server = ServerCodes[m.group(2)]
@@ -170,6 +168,8 @@ class CraftBar(QDialog, Ui_B_CraftBar):
                     self.model.setData(index, QVariant(m.group(1)), Qt.DisplayRole)
                     index = self.model.index(self.model.rowCount()-1, 2, QModelIndex())
                     self.model.setData(index, QVariant(file), Qt.DisplayRole)
+            if len(filelist) > 0:
+                self.parent.DaocPath = a0
         self.CharList.resizeRowsToContents()
 
     def openFileDialog(self):
@@ -210,24 +210,24 @@ class CraftBar(QDialog, Ui_B_CraftBar):
     def PieceBoxChanged(self):
         self.piecelist = {}
         if self.ChestSelect.isChecked():
-            self.piecelist['Chest'] = self.scwin.itemattrlist['Chest']
+            self.piecelist['Chest'] = self.parent.itemattrlist['Chest']
         if self.ArmsSelect.isChecked():
-            self.piecelist['Arms'] = self.scwin.itemattrlist['Arms']
+            self.piecelist['Arms'] = self.parent.itemattrlist['Arms']
         if self.HeadSelect.isChecked():
-            self.piecelist['Head'] = self.scwin.itemattrlist['Head']
+            self.piecelist['Head'] = self.parent.itemattrlist['Head']
         if self.LegsSelect.isChecked():
-            self.piecelist['Legs'] = self.scwin.itemattrlist['Legs']
+            self.piecelist['Legs'] = self.parent.itemattrlist['Legs']
         if self.FeetSelect.isChecked():
-            self.piecelist['Feet'] = self.scwin.itemattrlist['Feet']
+            self.piecelist['Feet'] = self.parent.itemattrlist['Feet']
         if self.HandsSelect.isChecked():
-            self.piecelist['Hands'] = self.scwin.itemattrlist['Hands']
+            self.piecelist['Hands'] = self.parent.itemattrlist['Hands']
         if self.RHSelect.isChecked():
-            self.piecelist['Right Hand'] = self.scwin.itemattrlist['Right Hand']
+            self.piecelist['Right Hand'] = self.parent.itemattrlist['Right Hand']
         if self.LHSelect.isChecked():
-            self.piecelist['Left Hand'] = self.scwin.itemattrlist['Left Hand']
+            self.piecelist['Left Hand'] = self.parent.itemattrlist['Left Hand']
         if self.THSelect.isChecked():
-            self.piecelist['2 Handed'] = self.scwin.itemattrlist['2 Handed']
+            self.piecelist['2 Handed'] = self.parent.itemattrlist['2 Handed']
         if self.RangedSelect.isChecked():
-            self.piecelist['Ranged'] = self.scwin.itemattrlist['Ranged']
+            self.piecelist['Ranged'] = self.parent.itemattrlist['Ranged']
         self.computeGemCount()
         self.computeBarEnd()
