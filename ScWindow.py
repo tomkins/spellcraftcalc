@@ -226,7 +226,7 @@ class ScWindow(QMainWindow, Ui_B_SC):
 
         layout = True
         hspacer = QSpacerItem(5,0,QSizePolicy.Fixed,QSizePolicy.Minimum)
-        vspacer = QSpacerItem(0,3,QSizePolicy.Minimum,QSizePolicy.Fixed)
+        vspacer = QSpacerItem(0,4,QSizePolicy.Minimum,QSizePolicy.Fixed)
 
         self.itemgrouplayout = QtGui.QHBoxLayout(self.DropCraftButtonFrame)
         self.itemgrouplayout.setMargin(0)
