@@ -122,19 +122,15 @@ class ScWindow(QMainWindow, Ui_B_SC):
                          self.Realm.sizeHint().height())
         else:
             height = min(self.CharName.minimumSizeHint().height(),
-                         self.Realm.minimumSizeHint().height())
+                         self.Realm.minimumSizeHint().height()) - 1
 
-        for ctl in (self.GroupItemFrame.children() + [self.CharLevel]):
-            if ((ctl.metaObject().className() == "QLineEdit" or 
-                 ctl.metaObject().className() == "QComboBox") and 
-                ctl.objectName() != "ItemName"):
+        sys.stdout.write("Height calculated at " + str(height) + "\n")
+        for ctl in (self.GroupItemFrame.children() + self.GroupCharInfo.children()):
+            if (ctl.metaObject().className() == "QLineEdit" or 
+                    ctl.metaObject().className() == "QComboBox"):
                 ctl.setFixedSize(QSize(ctl.width(), height))
-
-        for ctl in (self.GroupCharInfo.children() + [self.ItemName]):
-            if ((ctl.metaObject().className() == "QLineEdit" or 
-                 ctl.metaObject().className() == "QComboBox") and 
-                ctl.objectName() != "CharLevel"):
-                ctl.setFixedSize(QSize(ctl.width(), height))
+            #else:
+            #    sys.stdout.write("huh? " + ctl.metaObject().className() + "\n")
 
         self.StatLabel = {}
         self.StatValue = {}
@@ -192,10 +188,12 @@ class ScWindow(QMainWindow, Ui_B_SC):
         self.charlayout.setSpacing(0)
         row = 0
         for stat in ('CharName', 'Realm', 'CharClass', 'CharRace', 
-                     'CharLevel', 'TotalCost', 'TotalPrice', 'TotalUtility', ):
-            self.charlayout.addWidget(getattr(self, 'Label' + stat),row,0,1,2)
-            self.charlayout.addWidget(getattr(self, stat),row,1,1,1)
+                     'CharLevel', 'TotalCost', 'TotalPrice', ):
+            self.charlayout.addWidget(getattr(self, 'Label' + stat),row,0,1,1)
+            self.charlayout.addWidget(getattr(self, stat),row,1,1,2)
             row += 1
+        self.charlayout.addWidget(self.LabelTotalUtility,row,0,1,2)
+        self.charlayout.addWidget(self.TotalUtility,row,2,1,1)
 
         self.statusBar().hide()
         if str(QApplication.style().objectName()[0:9]).lower() == "macintosh":
@@ -298,7 +296,6 @@ class ScWindow(QMainWindow, Ui_B_SC):
             self.connect(self.AmountEdit[i],SIGNAL("textChanged(const QString&)"),
                          self.AmountChanged)
             self.Requirement.append(getattr(self, 'Requirement_%d' % idx))
-            self.Requirement[i].setValidator(editAmountValidator)
             self.connect(self.Requirement[i],SIGNAL("textChanged(const QString&)"),
                          self.AmountChanged)
             self.itemlayout.addWidget(self.GemLabel[i],row,0,1,1)
@@ -378,6 +375,8 @@ class ScWindow(QMainWindow, Ui_B_SC):
         self.mainlayout.addItem(QSpacerItem(vspacer),1,0,1,9)
         self.mainlayout.addLayout(self.tabslayout,2,0,1,9)
 
+        self.mainlayout.setRowStretch(0, 0)
+        self.mainlayout.setRowStretch(2, 1)
         self.mainlayout.setColumnStretch(4, 1)
         self.mainlayout.setColumnStretch(6, 1)
 
@@ -518,6 +517,7 @@ class ScWindow(QMainWindow, Ui_B_SC):
         self.setTabOrder(self.SkillsList,self.OtherBonusList)
 
     def showDropWidgets(self):
+        if not self.isVisible(): return
         self.GroupItemFrame.hide()
         for w in self.switchOnType['player']:
             w.hide()
@@ -666,8 +666,10 @@ class ScWindow(QMainWindow, Ui_B_SC):
                 item.slot(slot).setAmount(self.AmountEdit[slot].text())
             else:
                 item.slot(slot).setAmount(self.AmountDrop[slot].currentText())
-		if slot < 4:
-                    item.slot(slot).setQua(self.Quality[slot].currentText())
+            if state == 'player' and item.slot(slot).slotType() == 'player':
+                item.slot(slot).setQua(self.Quality[slot].currentText())
+            else:
+                item.slot(slot).setRequirement(self.Requirement[slot].text())
         self.itemattrlist[self.currentTabLabel] = item
 
     def restoreItem(self, item):
@@ -689,7 +691,8 @@ class ScWindow(QMainWindow, Ui_B_SC):
         for slot in range(0, item.slotCount()):
             typecombo = self.Type[slot]
             typecombo.clear()
-            if slot == 4 and itemtype == 'player':
+            if itemtype == 'player' and \
+                    not item.slot(slot).slotType() == 'player':
                 typelist = list(EffectTypeList)
             gemtype = str(item.slot(slot).type())
             if not gemtype in typelist:
@@ -697,8 +700,6 @@ class ScWindow(QMainWindow, Ui_B_SC):
             typecombo.insertItems(0, list(typelist))
             typecombo.setCurrentIndex(typelist.index(gemtype))
             self.UpdateCombo(0, slot)
-            if gemtype == 'Unused':
-                continue
             gemeffect = str(item.slot(slot).effect())
             effect = self.Effect[slot].findText(gemeffect)
             if len(gemeffect) and effect < 0:
@@ -720,11 +721,14 @@ class ScWindow(QMainWindow, Ui_B_SC):
                             amountlist = ValuesLists[gemtype][gemeffect]
                 if gemamount in amountlist:
                     self.AmountDrop[slot].setCurrentIndex(amountlist.index(gemamount))
+            if itemtype == 'player' and item.slot(slot).slotType() == 'player':
                 quacombo = self.Quality[slot]
                 gemqua = item.slot(slot).qua()
                 if gemqua in QualityValues:
                     if quacombo.count() > 0:
                         quacombo.setCurrentIndex(QualityValues.index(gemqua))
+            else:
+                self.Requirement[slot].setText(item.slot(slot).requirement())
         self.AFDPS_Edit.setText(item.AFDPS)
         self.Speed_Edit.setText(item.Speed)
         self.Bonus_Edit.setText(item.Bonus)
@@ -805,11 +809,7 @@ class ScWindow(QMainWindow, Ui_B_SC):
                     if key == self.currentTabLabel:
                         self.Cost[i].setText(SC.formatCost(cost))
                 if gemtype == 'Skill':
-                    if effect == 'All Magic Skills'\
-                        or effect == 'All Melee Weapon Skills'\
-                        or effect == 'All Dual Wield Skills'\
-                        or effect == 'All Archery Skills':
-
+                    if effect[0:4] == 'All ':
                         if effect == 'All Melee Combat Skills':
                             utility += amount * 5
                         for e in AllBonusList[self.realm][self.charclass][effect]:
@@ -909,8 +909,7 @@ class ScWindow(QMainWindow, Ui_B_SC):
                 elif imbue > (itemimbue+0.5):
                     success = -OCStartPercentages[int(imbue-itemimbue)]
                     for slot in item.slots():
-                        if item.slot(i).slotType != 'crafted': continue
-                        if slot.type() == 'Unused': continue
+                        if not item.slot(i).crafted(): continue
                         success += GemQualOCModifiers[slot.qua()]
                     success += ItemQualOCModifiers[str(self.QualDrop.currentText())]
                     skillbonus = (int(self.crafterSkill / 50) - 10) * 5
@@ -923,7 +922,7 @@ class ScWindow(QMainWindow, Ui_B_SC):
                     self.ItemImbueTotal.setText(' / ' + unicode(itemimbue))
                     self.ItemCost.setText(SC.formatCost(itemcost))
                     for i in range(0, item.slotCount()):
-                        if item.slot(i).slotType != 'crafted': continue
+                        if not item.slot(i).crafted(): continue
                         n = self.Name[i]
                         n.setText(item.slot(i).gemName(self.realm))
                         if item.slot(i).done() == "1":
