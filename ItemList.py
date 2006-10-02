@@ -41,50 +41,22 @@ class ItemPreview(QListWidget):
         self.clear()
         if self.item.load(unicode(filename), 1) == -2:
             return
-
-        state = self.item.getAttr('ActiveState')
-        if state == 'drop': 
-            toprng = 10
-        else:
-            toprng = 4
-        utility = 0
         stattext = []
-
-        for i in range(0, toprng):
-            gemtype = self.item.slot(i).type()
+        for slot in self.item.slots():
+            gemtype = slot.type()
             if not gemtype or gemtype == 'Unused':
                 continue
-            effect = self.item.slot(i).effect()
-            amount = self.item.slot(i).amount()
-            statstr = amount + ' ' + effect
-            if self.item.slot(i).type() == 'Cap Increase':
-                statstr += ' Cap Increase'
+            statstr = slot.effect() + ' ' + slot.amount()
+            if slot.type() == 'Resist' or slot.type() == 'Focus' or \
+               slot.type() == 'Cap Increase':
+                statstr += ' '+ slot.type()
             stattext.append(statstr)
-            ## This code must GO AWAY to Item.py:
-            if gemtype == 'Skill':
-                if effect == 'All Magic Skills'\
-                    or effect == 'All Melee Weapon Skills'\
-                    or effect == 'All Dual Wield Skills'\
-                    or effect == 'All Archery Skills':
-                    for e in AllBonusList[self.realm][self.charclass][effect]:
-                        utility += int(amount) * 5
-                else:
-                    utility += int(amount) * 5
-            elif gemtype == 'Focus':
-                utility += 1
-            elif gemtype == 'Power':
-                utility += int(amount) * 2
-            elif gemtype == 'Hits':
-                utility += int(amount) / 4.0
-            elif gemtype == 'Resist':
-                utility += int(amount) * 2
-            elif gemtype == 'Stat':
-                utility += int(amount) * 2.0 / 3.0
-
+        classinfo = AllBonusList[self.realm][self.charclass]
         listtext = [
             str(self.item.getAttr('ItemName')),
             "Level: %s   Quality: %s   Utility: %.1f" % (self.item.getAttr('Level'),
-                                         self.item.getAttr('ItemQuality'), utility),
+                                         self.item.getAttr('ItemQuality'), 
+                                         self.item.utility(classinfo)),
             "AF/DPS: %s   Speed: %s   Bonus:  %s" % (self.item.getAttr('AFDPS'),
                                          self.item.getAttr('Speed'),
                                          self.item.getAttr('Bonus')),
