@@ -21,7 +21,7 @@ class ItemSlot:
             'SlotType' : unicode(slottype),
             'Type': '', 'Effect' : '', 'Amount' : '', 'Requirement' : '',
             'Qua' : '', 'Time' : '',   'Remakes' : '', 'Done' : '', }
-        self.setAll(type, amount, effect, qua, time, remakes, done)
+        self.setAll(type, amount, effect, qua, time, remakes, done, requirement)
 
     def setAll(self, type='Unused', amount='0', effect='',
                qua='94', time='0', remakes='0', done='0',
@@ -94,7 +94,7 @@ class ItemSlot:
 
     def requirement(self):
         return self.Requirement
-    def setEffect(self, requirement):
+    def setRequirement(self, requirement):
         self.CraftOk = False
         self.Requirement = unicode(requirement)
 
@@ -289,7 +289,10 @@ class Item:
 
         for it in ('drop', 'player'):
             for i in range(0, len(self.itemslots[it])):
-                self.itemslots[it][i] = ItemSlot(slottype=it)
+                if i >= 4:
+                    self.itemslots[it][i] = ItemSlot('drop')
+                else:
+                    self.itemslots[it][i] = ItemSlot(slottype=it)
 
     def slot(self, index):
         return self.itemslots[self.ActiveState][index]
