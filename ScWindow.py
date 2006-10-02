@@ -779,14 +779,7 @@ class ScWindow(QMainWindow, Ui_B_SC):
             for i in range(0, item.slotCount()):
                 gemtype = item.slot(i).type()
                 effect = item.slot(i).effect()
-                if gemtype == 'Unused' or gemtype == '' or effect == '':
-                    continue
-                if str(item.slot(i).amount()) == '':
-                    amount = 0
-                else:
-                    amount = re.sub('[^\d]', '', item.slot(i).amount())
-                    if amount == '': amount = '0'
-                    amount = int(amount)
+                amount = int('0'+re.sub('[^\d]', '', item.slot(i).amount()))
                 if [gemtype, effect] in gemeffects:
                     error_act = QAction('Two of same type of gem on %s' % key, self)
                     if item.Location in JewelTabList:
@@ -922,10 +915,8 @@ class ScWindow(QMainWindow, Ui_B_SC):
                     self.ItemImbueTotal.setText(' / ' + unicode(itemimbue))
                     self.ItemCost.setText(SC.formatCost(itemcost))
                     for i in range(0, item.slotCount()):
-                        if not item.slot(i).crafted(): continue
-                        n = self.Name[i]
-                        n.setText(item.slot(i).gemName(self.realm))
-                        if item.slot(i).done() == "1":
+                        self.Name[i].setText(item.slot(i).gemName(self.realm))
+                        if item.slot(i).crafted() and item.slot(i).done() == "1":
                             self.GemLabel[i].setEnabled(0)
                         else:
                             self.GemLabel[i].setEnabled(1)
