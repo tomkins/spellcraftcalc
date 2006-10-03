@@ -1395,7 +1395,6 @@ class ScWindow(QMainWindow, Ui_B_SC):
                     'Error loading template file ' + unicode(filename), 'OK')
                 if f is not None: f.close()
                 return
-            return
             self.filename = os.path.abspath(filename)
             self.updateRecentFiles(self.filename)
             self.TemplatePath = os.path.dirname(self.filename)
