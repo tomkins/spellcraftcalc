@@ -873,6 +873,7 @@ class ScWindow(QMainWindow, Ui_B_SC):
                     self.ItemCost.setText(SC.formatCost(itemcost))
                     self.ItemPrice.setText(SC.formatCost(itemprice))
                     for i in range(0, item.slotCount()):
+                        slot = item.slot(i)
                         self.Name[i].setText(slot.gemName(self.realm))
                         if slot.crafted() and slot.done() == "1":
                             self.GemLabel[i].setEnabled(0)
