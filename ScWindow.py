@@ -69,7 +69,7 @@ class ScWindow(QMainWindow, Ui_B_SC):
         self.recentFiles = []
         self.effectlists = GemLists['All'].copy()
         self.dropeffectlists = DropLists['All'].copy()
-        self.itemeffectlists = DropLists['All'].copy()
+        self.itemeffectlists = CraftedLists['All'].copy()
 
         self.fixedtaborder = False
 
@@ -95,8 +95,8 @@ class ScWindow(QMainWindow, Ui_B_SC):
         self.pricingInfo = {}
         self.initLayout()
         self.initMenu()
-        self.initControls()
         self.updateGeometry()
+        self.initControls()
         OW = Options.Options(self)
         OW.load()
         self.pricingInfo = OW.getPriceInfo()
@@ -275,7 +275,7 @@ class ScWindow(QMainWindow, Ui_B_SC):
         self.itemlayout.setColumnMinimumWidth(0,width)
         width = testfont.size(Qt.TextSingleLine, " Points").width()
         self.itemlayout.setColumnMinimumWidth(5,width)
-        width = testfont.size(Qt.TextSingleLine, " 999g 00s 00c").width()
+        width = testfont.size(Qt.TextSingleLine, "  999g 00s 00c").width()
         self.itemlayout.setColumnMinimumWidth(6,width)
 
         row += 1
@@ -464,16 +464,27 @@ class ScWindow(QMainWindow, Ui_B_SC):
         self.filemenu.addAction('E&xit', self.close, QKeySequence(Qt.CTRL+Qt.Key_X))
         self.menuBar().addMenu(self.filemenu)
 
-        self.swapGems = QMenu('S&wap Gems With', self)
+        self.swapgemsmenu = QMenu('S&wap Gems With', self)
         for piece in range(0,len(PieceTabList)):
             act = QAction(PieceTabList[piece], self)
             act.setData(QVariant(piece))
-            self.swapGems.addAction(act)
-        self.connect(self.swapGems, SIGNAL("triggered(QAction*)"), self.swapWith)
+            self.swapgemsmenu.addAction(act)
+        self.connect(self.swapgemsmenu, SIGNAL("triggered(QAction*)"), self.swapWith)
+
+        self.itemtypemenu = QMenu('Item &Type', self)
+        for type in ('Normal Item', 'Caster Staff', 'Legendary Staff',
+                     'Enhanced Bow', 'Legendary Bow',
+                     'Legendary Weapon', 'Enhanced Armor'):
+            act = QAction(type, self)
+            act.setData(QVariant(type))
+            self.itemtypemenu.addAction(act)
+        self.connect(self.itemtypemenu, SIGNAL("triggered(QAction*)"), 
+                     self.chooseItemType)
 
         self.editmenu = QMenu('&Edit', self)
         self.editmenu.addAction('&Clear Item', self.clearCurrentItem)
-        self.editmenu.addMenu(self.swapGems)
+        self.itemtypemenuid = self.editmenu.addMenu(self.itemtypemenu)
+        self.editmenu.addMenu(self.swapgemsmenu)
         self.editmenu.addSeparator()
         self.editmenu.addAction('&Options...', self.openOptions,
                                 QKeySequence(Qt.ALT+Qt.Key_O))
@@ -501,7 +512,6 @@ class ScWindow(QMainWindow, Ui_B_SC):
         self.connect(self.errorsmenu, SIGNAL('triggered(QAction*)'), 
                      self.changePieceTab)
         self.errorsmenuid.setEnabled(False)
-
         self.helpmenu = QMenu('&Help', self)
         self.helpmenu.addAction('&About', self.aboutBox)
         self.menuBar().addMenu(self.helpmenu)
@@ -530,7 +540,7 @@ class ScWindow(QMainWindow, Ui_B_SC):
         self.setTabOrder(prev,self.SkillsList)
         self.setTabOrder(self.SkillsList,self.OtherBonusList)
 
-    def showDropWidgets(self):
+    def showDropWidgets(self, item):
         if not self.isVisible(): return
         self.GroupItemFrame.hide()
         for w in self.switchOnType['player']:
@@ -541,18 +551,27 @@ class ScWindow(QMainWindow, Ui_B_SC):
             self.GemLabel[i].setEnabled(1)
             self.GemLabel[i].setText('Slot %d:' % (i + 1))
         self.craftingmenuid.setEnabled(False)
+        self.itemtypemenuid.setEnabled(False)
         self.GroupItemFrame.show()
 
-    def showPlayerWidgets(self):
+    def showPlayerWidgets(self, item):
         self.GroupItemFrame.hide()
-        for w in self.switchOnType['player']:
-            w.show()
         for w in self.switchOnType['drop']:
             w.hide()
+        for w in self.switchOnType['player']:
+            w.show()
         for i in range(0,4):
             self.GemLabel[i].setEnabled(1)
-            self.GemLabel[i].setText('Gem %d:' % (i + 1))
+            if item.slot(i).slotType() == 'player':
+                self.GemLabel[i].setText('Gem %d:' % (i + 1))
+            else:
+                self.GemLabel[i].setText('Slot %d:' % (i + 1))
+                self.Quality[i].hide()
+                self.Points[i].hide()
+                self.Cost[i].hide()
+                self.Requirement[i].show()
         self.craftingmenuid.setEnabled(True)
+        self.itemtypemenuid.setEnabled(True)
         self.GroupItemFrame.show()
 
     def closeEvent(self, e):
@@ -661,11 +680,11 @@ class ScWindow(QMainWindow, Ui_B_SC):
         itemtype = item.ActiveState
         if itemtype == 'player':
             self.PlayerMade.setChecked(1)
-            self.showPlayerWidgets()
+            self.showPlayerWidgets(item)
             typelist = list(TypeList)
         else:
             self.Drop.setChecked(1)
-            self.showDropWidgets()
+            self.showDropWidgets(item)
             typelist = list(DropTypeList)
         self.ItemLevel.setText(item.Level)
         location = item.Location
@@ -675,7 +694,7 @@ class ScWindow(QMainWindow, Ui_B_SC):
             typecombo.clear()
             if itemtype == 'player' and \
                     not item.slot(slot).slotType() == 'player':
-                typelist = list(EffectTypeList)
+                typelist = list(CraftedTypeList)
             gemtype = str(item.slot(slot).type())
             if not gemtype in typelist:
                 typelist.append(gemtype)
@@ -685,9 +704,14 @@ class ScWindow(QMainWindow, Ui_B_SC):
             gemeffect = str(item.slot(slot).effect())
             effect = self.Effect[slot].findText(gemeffect)
             if len(gemeffect) and effect < 0:
-                if not self.Effect[slot].isEditable():
-                    self.Effect[slot].setEditable(True)
-                self.Effect[slot].setEditText(gemeffect)
+                if itemtype == 'player':
+                    self.Effect[slot].addItem(gemeffect)
+                    self.Effect[slot].setCurrentIndex(self.Effect[slot].count() - 1)
+                    self.EffectChanged(effect, slot)
+                else:
+                    if not self.Effect[slot].isEditable():
+                        self.Effect[slot].setEditable(True)
+                    self.Effect[slot].setEditText(gemeffect)
             else:
                 self.Effect[slot].setCurrentIndex(effect)
                 self.EffectChanged(effect, slot)
@@ -695,14 +719,12 @@ class ScWindow(QMainWindow, Ui_B_SC):
                 self.AmountEdit[slot].setText(item.slot(slot).amount())
             else:
                 gemamount = item.slot(slot).amount()
-                if ValuesLists.has_key(gemtype):
-                    if isinstance(ValuesLists[gemtype], tuple):
-                        amountlist = ValuesLists[gemtype]
-                    else:
-                        if ValuesLists[gemtype].has_key(gemeffect):
-                            amountlist = ValuesLists[gemtype][gemeffect]
-                if gemamount in amountlist:
-                    self.AmountDrop[slot].setCurrentIndex(amountlist.index(gemamount))
+                amount = self.AmountDrop[slot].findText(gemamount)
+                if len(gemamount) and gemamount != "0" and amount < 0:
+                    self.AmountDrop[slot].addItem(gemamount)
+                    self.AmountDrop[slot].setCurrentIndex(self.AmountDrop[slot].count() - 1)
+                else:
+                    self.AmountDrop[slot].setCurrentIndex(amount)
             if itemtype == 'player' and item.slot(slot).slotType() == 'player':
                 quacombo = self.Quality[slot]
                 gemqua = item.slot(slot).qua()
@@ -1158,15 +1180,19 @@ class ScWindow(QMainWindow, Ui_B_SC):
         elif self.PlayerMade.isChecked():
             amtindex = amount.currentIndex()
             amount.clear()
-            if ValuesLists.has_key(typetext):
-                valueslist = ValuesLists[typetext]
+            if item.slot(slot).slotType() == 'player':
+                valueslist = ValuesLists
+            else:
+                valueslist = CraftedValuesLists
+            if valueslist.has_key(typetext):
+                valueslist = valueslist[typetext]
                 if isinstance(valueslist, dict):
                     if valueslist.has_key(efftext):
                         valueslist = valueslist[efftext]
                     else:
                         valueslist = tuple()
                 elif efftext[0:5] == "All M":
-                    valueslist = ("1",)
+                    valueslist = valueslist[:1]
                 if len(valueslist) > 0:
                     amount.insertItems(0, list(valueslist))
                 if amtindex < 0:
@@ -1600,6 +1626,63 @@ class ScWindow(QMainWindow, Ui_B_SC):
         self.itemattrlist[part] = cur
         self.itemattrlist[self.currentTabLabel] = swap
         self.restoreItem(self.itemattrlist[self.currentTabLabel])
+
+    def chooseItemType(self, action):
+        newtype = str(action.data().toString())
+        item = self.itemattrlist[self.currentTabLabel]
+        if newtype == 'Normal Item' or newtype == 'Enhanced Bow':
+            item.slot(4).setSlotType('effect')
+            if item.slot(5).type()[-6:] == "Effect":
+                item.slot(4).setAll(item.slot(5).type(), item.slot(5).amount(), 
+                             item.slot(5).effect(), item.slot(5).requirement())
+            item.slot(5).setType('Unused')
+            item.slot(5).setSlotType('unused')
+        else:
+            item.slot(5).setSlotType('effect')
+            if item.slot(4).type()[-6:] == "Effect":
+                item.slot(5).setAll(item.slot(4).type(), item.slot(4).amount(), 
+                             item.slot(4).effect(), item.slot(4).requirement())
+            item.slot(4).setSlotType('crafted')
+        if newtype == 'Caster Staff' or newtype == 'Legendary Staff':
+            for fixslot in item.slots():
+                 if fixslot.type() == "Focus":
+                     fixslot.setType = "Unused"
+        if newtype == 'Normal Item':
+            item.slot(3).setSlotType('player')
+        elif newtype == 'Caster Staff':
+            item.slot(3).setSlotType('player')
+            item.slot(4).setAll('Focus', '50', 'All Spell Lines')
+        elif newtype == 'Legendary Staff':
+            item.slot(3).setSlotType('crafted')
+            item.slot(3).setAll('Focus', '50', 'All Spell Lines')
+            item.slot(4).setAll('Other Bonus', '2', 'Magic Damage', 
+                                requirement="vs All Monsters")
+            item.slot(5).setAll('Charged Effect', '60', 'Dmg w/Resist Debuff', 
+                                requirement="Level 50")
+        elif newtype == 'Enhanced Bow':
+            item.slot(3).setSlotType('player')
+            item.slot(4).setAll('Offensive Effect', '20', 'Direct Damage')
+        elif newtype == 'Legendary Bow':
+            item.slot(3).setSlotType('crafted')
+            item.slot(3).setAll('Other Bonus', '2', 'Archery Damage', 
+                                requirement="vs All Monsters")
+            item.slot(4).setAll('Other Bonus', '10', 'AF')
+            item.slot(5).setAll('Offensive Effect', '25', 'Dmg w/Resist Debuff', 
+                                requirement="Level 50")
+        elif newtype == 'Legendary Weapon':
+            item.slot(3).setSlotType('crafted')
+            item.slot(3).setAll('Other Bonus', '2', 'Melee Damage', 
+                                requirement="vs All Monsters")
+            item.slot(4).setAll('Other Bonus', '10', 'AF')
+            item.slot(5).setAll('Offensive Effect', '60', 'Dmg w/Resist Debuff', 
+                                requirement="Level 50")
+        elif newtype == 'Enhanced Armor':
+            item.slot(3).setSlotType('player')
+        # Recover from previously legendary items
+        if item.slot(3).slotType() == 'player' and \
+                not item.slot(3).crafted():
+            item.slot(3).setType("Unused")
+        self.restoreItem(item)
 
     def loadRecentFile(self, action):
         index = action.data().toInt()[0]
