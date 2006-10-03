@@ -69,6 +69,7 @@ class ScWindow(QMainWindow, Ui_B_SC):
         self.recentFiles = []
         self.effectlists = GemLists['All'].copy()
         self.dropeffectlists = DropLists['All'].copy()
+        self.itemeffectlists = DropLists['All'].copy()
 
         self.fixedtaborder = False
 
@@ -114,7 +115,7 @@ class ScWindow(QMainWindow, Ui_B_SC):
             self.ItemImbueLabel, self.ItemImbue, self.ItemImbueTotal,
             self.ItemOverchargeLabel, self.ItemOvercharge, 
             self.ItemCostLabel, self.ItemCost, self.QualDrop,
-            ## self.ItemPriceLabel, self.ItemPrice, XXX not calculated yet
+            self.ItemPriceLabel, self.ItemPrice,
         ]
 
         if str(QApplication.style().objectName()[0:9]).lower() == "macintosh":
@@ -122,15 +123,12 @@ class ScWindow(QMainWindow, Ui_B_SC):
                          self.Realm.sizeHint().height())
         else:
             height = min(self.CharName.minimumSizeHint().height(),
-                         self.Realm.minimumSizeHint().height()) - 1
+                         self.Realm.minimumSizeHint().height())
 
-        sys.stdout.write("Height calculated at " + str(height) + "\n")
         for ctl in (self.GroupItemFrame.children() + self.GroupCharInfo.children()):
             if (ctl.metaObject().className() == "QLineEdit" or 
                     ctl.metaObject().className() == "QComboBox"):
                 ctl.setFixedSize(QSize(ctl.width(), height))
-            #else:
-            #    sys.stdout.write("huh? " + ctl.metaObject().className() + "\n")
 
         self.StatLabel = {}
         self.StatValue = {}
@@ -203,10 +201,6 @@ class ScWindow(QMainWindow, Ui_B_SC):
         self.ItemLevel.setValidator(QIntValidator(0, 99, self))
         self.QualEdit.setValidator(QIntValidator(0, 100, self))
         self.Bonus_Edit.setValidator(QIntValidator(0, 99, self))
-
-        ## XXX not calculated yet - we must hide :)
-        self.ItemPriceLabel.hide()
-        self.ItemPrice.hide()
 
         self.Realm.insertItems(0, list(Realms))
         self.QualDrop.insertItems(0, list(QualityValues))
@@ -285,19 +279,19 @@ class ScWindow(QMainWindow, Ui_B_SC):
             idx = i + 1
             self.GemLabel.append(getattr(self, 'Gem_Label_%d' % idx))
             self.Type.append(getattr(self, 'Type_%d' % idx))
-            self.connect(self.Type[i],SIGNAL("activated(const QString&)"),
+            self.connect(self.Type[i],SIGNAL("activated(int)"),
                          self.TypeChanged)
             self.Effect.append(getattr(self, 'Effect_%d' % idx))
-            self.connect(self.Effect[i],SIGNAL("activated(const QString&)"),
+            self.connect(self.Effect[i],SIGNAL("activated(int)"),
                          self.EffectChanged)
             self.AmountEdit.append(getattr(self, 'Amount_Edit_%d' % idx))
             self.switchOnType['drop'].append(self.AmountEdit[i])
             self.AmountEdit[i].setValidator(editAmountValidator)
             self.connect(self.AmountEdit[i],SIGNAL("textChanged(const QString&)"),
-                         self.AmountChanged)
+                         self.AmountsChanged)
             self.Requirement.append(getattr(self, 'Requirement_%d' % idx))
             self.connect(self.Requirement[i],SIGNAL("textChanged(const QString&)"),
-                         self.AmountChanged)
+                         self.AmountsChanged)
             self.itemlayout.addWidget(self.GemLabel[i],row,0,1,1)
             self.itemlayout.addWidget(self.Type[i],row,1,1,1)
             self.itemlayout.addWidget(self.AmountEdit[i],row,2,1,1)
@@ -309,8 +303,8 @@ class ScWindow(QMainWindow, Ui_B_SC):
                 self.itemlayout.addWidget(self.AmountDrop[i],row,2,1,1)
                 self.Name.append(getattr(self, 'Name_%d' % idx))
                 self.itemlayout.addWidget(self.Name[i],row,8,1,2)
-                self.connect(self.AmountDrop[i],SIGNAL("activated(const QString&)"),
-                             self.AmountChanged)
+                self.connect(self.AmountDrop[i],SIGNAL("activated(int)"),
+                             self.AmountsChanged)
                 self.switchOnType['player'].extend([
                     self.AmountDrop[i], self.Name[i], ])
             else:
@@ -319,8 +313,8 @@ class ScWindow(QMainWindow, Ui_B_SC):
             if i < 4:
                 self.Quality.append(getattr(self, 'Quality_%d' % idx))
                 self.Quality[i].insertItems(0, list(QualityValues))
-                self.connect(self.Quality[i],SIGNAL("activated(const QString&)"),
-                             self.QualityChanged)
+                self.connect(self.Quality[i],SIGNAL("activated(int)"),
+                             self.AmountsChanged)
                 self.Points.append(getattr(self, 'Points_%d' % idx))
                 self.Cost.append(getattr(self, 'Cost_%d' % idx))
                 self.itemlayout.addWidget(self.Quality[i],row,4,1,1)
@@ -394,11 +388,11 @@ class ScWindow(QMainWindow, Ui_B_SC):
 
         self.connect(self.CharName,SIGNAL("textChanged(const QString&)"),
                      self.TemplateChanged)
-        self.connect(self.Realm,SIGNAL("activated(const QString&)"),
+        self.connect(self.Realm,SIGNAL("activated(int)"),
                      self.RealmChanged)
-        self.connect(self.CharClass,SIGNAL("activated(const QString&)"),
+        self.connect(self.CharClass,SIGNAL("activated(int)"),
                      self.CharClassChanged)
-        self.connect(self.CharRace,SIGNAL("activated(const QString&)"),
+        self.connect(self.CharRace,SIGNAL("activated(int)"),
                      self.RaceChanged)
         self.connect(self.CharLevel,SIGNAL("textChanged(const QString&)"),
                      self.TemplateChanged)
@@ -407,7 +401,9 @@ class ScWindow(QMainWindow, Ui_B_SC):
         self.connect(self.ItemLevel,SIGNAL("textChanged(const QString&)"),
                      self.ItemChanged)
         self.connect(self.ItemLevelButton,SIGNAL("clicked()"),self.ItemLevelShow)
-        self.connect(self.QualDrop,SIGNAL("activated(const QString&)"),
+        self.connect(self.QualDrop,SIGNAL("activated(int)"),
+                     self.ItemChanged)
+        self.connect(self.QualEdit,SIGNAL("textChanged(const QString&)"),
                      self.ItemChanged)
         self.connect(self.ItemName,SIGNAL("textChanged(const QString&)"),
                      self.ItemChanged)
@@ -417,9 +413,9 @@ class ScWindow(QMainWindow, Ui_B_SC):
                      self.ItemChanged)
         self.connect(self.Speed_Edit,SIGNAL("textChanged(const QString&)"),
                      self.ItemChanged)
+        self.connect(self.Equipped,SIGNAL("stateChanged(int)"),self.ItemChanged)
         self.connect(self.PlayerMade,SIGNAL("toggled(bool)"),self.PlayerToggled)
         self.connect(self.Drop,SIGNAL("toggled(bool)"),self.DropToggled)
-        self.connect(self.Equipped,SIGNAL("clicked()"),self.EquippedClicked)
         self.connect(self.SkillsList,SIGNAL("itemActivated(QListWidgetItem*)"),
                      self.SkillClicked)
         self.connect(self.OtherBonusList,SIGNAL("itemActivated(QListWidgetItem*)"),
@@ -480,8 +476,9 @@ class ScWindow(QMainWindow, Ui_B_SC):
         self.menuBar().addMenu(self.viewmenu)
 
         self.errorsmenu = QMenu('Errors', self)
-        self.errorsmenu.addSeparator()
         self.errorsmenuid = self.menuBar().addMenu(self.errorsmenu)
+        self.connect(self.errorsmenu, SIGNAL('triggered(QAction*)'), 
+                     self.changePieceTab)
         self.errorsmenuid.setEnabled(False)
 
         self.helpmenu = QMenu('&Help', self)
@@ -509,10 +506,6 @@ class ScWindow(QMainWindow, Ui_B_SC):
                 self.setTabOrder(self.AmountEdit[i],self.Effect[i])
                 self.setTabOrder(self.Effect[i],self.Requirement[i])
             prev = self.Requirement[i]
-        #self.setTabOrder(prev,self.CraftButton)
-        #self.setTabOrder(self.CraftButton,self.LoadItem)
-        #self.setTabOrder(self.CraftButton,self.SaveItem)
-        #self.setTabOrder(self.SaveItem,self.ClearItem)
         self.setTabOrder(prev,self.SkillsList)
         self.setTabOrder(self.SkillsList,self.OtherBonusList)
 
@@ -638,40 +631,6 @@ class ScWindow(QMainWindow, Ui_B_SC):
             if itemlevel < 1: itemlevel = 1
             self.ItemLevel.setText('%d' % itemlevel)
 
-    def storeItem(self, item):
-        if item is None: return
-        self.FixupItemLevel()
-        item.Location = self.currentTabLabel
-        item.Realm = self.realm
-        item.Level = unicode(self.ItemLevel.text())
-        if self.Equipped.isChecked():
-            item.Equipped = '1'
-        else:
-            item.Equipped = '0'
-        if self.PlayerMade.isChecked():
-            state = 'player'
-            item.ItemQuality = unicode(self.QualDrop.currentText())
-        else:
-            state = 'drop'
-            item.ItemName = unicode(self.ItemName.text())
-            item.ItemQuality = unicode(self.QualEdit.text())
-        item.AFDPS = unicode(self.AFDPS_Edit.text())
-        item.Speed = unicode(self.Speed_Edit.text())
-        item.Bonus = unicode(self.Bonus_Edit.text())
-        item.ActiveState = state
-        for slot in range(0, item.slotCount()):
-            item.slot(slot).setType(self.Type[slot].currentText())
-            item.slot(slot).setEffect(self.Effect[slot].currentText())
-            if state == 'drop':
-                item.slot(slot).setAmount(self.AmountEdit[slot].text())
-            else:
-                item.slot(slot).setAmount(self.AmountDrop[slot].currentText())
-            if state == 'player' and item.slot(slot).slotType() == 'player':
-                item.slot(slot).setQua(self.Quality[slot].currentText())
-            else:
-                item.slot(slot).setRequirement(self.Requirement[slot].text())
-        self.itemattrlist[self.currentTabLabel] = item
-
     def restoreItem(self, item):
         if item is None: return
         wasnocalc = self.nocalc
@@ -699,16 +658,17 @@ class ScWindow(QMainWindow, Ui_B_SC):
                 typelist.append(gemtype)
             typecombo.insertItems(0, list(typelist))
             typecombo.setCurrentIndex(typelist.index(gemtype))
-            self.UpdateCombo(0, slot)
+            self.TypeChanged(typelist.index(gemtype), slot)
             gemeffect = str(item.slot(slot).effect())
             effect = self.Effect[slot].findText(gemeffect)
             if len(gemeffect) and effect < 0:
                 if not self.Effect[slot].isEditable():
                     self.Effect[slot].setEditable(True)
                 self.Effect[slot].setEditText(gemeffect)
+                self.EffectChanged(gemeffect, slot)
             else:
                 self.Effect[slot].setCurrentIndex(effect)
-            self.UpdateCombo(1, slot)
+                self.EffectChanged(effect, slot)
             if itemtype == 'drop':
                 self.AmountEdit[slot].setText(item.slot(slot).amount())
             else:
@@ -746,7 +706,6 @@ class ScWindow(QMainWindow, Ui_B_SC):
     def calculate(self):
         if self.nocalc:
             return
-        self.nocalc = 1
         charleveltext = str(self.CharLevel.text())
         if charleveltext == '': 
             charlevel = 1
@@ -771,121 +730,122 @@ class ScWindow(QMainWindow, Ui_B_SC):
         self.errorsmenu.clear()
         totalutility = 0.0
         totalcost = 0
+        totalprice = 0
         for key, item in self.itemattrlist.iteritems():
             utility = 0.0
             itemtype = item.ActiveState
             itemcost = 0
+            itemprice = 0
             gemeffects = []
             for i in range(0, item.slotCount()):
-                gemtype = item.slot(i).type()
-                effect = item.slot(i).effect()
-                amount = int('0'+re.sub('[^\d]', '', item.slot(i).amount()))
-                if [gemtype, effect] in gemeffects:
-                    error_act = QAction('Two of same type of gem on %s' % key, self)
-                    if item.Location in JewelTabList:
-                        row = 1
-                        col = JewelTabList.index(item.Location)
-                    else:
-                        row = 0
-                        col = PieceTabList.index(item.Location)
-                    error_act.setData(QVariant((row << 8) | col))
-                    self.errorsmenu.addAction(error_act)
-                    self.connect(self.errorsmenu, SIGNAL('triggered(QAction*)'), 
-                                 self.changePieceTab)
-                    errorcount = errorcount + 1
-                gemeffects.append([gemtype, effect])
+                slot = item.slot(i)
+                utility += slot.gemUtility()
+                gemtype = slot.type()
+                effect = slot.effect()
+                amount = int('0'+re.sub('[^\d]', '', slot.amount()))
                 if i < 4 and itemtype == 'player':
-                    if key == self.currentTabLabel:
-                        self.Cost[i].setText('')
-                    cost = item.slot(i).gemCost()
+                    cost = slot.gemCost()
                     itemcost += cost
                     if key == self.currentTabLabel:
                         self.Cost[i].setText(SC.formatCost(cost))
+                    if cost > 0:
+                        itemprice += int(self.pricingInfo.get('PPGem', 0) * 10000)
+                        if self.pricingInfo.get('HourInclude', 0):
+                            itemprice += int(self.pricingInfo.get('Hour', 0) * 10000 \
+                                           * int(slot.time()) / 60.0)
+                        if self.pricingInfo.get('TierInclude', 0):
+                            gemlvl = str(slot.gemLevel())
+                            tierp = self.pricingInfo.get('Tier', {})
+                            itemprice += int(float(tierp.get(gemlvl, 0)) * 10000)
+                        if self.pricingInfo.get('QualInclude', 0):
+                            gemqual = slot.qua()
+                            qualp = self.pricingInfo.get('Qual', {})
+                            itemprice += int(cost * float(qualp.get(gemqual, 0)) / 100.0)
+                    if gemtype != 'Unused':
+                        if [gemtype, effect] in gemeffects:
+                            error_act = QAction('Two of same type of gem on %s' % key, self)
+                            if item.Location in JewelTabList:
+                                row = 1
+                                col = JewelTabList.index(item.Location)
+                            else:
+                                row = 0
+                                col = PieceTabList.index(item.Location)
+                            error_act.setData(QVariant((row << 8) | col))
+                            self.errorsmenu.addAction(error_act)
+                            errorcount = errorcount + 1
+                        gemeffects.append([gemtype, effect])
+                if not item.Equipped == '1':
+                    continue
                 if gemtype == 'Skill':
                     if effect[0:4] == 'All ':
-                        if effect == 'All Melee Combat Skills':
-                            utility += amount * 5
-                        for e in AllBonusList[self.realm][self.charclass][effect]:
-                            if effect == 'All Magic Skills'\
-                                or effect == 'All Dual Wield Skills'\
-                                or effect == 'All Archery Skills':
-                                utility += amount * 5
-                            if item.Equipped == '1':
-                                if not skillTotals.has_key(e):
-                                    skillTotals[e] = amount
-                                else:
-                                    skillTotals[e] += amount
-                    else:           
-                        utility += amount * 5
-                        if item.Equipped == '1':
-                            if self.hideNonClassSkills:
-                                if not AllBonusList[self.realm][self.charclass] \
-                                                   ['Skills Hash'].has_key(effect):
-                                    continue
-                            if not skillTotals.has_key(effect):
-                                skillTotals[effect] = amount
-                            else:
-                                skillTotals[effect] += amount
-                elif gemtype == 'Focus':
-                    utility += 1
-                    if item.Equipped == '1':
-                        if effect == 'All Spell Lines':
-                            for f in AllBonusList[self.realm][self.charclass][effect]:
-                                skillTotals[f + ' Focus'] = amount
+                        effects = AllBonusList[self.realm][self.charclass][effect]
+                    else:
+                        if self.hideNonClassSkills and \
+                                not AllBonusList[self.realm][self.charclass] \
+                                                ['Skills Hash'].has_key(effect):
+                            effects = tuple()
                         else:
-                            skillTotals[effect + ' Focus'] = amount
+                            effects = (effect,)
+                    for effect in effects:
+                        if not skillTotals.has_key(effect):
+                            skillTotals[effect] = amount
+                        else:
+                            skillTotals[effect] += amount
+                elif gemtype == 'Focus':
+                    if effect[0:4] == 'All ':
+                        effects = AllBonusList[self.realm][self.charclass][effect]
+                    elif self.hideNonClassSkills:
+                        if self.hideNonClassSkills and \
+                                not AllBonusList[self.realm][self.charclass] \
+                                                ['Skills Hash'].has_key(effect):
+                            effects = tuple()
+                        else:
+                            effects = (effect,)
+                    for effect in effects:
+                        skillTotals[effect + ' Focus'] = amount
                 elif gemtype == 'Power':
-                    utility += amount * 2
-                    if item.Equipped == '1':
-                        self.totals[gemtype] += amount
+                    self.totals[gemtype] += amount
                 elif gemtype == 'Hits':
-                    utility += amount / 4.0
-                    if item.Equipped == '1':
-                        self.totals[gemtype] += amount
+                    self.totals[gemtype] += amount
                 elif gemtype == 'Resist':
-                    utility += amount * 2
-                    if item.Equipped == '1':
-                        self.totals[effect] += amount
+                    self.totals[effect] += amount
                 elif gemtype == 'Stat':
                     if effect == 'Acuity':
                         for e in AllBonusList[self.realm][self.charclass][effect]:
-                            utility += amount * 2.0 / 3.0
-                            if item.Equipped == '1':
-                                self.totals[e] += amount
+                            self.totals[e] += amount
                     else:
-                        utility += amount * 2.0 / 3.0
-                        if item.Equipped == '1':
-                            self.totals[effect] += amount
+                        self.totals[effect] += amount
                 elif gemtype == 'Other Bonus' or gemtype == 'PvE Bonus':
-                    if item.Equipped == '1':
-                        if not otherTotals.has_key(effect):
-                            otherTotals[effect] = amount
-                        else:
-                            otherTotals[effect] += amount
+                    if not otherTotals.has_key(effect):
+                        otherTotals[effect] = amount
+                    else:
+                        otherTotals[effect] += amount
                 elif gemtype == 'Cap Increase':
-                    if item.Equipped == '1':
-                        oeffect = effect + ' Cap'
-                        if effect == 'AF':
-                          if not otherTotals.has_key(oeffect):
-                              otherTotals[oeffect] = amount
-                          else:
-                              otherTotals[oeffect] += amount
-                        elif effect == 'Acuity':
-                            effect = AllBonusList[self.realm][self.charclass][effect]
-                            if len(effect) == 0:
-                                continue
-                            effect = effect[0]
-                        if not self.capTotals.has_key(effect):
-                            self.capTotals[effect] = amount
-                        else:
-                            self.capTotals[effect] += amount
-            if item.Equipped == '1':
-                totalutility += utility
+                    if effect == 'Acuity':
+                        effects = AllBonusList[self.realm][self.charclass][effect]
+                    else:
+                        effects = (effect,)
+                    for effect in effects:
+                        self.capTotals[effect] += amount
+            totalutility += utility
+            itemimbue = self.getItemImbue(item)
+            imbuepts = self.calcImbue(item, key == self.currentTabLabel)
+            if self.pricingInfo.get('PPInclude', 0):
+                itemprice += int(self.pricingInfo.get('PPImbue', 0) * 10000 * imbuepts)
+                itemprice += int(self.pricingInfo.get('PPOC', 0) * 10000 \
+                               * max(0, int(imbuepts - self.getItemImbue(item))))
+                if itemcost > 0:
+                    itemprice += int(self.pricingInfo.get('PPLevel', 0) * 10000 \
+                                   * int(item.Level))
+            if itemcost > 0:
+                itemprice += int(self.pricingInfo.get('PPItem', 0) * 10000)
+            itemprice += int(itemcost * self.pricingInfo.get('General', 0) / 100.0)
+            if self.pricingInfo.get('CostInPrice', 1):
+                itemprice += itemcost
             totalcost += itemcost
+            totalprice += itemprice
             if itemtype == 'player':
-                itemimbue = self.getItemImbue(item)
-                imbue = self.calcImbue(item, key == self.currentTabLabel)
-                if (imbue - itemimbue) >= 6:
+                if (imbuepts - itemimbue) >= 6:
                     error_act = QAction('Impossible Overcharge on %s' % key, self)
                     if item.Location in JewelTabList:
                         row = 1
@@ -894,15 +854,12 @@ class ScWindow(QMainWindow, Ui_B_SC):
                         row = 0
                         col = PieceTabList.index(item.Location)
                     error_act.setData(QVariant((row << 8) | col))
-                    #error_act.setData(QVariant(errorcount))
                     self.errorsmenu.addAction(error_act)
-                    self.connect(self.errorsmenu, SIGNAL('triggered(QAction*)'), 
-                                 self.changePieceTab)
                     errorcount = errorcount + 1
-                elif imbue > (itemimbue+0.5):
-                    success = -OCStartPercentages[int(imbue-itemimbue)]
+                elif imbuepts > (itemimbue+0.5):
+                    success = -OCStartPercentages[int(imbuepts-itemimbue)]
                     for slot in item.slots():
-                        if not item.slot(i).crafted(): continue
+                        if not slot.crafted(): continue
                         success += GemQualOCModifiers[slot.qua()]
                     success += ItemQualOCModifiers[str(self.QualDrop.currentText())]
                     skillbonus = (int(self.crafterSkill / 50) - 10) * 5
@@ -911,18 +868,19 @@ class ScWindow(QMainWindow, Ui_B_SC):
             if key == self.currentTabLabel:
                 self.ItemUtility.setText('%3.1f' % utility)
                 if self.PlayerMade.isChecked():
-                    self.ItemImbue.setText('%3.1f' % imbue)
+                    self.ItemImbue.setText('%3.1f' % imbuepts)
                     self.ItemImbueTotal.setText(' / ' + unicode(itemimbue))
                     self.ItemCost.setText(SC.formatCost(itemcost))
+                    self.ItemPrice.setText(SC.formatCost(itemprice))
                     for i in range(0, item.slotCount()):
-                        self.Name[i].setText(item.slot(i).gemName(self.realm))
-                        if item.slot(i).crafted() and item.slot(i).done() == "1":
+                        self.Name[i].setText(slot.gemName(self.realm))
+                        if slot.crafted() and slot.done() == "1":
                             self.GemLabel[i].setEnabled(0)
                         else:
                             self.GemLabel[i].setEnabled(1)
-                    if (imbue - itemimbue) >= 6:
+                    if (imbuepts - itemimbue) >= 6:
                         self.ItemOvercharge.setText('Impossible!')
-                    elif imbue > (itemimbue+0.5):
+                    elif imbuepts > (itemimbue+0.5):
                         if success < 0:
                             self.ItemOvercharge.setText('BOOM! (%d%%)' % success)
                         else:
@@ -963,10 +921,7 @@ class ScWindow(QMainWindow, Ui_B_SC):
                 else:
                     capmod = 0
                 self.StatValue[key].setText(unicode(int(basecap + capmod) - val))
-        self.TotalUtility.setText('%3.1f' % totalutility)
-        self.TotalCost.setText(SC.formatCost(totalcost))
         self.SkillsList.clear()
-        self.OtherBonusList.clear()
         for skill, amount in skillTotals.iteritems():
             if not self.capDistance:
                 self.SkillsList.addItem('%d %s' % (amount, skill))
@@ -977,6 +932,7 @@ class ScWindow(QMainWindow, Ui_B_SC):
                     capcalc = HighCapBonusList['Skill']
                 thiscap = int(charlevel * capcalc[0]) + capcalc[1]
                 self.SkillsList.addItem('%d %s' % (thiscap - amount, skill))
+        self.OtherBonusList.clear()
         for bonus, amount in otherTotals.iteritems():
             if not self.capDistance:
                 self.OtherBonusList.addItem('%d %s' % (amount, bonus))
@@ -996,50 +952,11 @@ class ScWindow(QMainWindow, Ui_B_SC):
                 else:
                     capmod = 0
                 self.OtherBonusList.addItem('%d %s' % (cap + capmod - amount, bonus))        
-        self.TotalPrice.setText(SC.formatCost(self.computePrice()))
+        totalprice += self.pricingInfo.get('PPOrder', 0) * 10000
+        self.TotalCost.setText(SC.formatCost(totalcost))
+        self.TotalPrice.setText(SC.formatCost(totalprice))
+        self.TotalUtility.setText('%3.1f' % totalutility)
         self.errorsmenuid.setEnabled(errorcount > 0)
-        self.nocalc = 0
-
-    def computePrice(self):
-        price = 0
-        cost = 0
-        for key, item in self.itemattrlist.iteritems():
-            itemcost = 0
-            itemtype = item.ActiveState
-            if itemtype == 'drop': continue
-            for slot in item.slots():
-                gemcost = slot.gemCost()
-                gemlvl = slot.gemLevel()
-                cost += gemcost
-                itemcost += gemcost
-                if gemcost > 0:
-                    price += self.pricingInfo.get('PPGem', 0) * 10000
-                    if self.pricingInfo.get('HourInclude', 0):
-                        price += self.pricingInfo.get('Hour', 0) * 10000 \
-                               * int(slot.time()) / 60.0
-                    if self.pricingInfo.get('TierInclude', 0):
-                        tierp = self.pricingInfo.get('Tier', {})
-                        price += float(tierp.get(str(gemlvl), 0)) * 10000
-                    if self.pricingInfo.get('QualInclude', 0):
-                        gemqual = slot.qua()
-                        qualp = self.pricingInfo.get('Qual', {})
-                        price += (gemcost * float(qualp.get(gemqual, 0)) / 100.0)
-            if self.pricingInfo.get('PPInclude', 0):
-                imbuepts = self.calcImbue(item, 0)
-                price += self.pricingInfo.get('PPImbue', 0) * 10000 * imbuepts
-                price += self.pricingInfo.get('PPOC', 0) * 10000 \
-                       * max(0, int(imbuepts - self.getItemImbue(item)))
-                if itemcost > 0:
-                    price += self.pricingInfo.get('PPLevel', 0) * 10000 \
-                           * int(item.Level)
-            if itemcost > 0:
-                price += self.pricingInfo.get('PPItem', 0) * 10000
-        price += self.pricingInfo.get('PPOrder', 0) * 10000
-        price += cost * self.pricingInfo.get('General', 0) / 100.0
-        if not self.pricingInfo.get('CostInPrice', 1):
-            return int(price)
-        else:
-            return int(cost + price)
 
     def getItemImbue(self, item):
         try: itemlevel = int(item.Level)
@@ -1084,78 +1001,6 @@ class ScWindow(QMainWindow, Ui_B_SC):
         self.modified = 1
         self.calculate()
 
-    def UpdateCombo(self, type, num):
-        typecombo = self.Type[num]
-        typetext = str(typecombo.currentText())
-        effcombo = self.Effect[num]
-        efftext = str(effcombo.currentText())
-        itemslot = self.itemattrlist[self.currentTabLabel].slot(num)
-        if self.PlayerMade.isChecked():
-            amount = self.AmountDrop[num]
-        else:
-            amount = self.AmountEdit[num]
-        if typetext == 'Unused':
-            if type == 0:
-                effcombo.clear()
-                if effcombo.isEditable():
-                    effcombo.setEditable(False)
-                    self.fix_taborder(num)
-                amount.clear()
-                if num < 4 and self.PlayerMade.isChecked():
-                    self.Quality[num].setCurrentIndex(0)
-        else:
-            if self.PlayerMade.isChecked():
-                effectlist = self.effectlists
-            else:
-                effectlist = self.dropeffectlists
-            if effectlist.has_key(typetext):
-                effectlist = effectlist[typetext]
-            else:
-                effectlist = list()
-            if type == 0:
-                effcombo.clear()
-                if len(effectlist) > 0:
-                    effcombo.insertItems(0, list(effectlist))
-                    effcombo.setCurrentIndex(0)
-            if type == 1:
-                unique = (not efftext in effectlist) \
-                      or (len(efftext) > 3 and efftext[-3:] == "...")
-                if effcombo.isEditable() and not unique:
-                    refocus = self.Effect[num].hasFocus()
-                    effcombo.setEditable(False)
-                    effcombo.setCurrentIndex(effectlist.index(efftext))
-                    self.fix_taborder(num)
-                elif unique and not effcombo.isEditable():
-                    refocus = self.Effect[num].hasFocus()
-                    effcombo.setEditable(True)
-                    effcombo.setEditText(efftext)
-                    self.fix_taborder(num)
-                else:
-                    refocus = False
-                if refocus:
-                    flip = self.Effect[num].setFocus()
-            if self.PlayerMade.isChecked():
-                amtindex = amount.currentIndex()
-                amount.clear()
-                if ValuesLists.has_key(typetext):
-                    valueslist = ValuesLists[typetext]
-                    efftext = str(effcombo.currentText())
-                    if isinstance(valueslist, dict):
-                        if valueslist.has_key(efftext):
-                            valueslist = valueslist[efftext]
-                        else:
-                            valueslist = tuple()
-                    elif efftext[0:5] == "All M":
-                        valueslist = ("1",)
-                    if len(valueslist) > 0:
-                        amount.insertItems(0, list(valueslist))
-                    if amtindex < 0:
-                        amtindex = 0
-                    if amtindex < len(valueslist):
-                        amount.setCurrentIndex(amtindex)
-                if num < 4 and type == 0:
-                    self.Quality[num].setCurrentIndex(len(QualityValues)-2)
-
     def RaceChanged(self, a0):
         race = str(self.CharRace.currentText())
         for rt in GemLists['All']['Resist']:
@@ -1199,69 +1044,155 @@ class ScWindow(QMainWindow, Ui_B_SC):
           self.CharClass.setCurrentIndex(ClassList[self.realm].index(self.charclass))
         self.CharClassChanged('')
     
+    def ItemLevelShow(self):
+        level = self.ItemLevelWindow.exec_()
+        if level != -1:
+            self.ItemLevel.setText(str(level))
+            self.AFDPS_Edit.setText(str(self.ItemLevelWindow.afdps))
+
     def ItemChanged(self,a0):
         if self.nocalc: return
+        #sys.stdout.write("Changes to item control %s\n" % str(self.sender().objectName()))
         self.modified = 1
         item = self.itemattrlist[self.currentTabLabel]
-        self.storeItem(item)
+        self.FixupItemLevel()
+        item.Level = unicode(self.ItemLevel.text())
+        item.AFDPS = unicode(self.AFDPS_Edit.text())
+        item.Speed = unicode(self.Speed_Edit.text())
+        item.Bonus = unicode(self.Bonus_Edit.text())
+        if self.Equipped.isChecked():
+            item.Equipped = '1'
+        else:
+            item.Equipped = '0'
+        if self.PlayerMade.isChecked():
+            state = 'player'
+            item.ItemQuality = unicode(self.QualDrop.currentText())
+        else:
+            state = 'drop'
+            item.ItemName = unicode(self.ItemName.text())
+            item.ItemQuality = unicode(self.QualEdit.text())
         self.calculate()
 
-    def TypeChanged(self, Value):
-        wasnocalc = self.nocalc
-        self.nocalc = 1
-        index = self.focusWidget().objectName()[-2:]
+    def senderSlot(self):
+        index = self.sender().objectName()[-2:]
         if index[0] == '_': index = index[1:]
-        self.UpdateCombo(0, int(index) - 1)
-        self.nocalc = wasnocalc
-        if self.nocalc : return
-        self.modified = 1
-        self.storeItem(self.itemattrlist[self.currentTabLabel])
-        self.calculate()
+        return int(index) - 1
 
-    def EffectChanged(self, value):
-        wasnocalc = self.nocalc
-        self.nocalc = 1
-        index = str(self.focusWidget().objectName())[-2:]
-        if index[0] == '_': index = index[1:]
-        self.UpdateCombo(1, int(index) - 1)
-        self.nocalc = wasnocalc
-        if self.nocalc : return
-        self.modified = 1
-        self.storeItem(self.itemattrlist[self.currentTabLabel])
-        self.calculate()
-
-    def AmountChanged(self,a0):
+    def AmountsChanged(self, amount, slot = -1):
         if self.nocalc: return
+        if slot < 0:
+            slot = self.senderSlot()      
+        #sys.stdout.write("Changes to slot %d %s\n" % (slot, str(self.sender().objectName())))
+        item = self.itemattrlist[self.currentTabLabel]
+        if self.PlayerMade.isChecked():
+            item.slot(slot).setAmount(self.AmountDrop[slot].currentText())
+        else:
+            item.slot(slot).setAmount(self.AmountEdit[slot].text())
+        if item.slot(slot).slotType() == 'player':
+            item.slot(slot).setQua(self.Quality[slot].currentText())
+        else:
+            item.slot(slot).setRequirement(self.Requirement[slot].text())
         self.modified = 1
-        self.storeItem(self.itemattrlist[self.currentTabLabel])
         self.calculate()
 
-    def QualityChanged(self,a0):
-        if self.nocalc: return
-        self.modified = 1
-        self.storeItem(self.itemattrlist[self.currentTabLabel])
-        self.calculate()
+    def EffectChanged(self, value, slot = -1):
+        if slot < 0:
+            slot = self.senderSlot()        
+        item = self.itemattrlist[self.currentTabLabel]
+        efftext = str(self.Effect[slot].currentText())
+        if not self.nocalc:
+            item.slot(slot).setEffect(efftext)
+            self.modified = 1
+        typetext = str(item.slot(slot).type())
+        effcombo = self.Effect[slot]
+        unique = (len(efftext) > 3 and efftext[-3:] == "...")
+        if effcombo.isEditable() and not unique:
+            refocus = self.Effect[slot].hasFocus()
+            effcombo.setEditable(False)
+            effcombo.setCurrentIndex(effectlist.index(efftext))
+            self.fix_taborder(slot)
+        elif unique and not effcombo.isEditable():
+            refocus = self.Effect[slot].hasFocus()
+            effcombo.setEditable(True)
+            effcombo.setEditText(efftext)
+            self.fix_taborder(slot)
+        else:
+            refocus = False
+        if refocus:
+            flip = self.Effect[slot].setFocus()
+        if self.PlayerMade.isChecked():
+            amount = self.AmountDrop[slot]
+        else:
+            amount = self.AmountEdit[slot]
+        if typetext == 'Unused':
+            amount.clear()
+            if item.slot(slot).slotType() == 'player' and self.PlayerMade.isChecked():
+                self.Quality[slot].setCurrentIndex(0)
+        elif self.PlayerMade.isChecked():
+            amtindex = amount.currentIndex()
+            amount.clear()
+            if ValuesLists.has_key(typetext):
+                valueslist = ValuesLists[typetext]
+                if isinstance(valueslist, dict):
+                    if valueslist.has_key(efftext):
+                        valueslist = valueslist[efftext]
+                    else:
+                        valueslist = tuple()
+                elif efftext[0:5] == "All M":
+                    valueslist = ("1",)
+                if len(valueslist) > 0:
+                    amount.insertItems(0, list(valueslist))
+                if amtindex < 0:
+                    amtindex = 0
+                if amtindex < len(valueslist):
+                    amount.setCurrentIndex(amtindex)
+            if item.slot(slot).slotType() == 'player':
+                self.Quality[slot].setCurrentIndex(len(QualityValues)-2)
+        # Cascade the changes
+        self.AmountsChanged(0, slot)
 
-    def EquippedClicked(self):
-        if self.nocalc: return
-        self.modified = 1
-        self.storeItem(self.itemattrlist[self.currentTabLabel])
-        self.calculate()
+    def TypeChanged(self, Value, slot = -1):
+        if slot < 0:
+            slot = self.senderSlot()        
+        item = self.itemattrlist[self.currentTabLabel]
+        typetext = str(self.Type[slot].currentText())
+        if not self.nocalc:
+            item.slot(slot).setType(typetext)
+            self.modified = 1
+        effcombo = self.Effect[slot]
+        if effcombo.isEditable():
+            effcombo.setEditable(False)
+            self.fix_taborder(slot)
+        effcombo.clear()
+        if not self.PlayerMade.isChecked():
+            effectlist = self.dropeffectlists
+        elif item.slot(slot).slotType() == 'player':
+            effectlist = self.effectlists
+        else:
+            # XXX Grow this for crafted enhanced armor/weap/lw's
+            effectlist = self.itemeffectlists
+        if effectlist.has_key(typetext):
+            effectlist = effectlist[typetext]
+        else:
+            effectlist = list()
+        if len(effectlist) > 0:
+            effcombo.insertItems(0, list(effectlist))
+        # Here we go... cascade
+        effcombo.setCurrentIndex(0)
+        self.EffectChanged(0, slot)
     
     def DropToggled(self,a0):
         if self.nocalc or not a0: return
-        self.modified = 1
         item = self.itemattrlist[self.currentTabLabel]
         item.ActiveState = 'drop'
-        self.showDropWidgets()
+        self.modified = 1
         self.restoreItem(item)
 
     def PlayerToggled(self, a0):
         if self.nocalc or not a0: return
-        self.modified = 1
         item = self.itemattrlist[self.currentTabLabel]
         item.ActiveState = 'player'
-        self.showPlayerWidgets()
+        self.modified = 1
         self.restoreItem(item)
 
     def clearCurrentItem(self):
@@ -1277,7 +1208,6 @@ class ScWindow(QMainWindow, Ui_B_SC):
                 'Cannot save item - You must specifify a name!', 'OK')
             return
         item = self.itemattrlist[self.currentTabLabel]
-        self.storeItem(item)
         ext = FileExt[self.currentTabLabel]
         if not isinstance(ext, types.StringType):
             ext = ext[0]
@@ -1321,12 +1251,6 @@ class ScWindow(QMainWindow, Ui_B_SC):
                 self.itemattrlist[self.currentTabLabel] = item
                 self.restoreItem(item)
                 self.modified = 1
-
-    def ItemLevelShow(self):
-        level = self.ItemLevelWindow.exec_()
-        if level != -1:
-            self.ItemLevel.setText(str(level))
-            self.AFDPS_Edit.setText(str(self.ItemLevelWindow.afdps))
 
     def newFile(self):
         if self.modified:
@@ -1379,7 +1303,6 @@ class ScWindow(QMainWindow, Ui_B_SC):
             filetitle = os.path.basename(self.filename)
             self.setWindowTitle(filetitle + " - Kort's Spellcrafting Calculator")
             
-
     def openFile(self, *args):
         if self.modified:
             ret = QMessageBox.warning(self, 'Save Changes?', 
@@ -1527,7 +1450,6 @@ class ScWindow(QMainWindow, Ui_B_SC):
         self.calculate()
 
     def openCraftWindow(self):
-        self.storeItem(self.itemattrlist[self.currentTabLabel])
         CW = CraftWindow.CraftWindow(self, '', 1)
         CW.loadItem(self.itemattrlist.get(self.currentTabLabel))
         CW.ExpMultiplier.setValue(self.craftMultiplier)
