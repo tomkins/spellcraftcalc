@@ -200,8 +200,7 @@ class ItemSlot:
             if not gemlist.has_key(self.Effect): return ''
         return string.strip(GemNames[amountindex]
                 + ' ' + gemlist[self.Effect][0]
-                + ' ' + gemlist[self.Effect][1]
-                + ' ' + GemSubName[self.Type])
+                + ' ' + gemlist[self.Effect][1])
 
     def gemMaterials(self, realm):
         ret = { 'Gems' : { }, 'Dusts' : { }, 'Liquids' : { } }
