@@ -477,8 +477,9 @@ class ScWindow(QMainWindow, Ui_B_SC):
         self.menuBar().addMenu(self.editmenu)
 
         self.viewmenu = QMenu('&View', self)
-        self.viewmenu.addAction('&Gem Crafting', self.openCraftWindow,
-                                QKeySequence(Qt.ALT+Qt.Key_G))
+        self.craftingmenuid = self.viewmenu.addAction('&Gem Crafting', 
+                                  self.openCraftWindow,
+                                  QKeySequence(Qt.ALT+Qt.Key_G))
         self.viewmenu.addSeparator()
         self.viewmenu.addAction('&Materials', self.openMaterialsReport,
                                 QKeySequence(Qt.ALT+Qt.Key_M))
@@ -536,6 +537,7 @@ class ScWindow(QMainWindow, Ui_B_SC):
         for i in range(0,4):
             self.GemLabel[i].setEnabled(1)
             self.GemLabel[i].setText('Slot %d:' % (i + 1))
+        self.craftingmenuid.setEnabled(False)
         self.GroupItemFrame.show()
 
     def showPlayerWidgets(self):
@@ -547,6 +549,7 @@ class ScWindow(QMainWindow, Ui_B_SC):
         for i in range(0,4):
             self.GemLabel[i].setEnabled(1)
             self.GemLabel[i].setText('Gem %d:' % (i + 1))
+        self.craftingmenuid.setEnabled(True)
         self.GroupItemFrame.show()
 
     def closeEvent(self, e):
