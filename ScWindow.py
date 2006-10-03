@@ -305,7 +305,9 @@ class ScWindow(QMainWindow, Ui_B_SC):
             self.itemlayout.addWidget(self.Type[i],row,1,1,1)
             self.AmountEdit[i].setFixedSize(QSize(self.AmountEdit[i].width(), height))
             self.itemlayout.addWidget(self.AmountEdit[i],row,2,1,1)
-            self.Effect[i].setFixedSize(QSize(self.Effect[i].width(), height))
+
+            l = reduce(lambda x, y: x+y, [ list(x) for x in GemLists['All'].values() ])
+            self.Effect[i].setFixedSize(QSize(self.Effect[i].getMinimumWidth(l), height))
             self.itemlayout.addWidget(self.Effect[i],row,3,1,1)
             self.Requirement[i].setFixedSize(QSize(self.Requirement[i].width(), height))
             self.itemlayout.addWidget(self.Requirement[i],row,4,1,3)
