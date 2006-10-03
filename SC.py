@@ -80,7 +80,7 @@ def computeOverchargeSuccess(imbue, itemimbue, item, crafterskill):
         if item.slot(i).gemImbue() > 0 and GemQualOCModifiers.has_key(item.slot(i).qua()):
             success += GemQualOCModifiers[item.slot(i).qua()]
     success += ItemQualOCModifiers[item.getAttr('ItemQuality')]
-    skillbonus = (int(crafterSkill / 50) - 10) * 5
+    skillbonus = (int(crafterskill / 50) - 10) * 5
     if skillbonus > 50: skillbonus = 50
     success += skillbonus
     return success

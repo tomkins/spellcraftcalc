@@ -226,27 +226,17 @@ class ReportWindow(QDialog, Ui_B_ReportWindow):
             equipped = item.getAttr('Equipped')
             activestate = item.getAttr('ActiveState')
             if activestate == 'drop':
-                endrng = 10
                 iteminfo[key]['usedpoints'] = 0
                 iteminfo[key]['availablepoints'] = 0
                 iteminfo[key]['overcharge'] = 0
             else:
-                endrng = 5
                 imbue = SC.calcImbue(item)
                 itemimbue = SC.getItemImbue(item)
                 if (imbue - itemimbue) >= 6:
-                    success = '<font color="#FF0000">Impossible!</font>\n'
+                    success = 'Impossible!'
                 elif imbue > (itemimbue+0.5):
-                    success = -OCStartPercentages[int(imbue-itemimbue)]
-                    for i in range(0, 4):
-                        if item.slot(i).type() == 'Unused':
-                            success += GemQualOCModifiers['94']
-                        else:
-                            success += GemQualOCModifiers[item.slot(slot).qua()]
-                    success += ItemQualOCModifiers[item.getAttr('ItemQuality')]
-                    skillbonus = (int(self.parent.crafterSkill / 50) - 10) * 5
-                    if skillbonus > 50: skillbonus = 50
-                    success += skillbonus
+                    success = SC.computeOverchargeSuccess(imbue, itemimbue, item, 
+                                                          self.parent.crafterSkill)
                     if success < 0:
                         success = '%d%% (BOOM!)' % success
                     else:
@@ -257,8 +247,7 @@ class ReportWindow(QDialog, Ui_B_ReportWindow):
                 iteminfo[key]['availablepoints'] = itemimbue
                 iteminfo[key]['overcharge'] = success
             utility = 0
-            for slot in range(0, endrng):
-                    
+            for slot in range(0, item.slotCount()):
                 gemnum = 'gem%d' % (slot+1)
                 iteminfo[key][gemnum] = { }
                 gemtype = item.slot(slot).type()
@@ -284,93 +273,66 @@ class ReportWindow(QDialog, Ui_B_ReportWindow):
                     iteminfo[key][gemnum]['name'] = item.slot(slot).gemName(self.parent.realm)
                 else:
                     iteminfo[key][gemnum]['name'] = ''
+                utility += item.slot(slot).gemUtility()
+                if not equipped == '1':
+                    continue
                 if gemtype == 'Skill':
-                        if effect == 'All Magic Skills'\
-                            or effect == 'All Melee Weapon Skills'\
-                            or effect == 'All Dual Wield Skills'\
-                            or effect == 'All Archery Skills':
-
-                            if effect == 'All Melee Weapon Skills':
-                                utility += amount * 5
-                            for e in AllBonusList[self.parent.realm][self.parent.charclass][effect]:
-                                if effect == 'All Magic Skills'\
-                                    or effect == 'All Dual Wield Skills'\
-                                    or effect == 'All Archery Skills':
-                                    utility += amount * 5
-                                if equipped == '1':
-                                    if not skillTotals.has_key(e):
-                                        skillTotals[e] = amount
-                                    else:
-                                        skillTotals[e] += amount
-                        else:           
-                            utility += amount * 5
-                            if equipped == '1':
-                                if not skillTotals.has_key(effect):
-                                    skillTotals[effect] = amount
-                                else:
-                                    skillTotals[effect] += amount
-                elif gemtype == 'Focus':
-                    utility += 1
-                    if equipped == '1':
-                        if effect == 'All Spell Lines':
-                            for f in AllBonusList[self.parent.realm][self.parent.charclass][effect]:
-                                focusTotals[f] = amount
+                    if effect[0:4] == 'All ':
+                        effects = AllBonusList[self.parent.realm][self.parent.charclass][effect]
+                    else:
+                        effects = (effect,)
+                    for effect in effects:
+                        if not skillTotals.has_key(effect):
+                            skillTotals[effect] = amount
                         else:
-                            focusTotals[effect] = amount
+                            skillTotals[effect] += amount
+                elif gemtype == 'Focus':
+                    if effect == 'All Spell Lines':
+                        for f in AllBonusList[self.parent.realm][self.parent.charclass][effect]:
+                            focusTotals[f] = amount
+                    else:
+                        focusTotals[effect] = amount
                 elif gemtype == 'Power':
-                    utility += amount * 2
-                    if equipped == '1':
-                        totals[gemtype] += amount
-                        totals[gemtype.lower()] += amount
+                    totals[gemtype] += amount
+                    totals[gemtype.lower()] += amount
                 elif gemtype == 'Hits':
-                    utility += amount / 4.0
-                    if equipped == '1':
-                        totals[gemtype] += amount
-                        totals[gemtype.lower()] += amount
+                    totals[gemtype] += amount
+                    totals[gemtype.lower()] += amount
                 elif gemtype == 'Resist':
-                    utility += amount * 2
-                    if equipped == '1':
-                        totals[effect] += amount
-                        totals[effect.lower()] += amount
+                    totals[effect] += amount
+                    totals[effect.lower()] += amount
                 elif gemtype == 'Stat':
                     if effect == 'Acuity':
                         for e in AllBonusList[self.parent.realm][self.parent.charclass][effect]:
-                            utility += amount * 2.0 / 3.0
-                            if equipped == '1':
-                                totals[e] += amount
-                                totals[e[:3].lower()] += amount
+                            totals[e] += amount
+                            totals[e[:3].lower()] += amount
                     else:
-                        utility += amount * 2.0 / 3.0
-                        if equipped == '1':
-                            totals[effect] += amount
-                            totals[effect[:3].lower()] += amount
+                        totals[effect] += amount
+                        totals[effect[:3].lower()] += amount
                 elif gemtype == 'Other Bonus':
-                    if equipped == '1':
-                        if effect == 'AF':
-                            totals[effect] += amount
-                        if not otherTotals.has_key(effect):
-                            otherTotals[effect] = amount
-                        else:
-                            otherTotals[effect] += amount
+                    if effect == 'AF':
+                        totals[effect] += amount
+                    if not otherTotals.has_key(effect):
+                        otherTotals[effect] = amount
+                    else:
+                        otherTotals[effect] += amount
                 elif gemtype == 'PvE Bonus':
-                    if equipped == '1':
-                        if not otherTotals.has_key(effect + " PvE"):
-                            otherTotals[effect + " PvE"] = amount
-                        else:
-                            otherTotals[effect + " PvE"] += amount
+                    if not otherTotals.has_key(effect + " PvE"):
+                        otherTotals[effect + " PvE"] = amount
+                    else:
+                        otherTotals[effect + " PvE"] += amount
                 elif gemtype == 'Cap Increase':
-                    if equipped == '1':
-                        if effect == 'Acuity':
-                            effect = AllBonusList[self.parent.realm][self.parent.charclass][effect][0]
-                        if not capTotals.has_key(effect):
-                            capTotals[effect] = amount
-                        else:
-                            capTotals[effect] += amount
-                        if effect == 'Hits':
-                            if capTotals['Hits'] > 200:
-                                capTotals['Hits'] = 200 
-                        elif capTotals[effect] > 26:
-                            capTotals[effect] = 26
+                    if effect == 'Acuity':
+                        effect = AllBonusList[self.parent.realm][self.parent.charclass][effect][0]
+                    if not capTotals.has_key(effect):
+                        capTotals[effect] = amount
+                    else:
+                        capTotals[effect] += amount
+                    if effect == 'Hits':
+                        if capTotals['Hits'] > 200:
+                            capTotals['Hits'] = 200 
+                    elif capTotals[effect] > 26:
+                        capTotals[effect] = 26
             iteminfo[key]['utility'] = utility
 
         for (key, val) in totals.items():
