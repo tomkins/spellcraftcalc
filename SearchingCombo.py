@@ -28,6 +28,7 @@ class SearchingCombo(QComboBox):
                 (not e.modifiers() or e.modifiers() == Qt.NoModifier or e.modifiers() == Qt.KeypadModifier) \
                 and self.currentIndex() > 0:
             self.setCurrentIndex(self.currentIndex()-1)
+            self.emit(SIGNAL("activated(int)"),self.currentIndex())
             self.emit(SIGNAL("activated(const QString &)"),self.currentText())
             e.accept()
             return
@@ -35,6 +36,7 @@ class SearchingCombo(QComboBox):
                 (not e.modifiers() or e.modifiers() == Qt.NoModifier or e.modifiers() == Qt.KeypadModifier) \
                 and self.currentIndex() < self.count()-1:
             self.setCurrentIndex(self.currentIndex()+1)
+            self.emit(SIGNAL("activated(int)"),self.currentIndex())
             self.emit(SIGNAL("activated(const QString &)"),self.currentText())
             e.accept()
             return
@@ -52,6 +54,7 @@ class SearchingCombo(QComboBox):
                 else:
                     i = filter(lambda x: x > self.currentIndex(), indexlist)[0]
                     self.setCurrentIndex(i)
+                self.emit(SIGNAL("activated(int)"),self.currentIndex())
                 self.emit(SIGNAL("activated(const QString &)"),self.currentText())
             e.accept()
             return
