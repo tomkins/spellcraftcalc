@@ -125,6 +125,10 @@ class ScWindow(QMainWindow, Ui_B_SC):
             height = min(self.CharName.minimumSizeHint().height(),
                          self.Realm.minimumSizeHint().height())
 
+        for ctl in (self.GroupItemFrame.children() + self.GroupCharInfo.children()):
+            if (ctl.metaObject().className() == "QLineEdit" or 
+                    ctl.metaObject().className() == "QComboBox"):
+                ctl.setFixedSize(QSize(ctl.width(), height))
 
         self.StatLabel = {}
         self.StatValue = {}
@@ -182,13 +186,7 @@ class ScWindow(QMainWindow, Ui_B_SC):
         self.charlayout.setSpacing(0)
         row = 0
         for stat in ('CharName', 'Realm', 'CharClass', 'CharRace', 
-                     'CharLevel', ):
-            self.charlayout.addWidget(getattr(self, 'Label' + stat),row,0,1,1)
-            ctl = getattr(self, stat)
-            ctl.setFixedSize(QSize(ctl.width(), height))
-            self.charlayout.addWidget(ctl,row,1,1,2)
-            row += 1
-        for stat in ('TotalCost', 'TotalPrice', ):
+                     'CharLevel', 'TotalCost', 'TotalPrice', ):
             self.charlayout.addWidget(getattr(self, 'Label' + stat),row,0,1,1)
             self.charlayout.addWidget(getattr(self, stat),row,1,1,2)
             row += 1
@@ -239,8 +237,6 @@ class ScWindow(QMainWindow, Ui_B_SC):
                     self.ItemBonusLabel, self.Bonus_Edit, self.ItemAFDPSLabel, 
                     self.AFDPS_Edit, self.ItemSpeedLabel, self.Speed_Edit, 
                     self.Equipped):
-            if str(obj.objectName())[-5:] != 'Label':
-                obj.setFixedSize(QSize(obj.width(), height))
             self.itemcontrollayout.addWidget(obj)
             col += 1
             if col == 3 or (col > 6 and str(obj.objectName())[-5:] != 'Label'):
@@ -278,7 +274,6 @@ class ScWindow(QMainWindow, Ui_B_SC):
         self.itemlayout.setColumnMinimumWidth(6,width)
 
         row += 1
-        self.ItemName.setFixedSize(QSize(self.ItemName.width(), height))
         self.itemlayout.addWidget(self.ItemName,row,8,1,2)
         for i in range(0, 12):
             idx = i + 1
@@ -301,18 +296,13 @@ class ScWindow(QMainWindow, Ui_B_SC):
             self.connect(self.Requirement[i],SIGNAL("textChanged(const QString&)"),
                          self.AmountsChanged)
             self.itemlayout.addWidget(self.GemLabel[i],row,0,1,1)
-            self.Type[i].setFixedSize(QSize(self.Type[i].width(), height))
             self.itemlayout.addWidget(self.Type[i],row,1,1,1)
-            self.AmountEdit[i].setFixedSize(QSize(self.AmountEdit[i].width(), height))
             self.itemlayout.addWidget(self.AmountEdit[i],row,2,1,1)
-            self.Effect[i].setFixedSize(QSize(self.Effect[i].width(), height))
             self.itemlayout.addWidget(self.Effect[i],row,3,1,1)
-            self.Requrirement[i].setFixedSize(QSize(self.Requirement[i].width(), height))
             self.itemlayout.addWidget(self.Requirement[i],row,4,1,3)
             self.switchOnType['drop'].append(self.AmountEdit[i])
             if i < 6:
                 self.AmountDrop.append(getattr(self, 'Amount_Drop_%d' % idx))
-                self.AmountDrop[i].setFixedSize(QSize(self.AmountDrop[i].width(), height))
                 self.itemlayout.addWidget(self.AmountDrop[i],row,2,1,1)
                 self.Name.append(getattr(self, 'Name_%d' % idx))
                 self.itemlayout.addWidget(self.Name[i],row,8,1,2)
@@ -330,7 +320,6 @@ class ScWindow(QMainWindow, Ui_B_SC):
                              self.AmountsChanged)
                 self.Points.append(getattr(self, 'Points_%d' % idx))
                 self.Cost.append(getattr(self, 'Cost_%d' % idx))
-                self.Quality[i].setFixedSize(QSize(self.Quality[i].width(), height))
                 self.itemlayout.addWidget(self.Quality[i],row,4,1,1)
                 self.itemlayout.addWidget(self.Points[i],row,5,1,1)
                 self.itemlayout.addWidget(self.Cost[i],row,6,1,1)
