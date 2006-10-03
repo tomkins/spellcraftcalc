@@ -465,10 +465,20 @@ class ScWindow(QMainWindow, Ui_B_SC):
         self.menuBar().addMenu(self.filemenu)
 
         self.swapgemsmenu = QMenu('S&wap Gems With', self)
+        self.swapjewelsmenu = QMenu('Jewels', self)
+        for piece in range(0,len(JewelTabList)):
+            act = QAction(JewelTabList[piece], self)
+            act.setData(QVariant(piece + len(PieceTabList)))
+            self.swapjewelsmenu.addAction(act)
+        self.swapgemsmenu.addMenu(self.swapjewelsmenu)
+
         for piece in range(0,len(PieceTabList)):
             act = QAction(PieceTabList[piece], self)
             act.setData(QVariant(piece))
             self.swapgemsmenu.addAction(act)
+            if str(act.text()) == string.strip(str(self.PieceTab.tabText(0, 0))):
+                act.setEnabled(False)
+
         self.connect(self.swapgemsmenu, SIGNAL("triggered(QAction*)"), self.swapWith)
 
         self.itemtypemenu = QMenu('Item &Type', self)
@@ -654,7 +664,21 @@ class ScWindow(QMainWindow, Ui_B_SC):
     def PieceTabChanged(self, row, col):
         if self.nocalc:
             return
+        swapactions = self.swapgemsmenu.actions()
         self.currentTabLabel = string.strip(str(self.PieceTab.tabText(row, col)))
+        actions = []
+        for act in swapactions:
+            if act.menu():
+                for jewelact in act.menu().actions():
+                    actions.append(jewelact)
+            else:
+                actions.append(act)
+        for act in actions:
+            if str(act.text()) == self.currentTabLabel:
+                act.setEnabled(False)
+            else:
+                act.setEnabled(True)
+
         self.restoreItem(self.itemattrlist[self.currentTabLabel])
 
     def changePieceTab(self,a0):
