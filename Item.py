@@ -73,7 +73,7 @@ class ItemSlot:
         return self.Type
     def setType(self, type):
         self.CraftOk = False
-        if self.Type == 'Unused' or self.Type == '':
+        if type == 'Unused' or type == '':
             self.setAll()
         else:
             self.Type=unicode(type)
@@ -164,16 +164,17 @@ class ItemSlot:
 
     def gemUtility(self):
         mval = 0
-        if not self.crafted(): return 0.0
         if self.Type == 'Stat':
             return ((int(self.Amount) - 1) / 3.0) * 2.0 + 1.0
-        if self.Type == 'Hits':
-            return int(self.Amount) / 4.0
-        if self.Type == 'Resist' or self.Type == 'Power':
+        elif self.Type == 'Resist' or self.Type == 'Power':
             mval = (int(self.Amount) - 1) * 2.0
         elif self.Type == 'Skill':
             mval = (int(self.Amount) - 1) * 5.0
-        if (mval < 1): return 1.0
+        elif self.Type == 'Focus':
+            mval = 1
+        elif self.Type == 'Hits':
+            return int(self.Amount) / 4.0
+        if (mval > 0 and mval < 1): return 1.0
         return mval
 
     def gemName(self, realm):
