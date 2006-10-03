@@ -1031,7 +1031,7 @@ class ScWindow(QMainWindow, Ui_B_SC):
                 self.StatBonus[rt].setText('-')
         if self.nocalc: return
         self.modified = 1
-        self.calculate()
+        self.restoreItem(self.itemattrlist[self.currentTabLabel])
 
     def CharClassChanged(self,a0):
         self.charclass = str(self.CharClass.currentText())
@@ -1051,16 +1051,16 @@ class ScWindow(QMainWindow, Ui_B_SC):
         racelist = AllBonusList[self.realm][self.charclass]['Races']
         self.CharRace.insertItems(0, list(racelist))
         if race in racelist:
-          self.CharRace.setCurrentIndex(racelist.index(race))
-        self.RaceChanged('')
+            self.CharRace.setCurrentIndex(racelist.index(race))
+        self.RaceChanged(self.CharRace.currentIndex())
 
     def RealmChanged(self,a0):
         self.realm = str(self.Realm.currentText())
         self.CharClass.clear()
         self.CharClass.insertItems(0, list(ClassList[self.realm]))
         if self.charclass in ClassList[self.realm]:
-          self.CharClass.setCurrentIndex(ClassList[self.realm].index(self.charclass))
-        self.CharClassChanged('')
+            self.CharClass.setCurrentIndex(ClassList[self.realm].index(self.charclass))
+        self.CharClassChanged(self.CharClass.currentIndex())
     
     def ItemLevelShow(self):
         level = self.ItemLevelWindow.exec_()
