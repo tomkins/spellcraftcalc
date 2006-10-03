@@ -218,9 +218,9 @@ class ItemSlot:
             if self.Type == 'Focus':
                 ret['Gems'][MaterialGems[gemindex]] = 3
             ret['Dusts'][gemdust] = (gemindex * 5) + 1
-            ret['Liquids'][gemliquid][0] = (gemindex * 6) + 2
-            ret['Liquids'][gemliquid][1] = (gemindex * 6) + 2
-            ret['Liquids'][gemliquid][2] = (gemindex * 6) + 2
+            ret['Liquids'][gemliquid[0]] = (gemindex * 6) + 2
+            ret['Liquids'][gemliquid[1]] = (gemindex * 6) + 2
+            ret['Liquids'][gemliquid[2]] = (gemindex * 6) + 2
         elif self.Type == 'Focus' or self.Type == 'Resist':
             ret['Dusts'][gemdust] = (gemindex * 5) + 1
             ret['Liquids'][gemliquid] = gemindex + 1
