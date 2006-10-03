@@ -1085,7 +1085,7 @@ class ScWindow(QMainWindow, Ui_B_SC):
         if self.nocalc: return
         if slot < 0:
             slot = self.senderSlot()      
-        sys.stdout.write("Changes to slot %d %s\n" % (slot, str(self.sender().objectName())))
+        #sys.stdout.write("Changes to slot %d %s\n" % (slot, str(self.sender().objectName())))
         item = self.itemattrlist[self.currentTabLabel]
         if self.PlayerMade.isChecked():
             item.slot(slot).setAmount(self.AmountDrop[slot].currentText())
@@ -1103,7 +1103,7 @@ class ScWindow(QMainWindow, Ui_B_SC):
             slot = self.senderSlot()        
         item = self.itemattrlist[self.currentTabLabel]
         efftext = str(self.Effect[slot].lineEdit().text())
-        sys.stdout.write("Changes to slot %d Effect Text %s\n" % (slot, efftext))
+        #sys.stdout.write("Changes to slot %d Effect Text %s\n" % (slot, efftext))
         if not self.nocalc:
             item.slot(slot).setEffect(efftext)
             self.modified = 1
@@ -1116,7 +1116,7 @@ class ScWindow(QMainWindow, Ui_B_SC):
             slot = self.senderSlot()        
         item = self.itemattrlist[self.currentTabLabel]
         efftext = str(self.Effect[slot].currentText())
-        sys.stdout.write("Changes to slot %d Value %d Effect Item %s\n" % (slot, value, efftext))
+        #sys.stdout.write("Changes to slot %d Value %d Effect Item %s\n" % (slot, value, efftext))
         if not self.nocalc:
             item.slot(slot).setEffect(efftext)
             self.modified = 1
