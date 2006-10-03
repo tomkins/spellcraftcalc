@@ -6,23 +6,18 @@
 
 __all__ = [
   'ScVersion',
-  'DropLists',
-  'TypeList', 'EffectTypeList', 'DropTypeList',
+  'GemLists', 'DropLists', 'CraftedLists',
+  'TypeList', 'EffectTypeList', 'DropTypeList', 'CraftedTypeList',
+  'ValuesLists', 'CraftedValuesLists',
   'QualityValues', 'EstimatedMakes', 'ImbuePts',
-  'GemQualOCModifiers', 'ItemQualOCModifiers',
-  'FileExt',
-  'Caps', 'HighCapBonusList',
-  'ValuesLists',
-  'TabList', 
-  'OCStartPercentages', 
-  'GemTables', 'GemLists', 'GemDusts', 'GemLiquids', 
-  'GemSubName',
+  'OCStartPercentages', 'GemQualOCModifiers', 'ItemQualOCModifiers',
+  'FileExt', 'Caps', 'HighCapBonusList', 'BodyHitOdds',
+  'GemTables', 'GemDusts', 'GemLiquids', 'GemSubName',
   'GemNames', 'MaterialGems', 'GemCosts', 'RemakeCosts', 
-  'EffectTypeNames', 'EffectItemNames', 'EffectMetal', 'EffectRequiredLevel', 
-  'FixEffectsTable', 
-  'HotkeyGems', 'ImbueMultipliers',  
+  'EffectTypeNames', 'EffectItemNames', 'EffectMetal', 'EffectRequiredLevel',
+  'FixEffectsTable', 'HotkeyGems', 'ImbueMultipliers',  
   'ShieldTypes',
-  'PieceTabList', 'JewelTabList', 'BodyHitOdds', 
+  'TabList', 'PieceTabList', 'JewelTabList',
 ]
 
 ScVersion = "Kort's Spellcrafting Calulator 1.46"
@@ -495,36 +490,36 @@ EffectMetal = d2({
 ddEffectDamageSubtable = t2(("95", "86", "77", "68", "59", "50", "41",))
 
 offensiveEffectValues = d2({
-        'Direct Damage (Fire)' :     ddEffectDamageSubtable,
-        'Direct Damage (Cold)' :     ddEffectDamageSubtable,
-        'Direct Damage (Energy)' :   ddEffectDamageSubtable,
-        'Direct Damage (Spirit)' :   ddEffectDamageSubtable,
-        'Damage Over Time' :         t2(("64",)),
-        'Self AF Shield' :           t2(("75",)),
-        'Self Melee Health Buffer' : t2(("50",)),
-        'Self Melee Haste' :         t2(("20%",)),
-        'Self Damage Shield' :       t2(("5.1",)),
+    'Direct Damage (Fire)' :     ddEffectDamageSubtable,
+    'Direct Damage (Cold)' :     ddEffectDamageSubtable,
+    'Direct Damage (Energy)' :   ddEffectDamageSubtable,
+    'Direct Damage (Spirit)' :   ddEffectDamageSubtable,
+    'Damage Over Time' :         t2(("64",)),
+    'Self AF Shield' :           t2(("75",)),
+    'Self Melee Health Buffer' : t2(("50",)),
+    'Self Melee Haste' :         t2(("20%",)),
+    'Self Damage Shield' :       t2(("5.1",)),
 })
 
 reactiveEffectValues = offensiveEffectValues.copy()
 reactiveEffectValues.update({
-        'Direct Damage (Fire)' :     t2(ddEffectDamageSubtable[0:3]),
-        'Direct Damage (Cold)' :     t2(ddEffectDamageSubtable[0:3]),
-        'Direct Damage (Energy)' :   t2(ddEffectDamageSubtable[0:3]),
-        'Direct Damage (Spirit)' :   t2(ddEffectDamageSubtable[0:3]),
-        'Self Melee Health Buffer' : t2(("100",)),
+    'Direct Damage (Fire)' :     t2(ddEffectDamageSubtable[0:3]),
+    'Direct Damage (Cold)' :     t2(ddEffectDamageSubtable[0:3]),
+    'Direct Damage (Energy)' :   t2(ddEffectDamageSubtable[0:3]),
+    'Direct Damage (Spirit)' :   t2(ddEffectDamageSubtable[0:3]),
+    'Self Melee Health Buffer' : t2(("100",)),
 })
 reactiveEffectValues = d2(reactiveEffectValues)
 
 chargedEffectValues = offensiveEffectValues.copy()
 chargedEffectValues.update({
-        'Self Melee Haste' :         t2(("17%",)),
-        'Self Damage Shield' :       t2(("4.2",)),
-        'Lifedrain' :                t2(("65",)),
-        'Str/Con Debuff' :           t2(("56",)),
-        'Dex/Qui Debuff' :           t2(("56",)),
-        'Self Damage Add' :          t2(("11.3",)),
-        'Self Acuity Buff' :         t2(("75",)),
+    'Self Melee Haste' :         t2(("17%",)),
+    'Self Damage Shield' :       t2(("4.2",)),
+    'Lifedrain' :                t2(("65",)),
+    'Str/Con Debuff' :           t2(("56",)),
+    'Dex/Qui Debuff' :           t2(("56",)),
+    'Self Damage Add' :          t2(("11.3",)),
+    'Self Acuity Buff' :         t2(("75",)),
 })
 chargedEffectValues = d2(chargedEffectValues)
 
@@ -565,15 +560,22 @@ EffectTypeNames = d2({
 })
 
 
+GemTables = {
+  'All': {
+    'Stat' :    statTable,
+    'Resist' :  resistTable,
+    'Hits' :    hitsTable,
+    'Power' :   powerTable,
+    'Unused' :  unusedTable
+  }
+}
+
 GemLists = {
   'All': {
     'Stat' :             statList,
     'Resist' :           resistList,
     'Hits' :             hitsList,
     'Power' :            powerList,
-    'Charged Effect' :   stableEffectList,
-    'Reactive Effect' :  procEffectList,
-    'Offensive Effect' : procEffectList,
     'Unused' :           unusedList
   }
 }
@@ -592,16 +594,6 @@ DropLists = {
     'Reactive Effect' :  otherEffectList,
     'Offensive Effect' : otherEffectList,
     'Other Effect' :     otherEffectList,
-  }
-}
-
-GemTables = {
-  'All': {
-    'Stat' :    statTable,
-    'Resist' :  resistTable,
-    'Hits' :    hitsTable,
-    'Power' :   powerTable,
-    'Unused' :  unusedTable
   }
 }
 
@@ -638,10 +630,85 @@ ValuesLists = d2({
     'Focus' :            focusValues,
     'Skill' :            skillValues,
     'Unused' :           unusedValues,
-    'Offensive Effect':  offensiveEffectValues,
-    'Reactive Effect':   reactiveEffectValues,
-    'Charged Effect':    chargedEffectValues,
 })
+
+
+CraftedValuesLists = d2({
+    'Unused' :             unusedValues,
+    'Focus' :              t2(('50',)),
+    'Skill' :              t2(('3',)),
+    'Cap Increase' : d2({
+        'Strength' :       t2(('5',)),
+        'Constitution' :   t2(('5',)),
+        'Dexterity' :      t2(('5',)),
+        'Quickness' :      t2(('5',)),
+        'Acuity' :         t2(('5',)),
+        'Hits' :           t2(('40',)),
+    }),
+    'Other Bonus' : d2({
+        '% Power Pool' :   t2(('5',)),
+        'AF' :             t2(('10',)),
+        'Healing Effectiveness' :   t2(('5',)),
+        'Stat Buff Effectiveness' : t2(('5',)),
+    }),
+    'PvE Bonus' :          t2(('5',)),
+    'Offensive Effect' :   offensiveEffectValues,
+    'Reactive Effect' :    reactiveEffectValues,
+    'Charged Effect' :     chargedEffectValues,
+})
+
+
+CraftedTypeList = t2((
+    'Unused', 
+    'Focus', 
+    'Skill',
+    'Cap Increase', 
+    'PvE Bonus', 
+    'Other Bonus',
+    'Offensive Effect',
+    'Reactive Effect',
+    'Charged Effect',
+))
+
+
+CraftedLists = {
+  'All' : d2({
+    'Unused' : 
+        unusedList,
+    'Focus' : t2((
+        'All Magic Skills',
+    )),
+    'Skill' : t2((
+        'All Archery Skills',
+        'All Dual Wield Skills',
+        'All Magic Skills',
+        'All Melee Weapon Skills',
+    )),
+    'Cap Increase' : t2((
+        'Strength',
+        'Constitution',
+        'Dexterity',
+        'Quickness',
+        'Acuity',
+        'Hits',
+    )),
+    'Other Bonus' : t2((
+        '% Power Pool',
+        'AF',
+        'Healing Effectiveness',
+        'Stat Buff Effectiveness',
+    )),
+    'PvE Bonus' : t2((
+        'Defensive',
+    )),
+    'Charged Effect' :   stableEffectList,
+    'Reactive Effect' :  procEffectList,
+    'Offensive Effect' : procEffectList,
+  }),
+}
+for realm in Realms:
+    CraftedLists[realm] = CraftedLists['All'] 
+CraftedLists = d2(CraftedLists)
 
 
 Caps = dict.fromkeys(resistList, 'Resist')
