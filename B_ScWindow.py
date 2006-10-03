@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'ScWindow.ui'
 #
-# Created: Mon Oct  2 21:44:12 2006
+# Created: Tue Oct  3 00:25:54 2006
 #      by: PyQt4 UI code generator 4.0.1
 #
 # WARNING! All changes made in this file will be lost!
@@ -509,7 +509,7 @@ class Ui_B_SC(object):
         self.Amount_Edit_1.setObjectName("Amount_Edit_1")
 
         self.Amount_Drop_1 = SearchingCombo(self.GroupItemFrame)
-        self.Amount_Drop_1.setGeometry(QtCore.QRect(177,48,54,21))
+        self.Amount_Drop_1.setGeometry(QtCore.QRect(177,48,52,21))
         self.Amount_Drop_1.setObjectName("Amount_Drop_1")
 
         self.Effect_1 = SearchingCombo(self.GroupItemFrame)
@@ -518,7 +518,7 @@ class Ui_B_SC(object):
         self.Effect_1.setObjectName("Effect_1")
 
         self.Quality_1 = SearchingCombo(self.GroupItemFrame)
-        self.Quality_1.setGeometry(QtCore.QRect(387,48,60,21))
+        self.Quality_1.setGeometry(QtCore.QRect(387,48,52,21))
         self.Quality_1.setObjectName("Quality_1")
 
         self.Requirement_1 = QtGui.QLineEdit(self.GroupItemFrame)
@@ -548,7 +548,7 @@ class Ui_B_SC(object):
         self.Amount_Edit_2.setObjectName("Amount_Edit_2")
 
         self.Amount_Drop_2 = SearchingCombo(self.GroupItemFrame)
-        self.Amount_Drop_2.setGeometry(QtCore.QRect(177,69,54,21))
+        self.Amount_Drop_2.setGeometry(QtCore.QRect(177,69,52,21))
         self.Amount_Drop_2.setObjectName("Amount_Drop_2")
 
         self.Type_2 = SearchingCombo(self.GroupItemFrame)
@@ -561,7 +561,7 @@ class Ui_B_SC(object):
         self.Effect_2.setObjectName("Effect_2")
 
         self.Quality_2 = SearchingCombo(self.GroupItemFrame)
-        self.Quality_2.setGeometry(QtCore.QRect(387,69,60,21))
+        self.Quality_2.setGeometry(QtCore.QRect(387,69,52,21))
         self.Quality_2.setObjectName("Quality_2")
 
         self.Requirement_2 = QtGui.QLineEdit(self.GroupItemFrame)
@@ -595,7 +595,7 @@ class Ui_B_SC(object):
         self.Amount_Edit_3.setObjectName("Amount_Edit_3")
 
         self.Amount_Drop_3 = SearchingCombo(self.GroupItemFrame)
-        self.Amount_Drop_3.setGeometry(QtCore.QRect(177,90,54,21))
+        self.Amount_Drop_3.setGeometry(QtCore.QRect(177,90,52,21))
         self.Amount_Drop_3.setObjectName("Amount_Drop_3")
 
         self.Effect_3 = SearchingCombo(self.GroupItemFrame)
@@ -604,7 +604,7 @@ class Ui_B_SC(object):
         self.Effect_3.setObjectName("Effect_3")
 
         self.Quality_3 = SearchingCombo(self.GroupItemFrame)
-        self.Quality_3.setGeometry(QtCore.QRect(387,90,60,21))
+        self.Quality_3.setGeometry(QtCore.QRect(387,90,52,21))
         self.Quality_3.setObjectName("Quality_3")
 
         self.Requirement_3 = QtGui.QLineEdit(self.GroupItemFrame)
@@ -638,7 +638,7 @@ class Ui_B_SC(object):
         self.Amount_Edit_4.setObjectName("Amount_Edit_4")
 
         self.Amount_Drop_4 = SearchingCombo(self.GroupItemFrame)
-        self.Amount_Drop_4.setGeometry(QtCore.QRect(177,111,54,21))
+        self.Amount_Drop_4.setGeometry(QtCore.QRect(177,111,52,21))
         self.Amount_Drop_4.setObjectName("Amount_Drop_4")
 
         self.Effect_4 = SearchingCombo(self.GroupItemFrame)
@@ -647,7 +647,7 @@ class Ui_B_SC(object):
         self.Effect_4.setObjectName("Effect_4")
 
         self.Quality_4 = SearchingCombo(self.GroupItemFrame)
-        self.Quality_4.setGeometry(QtCore.QRect(387,111,60,21))
+        self.Quality_4.setGeometry(QtCore.QRect(387,111,52,21))
         self.Quality_4.setObjectName("Quality_4")
 
         self.Requirement_4 = QtGui.QLineEdit(self.GroupItemFrame)
@@ -681,7 +681,7 @@ class Ui_B_SC(object):
         self.Amount_Edit_5.setObjectName("Amount_Edit_5")
 
         self.Amount_Drop_5 = SearchingCombo(self.GroupItemFrame)
-        self.Amount_Drop_5.setGeometry(QtCore.QRect(177,132,54,21))
+        self.Amount_Drop_5.setGeometry(QtCore.QRect(177,132,52,21))
         self.Amount_Drop_5.setObjectName("Amount_Drop_5")
 
         self.Effect_5 = SearchingCombo(self.GroupItemFrame)
@@ -710,7 +710,7 @@ class Ui_B_SC(object):
         self.Amount_Edit_6.setObjectName("Amount_Edit_6")
 
         self.Amount_Drop_6 = SearchingCombo(self.GroupItemFrame)
-        self.Amount_Drop_6.setGeometry(QtCore.QRect(177,153,54,21))
+        self.Amount_Drop_6.setGeometry(QtCore.QRect(177,153,52,21))
         self.Amount_Drop_6.setObjectName("Amount_Drop_6")
 
         self.Effect_6 = SearchingCombo(self.GroupItemFrame)
