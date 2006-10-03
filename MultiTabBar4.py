@@ -372,6 +372,10 @@ class MultiTabBar4(QWidget):
             maxRowWidth = max(mw, maxRowWidth)
 
         maxHeight -= rowoverlap
+        if str(QApplication.style().objectName()[0:9]).lower() == "macintosh":
+            centerOffset = (self.width() - maxRowWidth) / 2.0
+        else:
+            centerOffset = 0
 
         for i in range(numrows):
             x = 0
@@ -388,7 +392,7 @@ class MultiTabBar4(QWidget):
                 if j == self.numTabsInRow(i) - 1 and \
                         (x + int(w)) < maxRowWidth:
                     w = maxRowWidth - x
-                self.__tabList[i][j].rect = QRect(x, y, int(w), maxHeight + rowoverlap)
+                self.__tabList[i][j].rect = QRect(x + centerOffset, y, int(w), maxHeight + rowoverlap)
                 x += int(w)
 
         self.tabLayoutChange()
