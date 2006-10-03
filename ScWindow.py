@@ -1560,6 +1560,7 @@ class ScWindow(QMainWindow, Ui_B_SC):
         child = self.childAt(e.pos())
         if child is None: return
         if not isinstance(child, QLabel): return
+        if str(child.text()) == '': return
         shortname = str(child.objectName())
         nameidx = 1
         while nameidx < len(shortname):
