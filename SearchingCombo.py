@@ -14,6 +14,14 @@ class SearchingCombo(QComboBox):
     def __init__(self, parent=None, name=None, editable=False):
         QComboBox.__init__(self, parent)
         self.setEditable(editable)
+        self.setSizeAdjustPolicy(QComboBox.AdjustToMinimumContentsLength)
+
+    def insertItems(self, idx, lst):
+        len_ = 0
+        for s in lst:
+            len_ = max(len_, len(s))
+        self.setMinimumContentsLength(len_)
+        QComboBox.insertItems(self, idx, lst)
 
     def buildItemKeys(self):
         keys = []

@@ -126,9 +126,10 @@ class ScWindow(QMainWindow, Ui_B_SC):
                          self.Realm.minimumSizeHint().height())
 
         for ctl in (self.GroupItemFrame.children() + self.GroupCharInfo.children()):
-            if (ctl.metaObject().className() == "QLineEdit" or 
-                    ctl.metaObject().className() == "QComboBox"):
-                ctl.setFixedSize(QSize(ctl.width(), height))
+            pass
+            #if (ctl.metaObject().className() == "QLineEdit" or 
+            #        ctl.metaObject().className() == "QComboBox"):
+            #    ctl.setFixedSize(QSize(ctl.width(), height))
 
         self.StatLabel = {}
         self.StatValue = {}
