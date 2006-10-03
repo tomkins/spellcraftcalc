@@ -246,6 +246,7 @@ class ScWindow(QMainWindow, Ui_B_SC):
             if col == 3 or (col > 6 and str(obj.objectName())[-5:] != 'Label'):
                 self.itemcontrollayout.addStretch(1)
                 col += 1
+        self.QualDrop.setFixedSize(QSize(self.QualDrop.getMinimumWidth(), height))
         self.itemcontrollayout.addWidget(self.DropCraftButtonFrame)
 
         self.itemlayout = QtGui.QGridLayout(self.GroupItemFrame)
