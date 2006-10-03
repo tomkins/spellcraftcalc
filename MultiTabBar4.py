@@ -147,7 +147,7 @@ class MultiTabBar4(QWidget):
             for j in range(len(self.__tabList[i])):
                 r = r.unite(self.__tabAt(i, j).rect)
         r.setRight(r.right() + padwidth)
-        r.setBottom(r.bottom())
+        r.setBottom(r.bottom() + padwidth)
         sz = QApplication.globalStrut()
         return r.size().expandedTo(sz)
 
