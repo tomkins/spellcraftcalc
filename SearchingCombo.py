@@ -7,22 +7,29 @@
 import sys
 import string
 
-from PyQt4.QtGui import QComboBox
-from PyQt4.QtCore import SIGNAL, Qt
+from PyQt4.QtGui import QComboBox, QFontMetrics, QStyleOptionComboBox, QStyle
+from PyQt4.QtCore import SIGNAL, Qt, QSize
 
 class SearchingCombo(QComboBox):
     def __init__(self, parent=None, name=None, editable=False):
         QComboBox.__init__(self, parent)
         self.setEditable(editable)
-        self.setSizeAdjustPolicy(QComboBox.AdjustToMinimumContentsLength)
+        self.minText = ' '
 
     def insertItems(self, idx, lst):
         len_ = 0
         for s in lst:
-            len_ = max(len_, len(s))
-        self.setMinimumContentsLength(len_)
+            if len(s) > len(self.minText):
+                self.minText = s
         QComboBox.insertItems(self, idx, lst)
 
+    def getMinimumWidth(self):
+        fm = QFontMetrics(self.font())
+        opt = QStyleOptionComboBox()
+        opt.setCurrentText = self.minText
+        sz = QSize(fm.width(self.minText), fm.height())
+        return self.style().sizeFromContents(QStyle.CT_ComboBox, opt, sz, self).width()
+        
     def buildItemKeys(self):
         keys = []
         for i in range(0, self.count()):
