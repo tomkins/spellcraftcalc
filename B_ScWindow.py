@@ -10,7 +10,7 @@
 import sys
 from MultiTabBar4 import MultiTabBar4
 from SearchingCombo import SearchingCombo
-from PyQt4 import QtCore, QtGui, Qt3Support
+from PyQt4 import QtCore, QtGui
 
 class Ui_B_SC(object):
     def setupUi(self, B_SC):
