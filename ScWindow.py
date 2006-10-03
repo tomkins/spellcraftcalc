@@ -99,6 +99,7 @@ class ScWindow(QMainWindow, Ui_B_SC):
         self.initControls()
         OW = Options.Options(self)
         OW.load()
+        self.showcapmenuid.setChecked(self.capDistance)
         self.pricingInfo = OW.getPriceInfo()
         self.updateRecentFiles(None)
         self.initialize(0)
