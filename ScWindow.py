@@ -291,7 +291,7 @@ class ScWindow(QMainWindow, Ui_B_SC):
             self.connect(self.Effect[i],SIGNAL("activated(int)"),
                          self.EffectChanged)
             self.connect(self.Effect[i],SIGNAL("editTextChanged(const QString&)"),
-                         self.EffectTextChanged)
+                         self.EffectChanged)
             self.AmountEdit.append(getattr(self, 'Amount_Edit_%d' % idx))
             self.switchOnType['drop'].append(self.AmountEdit[i])
             self.AmountEdit[i].setValidator(editAmountValidator)
@@ -682,7 +682,6 @@ class ScWindow(QMainWindow, Ui_B_SC):
                 if not self.Effect[slot].isEditable():
                     self.Effect[slot].setEditable(True)
                 self.Effect[slot].setEditText(gemeffect)
-                #self.EffectTextChanged(gemeffect, slot)
             else:
                 self.Effect[slot].setCurrentIndex(effect)
                 self.EffectChanged(effect, slot)
@@ -1112,31 +1111,22 @@ class ScWindow(QMainWindow, Ui_B_SC):
         self.modified = 1
         self.calculate()
 
-    def EffectTextChanged(self, value, slot = -1):
-        if slot < 0:
-            slot = self.senderSlot()        
-        item = self.itemattrlist[self.currentTabLabel]
-        efftext = str(self.Effect[slot].lineEdit().text())
-        #sys.stdout.write("Changes to slot %d Effect Text %s\n" % (slot, efftext))
-        if not self.nocalc:
-            item.slot(slot).setEffect(efftext)
-            self.modified = 1
-        # Cascade the changes
-        self.AmountsChanged(0, slot)
-        return
-
     def EffectChanged(self, value, slot = -1):
         if slot < 0:
             slot = self.senderSlot()        
         item = self.itemattrlist[self.currentTabLabel]
-        efftext = str(self.Effect[slot].currentText())
+        if isinstance(value,int):
+            efftext = str(self.Effect[slot].currentText())
+        else:
+            efftext = str(self.Effect[slot].lineEdit().text())
         #sys.stdout.write("Changes to slot %d Value %d Effect Item %s\n" % (slot, value, efftext))
         if not self.nocalc:
             item.slot(slot).setEffect(efftext)
             self.modified = 1
         typetext = str(item.slot(slot).type())
         effcombo = self.Effect[slot]
-        unique = (len(efftext) > 3 and efftext[-3:] == "...")
+        unique = ((len(efftext) > 3 and efftext[-3:] == "...") \
+               or not isinstance(value,int))
         if effcombo.isEditable() and not unique:
             refocus = self.Effect[slot].hasFocus()
             effcombo.setEditable(False)
