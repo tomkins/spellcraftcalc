@@ -23,13 +23,18 @@ class SearchingCombo(QComboBox):
                 self.minText = s
         QComboBox.insertItems(self, idx, lst)
 
-    def getMinimumWidth(self):
+    def getMinimumWidth(self, items = None):
+        if items:
+            len_ = 0
+            for s in items:
+                if len(s) > len(self.minText):
+                    self.minText = s
         fm = QFontMetrics(self.font())
         opt = QStyleOptionComboBox()
         opt.setCurrentText = self.minText
         sz = QSize(fm.width(self.minText), fm.height())
         return self.style().sizeFromContents(QStyle.CT_ComboBox, opt, sz, self).width()
-        
+
     def buildItemKeys(self):
         keys = []
         for i in range(0, self.count()):

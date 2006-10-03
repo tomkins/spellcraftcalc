@@ -301,7 +301,7 @@ class ScWindow(QMainWindow, Ui_B_SC):
             self.connect(self.Requirement[i],SIGNAL("textChanged(const QString&)"),
                          self.AmountsChanged)
             self.itemlayout.addWidget(self.GemLabel[i],row,0,1,1)
-            self.Type[i].setFixedSize(QSize(self.Type[i].width(), height))
+            self.Type[i].setFixedSize(QSize(self.Type[i].getMinimumWidth(), height))
             self.itemlayout.addWidget(self.Type[i],row,1,1,1)
             self.AmountEdit[i].setFixedSize(QSize(self.AmountEdit[i].width(), height))
             self.itemlayout.addWidget(self.AmountEdit[i],row,2,1,1)
@@ -312,7 +312,7 @@ class ScWindow(QMainWindow, Ui_B_SC):
             self.switchOnType['drop'].append(self.AmountEdit[i])
             if i < 6:
                 self.AmountDrop.append(getattr(self, 'Amount_Drop_%d' % idx))
-                self.AmountDrop[i].setFixedSize(QSize(self.AmountDrop[i].width(), height))
+                self.AmountDrop[i].setFixedSize(QSize(self.AmountDrop[i].getMinimumWidth(['99']), height))
                 self.itemlayout.addWidget(self.AmountDrop[i],row,2,1,1)
                 self.Name.append(getattr(self, 'Name_%d' % idx))
                 self.itemlayout.addWidget(self.Name[i],row,8,1,2)
