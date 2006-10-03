@@ -307,7 +307,7 @@ class ScWindow(QMainWindow, Ui_B_SC):
             self.itemlayout.addWidget(self.AmountEdit[i],row,2,1,1)
             self.Effect[i].setFixedSize(QSize(self.Effect[i].width(), height))
             self.itemlayout.addWidget(self.Effect[i],row,3,1,1)
-            self.Requrirement[i].setFixedSize(QSize(self.Requirement[i].width(), height))
+            self.Requirement[i].setFixedSize(QSize(self.Requirement[i].width(), height))
             self.itemlayout.addWidget(self.Requirement[i],row,4,1,3)
             self.switchOnType['drop'].append(self.AmountEdit[i])
             if i < 6:
