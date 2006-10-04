@@ -27,6 +27,23 @@ class MultiTabBar4(QWidget):
         self.setFocusPolicy(Qt.TabFocus)
         self.setSizePolicy(QSizePolicy.Preferred, QSizePolicy.Fixed)
 
+    def dump(self):
+        taboverlap = QStyleOptionTab()
+        taboverlap.shape = QTabBar.RoundedNorth
+        for var in (
+            'PM_TabBarTabOverlap',
+            'PM_TabBarTabHSpace',
+            'PM_TabBarTabShiftHorizontal',
+            'PM_TabBarTabVSpace',
+            'PM_TabBarTabShiftVertical',
+            'PM_TabBarBaseHeight',
+            'PM_TabBarBaseOverlap',
+        ):
+            val = self.style().pixelMetric(getattr(QStyle, var), 
+                                           taboverlap, self)
+            sys.stdout.write("%s = %s\n" % (var, val))
+
+
     def baseOverlap(self):
         taboverlap = QStyleOptionTab()
         taboverlap.shape = QTabBar.RoundedNorth
@@ -485,6 +502,7 @@ if __name__ == '__main__':
     bar.addTab(1, 'four1')
     bar.setGeometry(QRect(0, 0, bar.sizeHint().width(), 
                                 bar.sizeHint().height()))
+    bar.dump()
 
     frame = QFrame(child)
     frame.setFrameShape(QFrame.StyledPanel)
