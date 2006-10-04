@@ -60,7 +60,7 @@ class ScApplication(QApplication):
             font.setPointSize(12)
             font.setWeight(QFont.Light)
         elif sys.platform == "win32":
-            if sys.getwindowsversion()[3] < 2:
+            if sys.getwindowsversion()[0] < 4:
                 font.setFamily("Arial")
             else:
                 font.setFamily("Trebuchet MS")
