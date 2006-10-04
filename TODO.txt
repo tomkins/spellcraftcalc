@@ -1,8 +1,5 @@
 Things to fix before next beta release is announced;
 
-  Reimplement the MultiTabBar for Q4, if possible, or find another
-  representation for selecting a slot.
-
   Promote Item.py attributes such as Name, Level, Bonus etc. into
   the per-item scope (for each drop, crafted, and other named items).
 
@@ -10,25 +7,15 @@ Things to fix before next beta release is announced;
   changes to gems since cats gems.  This means using SC.py from
   ScWindow.py instead of duplicating the code.
 
-  Price (in addition to cost) per-item.
-
   Stop displaying unused slots in the reports!
 
-  Display 5th slot proc by level requirement.  Make it selectable?
-  (E.g. choose an effect amount or the proc level).  There's room
-  where the 'quality' on other gem slots isn't needed.
+  Calculate 5th slot proc by level requirement.
 
   Add 5th slot Drop tinctures (from epic dungeons) for crafted gear.
   According to various searchs of alakazahm and the the autobestiary,
   Prissy's lists are (were) complete.
 
-  Add 1.85 Crafted armor bonuses (sixth slot becomes custom bonus?)
-
-  Add 1.84 Crafted staves (sixth slot for Focus 50?)
-
-  Add 1.84 Legendary Weapons (fourth slot 2% melee / magic / archery 
-  damage bonus against All Monsters, fifth slot AF 10 / 50 All Focus, 
-  sixth slot becomes selectable specific charges/proc effects)
+  Add 1.85 Crafted armor lookups (by realm/style/piece)
 
 Things to fix before 2.0 final (non-beta) is announced;
 
