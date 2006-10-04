@@ -1441,7 +1441,7 @@
             </rect>
           </property>
           <property name="text" >
-            <string>Requirement: </string>
+            <string> Requirement</string>
           </property>
         </widget>
         <widget class="QLabel" name="LabelGemQuality" >
@@ -2142,6 +2142,19 @@
           </property>
           <property name="text" >
             <string/>
+          </property>
+        </widget>
+        <widget class="QLabel" name="LabelRequirement2" >
+          <property name="geometry" >
+            <rect>
+              <x>391</x>
+              <y>174</y>
+              <width>100</width>
+              <height>21</height>
+            </rect>
+          </property>
+          <property name="text" >
+            <string> (Requirement)</string>
           </property>
         </widget>
         <widget class="QLabel" name="Gem_Label_7" >
