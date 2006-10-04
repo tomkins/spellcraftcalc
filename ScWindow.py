@@ -121,14 +121,16 @@ class ScWindow(QMainWindow, Ui_B_SC):
         self.statusBar().hide()
         if str(QApplication.style().objectName()[0:9]).lower() == "macintosh":
             self.sizegrip = QSizeGrip(self)
+            fixcbwidth = testfont.size(Qt.TextSingleLine, "xx").width()
             edheight = self.CharName.sizeHint().height() - 1
             cbheight = self.Realm.sizeHint().height()
         else:
+            fixcbwidth = 0
             edheight = min(self.CharName.minimumSizeHint().height(),
                            self.Realm.minimumSizeHint().height()) - 2
             cbheight = edheight
 
-        amtcbwidth = self.QualDrop.getMinimumWidth(['100'])
+        amtcbwidth = self.QualDrop.getMinimumWidth(['100']) - fixcbwidth
         # minSizeHint includes one char, test 19.9 width...
         amtedwidth = self.ItemLevel.minimumSizeHint().width()
         amtedwidth += testfont.size(Qt.TextSingleLine, "19.").width()
@@ -184,7 +186,7 @@ class ScWindow(QMainWindow, Ui_B_SC):
         self.otherlayout.addWidget(self.OtherBonusList,0,0)
         self.otherlayout.setColumnStretch(0, 1)
 
-        cbwidth = self.CharClass.getMinimumWidth(['Necromancer'])
+        cbwidth = self.CharClass.getMinimumWidth(['Necromancer']) - fixcbwidth
         self.charlayout = QtGui.QGridLayout(self.GroupCharInfo)
         self.charlayout.setMargin(3)
         self.charlayout.setSpacing(0)
@@ -294,9 +296,9 @@ class ScWindow(QMainWindow, Ui_B_SC):
         self.itemlayout.setColumnMinimumWidth(6,width)
         row += 1
 
-        typewidth = self.Type_1.getMinimumWidth(list(DropTypeList))
+        typewidth = self.Type_1.getMinimumWidth(list(DropTypeList)) - fixcbwidth
         l = reduce(lambda x, y: x+y, [ list(x) for x in GemLists['All'].values() ])
-        effectwidth = self.Effect_1.getMinimumWidth(l)
+        effectwidth = self.Effect_1.getMinimumWidth(l) - fixcbwidth
 
         self.ItemName.setFixedHeight(edheight)
         self.itemlayout.addWidget(self.ItemName,row,8,1,2)
