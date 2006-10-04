@@ -53,13 +53,13 @@ class ItemPreview(QListWidget):
             stattext.append(statstr)
         classinfo = AllBonusList[self.realm][self.charclass]
         listtext = [
-            str(self.item.getAttr('ItemName')),
-            "Level: %s   Quality: %s   Utility: %.1f" % (self.item.getAttr('Level'),
-                                         self.item.getAttr('ItemQuality'), 
+            str(self.item.ItemName),
+            "Level: %s   Quality: %s   Utility: %.1f" % (self.item.Level,
+                                         self.item.ItemQuality, 
                                          self.item.utility(classinfo)),
-            "AF/DPS: %s   Speed: %s   Bonus:  %s" % (self.item.getAttr('AFDPS'),
-                                         self.item.getAttr('Speed'),
-                                         self.item.getAttr('Bonus')),
+            "AF/DPS: %s   Speed: %s   Bonus:  %s" % (self.item.AFDPS,
+                                         self.item.Speed,
+                                         self.item.Bonus),
         ]
         self.addItems(listtext)
         self.addItems(stattext)
