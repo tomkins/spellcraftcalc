@@ -80,21 +80,6 @@ class ScApplication(QApplication):
         scw.show()
         splash.finish(scw);
 
-    def polish(self, widget):
-        # Fix Mac bits of uglyness, not all of which can be fixed.
-        QApplication.polish(self, widget)
-        if str(self.style().name()[0:9]).lower() != "macintosh": return
-        if sys.platform != "darwin": return
-        if widget.className() == 'QGroupBox':
-            crect = widget.geometry()
-            crect.setHeight(crect.height() + 3)
-            widget.setGeometry(crect)
-        if widget.className() == 'QPushButton':
-            crect = widget.geometry()
-            crect.moveBy(-3, -3)
-            crect.setHeight(crect.height() + 6)
-            crect.setWidth(crect.width() + 6)
-            widget.setGeometry(crect)
 
 if __name__ == '__main__':
     app=ScApplication()
