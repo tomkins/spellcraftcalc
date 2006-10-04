@@ -2,6 +2,7 @@
   <author></author>
   <customwidgets>
     <customwidget><class>MultiTabBar4</class><header>MultiTabBar4.h</header></customwidget>
+    <customwidget><class>MultiTabFrame</class><header>MultiTabBar4.h</header></customwidget>
     <customwidget><class>SearchingCombo</class><header>SearchingCombo.h</header></customwidget>
   </customwidgets>
   <exportmacro></exportmacro>
@@ -1170,13 +1171,7 @@
           </property>
         </widget>
       </widget>
-      <widget class="QFrame" name="GroupItemFrame" >
-        <property name="frameShape" >
-          <enum>QFrame::StyledPanel</enum>
-        </property>
-        <property name="frameShadow" >
-          <enum>QFrame::Plain</enum>
-        </property>
+      <widget class="MultiTabFrame" name="GroupItemFrame" >
         <property name="geometry" >
           <rect>
             <x>3</x>
@@ -2680,6 +2675,13 @@
    <customwidget>
      <class>MultiTabBar4</class>
      <extends>QWidget</extends>
+     <header>multitabbar4.h</header>
+     <container>1</container>
+     <pixmap></pixmap>
+   </customwidget>
+   <customwidget>
+     <class>MultiTabFrame</class>
+     <extends>QFrame</extends>
      <header>multitabbar4.h</header>
      <container>1</container>
      <pixmap></pixmap>
