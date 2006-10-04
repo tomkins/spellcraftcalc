@@ -121,7 +121,7 @@ class ScWindow(QMainWindow, Ui_B_SC):
         self.statusBar().hide()
         if str(QApplication.style().objectName()[0:9]).lower() == "macintosh":
             self.sizegrip = QSizeGrip(self)
-            edheight = self.CharName.sizeHint().height()
+            edheight = self.CharName.sizeHint().height() - 1
             cbheight = self.Realm.sizeHint().height()
         else:
             edheight = min(self.CharName.minimumSizeHint().height(),
