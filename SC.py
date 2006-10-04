@@ -49,26 +49,24 @@ def getGemNameParts(gemname):
     return gemwords
 
 def getItemImbue(item):
-    itemlevel = int(item.getAttr('Level'))
-    if (item.getAttr('Level') == item.getAttr('AFDPS')) \
+    if not item.ActiveState == 'player': return 0
+    if item.Level == '': return 0
+    itemlevel = max(1,min(51,int(item.Level)))
+    if (item.Level == item.AFDPS) \
             and (itemlevel % 2 == 1) and (itemlevel != 51):
         itemlevel = itemlevel - 1
-    if item.getAttr('ItemQuality') == '':
-        item.loadAttr('ItemQuality', '94')
-    if itemlevel == '':
-        itemimbue = 0
+    if item.ItemQuality == '':
+        qualityindex = 0
     else:
-        itemimbue = ImbuePts[itemlevel - 1]\
-                            [int(item.getAttr('ItemQuality')) - 94]
-
-    return itemimbue
+        qualityindex = int(item.ItemQuality) - 94
+    return ImbuePts[itemlevel - 1][qualityindex]
 
 def calcImbue(item):
-    itemtype = item.getAttr('ActiveState')
-    if itemtype == 'drop': return 0
+    if not item.ActiveState == 'player': return 0
     mvals = []
-    for i in range(0, 4):
-        mvals.append(item.slot(i).gemImbue())
+    for slot in item.slots():
+        if slot.crafted():
+            mvals.append(slot.gemImbue())
     maximbue = max(mvals)
     mvals.remove(maximbue)
     totalimbue = ((maximbue * 2 + sum(mvals)) / 2.0)
@@ -79,7 +77,7 @@ def computeOverchargeSuccess(imbue, itemimbue, item, crafterskill):
     for i in range(0, 4):
         if item.slot(i).gemImbue() > 0 and GemQualOCModifiers.has_key(item.slot(i).qua()):
             success += GemQualOCModifiers[item.slot(i).qua()]
-    success += ItemQualOCModifiers[item.getAttr('ItemQuality')]
+    success += ItemQualOCModifiers[item.ItemQuality]
     skillbonus = (int(crafterskill / 50) - 10) * 5
     if skillbonus > 50: skillbonus = 50
     success += skillbonus

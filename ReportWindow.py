@@ -115,9 +115,7 @@ class ReportWindow(QDialog, Ui_B_ReportWindow):
         else:
             lastslot = showslot
         for loc, item in itemlist.items():
-            activestate = item.getAttr('ActiveState')
-            equipped = item.getAttr('Equipped')
-            if activestate != 'player':
+            if item.ActiveState != 'player':
                 continue
             for slot in range(max(showslot - 1,0), lastslot):
                 if item.slot(slot).done() == '1' \
@@ -215,17 +213,15 @@ class ReportWindow(QDialog, Ui_B_ReportWindow):
         iteminfo = { }
         for key, item in itemlist.items():
             iteminfo[key] = { }
-            iteminfo[key]['equipped'] = item.getAttr('Equipped')
-            iteminfo[key]['activestate'] = item.getAttr('ActiveState')
-            iteminfo[key]['level'] = item.getAttr('Level')
-            iteminfo[key]['name'] = item.getAttr('ItemName')
-            iteminfo[key]['quality'] = item.getAttr('ItemQuality')
-            iteminfo[key]['af'] = item.getAttr('AFDPS')
-            iteminfo[key]['bonus'] = item.getAttr('Bonus')
-            iteminfo[key]['speed'] = item.getAttr('Speed')
-            equipped = item.getAttr('Equipped')
-            activestate = item.getAttr('ActiveState')
-            if activestate == 'drop':
+            iteminfo[key]['equipped'] = item.Equipped
+            iteminfo[key]['activestate'] = item.ActiveState
+            iteminfo[key]['level'] = item.Level
+            iteminfo[key]['name'] = item.ItemName
+            iteminfo[key]['quality'] = item.ItemQuality
+            iteminfo[key]['af'] = item.AFDPS
+            iteminfo[key]['bonus'] = item.Bonus
+            iteminfo[key]['speed'] = item.Speed
+            if item.ActiveState == 'drop':
                 iteminfo[key]['usedpoints'] = 0
                 iteminfo[key]['availablepoints'] = 0
                 iteminfo[key]['overcharge'] = 0
@@ -269,12 +265,12 @@ class ReportWindow(QDialog, Ui_B_ReportWindow):
                 else:
                     iteminfo[key][gemnum]['effect'] = effect +' '+ gemtype
                 iteminfo[key][gemnum]['quality'] = qua
-                if activestate == 'player':
+                if item.slot(slot).slotType == 'player':
                     iteminfo[key][gemnum]['name'] = item.slot(slot).gemName(self.parent.realm)
                 else:
                     iteminfo[key][gemnum]['name'] = ''
                 utility += item.slot(slot).gemUtility()
-                if not equipped == '1':
+                if not item.Equipped == '1':
                     continue
                 if gemtype == 'Skill':
                     if effect[0:4] == 'All ':
