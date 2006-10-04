@@ -115,7 +115,7 @@ class ScWindow(QMainWindow, Ui_B_SC):
             self.ItemImbueLabel, self.ItemImbue, self.ItemImbueTotal,
             self.ItemOverchargeLabel, self.ItemOvercharge, 
             self.ItemCostLabel, self.ItemCost, self.QualDrop,
-            self.ItemPriceLabel, self.ItemPrice,
+            self.ItemPriceLabel, self.ItemPrice, self.LabelRequirement2,
         ]
 
         self.statusBar().hide()
@@ -125,7 +125,7 @@ class ScWindow(QMainWindow, Ui_B_SC):
             cbheight = self.Realm.sizeHint().height()
         else:
             edheight = min(self.CharName.minimumSizeHint().height(),
-                           self.Realm.minimumSizeHint().height())
+                           self.Realm.minimumSizeHint().height()) - 2
             cbheight = edheight
 
         amtcbwidth = self.QualDrop.getMinimumWidth(['100'])
@@ -228,11 +228,11 @@ class ScWindow(QMainWindow, Ui_B_SC):
         editAmountValidator = QIntValidator(-999, +999, self)
 
         layout = True
-        hspacer = QSpacerItem(5,0,QSizePolicy.Fixed,QSizePolicy.Minimum)
-        vspacer = QSpacerItem(0,4,QSizePolicy.Minimum,QSizePolicy.Fixed)
+        hspacer = QSpacerItem(3,0,QSizePolicy.Fixed,QSizePolicy.Minimum)
+        vspacer = QSpacerItem(0,3,QSizePolicy.Minimum,QSizePolicy.Fixed)
 
         self.itemgrouplayout = QtGui.QHBoxLayout(self.DropCraftButtonFrame)
-        self.itemgrouplayout.setMargin(0)
+        self.itemgrouplayout.setMargin(4)
         self.itemgrouplayout.setSpacing(0)
         self.itemgrouplayout.addWidget(self.PlayerMade)
         self.itemgrouplayout.addStretch(1)
@@ -331,7 +331,6 @@ class ScWindow(QMainWindow, Ui_B_SC):
             self.Requirement.append(getattr(self, 'Requirement_%d' % idx))
             self.Requirement[i].setFixedSize(QSize(self.Requirement[i].width(), edheight))
             self.itemlayout.addWidget(self.Requirement[i],row,4,1,3)
-            self.switchOnType['drop'].append(self.Requirement[i])
             self.connect(self.Requirement[i],SIGNAL("textChanged(const QString&)"),
                          self.AmountsChanged)
 
@@ -373,6 +372,12 @@ class ScWindow(QMainWindow, Ui_B_SC):
             self.itemlayout.setRowMinimumHeight(row, max(cbheight,edheight))
             row += 1
 
+        self.utilitylayout = QtGui.QGridLayout()
+        self.utilitylayout.addWidget(self.ItemUtilityLabel,0,0,1,1)
+        self.utilitylayout.addWidget(self.ItemUtility,0,1,1,1)
+        self.utilitylayout.setRowMinimumHeight(0, max(cbheight,edheight))
+
+        self.itemlayout.addWidget(self.LabelRequirement2,row-6,4,1,3)
         self.itemlayout.addWidget(self.ItemImbueLabel,row-5,3,1,2)
         self.itemlayout.addWidget(self.ItemImbue,row-5,5,1,1)
         self.itemlayout.addWidget(self.ItemImbueTotal,row-5,6,1,1)
@@ -382,8 +387,7 @@ class ScWindow(QMainWindow, Ui_B_SC):
         self.itemlayout.addWidget(self.ItemCost,row-3,5,1,2)
         self.itemlayout.addWidget(self.ItemPriceLabel,row-2,3,1,2)
         self.itemlayout.addWidget(self.ItemPrice,row-2,5,1,2)
-        self.itemlayout.addWidget(self.ItemUtilityLabel,row-2,8,1,1)
-        self.itemlayout.addWidget(self.ItemUtility,row-2,9,1,1)
+        self.itemlayout.addLayout(self.utilitylayout,row-1,8,1,1)
 
         if str(QApplication.style().objectName()[0:9]).lower() == "macintosh":
             self.itemlayout.addWidget(self.sizegrip,row-1,9,1,1)
@@ -403,7 +407,7 @@ class ScWindow(QMainWindow, Ui_B_SC):
         self.tabslayout.addWidget(self.GroupItemFrame)
  
         self.mainlayout = QGridLayout(self.ScWinFrame)
-        self.mainlayout.setMargin(3)
+        self.mainlayout.setMargin(2)
         self.mainlayout.setSpacing(0)
         self.mainlayout.addWidget(self.GroupStats,0,0,1,1)
         self.mainlayout.addItem(QSpacerItem(hspacer),0,1,1,1)
@@ -588,6 +592,7 @@ class ScWindow(QMainWindow, Ui_B_SC):
         for i in range(0,4):
             self.GemLabel[i].setEnabled(1)
             self.GemLabel[i].setText('Slot %d:' % (i + 1))
+        self.GroupItemFrame.updateGeometry()
         self.craftingmenuid.setEnabled(False)
         self.itemtypemenuid.setEnabled(False)
         self.GroupItemFrame.show()
@@ -608,6 +613,7 @@ class ScWindow(QMainWindow, Ui_B_SC):
                 self.Points[i].hide()
                 self.Cost[i].hide()
                 self.Requirement[i].show()
+        self.GroupItemFrame.updateGeometry()
         self.craftingmenuid.setEnabled(True)
         self.itemtypemenuid.setEnabled(True)
         self.GroupItemFrame.show()

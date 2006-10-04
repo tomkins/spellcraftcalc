@@ -2,13 +2,14 @@
 
 # Form implementation generated from reading ui file 'ScWindow.ui'
 #
-# Created: Tue Oct  3 00:25:54 2006
+# Created: Tue Oct 03 22:15:07 2006
 #      by: PyQt4 UI code generator 4.0.1
 #
 # WARNING! All changes made in this file will be lost!
 
 import sys
-from MultiTabBar4 import MultiTabBar4, MultiTabFrame
+from MultiTabBar4 import MultiTabBar4
+from MultiTabBar4 import MultiTabFrame
 from SearchingCombo import SearchingCombo
 from PyQt4 import QtCore, QtGui
 
@@ -724,6 +725,10 @@ class Ui_B_SC(object):
         self.Name_6.setGeometry(QtCore.QRect(562,153,200,21))
         self.Name_6.setObjectName("Name_6")
 
+        self.LabelRequirement2 = QtGui.QLabel(self.GroupItemFrame)
+        self.LabelRequirement2.setGeometry(QtCore.QRect(391,174,100,21))
+        self.LabelRequirement2.setObjectName("LabelRequirement2")
+
         self.Gem_Label_7 = QtGui.QLabel(self.GroupItemFrame)
         self.Gem_Label_7.setGeometry(QtCore.QRect(7,174,34,21))
         self.Gem_Label_7.setObjectName("Gem_Label_7")
@@ -1075,7 +1080,7 @@ class Ui_B_SC(object):
         self.LabelGemType.setText(QtGui.QApplication.translate("B_SC", " Type", None, QtGui.QApplication.UnicodeUTF8))
         self.LabelGemAmount.setText(QtGui.QApplication.translate("B_SC", " Amount", None, QtGui.QApplication.UnicodeUTF8))
         self.LabelGemEffect.setText(QtGui.QApplication.translate("B_SC", " Effect", None, QtGui.QApplication.UnicodeUTF8))
-        self.LabelRequirement.setText(QtGui.QApplication.translate("B_SC", "Requirement: ", None, QtGui.QApplication.UnicodeUTF8))
+        self.LabelRequirement.setText(QtGui.QApplication.translate("B_SC", " Requirement", None, QtGui.QApplication.UnicodeUTF8))
         self.LabelGemQuality.setText(QtGui.QApplication.translate("B_SC", " Quality", None, QtGui.QApplication.UnicodeUTF8))
         self.LabelGemPoints.setText(QtGui.QApplication.translate("B_SC", "Points", None, QtGui.QApplication.UnicodeUTF8))
         self.LabelGemCost.setText(QtGui.QApplication.translate("B_SC", "Cost", None, QtGui.QApplication.UnicodeUTF8))
@@ -1094,6 +1099,7 @@ class Ui_B_SC(object):
         self.Cost_4.setText(QtGui.QApplication.translate("B_SC", "0c", None, QtGui.QApplication.UnicodeUTF8))
         self.Gem_Label_5.setText(QtGui.QApplication.translate("B_SC", "Slot 5: ", None, QtGui.QApplication.UnicodeUTF8))
         self.Gem_Label_6.setText(QtGui.QApplication.translate("B_SC", "Slot 6: ", None, QtGui.QApplication.UnicodeUTF8))
+        self.LabelRequirement2.setText(QtGui.QApplication.translate("B_SC", " (Requirement)", None, QtGui.QApplication.UnicodeUTF8))
         self.Gem_Label_7.setText(QtGui.QApplication.translate("B_SC", "Slot 7: ", None, QtGui.QApplication.UnicodeUTF8))
         self.Gem_Label_8.setText(QtGui.QApplication.translate("B_SC", "Slot 8: ", None, QtGui.QApplication.UnicodeUTF8))
         self.Gem_Label_9.setText(QtGui.QApplication.translate("B_SC", "Slot 9: ", None, QtGui.QApplication.UnicodeUTF8))
