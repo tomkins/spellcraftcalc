@@ -8,7 +8,7 @@
 # WARNING! All changes made in this file will be lost!
 
 import sys
-from MultiTabBar4 import MultiTabBar4
+from MultiTabBar4 import MultiTabBar4, MultiTabFrame
 from SearchingCombo import SearchingCombo
 from PyQt4 import QtCore, QtGui
 
@@ -384,9 +384,7 @@ class Ui_B_SC(object):
         self.OtherBonusList.setGeometry(QtCore.QRect(5,15,230,160))
         self.OtherBonusList.setObjectName("OtherBonusList")
 
-        self.GroupItemFrame = QtGui.QFrame(self.ScWinFrame)
-        self.GroupItemFrame.setFrameShape(QtGui.QFrame.StyledPanel)
-        self.GroupItemFrame.setFrameShadow(QtGui.QFrame.Plain)
+        self.GroupItemFrame = MultiTabFrame(self.ScWinFrame)
         self.GroupItemFrame.setGeometry(QtCore.QRect(3,235,776,307))
         self.GroupItemFrame.setObjectName("GroupItemFrame")
 
