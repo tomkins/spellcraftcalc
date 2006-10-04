@@ -3,6 +3,15 @@ import math
 from PyQt4.QtGui import *
 from PyQt4.QtCore import *
 
+class MultiTabFrame(QFrame):
+    def paintEvent(self, e):
+
+        painter = QPainter(self)
+        tabframe = QStyleOptionTabWidgetFrame()
+        tabframe.initFrom(self);
+        self.style().drawPrimitive(QStyle.PE_FrameTabWidget, 
+                                   tabframe, painter, self)
+
 class MultiTab:
     def __init__(self):
         self.enabled = True
