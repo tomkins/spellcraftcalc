@@ -969,7 +969,7 @@ class ScWindow(QMainWindow, Ui_B_SC):
                     success += skillbonus
             if key == self.currentTabLabel:
                 self.ItemUtility.setText('%3.1f' % utility)
-                if self.PlayerMade.isChecked():
+                if item.ActiveState == 'player':
                     self.ItemImbue.setText('%3.1f' % imbuepts)
                     self.ItemImbueTotal.setText(' / ' + unicode(itemimbue))
                     self.ItemCost.setText(SC.formatCost(itemcost))
@@ -1166,11 +1166,9 @@ class ScWindow(QMainWindow, Ui_B_SC):
             item.Equipped = '1'
         else:
             item.Equipped = '0'
-        if self.PlayerMade.isChecked():
-            state = 'player'
+        if item.ActiveState == 'player':
             item.ItemQuality = unicode(self.QualDrop.currentText())
         else:
-            state = 'drop'
             item.ItemName = unicode(self.ItemName.text())
             item.ItemQuality = unicode(self.QualEdit.text())
         self.calculate()
@@ -1186,7 +1184,7 @@ class ScWindow(QMainWindow, Ui_B_SC):
             slot = self.senderSlot()      
         #sys.stdout.write("Changes to slot %d %s\n" % (slot, str(self.sender().objectName())))
         item = self.itemattrlist[self.currentTabLabel]
-        if self.PlayerMade.isChecked():
+        if item.ActiveState == 'player':
             item.slot(slot).setAmount(self.AmountDrop[slot].currentText())
         else:
             item.slot(slot).setAmount(self.AmountEdit[slot].text())
@@ -1227,15 +1225,15 @@ class ScWindow(QMainWindow, Ui_B_SC):
             refocus = False
         if refocus:
             flip = self.Effect[slot].setFocus()
-        if self.PlayerMade.isChecked():
+        if item.ActiveState == 'player':
             amount = self.AmountDrop[slot]
         else:
             amount = self.AmountEdit[slot]
         if typetext == 'Unused':
             amount.clear()
-            if item.slot(slot).slotType() == 'player' and self.PlayerMade.isChecked():
+            if item.slot(slot).slotType() == 'player':
                 self.Quality[slot].setCurrentIndex(0)
-        elif self.PlayerMade.isChecked():
+        elif item.ActiveState == 'player':
             amtindex = amount.currentIndex()
             amount.clear()
             if item.slot(slot).slotType() == 'player':
@@ -1275,7 +1273,7 @@ class ScWindow(QMainWindow, Ui_B_SC):
             effcombo.setEditable(False)
             self.fix_taborder(slot)
         effcombo.clear()
-        if not self.PlayerMade.isChecked():
+        if item.ActiveState == 'player':
             effectlist = self.dropeffectlists
         elif item.slot(slot).slotType() == 'player':
             effectlist = self.effectlists
@@ -1657,8 +1655,10 @@ class ScWindow(QMainWindow, Ui_B_SC):
             slotid = child.objectName()[-2:]
             if str(slotid[0:1]) == '_':
                 slotid = slotid[1:]
-            if self.PlayerMade.isChecked():
-                self.gemClicked(self.currentTabLabel, int(slotid))
+            item = self.itemattrlist[self.currentTabLabel]
+            slot = int(slotid)
+            if item.slot(slot).slotType() == 'player':
+                self.gemClicked(self.currentTabLabel, slot)
             return
         if shortname in ['', 'Label', 'Total', 'Item']: return
         if child.parent().objectName() == 'GroupResists':
