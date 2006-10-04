@@ -22,6 +22,8 @@ class CraftWindow(QDialog, Ui_B_CraftWindow):
         self.GemDone = []
         self.GemTime = []
         self.GemCost = []
+        self.GemQuality = []
+        self.GemName = []
         for i in range (0, 4):
             idx = i + 1
             self.GemRemakes.append(getattr(self, 'Gem%dRemakes' % idx))
@@ -31,6 +33,8 @@ class CraftWindow(QDialog, Ui_B_CraftWindow):
             self.GemTime.append(getattr(self, 'Gem%dTime' % idx))
             self.connect(self.GemTime[i],SIGNAL("textChanged(const QString&)"),self.TimeChanged)
             self.GemCost.append(getattr(self, 'Gem%dCost' % idx))
+            self.GemQuality.append(getattr(self, 'Gem%dQua' % idx))
+            self.GemName.append(getattr(self, 'Gem%dName' % idx))
         self.connect(self.ExpMultiplier,SIGNAL("valueChanged(int)"),self.computeMaterials)
         self.connect(self.Close,SIGNAL("clicked()"),self.CloseWindow)
         self.currentItem = None
@@ -42,25 +46,37 @@ class CraftWindow(QDialog, Ui_B_CraftWindow):
         self.currentItem = item
         materials = { 'Gems': { }, 'Dusts' : { }, 'Liquids' : { } }
         for slot in range(0, 4):
-            gemqua = getattr(self, 'Gem%dQua' % (slot+1))
-            gemname = getattr(self, 'Gem%dName' % (slot+1))
-            gemcost = getattr(self, 'Gem%dCost' % (slot+1))
             gemtype = item.slot(slot).type()
-            gemamount = item.slot(slot).amount()
+            if gemtype == 'Unused' or item.slot(slot).slotType() != 'player':
+                self.GemRemakes[slot].hide()
+                self.GemDone[slot].hide()
+                self.GemTime[slot].hide()
+                self.GemCost[slot].hide()
+                self.GemName[slot].hide()
+                self.GemQuality[slot].hide()
+                continue
             
-            gemqua.setText('%s%%' % item.slot(slot).qua())
-            self.GemTime[slot].setText(item.slot(slot).time())
+            if item.slot(slot).done() == '1':
+                self.GemDone[slot].setChecked(1)
 
             numremakes = int(item.slot(slot).remakes())
+            self.GemRemakes[slot].setValue(numremakes)
+            self.GemName[slot].setText(item.slot(slot).gemName(self.parent.realm))
+
+            gemamount = item.slot(slot).amount()
+            
             self.gemCosts[slot] = item.slot(slot).gemCost(numremakes)
             self.totalCost += self.gemCosts[slot]
-            gemcost.setText(SC.formatCost(self.gemCosts[slot]))
+
+            self.GemQuality[slot].setText('%s%%' % item.slot(slot).qua())
+            self.GemTime[slot].setText(item.slot(slot).time())
+            self.GemCost[slot].setText(SC.formatCost(self.gemCosts[slot]))
             
             if item.slot(slot).done() == '1':
                 self.GemDone[slot].setChecked(1)
 
             self.GemRemakes[slot].setValue(numremakes)
-            gemname.setText(item.slot(slot).gemName(self.parent.realm))
+            self.GemName[slot].setText(item.slot(slot).gemName(self.parent.realm))
 
         self.TotalCost.setText(SC.formatCost(self.totalCost))
         self.ExpMultiplier.setValue(6)
