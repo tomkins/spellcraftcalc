@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'ScWindow.ui'
 #
-# Created: Tue Oct 03 22:15:07 2006
+# Created: Tue Oct 03 23:12:39 2006
 #      by: PyQt4 UI code generator 4.0.1
 #
 # WARNING! All changes made in this file will be lost!
@@ -995,7 +995,6 @@ class Ui_B_SC(object):
 
     def retranslateUi(self, B_SC):
         B_SC.setWindowTitle(QtGui.QApplication.translate("B_SC", "Spellcrafting Calculator", None, QtGui.QApplication.UnicodeUTF8))
-        self.GroupCharInfo.setTitle(QtGui.QApplication.translate("B_SC", "Char Info", None, QtGui.QApplication.UnicodeUTF8))
         self.LabelCharName.setText(QtGui.QApplication.translate("B_SC", "Name: ", None, QtGui.QApplication.UnicodeUTF8))
         self.LabelRealm.setText(QtGui.QApplication.translate("B_SC", "Realm: ", None, QtGui.QApplication.UnicodeUTF8))
         self.LabelCharClass.setText(QtGui.QApplication.translate("B_SC", "Class: ", None, QtGui.QApplication.UnicodeUTF8))
@@ -1007,7 +1006,6 @@ class Ui_B_SC(object):
         self.TotalPrice.setText(QtGui.QApplication.translate("B_SC", "0", None, QtGui.QApplication.UnicodeUTF8))
         self.LabelTotalUtility.setText(QtGui.QApplication.translate("B_SC", "Total Utility: ", None, QtGui.QApplication.UnicodeUTF8))
         self.TotalUtility.setText(QtGui.QApplication.translate("B_SC", "0.0", None, QtGui.QApplication.UnicodeUTF8))
-        self.GroupStats.setTitle(QtGui.QApplication.translate("B_SC", "Stats", None, QtGui.QApplication.UnicodeUTF8))
         self.StrengthLabel.setText(QtGui.QApplication.translate("B_SC", "STR: ", None, QtGui.QApplication.UnicodeUTF8))
         self.Strength.setText(QtGui.QApplication.translate("B_SC", "0", None, QtGui.QApplication.UnicodeUTF8))
         self.StrengthCap.setText(QtGui.QApplication.translate("B_SC", "-", None, QtGui.QApplication.UnicodeUTF8))
@@ -1038,7 +1036,6 @@ class Ui_B_SC(object):
         self.HitsLabel.setText(QtGui.QApplication.translate("B_SC", "Hits: ", None, QtGui.QApplication.UnicodeUTF8))
         self.Hits.setText(QtGui.QApplication.translate("B_SC", "0", None, QtGui.QApplication.UnicodeUTF8))
         self.HitsCap.setText(QtGui.QApplication.translate("B_SC", "-", None, QtGui.QApplication.UnicodeUTF8))
-        self.GroupResists.setTitle(QtGui.QApplication.translate("B_SC", "Resists", None, QtGui.QApplication.UnicodeUTF8))
         self.BodyLabel.setText(QtGui.QApplication.translate("B_SC", "Body: ", None, QtGui.QApplication.UnicodeUTF8))
         self.Body.setText(QtGui.QApplication.translate("B_SC", "0", None, QtGui.QApplication.UnicodeUTF8))
         self.BodyRR.setText(QtGui.QApplication.translate("B_SC", "-", None, QtGui.QApplication.UnicodeUTF8))
@@ -1066,8 +1063,6 @@ class Ui_B_SC(object):
         self.SlashLabel.setText(QtGui.QApplication.translate("B_SC", "Slash: ", None, QtGui.QApplication.UnicodeUTF8))
         self.Slash.setText(QtGui.QApplication.translate("B_SC", "0", None, QtGui.QApplication.UnicodeUTF8))
         self.SlashRR.setText(QtGui.QApplication.translate("B_SC", "-", None, QtGui.QApplication.UnicodeUTF8))
-        self.GroupSkillsList.setTitle(QtGui.QApplication.translate("B_SC", "Skills", None, QtGui.QApplication.UnicodeUTF8))
-        self.GroupOtherBonusList.setTitle(QtGui.QApplication.translate("B_SC", "Other Bonuses", None, QtGui.QApplication.UnicodeUTF8))
         self.ItemLevelLabel.setText(QtGui.QApplication.translate("B_SC", "Level: ", None, QtGui.QApplication.UnicodeUTF8))
         self.ItemLevelButton.setText(QtGui.QApplication.translate("B_SC", "...", None, QtGui.QApplication.UnicodeUTF8))
         self.ItemQualityLabel.setText(QtGui.QApplication.translate("B_SC", "Quality: ", None, QtGui.QApplication.UnicodeUTF8))
