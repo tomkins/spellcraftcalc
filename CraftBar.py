@@ -18,6 +18,7 @@ import SC
 import ConfigParser
 import sys
 
+
 class CraftBar(QDialog, Ui_B_CraftBar):
     def __init__(self,parent = None,name = None,modal = False,fl = Qt.Widget):
         QDialog.__init__(self, parent, fl)
@@ -25,7 +26,7 @@ class CraftBar(QDialog, Ui_B_CraftBar):
 
         self.model = QStandardItemModel(0, 3)
         self.model.setHeaderData(0, Qt.Horizontal, QVariant('Server'), Qt.DisplayRole)
-        self.model.setHeaderData(1, Qt.Horizontal, QVariant('Char Name'), Qt.DisplayRole)
+        self.model.setHeaderData(1, Qt.Horizontal, QVariant('Crafter'), Qt.DisplayRole)
         self.CharList.setModel(self.model)
         self.CharList.setEditTriggers(QAbstractItemView.NoEditTriggers)
         self.CharList.setShowGrid(False)
@@ -81,7 +82,7 @@ class CraftBar(QDialog, Ui_B_CraftBar):
         self.LoadGemsButton.update()
 
         f = open(filename, 'r')
-        g = open(re.sub(r'(\w+)-(\d+)\.ini$', r'\1-\2.ini.bak', filename), 'w')
+        g = open(filename + '.bak', 'w')
         g.write(f.read())
         f.close()
         g.close()
@@ -155,20 +156,44 @@ class CraftBar(QDialog, Ui_B_CraftBar):
 
     def findPath(self,a0):
         a0 = unicode(a0)
+        reini = re.compile('(\w+)-(\d+)\.ini$')
+        resec = re.compile('\[(\w+)\]')
+        rectl = re.compile('Hotkey_(\d+)=44,13,')
         if os.path.isdir(a0):
             self.model.removeRows(0, self.model.rowCount())
             filelist = glob.glob(a0+'/*-*.ini')
             for file in filelist:
-                m = re.compile("(\w+)-(\d+)\.ini$").search(file)
-                if m is not None:
-                    server = ServerCodes[m.group(2)]
-                    self.model.insertRows(self.model.rowCount(), 1)
-                    index = self.model.index(self.model.rowCount()-1, 0, QModelIndex())
-                    self.model.setData(index, QVariant(server), Qt.DisplayRole)
-                    index = self.model.index(self.model.rowCount()-1, 1, QModelIndex())
-                    self.model.setData(index, QVariant(m.group(1)), Qt.DisplayRole)
-                    index = self.model.index(self.model.rowCount()-1, 2, QModelIndex())
-                    self.model.setData(index, QVariant(file), Qt.DisplayRole)
+                m = reini.search(file)
+                if m is None:
+                    continue
+                # search the section(s) for the pattern
+                # [Quickbar[2-3]*]
+                # Hotkey_[0-9]*=44,13,
+                # corresponding to an SC'er menu quickbar item
+                f = open(file, 'r')
+                find = 0
+                for txt in f:
+                    sec = resec.match(txt)
+                    if sec is not None:
+                        if sec.group(1)[:8] == 'Quickbar':
+                            find = 1
+                        else:
+                            find = 0
+                        continue
+                    if find == 1 and rectl.match(txt) is not None:
+                        find = 2
+                        break
+                f.close()
+                if find < 2:
+                    continue
+                server = ServerCodes[m.group(2)]
+                self.model.insertRows(self.model.rowCount(), 1)
+                index = self.model.index(self.model.rowCount()-1, 0, QModelIndex())
+                self.model.setData(index, QVariant(server), Qt.DisplayRole)
+                index = self.model.index(self.model.rowCount()-1, 1, QModelIndex())
+                self.model.setData(index, QVariant(m.group(1)), Qt.DisplayRole)
+                index = self.model.index(self.model.rowCount()-1, 2, QModelIndex())
+                self.model.setData(index, QVariant(file), Qt.DisplayRole)
             if len(filelist) > 0:
                 self.parent.DaocPath = a0
         self.CharList.resizeRowsToContents()
