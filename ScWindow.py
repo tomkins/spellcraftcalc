@@ -739,24 +739,26 @@ class ScWindow(QMainWindow, Ui_B_SC):
         if itemtype == 'player':
             self.PlayerMade.setChecked(1)
             self.showPlayerWidgets(item)
-            typelist = list(TypeList)
         else:
             self.Drop.setChecked(1)
             self.showDropWidgets(item)
-            typelist = list(DropTypeList)
         self.ItemLevel.setText(item.Level)
         location = item.Location
         self.Equipped.setChecked(int(item.Equipped))
         for slot in range(0, item.slotCount()):
             typecombo = self.Type[slot]
             typecombo.clear()
-            if itemtype == 'player' and \
-                    not item.slot(slot).slotType() == 'player':
-                typelist = list(CraftedTypeList)
+            if itemtype == 'player':
+                if item.slot(slot).slotType() == 'player':
+                    typelist = list(TypeList)
+                else:
+                    typelist = list(CraftedTypeList)
+            else:
+                typelist = list(DropTypeList)
             gemtype = str(item.slot(slot).type())
             if not gemtype in typelist:
                 typelist.append(gemtype)
-            typecombo.insertItems(0, list(typelist))
+            typecombo.insertItems(0, typelist)
             typecombo.setCurrentIndex(typelist.index(gemtype))
             self.TypeChanged(typelist.index(gemtype), slot)
             gemeffect = str(item.slot(slot).effect())
@@ -1274,12 +1276,12 @@ class ScWindow(QMainWindow, Ui_B_SC):
             self.fix_taborder(slot)
         effcombo.clear()
         if item.ActiveState == 'player':
-            effectlist = self.dropeffectlists
-        elif item.slot(slot).slotType() == 'player':
-            effectlist = self.effectlists
+            if item.slot(slot).slotType() == 'player':
+                effectlist = self.effectlists
+            else:
+                effectlist = self.itemeffectlists
         else:
-            # XXX Grow this for crafted enhanced armor/weap/lw's
-            effectlist = self.itemeffectlists
+            effectlist = self.dropeffectlists
         if effectlist.has_key(typetext):
             effectlist = effectlist[typetext]
         else:
