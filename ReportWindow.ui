@@ -1,98 +1,140 @@
-<ui version="4.0" stdsetdef="1" >
-  <author></author>
-  <comment></comment>
-  <exportmacro></exportmacro>
-  <class>B_ReportWindow</class>
-  <widget class="QDialog" name="B_ReportWindow" >
-    <property name="geometry" >
-      <rect>
-        <x>0</x>
-        <y>0</y>
-        <width>573</width>
-        <height>480</height>
-      </rect>
-    </property>
-    <property name="windowTitle" >
-      <string>B_ReportWindow</string>
-    </property>
-    <widget class="QTextBrowser" name="ReportText" >
-      <property name="geometry" >
-        <rect>
-          <x>10</x>
-          <y>9</y>
-          <width>569</width>
-          <height>430</height>
-        </rect>
-      </property>
-    </widget>
-    <widget class="QPushButton" name="PushButton1" >
-      <property name="geometry" >
-        <rect>
-          <x>35</x>
-          <y>447</y>
-          <width>93</width>
-          <height>26</height>
-        </rect>
-      </property>
-      <property name="text" >
-        <string>Save As HTML</string>
-      </property>
-    </widget>
-    <widget class="QPushButton" name="PushButton1_2" >
-      <property name="geometry" >
-        <rect>
-          <x>149</x>
-          <y>447</y>
-          <width>93</width>
-          <height>26</height>
-        </rect>
-      </property>
-      <property name="text" >
-        <string>Save As Text</string>
-      </property>
-    </widget>
-    <widget class="QPushButton" name="PushButton2" >
-      <property name="geometry" >
-        <rect>
-          <x>446</x>
-          <y>448</y>
-          <width>93</width>
-          <height>26</height>
-        </rect>
-      </property>
-      <property name="text" >
-        <string>Close</string>
-      </property>
-    </widget>
-    <widget class="QLabel" name="MMLabel" >
-      <property name="geometry" >
-        <rect>
-          <x>298</x>
-          <y>451</y>
-          <width>91</width>
-          <height>16</height>
-        </rect>
-      </property>
-      <property name="text" >
-        <string>Materials Multiplier</string>
-      </property>
-    </widget>
-    <widget class="QSpinBox" name="MatMultiplier" >
-      <property name="geometry" >
-        <rect>
-          <x>256</x>
-          <y>449</y>
-          <width>37</width>
-          <height>21</height>
-        </rect>
-      </property>
-      <property name="minimum" >
-        <number>1</number>
-      </property>
-      <property name="value" >
-        <number>1</number>
-      </property>
-    </widget>
-  </widget>
-  <pixmapfunction>qPixmapFromMimeSource</pixmapfunction>
+<ui version="4.0" >
+ <author></author>
+ <comment></comment>
+ <exportmacro></exportmacro>
+ <class>B_ReportWindow</class>
+ <widget class="QDialog" name="B_ReportWindow" >
+  <property name="geometry" >
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>566</width>
+    <height>565</height>
+   </rect>
+  </property>
+  <property name="windowTitle" >
+   <string>B_ReportWindow</string>
+  </property>
+  <layout class="QVBoxLayout" >
+   <property name="margin" >
+    <number>9</number>
+   </property>
+   <property name="spacing" >
+    <number>6</number>
+   </property>
+   <item>
+    <layout class="QVBoxLayout" >
+     <property name="margin" >
+      <number>0</number>
+     </property>
+     <property name="spacing" >
+      <number>6</number>
+     </property>
+     <item>
+      <widget class="QTextBrowser" name="ReportText" />
+     </item>
+     <item>
+      <layout class="QHBoxLayout" >
+       <property name="margin" >
+        <number>0</number>
+       </property>
+       <property name="spacing" >
+        <number>6</number>
+       </property>
+       <item>
+        <widget class="QPushButton" name="PushButton1" >
+         <property name="text" >
+          <string>Save As HTML</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QPushButton" name="PushButton1_2" >
+         <property name="text" >
+          <string>Save As Text</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <spacer>
+         <property name="orientation" >
+          <enum>Qt::Horizontal</enum>
+         </property>
+         <property name="sizeHint" >
+          <size>
+           <width>16</width>
+           <height>20</height>
+          </size>
+         </property>
+        </spacer>
+       </item>
+       <item>
+        <widget class="QSpinBox" name="MatMultiplier" >
+         <property name="minimum" >
+          <number>1</number>
+         </property>
+         <property name="value" >
+          <number>1</number>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QLabel" name="MMLabel" >
+         <property name="text" >
+          <string>Materials Multiplier</string>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </item>
+     <item>
+      <layout class="QHBoxLayout" >
+       <property name="margin" >
+        <number>0</number>
+       </property>
+       <property name="spacing" >
+        <number>6</number>
+       </property>
+       <item>
+        <spacer>
+         <property name="orientation" >
+          <enum>Qt::Horizontal</enum>
+         </property>
+         <property name="sizeHint" >
+          <size>
+           <width>40</width>
+           <height>20</height>
+          </size>
+         </property>
+        </spacer>
+       </item>
+       <item>
+        <widget class="QPushButton" name="PushButton2" >
+         <property name="text" >
+          <string>Close</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <spacer>
+         <property name="orientation" >
+          <enum>Qt::Horizontal</enum>
+         </property>
+         <property name="sizeHint" >
+          <size>
+           <width>40</width>
+           <height>20</height>
+          </size>
+         </property>
+        </spacer>
+       </item>
+      </layout>
+     </item>
+    </layout>
+   </item>
+  </layout>
+ </widget>
+ <pixmapfunction>qPixmapFromMimeSource</pixmapfunction>
+ <resources/>
+ <connections/>
 </ui>
