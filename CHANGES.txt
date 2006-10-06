@@ -32,6 +32,15 @@ Updated ??/??/2006 - Version 1.46
   on the quality of the gems chosen, until the gem is marked Done in the 
   Gem Crafting window (with the true number of remakes if any).
 
+  Template and item files are far smaller because default/empty data isn't
+  saved to the file.  Crafter's skill, material multipliers and other 
+  preferences are no longer loaded from or saved to a template, those are 
+  options specific for each user's configuration.
+
+  Export Gems to a specific character's .ini file now lists only crafters;
+  the character must already have a Spellcraft menu item in one of their
+  quickbar slots for the program to recognize them as a crafter.
+
   Prevent albion tank templates from showing Slash/Crush/Thrust resists
   while delving skills or showing skills while delving those resists.
 
@@ -42,6 +51,10 @@ Updated ??/??/2006 - Version 1.46
   Corrections to MultiTabBar and SearchingCombo controls, so that the 
   form won't do 'unexpected' things when alt-tabbing between the game, 
   for example.
+
+  Players warned us they were confused by the existing save changes warning,
+  so it will now pop up a Save Template? question with Yes, No, or Cancel
+  options.  The program now correctly tracks if a template has changed.
 
 Updated 06/09/2006 - Version 1.45
 
