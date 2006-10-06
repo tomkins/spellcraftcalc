@@ -23,7 +23,7 @@ import ReportWindow
 import DisplayWindow
 import CraftBar
 import SearchingCombo
-import MultiTabBar
+import MultiTabBar4
 import UIXML
 import os
 import os.path
@@ -281,7 +281,6 @@ class ScWindow(QMainWindow, Ui_B_SC):
         self.itemlayout.addItem(QSpacerItem(hspacer),row,7,1,1)
         self.itemlayout.addWidget(self.LabelRequirement,row,4,1,3)
         self.itemlayout.addWidget(self.LabelGemName,row,8,1,2)
-        #self.itemlayout.setColumnStretch(3, 1)
         self.itemlayout.setColumnStretch(8, 1)
 
         width = testfont.size(Qt.TextSingleLine, " Slot 10:").width()
@@ -420,7 +419,7 @@ class ScWindow(QMainWindow, Ui_B_SC):
         self.mainlayout.addLayout(self.tabslayout,2,0,1,9)
 
         self.mainlayout.setRowStretch(0, 0)
-        self.mainlayout.setRowStretch(2, 1)
+        self.mainlayout.setRowStretch(2, 0)
         self.mainlayout.setColumnStretch(4, 1)
         self.mainlayout.setColumnStretch(6, 1)
 
