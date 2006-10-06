@@ -288,8 +288,10 @@ class ScWindow(QMainWindow, Ui_B_SC):
         self.itemlayout.setColumnMinimumWidth(0,width)
         width = testfont.size(Qt.TextSingleLine, " Points").width()
         self.itemlayout.setColumnMinimumWidth(5,width)
+        reqwidth = width
         width = testfont.size(Qt.TextSingleLine, "  999g 00s 00c").width()
         self.itemlayout.setColumnMinimumWidth(6,width)
+        reqwidth += width + amtcbwidth
         row += 1
 
         typewidth = self.Type_1.getMinimumWidth(list(DropTypeList))
@@ -325,7 +327,7 @@ class ScWindow(QMainWindow, Ui_B_SC):
                          self.EffectChanged)
 
             self.Requirement.append(getattr(self, 'Requirement_%d' % idx))
-            self.Requirement[i].setFixedSize(QSize(self.Requirement[i].width(), edheight))
+            self.Requirement[i].setFixedSize(QSize(reqwidth, edheight))
             self.itemlayout.addWidget(self.Requirement[i],row,4,1,3)
             self.connect(self.Requirement[i],SIGNAL("textChanged(const QString&)"),
                          self.AmountsChanged)
