@@ -182,7 +182,7 @@ class ItemSlot:
             return int(self.Amount) / 4.0
         return mval
 
-    def gemName(self, realm):
+    def gemName(self, realm, parts = 7):
         if not GemTables.has_key(realm): return ''
         if not self.crafted():
             return ''
@@ -200,9 +200,19 @@ class ItemSlot:
         if not gemlist.has_key(self.Effect):
             gemlist = GemTables['All'][self.Type]
             if not gemlist.has_key(self.Effect): return ''
-        return string.strip(GemNames[amountindex]
-                + ' ' + gemlist[self.Effect][0]
-                + ' ' + gemlist[self.Effect][1])
+        if parts == 7:
+            return string.strip(GemNames[amountindex]
+                        + ' ' + gemlist[self.Effect][0]
+                        + ' ' + gemlist[self.Effect][1])
+        else:
+            name = ""
+            if parts & 4:
+                name += GemNames[amountindex] + ' '
+            if parts & 2:
+                name += gemlist[self.Effect][0] + ' '
+            if parts & 1:
+                name += gemlist[self.Effect][1] + ' '
+            return string.strip(name)
 
     def gemMaterials(self, realm):
         ret = { 'Gems' : { }, 'Dusts' : { }, 'Liquids' : { } }
