@@ -152,7 +152,6 @@ class CraftBar(QDialog, Ui_B_CraftBar):
         CP.write(f)
         f.close()
         self.LoadGemsButton.setEnabled(1)
-        self.LoadGemsButton.repaint(self.LoadGemsButton.visibleRect())
 
     def findPath(self,a0):
         a0 = unicode(a0)
