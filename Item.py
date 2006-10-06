@@ -43,6 +43,8 @@ class ItemSlot:
         else:
             keys = ['Type', 'Effect', 'Amount', 'Requirement', ]
         for attrkey in keys:
+            if self.getAttr(attrkey) == '0' or self.getAttr(attrkey) == '':
+                continue
             valnode = document.createElement(unicode(attrkey))
             valtext = document.createTextNode(self.getAttr(attrkey))
             valnode.appendChild(valtext)
@@ -358,11 +360,13 @@ class Item:
             elem = document.createElement(key)
             elem.appendChild(document.createTextNode(val))
             rootnode.appendChild(elem)
-
         for num in range(0,len(self.itemslots)):
             if self.itemslots[num].type() == "Unused": continue
             slotnode = document.createElement(unicode('SLOT'))
             slotnode.setAttribute(unicode("Number"), unicode(num))
+            if self.itemslots[num].slotType != self.ActiveState:
+                slotnode.setAttribute(unicode("Type"), 
+                                      unicode(self.itemslots[num].slotType))
             self.itemslots[num].asXML(document,slotnode)
             rootnode.appendChild(slotnode)
         return document
@@ -446,6 +450,9 @@ class Item:
             elif child.tagName == 'SLOT':
                 slotval = child.getAttribute("Number")
                 itemslot = self.itemslots[int(slotval)]
+                slottype = slot.getAttribute("Type")
+                if slottype is not None and slottype != '':
+                    itemslot.slotType = slottype
                 for attr in child.childNodes:
                     if attr.nodeType == Node.TEXT_NODE: continue
                     val = XMLHelper.getText(attr.childNodes)
@@ -465,7 +472,7 @@ class Item:
                     slot_match = re.compile("SLOT(\d+)").match(slot.tagName)
                     if slot_match is None:
                         slotval = slot.getAttribute("Number")
-                        if slotval == '' or slotval is None:
+                        if slotval is None or slotval == '':
                             slotnum = slotnum + 1
                         else:
                             slotnum = int(slotval)
