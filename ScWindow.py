@@ -652,9 +652,8 @@ class ScWindow(QMainWindow, Ui_B_SC):
     def testCraftingMenu(self):
         item = self.itemattrlist[self.currentTabLabel]
         enableCrafting = False
-        for slot in range(0, 4):
-            gemtype = item.slot(slot).type()
-            if gemtype != 'Unused' and item.slot(slot).slotType() == 'player':
+        for slot in item.slots():
+            if slot.crafted():
                 enableCrafting = True
         self.craftingmenuid.setEnabled(enableCrafting)
 
