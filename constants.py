@@ -318,7 +318,7 @@ skillTable = {
         'Stealth' :           ('Airy', 'Battle Jewel',),
         'Thrust' :            ('Dusty', 'War Sigil',),
         'Two Handed' :        ('Heated', 'War Sigil',),
-        'Wind Magic' :        ('Air', 'Evocation Sigil',),
+        'Wind Magic' :        ('Airy', 'Evocation Sigil',),
     }, 
 
     'Hibernia' : {
