@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'ScWindow.ui'
 #
-# Created: Tue Oct 03 23:12:39 2006
+# Created: Thu Oct 05 15:59:56 2006
 #      by: PyQt4 UI code generator 4.0.1
 #
 # WARNING! All changes made in this file will be lost!
@@ -442,24 +442,9 @@ class Ui_B_SC(object):
         self.Equipped.setGeometry(QtCore.QRect(509,5,71,21))
         self.Equipped.setObjectName("Equipped")
 
-        self.DropCraftButtonFrame = QtGui.QFrame(self.GroupItemFrame)
-        self.DropCraftButtonFrame.setEnabled(True)
-        self.DropCraftButtonFrame.setGeometry(QtCore.QRect(617,5,136,21))
-        self.DropCraftButtonFrame.setFrameShape(QtGui.QFrame.NoFrame)
-        self.DropCraftButtonFrame.setObjectName("DropCraftButtonFrame")
-
-        self.PlayerMade = QtGui.QRadioButton(self.DropCraftButtonFrame)
-        self.PlayerMade.setGeometry(QtCore.QRect(0,0,85,21))
-        self.PlayerMade.setObjectName("PlayerMade")
-
-        self.Drop = QtGui.QRadioButton(self.DropCraftButtonFrame)
-        self.Drop.setGeometry(QtCore.QRect(86,0,52,21))
-        self.Drop.setChecked(True)
-        self.Drop.setObjectName("Drop")
-
-        self.ItemName = QtGui.QLineEdit(self.GroupItemFrame)
-        self.ItemName.setGeometry(QtCore.QRect(562,48,200,21))
-        self.ItemName.setObjectName("ItemName")
+        self.ItemNameCombo = SearchingCombo(self.GroupItemFrame)
+        self.ItemNameCombo.setGeometry(QtCore.QRect(617,5,136,21))
+        self.ItemNameCombo.setObjectName("ItemNameCombo")
 
         self.LabelGemType = QtGui.QLabel(self.GroupItemFrame)
         self.LabelGemType.setGeometry(QtCore.QRect(50,31,119,17))
@@ -491,9 +476,9 @@ class Ui_B_SC(object):
         self.LabelGemCost.setAlignment(QtCore.Qt.AlignVCenter|QtCore.Qt.AlignRight)
         self.LabelGemCost.setObjectName("LabelGemCost")
 
-        self.LabelItemName = QtGui.QLabel(self.GroupItemFrame)
-        self.LabelItemName.setGeometry(QtCore.QRect(562,31,70,17))
-        self.LabelItemName.setObjectName("LabelItemName")
+        self.LabelGemName = QtGui.QLabel(self.GroupItemFrame)
+        self.LabelGemName.setGeometry(QtCore.QRect(562,31,70,17))
+        self.LabelGemName.setObjectName("LabelGemName")
 
         self.Gem_Label_1 = QtGui.QLabel(self.GroupItemFrame)
         self.Gem_Label_1.setGeometry(QtCore.QRect(7,48,34,21))
@@ -929,10 +914,8 @@ class Ui_B_SC(object):
         B_SC.setTabOrder(self.Bonus_Edit,self.AFDPS_Edit)
         B_SC.setTabOrder(self.AFDPS_Edit,self.Speed_Edit)
         B_SC.setTabOrder(self.Speed_Edit,self.Equipped)
-        B_SC.setTabOrder(self.Equipped,self.PlayerMade)
-        B_SC.setTabOrder(self.PlayerMade,self.Drop)
-        B_SC.setTabOrder(self.Drop,self.ItemName)
-        B_SC.setTabOrder(self.ItemName,self.Type_1)
+        B_SC.setTabOrder(self.Equipped,self.ItemNameCombo)
+        B_SC.setTabOrder(self.ItemNameCombo,self.Type_1)
         B_SC.setTabOrder(self.Type_1,self.Amount_Edit_1)
         B_SC.setTabOrder(self.Amount_Edit_1,self.Amount_Drop_1)
         B_SC.setTabOrder(self.Amount_Drop_1,self.Effect_1)
@@ -1070,8 +1053,6 @@ class Ui_B_SC(object):
         self.ItemAFDPSLabel.setText(QtGui.QApplication.translate("B_SC", "AF/DPS: ", None, QtGui.QApplication.UnicodeUTF8))
         self.ItemSpeedLabel.setText(QtGui.QApplication.translate("B_SC", "Speed: ", None, QtGui.QApplication.UnicodeUTF8))
         self.Equipped.setText(QtGui.QApplication.translate("B_SC", "Equipped", None, QtGui.QApplication.UnicodeUTF8))
-        self.PlayerMade.setText(QtGui.QApplication.translate("B_SC", "Player Made", None, QtGui.QApplication.UnicodeUTF8))
-        self.Drop.setText(QtGui.QApplication.translate("B_SC", "Drop", None, QtGui.QApplication.UnicodeUTF8))
         self.LabelGemType.setText(QtGui.QApplication.translate("B_SC", " Type", None, QtGui.QApplication.UnicodeUTF8))
         self.LabelGemAmount.setText(QtGui.QApplication.translate("B_SC", " Amount", None, QtGui.QApplication.UnicodeUTF8))
         self.LabelGemEffect.setText(QtGui.QApplication.translate("B_SC", " Effect", None, QtGui.QApplication.UnicodeUTF8))
@@ -1079,7 +1060,7 @@ class Ui_B_SC(object):
         self.LabelGemQuality.setText(QtGui.QApplication.translate("B_SC", " Quality", None, QtGui.QApplication.UnicodeUTF8))
         self.LabelGemPoints.setText(QtGui.QApplication.translate("B_SC", "Points", None, QtGui.QApplication.UnicodeUTF8))
         self.LabelGemCost.setText(QtGui.QApplication.translate("B_SC", "Cost", None, QtGui.QApplication.UnicodeUTF8))
-        self.LabelItemName.setText(QtGui.QApplication.translate("B_SC", "Name", None, QtGui.QApplication.UnicodeUTF8))
+        self.LabelGemName.setText(QtGui.QApplication.translate("B_SC", "Name", None, QtGui.QApplication.UnicodeUTF8))
         self.Gem_Label_1.setText(QtGui.QApplication.translate("B_SC", "Slot 1: ", None, QtGui.QApplication.UnicodeUTF8))
         self.Points_1.setText(QtGui.QApplication.translate("B_SC", "0.0", None, QtGui.QApplication.UnicodeUTF8))
         self.Cost_1.setText(QtGui.QApplication.translate("B_SC", "0c", None, QtGui.QApplication.UnicodeUTF8))
