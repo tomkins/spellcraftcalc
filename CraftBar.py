@@ -117,16 +117,18 @@ class CraftBar(QDialog, Ui_B_CraftBar):
             if item.ActiveState == 'player':
                 for slot in item.slots():
                     if slot.crafted():
-                        gemname = slot.gemName(realm)
+                        gemname = slot.gemName(realm, 3)
                         if slotcounter >= 300:
                             sys.stdout.write("Out of slots!\n")
                             continue
                         if not HotkeyGems[realm].has_key(gemname):
                             for i in (0, 1, 2):
+                                gemname = slot.gemName(Realms[i], 3)
                                 if realm == Realms[i]:
                                     continue
                                 if HotkeyGems[Realms[i]].has_key(gemname):
                                     realm = Realms[i]
+                                    # XXX Huh?  should be the switch realm macro(!)
                                     buttonstr = 'Hotkey_%d' % buttons[i]
                                     if slotcounter >= 200:
                                         CP.set('Quickbar3', 'Hotkey_%d' % slotcounter - 200, buttonstr)
@@ -157,7 +159,7 @@ class CraftBar(QDialog, Ui_B_CraftBar):
         a0 = unicode(a0)
         reini = re.compile('(\w+)-(\d+)\.ini$')
         resec = re.compile('\[(\w+)\]')
-        rectl = re.compile('Hotkey_(\d+)=44,13,')
+        rectl = re.compile('[Hh]otkey_(\d+)=44,13,')
         if os.path.isdir(a0):
             self.model.removeRows(0, self.model.rowCount())
             filelist = glob.glob(a0+'/*-*.ini')
