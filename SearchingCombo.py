@@ -45,7 +45,7 @@ class SearchingCombo(QComboBox):
     def keyPressEvent(self, e):
         keycode = e.key()
         if keycode == Qt.Key_Up and \
-                (not e.modifiers() or e.modifiers() == Qt.NoModifier or e.modifiers() == Qt.KeypadModifier) \
+                (e.modifiers() == Qt.NoModifier or e.modifiers() == Qt.KeypadModifier) \
                 and self.currentIndex() > 0:
             self.setCurrentIndex(self.currentIndex()-1)
             self.emit(SIGNAL("activated(int)"),self.currentIndex())
@@ -53,7 +53,7 @@ class SearchingCombo(QComboBox):
             e.accept()
             return
         if keycode == Qt.Key_Down and \
-                (not e.modifiers() or e.modifiers() == Qt.NoModifier or e.modifiers() == Qt.KeypadModifier) \
+                (e.modifiers() == Qt.NoModifier or e.modifiers() == Qt.KeypadModifier) \
                 and self.currentIndex() < self.count()-1:
             self.setCurrentIndex(self.currentIndex()+1)
             self.emit(SIGNAL("activated(int)"),self.currentIndex())
