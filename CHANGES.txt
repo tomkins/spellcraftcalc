@@ -1,12 +1,36 @@
 Updated ??/??/2006 - Version 1.46
 
-  Completely overhauled the UI from Qt3 to Qt4.  Some of the controls 
-  and options change behavior slightly because Qt4 is vastly changed.
-  Two last elements, the "Load Item" window (because of its preview) 
-  and the "Export Quickbars..." (because of its characters list) have
-  yet to be converted, so source code users will need to grab our
-  patches to sip and pyqt.  Folks who download the .msi installer 
-  won't need to grab anything else.
+  Completely overhauled the UI from Qt3.3 to Qt4.1.  Some of the controls 
+  and options change behavior slightly because Qt4.1 is vastly changed.
+  This was necessary to simplify the licensing under the GPL and vastly
+  improve the interface on Windows.  With Qt4.1, sip and PyQt, the program
+  now works well (without any extra patches) on Mac/Aqua or Unix/X11.
+
+  Drop v.s. Crafted Item are now folded into the item name (top right
+  corner of the item display.)  More than one of each may be stored for
+  each slot.  Edit menu's New Item, Move Item, and Delete Item let you
+  manage the list, and File - Load Item will add another item to the list.
+  Edit the name in the displayed box and the item name is changed (typing
+  a few characters in that box will not look up an item by name.)
+
+  The Item's Load/Save/Craft/Clear buttons can now be found in the menu,
+  under File - Load/Save Item, Edit - Clear Item and View - Gem Crafting.
+  Hotkeys make this easier to reach (except for Clear Item, too dangerous.)
+
+  Introduce all sorts of crafted item and tincture bonuses available, 
+  in the 4th - 6th slots, as applicable.  See the Edit - Item Type submenu.
+  No hints are offered for which bonux-by-item, since they are still in flux.
+  Check the item itself for its bonus, and please report to us any missing
+  crafted bonus.
+
+  Added the optional 'Requirement' to every non-crafted item slot.  For
+  example, Legendary melee/magic/archery bonus is "vs. Monsters", and
+  effects might be "Level ##", while Artifacts might be "Artifact Level #"
+
+  Item Price is now displayed.  Item Cost, until crafted, is now based 
+  on the (fractional!) estimate of how many gem makes, and that's based 
+  on the quality of the gems chosen, until the gem is marked Done in the 
+  Gem Crafting window (with the true number of remakes if any).
 
   Prevent albion tank templates from showing Slash/Crush/Thrust resists
   while delving skills or showing skills while delving those resists.
@@ -15,10 +39,9 @@ Updated ??/??/2006 - Version 1.46
   so these Realm / Class / Race / Server lists might be used 
   for other kinds of DAoC programs.
 
-  Fixed fifth slot tinctures (had reverted to SC bonuses).
-
-  More minor corrections to MultiTabBar and SearchingCombo so these
-  controls don't do 'unexpected' things.
+  Corrections to MultiTabBar and SearchingCombo controls, so that the 
+  form won't do 'unexpected' things when alt-tabbing between the game, 
+  for example.
 
 Updated 06/09/2006 - Version 1.45
 

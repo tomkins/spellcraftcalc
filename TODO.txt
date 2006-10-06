@@ -1,12 +1,5 @@
 Things to fix before next beta release is announced;
 
-  Promote Item.py attributes such as Name, Level, Bonus etc. into
-  the per-item scope (for each drop, crafted, and other named items).
-
-  Fix the prices, it's just wonked with all the different cost
-  changes to gems since cats gems.  This means using SC.py from
-  ScWindow.py instead of duplicating the code.
-
   Stop displaying unused slots in the reports!
 
   Calculate 5th slot proc by level requirement.
@@ -17,41 +10,22 @@ Things to fix before next beta release is announced;
 
   Add 1.85 Crafted armor lookups (by realm/style/piece)
 
+
 Things to fix before 2.0 final (non-beta) is announced;
 
-  Untangle modified events ... gotta mop those up, so unchanged
-  templates remain unchanged.  Perhaps use Item.py to track this,
-  and compare with new/last saved details?
-
-  Figure costing of crafted tinctures as a seperate subtotal,
-  priced by their own rules, based on 94 qual (it doesn't matter).
+  Let slots share an Item list, e.g. both Left Ring and Right Ring
+  keep track of unused Rings.  Move to sort of provides this, but 
+  not all that elegantly.
 
   LoadTemplate:  Some report that old templates don't load properly.
   Noticed more often on crafted rather than drop gear, probably bad
   lookups.  Good fix would be to scream bloody murder during the load
   to sys.stderr so the user can give us a log.
 
-  LoadTemplate:  Loading a template doesn't update the most recently
-  used list, nor the directory to load templates from (saving does).
-  At least ensure the template defaults to cwd()+'/templates/*.xml'
-
   Accelerator keys to jump around the page, especially to tabs.
 
 
 Extreme features, perhaps post-2.0
-
-  Replace '[V] Equipped   (o) crafted   (o) drop' with a drop down of
-  multiple items in the player's 'queue' based on slot.  Loading another
-  item adds it to the selectable 'queue'.  'Crafted' is one choice, and
-  perhaps user can add a second 'Crafted 2' or give them names.  The
-  final choice is 'None' which does the same thing as 'unequipping'.
-  The items in the drop down list are the item names.
-
-  Add 'requirements' in general (beyond 5th crafted slot) for drop items
-  by each gem slot.  Track 'Artifact Level' in this same field (none of
-  them appear to be arti level + required level).  Such as, Spell Range
-  - requirement against Animals, or Spell Range - requirement artifact
-  level 50.
 
   A guildy suggested that the user could fix all of the body armor
   pieces or all the weapons which are crafted, based on popping up
