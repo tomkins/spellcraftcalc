@@ -445,7 +445,7 @@ class Item:
                     self.itemslots = self.makeSlots()
             elif child.tagName == 'SLOT':
                 slotval = child.getAttribute("Number")
-                itemslot = self.itemslots[slotnum]
+                itemslot = self.itemslots[int(slotval)]
                 for attr in child.childNodes:
                     if attr.nodeType == Node.TEXT_NODE: continue
                     val = XMLHelper.getText(attr.childNodes)
