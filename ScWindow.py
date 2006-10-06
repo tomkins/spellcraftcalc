@@ -102,17 +102,18 @@ class ScWindow(QMainWindow, Ui_B_SC):
         self.pricingInfo = OW.getPriceInfo()
         self.updateRecentFiles(None)
         self.initialize(0)
-
+        
     def initLayout(self):
         testfont = QFontMetrics(qApp.font())
 
         self.switchOnType = {'drop' : [], 'player' : [] }
         self.switchOnType['drop'] = [ 
-            self.QualEdit, self.ItemName, self.LabelRequirement,
+            self.QualEdit, self.LabelRequirement,
         ]
         self.switchOnType['player'] = [
             self.LabelGemQuality, self.LabelGemPoints, self.LabelGemCost,
-            self.ItemImbueLabel, self.ItemImbue, self.ItemImbueTotal,
+            self.LabelGemName, self.ItemImbueLabel,
+            self.ItemImbue, self.ItemImbueTotal,
             self.ItemOverchargeLabel, self.ItemOvercharge, 
             self.ItemCostLabel, self.ItemCost, self.QualDrop,
             self.ItemPriceLabel, self.ItemPrice, self.LabelRequirement2,
@@ -231,13 +232,6 @@ class ScWindow(QMainWindow, Ui_B_SC):
         hspacer = QSpacerItem(3,0,QSizePolicy.Fixed,QSizePolicy.Minimum)
         vspacer = QSpacerItem(0,3,QSizePolicy.Minimum,QSizePolicy.Fixed)
 
-        self.itemgrouplayout = QtGui.QHBoxLayout(self.DropCraftButtonFrame)
-        self.itemgrouplayout.setMargin(4)
-        self.itemgrouplayout.setSpacing(0)
-        self.itemgrouplayout.addWidget(self.PlayerMade)
-        self.itemgrouplayout.addStretch(1)
-        self.itemgrouplayout.addWidget(self.Drop)
-
         self.itemcontrollayout = QtGui.QHBoxLayout()
         self.itemcontrollayout.setMargin(0)
         self.itemcontrollayout.setSpacing(0)
@@ -262,7 +256,11 @@ class ScWindow(QMainWindow, Ui_B_SC):
             if col == 3 or (col > 6 and str(obj.objectName())[-5:] != 'Label'):
                 self.itemcontrollayout.addStretch(1)
                 col += 1
-        self.itemcontrollayout.addWidget(self.DropCraftButtonFrame)
+        self.ItemNameCombo.setEditable(True)
+        self.ItemNameCombo.setInsertPolicy(QComboBox.NoInsert)
+        self.ItemNameCombo.setFixedHeight(cbheight)
+        self.ItemNameCombo.setSizePolicy(QSizePolicy(QSizePolicy.Expanding,QSizePolicy.Fixed))
+        self.itemcontrollayout.addWidget(self.ItemNameCombo,6)
 
         self.itemlayout = QtGui.QGridLayout(self.GroupItemFrame)
         self.itemlayout.setMargin(3)
@@ -282,7 +280,7 @@ class ScWindow(QMainWindow, Ui_B_SC):
             col += 1
         self.itemlayout.addItem(QSpacerItem(hspacer),row,7,1,1)
         self.itemlayout.addWidget(self.LabelRequirement,row,4,1,3)
-        self.itemlayout.addWidget(self.LabelItemName,row,8,1,2)
+        self.itemlayout.addWidget(self.LabelGemName,row,8,1,2)
         #self.itemlayout.setColumnStretch(3, 1)
         self.itemlayout.setColumnStretch(8, 1)
 
@@ -298,8 +296,6 @@ class ScWindow(QMainWindow, Ui_B_SC):
         l = reduce(lambda x, y: x+y, [ list(x) for x in GemLists['All'].values() ])
         effectwidth = self.Effect_1.getMinimumWidth(l)
 
-        self.ItemName.setFixedHeight(edheight)
-        self.itemlayout.addWidget(self.ItemName,row,8,1,2)
         for i in range(0, 12):
             idx = i + 1
 
@@ -457,8 +453,6 @@ class ScWindow(QMainWindow, Ui_B_SC):
                      self.ItemChanged)
         self.connect(self.QualEdit,SIGNAL("textChanged(const QString&)"),
                      self.ItemChanged)
-        self.connect(self.ItemName,SIGNAL("textChanged(const QString&)"),
-                     self.ItemChanged)
         self.connect(self.Bonus_Edit,SIGNAL("textChanged(const QString&)"),
                      self.ItemChanged)
         self.connect(self.AFDPS_Edit,SIGNAL("textChanged(const QString&)"),
@@ -466,8 +460,10 @@ class ScWindow(QMainWindow, Ui_B_SC):
         self.connect(self.Speed_Edit,SIGNAL("textChanged(const QString&)"),
                      self.ItemChanged)
         self.connect(self.Equipped,SIGNAL("stateChanged(int)"),self.ItemChanged)
-        self.connect(self.PlayerMade,SIGNAL("toggled(bool)"),self.PlayerToggled)
-        self.connect(self.Drop,SIGNAL("toggled(bool)"),self.DropToggled)
+        self.connect(self.ItemNameCombo,SIGNAL("activated(int)"),
+                     self.ItemNameSelected)
+        self.connect(self.ItemNameCombo,SIGNAL("textChanged(const QString&)"),
+                     self.ItemNameEdited)
         self.connect(self.SkillsList,SIGNAL("itemActivated(QListWidgetItem*)"),
                      self.SkillClicked)
         self.connect(self.OtherBonusList,SIGNAL("itemActivated(QListWidgetItem*)"),
@@ -513,6 +509,20 @@ class ScWindow(QMainWindow, Ui_B_SC):
 
         self.connect(self.swapgemsmenu, SIGNAL("triggered(QAction*)"), self.swapWith)
 
+        self.newitemmenu = QMenu('&New Item', self)
+        act = QAction('Drop Item', self)
+        act.setData(QVariant('Drop Item'))
+        self.newitemmenu.addAction(act)
+        self.newitemmenu.addSeparator()
+        for type in ('Normal Item', 'Caster Staff', 'Legendary Staff',
+                     'Enhanced Bow', 'Legendary Bow',
+                     'Legendary Weapon', 'Enhanced Armor'):
+            act = QAction(type, self)
+            act.setData(QVariant(type))
+            self.newitemmenu.addAction(act)
+        self.connect(self.newitemmenu, SIGNAL("triggered(QAction*)"), 
+                     self.newItemType)
+
         self.itemtypemenu = QMenu('Item &Type', self)
         for type in ('Normal Item', 'Caster Staff', 'Legendary Staff',
                      'Enhanced Bow', 'Legendary Bow',
@@ -521,10 +531,13 @@ class ScWindow(QMainWindow, Ui_B_SC):
             act.setData(QVariant(type))
             self.itemtypemenu.addAction(act)
         self.connect(self.itemtypemenu, SIGNAL("triggered(QAction*)"), 
-                     self.chooseItemType)
+                     self.newItemType)
 
         self.editmenu = QMenu('&Edit', self)
+        self.editmenu.addMenu(self.newitemmenu)
         self.editmenu.addAction('&Clear Item', self.clearCurrentItem)
+        self.editmenu.addAction('&Delete Item', self.deleteCurrentItem)
+        self.editmenu.addSeparator()
         self.itemtypemenuid = self.editmenu.addMenu(self.itemtypemenu)
         self.editmenu.addMenu(self.swapgemsmenu)
         self.editmenu.addSeparator()
@@ -562,7 +575,7 @@ class ScWindow(QMainWindow, Ui_B_SC):
         if line > 0:
             prev = self.Requirement[line - 1]
         else: 
-            prev = self.ItemName
+            prev = self.ItemNameCombo
         for i in range(line, 12):
             # Create the (sometimes used) edit boxes
             self.setTabOrder(prev,self.Type[i])
@@ -653,12 +666,22 @@ class ScWindow(QMainWindow, Ui_B_SC):
         self.Equipped.setChecked(1)
 
         self.itemattrlist = { }
-        for tab in TabList:
-            self.itemattrlist[tab] = Item(realm=self.realm,loc=tab)
-        self.ItemLevel.setText('51')
-        self.CharLevel.setText('50')
+        item = 1
+        for tab in PieceTabList:
+            self.itemattrlist[tab] = Item(realm=self.realm,state='player',loc=tab)
+            self.itemattrlist[tab].next = Item(realm=self.realm,state='drop',loc=tab)
+            self.itemattrlist[tab].ItemName = "Crafted Item" + str(item)
+            self.itemattrlist[tab].next.ItemName = "Drop Item" + str(item)
+            item += 1
+        for tab in JewelTabList:
+            self.itemattrlist[tab] = Item(realm=self.realm,state='drop',loc=tab)
+            self.itemattrlist[tab].ItemName = "Drop Item" + str(item)
+            item += 1
 
-        self.RealmChanged(self.realm)
+        self.CharName.setText('')
+        self.Realm.setCurrentIndex(Realms.index(self.realm))
+        self.RealmChanged(self.Realm.currentIndex())
+        self.CharLevel.setText('50')
         self.restoreItem(self.itemattrlist[self.currentTabLabel])
         self.modified = 0
         self.nocalc = moretodo
@@ -737,11 +760,16 @@ class ScWindow(QMainWindow, Ui_B_SC):
         self.nocalc = 1
         itemtype = item.ActiveState
         if itemtype == 'player':
-            self.PlayerMade.setChecked(1)
             self.showPlayerWidgets(item)
         else:
-            self.Drop.setChecked(1)
             self.showDropWidgets(item)
+        self.ItemNameCombo.clear()
+        altitem = item
+        while altitem is not None:
+            self.ItemNameCombo.addItem(altitem.ItemName)
+            altitem = altitem.next
+        self.ItemNameCombo.setCurrentIndex(0)
+        #self.ItemNameCombo.setEditText(item.ItemName)
         self.ItemLevel.setText(item.Level)
         location = item.Location
         self.Equipped.setChecked(int(item.Equipped))
@@ -798,7 +826,7 @@ class ScWindow(QMainWindow, Ui_B_SC):
         self.Bonus_Edit.setText(item.Bonus)
         if itemtype == 'drop':
             self.QualEdit.setText(item.ItemQuality)
-            self.ItemName.setText(item.ItemName)
+            #self.ItemNameCombo.setText(item.ItemName)
         else:
             if item.ItemQuality in QualityValues:
                 self.QualDrop.setCurrentIndex(
@@ -1087,6 +1115,8 @@ class ScWindow(QMainWindow, Ui_B_SC):
         for slot in item.slots():
             mval = slot.gemImbue()
             mvals.append(mval)
+        if len(mvals) < 4:
+            mvals.extend([0,0,0,0])
         maximbue = max(mvals)
         if display:
             for j in range(0, 4):
@@ -1171,9 +1201,34 @@ class ScWindow(QMainWindow, Ui_B_SC):
         if item.ActiveState == 'player':
             item.ItemQuality = unicode(self.QualDrop.currentText())
         else:
-            item.ItemName = unicode(self.ItemName.text())
+            #item.ItemNameCombo = unicode(self.ItemName.text())
             item.ItemQuality = unicode(self.QualEdit.text())
         self.calculate()
+
+    def ItemNameSelected(self,a0):
+        if self.nocalc: return
+        if isinstance(a0,int):
+            if a0 == 0: return
+            item = self.itemattrlist[self.currentTabLabel]
+            wasequipped = item.Equipped
+            item.Equipped = '0'
+            prev = item
+            for a1 in range(0, a0 - 1):
+                prev = prev.next
+            item = prev.next
+            prev.next = prev.next.next
+            item.next = self.itemattrlist[self.currentTabLabel]
+            self.itemattrlist[self.currentTabLabel] = item
+            item.Equipped = wasequipped
+            self.restoreItem(item)
+
+    def ItemNameEdited(self,a0):
+        if self.nocalc: return
+        if self.ItemNameCombo.findText(a0) > 0: return
+        item = self.itemattrlist[self.currentTabLabel]
+        item.ItemName = unicode(self.ItemNameCombo.lineEdit().text())
+        self.ItemNameCombo.setItemText(0,item.ItemName)
+        self.modified = 1
 
     def senderSlot(self):
         index = self.sender().objectName()[-2:]
@@ -1307,13 +1362,26 @@ class ScWindow(QMainWindow, Ui_B_SC):
         self.restoreItem(item)
 
     def clearCurrentItem(self):
-        self.itemattrlist[self.currentTabLabel] = Item(realm=self.realm,loc=self.currentTabLabel)
+        self.itemattrlist[self.currentTabLabel] \
+            = Item(realm=self.realm,loc=self.currentTabLabel,
+                   state=self.itemattrlist[self.currentTabLabel].ActiveState)
+        if self.nocalc: return
+        self.modified = 1
+        self.restoreItem(self.itemattrlist[self.currentTabLabel])
+
+    def deleteCurrentItem(self):
+        if self.itemattrlist[self.currentTabLabel].next is None:
+            self.clearCurrentItem()
+            return
+        item = self.itemattrlist[self.currentTabLabel]
+        self.itemattrlist[self.currentTabLabel] = item.next
+        item.next = None
         if self.nocalc: return
         self.modified = 1
         self.restoreItem(self.itemattrlist[self.currentTabLabel])
 
     def saveItem(self):
-        itemname = unicode(self.ItemName.text())
+        itemname = unicode(self.ItemNameCombo.text())
         if itemname == '':
             QMessageBox.critical(None, 'Error!', 
                 'Cannot save item - You must specifify a name!', 'OK')
@@ -1349,8 +1417,7 @@ class ScWindow(QMainWindow, Ui_B_SC):
         if Qfd.exec_():
             if Qfd.selectedFiles().count() > 0:
                 filename = unicode(Qfd.selectedFiles()[0])
-                item = Item(self.currentTabLabel)
-                item.Realm = self.realm
+                item = Item(realm=self.realm,state='drop',loc=self.currentTabLabel)
                 if item.load(filename) == -1 : return
                 if string.lower(item.Realm) != string.lower(self.realm)\
                     and string.lower(item.Realm) != 'all'\
@@ -1359,6 +1426,9 @@ class ScWindow(QMainWindow, Ui_B_SC):
                                                        + 'item for another realm!', 'OK')
                     return
                 item.Location = self.currentTabLabel
+                item.Equipped = self.itemattrlist[self.currentTabLabel].Equipped
+                self.itemattrlist[self.currentTabLabel].Equipped = '0'
+                item.next = self.itemattrlist[self.currentTabLabel]
                 self.itemattrlist[self.currentTabLabel] = item
                 self.restoreItem(item)
                 self.modified = 1
@@ -1477,6 +1547,8 @@ class ScWindow(QMainWindow, Ui_B_SC):
         self.clearCurrentItem()
         racename = ''
         classname = ''
+        itemnum = 1
+        itemdefault = self.itemattrlist.copy()
         for child in template.childNodes:
             if child.nodeType == Node.TEXT_NODE: continue
             if child.tagName == 'Name':
@@ -1496,9 +1568,23 @@ class ScWindow(QMainWindow, Ui_B_SC):
             elif child.tagName == 'CrafterSkill':
                 self.crafterSkill = int(XMLHelper.getText(child.childNodes))
             elif child.tagName == 'SCItem':
-                newItem = Item()
-                newItem.loadFromXML(child)
-                self.itemattrlist[newItem.Location] = newItem
+                newItem = Item(realm=self.realm)
+                newItem.loadFromXML(child,str(itemnum))
+                itemnum = itemnum + 1
+                if self.itemattrlist[newItem.Location] == itemdefault[newItem.Location]:
+                    self.itemattrlist[newItem.Location] = newItem
+                elif newItem.Equipped == '1':
+                    self.itemattrlist[newItem.Location].Equipped = '0'
+                    item = newItem
+                    while item.next is not None:
+                        item = item.next
+                    item.next = self.itemattrlist[newItem.Location]
+                    self.itemattrlist[newItem.Location] = newItem
+                else:
+                    item = self.itemattrlist[newItem.Location] 
+                    while item.next is not None:
+                        item = item.next
+                    item.next = newItem
             elif child.tagName == 'Coop':
                 self.coop = eval(XMLHelper.getText(child.childNodes), 
                                  globals(), globals())
@@ -1541,8 +1627,7 @@ class ScWindow(QMainWindow, Ui_B_SC):
                    self.CharClass.setCurrentIndex(ClassList[self.realm].index(self.charclass))
                    self.CharClassChanged(self.CharClass.currentIndex())
         for itemnum in range(0, 19):
-            item = Item(TabList[itemnum])
-            #item.Location = TabList[itemnum]
+            item = Item(realm=self.realm,loc=TabList[itemnum])
             item.loadLelaItemFromSCC(itemnum, scclines, self.realm)
             self.itemattrlist[item.Location] = item
         self.restoreItem(self.itemattrlist[self.currentTabLabel])
@@ -1744,6 +1829,20 @@ class ScWindow(QMainWindow, Ui_B_SC):
                 not item.slot(3).crafted():
             item.slot(3).setType("Unused")
         self.restoreItem(item)
+
+    def newItemType(self, action):
+        newtype = str(action.data().toString())
+        if newtype == 'Drop Item':
+            item = Item(realm=self.realm,loc=self.currentTabLabel,state='drop')
+        else:
+            item = Item(realm=self.realm,loc=self.currentTabLabel,state='player')
+        item.ItemName = "New " + newtype
+        item.next = self.itemattrlist[self.currentTabLabel]
+        self.itemattrlist[self.currentTabLabel] = item
+        if newtype == 'Drop Item' or newtype == 'Normal Item':
+            self.restoreItem(item)
+        else:
+            self.chooseItemType(action)
 
     def loadRecentFile(self, action):
         index = action.data().toInt()[0]

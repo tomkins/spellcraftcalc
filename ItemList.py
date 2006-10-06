@@ -32,17 +32,16 @@ class ItemPreview(QListWidget):
         fixlayout(parent.layout())
         QListWidget.__init__(self, None)
         parent.layout().addWidget(self, 1, 4, 1, 2)
-        self.item = Item()
-        self.item.loadAttr('Realm', realm)
         self.realm = realm
         self.charclass = charclass
 
     def preView(self, filename):
         self.clear()
-        if self.item.load(unicode(filename), 1) == -2:
+        item = Item(realm=self.realm)
+        if item.load(unicode(filename), 1) == -2:
             return
         stattext = []
-        for slot in self.item.slots():
+        for slot in item.slots():
             gemtype = slot.type()
             if not gemtype or gemtype == 'Unused':
                 continue
@@ -53,13 +52,13 @@ class ItemPreview(QListWidget):
             stattext.append(statstr)
         classinfo = AllBonusList[self.realm][self.charclass]
         listtext = [
-            str(self.item.ItemName),
-            "Level: %s   Quality: %s   Utility: %.1f" % (self.item.Level,
-                                         self.item.ItemQuality, 
-                                         self.item.utility(classinfo)),
-            "AF/DPS: %s   Speed: %s   Bonus:  %s" % (self.item.AFDPS,
-                                         self.item.Speed,
-                                         self.item.Bonus),
+            str(item.ItemName),
+            "Level: %s   Quality: %s   Utility: %.1f" % (item.Level,
+                                         item.ItemQuality, 
+                                         item.utility(classinfo)),
+            "AF/DPS: %s   Speed: %s   Bonus:  %s" % (item.AFDPS,
+                                         item.Speed,
+                                         item.Bonus),
         ]
         self.addItems(listtext)
         self.addItems(stattext)

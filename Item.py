@@ -256,55 +256,80 @@ class ItemSlot:
 
 
 class Item:
-    def __init__(self, realm='All', loc=''):
-        self.__dict__ = { 'ActiveState' : 'drop',
-            'Location': '', 'Realm' : realm,
-            'ItemName' : '', 'AFDPS' : '',
-            'Speed' : '', 'Bonus' : '',
-            'ItemQuality' : '',
-            'Equipped' : '', 'Level' : ''}
-        self.itemslots = { 'drop' : range(0, 12),
-            'player' : range(0, 6) }
+    def __init__(self, state='', loc='', realm='All'):
+        self.__dict__ = { 
+            'ActiveState' : state,
+            'Equipped' : '0',
+            'Location': loc,
+            'Realm' : realm,
+            'Level' : '51',
+            'ItemQuality' : '99',
+            'ItemName' : '',
+            'AFDPS' : '',
+            'Speed' : '',
+            'Bonus' : '',
+        }
 
-        if loc == 'Neck' \
-                or loc == 'Cloak' \
-                or loc == 'Jewel' \
-                or loc == 'Belt' \
-                or loc == 'Left Ring' \
-                or loc == 'Right Ring' \
-                or loc == 'Left Wrist' \
-                or loc == 'Right Wrist':
-            self.ActiveState = 'drop'
-        else:
-            self.ActiveState = 'player'
-        if loc == 'Right Hand' \
-                or loc == 'Left Hand' \
-                or loc == '2 Handed' \
-                or loc == 'Ranged' \
-                or loc == 'Spare':
-            self.Equipped = '0'
-        else:
-            self.Equipped = '1'
+        self.itemslots = list()
+        self.next = None
 
-        self.Location = loc
-        self.Level = '51'
-        self.Quality = '99'
-
-        for it in ('drop', 'player'):
-            for i in range(0, len(self.itemslots[it])):
-                if i >= 4:
-                    self.itemslots[it][i] = ItemSlot('drop')
+        if len(loc) > 0:
+            if loc in JewelTabList:
+                self.Equipped = '1'
+            elif loc in PieceTabList:
+                if loc in PieceTabList[:8]:
+                    self.Equipped = '1'
                 else:
-                    self.itemslots[it][i] = ItemSlot(slottype=it)
+                    self.Equipped = '0'
+            if len(state) == 0:
+                if loc in JewelTabList:
+                    self.ActiveState = 'drop'
+                elif loc in PieceTabList:
+                    self.ActiveState = 'player'
+
+        self.itemslots = self.makeSlots()
+
+    def makeSlots(self, type=''):
+        if type == '':
+            type = self.ActiveState
+
+        slots = []
+
+        if type == 'drop':
+            for slot in range(0, 12):
+                slots.append(ItemSlot(type))
+        elif type == 'player':
+            for slot in range(0, 4):
+                slots.append(ItemSlot(type))
+            slots.append(ItemSlot('crafted'))
+            slots.append(ItemSlot('unused'))
+
+        return slots
+
+    def copy(self):
+        item = Item()
+        item.ActiveState = self.ActiveState
+        item.Location = self.Location
+        item.Realm = self.Realm
+        item.Equipped = self.Equipped
+        item.Level = self.Level
+        item.ItemQuality = self.ItemQuality
+        item.ItemName = self.ItemName
+        item.AFDPS = self.AFDPS
+        item.Speed = self.Speed
+        item.Bonus = self.Bonus
+        item.itemslots = self.itemslots[:]
+        item.next = self.next
+        return item
 
     def slot(self, index):
-        return self.itemslots[self.ActiveState][index]
+        return self.itemslots[index]
 
     def slotCount(self):
-        return len(self.itemslots[self.ActiveState])
+        return len(self.itemslots)
 
     def slots(self):
-        return self.itemslots[self.ActiveState]
+        return list(self.itemslots)
 
     def loadAttr(self, attrname, attrval):
         if self.__dict__.has_key(attrname):
@@ -334,16 +359,12 @@ class Item:
             elem.appendChild(document.createTextNode(val))
             rootnode.appendChild(elem)
 
-        for (key, slots) in self.itemslots.iteritems():
-            #if key != self.ActiveState: continue
-            statenode = document.createElement(unicode(string.upper(key)+'ITEM'))
-            rootnode.appendChild(statenode)
-            for num in range(0,len(slots)):
-                if slots[num].type() == "Unused": continue
-                slotnode = document.createElement(unicode('SLOT'))
-                slotnode.setAttribute(unicode("Number"), unicode(num))
-                slots[num].asXML(document,slotnode)
-                statenode.appendChild(slotnode)
+        for num in range(0,len(self.itemslots)):
+            if self.itemslots[num].type() == "Unused": continue
+            slotnode = document.createElement(unicode('SLOT'))
+            slotnode.setAttribute(unicode("Number"), unicode(num))
+            self.itemslots[num].asXML(document,slotnode)
+            rootnode.appendChild(slotnode)
         return document
 
     def utility(self, skilltable):
@@ -409,7 +430,8 @@ class Item:
                 self.loadLelaItemFromSCC(0, f.readlines(), self.Realm, True)
         f.close()
 
-    def loadFromXML(self, itemnode):
+    def loadFromXML(self, itemnode, namehint = ''):
+        slots = {}
         for child in itemnode.childNodes:
             if child.nodeType == Node.TEXT_NODE: continue
             if self.__dict__.has_key(child.tagName):
@@ -419,29 +441,64 @@ class Item:
                 setattr(self, child.tagName, XMLHelper.getText(child.childNodes))
                 #exec('%s = "%s"' % (self.attrs[child.tagName],
                 #    XMLHelper.getText(child.childNodes)))
-            else: 
-                item_match = re.compile("(\w+)ITEM").match(child.tagName)
-                if item_match is not None:
-                    type = string.lower(item_match.group(1))
-                    slotnum = -1
-                    for slot in child.childNodes:
-                        if slot.nodeType == Node.TEXT_NODE: continue
-                        slot_match = re.compile("SLOT(\d+)").match(slot.tagName)
-                        if slot_match is None:
-                            slotval = slot.getAttribute("Number")
-                            if slotval == '' or slotval is None:
-                                slotnum = slotnum + 1
-                            else:
-                                slotnum = int(slotval)
+                if child.tagName == 'ActiveState':
+                    self.itemslots = self.makeSlots()
+            elif child.tagName == 'SLOT':
+                slotval = child.getAttribute("Number")
+                itemslot = self.itemslots[slotnum]
+                for attr in child.childNodes:
+                    if attr.nodeType == Node.TEXT_NODE: continue
+                    val = XMLHelper.getText(attr.childNodes)
+                    if itemslot.__dict__.has_key(attr.tagName):
+                        itemslot.setAttr(attr.tagName, val)
+                    itemslot.fixEffect()
+            elif child.tagName[-4:] == "ITEM":
+                # Legacy nested DROPITEM/PLAYERITEM slots
+                type = string.lower(child.tagName[:-4])
+                slots[type] = self.makeSlots(type)
+                if len(slots[type]) == 0:
+                    slots.pop(type)
+                slotnum = -1
+                found = False
+                for slot in child.childNodes:
+                    if slot.nodeType == Node.TEXT_NODE: continue
+                    slot_match = re.compile("SLOT(\d+)").match(slot.tagName)
+                    if slot_match is None:
+                        slotval = slot.getAttribute("Number")
+                        if slotval == '' or slotval is None:
+                            slotnum = slotnum + 1
                         else:
-                            slotnum = int(slot_match.group(1))
-                        itemslot = self.itemslots[type][slotnum]
-                        for attr in slot.childNodes:
-                            if attr.nodeType == Node.TEXT_NODE: continue
-                            val = XMLHelper.getText(attr.childNodes)
-                            if itemslot.__dict__.has_key(attr.tagName):
-                                 itemslot.setAttr(attr.tagName, val)
-                        itemslot.fixEffect()
+                            slotnum = int(slotval)
+                    else:
+                        slotnum = int(slot_match.group(1))
+                    for attr in slot.childNodes:
+                        if attr.nodeType == Node.TEXT_NODE: continue
+                        val = XMLHelper.getText(attr.childNodes)
+                        itemslot = slots[type][slotnum]
+                        if itemslot.__dict__.has_key(attr.tagName):
+                            itemslot.setAttr(attr.tagName, val)
+                    if itemslot.type() != 'Unused':
+                        found = True
+                    itemslot.fixEffect()
+                if not found:
+                    slots.pop(type)
+        if len(slots) > 0:
+            if slots.has_key(self.ActiveState):
+                self.itemslots = slots[self.ActiveState]
+                self.itemslots = slots.pop(self.ActiveState)
+            if len(slots) > 0:
+                self.next = self.copy()
+                type = slots.keys()[0]
+                self.next.Equipped = '0'
+                self.next.ActiveState = type
+                self.next.itemslots = slots[type]
+        item = self
+        while item:
+            if item.ActiveState == 'player':
+                item.ItemName = 'Crafted Item' + namehint
+            elif len(item.ItemName) == 0:
+                item.ItemName = 'Drop Item' + namehint
+            item = item.next
 
     def importLela(self, f):
         f.seek(0)
@@ -470,7 +527,7 @@ class Item:
             elif l == 22:
                 self.Level = line
             elif l == 23:
-                self.Quality = line
+                self.ItemQuality = line
             elif l == 24:
                 self.AF = line
             elif l == 25:
