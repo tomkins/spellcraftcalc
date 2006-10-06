@@ -505,6 +505,8 @@ class ScWindow(QMainWindow, Ui_B_SC):
             self.swappiecemenu.addAction(act)
         self.swapgemsmenu = QMenu('S&wap Gems with',self)
         self.connect(self.swapgemsmenu, SIGNAL("triggered(QAction*)"), self.swapWith)
+        self.connect(self.swappiecemenu, SIGNAL("triggered(QAction*)"), self.swapWith)
+        self.connect(self.swapjewelmenu, SIGNAL("triggered(QAction*)"), self.swapWith)
 
         self.movejewelmenu = QMenu('Jewel Slots', self)
         for piece in range(0,len(JewelTabList)):
@@ -518,6 +520,8 @@ class ScWindow(QMainWindow, Ui_B_SC):
             self.movepiecemenu.addAction(act)
         self.moveitemmenu = QMenu('&Move Item to',self)
         self.connect(self.moveitemmenu, SIGNAL("triggered(QAction*)"), self.moveTo)
+        self.connect(self.movepiecemenu, SIGNAL("triggered(QAction*)"), self.moveTo)
+        self.connect(self.movejewelmenu, SIGNAL("triggered(QAction*)"), self.moveTo)
 
         self.newitemmenu = QMenu('&New Item', self)
         act = QAction('Drop Item', self)
