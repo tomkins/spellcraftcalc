@@ -1215,9 +1215,18 @@ FixEffectsTable = d2({
 })
 
 if __name__ == "__main__":
-    pass
+    for (realm, realmtable) in GemTables.iteritems():
+        if realm == "All": continue
+        for (type, typetable) in realmtable.iteritems():
+            for (effect, effecttable) in typetable.iteritems():
+                try:
+                    name = effecttable[0] + " " + effecttable[1] 
+                    tryit = HotkeyGems[realm][name]
+                except:
+                    sys.stdout.write("Missing %s %s entry\n" % (type, effect,))
     #import gnosis.xml.pickle
     #constants = {}
     #for v in __all__:
     #    constants[v] = locals()[v]
     #print gnosis.xml.pickle.dumps(constants)
+    pass
