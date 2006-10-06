@@ -263,7 +263,7 @@ class ScWindow(QMainWindow, Ui_B_SC):
         self.itemcontrollayout.addWidget(self.ItemNameCombo,6)
 
         self.itemlayout = QtGui.QGridLayout(self.GroupItemFrame)
-        self.itemlayout.setMargin(3)
+        self.itemlayout.setMargin(8)
         self.itemlayout.setSpacing(0)
         row = 0
         self.itemlayout.addItem(QSpacerItem(1, self.PieceTab.baseOverlap(),
@@ -404,7 +404,7 @@ class ScWindow(QMainWindow, Ui_B_SC):
         self.tabslayout.addWidget(self.GroupItemFrame)
  
         self.mainlayout = QGridLayout(self.ScWinFrame)
-        self.mainlayout.setMargin(2)
+        self.mainlayout.setMargin(3)
         self.mainlayout.setSpacing(0)
         self.mainlayout.addWidget(self.GroupStats,0,0,1,1)
         self.mainlayout.addItem(QSpacerItem(hspacer),0,1,1,1)
@@ -418,7 +418,7 @@ class ScWindow(QMainWindow, Ui_B_SC):
         self.mainlayout.addItem(QSpacerItem(vspacer),1,0,1,9)
         self.mainlayout.addLayout(self.tabslayout,2,0,1,9)
 
-        self.mainlayout.setRowStretch(0, 0)
+        self.mainlayout.setRowStretch(0, 1)
         self.mainlayout.setRowStretch(2, 0)
         self.mainlayout.setColumnStretch(4, 1)
         self.mainlayout.setColumnStretch(6, 1)
@@ -667,17 +667,20 @@ class ScWindow(QMainWindow, Ui_B_SC):
         self.Equipped.setChecked(1)
 
         self.itemattrlist = { }
-        item = 1
+        self.itemnumbering = 1
         for tab in PieceTabList:
             self.itemattrlist[tab] = Item(realm=self.realm,state='player',loc=tab)
             self.itemattrlist[tab].next = Item(realm=self.realm,state='drop',loc=tab)
-            self.itemattrlist[tab].ItemName = "Crafted Item" + str(item)
-            self.itemattrlist[tab].next.ItemName = "Drop Item" + str(item)
-            item += 1
+            self.itemattrlist[tab].ItemName = "Crafted Item" \
+                                            + str(self.itemnumbering)
+            self.itemattrlist[tab].next.ItemName = "Drop Item" \
+                                                 + str(self.itemnumbering)
+            self.itemnumbering += 1
         for tab in JewelTabList:
             self.itemattrlist[tab] = Item(realm=self.realm,state='drop',loc=tab)
-            self.itemattrlist[tab].ItemName = "Drop Item" + str(item)
-            item += 1
+            self.itemattrlist[tab].ItemName = "Drop Item" \
+                                            + str(self.itemnumbering)
+            self.itemnumbering += 1
 
         self.CharName.setText('')
         self.Realm.setCurrentIndex(Realms.index(self.realm))
@@ -1363,9 +1366,14 @@ class ScWindow(QMainWindow, Ui_B_SC):
         self.restoreItem(item)
 
     def clearCurrentItem(self):
-        self.itemattrlist[self.currentTabLabel] \
-            = Item(realm=self.realm,loc=self.currentTabLabel,
-                   state=self.itemattrlist[self.currentTabLabel].ActiveState)
+        item = Item(realm=self.realm,loc=self.currentTabLabel,
+                    state=self.itemattrlist[self.currentTabLabel].ActiveState)
+        if item.ActiveState == 'drop':
+            item.ItemName = "Drop Item" + str(self.itemnumbering)
+        else:
+            item.ItemName = "Crafted Item" + str(self.itemnumbering)
+        self.itemattrlist[self.currentTabLabel] = item
+        self.itemnumbering += 1
         if self.nocalc: return
         self.modified = 1
         self.restoreItem(self.itemattrlist[self.currentTabLabel])
@@ -1419,13 +1427,14 @@ class ScWindow(QMainWindow, Ui_B_SC):
             if Qfd.selectedFiles().count() > 0:
                 filename = unicode(Qfd.selectedFiles()[0])
                 item = Item(realm=self.realm,state='drop',loc=self.currentTabLabel)
-                if item.load(filename) == -1 : return
+                if item.load(filename,str(self.itemnumbering)) == -1 : return
                 if string.lower(item.Realm) != string.lower(self.realm)\
                     and string.lower(item.Realm) != 'all'\
                     and not self.coop:
                     QMessageBox.critical(None, 'Error!', 'You are trying to load an '
                                                        + 'item for another realm!', 'OK')
                     return
+                self.itemnumbering += 1
                 item.Location = self.currentTabLabel
                 item.Equipped = self.itemattrlist[self.currentTabLabel].Equipped
                 self.itemattrlist[self.currentTabLabel].Equipped = '0'
@@ -1545,10 +1554,9 @@ class ScWindow(QMainWindow, Ui_B_SC):
 
     def loadFromXML(self, template):
         self.initialize(1)
-        self.clearCurrentItem()
         racename = ''
         classname = ''
-        itemnum = 1
+        self.itemnumbering = 1
         itemdefault = self.itemattrlist.copy()
         for child in template.childNodes:
             if child.nodeType == Node.TEXT_NODE: continue
@@ -1566,8 +1574,8 @@ class ScWindow(QMainWindow, Ui_B_SC):
                 self.noteText = XMLHelper.getText(child.childNodes)
             elif child.tagName == 'SCItem':
                 newItem = Item(realm=self.realm)
-                newItem.loadFromXML(child,str(itemnum))
-                itemnum = itemnum + 1
+                newItem.loadFromXML(child,str(self.itemnumbering))
+                self.itemnumbering += 1
                 if self.itemattrlist[newItem.Location] == itemdefault[newItem.Location]:
                     self.itemattrlist[newItem.Location] = newItem
                 elif newItem.Equipped == '1':
@@ -1601,7 +1609,6 @@ class ScWindow(QMainWindow, Ui_B_SC):
         
     def loadFromLela(self, scclines):
         self.initialize(1)
-        self.clearCurrentItem()
         sublines = filter(lambda(x): re.compile('^ITEM').match(x) is None, scclines)
         for line in sublines:
             line = string.strip(line, " \n\r")
@@ -1715,7 +1722,6 @@ class ScWindow(QMainWindow, Ui_B_SC):
         DW.loadLocations(locs)
         DW.exec_()
 
-
     def gemClicked(self, item, slot):
         RW = ReportWindow.ReportWindow(self, '', True)
         RW.setWindowTitle('Materials')
@@ -1762,12 +1768,20 @@ class ScWindow(QMainWindow, Ui_B_SC):
         self.calculate()
 
     def swapWith(self, action):
+        cur = self.itemattrlist[self.currentTabLabel]
+        if cur.ActiveState != 'player': return
         piece = action.data().toInt()[0]
-        part = TabList[piece]
-        cur = self.itemattrlist.get(self.currentTabLabel, Item(self.currentTabLabel))
-        swap = self.itemattrlist.get(part, Item(part))
-        self.itemattrlist[part] = cur
-        self.itemattrlist[self.currentTabLabel] = swap
+        part = self.itemattrlist[TabList[piece]]
+        while part.ActiveState != 'player':
+            ## could offer a message here if we fail
+            if part.next is None: return
+            part = part.next
+        for i in range(min(cur.slotCount(),part.slotCount()))
+            if cur.slot(i) != 'player' or part.slot(i) != 'player':
+                continue
+            itemslot = cur.itemslots[i]
+            cur.itemslots[i] = part.itemslots[i]
+            part.itemslots[i] = itemslot
         self.restoreItem(self.itemattrlist[self.currentTabLabel])
 
     def chooseItemType(self, action):
@@ -1831,9 +1845,11 @@ class ScWindow(QMainWindow, Ui_B_SC):
         newtype = str(action.data().toString())
         if newtype == 'Drop Item':
             item = Item(realm=self.realm,loc=self.currentTabLabel,state='drop')
+            item.ItemName = "Drop Item" + str(self.itemnumbering)
         else:
             item = Item(realm=self.realm,loc=self.currentTabLabel,state='player')
-        item.ItemName = "New " + newtype
+            item.ItemName = "Crafted Item" + str(self.itemnumbering)
+        self.itemnumbering += 1
         item.next = self.itemattrlist[self.currentTabLabel]
         self.itemattrlist[self.currentTabLabel] = item
         if newtype == 'Drop Item' or newtype == 'Normal Item':
