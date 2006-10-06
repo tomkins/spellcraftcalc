@@ -1152,8 +1152,7 @@ class ScWindow(QMainWindow, Ui_B_SC):
                     self.Points[j].setText('%3.1f' % (mvals[j] / 2.0))
                 else:
                     self.Points[j].setText('%3.1f' % mvals[j])
-        mvals.remove(maximbue)
-        totalimbue = ((maximbue * 2 + sum(mvals)) / 2.0)
+        totalimbue = ((maximbue + sum(mvals)) / 2.0)
         return totalimbue
         
     def getMultiplier(self, type):

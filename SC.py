@@ -62,14 +62,14 @@ def getItemImbue(item):
     return ImbuePts[itemlevel - 1][qualityindex]
 
 def calcImbue(item):
-    if not item.ActiveState == 'player': return 0
+    if not item.ActiveState == 'player': return 0.0
     mvals = []
     for slot in item.slots():
         if slot.crafted():
             mvals.append(slot.gemImbue())
+    if len(mvals) < 1: return 0.0
     maximbue = max(mvals)
-    mvals.remove(maximbue)
-    totalimbue = ((maximbue * 2 + sum(mvals)) / 2.0)
+    totalimbue = ((maximbue + sum(mvals)) / 2.0)
     return totalimbue
 
 def computeOverchargeSuccess(imbue, itemimbue, item, crafterskill):
