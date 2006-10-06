@@ -548,13 +548,13 @@ class ScWindow(QMainWindow, Ui_B_SC):
                      self.newItemType)
 
         self.editmenu = QMenu('&Edit', self)
+        self.itemtypemenuid = self.editmenu.addMenu(self.itemtypemenu)
+        self.swapgemsmenuid = self.editmenu.addMenu(self.swapgemsmenu)
+        self.editmenu.addSeparator()
         self.editmenu.addMenu(self.newitemmenu)
         self.editmenu.addMenu(self.moveitemmenu)
         self.editmenu.addAction('Delete Item', self.deleteCurrentItem)
         self.editmenu.addAction('Clear Item', self.clearCurrentItem)
-        self.editmenu.addSeparator()
-        self.itemtypemenuid = self.editmenu.addMenu(self.itemtypemenu)
-        self.swapgemsmenuid = self.editmenu.addMenu(self.swapgemsmenu)
         self.editmenu.addSeparator()
         self.editmenu.addAction('&Options...', self.openOptions,
                                 QKeySequence(Qt.ALT+Qt.Key_O))
