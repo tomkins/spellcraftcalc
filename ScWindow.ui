@@ -1322,57 +1322,12 @@
             <string>Equipped</string>
           </property>
         </widget>
-        <widget class="QFrame" name="DropCraftButtonFrame" >
-          <property name="enabled" >
-            <bool>true</bool>
-          </property>
+        <widget class="SearchingCombo" name="ItemNameCombo" >
           <property name="geometry" >
             <rect>
               <x>617</x>
               <y>5</y>
               <width>136</width>
-              <height>21</height>
-            </rect>
-          </property>
-          <property name="frameShape" >
-            <enum>QFrame::NoFrame</enum>
-          </property>
-          <widget class="QRadioButton" name="PlayerMade" >
-            <property name="geometry" >
-              <rect>
-                <x>0</x>
-                <y>0</y>
-                <width>85</width>
-                <height>21</height>
-              </rect>
-            </property>
-            <property name="text" >
-              <string>Player Made</string>
-            </property>
-          </widget>
-          <widget class="QRadioButton" name="Drop" >
-            <property name="geometry" >
-              <rect>
-                <x>86</x>
-                <y>0</y>
-                <width>52</width>
-                <height>21</height>
-              </rect>
-            </property>
-            <property name="text" >
-              <string>Drop</string>
-            </property>
-            <property name="checked" >
-              <bool>true</bool>
-            </property>
-          </widget>
-        </widget>
-        <widget class="QLineEdit" name="ItemName" >
-          <property name="geometry" >
-            <rect>
-              <x>562</x>
-              <y>48</y>
-              <width>200</width>
               <height>21</height>
             </rect>
           </property>
@@ -1474,7 +1429,7 @@
             <set>Qt::AlignVCenter|Qt::AlignRight</set>
           </property>
         </widget>
-        <widget class="QLabel" name="LabelItemName" >
+        <widget class="QLabel" name="LabelGemName" >
           <property name="geometry" >
             <rect>
               <x>562</x>
@@ -2707,9 +2662,7 @@
     <tabstop>AFDPS_Edit</tabstop>
     <tabstop>Speed_Edit</tabstop>
     <tabstop>Equipped</tabstop>
-    <tabstop>PlayerMade</tabstop>
-    <tabstop>Drop</tabstop>
-    <tabstop>ItemName</tabstop>
+    <tabstop>ItemNameCombo</tabstop>
     <tabstop>Type_1</tabstop>
     <tabstop>Amount_Edit_1</tabstop>
     <tabstop>Amount_Drop_1</tabstop>
