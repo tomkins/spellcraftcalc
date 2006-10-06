@@ -654,7 +654,7 @@ class ScWindow(QMainWindow, Ui_B_SC):
     def initialize(self, moretodo):
         self.nocalc = 1
         self.noteText = ''
-        self.craftMultiplier = 6
+        self.craftMultiplier = 1
         self.filename = None
         self.newcount = self.newcount + 1
         filetitle = unicode("Template" + str(self.newcount))
@@ -696,6 +696,9 @@ class ScWindow(QMainWindow, Ui_B_SC):
         childnode = document.createElement('Name')
         childnode.appendChild(document.createTextNode(str(self.CharName.text())))
         rootnode.appendChild(childnode)
+        childnode = document.createElement('Realm')
+        childnode.appendChild(document.createTextNode(self.realm))
+        rootnode.appendChild(childnode)
         childnode = document.createElement('Class')
         childnode.appendChild(document.createTextNode(self.charclass))
         rootnode.appendChild(childnode)
@@ -704,9 +707,6 @@ class ScWindow(QMainWindow, Ui_B_SC):
         rootnode.appendChild(childnode)
         childnode = document.createElement('Level')
         childnode.appendChild(document.createTextNode(unicode(self.CharLevel.text())))
-        rootnode.appendChild(childnode)
-        childnode = document.createElement('Realm')
-        childnode.appendChild(document.createTextNode(self.realm))
         rootnode.appendChild(childnode)
         childnode = document.createElement('Notes')
         childnode.appendChild(document.createTextNode(str(self.noteText)))
@@ -1560,14 +1560,10 @@ class ScWindow(QMainWindow, Ui_B_SC):
                 racename = XMLHelper.getText(child.childNodes)
             elif child.tagName == 'Realm':
                 self.realm = XMLHelper.getText(child.childNodes)
-            elif child.tagName == 'CraftMultiplier':
-                self.craftMultiplier = int(XMLHelper.getText(child.childNodes))
             elif child.tagName == 'Level':
                 self.CharLevel.setText(XMLHelper.getText(child.childNodes))
             elif child.tagName == 'Notes':
                 self.noteText = XMLHelper.getText(child.childNodes)
-            elif child.tagName == 'CrafterSkill':
-                self.crafterSkill = int(XMLHelper.getText(child.childNodes))
             elif child.tagName == 'SCItem':
                 newItem = Item(realm=self.realm)
                 newItem.loadFromXML(child,str(itemnum))
