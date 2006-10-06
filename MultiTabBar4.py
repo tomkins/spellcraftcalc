@@ -233,7 +233,7 @@ class MultiTabBar4(QWidget):
         #optTabBase.rect = optTabBase.tabBarRect
         #optTabBase.rect.setHeight(400)
         #self.style().drawPrimitive(QStyle.PE_FrameTabBarBase, optTabBase,
-        #    QPainter(self), self)
+        #    painter, self)
 
     def mousePressEvent(self, e):
         if e.button() != Qt.LeftButton:
@@ -280,8 +280,8 @@ class MultiTabBar4(QWidget):
             self.setCurrentIndex(i[0], i[1])
 
     def keyPressEvent(self, e):
-        if e.key() != Qt.Key_Left and e.key() != Qt.Key_Right \
-                and e.key() != Qt.Key_Up:
+        if (e.key() != Qt.Key_Left and e.key() != Qt.Key_Right \
+            and e.key() != Qt.Key_Up) or e.modifiers() != Qt.NoModifier:
             e.ignore()
             return
 
@@ -360,6 +360,91 @@ class MultiTabBar4(QWidget):
         if len(self.__tabList[row]) <= col:
             return None
         return self.__tabList[row][col]
+
+    """
+    def layoutTabs(self):
+        if self.count() < 1:
+            return
+
+        r = self.tabList()[0].rect()
+        for t in self.tabList()[1:]:
+	    r = r.unite(t.rect())
+	oldSh = r.size()
+
+        ## btnWidth = self.style().pixelMetric(QStyle.PM_TabBarScrollButtonWidth, self)
+        hframe  = self.style().pixelMetric(QStyle.PM_TabBarTabHSpace, self)
+        vframe  = self.style().pixelMetric(QStyle.PM_TabBarTabVSpace, self)
+        overlap = self.style().pixelMetric(QStyle.PM_TabBarTabOverlap, self)
+        baseh = self.style().pixelMetric(QStyle.PM_TabBarBaseHeight, self)
+
+        fm = self.fontMetrics()
+        reverse = QApplication.reverseLayout()
+        lastrow = len(self.tabrows) - 1
+        y = 0
+        maxx = 0
+        for row in range(0, lastrow + 1):
+            if reverse:
+                telts = range(len(self.tabrows[self.currows[row]]) - 1, -1, -1)
+            else:
+                telts = range(0, len(self.tabrows[self.currows[row]]))
+            x = 0
+            offset = 0
+            for telt in telts:
+                t = self.tab(self.tabrows[self.currows[row]][telt])
+                w = fm.width(noamptext(str(t.text())));
+                h = max(fm.height(), QApplication.globalStrut().height() )
+                if t.iconSet():
+                    w += t.iconSet().pixmap(QIconSet.Small, QIconSet.Normal).width() + 4
+                    h = max(h, t.iconSet().pixmap(QIconSet.Small, QIconSet.Normal).height())
+                h = max(h + vframe, QApplication.globalStrut().height())
+                w = max(w + hframe, QApplication.globalStrut().width())
+                t.setRect(QRect(QPoint(x, y), 
+                                self.style().sizeFromContents(
+                                    QStyle.CT_TabBarTab, self, \
+                                    QSize(w, h), QStyleOption(t))))
+                x += t.rect().width() - overlap
+                r = r.unite(t.rect())
+            y += h - self.rowoverlap
+            maxx = max(maxx, x + overlap - 1)
+        y += self.rowoverlap;
+
+        for row in range(0, lastrow + 1):
+            if reverse:
+                telts = range(len(self.tabrows[self.currows[row]]) - 1, -1, -1)
+            else:
+                telts = range(0, len(self.tabrows[self.currows[row]]))
+            addx = maxx - self.tab(self.tabrows[self.currows[row]][-1]).rect().right()
+            adjx = 0
+            if addx <= 0: telts = []
+            while len(telts) > 0:
+                fixx = ((addx + len(telts) - 1) / len(telts))
+                t = self.tab(self.tabrows[self.currows[row]][telts[0]])
+                newrect = t.rect()
+                newrect.moveLeft(newrect.left() + adjx)
+                newrect.setWidth(newrect.width() + fixx)
+                t.setRect(newrect)
+                addx -= fixx
+                adjx += fixx
+                r = r.unite(t.rect())
+                telts = telts[1:]
+
+        w = self.width()
+        if maxx < w:
+            offset = w - maxx
+        if offset > 0:
+            offset = 0
+
+        for row in range(0, len(self.tabrows)):
+            telts = range(0, len(self.tabrows[self.currows[row]]))
+            for telt in telts:
+                t = self.tab(self.tabrows[self.currows[row]][telt])
+                t.rect().moveBy( offset, 0 )
+
+        if self.sizeHint() != oldSh:
+            self.updateGeometry()
+
+        self.emit(PYSIGNAL("sigLayoutChanged"),(self,))
+    """
 
     def __layoutTabs(self):
         self.__layoutDirty = False
