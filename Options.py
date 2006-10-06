@@ -219,12 +219,30 @@ class Options(QDialog, Ui_B_Options):
             elif child.tagName == 'ConfigReportFile':
                 self.parent.reportFile = unicode(XMLHelper.getText(child.childNodes))
                 
-        #if w == 0:
-        #    w = 760
-        #if h == 0:
-        #    h = 517
-        #self.parent.resize(w, h)
-        #self.parent.move(x, y)
+        screenW = QApplication.desktop().width()
+        screenH = QApplication.desktop().height()
+        if w < 100:
+            w = 781
+        if h < 100:
+            w = 589
+
+        if w > screenW:
+            w = 781
+        if h > screenH:
+            h = 589
+
+        if x < 0:
+            x = 20
+        if y < 0:
+            y = 20
+
+        if (x + w) > screenW:
+            x = 20
+        if (y + h) > screenH:
+            y = 20
+
+        self.parent.resize(w, h)
+        self.parent.move(x, y)
         self.loadPriceInfo(pricing)
         self.setParent()
             
