@@ -643,10 +643,20 @@ class ScWindow(QMainWindow, Ui_B_SC):
                 self.Cost[i].hide()
                 self.Requirement[i].show()
         self.GroupItemFrame.updateGeometry()
-        self.craftingmenuid.setEnabled(True)
+        #self.craftingmenuid.setEnabled(True)
+        self.testCraftingMenu()
         self.itemtypemenuid.setEnabled(True)
         self.swapgemsmenuid.setEnabled(True)
         self.GroupItemFrame.show()
+
+    def testCraftingMenu(self):
+        item = self.itemattrlist[self.currentTabLabel]
+        enableCrafting = False
+        for slot in range(0, 4):
+            gemtype = item.slot(slot).type()
+            if gemtype != 'Unused' and item.slot(slot).slotType() == 'player':
+                enableCrafting = True
+        self.craftingmenuid.setEnabled(enableCrafting)
 
     def closeEvent(self, e):
         OW = Options.Options(self)
@@ -763,6 +773,8 @@ class ScWindow(QMainWindow, Ui_B_SC):
         if self.nocalc:
             return
         self.restoreItem(self.itemattrlist[self.currentTabLabel])
+
+        self.testCraftingMenu()
 
     def changePieceTab(self,a0):
         mask = a0.data().toInt()[0]
@@ -1373,6 +1385,7 @@ class ScWindow(QMainWindow, Ui_B_SC):
         # Here we go... cascade
         effcombo.setCurrentIndex(0)
         self.EffectChanged(0, slot)
+        self.testCraftingMenu()
     
     def clearCurrentItem(self):
         item = Item(realm=self.realm,loc=self.currentTabLabel,
