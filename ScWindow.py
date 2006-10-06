@@ -493,22 +493,23 @@ class ScWindow(QMainWindow, Ui_B_SC):
         self.filemenu.addAction('E&xit', self.close, QKeySequence(Qt.CTRL+Qt.Key_X))
         self.menuBar().addMenu(self.filemenu)
 
-        self.swapgemsmenu = QMenu('S&wap Gems With', self)
-        self.swapjewelsmenu = QMenu('Jewels', self)
+        self.jewelmenu = QMenu('Jewel Slots', self)
         for piece in range(0,len(JewelTabList)):
             act = QAction(JewelTabList[piece], self)
             act.setData(QVariant(piece + len(PieceTabList)))
-            self.swapjewelsmenu.addAction(act)
-        self.swapgemsmenu.addMenu(self.swapjewelsmenu)
+            self.jewelmenu.addAction(act)
 
+        self.piecemenu = QMenu('Body Slots', self)
         for piece in range(0,len(PieceTabList)):
             act = QAction(PieceTabList[piece], self)
             act.setData(QVariant(piece))
-            self.swapgemsmenu.addAction(act)
-            if str(act.text()) == string.strip(str(self.PieceTab.tabText(0, 0))):
-                act.setEnabled(False)
+            self.piecemenu.addAction(act)
 
+        self.swapgemsmenu = QMenu('S&wap Gems with',self)
         self.connect(self.swapgemsmenu, SIGNAL("triggered(QAction*)"), self.swapWith)
+
+        self.moveitemmenu = QMenu('&Move Item to',self)
+        self.connect(self.moveitemmenu, SIGNAL("triggered(QAction*)"), self.moveTo)
 
         self.newitemmenu = QMenu('&New Item', self)
         act = QAction('Drop Item', self)
@@ -536,11 +537,12 @@ class ScWindow(QMainWindow, Ui_B_SC):
 
         self.editmenu = QMenu('&Edit', self)
         self.editmenu.addMenu(self.newitemmenu)
-        self.editmenu.addAction('&Clear Item', self.clearCurrentItem)
-        self.editmenu.addAction('&Delete Item', self.deleteCurrentItem)
+        self.editmenu.addMenu(self.moveitemmenu)
+        self.editmenu.addAction('Delete Item', self.deleteCurrentItem)
+        self.editmenu.addAction('Clear Item', self.clearCurrentItem)
         self.editmenu.addSeparator()
         self.itemtypemenuid = self.editmenu.addMenu(self.itemtypemenu)
-        self.editmenu.addMenu(self.swapgemsmenu)
+        self.swapgemsmenuid = self.editmenu.addMenu(self.swapgemsmenu)
         self.editmenu.addSeparator()
         self.editmenu.addAction('&Options...', self.openOptions,
                                 QKeySequence(Qt.ALT+Qt.Key_O))
@@ -609,6 +611,7 @@ class ScWindow(QMainWindow, Ui_B_SC):
         self.GroupItemFrame.updateGeometry()
         self.craftingmenuid.setEnabled(False)
         self.itemtypemenuid.setEnabled(False)
+        self.swapgemsmenuid.setEnabled(False)
         self.GroupItemFrame.show()
 
     def showPlayerWidgets(self, item):
@@ -630,6 +633,7 @@ class ScWindow(QMainWindow, Ui_B_SC):
         self.GroupItemFrame.updateGeometry()
         self.craftingmenuid.setEnabled(True)
         self.itemtypemenuid.setEnabled(True)
+        self.swapgemsmenuid.setEnabled(True)
         self.GroupItemFrame.show()
 
     def closeEvent(self, e):
@@ -723,23 +727,24 @@ class ScWindow(QMainWindow, Ui_B_SC):
         return document
 
     def PieceTabChanged(self, row, col):
+        self.currentTabLabel = string.strip(str(self.PieceTab.tabText(row, col)))
+        if self.currentTabLabel in JewelTabList:
+            actionlist = self.jewelmenu.actions()
+            submenu = self.piecemenu
+        else:
+            actionlist = self.piecemenu.actions()
+            submenu = self.jewelmenu
+        self.swapgemsmenu.clear()
+        self.moveitemmenu.clear()
+        self.swapgemsmenu.addMenu(submenu)
+        self.moveitemmenu.addMenu(submenu)
+        for act in actionlist:
+            if str(act.text()) == self.currentTabLabel:
+                continue
+            self.swapgemsmenu.addAction(act)
+            self.moveitemmenu.addAction(act)
         if self.nocalc:
             return
-        swapactions = self.swapgemsmenu.actions()
-        self.currentTabLabel = string.strip(str(self.PieceTab.tabText(row, col)))
-        actions = []
-        for act in swapactions:
-            if act.menu():
-                for jewelact in act.menu().actions():
-                    actions.append(jewelact)
-            else:
-                actions.append(act)
-        for act in actions:
-            if str(act.text()) == self.currentTabLabel:
-                act.setEnabled(False)
-            else:
-                act.setEnabled(True)
-
         self.restoreItem(self.itemattrlist[self.currentTabLabel])
 
     def changePieceTab(self,a0):
@@ -768,12 +773,14 @@ class ScWindow(QMainWindow, Ui_B_SC):
         else:
             self.showDropWidgets(item)
         self.ItemNameCombo.clear()
+
         altitem = item
         while altitem is not None:
             self.ItemNameCombo.addItem(altitem.ItemName)
             altitem = altitem.next
         self.ItemNameCombo.setCurrentIndex(0)
         #self.ItemNameCombo.setEditText(item.ItemName)
+
         self.ItemLevel.setText(item.Level)
         location = item.Location
         self.Equipped.setChecked(int(item.Equipped))
@@ -1351,20 +1358,6 @@ class ScWindow(QMainWindow, Ui_B_SC):
         effcombo.setCurrentIndex(0)
         self.EffectChanged(0, slot)
     
-    def DropToggled(self,a0):
-        if self.nocalc or not a0: return
-        item = self.itemattrlist[self.currentTabLabel]
-        item.ActiveState = 'drop'
-        self.modified = 1
-        self.restoreItem(item)
-
-    def PlayerToggled(self, a0):
-        if self.nocalc or not a0: return
-        item = self.itemattrlist[self.currentTabLabel]
-        item.ActiveState = 'player'
-        self.modified = 1
-        self.restoreItem(item)
-
     def clearCurrentItem(self):
         item = Item(realm=self.realm,loc=self.currentTabLabel,
                     state=self.itemattrlist[self.currentTabLabel].ActiveState)
@@ -1772,17 +1765,47 @@ class ScWindow(QMainWindow, Ui_B_SC):
         if cur.ActiveState != 'player': return
         piece = action.data().toInt()[0]
         part = self.itemattrlist[TabList[piece]]
+        if cur == part: return
         while part.ActiveState != 'player':
             ## could offer a message here if we fail
             if part.next is None: return
             part = part.next
-        for i in range(min(cur.slotCount(),part.slotCount()))
+        for i in range(0,min(cur.slotCount(),part.slotCount())):
             if cur.slot(i) != 'player' or part.slot(i) != 'player':
                 continue
             itemslot = cur.itemslots[i]
             cur.itemslots[i] = part.itemslots[i]
             part.itemslots[i] = itemslot
         self.restoreItem(self.itemattrlist[self.currentTabLabel])
+
+    def moveTo(self, action):
+        cur = self.itemattrlist[self.currentTabLabel]
+        if cur.ActiveState != 'player': return
+        piece = action.data().toInt()[0]
+        part = self.itemattrlist[TabList[piece]]
+        if cur == part: return
+        if cur.next is None:
+            item = Item(realm=self.realm,loc=self.currentTabLabel,
+                        state=cur.ActiveState)
+            if cur.ActiveState == 'drop':
+                item.ItemName = "Drop Item" + str(self.itemnumbering)
+            else:
+                item.ItemName = "Crafted Item" + str(self.itemnumbering)
+            self.itemnumbering += 1
+            self.itemattrlist[self.currentTabLabel] = item
+        else:
+            self.itemattrlist[self.currentTabLabel] = cur.next
+        cur.next = part
+        cur.Location = TabList[piece]
+        self.itemattrlist[TabList[piece]] = cur
+        self.currentTabLabel = TabList[piece]
+        if TabList[piece] in JewelTabList:
+            row = 1
+            col = JewelTabList.index(TabList[piece])
+        else:
+            row = 0
+            col = PieceTabList.index(TabList[piece])
+        self.changePieceTab(QVariant((row << 8) | col))
 
     def chooseItemType(self, action):
         newtype = str(action.data().toString())
