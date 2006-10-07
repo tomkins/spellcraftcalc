@@ -139,7 +139,7 @@ class MultiTabBar4(QWidget):
     def index(self, tabname):
         for i in range(len(self.__tabList)):
             for j in range(len(self.__tabList[i])):
-                if tabname == self.__tabList[i][j]:
+                if tabname == self.__tabList[i][j].text:
                     return i,j
 
         return None
