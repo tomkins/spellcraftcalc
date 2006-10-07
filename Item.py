@@ -460,9 +460,9 @@ class Item:
             elif child.tagName == 'SLOT':
                 slotval = child.getAttribute("Number")
                 itemslot = self.itemslots[int(slotval)]
-                slottype = slot.getAttribute("Type")
+                slottype = child.getAttribute("Type")
                 if slottype is not None and slottype != '':
-                    itemslot.slotType = slottype
+                    itemslot.setSlotType(slottype)
                 for attr in child.childNodes:
                     if attr.nodeType == Node.TEXT_NODE: continue
                     val = XMLHelper.getText(attr.childNodes)
