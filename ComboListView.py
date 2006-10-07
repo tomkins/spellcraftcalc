@@ -7,14 +7,14 @@ class ComboListView(QListView):
         self.combobox = cb
 
     def keyPressEvent(self, e):
-        if e.key() == Qt.Key_Tab:
-            backFocus = False
-            if e.modifiers() == Qt.ShiftModifier:
-                backFocus = True
+
+        if e.key() == Qt.Key_Tab or e.key() == Qt.Key_Backtab:
+            backFocus = e.key() == Qt.Key_Backtab
             idxs = self.selectedIndexes()
             if len(idxs) > 0:
                 self.combobox.setCurrentIndex(idxs[0].row())
-
+                self.combobox.emit(SIGNAL("activated(int)"),self.combobox.currentIndex())
+                self.combobox.emit(SIGNAL("activated(const QString &)"),self.combobox.currentText())
 
             self.combobox.hidePopup()
             self.combobox.focusNextPrevChild(not backFocus)
