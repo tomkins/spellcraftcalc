@@ -18,15 +18,14 @@ class ComboListView(QListView):
             idx = model.index(i, 0)
             data = model.data(idx)
             s = str(data.toString())
-            print s
-            print fm.size(Qt.TextSingleLine, s).width()
             mx = max(mx, fm.size(Qt.TextSingleLine, s).width())
 
         mx += 25
 
-        self.setGeometry(self.pos().x(), self.pos().y(), mx, self.height())
-        self.parent().setGeometry(self.parent().pos().x(),
-            self.parent().pos().y(), mx, self.parent().height())
+        if mx > self.combobox.width():
+            self.setGeometry(self.pos().x(), self.pos().y(), mx, self.height())
+            self.parent().setGeometry(self.parent().pos().x(),
+                self.parent().pos().y(), mx, self.parent().height())
             
 
 
