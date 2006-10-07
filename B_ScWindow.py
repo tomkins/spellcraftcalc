@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'ScWindow.ui'
 #
-# Created: Thu Oct 05 15:59:56 2006
+# Created: Fri Oct 06 23:09:23 2006
 #      by: PyQt4 UI code generator 4.0.1
 #
 # WARNING! All changes made in this file will be lost!
@@ -482,6 +482,7 @@ class Ui_B_SC(object):
 
         self.Gem_Label_1 = QtGui.QLabel(self.GroupItemFrame)
         self.Gem_Label_1.setGeometry(QtCore.QRect(7,48,34,21))
+        self.Gem_Label_1.setTextFormat(QtCore.Qt.PlainText)
         self.Gem_Label_1.setObjectName("Gem_Label_1")
 
         self.Type_1 = SearchingCombo(self.GroupItemFrame)
@@ -525,6 +526,7 @@ class Ui_B_SC(object):
 
         self.Gem_Label_2 = QtGui.QLabel(self.GroupItemFrame)
         self.Gem_Label_2.setGeometry(QtCore.QRect(7,69,34,21))
+        self.Gem_Label_2.setTextFormat(QtCore.Qt.PlainText)
         self.Gem_Label_2.setObjectName("Gem_Label_2")
 
         self.Amount_Edit_2 = QtGui.QLineEdit(self.GroupItemFrame)
@@ -568,6 +570,7 @@ class Ui_B_SC(object):
 
         self.Gem_Label_3 = QtGui.QLabel(self.GroupItemFrame)
         self.Gem_Label_3.setGeometry(QtCore.QRect(7,90,34,21))
+        self.Gem_Label_3.setTextFormat(QtCore.Qt.PlainText)
         self.Gem_Label_3.setObjectName("Gem_Label_3")
 
         self.Type_3 = SearchingCombo(self.GroupItemFrame)
@@ -611,6 +614,7 @@ class Ui_B_SC(object):
 
         self.Gem_Label_4 = QtGui.QLabel(self.GroupItemFrame)
         self.Gem_Label_4.setGeometry(QtCore.QRect(7,111,34,21))
+        self.Gem_Label_4.setTextFormat(QtCore.Qt.PlainText)
         self.Gem_Label_4.setObjectName("Gem_Label_4")
 
         self.Type_4 = SearchingCombo(self.GroupItemFrame)
@@ -654,6 +658,7 @@ class Ui_B_SC(object):
 
         self.Gem_Label_5 = QtGui.QLabel(self.GroupItemFrame)
         self.Gem_Label_5.setGeometry(QtCore.QRect(7,132,34,21))
+        self.Gem_Label_5.setTextFormat(QtCore.Qt.PlainText)
         self.Gem_Label_5.setObjectName("Gem_Label_5")
 
         self.Type_5 = SearchingCombo(self.GroupItemFrame)
@@ -683,6 +688,7 @@ class Ui_B_SC(object):
 
         self.Gem_Label_6 = QtGui.QLabel(self.GroupItemFrame)
         self.Gem_Label_6.setGeometry(QtCore.QRect(7,153,34,21))
+        self.Gem_Label_6.setTextFormat(QtCore.Qt.PlainText)
         self.Gem_Label_6.setObjectName("Gem_Label_6")
 
         self.Type_6 = SearchingCombo(self.GroupItemFrame)
@@ -716,6 +722,7 @@ class Ui_B_SC(object):
 
         self.Gem_Label_7 = QtGui.QLabel(self.GroupItemFrame)
         self.Gem_Label_7.setGeometry(QtCore.QRect(7,174,34,21))
+        self.Gem_Label_7.setTextFormat(QtCore.Qt.PlainText)
         self.Gem_Label_7.setObjectName("Gem_Label_7")
 
         self.Type_7 = SearchingCombo(self.GroupItemFrame)
@@ -737,6 +744,7 @@ class Ui_B_SC(object):
 
         self.Gem_Label_8 = QtGui.QLabel(self.GroupItemFrame)
         self.Gem_Label_8.setGeometry(QtCore.QRect(7,195,34,21))
+        self.Gem_Label_8.setTextFormat(QtCore.Qt.PlainText)
         self.Gem_Label_8.setObjectName("Gem_Label_8")
 
         self.Type_8 = SearchingCombo(self.GroupItemFrame)
@@ -758,6 +766,7 @@ class Ui_B_SC(object):
 
         self.Gem_Label_9 = QtGui.QLabel(self.GroupItemFrame)
         self.Gem_Label_9.setGeometry(QtCore.QRect(7,216,34,21))
+        self.Gem_Label_9.setTextFormat(QtCore.Qt.PlainText)
         self.Gem_Label_9.setObjectName("Gem_Label_9")
 
         self.Type_9 = SearchingCombo(self.GroupItemFrame)
@@ -779,6 +788,7 @@ class Ui_B_SC(object):
 
         self.Gem_Label_10 = QtGui.QLabel(self.GroupItemFrame)
         self.Gem_Label_10.setGeometry(QtCore.QRect(7,237,41,21))
+        self.Gem_Label_10.setTextFormat(QtCore.Qt.PlainText)
         self.Gem_Label_10.setObjectName("Gem_Label_10")
 
         self.Type_10 = SearchingCombo(self.GroupItemFrame)
@@ -800,6 +810,7 @@ class Ui_B_SC(object):
 
         self.Gem_Label_11 = QtGui.QLabel(self.GroupItemFrame)
         self.Gem_Label_11.setGeometry(QtCore.QRect(7,258,41,21))
+        self.Gem_Label_11.setTextFormat(QtCore.Qt.PlainText)
         self.Gem_Label_11.setObjectName("Gem_Label_11")
 
         self.Type_11 = SearchingCombo(self.GroupItemFrame)
@@ -821,6 +832,7 @@ class Ui_B_SC(object):
 
         self.Gem_Label_12 = QtGui.QLabel(self.GroupItemFrame)
         self.Gem_Label_12.setGeometry(QtCore.QRect(7,279,41,21))
+        self.Gem_Label_12.setTextFormat(QtCore.Qt.PlainText)
         self.Gem_Label_12.setObjectName("Gem_Label_12")
 
         self.Type_12 = SearchingCombo(self.GroupItemFrame)
@@ -1061,27 +1073,27 @@ class Ui_B_SC(object):
         self.LabelGemPoints.setText(QtGui.QApplication.translate("B_SC", "Points", None, QtGui.QApplication.UnicodeUTF8))
         self.LabelGemCost.setText(QtGui.QApplication.translate("B_SC", "Cost", None, QtGui.QApplication.UnicodeUTF8))
         self.LabelGemName.setText(QtGui.QApplication.translate("B_SC", "Name", None, QtGui.QApplication.UnicodeUTF8))
-        self.Gem_Label_1.setText(QtGui.QApplication.translate("B_SC", "Slot 1: ", None, QtGui.QApplication.UnicodeUTF8))
+        self.Gem_Label_1.setText(QtGui.QApplication.translate("B_SC", "Slot &1: ", None, QtGui.QApplication.UnicodeUTF8))
         self.Points_1.setText(QtGui.QApplication.translate("B_SC", "0.0", None, QtGui.QApplication.UnicodeUTF8))
         self.Cost_1.setText(QtGui.QApplication.translate("B_SC", "0c", None, QtGui.QApplication.UnicodeUTF8))
-        self.Gem_Label_2.setText(QtGui.QApplication.translate("B_SC", "Slot 2: ", None, QtGui.QApplication.UnicodeUTF8))
+        self.Gem_Label_2.setText(QtGui.QApplication.translate("B_SC", "Slot &2: ", None, QtGui.QApplication.UnicodeUTF8))
         self.Points_2.setText(QtGui.QApplication.translate("B_SC", "0.0", None, QtGui.QApplication.UnicodeUTF8))
         self.Cost_2.setText(QtGui.QApplication.translate("B_SC", "0c", None, QtGui.QApplication.UnicodeUTF8))
-        self.Gem_Label_3.setText(QtGui.QApplication.translate("B_SC", "Slot 3: ", None, QtGui.QApplication.UnicodeUTF8))
+        self.Gem_Label_3.setText(QtGui.QApplication.translate("B_SC", "Slot &3: ", None, QtGui.QApplication.UnicodeUTF8))
         self.Points_3.setText(QtGui.QApplication.translate("B_SC", "0.0", None, QtGui.QApplication.UnicodeUTF8))
         self.Cost_3.setText(QtGui.QApplication.translate("B_SC", "0c", None, QtGui.QApplication.UnicodeUTF8))
-        self.Gem_Label_4.setText(QtGui.QApplication.translate("B_SC", "Slot 4: ", None, QtGui.QApplication.UnicodeUTF8))
+        self.Gem_Label_4.setText(QtGui.QApplication.translate("B_SC", "Slot &4: ", None, QtGui.QApplication.UnicodeUTF8))
         self.Points_4.setText(QtGui.QApplication.translate("B_SC", "0.0", None, QtGui.QApplication.UnicodeUTF8))
         self.Cost_4.setText(QtGui.QApplication.translate("B_SC", "0c", None, QtGui.QApplication.UnicodeUTF8))
-        self.Gem_Label_5.setText(QtGui.QApplication.translate("B_SC", "Slot 5: ", None, QtGui.QApplication.UnicodeUTF8))
-        self.Gem_Label_6.setText(QtGui.QApplication.translate("B_SC", "Slot 6: ", None, QtGui.QApplication.UnicodeUTF8))
+        self.Gem_Label_5.setText(QtGui.QApplication.translate("B_SC", "Slot &5: ", None, QtGui.QApplication.UnicodeUTF8))
+        self.Gem_Label_6.setText(QtGui.QApplication.translate("B_SC", "Slot &6: ", None, QtGui.QApplication.UnicodeUTF8))
         self.LabelRequirement2.setText(QtGui.QApplication.translate("B_SC", " (Requirement)", None, QtGui.QApplication.UnicodeUTF8))
-        self.Gem_Label_7.setText(QtGui.QApplication.translate("B_SC", "Slot 7: ", None, QtGui.QApplication.UnicodeUTF8))
-        self.Gem_Label_8.setText(QtGui.QApplication.translate("B_SC", "Slot 8: ", None, QtGui.QApplication.UnicodeUTF8))
-        self.Gem_Label_9.setText(QtGui.QApplication.translate("B_SC", "Slot 9: ", None, QtGui.QApplication.UnicodeUTF8))
-        self.Gem_Label_10.setText(QtGui.QApplication.translate("B_SC", "Slot 10:", None, QtGui.QApplication.UnicodeUTF8))
-        self.Gem_Label_11.setText(QtGui.QApplication.translate("B_SC", "Slot 11:", None, QtGui.QApplication.UnicodeUTF8))
-        self.Gem_Label_12.setText(QtGui.QApplication.translate("B_SC", "Slot 12:", None, QtGui.QApplication.UnicodeUTF8))
+        self.Gem_Label_7.setText(QtGui.QApplication.translate("B_SC", "Slot &7: ", None, QtGui.QApplication.UnicodeUTF8))
+        self.Gem_Label_8.setText(QtGui.QApplication.translate("B_SC", "Slot &8: ", None, QtGui.QApplication.UnicodeUTF8))
+        self.Gem_Label_9.setText(QtGui.QApplication.translate("B_SC", "Slot &9: ", None, QtGui.QApplication.UnicodeUTF8))
+        self.Gem_Label_10.setText(QtGui.QApplication.translate("B_SC", "Slot 1&0:", None, QtGui.QApplication.UnicodeUTF8))
+        self.Gem_Label_11.setText(QtGui.QApplication.translate("B_SC", "Slot 11&- ", None, QtGui.QApplication.UnicodeUTF8))
+        self.Gem_Label_12.setText(QtGui.QApplication.translate("B_SC", "Slot 12&=", None, QtGui.QApplication.UnicodeUTF8))
         self.ItemImbueLabel.setText(QtGui.QApplication.translate("B_SC", "Imbue Points: ", None, QtGui.QApplication.UnicodeUTF8))
         self.ItemImbue.setText(QtGui.QApplication.translate("B_SC", "0.0", None, QtGui.QApplication.UnicodeUTF8))
         self.ItemImbueTotal.setText(QtGui.QApplication.translate("B_SC", " / 0.0", None, QtGui.QApplication.UnicodeUTF8))

@@ -307,6 +307,7 @@ class ScWindow(QMainWindow, Ui_B_SC):
             self.itemlayout.addWidget(self.Type[i],row,1,1,1)
             self.connect(self.Type[i],SIGNAL("activated(int)"),
                          self.TypeChanged)
+            self.GemLabel[i].setBuddy(self.Type[i])
 
             self.AmountEdit.append(getattr(self, 'Amount_Edit_%d' % idx))
             self.AmountEdit[i].setFixedSize(QSize(amtcbwidth, edheight))
@@ -619,7 +620,7 @@ class ScWindow(QMainWindow, Ui_B_SC):
             w.show()
         for i in range(0,4):
             self.GemLabel[i].setEnabled(1)
-            self.GemLabel[i].setText('Slot %d:' % (i + 1))
+            self.GemLabel[i].setText('Slot &%d:' % (i + 1))
         self.GroupItemFrame.updateGeometry()
         self.craftingmenuid.setEnabled(False)
         self.itemtypemenuid.setEnabled(False)
@@ -635,9 +636,9 @@ class ScWindow(QMainWindow, Ui_B_SC):
         for i in range(0,4):
             self.GemLabel[i].setEnabled(1)
             if item.slot(i).slotType() == 'player':
-                self.GemLabel[i].setText('Gem %d:' % (i + 1))
+                self.GemLabel[i].setText('Gem &%d:' % (i + 1))
             else:
-                self.GemLabel[i].setText('Slot %d:' % (i + 1))
+                self.GemLabel[i].setText('Slot &%d:' % (i + 1))
                 self.Quality[i].hide()
                 self.Points[i].hide()
                 self.Cost[i].hide()
