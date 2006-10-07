@@ -39,7 +39,10 @@
             </rect>
           </property>
           <property name="text" >
-            <string>Name: </string>
+            <string>&amp;Name: </string>
+          </property>
+          <property name="textFormat" >
+            <enum>Qt::PlainText</enum>
           </property>
         </widget>
         <widget class="QLineEdit" name="CharName" >
@@ -64,6 +67,9 @@
           <property name="text" >
             <string>Realm: </string>
           </property>
+          <property name="textFormat" >
+            <enum>Qt::PlainText</enum>
+          </property>
         </widget>
         <widget class="SearchingCombo" name="Realm" >
           <property name="geometry" >
@@ -86,6 +92,9 @@
           </property>
           <property name="text" >
             <string>Class: </string>
+          </property>
+          <property name="textFormat" >
+            <enum>Qt::PlainText</enum>
           </property>
         </widget>
         <widget class="SearchingCombo" name="CharClass" >
@@ -110,6 +119,9 @@
           <property name="text" >
             <string>Race: </string>
           </property>
+          <property name="textFormat" >
+            <enum>Qt::PlainText</enum>
+          </property>
         </widget>
         <widget class="SearchingCombo" name="CharRace" >
           <property name="geometry" >
@@ -132,6 +144,9 @@
           </property>
           <property name="text" >
             <string>Level: </string>
+          </property>
+          <property name="textFormat" >
+            <enum>Qt::PlainText</enum>
           </property>
         </widget>
         <widget class="QLineEdit" name="CharLevel" >
@@ -1175,7 +1190,10 @@
             </rect>
           </property>
           <property name="text" >
-            <string>Level: </string>
+            <string>&amp;Level: </string>
+          </property>
+          <property name="textFormat" >
+            <enum>Qt::PlainText</enum>
           </property>
         </widget>
         <widget class="QLineEdit" name="ItemLevel" >
@@ -1219,6 +1237,9 @@
           <property name="text" >
             <string>Quality: </string>
           </property>
+          <property name="textFormat" >
+            <enum>Qt::PlainText</enum>
+          </property>
         </widget>
         <widget class="SearchingCombo" name="QualDrop" >
           <property name="geometry" >
@@ -1252,6 +1273,9 @@
           <property name="text" >
             <string>Bonus: </string>
           </property>
+          <property name="textFormat" >
+            <enum>Qt::PlainText</enum>
+          </property>
         </widget>
         <widget class="QLineEdit" name="Bonus_Edit" >
           <property name="geometry" >
@@ -1274,6 +1298,9 @@
           </property>
           <property name="text" >
             <string>AF/DPS: </string>
+          </property>
+          <property name="textFormat" >
+            <enum>Qt::PlainText</enum>
           </property>
         </widget>
         <widget class="QLineEdit" name="AFDPS_Edit" >
@@ -1298,6 +1325,9 @@
           <property name="text" >
             <string>Speed: </string>
           </property>
+          <property name="textFormat" >
+            <enum>Qt::PlainText</enum>
+          </property>
         </widget>
         <widget class="QLineEdit" name="Speed_Edit" >
           <property name="geometry" >
@@ -1312,22 +1342,38 @@
         <widget class="QCheckBox" name="Equipped" >
           <property name="geometry" >
             <rect>
-              <x>509</x>
+              <x>483</x>
               <y>5</y>
               <width>71</width>
               <height>21</height>
             </rect>
           </property>
           <property name="text" >
-            <string>Equipped</string>
+            <string>Equi&amp;pped</string>
+          </property>
+        </widget>
+        <widget class="QLabel" name="ItemNameLabel" >
+          <property name="geometry" >
+            <rect>
+              <x>630</x>
+              <y>5</y>
+              <width>20</width>
+              <height>21</height>
+            </rect>
+          </property>
+          <property name="text" >
+            <string>&amp;Item: </string>
+          </property>
+          <property name="textFormat" >
+            <enum>Qt::PlainText</enum>
           </property>
         </widget>
         <widget class="SearchingCombo" name="ItemNameCombo" >
           <property name="geometry" >
             <rect>
-              <x>617</x>
+              <x>653</x>
               <y>5</y>
-              <width>136</width>
+              <width>100</width>
               <height>21</height>
             </rect>
           </property>
