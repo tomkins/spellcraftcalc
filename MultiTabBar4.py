@@ -105,7 +105,21 @@ class MultiTabBar4(QWidget):
     def currentIndex(self):
         return self.__selectedIndex
 
-    def setCurrentIndex(self, row, col):
+    def setCurrentIndex(self, *args):
+        if len(args) == 1:
+            loctuple = args[0]
+            if isinstance(loctuple, tuple) and len(loctuple) == 2:
+                self.__setCurrentIndex(loctuple[0], loctuple[1])
+            else:
+                raise TypeError, 'Argument should be a row,col tuple! or row,col as separate arguments!'
+        elif len(args) == 2:
+            row = args[0]
+            col = args[1]
+            self.__setCurrentIndex(row, col)
+        else:
+            raise TypeError, 'Argument should be a row,col tuple! or row,col as separate arguments!'
+
+    def __setCurrentIndex(self, row, col):
         self.__selectedIndex = (row, col)
         self.__layoutTabs()
         self.update()
@@ -631,7 +645,8 @@ if __name__ == '__main__':
     #layout.addWidget(frame, 0)
     wind.resize(600, 400)
 
-    bar.setCurrentIndex(0, 0)
+    bar.setCurrentIndex((0, 0))
+    bar.setCurrentIndex(1,1)
 
     wind.show()
 
