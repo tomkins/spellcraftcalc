@@ -135,6 +135,14 @@ class MultiTabBar4(QWidget):
         tab = self.__tabAt(row, col)
         if tab: return tab.data
         return None
+
+    def index(self, tabname):
+        for i in range(len(self.__tabList)):
+            for j in range(len(self.__tabList[i])):
+                if tabname == self.__tabList[i][j]:
+                    return i,j
+
+        return None
     
     def tabSizeHint(self, row, col):
         tab = self.__tabAt(row, col)
