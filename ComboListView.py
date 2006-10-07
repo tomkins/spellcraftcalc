@@ -23,3 +23,10 @@ class ComboListView(QListView):
             QListView.keyPressEvent(self, e)
 
        
+    def focusOutEvent(self, e):
+        idxs = self.selectedIndexes()
+        if len(idxs) > 0:
+            self.combobox.setCurrentIndex(idxs[0].row())
+            self.combobox.emit(SIGNAL("activated(int)"),self.combobox.currentIndex())
+            self.combobox.emit(SIGNAL("activated(const QString &)"),self.combobox.currentText())
+
