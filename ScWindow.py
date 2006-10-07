@@ -474,7 +474,7 @@ class ScWindow(QMainWindow, Ui_B_SC):
         self.connect(self.SkillsList,SIGNAL("itemActivated(QListWidgetItem*)"),
                      self.SkillClicked)
         self.connect(self.OtherBonusList,SIGNAL("itemActivated(QListWidgetItem*)"),
-                     self.SkillClicked)
+                     self.BonusClicked)
 
     def initMenu(self):
         self.rf_menu = QMenu('&Recent Files')
@@ -1712,38 +1712,48 @@ class ScWindow(QMainWindow, Ui_B_SC):
 
     def DelveItemsDialog(self, find, findtype = None):
         locs = []
+        finddesc = findtype
+        if findtype is not None:
+            if (find == 'AF' or find == '% Power Pool'):
+                findtype = None
+            else:
+                findtype = findtype[-5:]
         for key, item in self.itemattrlist.iteritems():
             activestate = item.ActiveState
             for slot in range(0, item.slotCount()):
-                itemtype = str(item.slot(slot).type())
-                if itemtype == 'Unused': continue
-                if (findtype and itemtype != findtype) or \
-                   (not findtype and itemtype in ('Resist',)): continue
+                slottype = str(item.slot(slot).type())
+                if slottype == 'Unused': continue
+                if findtype is not None:
+                    if slottype[-5:] != findtype: continue
+                elif effect != 'AF' and effect != '% Power Pool':
+                    if slottype == 'Resist': continue
+                    if slottype[-5:] == 'Bonus': continue
                 effect = item.slot(slot).effect()
-                if effect != find: 
+                if effect != find:
                     if find == 'Power' or find == '% Power Pool':
                        if effect != 'Power' and effect != '% Power Pool':
                            continue
                     elif effect == 'Acuity':
                        if not find in AllBonusList[self.realm][self.charclass][effect]:
                            continue
-                    elif (type == 'Skill' or itemtype == 'Focus') and effect[0:4] == 'All ' \
+                    elif (slottype == 'Skill' or slottype == 'Focus') \
+                            and effect[0:4] == 'All ' \
                             and effect in AllBonusList[self.realm][self.charclass].keys():
                         if not find in AllBonusList[self.realm][self.charclass][effect]:
                             continue
                     else:
                         continue
                 amount = item.slot(slot).amount()
-                if type == 'Focus':
+                if slottype == 'Focus':
                     amount += ' Levels Focus'
                 if effect != find: 
                     amount += ' ' + effect
-                if itemtype == 'Cap Increase':
+                if slottype == 'Cap Increase':
                     amount += ' Cap'
                 locs.append([key, amount])
         DW = DisplayWindow.DisplayWindow(self)
         if findtype:
-            DW.setWindowTitle('Slots With %s %s' % (find, findtype))
+            DW.setWindowTitle('Slots With %s %s' % (find, finddesc))
         else:
             DW.setWindowTitle('Slots With %s' % find)
         DW.loadLocations(locs)
@@ -1788,6 +1798,12 @@ class ScWindow(QMainWindow, Ui_B_SC):
         if not ' ' in str(a0.text()): return
         amount, effect = string.split(str(a0.text()), ' ', 1)
         self.DelveItemsDialog(effect)
+
+    def BonusClicked(self,a0):
+        if a0 is None: return
+        if not ' ' in str(a0.text()): return
+        amount, effect = string.split(str(a0.text()), ' ', 1)
+        self.DelveItemsDialog(effect, 'Bonus')
 
     def showCap(self):
         self.capDistance = not self.capDistance
