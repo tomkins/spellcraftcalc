@@ -9,12 +9,14 @@ import string
 
 from PyQt4.QtGui import QComboBox, QFontMetrics, QStyleOptionComboBox, QStyle
 from PyQt4.QtCore import SIGNAL, Qt, QSize
+from ComboListView import ComboListView
 
 class SearchingCombo(QComboBox):
     def __init__(self, parent=None, name=None, editable=False):
         QComboBox.__init__(self, parent)
         self.setEditable(editable)
         self.minText = ' '
+        self.setView(ComboListView(self, self))
 
     def insertItems(self, idx, lst):
         len_ = 0
