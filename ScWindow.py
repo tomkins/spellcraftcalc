@@ -1723,12 +1723,12 @@ class ScWindow(QMainWindow, Ui_B_SC):
             for slot in range(0, item.slotCount()):
                 slottype = str(item.slot(slot).type())
                 if slottype == 'Unused': continue
+                effect = item.slot(slot).effect()
                 if findtype is not None:
                     if slottype[-5:] != findtype: continue
                 elif effect != 'AF' and effect != '% Power Pool':
                     if slottype == 'Resist': continue
                     if slottype[-5:] == 'Bonus': continue
-                effect = item.slot(slot).effect()
                 if effect != find:
                     if find == 'Power' or find == '% Power Pool':
                        if effect != 'Power' and effect != '% Power Pool':
