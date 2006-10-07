@@ -36,6 +36,10 @@ class DisplayWindow(QDialog, Ui_B_DisplayWindow):
 	def LocationClicked(self,a0):
 		if a0 is None: return
 		tabname, rest = string.split(str(a0.text()), ':', 1)
-		tabindex = TabList.index(tabname)
-		self.scwindow.PieceTab.setCurrentIndex(tabindex)
+                if tabname in JewelTabList:
+                    col = JewelTabList.index(tabname)
+		    self.scwindow.PieceTab.setCurrentIndex(1, col)
+                elif tabname in PieceTabList:
+                    col = PieceTabList.index(tabname)
+		    self.scwindow.PieceTab.setCurrentIndex(0, col)
 		self.done(1)
