@@ -14,6 +14,7 @@ from ComboListView import ComboListView
 class SearchingCombo(QComboBox):
     def __init__(self, parent=None, name=None, editable=False):
         QComboBox.__init__(self, parent)
+        self.setMaxVisibleItems(20)
         self.setEditable(editable)
         self.minText = ' '
         self.setView(ComboListView(self, self))
