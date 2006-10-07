@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'ScWindow.ui'
 #
-# Created: Fri Oct 06 23:09:23 2006
+# Created: Fri Oct 06 23:50:38 2006
 #      by: PyQt4 UI code generator 4.0.1
 #
 # WARNING! All changes made in this file will be lost!
@@ -27,6 +27,7 @@ class Ui_B_SC(object):
 
         self.LabelCharName = QtGui.QLabel(self.GroupCharInfo)
         self.LabelCharName.setGeometry(QtCore.QRect(6,16,37,21))
+        self.LabelCharName.setTextFormat(QtCore.Qt.PlainText)
         self.LabelCharName.setObjectName("LabelCharName")
 
         self.CharName = QtGui.QLineEdit(self.GroupCharInfo)
@@ -35,6 +36,7 @@ class Ui_B_SC(object):
 
         self.LabelRealm = QtGui.QLabel(self.GroupCharInfo)
         self.LabelRealm.setGeometry(QtCore.QRect(6,37,38,21))
+        self.LabelRealm.setTextFormat(QtCore.Qt.PlainText)
         self.LabelRealm.setObjectName("LabelRealm")
 
         self.Realm = SearchingCombo(self.GroupCharInfo)
@@ -43,6 +45,7 @@ class Ui_B_SC(object):
 
         self.LabelCharClass = QtGui.QLabel(self.GroupCharInfo)
         self.LabelCharClass.setGeometry(QtCore.QRect(6,59,38,21))
+        self.LabelCharClass.setTextFormat(QtCore.Qt.PlainText)
         self.LabelCharClass.setObjectName("LabelCharClass")
 
         self.CharClass = SearchingCombo(self.GroupCharInfo)
@@ -51,6 +54,7 @@ class Ui_B_SC(object):
 
         self.LabelCharRace = QtGui.QLabel(self.GroupCharInfo)
         self.LabelCharRace.setGeometry(QtCore.QRect(6,81,38,21))
+        self.LabelCharRace.setTextFormat(QtCore.Qt.PlainText)
         self.LabelCharRace.setObjectName("LabelCharRace")
 
         self.CharRace = SearchingCombo(self.GroupCharInfo)
@@ -59,6 +63,7 @@ class Ui_B_SC(object):
 
         self.LabelCharLevel = QtGui.QLabel(self.GroupCharInfo)
         self.LabelCharLevel.setGeometry(QtCore.QRect(6,103,38,21))
+        self.LabelCharLevel.setTextFormat(QtCore.Qt.PlainText)
         self.LabelCharLevel.setObjectName("LabelCharLevel")
 
         self.CharLevel = QtGui.QLineEdit(self.GroupCharInfo)
@@ -391,6 +396,7 @@ class Ui_B_SC(object):
 
         self.ItemLevelLabel = QtGui.QLabel(self.GroupItemFrame)
         self.ItemLevelLabel.setGeometry(QtCore.QRect(7,5,34,21))
+        self.ItemLevelLabel.setTextFormat(QtCore.Qt.PlainText)
         self.ItemLevelLabel.setObjectName("ItemLevelLabel")
 
         self.ItemLevel = QtGui.QLineEdit(self.GroupItemFrame)
@@ -404,6 +410,7 @@ class Ui_B_SC(object):
 
         self.ItemQualityLabel = QtGui.QLabel(self.GroupItemFrame)
         self.ItemQualityLabel.setGeometry(QtCore.QRect(115,5,54,21))
+        self.ItemQualityLabel.setTextFormat(QtCore.Qt.PlainText)
         self.ItemQualityLabel.setObjectName("ItemQualityLabel")
 
         self.QualDrop = SearchingCombo(self.GroupItemFrame)
@@ -416,6 +423,7 @@ class Ui_B_SC(object):
 
         self.ItemBonusLabel = QtGui.QLabel(self.GroupItemFrame)
         self.ItemBonusLabel.setGeometry(QtCore.QRect(232,5,40,21))
+        self.ItemBonusLabel.setTextFormat(QtCore.Qt.PlainText)
         self.ItemBonusLabel.setObjectName("ItemBonusLabel")
 
         self.Bonus_Edit = QtGui.QLineEdit(self.GroupItemFrame)
@@ -424,6 +432,7 @@ class Ui_B_SC(object):
 
         self.ItemAFDPSLabel = QtGui.QLabel(self.GroupItemFrame)
         self.ItemAFDPSLabel.setGeometry(QtCore.QRect(315,5,55,21))
+        self.ItemAFDPSLabel.setTextFormat(QtCore.Qt.PlainText)
         self.ItemAFDPSLabel.setObjectName("ItemAFDPSLabel")
 
         self.AFDPS_Edit = QtGui.QLineEdit(self.GroupItemFrame)
@@ -432,6 +441,7 @@ class Ui_B_SC(object):
 
         self.ItemSpeedLabel = QtGui.QLabel(self.GroupItemFrame)
         self.ItemSpeedLabel.setGeometry(QtCore.QRect(403,5,40,21))
+        self.ItemSpeedLabel.setTextFormat(QtCore.Qt.PlainText)
         self.ItemSpeedLabel.setObjectName("ItemSpeedLabel")
 
         self.Speed_Edit = QtGui.QLineEdit(self.GroupItemFrame)
@@ -439,11 +449,16 @@ class Ui_B_SC(object):
         self.Speed_Edit.setObjectName("Speed_Edit")
 
         self.Equipped = QtGui.QCheckBox(self.GroupItemFrame)
-        self.Equipped.setGeometry(QtCore.QRect(509,5,71,21))
+        self.Equipped.setGeometry(QtCore.QRect(483,5,71,21))
         self.Equipped.setObjectName("Equipped")
 
+        self.ItemNameLabel = QtGui.QLabel(self.GroupItemFrame)
+        self.ItemNameLabel.setGeometry(QtCore.QRect(630,5,20,21))
+        self.ItemNameLabel.setTextFormat(QtCore.Qt.PlainText)
+        self.ItemNameLabel.setObjectName("ItemNameLabel")
+
         self.ItemNameCombo = SearchingCombo(self.GroupItemFrame)
-        self.ItemNameCombo.setGeometry(QtCore.QRect(617,5,136,21))
+        self.ItemNameCombo.setGeometry(QtCore.QRect(653,5,100,21))
         self.ItemNameCombo.setObjectName("ItemNameCombo")
 
         self.LabelGemType = QtGui.QLabel(self.GroupItemFrame)
@@ -990,7 +1005,7 @@ class Ui_B_SC(object):
 
     def retranslateUi(self, B_SC):
         B_SC.setWindowTitle(QtGui.QApplication.translate("B_SC", "Spellcrafting Calculator", None, QtGui.QApplication.UnicodeUTF8))
-        self.LabelCharName.setText(QtGui.QApplication.translate("B_SC", "Name: ", None, QtGui.QApplication.UnicodeUTF8))
+        self.LabelCharName.setText(QtGui.QApplication.translate("B_SC", "&Name: ", None, QtGui.QApplication.UnicodeUTF8))
         self.LabelRealm.setText(QtGui.QApplication.translate("B_SC", "Realm: ", None, QtGui.QApplication.UnicodeUTF8))
         self.LabelCharClass.setText(QtGui.QApplication.translate("B_SC", "Class: ", None, QtGui.QApplication.UnicodeUTF8))
         self.LabelCharRace.setText(QtGui.QApplication.translate("B_SC", "Race: ", None, QtGui.QApplication.UnicodeUTF8))
@@ -1058,13 +1073,14 @@ class Ui_B_SC(object):
         self.SlashLabel.setText(QtGui.QApplication.translate("B_SC", "Slash: ", None, QtGui.QApplication.UnicodeUTF8))
         self.Slash.setText(QtGui.QApplication.translate("B_SC", "0", None, QtGui.QApplication.UnicodeUTF8))
         self.SlashRR.setText(QtGui.QApplication.translate("B_SC", "-", None, QtGui.QApplication.UnicodeUTF8))
-        self.ItemLevelLabel.setText(QtGui.QApplication.translate("B_SC", "Level: ", None, QtGui.QApplication.UnicodeUTF8))
+        self.ItemLevelLabel.setText(QtGui.QApplication.translate("B_SC", "&Level: ", None, QtGui.QApplication.UnicodeUTF8))
         self.ItemLevelButton.setText(QtGui.QApplication.translate("B_SC", "...", None, QtGui.QApplication.UnicodeUTF8))
         self.ItemQualityLabel.setText(QtGui.QApplication.translate("B_SC", "Quality: ", None, QtGui.QApplication.UnicodeUTF8))
         self.ItemBonusLabel.setText(QtGui.QApplication.translate("B_SC", "Bonus: ", None, QtGui.QApplication.UnicodeUTF8))
         self.ItemAFDPSLabel.setText(QtGui.QApplication.translate("B_SC", "AF/DPS: ", None, QtGui.QApplication.UnicodeUTF8))
         self.ItemSpeedLabel.setText(QtGui.QApplication.translate("B_SC", "Speed: ", None, QtGui.QApplication.UnicodeUTF8))
-        self.Equipped.setText(QtGui.QApplication.translate("B_SC", "Equipped", None, QtGui.QApplication.UnicodeUTF8))
+        self.Equipped.setText(QtGui.QApplication.translate("B_SC", "Equi&pped", None, QtGui.QApplication.UnicodeUTF8))
+        self.ItemNameLabel.setText(QtGui.QApplication.translate("B_SC", "&Item: ", None, QtGui.QApplication.UnicodeUTF8))
         self.LabelGemType.setText(QtGui.QApplication.translate("B_SC", " Type", None, QtGui.QApplication.UnicodeUTF8))
         self.LabelGemAmount.setText(QtGui.QApplication.translate("B_SC", " Amount", None, QtGui.QApplication.UnicodeUTF8))
         self.LabelGemEffect.setText(QtGui.QApplication.translate("B_SC", " Effect", None, QtGui.QApplication.UnicodeUTF8))

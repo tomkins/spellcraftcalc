@@ -128,6 +128,7 @@ class ScWindow(QMainWindow, Ui_B_SC):
             edheight = min(self.CharName.minimumSizeHint().height(),
                            self.Realm.minimumSizeHint().height()) - 2
             cbheight = edheight
+        self.LabelCharName.setBuddy(self.CharName)
 
         amtcbwidth = self.QualDrop.getMinimumWidth(['100'])
         # minSizeHint includes one char, test 19.9 width...
@@ -191,11 +192,11 @@ class ScWindow(QMainWindow, Ui_B_SC):
         self.charlayout.setSpacing(0)
         row = 0
         for (stat,height,width) \
-                in (('CharName',   edheight,cbwidth,),
-                    ('Realm',      cbheight,cbwidth,),
-                    ('CharClass',  cbheight,cbwidth,),
-                    ('CharRace',   cbheight,cbwidth,),
-                    ('CharLevel',  edheight,amtedwidth,),
+                in (('CharName',   edheight+2,cbwidth,),
+                    ('Realm',      cbheight+2,cbwidth,),
+                    ('CharClass',  cbheight+2,cbwidth,),
+                    ('CharRace',   cbheight+2,cbwidth,),
+                    ('CharLevel',  edheight+2,amtedwidth,),
                     ('TotalCost',  0,0,),
                     ('TotalPrice', 0,0,),):
             self.charlayout.addWidget(getattr(self, 'Label' + stat),row,0,1,1)
@@ -246,21 +247,25 @@ class ScWindow(QMainWindow, Ui_B_SC):
                     (self.AFDPS_Edit,edheight,amtedwidth,),
                     (self.Speed_Edit,edheight,amtedwidth,),):
             obj.setFixedSize(QSize(width, height))
+        self.ItemNameCombo.setEditable(True)
+        self.ItemNameCombo.setInsertPolicy(QComboBox.NoInsert)
+        self.ItemNameCombo.setFixedHeight(cbheight)
+        self.ItemNameCombo.setSizePolicy(QSizePolicy(QSizePolicy.Expanding,QSizePolicy.Fixed))
         for obj in (self.ItemLevelLabel, self.ItemLevel, self.ItemLevelButton, 
                     self.ItemQualityLabel, self.QualDrop, self.QualEdit, 
                     self.ItemBonusLabel, self.Bonus_Edit, self.ItemAFDPSLabel, 
                     self.AFDPS_Edit, self.ItemSpeedLabel, self.Speed_Edit, 
-                    self.Equipped):
+                    self.ItemNameLabel):
             self.itemcontrollayout.addWidget(obj)
             col += 1
             if col == 3 or (col > 6 and str(obj.objectName())[-5:] != 'Label'):
                 self.itemcontrollayout.addStretch(1)
                 col += 1
-        self.ItemNameCombo.setEditable(True)
-        self.ItemNameCombo.setInsertPolicy(QComboBox.NoInsert)
-        self.ItemNameCombo.setFixedHeight(cbheight)
-        self.ItemNameCombo.setSizePolicy(QSizePolicy(QSizePolicy.Expanding,QSizePolicy.Fixed))
-        self.itemcontrollayout.addWidget(self.ItemNameCombo,6)
+        self.itemcontrollayout.addWidget(self.ItemNameCombo, 8)
+        self.itemcontrollayout.addStretch(1)
+        self.itemcontrollayout.addWidget(self.Equipped)
+        self.ItemLevelLabel.setBuddy(self.ItemLevel)
+        self.ItemNameLabel.setBuddy(self.ItemNameCombo)
 
         self.itemlayout = QtGui.QGridLayout(self.GroupItemFrame)
         self.itemlayout.setMargin(8)
@@ -483,7 +488,7 @@ class ScWindow(QMainWindow, Ui_B_SC):
         self.filemenu.addSeparator()
         self.filemenu.addAction('&Load Item...', self.loadItem,
                                 QKeySequence(Qt.CTRL+Qt.SHIFT+Qt.Key_L))
-        self.filemenu.addAction('&Save Item...', self.saveItem,
+        self.filemenu.addAction('Sa&ve Item...', self.saveItem,
                                 QKeySequence(Qt.CTRL+Qt.SHIFT+Qt.Key_S))
         self.filemenu.addSeparator()
         self.filemenu.addAction('Export &Quickbars...', self.openCraftBars)
