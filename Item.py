@@ -374,9 +374,9 @@ class Item:
             if self.itemslots[num].type() == "Unused": continue
             slotnode = document.createElement(unicode('SLOT'))
             slotnode.setAttribute(unicode("Number"), unicode(num))
-            if self.itemslots[num].slotType != self.ActiveState:
+            if self.itemslots[num].slotType() != self.ActiveState:
                 slotnode.setAttribute(unicode("Type"), 
-                                      unicode(self.itemslots[num].slotType))
+                                      unicode(self.itemslots[num].slotType()))
             self.itemslots[num].asXML(document,slotnode)
             rootnode.appendChild(slotnode)
         return document
