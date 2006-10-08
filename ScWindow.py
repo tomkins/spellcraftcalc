@@ -334,6 +334,7 @@ class ScWindow(QMainWindow, Ui_B_SC):
             self.Requirement.append(getattr(self, 'Requirement_%d' % idx))
             self.Requirement[i].setFixedSize(QSize(reqwidth, edheight))
             self.itemlayout.addWidget(self.Requirement[i],row,4,1,3)
+            self.switchOnType['drop'].append(self.Requirement[i])
             self.connect(self.Requirement[i],SIGNAL("textChanged(const QString&)"),
                          self.AmountsChanged)
 
@@ -351,8 +352,7 @@ class ScWindow(QMainWindow, Ui_B_SC):
                     self.AmountDrop[i], self.Name[i], ])
             else:
                 self.switchOnType['drop'].extend([
-                    self.GemLabel[i], self.Type[i], 
-                    self.Effect[i],   self.Requirement[i], ])
+                    self.GemLabel[i], self.Type[i], self.Effect[i], ])
 
             if i < 4:
                 self.Quality.append(getattr(self, 'Quality_%d' % idx))
@@ -370,7 +370,6 @@ class ScWindow(QMainWindow, Ui_B_SC):
 
                 self.switchOnType['player'].extend([
                     self.Quality[i], self.Points[i], self.Cost[i], ])
-                self.switchOnType['drop'].append(self.Requirement[i])
 
             self.itemlayout.setRowMinimumHeight(row, max(cbheight,edheight))
             row += 1
@@ -596,7 +595,7 @@ class ScWindow(QMainWindow, Ui_B_SC):
         if line > 0:
             prev = self.Requirement[line - 1]
         else: 
-            prev = self.ItemNameCombo
+            prev = self.Equipped
         for i in range(line, 12):
             # Create the (sometimes used) edit boxes
             self.setTabOrder(prev,self.Type[i])
@@ -638,16 +637,25 @@ class ScWindow(QMainWindow, Ui_B_SC):
             w.hide()
         for w in self.switchOnType['player']:
             w.show()
-        for i in range(0,4):
+        for i in range(0,item.slotCount()):
             self.GemLabel[i].setEnabled(1)
             if item.slot(i).slotType() == 'player':
                 self.GemLabel[i].setText('Gem &%d:' % (i + 1))
             else:
                 self.GemLabel[i].setText('Slot &%d:' % (i + 1))
-                self.Quality[i].hide()
-                self.Points[i].hide()
-                self.Cost[i].hide()
+                if i < 4:
+                    self.Quality[i].hide()
+                    self.Points[i].hide()
+                    self.Cost[i].hide()
                 self.Requirement[i].show()
+            if item.slot(i).slotType() == 'unused':
+                if item.slot(i).slotType() == 'Unused':
+                    self.GemLabel[i].hide()
+                    self.Type[i].hide()
+                    self.Amount[i].hide()
+                    self.Effect[i].hide()
+                    self.Requirement[i].hide()
+
         self.GroupItemFrame.updateGeometry()
         #self.craftingmenuid.setEnabled(True)
         self.testCraftingMenu()

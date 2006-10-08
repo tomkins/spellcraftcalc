@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'ScWindow.ui'
 #
-# Created: Fri Oct 06 23:50:38 2006
+# Created: Sat Oct 07 21:40:39 2006
 #      by: PyQt4 UI code generator 4.0.1
 #
 # WARNING! All changes made in this file will be lost!
@@ -431,7 +431,7 @@ class Ui_B_SC(object):
         self.Bonus_Edit.setObjectName("Bonus_Edit")
 
         self.ItemAFDPSLabel = QtGui.QLabel(self.GroupItemFrame)
-        self.ItemAFDPSLabel.setGeometry(QtCore.QRect(315,5,55,21))
+        self.ItemAFDPSLabel.setGeometry(QtCore.QRect(315,5,45,21))
         self.ItemAFDPSLabel.setTextFormat(QtCore.Qt.PlainText)
         self.ItemAFDPSLabel.setObjectName("ItemAFDPSLabel")
 
@@ -448,18 +448,18 @@ class Ui_B_SC(object):
         self.Speed_Edit.setGeometry(QtCore.QRect(443,5,35,21))
         self.Speed_Edit.setObjectName("Speed_Edit")
 
-        self.Equipped = QtGui.QCheckBox(self.GroupItemFrame)
-        self.Equipped.setGeometry(QtCore.QRect(483,5,71,21))
-        self.Equipped.setObjectName("Equipped")
-
         self.ItemNameLabel = QtGui.QLabel(self.GroupItemFrame)
-        self.ItemNameLabel.setGeometry(QtCore.QRect(630,5,20,21))
+        self.ItemNameLabel.setGeometry(QtCore.QRect(486,5,20,21))
         self.ItemNameLabel.setTextFormat(QtCore.Qt.PlainText)
         self.ItemNameLabel.setObjectName("ItemNameLabel")
 
         self.ItemNameCombo = SearchingCombo(self.GroupItemFrame)
-        self.ItemNameCombo.setGeometry(QtCore.QRect(653,5,100,21))
+        self.ItemNameCombo.setGeometry(QtCore.QRect(506,5,68,21))
         self.ItemNameCombo.setObjectName("ItemNameCombo")
+
+        self.Equipped = QtGui.QCheckBox(self.GroupItemFrame)
+        self.Equipped.setGeometry(QtCore.QRect(582,5,71,21))
+        self.Equipped.setObjectName("Equipped")
 
         self.LabelGemType = QtGui.QLabel(self.GroupItemFrame)
         self.LabelGemType.setGeometry(QtCore.QRect(50,31,119,17))
@@ -940,9 +940,9 @@ class Ui_B_SC(object):
         B_SC.setTabOrder(self.QualDrop,self.Bonus_Edit)
         B_SC.setTabOrder(self.Bonus_Edit,self.AFDPS_Edit)
         B_SC.setTabOrder(self.AFDPS_Edit,self.Speed_Edit)
-        B_SC.setTabOrder(self.Speed_Edit,self.Equipped)
-        B_SC.setTabOrder(self.Equipped,self.ItemNameCombo)
-        B_SC.setTabOrder(self.ItemNameCombo,self.Type_1)
+        B_SC.setTabOrder(self.Speed_Edit,self.ItemNameCombo)
+        B_SC.setTabOrder(self.ItemNameCombo,self.Equipped)
+        B_SC.setTabOrder(self.Equipped,self.Type_1)
         B_SC.setTabOrder(self.Type_1,self.Amount_Edit_1)
         B_SC.setTabOrder(self.Amount_Edit_1,self.Amount_Drop_1)
         B_SC.setTabOrder(self.Amount_Drop_1,self.Effect_1)
@@ -1079,8 +1079,8 @@ class Ui_B_SC(object):
         self.ItemBonusLabel.setText(QtGui.QApplication.translate("B_SC", "Bonus: ", None, QtGui.QApplication.UnicodeUTF8))
         self.ItemAFDPSLabel.setText(QtGui.QApplication.translate("B_SC", "AF/DPS: ", None, QtGui.QApplication.UnicodeUTF8))
         self.ItemSpeedLabel.setText(QtGui.QApplication.translate("B_SC", "Speed: ", None, QtGui.QApplication.UnicodeUTF8))
-        self.Equipped.setText(QtGui.QApplication.translate("B_SC", "Equi&pped", None, QtGui.QApplication.UnicodeUTF8))
         self.ItemNameLabel.setText(QtGui.QApplication.translate("B_SC", "&Item: ", None, QtGui.QApplication.UnicodeUTF8))
+        self.Equipped.setText(QtGui.QApplication.translate("B_SC", "Equi&pped", None, QtGui.QApplication.UnicodeUTF8))
         self.LabelGemType.setText(QtGui.QApplication.translate("B_SC", " Type", None, QtGui.QApplication.UnicodeUTF8))
         self.LabelGemAmount.setText(QtGui.QApplication.translate("B_SC", " Amount", None, QtGui.QApplication.UnicodeUTF8))
         self.LabelGemEffect.setText(QtGui.QApplication.translate("B_SC", " Effect", None, QtGui.QApplication.UnicodeUTF8))
