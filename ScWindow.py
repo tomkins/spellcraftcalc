@@ -122,6 +122,7 @@ class ScWindow(QMainWindow, Ui_B_SC):
         self.statusBar().hide()
         if str(QApplication.style().objectName()[0:9]).lower() == "macintosh":
             self.sizegrip = QSizeGrip(self)
+            self.sizegrip.move(self.width() - 15, self.height() - 15)
             edheight = self.CharName.sizeHint().height() - 1
             cbheight = self.Realm.sizeHint().height()
         else:
@@ -377,6 +378,8 @@ class ScWindow(QMainWindow, Ui_B_SC):
         self.utilitylayout = QtGui.QGridLayout()
         self.utilitylayout.addWidget(self.ItemUtilityLabel,0,0,1,1)
         self.utilitylayout.addWidget(self.ItemUtility,0,1,1,1)
+        if str(QApplication.style().objectName()[0:9]).lower() == "macintosh":
+            self.utilitylayout.addItem(QSpacerItem(5,0,QSizePolicy.Fixed,QSizePolicy.Minimum),0,2,1,1)
         self.utilitylayout.setRowMinimumHeight(0, max(cbheight,edheight))
 
         self.itemlayout.addWidget(self.LabelRequirement2,row-6,4,1,3)
@@ -391,8 +394,8 @@ class ScWindow(QMainWindow, Ui_B_SC):
         self.itemlayout.addWidget(self.ItemPrice,row-2,5,1,2)
         self.itemlayout.addLayout(self.utilitylayout,row-1,8,1,1)
 
-        if str(QApplication.style().objectName()[0:9]).lower() == "macintosh":
-            self.itemlayout.addWidget(self.sizegrip,row-1,9,1,1)
+        #if str(QApplication.style().objectName()[0:9]).lower() == "macintosh":
+        #    self.itemlayout.addWidget(self.sizegrip,row-1,9,1,1)
 
         self.PieceTab.setFocusPolicy(Qt.StrongFocus)
         for tabname in PieceTabList:
@@ -1958,6 +1961,10 @@ class ScWindow(QMainWindow, Ui_B_SC):
    
     def ignoreMouseEvent(self, e):
         e.ignore()
+
+    def resizeEvent(self, e):
+        if str(QApplication.style().objectName()[0:9]).lower() == "macintosh":
+            self.sizegrip.move(self.width() - 15, self.height() - 15)
 
 if __name__ == '__main__':
     app = QApplication([])
