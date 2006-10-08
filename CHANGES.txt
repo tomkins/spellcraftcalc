@@ -54,6 +54,11 @@ Updated 06/07/2006 - Version 1.90
   the crafter character must already have a Spellcraft menu item on one 
   of their quickbars for the program to recognize them as a crafter.
 
+  Export autoselects items who's gems are undone, and are the Active item.
+  It Disable items with no craftable flavor, or all Unused slots.  Added
+  the Spare item as an exportable slot, and you now specify the Bar, Row, 
+  and Pos as the starting slot, it reports the last bar, row, pos used.
+
   Prevent albion tank templates from showing Slash/Crush/Thrust resists
   while delving skills or showing skills while delving those resists.  Also
   prevents PvE Parry from being shown with Parry skill when delving either.
