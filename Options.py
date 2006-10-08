@@ -202,9 +202,9 @@ class Options(QDialog, Ui_B_Options):
             elif child.tagName == 'WindowY':
                 y = int(XMLHelper.getText(child.childNodes))
             elif child.tagName == 'WindowW':
-                pass # was w = int(XMLHelper.getText(child.childNodes))
+                w = int(XMLHelper.getText(child.childNodes))
             elif child.tagName == 'WindowH':
-                pass # was h = int(XMLHelper.getText(child.childNodes))
+                h = int(XMLHelper.getText(child.childNodes))
             elif child.tagName == 'RecentFiles':
                 for pchild in child.childNodes:
                     if pchild.nodeType == Node.TEXT_NODE: continue
@@ -231,18 +231,12 @@ class Options(QDialog, Ui_B_Options):
         if h > screenH:
             h = 589
 
-        if x < 0:
+        if x < 20 or x > (screenW - 20):
             x = 20
-        if y < 0:
+        if y < 20 or y > (screenH - 20):
             y = 20
 
-        if (x + w) > screenW:
-            x = 20
-        if (y + h) > screenH:
-            y = 20
-
-        self.parent.resize(w, h)
-        self.parent.move(x, y)
+        self.parent.setGeometry(x, y, w, h)
         self.loadPriceInfo(pricing)
         self.setParent()
             
