@@ -98,16 +98,16 @@ class Options(QDialog, Ui_B_Options):
         pricing = self.getPriceInfo()
 
         locxnode = document.createElement('WindowX')
-        locxnode.appendChild(document.createTextNode(str(self.parent.x())))
+        locxnode.appendChild(document.createTextNode(str(self.parent.pos().x())))
         rootnode.appendChild(locxnode)
         locynode = document.createElement('WindowY')
-        locynode.appendChild(document.createTextNode(str(self.parent.y())))
+        locynode.appendChild(document.createTextNode(str(self.parent.pos().y())))
         rootnode.appendChild(locynode)
         sizewnode = document.createElement('WindowW')
-        sizewnode.appendChild(document.createTextNode(str(self.parent.width())))
+        sizewnode.appendChild(document.createTextNode(str(self.parent.size().width())))
         rootnode.appendChild(sizewnode)
         sizehnode = document.createElement('WindowH')
-        sizehnode.appendChild(document.createTextNode(str(self.parent.height())))
+        sizehnode.appendChild(document.createTextNode(str(self.parent.size().height())))
         rootnode.appendChild(sizehnode)
         recentFiles = document.createElement('RecentFiles')
         for f in self.parent.recentFiles:
@@ -236,7 +236,8 @@ class Options(QDialog, Ui_B_Options):
         if y < 20 or y > (screenH - 20):
             y = 20
 
-        self.parent.setGeometry(x, y, w, h)
+        self.parent.resize(w, h)
+        self.parent.move(x, y)
         self.loadPriceInfo(pricing)
         self.setParent()
             
