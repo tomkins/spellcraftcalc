@@ -1287,6 +1287,9 @@ class ScWindow(QMainWindow, Ui_B_SC):
 
     def ItemNameEdited(self,a0):
         if self.nocalc: return
+        if self.ItemNameCombo.currentIndex() == -1:
+            # strange interactions with focusOut...
+            self.ItemNameCombo.setCurrentIndex(0)
         if self.ItemNameCombo.findText(a0) > 0: return
         item = self.itemattrlist[self.currentTabLabel]
         item.ItemName = unicode(self.ItemNameCombo.lineEdit().text())
