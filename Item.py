@@ -166,7 +166,7 @@ class ItemSlot:
 
     def gemUtility(self):
         mval = 0.0
-        if self.Amount == '0':
+        if self.Amount == '0' or self.Amount == '':
             pass
         elif self.Type == 'Stat':
             mval = ((int(self.Amount) - 1) / 3.0) * 2.0 + 1.0
