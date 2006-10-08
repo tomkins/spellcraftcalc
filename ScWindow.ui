@@ -1292,7 +1292,7 @@
             <rect>
               <x>315</x>
               <y>5</y>
-              <width>55</width>
+              <width>45</width>
               <height>21</height>
             </rect>
           </property>
@@ -1339,23 +1339,10 @@
             </rect>
           </property>
         </widget>
-        <widget class="QCheckBox" name="Equipped" >
-          <property name="geometry" >
-            <rect>
-              <x>483</x>
-              <y>5</y>
-              <width>71</width>
-              <height>21</height>
-            </rect>
-          </property>
-          <property name="text" >
-            <string>Equi&amp;pped</string>
-          </property>
-        </widget>
         <widget class="QLabel" name="ItemNameLabel" >
           <property name="geometry" >
             <rect>
-              <x>630</x>
+              <x>486</x>
               <y>5</y>
               <width>20</width>
               <height>21</height>
@@ -1371,11 +1358,24 @@
         <widget class="SearchingCombo" name="ItemNameCombo" >
           <property name="geometry" >
             <rect>
-              <x>653</x>
+              <x>506</x>
               <y>5</y>
-              <width>100</width>
+              <width>68</width>
               <height>21</height>
             </rect>
+          </property>
+        </widget>
+        <widget class="QCheckBox" name="Equipped" >
+          <property name="geometry" >
+            <rect>
+              <x>582</x>
+              <y>5</y>
+              <width>71</width>
+              <height>21</height>
+            </rect>
+          </property>
+          <property name="text" >
+            <string>Equi&amp;pped</string>
           </property>
         </widget>
         <widget class="QLabel" name="LabelGemType" >
@@ -2743,8 +2743,8 @@
     <tabstop>Bonus_Edit</tabstop>
     <tabstop>AFDPS_Edit</tabstop>
     <tabstop>Speed_Edit</tabstop>
-    <tabstop>Equipped</tabstop>
     <tabstop>ItemNameCombo</tabstop>
+    <tabstop>Equipped</tabstop>
     <tabstop>Type_1</tabstop>
     <tabstop>Amount_Edit_1</tabstop>
     <tabstop>Amount_Drop_1</tabstop>
