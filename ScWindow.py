@@ -615,9 +615,16 @@ class ScWindow(QMainWindow, Ui_B_SC):
         self.setTabOrder(prev,self.SkillsList)
         self.setTabOrder(self.SkillsList,self.OtherBonusList)
 
+    def showFixWidgets(self):
+        for i in range(0,6):
+            self.GemLabel[i].show()
+            self.Type[i].show()
+            self.Effect[i].show()
+
     def showDropWidgets(self, item):
         if not self.isVisible(): return
         self.GroupItemFrame.hide()
+        self.showFixWidgets()
         for w in self.switchOnType['player']:
             w.hide()
         for w in self.switchOnType['drop']:
@@ -633,6 +640,7 @@ class ScWindow(QMainWindow, Ui_B_SC):
 
     def showPlayerWidgets(self, item):
         self.GroupItemFrame.hide()
+        self.showFixWidgets()
         for w in self.switchOnType['drop']:
             w.hide()
         for w in self.switchOnType['player']:
@@ -649,10 +657,10 @@ class ScWindow(QMainWindow, Ui_B_SC):
                     self.Cost[i].hide()
                 self.Requirement[i].show()
             if item.slot(i).slotType() == 'unused':
-                if item.slot(i).slotType() == 'Unused':
+                if item.slot(i).type() == 'Unused':
                     self.GemLabel[i].hide()
                     self.Type[i].hide()
-                    self.Amount[i].hide()
+                    self.AmountDrop[i].hide()
                     self.Effect[i].hide()
                     self.Requirement[i].hide()
 
