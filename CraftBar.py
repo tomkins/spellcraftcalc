@@ -221,12 +221,12 @@ class CraftBar(QDialog, Ui_B_CraftBar):
         self.LoadGemsButton.setEnabled(1)
 
     def findPath(self,a0):
+        self.model.removeRows(0, self.model.rowCount())
         a0 = unicode(a0)
         reini = re.compile('(\w+)-(\d+)\.ini$')
         resec = re.compile('\[(\w+)\]')
         rectl = re.compile('[Hh]otkey_(\d+)=44,13,')
         if os.path.isdir(a0):
-            self.model.removeRows(0, self.model.rowCount())
             filelist = glob.glob(a0+'/*-*.ini')
             for file in filelist:
                 m = reini.search(file)
