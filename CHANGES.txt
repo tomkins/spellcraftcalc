@@ -1,60 +1,76 @@
-Updated ??/??/2006 - Version 1.46
+Updated 06/07/2006 - Version 1.90
 
-  Completely overhauled the UI from Qt3.3 to Qt4.1.  Some of the controls 
-  and options change behavior slightly because Qt4.1 is vastly changed.
-  This was necessary to simplify the licensing under the GPL and vastly
-  improve the interface on Windows.  With Qt4.1, sip and PyQt, the program
-  now works well (without any extra patches) on Mac/Aqua or Unix/X11.
+  This version, 1.90 is leading to the new 2.0 version.  Please consider
+  this version experimental for now, do not overwrite your old template
+  or item files that are important to you!  With the substantial changes
+  listed below, please expect some bugs and report them to the project
+  at http://sourceforge.net/projects/kscraft and click on 'Bugs'.
 
-  Drop v.s. Crafted Item are now folded into the item name (top right
-  corner of the item display.)  More than one of each may be stored for
-  each slot.  Edit menu's New Item, Move Item, and Delete Item let you
-  manage the list, and File - Load Item will add another item to the list.
-  Edit the name in the displayed box and the item name is changed (typing
-  a few characters in that box will not look up an item by name.)
+  You can leave feedback about these changes in the Users forum (choose
+  'Forums' from the menu at the project page.)  Until version 2.0 is
+  released, the project will continue to offer the prior version 1.45,
+  which is considered stable.
+
+  Completely overhauled the UI from Qt3.3 to Qt4.1 (the GUI library used
+  to create and manage the screens).  Some of the controls and options
+  change behavior slightly because Qt4.1 is vastly different.  This was
+  necessary to simplify the licensing under the GPL while improving the
+  interface on Windows.  With Qt4.1, sip and PyQt, the program now works
+  well (without any extra patches) on Mac/Aqua or Unix/X11.
+
+  Drop v.s. Crafted Item are now folded into each item, selected from the
+  item name dropdown (top right corner of the item display.)  Multiple drop
+  and crafted items may be stored in each slot!  Edit menu's New Item, 
+  Move Item, and Delete Item let you manage the list of items in the slot,
+  and File - Load Item will load it's new item at the front of the list.
+  Edit the name in the displayed box to change the item name is (typing
+  a few characters in that box does not look up an item by name.)
 
   The Item's Load/Save/Craft/Clear buttons can now be found in the menu,
   under File - Load/Save Item, Edit - Clear Item and View - Gem Crafting.
-  Hotkeys make this easier to reach (except for Clear Item, too dangerous.)
+  Hotkeys make these easier to reach (except for Clear Item, too dangerous.)
 
-  Introduce all sorts of crafted item and tincture bonuses available, 
+  Introduce the many crafted item bonuses and tincture effects available, 
   in the 4th - 6th slots, as applicable.  See the Edit - Item Type submenu.
-  No hints are offered for which bonux-by-item, since they are still in flux.
+  No hints are offered for which bonus-by-item, since they are still in flux.
   Check the item itself for its bonus, and please report to us any missing
-  crafted bonus.
+  crafted bonus.  There is a table of armor bonuses at www.craftsage.com.
 
   Added the optional 'Requirement' to every non-crafted item slot.  For
-  example, Legendary melee/magic/archery bonus is "vs. Monsters", and
-  effects might be "Level ##", while Artifacts might be "Artifact Level #"
+  example, Legendary melee/magic/archery bonus is "vs. Monsters", some
+  effects might be "Level ##", while Artifacts may be "Artifact Level #"
 
-  Item Price is now displayed.  Item Cost, until crafted, is now based 
-  on the (fractional!) estimate of how many gem makes, and that's based 
-  on the quality of the gems chosen, until the gem is marked Done in the 
-  Gem Crafting window (with the true number of remakes if any).
+  Item Price is now displayed.  Item Cost (until crafted) is now based 
+  on the (fractional!) estimate of how many gem makes, and that is based 
+  on the quality of the gems chosen.  Mark the gem Done in the Gem Crafting
+  window (with the true number of remakes if any) to fix the exact cost.
 
-  Template and item files are far smaller because default/empty data isn't
+  Template and item files are far smaller, because default/empty data isn't
   saved to the file.  Crafter's skill, material multipliers and other 
-  preferences are no longer loaded from or saved to a template, those are 
-  options specific for each user's configuration.
+  preferences are no longer loaded from or saved to a template, since those
+  options are specific to the -crafter's- own configuration.
 
   Export Gems to a specific character's .ini file now lists only crafters;
-  the character must already have a Spellcraft menu item in one of their
-  quickbar slots for the program to recognize them as a crafter.
+  the crafter character must already have a Spellcraft menu item on one 
+  of their quickbars for the program to recognize them as a crafter.
 
   Prevent albion tank templates from showing Slash/Crush/Thrust resists
-  while delving skills or showing skills while delving those resists.
+  while delving skills or showing skills while delving those resists.  Also
+  prevents PvE Parry from being shown with Parry skill when delving either.
 
-  Split Character.py tables apart from the constants.py module,
-  so these Realm / Class / Race / Server lists might be used 
-  for other kinds of DAoC programs.
+  Split Character.py tables apart from the constants.py module, so these 
+  Realm / Class / Race / Server lists might be used for other kinds of
+  DAoC programs.
 
-  Corrections to MultiTabBar and SearchingCombo controls, so that the 
-  form won't do 'unexpected' things when alt-tabbing between the game, 
-  for example.
+  Corrections to MultiTabBar and SearchingCombo controls, so that the form
+  won't do unexpected things (when alt-tabbing between the game for example.)
 
-  Players warned us they were confused by the existing save changes warning,
-  so it will now pop up a Save Template? question with Yes, No, or Cancel
-  options.  The program now correctly tracks if a template has changed.
+  Players told us they were confused by the existing 'template changed'
+  warning popup, so it will now pop up a Save Template? question with
+  Yes, No, or Cancel options.  The program now correctly tracks if a template
+  has changed.
+
+------------------------------------------------------------------------------
 
 Updated 06/09/2006 - Version 1.45
 
