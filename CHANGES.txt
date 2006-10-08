@@ -1,4 +1,8 @@
-Updated 06/07/2006 - Version 1.90
+Updated ??/??/2006 - Version 1.91
+
+
+
+Updated 10/07/2006 - Version 1.90
 
   This version, 1.90 is leading to the new 2.0 version.  Please consider
   this version experimental for now, do not overwrite your old template
