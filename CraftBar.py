@@ -15,10 +15,34 @@ import glob
 import re
 import string
 import SC
-import ConfigParser
+import ConfigParser 
 import sys
 
 
+class IniConfigParser(ConfigParser.RawConfigParser):
+    def __init__(self, defaults=None):
+        ConfigParser.RawConfigParser.__init__(self,defaults)
+
+    def write(self, fp):
+        """Override whitespace default from RawConfigParser."""
+        if self._defaults:
+            fp.write("[%s]\n" % DEFAULTSECT)
+            for (key, value) in self._defaults.items():
+                fp.write("%s=%s\n" % (key, str(value).replace('\n', '\n\t')))
+            fp.write("\n")
+        for section in self._sections:
+            fp.write("[%s]\n" % section)
+            for (key, value) in self._sections[section].items():
+                if key != "__name__":
+                    fp.write("%s=%s\n" %
+                             (key, str(value).replace('\n', '\n\t')))
+            fp.write("\n")
+
+    def optionxform(self, optionstr):
+        """Override lowercase default from RawConfigParser."""
+        return optionstr
+
+    
 class CraftBar(QDialog, Ui_B_CraftBar):
     def __init__(self,parent = None,name = None,modal = False,fl = Qt.Widget):
         QDialog.__init__(self, parent, fl)
@@ -41,29 +65,65 @@ class CraftBar(QDialog, Ui_B_CraftBar):
         if (modal):
             self.setModal(modal)
 
+        self.parent = parent
+        self.gemcount = 0
+        self.piecelist = { }
+        self.ItemSelect = [
+            self.ChestSelect, self.ArmsSelect, self.HeadSelect,
+            self.LegsSelect, self.FeetSelect, self.HandsSelect,
+            self.SpareSelect, self.RHSelect, self.LHSelect,
+            self.THSelect, self.RangedSelect,
+        ]
+        self.items = [
+            'Chest', 'Arms', 'Head', 'Legs', 'Feet', 'Hands',
+            'Spare', 'Right Hand', 'Left Hand', '2 Handed', 'Ranged',
+        ]
+
+        for i in range(0, len(self.ItemSelect)):
+            item = self.parent.itemattrlist[self.items[i]]
+            while item.ActiveState == 'drop' and item.next is not None:
+                item = item.next
+            if item.ActiveState == 'drop':
+                self.ItemSelect[i].setEnabled(False)
+                continue
+            done = True
+            unused = True
+            for slot in item.slots():
+                 if slot.crafted():
+                     unused = False
+                     if slot.done() == '0':
+                         done = False
+                         break
+            if unused:
+                self.ItemSelect[i].setEnabled(False)
+                continue
+            if not done and item == self.parent.itemattrlist[self.items[i]]:
+                self.ItemSelect[i].setCheckState(Qt.Checked)
+                
         self.connect(self.PathSelectButton,SIGNAL("clicked()"),self.openFileDialog)
         self.connect(self.PushButton19,SIGNAL("clicked()"),self.accept)
         self.connect(self.LoadGemsButton,SIGNAL("clicked()"),self.loadGems)
         self.connect(self.DaocPath,SIGNAL("textChanged(const QString&)"),self.findPath)
         self.connect(self.HotbarNum,SIGNAL("valueChanged(int)"),self.hotbarNumChanged)
-        self.connect(self.HotbarPos,SIGNAL("valueChanged(int)"),self.hotbarPosChanged)
+        self.connect(self.HotbarRow,SIGNAL("valueChanged(int)"),self.hotbarNumChanged)
+        self.connect(self.HotbarPos,SIGNAL("valueChanged(int)"),self.hotbarNumChanged)
         self.connect(self.ChestSelect,SIGNAL("clicked()"),self.PieceBoxChanged)
         self.connect(self.ArmsSelect,SIGNAL("clicked()"),self.PieceBoxChanged)
         self.connect(self.HeadSelect,SIGNAL("clicked()"),self.PieceBoxChanged)
         self.connect(self.LegsSelect,SIGNAL("clicked()"),self.PieceBoxChanged)
         self.connect(self.HandsSelect,SIGNAL("clicked()"),self.PieceBoxChanged)
         self.connect(self.FeetSelect,SIGNAL("clicked()"),self.PieceBoxChanged)
+        self.connect(self.SpareSelect,SIGNAL("clicked()"),self.PieceBoxChanged)
         self.connect(self.RangedSelect,SIGNAL("clicked()"),self.PieceBoxChanged)
         self.connect(self.RHSelect,SIGNAL("clicked()"),self.PieceBoxChanged)
         self.connect(self.LHSelect,SIGNAL("clicked()"),self.PieceBoxChanged)
         self.connect(self.THSelect,SIGNAL("clicked()"),self.PieceBoxChanged)
 
-        self.parent = parent
-        self.gemcount = 0
-        self.piecelist = { }
         self.HotbarNum.setValue(1)
+        self.HotbarRow.setValue(1)
         self.HotbarPos.setValue(1)
         self.DaocPath.setText(self.parent.DaocPath)
+        self.PieceBoxChanged()
         self.computeGemCount()
         self.computeBarEnd()
 
@@ -86,7 +146,7 @@ class CraftBar(QDialog, Ui_B_CraftBar):
         g.write(f.read())
         f.close()
         g.close()
-        CP = ConfigParser.SafeConfigParser()
+        CP = IniConfigParser()
         CP.read([filename])
         buttons = [-1, -1, -1]
         newbuttons = []
@@ -110,7 +170,10 @@ class CraftBar(QDialog, Ui_B_CraftBar):
                        "%s,/craft %s" % (Realms[i][0:3], Realms[i]))
         
         realm = self.parent.realm
-        slotcounter = (self.HotbarNum.value() - 1) * 10 + self.HotbarPos.value() - 1
+        slotcounter = (self.HotbarNum.value() - 1) * 100 \
+                    + (self.HotbarRow.value() - 1) * 10 \
+                     + self.HotbarPos.value() - 1
+        startslot = slotcounter
         for loc in TabList:
             item = self.piecelist.get(loc, None)
             if item is None: continue
@@ -140,7 +203,7 @@ class CraftBar(QDialog, Ui_B_CraftBar):
                                     break
                         if HotkeyGems[realm].has_key(gemname):
                             val = HotkeyGems[realm][gemname]
-                            buttonstr = '45,13%03d%02d' % (val, slot.gemLevel() - 1)
+                            buttonstr = '45,13%03d%02d,,-1' % (val, slot.gemLevel() - 1)
                             if slotcounter >= 200: 
                                 CP.set('Quickbar3', 'Hotkey_%d' % (slotcounter - 200), buttonstr)
                             elif slotcounter >= 100:
@@ -153,6 +216,8 @@ class CraftBar(QDialog, Ui_B_CraftBar):
         f = open(filename, 'w')
         CP.write(f)
         f.close()
+        self.LabelNumGems.setText('Number of Quickbar Buttons Loaded:')
+        self.NumGems.setText(str(slotcounter - startslot))
         self.LoadGemsButton.setEnabled(1)
 
     def findPath(self,a0):
@@ -205,24 +270,24 @@ class CraftBar(QDialog, Ui_B_CraftBar):
             self.DaocPath.setText(os.path.abspath(daocdir))
 
     def computeBarEnd(self):
-        eb = int((self.HotbarNum.value() * 10 + self.HotbarPos.value() + self.gemcount - 1) / 10)
-        ep = int((self.HotbarNum.value() * 10 + self.HotbarPos.value() + self.gemcount - 1) % 10)
-        if ep == 0: 
-            ep = 10
-            eb -= 1
-        if eb > 30 or self.gemcount == 0:
+        pos = (self.HotbarNum.value() - 1) * 100 \
+            + (self.HotbarRow.value() - 1) * 10 \
+             + self.HotbarPos.value() - 1
+        eb = int((pos + self.gemcount - 1) / 100) + 1
+        er = int((pos + self.gemcount - 1) / 10) % 10 + 1
+        ep = (pos + self.gemcount - 1) % 10 + 1
+        if eb > 3 or self.gemcount == 0:
             self.LoadGemsButton.setEnabled(0)
             self.EndBar.setText('-')
+            self.EndRow.setText('-')
             self.EndPos.setText('-')
         else:
             self.LoadGemsButton.setEnabled(1)
             self.EndBar.setText(str(eb))
+            self.EndRow.setText(str(er))
             self.EndPos.setText(str(ep))
 
     def hotbarNumChanged(self,a0):
-        self.computeBarEnd()
-
-    def hotbarPosChanged(self,a0):
         self.computeBarEnd()
 
     def computeGemCount(self):
@@ -232,29 +297,16 @@ class CraftBar(QDialog, Ui_B_CraftBar):
                 for slot in item.slots():
                     if slot.crafted():
                         self.gemcount += 1
+        self.LabelNumGems.setText('Total Number of Gems to Load:')
         self.NumGems.setText(str(self.gemcount))
 
     def PieceBoxChanged(self):
         self.piecelist = {}
-        if self.ChestSelect.isChecked():
-            self.piecelist['Chest'] = self.parent.itemattrlist['Chest']
-        if self.ArmsSelect.isChecked():
-            self.piecelist['Arms'] = self.parent.itemattrlist['Arms']
-        if self.HeadSelect.isChecked():
-            self.piecelist['Head'] = self.parent.itemattrlist['Head']
-        if self.LegsSelect.isChecked():
-            self.piecelist['Legs'] = self.parent.itemattrlist['Legs']
-        if self.FeetSelect.isChecked():
-            self.piecelist['Feet'] = self.parent.itemattrlist['Feet']
-        if self.HandsSelect.isChecked():
-            self.piecelist['Hands'] = self.parent.itemattrlist['Hands']
-        if self.RHSelect.isChecked():
-            self.piecelist['Right Hand'] = self.parent.itemattrlist['Right Hand']
-        if self.LHSelect.isChecked():
-            self.piecelist['Left Hand'] = self.parent.itemattrlist['Left Hand']
-        if self.THSelect.isChecked():
-            self.piecelist['2 Handed'] = self.parent.itemattrlist['2 Handed']
-        if self.RangedSelect.isChecked():
-            self.piecelist['Ranged'] = self.parent.itemattrlist['Ranged']
+        for i in range(0, len(self.ItemSelect)):
+            if self.ItemSelect[i].isChecked():
+                item = self.parent.itemattrlist[self.items[i]]
+                while item.ActiveState == 'drop' and item.next is not None:
+                    item = item.next
+                self.piecelist[self.items[i]] =item
         self.computeGemCount()
         self.computeBarEnd()
