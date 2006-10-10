@@ -1439,7 +1439,7 @@ class ScWindow(QMainWindow, Ui_B_SC):
         self.restoreItem(self.itemattrlist[self.currentTabLabel])
 
     def saveItem(self):
-        itemname = unicode(self.ItemNameCombo.text())
+        itemname = unicode(self.ItemNameCombo.currentText())
         if itemname == '':
             QMessageBox.critical(None, 'Error!', 
                 'Cannot save item - You must specifify a name!', 'OK')
