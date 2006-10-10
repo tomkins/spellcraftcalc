@@ -995,8 +995,8 @@ class ScWindow(QMainWindow, Ui_B_SC):
                                 not AllBonusList[self.realm][self.charclass] \
                                                 ['Skills Hash'].has_key(effect):
                             effects = tuple()
-                        else:
-                            effects = (effect,)
+                    else:
+                        effects = (effect,)
                     for effect in effects:
                         skillTotals[effect + ' Focus'] = amount
                 elif gemtype == 'Power':
