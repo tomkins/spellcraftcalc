@@ -1468,8 +1468,12 @@ class ScWindow(QMainWindow, Ui_B_SC):
             ext = ext[0]
         else:
             extstr = '*%s.xml *.%s' % (ext, ext)
-        extstr = "Items (%s)" % extstr
-        itemdir = os.path.join(self.ItemPath, self.realm, ext)
+        extstr = "Items (%s);;All Files (*.*)" % extstr
+        itemdir = self.ItemPath
+        if os.path.exists(os.path.join(itemdir, self.realm)):
+            itemdir = os.path.join(itemdir, self.realm)
+            if os.path.exists(os.path.join(itemdir, ext)):
+                itemdir = os.path.join(itemdir, ext)
         Qfd = ItemList.ItemListDialog(self, "Load Item", itemdir, extstr, 
                                       self.realm, self.charclass)
         if Qfd.exec_():
