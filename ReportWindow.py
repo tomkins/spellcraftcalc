@@ -360,7 +360,7 @@ class ReportWindow(QDialog, Ui_B_ReportWindow):
         self.ReportText.setHtml(self.reportHtml)
 
     def saveToHTML(self):
-        filename = QFileDialog.getSaveFileName(self, "Save HTML Report", "", "HTML (*.html)")
+        filename = QFileDialog.getSaveFileName(self, "Save HTML Report", "", "HTML (*.html);;All Files (*.*)")
         if filename is not None and str(filename) != '':
             try:
                 if re.compile('\.html$').search(str(filename)) is None:
@@ -374,7 +374,7 @@ class ReportWindow(QDialog, Ui_B_ReportWindow):
                     'Error writing to file: ' + filename, 'OK')
 
     def saveToText(self):
-        filename = QFileDialog.getSaveFileName(self, "Save Text Report", "", "Text (*.txt)")
+        filename = QFileDialog.getSaveFileName(self, "Save Text Report", "", "Text (*.txt);;All Files (*.*)")
         if filename is not None and str(filename) != '':
             try:
                 if re.compile('\.txt$').search(str(filename)) is None:

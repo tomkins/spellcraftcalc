@@ -18,7 +18,7 @@ def uixml(scwin):
     path = os.path.join(pwd, 'Reports')
     srcpath = os.path.join(path, 'windowgen.xml')
 
-    filename = QFileDialog.getOpenFileName(scwin, "Choose a report file", "", "Reports (*.xml)")
+    filename = QFileDialog.getOpenFileName(scwin, "Choose a report file", "", "Reports (*.xml);;All Files (*.*)")
     if str(filename) == '':
         return
     filename = str(filename)
@@ -96,7 +96,7 @@ def uixml(scwin):
             y += 17
     uixmlstr = uixmlheader + labeledstr + uixmlfooter
     savepath = os.path.join(path, 'custom1.xml')
-    filename = QFileDialog.getSaveFileName(path, "WindowXML (*.xml)")
+    filename = QFileDialog.getSaveFileName(path, "WindowXML (*.xml);;All Files (*.*)")
     if str(filename) == '':
         return
     try:
