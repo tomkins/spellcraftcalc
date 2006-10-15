@@ -1523,7 +1523,7 @@ class ScWindow(QMainWindow, Ui_B_SC):
             filename = os.path.join(self.TemplatePath, str(self.CharName.text()) + "_template.xml")
         filename = unicode(filename)
         filename = QFileDialog.getSaveFileName(self, "Save Template", filename, 
-                                               "Templates (*.xml)")
+                                               "Templates (*.xml);;All Files (*.*)")
         filename = unicode(filename)
         if filename != '':
             if filename[-4:] != '.xml':
@@ -1555,7 +1555,7 @@ class ScWindow(QMainWindow, Ui_B_SC):
                 if self.modified: return
         if len(args) == 0:
             filename = QFileDialog.getOpenFileName(self, "Open Template", self.TemplatePath, 
-                                                   "Templates (*.xml *.scc)")
+                                                   "Templates (*.xml *.scc);;All Files (*.*)")
         else:
             filename = args[0]
         filename = unicode(filename)
@@ -1720,7 +1720,7 @@ class ScWindow(QMainWindow, Ui_B_SC):
 
     def chooseReportFile(self):
         filename = QFileDialog.getOpenFileName(self, "Choose Report Format", "reports", 
-                                               "Reports (*.xml *.rpt)")
+                                               "Reports (*.xml *.rpt);;All Files (*.*)")
         if filename is not None and str(filename) != '':
             self.reportFile = str(filename)
 
