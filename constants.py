@@ -1131,7 +1131,8 @@ FileExt = d2({
     'Right Hand' :   'wep', 
     'Left Hand' :   ('lhwep', 'shield',),
     '2 Handed' :    ('2hwep', 'lhwep', 'wep',),
-    'Ranged' :       'ranged', 
+    'Ranged' :       'ranged',
+    'Mythical' :     'mythic' 
     'Spare' :        '*', 
 })
 
