@@ -1439,22 +1439,32 @@ class ScWindow(QMainWindow, Ui_B_SC):
         self.restoreItem(self.itemattrlist[self.currentTabLabel])
 
     def saveItem(self):
-        itemname = unicode(self.ItemNameCombo.currentText())
+        itemname = string.replace(unicode(self.ItemNameCombo.currentText()), ' ', '_')
         if itemname == '':
             QMessageBox.critical(None, 'Error!', 
-                'Cannot save item - You must specifify a name!', 'OK')
+                'Cannot save item - You must specify a name!', 'OK')
             return
         item = self.itemattrlist[self.currentTabLabel]
+
         ext = FileExt[self.currentTabLabel]
+        extstr = ''
         if not isinstance(ext, types.StringType):
+            for e in ext:
+                extstr += '*%s.xml ' % e
             ext = ext[0]
-        itemdir = os.path.join(os.path.dirname(os.path.abspath(sys.argv[0])), 
-                               'items', self.realm, ext)
+        else:
+            extstr = '*%s.xml' % ext
+        extstr = "Items (%s);;All Files (*.*)" % extstr.rstrip()
+
+        itemdir = os.path.join(self.ItemPath, self.realm, ext)
         if not os.path.exists(itemdir):
             os.makedirs(itemdir)
-        filename = os.path.join(itemdir, string.replace(itemname, ' ', '_') + '_' \
-            + ext \
-            + '.xml')
+        filename = os.path.join(itemdir, itemname + '_' + ext + '.xml')
+
+        filename = QFileDialog.getSaveFileName(self, "Save Item", filename, 
+                                               "Templates (*.xml);;All Files (*.*)")
+        filename = unicode(filename)
+
         item.save(filename)
         QMessageBox.information(None, 'Success!',
                 '%s successfully saved!' % itemname, 'OK')
@@ -1468,7 +1478,7 @@ class ScWindow(QMainWindow, Ui_B_SC):
             ext = ext[0]
         else:
             extstr = '*%s.xml *.%s' % (ext, ext)
-        extstr = "Items (%s);;All Files (*.*)" % extstr
+        extstr = "Items (%s);;All Files (*.*)" % extstr.rstrip()
         itemdir = self.ItemPath
         if os.path.exists(os.path.join(itemdir, self.realm)):
             itemdir = os.path.join(itemdir, self.realm)
