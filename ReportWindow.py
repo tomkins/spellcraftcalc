@@ -111,7 +111,7 @@ class ReportWindow(QDialog, Ui_B_ReportWindow):
         self.gemnames = { }
         self.totalcost = 0
         if showslot == 0:
-            lastslot = 5
+            lastslot = 6
         else:
             lastslot = showslot
         for loc, item in itemlist.items():
@@ -265,7 +265,7 @@ class ReportWindow(QDialog, Ui_B_ReportWindow):
                 else:
                     iteminfo[key][gemnum]['effect'] = effect +' '+ gemtype
                 iteminfo[key][gemnum]['quality'] = qua
-                if item.slot(slot).slotType == 'player':
+                if item.slot(slot).slotType() == 'player':
                     iteminfo[key][gemnum]['name'] = item.slot(slot).gemName(self.parent.realm)
                 else:
                     iteminfo[key][gemnum]['name'] = ''
