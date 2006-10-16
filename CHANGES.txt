@@ -1,6 +1,15 @@
-Updated ??/??/2006 - Version 1.91
+Updated 10/15/2006 - Version 1.91
 
+  File menu option 'Item Database Path' will change the path of the items
+  tree (containing All/Albion/Hibernia/Midgard directory trees) and even
+  create all the realm subdirs and item slot sub-subdirs.
 
+  If 'Load Item' isn't pointing to a Realm/Slot/ directory tree, stop
+  showing the filesystem root.  For 'Save Item', prompt to save the item
+  file with it's filename (the Item_Name_slot.xml), and don't create the
+  subdirectories automatically (for users who don't care for the layout).
+
+  Fixed 'Save Item', which was broken in 1.90.
 
 Updated 10/07/2006 - Version 1.90
 
