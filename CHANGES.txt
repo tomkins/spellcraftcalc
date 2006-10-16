@@ -1,5 +1,7 @@
 Updated 10/15/2006 - Version 1.91
 
+  Recall the most recently used Realm on startup.
+
   File menu option 'Item Database Path' will change the path of the items
   tree (containing All/Albion/Hibernia/Midgard directory trees) and even
   create all the realm subdirs and item slot sub-subdirs.
