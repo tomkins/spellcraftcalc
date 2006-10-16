@@ -509,9 +509,11 @@ class Item:
                 self.next.Equipped = '0'
                 self.next.ActiveState = type
                 self.next.itemslots = slots[type]
+                if self.ActiveState == 'player': self.ItemName = ''
+                if self.next.ActiveState == 'player': self.next.ItemName = ''
         item = self
         while item:
-            if item.ActiveState == 'player':
+            if item.ActiveState == 'player' and len(item.ItemName) == 0:
                 item.ItemName = 'Crafted Item' + namehint
             elif len(item.ItemName) == 0:
                 item.ItemName = 'Drop Item' + namehint
