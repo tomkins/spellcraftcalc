@@ -492,6 +492,7 @@ class ScWindow(QMainWindow, Ui_B_SC):
                                 QKeySequence(Qt.CTRL+Qt.SHIFT+Qt.Key_L))
         self.filemenu.addAction('Sa&ve Item...', self.saveItem,
                                 QKeySequence(Qt.CTRL+Qt.SHIFT+Qt.Key_S))
+        self.filemenu.addAction('Item Database...', self.chooseItemPath)
         self.filemenu.addSeparator()
         self.filemenu.addAction('Export &Quickbars...', self.openCraftBars)
         self.filemenu.addAction('Export &UI XML (Beta)...', self.generateUIXML)
@@ -1438,10 +1439,33 @@ class ScWindow(QMainWindow, Ui_B_SC):
         self.modified = 1
         self.restoreItem(self.itemattrlist[self.currentTabLabel])
 
+    def chooseItemPath(self):
+        itemdir = QFileDialog.getExistingDirectory(self, 'Select Items Database Tree', self.ItemPath)
+        if itemdir:
+            self.ItemPath = os.path.abspath(unicode(itemdir))
+            ret = QMessageBox.question(self, 'Create Database Directories?', 
+                                      "Create realm and item slot directories underneath %s", 
+                                      QMessageBox.Yes, QMessageBox.No)
+            if ret == QMessageBox.Yes:
+                realms = Realms
+                realms.append("All")
+                for realm in realms:
+                    itempath = os.path.join(self.ItemPath, self.realm)
+                    if not os.path.exists(itempath):
+                        os.makedirs(itempath)
+                    for ext in FileExt:
+                        if ext == '*':
+                            continue
+                        if not isinstance(ext, types.StringType):
+                            ext = ext[0]
+                        itempath = os.path.join(self.ItemPath, self.realm, ext)
+                        if not os.path.exists(itempath):
+                            os.makedirs(itempath)
+
     def saveItem(self):
         itemname = string.replace(unicode(self.ItemNameCombo.currentText()), ' ', '_')
         if itemname == '':
-            QMessageBox.critical(None, 'Error!', 
+            QMessageBox.critical(self, 'Error!', 
                 'Cannot save item - You must specify a name!', 'OK')
             return
         item = self.itemattrlist[self.currentTabLabel]
@@ -1455,20 +1479,25 @@ class ScWindow(QMainWindow, Ui_B_SC):
         else:
             extstr = '*%s.xml' % ext
         extstr = "Items (%s);;All Files (*.*)" % extstr.rstrip()
-
-        itemdir = os.path.join(self.ItemPath, self.realm, ext)
-        if not os.path.exists(itemdir):
-            os.makedirs(itemdir)
-        filename = os.path.join(itemdir, itemname + '_' + ext + '.xml')
-
+        itemname = itemname + '_' + ext + '.xml'
+        itemdir = self.ItemPath
+        recentdir = []
+        if os.path.exists(os.path.join(itemdir, self.realm, ext)):
+            itemdir = os.path.join(self.ItemPath, self.realm, ext)
+            if self.coop:
+                for realm in Realms:
+                    if realm != self.realm:
+                        recentdir.append(os.path.join(self.ItemPath, realm, ext))
+            recentdir.append(os.path.join(self.ItemPath, "All", ext))
+        filename = os.path.join(itemdir, itemname)
         filename = QFileDialog.getSaveFileName(self, "Save Item", filename, 
                                                "Templates (*.xml);;All Files (*.*)")
         filename = unicode(filename)
+        if filename != '':
+            item.save(filename)
+            # QMessageBox.information(None, 'Success!',
+            #         '%s successfully saved!' % itemname, 'OK')
 
-        item.save(filename)
-        QMessageBox.information(None, 'Success!',
-                '%s successfully saved!' % itemname, 'OK')
-        
     def loadItem(self):
         ext = FileExt[self.currentTabLabel]
         extstr = ''
@@ -1480,17 +1509,22 @@ class ScWindow(QMainWindow, Ui_B_SC):
             extstr = '*%s.xml *.%s' % (ext, ext)
         extstr = "Items (%s);;All Files (*.*)" % extstr.rstrip()
         itemdir = self.ItemPath
-        if os.path.exists(os.path.join(itemdir, self.realm)):
-            itemdir = os.path.join(itemdir, self.realm)
-            if os.path.exists(os.path.join(itemdir, ext)):
-                itemdir = os.path.join(itemdir, ext)
+        recentdir = []
+        if os.path.exists(os.path.join(itemdir, self.realm, ext)):
+            itemdir = os.path.join(self.ItemPath, self.realm, ext)
+            if self.coop:
+                for realm in Realms:
+                    if realm != self.realm:
+                        recentdir.append(os.path.join(self.ItemPath, realm, ext))
+            recentdir.append(os.path.join(self.ItemPath, "All", ext))
         Qfd = ItemList.ItemListDialog(self, "Load Item", itemdir, extstr, 
                                       self.realm, self.charclass)
+        Qfd.setHistory(recentdir)
         if Qfd.exec_():
             if Qfd.selectedFiles().count() > 0:
                 filename = unicode(Qfd.selectedFiles()[0])
                 item = Item(realm=self.realm,state='drop',loc=self.currentTabLabel)
-                if item.load(filename,str(self.itemnumbering)) == -1 : return
+                if item.load(filename,str(self.itemnumbering)) == -1: return
                 if string.lower(item.Realm) != string.lower(self.realm)\
                     and string.lower(item.Realm) != 'all'\
                     and not self.coop:
