@@ -415,7 +415,7 @@ class Item:
         f.write(XMLHelper.writexml(self.asXML(), UnicodeStringIO(), '', '\t', '\n'))
         f.close()
 
-    def load(self, filename, silent = 0):
+    def load(self, filename, namehint = '', silent = 0):
         try:
             f = file(filename, 'r')
         except IOError:
@@ -429,7 +429,7 @@ class Item:
             try:
                 xmldoc = parseString(docstr)
                 items = xmldoc.getElementsByTagName('SCItem')
-                self.loadFromXML(items[0])
+                self.loadFromXML(items[0], namehint)
             except:
                 if not silent:
                     QMessageBox.critical(None, 'Error!', 
