@@ -492,7 +492,7 @@ class ScWindow(QMainWindow, Ui_B_SC):
                                 QKeySequence(Qt.CTRL+Qt.SHIFT+Qt.Key_L))
         self.filemenu.addAction('Sa&ve Item...', self.saveItem,
                                 QKeySequence(Qt.CTRL+Qt.SHIFT+Qt.Key_S))
-        self.filemenu.addAction('Item Database...', self.chooseItemPath)
+        self.filemenu.addAction('Item Database Path...', self.chooseItemPath)
         self.filemenu.addSeparator()
         self.filemenu.addAction('Export &Quickbars...', self.openCraftBars)
         self.filemenu.addAction('Export &UI XML (Beta)...', self.generateUIXML)
@@ -1444,21 +1444,22 @@ class ScWindow(QMainWindow, Ui_B_SC):
         if itemdir:
             self.ItemPath = os.path.abspath(unicode(itemdir))
             ret = QMessageBox.question(self, 'Create Database Directories?', 
-                                      "Create realm and item slot directories underneath %s", 
+                                      "Create realm and item slot directories" +\
+                                      " underneath %s ?" % itemdir, 
                                       QMessageBox.Yes, QMessageBox.No)
             if ret == QMessageBox.Yes:
-                realms = Realms
+                realms = list(Realms)
                 realms.append("All")
                 for realm in realms:
-                    itempath = os.path.join(self.ItemPath, self.realm)
+                    itempath = os.path.join(self.ItemPath, realm)
                     if not os.path.exists(itempath):
                         os.makedirs(itempath)
-                    for ext in FileExt:
+                    for ext in FileExt.values():
                         if ext == '*':
                             continue
                         if not isinstance(ext, types.StringType):
                             ext = ext[0]
-                        itempath = os.path.join(self.ItemPath, self.realm, ext)
+                        itempath = os.path.join(self.ItemPath, realm, ext)
                         if not os.path.exists(itempath):
                             os.makedirs(itempath)
 
