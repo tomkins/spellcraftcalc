@@ -30,7 +30,8 @@
 <dd>Gem 2: <chest gem2 amount 2/> <chest gem2 effect/> - <chest gem2 quality/> <chest gem2 name/></dd>
 <dd>Gem 3: <chest gem3 amount 2/> <chest gem3 effect/> - <chest gem3 quality/> <chest gem3 name/></dd>
 <dd>Gem 4: <chest gem4 amount 2/> <chest gem4 effect/> - <chest gem4 quality/> <chest gem4 name/></dd>
-<dd>Proc:  <chest gem5 amount 2/> <chest gem5 effect/> - <chest gem5 name/></dd>
+<dd>Effect 5: <chest gem5 amount 2/> <chest gem5 effect/> - <chest gem5 name/></dd>
+<dd>Effect 6: <chest gem6 amount 2/> <chest gem6 effect/> - <chest gem6 name/></dd>
 <dd>Utility: <chest utility/></dd>
 </if>
 <if chest drop>
@@ -45,7 +46,9 @@
 <dd>Effect 7: <chest gem7 amount 3/> <chest gem7 effect/></dd>
 <dd>Effect 8: <chest gem8 amount 3/> <chest gem8 effect/></dd>
 <dd>Effect 9: <chest gem9 amount 3/> <chest gem9 effect/></dd>
-<dd>Effect10: <chest gem10 amount 3/> <chest gem10 effect/></dd>
+<dd>Effect 10: <chest gem10 amount 3/> <chest gem10 effect/></dd>
+<dd>Effect 11: <chest gem11 amount 3/> <chest gem11 effect/></dd>
+<dd>Effect 12: <chest gem12 amount 3/> <chest gem12 effect/></dd>
 <dd>Utility: <chest utility/></dd>
 </if>
 </ifnotempty>
@@ -57,7 +60,8 @@
 <dd>Gem 2: <arms gem2 amount 2/> <arms gem2 effect/> - <arms gem2 quality/> <arms gem2 name/></dd>
 <dd>Gem 3: <arms gem3 amount 2/> <arms gem3 effect/> - <arms gem3 quality/> <arms gem3 name/></dd>
 <dd>Gem 4: <arms gem4 amount 2/> <arms gem4 effect/> - <arms gem4 quality/> <arms gem4 name/></dd>
-<dd>Proc:  <arms gem5 amount 2/> <arms gem5 effect/> - <arms gem5 name/></dd>
+<dd>Effect 5: <arms gem5 amount 2/> <arms gem5 effect/> - <arms gem5 name/></dd>
+<dd>Effect 6: <arms gem6 amount 2/> <arms gem6 effect/> - <arms gem6 name/></dd>
 <dd>Utility: <arms utility/></dd>
 </if>
 <if arms drop>
@@ -72,7 +76,9 @@
 <dd>Effect 7: <arms gem7 amount 3/> <arms gem7 effect/></dd>
 <dd>Effect 8: <arms gem8 amount 3/> <arms gem8 effect/></dd>
 <dd>Effect 9: <arms gem9 amount 3/> <arms gem9 effect/></dd>
-<dd>Effect10: <arms gem10 amount 3/> <arms gem10 effect/></dd>
+<dd>Effect 10: <arms gem10 amount 3/> <arms gem10 effect/></dd>
+<dd>Effect 11: <arms gem11 amount 3/> <arms gem11 effect/></dd>
+<dd>Effect 12: <arms gem12 amount 3/> <arms gem12 effect/></dd>
 <dd>Utility: <arms utility/></dd>
 </if>
 </ifnotempty>
@@ -84,7 +90,8 @@
 <dd>Gem 2: <head gem2 amount 2/> <head gem2 effect/> - <head gem2 quality/> <head gem2 name/></dd>
 <dd>Gem 3: <head gem3 amount 2/> <head gem3 effect/> - <head gem3 quality/> <head gem3 name/></dd>
 <dd>Gem 4: <head gem4 amount 2/> <head gem4 effect/> - <head gem4 quality/> <head gem4 name/></dd>
-<dd>Proc:  <head gem5 amount 2/> <head gem5 effect/> - <head gem5 name/></dd>
+<dd>Effect 5: <head gem5 amount 2/> <head gem5 effect/> - <head gem5 name/></dd>
+<dd>Effect 6: <head gem6 amount 2/> <head gem6 effect/> - <head gem6 name/></dd>
 <dd>Utility: <head utility/></dd>
 </if>
 <if head drop>
@@ -99,7 +106,9 @@
 <dd>Effect 7: <head gem7 amount 3/> <head gem7 effect/></dd>
 <dd>Effect 8: <head gem8 amount 3/> <head gem8 effect/></dd>
 <dd>Effect 9: <head gem9 amount 3/> <head gem9 effect/></dd>
-<dd>Effect10: <head gem10 amount 3/> <head gem10 effect/></dd>
+<dd>Effect 10: <head gem10 amount 3/> <head gem10 effect/></dd>
+<dd>Effect 11: <head gem11 amount 3/> <head gem11 effect/></dd>
+<dd>Effect 12: <head gem12 amount 3/> <head gem12 effect/></dd>
 <dd>Utility: <head utility/></dd>
 </if>
 </ifnotempty>
@@ -111,7 +120,8 @@
 <dd>Gem 2: <legs gem2 amount 2/> <legs gem2 effect/> - <legs gem2 quality/> <legs gem2 name/></dd>
 <dd>Gem 3: <legs gem3 amount 2/> <legs gem3 effect/> - <legs gem3 quality/> <legs gem3 name/></dd>
 <dd>Gem 4: <legs gem4 amount 2/> <legs gem4 effect/> - <legs gem4 quality/> <legs gem4 name/></dd>
-<dd>Proc:  <legs gem5 amount 2/> <legs gem5 effect/> - <legs gem5 name/></dd>
+<dd>Effect 5: <legs gem5 amount 2/> <legs gem5 effect/> - <legs gem5 name/></dd>
+<dd>Effect 6: <legs gem6 amount 2/> <legs gem6 effect/> - <legs gem6 name/></dd>
 <dd>Utility: <legs utility/></dd>
 </if>
 <if legs drop>
@@ -126,7 +136,9 @@
 <dd>Effect 7: <legs gem7 amount 3/> <legs gem7 effect/></dd>
 <dd>Effect 8: <legs gem8 amount 3/> <legs gem8 effect/></dd>
 <dd>Effect 9: <legs gem9 amount 3/> <legs gem9 effect/></dd>
-<dd>Effect10: <legs gem10 amount 3/> <legs gem10 effect/></dd>
+<dd>Effect 10: <legs gem10 amount 3/> <legs gem10 effect/></dd>
+<dd>Effect 11: <legs gem11 amount 3/> <legs gem11 effect/></dd>
+<dd>Effect 12: <legs gem12 amount 3/> <legs gem12 effect/></dd>
 <dd>Utility: <legs utility/></dd>
 </if>
 </ifnotempty>
@@ -138,7 +150,8 @@
 <dd>Gem 2: <hands gem2 amount 2/> <hands gem2 effect/> - <hands gem2 quality/> <hands gem2 name/></dd>
 <dd>Gem 3: <hands gem3 amount 2/> <hands gem3 effect/> - <hands gem3 quality/> <hands gem3 name/></dd>
 <dd>Gem 4: <hands gem4 amount 2/> <hands gem4 effect/> - <hands gem4 quality/> <hands gem4 name/></dd>
-<dd>Proc:  <hands gem5 amount 2/> <hands gem5 effect/> - <hands gem5 name/></dd>
+<dd>Effect 5: <hands gem5 amount 2/> <hands gem5 effect/> - <hands gem5 name/></dd>
+<dd>Effect 6: <hands gem6 amount 2/> <hands gem6 effect/> - <hands gem6 name/></dd>
 <dd>Utility: <hands utility/></dd>
 </if>
 <if hands drop>
@@ -153,7 +166,9 @@
 <dd>Effect 7: <hands gem7 amount 3/> <hands gem7 effect/></dd>
 <dd>Effect 8: <hands gem8 amount 3/> <hands gem8 effect/></dd>
 <dd>Effect 9: <hands gem9 amount 3/> <hands gem9 effect/></dd>
-<dd>Effect10: <hands gem10 amount 3/> <hands gem10 effect/></dd>
+<dd>Effect 10: <hands gem10 amount 3/> <hands gem10 effect/></dd>
+<dd>Effect 11: <hands gem11 amount 3/> <hands gem11 effect/></dd>
+<dd>Effect 12: <hands gem12 amount 3/> <hands gem12 effect/></dd>
 <dd>Utility: <hands utility/></dd>
 </if>
 </ifnotempty>
@@ -165,7 +180,8 @@
 <dd>Gem 2: <feet gem2 amount 2/> <feet gem2 effect/> - <feet gem2 quality/> <feet gem2 name/></dd>
 <dd>Gem 3: <feet gem3 amount 2/> <feet gem3 effect/> - <feet gem3 quality/> <feet gem3 name/></dd>
 <dd>Gem 4: <feet gem4 amount 2/> <feet gem4 effect/> - <feet gem4 quality/> <feet gem4 name/></dd>
-<dd>Proc:  <feet gem5 amount 2/> <feet gem5 effect/> - <feet gem5 name/></dd>
+<dd>Effect 5: <feet gem5 amount 2/> <feet gem5 effect/> - <feet gem5 name/></dd>
+<dd>Effect 6: <feet gem6 amount 2/> <feet gem6 effect/> - <feet gem6 name/></dd>
 <dd>Utility: <feet utility/></dd>
 </if>
 <if feet drop>
@@ -180,7 +196,9 @@
 <dd>Effect 7: <feet gem7 amount 3/> <feet gem7 effect/></dd>
 <dd>Effect 8: <feet gem8 amount 3/> <feet gem8 effect/></dd>
 <dd>Effect 9: <feet gem9 amount 3/> <feet gem9 effect/></dd>
-<dd>Effect10: <feet gem10 amount 3/> <feet gem10 effect/></dd>
+<dd>Effect 10: <feet gem10 amount 3/> <feet gem10 effect/></dd>
+<dd>Effect 11: <feet gem11 amount 3/> <feet gem11 effect/></dd>
+<dd>Effect 12: <feet gem12 amount 3/> <feet gem12 effect/></dd>
 <dd>Utility: <feet utility/></dd>
 </if>
 </ifnotempty>
@@ -192,7 +210,8 @@
 <dd>Gem 2: <rweapon gem2 amount 2/> <rweapon gem2 effect/> - <rweapon gem2 quality/> <rweapon gem2 name/></dd>
 <dd>Gem 3: <rweapon gem3 amount 2/> <rweapon gem3 effect/> - <rweapon gem3 quality/> <rweapon gem3 name/></dd>
 <dd>Gem 4: <rweapon gem4 amount 2/> <rweapon gem4 effect/> - <rweapon gem4 quality/> <rweapon gem4 name/></dd>
-<dd>Proc:  <rweapon gem5 amount 2/> <rweapon gem5 effect/> - <rweapon gem5 name/></dd>
+<dd>Effect 5: <rweapon gem5 amount 2/> <rweapon gem5 effect/> - <rweapon gem5 name/></dd>
+<dd>Effect 6: <rweapon gem6 amount 2/> <rweapon gem6 effect/> - <rweapon gem6 name/></dd>
 <dd>Utility: <rweapon utility/></dd>
 </if>
 <if rweapon drop>
@@ -207,7 +226,9 @@
 <dd>Effect 7: <rweapon gem7 amount 3/> <rweapon gem7 effect/></dd>
 <dd>Effect 8: <rweapon gem8 amount 3/> <rweapon gem8 effect/></dd>
 <dd>Effect 9: <rweapon gem9 amount 3/> <rweapon gem9 effect/></dd>
-<dd>Effect10: <rweapon gem10 amount 3/> <rweapon gem10 effect/></dd>
+<dd>Effect 10: <rweapon gem10 amount 3/> <rweapon gem10 effect/></dd>
+<dd>Effect 11: <rweapon gem11 amount 3/> <rweapon gem11 effect/></dd>
+<dd>Effect 12: <rweapon gem12 amount 3/> <rweapon gem12 effect/></dd>
 <dd>Utility: <rweapon utility/></dd>
 </if>
 </ifnotempty>
@@ -219,7 +240,8 @@
 <dd>Gem 2: <lweapon gem2 amount 2/> <lweapon gem2 effect/> - <lweapon gem2 quality/> <lweapon gem2 name/></dd>
 <dd>Gem 3: <lweapon gem3 amount 2/> <lweapon gem3 effect/> - <lweapon gem3 quality/> <lweapon gem3 name/></dd>
 <dd>Gem 4: <lweapon gem4 amount 2/> <lweapon gem4 effect/> - <lweapon gem4 quality/> <lweapon gem4 name/></dd>
-<dd>Proc:  <lweapon gem5 amount 2/> <lweapon gem5 effect/> - <lweapon gem5 name/></dd>
+<dd>Effect 5: <lweapon gem5 amount 2/> <lweapon gem5 effect/> - <lweapon gem5 name/></dd>
+<dd>Effect 6: <lweapon gem6 amount 2/> <lweapon gem6 effect/> - <lweapon gem6 name/></dd>
 <dd>Utility: <lweapon utility/></dd>
 </if>
 <if lweapon drop>
@@ -234,7 +256,9 @@
 <dd>Effect 7: <lweapon gem7 amount 3/> <lweapon gem7 effect/></dd>
 <dd>Effect 8: <lweapon gem8 amount 3/> <lweapon gem8 effect/></dd>
 <dd>Effect 9: <lweapon gem9 amount 3/> <lweapon gem9 effect/></dd>
-<dd>Effect10: <lweapon gem10 amount 3/> <lweapon gem10 effect/></dd>
+<dd>Effect 10: <lweapon gem10 amount 3/> <lweapon gem10 effect/></dd>
+<dd>Effect 11: <lweapon gem11 amount 3/> <lweapon gem11 effect/></dd>
+<dd>Effect 12: <lweapon gem12 amount 3/> <lweapon gem12 effect/></dd>
 <dd>Utility: <lweapon utility/></dd>
 </if>
 </ifnotempty>
@@ -246,7 +270,8 @@
 <dd>Gem 2: <2handed gem2 amount 2/> <2handed gem2 effect/> - <2handed gem2 quality/> <2handed gem2 name/></dd>
 <dd>Gem 3: <2handed gem3 amount 2/> <2handed gem3 effect/> - <2handed gem3 quality/> <2handed gem3 name/></dd>
 <dd>Gem 4: <2handed gem4 amount 2/> <2handed gem4 effect/> - <2handed gem4 quality/> <2handed gem4 name/></dd>
-<dd>Proc:  <2handed gem5 amount 2/> <2handed gem5 effect/> - <2handed gem5 name/></dd>
+<dd>Effect 5: <2handed gem5 amount 2/> <2handed gem5 effect/> - <2handed gem5 name/></dd>
+<dd>Effect 6: <2handed gem6 amount 2/> <2handed gem6 effect/> - <2handed gem6 name/></dd>
 <dd>Utility: <2handed utility/></dd>
 </if>
 <if 2handed drop>
@@ -261,7 +286,9 @@
 <dd>Effect 7: <2handed gem7 amount 3/> <2handed gem7 effect/></dd>
 <dd>Effect 8: <2handed gem8 amount 3/> <2handed gem8 effect/></dd>
 <dd>Effect 9: <2handed gem9 amount 3/> <2handed gem9 effect/></dd>
-<dd>Effect10: <2handed gem10 amount 3/> <2handed gem10 effect/></dd>
+<dd>Effect 10: <2handed gem10 amount 3/> <2handed gem10 effect/></dd>
+<dd>Effect 11: <2handed gem11 amount 3/> <2handed gem11 effect/></dd>
+<dd>Effect 12: <2handed gem12 amount 3/> <2handed gem12 effect/></dd>
 <dd>Utility: <2handed utility/></dd>
 </if>
 </ifnotempty>
@@ -273,7 +300,8 @@
 <dd>Gem 2: <ranged gem2 amount 2/> <ranged gem2 effect/> - <ranged gem2 quality/> <ranged gem2 name/></dd>
 <dd>Gem 3: <ranged gem3 amount 2/> <ranged gem3 effect/> - <ranged gem3 quality/> <ranged gem3 name/></dd>
 <dd>Gem 4: <ranged gem4 amount 2/> <ranged gem4 effect/> - <ranged gem4 quality/> <ranged gem4 name/></dd>
-<dd>Proc:  <ranged gem5 amount 2/> <ranged gem5 effect/> - <ranged gem5 name/></dd>
+<dd>Effect 5: <ranged gem5 amount 2/> <ranged gem5 effect/> - <ranged gem5 name/></dd>
+<dd>Effect 6: <ranged gem6 amount 2/> <ranged gem6 effect/> - <ranged gem6 name/></dd>
 <dd>Utility: <ranged utility/></dd>
 </if>
 <if ranged drop>
@@ -288,7 +316,9 @@
 <dd>Effect 7: <ranged gem7 amount 3/> <ranged gem7 effect/></dd>
 <dd>Effect 8: <ranged gem8 amount 3/> <ranged gem8 effect/></dd>
 <dd>Effect 9: <ranged gem9 amount 3/> <ranged gem9 effect/></dd>
-<dd>Effect10: <ranged gem10 amount 3/> <ranged gem10 effect/></dd>
+<dd>Effect 10: <ranged gem10 amount 3/> <ranged gem10 effect/></dd>
+<dd>Effect 11: <ranged gem11 amount 3/> <ranged gem11 effect/></dd>
+<dd>Effect 12: <ranged gem12 amount 3/> <ranged gem12 effect/></dd>
 <dd>Utility: <ranged utility/></dd>
 </if>
 </ifnotempty>
@@ -305,7 +335,9 @@
 <dd>Effect 7: <neck gem7 amount 3/> <neck gem7 effect/></dd>
 <dd>Effect 8: <neck gem8 amount 3/> <neck gem8 effect/></dd>
 <dd>Effect 9: <neck gem9 amount 3/> <neck gem9 effect/></dd>
-<dd>Effect10: <neck gem10 amount 3/> <neck gem10 effect/></dd>
+<dd>Effect 10: <neck gem10 amount 3/> <neck gem10 effect/></dd>
+<dd>Effect 11: <neck gem11 amount 3/> <neck gem11 effect/></dd>
+<dd>Effect 12: <neck gem12 amount 3/> <neck gem12 effect/></dd>
 <dd>Utility: <neck utility/></dd>
 </ifnotempty>
 <ifnotempty cloak>
@@ -321,7 +353,9 @@
 <dd>Effect 7: <cloak gem7 amount 3/> <cloak gem7 effect/></dd>
 <dd>Effect 8: <cloak gem8 amount 3/> <cloak gem8 effect/></dd>
 <dd>Effect 9: <cloak gem9 amount 3/> <cloak gem9 effect/></dd>
-<dd>Effect10: <cloak gem10 amount 3/> <cloak gem10 effect/></dd>
+<dd>Effect 10: <cloak gem10 amount 3/> <cloak gem10 effect/></dd>
+<dd>Effect 11: <cloak gem11 amount 3/> <cloak gem11 effect/></dd>
+<dd>Effect 12: <cloak gem12 amount 3/> <cloak gem12 effect/></dd>
 <dd>Utility: <cloak utility/></dd>
 </ifnotempty>
 <ifnotempty jewel>
@@ -337,7 +371,9 @@
 <dd>Effect 7: <jewel gem7 amount 3/> <jewel gem7 effect/></dd>
 <dd>Effect 8: <jewel gem8 amount 3/> <jewel gem8 effect/></dd>
 <dd>Effect 9: <jewel gem9 amount 3/> <jewel gem9 effect/></dd>
-<dd>Effect10: <jewel gem10 amount 3/> <jewel gem10 effect/></dd>
+<dd>Effect 10: <jewel gem10 amount 3/> <jewel gem10 effect/></dd>
+<dd>Effect 11: <jewel gem11 amount 3/> <jewel gem11 effect/></dd>
+<dd>Effect 12: <jewel gem12 amount 3/> <jewel gem12 effect/></dd>
 <dd>Utility: <jewel utility/></dd>
 </ifnotempty>
 <ifnotempty belt>
@@ -353,7 +389,9 @@
 <dd>Effect 7: <belt gem7 amount 3/> <belt gem7 effect/></dd>
 <dd>Effect 8: <belt gem8 amount 3/> <belt gem8 effect/></dd>
 <dd>Effect 9: <belt gem9 amount 3/> <belt gem9 effect/></dd>
-<dd>Effect10: <belt gem10 amount 3/> <belt gem10 effect/></dd>
+<dd>Effect 10: <belt gem10 amount 3/> <belt gem10 effect/></dd>
+<dd>Effect 11: <belt gem11 amount 3/> <belt gem11 effect/></dd>
+<dd>Effect 12: <belt gem12 amount 3/> <belt gem12 effect/></dd>
 <dd>Utility: <belt utility/></dd>
 </ifnotempty>
 <ifnotempty rring>
@@ -369,7 +407,9 @@
 <dd>Effect 7: <rring gem7 amount 3/> <rring gem7 effect/></dd>
 <dd>Effect 8: <rring gem8 amount 3/> <rring gem8 effect/></dd>
 <dd>Effect 9: <rring gem9 amount 3/> <rring gem9 effect/></dd>
-<dd>Effect10: <rring gem10 amount 3/> <rring gem10 effect/></dd>
+<dd>Effect 10: <rring gem10 amount 3/> <rring gem10 effect/></dd>
+<dd>Effect 11: <rring gem11 amount 3/> <rring gem11 effect/></dd>
+<dd>Effect 12: <rring gem12 amount 3/> <rring gem12 effect/></dd>
 <dd>Utility: <rring utility/></dd>
 </ifnotempty>
 <ifnotempty lring>
@@ -385,7 +425,9 @@
 <dd>Effect 7: <lring gem7 amount 3/> <lring gem7 effect/></dd>
 <dd>Effect 8: <lring gem8 amount 3/> <lring gem8 effect/></dd>
 <dd>Effect 9: <lring gem9 amount 3/> <lring gem9 effect/></dd>
-<dd>Effect10: <lring gem10 amount 3/> <lring gem10 effect/></dd>
+<dd>Effect 10: <lring gem10 amount 3/> <lring gem10 effect/></dd>
+<dd>Effect 11: <lring gem11 amount 3/> <lring gem11 effect/></dd>
+<dd>Effect 12: <lring gem12 amount 3/> <lring gem12 effect/></dd>
 <dd>Utility: <lring utility/></dd>
 </ifnotempty>
 <ifnotempty rwrist>
@@ -401,7 +443,9 @@
 <dd>Effect 7: <rwrist gem7 amount 3/> <rwrist gem7 effect/></dd>
 <dd>Effect 8: <rwrist gem8 amount 3/> <rwrist gem8 effect/></dd>
 <dd>Effect 9: <rwrist gem9 amount 3/> <rwrist gem9 effect/></dd>
-<dd>Effect10: <rwrist gem10 amount 3/> <rwrist gem10 effect/></dd>
+<dd>Effect 10: <rwrist gem10 amount 3/> <rwrist gem10 effect/></dd>
+<dd>Effect 11: <rwrist gem11 amount 3/> <rwrist gem11 effect/></dd>
+<dd>Effect 12: <rwrist gem12 amount 3/> <rwrist gem12 effect/></dd>
 <dd>Utility: <rwrist utility/></dd>
 </ifnotempty>
 <ifnotempty lwrist>
@@ -417,7 +461,9 @@
 <dd>Effect 7: <lwrist gem7 amount 3/> <lwrist gem7 effect/></dd>
 <dd>Effect 8: <lwrist gem8 amount 3/> <lwrist gem8 effect/></dd>
 <dd>Effect 9: <lwrist gem9 amount 3/> <lwrist gem9 effect/></dd>
-<dd>Effect10: <lwrist gem10 amount 3/> <lwrist gem10 effect/></dd>
+<dd>Effect 10: <lwrist gem10 amount 3/> <lwrist gem10 effect/></dd>
+<dd>Effect 11: <lwrist gem11 amount 3/> <lwrist gem11 effect/></dd>
+<dd>Effect 12: <lwrist gem12 amount 3/> <lwrist gem12 effect/></dd>
 <dd>Utility: <lwrist utility/></dd>
 </ifnotempty>
 </dl>
