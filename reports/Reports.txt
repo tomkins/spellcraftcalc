@@ -16,8 +16,8 @@ Of course, you don't really need this if you use <table>s everywhere, and you
 don't export to text often.
 
 And the trailing / in <something/> tells XML parsers the tag stands on it's own
-(it doesn't have a matching </something> to close it).  These are not required!
-But they are encouraged for every tag listed here, because some .xml editors 
+(it doesn't have a matching </something> to close it).  These are not required,
+but they are encouraged for every tag listed here, because some .xml editors 
 will groan without them.
 
 Note that good html style is encouraged.  Some browsers won't show <br/> and
@@ -81,7 +81,7 @@ Report generation is based on which radio button, drop or player crafted,
 that you have selected at time of the report.  The old <endif> instead of
 </if> is still supported, but not recommended, as it isn't valid xml/sgml.
 
-Also there is <ifnotempty location>.....<endif>
+Also there is <ifnotempty location>.....</ifnotempty>
 This excludes an item from printing in the config report if the slots are
 all completed 'Unused'.  The old <endifnotempty> instead of </ifnotempty>
 is still supported, but not recommended, as it isn't valid xml/sgml.
