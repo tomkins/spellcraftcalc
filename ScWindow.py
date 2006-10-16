@@ -1440,7 +1440,7 @@ class ScWindow(QMainWindow, Ui_B_SC):
         self.restoreItem(self.itemattrlist[self.currentTabLabel])
 
     def chooseItemPath(self):
-        itemdir = QFileDialog.getExistingDirectory(self, 'Select Items Database Tree', self.ItemPath)
+        itemdir = QFileDialog.getExistingDirectory(self, 'Select Item Database Path', self.ItemPath)
         if itemdir:
             self.ItemPath = os.path.abspath(unicode(itemdir))
             ret = QMessageBox.question(self, 'Create Database Directories?', 
