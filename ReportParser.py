@@ -40,8 +40,7 @@ class ReportParser:
             if piece == 'Lwrist': piece = 'Left Wrist'
             if items.has_key(piece):
                 empty = True
-                endrng = items[piece].slotCount()
-                for slot in range(0, endrng):
+                for slot in range(0, len(items[piece])):
                     gemnum = 'gem%d' % (slot+1)
                     if items[piece][gemnum]['type'] != 'Unused':
                         empty = False
