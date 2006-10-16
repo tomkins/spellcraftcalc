@@ -74,7 +74,7 @@ class Options(QDialog, Ui_B_Options):
         rootnode = document.createElement('DefaultOptions')
         document.appendChild(rootnode)
         realmnode = document.createElement('Realm')
-        realmnode.appendChild(document.createTextNode(str(self.parent.Realm.currentText())))
+        realmnode.appendChild(document.createTextNode(str(self.parent.realm)))
         rootnode.appendChild(realmnode)
         showdone = document.createElement('DontShowDoneGems')
         showdone.appendChild(document.createTextNode(str(self.ShowDoneGems.isChecked())))
@@ -150,13 +150,7 @@ class Options(QDialog, Ui_B_Options):
         for child in xmldoc.childNodes:
             if child.nodeType == Node.TEXT_NODE: continue
             if child.tagName == 'Realm':
-                realm = XMLHelper.getText(child.childNodes)
-                if realm == 'Albion':
-                    self.parent.Realm.setCurrentIndex(0)
-                if realm == 'Hibernia':
-                    self.parent.Realm.setCurrentIndex(1)
-                if realm == 'Midgard':
-                    self.parent.Realm.setCurrentIndex(2)
+                self.parent.realm = XMLHelper.getText(child.childNodes)
             elif child.tagName == 'DontShowDoneGems':
                 if XMLHelper.getText(child.childNodes) == 'True':
                     self.ShowDoneGems.setChecked(1)
