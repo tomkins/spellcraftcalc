@@ -38,7 +38,7 @@ class ItemPreview(QListWidget):
     def preView(self, filename):
         self.clear()
         item = Item(realm=self.realm)
-        if item.load(unicode(filename), 1) == -2:
+        if item.load(unicode(filename), silent = 1) == -2:
             return
         stattext = []
         for slot in item.slots():
