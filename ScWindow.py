@@ -768,9 +768,11 @@ class ScWindow(QMainWindow, Ui_B_SC):
 
         for key, item in self.itemattrlist.iteritems():
             # use firstChild here because item.asXML() constructs a Document()
-            childnode = item.asXML()
-            if childnode is not None:
-                rootnode.appendChild(childnode.firstChild)
+            while item is not None:
+                childnode = item.asXML()
+                if childnode is not None:
+                    rootnode.appendChild(childnode.firstChild)
+                item = item.next
         return document
 
     def PieceTabChanged(self, row, col):
