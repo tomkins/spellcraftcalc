@@ -53,12 +53,10 @@ class ItemPreview(QListWidget):
         classinfo = AllBonusList[self.realm][self.charclass]
         listtext = [
             str(item.ItemName),
-            "Level: %s   Quality: %s   Utility: %.1f" % (item.Level,
-                                         item.ItemQuality, 
-                                         item.utility(classinfo)),
-            "AF/DPS: %s   Speed: %s   Bonus:  %s" % (item.AFDPS,
-                                         item.Speed,
-                                         item.Bonus),
+            "Level: %s   Quality: %s" % (item.Level, item.ItemQuality),
+            "AF/DPS: %s   Speed: %s" % (item.AFDPS, item.Speed),
+            "Utility: %.1f   Bonus: %s" 
+                    % (item.utility(classinfo), item.Bonus),
         ]
         self.addItems(listtext)
         self.addItems(stattext)
