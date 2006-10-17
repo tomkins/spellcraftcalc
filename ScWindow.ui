@@ -1132,38 +1132,30 @@
           <rect>
             <x>201</x>
             <y>3</y>
-            <width>160</width>
+            <width>407</width>
             <height>182</height>
           </rect>
         </property>
-        <widget class="QListWidget" name="SkillsList" >
+        <widget class="QListView" name="SkillsList" >
           <property name="geometry" >
             <rect>
               <x>5</x>
               <y>16</y>
-              <width>150</width>
+              <width>396</width>
               <height>160</height>
             </rect>
           </property>
-        </widget>
-      </widget>
-      <widget class="QGroupBox" name="GroupOtherBonusList" >
-        <property name="geometry" >
-          <rect>
-            <x>367</x>
-            <y>3</y>
-            <width>240</width>
-            <height>182</height>
-          </rect>
-        </property>
-        <widget class="QListWidget" name="OtherBonusList" >
-          <property name="geometry" >
-            <rect>
-              <x>5</x>
-              <y>15</y>
-              <width>230</width>
-              <height>160</height>
-            </rect>
+          <property name="focusPolicy" >
+            <enum>Qt::StrongFocus</enum>
+          </property>
+          <property name="editTriggers" >
+            <set>QAbstractItemView::NoEditTriggers</set>
+          </property>
+          <property name="isWrapping" stdset="0" >
+            <bool>true</bool>
+          </property>
+          <property name="resizeMode" >
+            <enum>QListView::Adjust</enum>
           </property>
         </widget>
       </widget>
@@ -2706,21 +2698,21 @@
     <customwidget>
       <class>MultiTabBar4</class>
       <extends>QWidget</extends>
-      <header>multitabbar4.h</header>
+      <header>MultiTabBar4.h</header>
       <container>1</container>
       <pixmap></pixmap>
     </customwidget>
     <customwidget>
       <class>MultiTabFrame</class>
       <extends>QFrame</extends>
-      <header>multitabbar4.h</header>
+      <header>MultiTabBar4.h</header>
       <container>1</container>
       <pixmap></pixmap>
     </customwidget>
     <customwidget>
       <class>SearchingCombo</class>
       <extends>QComboBox</extends>
-      <header>searchingcombo.h</header>
+      <header>SearchingCombo.h</header>
       <container>1</container>
       <pixmap></pixmap>
     </customwidget>
