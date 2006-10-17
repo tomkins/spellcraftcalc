@@ -1,10 +1,6 @@
-<ui version="4.0" stdsetdef="1" >
+<ui version="4.0" >
   <author></author>
-  <customwidgets>
-    <customwidget><class>MultiTabBar4</class><header>MultiTabBar4.h</header></customwidget>
-    <customwidget><class>MultiTabFrame</class><header>MultiTabBar4.h</header></customwidget>
-    <customwidget><class>SearchingCombo</class><header>SearchingCombo.h</header></customwidget>
-  </customwidgets>
+  <comment></comment>
   <exportmacro></exportmacro>
   <class>B_SC</class>
   <widget class="QMainWindow" name="B_SC" >
@@ -2706,28 +2702,28 @@
   </widget>
   <layoutdefault spacing="6" margin="11" />
   <pixmapfunction>qPixmapFromMimeSource</pixmapfunction>
- <customwidgets>
-   <customwidget>
-     <class>MultiTabBar4</class>
-     <extends>QWidget</extends>
-     <header>multitabbar4.h</header>
-     <container>1</container>
-     <pixmap></pixmap>
-   </customwidget>
-   <customwidget>
-     <class>MultiTabFrame</class>
-     <extends>QFrame</extends>
-     <header>multitabbar4.h</header>
-     <container>1</container>
-     <pixmap></pixmap>
-   </customwidget>
-   <customwidget>
-     <class>SearchingCombo</class>
-     <extends>QComboBox</extends>
-     <header>searchingcombo.h</header>
-     <container>1</container>
-     <pixmap></pixmap>
-   </customwidget>
+  <customwidgets>
+    <customwidget>
+      <class>MultiTabBar4</class>
+      <extends>QWidget</extends>
+      <header>multitabbar4.h</header>
+      <container>1</container>
+      <pixmap></pixmap>
+    </customwidget>
+    <customwidget>
+      <class>MultiTabFrame</class>
+      <extends>QFrame</extends>
+      <header>multitabbar4.h</header>
+      <container>1</container>
+      <pixmap></pixmap>
+    </customwidget>
+    <customwidget>
+      <class>SearchingCombo</class>
+      <extends>QComboBox</extends>
+      <header>searchingcombo.h</header>
+      <container>1</container>
+      <pixmap></pixmap>
+    </customwidget>
   </customwidgets>
   <tabstops>
     <tabstop>CharName</tabstop>
@@ -2804,6 +2800,7 @@
     <tabstop>Effect_12</tabstop>
     <tabstop>Requirement_12</tabstop>
     <tabstop>SkillsList</tabstop>
-    <tabstop>OtherBonusList</tabstop>
   </tabstops>
+  <resources/>
+  <connections/>
 </ui>
