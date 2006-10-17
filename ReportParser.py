@@ -40,11 +40,13 @@ class ReportParser:
             if piece == 'Lwrist': piece = 'Left Wrist'
             if items.has_key(piece):
                 empty = True
-                for slot in range(0, len(items[piece])):
-                    gemnum = 'gem%d' % (slot+1)
-                    if items[piece][gemnum]['type'] != 'Unused':
-                        empty = False
-                        break
+                #for slot in range(0, len(items[piece])):
+                for slot in items[piece].keys():
+                    if slot[0:3] == 'gem':
+                        gemnum = 'gem%d' % (int(slot[3:]))
+                        if items[piece][gemnum]['type'] != 'Unused':
+                            empty = False
+                            break
                 if not empty:
                     reporttext = re.sub(re.escape(match.string[match.start():match.end()]),
                             doc, reporttext)
