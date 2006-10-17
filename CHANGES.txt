@@ -1,4 +1,6 @@
-Updated 10/??/2006 - Version 1.91
+Updated 10/16/2006 - Version 1.91
+
+  Ensure all item variants for each slot are correctly saved.
 
   Recall a crafted item's name when it's loaded again.
 
@@ -13,7 +15,12 @@ Updated 10/??/2006 - Version 1.91
   file with it's filename (the Item_Name_slot.xml), and don't create the
   subdirectories automatically (for users who don't care for the layout).
 
-  Show the Gem's name in the config report (broken in 1.90).
+  Load Item's dropdown directory name (up top) will show the equivilant
+  realm/slot directory for each realm if the Coop option is set, and
+  always show the All/slot crossrealm directory name.
+
+  Show the Gem's name in the config report (broken in 1.90).  Also added
+  the 6th player and 11th, 12th crafted slots to the config.
 
   Fixed 'Save Item', which was broken in 1.90.
 
