@@ -1,3 +1,7 @@
+Updated ??/??/2006 - Version 1.92
+
+
+
 Updated 10/16/2006 - Version 1.91
 
   Ensure all item variants for each slot are correctly saved.
