@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'ScWindow.ui'
 #
-# Created: Sat Oct 07 21:40:39 2006
+# Created: Tue Oct 17 16:28:34 2006
 #      by: PyQt4 UI code generator 4.0.1
 #
 # WARNING! All changes made in this file will be lost!
@@ -375,20 +375,16 @@ class Ui_B_SC(object):
         self.SlashRR.setObjectName("SlashRR")
 
         self.GroupSkillsList = QtGui.QGroupBox(self.ScWinFrame)
-        self.GroupSkillsList.setGeometry(QtCore.QRect(201,3,160,182))
+        self.GroupSkillsList.setGeometry(QtCore.QRect(201,3,407,182))
         self.GroupSkillsList.setObjectName("GroupSkillsList")
 
-        self.SkillsList = QtGui.QListWidget(self.GroupSkillsList)
-        self.SkillsList.setGeometry(QtCore.QRect(5,16,150,160))
+        self.SkillsList = QtGui.QListView(self.GroupSkillsList)
+        self.SkillsList.setGeometry(QtCore.QRect(5,16,396,160))
+        self.SkillsList.setFocusPolicy(QtCore.Qt.StrongFocus)
+        self.SkillsList.setEditTriggers(QtGui.QAbstractItemView.NoEditTriggers)
+        self.SkillsList.setWrapping(True)
+        self.SkillsList.setResizeMode(QtGui.QListView.Adjust)
         self.SkillsList.setObjectName("SkillsList")
-
-        self.GroupOtherBonusList = QtGui.QGroupBox(self.ScWinFrame)
-        self.GroupOtherBonusList.setGeometry(QtCore.QRect(367,3,240,182))
-        self.GroupOtherBonusList.setObjectName("GroupOtherBonusList")
-
-        self.OtherBonusList = QtGui.QListWidget(self.GroupOtherBonusList)
-        self.OtherBonusList.setGeometry(QtCore.QRect(5,15,230,160))
-        self.OtherBonusList.setObjectName("OtherBonusList")
 
         self.GroupItemFrame = MultiTabFrame(self.ScWinFrame)
         self.GroupItemFrame.setGeometry(QtCore.QRect(3,235,776,307))
@@ -928,6 +924,7 @@ class Ui_B_SC(object):
         B_SC.setCentralWidget(self.ScWinFrame)
 
         self.retranslateUi(B_SC)
+        QtCore.QMetaObject.connectSlotsByName(B_SC)
         B_SC.setTabOrder(self.CharName,self.Realm)
         B_SC.setTabOrder(self.Realm,self.CharClass)
         B_SC.setTabOrder(self.CharClass,self.CharRace)
@@ -1001,7 +998,6 @@ class Ui_B_SC(object):
         B_SC.setTabOrder(self.Amount_Edit_12,self.Effect_12)
         B_SC.setTabOrder(self.Effect_12,self.Requirement_12)
         B_SC.setTabOrder(self.Requirement_12,self.SkillsList)
-        B_SC.setTabOrder(self.SkillsList,self.OtherBonusList)
 
     def retranslateUi(self, B_SC):
         B_SC.setWindowTitle(QtGui.QApplication.translate("B_SC", "Spellcrafting Calculator", None, QtGui.QApplication.UnicodeUTF8))

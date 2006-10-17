@@ -175,17 +175,15 @@ class ScWindow(QMainWindow, Ui_B_SC):
         width = testfont.size(Qt.TextSingleLine, " (5)").width()
         self.resistlayout.setColumnMinimumWidth(2,width)
 
+        skillmodel = QStandardItemModel(0,2,self.SkillsList)
+        self.SkillsList.setModel(skillmodel)
+        self.SkillsList.setModelColumn(0)
+
         self.skilllayout = QtGui.QGridLayout(self.GroupSkillsList)
         self.skilllayout.setMargin(3)
         self.skilllayout.setSpacing(0)
         self.skilllayout.addWidget(self.SkillsList,0,0)
         self.skilllayout.setColumnStretch(0, 1)
-
-        self.otherlayout = QtGui.QGridLayout(self.GroupOtherBonusList)
-        self.otherlayout.setMargin(3)
-        self.otherlayout.setSpacing(0)
-        self.otherlayout.addWidget(self.OtherBonusList,0,0)
-        self.otherlayout.setColumnStretch(0, 1)
 
         cbwidth = self.CharClass.getMinimumWidth(['Necromancer'])
         self.charlayout = QtGui.QGridLayout(self.GroupCharInfo)
@@ -420,16 +418,13 @@ class ScWindow(QMainWindow, Ui_B_SC):
         self.mainlayout.addItem(QSpacerItem(hspacer),0,3,1,1)
         self.mainlayout.addWidget(self.GroupSkillsList,0,4,1,1)
         self.mainlayout.addItem(QSpacerItem(hspacer),0,5,1,1)
-        self.mainlayout.addWidget(self.GroupOtherBonusList,0,6,1,1)
-        self.mainlayout.addItem(QSpacerItem(hspacer),0,7,1,1)
-        self.mainlayout.addWidget(self.GroupCharInfo,0,8,1,1)
-        self.mainlayout.addItem(QSpacerItem(vspacer),1,0,1,9)
-        self.mainlayout.addLayout(self.tabslayout,2,0,1,9)
+        self.mainlayout.addWidget(self.GroupCharInfo,0,6,1,1)
+        self.mainlayout.addItem(QSpacerItem(vspacer),1,0,1,7)
+        self.mainlayout.addLayout(self.tabslayout,2,0,1,7)
 
-        self.mainlayout.setRowStretch(0, 1)
+        self.mainlayout.setRowStretch(0, 0)
         self.mainlayout.setRowStretch(2, 0)
         self.mainlayout.setColumnStretch(4, 1)
-        self.mainlayout.setColumnStretch(6, 1)
 
     def initControls(self):
         self.GroupStats.mousePressEvent = self.ignoreMouseEvent
@@ -473,10 +468,8 @@ class ScWindow(QMainWindow, Ui_B_SC):
                      self.ItemNameSelected)
         self.connect(self.ItemNameCombo,SIGNAL("textChanged(const QString&)"),
                      self.ItemNameEdited)
-        self.connect(self.SkillsList,SIGNAL("itemActivated(QListWidgetItem*)"),
+        self.connect(self.SkillsList,SIGNAL("activated(const QModelIndex&)"),
                      self.SkillClicked)
-        self.connect(self.OtherBonusList,SIGNAL("itemActivated(QListWidgetItem*)"),
-                     self.BonusClicked)
 
     def initMenu(self):
         self.rf_menu = QMenu('&Recent Files')
@@ -617,7 +610,6 @@ class ScWindow(QMainWindow, Ui_B_SC):
                 self.setTabOrder(self.Effect[i],self.Requirement[i])
             prev = self.Requirement[i]
         self.setTabOrder(prev,self.SkillsList)
-        self.setTabOrder(self.SkillsList,self.OtherBonusList)
 
     def showFixWidgets(self):
         for i in range(0,6):
@@ -902,6 +894,17 @@ class ScWindow(QMainWindow, Ui_B_SC):
         if self.nocalc: return
         self.calculate()
 
+    def insertSkill(self,amt,bonus,group):
+        model = self.SkillsList.model()
+        model.insertRows(model.rowCount(), 1)
+        wid = 3
+        if amt > -10 and amt < 10: wid += 1
+        bonus = "%*d %s" % (wid, amt, bonus)
+        sys.stdout.write("%s\n" % bonus)
+        index = model.index(model.rowCount()-1, 0, QModelIndex())
+        model.setData(index, QVariant(bonus), Qt.DisplayRole)
+        model.setData(index, QVariant(group), Qt.UserRole)
+
     def calculate(self):
         if self.nocalc:
             return
@@ -1121,21 +1124,20 @@ class ScWindow(QMainWindow, Ui_B_SC):
                 else:
                     capmod = 0
                 self.StatValue[key].setText(unicode(int(basecap + capmod) - val))
-        self.SkillsList.clear()
+        self.SkillsList.model().removeRows(0, self.SkillsList.model().rowCount())
         for skill, amount in skillTotals.iteritems():
             if not self.capDistance:
-                self.SkillsList.addItem('%d %s' % (amount, skill))
+                self.insertSkill(amount, skill, "Skill")
             else:
                 if skill[-6:] == " Focus":
                     capcalc = HighCapBonusList['Focus']
                 else:
                     capcalc = HighCapBonusList['Skill']
                 thiscap = int(charlevel * capcalc[0]) + capcalc[1]
-                self.SkillsList.addItem('%d %s' % (thiscap - amount, skill))
-        self.OtherBonusList.clear()
+                self.insertSkill(thiscap - amount, skill, "Skill")
         for bonus, amount in otherTotals.iteritems():
             if not self.capDistance:
-                self.OtherBonusList.addItem('%d %s' % (amount, bonus))
+                self.insertSkill(amount, bonus, "Bonus")
             else:
                 if HighCapBonusList.has_key(bonus):
                     capcalc = HighCapBonusList[bonus]
@@ -1151,7 +1153,7 @@ class ScWindow(QMainWindow, Ui_B_SC):
                     if capmod > addcap:  capmod = addcap
                 else:
                     capmod = 0
-                self.OtherBonusList.addItem('%d %s' % (cap + capmod - amount, bonus))        
+                self.insertSkill(cap + capmod - amount, bonus, "Bonus")
         totalprice += self.pricingInfo.get('PPOrder', 0) * 10000
         self.TotalCost.setText(SC.formatCost(totalcost))
         self.TotalPrice.setText(SC.formatCost(totalprice))
@@ -1866,17 +1868,11 @@ class ScWindow(QMainWindow, Ui_B_SC):
         else:
            self.DelveItemsDialog(shortname)
 
-    def SkillClicked(self,a0):
-        if a0 is None: return
-        if not ' ' in str(a0.text()): return
-        amount, effect = string.split(str(a0.text()), ' ', 1)
-        self.DelveItemsDialog(effect)
-
-    def BonusClicked(self,a0):
-        if a0 is None: return
-        if not ' ' in str(a0.text()): return
-        amount, effect = string.split(str(a0.text()), ' ', 1)
-        self.DelveItemsDialog(effect, 'Bonus')
+    def SkillClicked(self,index):
+        effect = str(index.data(Qt.DisplayRole).toString())
+        bonus = str(index.data(Qt.UserRole).toString())
+        amount, effect = string.split(effect.lstrip(), ' ', 1)
+        self.DelveItemsDialog(effect, bonus)
 
     def showCap(self):
         self.capDistance = not self.capDistance
