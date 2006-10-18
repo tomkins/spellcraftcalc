@@ -253,7 +253,6 @@ class CraftBar(QDialog, Ui_B_CraftBar):
                 server = ServerCodes[m.group(2)]
                 self.model.insertRows(self.model.rowCount(), 1)
                 index = self.model.index(self.model.rowCount()-1, 0, QModelIndex())
-                self.model.setData(index, QVariant(file), Qt.UserRole)
                 self.model.setData(index, QVariant(server), Qt.DisplayRole)
                 self.model.setData(index, QVariant(file), Qt.UserRole)
                 index = self.model.index(self.model.rowCount()-1, 1, QModelIndex())
