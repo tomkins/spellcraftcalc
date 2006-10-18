@@ -141,39 +141,23 @@ class ScWindow(QMainWindow, Ui_B_SC):
         self.StatCap = {}
         self.StatBonus = {}
 
-        self.statlayout = QtGui.QGridLayout(self.GroupStats)
-        self.statlayout.setMargin(3)
-        self.statlayout.setSpacing(0)
-        row = 0
         for stat in (GemLists['All']['Stat'] + ('Power', 'Hits',)):
             self.StatLabel[stat] = getattr(self, stat + 'Label')
             self.StatValue[stat] = getattr(self, stat)
             self.StatCap[stat] = getattr(self, stat + 'Cap')
-            self.statlayout.addWidget(self.StatLabel[stat],row,0,1,1)
-            self.statlayout.addWidget(self.StatValue[stat],row,1,1,1)
-            self.statlayout.addWidget(self.StatCap[stat],row,2,1,1)
-            row += 1
         width = testfont.size(Qt.TextSingleLine, "400").width()
-        self.statlayout.setColumnMinimumWidth(1,width)
+        self.GroupStats.layout().setColumnMinimumWidth(1,width)
         width = testfont.size(Qt.TextSingleLine, " (400)").width()
-        self.statlayout.setColumnMinimumWidth(2,width)
+        self.GroupStats.layout().setColumnMinimumWidth(2,width)
 
-        self.resistlayout = QtGui.QGridLayout(self.GroupResists)
-        self.resistlayout.setMargin(3)
-        self.resistlayout.setSpacing(1)
-        row = 0
         for stat in (GemLists['All']['Resist']):
             self.StatLabel[stat] = getattr(self, stat + 'Label')
             self.StatValue[stat] = getattr(self, stat)
             self.StatBonus[stat] = getattr(self, stat + 'RR')
-            self.resistlayout.addWidget(self.StatLabel[stat],row,0,1,1)
-            self.resistlayout.addWidget(self.StatValue[stat],row,1,1,1)
-            self.resistlayout.addWidget(self.StatBonus[stat],row,2,1,1)
-            row += 1
         width = testfont.size(Qt.TextSingleLine, "26").width()
-        self.resistlayout.setColumnMinimumWidth(1,width)
+        self.GroupResists.layout().setColumnMinimumWidth(1,width)
         width = testfont.size(Qt.TextSingleLine, " (5)").width()
-        self.resistlayout.setColumnMinimumWidth(2,width)
+        self.GroupResists.layout().setColumnMinimumWidth(2,width)
 
         skillmodel = QStandardItemModel(0,1,self.SkillsList)
         self.SkillsList.setModel(skillmodel)
@@ -181,34 +165,15 @@ class ScWindow(QMainWindow, Ui_B_SC):
         palette.setColor(QPalette.Base, palette.color(QPalette.Window))
         palette.setBrush(QPalette.Base, palette.window())
         self.SkillsList.setPalette(palette)
-
-        self.skilllayout = QtGui.QGridLayout(self.GroupSkillsList)
-        self.skilllayout.setMargin(3)
-        self.skilllayout.setSpacing(0)
-        self.skilllayout.addWidget(self.SkillsList,0,0)
-        self.skilllayout.setColumnStretch(0, 1)
+        self.GroupSkillsList.layout().setColumnStretch(0, 1)
+        self.ScWinFrame.layout().setColumnStretch(6, 1)
 
         cbwidth = self.CharClass.getMinimumWidth(['Necromancer'])
-        self.charlayout = QtGui.QGridLayout(self.GroupCharInfo)
-        self.charlayout.setMargin(3)
-        self.charlayout.setSpacing(0)
-        row = 0
-        for (stat,height,width) \
-                in (('CharName',   edheight+2,cbwidth,),
-                    ('Realm',      cbheight+2,cbwidth,),
-                    ('CharClass',  cbheight+2,cbwidth,),
-                    ('CharRace',   cbheight+2,cbwidth,),
-                    ('CharLevel',  edheight+2,amtedwidth,),
-                    ('TotalCost',  0,0,),
-                    ('TotalPrice', 0,0,),):
-            self.charlayout.addWidget(getattr(self, 'Label' + stat),row,0,1,1)
-            ctl = getattr(self, stat)
-            if height:
-                ctl.setFixedSize(QSize(width, height))
-            self.charlayout.addWidget(ctl,row,1,1,2)
-            row += 1
-        self.charlayout.addWidget(self.LabelTotalUtility,row,0,1,2)
-        self.charlayout.addWidget(self.TotalUtility,row,2,1,1)
+        self.CharName.setFixedSize(QSize(cbwidth, edheight + 2))
+        self.Realm.setFixedSize(QSize(cbwidth, cbheight + 2))
+        self.CharClass.setFixedSize(QSize(cbwidth, cbheight + 2))
+        self.CharRace.setFixedSize(QSize(cbwidth, cbheight + 2))
+        self.CharLevel.setFixedSize(QSize(amtedwidth, edheight + 2))
 
         self.CharLevel.setValidator(QIntValidator(0, 99, self))
         self.ItemLevel.setValidator(QIntValidator(0, 99, self))
@@ -231,74 +196,36 @@ class ScWindow(QMainWindow, Ui_B_SC):
 
         editAmountValidator = QIntValidator(-999, +999, self)
 
-        layout = True
-        hspacer = QSpacerItem(3,0,QSizePolicy.Fixed,QSizePolicy.Minimum)
-        vspacer = QSpacerItem(0,3,QSizePolicy.Minimum,QSizePolicy.Fixed)
+        self.ItemLevel.setFixedSize(QSize(amtedwidth, edheight))
+        self.ItemLevelButton.setFixedSize(
+            QSize(self.ItemLevelButton.width(), edheight))
+        self.QualDrop.setFixedSize(QSize(amtcbwidth, cbheight))
+        self.QualEdit.setFixedSize(QSize(amtcbwidth, edheight))
+        self.Bonus_Edit.setFixedSize(QSize(amtedwidth, edheight))
+        self.AFDPS_Edit.setFixedSize(QSize(amtedwidth, edheight))
+        self.Speed_Edit.setFixedSize(QSize(amtedwidth, edheight))
 
-        self.itemcontrollayout = QtGui.QHBoxLayout()
-        self.itemcontrollayout.setMargin(0)
-        self.itemcontrollayout.setSpacing(0)
-        col = 0
-        for (obj,height,width) \
-                in ((self.ItemLevel,edheight,amtedwidth,),
-                    (self.ItemLevelButton,edheight,
-                         self.ItemLevelButton.width(),),
-                    (self.QualDrop,cbheight,amtcbwidth,),
-                    (self.QualEdit,edheight,amtcbwidth,),
-                    (self.Bonus_Edit,edheight,amtedwidth,),
-                    (self.AFDPS_Edit,edheight,amtedwidth,),
-                    (self.Speed_Edit,edheight,amtedwidth,),):
-            obj.setFixedSize(QSize(width, height))
         self.ItemNameCombo.setEditable(True)
         self.ItemNameCombo.setInsertPolicy(QComboBox.NoInsert)
         self.ItemNameCombo.setFixedHeight(cbheight)
         self.ItemNameCombo.setSizePolicy(QSizePolicy(QSizePolicy.Expanding,QSizePolicy.Fixed))
-        for obj in (self.ItemLevelLabel, self.ItemLevel, self.ItemLevelButton, 
-                    self.ItemQualityLabel, self.QualDrop, self.QualEdit, 
-                    self.ItemBonusLabel, self.Bonus_Edit, self.ItemAFDPSLabel, 
-                    self.AFDPS_Edit, self.ItemSpeedLabel, self.Speed_Edit, 
-                    self.ItemNameLabel):
-            self.itemcontrollayout.addWidget(obj)
-            col += 1
-            if col == 3 or (col > 6 and str(obj.objectName())[-5:] != 'Label'):
-                self.itemcontrollayout.addStretch(1)
-                col += 1
-        self.itemcontrollayout.addWidget(self.ItemNameCombo, 8)
-        self.itemcontrollayout.addStretch(1)
-        self.itemcontrollayout.addWidget(self.Equipped)
+
         self.ItemLevelLabel.setBuddy(self.ItemLevel)
         self.ItemNameLabel.setBuddy(self.ItemNameCombo)
 
-        self.itemlayout = QtGui.QGridLayout(self.GroupItemFrame)
-        self.itemlayout.setMargin(8)
-        self.itemlayout.setSpacing(0)
-        row = 0
-        self.itemlayout.addItem(QSpacerItem(1, self.PieceTab.baseOverlap(),
-                                    QSizePolicy.Minimum, QSizePolicy.Fixed),
-                                row,0,1,10)
-        row += 1
-        self.itemlayout.addLayout(self.itemcontrollayout,row,0,1,10)
-        row += 1
+        self.GroupItemFrame.layout().itemAt(0).changeSize(1, 
+                                    self.PieceTab.baseOverlap(),
+                                    QSizePolicy.Minimum, QSizePolicy.Fixed)
 
-        col = 1
-        for obj in (self.LabelGemType, self.LabelGemAmount, self.LabelGemEffect,
-                    self.LabelGemQuality, self.LabelGemPoints, self.LabelGemCost,):
-            self.itemlayout.addWidget(obj,row,col,1,1)
-            col += 1
-        self.itemlayout.addItem(QSpacerItem(hspacer),row,7,1,1)
-        self.itemlayout.addWidget(self.LabelRequirement,row,4,1,3)
-        self.itemlayout.addWidget(self.LabelGemName,row,8,1,2)
-        self.itemlayout.setColumnStretch(8, 1)
-
+        self.GroupItemFrame.layout().setColumnStretch(8, 1)
         width = testfont.size(Qt.TextSingleLine, " Slot 10:").width()
-        self.itemlayout.setColumnMinimumWidth(0,width)
+        self.GroupItemFrame.layout().setColumnMinimumWidth(0,width)
         width = testfont.size(Qt.TextSingleLine, " Points").width()
-        self.itemlayout.setColumnMinimumWidth(5,width)
+        self.GroupItemFrame.layout().setColumnMinimumWidth(5,width)
         reqwidth = width
         width = testfont.size(Qt.TextSingleLine, "  999g 00s 00c").width()
-        self.itemlayout.setColumnMinimumWidth(6,width)
+        self.GroupItemFrame.layout().setColumnMinimumWidth(6,width)
         reqwidth += width + amtcbwidth
-        row += 1
 
         typewidth = self.Type_1.getMinimumWidth(list(DropTypeList))
         l = reduce(lambda x, y: x+y, [ list(x) for x in GemLists['All'].values() ])
@@ -308,10 +235,8 @@ class ScWindow(QMainWindow, Ui_B_SC):
             idx = i + 1
 
             self.GemLabel.append(getattr(self, 'Gem_Label_%d' % idx))
-            self.itemlayout.addWidget(self.GemLabel[i],row,0,1,1)
             self.Type.append(getattr(self, 'Type_%d' % idx))
             self.Type[i].setFixedSize(QSize(typewidth, cbheight))
-            self.itemlayout.addWidget(self.Type[i],row,1,1,1)
             self.connect(self.Type[i],SIGNAL("activated(int)"),
                          self.TypeChanged)
             self.GemLabel[i].setBuddy(self.Type[i])
@@ -319,7 +244,6 @@ class ScWindow(QMainWindow, Ui_B_SC):
             self.AmountEdit.append(getattr(self, 'Amount_Edit_%d' % idx))
             self.AmountEdit[i].setFixedSize(QSize(amtcbwidth, edheight))
             self.AmountEdit[i].setValidator(editAmountValidator)
-            self.itemlayout.addWidget(self.AmountEdit[i],row,2,1,1)
             self.switchOnType['drop'].append(self.AmountEdit[i])
             self.connect(self.AmountEdit[i],SIGNAL("textChanged(const QString&)"),
                          self.AmountsChanged)
@@ -327,7 +251,6 @@ class ScWindow(QMainWindow, Ui_B_SC):
             self.Effect.append(getattr(self, 'Effect_%d' % idx))
             self.Effect[i].setFixedSize(QSize(effectwidth, cbheight))
             self.Effect[i].setInsertPolicy(QComboBox.NoInsert)
-            self.itemlayout.addWidget(self.Effect[i],row,3,1,1)
             self.connect(self.Effect[i],SIGNAL("activated(int)"),
                          self.EffectChanged)
             self.connect(self.Effect[i],SIGNAL("editTextChanged(const QString&)"),
@@ -335,7 +258,6 @@ class ScWindow(QMainWindow, Ui_B_SC):
 
             self.Requirement.append(getattr(self, 'Requirement_%d' % idx))
             self.Requirement[i].setFixedSize(QSize(reqwidth, edheight))
-            self.itemlayout.addWidget(self.Requirement[i],row,4,1,3)
             self.switchOnType['drop'].append(self.Requirement[i])
             self.connect(self.Requirement[i],SIGNAL("textChanged(const QString&)"),
                          self.AmountsChanged)
@@ -343,13 +265,9 @@ class ScWindow(QMainWindow, Ui_B_SC):
             if i < 6:
                 self.AmountDrop.append(getattr(self, 'Amount_Drop_%d' % idx))
                 self.AmountDrop[i].setFixedSize(QSize(amtcbwidth, cbheight))
-                self.itemlayout.addWidget(self.AmountDrop[i],row,2,1,1)
                 self.connect(self.AmountDrop[i],SIGNAL("activated(int)"),
                              self.AmountsChanged)
-
                 self.Name.append(getattr(self, 'Name_%d' % idx))
-                self.itemlayout.addWidget(self.Name[i],row,8,1,2)
-
                 self.switchOnType['player'].extend([
                     self.AmountDrop[i], self.Name[i], ])
             else:
@@ -360,73 +278,25 @@ class ScWindow(QMainWindow, Ui_B_SC):
                 self.Quality.append(getattr(self, 'Quality_%d' % idx))
                 self.Quality[i].insertItems(0, list(QualityValues))
                 self.Quality[i].setFixedSize(QSize(amtcbwidth, cbheight))
-                self.itemlayout.addWidget(self.Quality[i],row,4,1,1)
                 self.connect(self.Quality[i],SIGNAL("activated(int)"),
                              self.AmountsChanged)
-
                 self.Points.append(getattr(self, 'Points_%d' % idx))
-                self.itemlayout.addWidget(self.Points[i],row,5,1,1)
-
                 self.Cost.append(getattr(self, 'Cost_%d' % idx))
-                self.itemlayout.addWidget(self.Cost[i],row,6,1,1)
-
                 self.switchOnType['player'].extend([
                     self.Quality[i], self.Points[i], self.Cost[i], ])
 
-            self.itemlayout.setRowMinimumHeight(row, max(cbheight,edheight))
-            row += 1
-
-        self.utilitylayout = QtGui.QGridLayout()
-        self.utilitylayout.addWidget(self.ItemUtilityLabel,0,0,1,1)
-        self.utilitylayout.addWidget(self.ItemUtility,0,1,1,1)
-        if str(QApplication.style().objectName()[0:9]).lower() == "macintosh":
-            self.utilitylayout.addItem(QSpacerItem(5,0,QSizePolicy.Fixed,QSizePolicy.Minimum),0,2,1,1)
-        self.utilitylayout.setRowMinimumHeight(0, max(cbheight,edheight))
-
-        self.itemlayout.addWidget(self.LabelRequirement2,row-6,4,1,3)
-        self.itemlayout.addWidget(self.ItemImbueLabel,row-5,3,1,2)
-        self.itemlayout.addWidget(self.ItemImbue,row-5,5,1,1)
-        self.itemlayout.addWidget(self.ItemImbueTotal,row-5,6,1,1)
-        self.itemlayout.addWidget(self.ItemOverchargeLabel,row-4,3,1,2)
-        self.itemlayout.addWidget(self.ItemOvercharge,row-4,5,1,2)
-        self.itemlayout.addWidget(self.ItemCostLabel,row-3,3,1,2)
-        self.itemlayout.addWidget(self.ItemCost,row-3,5,1,2)
-        self.itemlayout.addWidget(self.ItemPriceLabel,row-2,3,1,2)
-        self.itemlayout.addWidget(self.ItemPrice,row-2,5,1,2)
-        self.itemlayout.addLayout(self.utilitylayout,row-1,8,1,1)
-
-        #if str(QApplication.style().objectName()[0:9]).lower() == "macintosh":
-        #    self.itemlayout.addWidget(self.sizegrip,row-1,9,1,1)
+            self.GroupItemFrame.layout().setRowMinimumHeight(i + 3, 
+                max(cbheight, edheight))
 
         for tabname in PieceTabList:
             self.PieceTab.addTab(0, qApp.translate("B_SC",tabname,None))
         for tabname in JewelTabList:
             self.PieceTab.addTab(1, qApp.translate("B_SC",tabname,None))
         self.GroupItemFrame.stackUnder(self.PieceTab)
+        l = self.ScWinFrame.layout().itemAt(self.ScWinFrame.layout().count() - 1)
+        l.layout().itemAt(1).changeSize(1, -self.PieceTab.baseOverlap(),
+                                        QSizePolicy.Minimum, QSizePolicy.Fixed)
 
-        self.tabslayout = QVBoxLayout()
-        #self.GroupItemFrame.setContentsMargins(left, top, right, bottom)
-        self.tabslayout.addWidget(self.PieceTab)
-        self.tabslayout.addItem(QSpacerItem(1, -self.PieceTab.baseOverlap(),
-                                            QSizePolicy.Minimum, QSizePolicy.Fixed))
-        self.tabslayout.addWidget(self.GroupItemFrame)
- 
-        self.mainlayout = QGridLayout(self.ScWinFrame)
-        self.mainlayout.setMargin(3)
-        self.mainlayout.setSpacing(0)
-        self.mainlayout.addWidget(self.GroupStats,0,0,1,1)
-        self.mainlayout.addItem(QSpacerItem(hspacer),0,1,1,1)
-        self.mainlayout.addWidget(self.GroupResists,0,2,1,1)
-        self.mainlayout.addItem(QSpacerItem(hspacer),0,3,1,1)
-        self.mainlayout.addWidget(self.GroupSkillsList,0,4,1,1)
-        self.mainlayout.addItem(QSpacerItem(hspacer),0,5,1,1)
-        self.mainlayout.addWidget(self.GroupCharInfo,0,6,1,1)
-        self.mainlayout.addItem(QSpacerItem(vspacer),1,0,1,7)
-        self.mainlayout.addLayout(self.tabslayout,2,0,1,7)
-
-        self.mainlayout.setRowStretch(0, 0)
-        self.mainlayout.setRowStretch(2, 0)
-        self.mainlayout.setColumnStretch(4, 1)
 
     def initControls(self):
         self.GroupStats.mousePressEvent = self.ignoreMouseEvent
