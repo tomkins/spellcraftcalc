@@ -25,15 +25,15 @@
             <height>182</height>
           </rect>
         </property>
+      <layout class="QGridLayout" name="charlayout" >
+       <property name="margin" >
+         <number>3</number>
+       </property>
+       <property name="spacing" >
+         <number>0</number>
+       </property>
+       <item row="0" column="0" >
         <widget class="QLabel" name="LabelCharName" >
-          <property name="geometry" >
-            <rect>
-              <x>6</x>
-              <y>16</y>
-              <width>37</width>
-              <height>21</height>
-            </rect>
-          </property>
           <property name="text" >
             <string>&amp;Name: </string>
           </property>
@@ -41,25 +41,13 @@
             <enum>Qt::PlainText</enum>
           </property>
         </widget>
+       </item>
+       <item row="0" column="1" colspan="2" >
         <widget class="QLineEdit" name="CharName" >
-          <property name="geometry" >
-            <rect>
-              <x>46</x>
-              <y>16</y>
-              <width>114</width>
-              <height>21</height>
-            </rect>
-          </property>
         </widget>
+       </item>
+       <item row="1" column="0" >
         <widget class="QLabel" name="LabelRealm" >
-          <property name="geometry" >
-            <rect>
-              <x>6</x>
-              <y>37</y>
-              <width>38</width>
-              <height>21</height>
-            </rect>
-          </property>
           <property name="text" >
             <string>Realm: </string>
           </property>
@@ -67,25 +55,13 @@
             <enum>Qt::PlainText</enum>
           </property>
         </widget>
+       </item>
+       <item row="1" column="1" colspan="2" >
         <widget class="SearchingCombo" name="Realm" >
-          <property name="geometry" >
-            <rect>
-              <x>46</x>
-              <y>37</y>
-              <width>114</width>
-              <height>21</height>
-            </rect>
-          </property>
         </widget>
+       </item>
+       <item row="2" column="0" >
         <widget class="QLabel" name="LabelCharClass" >
-          <property name="geometry" >
-            <rect>
-              <x>6</x>
-              <y>59</y>
-              <width>38</width>
-              <height>21</height>
-            </rect>
-          </property>
           <property name="text" >
             <string>Class: </string>
           </property>
@@ -93,25 +69,13 @@
             <enum>Qt::PlainText</enum>
           </property>
         </widget>
+       </item>
+       <item row="2" column="1" colspan="2" >
         <widget class="SearchingCombo" name="CharClass" >
-          <property name="geometry" >
-            <rect>
-              <x>46</x>
-              <y>59</y>
-              <width>114</width>
-              <height>21</height>
-            </rect>
-          </property>
         </widget>
+       </item>
+       <item row="3" column="0" >
         <widget class="QLabel" name="LabelCharRace" >
-          <property name="geometry" >
-            <rect>
-              <x>6</x>
-              <y>81</y>
-              <width>38</width>
-              <height>21</height>
-            </rect>
-          </property>
           <property name="text" >
             <string>Race: </string>
           </property>
@@ -119,25 +83,13 @@
             <enum>Qt::PlainText</enum>
           </property>
         </widget>
+       </item>
+       <item row="3" column="1" colspan="2" >
         <widget class="SearchingCombo" name="CharRace" >
-          <property name="geometry" >
-            <rect>
-              <x>46</x>
-              <y>81</y>
-              <width>114</width>
-              <height>21</height>
-            </rect>
-          </property>
         </widget>
+       </item>
+       <item row="4" column="0" >
         <widget class="QLabel" name="LabelCharLevel" >
-          <property name="geometry" >
-            <rect>
-              <x>6</x>
-              <y>103</y>
-              <width>38</width>
-              <height>21</height>
-            </rect>
-          </property>
           <property name="text" >
             <string>Level: </string>
           </property>
@@ -145,25 +97,13 @@
             <enum>Qt::PlainText</enum>
           </property>
         </widget>
+       </item>
+       <item row="4" column="1" colspan="2" >
         <widget class="QLineEdit" name="CharLevel" >
-          <property name="geometry" >
-            <rect>
-              <x>46</x>
-              <y>103</y>
-              <width>37</width>
-              <height>21</height>
-            </rect>
-          </property>
         </widget>
+       </item>
+       <item row="5" column="0" >
         <widget class="QLabel" name="LabelTotalCost" >
-          <property name="geometry" >
-            <rect>
-              <x>6</x>
-              <y>126</y>
-              <width>30</width>
-              <height>16</height>
-            </rect>
-          </property>
           <property name="text" >
             <string>Cost: </string>
           </property>
@@ -171,15 +111,9 @@
             <set>Qt::AlignVCenter|Qt::AlignLeft</set>
           </property>
         </widget>
+       </item>
+       <item row="5" column="1" colspan="2" >
         <widget class="QLabel" name="TotalCost" >
-          <property name="geometry" >
-            <rect>
-              <x>44</x>
-              <y>126</y>
-              <width>114</width>
-              <height>16</height>
-            </rect>
-          </property>
           <property name="text" >
             <string>0</string>
           </property>
@@ -187,15 +121,9 @@
             <set>Qt::AlignVCenter|Qt::AlignRight</set>
           </property>
         </widget>
+       </item>
+       <item row="6" column="0" >
         <widget class="QLabel" name="LabelTotalPrice" >
-          <property name="geometry" >
-            <rect>
-              <x>6</x>
-              <y>143</y>
-              <width>30</width>
-              <height>16</height>
-            </rect>
-          </property>
           <property name="text" >
             <string>Price: </string>
           </property>
@@ -203,15 +131,9 @@
             <set>Qt::AlignVCenter|Qt::AlignLeft</set>
           </property>
         </widget>
+       </item>
+       <item row="6" column="1" colspan="2" >
         <widget class="QLabel" name="TotalPrice" >
-          <property name="geometry" >
-            <rect>
-              <x>44</x>
-              <y>143</y>
-              <width>114</width>
-              <height>16</height>
-            </rect>
-          </property>
           <property name="text" >
             <string>0</string>
           </property>
@@ -219,15 +141,9 @@
             <set>Qt::AlignVCenter|Qt::AlignRight</set>
           </property>
         </widget>
+       </item>
+       <item row="7" column="0" colspan="2" >
         <widget class="QLabel" name="LabelTotalUtility" >
-          <property name="geometry" >
-            <rect>
-              <x>6</x>
-              <y>160</y>
-              <width>70</width>
-              <height>16</height>
-            </rect>
-          </property>
           <property name="text" >
             <string>Total Utility: </string>
           </property>
@@ -235,15 +151,9 @@
             <set>Qt::AlignVCenter|Qt::AlignLeft</set>
           </property>
         </widget>
+       </item>
+       <item row="7" column="2" >
         <widget class="QLabel" name="TotalUtility" >
-          <property name="geometry" >
-            <rect>
-              <x>84</x>
-              <y>160</y>
-              <width>74</width>
-              <height>16</height>
-            </rect>
-          </property>
           <property name="text" >
             <string>0.0</string>
           </property>
@@ -251,6 +161,8 @@
             <set>Qt::AlignVCenter|Qt::AlignRight</set>
           </property>
         </widget>
+       </item>
+      </layout>
       </widget>
       <widget class="QGroupBox" name="GroupStats" >
         <property name="geometry" >
