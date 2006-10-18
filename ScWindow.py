@@ -76,6 +76,11 @@ class ScWindow(QMainWindow, Ui_B_SC):
         QMainWindow.__init__(self,None,Qt.Window)
         self.setAttribute(Qt.WA_DeleteOnClose)
         Ui_B_SC.setupUi(self,self)
+        self.statusBar().hide()
+        if str(QApplication.style().objectName()[0:9]).lower() == "macintosh":
+            self.sizegrip = QSizeGrip(self)
+            self.sizegrip.move(self.width() - 15, self.height() - 15)
+
         self.initLayout()
         self.initControls()
         self.updateGeometry()
@@ -112,24 +117,21 @@ class ScWindow(QMainWindow, Ui_B_SC):
         ]
         self.switchOnType['player'] = [
             self.LabelGemQuality, self.LabelGemPoints, self.LabelGemCost,
-            self.LabelGemName, self.ItemImbueLabel,
-            self.ItemImbue, self.ItemImbueTotal,
+            self.LabelGemName, self.QualDrop,
+            self.ItemImbueLabel, self.ItemImbue, self.ItemImbueTotal,
             self.ItemOverchargeLabel, self.ItemOvercharge, 
-            self.ItemCostLabel, self.ItemCost, self.QualDrop,
-            self.ItemPriceLabel, self.ItemPrice, self.LabelRequirement2,
+            self.ItemCostLabel, self.ItemCost,
+            self.ItemPriceLabel, self.ItemPrice,
+            self.LabelRequirement2,
         ]
 
-        self.statusBar().hide()
         if str(QApplication.style().objectName()[0:9]).lower() == "macintosh":
-            self.sizegrip = QSizeGrip(self)
-            self.sizegrip.move(self.width() - 15, self.height() - 15)
             edheight = self.CharName.sizeHint().height() - 1
             cbheight = self.Realm.sizeHint().height()
         else:
             edheight = min(self.CharName.minimumSizeHint().height(),
                            self.Realm.minimumSizeHint().height()) - 2
             cbheight = edheight
-        self.LabelCharName.setBuddy(self.CharName)
 
         amtcbwidth = self.QualDrop.getMinimumWidth(['100'])
         # minSizeHint includes one char, test 19.9 width...
@@ -175,13 +177,17 @@ class ScWindow(QMainWindow, Ui_B_SC):
         self.CharRace.setFixedSize(QSize(cbwidth, cbheight + 2))
         self.CharLevel.setFixedSize(QSize(amtedwidth, edheight + 2))
 
+        self.Realm.insertItems(0, list(Realms))
+        self.QualDrop.insertItems(0, list(QualityValues))
+
         self.CharLevel.setValidator(QIntValidator(0, 99, self))
         self.ItemLevel.setValidator(QIntValidator(0, 99, self))
         self.QualEdit.setValidator(QIntValidator(0, 100, self))
         self.Bonus_Edit.setValidator(QIntValidator(0, 99, self))
 
-        self.Realm.insertItems(0, list(Realms))
-        self.QualDrop.insertItems(0, list(QualityValues))
+        self.GroupItemFrame.layout().itemAt(0).changeSize(1, 
+                                    self.PieceTab.baseOverlap(),
+                                    QSizePolicy.Minimum, QSizePolicy.Fixed)
 
         self.GemLabel = []
         self.Type = []
@@ -194,8 +200,6 @@ class ScWindow(QMainWindow, Ui_B_SC):
         self.Requirement = []
         self.Name = []
 
-        editAmountValidator = QIntValidator(-999, +999, self)
-
         self.ItemLevel.setFixedSize(QSize(amtedwidth, edheight))
         self.ItemLevelButton.setFixedSize(
             QSize(self.ItemLevelButton.width(), edheight))
@@ -204,18 +208,7 @@ class ScWindow(QMainWindow, Ui_B_SC):
         self.Bonus_Edit.setFixedSize(QSize(amtedwidth, edheight))
         self.AFDPS_Edit.setFixedSize(QSize(amtedwidth, edheight))
         self.Speed_Edit.setFixedSize(QSize(amtedwidth, edheight))
-
-        self.ItemNameCombo.setEditable(True)
-        self.ItemNameCombo.setInsertPolicy(QComboBox.NoInsert)
         self.ItemNameCombo.setFixedHeight(cbheight)
-        self.ItemNameCombo.setSizePolicy(QSizePolicy(QSizePolicy.Expanding,QSizePolicy.Fixed))
-
-        self.ItemLevelLabel.setBuddy(self.ItemLevel)
-        self.ItemNameLabel.setBuddy(self.ItemNameCombo)
-
-        self.GroupItemFrame.layout().itemAt(0).changeSize(1, 
-                                    self.PieceTab.baseOverlap(),
-                                    QSizePolicy.Minimum, QSizePolicy.Fixed)
 
         self.GroupItemFrame.layout().setColumnStretch(8, 1)
         width = testfont.size(Qt.TextSingleLine, " Slot 10:").width()
@@ -230,6 +223,8 @@ class ScWindow(QMainWindow, Ui_B_SC):
         typewidth = self.Type_1.getMinimumWidth(list(DropTypeList))
         l = reduce(lambda x, y: x+y, [ list(x) for x in GemLists['All'].values() ])
         effectwidth = self.Effect_1.getMinimumWidth(l)
+
+        editAmountValidator = QIntValidator(-999, +999, self)
 
         for i in range(0, 12):
             idx = i + 1
