@@ -774,15 +774,36 @@
             <height>307</height>
           </rect>
         </property>
-        <widget class="QLabel" name="ItemLevelLabel" >
-          <property name="geometry" >
-            <rect>
-              <x>7</x>
-              <y>5</y>
-              <width>34</width>
-              <height>21</height>
-            </rect>
+      <layout class="QGridLayout" >
+       <property name="margin" >
+         <number>8</number>
+       </property>
+       <property name="spacing" >
+         <number>0</number>
+       </property>
+       <item row="0" column="0" colspan="10" >
+         <spacer>
+          <property name="sizeType" >
+           <enum>QSizePolicy::Minimum</enum>
           </property>
+          <property name="sizeHint" >
+           <size>
+            <width>0</width>
+            <height>0</height>
+           </size>
+          </property>
+         </spacer>
+       </item>
+       <item row="1" column="0" colspan="10" >
+       <layout class="QHBoxLayout" >
+        <property name="margin" >
+         <number>0</number>
+        </property>
+        <property name="spacing" >
+         <number>0</number>
+        </property>
+        <item>
+        <widget class="QLabel" name="ItemLevelLabel" >
           <property name="text" >
             <string>&amp;Level: </string>
           </property>
@@ -790,25 +811,13 @@
             <enum>Qt::PlainText</enum>
           </property>
         </widget>
+        </item>
+        <item>
         <widget class="QLineEdit" name="ItemLevel" >
-          <property name="geometry" >
-            <rect>
-              <x>46</x>
-              <y>5</y>
-              <width>35</width>
-              <height>21</height>
-            </rect>
-          </property>
         </widget>
+        </item>
+        <item>
         <widget class="QPushButton" name="ItemLevelButton" >
-          <property name="geometry" >
-            <rect>
-              <x>81</x>
-              <y>5</y>
-              <width>21</width>
-              <height>21</height>
-            </rect>
-          </property>
           <property name="maximumSize" >
            <size>
             <width>21</width>
@@ -819,15 +828,25 @@
             <string>...</string>
           </property>
         </widget>
-        <widget class="QLabel" name="ItemQualityLabel" >
-          <property name="geometry" >
-            <rect>
-              <x>115</x>
-              <y>5</y>
-              <width>54</width>
-              <height>21</height>
-            </rect>
+        </item>
+        <item>
+         <spacer>
+          <property name="orientation" >
+           <enum>Qt::Horizontal</enum>
           </property>
+          <property name="sizeType" >
+           <enum>QSizePolicy::Minimum</enum>
+          </property>
+          <property name="sizeHint" >
+           <size>
+            <width>5</width>
+            <height>1</height>
+           </size>
+          </property>
+         </spacer>
+        </item>
+        <item>
+        <widget class="QLabel" name="ItemQualityLabel" >
           <property name="text" >
             <string>Quality: </string>
           </property>
@@ -835,35 +854,33 @@
             <enum>Qt::PlainText</enum>
           </property>
         </widget>
+        </item>
+        <item>
         <widget class="SearchingCombo" name="QualDrop" >
-          <property name="geometry" >
-            <rect>
-              <x>160</x>
-              <y>5</y>
-              <width>52</width>
-              <height>21</height>
-            </rect>
-          </property>
         </widget>
+        </item>
+        <item>
         <widget class="QLineEdit" name="QualEdit" >
-          <property name="geometry" >
-            <rect>
-              <x>160</x>
-              <y>5</y>
-              <width>52</width>
-              <height>21</height>
-            </rect>
-          </property>
         </widget>
-        <widget class="QLabel" name="ItemBonusLabel" >
-          <property name="geometry" >
-            <rect>
-              <x>232</x>
-              <y>5</y>
-              <width>40</width>
-              <height>21</height>
-            </rect>
+        </item>
+        <item>
+         <spacer>
+          <property name="orientation" >
+           <enum>Qt::Horizontal</enum>
           </property>
+          <property name="sizeType" >
+           <enum>QSizePolicy::Minimum</enum>
+          </property>
+          <property name="sizeHint" >
+           <size>
+            <width>5</width>
+            <height>1</height>
+           </size>
+          </property>
+         </spacer>
+        </item>
+        <item>
+        <widget class="QLabel" name="ItemBonusLabel" >
           <property name="text" >
             <string>Bonus: </string>
           </property>
@@ -871,25 +888,29 @@
             <enum>Qt::PlainText</enum>
           </property>
         </widget>
+        </item>
+        <item>
         <widget class="QLineEdit" name="Bonus_Edit" >
-          <property name="geometry" >
-            <rect>
-              <x>272</x>
-              <y>5</y>
-              <width>35</width>
-              <height>21</height>
-            </rect>
-          </property>
         </widget>
-        <widget class="QLabel" name="ItemAFDPSLabel" >
-          <property name="geometry" >
-            <rect>
-              <x>315</x>
-              <y>5</y>
-              <width>45</width>
-              <height>21</height>
-            </rect>
+        </item>
+        <item>
+         <spacer>
+          <property name="orientation" >
+           <enum>Qt::Horizontal</enum>
           </property>
+          <property name="sizeType" >
+           <enum>QSizePolicy::Minimum</enum>
+          </property>
+          <property name="sizeHint" >
+           <size>
+            <width>5</width>
+            <height>1</height>
+           </size>
+          </property>
+         </spacer>
+        </item>
+        <item>
+        <widget class="QLabel" name="ItemAFDPSLabel" >
           <property name="text" >
             <string>AF/DPS: </string>
           </property>
@@ -897,25 +918,29 @@
             <enum>Qt::PlainText</enum>
           </property>
         </widget>
+        </item>
+        <item>
         <widget class="QLineEdit" name="AFDPS_Edit" >
-          <property name="geometry" >
-            <rect>
-              <x>360</x>
-              <y>5</y>
-              <width>35</width>
-              <height>21</height>
-            </rect>
-          </property>
         </widget>
-        <widget class="QLabel" name="ItemSpeedLabel" >
-          <property name="geometry" >
-            <rect>
-              <x>403</x>
-              <y>5</y>
-              <width>40</width>
-              <height>21</height>
-            </rect>
+        </item>
+        <item>
+         <spacer>
+          <property name="orientation" >
+           <enum>Qt::Horizontal</enum>
           </property>
+          <property name="sizeType" >
+           <enum>QSizePolicy::Minimum</enum>
+          </property>
+          <property name="sizeHint" >
+           <size>
+            <width>5</width>
+            <height>1</height>
+           </size>
+          </property>
+         </spacer>
+        </item>
+        <item>
+        <widget class="QLabel" name="ItemSpeedLabel" >
           <property name="text" >
             <string>Speed: </string>
           </property>
@@ -923,25 +948,29 @@
             <enum>Qt::PlainText</enum>
           </property>
         </widget>
+        </item>
+        <item>
         <widget class="QLineEdit" name="Speed_Edit" >
-          <property name="geometry" >
-            <rect>
-              <x>443</x>
-              <y>5</y>
-              <width>35</width>
-              <height>21</height>
-            </rect>
-          </property>
         </widget>
-        <widget class="QLabel" name="ItemNameLabel" >
-          <property name="geometry" >
-            <rect>
-              <x>486</x>
-              <y>5</y>
-              <width>20</width>
-              <height>21</height>
-            </rect>
+        </item>
+        <item>
+         <spacer>
+          <property name="orientation" >
+           <enum>Qt::Horizontal</enum>
           </property>
+          <property name="sizeType" >
+           <enum>QSizePolicy::Minimum</enum>
+          </property>
+          <property name="sizeHint" >
+           <size>
+            <width>5</width>
+            <height>1</height>
+           </size>
+          </property>
+         </spacer>
+        </item>
+        <item>
+        <widget class="QLabel" name="ItemNameLabel" >
           <property name="text" >
             <string>&amp;Item: </string>
           </property>
@@ -949,103 +978,73 @@
             <enum>Qt::PlainText</enum>
           </property>
         </widget>
+        </item>
+        <item>
         <widget class="SearchingCombo" name="ItemNameCombo" >
-          <property name="geometry" >
-            <rect>
-              <x>506</x>
-              <y>5</y>
-              <width>68</width>
-              <height>21</height>
-            </rect>
-          </property>
         </widget>
-        <widget class="QCheckBox" name="Equipped" >
-          <property name="geometry" >
-            <rect>
-              <x>582</x>
-              <y>5</y>
-              <width>71</width>
-              <height>21</height>
-            </rect>
+        </item>
+        <item>
+         <spacer>
+          <property name="orientation" >
+           <enum>Qt::Horizontal</enum>
           </property>
+          <property name="sizeType" >
+           <enum>QSizePolicy::Minimum</enum>
+          </property>
+          <property name="sizeHint" >
+           <size>
+            <width>5</width>
+            <height>1</height>
+           </size>
+          </property>
+         </spacer>
+        </item>
+        <item>
+        <widget class="QCheckBox" name="Equipped" >
           <property name="text" >
             <string>Equi&amp;pped</string>
           </property>
         </widget>
+        </item>
+       </layout>
+       </item>
+       <item row="2" column="1" >
         <widget class="QLabel" name="LabelGemType" >
-          <property name="geometry" >
-            <rect>
-              <x>50</x>
-              <y>31</y>
-              <width>119</width>
-              <height>17</height>
-            </rect>
-          </property>
           <property name="text" >
             <string> Type</string>
           </property>
         </widget>
+       </item>
+       <item row="2" column="2" >
         <widget class="QLabel" name="LabelGemAmount" >
-          <property name="geometry" >
-            <rect>
-              <x>181</x>
-              <y>31</y>
-              <width>44</width>
-              <height>17</height>
-            </rect>
-          </property>
           <property name="text" >
             <string> Amount</string>
           </property>
         </widget>
+       </item>
+       <item row="2" column="3" >
         <widget class="QLabel" name="LabelGemEffect" >
-          <property name="geometry" >
-            <rect>
-              <x>237</x>
-              <y>31</y>
-              <width>142</width>
-              <height>17</height>
-            </rect>
-          </property>
           <property name="text" >
             <string> Effect</string>
           </property>
         </widget>
-        <widget class="QLabel" name="LabelRequirement" >
-          <property name="geometry" >
-            <rect>
-              <x>391</x>
-              <y>31</y>
-              <width>100</width>
-              <height>21</height>
-            </rect>
-          </property>
-          <property name="text" >
-            <string> Requirement</string>
-          </property>
-        </widget>
+       </item>
+       <item row="2" column="4" >
         <widget class="QLabel" name="LabelGemQuality" >
-          <property name="geometry" >
-            <rect>
-              <x>391</x>
-              <y>31</y>
-              <width>44</width>
-              <height>17</height>
-            </rect>
-          </property>
           <property name="text" >
             <string> Quality</string>
           </property>
         </widget>
-        <widget class="QLabel" name="LabelGemPoints" >
-          <property name="geometry" >
-            <rect>
-              <x>443</x>
-              <y>31</y>
-              <width>35</width>
-              <height>17</height>
-            </rect>
+       </item>
+       <item row="2" column="4" colspan="3" >
+        <widget class="QLabel" name="LabelRequirement" >
+          <property name="text" >
+            <string> Requirement</string>
           </property>
+        </widget>
+       </item>
+       <item row="2" column="5" >
+        <widget class="QLabel" name="LabelGemPoints" >
           <property name="text" >
             <string>Points</string>
           </property>
@@ -1053,15 +1052,9 @@
             <set>Qt::AlignVCenter|Qt::AlignRight</set>
           </property>
         </widget>
+       </item>
+       <item row="2" column="6" >
         <widget class="QLabel" name="LabelGemCost" >
-          <property name="geometry" >
-            <rect>
-              <x>482</x>
-              <y>31</y>
-              <width>70</width>
-              <height>17</height>
-            </rect>
-          </property>
           <property name="text" >
             <string>Cost</string>
           </property>
@@ -1069,28 +1062,48 @@
             <set>Qt::AlignVCenter|Qt::AlignRight</set>
           </property>
         </widget>
-        <widget class="QLabel" name="LabelGemName" >
-          <property name="geometry" >
-            <rect>
-              <x>562</x>
-              <y>31</y>
-              <width>70</width>
-              <height>17</height>
-            </rect>
+       </item>
+       <item row="2" column="7" >
+         <spacer>
+          <property name="orientation" >
+           <enum>Qt::Horizontal</enum>
           </property>
+          <property name="sizeType" >
+           <enum>QSizePolicy::Minimum</enum>
+          </property>
+          <property name="sizeHint" >
+           <size>
+            <width>5</width>
+            <height>1</height>
+           </size>
+          </property>
+         </spacer>
+       </item>
+       <item row="2" column="8" colspan="2" >
+        <widget class="QLabel" name="LabelGemName" >
           <property name="text" >
             <string>Name</string>
           </property>
         </widget>
-        <widget class="QLabel" name="Gem_Label_1" >
-          <property name="geometry" >
-            <rect>
-              <x>7</x>
-              <y>48</y>
-              <width>34</width>
-              <height>21</height>
-            </rect>
+       </item>
+       <item row="2" column="9" >
+         <spacer>
+          <property name="orientation" >
+           <enum>Qt::Horizontal</enum>
           </property>
+          <property name="sizeType" >
+           <enum>QSizePolicy::Minimum</enum>
+          </property>
+          <property name="sizeHint" >
+           <size>
+            <width>5</width>
+            <height>5</height>
+           </size>
+          </property>
+         </spacer>
+       </item>
+       <item row="3" column="0" >
+        <widget class="QLabel" name="Gem_Label_1" >
           <property name="text" >
             <string>Slot &amp;1: </string>
           </property>
@@ -1098,78 +1111,36 @@
             <enum>Qt::PlainText</enum>
           </property>
         </widget>
+       </item>
+       <item row="3" column="1" >
         <widget class="SearchingCombo" name="Type_1" >
-          <property name="geometry" >
-            <rect>
-              <x>46</x>
-              <y>48</y>
-              <width>127</width>
-              <height>21</height>
-            </rect>
-          </property>
         </widget>
+       </item>
+       <item row="3" column="2" >
         <widget class="QLineEdit" name="Amount_Edit_1" >
-          <property name="geometry" >
-            <rect>
-              <x>177</x>
-              <y>48</y>
-              <width>51</width>
-              <height>21</height>
-            </rect>
-          </property>
         </widget>
+       </item>
+       <item row="3" column="2" >
         <widget class="SearchingCombo" name="Amount_Drop_1" >
-          <property name="geometry" >
-            <rect>
-              <x>177</x>
-              <y>48</y>
-              <width>52</width>
-              <height>21</height>
-            </rect>
-          </property>
         </widget>
+       </item>
+       <item row="3" column="3" >
         <widget class="SearchingCombo" name="Effect_1" >
           <property name="editable" >
             <bool>true</bool>
           </property>
-          <property name="geometry" >
-            <rect>
-              <x>233</x>
-              <y>48</y>
-              <width>150</width>
-              <height>21</height>
-            </rect>
-          </property>
         </widget>
+       </item>
+       <item row="3" column="4" >
         <widget class="SearchingCombo" name="Quality_1" >
-          <property name="geometry" >
-            <rect>
-              <x>387</x>
-              <y>48</y>
-              <width>52</width>
-              <height>21</height>
-            </rect>
-          </property>
         </widget>
+       </item>
+       <item row="3" column="4" colspan="3" >
         <widget class="QLineEdit" name="Requirement_1" >
-          <property name="geometry" >
-            <rect>
-              <x>387</x>
-              <y>48</y>
-              <width>165</width>
-              <height>21</height>
-            </rect>
-          </property>
         </widget>
+       </item>
+       <item row="3" column="5" >
         <widget class="QLabel" name="Points_1" >
-          <property name="geometry" >
-            <rect>
-              <x>443</x>
-              <y>48</y>
-              <width>35</width>
-              <height>21</height>
-            </rect>
-          </property>
           <property name="text" >
             <string>0.0</string>
           </property>
@@ -1177,15 +1148,9 @@
             <set>Qt::AlignVCenter|Qt::AlignRight</set>
           </property>
         </widget>
+       </item>
+       <item row="3" column="6" >
         <widget class="QLabel" name="Cost_1" >
-          <property name="geometry" >
-            <rect>
-              <x>482</x>
-              <y>48</y>
-              <width>70</width>
-              <height>21</height>
-            </rect>
-          </property>
           <property name="text" >
             <string>0c</string>
           </property>
@@ -1193,28 +1158,16 @@
             <set>Qt::AlignVCenter|Qt::AlignRight</set>
           </property>
         </widget>
+       </item>
+       <item row="3" column="8" colspan="2" >
         <widget class="QLabel" name="Name_1" >
-          <property name="geometry" >
-            <rect>
-              <x>562</x>
-              <y>48</y>
-              <width>200</width>
-              <height>21</height>
-            </rect>
-          </property>
           <property name="text" >
             <string/>
           </property>
         </widget>
+       </item>
+       <item row="4" column="0" >
         <widget class="QLabel" name="Gem_Label_2" >
-          <property name="geometry" >
-            <rect>
-              <x>7</x>
-              <y>69</y>
-              <width>34</width>
-              <height>21</height>
-            </rect>
-          </property>
           <property name="text" >
             <string>Slot &amp;2: </string>
           </property>
@@ -1222,78 +1175,36 @@
             <enum>Qt::PlainText</enum>
           </property>
         </widget>
-        <widget class="QLineEdit" name="Amount_Edit_2" >
-          <property name="geometry" >
-            <rect>
-              <x>177</x>
-              <y>69</y>
-              <width>51</width>
-              <height>21</height>
-            </rect>
-          </property>
-        </widget>
-        <widget class="SearchingCombo" name="Amount_Drop_2" >
-          <property name="geometry" >
-            <rect>
-              <x>177</x>
-              <y>69</y>
-              <width>52</width>
-              <height>21</height>
-            </rect>
-          </property>
-        </widget>
+       </item>
+       <item row="4" column="1" >
         <widget class="SearchingCombo" name="Type_2" >
-          <property name="geometry" >
-            <rect>
-              <x>46</x>
-              <y>69</y>
-              <width>127</width>
-              <height>21</height>
-            </rect>
-          </property>
         </widget>
+       </item>
+       <item row="4" column="2" >
+        <widget class="QLineEdit" name="Amount_Edit_2" >
+        </widget>
+       </item>
+       <item row="4" column="2" >
+        <widget class="SearchingCombo" name="Amount_Drop_2" >
+        </widget>
+       </item>
+       <item row="4" column="3" >
         <widget class="SearchingCombo" name="Effect_2" >
           <property name="editable" >
             <bool>true</bool>
           </property>
-          <property name="geometry" >
-            <rect>
-              <x>233</x>
-              <y>69</y>
-              <width>150</width>
-              <height>21</height>
-            </rect>
-          </property>
         </widget>
+       </item>
+       <item row="4" column="4" >
         <widget class="SearchingCombo" name="Quality_2" >
-          <property name="geometry" >
-            <rect>
-              <x>387</x>
-              <y>69</y>
-              <width>52</width>
-              <height>21</height>
-            </rect>
-          </property>
         </widget>
+       </item>
+       <item row="4" column="4" colspan="3" >
         <widget class="QLineEdit" name="Requirement_2" >
-          <property name="geometry" >
-            <rect>
-              <x>387</x>
-              <y>69</y>
-              <width>165</width>
-              <height>21</height>
-            </rect>
-          </property>
         </widget>
+       </item>
+       <item row="4" column="5" >
         <widget class="QLabel" name="Points_2" >
-          <property name="geometry" >
-            <rect>
-              <x>443</x>
-              <y>69</y>
-              <width>35</width>
-              <height>21</height>
-            </rect>
-          </property>
           <property name="text" >
             <string>0.0</string>
           </property>
@@ -1301,15 +1212,9 @@
             <set>Qt::AlignVCenter|Qt::AlignRight</set>
           </property>
         </widget>
+       </item>
+       <item row="4" column="6" >
         <widget class="QLabel" name="Cost_2" >
-          <property name="geometry" >
-            <rect>
-              <x>482</x>
-              <y>69</y>
-              <width>70</width>
-              <height>21</height>
-            </rect>
-          </property>
           <property name="text" >
             <string>0c</string>
           </property>
@@ -1317,28 +1222,16 @@
             <set>Qt::AlignVCenter|Qt::AlignRight</set>
           </property>
         </widget>
+       </item>
+       <item row="4" column="8" colspan="2" >
         <widget class="QLabel" name="Name_2" >
-          <property name="geometry" >
-            <rect>
-              <x>562</x>
-              <y>69</y>
-              <width>200</width>
-              <height>21</height>
-            </rect>
-          </property>
           <property name="text" >
             <string/>
           </property>
         </widget>
+       </item>
+       <item row="5" column="0" >
         <widget class="QLabel" name="Gem_Label_3" >
-          <property name="geometry" >
-            <rect>
-              <x>7</x>
-              <y>90</y>
-              <width>34</width>
-              <height>21</height>
-            </rect>
-          </property>
           <property name="text" >
             <string>Slot &amp;3: </string>
           </property>
@@ -1346,78 +1239,36 @@
             <enum>Qt::PlainText</enum>
           </property>
         </widget>
+       </item>
+       <item row="5" column="1" >
         <widget class="SearchingCombo" name="Type_3" >
-          <property name="geometry" >
-            <rect>
-              <x>46</x>
-              <y>90</y>
-              <width>127</width>
-              <height>21</height>
-            </rect>
-          </property>
         </widget>
+       </item>
+       <item row="5" column="2" >
         <widget class="QLineEdit" name="Amount_Edit_3" >
-          <property name="geometry" >
-            <rect>
-              <x>177</x>
-              <y>90</y>
-              <width>51</width>
-              <height>21</height>
-            </rect>
-          </property>
         </widget>
+       </item>
+       <item row="5" column="2" >
         <widget class="SearchingCombo" name="Amount_Drop_3" >
-          <property name="geometry" >
-            <rect>
-              <x>177</x>
-              <y>90</y>
-              <width>52</width>
-              <height>21</height>
-            </rect>
-          </property>
         </widget>
+       </item>
+       <item row="5" column="3" >
         <widget class="SearchingCombo" name="Effect_3" >
           <property name="editable" >
             <bool>true</bool>
           </property>
-          <property name="geometry" >
-            <rect>
-              <x>233</x>
-              <y>90</y>
-              <width>150</width>
-              <height>21</height>
-            </rect>
-          </property>
         </widget>
+       </item>
+       <item row="5" column="4" >
         <widget class="SearchingCombo" name="Quality_3" >
-          <property name="geometry" >
-            <rect>
-              <x>387</x>
-              <y>90</y>
-              <width>52</width>
-              <height>21</height>
-            </rect>
-          </property>
         </widget>
+       </item>
+       <item row="5" column="4" colspan="3" >
         <widget class="QLineEdit" name="Requirement_3" >
-          <property name="geometry" >
-            <rect>
-              <x>387</x>
-              <y>90</y>
-              <width>165</width>
-              <height>21</height>
-            </rect>
-          </property>
         </widget>
+       </item>
+       <item row="5" column="5" >
         <widget class="QLabel" name="Points_3" >
-          <property name="geometry" >
-            <rect>
-              <x>443</x>
-              <y>90</y>
-              <width>35</width>
-              <height>21</height>
-            </rect>
-          </property>
           <property name="text" >
             <string>0.0</string>
           </property>
@@ -1425,15 +1276,9 @@
             <set>Qt::AlignVCenter|Qt::AlignRight</set>
           </property>
         </widget>
+       </item>
+       <item row="5" column="6" >
         <widget class="QLabel" name="Cost_3" >
-          <property name="geometry" >
-            <rect>
-              <x>482</x>
-              <y>90</y>
-              <width>70</width>
-              <height>21</height>
-            </rect>
-          </property>
           <property name="text" >
             <string>0c</string>
           </property>
@@ -1441,28 +1286,16 @@
             <set>Qt::AlignVCenter|Qt::AlignRight</set>
           </property>
         </widget>
+       </item>
+       <item row="5" column="8" colspan="2" >
         <widget class="QLabel" name="Name_3" >
-          <property name="geometry" >
-            <rect>
-              <x>562</x>
-              <y>90</y>
-              <width>200</width>
-              <height>21</height>
-            </rect>
-          </property>
           <property name="text" >
             <string/>
           </property>
         </widget>
+       </item>
+       <item row="6" column="0" >
         <widget class="QLabel" name="Gem_Label_4" >
-          <property name="geometry" >
-            <rect>
-              <x>7</x>
-              <y>111</y>
-              <width>34</width>
-              <height>21</height>
-            </rect>
-          </property>
           <property name="text" >
             <string>Slot &amp;4: </string>
           </property>
@@ -1470,78 +1303,36 @@
             <enum>Qt::PlainText</enum>
           </property>
         </widget>
+       </item>
+       <item row="6" column="1" >
         <widget class="SearchingCombo" name="Type_4" >
-          <property name="geometry" >
-            <rect>
-              <x>46</x>
-              <y>111</y>
-              <width>127</width>
-              <height>21</height>
-            </rect>
-          </property>
         </widget>
+       </item>
+       <item row="6" column="2" >
         <widget class="QLineEdit" name="Amount_Edit_4" >
-          <property name="geometry" >
-            <rect>
-              <x>177</x>
-              <y>111</y>
-              <width>51</width>
-              <height>21</height>
-            </rect>
-          </property>
         </widget>
+       </item>
+       <item row="6" column="2" >
         <widget class="SearchingCombo" name="Amount_Drop_4" >
-          <property name="geometry" >
-            <rect>
-              <x>177</x>
-              <y>111</y>
-              <width>52</width>
-              <height>21</height>
-            </rect>
-          </property>
         </widget>
+       </item>
+       <item row="6" column="3" >
         <widget class="SearchingCombo" name="Effect_4" >
           <property name="editable" >
             <bool>true</bool>
           </property>
-          <property name="geometry" >
-            <rect>
-              <x>233</x>
-              <y>111</y>
-              <width>150</width>
-              <height>21</height>
-            </rect>
-          </property>
         </widget>
+       </item>
+       <item row="6" column="4" >
         <widget class="SearchingCombo" name="Quality_4" >
-          <property name="geometry" >
-            <rect>
-              <x>387</x>
-              <y>111</y>
-              <width>52</width>
-              <height>21</height>
-            </rect>
-          </property>
         </widget>
+       </item>
+       <item row="6" column="4" colspan="3" >
         <widget class="QLineEdit" name="Requirement_4" >
-          <property name="geometry" >
-            <rect>
-              <x>387</x>
-              <y>111</y>
-              <width>165</width>
-              <height>21</height>
-            </rect>
-          </property>
         </widget>
+       </item>
+       <item row="6" column="5" >
         <widget class="QLabel" name="Points_4" >
-          <property name="geometry" >
-            <rect>
-              <x>443</x>
-              <y>111</y>
-              <width>35</width>
-              <height>21</height>
-            </rect>
-          </property>
           <property name="text" >
             <string>0.0</string>
           </property>
@@ -1549,15 +1340,9 @@
             <set>Qt::AlignVCenter|Qt::AlignRight</set>
           </property>
         </widget>
+       </item>
+       <item row="6" column="6" >
         <widget class="QLabel" name="Cost_4" >
-          <property name="geometry" >
-            <rect>
-              <x>482</x>
-              <y>111</y>
-              <width>70</width>
-              <height>21</height>
-            </rect>
-          </property>
           <property name="text" >
             <string>0c</string>
           </property>
@@ -1565,28 +1350,16 @@
             <set>Qt::AlignVCenter|Qt::AlignRight</set>
           </property>
         </widget>
+       </item>
+       <item row="6" column="8" colspan="2" >
         <widget class="QLabel" name="Name_4" >
-          <property name="geometry" >
-            <rect>
-              <x>562</x>
-              <y>111</y>
-              <width>200</width>
-              <height>21</height>
-            </rect>
-          </property>
           <property name="text" >
             <string/>
           </property>
         </widget>
+       </item>
+       <item row="7" column="0" >
         <widget class="QLabel" name="Gem_Label_5" >
-          <property name="geometry" >
-            <rect>
-              <x>7</x>
-              <y>132</y>
-              <width>34</width>
-              <height>21</height>
-            </rect>
-          </property>
           <property name="text" >
             <string>Slot &amp;5: </string>
           </property>
@@ -1594,81 +1367,39 @@
             <enum>Qt::PlainText</enum>
           </property>
         </widget>
+       </item>
+       <item row="7" column="1" >
         <widget class="SearchingCombo" name="Type_5" >
-          <property name="geometry" >
-            <rect>
-              <x>46</x>
-              <y>132</y>
-              <width>127</width>
-              <height>21</height>
-            </rect>
-          </property>
         </widget>
+       </item>
+       <item row="7" column="2" >
         <widget class="QLineEdit" name="Amount_Edit_5" >
-          <property name="geometry" >
-            <rect>
-              <x>177</x>
-              <y>132</y>
-              <width>51</width>
-              <height>21</height>
-            </rect>
-          </property>
         </widget>
+       </item>
+       <item row="7" column="2" >
         <widget class="SearchingCombo" name="Amount_Drop_5" >
-          <property name="geometry" >
-            <rect>
-              <x>177</x>
-              <y>132</y>
-              <width>52</width>
-              <height>21</height>
-            </rect>
-          </property>
         </widget>
+       </item>
+       <item row="7" column="3" >
         <widget class="SearchingCombo" name="Effect_5" >
           <property name="editable" >
             <bool>true</bool>
           </property>
-          <property name="geometry" >
-            <rect>
-              <x>233</x>
-              <y>132</y>
-              <width>150</width>
-              <height>21</height>
-            </rect>
-          </property>
         </widget>
+       </item>
+       <item row="7" column="4" colspan="3" >
         <widget class="QLineEdit" name="Requirement_5" >
-          <property name="geometry" >
-            <rect>
-              <x>387</x>
-              <y>132</y>
-              <width>165</width>
-              <height>21</height>
-            </rect>
-          </property>
         </widget>
+       </item>
+       <item row="7" column="8" colspan="2" >
         <widget class="QLabel" name="Name_5" >
-          <property name="geometry" >
-            <rect>
-              <x>562</x>
-              <y>132</y>
-              <width>200</width>
-              <height>21</height>
-            </rect>
-          </property>
           <property name="text" >
             <string/>
           </property>
         </widget>
+       </item>
+       <item row="8" column="0" >
         <widget class="QLabel" name="Gem_Label_6" >
-          <property name="geometry" >
-            <rect>
-              <x>7</x>
-              <y>153</y>
-              <width>34</width>
-              <height>21</height>
-            </rect>
-          </property>
           <property name="text" >
             <string>Slot &amp;6: </string>
           </property>
@@ -1676,94 +1407,46 @@
             <enum>Qt::PlainText</enum>
           </property>
         </widget>
+       </item>
+       <item row="8" column="1" >
         <widget class="SearchingCombo" name="Type_6" >
-          <property name="geometry" >
-            <rect>
-              <x>46</x>
-              <y>153</y>
-              <width>127</width>
-              <height>21</height>
-            </rect>
-          </property>
         </widget>
+       </item>
+       <item row="8" column="2" >
         <widget class="QLineEdit" name="Amount_Edit_6" >
-          <property name="geometry" >
-            <rect>
-              <x>177</x>
-              <y>153</y>
-              <width>51</width>
-              <height>21</height>
-            </rect>
-          </property>
         </widget>
+       </item>
+       <item row="8" column="2" >
         <widget class="SearchingCombo" name="Amount_Drop_6" >
-          <property name="geometry" >
-            <rect>
-              <x>177</x>
-              <y>153</y>
-              <width>52</width>
-              <height>21</height>
-            </rect>
-          </property>
         </widget>
+       </item>
+       <item row="8" column="3" >
         <widget class="SearchingCombo" name="Effect_6" >
           <property name="editable" >
             <bool>true</bool>
           </property>
-          <property name="geometry" >
-            <rect>
-              <x>233</x>
-              <y>153</y>
-              <width>150</width>
-              <height>21</height>
-            </rect>
-          </property>
         </widget>
+       </item>
+       <item row="8" column="4" colspan="3" >
         <widget class="QLineEdit" name="Requirement_6" >
-          <property name="geometry" >
-            <rect>
-              <x>387</x>
-              <y>153</y>
-              <width>165</width>
-              <height>21</height>
-            </rect>
-          </property>
         </widget>
+       </item>
+       <item row="8" column="8" colspan="2" >
         <widget class="QLabel" name="Name_6" >
-          <property name="geometry" >
-            <rect>
-              <x>562</x>
-              <y>153</y>
-              <width>200</width>
-              <height>21</height>
-            </rect>
-          </property>
           <property name="text" >
             <string/>
           </property>
         </widget>
+       </item>
+       <item row="7" column="8" colspan="2" >
         <widget class="QLabel" name="LabelRequirement2" >
-          <property name="geometry" >
-            <rect>
-              <x>391</x>
-              <y>174</y>
-              <width>100</width>
-              <height>21</height>
-            </rect>
-          </property>
           <property name="text" >
             <string> (Requirement)</string>
           </property>
         </widget>
+       </item>
+       <item row="9" column="0" >
         <widget class="QLabel" name="Gem_Label_7" >
-          <property name="geometry" >
-            <rect>
-              <x>7</x>
-              <y>174</y>
-              <width>34</width>
-              <height>21</height>
-            </rect>
-          </property>
           <property name="text" >
             <string>Slot &amp;7: </string>
           </property>
@@ -1771,58 +1454,28 @@
             <enum>Qt::PlainText</enum>
           </property>
         </widget>
+       </item>
+       <item row="9" column="1" >
         <widget class="SearchingCombo" name="Type_7" >
-          <property name="geometry" >
-            <rect>
-              <x>46</x>
-              <y>174</y>
-              <width>127</width>
-              <height>21</height>
-            </rect>
-          </property>
         </widget>
+       </item>
+       <item row="9" column="2" >
         <widget class="QLineEdit" name="Amount_Edit_7" >
-          <property name="geometry" >
-            <rect>
-              <x>177</x>
-              <y>174</y>
-              <width>51</width>
-              <height>21</height>
-            </rect>
-          </property>
         </widget>
+       </item>
+       <item row="9" column="3" >
         <widget class="SearchingCombo" name="Effect_7" >
           <property name="editable" >
             <bool>true</bool>
           </property>
-          <property name="geometry" >
-            <rect>
-              <x>233</x>
-              <y>174</y>
-              <width>150</width>
-              <height>21</height>
-            </rect>
-          </property>
         </widget>
+       </item>
+       <item row="9" column="4" colspan="3" >
         <widget class="QLineEdit" name="Requirement_7" >
-          <property name="geometry" >
-            <rect>
-              <x>387</x>
-              <y>174</y>
-              <width>165</width>
-              <height>21</height>
-            </rect>
-          </property>
         </widget>
+       </item>
+       <item row="10" column="0" >
         <widget class="QLabel" name="Gem_Label_8" >
-          <property name="geometry" >
-            <rect>
-              <x>7</x>
-              <y>195</y>
-              <width>34</width>
-              <height>21</height>
-            </rect>
-          </property>
           <property name="text" >
             <string>Slot &amp;8: </string>
           </property>
@@ -1830,58 +1483,28 @@
             <enum>Qt::PlainText</enum>
           </property>
         </widget>
+       </item>
+       <item row="10" column="1" >
         <widget class="SearchingCombo" name="Type_8" >
-          <property name="geometry" >
-            <rect>
-              <x>46</x>
-              <y>195</y>
-              <width>127</width>
-              <height>21</height>
-            </rect>
-          </property>
         </widget>
+       </item>
+       <item row="10" column="2" >
         <widget class="QLineEdit" name="Amount_Edit_8" >
-          <property name="geometry" >
-            <rect>
-              <x>177</x>
-              <y>195</y>
-              <width>51</width>
-              <height>21</height>
-            </rect>
-          </property>
         </widget>
+       </item>
+       <item row="10" column="3" >
         <widget class="SearchingCombo" name="Effect_8" >
           <property name="editable" >
             <bool>true</bool>
           </property>
-          <property name="geometry" >
-            <rect>
-              <x>233</x>
-              <y>195</y>
-              <width>150</width>
-              <height>21</height>
-            </rect>
-          </property>
         </widget>
+       </item>
+       <item row="10" column="4" colspan="3" >
         <widget class="QLineEdit" name="Requirement_8" >
-          <property name="geometry" >
-            <rect>
-              <x>387</x>
-              <y>195</y>
-              <width>165</width>
-              <height>21</height>
-            </rect>
-          </property>
         </widget>
+       </item>
+       <item row="11" column="0" >
         <widget class="QLabel" name="Gem_Label_9" >
-          <property name="geometry" >
-            <rect>
-              <x>7</x>
-              <y>216</y>
-              <width>34</width>
-              <height>21</height>
-            </rect>
-          </property>
           <property name="text" >
             <string>Slot &amp;9: </string>
           </property>
@@ -1889,58 +1512,28 @@
             <enum>Qt::PlainText</enum>
           </property>
         </widget>
+       </item>
+       <item row="11" column="1" >
         <widget class="SearchingCombo" name="Type_9" >
-          <property name="geometry" >
-            <rect>
-              <x>46</x>
-              <y>216</y>
-              <width>127</width>
-              <height>21</height>
-            </rect>
-          </property>
         </widget>
+       </item>
+       <item row="11" column="2" >
         <widget class="QLineEdit" name="Amount_Edit_9" >
-          <property name="geometry" >
-            <rect>
-              <x>177</x>
-              <y>216</y>
-              <width>51</width>
-              <height>21</height>
-            </rect>
-          </property>
         </widget>
+       </item>
+       <item row="11" column="3" >
         <widget class="SearchingCombo" name="Effect_9" >
           <property name="editable" >
             <bool>true</bool>
           </property>
-          <property name="geometry" >
-            <rect>
-              <x>233</x>
-              <y>216</y>
-              <width>150</width>
-              <height>21</height>
-            </rect>
-          </property>
         </widget>
+       </item>
+       <item row="11" column="4" colspan="3" >
         <widget class="QLineEdit" name="Requirement_9" >
-          <property name="geometry" >
-            <rect>
-              <x>387</x>
-              <y>216</y>
-              <width>165</width>
-              <height>21</height>
-            </rect>
-          </property>
         </widget>
+       </item>
+       <item row="12" column="0" >
         <widget class="QLabel" name="Gem_Label_10" >
-          <property name="geometry" >
-            <rect>
-              <x>7</x>
-              <y>237</y>
-              <width>41</width>
-              <height>21</height>
-            </rect>
-          </property>
           <property name="text" >
             <string>Slot 1&amp;0:</string>
           </property>
@@ -1948,58 +1541,28 @@
             <enum>Qt::PlainText</enum>
           </property>
         </widget>
+       </item>
+       <item row="12" column="1" >
         <widget class="SearchingCombo" name="Type_10" >
-          <property name="geometry" >
-            <rect>
-              <x>46</x>
-              <y>237</y>
-              <width>127</width>
-              <height>21</height>
-            </rect>
-          </property>
         </widget>
+       </item>
+       <item row="12" column="2" >
         <widget class="QLineEdit" name="Amount_Edit_10" >
-          <property name="geometry" >
-            <rect>
-              <x>177</x>
-              <y>237</y>
-              <width>51</width>
-              <height>21</height>
-            </rect>
-          </property>
         </widget>
+       </item>
+       <item row="12" column="3" >
         <widget class="SearchingCombo" name="Effect_10" >
           <property name="editable" >
             <bool>true</bool>
           </property>
-          <property name="geometry" >
-            <rect>
-              <x>233</x>
-              <y>237</y>
-              <width>150</width>
-              <height>21</height>
-            </rect>
-          </property>
         </widget>
+       </item>
+       <item row="12" column="4" colspan="3" >
         <widget class="QLineEdit" name="Requirement_10" >
-          <property name="geometry" >
-            <rect>
-              <x>387</x>
-              <y>237</y>
-              <width>165</width>
-              <height>21</height>
-            </rect>
-          </property>
         </widget>
+       </item>
+       <item row="13" column="0" >
         <widget class="QLabel" name="Gem_Label_11" >
-          <property name="geometry" >
-            <rect>
-              <x>7</x>
-              <y>258</y>
-              <width>41</width>
-              <height>21</height>
-            </rect>
-          </property>
           <property name="text" >
             <string>Slot 11&amp;- </string>
           </property>
@@ -2007,58 +1570,28 @@
             <enum>Qt::PlainText</enum>
           </property>
         </widget>
+       </item>
+       <item row="13" column="1" >
         <widget class="SearchingCombo" name="Type_11" >
-          <property name="geometry" >
-            <rect>
-              <x>46</x>
-              <y>258</y>
-              <width>127</width>
-              <height>21</height>
-            </rect>
-          </property>
         </widget>
+       </item>
+       <item row="13" column="2" >
         <widget class="QLineEdit" name="Amount_Edit_11" >
-          <property name="geometry" >
-            <rect>
-              <x>177</x>
-              <y>258</y>
-              <width>51</width>
-              <height>21</height>
-            </rect>
-          </property>
         </widget>
+       </item>
+       <item row="13" column="3" >
         <widget class="SearchingCombo" name="Effect_11" >
           <property name="editable" >
             <bool>true</bool>
           </property>
-          <property name="geometry" >
-            <rect>
-              <x>233</x>
-              <y>258</y>
-              <width>150</width>
-              <height>21</height>
-            </rect>
-          </property>
         </widget>
+       </item>
+       <item row="13" column="4" colspan="3" >
         <widget class="QLineEdit" name="Requirement_11" >
-          <property name="geometry" >
-            <rect>
-              <x>387</x>
-              <y>258</y>
-              <width>165</width>
-              <height>21</height>
-            </rect>
-          </property>
         </widget>
+       </item>
+       <item row="14" column="0" >
         <widget class="QLabel" name="Gem_Label_12" >
-          <property name="geometry" >
-            <rect>
-              <x>7</x>
-              <y>279</y>
-              <width>41</width>
-              <height>21</height>
-            </rect>
-          </property>
           <property name="text" >
             <string>Slot 12&amp;=</string>
           </property>
@@ -2066,58 +1599,28 @@
             <enum>Qt::PlainText</enum>
           </property>
         </widget>
+       </item>
+       <item row="14" column="1" >
         <widget class="SearchingCombo" name="Type_12" >
-          <property name="geometry" >
-            <rect>
-              <x>46</x>
-              <y>279</y>
-              <width>127</width>
-              <height>21</height>
-            </rect>
-          </property>
         </widget>
+       </item>
+       <item row="14" column="2" >
         <widget class="QLineEdit" name="Amount_Edit_12" >
-          <property name="geometry" >
-            <rect>
-              <x>177</x>
-              <y>279</y>
-              <width>51</width>
-              <height>21</height>
-            </rect>
-          </property>
         </widget>
+       </item>
+       <item row="14" column="3" >
         <widget class="SearchingCombo" name="Effect_12" >
           <property name="editable" >
             <bool>true</bool>
           </property>
-          <property name="geometry" >
-            <rect>
-              <x>233</x>
-              <y>279</y>
-              <width>150</width>
-              <height>21</height>
-            </rect>
-          </property>
         </widget>
+       </item>
+       <item row="14" column="4" colspan="3" >
         <widget class="QLineEdit" name="Requirement_12" >
-          <property name="geometry" >
-            <rect>
-              <x>387</x>
-              <y>279</y>
-              <width>165</width>
-              <height>21</height>
-            </rect>
-          </property>
         </widget>
+       </item>
+       <item row="10" column="3" colspan="2" >
         <widget class="QLabel" name="ItemImbueLabel" >
-          <property name="geometry" >
-            <rect>
-              <x>370</x>
-              <y>178</y>
-              <width>73</width>
-              <height>17</height>
-            </rect>
-          </property>
           <property name="text" >
             <string>Imbue Points: </string>
           </property>
@@ -2125,15 +1628,9 @@
             <set>Qt::AlignVCenter|Qt::AlignRight</set>
           </property>
         </widget>
+       </item>
+       <item row="10" column="5" >
         <widget class="QLabel" name="ItemImbue" >
-          <property name="geometry" >
-            <rect>
-              <x>443</x>
-              <y>178</y>
-              <width>35</width>
-              <height>17</height>
-            </rect>
-          </property>
           <property name="text" >
             <string>0.0</string>
           </property>
@@ -2141,15 +1638,9 @@
             <set>Qt::AlignVCenter|Qt::AlignRight</set>
           </property>
         </widget>
+       </item>
+       <item row="10" column="6" >
         <widget class="QLabel" name="ItemImbueTotal" >
-          <property name="geometry" >
-            <rect>
-              <x>487</x>
-              <y>178</y>
-              <width>40</width>
-              <height>17</height>
-            </rect>
-          </property>
           <property name="text" >
             <string> / 0.0</string>
           </property>
@@ -2157,15 +1648,9 @@
             <set>Qt::AlignVCenter|Qt::AlignLeft</set>
           </property>
         </widget>
+       </item>
+       <item row="11" column="3" colspan="2" >
         <widget class="QLabel" name="ItemOverchargeLabel" >
-          <property name="geometry" >
-            <rect>
-              <x>370</x>
-              <y>195</y>
-              <width>73</width>
-              <height>17</height>
-            </rect>
-          </property>
           <property name="text" >
             <string>Overcharge: </string>
           </property>
@@ -2173,15 +1658,9 @@
             <set>Qt::AlignVCenter|Qt::AlignRight</set>
           </property>
         </widget>
+       </item>
+       <item row="11" column="5" colspan="2" >
         <widget class="QLabel" name="ItemOvercharge" >
-          <property name="geometry" >
-            <rect>
-              <x>443</x>
-              <y>195</y>
-              <width>90</width>
-              <height>17</height>
-            </rect>
-          </property>
           <property name="text" >
             <string>None</string>
           </property>
@@ -2189,15 +1668,9 @@
             <set>Qt::AlignVCenter|Qt::AlignCenter</set>
           </property>
         </widget>
+       </item>
+       <item row="12" column="3" colspan="2" >
         <widget class="QLabel" name="ItemCostLabel" >
-          <property name="geometry" >
-            <rect>
-              <x>370</x>
-              <y>220</y>
-              <width>73</width>
-              <height>17</height>
-            </rect>
-          </property>
           <property name="text" >
             <string>Item Cost: </string>
           </property>
@@ -2205,15 +1678,9 @@
             <set>Qt::AlignVCenter|Qt::AlignRight</set>
           </property>
         </widget>
+       </item>
+       <item row="12" column="5" colspan="2" >
         <widget class="QLabel" name="ItemCost" >
-          <property name="geometry" >
-            <rect>
-              <x>482</x>
-              <y>220</y>
-              <width>70</width>
-              <height>17</height>
-            </rect>
-          </property>
           <property name="text" >
             <string/>
           </property>
@@ -2221,15 +1688,9 @@
             <set>Qt::AlignVCenter|Qt::AlignRight</set>
           </property>
         </widget>
+       </item>
+       <item row="13" column="3" colspan="2" >
         <widget class="QLabel" name="ItemPriceLabel" >
-          <property name="geometry" >
-            <rect>
-              <x>370</x>
-              <y>237</y>
-              <width>73</width>
-              <height>17</height>
-            </rect>
-          </property>
           <property name="text" >
             <string>Item Price: </string>
           </property>
@@ -2237,15 +1698,9 @@
             <set>Qt::AlignVCenter|Qt::AlignRight</set>
           </property>
         </widget>
+       </item>
+       <item row="13" column="5" colspan="2" >
         <widget class="QLabel" name="ItemPrice" >
-          <property name="geometry" >
-            <rect>
-              <x>482</x>
-              <y>237</y>
-              <width>70</width>
-              <height>17</height>
-            </rect>
-          </property>
           <property name="text" >
             <string/>
           </property>
@@ -2253,15 +1708,17 @@
             <set>Qt::AlignVCenter|Qt::AlignRight</set>
           </property>
         </widget>
+       </item>
+       <item row="14" column="8" colspan="1" >
+      <layout class="QGridLayout" >
+       <property name="margin" >
+         <number>3</number>
+       </property>
+       <property name="spacing" >
+         <number>0</number>
+       </property>
+       <item row="0" column="0" >
         <widget class="QLabel" name="ItemUtilityLabel" >
-          <property name="geometry" >
-            <rect>
-              <x>585</x>
-              <y>237</y>
-              <width>35</width>
-              <height>17</height>
-            </rect>
-          </property>
           <property name="text" >
             <string>Utility: </string>
           </property>
@@ -2269,15 +1726,9 @@
             <set>Qt::AlignVCenter|Qt::AlignRight</set>
           </property>
         </widget>
+       </item>
+       <item row="0" column="1" >
         <widget class="QLabel" name="ItemUtility" >
-          <property name="geometry" >
-            <rect>
-              <x>625</x>
-              <y>237</y>
-              <width>30</width>
-              <height>17</height>
-            </rect>
-          </property>
           <property name="alignment" >
             <set>Qt::AlignVCenter|Qt::AlignRight</set>
           </property>
@@ -2285,6 +1736,10 @@
             <string>0.0</string>
           </property>
         </widget>
+       </item>
+      </layout>
+       </item>
+      </layout>
       </widget>
       <widget class="MultiTabBar4" name="PieceTab" >
         <property name="geometry" >
