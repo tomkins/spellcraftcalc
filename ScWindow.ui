@@ -25,7 +25,7 @@
             <height>182</height>
           </rect>
         </property>
-      <layout class="QGridLayout" name="charlayout" >
+      <layout class="QGridLayout" >
        <property name="margin" >
          <number>3</number>
        </property>
@@ -173,28 +173,22 @@
             <height>182</height>
           </rect>
         </property>
+      <layout class="QGridLayout" >
+       <property name="margin" >
+         <number>3</number>
+       </property>
+       <property name="spacing" >
+         <number>1</number>
+       </property>
+       <item row="0" column="0" >
         <widget class="QLabel" name="StrengthLabel" >
-          <property name="geometry" >
-            <rect>
-              <x>6</x>
-              <y>16</y>
-              <width>28</width>
-              <height>16</height>
-            </rect>
-          </property>
           <property name="text" >
             <string>STR: </string>
           </property>
         </widget>
+       </item>
+       <item row="0" column="1" >
         <widget class="QLabel" name="Strength" >
-          <property name="geometry" >
-            <rect>
-              <x>35</x>
-              <y>16</y>
-              <width>20</width>
-              <height>16</height>
-            </rect>
-          </property>
           <property name="text" >
             <string>0</string>
           </property>
@@ -202,15 +196,9 @@
             <set>Qt::AlignVCenter|Qt::AlignRight</set>
           </property>
         </widget>
+       </item>
+       <item row="0" column="2" >
         <widget class="QLabel" name="StrengthCap" >
-          <property name="geometry" >
-            <rect>
-              <x>57</x>
-              <y>16</y>
-              <width>29</width>
-              <height>16</height>
-            </rect>
-          </property>
           <property name="text" >
             <string>-</string>
           </property>
@@ -218,28 +206,16 @@
             <set>Qt::AlignVCenter|Qt::AlignRight</set>
           </property>
         </widget>
+       </item>
+       <item row="1" column="0" >
         <widget class="QLabel" name="ConstitutionLabel" >
-          <property name="geometry" >
-            <rect>
-              <x>6</x>
-              <y>32</y>
-              <width>28</width>
-              <height>16</height>
-            </rect>
-          </property>
           <property name="text" >
             <string>CON: </string>
           </property>
         </widget>
+       </item>
+       <item row="1" column="1" >
         <widget class="QLabel" name="Constitution" >
-          <property name="geometry" >
-            <rect>
-              <x>35</x>
-              <y>32</y>
-              <width>20</width>
-              <height>16</height>
-            </rect>
-          </property>
           <property name="text" >
             <string>0</string>
           </property>
@@ -247,15 +223,9 @@
             <set>Qt::AlignVCenter|Qt::AlignRight</set>
           </property>
         </widget>
+       </item>
+       <item row="1" column="2" >
         <widget class="QLabel" name="ConstitutionCap" >
-          <property name="geometry" >
-            <rect>
-              <x>57</x>
-              <y>32</y>
-              <width>29</width>
-              <height>16</height>
-            </rect>
-          </property>
           <property name="text" >
             <string>-</string>
           </property>
@@ -263,28 +233,16 @@
             <set>Qt::AlignVCenter|Qt::AlignRight</set>
           </property>
         </widget>
+       </item>
+       <item row="2" column="0" >
         <widget class="QLabel" name="DexterityLabel" >
-          <property name="geometry" >
-            <rect>
-              <x>6</x>
-              <y>48</y>
-              <width>28</width>
-              <height>16</height>
-            </rect>
-          </property>
           <property name="text" >
             <string>DEX: </string>
           </property>
         </widget>
+       </item>
+       <item row="2" column="1" >
         <widget class="QLabel" name="Dexterity" >
-          <property name="geometry" >
-            <rect>
-              <x>35</x>
-              <y>48</y>
-              <width>20</width>
-              <height>16</height>
-            </rect>
-          </property>
           <property name="text" >
             <string>0</string>
           </property>
@@ -292,15 +250,9 @@
             <set>Qt::AlignVCenter|Qt::AlignRight</set>
           </property>
         </widget>
+       </item>
+       <item row="2" column="2" >
         <widget class="QLabel" name="DexterityCap" >
-          <property name="geometry" >
-            <rect>
-              <x>57</x>
-              <y>48</y>
-              <width>29</width>
-              <height>16</height>
-            </rect>
-          </property>
           <property name="text" >
             <string>-</string>
           </property>
@@ -308,28 +260,16 @@
             <set>Qt::AlignVCenter|Qt::AlignRight</set>
           </property>
         </widget>
+       </item>
+       <item row="3" column="0" >
         <widget class="QLabel" name="QuicknessLabel" >
-          <property name="geometry" >
-            <rect>
-              <x>6</x>
-              <y>64</y>
-              <width>28</width>
-              <height>16</height>
-            </rect>
-          </property>
           <property name="text" >
             <string>QUI: </string>
           </property>
         </widget>
+       </item>
+       <item row="3" column="1" >
         <widget class="QLabel" name="Quickness" >
-          <property name="geometry" >
-            <rect>
-              <x>35</x>
-              <y>64</y>
-              <width>20</width>
-              <height>16</height>
-            </rect>
-          </property>
           <property name="text" >
             <string>0</string>
           </property>
@@ -337,15 +277,9 @@
             <set>Qt::AlignVCenter|Qt::AlignRight</set>
           </property>
         </widget>
+       </item>
+       <item row="3" column="2" >
         <widget class="QLabel" name="QuicknessCap" >
-          <property name="geometry" >
-            <rect>
-              <x>57</x>
-              <y>64</y>
-              <width>29</width>
-              <height>16</height>
-            </rect>
-          </property>
           <property name="text" >
             <string>-</string>
           </property>
@@ -353,28 +287,16 @@
             <set>Qt::AlignVCenter|Qt::AlignRight</set>
           </property>
         </widget>
+       </item>
+       <item row="4" column="0" >
         <widget class="QLabel" name="IntelligenceLabel" >
-          <property name="geometry" >
-            <rect>
-              <x>6</x>
-              <y>80</y>
-              <width>28</width>
-              <height>16</height>
-            </rect>
-          </property>
           <property name="text" >
             <string>INT: </string>
           </property>
         </widget>
+       </item>
+       <item row="4" column="1" >
         <widget class="QLabel" name="Intelligence" >
-          <property name="geometry" >
-            <rect>
-              <x>35</x>
-              <y>80</y>
-              <width>20</width>
-              <height>16</height>
-            </rect>
-          </property>
           <property name="text" >
             <string>0</string>
           </property>
@@ -382,15 +304,9 @@
             <set>Qt::AlignVCenter|Qt::AlignRight</set>
           </property>
         </widget>
+       </item>
+       <item row="4" column="2" >
         <widget class="QLabel" name="IntelligenceCap" >
-          <property name="geometry" >
-            <rect>
-              <x>57</x>
-              <y>80</y>
-              <width>29</width>
-              <height>16</height>
-            </rect>
-          </property>
           <property name="text" >
             <string>-</string>
           </property>
@@ -398,28 +314,16 @@
             <set>Qt::AlignVCenter|Qt::AlignRight</set>
           </property>
         </widget>
+       </item>
+       <item row="5" column="0" >
         <widget class="QLabel" name="PietyLabel" >
-          <property name="geometry" >
-            <rect>
-              <x>6</x>
-              <y>96</y>
-              <width>28</width>
-              <height>16</height>
-            </rect>
-          </property>
           <property name="text" >
             <string>PIE: </string>
           </property>
         </widget>
+       </item>
+       <item row="5" column="1" >
         <widget class="QLabel" name="Piety" >
-          <property name="geometry" >
-            <rect>
-              <x>35</x>
-              <y>96</y>
-              <width>20</width>
-              <height>16</height>
-            </rect>
-          </property>
           <property name="text" >
             <string>0</string>
           </property>
@@ -427,15 +331,9 @@
             <set>Qt::AlignVCenter|Qt::AlignRight</set>
           </property>
         </widget>
+       </item>
+       <item row="5" column="2" >
         <widget class="QLabel" name="PietyCap" >
-          <property name="geometry" >
-            <rect>
-              <x>57</x>
-              <y>96</y>
-              <width>29</width>
-              <height>16</height>
-            </rect>
-          </property>
           <property name="text" >
             <string>-</string>
           </property>
@@ -443,28 +341,16 @@
             <set>Qt::AlignVCenter|Qt::AlignRight</set>
           </property>
         </widget>
+       </item>
+       <item row="6" column="0" >
         <widget class="QLabel" name="CharismaLabel" >
-          <property name="geometry" >
-            <rect>
-              <x>6</x>
-              <y>112</y>
-              <width>28</width>
-              <height>16</height>
-            </rect>
-          </property>
           <property name="text" >
             <string>CHA: </string>
           </property>
         </widget>
+       </item>
+       <item row="6" column="1" >
         <widget class="QLabel" name="Charisma" >
-          <property name="geometry" >
-            <rect>
-              <x>35</x>
-              <y>112</y>
-              <width>20</width>
-              <height>16</height>
-            </rect>
-          </property>
           <property name="text" >
             <string>0</string>
           </property>
@@ -472,15 +358,9 @@
             <set>Qt::AlignVCenter|Qt::AlignRight</set>
           </property>
         </widget>
+       </item>
+       <item row="6" column="2" >
         <widget class="QLabel" name="CharismaCap" >
-          <property name="geometry" >
-            <rect>
-              <x>57</x>
-              <y>112</y>
-              <width>29</width>
-              <height>16</height>
-            </rect>
-          </property>
           <property name="text" >
             <string>-</string>
           </property>
@@ -488,28 +368,16 @@
             <set>Qt::AlignVCenter|Qt::AlignRight</set>
           </property>
         </widget>
+       </item>
+       <item row="7" column="0" >
         <widget class="QLabel" name="EmpathyLabel" >
-          <property name="geometry" >
-            <rect>
-              <x>6</x>
-              <y>128</y>
-              <width>28</width>
-              <height>16</height>
-            </rect>
-          </property>
           <property name="text" >
             <string>EMP: </string>
           </property>
         </widget>
+       </item>
+       <item row="7" column="1" >
         <widget class="QLabel" name="Empathy" >
-          <property name="geometry" >
-            <rect>
-              <x>35</x>
-              <y>128</y>
-              <width>20</width>
-              <height>16</height>
-            </rect>
-          </property>
           <property name="text" >
             <string>0</string>
           </property>
@@ -517,15 +385,9 @@
             <set>Qt::AlignVCenter|Qt::AlignRight</set>
           </property>
         </widget>
+       </item>
+       <item row="7" column="2" >
         <widget class="QLabel" name="EmpathyCap" >
-          <property name="geometry" >
-            <rect>
-              <x>57</x>
-              <y>128</y>
-              <width>29</width>
-              <height>16</height>
-            </rect>
-          </property>
           <property name="text" >
             <string>-</string>
           </property>
@@ -533,28 +395,16 @@
             <set>Qt::AlignVCenter|Qt::AlignRight</set>
           </property>
         </widget>
+       </item>
+       <item row="8" column="0" >
         <widget class="QLabel" name="PowerLabel" >
-          <property name="geometry" >
-            <rect>
-              <x>6</x>
-              <y>144</y>
-              <width>28</width>
-              <height>16</height>
-            </rect>
-          </property>
           <property name="text" >
             <string>Pow: </string>
           </property>
         </widget>
+       </item>
+       <item row="8" column="1" >
         <widget class="QLabel" name="Power" >
-          <property name="geometry" >
-            <rect>
-              <x>35</x>
-              <y>144</y>
-              <width>20</width>
-              <height>16</height>
-            </rect>
-          </property>
           <property name="text" >
             <string>0</string>
           </property>
@@ -562,15 +412,9 @@
             <set>Qt::AlignVCenter|Qt::AlignRight</set>
           </property>
         </widget>
+       </item>
+       <item row="8" column="2" >
         <widget class="QLabel" name="PowerCap" >
-          <property name="geometry" >
-            <rect>
-              <x>57</x>
-              <y>144</y>
-              <width>29</width>
-              <height>16</height>
-            </rect>
-          </property>
           <property name="text" >
             <string>-</string>
           </property>
@@ -578,28 +422,16 @@
             <set>Qt::AlignVCenter|Qt::AlignRight</set>
           </property>
         </widget>
+       </item>
+       <item row="9" column="0" >
         <widget class="QLabel" name="HitsLabel" >
-          <property name="geometry" >
-            <rect>
-              <x>6</x>
-              <y>160</y>
-              <width>28</width>
-              <height>16</height>
-            </rect>
-          </property>
           <property name="text" >
             <string>Hits: </string>
           </property>
         </widget>
+       </item>
+       <item row="9" column="1" >
         <widget class="QLabel" name="Hits" >
-          <property name="geometry" >
-            <rect>
-              <x>35</x>
-              <y>160</y>
-              <width>20</width>
-              <height>16</height>
-            </rect>
-          </property>
           <property name="text" >
             <string>0</string>
           </property>
@@ -607,15 +439,9 @@
             <set>Qt::AlignVCenter|Qt::AlignRight</set>
           </property>
         </widget>
+       </item>
+       <item row="9" column="2" >
         <widget class="QLabel" name="HitsCap" >
-          <property name="geometry" >
-            <rect>
-              <x>57</x>
-              <y>160</y>
-              <width>29</width>
-              <height>16</height>
-            </rect>
-          </property>
           <property name="text" >
             <string>-</string>
           </property>
@@ -623,6 +449,8 @@
             <set>Qt::AlignVCenter|Qt::AlignRight</set>
           </property>
         </widget>
+       </item>
+      </layout>
       </widget>
       <widget class="QGroupBox" name="GroupResists" >
         <property name="geometry" >
