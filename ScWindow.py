@@ -900,7 +900,6 @@ class ScWindow(QMainWindow, Ui_B_SC):
         wid = 3
         if amt > -10 and amt < 10: wid += 1
         bonus = "%*d %s" % (wid, amt, bonus)
-        sys.stdout.write("%s\n" % bonus)
         index = model.index(model.rowCount()-1, 0, QModelIndex())
         model.setData(index, QVariant(bonus), Qt.DisplayRole)
         model.setData(index, QVariant(group), Qt.UserRole)
