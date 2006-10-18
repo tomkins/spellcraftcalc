@@ -1148,6 +1148,24 @@
           <property name="focusPolicy" >
             <enum>Qt::StrongFocus</enum>
           </property>
+          <property name="frameShape" >
+            <enum>QFrame::NoFrame</enum>
+          </property>
+          <property name="frameShadow" >
+            <enum>QFrame::Plain</enum>
+          </property>
+          <property name="lineWidth" >
+            <number>0</number>
+          </property>
+          <property name="verticalScrollBarPolicy" >
+            <enum>Qt::ScrollBarAlwaysOff</enum>
+          </property>
+          <property name="horizontalScrollBarPolicy" >
+            <enum>Qt::ScrollBarAsNeeded</enum>
+          </property>
+          <property name="autoScroll" >
+            <bool>true</bool>
+          </property>
           <property name="editTriggers" >
             <set>QAbstractItemView::NoEditTriggers</set>
           </property>
@@ -2688,6 +2706,9 @@
             <width>776</width>
             <height>46</height>
           </rect>
+        </property>
+        <property name="focusPolicy" >
+          <enum>Qt::StrongFocus</enum>
         </property>
       </widget>
     </widget>
