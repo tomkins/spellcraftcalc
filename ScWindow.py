@@ -175,9 +175,12 @@ class ScWindow(QMainWindow, Ui_B_SC):
         width = testfont.size(Qt.TextSingleLine, " (5)").width()
         self.resistlayout.setColumnMinimumWidth(2,width)
 
-        skillmodel = QStandardItemModel(0,2,self.SkillsList)
+        skillmodel = QStandardItemModel(0,1,self.SkillsList)
         self.SkillsList.setModel(skillmodel)
-        self.SkillsList.setModelColumn(0)
+        palette = QPalette(self.SkillsList.palette())
+        palette.setColor(QPalette.Base, palette.color(QPalette.Window))
+        palette.setBrush(QPalette.Base, palette.window())
+        self.SkillsList.setPalette(palette)
 
         self.skilllayout = QtGui.QGridLayout(self.GroupSkillsList)
         self.skilllayout.setMargin(3)
@@ -395,7 +398,6 @@ class ScWindow(QMainWindow, Ui_B_SC):
         #if str(QApplication.style().objectName()[0:9]).lower() == "macintosh":
         #    self.itemlayout.addWidget(self.sizegrip,row-1,9,1,1)
 
-        self.PieceTab.setFocusPolicy(Qt.StrongFocus)
         for tabname in PieceTabList:
             self.PieceTab.addTab(0, qApp.translate("B_SC",tabname,None))
         for tabname in JewelTabList:

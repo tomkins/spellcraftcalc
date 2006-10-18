@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'ScWindow.ui'
 #
-# Created: Tue Oct 17 16:28:34 2006
+# Created: Tue Oct 17 23:04:33 2006
 #      by: PyQt4 UI code generator 4.0.1
 #
 # WARNING! All changes made in this file will be lost!
@@ -381,6 +381,12 @@ class Ui_B_SC(object):
         self.SkillsList = QtGui.QListView(self.GroupSkillsList)
         self.SkillsList.setGeometry(QtCore.QRect(5,16,396,160))
         self.SkillsList.setFocusPolicy(QtCore.Qt.StrongFocus)
+        self.SkillsList.setFrameShape(QtGui.QFrame.NoFrame)
+        self.SkillsList.setFrameShadow(QtGui.QFrame.Plain)
+        self.SkillsList.setLineWidth(0)
+        self.SkillsList.setVerticalScrollBarPolicy(QtCore.Qt.ScrollBarAlwaysOff)
+        self.SkillsList.setHorizontalScrollBarPolicy(QtCore.Qt.ScrollBarAsNeeded)
+        self.SkillsList.setAutoScroll(True)
         self.SkillsList.setEditTriggers(QtGui.QAbstractItemView.NoEditTriggers)
         self.SkillsList.setWrapping(True)
         self.SkillsList.setResizeMode(QtGui.QListView.Adjust)
@@ -920,6 +926,7 @@ class Ui_B_SC(object):
 
         self.PieceTab = MultiTabBar4(self.ScWinFrame)
         self.PieceTab.setGeometry(QtCore.QRect(3,190,776,46))
+        self.PieceTab.setFocusPolicy(QtCore.Qt.StrongFocus)
         self.PieceTab.setObjectName("PieceTab")
         B_SC.setCentralWidget(self.ScWinFrame)
 
