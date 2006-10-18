@@ -43,8 +43,7 @@
         </widget>
        </item>
        <item row="0" column="1" colspan="2" >
-        <widget class="QLineEdit" name="CharName" >
-        </widget>
+        <widget class="QLineEdit" name="CharName" />
        </item>
        <item row="1" column="0" >
         <widget class="QLabel" name="LabelRealm" >
@@ -57,8 +56,7 @@
         </widget>
        </item>
        <item row="1" column="1" colspan="2" >
-        <widget class="SearchingCombo" name="Realm" >
-        </widget>
+        <widget class="SearchingCombo" name="Realm" />
        </item>
        <item row="2" column="0" >
         <widget class="QLabel" name="LabelCharClass" >
@@ -71,8 +69,7 @@
         </widget>
        </item>
        <item row="2" column="1" colspan="2" >
-        <widget class="SearchingCombo" name="CharClass" >
-        </widget>
+        <widget class="SearchingCombo" name="CharClass" />
        </item>
        <item row="3" column="0" >
         <widget class="QLabel" name="LabelCharRace" >
@@ -85,8 +82,7 @@
         </widget>
        </item>
        <item row="3" column="1" colspan="2" >
-        <widget class="SearchingCombo" name="CharRace" >
-        </widget>
+        <widget class="SearchingCombo" name="CharRace" />
        </item>
        <item row="4" column="0" >
         <widget class="QLabel" name="LabelCharLevel" >
@@ -99,8 +95,7 @@
         </widget>
        </item>
        <item row="4" column="1" colspan="2" >
-        <widget class="QLineEdit" name="CharLevel" >
-        </widget>
+        <widget class="QLineEdit" name="CharLevel" />
        </item>
        <item row="5" column="0" >
         <widget class="QLabel" name="LabelTotalCost" >
@@ -108,7 +103,7 @@
             <string>Cost: </string>
           </property>
           <property name="alignment" >
-            <set>Qt::AlignVCenter|Qt::AlignLeft</set>
+          <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
           </property>
         </widget>
        </item>
@@ -118,7 +113,7 @@
             <string>0</string>
           </property>
           <property name="alignment" >
-            <set>Qt::AlignVCenter|Qt::AlignRight</set>
+          <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
           </property>
         </widget>
        </item>
@@ -128,7 +123,7 @@
             <string>Price: </string>
           </property>
           <property name="alignment" >
-            <set>Qt::AlignVCenter|Qt::AlignLeft</set>
+          <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
           </property>
         </widget>
        </item>
@@ -138,7 +133,7 @@
             <string>0</string>
           </property>
           <property name="alignment" >
-            <set>Qt::AlignVCenter|Qt::AlignRight</set>
+          <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
           </property>
         </widget>
        </item>
@@ -148,7 +143,7 @@
             <string>Total Utility: </string>
           </property>
           <property name="alignment" >
-            <set>Qt::AlignVCenter|Qt::AlignLeft</set>
+          <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
           </property>
         </widget>
        </item>
@@ -158,7 +153,7 @@
             <string>0.0</string>
           </property>
           <property name="alignment" >
-            <set>Qt::AlignVCenter|Qt::AlignRight</set>
+          <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
           </property>
         </widget>
        </item>
@@ -203,7 +198,7 @@
             <string>0</string>
           </property>
           <property name="alignment" >
-            <set>Qt::AlignVCenter|Qt::AlignRight</set>
+          <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
           </property>
         </widget>
        </item>
@@ -213,7 +208,7 @@
             <string>-</string>
           </property>
           <property name="alignment" >
-            <set>Qt::AlignVCenter|Qt::AlignRight</set>
+          <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
           </property>
         </widget>
        </item>
@@ -230,7 +225,7 @@
             <string>0</string>
           </property>
           <property name="alignment" >
-            <set>Qt::AlignVCenter|Qt::AlignRight</set>
+          <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
           </property>
         </widget>
        </item>
@@ -240,7 +235,7 @@
             <string>-</string>
           </property>
           <property name="alignment" >
-            <set>Qt::AlignVCenter|Qt::AlignRight</set>
+          <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
           </property>
         </widget>
        </item>
@@ -257,7 +252,7 @@
             <string>0</string>
           </property>
           <property name="alignment" >
-            <set>Qt::AlignVCenter|Qt::AlignRight</set>
+          <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
           </property>
         </widget>
        </item>
@@ -267,7 +262,7 @@
             <string>-</string>
           </property>
           <property name="alignment" >
-            <set>Qt::AlignVCenter|Qt::AlignRight</set>
+          <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
           </property>
         </widget>
        </item>
@@ -284,7 +279,7 @@
             <string>0</string>
           </property>
           <property name="alignment" >
-            <set>Qt::AlignVCenter|Qt::AlignRight</set>
+          <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
           </property>
         </widget>
        </item>
@@ -294,7 +289,7 @@
             <string>-</string>
           </property>
           <property name="alignment" >
-            <set>Qt::AlignVCenter|Qt::AlignRight</set>
+          <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
           </property>
         </widget>
        </item>
@@ -311,7 +306,7 @@
             <string>0</string>
           </property>
           <property name="alignment" >
-            <set>Qt::AlignVCenter|Qt::AlignRight</set>
+          <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
           </property>
         </widget>
        </item>
@@ -321,7 +316,7 @@
             <string>-</string>
           </property>
           <property name="alignment" >
-            <set>Qt::AlignVCenter|Qt::AlignRight</set>
+          <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
           </property>
         </widget>
        </item>
@@ -338,7 +333,7 @@
             <string>0</string>
           </property>
           <property name="alignment" >
-            <set>Qt::AlignVCenter|Qt::AlignRight</set>
+          <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
           </property>
         </widget>
        </item>
@@ -348,7 +343,7 @@
             <string>-</string>
           </property>
           <property name="alignment" >
-            <set>Qt::AlignVCenter|Qt::AlignRight</set>
+          <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
           </property>
         </widget>
        </item>
@@ -365,7 +360,7 @@
             <string>0</string>
           </property>
           <property name="alignment" >
-            <set>Qt::AlignVCenter|Qt::AlignRight</set>
+          <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
           </property>
         </widget>
        </item>
@@ -375,7 +370,7 @@
             <string>-</string>
           </property>
           <property name="alignment" >
-            <set>Qt::AlignVCenter|Qt::AlignRight</set>
+          <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
           </property>
         </widget>
        </item>
@@ -392,7 +387,7 @@
             <string>0</string>
           </property>
           <property name="alignment" >
-            <set>Qt::AlignVCenter|Qt::AlignRight</set>
+          <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
           </property>
         </widget>
        </item>
@@ -402,7 +397,7 @@
             <string>-</string>
           </property>
           <property name="alignment" >
-            <set>Qt::AlignVCenter|Qt::AlignRight</set>
+          <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
           </property>
         </widget>
        </item>
@@ -419,7 +414,7 @@
             <string>0</string>
           </property>
           <property name="alignment" >
-            <set>Qt::AlignVCenter|Qt::AlignRight</set>
+          <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
           </property>
         </widget>
        </item>
@@ -429,7 +424,7 @@
             <string>-</string>
           </property>
           <property name="alignment" >
-            <set>Qt::AlignVCenter|Qt::AlignRight</set>
+          <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
           </property>
         </widget>
        </item>
@@ -446,7 +441,7 @@
             <string>0</string>
           </property>
           <property name="alignment" >
-            <set>Qt::AlignVCenter|Qt::AlignRight</set>
+          <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
           </property>
         </widget>
        </item>
@@ -456,7 +451,7 @@
             <string>-</string>
           </property>
           <property name="alignment" >
-            <set>Qt::AlignVCenter|Qt::AlignRight</set>
+          <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
           </property>
         </widget>
        </item>
@@ -501,7 +496,7 @@
             <string>0</string>
           </property>
           <property name="alignment" >
-            <set>Qt::AlignVCenter|Qt::AlignRight</set>
+          <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
           </property>
         </widget>
        </item>
@@ -511,7 +506,7 @@
             <string>-</string>
           </property>
           <property name="alignment" >
-            <set>Qt::AlignVCenter|Qt::AlignRight</set>
+          <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
           </property>
         </widget>
        </item>
@@ -528,7 +523,7 @@
             <string>0</string>
           </property>
           <property name="alignment" >
-            <set>Qt::AlignVCenter|Qt::AlignRight</set>
+          <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
           </property>
         </widget>
        </item>
@@ -538,7 +533,7 @@
             <string>-</string>
           </property>
           <property name="alignment" >
-            <set>Qt::AlignVCenter|Qt::AlignRight</set>
+          <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
           </property>
         </widget>
        </item>
@@ -555,7 +550,7 @@
             <string>0</string>
           </property>
           <property name="alignment" >
-            <set>Qt::AlignVCenter|Qt::AlignRight</set>
+          <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
           </property>
         </widget>
        </item>
@@ -565,7 +560,7 @@
             <string>-</string>
           </property>
           <property name="alignment" >
-            <set>Qt::AlignVCenter|Qt::AlignRight</set>
+          <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
           </property>
         </widget>
        </item>
@@ -582,7 +577,7 @@
             <string>0</string>
           </property>
           <property name="alignment" >
-            <set>Qt::AlignVCenter|Qt::AlignRight</set>
+          <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
           </property>
         </widget>
        </item>
@@ -592,7 +587,7 @@
             <string>-</string>
           </property>
           <property name="alignment" >
-            <set>Qt::AlignVCenter|Qt::AlignRight</set>
+          <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
           </property>
         </widget>
        </item>
@@ -609,7 +604,7 @@
             <string>0</string>
           </property>
           <property name="alignment" >
-            <set>Qt::AlignVCenter|Qt::AlignRight</set>
+          <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
           </property>
         </widget>
        </item>
@@ -619,7 +614,7 @@
             <string>-</string>
           </property>
           <property name="alignment" >
-            <set>Qt::AlignVCenter|Qt::AlignRight</set>
+          <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
           </property>
         </widget>
        </item>
@@ -636,7 +631,7 @@
             <string>0</string>
           </property>
           <property name="alignment" >
-            <set>Qt::AlignVCenter|Qt::AlignRight</set>
+          <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
           </property>
         </widget>
        </item>
@@ -646,7 +641,7 @@
             <string>-</string>
           </property>
           <property name="alignment" >
-            <set>Qt::AlignVCenter|Qt::AlignRight</set>
+          <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
           </property>
         </widget>
        </item>
@@ -663,7 +658,7 @@
             <string>0</string>
           </property>
           <property name="alignment" >
-            <set>Qt::AlignVCenter|Qt::AlignRight</set>
+          <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
           </property>
         </widget>
        </item>
@@ -673,7 +668,7 @@
             <string>-</string>
           </property>
           <property name="alignment" >
-            <set>Qt::AlignVCenter|Qt::AlignRight</set>
+          <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
           </property>
         </widget>
        </item>
@@ -690,7 +685,7 @@
             <string>0</string>
           </property>
           <property name="alignment" >
-            <set>Qt::AlignVCenter|Qt::AlignRight</set>
+          <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
           </property>
         </widget>
        </item>
@@ -700,7 +695,7 @@
             <string>-</string>
           </property>
           <property name="alignment" >
-            <set>Qt::AlignVCenter|Qt::AlignRight</set>
+          <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
           </property>
         </widget>
        </item>
@@ -717,7 +712,7 @@
             <string>0</string>
           </property>
           <property name="alignment" >
-            <set>Qt::AlignVCenter|Qt::AlignRight</set>
+          <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
           </property>
         </widget>
        </item>
@@ -727,7 +722,7 @@
             <string>-</string>
           </property>
           <property name="alignment" >
-            <set>Qt::AlignVCenter|Qt::AlignRight</set>
+          <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
           </property>
         </widget>
        </item>
@@ -854,6 +849,9 @@
        </property>
        <item row="0" column="0" colspan="10" >
          <spacer>
+           <property name="orientation" >
+            <enum>Qt::Vertical</enum>
+           </property>
           <property name="sizeType" >
            <enum>QSizePolicy::Minimum</enum>
           </property>
@@ -884,8 +882,7 @@
         </widget>
         </item>
         <item>
-        <widget class="QLineEdit" name="ItemLevel" >
-        </widget>
+            <widget class="QLineEdit" name="ItemLevel" />
         </item>
         <item>
         <widget class="QPushButton" name="ItemLevelButton" >
@@ -927,12 +924,10 @@
         </widget>
         </item>
         <item>
-        <widget class="SearchingCombo" name="QualDrop" >
-        </widget>
+            <widget class="SearchingCombo" name="QualDrop" />
         </item>
         <item>
-        <widget class="QLineEdit" name="QualEdit" >
-        </widget>
+            <widget class="QLineEdit" name="QualEdit" />
         </item>
         <item>
          <spacer>
@@ -961,8 +956,7 @@
         </widget>
         </item>
         <item>
-        <widget class="QLineEdit" name="Bonus_Edit" >
-        </widget>
+            <widget class="QLineEdit" name="Bonus_Edit" />
         </item>
         <item>
          <spacer>
@@ -991,8 +985,7 @@
         </widget>
         </item>
         <item>
-        <widget class="QLineEdit" name="AFDPS_Edit" >
-        </widget>
+            <widget class="QLineEdit" name="AFDPS_Edit" />
         </item>
         <item>
          <spacer>
@@ -1021,8 +1014,7 @@
         </widget>
         </item>
         <item>
-        <widget class="QLineEdit" name="Speed_Edit" >
-        </widget>
+            <widget class="QLineEdit" name="Speed_Edit" />
         </item>
         <item>
          <spacer>
@@ -1051,8 +1043,7 @@
         </widget>
         </item>
         <item>
-        <widget class="SearchingCombo" name="ItemNameCombo" >
-        </widget>
+            <widget class="SearchingCombo" name="ItemNameCombo" />
         </item>
         <item>
          <spacer>
@@ -1120,7 +1111,7 @@
             <string>Points</string>
           </property>
           <property name="alignment" >
-            <set>Qt::AlignVCenter|Qt::AlignRight</set>
+            <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
           </property>
         </widget>
        </item>
@@ -1130,7 +1121,7 @@
             <string>Cost</string>
           </property>
           <property name="alignment" >
-            <set>Qt::AlignVCenter|Qt::AlignRight</set>
+            <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
           </property>
         </widget>
        </item>
@@ -1184,16 +1175,13 @@
         </widget>
        </item>
        <item row="3" column="1" >
-        <widget class="SearchingCombo" name="Type_1" >
-        </widget>
+          <widget class="SearchingCombo" name="Type_1" />
        </item>
        <item row="3" column="2" >
-        <widget class="QLineEdit" name="Amount_Edit_1" >
-        </widget>
+          <widget class="QLineEdit" name="Amount_Edit_1" />
        </item>
        <item row="3" column="2" >
-        <widget class="SearchingCombo" name="Amount_Drop_1" >
-        </widget>
+          <widget class="SearchingCombo" name="Amount_Drop_1" />
        </item>
        <item row="3" column="3" >
         <widget class="SearchingCombo" name="Effect_1" >
@@ -1203,12 +1191,10 @@
         </widget>
        </item>
        <item row="3" column="4" >
-        <widget class="SearchingCombo" name="Quality_1" >
-        </widget>
+          <widget class="SearchingCombo" name="Quality_1" />
        </item>
        <item row="3" column="4" colspan="3" >
-        <widget class="QLineEdit" name="Requirement_1" >
-        </widget>
+          <widget class="QLineEdit" name="Requirement_1" />
        </item>
        <item row="3" column="5" >
         <widget class="QLabel" name="Points_1" >
@@ -1216,7 +1202,7 @@
             <string>0.0</string>
           </property>
           <property name="alignment" >
-            <set>Qt::AlignVCenter|Qt::AlignRight</set>
+            <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
           </property>
         </widget>
        </item>
@@ -1226,7 +1212,7 @@
             <string>0c</string>
           </property>
           <property name="alignment" >
-            <set>Qt::AlignVCenter|Qt::AlignRight</set>
+            <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
           </property>
         </widget>
        </item>
@@ -1248,16 +1234,13 @@
         </widget>
        </item>
        <item row="4" column="1" >
-        <widget class="SearchingCombo" name="Type_2" >
-        </widget>
+          <widget class="SearchingCombo" name="Type_2" />
        </item>
        <item row="4" column="2" >
-        <widget class="QLineEdit" name="Amount_Edit_2" >
-        </widget>
+          <widget class="QLineEdit" name="Amount_Edit_2" />
        </item>
        <item row="4" column="2" >
-        <widget class="SearchingCombo" name="Amount_Drop_2" >
-        </widget>
+          <widget class="SearchingCombo" name="Amount_Drop_2" />
        </item>
        <item row="4" column="3" >
         <widget class="SearchingCombo" name="Effect_2" >
@@ -1267,12 +1250,10 @@
         </widget>
        </item>
        <item row="4" column="4" >
-        <widget class="SearchingCombo" name="Quality_2" >
-        </widget>
+          <widget class="SearchingCombo" name="Quality_2" />
        </item>
        <item row="4" column="4" colspan="3" >
-        <widget class="QLineEdit" name="Requirement_2" >
-        </widget>
+          <widget class="QLineEdit" name="Requirement_2" />
        </item>
        <item row="4" column="5" >
         <widget class="QLabel" name="Points_2" >
@@ -1280,7 +1261,7 @@
             <string>0.0</string>
           </property>
           <property name="alignment" >
-            <set>Qt::AlignVCenter|Qt::AlignRight</set>
+            <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
           </property>
         </widget>
        </item>
@@ -1290,7 +1271,7 @@
             <string>0c</string>
           </property>
           <property name="alignment" >
-            <set>Qt::AlignVCenter|Qt::AlignRight</set>
+            <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
           </property>
         </widget>
        </item>
@@ -1312,16 +1293,13 @@
         </widget>
        </item>
        <item row="5" column="1" >
-        <widget class="SearchingCombo" name="Type_3" >
-        </widget>
+          <widget class="SearchingCombo" name="Type_3" />
        </item>
        <item row="5" column="2" >
-        <widget class="QLineEdit" name="Amount_Edit_3" >
-        </widget>
+          <widget class="QLineEdit" name="Amount_Edit_3" />
        </item>
        <item row="5" column="2" >
-        <widget class="SearchingCombo" name="Amount_Drop_3" >
-        </widget>
+          <widget class="SearchingCombo" name="Amount_Drop_3" />
        </item>
        <item row="5" column="3" >
         <widget class="SearchingCombo" name="Effect_3" >
@@ -1331,12 +1309,10 @@
         </widget>
        </item>
        <item row="5" column="4" >
-        <widget class="SearchingCombo" name="Quality_3" >
-        </widget>
+          <widget class="SearchingCombo" name="Quality_3" />
        </item>
        <item row="5" column="4" colspan="3" >
-        <widget class="QLineEdit" name="Requirement_3" >
-        </widget>
+          <widget class="QLineEdit" name="Requirement_3" />
        </item>
        <item row="5" column="5" >
         <widget class="QLabel" name="Points_3" >
@@ -1344,7 +1320,7 @@
             <string>0.0</string>
           </property>
           <property name="alignment" >
-            <set>Qt::AlignVCenter|Qt::AlignRight</set>
+            <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
           </property>
         </widget>
        </item>
@@ -1354,7 +1330,7 @@
             <string>0c</string>
           </property>
           <property name="alignment" >
-            <set>Qt::AlignVCenter|Qt::AlignRight</set>
+            <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
           </property>
         </widget>
        </item>
@@ -1376,16 +1352,13 @@
         </widget>
        </item>
        <item row="6" column="1" >
-        <widget class="SearchingCombo" name="Type_4" >
-        </widget>
+          <widget class="SearchingCombo" name="Type_4" />
        </item>
        <item row="6" column="2" >
-        <widget class="QLineEdit" name="Amount_Edit_4" >
-        </widget>
+          <widget class="QLineEdit" name="Amount_Edit_4" />
        </item>
        <item row="6" column="2" >
-        <widget class="SearchingCombo" name="Amount_Drop_4" >
-        </widget>
+          <widget class="SearchingCombo" name="Amount_Drop_4" />
        </item>
        <item row="6" column="3" >
         <widget class="SearchingCombo" name="Effect_4" >
@@ -1395,12 +1368,10 @@
         </widget>
        </item>
        <item row="6" column="4" >
-        <widget class="SearchingCombo" name="Quality_4" >
-        </widget>
+          <widget class="SearchingCombo" name="Quality_4" />
        </item>
        <item row="6" column="4" colspan="3" >
-        <widget class="QLineEdit" name="Requirement_4" >
-        </widget>
+          <widget class="QLineEdit" name="Requirement_4" />
        </item>
        <item row="6" column="5" >
         <widget class="QLabel" name="Points_4" >
@@ -1408,7 +1379,7 @@
             <string>0.0</string>
           </property>
           <property name="alignment" >
-            <set>Qt::AlignVCenter|Qt::AlignRight</set>
+            <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
           </property>
         </widget>
        </item>
@@ -1418,7 +1389,7 @@
             <string>0c</string>
           </property>
           <property name="alignment" >
-            <set>Qt::AlignVCenter|Qt::AlignRight</set>
+            <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
           </property>
         </widget>
        </item>
@@ -1440,16 +1411,13 @@
         </widget>
        </item>
        <item row="7" column="1" >
-        <widget class="SearchingCombo" name="Type_5" >
-        </widget>
+          <widget class="SearchingCombo" name="Type_5" />
        </item>
        <item row="7" column="2" >
-        <widget class="QLineEdit" name="Amount_Edit_5" >
-        </widget>
+          <widget class="QLineEdit" name="Amount_Edit_5" />
        </item>
        <item row="7" column="2" >
-        <widget class="SearchingCombo" name="Amount_Drop_5" >
-        </widget>
+          <widget class="SearchingCombo" name="Amount_Drop_5" />
        </item>
        <item row="7" column="3" >
         <widget class="SearchingCombo" name="Effect_5" >
@@ -1459,8 +1427,7 @@
         </widget>
        </item>
        <item row="7" column="4" colspan="3" >
-        <widget class="QLineEdit" name="Requirement_5" >
-        </widget>
+          <widget class="QLineEdit" name="Requirement_5" />
        </item>
        <item row="7" column="8" colspan="2" >
         <widget class="QLabel" name="Name_5" >
@@ -1480,16 +1447,13 @@
         </widget>
        </item>
        <item row="8" column="1" >
-        <widget class="SearchingCombo" name="Type_6" >
-        </widget>
+          <widget class="SearchingCombo" name="Type_6" />
        </item>
        <item row="8" column="2" >
-        <widget class="QLineEdit" name="Amount_Edit_6" >
-        </widget>
+          <widget class="QLineEdit" name="Amount_Edit_6" />
        </item>
        <item row="8" column="2" >
-        <widget class="SearchingCombo" name="Amount_Drop_6" >
-        </widget>
+          <widget class="SearchingCombo" name="Amount_Drop_6" />
        </item>
        <item row="8" column="3" >
         <widget class="SearchingCombo" name="Effect_6" >
@@ -1499,8 +1463,7 @@
         </widget>
        </item>
        <item row="8" column="4" colspan="3" >
-        <widget class="QLineEdit" name="Requirement_6" >
-        </widget>
+          <widget class="QLineEdit" name="Requirement_6" />
        </item>
        <item row="8" column="8" colspan="2" >
         <widget class="QLabel" name="Name_6" >
@@ -1527,12 +1490,10 @@
         </widget>
        </item>
        <item row="9" column="1" >
-        <widget class="SearchingCombo" name="Type_7" >
-        </widget>
+          <widget class="SearchingCombo" name="Type_7" />
        </item>
        <item row="9" column="2" >
-        <widget class="QLineEdit" name="Amount_Edit_7" >
-        </widget>
+          <widget class="QLineEdit" name="Amount_Edit_7" />
        </item>
        <item row="9" column="3" >
         <widget class="SearchingCombo" name="Effect_7" >
@@ -1542,8 +1503,7 @@
         </widget>
        </item>
        <item row="9" column="4" colspan="3" >
-        <widget class="QLineEdit" name="Requirement_7" >
-        </widget>
+          <widget class="QLineEdit" name="Requirement_7" />
        </item>
        <item row="10" column="0" >
         <widget class="QLabel" name="Gem_Label_8" >
@@ -1556,12 +1516,10 @@
         </widget>
        </item>
        <item row="10" column="1" >
-        <widget class="SearchingCombo" name="Type_8" >
-        </widget>
+          <widget class="SearchingCombo" name="Type_8" />
        </item>
        <item row="10" column="2" >
-        <widget class="QLineEdit" name="Amount_Edit_8" >
-        </widget>
+          <widget class="QLineEdit" name="Amount_Edit_8" />
        </item>
        <item row="10" column="3" >
         <widget class="SearchingCombo" name="Effect_8" >
@@ -1571,8 +1529,7 @@
         </widget>
        </item>
        <item row="10" column="4" colspan="3" >
-        <widget class="QLineEdit" name="Requirement_8" >
-        </widget>
+          <widget class="QLineEdit" name="Requirement_8" />
        </item>
        <item row="11" column="0" >
         <widget class="QLabel" name="Gem_Label_9" >
@@ -1585,12 +1542,10 @@
         </widget>
        </item>
        <item row="11" column="1" >
-        <widget class="SearchingCombo" name="Type_9" >
-        </widget>
+          <widget class="SearchingCombo" name="Type_9" />
        </item>
        <item row="11" column="2" >
-        <widget class="QLineEdit" name="Amount_Edit_9" >
-        </widget>
+          <widget class="QLineEdit" name="Amount_Edit_9" />
        </item>
        <item row="11" column="3" >
         <widget class="SearchingCombo" name="Effect_9" >
@@ -1600,8 +1555,7 @@
         </widget>
        </item>
        <item row="11" column="4" colspan="3" >
-        <widget class="QLineEdit" name="Requirement_9" >
-        </widget>
+          <widget class="QLineEdit" name="Requirement_9" />
        </item>
        <item row="12" column="0" >
         <widget class="QLabel" name="Gem_Label_10" >
@@ -1614,12 +1568,10 @@
         </widget>
        </item>
        <item row="12" column="1" >
-        <widget class="SearchingCombo" name="Type_10" >
-        </widget>
+          <widget class="SearchingCombo" name="Type_10" />
        </item>
        <item row="12" column="2" >
-        <widget class="QLineEdit" name="Amount_Edit_10" >
-        </widget>
+          <widget class="QLineEdit" name="Amount_Edit_10" />
        </item>
        <item row="12" column="3" >
         <widget class="SearchingCombo" name="Effect_10" >
@@ -1629,8 +1581,7 @@
         </widget>
        </item>
        <item row="12" column="4" colspan="3" >
-        <widget class="QLineEdit" name="Requirement_10" >
-        </widget>
+          <widget class="QLineEdit" name="Requirement_10" />
        </item>
        <item row="13" column="0" >
         <widget class="QLabel" name="Gem_Label_11" >
@@ -1643,12 +1594,10 @@
         </widget>
        </item>
        <item row="13" column="1" >
-        <widget class="SearchingCombo" name="Type_11" >
-        </widget>
+          <widget class="SearchingCombo" name="Type_11" />
        </item>
        <item row="13" column="2" >
-        <widget class="QLineEdit" name="Amount_Edit_11" >
-        </widget>
+          <widget class="QLineEdit" name="Amount_Edit_11" />
        </item>
        <item row="13" column="3" >
         <widget class="SearchingCombo" name="Effect_11" >
@@ -1658,8 +1607,7 @@
         </widget>
        </item>
        <item row="13" column="4" colspan="3" >
-        <widget class="QLineEdit" name="Requirement_11" >
-        </widget>
+          <widget class="QLineEdit" name="Requirement_11" />
        </item>
        <item row="14" column="0" >
         <widget class="QLabel" name="Gem_Label_12" >
@@ -1672,12 +1620,10 @@
         </widget>
        </item>
        <item row="14" column="1" >
-        <widget class="SearchingCombo" name="Type_12" >
-        </widget>
+          <widget class="SearchingCombo" name="Type_12" />
        </item>
        <item row="14" column="2" >
-        <widget class="QLineEdit" name="Amount_Edit_12" >
-        </widget>
+          <widget class="QLineEdit" name="Amount_Edit_12" />
        </item>
        <item row="14" column="3" >
         <widget class="SearchingCombo" name="Effect_12" >
@@ -1687,8 +1633,7 @@
         </widget>
        </item>
        <item row="14" column="4" colspan="3" >
-        <widget class="QLineEdit" name="Requirement_12" >
-        </widget>
+          <widget class="QLineEdit" name="Requirement_12" />
        </item>
        <item row="10" column="3" colspan="2" >
         <widget class="QLabel" name="ItemImbueLabel" >
@@ -1696,7 +1641,7 @@
             <string>Imbue Points: </string>
           </property>
           <property name="alignment" >
-            <set>Qt::AlignVCenter|Qt::AlignRight</set>
+            <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
           </property>
         </widget>
        </item>
@@ -1706,7 +1651,7 @@
             <string>0.0</string>
           </property>
           <property name="alignment" >
-            <set>Qt::AlignVCenter|Qt::AlignRight</set>
+            <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
           </property>
         </widget>
        </item>
@@ -1716,7 +1661,7 @@
             <string> / 0.0</string>
           </property>
           <property name="alignment" >
-            <set>Qt::AlignVCenter|Qt::AlignLeft</set>
+            <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
           </property>
         </widget>
        </item>
@@ -1726,7 +1671,7 @@
             <string>Overcharge: </string>
           </property>
           <property name="alignment" >
-            <set>Qt::AlignVCenter|Qt::AlignRight</set>
+            <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
           </property>
         </widget>
        </item>
@@ -1736,7 +1681,7 @@
             <string>None</string>
           </property>
           <property name="alignment" >
-            <set>Qt::AlignVCenter|Qt::AlignCenter</set>
+            <set>Qt::AlignCenter</set>
           </property>
         </widget>
        </item>
@@ -1746,7 +1691,7 @@
             <string>Item Cost: </string>
           </property>
           <property name="alignment" >
-            <set>Qt::AlignVCenter|Qt::AlignRight</set>
+            <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
           </property>
         </widget>
        </item>
@@ -1756,7 +1701,7 @@
             <string/>
           </property>
           <property name="alignment" >
-            <set>Qt::AlignVCenter|Qt::AlignRight</set>
+            <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
           </property>
         </widget>
        </item>
@@ -1766,7 +1711,7 @@
             <string>Item Price: </string>
           </property>
           <property name="alignment" >
-            <set>Qt::AlignVCenter|Qt::AlignRight</set>
+            <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
           </property>
         </widget>
        </item>
@@ -1776,11 +1721,11 @@
             <string/>
           </property>
           <property name="alignment" >
-            <set>Qt::AlignVCenter|Qt::AlignRight</set>
+            <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
           </property>
         </widget>
        </item>
-       <item row="14" column="8" colspan="1" >
+         <item row="14" column="8" >
       <layout class="QGridLayout" >
        <property name="margin" >
          <number>3</number>
@@ -1794,18 +1739,18 @@
             <string>Utility: </string>
           </property>
           <property name="alignment" >
-            <set>Qt::AlignVCenter|Qt::AlignRight</set>
+              <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
           </property>
         </widget>
        </item>
        <item row="0" column="1" >
         <widget class="QLabel" name="ItemUtility" >
-          <property name="alignment" >
-            <set>Qt::AlignVCenter|Qt::AlignRight</set>
-          </property>
           <property name="text" >
             <string>0.0</string>
           </property>
+             <property name="alignment" >
+              <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+             </property>
         </widget>
        </item>
       </layout>
@@ -1822,6 +1767,13 @@
   <pixmapfunction>qPixmapFromMimeSource</pixmapfunction>
   <customwidgets>
     <customwidget>
+   <class>SearchingCombo</class>
+   <extends>QComboBox</extends>
+   <header>SearchingCombo.h</header>
+   <container>1</container>
+   <pixmap></pixmap>
+  </customwidget>
+  <customwidget>
       <class>MultiTabBar4</class>
       <extends>QWidget</extends>
       <header>MultiTabBar4.h</header>
@@ -1832,13 +1784,6 @@
       <class>MultiTabFrame</class>
       <extends>QFrame</extends>
       <header>MultiTabBar4.h</header>
-      <container>1</container>
-      <pixmap></pixmap>
-    </customwidget>
-    <customwidget>
-      <class>SearchingCombo</class>
-      <extends>QComboBox</extends>
-      <header>SearchingCombo.h</header>
       <container>1</container>
       <pixmap></pixmap>
     </customwidget>
