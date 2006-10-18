@@ -48,7 +48,7 @@ class CraftBar(QDialog, Ui_B_CraftBar):
         QDialog.__init__(self, parent, fl)
         Ui_B_CraftBar.setupUi(self,self)
 
-        self.model = QStandardItemModel(0, 3)
+        self.model = QStandardItemModel(0, 2)
         self.model.setHeaderData(0, Qt.Horizontal, QVariant('Server'), Qt.DisplayRole)
         self.model.setHeaderData(1, Qt.Horizontal, QVariant('Crafter'), Qt.DisplayRole)
         self.CharList.setModel(self.model)
@@ -58,7 +58,6 @@ class CraftBar(QDialog, Ui_B_CraftBar):
         self.CharList.horizontalHeader().setResizeMode(QHeaderView.Stretch)
         self.CharList.setSelectionBehavior(QAbstractItemView.SelectRows)
         self.CharList.setSelectionMode(QAbstractItemView.SingleSelection)
-        self.CharList.setColumnHidden(2, True)
 
         if (name):
             self.setObjectName(name)
@@ -133,10 +132,9 @@ class CraftBar(QDialog, Ui_B_CraftBar):
         for idx in indexList:
             if idx.column() == 0: server = str(idx.data().toString())
 
-        # file column is hidden so we have to fetch it
         row = indexList[0].row()
-        fileIndex = self.model.index(row, 2)
-        filename = str(self.model.data(fileIndex).toString())
+        fileIndex = self.model.index(row, 0)
+        filename = unicode(self.model.data(fileIndex, Qt.UserRole).toString())
         
         self.LoadGemsButton.setEnabled(0)
         self.LoadGemsButton.update()
@@ -255,11 +253,11 @@ class CraftBar(QDialog, Ui_B_CraftBar):
                 server = ServerCodes[m.group(2)]
                 self.model.insertRows(self.model.rowCount(), 1)
                 index = self.model.index(self.model.rowCount()-1, 0, QModelIndex())
+                self.model.setData(index, QVariant(file), Qt.UserRole)
                 self.model.setData(index, QVariant(server), Qt.DisplayRole)
+                self.model.setData(index, QVariant(file), Qt.UserRole)
                 index = self.model.index(self.model.rowCount()-1, 1, QModelIndex())
                 self.model.setData(index, QVariant(m.group(1)), Qt.DisplayRole)
-                index = self.model.index(self.model.rowCount()-1, 2, QModelIndex())
-                self.model.setData(index, QVariant(file), Qt.DisplayRole)
             if len(filelist) > 0:
                 self.parent.DaocPath = a0
         self.CharList.resizeRowsToContents()
