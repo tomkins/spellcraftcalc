@@ -461,28 +461,22 @@
             <height>182</height>
           </rect>
         </property>
+      <layout class="QGridLayout" >
+       <property name="margin" >
+         <number>3</number>
+       </property>
+       <property name="spacing" >
+         <number>0</number>
+       </property>
+       <item row="0" column="0" >
         <widget class="QLabel" name="BodyLabel" >
-          <property name="geometry" >
-            <rect>
-              <x>6</x>
-              <y>16</y>
-              <width>36</width>
-              <height>16</height>
-            </rect>
-          </property>
           <property name="text" >
             <string>Body: </string>
           </property>
         </widget>
+       </item>
+       <item row="0" column="1" >
         <widget class="QLabel" name="Body" >
-          <property name="geometry" >
-            <rect>
-              <x>44</x>
-              <y>16</y>
-              <width>17</width>
-              <height>16</height>
-            </rect>
-          </property>
           <property name="text" >
             <string>0</string>
           </property>
@@ -490,15 +484,9 @@
             <set>Qt::AlignVCenter|Qt::AlignRight</set>
           </property>
         </widget>
+       </item>
+       <item row="0" column="2" >
         <widget class="QLabel" name="BodyRR" >
-          <property name="geometry" >
-            <rect>
-              <x>66</x>
-              <y>16</y>
-              <width>17</width>
-              <height>16</height>
-            </rect>
-          </property>
           <property name="text" >
             <string>-</string>
           </property>
@@ -506,28 +494,16 @@
             <set>Qt::AlignVCenter|Qt::AlignRight</set>
           </property>
         </widget>
+       </item>
+       <item row="1" column="0" >
         <widget class="QLabel" name="ColdLabel" >
-          <property name="geometry" >
-            <rect>
-              <x>6</x>
-              <y>34</y>
-              <width>36</width>
-              <height>16</height>
-            </rect>
-          </property>
           <property name="text" >
             <string>Cold: </string>
           </property>
         </widget>
+       </item>
+       <item row="1" column="1" >
         <widget class="QLabel" name="Cold" >
-          <property name="geometry" >
-            <rect>
-              <x>44</x>
-              <y>34</y>
-              <width>17</width>
-              <height>16</height>
-            </rect>
-          </property>
           <property name="text" >
             <string>0</string>
           </property>
@@ -535,15 +511,9 @@
             <set>Qt::AlignVCenter|Qt::AlignRight</set>
           </property>
         </widget>
+       </item>
+       <item row="1" column="2" >
         <widget class="QLabel" name="ColdRR" >
-          <property name="geometry" >
-            <rect>
-              <x>66</x>
-              <y>34</y>
-              <width>17</width>
-              <height>16</height>
-            </rect>
-          </property>
           <property name="text" >
             <string>-</string>
           </property>
@@ -551,28 +521,16 @@
             <set>Qt::AlignVCenter|Qt::AlignRight</set>
           </property>
         </widget>
+       </item>
+       <item row="2" column="0" >
         <widget class="QLabel" name="HeatLabel" >
-          <property name="geometry" >
-            <rect>
-              <x>6</x>
-              <y>52</y>
-              <width>36</width>
-              <height>16</height>
-            </rect>
-          </property>
           <property name="text" >
             <string>Heat: </string>
           </property>
         </widget>
+       </item>
+       <item row="2" column="1" >
         <widget class="QLabel" name="Heat" >
-          <property name="geometry" >
-            <rect>
-              <x>44</x>
-              <y>52</y>
-              <width>17</width>
-              <height>16</height>
-            </rect>
-          </property>
           <property name="text" >
             <string>0</string>
           </property>
@@ -580,15 +538,9 @@
             <set>Qt::AlignVCenter|Qt::AlignRight</set>
           </property>
         </widget>
+       </item>
+       <item row="2" column="2" >
         <widget class="QLabel" name="HeatRR" >
-          <property name="geometry" >
-            <rect>
-              <x>66</x>
-              <y>52</y>
-              <width>17</width>
-              <height>16</height>
-            </rect>
-          </property>
           <property name="text" >
             <string>-</string>
           </property>
@@ -596,28 +548,16 @@
             <set>Qt::AlignVCenter|Qt::AlignRight</set>
           </property>
         </widget>
+       </item>
+       <item row="3" column="0" >
         <widget class="QLabel" name="EnergyLabel" >
-          <property name="geometry" >
-            <rect>
-              <x>6</x>
-              <y>70</y>
-              <width>36</width>
-              <height>16</height>
-            </rect>
-          </property>
           <property name="text" >
             <string>Energy: </string>
           </property>
         </widget>
+       </item>
+       <item row="3" column="1" >
         <widget class="QLabel" name="Energy" >
-          <property name="geometry" >
-            <rect>
-              <x>44</x>
-              <y>70</y>
-              <width>17</width>
-              <height>16</height>
-            </rect>
-          </property>
           <property name="text" >
             <string>0</string>
           </property>
@@ -625,15 +565,9 @@
             <set>Qt::AlignVCenter|Qt::AlignRight</set>
           </property>
         </widget>
+       </item>
+       <item row="3" column="2" >
         <widget class="QLabel" name="EnergyRR" >
-          <property name="geometry" >
-            <rect>
-              <x>66</x>
-              <y>70</y>
-              <width>17</width>
-              <height>16</height>
-            </rect>
-          </property>
           <property name="text" >
             <string>-</string>
           </property>
@@ -641,28 +575,16 @@
             <set>Qt::AlignVCenter|Qt::AlignRight</set>
           </property>
         </widget>
+       </item>
+       <item row="4" column="0" >
         <widget class="QLabel" name="MatterLabel" >
-          <property name="geometry" >
-            <rect>
-              <x>6</x>
-              <y>88</y>
-              <width>36</width>
-              <height>16</height>
-            </rect>
-          </property>
           <property name="text" >
             <string>Matter: </string>
           </property>
         </widget>
+       </item>
+       <item row="4" column="1" >
         <widget class="QLabel" name="Matter" >
-          <property name="geometry" >
-            <rect>
-              <x>44</x>
-              <y>88</y>
-              <width>17</width>
-              <height>16</height>
-            </rect>
-          </property>
           <property name="text" >
             <string>0</string>
           </property>
@@ -670,15 +592,9 @@
             <set>Qt::AlignVCenter|Qt::AlignRight</set>
           </property>
         </widget>
+       </item>
+       <item row="4" column="2" >
         <widget class="QLabel" name="MatterRR" >
-          <property name="geometry" >
-            <rect>
-              <x>66</x>
-              <y>88</y>
-              <width>17</width>
-              <height>16</height>
-            </rect>
-          </property>
           <property name="text" >
             <string>-</string>
           </property>
@@ -686,28 +602,16 @@
             <set>Qt::AlignVCenter|Qt::AlignRight</set>
           </property>
         </widget>
+       </item>
+       <item row="5" column="0" >
         <widget class="QLabel" name="SpiritLabel" >
-          <property name="geometry" >
-            <rect>
-              <x>6</x>
-              <y>106</y>
-              <width>36</width>
-              <height>16</height>
-            </rect>
-          </property>
           <property name="text" >
             <string>Spirit: </string>
           </property>
         </widget>
+       </item>
+       <item row="5" column="1" >
         <widget class="QLabel" name="Spirit" >
-          <property name="geometry" >
-            <rect>
-              <x>44</x>
-              <y>106</y>
-              <width>17</width>
-              <height>16</height>
-            </rect>
-          </property>
           <property name="text" >
             <string>0</string>
           </property>
@@ -715,15 +619,9 @@
             <set>Qt::AlignVCenter|Qt::AlignRight</set>
           </property>
         </widget>
+       </item>
+       <item row="5" column="2" >
         <widget class="QLabel" name="SpiritRR" >
-          <property name="geometry" >
-            <rect>
-              <x>66</x>
-              <y>106</y>
-              <width>17</width>
-              <height>16</height>
-            </rect>
-          </property>
           <property name="text" >
             <string>-</string>
           </property>
@@ -731,28 +629,16 @@
             <set>Qt::AlignVCenter|Qt::AlignRight</set>
           </property>
         </widget>
+       </item>
+       <item row="6" column="0" >
         <widget class="QLabel" name="CrushLabel" >
-          <property name="geometry" >
-            <rect>
-              <x>6</x>
-              <y>124</y>
-              <width>36</width>
-              <height>16</height>
-            </rect>
-          </property>
           <property name="text" >
             <string>Crush: </string>
           </property>
         </widget>
+       </item>
+       <item row="6" column="1" >
         <widget class="QLabel" name="Crush" >
-          <property name="geometry" >
-            <rect>
-              <x>44</x>
-              <y>124</y>
-              <width>17</width>
-              <height>16</height>
-            </rect>
-          </property>
           <property name="text" >
             <string>0</string>
           </property>
@@ -760,15 +646,9 @@
             <set>Qt::AlignVCenter|Qt::AlignRight</set>
           </property>
         </widget>
+       </item>
+       <item row="6" column="2" >
         <widget class="QLabel" name="CrushRR" >
-          <property name="geometry" >
-            <rect>
-              <x>66</x>
-              <y>124</y>
-              <width>17</width>
-              <height>16</height>
-            </rect>
-          </property>
           <property name="text" >
             <string>-</string>
           </property>
@@ -776,28 +656,16 @@
             <set>Qt::AlignVCenter|Qt::AlignRight</set>
           </property>
         </widget>
+       </item>
+       <item row="7" column="0" >
         <widget class="QLabel" name="ThrustLabel" >
-          <property name="geometry" >
-            <rect>
-              <x>6</x>
-              <y>142</y>
-              <width>36</width>
-              <height>16</height>
-            </rect>
-          </property>
           <property name="text" >
             <string>Thrust: </string>
           </property>
         </widget>
+       </item>
+       <item row="7" column="1" >
         <widget class="QLabel" name="Thrust" >
-          <property name="geometry" >
-            <rect>
-              <x>44</x>
-              <y>142</y>
-              <width>17</width>
-              <height>16</height>
-            </rect>
-          </property>
           <property name="text" >
             <string>0</string>
           </property>
@@ -805,15 +673,9 @@
             <set>Qt::AlignVCenter|Qt::AlignRight</set>
           </property>
         </widget>
+       </item>
+       <item row="7" column="2" >
         <widget class="QLabel" name="ThrustRR" >
-          <property name="geometry" >
-            <rect>
-              <x>66</x>
-              <y>142</y>
-              <width>17</width>
-              <height>16</height>
-            </rect>
-          </property>
           <property name="text" >
             <string>-</string>
           </property>
@@ -821,28 +683,16 @@
             <set>Qt::AlignVCenter|Qt::AlignRight</set>
           </property>
         </widget>
+       </item>
+       <item row="8" column="0" >
         <widget class="QLabel" name="SlashLabel" >
-          <property name="geometry" >
-            <rect>
-              <x>6</x>
-              <y>160</y>
-              <width>36</width>
-              <height>16</height>
-            </rect>
-          </property>
           <property name="text" >
             <string>Slash: </string>
           </property>
         </widget>
+       </item>
+       <item row="8" column="1" >
         <widget class="QLabel" name="Slash" >
-          <property name="geometry" >
-            <rect>
-              <x>44</x>
-              <y>160</y>
-              <width>17</width>
-              <height>16</height>
-            </rect>
-          </property>
           <property name="text" >
             <string>0</string>
           </property>
@@ -850,15 +700,9 @@
             <set>Qt::AlignVCenter|Qt::AlignRight</set>
           </property>
         </widget>
+       </item>
+       <item row="8" column="2" >
         <widget class="QLabel" name="SlashRR" >
-          <property name="geometry" >
-            <rect>
-              <x>66</x>
-              <y>160</y>
-              <width>17</width>
-              <height>16</height>
-            </rect>
-          </property>
           <property name="text" >
             <string>-</string>
           </property>
@@ -866,6 +710,8 @@
             <set>Qt::AlignVCenter|Qt::AlignRight</set>
           </property>
         </widget>
+       </item>
+      </layout>
       </widget>
       <widget class="QGroupBox" name="GroupSkillsList" >
         <property name="geometry" >
