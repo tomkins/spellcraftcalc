@@ -16,15 +16,15 @@
       <string>Spellcrafting Calculator</string>
     </property>
     <widget class="QWidget" name="ScWinFrame">
+      <layout class="QGridLayout" >
+       <property name="margin" >
+         <number>3</number>
+       </property>
+       <property name="spacing" >
+         <number>0</number>
+       </property>
+       <item row="0" column="0" >
       <widget class="QGroupBox" name="GroupCharInfo" >
-        <property name="geometry" >
-          <rect>
-            <x>613</x>
-            <y>3</y>
-            <width>165</width>
-            <height>182</height>
-          </rect>
-        </property>
       <layout class="QGridLayout" >
        <property name="margin" >
          <number>3</number>
@@ -164,15 +164,25 @@
        </item>
       </layout>
       </widget>
+       </item>
+       <item row="0" column="1" >
+         <spacer>
+          <property name="orientation" >
+           <enum>Qt::Horizontal</enum>
+          </property>
+          <property name="sizeType" >
+           <enum>QSizePolicy::Fixed</enum>
+          </property>
+          <property name="sizeHint" >
+           <size>
+            <width>3</width>
+            <height>1</height>
+           </size>
+          </property>
+         </spacer>
+       </item>
+       <item row="0" column="2" >
       <widget class="QGroupBox" name="GroupStats" >
-        <property name="geometry" >
-          <rect>
-            <x>5</x>
-            <y>3</y>
-            <width>94</width>
-            <height>182</height>
-          </rect>
-        </property>
       <layout class="QGridLayout" >
        <property name="margin" >
          <number>3</number>
@@ -452,15 +462,25 @@
        </item>
       </layout>
       </widget>
+       </item>
+       <item row="0" column="3" >
+         <spacer>
+          <property name="orientation" >
+           <enum>Qt::Horizontal</enum>
+          </property>
+          <property name="sizeType" >
+           <enum>QSizePolicy::Fixed</enum>
+          </property>
+          <property name="sizeHint" >
+           <size>
+            <width>3</width>
+            <height>1</height>
+           </size>
+          </property>
+         </spacer>
+       </item>
+       <item row="0" column="4" >
       <widget class="QGroupBox" name="GroupResists" >
-        <property name="geometry" >
-          <rect>
-            <x>105</x>
-            <y>3</y>
-            <width>90</width>
-            <height>182</height>
-          </rect>
-        </property>
       <layout class="QGridLayout" >
        <property name="margin" >
          <number>3</number>
@@ -713,15 +733,25 @@
        </item>
       </layout>
       </widget>
+       </item>
+       <item row="0" column="5" >
+         <spacer>
+          <property name="orientation" >
+           <enum>Qt::Horizontal</enum>
+          </property>
+          <property name="sizeType" >
+           <enum>QSizePolicy::Fixed</enum>
+          </property>
+          <property name="sizeHint" >
+           <size>
+            <width>3</width>
+            <height>1</height>
+           </size>
+          </property>
+         </spacer>
+       </item>
+       <item row="0" column="6" >
       <widget class="QGroupBox" name="GroupSkillsList" >
-        <property name="geometry" >
-          <rect>
-            <x>201</x>
-            <y>3</y>
-            <width>407</width>
-            <height>182</height>
-          </rect>
-        </property>
       <layout class="QGridLayout" >
        <property name="margin" >
          <number>3</number>
@@ -765,15 +795,56 @@
        </item>
       </layout>
       </widget>
-      <widget class="MultiTabFrame" name="GroupItemFrame" >
-        <property name="geometry" >
-          <rect>
-            <x>3</x>
-            <y>235</y>
-            <width>776</width>
-            <height>307</height>
-          </rect>
+       </item>
+       <item row="1" column="0" colspan="7" >
+         <spacer>
+          <property name="orientation" >
+           <enum>Qt::Vertical</enum>
+          </property>
+          <property name="sizeType" >
+           <enum>QSizePolicy::Fixed</enum>
+          </property>
+          <property name="sizeHint" >
+           <size>
+            <width>1</width>
+            <height>3</height>
+           </size>
+          </property>
+         </spacer>
+       </item>
+       <item row="2" column="0" colspan="7" >
+      <layout class="QVBoxLayout" >
+        <property name="margin" >
+         <number>0</number>
         </property>
+        <property name="spacing" >
+         <number>0</number>
+        </property>
+        <item>
+      <widget class="MultiTabBar4" name="PieceTab" >
+        <property name="focusPolicy" >
+          <enum>Qt::StrongFocus</enum>
+        </property>
+      </widget>
+        </item>
+        <item>
+         <spacer>
+          <property name="orientation" >
+           <enum>Qt::Vertical</enum>
+          </property>
+          <property name="sizeType" >
+           <enum>QSizePolicy::Fixed</enum>
+          </property>
+          <property name="sizeHint" >
+           <size>
+            <width>1</width>
+            <height>1</height>
+           </size>
+          </property>
+         </spacer>
+        </item>
+        <item>
+      <widget class="MultiTabFrame" name="GroupItemFrame" >
       <layout class="QGridLayout" >
        <property name="margin" >
          <number>8</number>
@@ -1741,19 +1812,10 @@
        </item>
       </layout>
       </widget>
-      <widget class="MultiTabBar4" name="PieceTab" >
-        <property name="geometry" >
-          <rect>
-            <x>3</x>
-            <y>190</y>
-            <width>776</width>
-            <height>46</height>
-          </rect>
-        </property>
-        <property name="focusPolicy" >
-          <enum>Qt::StrongFocus</enum>
-        </property>
-      </widget>
+        </item>
+       </layout>
+        </item>
+       </layout>
     </widget>
   </widget>
   <layoutdefault spacing="6" margin="11" />
