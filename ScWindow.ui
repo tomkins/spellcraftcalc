@@ -722,15 +722,15 @@
             <height>182</height>
           </rect>
         </property>
+      <layout class="QGridLayout" >
+       <property name="margin" >
+         <number>3</number>
+       </property>
+       <property name="spacing" >
+         <number>0</number>
+       </property>
+       <item row="0" column="0" >
         <widget class="QListView" name="SkillsList" >
-          <property name="geometry" >
-            <rect>
-              <x>5</x>
-              <y>16</y>
-              <width>396</width>
-              <height>160</height>
-            </rect>
-          </property>
           <property name="focusPolicy" >
             <enum>Qt::StrongFocus</enum>
           </property>
@@ -762,6 +762,8 @@
             <enum>QListView::Adjust</enum>
           </property>
         </widget>
+       </item>
+      </layout>
       </widget>
       <widget class="MultiTabFrame" name="GroupItemFrame" >
         <property name="geometry" >
