@@ -17,9 +17,9 @@ class SearchingCombo(QComboBox):
         self.setMaxVisibleItems(20)
         self.setEditable(editable)
         self.minText = ' '
-        self.setView(ComboListView(self, self))
         if name is not None:
             self.setObjectName(name)
+        self.setView(ComboListView(self, self))
 
     def insertItems(self, idx, lst):
         len_ = 0

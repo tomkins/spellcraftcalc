@@ -5,6 +5,7 @@ class ComboListView(QListView):
     def __init__(self, p, cb):
         QListView.__init__(self, p)
         self.setHorizontalScrollBarPolicy(Qt.ScrollBarAlwaysOff)
+        self.setSelectionMode(QAbstractItemView.SingleSelection)
 
     def showEvent(self, e):
         if qVersion < '4.2': 
