@@ -49,11 +49,11 @@ class ComboListView(QListView):
     def focusOutEvent(self, e):
         # from the focus events posted at our combobox, we must...
         combobox = self.parent().parent()
+        if e.reason() in (Qt.TabFocusReason, Qt.BacktabFocusReason,):
+            combobox.hidePopup()
         idxs = self.selectedIndexes()
         if len(idxs) > 0 and combobox.currentIndex() != idxs[0].row():
             combobox.setCurrentIndex(idxs[0].row())
             combobox.emit(SIGNAL("activated(int)"),combobox.currentIndex())
             combobox.emit(SIGNAL("activated(const QString &)"),combobox.currentText())
-        if e.reason() in (Qt.TabFocusReason, Qt.BacktabFocusReason,):
-            combobox.hidePopup()
         QListView.focusOutEvent(self, e)
