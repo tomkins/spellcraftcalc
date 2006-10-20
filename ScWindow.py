@@ -109,7 +109,7 @@ class ScWindow(QMainWindow, Ui_B_SC):
         self.initialize(0)
         
     def initLayout(self):
-        testfont = QFontMetrics(qApp.font())
+        testfont = QFontMetrics(QApplication.font())
 
         self.switchOnType = {'drop' : [], 'player' : [] }
         self.switchOnType['drop'] = [ 
@@ -406,18 +406,18 @@ class ScWindow(QMainWindow, Ui_B_SC):
         self.connect(self.newitemmenu, SIGNAL("triggered(QAction*)"), 
                      self.newItemType)
 
-        self.itemtypemenu = QMenu('Item &Type', self)
+        self.chooseitemmenu = QMenu('Item &Type', self)
         for type in ('Normal Item', 'Caster Staff', 'Legendary Staff',
                      'Enhanced Bow', 'Legendary Bow',
                      'Legendary Weapon', 'Enhanced Armor'):
             act = QAction(type, self)
             act.setData(QVariant(type))
-            self.itemtypemenu.addAction(act)
-        self.connect(self.itemtypemenu, SIGNAL("triggered(QAction*)"), 
-                     self.newItemType)
+            self.chooseitemmenu.addAction(act)
+        self.connect(self.chooseitemmenu, SIGNAL("triggered(QAction*)"), 
+                     self.chooseItemType)
 
         self.editmenu = QMenu('&Edit', self)
-        self.itemtypemenuid = self.editmenu.addMenu(self.itemtypemenu)
+        self.chooseitemmenuid = self.editmenu.addMenu(self.chooseitemmenu)
         self.swapgemsmenuid = self.editmenu.addMenu(self.swapgemsmenu)
         self.editmenu.addSeparator()
         self.editmenu.addMenu(self.newitemmenu)
@@ -497,7 +497,7 @@ class ScWindow(QMainWindow, Ui_B_SC):
             self.GemLabel[i].setText('Slot &%d:' % (i + 1))
         self.GroupItemFrame.updateGeometry()
         self.craftingmenuid.setEnabled(False)
-        self.itemtypemenuid.setEnabled(False)
+        self.chooseitemmenuid.setEnabled(False)
         self.swapgemsmenuid.setEnabled(False)
         self.GroupItemFrame.show()
 
@@ -530,7 +530,7 @@ class ScWindow(QMainWindow, Ui_B_SC):
         self.GroupItemFrame.updateGeometry()
         #self.craftingmenuid.setEnabled(True)
         self.testCraftingMenu()
-        self.itemtypemenuid.setEnabled(True)
+        self.chooseitemmenuid.setEnabled(True)
         self.swapgemsmenuid.setEnabled(True)
         self.GroupItemFrame.show()
 
