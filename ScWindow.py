@@ -116,10 +116,11 @@ class ScWindow(QMainWindow, Ui_B_SC):
             self.QualEdit, self.LabelRequirement,
         ]
         self.switchOnType['player'] = [
-            self.LabelGemQuality, self.LabelGemPoints, self.LabelGemCost,
-            self.LabelGemName, self.QualDrop,
+            self.QualDrop,
+            self.LabelGemQuality, self.LabelGemPoints,
+            self.LabelGemCost, self.LabelGemName,
             self.ItemImbueLabel, self.ItemImbue, self.ItemImbueTotal,
-            self.ItemOverchargeLabel, self.ItemOvercharge, 
+            self.ItemOverchargeLabel, self.ItemOvercharge,
             self.ItemCostLabel, self.ItemCost,
             self.ItemPriceLabel, self.ItemPrice,
             self.LabelRequirement2,
@@ -495,7 +496,7 @@ class ScWindow(QMainWindow, Ui_B_SC):
         for i in range(0,4):
             self.GemLabel[i].setEnabled(1)
             self.GemLabel[i].setText('Slot &%d:' % (i + 1))
-        self.GroupItemFrame.updateGeometry()
+        #self.GroupItemFrame.updateGeometry()
         self.craftingmenuid.setEnabled(False)
         self.chooseitemmenuid.setEnabled(False)
         self.swapgemsmenuid.setEnabled(False)
@@ -527,7 +528,7 @@ class ScWindow(QMainWindow, Ui_B_SC):
                     self.Effect[i].hide()
                     self.Requirement[i].hide()
 
-        self.GroupItemFrame.updateGeometry()
+        #self.GroupItemFrame.updateGeometry()
         #self.craftingmenuid.setEnabled(True)
         self.testCraftingMenu()
         self.chooseitemmenuid.setEnabled(True)
@@ -1256,7 +1257,7 @@ class ScWindow(QMainWindow, Ui_B_SC):
 
     def TypeChanged(self, Value, slot = -1):
         if slot < 0:
-            slot = self.senderSlot()        
+            slot = self.senderSlot()
         item = self.itemattrlist[self.currentTabLabel]
         typetext = str(self.Type[slot].currentText())
         if not self.nocalc:
@@ -1807,14 +1808,16 @@ class ScWindow(QMainWindow, Ui_B_SC):
             item.slot(5).setSlotType('unused')
         else:
             item.slot(5).setSlotType('effect')
-            if item.slot(4).type()[-6:] == "Effect":
+            if item.slot(4).type()[-6:] == 'Effect':
                 item.slot(5).setAll(item.slot(4).type(), item.slot(4).amount(), 
                              item.slot(4).effect(), item.slot(4).requirement())
             item.slot(4).setSlotType('crafted')
+
         if newtype == 'Caster Staff' or newtype == 'Legendary Staff':
             for fixslot in item.slots():
-                 if fixslot.type() == "Focus":
-                     fixslot.setType = "Unused"
+                 if fixslot.type() == 'Focus':
+                     fixslot.setType('Unused')
+
         if newtype == 'Normal Item':
             item.slot(3).setSlotType('player')
         elif newtype == 'Caster Staff':
@@ -1846,10 +1849,11 @@ class ScWindow(QMainWindow, Ui_B_SC):
                                 requirement="Level 50")
         elif newtype == 'Enhanced Armor':
             item.slot(3).setSlotType('player')
+
         # Recover from previously legendary items
         if item.slot(3).slotType() == 'player' and \
                 not item.slot(3).crafted():
-            item.slot(3).setType("Unused")
+            item.slot(3).setType('Unused')
         self.restoreItem(item)
 
     def newItemType(self, action):
