@@ -313,7 +313,7 @@ class Item:
         elif type == 'player':
             for slot in range(0, 4):
                 slots.append(ItemSlot(type))
-            slots.append(ItemSlot('crafted'))
+            slots.append(ItemSlot('effect'))
             slots.append(ItemSlot('unused'))
 
         return slots
