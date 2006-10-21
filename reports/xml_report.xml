@@ -1,0 +1,519 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ConfigReport>
+<center><b>Config Report</b></center><br />
+<center><b>Stats</b></center><hr />
+<table cellspacing=10 cellpadding=0>
+<tr>
+	<td>Str:</td>
+	<td><attr type="str" width="3" /></td>
+	<td>Int:</td>
+	<td><attr type="int" width="3" /></td>
+	<td>Hits:</td>
+	<td><attr type="hits" width="4" /></td>
+</tr>
+<tr>
+	<td>Con:</td>
+	<td><attr type="con" width="3" /></td>
+	<td>Pie:</td>
+	<td><attr type="pie" width="3" /></td>
+	<td>Power:</td>
+	<td><attr type="power" width="3" /></td>
+</tr>
+<tr>
+	<td>Dex:</td>
+	<td><attr type="dex" width="3" /></td>
+	<td>Cha:</td>
+	<td><attr type="cha" width="3" /></td>
+</tr>
+<tr>
+	<td>Qui:</td>
+	<td><attr type="qui" width="3" /></td>
+	<td>Emp:</td>
+	<td><attr type="emp" width="3" /></td>
+</tr>
+</table><br />
+<center><b>Resists</b></center><hr />
+<table cellspacing=10 cellpadding=0>
+<tr>
+	<td>Body:</td>
+	<td><attr type="body" width="2" /></td>
+	<td>Energy:</td>
+	<td><attr type="energy" width="2" /></td>
+	<td>Crush:</td>
+	<td><attr type="crush" width="3" /></td>
+</tr>
+<tr>
+	<td>Cold:</td>
+	<td><attr type="cold" width="2" /></td>
+	<td>Matter:</td>
+	<td><attr type="matter" width="2" /></td>
+	<td>Thrust:</td>
+	<td><attr type="thrust" width="2" /></td>
+</tr>
+<tr>
+	<td>Heat:</td>
+	<td><attr type="heat" width="2" /></td>
+	<td>Spirit:</td>
+	<td><attr type="spirit" width="2" /></td>
+	<td>Slash:</td>
+	<td><attr type="slash" width="3" /></td>
+</tr>
+</table><br />
+<center><b>Skills</b></center><hr />
+<skills /><br />
+<center><b>Focus</b></center><hr />
+<foci /><br />
+<center><b>Cap Increases</b></center><hr />
+<capbonuses /><br />
+<center><b>Other Bonuses</b></center><hr />
+<otherbonuses /><br />
+<center><b>Piece Listing</b></center><hr />
+<dl>
+<ifnotempty piece="chest">
+<dt><b>Chest</b></dt>
+<ifpiece piece="chest" piecetype="pcmade">
+<dd>Imbue Points: <pattr piece="chest" attr="usedpoints" /> of <pattr piece="chest" attr="availablepoints" />   
+	Quality: <pattr piece="chest" attr="quality" />   
+	Overcharge: <pattr piece="chest" attr="overcharge" />
+</dd>
+<dd>Gem 1: <chest gem1 amount 2/> <chest gem1 effect/> - <chest gem1 quality/> <chest gem1 name/></dd>
+<dd>Gem 2: <chest gem2 amount 2/> <chest gem2 effect/> - <chest gem2 quality/> <chest gem2 name/></dd>
+<dd>Gem 3: <chest gem3 amount 2/> <chest gem3 effect/> - <chest gem3 quality/> <chest gem3 name/></dd>
+<dd>Gem 4: <chest gem4 amount 2/> <chest gem4 effect/> - <chest gem4 quality/> <chest gem4 name/></dd>
+<dd>Effect 5: <chest gem5 amount 2/> <chest gem5 effect/> - <chest gem5 name/></dd>
+<dd>Effect 6: <chest gem6 amount 2/> <chest gem6 effect/> - <chest gem6 name/></dd>
+<dd>Utility: <chest utility/></dd>
+</ifpiece>
+<ifpiece piece="chest" piecetype="drop">
+<dd>Name: <chest name/></dd>
+<dd>Level: <chest level/>   Quality: <chest quality/>   AF: <chest af/>   Bonus: <chest bonus/></dd>
+<dd>Effect 1: <chest gem1 amount 3/> <chest gem1 effect/></dd>
+<dd>Effect 2: <chest gem2 amount 3/> <chest gem2 effect/></dd>
+<dd>Effect 3: <chest gem3 amount 3/> <chest gem3 effect/></dd>
+<dd>Effect 4: <chest gem4 amount 3/> <chest gem4 effect/></dd>
+<dd>Effect 5: <chest gem5 amount 3/> <chest gem5 effect/></dd>
+<dd>Effect 6: <chest gem6 amount 3/> <chest gem6 effect/></dd>
+<dd>Effect 7: <chest gem7 amount 3/> <chest gem7 effect/></dd>
+<dd>Effect 8: <chest gem8 amount 3/> <chest gem8 effect/></dd>
+<dd>Effect 9: <chest gem9 amount 3/> <chest gem9 effect/></dd>
+<dd>Effect 10: <chest gem10 amount 3/> <chest gem10 effect/></dd>
+<dd>Effect 11: <chest gem11 amount 3/> <chest gem11 effect/></dd>
+<dd>Effect 12: <chest gem12 amount 3/> <chest gem12 effect/></dd>
+<dd>Utility: <chest utility/></dd>
+</ifpiece>
+</ifnotempty>
+<ifnotempty piece="arms">
+<dt><b>Arms</b></dt>
+<ifpiece piece="arms" piecetype="pcmade">
+<dd>Imbue Points: <arms usedpoints/> of <arms availablepoints/>   Quality: <arms quality/>   Overcharge: <arms overcharge/>
+<dd>Gem 1: <arms gem1 amount 2/> <arms gem1 effect/> - <arms gem1 quality/> <arms gem1 name/></dd>
+<dd>Gem 2: <arms gem2 amount 2/> <arms gem2 effect/> - <arms gem2 quality/> <arms gem2 name/></dd>
+<dd>Gem 3: <arms gem3 amount 2/> <arms gem3 effect/> - <arms gem3 quality/> <arms gem3 name/></dd>
+<dd>Gem 4: <arms gem4 amount 2/> <arms gem4 effect/> - <arms gem4 quality/> <arms gem4 name/></dd>
+<dd>Effect 5: <arms gem5 amount 2/> <arms gem5 effect/> - <arms gem5 name/></dd>
+<dd>Effect 6: <arms gem6 amount 2/> <arms gem6 effect/> - <arms gem6 name/></dd>
+<dd>Utility: <arms utility/></dd>
+</ifpiece>
+<ifpiece piece="arms" piecetype="drop">
+<dd>Name: <arms name/></dd>
+<dd>Level: <arms level/>   Quality: <arms quality/>   AF: <arms af/>   Bonus: <arms bonus/></dd>
+<dd>Effect 1: <arms gem1 amount 3/> <arms gem1 effect/></dd>
+<dd>Effect 2: <arms gem2 amount 3/> <arms gem2 effect/></dd>
+<dd>Effect 3: <arms gem3 amount 3/> <arms gem3 effect/></dd>
+<dd>Effect 4: <arms gem4 amount 3/> <arms gem4 effect/></dd>
+<dd>Effect 5: <arms gem5 amount 3/> <arms gem5 effect/></dd>
+<dd>Effect 6: <arms gem6 amount 3/> <arms gem6 effect/></dd>
+<dd>Effect 7: <arms gem7 amount 3/> <arms gem7 effect/></dd>
+<dd>Effect 8: <arms gem8 amount 3/> <arms gem8 effect/></dd>
+<dd>Effect 9: <arms gem9 amount 3/> <arms gem9 effect/></dd>
+<dd>Effect 10: <arms gem10 amount 3/> <arms gem10 effect/></dd>
+<dd>Effect 11: <arms gem11 amount 3/> <arms gem11 effect/></dd>
+<dd>Effect 12: <arms gem12 amount 3/> <arms gem12 effect/></dd>
+<dd>Utility: <arms utility/></dd>
+</ifpiece>
+</ifnotempty>
+<ifnotempty head>
+<dt><b>Head</b></dt>
+<if head pcmade>
+<dd>Imbue Points: <head usedpoints/> of <head availablepoints/>   Quality: <head quality/>   Overcharge: <head overcharge/>
+<dd>Gem 1: <head gem1 amount 2/> <head gem1 effect/> - <head gem1 quality/> <head gem1 name/></dd>
+<dd>Gem 2: <head gem2 amount 2/> <head gem2 effect/> - <head gem2 quality/> <head gem2 name/></dd>
+<dd>Gem 3: <head gem3 amount 2/> <head gem3 effect/> - <head gem3 quality/> <head gem3 name/></dd>
+<dd>Gem 4: <head gem4 amount 2/> <head gem4 effect/> - <head gem4 quality/> <head gem4 name/></dd>
+<dd>Effect 5: <head gem5 amount 2/> <head gem5 effect/> - <head gem5 name/></dd>
+<dd>Effect 6: <head gem6 amount 2/> <head gem6 effect/> - <head gem6 name/></dd>
+<dd>Utility: <head utility/></dd>
+</if>
+<if head drop>
+<dd>Name: <head name/></dd>
+<dd>Level: <head level/>   Quality: <head quality/>   AF: <head af/>   Bonus: <head bonus/></dd>
+<dd>Effect 1: <head gem1 amount 3/> <head gem1 effect/></dd>
+<dd>Effect 2: <head gem2 amount 3/> <head gem2 effect/></dd>
+<dd>Effect 3: <head gem3 amount 3/> <head gem3 effect/></dd>
+<dd>Effect 4: <head gem4 amount 3/> <head gem4 effect/></dd>
+<dd>Effect 5: <head gem5 amount 3/> <head gem5 effect/></dd>
+<dd>Effect 6: <head gem6 amount 3/> <head gem6 effect/></dd>
+<dd>Effect 7: <head gem7 amount 3/> <head gem7 effect/></dd>
+<dd>Effect 8: <head gem8 amount 3/> <head gem8 effect/></dd>
+<dd>Effect 9: <head gem9 amount 3/> <head gem9 effect/></dd>
+<dd>Effect 10: <head gem10 amount 3/> <head gem10 effect/></dd>
+<dd>Effect 11: <head gem11 amount 3/> <head gem11 effect/></dd>
+<dd>Effect 12: <head gem12 amount 3/> <head gem12 effect/></dd>
+<dd>Utility: <head utility/></dd>
+</if>
+</ifnotempty>
+<ifnotempty legs>
+<dt><b>Legs</b></dt>
+<if legs pcmade>
+<dd>Imbue Points: <legs usedpoints/> of <legs availablepoints/>   Quality: <legs quality/>   Overcharge: <legs overcharge/>
+<dd>Gem 1: <legs gem1 amount 2/> <legs gem1 effect/> - <legs gem1 quality/> <legs gem1 name/></dd>
+<dd>Gem 2: <legs gem2 amount 2/> <legs gem2 effect/> - <legs gem2 quality/> <legs gem2 name/></dd>
+<dd>Gem 3: <legs gem3 amount 2/> <legs gem3 effect/> - <legs gem3 quality/> <legs gem3 name/></dd>
+<dd>Gem 4: <legs gem4 amount 2/> <legs gem4 effect/> - <legs gem4 quality/> <legs gem4 name/></dd>
+<dd>Effect 5: <legs gem5 amount 2/> <legs gem5 effect/> - <legs gem5 name/></dd>
+<dd>Effect 6: <legs gem6 amount 2/> <legs gem6 effect/> - <legs gem6 name/></dd>
+<dd>Utility: <legs utility/></dd>
+</if>
+<if legs drop>
+<dd>Name: <legs name/></dd>
+<dd>Level: <legs level/>   Quality: <legs quality/>   AF: <legs af/>   Bonus: <legs bonus/></dd>
+<dd>Effect 1: <legs gem1 amount 3/> <legs gem1 effect/></dd>
+<dd>Effect 2: <legs gem2 amount 3/> <legs gem2 effect/></dd>
+<dd>Effect 3: <legs gem3 amount 3/> <legs gem3 effect/></dd>
+<dd>Effect 4: <legs gem4 amount 3/> <legs gem4 effect/></dd>
+<dd>Effect 5: <legs gem5 amount 3/> <legs gem5 effect/></dd>
+<dd>Effect 6: <legs gem6 amount 3/> <legs gem6 effect/></dd>
+<dd>Effect 7: <legs gem7 amount 3/> <legs gem7 effect/></dd>
+<dd>Effect 8: <legs gem8 amount 3/> <legs gem8 effect/></dd>
+<dd>Effect 9: <legs gem9 amount 3/> <legs gem9 effect/></dd>
+<dd>Effect 10: <legs gem10 amount 3/> <legs gem10 effect/></dd>
+<dd>Effect 11: <legs gem11 amount 3/> <legs gem11 effect/></dd>
+<dd>Effect 12: <legs gem12 amount 3/> <legs gem12 effect/></dd>
+<dd>Utility: <legs utility/></dd>
+</if>
+</ifnotempty>
+<ifnotempty hands>
+<dt><b>Hands</b></dt>
+<if hands pcmade>
+<dd>Imbue Points: <hands usedpoints/> of <hands availablepoints/>   Quality: <hands quality/>   Overcharge: <hands overcharge/>
+<dd>Gem 1: <hands gem1 amount 2/> <hands gem1 effect/> - <hands gem1 quality/> <hands gem1 name/></dd>
+<dd>Gem 2: <hands gem2 amount 2/> <hands gem2 effect/> - <hands gem2 quality/> <hands gem2 name/></dd>
+<dd>Gem 3: <hands gem3 amount 2/> <hands gem3 effect/> - <hands gem3 quality/> <hands gem3 name/></dd>
+<dd>Gem 4: <hands gem4 amount 2/> <hands gem4 effect/> - <hands gem4 quality/> <hands gem4 name/></dd>
+<dd>Effect 5: <hands gem5 amount 2/> <hands gem5 effect/> - <hands gem5 name/></dd>
+<dd>Effect 6: <hands gem6 amount 2/> <hands gem6 effect/> - <hands gem6 name/></dd>
+<dd>Utility: <hands utility/></dd>
+</if>
+<if hands drop>
+<dd>Name: <hands name/></dd>
+<dd>Level: <hands level/>   Quality: <hands quality/>   AF: <hands af/>   Bonus: <hands bonus/></dd>
+<dd>Effect 1: <hands gem1 amount 3/> <hands gem1 effect/></dd>
+<dd>Effect 2: <hands gem2 amount 3/> <hands gem2 effect/></dd>
+<dd>Effect 3: <hands gem3 amount 3/> <hands gem3 effect/></dd>
+<dd>Effect 4: <hands gem4 amount 3/> <hands gem4 effect/></dd>
+<dd>Effect 5: <hands gem5 amount 3/> <hands gem5 effect/></dd>
+<dd>Effect 6: <hands gem6 amount 3/> <hands gem6 effect/></dd>
+<dd>Effect 7: <hands gem7 amount 3/> <hands gem7 effect/></dd>
+<dd>Effect 8: <hands gem8 amount 3/> <hands gem8 effect/></dd>
+<dd>Effect 9: <hands gem9 amount 3/> <hands gem9 effect/></dd>
+<dd>Effect 10: <hands gem10 amount 3/> <hands gem10 effect/></dd>
+<dd>Effect 11: <hands gem11 amount 3/> <hands gem11 effect/></dd>
+<dd>Effect 12: <hands gem12 amount 3/> <hands gem12 effect/></dd>
+<dd>Utility: <hands utility/></dd>
+</if>
+</ifnotempty>
+<ifnotempty feet>
+<dt><b>Feet</b></dt>
+<if feet pcmade>
+<dd>Imbue Points: <feet usedpoints/> of <feet availablepoints/>   Quality: <feet quality/>   Overcharge: <feet overcharge/>
+<dd>Gem 1: <feet gem1 amount 2/> <feet gem1 effect/> - <feet gem1 quality/> <feet gem1 name/></dd>
+<dd>Gem 2: <feet gem2 amount 2/> <feet gem2 effect/> - <feet gem2 quality/> <feet gem2 name/></dd>
+<dd>Gem 3: <feet gem3 amount 2/> <feet gem3 effect/> - <feet gem3 quality/> <feet gem3 name/></dd>
+<dd>Gem 4: <feet gem4 amount 2/> <feet gem4 effect/> - <feet gem4 quality/> <feet gem4 name/></dd>
+<dd>Effect 5: <feet gem5 amount 2/> <feet gem5 effect/> - <feet gem5 name/></dd>
+<dd>Effect 6: <feet gem6 amount 2/> <feet gem6 effect/> - <feet gem6 name/></dd>
+<dd>Utility: <feet utility/></dd>
+</if>
+<if feet drop>
+<dd>Name: <feet name/></dd>
+<dd>Level: <feet level/>   Quality: <feet quality/>   AF: <feet af/>   Bonus: <feet bonus/></dd>
+<dd>Effect 1: <feet gem1 amount 3/> <feet gem1 effect/></dd>
+<dd>Effect 2: <feet gem2 amount 3/> <feet gem2 effect/></dd>
+<dd>Effect 3: <feet gem3 amount 3/> <feet gem3 effect/></dd>
+<dd>Effect 4: <feet gem4 amount 3/> <feet gem4 effect/></dd>
+<dd>Effect 5: <feet gem5 amount 3/> <feet gem5 effect/></dd>
+<dd>Effect 6: <feet gem6 amount 3/> <feet gem6 effect/></dd>
+<dd>Effect 7: <feet gem7 amount 3/> <feet gem7 effect/></dd>
+<dd>Effect 8: <feet gem8 amount 3/> <feet gem8 effect/></dd>
+<dd>Effect 9: <feet gem9 amount 3/> <feet gem9 effect/></dd>
+<dd>Effect 10: <feet gem10 amount 3/> <feet gem10 effect/></dd>
+<dd>Effect 11: <feet gem11 amount 3/> <feet gem11 effect/></dd>
+<dd>Effect 12: <feet gem12 amount 3/> <feet gem12 effect/></dd>
+<dd>Utility: <feet utility/></dd>
+</if>
+</ifnotempty>
+<ifnotempty rweapon>
+<dt><b>Right Hand</b></dt>
+<if rweapon pcmade>
+<dd>Imbue Points: <rweapon usedpoints/> of <rweapon availablepoints/>   Quality: <rweapon quality/>   Overcharge: <rweapon overcharge/>
+<dd>Gem 1: <rweapon gem1 amount 2/> <rweapon gem1 effect/> - <rweapon gem1 quality/> <rweapon gem1 name/></dd>
+<dd>Gem 2: <rweapon gem2 amount 2/> <rweapon gem2 effect/> - <rweapon gem2 quality/> <rweapon gem2 name/></dd>
+<dd>Gem 3: <rweapon gem3 amount 2/> <rweapon gem3 effect/> - <rweapon gem3 quality/> <rweapon gem3 name/></dd>
+<dd>Gem 4: <rweapon gem4 amount 2/> <rweapon gem4 effect/> - <rweapon gem4 quality/> <rweapon gem4 name/></dd>
+<dd>Effect 5: <rweapon gem5 amount 2/> <rweapon gem5 effect/> - <rweapon gem5 name/></dd>
+<dd>Effect 6: <rweapon gem6 amount 2/> <rweapon gem6 effect/> - <rweapon gem6 name/></dd>
+<dd>Utility: <rweapon utility/></dd>
+</if>
+<if rweapon drop>
+<dd>Name: <rweapon name/></dd>
+<dd>Level: <rweapon level/>   Quality: <rweapon quality/>   DPS: <rweapon af/>   Bonus: <rweapon bonus/></dd>
+<dd>Effect 1: <rweapon gem1 amount 3/> <rweapon gem1 effect/></dd>
+<dd>Effect 2: <rweapon gem2 amount 3/> <rweapon gem2 effect/></dd>
+<dd>Effect 3: <rweapon gem3 amount 3/> <rweapon gem3 effect/></dd>
+<dd>Effect 4: <rweapon gem4 amount 3/> <rweapon gem4 effect/></dd>
+<dd>Effect 5: <rweapon gem5 amount 3/> <rweapon gem5 effect/></dd>
+<dd>Effect 6: <rweapon gem6 amount 3/> <rweapon gem6 effect/></dd>
+<dd>Effect 7: <rweapon gem7 amount 3/> <rweapon gem7 effect/></dd>
+<dd>Effect 8: <rweapon gem8 amount 3/> <rweapon gem8 effect/></dd>
+<dd>Effect 9: <rweapon gem9 amount 3/> <rweapon gem9 effect/></dd>
+<dd>Effect 10: <rweapon gem10 amount 3/> <rweapon gem10 effect/></dd>
+<dd>Effect 11: <rweapon gem11 amount 3/> <rweapon gem11 effect/></dd>
+<dd>Effect 12: <rweapon gem12 amount 3/> <rweapon gem12 effect/></dd>
+<dd>Utility: <rweapon utility/></dd>
+</if>
+</ifnotempty>
+<ifnotempty lweapon>
+<dt><b>Left Hand</b></dt>
+<if lweapon pcmade>
+<dd>Imbue Points: <lweapon usedpoints/> of <lweapon availablepoints/>   Quality: <lweapon quality/>   Overcharge: <lweapon overcharge/>
+<dd>Gem 1: <lweapon gem1 amount 2/> <lweapon gem1 effect/> - <lweapon gem1 quality/> <lweapon gem1 name/></dd>
+<dd>Gem 2: <lweapon gem2 amount 2/> <lweapon gem2 effect/> - <lweapon gem2 quality/> <lweapon gem2 name/></dd>
+<dd>Gem 3: <lweapon gem3 amount 2/> <lweapon gem3 effect/> - <lweapon gem3 quality/> <lweapon gem3 name/></dd>
+<dd>Gem 4: <lweapon gem4 amount 2/> <lweapon gem4 effect/> - <lweapon gem4 quality/> <lweapon gem4 name/></dd>
+<dd>Effect 5: <lweapon gem5 amount 2/> <lweapon gem5 effect/> - <lweapon gem5 name/></dd>
+<dd>Effect 6: <lweapon gem6 amount 2/> <lweapon gem6 effect/> - <lweapon gem6 name/></dd>
+<dd>Utility: <lweapon utility/></dd>
+</if>
+<if lweapon drop>
+<dd>Name: <lweapon name/></dd>
+<dd>Level: <lweapon level/>   Quality: <lweapon quality/>   DPS: <lweapon af/>   Bonus: <lweapon bonus/></dd>
+<dd>Effect 1: <lweapon gem1 amount 3/> <lweapon gem1 effect/></dd>
+<dd>Effect 2: <lweapon gem2 amount 3/> <lweapon gem2 effect/></dd>
+<dd>Effect 3: <lweapon gem3 amount 3/> <lweapon gem3 effect/></dd>
+<dd>Effect 4: <lweapon gem4 amount 3/> <lweapon gem4 effect/></dd>
+<dd>Effect 5: <lweapon gem5 amount 3/> <lweapon gem5 effect/></dd>
+<dd>Effect 6: <lweapon gem6 amount 3/> <lweapon gem6 effect/></dd>
+<dd>Effect 7: <lweapon gem7 amount 3/> <lweapon gem7 effect/></dd>
+<dd>Effect 8: <lweapon gem8 amount 3/> <lweapon gem8 effect/></dd>
+<dd>Effect 9: <lweapon gem9 amount 3/> <lweapon gem9 effect/></dd>
+<dd>Effect 10: <lweapon gem10 amount 3/> <lweapon gem10 effect/></dd>
+<dd>Effect 11: <lweapon gem11 amount 3/> <lweapon gem11 effect/></dd>
+<dd>Effect 12: <lweapon gem12 amount 3/> <lweapon gem12 effect/></dd>
+<dd>Utility: <lweapon utility/></dd>
+</if>
+</ifnotempty>
+<ifnotempty 2handed>
+<dt><b>Two Handed</b></dt>
+<if 2handed pcmade>
+<dd>Imbue Points: <2handed usedpoints/> of <2handed availablepoints/>   Quality: <2handed quality/>   Overcharge: <2handed overcharge/>
+<dd>Gem 1: <2handed gem1 amount 2/> <2handed gem1 effect/> - <2handed gem1 quality/> <2handed gem1 name/></dd>
+<dd>Gem 2: <2handed gem2 amount 2/> <2handed gem2 effect/> - <2handed gem2 quality/> <2handed gem2 name/></dd>
+<dd>Gem 3: <2handed gem3 amount 2/> <2handed gem3 effect/> - <2handed gem3 quality/> <2handed gem3 name/></dd>
+<dd>Gem 4: <2handed gem4 amount 2/> <2handed gem4 effect/> - <2handed gem4 quality/> <2handed gem4 name/></dd>
+<dd>Effect 5: <2handed gem5 amount 2/> <2handed gem5 effect/> - <2handed gem5 name/></dd>
+<dd>Effect 6: <2handed gem6 amount 2/> <2handed gem6 effect/> - <2handed gem6 name/></dd>
+<dd>Utility: <2handed utility/></dd>
+</if>
+<if 2handed drop>
+<dd>Name: <2handed name/></dd>
+<dd>Level: <2handed level/>   Quality: <2handed quality/>   DPS: <2handed af/>   Bonus: <2handed bonus/></dd>
+<dd>Effect 1: <2handed gem1 amount 3/> <2handed gem1 effect/></dd>
+<dd>Effect 2: <2handed gem2 amount 3/> <2handed gem2 effect/></dd>
+<dd>Effect 3: <2handed gem3 amount 3/> <2handed gem3 effect/></dd>
+<dd>Effect 4: <2handed gem4 amount 3/> <2handed gem4 effect/></dd>
+<dd>Effect 5: <2handed gem5 amount 3/> <2handed gem5 effect/></dd>
+<dd>Effect 6: <2handed gem6 amount 3/> <2handed gem6 effect/></dd>
+<dd>Effect 7: <2handed gem7 amount 3/> <2handed gem7 effect/></dd>
+<dd>Effect 8: <2handed gem8 amount 3/> <2handed gem8 effect/></dd>
+<dd>Effect 9: <2handed gem9 amount 3/> <2handed gem9 effect/></dd>
+<dd>Effect 10: <2handed gem10 amount 3/> <2handed gem10 effect/></dd>
+<dd>Effect 11: <2handed gem11 amount 3/> <2handed gem11 effect/></dd>
+<dd>Effect 12: <2handed gem12 amount 3/> <2handed gem12 effect/></dd>
+<dd>Utility: <2handed utility/></dd>
+</if>
+</ifnotempty>
+<ifnotempty ranged>
+<dt><b>Ranged</b></dt>
+<if ranged pcmade>
+<dd>Imbue Points: <ranged usedpoints/> of <ranged availablepoints/>   Quality: <ranged quality/>   Overcharge: <ranged overcharge/>
+<dd>Gem 1: <ranged gem1 amount 2/> <ranged gem1 effect/> - <ranged gem1 quality/> <ranged gem1 name/></dd>
+<dd>Gem 2: <ranged gem2 amount 2/> <ranged gem2 effect/> - <ranged gem2 quality/> <ranged gem2 name/></dd>
+<dd>Gem 3: <ranged gem3 amount 2/> <ranged gem3 effect/> - <ranged gem3 quality/> <ranged gem3 name/></dd>
+<dd>Gem 4: <ranged gem4 amount 2/> <ranged gem4 effect/> - <ranged gem4 quality/> <ranged gem4 name/></dd>
+<dd>Effect 5: <ranged gem5 amount 2/> <ranged gem5 effect/> - <ranged gem5 name/></dd>
+<dd>Effect 6: <ranged gem6 amount 2/> <ranged gem6 effect/> - <ranged gem6 name/></dd>
+<dd>Utility: <ranged utility/></dd>
+</if>
+<if ranged drop>
+<dd>Name: <ranged name/></dd>
+<dd>Level: <ranged level/>   Quality: <ranged quality/>   DPS: <ranged af/>   Bonus: <ranged bonus/></dd>
+<dd>Effect 1: <ranged gem1 amount 3/> <ranged gem1 effect/></dd>
+<dd>Effect 2: <ranged gem2 amount 3/> <ranged gem2 effect/></dd>
+<dd>Effect 3: <ranged gem3 amount 3/> <ranged gem3 effect/></dd>
+<dd>Effect 4: <ranged gem4 amount 3/> <ranged gem4 effect/></dd>
+<dd>Effect 5: <ranged gem5 amount 3/> <ranged gem5 effect/></dd>
+<dd>Effect 6: <ranged gem6 amount 3/> <ranged gem6 effect/></dd>
+<dd>Effect 7: <ranged gem7 amount 3/> <ranged gem7 effect/></dd>
+<dd>Effect 8: <ranged gem8 amount 3/> <ranged gem8 effect/></dd>
+<dd>Effect 9: <ranged gem9 amount 3/> <ranged gem9 effect/></dd>
+<dd>Effect 10: <ranged gem10 amount 3/> <ranged gem10 effect/></dd>
+<dd>Effect 11: <ranged gem11 amount 3/> <ranged gem11 effect/></dd>
+<dd>Effect 12: <ranged gem12 amount 3/> <ranged gem12 effect/></dd>
+<dd>Utility: <ranged utility/></dd>
+</if>
+</ifnotempty>
+<ifnotempty neck>
+<dt><b>Neck</b></dt>
+<dd>Name: <neck name/></dd>
+<dd>Level: <neck level/>   Quality: <neck quality/>   Bonus: <neck bonus/></dd>
+<dd>Effect 1: <neck gem1 amount 3/> <neck gem1 effect/></dd>
+<dd>Effect 2: <neck gem2 amount 3/> <neck gem2 effect/></dd>
+<dd>Effect 3: <neck gem3 amount 3/> <neck gem3 effect/></dd>
+<dd>Effect 4: <neck gem4 amount 3/> <neck gem4 effect/></dd>
+<dd>Effect 5: <neck gem5 amount 3/> <neck gem5 effect/></dd>
+<dd>Effect 6: <neck gem6 amount 3/> <neck gem6 effect/></dd>
+<dd>Effect 7: <neck gem7 amount 3/> <neck gem7 effect/></dd>
+<dd>Effect 8: <neck gem8 amount 3/> <neck gem8 effect/></dd>
+<dd>Effect 9: <neck gem9 amount 3/> <neck gem9 effect/></dd>
+<dd>Effect 10: <neck gem10 amount 3/> <neck gem10 effect/></dd>
+<dd>Effect 11: <neck gem11 amount 3/> <neck gem11 effect/></dd>
+<dd>Effect 12: <neck gem12 amount 3/> <neck gem12 effect/></dd>
+<dd>Utility: <neck utility/></dd>
+</ifnotempty>
+<ifnotempty cloak>
+<dt><b>Cloak</b></dt>
+<dd>Name: <cloak name/></dd>
+<dd>Level: <cloak level/>   Quality: <cloak quality/>   Bonus: <cloak bonus/></dd>
+<dd>Effect 1: <cloak gem1 amount 3/> <cloak gem1 effect/></dd>
+<dd>Effect 2: <cloak gem2 amount 3/> <cloak gem2 effect/></dd>
+<dd>Effect 3: <cloak gem3 amount 3/> <cloak gem3 effect/></dd>
+<dd>Effect 4: <cloak gem4 amount 3/> <cloak gem4 effect/></dd>
+<dd>Effect 5: <cloak gem5 amount 3/> <cloak gem5 effect/></dd>
+<dd>Effect 6: <cloak gem6 amount 3/> <cloak gem6 effect/></dd>
+<dd>Effect 7: <cloak gem7 amount 3/> <cloak gem7 effect/></dd>
+<dd>Effect 8: <cloak gem8 amount 3/> <cloak gem8 effect/></dd>
+<dd>Effect 9: <cloak gem9 amount 3/> <cloak gem9 effect/></dd>
+<dd>Effect 10: <cloak gem10 amount 3/> <cloak gem10 effect/></dd>
+<dd>Effect 11: <cloak gem11 amount 3/> <cloak gem11 effect/></dd>
+<dd>Effect 12: <cloak gem12 amount 3/> <cloak gem12 effect/></dd>
+<dd>Utility: <cloak utility/></dd>
+</ifnotempty>
+<ifnotempty jewel>
+<dt><b>Jewel</b></dt>
+<dd>Name: <jewel name/></dd>
+<dd>Level: <jewel level/>   Quality: <jewel quality/>   Bonus: <jewel bonus/></dd>
+<dd>Effect 1: <jewel gem1 amount 3/> <jewel gem1 effect/></dd>
+<dd>Effect 2: <jewel gem2 amount 3/> <jewel gem2 effect/></dd>
+<dd>Effect 3: <jewel gem3 amount 3/> <jewel gem3 effect/></dd>
+<dd>Effect 4: <jewel gem4 amount 3/> <jewel gem4 effect/></dd>
+<dd>Effect 5: <jewel gem5 amount 3/> <jewel gem5 effect/></dd>
+<dd>Effect 6: <jewel gem6 amount 3/> <jewel gem6 effect/></dd>
+<dd>Effect 7: <jewel gem7 amount 3/> <jewel gem7 effect/></dd>
+<dd>Effect 8: <jewel gem8 amount 3/> <jewel gem8 effect/></dd>
+<dd>Effect 9: <jewel gem9 amount 3/> <jewel gem9 effect/></dd>
+<dd>Effect 10: <jewel gem10 amount 3/> <jewel gem10 effect/></dd>
+<dd>Effect 11: <jewel gem11 amount 3/> <jewel gem11 effect/></dd>
+<dd>Effect 12: <jewel gem12 amount 3/> <jewel gem12 effect/></dd>
+<dd>Utility: <jewel utility/></dd>
+</ifnotempty>
+<ifnotempty belt>
+<dt><b>Belt</b></dt>
+<dd>Name: <belt name/></dd>
+<dd>Level: <belt level/>   Quality: <belt quality/>   Bonus: <belt bonus/></dd>
+<dd>Effect 1: <belt gem1 amount 3/> <belt gem1 effect/></dd>
+<dd>Effect 2: <belt gem2 amount 3/> <belt gem2 effect/></dd>
+<dd>Effect 3: <belt gem3 amount 3/> <belt gem3 effect/></dd>
+<dd>Effect 4: <belt gem4 amount 3/> <belt gem4 effect/></dd>
+<dd>Effect 5: <belt gem5 amount 3/> <belt gem5 effect/></dd>
+<dd>Effect 6: <belt gem6 amount 3/> <belt gem6 effect/></dd>
+<dd>Effect 7: <belt gem7 amount 3/> <belt gem7 effect/></dd>
+<dd>Effect 8: <belt gem8 amount 3/> <belt gem8 effect/></dd>
+<dd>Effect 9: <belt gem9 amount 3/> <belt gem9 effect/></dd>
+<dd>Effect 10: <belt gem10 amount 3/> <belt gem10 effect/></dd>
+<dd>Effect 11: <belt gem11 amount 3/> <belt gem11 effect/></dd>
+<dd>Effect 12: <belt gem12 amount 3/> <belt gem12 effect/></dd>
+<dd>Utility: <belt utility/></dd>
+</ifnotempty>
+<ifnotempty rring>
+<dt><b>Right Ring</b></dt>
+<dd>Name: <rring name/></dd>
+<dd>Level: <rring level/>   Quality: <rring quality/>   Bonus: <rring bonus/></dd>
+<dd>Effect 1: <rring gem1 amount 3/> <rring gem1 effect/></dd>
+<dd>Effect 2: <rring gem2 amount 3/> <rring gem2 effect/></dd>
+<dd>Effect 3: <rring gem3 amount 3/> <rring gem3 effect/></dd>
+<dd>Effect 4: <rring gem4 amount 3/> <rring gem4 effect/></dd>
+<dd>Effect 5: <rring gem5 amount 3/> <rring gem5 effect/></dd>
+<dd>Effect 6: <rring gem6 amount 3/> <rring gem6 effect/></dd>
+<dd>Effect 7: <rring gem7 amount 3/> <rring gem7 effect/></dd>
+<dd>Effect 8: <rring gem8 amount 3/> <rring gem8 effect/></dd>
+<dd>Effect 9: <rring gem9 amount 3/> <rring gem9 effect/></dd>
+<dd>Effect 10: <rring gem10 amount 3/> <rring gem10 effect/></dd>
+<dd>Effect 11: <rring gem11 amount 3/> <rring gem11 effect/></dd>
+<dd>Effect 12: <rring gem12 amount 3/> <rring gem12 effect/></dd>
+<dd>Utility: <rring utility/></dd>
+</ifnotempty>
+<ifnotempty lring>
+<dt><b>Left Ring</b></dt>
+<dd>Name: <lring name/></dd>
+<dd>Level: <lring level/>   Quality: <lring quality/>   Bonus: <lring bonus/></dd>
+<dd>Effect 1: <lring gem1 amount 3/> <lring gem1 effect/></dd>
+<dd>Effect 2: <lring gem2 amount 3/> <lring gem2 effect/></dd>
+<dd>Effect 3: <lring gem3 amount 3/> <lring gem3 effect/></dd>
+<dd>Effect 4: <lring gem4 amount 3/> <lring gem4 effect/></dd>
+<dd>Effect 5: <lring gem5 amount 3/> <lring gem5 effect/></dd>
+<dd>Effect 6: <lring gem6 amount 3/> <lring gem6 effect/></dd>
+<dd>Effect 7: <lring gem7 amount 3/> <lring gem7 effect/></dd>
+<dd>Effect 8: <lring gem8 amount 3/> <lring gem8 effect/></dd>
+<dd>Effect 9: <lring gem9 amount 3/> <lring gem9 effect/></dd>
+<dd>Effect 10: <lring gem10 amount 3/> <lring gem10 effect/></dd>
+<dd>Effect 11: <lring gem11 amount 3/> <lring gem11 effect/></dd>
+<dd>Effect 12: <lring gem12 amount 3/> <lring gem12 effect/></dd>
+<dd>Utility: <lring utility/></dd>
+</ifnotempty>
+<ifnotempty rwrist>
+<dt><b>Right Wrist</b></dt>
+<dd>Name: <rwrist name/></dd>
+<dd>Level: <rwrist level/>   Quality: <rwrist quality/>   Bonus: <rwrist bonus/></dd>
+<dd>Effect 1: <rwrist gem1 amount 3/> <rwrist gem1 effect/></dd>
+<dd>Effect 2: <rwrist gem2 amount 3/> <rwrist gem2 effect/></dd>
+<dd>Effect 3: <rwrist gem3 amount 3/> <rwrist gem3 effect/></dd>
+<dd>Effect 4: <rwrist gem4 amount 3/> <rwrist gem4 effect/></dd>
+<dd>Effect 5: <rwrist gem5 amount 3/> <rwrist gem5 effect/></dd>
+<dd>Effect 6: <rwrist gem6 amount 3/> <rwrist gem6 effect/></dd>
+<dd>Effect 7: <rwrist gem7 amount 3/> <rwrist gem7 effect/></dd>
+<dd>Effect 8: <rwrist gem8 amount 3/> <rwrist gem8 effect/></dd>
+<dd>Effect 9: <rwrist gem9 amount 3/> <rwrist gem9 effect/></dd>
+<dd>Effect 10: <rwrist gem10 amount 3/> <rwrist gem10 effect/></dd>
+<dd>Effect 11: <rwrist gem11 amount 3/> <rwrist gem11 effect/></dd>
+<dd>Effect 12: <rwrist gem12 amount 3/> <rwrist gem12 effect/></dd>
+<dd>Utility: <rwrist utility/></dd>
+</ifnotempty>
+<ifnotempty lwrist>
+<dt><b>Left Wrist</b></dt>
+<dd>Name: <lwrist name/></dd>
+<dd>Level: <lwrist level/>   Quality: <lwrist quality/>   Bonus: <lwrist bonus/></dd>
+<dd>Effect 1: <lwrist gem1 amount 3/> <lwrist gem1 effect/></dd>
+<dd>Effect 2: <lwrist gem2 amount 3/> <lwrist gem2 effect/></dd>
+<dd>Effect 3: <lwrist gem3 amount 3/> <lwrist gem3 effect/></dd>
+<dd>Effect 4: <lwrist gem4 amount 3/> <lwrist gem4 effect/></dd>
+<dd>Effect 5: <lwrist gem5 amount 3/> <lwrist gem5 effect/></dd>
+<dd>Effect 6: <lwrist gem6 amount 3/> <lwrist gem6 effect/></dd>
+<dd>Effect 7: <lwrist gem7 amount 3/> <lwrist gem7 effect/></dd>
+<dd>Effect 8: <lwrist gem8 amount 3/> <lwrist gem8 effect/></dd>
+<dd>Effect 9: <lwrist gem9 amount 3/> <lwrist gem9 effect/></dd>
+<dd>Effect 10: <lwrist gem10 amount 3/> <lwrist gem10 effect/></dd>
+<dd>Effect 11: <lwrist gem11 amount 3/> <lwrist gem11 effect/></dd>
+<dd>Effect 12: <lwrist gem12 amount 3/> <lwrist gem12 effect/></dd>
+<dd>Utility: <lwrist utility/></dd>
+</ifnotempty>
+</dl>
