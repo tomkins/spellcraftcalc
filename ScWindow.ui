@@ -1213,7 +1213,7 @@
            </property>
           </widget>
          </item>
-         <item row="2" column="7" >
+         <item row="2" column="7" rowspan="13">
           <spacer>
            <property name="orientation" >
             <enum>Qt::Horizontal</enum>
@@ -1236,7 +1236,7 @@
            </property>
           </widget>
          </item>
-         <item row="2" column="8" colspan="2" >
+         <item row="2" column="8" rowspan="12" colspan="2" >
           <spacer>
            <property name="orientation" >
             <enum>Qt::Horizontal</enum>
@@ -1310,22 +1310,6 @@
             <string/>
            </property>
           </widget>
-         </item>
-         <item row="3" column="8" rowspan="5" colspan="2" >
-          <spacer>
-           <property name="orientation" >
-            <enum>Qt::Horizontal</enum>
-           </property>
-           <property name="sizeType" >
-            <enum>QSizePolicy::MinimumExpanding</enum>
-           </property>
-           <property name="sizeHint" >
-            <size>
-             <width>5</width>
-             <height>21</height>
-            </size>
-           </property>
-          </spacer>
          </item>
          <item row="4" column="0" >
           <widget class="QLabel" name="Gem_Label_2" >
@@ -1543,7 +1527,7 @@
          <item row="7" column="8" colspan="2" >
           <widget class="QLabel" name="LabelRequirement2" >
            <property name="text" >
-            <string> (Requirement)</string>
+            <string>(Requirement)</string>
            </property>
           </widget>
          </item>
@@ -1582,22 +1566,6 @@
             <string/>
            </property>
           </widget>
-         </item>
-         <item row="8" column="8" rowspan="6" colspan="2" >
-          <spacer>
-           <property name="orientation" >
-            <enum>Qt::Horizontal</enum>
-           </property>
-           <property name="sizeType" >
-            <enum>QSizePolicy::MinimumExpanding</enum>
-           </property>
-           <property name="sizeHint" >
-            <size>
-             <width>5</width>
-             <height>21</height>
-            </size>
-           </property>
-          </spacer>
          </item>
          <item row="9" column="0" >
           <widget class="QLabel" name="Gem_Label_7" >
@@ -1771,7 +1739,23 @@
            </property>
           </spacer>
          </item>
-         <item row="8" column="3" rowspan="2" colspan="4" >
+         <item row="8" column="3" colspan="4" >
+          <spacer>
+           <property name="orientation" >
+            <enum>Qt::Vertical</enum>
+           </property>
+           <property name="sizeType" >
+            <enum>QSizePolicy::Minimum</enum>
+           </property>
+           <property name="sizeHint" >
+            <size>
+             <width>5</width>
+             <height>21</height>
+            </size>
+           </property>
+          </spacer>
+         </item>
+         <item row="9" column="3" colspan="4" >
           <spacer>
            <property name="orientation" >
             <enum>Qt::Vertical</enum>
@@ -1877,22 +1861,6 @@
            </property>
           </widget>
          </item>
-         <item row="8" column="3" colspan="4" >
-          <spacer>
-           <property name="orientation" >
-            <enum>Qt::Vertical</enum>
-           </property>
-           <property name="sizeType" >
-            <enum>QSizePolicy::Minimum</enum>
-           </property>
-           <property name="sizeHint" >
-            <size>
-             <width>5</width>
-             <height>21</height>
-            </size>
-           </property>
-          </spacer>
-         </item>
          <item row="14" column="8" >
           <layout class="QHBoxLayout" >
            <property name="margin" >
@@ -1933,7 +1901,7 @@
            </property>
            <property name="sizeHint" >
             <size>
-             <width>5</width>
+             <width>20</width>
              <height>5</height>
             </size>
            </property>
