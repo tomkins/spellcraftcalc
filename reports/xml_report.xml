@@ -5,516 +5,513 @@
 <table cellspacing="10" cellpadding="0">
 <tr>
 	<td>Str:</td>
-	<td><charattr attr="str" width="3" /></td>
+	<td><charattr attr="Strength" width="3" /></td>
 	<td>Int:</td>
-	<td><charattr attr="int" width="3" /></td>
+	<td><charattr attr="Intelligence" width="3" /></td>
 	<td>Hits:</td>
-	<td><charattr attr="hits" width="4" /></td>
+	<td><charattr attr="Hits" width="4" /></td>
 </tr>
 <tr>
 	<td>Con:</td>
-	<td><charattr attr="con" width="3" /></td>
+	<td><charattr attr="Constitution" width="3" /></td>
 	<td>Pie:</td>
-	<td><charattr attr="pie" width="3" /></td>
+	<td><charattr attr="Piety" width="3" /></td>
 	<td>Power:</td>
-	<td><charattr attr="power" width="3" /></td>
+	<td><charattr attr="Power" width="3" /></td>
 </tr>
 <tr>
 	<td>Dex:</td>
-	<td><charattr attr="dex" width="3" /></td>
+	<td><charattr attr="Dexterity" width="3" /></td>
 	<td>Cha:</td>
-	<td><charattr attr="cha" width="3" /></td>
+	<td><charattr attr="Charisma" width="3" /></td>
 </tr>
 <tr>
 	<td>Qui:</td>
-	<td><charattr attr="qui" width="3" /></td>
+	<td><charattr attr="Quickness" width="3" /></td>
 	<td>Emp:</td>
-	<td><charattr attr="emp" width="3" /></td>
+	<td><charattr attr="Empathy" width="3" /></td>
 </tr>
 </table><br />
 <center><b>Resists</b></center><hr />
 <table cellspacing="10" cellpadding="0">
 <tr>
 	<td>Body:</td>
-	<td><charattr attr="body" width="2" /></td>
+	<td><charattr attr="Body" width="2" /></td>
 	<td>Energy:</td>
-	<td><charattr attr="energy" width="2" /></td>
+	<td><charattr attr="Energy" width="2" /></td>
 	<td>Crush:</td>
-	<td><charattr attr="crush" width="3" /></td>
+	<td><charattr attr="Crush" width="3" /></td>
 </tr>
 <tr>
 	<td>Cold:</td>
-	<td><charattr attr="cold" width="2" /></td>
+	<td><charattr attr="Cold" width="2" /></td>
 	<td>Matter:</td>
-	<td><charattr attr="matter" width="2" /></td>
+	<td><charattr attr="Matter" width="2" /></td>
 	<td>Thrust:</td>
-	<td><charattr attr="thrust" width="2" /></td>
+	<td><charattr attr="Thrust" width="2" /></td>
 </tr>
 <tr>
 	<td>Heat:</td>
-	<td><charattr attr="heat" width="2" /></td>
+	<td><charattr attr="Heat" width="2" /></td>
 	<td>Spirit:</td>
-	<td><charattr attr="spirit" width="2" /></td>
+	<td><charattr attr="Spirit" width="2" /></td>
 	<td>Slash:</td>
-	<td><charattr attr="slash" width="3" /></td>
+	<td><charattr attr="Slash" width="3" /></td>
 </tr>
 </table><br />
 <center><b>Skills</b></center><hr />
-<skills /><br />
+<charattr attr="skills" /><br />
 <center><b>Focus</b></center><hr />
 <foci /><br />
 <center><b>Cap Increases</b></center><hr />
-<capbonuses /><br />
+<charattr attr="capbonuses" /><br />
 <center><b>Other Bonuses</b></center><hr />
-<otherbonuses /><br />
+<charattr attr="otherbonuses" /><br />
 <center><b>Piece Listing</b></center><hr />
 <dl>
-<ifnotempty piece="chest">
+<ifnotempty piece="Chest">
 <dt><b>Chest</b></dt>
-<ifpiece piece="chest" piecetype="pcmade">
-<dd>Imbue Points: <pieceattr piece="chest" attr="usedpoints" /> of <pieceattr piece="chest" attr="availablepoints" />   
-	Quality: <pieceattr piece="chest" attr="quality" />   
-	Overcharge: <pieceattr piece="chest" attr="overcharge" />
-</dd>
-<dd>Gem 1: <slotattr piece="chest" slot="1" attr="amount" width="2"/> <slotattr piece="chest" slot="1" attr="effect"/> - <slotattr piece="chest" slot="1" attr="quality"/> <slotattr piece="chest" slot="1" attr="name"/></dd>
-<dd>Gem 2: <slotattr piece="chest" slot="2" attr="amount" width="2"/> <slotattr piece="chest" slot="2" attr="effect"/> - <slotattr piece="chest" slot="2" attr="quality"/> <slotattr piece="chest" slot="2" attr="name"/></dd>
-<dd>Gem 3: <slotattr piece="chest" slot="3" attr="amount" width="2"/> <slotattr piece="chest" slot="3" attr="effect"/> - <slotattr piece="chest" slot="3" attr="quality"/> <slotattr piece="chest" slot="3" attr="name"/></dd>
-<dd>Gem 4: <slotattr piece="chest" slot="4" attr="amount" width="2"/> <slotattr piece="chest" slot="4" attr="effect"/> - <slotattr piece="chest" slot="4" attr="quality"/> <slotattr piece="chest" slot="4" attr="name"/></dd>
-<dd>Effect 5: <slotattr piece="chest" slot="5" attr="amount" width="2"/> <slotattr piece="chest" slot="5" attr="effect"/> - <slotattr piece="chest" slot="5" attr="name"/></dd>
-<dd>Effect 6: <slotattr piece="chest" slot="6" attr="amount" width="2"/> <slotattr piece="chest" slot="6" attr="effect"/> - <slotattr piece="chest" slot="6" attr="name"/></dd>
-<dd>Utility: <pieceattr piece="chest" attr="utility"/></dd>
+<ifpiece piece="Chest" piecetype="pcmade">
+<dd>Imbue Points: <pieceattr piece="Chest" attr="usedpoints" /> of <pieceattr piece="Chest" attr="availablepoints" /> Quality: <pieceattr piece="Chest" attr="quality" /> Overcharge: <pieceattr piece="Chest" attr="overcharge" /></dd>
+<dd>Gem 1: <slotattr piece="Chest" slot="1" attr="amount" width="2"/> <slotattr piece="Chest" slot="1" attr="effect"/> - <slotattr piece="Chest" slot="1" attr="quality"/> <slotattr piece="Chest" slot="1" attr="name"/></dd>
+<dd>Gem 2: <slotattr piece="Chest" slot="2" attr="amount" width="2"/> <slotattr piece="Chest" slot="2" attr="effect"/> - <slotattr piece="Chest" slot="2" attr="quality"/> <slotattr piece="Chest" slot="2" attr="name"/></dd>
+<dd>Gem 3: <slotattr piece="Chest" slot="3" attr="amount" width="2"/> <slotattr piece="Chest" slot="3" attr="effect"/> - <slotattr piece="Chest" slot="3" attr="quality"/> <slotattr piece="Chest" slot="3" attr="name"/></dd>
+<dd>Gem 4: <slotattr piece="Chest" slot="4" attr="amount" width="2"/> <slotattr piece="Chest" slot="4" attr="effect"/> - <slotattr piece="Chest" slot="4" attr="quality"/> <slotattr piece="Chest" slot="4" attr="name"/></dd>
+<dd>Effect 5: <slotattr piece="Chest" slot="5" attr="amount" width="2"/> <slotattr piece="Chest" slot="5" attr="effect"/> - <slotattr piece="Chest" slot="5" attr="name"/></dd>
+<dd>Effect 6: <slotattr piece="Chest" slot="6" attr="amount" width="2"/> <slotattr piece="Chest" slot="6" attr="effect"/> - <slotattr piece="Chest" slot="6" attr="name"/></dd>
+<dd>Utility: <pieceattr piece="Chest" attr="utility"/></dd>
 </ifpiece>
-<ifpiece piece="chest" piecetype="drop">
-<dd>Name: <pieceattr piece="chest" attr="name"/></dd>
-<dd>Level: <pieceattr piece="chest" attr="level"/>   Quality: <pieceattr piece="chest" attr="quality"/>   AF: <pieceattr piece="chest" attr="af"/>   Bonus: <pieceattr piece="chest" attr="bonus"/></dd>
-<dd>Effect 1: <slotattr piece="chest" slot="1" attr="amount" width="3"/> <slotattr piece="chest" slot="1" attr="effect"/></dd>
-<dd>Effect 2: <slotattr piece="chest" slot="2" attr="amount" width="3"/> <slotattr piece="chest" slot="2" attr="effect"/></dd>
-<dd>Effect 3: <slotattr piece="chest" slot="3" attr="amount" width="3"/> <slotattr piece="chest" slot="3" attr="effect"/></dd>
-<dd>Effect 4: <slotattr piece="chest" slot="4" attr="amount" width="3"/> <slotattr piece="chest" slot="4" attr="effect"/></dd>
-<dd>Effect 5: <slotattr piece="chest" slot="5" attr="amount" width="3"/> <slotattr piece="chest" slot="5" attr="effect"/></dd>
-<dd>Effect 6: <slotattr piece="chest" slot="6" attr="amount" width="3"/> <slotattr piece="chest" slot="6" attr="effect"/></dd>
-<dd>Effect 7: <slotattr piece="chest" slot="7" attr="amount" width="3"/> <slotattr piece="chest" slot="7" attr="effect"/></dd>
-<dd>Effect 8: <slotattr piece="chest" slot="8" attr="amount" width="3"/> <slotattr piece="chest" slot="8" attr="effect"/></dd>
-<dd>Effect 9: <slotattr piece="chest" slot="9" attr="amount" width="3"/> <slotattr piece="chest" slot="9" attr="effect"/></dd>
-<dd>Effect 10: <slotattr piece="chest" slot="10" attr="amount" width="3"/> <slotattr piece="chest" slot="10" attr="effect"/></dd>
-<dd>Effect 11: <slotattr piece="chest" slot="11" attr="amount" width="3"/> <slotattr piece="chest" slot="11" attr="effect"/></dd>
-<dd>Effect 12: <slotattr piece="chest" slot="12" attr="amount" width="3"/> <slotattr piece="chest" slot="12" attr="effect"/></dd>
-<dd>Utility: <pieceattr piece="chest" attr="utility"/></dd>
+<ifpiece piece="Chest" piecetype="drop">
+<dd>Name: <pieceattr piece="Chest" attr="name"/></dd>
+<dd>Level: <pieceattr piece="Chest" attr="level"/>   Quality: <pieceattr piece="Chest" attr="quality"/>   AF: <pieceattr piece="Chest" attr="af"/>   Bonus: <pieceattr piece="Chest" attr="bonus"/></dd>
+<dd>Effect 1: <slotattr piece="Chest" slot="1" attr="amount" width="3"/> <slotattr piece="Chest" slot="1" attr="effect"/></dd>
+<dd>Effect 2: <slotattr piece="Chest" slot="2" attr="amount" width="3"/> <slotattr piece="Chest" slot="2" attr="effect"/></dd>
+<dd>Effect 3: <slotattr piece="Chest" slot="3" attr="amount" width="3"/> <slotattr piece="Chest" slot="3" attr="effect"/></dd>
+<dd>Effect 4: <slotattr piece="Chest" slot="4" attr="amount" width="3"/> <slotattr piece="Chest" slot="4" attr="effect"/></dd>
+<dd>Effect 5: <slotattr piece="Chest" slot="5" attr="amount" width="3"/> <slotattr piece="Chest" slot="5" attr="effect"/></dd>
+<dd>Effect 6: <slotattr piece="Chest" slot="6" attr="amount" width="3"/> <slotattr piece="Chest" slot="6" attr="effect"/></dd>
+<dd>Effect 7: <slotattr piece="Chest" slot="7" attr="amount" width="3"/> <slotattr piece="Chest" slot="7" attr="effect"/></dd>
+<dd>Effect 8: <slotattr piece="Chest" slot="8" attr="amount" width="3"/> <slotattr piece="Chest" slot="8" attr="effect"/></dd>
+<dd>Effect 9: <slotattr piece="Chest" slot="9" attr="amount" width="3"/> <slotattr piece="Chest" slot="9" attr="effect"/></dd>
+<dd>Effect 10: <slotattr piece="Chest" slot="10" attr="amount" width="3"/> <slotattr piece="Chest" slot="10" attr="effect"/></dd>
+<dd>Effect 11: <slotattr piece="Chest" slot="11" attr="amount" width="3"/> <slotattr piece="Chest" slot="11" attr="effect"/></dd>
+<dd>Effect 12: <slotattr piece="Chest" slot="12" attr="amount" width="3"/> <slotattr piece="Chest" slot="12" attr="effect"/></dd>
+<dd>Utility: <pieceattr piece="Chest" attr="utility"/></dd>
 </ifpiece>
 </ifnotempty>
-<ifnotempty piece="arms">
+<ifnotempty piece="Arms">
 <dt><b>Arms</b></dt>
-<ifpiece piece="arms" piecetype="pcmade">
-<dd>Imbue Points: <pieceattr piece="arms" attr="usedpoints"/> of <pieceattr piece="arms" attr="availablepoints"/>   Quality: <pieceattr piece="arms" attr="quality"/>   Overcharge: <pieceattr piece="arms" attr="overcharge"/></dd>
-<dd>Gem 1: <slotattr piece="arms" slot="1" attr="amount" width="2"/> <slotattr piece="arms" slot="1" attr="effect"/> - <slotattr piece="arms" slot="1" attr="quality"/> <slotattr piece="arms" slot="1" attr="name"/></dd>
-<dd>Gem 2: <slotattr piece="arms" slot="2" attr="amount" width="2"/> <slotattr piece="arms" slot="2" attr="effect"/> - <slotattr piece="arms" slot="2" attr="quality"/> <slotattr piece="arms" slot="2" attr="name"/></dd>
-<dd>Gem 3: <slotattr piece="arms" slot="3" attr="amount" width="2"/> <slotattr piece="arms" slot="3" attr="effect"/> - <slotattr piece="arms" slot="3" attr="quality"/> <slotattr piece="arms" slot="3" attr="name"/></dd>
-<dd>Gem 4: <slotattr piece="arms" slot="4" attr="amount" width="2"/> <slotattr piece="arms" slot="4" attr="effect"/> - <slotattr piece="arms" slot="4" attr="quality"/> <slotattr piece="arms" slot="4" attr="name"/></dd>
-<dd>Effect 5: <slotattr piece="arms" slot="5" attr="amount" width="2"/> <slotattr piece="arms" slot="5" attr="effect"/> - <slotattr piece="arms" slot="5" attr="name"/></dd>
-<dd>Effect 6: <slotattr piece="arms" slot="6" attr="amount" width="2"/> <slotattr piece="arms" slot="6" attr="effect"/> - <slotattr piece="arms" slot="6" attr="name"/></dd>
-<dd>Utility: <pieceattr piece="arms" attr="utility"/></dd>
+<ifpiece piece="Arms" piecetype="pcmade">
+<dd>Imbue Points: <pieceattr piece="Arms" attr="usedpoints"/> of <pieceattr piece="Arms" attr="availablepoints"/>   Quality: <pieceattr piece="Arms" attr="quality"/>   Overcharge: <pieceattr piece="Arms" attr="overcharge"/></dd>
+<dd>Gem 1: <slotattr piece="Arms" slot="1" attr="amount" width="2"/> <slotattr piece="Arms" slot="1" attr="effect"/> - <slotattr piece="Arms" slot="1" attr="quality"/> <slotattr piece="Arms" slot="1" attr="name"/></dd>
+<dd>Gem 2: <slotattr piece="Arms" slot="2" attr="amount" width="2"/> <slotattr piece="Arms" slot="2" attr="effect"/> - <slotattr piece="Arms" slot="2" attr="quality"/> <slotattr piece="Arms" slot="2" attr="name"/></dd>
+<dd>Gem 3: <slotattr piece="Arms" slot="3" attr="amount" width="2"/> <slotattr piece="Arms" slot="3" attr="effect"/> - <slotattr piece="Arms" slot="3" attr="quality"/> <slotattr piece="Arms" slot="3" attr="name"/></dd>
+<dd>Gem 4: <slotattr piece="Arms" slot="4" attr="amount" width="2"/> <slotattr piece="Arms" slot="4" attr="effect"/> - <slotattr piece="Arms" slot="4" attr="quality"/> <slotattr piece="Arms" slot="4" attr="name"/></dd>
+<dd>Effect 5: <slotattr piece="Arms" slot="5" attr="amount" width="2"/> <slotattr piece="Arms" slot="5" attr="effect"/> - <slotattr piece="Arms" slot="5" attr="name"/></dd>
+<dd>Effect 6: <slotattr piece="Arms" slot="6" attr="amount" width="2"/> <slotattr piece="Arms" slot="6" attr="effect"/> - <slotattr piece="Arms" slot="6" attr="name"/></dd>
+<dd>Utility: <pieceattr piece="Arms" attr="utility"/></dd>
 </ifpiece>
-<ifpiece piece="arms" piecetype="drop">
-<dd>Name: <pieceattr piece="arms" attr="name"/></dd>
-<dd>Level: <pieceattr piece="arms" attr="level"/>   Quality: <pieceattr piece="arms" attr="quality"/>   AF: <pieceattr piece="arms" attr="af"/>   Bonus: <pieceattr piece="arms" attr="bonus"/></dd>
-<dd>Effect 1: <slotattr piece="arms" slot="1" attr="amount" width="3"/> <slotattr piece="arms" slot="1" attr="effect"/></dd>
-<dd>Effect 2: <slotattr piece="arms" slot="2" attr="amount" width="3"/> <slotattr piece="arms" slot="2" attr="effect"/></dd>
-<dd>Effect 3: <slotattr piece="arms" slot="3" attr="amount" width="3"/> <slotattr piece="arms" slot="3" attr="effect"/></dd>
-<dd>Effect 4: <slotattr piece="arms" slot="4" attr="amount" width="3"/> <slotattr piece="arms" slot="4" attr="effect"/></dd>
-<dd>Effect 5: <slotattr piece="arms" slot="5" attr="amount" width="3"/> <slotattr piece="arms" slot="5" attr="effect"/></dd>
-<dd>Effect 6: <slotattr piece="arms" slot="6" attr="amount" width="3"/> <slotattr piece="arms" slot="6" attr="effect"/></dd>
-<dd>Effect 7: <slotattr piece="arms" slot="7" attr="amount" width="3"/> <slotattr piece="arms" slot="7" attr="effect"/></dd>
-<dd>Effect 8: <slotattr piece="arms" slot="8" attr="amount" width="3"/> <slotattr piece="arms" slot="8" attr="effect"/></dd>
-<dd>Effect 9: <slotattr piece="arms" slot="9" attr="amount" width="3"/> <slotattr piece="arms" slot="9" attr="effect"/></dd>
-<dd>Effect 10: <slotattr piece="arms" slot="10" attr="amount" width="3"/> <slotattr piece="arms" slot="10" attr="effect"/></dd>
-<dd>Effect 11: <slotattr piece="arms" slot="11" attr="amount" width="3"/> <slotattr piece="arms" slot="11" attr="effect"/></dd>
-<dd>Effect 12: <slotattr piece="arms" slot="12" attr="amount" width="3"/> <slotattr piece="arms" slot="12" attr="effect"/></dd>
-<dd>Utility: <pieceattr piece="arms" attr="utility"/></dd>
+<ifpiece piece="Arms" piecetype="drop">
+<dd>Name: <pieceattr piece="Arms" attr="name"/></dd>
+<dd>Level: <pieceattr piece="Arms" attr="level"/>   Quality: <pieceattr piece="Arms" attr="quality"/>   AF: <pieceattr piece="Arms" attr="af"/>   Bonus: <pieceattr piece="Arms" attr="bonus"/></dd>
+<dd>Effect 1: <slotattr piece="Arms" slot="1" attr="amount" width="3"/> <slotattr piece="Arms" slot="1" attr="effect"/></dd>
+<dd>Effect 2: <slotattr piece="Arms" slot="2" attr="amount" width="3"/> <slotattr piece="Arms" slot="2" attr="effect"/></dd>
+<dd>Effect 3: <slotattr piece="Arms" slot="3" attr="amount" width="3"/> <slotattr piece="Arms" slot="3" attr="effect"/></dd>
+<dd>Effect 4: <slotattr piece="Arms" slot="4" attr="amount" width="3"/> <slotattr piece="Arms" slot="4" attr="effect"/></dd>
+<dd>Effect 5: <slotattr piece="Arms" slot="5" attr="amount" width="3"/> <slotattr piece="Arms" slot="5" attr="effect"/></dd>
+<dd>Effect 6: <slotattr piece="Arms" slot="6" attr="amount" width="3"/> <slotattr piece="Arms" slot="6" attr="effect"/></dd>
+<dd>Effect 7: <slotattr piece="Arms" slot="7" attr="amount" width="3"/> <slotattr piece="Arms" slot="7" attr="effect"/></dd>
+<dd>Effect 8: <slotattr piece="Arms" slot="8" attr="amount" width="3"/> <slotattr piece="Arms" slot="8" attr="effect"/></dd>
+<dd>Effect 9: <slotattr piece="Arms" slot="9" attr="amount" width="3"/> <slotattr piece="Arms" slot="9" attr="effect"/></dd>
+<dd>Effect 10: <slotattr piece="Arms" slot="10" attr="amount" width="3"/> <slotattr piece="Arms" slot="10" attr="effect"/></dd>
+<dd>Effect 11: <slotattr piece="Arms" slot="11" attr="amount" width="3"/> <slotattr piece="Arms" slot="11" attr="effect"/></dd>
+<dd>Effect 12: <slotattr piece="Arms" slot="12" attr="amount" width="3"/> <slotattr piece="Arms" slot="12" attr="effect"/></dd>
+<dd>Utility: <pieceattr piece="Arms" attr="utility"/></dd>
 </ifpiece>
 </ifnotempty>
-<ifnotempty piece="head">
+<ifnotempty piece="Head">
 <dt><b>Head</b></dt>
-<ifpiece piece="head" piecetype="pcmade">
-<dd>Imbue Points: <pieceattr piece="head" attr="usedpoints"/> of <pieceattr piece="head" attr="availablepoints"/>   Quality: <pieceattr piece="head" attr="quality"/>   Overcharge: <pieceattr piece="head" attr="overcharge"/></dd>
-<dd>Gem 1: <slotattr piece="head" slot="1" attr="amount" width="2"/> <slotattr piece="head" slot="1" attr="effect"/> - <slotattr piece="head" slot="1" attr="quality"/> <slotattr piece="head" slot="1" attr="name"/></dd>
-<dd>Gem 2: <slotattr piece="head" slot="2" attr="amount" width="2"/> <slotattr piece="head" slot="2" attr="effect"/> - <slotattr piece="head" slot="2" attr="quality"/> <slotattr piece="head" slot="2" attr="name"/></dd>
-<dd>Gem 3: <slotattr piece="head" slot="3" attr="amount" width="2"/> <slotattr piece="head" slot="3" attr="effect"/> - <slotattr piece="head" slot="3" attr="quality"/> <slotattr piece="head" slot="3" attr="name"/></dd>
-<dd>Gem 4: <slotattr piece="head" slot="4" attr="amount" width="2"/> <slotattr piece="head" slot="4" attr="effect"/> - <slotattr piece="head" slot="4" attr="quality"/> <slotattr piece="head" slot="4" attr="name"/></dd>
-<dd>Effect 5: <slotattr piece="head" slot="5" attr="amount" width="2"/> <slotattr piece="head" slot="5" attr="effect"/> - <slotattr piece="head" slot="5" attr="name"/></dd>
-<dd>Effect 6: <slotattr piece="head" slot="6" attr="amount" width="2"/> <slotattr piece="head" slot="6" attr="effect"/> - <slotattr piece="head" slot="6" attr="name"/></dd>
-<dd>Utility: <pieceattr piece="head" attr="utility"/></dd>
+<ifpiece piece="Head" piecetype="pcmade">
+<dd>Imbue Points: <pieceattr piece="Head" attr="usedpoints"/> of <pieceattr piece="Head" attr="availablepoints"/>   Quality: <pieceattr piece="Head" attr="quality"/>   Overcharge: <pieceattr piece="Head" attr="overcharge"/></dd>
+<dd>Gem 1: <slotattr piece="Head" slot="1" attr="amount" width="2"/> <slotattr piece="Head" slot="1" attr="effect"/> - <slotattr piece="Head" slot="1" attr="quality"/> <slotattr piece="Head" slot="1" attr="name"/></dd>
+<dd>Gem 2: <slotattr piece="Head" slot="2" attr="amount" width="2"/> <slotattr piece="Head" slot="2" attr="effect"/> - <slotattr piece="Head" slot="2" attr="quality"/> <slotattr piece="Head" slot="2" attr="name"/></dd>
+<dd>Gem 3: <slotattr piece="Head" slot="3" attr="amount" width="2"/> <slotattr piece="Head" slot="3" attr="effect"/> - <slotattr piece="Head" slot="3" attr="quality"/> <slotattr piece="Head" slot="3" attr="name"/></dd>
+<dd>Gem 4: <slotattr piece="Head" slot="4" attr="amount" width="2"/> <slotattr piece="Head" slot="4" attr="effect"/> - <slotattr piece="Head" slot="4" attr="quality"/> <slotattr piece="Head" slot="4" attr="name"/></dd>
+<dd>Effect 5: <slotattr piece="Head" slot="5" attr="amount" width="2"/> <slotattr piece="Head" slot="5" attr="effect"/> - <slotattr piece="Head" slot="5" attr="name"/></dd>
+<dd>Effect 6: <slotattr piece="Head" slot="6" attr="amount" width="2"/> <slotattr piece="Head" slot="6" attr="effect"/> - <slotattr piece="Head" slot="6" attr="name"/></dd>
+<dd>Utility: <pieceattr piece="Head" attr="utility"/></dd>
 </ifpiece>
-<ifpiece piece="head" piecetype="drop">
-<dd>Name: <pieceattr piece="head" attr="name"/></dd>
-<dd>Level: <pieceattr piece="head" attr="level"/>   Quality: <pieceattr piece="head" attr="quality"/>   AF: <pieceattr piece="head" attr="af"/>   Bonus: <pieceattr piece="head" attr="bonus"/></dd>
-<dd>Effect 1: <slotattr piece="head" slot="1" attr="amount" width="3"/> <slotattr piece="head" slot="1" attr="effect"/></dd>
-<dd>Effect 2: <slotattr piece="head" slot="2" attr="amount" width="3"/> <slotattr piece="head" slot="2" attr="effect"/></dd>
-<dd>Effect 3: <slotattr piece="head" slot="3" attr="amount" width="3"/> <slotattr piece="head" slot="3" attr="effect"/></dd>
-<dd>Effect 4: <slotattr piece="head" slot="4" attr="amount" width="3"/> <slotattr piece="head" slot="4" attr="effect"/></dd>
-<dd>Effect 5: <slotattr piece="head" slot="5" attr="amount" width="3"/> <slotattr piece="head" slot="5" attr="effect"/></dd>
-<dd>Effect 6: <slotattr piece="head" slot="6" attr="amount" width="3"/> <slotattr piece="head" slot="6" attr="effect"/></dd>
-<dd>Effect 7: <slotattr piece="head" slot="7" attr="amount" width="3"/> <slotattr piece="head" slot="7" attr="effect"/></dd>
-<dd>Effect 8: <slotattr piece="head" slot="8" attr="amount" width="3"/> <slotattr piece="head" slot="8" attr="effect"/></dd>
-<dd>Effect 9: <slotattr piece="head" slot="9" attr="amount" width="3"/> <slotattr piece="head" slot="9" attr="effect"/></dd>
-<dd>Effect 10: <slotattr piece="head" slot="10" attr="amount" width="3"/> <slotattr piece="head" slot="10" attr="effect"/></dd>
-<dd>Effect 11: <slotattr piece="head" slot="11" attr="amount" width="3"/> <slotattr piece="head" slot="11" attr="effect"/></dd>
-<dd>Effect 12: <slotattr piece="head" slot="12" attr="amount" width="3"/> <slotattr piece="head" slot="12" attr="effect"/></dd>
-<dd>Utility: <pieceattr piece="head" attr="utility"/></dd>
+<ifpiece piece="Head" piecetype="drop">
+<dd>Name: <pieceattr piece="Head" attr="name"/></dd>
+<dd>Level: <pieceattr piece="Head" attr="level"/>   Quality: <pieceattr piece="Head" attr="quality"/>   AF: <pieceattr piece="Head" attr="af"/>   Bonus: <pieceattr piece="Head" attr="bonus"/></dd>
+<dd>Effect 1: <slotattr piece="Head" slot="1" attr="amount" width="3"/> <slotattr piece="Head" slot="1" attr="effect"/></dd>
+<dd>Effect 2: <slotattr piece="Head" slot="2" attr="amount" width="3"/> <slotattr piece="Head" slot="2" attr="effect"/></dd>
+<dd>Effect 3: <slotattr piece="Head" slot="3" attr="amount" width="3"/> <slotattr piece="Head" slot="3" attr="effect"/></dd>
+<dd>Effect 4: <slotattr piece="Head" slot="4" attr="amount" width="3"/> <slotattr piece="Head" slot="4" attr="effect"/></dd>
+<dd>Effect 5: <slotattr piece="Head" slot="5" attr="amount" width="3"/> <slotattr piece="Head" slot="5" attr="effect"/></dd>
+<dd>Effect 6: <slotattr piece="Head" slot="6" attr="amount" width="3"/> <slotattr piece="Head" slot="6" attr="effect"/></dd>
+<dd>Effect 7: <slotattr piece="Head" slot="7" attr="amount" width="3"/> <slotattr piece="Head" slot="7" attr="effect"/></dd>
+<dd>Effect 8: <slotattr piece="Head" slot="8" attr="amount" width="3"/> <slotattr piece="Head" slot="8" attr="effect"/></dd>
+<dd>Effect 9: <slotattr piece="Head" slot="9" attr="amount" width="3"/> <slotattr piece="Head" slot="9" attr="effect"/></dd>
+<dd>Effect 10: <slotattr piece="Head" slot="10" attr="amount" width="3"/> <slotattr piece="Head" slot="10" attr="effect"/></dd>
+<dd>Effect 11: <slotattr piece="Head" slot="11" attr="amount" width="3"/> <slotattr piece="Head" slot="11" attr="effect"/></dd>
+<dd>Effect 12: <slotattr piece="Head" slot="12" attr="amount" width="3"/> <slotattr piece="Head" slot="12" attr="effect"/></dd>
+<dd>Utility: <pieceattr piece="Head" attr="utility"/></dd>
 </ifpiece>
 </ifnotempty>
-<ifnotempty piece="legs">
+<ifnotempty piece="Legs">
 <dt><b>Legs</b></dt>
-<ifpiece piece="legs" piecetype="pcmade">
-<dd>Imbue Points: <pieceattr piece="legs" attr="usedpoints"/> of <pieceattr piece="legs" attr="availablepoints"/>   Quality: <pieceattr piece="legs" attr="quality"/>   Overcharge: <pieceattr piece="legs" attr="overcharge"/></dd>
-<dd>Gem 1: <slotattr piece="legs" slot="1" attr="amount" width="2"/> <slotattr piece="legs" slot="1" attr="effect"/> - <slotattr piece="legs" slot="1" attr="quality"/> <slotattr piece="legs" slot="1" attr="name"/></dd>
-<dd>Gem 2: <slotattr piece="legs" slot="2" attr="amount" width="2"/> <slotattr piece="legs" slot="2" attr="effect"/> - <slotattr piece="legs" slot="2" attr="quality"/> <slotattr piece="legs" slot="2" attr="name"/></dd>
-<dd>Gem 3: <slotattr piece="legs" slot="3" attr="amount" width="2"/> <slotattr piece="legs" slot="3" attr="effect"/> - <slotattr piece="legs" slot="3" attr="quality"/> <slotattr piece="legs" slot="3" attr="name"/></dd>
-<dd>Gem 4: <slotattr piece="legs" slot="4" attr="amount" width="2"/> <slotattr piece="legs" slot="4" attr="effect"/> - <slotattr piece="legs" slot="4" attr="quality"/> <slotattr piece="legs" slot="4" attr="name"/></dd>
-<dd>Effect 5: <slotattr piece="legs" slot="5" attr="amount" width="2"/> <slotattr piece="legs" slot="5" attr="effect"/> - <slotattr piece="legs" slot="5" attr="name"/></dd>
-<dd>Effect 6: <slotattr piece="legs" slot="6" attr="amount" width="2"/> <slotattr piece="legs" slot="6" attr="effect"/> - <slotattr piece="legs" slot="6" attr="name"/></dd>
-<dd>Utility: <pieceattr piece="legs" attr="utility"/></dd>
+<ifpiece piece="Legs" piecetype="pcmade">
+<dd>Imbue Points: <pieceattr piece="Legs" attr="usedpoints"/> of <pieceattr piece="Legs" attr="availablepoints"/>   Quality: <pieceattr piece="Legs" attr="quality"/>   Overcharge: <pieceattr piece="Legs" attr="overcharge"/></dd>
+<dd>Gem 1: <slotattr piece="Legs" slot="1" attr="amount" width="2"/> <slotattr piece="Legs" slot="1" attr="effect"/> - <slotattr piece="Legs" slot="1" attr="quality"/> <slotattr piece="Legs" slot="1" attr="name"/></dd>
+<dd>Gem 2: <slotattr piece="Legs" slot="2" attr="amount" width="2"/> <slotattr piece="Legs" slot="2" attr="effect"/> - <slotattr piece="Legs" slot="2" attr="quality"/> <slotattr piece="Legs" slot="2" attr="name"/></dd>
+<dd>Gem 3: <slotattr piece="Legs" slot="3" attr="amount" width="2"/> <slotattr piece="Legs" slot="3" attr="effect"/> - <slotattr piece="Legs" slot="3" attr="quality"/> <slotattr piece="Legs" slot="3" attr="name"/></dd>
+<dd>Gem 4: <slotattr piece="Legs" slot="4" attr="amount" width="2"/> <slotattr piece="Legs" slot="4" attr="effect"/> - <slotattr piece="Legs" slot="4" attr="quality"/> <slotattr piece="Legs" slot="4" attr="name"/></dd>
+<dd>Effect 5: <slotattr piece="Legs" slot="5" attr="amount" width="2"/> <slotattr piece="Legs" slot="5" attr="effect"/> - <slotattr piece="Legs" slot="5" attr="name"/></dd>
+<dd>Effect 6: <slotattr piece="Legs" slot="6" attr="amount" width="2"/> <slotattr piece="Legs" slot="6" attr="effect"/> - <slotattr piece="Legs" slot="6" attr="name"/></dd>
+<dd>Utility: <pieceattr piece="Legs" attr="utility"/></dd>
 </ifpiece>
-<ifpiece piece="legs" piecetype="drop">
-<dd>Name: <pieceattr piece="legs" attr="name"/></dd>
-<dd>Level: <pieceattr piece="legs" attr="level"/>   Quality: <pieceattr piece="legs" attr="quality"/>   AF: <pieceattr piece="legs" attr="af"/>   Bonus: <pieceattr piece="legs" attr="bonus"/></dd>
-<dd>Effect 1: <slotattr piece="legs" slot="1" attr="amount" width="3"/> <slotattr piece="legs" slot="1" attr="effect"/></dd>
-<dd>Effect 2: <slotattr piece="legs" slot="2" attr="amount" width="3"/> <slotattr piece="legs" slot="2" attr="effect"/></dd>
-<dd>Effect 3: <slotattr piece="legs" slot="3" attr="amount" width="3"/> <slotattr piece="legs" slot="3" attr="effect"/></dd>
-<dd>Effect 4: <slotattr piece="legs" slot="4" attr="amount" width="3"/> <slotattr piece="legs" slot="4" attr="effect"/></dd>
-<dd>Effect 5: <slotattr piece="legs" slot="5" attr="amount" width="3"/> <slotattr piece="legs" slot="5" attr="effect"/></dd>
-<dd>Effect 6: <slotattr piece="legs" slot="6" attr="amount" width="3"/> <slotattr piece="legs" slot="6" attr="effect"/></dd>
-<dd>Effect 7: <slotattr piece="legs" slot="7" attr="amount" width="3"/> <slotattr piece="legs" slot="7" attr="effect"/></dd>
-<dd>Effect 8: <slotattr piece="legs" slot="8" attr="amount" width="3"/> <slotattr piece="legs" slot="8" attr="effect"/></dd>
-<dd>Effect 9: <slotattr piece="legs" slot="9" attr="amount" width="3"/> <slotattr piece="legs" slot="9" attr="effect"/></dd>
-<dd>Effect 10: <slotattr piece="legs" slot="10" attr="amount" width="3"/> <slotattr piece="legs" slot="10" attr="effect"/></dd>
-<dd>Effect 11: <slotattr piece="legs" slot="11" attr="amount" width="3"/> <slotattr piece="legs" slot="11" attr="effect"/></dd>
-<dd>Effect 12: <slotattr piece="legs" slot="12" attr="amount" width="3"/> <slotattr piece="legs" slot="12" attr="effect"/></dd>
-<dd>Utility: <pieceattr piece="legs" attr="utility"/></dd>
+<ifpiece piece="Legs" piecetype="drop">
+<dd>Name: <pieceattr piece="Legs" attr="name"/></dd>
+<dd>Level: <pieceattr piece="Legs" attr="level"/>   Quality: <pieceattr piece="Legs" attr="quality"/>   AF: <pieceattr piece="Legs" attr="af"/>   Bonus: <pieceattr piece="Legs" attr="bonus"/></dd>
+<dd>Effect 1: <slotattr piece="Legs" slot="1" attr="amount" width="3"/> <slotattr piece="Legs" slot="1" attr="effect"/></dd>
+<dd>Effect 2: <slotattr piece="Legs" slot="2" attr="amount" width="3"/> <slotattr piece="Legs" slot="2" attr="effect"/></dd>
+<dd>Effect 3: <slotattr piece="Legs" slot="3" attr="amount" width="3"/> <slotattr piece="Legs" slot="3" attr="effect"/></dd>
+<dd>Effect 4: <slotattr piece="Legs" slot="4" attr="amount" width="3"/> <slotattr piece="Legs" slot="4" attr="effect"/></dd>
+<dd>Effect 5: <slotattr piece="Legs" slot="5" attr="amount" width="3"/> <slotattr piece="Legs" slot="5" attr="effect"/></dd>
+<dd>Effect 6: <slotattr piece="Legs" slot="6" attr="amount" width="3"/> <slotattr piece="Legs" slot="6" attr="effect"/></dd>
+<dd>Effect 7: <slotattr piece="Legs" slot="7" attr="amount" width="3"/> <slotattr piece="Legs" slot="7" attr="effect"/></dd>
+<dd>Effect 8: <slotattr piece="Legs" slot="8" attr="amount" width="3"/> <slotattr piece="Legs" slot="8" attr="effect"/></dd>
+<dd>Effect 9: <slotattr piece="Legs" slot="9" attr="amount" width="3"/> <slotattr piece="Legs" slot="9" attr="effect"/></dd>
+<dd>Effect 10: <slotattr piece="Legs" slot="10" attr="amount" width="3"/> <slotattr piece="Legs" slot="10" attr="effect"/></dd>
+<dd>Effect 11: <slotattr piece="Legs" slot="11" attr="amount" width="3"/> <slotattr piece="Legs" slot="11" attr="effect"/></dd>
+<dd>Effect 12: <slotattr piece="Legs" slot="12" attr="amount" width="3"/> <slotattr piece="Legs" slot="12" attr="effect"/></dd>
+<dd>Utility: <pieceattr piece="Legs" attr="utility"/></dd>
 </ifpiece>
 </ifnotempty>
-<ifnotempty piece="hands">
+<ifnotempty piece="Hands">
 <dt><b>Hands</b></dt>
-<ifpiece piece="hands" piecetype="pcmade">
-<dd>Imbue Points: <pieceattr piece="hands" attr="usedpoints"/> of <pieceattr piece="hands" attr="availablepoints"/>   Quality: <pieceattr piece="hands" attr="quality"/>   Overcharge: <pieceattr piece="hands" attr="overcharge"/></dd>
-<dd>Gem 1: <slotattr piece="hands" slot="1" attr="amount" width="2"/> <slotattr piece="hands" slot="1" attr="effect"/> - <slotattr piece="hands" slot="1" attr="quality"/> <slotattr piece="hands" slot="1" attr="name"/></dd>
-<dd>Gem 2: <slotattr piece="hands" slot="2" attr="amount" width="2"/> <slotattr piece="hands" slot="2" attr="effect"/> - <slotattr piece="hands" slot="2" attr="quality"/> <slotattr piece="hands" slot="2" attr="name"/></dd>
-<dd>Gem 3: <slotattr piece="hands" slot="3" attr="amount" width="2"/> <slotattr piece="hands" slot="3" attr="effect"/> - <slotattr piece="hands" slot="3" attr="quality"/> <slotattr piece="hands" slot="3" attr="name"/></dd>
-<dd>Gem 4: <slotattr piece="hands" slot="4" attr="amount" width="2"/> <slotattr piece="hands" slot="4" attr="effect"/> - <slotattr piece="hands" slot="4" attr="quality"/> <slotattr piece="hands" slot="4" attr="name"/></dd>
-<dd>Effect 5: <slotattr piece="hands" slot="5" attr="amount" width="2"/> <slotattr piece="hands" slot="5" attr="effect"/> - <slotattr piece="hands" slot="5" attr="name"/></dd>
-<dd>Effect 6: <slotattr piece="hands" slot="6" attr="amount" width="2"/> <slotattr piece="hands" slot="6" attr="effect"/> - <slotattr piece="hands" slot="6" attr="name"/></dd>
-<dd>Utility: <pieceattr piece="hands" attr="utility"/></dd>
+<ifpiece piece="Hands" piecetype="pcmade">
+<dd>Imbue Points: <pieceattr piece="Hands" attr="usedpoints"/> of <pieceattr piece="Hands" attr="availablepoints"/>   Quality: <pieceattr piece="Hands" attr="quality"/>   Overcharge: <pieceattr piece="Hands" attr="overcharge"/></dd>
+<dd>Gem 1: <slotattr piece="Hands" slot="1" attr="amount" width="2"/> <slotattr piece="Hands" slot="1" attr="effect"/> - <slotattr piece="Hands" slot="1" attr="quality"/> <slotattr piece="Hands" slot="1" attr="name"/></dd>
+<dd>Gem 2: <slotattr piece="Hands" slot="2" attr="amount" width="2"/> <slotattr piece="Hands" slot="2" attr="effect"/> - <slotattr piece="Hands" slot="2" attr="quality"/> <slotattr piece="Hands" slot="2" attr="name"/></dd>
+<dd>Gem 3: <slotattr piece="Hands" slot="3" attr="amount" width="2"/> <slotattr piece="Hands" slot="3" attr="effect"/> - <slotattr piece="Hands" slot="3" attr="quality"/> <slotattr piece="Hands" slot="3" attr="name"/></dd>
+<dd>Gem 4: <slotattr piece="Hands" slot="4" attr="amount" width="2"/> <slotattr piece="Hands" slot="4" attr="effect"/> - <slotattr piece="Hands" slot="4" attr="quality"/> <slotattr piece="Hands" slot="4" attr="name"/></dd>
+<dd>Effect 5: <slotattr piece="Hands" slot="5" attr="amount" width="2"/> <slotattr piece="Hands" slot="5" attr="effect"/> - <slotattr piece="Hands" slot="5" attr="name"/></dd>
+<dd>Effect 6: <slotattr piece="Hands" slot="6" attr="amount" width="2"/> <slotattr piece="Hands" slot="6" attr="effect"/> - <slotattr piece="Hands" slot="6" attr="name"/></dd>
+<dd>Utility: <pieceattr piece="Hands" attr="utility"/></dd>
 </ifpiece>
-<ifpiece piece="hands" piecetype="drop">
-<dd>Name: <pieceattr piece="hands" attr="name"/></dd>
-<dd>Level: <pieceattr piece="hands" attr="level"/>   Quality: <pieceattr piece="hands" attr="quality"/>   AF: <pieceattr piece="hands" attr="af"/>   Bonus: <pieceattr piece="hands" attr="bonus"/></dd>
-<dd>Effect 1: <slotattr piece="hands" slot="1" attr="amount" width="3"/> <slotattr piece="hands" slot="1" attr="effect"/></dd>
-<dd>Effect 2: <slotattr piece="hands" slot="2" attr="amount" width="3"/> <slotattr piece="hands" slot="2" attr="effect"/></dd>
-<dd>Effect 3: <slotattr piece="hands" slot="3" attr="amount" width="3"/> <slotattr piece="hands" slot="3" attr="effect"/></dd>
-<dd>Effect 4: <slotattr piece="hands" slot="4" attr="amount" width="3"/> <slotattr piece="hands" slot="4" attr="effect"/></dd>
-<dd>Effect 5: <slotattr piece="hands" slot="5" attr="amount" width="3"/> <slotattr piece="hands" slot="5" attr="effect"/></dd>
-<dd>Effect 6: <slotattr piece="hands" slot="6" attr="amount" width="3"/> <slotattr piece="hands" slot="6" attr="effect"/></dd>
-<dd>Effect 7: <slotattr piece="hands" slot="7" attr="amount" width="3"/> <slotattr piece="hands" slot="7" attr="effect"/></dd>
-<dd>Effect 8: <slotattr piece="hands" slot="8" attr="amount" width="3"/> <slotattr piece="hands" slot="8" attr="effect"/></dd>
-<dd>Effect 9: <slotattr piece="hands" slot="9" attr="amount" width="3"/> <slotattr piece="hands" slot="9" attr="effect"/></dd>
-<dd>Effect 10: <slotattr piece="hands" slot="10" attr="amount" width="3"/> <slotattr piece="hands" slot="10" attr="effect"/></dd>
-<dd>Effect 11: <slotattr piece="hands" slot="11" attr="amount" width="3"/> <slotattr piece="hands" slot="11" attr="effect"/></dd>
-<dd>Effect 12: <slotattr piece="hands" slot="12" attr="amount" width="3"/> <slotattr piece="hands" slot="12" attr="effect"/></dd>
-<dd>Utility: <pieceattr piece="hands" attr="utility"/></dd>
+<ifpiece piece="Hands" piecetype="drop">
+<dd>Name: <pieceattr piece="Hands" attr="name"/></dd>
+<dd>Level: <pieceattr piece="Hands" attr="level"/>   Quality: <pieceattr piece="Hands" attr="quality"/>   AF: <pieceattr piece="Hands" attr="af"/>   Bonus: <pieceattr piece="Hands" attr="bonus"/></dd>
+<dd>Effect 1: <slotattr piece="Hands" slot="1" attr="amount" width="3"/> <slotattr piece="Hands" slot="1" attr="effect"/></dd>
+<dd>Effect 2: <slotattr piece="Hands" slot="2" attr="amount" width="3"/> <slotattr piece="Hands" slot="2" attr="effect"/></dd>
+<dd>Effect 3: <slotattr piece="Hands" slot="3" attr="amount" width="3"/> <slotattr piece="Hands" slot="3" attr="effect"/></dd>
+<dd>Effect 4: <slotattr piece="Hands" slot="4" attr="amount" width="3"/> <slotattr piece="Hands" slot="4" attr="effect"/></dd>
+<dd>Effect 5: <slotattr piece="Hands" slot="5" attr="amount" width="3"/> <slotattr piece="Hands" slot="5" attr="effect"/></dd>
+<dd>Effect 6: <slotattr piece="Hands" slot="6" attr="amount" width="3"/> <slotattr piece="Hands" slot="6" attr="effect"/></dd>
+<dd>Effect 7: <slotattr piece="Hands" slot="7" attr="amount" width="3"/> <slotattr piece="Hands" slot="7" attr="effect"/></dd>
+<dd>Effect 8: <slotattr piece="Hands" slot="8" attr="amount" width="3"/> <slotattr piece="Hands" slot="8" attr="effect"/></dd>
+<dd>Effect 9: <slotattr piece="Hands" slot="9" attr="amount" width="3"/> <slotattr piece="Hands" slot="9" attr="effect"/></dd>
+<dd>Effect 10: <slotattr piece="Hands" slot="10" attr="amount" width="3"/> <slotattr piece="Hands" slot="10" attr="effect"/></dd>
+<dd>Effect 11: <slotattr piece="Hands" slot="11" attr="amount" width="3"/> <slotattr piece="Hands" slot="11" attr="effect"/></dd>
+<dd>Effect 12: <slotattr piece="Hands" slot="12" attr="amount" width="3"/> <slotattr piece="Hands" slot="12" attr="effect"/></dd>
+<dd>Utility: <pieceattr piece="Hands" attr="utility"/></dd>
 </ifpiece>
 </ifnotempty>
-<ifnotempty piece="feet">
+<ifnotempty piece="Feet">
 <dt><b>Feet</b></dt>
-<ifpiece piece="feet" piecetype="pcmade">
-<dd>Imbue Points: <pieceattr piece="feet" attr="usedpoints"/> of <pieceattr piece="feet" attr="availablepoints"/>   Quality: <pieceattr piece="feet" attr="quality"/>   Overcharge: <pieceattr piece="feet" attr="overcharge"/></dd>
-<dd>Gem 1: <slotattr piece="feet" slot="1" attr="amount" width="2"/> <slotattr piece="feet" slot="1" attr="effect"/> - <slotattr piece="feet" slot="1" attr="quality"/> <slotattr piece="feet" slot="1" attr="name"/></dd>
-<dd>Gem 2: <slotattr piece="feet" slot="2" attr="amount" width="2"/> <slotattr piece="feet" slot="2" attr="effect"/> - <slotattr piece="feet" slot="2" attr="quality"/> <slotattr piece="feet" slot="2" attr="name"/></dd>
-<dd>Gem 3: <slotattr piece="feet" slot="3" attr="amount" width="2"/> <slotattr piece="feet" slot="3" attr="effect"/> - <slotattr piece="feet" slot="3" attr="quality"/> <slotattr piece="feet" slot="3" attr="name"/></dd>
-<dd>Gem 4: <slotattr piece="feet" slot="4" attr="amount" width="2"/> <slotattr piece="feet" slot="4" attr="effect"/> - <slotattr piece="feet" slot="4" attr="quality"/> <slotattr piece="feet" slot="4" attr="name"/></dd>
-<dd>Effect 5: <slotattr piece="feet" slot="5" attr="amount" width="2"/> <slotattr piece="feet" slot="5" attr="effect"/> - <slotattr piece="feet" slot="5" attr="name"/></dd>
-<dd>Effect 6: <slotattr piece="feet" slot="6" attr="amount" width="2"/> <slotattr piece="feet" slot="6" attr="effect"/> - <slotattr piece="feet" slot="6" attr="name"/></dd>
-<dd>Utility: <pieceattr piece="feet" attr="utility"/></dd>
+<ifpiece piece="Feet" piecetype="pcmade">
+<dd>Imbue Points: <pieceattr piece="Feet" attr="usedpoints"/> of <pieceattr piece="Feet" attr="availablepoints"/>   Quality: <pieceattr piece="Feet" attr="quality"/>   Overcharge: <pieceattr piece="Feet" attr="overcharge"/></dd>
+<dd>Gem 1: <slotattr piece="Feet" slot="1" attr="amount" width="2"/> <slotattr piece="Feet" slot="1" attr="effect"/> - <slotattr piece="Feet" slot="1" attr="quality"/> <slotattr piece="Feet" slot="1" attr="name"/></dd>
+<dd>Gem 2: <slotattr piece="Feet" slot="2" attr="amount" width="2"/> <slotattr piece="Feet" slot="2" attr="effect"/> - <slotattr piece="Feet" slot="2" attr="quality"/> <slotattr piece="Feet" slot="2" attr="name"/></dd>
+<dd>Gem 3: <slotattr piece="Feet" slot="3" attr="amount" width="2"/> <slotattr piece="Feet" slot="3" attr="effect"/> - <slotattr piece="Feet" slot="3" attr="quality"/> <slotattr piece="Feet" slot="3" attr="name"/></dd>
+<dd>Gem 4: <slotattr piece="Feet" slot="4" attr="amount" width="2"/> <slotattr piece="Feet" slot="4" attr="effect"/> - <slotattr piece="Feet" slot="4" attr="quality"/> <slotattr piece="Feet" slot="4" attr="name"/></dd>
+<dd>Effect 5: <slotattr piece="Feet" slot="5" attr="amount" width="2"/> <slotattr piece="Feet" slot="5" attr="effect"/> - <slotattr piece="Feet" slot="5" attr="name"/></dd>
+<dd>Effect 6: <slotattr piece="Feet" slot="6" attr="amount" width="2"/> <slotattr piece="Feet" slot="6" attr="effect"/> - <slotattr piece="Feet" slot="6" attr="name"/></dd>
+<dd>Utility: <pieceattr piece="Feet" attr="utility"/></dd>
 </ifpiece>
-<ifpiece piece="feet" piecetype="drop">
-<dd>Name: <pieceattr piece="feet" attr="name"/></dd>
-<dd>Level: <pieceattr piece="feet" attr="level"/>   Quality: <pieceattr piece="feet" attr="quality"/>   AF: <pieceattr piece="feet" attr="af"/>   Bonus: <pieceattr piece="feet" attr="bonus"/></dd>
-<dd>Effect 1: <slotattr piece="feet" slot="1" attr="amount" width="3"/> <slotattr piece="feet" slot="1" attr="effect"/></dd>
-<dd>Effect 2: <slotattr piece="feet" slot="2" attr="amount" width="3"/> <slotattr piece="feet" slot="2" attr="effect"/></dd>
-<dd>Effect 3: <slotattr piece="feet" slot="3" attr="amount" width="3"/> <slotattr piece="feet" slot="3" attr="effect"/></dd>
-<dd>Effect 4: <slotattr piece="feet" slot="4" attr="amount" width="3"/> <slotattr piece="feet" slot="4" attr="effect"/></dd>
-<dd>Effect 5: <slotattr piece="feet" slot="5" attr="amount" width="3"/> <slotattr piece="feet" slot="5" attr="effect"/></dd>
-<dd>Effect 6: <slotattr piece="feet" slot="6" attr="amount" width="3"/> <slotattr piece="feet" slot="6" attr="effect"/></dd>
-<dd>Effect 7: <slotattr piece="feet" slot="7" attr="amount" width="3"/> <slotattr piece="feet" slot="7" attr="effect"/></dd>
-<dd>Effect 8: <slotattr piece="feet" slot="8" attr="amount" width="3"/> <slotattr piece="feet" slot="8" attr="effect"/></dd>
-<dd>Effect 9: <slotattr piece="feet" slot="9" attr="amount" width="3"/> <slotattr piece="feet" slot="9" attr="effect"/></dd>
-<dd>Effect 10: <slotattr piece="feet" slot="10" attr="amount" width="3"/> <slotattr piece="feet" slot="10" attr="effect"/></dd>
-<dd>Effect 11: <slotattr piece="feet" slot="11" attr="amount" width="3"/> <slotattr piece="feet" slot="11" attr="effect"/></dd>
-<dd>Effect 12: <slotattr piece="feet" slot="12" attr="amount" width="3"/> <slotattr piece="feet" slot="12" attr="effect"/></dd>
-<dd>Utility: <pieceattr piece="feet" attr="utility"/></dd>
+<ifpiece piece="Feet" piecetype="drop">
+<dd>Name: <pieceattr piece="Feet" attr="name"/></dd>
+<dd>Level: <pieceattr piece="Feet" attr="level"/>   Quality: <pieceattr piece="Feet" attr="quality"/>   AF: <pieceattr piece="Feet" attr="af"/>   Bonus: <pieceattr piece="Feet" attr="bonus"/></dd>
+<dd>Effect 1: <slotattr piece="Feet" slot="1" attr="amount" width="3"/> <slotattr piece="Feet" slot="1" attr="effect"/></dd>
+<dd>Effect 2: <slotattr piece="Feet" slot="2" attr="amount" width="3"/> <slotattr piece="Feet" slot="2" attr="effect"/></dd>
+<dd>Effect 3: <slotattr piece="Feet" slot="3" attr="amount" width="3"/> <slotattr piece="Feet" slot="3" attr="effect"/></dd>
+<dd>Effect 4: <slotattr piece="Feet" slot="4" attr="amount" width="3"/> <slotattr piece="Feet" slot="4" attr="effect"/></dd>
+<dd>Effect 5: <slotattr piece="Feet" slot="5" attr="amount" width="3"/> <slotattr piece="Feet" slot="5" attr="effect"/></dd>
+<dd>Effect 6: <slotattr piece="Feet" slot="6" attr="amount" width="3"/> <slotattr piece="Feet" slot="6" attr="effect"/></dd>
+<dd>Effect 7: <slotattr piece="Feet" slot="7" attr="amount" width="3"/> <slotattr piece="Feet" slot="7" attr="effect"/></dd>
+<dd>Effect 8: <slotattr piece="Feet" slot="8" attr="amount" width="3"/> <slotattr piece="Feet" slot="8" attr="effect"/></dd>
+<dd>Effect 9: <slotattr piece="Feet" slot="9" attr="amount" width="3"/> <slotattr piece="Feet" slot="9" attr="effect"/></dd>
+<dd>Effect 10: <slotattr piece="Feet" slot="10" attr="amount" width="3"/> <slotattr piece="Feet" slot="10" attr="effect"/></dd>
+<dd>Effect 11: <slotattr piece="Feet" slot="11" attr="amount" width="3"/> <slotattr piece="Feet" slot="11" attr="effect"/></dd>
+<dd>Effect 12: <slotattr piece="Feet" slot="12" attr="amount" width="3"/> <slotattr piece="Feet" slot="12" attr="effect"/></dd>
+<dd>Utility: <pieceattr piece="Feet" attr="utility"/></dd>
 </ifpiece>
 </ifnotempty>
-<ifnotempty piece="rweapon">
+<ifnotempty piece="Right Hand">
 <dt><b>Right Hand</b></dt>
-<ifpiece piece="rweapon" piecetype="pcmade">
-<dd>Imbue Points: <pieceattr piece="rweapon" attr="usedpoints"/> of <pieceattr piece="rweapon" attr="availablepoints"/>   Quality: <pieceattr piece="rweapon" attr="quality"/>   Overcharge: <pieceattr piece="rweapon" attr="overcharge"/></dd>
-<dd>Gem 1: <slotattr piece="rweapon" slot="1" attr="amount" width="2"/> <slotattr piece="rweapon" slot="1" attr="effect"/> - <slotattr piece="rweapon" slot="1" attr="quality"/> <slotattr piece="rweapon" slot="1" attr="name"/></dd>
-<dd>Gem 2: <slotattr piece="rweapon" slot="2" attr="amount" width="2"/> <slotattr piece="rweapon" slot="2" attr="effect"/> - <slotattr piece="rweapon" slot="2" attr="quality"/> <slotattr piece="rweapon" slot="2" attr="name"/></dd>
-<dd>Gem 3: <slotattr piece="rweapon" slot="3" attr="amount" width="2"/> <slotattr piece="rweapon" slot="3" attr="effect"/> - <slotattr piece="rweapon" slot="3" attr="quality"/> <slotattr piece="rweapon" slot="3" attr="name"/></dd>
-<dd>Gem 4: <slotattr piece="rweapon" slot="4" attr="amount" width="2"/> <slotattr piece="rweapon" slot="4" attr="effect"/> - <slotattr piece="rweapon" slot="4" attr="quality"/> <slotattr piece="rweapon" slot="4" attr="name"/></dd>
-<dd>Effect 5: <slotattr piece="rweapon" slot="5" attr="amount" width="2"/> <slotattr piece="rweapon" slot="5" attr="effect"/> - <slotattr piece="rweapon" slot="5" attr="name"/></dd>
-<dd>Effect 6: <slotattr piece="rweapon" slot="6" attr="amount" width="2"/> <slotattr piece="rweapon" slot="6" attr="effect"/> - <slotattr piece="rweapon" slot="6" attr="name"/></dd>
-<dd>Utility: <pieceattr piece="rweapon" attr="utility"/></dd>
+<ifpiece piece="Right Hand" piecetype="pcmade">
+<dd>Imbue Points: <pieceattr piece="Right Hand" attr="usedpoints"/> of <pieceattr piece="Right Hand" attr="availablepoints"/>   Quality: <pieceattr piece="Right Hand" attr="quality"/>   Overcharge: <pieceattr piece="Right Hand" attr="overcharge"/></dd>
+<dd>Gem 1: <slotattr piece="Right Hand" slot="1" attr="amount" width="2"/> <slotattr piece="Right Hand" slot="1" attr="effect"/> - <slotattr piece="Right Hand" slot="1" attr="quality"/> <slotattr piece="Right Hand" slot="1" attr="name"/></dd>
+<dd>Gem 2: <slotattr piece="Right Hand" slot="2" attr="amount" width="2"/> <slotattr piece="Right Hand" slot="2" attr="effect"/> - <slotattr piece="Right Hand" slot="2" attr="quality"/> <slotattr piece="Right Hand" slot="2" attr="name"/></dd>
+<dd>Gem 3: <slotattr piece="Right Hand" slot="3" attr="amount" width="2"/> <slotattr piece="Right Hand" slot="3" attr="effect"/> - <slotattr piece="Right Hand" slot="3" attr="quality"/> <slotattr piece="Right Hand" slot="3" attr="name"/></dd>
+<dd>Gem 4: <slotattr piece="Right Hand" slot="4" attr="amount" width="2"/> <slotattr piece="Right Hand" slot="4" attr="effect"/> - <slotattr piece="Right Hand" slot="4" attr="quality"/> <slotattr piece="Right Hand" slot="4" attr="name"/></dd>
+<dd>Effect 5: <slotattr piece="Right Hand" slot="5" attr="amount" width="2"/> <slotattr piece="Right Hand" slot="5" attr="effect"/> - <slotattr piece="Right Hand" slot="5" attr="name"/></dd>
+<dd>Effect 6: <slotattr piece="Right Hand" slot="6" attr="amount" width="2"/> <slotattr piece="Right Hand" slot="6" attr="effect"/> - <slotattr piece="Right Hand" slot="6" attr="name"/></dd>
+<dd>Utility: <pieceattr piece="Right Hand" attr="utility"/></dd>
 </ifpiece>
-<ifpiece piece="rweapon" piecetype="drop">
-<dd>Name: <pieceattr piece="rweapon" attr="name"/></dd>
-<dd>Level: <pieceattr piece="rweapon" attr="level"/>   Quality: <pieceattr piece="rweapon" attr="quality"/>   DPS: <pieceattr piece="rweapon" attr="af"/>   Bonus: <pieceattr piece="rweapon" attr="bonus"/></dd>
-<dd>Effect 1: <slotattr piece="rweapon" slot="1" attr="amount" width="3"/> <slotattr piece="rweapon" slot="1" attr="effect"/></dd>
-<dd>Effect 2: <slotattr piece="rweapon" slot="2" attr="amount" width="3"/> <slotattr piece="rweapon" slot="2" attr="effect"/></dd>
-<dd>Effect 3: <slotattr piece="rweapon" slot="3" attr="amount" width="3"/> <slotattr piece="rweapon" slot="3" attr="effect"/></dd>
-<dd>Effect 4: <slotattr piece="rweapon" slot="4" attr="amount" width="3"/> <slotattr piece="rweapon" slot="4" attr="effect"/></dd>
-<dd>Effect 5: <slotattr piece="rweapon" slot="5" attr="amount" width="3"/> <slotattr piece="rweapon" slot="5" attr="effect"/></dd>
-<dd>Effect 6: <slotattr piece="rweapon" slot="6" attr="amount" width="3"/> <slotattr piece="rweapon" slot="6" attr="effect"/></dd>
-<dd>Effect 7: <slotattr piece="rweapon" slot="7" attr="amount" width="3"/> <slotattr piece="rweapon" slot="7" attr="effect"/></dd>
-<dd>Effect 8: <slotattr piece="rweapon" slot="8" attr="amount" width="3"/> <slotattr piece="rweapon" slot="8" attr="effect"/></dd>
-<dd>Effect 9: <slotattr piece="rweapon" slot="9" attr="amount" width="3"/> <slotattr piece="rweapon" slot="9" attr="effect"/></dd>
-<dd>Effect 10: <slotattr piece="rweapon" slot="10" attr="amount" width="3"/> <slotattr piece="rweapon" slot="10" attr="effect"/></dd>
-<dd>Effect 11: <slotattr piece="rweapon" slot="11" attr="amount" width="3"/> <slotattr piece="rweapon" slot="11" attr="effect"/></dd>
-<dd>Effect 12: <slotattr piece="rweapon" slot="12" attr="amount" width="3"/> <slotattr piece="rweapon" slot="12" attr="effect"/></dd>
-<dd>Utility: <pieceattr piece="rweapon" attr="utility"/></dd>
+<ifpiece piece="Right Hand" piecetype="drop">
+<dd>Name: <pieceattr piece="Right Hand" attr="name"/></dd>
+<dd>Level: <pieceattr piece="Right Hand" attr="level"/>   Quality: <pieceattr piece="Right Hand" attr="quality"/>   DPS: <pieceattr piece="Right Hand" attr="af"/>   Bonus: <pieceattr piece="Right Hand" attr="bonus"/></dd>
+<dd>Effect 1: <slotattr piece="Right Hand" slot="1" attr="amount" width="3"/> <slotattr piece="Right Hand" slot="1" attr="effect"/></dd>
+<dd>Effect 2: <slotattr piece="Right Hand" slot="2" attr="amount" width="3"/> <slotattr piece="Right Hand" slot="2" attr="effect"/></dd>
+<dd>Effect 3: <slotattr piece="Right Hand" slot="3" attr="amount" width="3"/> <slotattr piece="Right Hand" slot="3" attr="effect"/></dd>
+<dd>Effect 4: <slotattr piece="Right Hand" slot="4" attr="amount" width="3"/> <slotattr piece="Right Hand" slot="4" attr="effect"/></dd>
+<dd>Effect 5: <slotattr piece="Right Hand" slot="5" attr="amount" width="3"/> <slotattr piece="Right Hand" slot="5" attr="effect"/></dd>
+<dd>Effect 6: <slotattr piece="Right Hand" slot="6" attr="amount" width="3"/> <slotattr piece="Right Hand" slot="6" attr="effect"/></dd>
+<dd>Effect 7: <slotattr piece="Right Hand" slot="7" attr="amount" width="3"/> <slotattr piece="Right Hand" slot="7" attr="effect"/></dd>
+<dd>Effect 8: <slotattr piece="Right Hand" slot="8" attr="amount" width="3"/> <slotattr piece="Right Hand" slot="8" attr="effect"/></dd>
+<dd>Effect 9: <slotattr piece="Right Hand" slot="9" attr="amount" width="3"/> <slotattr piece="Right Hand" slot="9" attr="effect"/></dd>
+<dd>Effect 10: <slotattr piece="Right Hand" slot="10" attr="amount" width="3"/> <slotattr piece="Right Hand" slot="10" attr="effect"/></dd>
+<dd>Effect 11: <slotattr piece="Right Hand" slot="11" attr="amount" width="3"/> <slotattr piece="Right Hand" slot="11" attr="effect"/></dd>
+<dd>Effect 12: <slotattr piece="Right Hand" slot="12" attr="amount" width="3"/> <slotattr piece="Right Hand" slot="12" attr="effect"/></dd>
+<dd>Utility: <pieceattr piece="Right Hand" attr="utility"/></dd>
 </ifpiece>
 </ifnotempty>
-<ifnotempty piece="lweapon">
+<ifnotempty piece="Left Hand">
 <dt><b>Left Hand</b></dt>
-<ifpiece piece="lweapon" piecetype="pcmade">
-<dd>Imbue Points: <pieceattr piece="lweapon" attr="usedpoints"/> of <pieceattr piece="lweapon" attr="availablepoints"/>   Quality: <pieceattr piece="lweapon" attr="quality"/>   Overcharge: <pieceattr piece="lweapon" attr="overcharge"/></dd>
-<dd>Gem 1: <slotattr piece="lweapon" slot="1" attr="amount" width="2"/> <slotattr piece="lweapon" slot="1" attr="effect"/> - <slotattr piece="lweapon" slot="1" attr="quality"/> <slotattr piece="lweapon" slot="1" attr="name"/></dd>
-<dd>Gem 2: <slotattr piece="lweapon" slot="2" attr="amount" width="2"/> <slotattr piece="lweapon" slot="2" attr="effect"/> - <slotattr piece="lweapon" slot="2" attr="quality"/> <slotattr piece="lweapon" slot="2" attr="name"/></dd>
-<dd>Gem 3: <slotattr piece="lweapon" slot="3" attr="amount" width="2"/> <slotattr piece="lweapon" slot="3" attr="effect"/> - <slotattr piece="lweapon" slot="3" attr="quality"/> <slotattr piece="lweapon" slot="3" attr="name"/></dd>
-<dd>Gem 4: <slotattr piece="lweapon" slot="4" attr="amount" width="2"/> <slotattr piece="lweapon" slot="4" attr="effect"/> - <slotattr piece="lweapon" slot="4" attr="quality"/> <slotattr piece="lweapon" slot="4" attr="name"/></dd>
-<dd>Effect 5: <slotattr piece="lweapon" slot="5" attr="amount" width="2"/> <slotattr piece="lweapon" slot="5" attr="effect"/> - <slotattr piece="lweapon" slot="5" attr="name"/></dd>
-<dd>Effect 6: <slotattr piece="lweapon" slot="6" attr="amount" width="2"/> <slotattr piece="lweapon" slot="6" attr="effect"/> - <slotattr piece="lweapon" slot="6" attr="name"/></dd>
-<dd>Utility: <pieceattr piece="lweapon" attr="utility"/></dd>
+<ifpiece piece="Left Hand" piecetype="pcmade">
+<dd>Imbue Points: <pieceattr piece="Left Hand" attr="usedpoints"/> of <pieceattr piece="Left Hand" attr="availablepoints"/>   Quality: <pieceattr piece="Left Hand" attr="quality"/>   Overcharge: <pieceattr piece="Left Hand" attr="overcharge"/></dd>
+<dd>Gem 1: <slotattr piece="Left Hand" slot="1" attr="amount" width="2"/> <slotattr piece="Left Hand" slot="1" attr="effect"/> - <slotattr piece="Left Hand" slot="1" attr="quality"/> <slotattr piece="Left Hand" slot="1" attr="name"/></dd>
+<dd>Gem 2: <slotattr piece="Left Hand" slot="2" attr="amount" width="2"/> <slotattr piece="Left Hand" slot="2" attr="effect"/> - <slotattr piece="Left Hand" slot="2" attr="quality"/> <slotattr piece="Left Hand" slot="2" attr="name"/></dd>
+<dd>Gem 3: <slotattr piece="Left Hand" slot="3" attr="amount" width="2"/> <slotattr piece="Left Hand" slot="3" attr="effect"/> - <slotattr piece="Left Hand" slot="3" attr="quality"/> <slotattr piece="Left Hand" slot="3" attr="name"/></dd>
+<dd>Gem 4: <slotattr piece="Left Hand" slot="4" attr="amount" width="2"/> <slotattr piece="Left Hand" slot="4" attr="effect"/> - <slotattr piece="Left Hand" slot="4" attr="quality"/> <slotattr piece="Left Hand" slot="4" attr="name"/></dd>
+<dd>Effect 5: <slotattr piece="Left Hand" slot="5" attr="amount" width="2"/> <slotattr piece="Left Hand" slot="5" attr="effect"/> - <slotattr piece="Left Hand" slot="5" attr="name"/></dd>
+<dd>Effect 6: <slotattr piece="Left Hand" slot="6" attr="amount" width="2"/> <slotattr piece="Left Hand" slot="6" attr="effect"/> - <slotattr piece="Left Hand" slot="6" attr="name"/></dd>
+<dd>Utility: <pieceattr piece="Left Hand" attr="utility"/></dd>
 </ifpiece>
-<ifpiece piece="lweapon" piecetype="drop">
-<dd>Name: <pieceattr piece="lweapon" attr="name"/></dd>
-<dd>Level: <pieceattr piece="lweapon" attr="level"/>   Quality: <pieceattr piece="lweapon" attr="quality"/>   DPS: <pieceattr piece="lweapon" attr="af"/>   Bonus: <pieceattr piece="lweapon" attr="bonus"/></dd>
-<dd>Effect 1: <slotattr piece="lweapon" slot="1" attr="amount" width="3"/> <slotattr piece="lweapon" slot="1" attr="effect"/></dd>
-<dd>Effect 2: <slotattr piece="lweapon" slot="2" attr="amount" width="3"/> <slotattr piece="lweapon" slot="2" attr="effect"/></dd>
-<dd>Effect 3: <slotattr piece="lweapon" slot="3" attr="amount" width="3"/> <slotattr piece="lweapon" slot="3" attr="effect"/></dd>
-<dd>Effect 4: <slotattr piece="lweapon" slot="4" attr="amount" width="3"/> <slotattr piece="lweapon" slot="4" attr="effect"/></dd>
-<dd>Effect 5: <slotattr piece="lweapon" slot="5" attr="amount" width="3"/> <slotattr piece="lweapon" slot="5" attr="effect"/></dd>
-<dd>Effect 6: <slotattr piece="lweapon" slot="6" attr="amount" width="3"/> <slotattr piece="lweapon" slot="6" attr="effect"/></dd>
-<dd>Effect 7: <slotattr piece="lweapon" slot="7" attr="amount" width="3"/> <slotattr piece="lweapon" slot="7" attr="effect"/></dd>
-<dd>Effect 8: <slotattr piece="lweapon" slot="8" attr="amount" width="3"/> <slotattr piece="lweapon" slot="8" attr="effect"/></dd>
-<dd>Effect 9: <slotattr piece="lweapon" slot="9" attr="amount" width="3"/> <slotattr piece="lweapon" slot="9" attr="effect"/></dd>
-<dd>Effect 10: <slotattr piece="lweapon" slot="10" attr="amount" width="3"/> <slotattr piece="lweapon" slot="10" attr="effect"/></dd>
-<dd>Effect 11: <slotattr piece="lweapon" slot="11" attr="amount" width="3"/> <slotattr piece="lweapon" slot="11" attr="effect"/></dd>
-<dd>Effect 12: <slotattr piece="lweapon" slot="12" attr="amount" width="3"/> <slotattr piece="lweapon" slot="12" attr="effect"/></dd>
-<dd>Utility: <pieceattr piece="lweapon" attr="utility"/></dd>
+<ifpiece piece="Left Hand" piecetype="drop">
+<dd>Name: <pieceattr piece="Left Hand" attr="name"/></dd>
+<dd>Level: <pieceattr piece="Left Hand" attr="level"/>   Quality: <pieceattr piece="Left Hand" attr="quality"/>   DPS: <pieceattr piece="Left Hand" attr="af"/>   Bonus: <pieceattr piece="Left Hand" attr="bonus"/></dd>
+<dd>Effect 1: <slotattr piece="Left Hand" slot="1" attr="amount" width="3"/> <slotattr piece="Left Hand" slot="1" attr="effect"/></dd>
+<dd>Effect 2: <slotattr piece="Left Hand" slot="2" attr="amount" width="3"/> <slotattr piece="Left Hand" slot="2" attr="effect"/></dd>
+<dd>Effect 3: <slotattr piece="Left Hand" slot="3" attr="amount" width="3"/> <slotattr piece="Left Hand" slot="3" attr="effect"/></dd>
+<dd>Effect 4: <slotattr piece="Left Hand" slot="4" attr="amount" width="3"/> <slotattr piece="Left Hand" slot="4" attr="effect"/></dd>
+<dd>Effect 5: <slotattr piece="Left Hand" slot="5" attr="amount" width="3"/> <slotattr piece="Left Hand" slot="5" attr="effect"/></dd>
+<dd>Effect 6: <slotattr piece="Left Hand" slot="6" attr="amount" width="3"/> <slotattr piece="Left Hand" slot="6" attr="effect"/></dd>
+<dd>Effect 7: <slotattr piece="Left Hand" slot="7" attr="amount" width="3"/> <slotattr piece="Left Hand" slot="7" attr="effect"/></dd>
+<dd>Effect 8: <slotattr piece="Left Hand" slot="8" attr="amount" width="3"/> <slotattr piece="Left Hand" slot="8" attr="effect"/></dd>
+<dd>Effect 9: <slotattr piece="Left Hand" slot="9" attr="amount" width="3"/> <slotattr piece="Left Hand" slot="9" attr="effect"/></dd>
+<dd>Effect 10: <slotattr piece="Left Hand" slot="10" attr="amount" width="3"/> <slotattr piece="Left Hand" slot="10" attr="effect"/></dd>
+<dd>Effect 11: <slotattr piece="Left Hand" slot="11" attr="amount" width="3"/> <slotattr piece="Left Hand" slot="11" attr="effect"/></dd>
+<dd>Effect 12: <slotattr piece="Left Hand" slot="12" attr="amount" width="3"/> <slotattr piece="Left Hand" slot="12" attr="effect"/></dd>
+<dd>Utility: <pieceattr piece="Left Hand" attr="utility"/></dd>
 </ifpiece>
 </ifnotempty>
-<ifnotempty piece="2handed">
+<ifnotempty piece="2 Handed">
 <dt><b>Two Handed</b></dt>
-<ifpiece piece="2handed" type="pcmade">
-<dd>Imbue Points: <pieceattr piece="2handed" attr="usedpoints"/> of <pieceattr piece="2handed" attr="availablepoints"/>   Quality: <pieceattr piece="2handed" attr="quality"/>   Overcharge: <pieceattr piece="2handed" attr="overcharge"/></dd>
-<dd>Gem 1: <slotattr piece="2handed" slot="1" attr="1" width="amount"/> <slotattr piece="2handed" slot="1" attr="1"/> - <slotattr piece="2handed" slot="1" attr="1"/> <slotattr piece="2handed" slot="1" attr="1"/></dd>
-<dd>Gem 2: <slotattr piece="2handed" slot="2" attr="2" width="amount"/> <slotattr piece="2handed" slot="2" attr="2"/> - <slotattr piece="2handed" slot="2" attr="2"/> <slotattr piece="2handed" slot="2" attr="2"/></dd>
-<dd>Gem 3: <slotattr piece="2handed" slot="3" attr="3" width="amount"/> <slotattr piece="2handed" slot="3" attr="3"/> - <slotattr piece="2handed" slot="3" attr="3"/> <slotattr piece="2handed" slot="3" attr="3"/></dd>
-<dd>Gem 4: <slotattr piece="2handed" slot="4" attr="4" width="amount"/> <slotattr piece="2handed" slot="4" attr="4"/> - <slotattr piece="2handed" slot="4" attr="4"/> <slotattr piece="2handed" slot="4" attr="4"/></dd>
-<dd>Effect 5: <slotattr piece="2handed" slot="5" attr="5" width="amount"/> <slotattr piece="2handed" slot="5" attr="5"/> - <slotattr piece="2handed" slot="5" attr="5"/></dd>
-<dd>Effect 6: <slotattr piece="2handed" slot="6" attr="6" width="amount"/> <slotattr piece="2handed" slot="6" attr="6"/> - <slotattr piece="2handed" slot="6" attr="6"/></dd>
-<dd>Utility: <pieceattr piece="2handed" attr="utility"/></dd>
+<ifpiece piece="2 Handed" type="pcmade">
+<dd>Imbue Points: <pieceattr piece="2 Handed" attr="usedpoints"/> of <pieceattr piece="2 Handed" attr="availablepoints"/>   Quality: <pieceattr piece="2 Handed" attr="quality"/>   Overcharge: <pieceattr piece="2 Handed" attr="overcharge"/></dd>
+<dd>Gem 1: <slotattr piece="2 Handed" slot="1" attr="1" width="amount"/> <slotattr piece="2 Handed" slot="1" attr="1"/> - <slotattr piece="2 Handed" slot="1" attr="1"/> <slotattr piece="2 Handed" slot="1" attr="1"/></dd>
+<dd>Gem 2: <slotattr piece="2 Handed" slot="2" attr="2" width="amount"/> <slotattr piece="2 Handed" slot="2" attr="2"/> - <slotattr piece="2 Handed" slot="2" attr="2"/> <slotattr piece="2 Handed" slot="2" attr="2"/></dd>
+<dd>Gem 3: <slotattr piece="2 Handed" slot="3" attr="3" width="amount"/> <slotattr piece="2 Handed" slot="3" attr="3"/> - <slotattr piece="2 Handed" slot="3" attr="3"/> <slotattr piece="2 Handed" slot="3" attr="3"/></dd>
+<dd>Gem 4: <slotattr piece="2 Handed" slot="4" attr="4" width="amount"/> <slotattr piece="2 Handed" slot="4" attr="4"/> - <slotattr piece="2 Handed" slot="4" attr="4"/> <slotattr piece="2 Handed" slot="4" attr="4"/></dd>
+<dd>Effect 5: <slotattr piece="2 Handed" slot="5" attr="5" width="amount"/> <slotattr piece="2 Handed" slot="5" attr="5"/> - <slotattr piece="2 Handed" slot="5" attr="5"/></dd>
+<dd>Effect 6: <slotattr piece="2 Handed" slot="6" attr="6" width="amount"/> <slotattr piece="2 Handed" slot="6" attr="6"/> - <slotattr piece="2 Handed" slot="6" attr="6"/></dd>
+<dd>Utility: <pieceattr piece="2 Handed" attr="utility"/></dd>
 </ifpiece>
-<ifpiece piece="2handed" type="drop">
-<dd>Name: <pieceattr piece="2handed" attr="name"/></dd>
-<dd>Level: <pieceattr piece="2handed" attr="level"/>   Quality: <pieceattr piece="2handed" attr="quality"/>   DPS: <pieceattr piece="2handed" attr="af"/>   Bonus: <pieceattr piece="2handed" attr="bonus"/></dd>
-<dd>Effect 1: <slotattr piece="2handed" slot="1" attr="1" width="amount"/> <slotattr piece="2handed" slot="1" attr="1"/></dd>
-<dd>Effect 2: <slotattr piece="2handed" slot="2" attr="2" width="amount"/> <slotattr piece="2handed" slot="2" attr="2"/></dd>
-<dd>Effect 3: <slotattr piece="2handed" slot="3" attr="3" width="amount"/> <slotattr piece="2handed" slot="3" attr="3"/></dd>
-<dd>Effect 4: <slotattr piece="2handed" slot="4" attr="4" width="amount"/> <slotattr piece="2handed" slot="4" attr="4"/></dd>
-<dd>Effect 5: <slotattr piece="2handed" slot="5" attr="5" width="amount"/> <slotattr piece="2handed" slot="5" attr="5"/></dd>
-<dd>Effect 6: <slotattr piece="2handed" slot="6" attr="6" width="amount"/> <slotattr piece="2handed" slot="6" attr="6"/></dd>
-<dd>Effect 7: <slotattr piece="2handed" slot="7" attr="7" width="amount"/> <slotattr piece="2handed" slot="7" attr="7"/></dd>
-<dd>Effect 8: <slotattr piece="2handed" slot="8" attr="8" width="amount"/> <slotattr piece="2handed" slot="8" attr="8"/></dd>
-<dd>Effect 9: <slotattr piece="2handed" slot="9" attr="9" width="amount"/> <slotattr piece="2handed" slot="9" attr="9"/></dd>
-<dd>Effect 10: <slotattr piece="2handed" slot="10" attr="10" width="amount"/> <slotattr piece="2handed" slot="10" attr="10"/></dd>
-<dd>Effect 11: <slotattr piece="2handed" slot="11" attr="11" width="amount"/> <slotattr piece="2handed" slot="11" attr="11"/></dd>
-<dd>Effect 12: <slotattr piece="2handed" slot="12" attr="12" width="amount"/> <slotattr piece="2handed" slot="12" attr="12"/></dd>
-<dd>Utility: <pieceattr piece="2handed" attr="utility"/></dd>
+<ifpiece piece="2 Handed" type="drop">
+<dd>Name: <pieceattr piece="2 Handed" attr="name"/></dd>
+<dd>Level: <pieceattr piece="2 Handed" attr="level"/>   Quality: <pieceattr piece="2 Handed" attr="quality"/>   DPS: <pieceattr piece="2 Handed" attr="af"/>   Bonus: <pieceattr piece="2 Handed" attr="bonus"/></dd>
+<dd>Effect 1: <slotattr piece="2 Handed" slot="1" attr="1" width="amount"/> <slotattr piece="2 Handed" slot="1" attr="1"/></dd>
+<dd>Effect 2: <slotattr piece="2 Handed" slot="2" attr="2" width="amount"/> <slotattr piece="2 Handed" slot="2" attr="2"/></dd>
+<dd>Effect 3: <slotattr piece="2 Handed" slot="3" attr="3" width="amount"/> <slotattr piece="2 Handed" slot="3" attr="3"/></dd>
+<dd>Effect 4: <slotattr piece="2 Handed" slot="4" attr="4" width="amount"/> <slotattr piece="2 Handed" slot="4" attr="4"/></dd>
+<dd>Effect 5: <slotattr piece="2 Handed" slot="5" attr="5" width="amount"/> <slotattr piece="2 Handed" slot="5" attr="5"/></dd>
+<dd>Effect 6: <slotattr piece="2 Handed" slot="6" attr="6" width="amount"/> <slotattr piece="2 Handed" slot="6" attr="6"/></dd>
+<dd>Effect 7: <slotattr piece="2 Handed" slot="7" attr="7" width="amount"/> <slotattr piece="2 Handed" slot="7" attr="7"/></dd>
+<dd>Effect 8: <slotattr piece="2 Handed" slot="8" attr="8" width="amount"/> <slotattr piece="2 Handed" slot="8" attr="8"/></dd>
+<dd>Effect 9: <slotattr piece="2 Handed" slot="9" attr="9" width="amount"/> <slotattr piece="2 Handed" slot="9" attr="9"/></dd>
+<dd>Effect 10: <slotattr piece="2 Handed" slot="10" attr="10" width="amount"/> <slotattr piece="2 Handed" slot="10" attr="10"/></dd>
+<dd>Effect 11: <slotattr piece="2 Handed" slot="11" attr="11" width="amount"/> <slotattr piece="2 Handed" slot="11" attr="11"/></dd>
+<dd>Effect 12: <slotattr piece="2 Handed" slot="12" attr="12" width="amount"/> <slotattr piece="2 Handed" slot="12" attr="12"/></dd>
+<dd>Utility: <pieceattr piece="2 Handed" attr="utility"/></dd>
 </ifpiece>
 </ifnotempty>
-<ifnotempty piece="ranged">
+<ifnotempty piece="Ranged">
 <dt><b>Ranged</b></dt>
-<ifpiece piece="ranged" piecetype="pcmade">
-<dd>Imbue Points: <pieceattr piece="ranged" attr="usedpoints"/> of <pieceattr piece="ranged" attr="availablepoints"/>   Quality: <pieceattr piece="ranged" attr="quality"/>   Overcharge: <pieceattr piece="ranged" attr="overcharge"/></dd>
-<dd>Gem 1: <slotattr piece="ranged" slot="1" attr="amount" width="2"/> <slotattr piece="ranged" slot="1" attr="effect"/> - <slotattr piece="ranged" slot="1" attr="quality"/> <slotattr piece="ranged" slot="1" attr="name"/></dd>
-<dd>Gem 2: <slotattr piece="ranged" slot="2" attr="amount" width="2"/> <slotattr piece="ranged" slot="2" attr="effect"/> - <slotattr piece="ranged" slot="2" attr="quality"/> <slotattr piece="ranged" slot="2" attr="name"/></dd>
-<dd>Gem 3: <slotattr piece="ranged" slot="3" attr="amount" width="2"/> <slotattr piece="ranged" slot="3" attr="effect"/> - <slotattr piece="ranged" slot="3" attr="quality"/> <slotattr piece="ranged" slot="3" attr="name"/></dd>
-<dd>Gem 4: <slotattr piece="ranged" slot="4" attr="amount" width="2"/> <slotattr piece="ranged" slot="4" attr="effect"/> - <slotattr piece="ranged" slot="4" attr="quality"/> <slotattr piece="ranged" slot="4" attr="name"/></dd>
-<dd>Effect 5: <slotattr piece="ranged" slot="5" attr="amount" width="2"/> <slotattr piece="ranged" slot="5" attr="effect"/> - <slotattr piece="ranged" slot="5" attr="name"/></dd>
-<dd>Effect 6: <slotattr piece="ranged" slot="6" attr="amount" width="2"/> <slotattr piece="ranged" slot="6" attr="effect"/> - <slotattr piece="ranged" slot="6" attr="name"/></dd>
-<dd>Utility: <pieceattr piece="ranged" attr="utility"/></dd>
+<ifpiece piece="Ranged" piecetype="pcmade">
+<dd>Imbue Points: <pieceattr piece="Ranged" attr="usedpoints"/> of <pieceattr piece="Ranged" attr="availablepoints"/>   Quality: <pieceattr piece="Ranged" attr="quality"/>   Overcharge: <pieceattr piece="Ranged" attr="overcharge"/></dd>
+<dd>Gem 1: <slotattr piece="Ranged" slot="1" attr="amount" width="2"/> <slotattr piece="Ranged" slot="1" attr="effect"/> - <slotattr piece="Ranged" slot="1" attr="quality"/> <slotattr piece="Ranged" slot="1" attr="name"/></dd>
+<dd>Gem 2: <slotattr piece="Ranged" slot="2" attr="amount" width="2"/> <slotattr piece="Ranged" slot="2" attr="effect"/> - <slotattr piece="Ranged" slot="2" attr="quality"/> <slotattr piece="Ranged" slot="2" attr="name"/></dd>
+<dd>Gem 3: <slotattr piece="Ranged" slot="3" attr="amount" width="2"/> <slotattr piece="Ranged" slot="3" attr="effect"/> - <slotattr piece="Ranged" slot="3" attr="quality"/> <slotattr piece="Ranged" slot="3" attr="name"/></dd>
+<dd>Gem 4: <slotattr piece="Ranged" slot="4" attr="amount" width="2"/> <slotattr piece="Ranged" slot="4" attr="effect"/> - <slotattr piece="Ranged" slot="4" attr="quality"/> <slotattr piece="Ranged" slot="4" attr="name"/></dd>
+<dd>Effect 5: <slotattr piece="Ranged" slot="5" attr="amount" width="2"/> <slotattr piece="Ranged" slot="5" attr="effect"/> - <slotattr piece="Ranged" slot="5" attr="name"/></dd>
+<dd>Effect 6: <slotattr piece="Ranged" slot="6" attr="amount" width="2"/> <slotattr piece="Ranged" slot="6" attr="effect"/> - <slotattr piece="Ranged" slot="6" attr="name"/></dd>
+<dd>Utility: <pieceattr piece="Ranged" attr="utility"/></dd>
 </ifpiece>
-<ifpiece piece="ranged" piecetype="drop">
-<dd>Name: <pieceattr piece="ranged" attr="name"/></dd>
-<dd>Level: <pieceattr piece="ranged" attr="level"/>   Quality: <pieceattr piece="ranged" attr="quality"/>   DPS: <pieceattr piece="ranged" attr="af"/>   Bonus: <pieceattr piece="ranged" attr="bonus"/></dd>
-<dd>Effect 1: <slotattr piece="ranged" slot="1" attr="amount" width="3"/> <slotattr piece="ranged" slot="1" attr="effect"/></dd>
-<dd>Effect 2: <slotattr piece="ranged" slot="2" attr="amount" width="3"/> <slotattr piece="ranged" slot="2" attr="effect"/></dd>
-<dd>Effect 3: <slotattr piece="ranged" slot="3" attr="amount" width="3"/> <slotattr piece="ranged" slot="3" attr="effect"/></dd>
-<dd>Effect 4: <slotattr piece="ranged" slot="4" attr="amount" width="3"/> <slotattr piece="ranged" slot="4" attr="effect"/></dd>
-<dd>Effect 5: <slotattr piece="ranged" slot="5" attr="amount" width="3"/> <slotattr piece="ranged" slot="5" attr="effect"/></dd>
-<dd>Effect 6: <slotattr piece="ranged" slot="6" attr="amount" width="3"/> <slotattr piece="ranged" slot="6" attr="effect"/></dd>
-<dd>Effect 7: <slotattr piece="ranged" slot="7" attr="amount" width="3"/> <slotattr piece="ranged" slot="7" attr="effect"/></dd>
-<dd>Effect 8: <slotattr piece="ranged" slot="8" attr="amount" width="3"/> <slotattr piece="ranged" slot="8" attr="effect"/></dd>
-<dd>Effect 9: <slotattr piece="ranged" slot="9" attr="amount" width="3"/> <slotattr piece="ranged" slot="9" attr="effect"/></dd>
-<dd>Effect 10: <slotattr piece="ranged" slot="10" attr="amount" width="3"/> <slotattr piece="ranged" slot="10" attr="effect"/></dd>
-<dd>Effect 11: <slotattr piece="ranged" slot="11" attr="amount" width="3"/> <slotattr piece="ranged" slot="11" attr="effect"/></dd>
-<dd>Effect 12: <slotattr piece="ranged" slot="12" attr="amount" width="3"/> <slotattr piece="ranged" slot="12" attr="effect"/></dd>
-<dd>Utility: <pieceattr piece="ranged" attr="utility"/></dd>
+<ifpiece piece="Ranged" piecetype="drop">
+<dd>Name: <pieceattr piece="Ranged" attr="name"/></dd>
+<dd>Level: <pieceattr piece="Ranged" attr="level"/>   Quality: <pieceattr piece="Ranged" attr="quality"/>   DPS: <pieceattr piece="Ranged" attr="af"/>   Bonus: <pieceattr piece="Ranged" attr="bonus"/></dd>
+<dd>Effect 1: <slotattr piece="Ranged" slot="1" attr="amount" width="3"/> <slotattr piece="Ranged" slot="1" attr="effect"/></dd>
+<dd>Effect 2: <slotattr piece="Ranged" slot="2" attr="amount" width="3"/> <slotattr piece="Ranged" slot="2" attr="effect"/></dd>
+<dd>Effect 3: <slotattr piece="Ranged" slot="3" attr="amount" width="3"/> <slotattr piece="Ranged" slot="3" attr="effect"/></dd>
+<dd>Effect 4: <slotattr piece="Ranged" slot="4" attr="amount" width="3"/> <slotattr piece="Ranged" slot="4" attr="effect"/></dd>
+<dd>Effect 5: <slotattr piece="Ranged" slot="5" attr="amount" width="3"/> <slotattr piece="Ranged" slot="5" attr="effect"/></dd>
+<dd>Effect 6: <slotattr piece="Ranged" slot="6" attr="amount" width="3"/> <slotattr piece="Ranged" slot="6" attr="effect"/></dd>
+<dd>Effect 7: <slotattr piece="Ranged" slot="7" attr="amount" width="3"/> <slotattr piece="Ranged" slot="7" attr="effect"/></dd>
+<dd>Effect 8: <slotattr piece="Ranged" slot="8" attr="amount" width="3"/> <slotattr piece="Ranged" slot="8" attr="effect"/></dd>
+<dd>Effect 9: <slotattr piece="Ranged" slot="9" attr="amount" width="3"/> <slotattr piece="Ranged" slot="9" attr="effect"/></dd>
+<dd>Effect 10: <slotattr piece="Ranged" slot="10" attr="amount" width="3"/> <slotattr piece="Ranged" slot="10" attr="effect"/></dd>
+<dd>Effect 11: <slotattr piece="Ranged" slot="11" attr="amount" width="3"/> <slotattr piece="Ranged" slot="11" attr="effect"/></dd>
+<dd>Effect 12: <slotattr piece="Ranged" slot="12" attr="amount" width="3"/> <slotattr piece="Ranged" slot="12" attr="effect"/></dd>
+<dd>Utility: <pieceattr piece="Ranged" attr="utility"/></dd>
 </ifpiece>
 </ifnotempty>
-<ifnotempty piece="neck">
+<ifnotempty piece="Neck">
 <dt><b>Neck</b></dt>
-<dd>Name: <pieceattr piece="neck" attr="name"/></dd>
-<dd>Level: <pieceattr piece="neck" attr="level"/>   Quality: <pieceattr piece="neck" attr="quality"/>   Bonus: <pieceattr piece="neck" attr="bonus"/></dd>
-<dd>Effect 1: <slotattr piece="neck" slot="1" attr="amount" width="3"/> <slotattr piece="neck" slot="1" attr="effect"/></dd>
-<dd>Effect 2: <slotattr piece="neck" slot="2" attr="amount" width="3"/> <slotattr piece="neck" slot="2" attr="effect"/></dd>
-<dd>Effect 3: <slotattr piece="neck" slot="3" attr="amount" width="3"/> <slotattr piece="neck" slot="3" attr="effect"/></dd>
-<dd>Effect 4: <slotattr piece="neck" slot="4" attr="amount" width="3"/> <slotattr piece="neck" slot="4" attr="effect"/></dd>
-<dd>Effect 5: <slotattr piece="neck" slot="5" attr="amount" width="3"/> <slotattr piece="neck" slot="5" attr="effect"/></dd>
-<dd>Effect 6: <slotattr piece="neck" slot="6" attr="amount" width="3"/> <slotattr piece="neck" slot="6" attr="effect"/></dd>
-<dd>Effect 7: <slotattr piece="neck" slot="7" attr="amount" width="3"/> <slotattr piece="neck" slot="7" attr="effect"/></dd>
-<dd>Effect 8: <slotattr piece="neck" slot="8" attr="amount" width="3"/> <slotattr piece="neck" slot="8" attr="effect"/></dd>
-<dd>Effect 9: <slotattr piece="neck" slot="9" attr="amount" width="3"/> <slotattr piece="neck" slot="9" attr="effect"/></dd>
-<dd>Effect 10: <slotattr piece="neck" slot="10" attr="amount" width="3"/> <slotattr piece="neck" slot="10" attr="effect"/></dd>
-<dd>Effect 11: <slotattr piece="neck" slot="11" attr="amount" width="3"/> <slotattr piece="neck" slot="11" attr="effect"/></dd>
-<dd>Effect 12: <slotattr piece="neck" slot="12" attr="amount" width="3"/> <slotattr piece="neck" slot="12" attr="effect"/></dd>
-<dd>Utility: <pieceattr piece="neck" attr="utility"/></dd>
+<dd>Name: <pieceattr piece="Neck" attr="name"/></dd>
+<dd>Level: <pieceattr piece="Neck" attr="level"/>   Quality: <pieceattr piece="Neck" attr="quality"/>   Bonus: <pieceattr piece="Neck" attr="bonus"/></dd>
+<dd>Effect 1: <slotattr piece="Neck" slot="1" attr="amount" width="3"/> <slotattr piece="Neck" slot="1" attr="effect"/></dd>
+<dd>Effect 2: <slotattr piece="Neck" slot="2" attr="amount" width="3"/> <slotattr piece="Neck" slot="2" attr="effect"/></dd>
+<dd>Effect 3: <slotattr piece="Neck" slot="3" attr="amount" width="3"/> <slotattr piece="Neck" slot="3" attr="effect"/></dd>
+<dd>Effect 4: <slotattr piece="Neck" slot="4" attr="amount" width="3"/> <slotattr piece="Neck" slot="4" attr="effect"/></dd>
+<dd>Effect 5: <slotattr piece="Neck" slot="5" attr="amount" width="3"/> <slotattr piece="Neck" slot="5" attr="effect"/></dd>
+<dd>Effect 6: <slotattr piece="Neck" slot="6" attr="amount" width="3"/> <slotattr piece="Neck" slot="6" attr="effect"/></dd>
+<dd>Effect 7: <slotattr piece="Neck" slot="7" attr="amount" width="3"/> <slotattr piece="Neck" slot="7" attr="effect"/></dd>
+<dd>Effect 8: <slotattr piece="Neck" slot="8" attr="amount" width="3"/> <slotattr piece="Neck" slot="8" attr="effect"/></dd>
+<dd>Effect 9: <slotattr piece="Neck" slot="9" attr="amount" width="3"/> <slotattr piece="Neck" slot="9" attr="effect"/></dd>
+<dd>Effect 10: <slotattr piece="Neck" slot="10" attr="amount" width="3"/> <slotattr piece="Neck" slot="10" attr="effect"/></dd>
+<dd>Effect 11: <slotattr piece="Neck" slot="11" attr="amount" width="3"/> <slotattr piece="Neck" slot="11" attr="effect"/></dd>
+<dd>Effect 12: <slotattr piece="Neck" slot="12" attr="amount" width="3"/> <slotattr piece="Neck" slot="12" attr="effect"/></dd>
+<dd>Utility: <pieceattr piece="Neck" attr="utility"/></dd>
 </ifnotempty>
-<ifnotempty piece="cloak">
+<ifnotempty piece="Cloak">
 <dt><b>Cloak</b></dt>
-<dd>Name: <pieceattr piece="cloak" attr="name"/></dd>
-<dd>Level: <pieceattr piece="cloak" attr="level"/>   Quality: <pieceattr piece="cloak" attr="quality"/>   Bonus: <pieceattr piece="cloak" attr="bonus"/></dd>
-<dd>Effect 1: <slotattr piece="cloak" slot="1" attr="amount" width="3"/> <slotattr piece="cloak" slot="1" attr="effect"/></dd>
-<dd>Effect 2: <slotattr piece="cloak" slot="2" attr="amount" width="3"/> <slotattr piece="cloak" slot="2" attr="effect"/></dd>
-<dd>Effect 3: <slotattr piece="cloak" slot="3" attr="amount" width="3"/> <slotattr piece="cloak" slot="3" attr="effect"/></dd>
-<dd>Effect 4: <slotattr piece="cloak" slot="4" attr="amount" width="3"/> <slotattr piece="cloak" slot="4" attr="effect"/></dd>
-<dd>Effect 5: <slotattr piece="cloak" slot="5" attr="amount" width="3"/> <slotattr piece="cloak" slot="5" attr="effect"/></dd>
-<dd>Effect 6: <slotattr piece="cloak" slot="6" attr="amount" width="3"/> <slotattr piece="cloak" slot="6" attr="effect"/></dd>
-<dd>Effect 7: <slotattr piece="cloak" slot="7" attr="amount" width="3"/> <slotattr piece="cloak" slot="7" attr="effect"/></dd>
-<dd>Effect 8: <slotattr piece="cloak" slot="8" attr="amount" width="3"/> <slotattr piece="cloak" slot="8" attr="effect"/></dd>
-<dd>Effect 9: <slotattr piece="cloak" slot="9" attr="amount" width="3"/> <slotattr piece="cloak" slot="9" attr="effect"/></dd>
-<dd>Effect 10: <slotattr piece="cloak" slot="10" attr="amount" width="3"/> <slotattr piece="cloak" slot="10" attr="effect"/></dd>
-<dd>Effect 11: <slotattr piece="cloak" slot="11" attr="amount" width="3"/> <slotattr piece="cloak" slot="11" attr="effect"/></dd>
-<dd>Effect 12: <slotattr piece="cloak" slot="12" attr="amount" width="3"/> <slotattr piece="cloak" slot="12" attr="effect"/></dd>
-<dd>Utility: <pieceattr piece="cloak" attr="utility"/></dd>
+<dd>Name: <pieceattr piece="Cloak" attr="name"/></dd>
+<dd>Level: <pieceattr piece="Cloak" attr="level"/>   Quality: <pieceattr piece="Cloak" attr="quality"/>   Bonus: <pieceattr piece="Cloak" attr="bonus"/></dd>
+<dd>Effect 1: <slotattr piece="Cloak" slot="1" attr="amount" width="3"/> <slotattr piece="Cloak" slot="1" attr="effect"/></dd>
+<dd>Effect 2: <slotattr piece="Cloak" slot="2" attr="amount" width="3"/> <slotattr piece="Cloak" slot="2" attr="effect"/></dd>
+<dd>Effect 3: <slotattr piece="Cloak" slot="3" attr="amount" width="3"/> <slotattr piece="Cloak" slot="3" attr="effect"/></dd>
+<dd>Effect 4: <slotattr piece="Cloak" slot="4" attr="amount" width="3"/> <slotattr piece="Cloak" slot="4" attr="effect"/></dd>
+<dd>Effect 5: <slotattr piece="Cloak" slot="5" attr="amount" width="3"/> <slotattr piece="Cloak" slot="5" attr="effect"/></dd>
+<dd>Effect 6: <slotattr piece="Cloak" slot="6" attr="amount" width="3"/> <slotattr piece="Cloak" slot="6" attr="effect"/></dd>
+<dd>Effect 7: <slotattr piece="Cloak" slot="7" attr="amount" width="3"/> <slotattr piece="Cloak" slot="7" attr="effect"/></dd>
+<dd>Effect 8: <slotattr piece="Cloak" slot="8" attr="amount" width="3"/> <slotattr piece="Cloak" slot="8" attr="effect"/></dd>
+<dd>Effect 9: <slotattr piece="Cloak" slot="9" attr="amount" width="3"/> <slotattr piece="Cloak" slot="9" attr="effect"/></dd>
+<dd>Effect 10: <slotattr piece="Cloak" slot="10" attr="amount" width="3"/> <slotattr piece="Cloak" slot="10" attr="effect"/></dd>
+<dd>Effect 11: <slotattr piece="Cloak" slot="11" attr="amount" width="3"/> <slotattr piece="Cloak" slot="11" attr="effect"/></dd>
+<dd>Effect 12: <slotattr piece="Cloak" slot="12" attr="amount" width="3"/> <slotattr piece="Cloak" slot="12" attr="effect"/></dd>
+<dd>Utility: <pieceattr piece="Cloak" attr="utility"/></dd>
 </ifnotempty>
-<ifnotempty piece="jewel">
+<ifnotempty piece="Jewel">
 <dt><b>Jewel</b></dt>
-<dd>Name: <pieceattr piece="jewel" attr="name"/></dd>
-<dd>Level: <pieceattr piece="jewel" attr="level"/>   Quality: <pieceattr piece="jewel" attr="quality"/>   Bonus: <pieceattr piece="jewel" attr="bonus"/></dd>
-<dd>Effect 1: <slotattr piece="jewel" slot="1" attr="amount" width="3"/> <slotattr piece="jewel" slot="1" attr="effect"/></dd>
-<dd>Effect 2: <slotattr piece="jewel" slot="2" attr="amount" width="3"/> <slotattr piece="jewel" slot="2" attr="effect"/></dd>
-<dd>Effect 3: <slotattr piece="jewel" slot="3" attr="amount" width="3"/> <slotattr piece="jewel" slot="3" attr="effect"/></dd>
-<dd>Effect 4: <slotattr piece="jewel" slot="4" attr="amount" width="3"/> <slotattr piece="jewel" slot="4" attr="effect"/></dd>
-<dd>Effect 5: <slotattr piece="jewel" slot="5" attr="amount" width="3"/> <slotattr piece="jewel" slot="5" attr="effect"/></dd>
-<dd>Effect 6: <slotattr piece="jewel" slot="6" attr="amount" width="3"/> <slotattr piece="jewel" slot="6" attr="effect"/></dd>
-<dd>Effect 7: <slotattr piece="jewel" slot="7" attr="amount" width="3"/> <slotattr piece="jewel" slot="7" attr="effect"/></dd>
-<dd>Effect 8: <slotattr piece="jewel" slot="8" attr="amount" width="3"/> <slotattr piece="jewel" slot="8" attr="effect"/></dd>
-<dd>Effect 9: <slotattr piece="jewel" slot="9" attr="amount" width="3"/> <slotattr piece="jewel" slot="9" attr="effect"/></dd>
-<dd>Effect 10: <slotattr piece="jewel" slot="10" attr="amount" width="3"/> <slotattr piece="jewel" slot="10" attr="effect"/></dd>
-<dd>Effect 11: <slotattr piece="jewel" slot="11" attr="amount" width="3"/> <slotattr piece="jewel" slot="11" attr="effect"/></dd>
-<dd>Effect 12: <slotattr piece="jewel" slot="12" attr="amount" width="3"/> <slotattr piece="jewel" slot="12" attr="effect"/></dd>
-<dd>Utility: <pieceattr piece="jewel" attr="utility"/></dd>
+<dd>Name: <pieceattr piece="Jewel" attr="name"/></dd>
+<dd>Level: <pieceattr piece="Jewel" attr="level"/>   Quality: <pieceattr piece="Jewel" attr="quality"/>   Bonus: <pieceattr piece="Jewel" attr="bonus"/></dd>
+<dd>Effect 1: <slotattr piece="Jewel" slot="1" attr="amount" width="3"/> <slotattr piece="Jewel" slot="1" attr="effect"/></dd>
+<dd>Effect 2: <slotattr piece="Jewel" slot="2" attr="amount" width="3"/> <slotattr piece="Jewel" slot="2" attr="effect"/></dd>
+<dd>Effect 3: <slotattr piece="Jewel" slot="3" attr="amount" width="3"/> <slotattr piece="Jewel" slot="3" attr="effect"/></dd>
+<dd>Effect 4: <slotattr piece="Jewel" slot="4" attr="amount" width="3"/> <slotattr piece="Jewel" slot="4" attr="effect"/></dd>
+<dd>Effect 5: <slotattr piece="Jewel" slot="5" attr="amount" width="3"/> <slotattr piece="Jewel" slot="5" attr="effect"/></dd>
+<dd>Effect 6: <slotattr piece="Jewel" slot="6" attr="amount" width="3"/> <slotattr piece="Jewel" slot="6" attr="effect"/></dd>
+<dd>Effect 7: <slotattr piece="Jewel" slot="7" attr="amount" width="3"/> <slotattr piece="Jewel" slot="7" attr="effect"/></dd>
+<dd>Effect 8: <slotattr piece="Jewel" slot="8" attr="amount" width="3"/> <slotattr piece="Jewel" slot="8" attr="effect"/></dd>
+<dd>Effect 9: <slotattr piece="Jewel" slot="9" attr="amount" width="3"/> <slotattr piece="Jewel" slot="9" attr="effect"/></dd>
+<dd>Effect 10: <slotattr piece="Jewel" slot="10" attr="amount" width="3"/> <slotattr piece="Jewel" slot="10" attr="effect"/></dd>
+<dd>Effect 11: <slotattr piece="Jewel" slot="11" attr="amount" width="3"/> <slotattr piece="Jewel" slot="11" attr="effect"/></dd>
+<dd>Effect 12: <slotattr piece="Jewel" slot="12" attr="amount" width="3"/> <slotattr piece="Jewel" slot="12" attr="effect"/></dd>
+<dd>Utility: <pieceattr piece="Jewel" attr="utility"/></dd>
 </ifnotempty>
-<ifnotempty piece="belt">
+<ifnotempty piece="Belt">
 <dt><b>Belt</b></dt>
-<dd>Name: <pieceattr piece="belt" attr="name"/></dd>
-<dd>Level: <pieceattr piece="belt" attr="level"/>   Quality: <pieceattr piece="belt" attr="quality"/>   Bonus: <pieceattr piece="belt" attr="bonus"/></dd>
-<dd>Effect 1: <slotattr piece="belt" slot="1" attr="amount" width="3"/> <slotattr piece="belt" slot="1" attr="effect"/></dd>
-<dd>Effect 2: <slotattr piece="belt" slot="2" attr="amount" width="3"/> <slotattr piece="belt" slot="2" attr="effect"/></dd>
-<dd>Effect 3: <slotattr piece="belt" slot="3" attr="amount" width="3"/> <slotattr piece="belt" slot="3" attr="effect"/></dd>
-<dd>Effect 4: <slotattr piece="belt" slot="4" attr="amount" width="3"/> <slotattr piece="belt" slot="4" attr="effect"/></dd>
-<dd>Effect 5: <slotattr piece="belt" slot="5" attr="amount" width="3"/> <slotattr piece="belt" slot="5" attr="effect"/></dd>
-<dd>Effect 6: <slotattr piece="belt" slot="6" attr="amount" width="3"/> <slotattr piece="belt" slot="6" attr="effect"/></dd>
-<dd>Effect 7: <slotattr piece="belt" slot="7" attr="amount" width="3"/> <slotattr piece="belt" slot="7" attr="effect"/></dd>
-<dd>Effect 8: <slotattr piece="belt" slot="8" attr="amount" width="3"/> <slotattr piece="belt" slot="8" attr="effect"/></dd>
-<dd>Effect 9: <slotattr piece="belt" slot="9" attr="amount" width="3"/> <slotattr piece="belt" slot="9" attr="effect"/></dd>
-<dd>Effect 10: <slotattr piece="belt" slot="10" attr="amount" width="3"/> <slotattr piece="belt" slot="10" attr="effect"/></dd>
-<dd>Effect 11: <slotattr piece="belt" slot="11" attr="amount" width="3"/> <slotattr piece="belt" slot="11" attr="effect"/></dd>
-<dd>Effect 12: <slotattr piece="belt" slot="12" attr="amount" width="3"/> <slotattr piece="belt" slot="12" attr="effect"/></dd>
-<dd>Utility: <pieceattr piece="belt" attr="utility"/></dd>
+<dd>Name: <pieceattr piece="Belt" attr="name"/></dd>
+<dd>Level: <pieceattr piece="Belt" attr="level"/>   Quality: <pieceattr piece="Belt" attr="quality"/>   Bonus: <pieceattr piece="Belt" attr="bonus"/></dd>
+<dd>Effect 1: <slotattr piece="Belt" slot="1" attr="amount" width="3"/> <slotattr piece="Belt" slot="1" attr="effect"/></dd>
+<dd>Effect 2: <slotattr piece="Belt" slot="2" attr="amount" width="3"/> <slotattr piece="Belt" slot="2" attr="effect"/></dd>
+<dd>Effect 3: <slotattr piece="Belt" slot="3" attr="amount" width="3"/> <slotattr piece="Belt" slot="3" attr="effect"/></dd>
+<dd>Effect 4: <slotattr piece="Belt" slot="4" attr="amount" width="3"/> <slotattr piece="Belt" slot="4" attr="effect"/></dd>
+<dd>Effect 5: <slotattr piece="Belt" slot="5" attr="amount" width="3"/> <slotattr piece="Belt" slot="5" attr="effect"/></dd>
+<dd>Effect 6: <slotattr piece="Belt" slot="6" attr="amount" width="3"/> <slotattr piece="Belt" slot="6" attr="effect"/></dd>
+<dd>Effect 7: <slotattr piece="Belt" slot="7" attr="amount" width="3"/> <slotattr piece="Belt" slot="7" attr="effect"/></dd>
+<dd>Effect 8: <slotattr piece="Belt" slot="8" attr="amount" width="3"/> <slotattr piece="Belt" slot="8" attr="effect"/></dd>
+<dd>Effect 9: <slotattr piece="Belt" slot="9" attr="amount" width="3"/> <slotattr piece="Belt" slot="9" attr="effect"/></dd>
+<dd>Effect 10: <slotattr piece="Belt" slot="10" attr="amount" width="3"/> <slotattr piece="Belt" slot="10" attr="effect"/></dd>
+<dd>Effect 11: <slotattr piece="Belt" slot="11" attr="amount" width="3"/> <slotattr piece="Belt" slot="11" attr="effect"/></dd>
+<dd>Effect 12: <slotattr piece="Belt" slot="12" attr="amount" width="3"/> <slotattr piece="Belt" slot="12" attr="effect"/></dd>
+<dd>Utility: <pieceattr piece="Belt" attr="utility"/></dd>
 </ifnotempty>
-<ifnotempty piece="rring">
+<ifnotempty piece="Right Ring">
 <dt><b>Right Ring</b></dt>
-<dd>Name: <pieceattr piece="rring" attr="name"/></dd>
-<dd>Level: <pieceattr piece="rring" attr="level"/>   Quality: <pieceattr piece="rring" attr="quality"/>   Bonus: <pieceattr piece="rring" attr="bonus"/></dd>
-<dd>Effect 1: <slotattr piece="rring" slot="1" attr="amount" width="3"/> <slotattr piece="rring" slot="1" attr="effect"/></dd>
-<dd>Effect 2: <slotattr piece="rring" slot="2" attr="amount" width="3"/> <slotattr piece="rring" slot="2" attr="effect"/></dd>
-<dd>Effect 3: <slotattr piece="rring" slot="3" attr="amount" width="3"/> <slotattr piece="rring" slot="3" attr="effect"/></dd>
-<dd>Effect 4: <slotattr piece="rring" slot="4" attr="amount" width="3"/> <slotattr piece="rring" slot="4" attr="effect"/></dd>
-<dd>Effect 5: <slotattr piece="rring" slot="5" attr="amount" width="3"/> <slotattr piece="rring" slot="5" attr="effect"/></dd>
-<dd>Effect 6: <slotattr piece="rring" slot="6" attr="amount" width="3"/> <slotattr piece="rring" slot="6" attr="effect"/></dd>
-<dd>Effect 7: <slotattr piece="rring" slot="7" attr="amount" width="3"/> <slotattr piece="rring" slot="7" attr="effect"/></dd>
-<dd>Effect 8: <slotattr piece="rring" slot="8" attr="amount" width="3"/> <slotattr piece="rring" slot="8" attr="effect"/></dd>
-<dd>Effect 9: <slotattr piece="rring" slot="9" attr="amount" width="3"/> <slotattr piece="rring" slot="9" attr="effect"/></dd>
-<dd>Effect 10: <slotattr piece="rring" slot="10" attr="amount" width="3"/> <slotattr piece="rring" slot="10" attr="effect"/></dd>
-<dd>Effect 11: <slotattr piece="rring" slot="11" attr="amount" width="3"/> <slotattr piece="rring" slot="11" attr="effect"/></dd>
-<dd>Effect 12: <slotattr piece="rring" slot="12" attr="amount" width="3"/> <slotattr piece="rring" slot="12" attr="effect"/></dd>
-<dd>Utility: <pieceattr piece="rring" attr="utility"/></dd>
+<dd>Name: <pieceattr piece="Right Ring" attr="name"/></dd>
+<dd>Level: <pieceattr piece="Right Ring" attr="level"/>   Quality: <pieceattr piece="Right Ring" attr="quality"/>   Bonus: <pieceattr piece="Right Ring" attr="bonus"/></dd>
+<dd>Effect 1: <slotattr piece="Right Ring" slot="1" attr="amount" width="3"/> <slotattr piece="Right Ring" slot="1" attr="effect"/></dd>
+<dd>Effect 2: <slotattr piece="Right Ring" slot="2" attr="amount" width="3"/> <slotattr piece="Right Ring" slot="2" attr="effect"/></dd>
+<dd>Effect 3: <slotattr piece="Right Ring" slot="3" attr="amount" width="3"/> <slotattr piece="Right Ring" slot="3" attr="effect"/></dd>
+<dd>Effect 4: <slotattr piece="Right Ring" slot="4" attr="amount" width="3"/> <slotattr piece="Right Ring" slot="4" attr="effect"/></dd>
+<dd>Effect 5: <slotattr piece="Right Ring" slot="5" attr="amount" width="3"/> <slotattr piece="Right Ring" slot="5" attr="effect"/></dd>
+<dd>Effect 6: <slotattr piece="Right Ring" slot="6" attr="amount" width="3"/> <slotattr piece="Right Ring" slot="6" attr="effect"/></dd>
+<dd>Effect 7: <slotattr piece="Right Ring" slot="7" attr="amount" width="3"/> <slotattr piece="Right Ring" slot="7" attr="effect"/></dd>
+<dd>Effect 8: <slotattr piece="Right Ring" slot="8" attr="amount" width="3"/> <slotattr piece="Right Ring" slot="8" attr="effect"/></dd>
+<dd>Effect 9: <slotattr piece="Right Ring" slot="9" attr="amount" width="3"/> <slotattr piece="Right Ring" slot="9" attr="effect"/></dd>
+<dd>Effect 10: <slotattr piece="Right Ring" slot="10" attr="amount" width="3"/> <slotattr piece="Right Ring" slot="10" attr="effect"/></dd>
+<dd>Effect 11: <slotattr piece="Right Ring" slot="11" attr="amount" width="3"/> <slotattr piece="Right Ring" slot="11" attr="effect"/></dd>
+<dd>Effect 12: <slotattr piece="Right Ring" slot="12" attr="amount" width="3"/> <slotattr piece="Right Ring" slot="12" attr="effect"/></dd>
+<dd>Utility: <pieceattr piece="Right Ring" attr="utility"/></dd>
 </ifnotempty>
-<ifnotempty piece="lring">
+<ifnotempty piece="Left Ring">
 <dt><b>Left Ring</b></dt>
-<dd>Name: <pieceattr piece="lring" attr="name"/></dd>
-<dd>Level: <pieceattr piece="lring" attr="level"/>   Quality: <pieceattr piece="lring" attr="quality"/>   Bonus: <pieceattr piece="lring" attr="bonus"/></dd>
-<dd>Effect 1: <slotattr piece="lring" slot="1" attr="amount" width="3"/> <slotattr piece="lring" slot="1" attr="effect"/></dd>
-<dd>Effect 2: <slotattr piece="lring" slot="2" attr="amount" width="3"/> <slotattr piece="lring" slot="2" attr="effect"/></dd>
-<dd>Effect 3: <slotattr piece="lring" slot="3" attr="amount" width="3"/> <slotattr piece="lring" slot="3" attr="effect"/></dd>
-<dd>Effect 4: <slotattr piece="lring" slot="4" attr="amount" width="3"/> <slotattr piece="lring" slot="4" attr="effect"/></dd>
-<dd>Effect 5: <slotattr piece="lring" slot="5" attr="amount" width="3"/> <slotattr piece="lring" slot="5" attr="effect"/></dd>
-<dd>Effect 6: <slotattr piece="lring" slot="6" attr="amount" width="3"/> <slotattr piece="lring" slot="6" attr="effect"/></dd>
-<dd>Effect 7: <slotattr piece="lring" slot="7" attr="amount" width="3"/> <slotattr piece="lring" slot="7" attr="effect"/></dd>
-<dd>Effect 8: <slotattr piece="lring" slot="8" attr="amount" width="3"/> <slotattr piece="lring" slot="8" attr="effect"/></dd>
-<dd>Effect 9: <slotattr piece="lring" slot="9" attr="amount" width="3"/> <slotattr piece="lring" slot="9" attr="effect"/></dd>
-<dd>Effect 10: <slotattr piece="lring" slot="10" attr="amount" width="3"/> <slotattr piece="lring" slot="10" attr="effect"/></dd>
-<dd>Effect 11: <slotattr piece="lring" slot="11" attr="amount" width="3"/> <slotattr piece="lring" slot="11" attr="effect"/></dd>
-<dd>Effect 12: <slotattr piece="lring" slot="12" attr="amount" width="3"/> <slotattr piece="lring" slot="12" attr="effect"/></dd>
-<dd>Utility: <pieceattr piece="lring" attr="utility"/></dd>
+<dd>Name: <pieceattr piece="Left Ring" attr="name"/></dd>
+<dd>Level: <pieceattr piece="Left Ring" attr="level"/>   Quality: <pieceattr piece="Left Ring" attr="quality"/>   Bonus: <pieceattr piece="Left Ring" attr="bonus"/></dd>
+<dd>Effect 1: <slotattr piece="Left Ring" slot="1" attr="amount" width="3"/> <slotattr piece="Left Ring" slot="1" attr="effect"/></dd>
+<dd>Effect 2: <slotattr piece="Left Ring" slot="2" attr="amount" width="3"/> <slotattr piece="Left Ring" slot="2" attr="effect"/></dd>
+<dd>Effect 3: <slotattr piece="Left Ring" slot="3" attr="amount" width="3"/> <slotattr piece="Left Ring" slot="3" attr="effect"/></dd>
+<dd>Effect 4: <slotattr piece="Left Ring" slot="4" attr="amount" width="3"/> <slotattr piece="Left Ring" slot="4" attr="effect"/></dd>
+<dd>Effect 5: <slotattr piece="Left Ring" slot="5" attr="amount" width="3"/> <slotattr piece="Left Ring" slot="5" attr="effect"/></dd>
+<dd>Effect 6: <slotattr piece="Left Ring" slot="6" attr="amount" width="3"/> <slotattr piece="Left Ring" slot="6" attr="effect"/></dd>
+<dd>Effect 7: <slotattr piece="Left Ring" slot="7" attr="amount" width="3"/> <slotattr piece="Left Ring" slot="7" attr="effect"/></dd>
+<dd>Effect 8: <slotattr piece="Left Ring" slot="8" attr="amount" width="3"/> <slotattr piece="Left Ring" slot="8" attr="effect"/></dd>
+<dd>Effect 9: <slotattr piece="Left Ring" slot="9" attr="amount" width="3"/> <slotattr piece="Left Ring" slot="9" attr="effect"/></dd>
+<dd>Effect 10: <slotattr piece="Left Ring" slot="10" attr="amount" width="3"/> <slotattr piece="Left Ring" slot="10" attr="effect"/></dd>
+<dd>Effect 11: <slotattr piece="Left Ring" slot="11" attr="amount" width="3"/> <slotattr piece="Left Ring" slot="11" attr="effect"/></dd>
+<dd>Effect 12: <slotattr piece="Left Ring" slot="12" attr="amount" width="3"/> <slotattr piece="Left Ring" slot="12" attr="effect"/></dd>
+<dd>Utility: <pieceattr piece="Left Ring" attr="utility"/></dd>
 </ifnotempty>
-<ifnotempty piece="rwrist">
+<ifnotempty piece="Right Wrist">
 <dt><b>Right Wrist</b></dt>
-<dd>Name: <pieceattr piece="rwrist" attr="name"/></dd>
-<dd>Level: <pieceattr piece="rwrist" attr="level"/>   Quality: <pieceattr piece="rwrist" attr="quality"/>   Bonus: <pieceattr piece="rwrist" attr="bonus"/></dd>
-<dd>Effect 1: <slotattr piece="rwrist" slot="1" attr="amount" width="3"/> <slotattr piece="rwrist" slot="1" attr="effect"/></dd>
-<dd>Effect 2: <slotattr piece="rwrist" slot="2" attr="amount" width="3"/> <slotattr piece="rwrist" slot="2" attr="effect"/></dd>
-<dd>Effect 3: <slotattr piece="rwrist" slot="3" attr="amount" width="3"/> <slotattr piece="rwrist" slot="3" attr="effect"/></dd>
-<dd>Effect 4: <slotattr piece="rwrist" slot="4" attr="amount" width="3"/> <slotattr piece="rwrist" slot="4" attr="effect"/></dd>
-<dd>Effect 5: <slotattr piece="rwrist" slot="5" attr="amount" width="3"/> <slotattr piece="rwrist" slot="5" attr="effect"/></dd>
-<dd>Effect 6: <slotattr piece="rwrist" slot="6" attr="amount" width="3"/> <slotattr piece="rwrist" slot="6" attr="effect"/></dd>
-<dd>Effect 7: <slotattr piece="rwrist" slot="7" attr="amount" width="3"/> <slotattr piece="rwrist" slot="7" attr="effect"/></dd>
-<dd>Effect 8: <slotattr piece="rwrist" slot="8" attr="amount" width="3"/> <slotattr piece="rwrist" slot="8" attr="effect"/></dd>
-<dd>Effect 9: <slotattr piece="rwrist" slot="9" attr="amount" width="3"/> <slotattr piece="rwrist" slot="9" attr="effect"/></dd>
-<dd>Effect 10: <slotattr piece="rwrist" slot="10" attr="amount" width="3"/> <slotattr piece="rwrist" slot="10" attr="effect"/></dd>
-<dd>Effect 11: <slotattr piece="rwrist" slot="11" attr="amount" width="3"/> <slotattr piece="rwrist" slot="11" attr="effect"/></dd>
-<dd>Effect 12: <slotattr piece="rwrist" slot="12" attr="amount" width="3"/> <slotattr piece="rwrist" slot="12" attr="effect"/></dd>
-<dd>Utility: <pieceattr piece="rwrist" attr="utility"/></dd>
+<dd>Name: <pieceattr piece="Right Wrist" attr="name"/></dd>
+<dd>Level: <pieceattr piece="Right Wrist" attr="level"/>   Quality: <pieceattr piece="Right Wrist" attr="quality"/>   Bonus: <pieceattr piece="Right Wrist" attr="bonus"/></dd>
+<dd>Effect 1: <slotattr piece="Right Wrist" slot="1" attr="amount" width="3"/> <slotattr piece="Right Wrist" slot="1" attr="effect"/></dd>
+<dd>Effect 2: <slotattr piece="Right Wrist" slot="2" attr="amount" width="3"/> <slotattr piece="Right Wrist" slot="2" attr="effect"/></dd>
+<dd>Effect 3: <slotattr piece="Right Wrist" slot="3" attr="amount" width="3"/> <slotattr piece="Right Wrist" slot="3" attr="effect"/></dd>
+<dd>Effect 4: <slotattr piece="Right Wrist" slot="4" attr="amount" width="3"/> <slotattr piece="Right Wrist" slot="4" attr="effect"/></dd>
+<dd>Effect 5: <slotattr piece="Right Wrist" slot="5" attr="amount" width="3"/> <slotattr piece="Right Wrist" slot="5" attr="effect"/></dd>
+<dd>Effect 6: <slotattr piece="Right Wrist" slot="6" attr="amount" width="3"/> <slotattr piece="Right Wrist" slot="6" attr="effect"/></dd>
+<dd>Effect 7: <slotattr piece="Right Wrist" slot="7" attr="amount" width="3"/> <slotattr piece="Right Wrist" slot="7" attr="effect"/></dd>
+<dd>Effect 8: <slotattr piece="Right Wrist" slot="8" attr="amount" width="3"/> <slotattr piece="Right Wrist" slot="8" attr="effect"/></dd>
+<dd>Effect 9: <slotattr piece="Right Wrist" slot="9" attr="amount" width="3"/> <slotattr piece="Right Wrist" slot="9" attr="effect"/></dd>
+<dd>Effect 10: <slotattr piece="Right Wrist" slot="10" attr="amount" width="3"/> <slotattr piece="Right Wrist" slot="10" attr="effect"/></dd>
+<dd>Effect 11: <slotattr piece="Right Wrist" slot="11" attr="amount" width="3"/> <slotattr piece="Right Wrist" slot="11" attr="effect"/></dd>
+<dd>Effect 12: <slotattr piece="Right Wrist" slot="12" attr="amount" width="3"/> <slotattr piece="Right Wrist" slot="12" attr="effect"/></dd>
+<dd>Utility: <pieceattr piece="Right Wrist" attr="utility"/></dd>
 </ifnotempty>
-<ifnotempty piece="lwrist">
+<ifnotempty piece="Left Wrist">
 <dt><b>Left Wrist</b></dt>
-<dd>Name: <pieceattr piece="lwrist" attr="name"/></dd>
-<dd>Level: <pieceattr piece="lwrist" attr="level"/>   Quality: <pieceattr piece="lwrist" attr="quality"/>   Bonus: <pieceattr piece="lwrist" attr="bonus"/></dd>
-<dd>Effect 1: <slotattr piece="lwrist" slot="1" attr="amount" width="3"/> <slotattr piece="lwrist" slot="1" attr="effect"/></dd>
-<dd>Effect 2: <slotattr piece="lwrist" slot="2" attr="amount" width="3"/> <slotattr piece="lwrist" slot="2" attr="effect"/></dd>
-<dd>Effect 3: <slotattr piece="lwrist" slot="3" attr="amount" width="3"/> <slotattr piece="lwrist" slot="3" attr="effect"/></dd>
-<dd>Effect 4: <slotattr piece="lwrist" slot="4" attr="amount" width="3"/> <slotattr piece="lwrist" slot="4" attr="effect"/></dd>
-<dd>Effect 5: <slotattr piece="lwrist" slot="5" attr="amount" width="3"/> <slotattr piece="lwrist" slot="5" attr="effect"/></dd>
-<dd>Effect 6: <slotattr piece="lwrist" slot="6" attr="amount" width="3"/> <slotattr piece="lwrist" slot="6" attr="effect"/></dd>
-<dd>Effect 7: <slotattr piece="lwrist" slot="7" attr="amount" width="3"/> <slotattr piece="lwrist" slot="7" attr="effect"/></dd>
-<dd>Effect 8: <slotattr piece="lwrist" slot="8" attr="amount" width="3"/> <slotattr piece="lwrist" slot="8" attr="effect"/></dd>
-<dd>Effect 9: <slotattr piece="lwrist" slot="9" attr="amount" width="3"/> <slotattr piece="lwrist" slot="9" attr="effect"/></dd>
-<dd>Effect 10: <slotattr piece="lwrist" slot="10" attr="amount" width="3"/> <slotattr piece="lwrist" slot="10" attr="effect"/></dd>
-<dd>Effect 11: <slotattr piece="lwrist" slot="11" attr="amount" width="3"/> <slotattr piece="lwrist" slot="11" attr="effect"/></dd>
-<dd>Effect 12: <slotattr piece="lwrist" slot="12" attr="amount" width="3"/> <slotattr piece="lwrist" slot="12" attr="effect"/></dd>
-<dd>Utility: <pieceattr piece="lwrist" attr="utility"/></dd>
+<dd>Name: <pieceattr piece="Left Wrist" attr="name"/></dd>
+<dd>Level: <pieceattr piece="Left Wrist" attr="level"/>   Quality: <pieceattr piece="Left Wrist" attr="quality"/>   Bonus: <pieceattr piece="Left Wrist" attr="bonus"/></dd>
+<dd>Effect 1: <slotattr piece="Left Wrist" slot="1" attr="amount" width="3"/> <slotattr piece="Left Wrist" slot="1" attr="effect"/></dd>
+<dd>Effect 2: <slotattr piece="Left Wrist" slot="2" attr="amount" width="3"/> <slotattr piece="Left Wrist" slot="2" attr="effect"/></dd>
+<dd>Effect 3: <slotattr piece="Left Wrist" slot="3" attr="amount" width="3"/> <slotattr piece="Left Wrist" slot="3" attr="effect"/></dd>
+<dd>Effect 4: <slotattr piece="Left Wrist" slot="4" attr="amount" width="3"/> <slotattr piece="Left Wrist" slot="4" attr="effect"/></dd>
+<dd>Effect 5: <slotattr piece="Left Wrist" slot="5" attr="amount" width="3"/> <slotattr piece="Left Wrist" slot="5" attr="effect"/></dd>
+<dd>Effect 6: <slotattr piece="Left Wrist" slot="6" attr="amount" width="3"/> <slotattr piece="Left Wrist" slot="6" attr="effect"/></dd>
+<dd>Effect 7: <slotattr piece="Left Wrist" slot="7" attr="amount" width="3"/> <slotattr piece="Left Wrist" slot="7" attr="effect"/></dd>
+<dd>Effect 8: <slotattr piece="Left Wrist" slot="8" attr="amount" width="3"/> <slotattr piece="Left Wrist" slot="8" attr="effect"/></dd>
+<dd>Effect 9: <slotattr piece="Left Wrist" slot="9" attr="amount" width="3"/> <slotattr piece="Left Wrist" slot="9" attr="effect"/></dd>
+<dd>Effect 10: <slotattr piece="Left Wrist" slot="10" attr="amount" width="3"/> <slotattr piece="Left Wrist" slot="10" attr="effect"/></dd>
+<dd>Effect 11: <slotattr piece="Left Wrist" slot="11" attr="amount" width="3"/> <slotattr piece="Left Wrist" slot="11" attr="effect"/></dd>
+<dd>Effect 12: <slotattr piece="Left Wrist" slot="12" attr="amount" width="3"/> <slotattr piece="Left Wrist" slot="12" attr="effect"/></dd>
+<dd>Utility: <pieceattr piece="Left Wrist" attr="utility"/></dd>
 </ifnotempty>
 </dl>
 </ConfigReport>
