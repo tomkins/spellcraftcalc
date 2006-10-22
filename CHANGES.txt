@@ -1,6 +1,13 @@
 Updated ??/??/2006 - Version 1.92
 
+  Fixed a flaw that Edit - Item Type was creating a new item instead of
+  modifying the current item.
 
+  Fixed the escape key within the dropdown lists.  Escape will not change
+  the previously selected item as it closes the dropdown list.
+
+  Qt 4.2 is now strongly recommended to enable all of the layout features
+  and easiest-to-use interface.  Several quirks fixed from this move.
 
 Updated 10/16/2006 - Version 1.91
 
