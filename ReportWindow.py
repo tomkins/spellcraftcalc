@@ -226,13 +226,12 @@ class ReportWindow(QDialog, Ui_B_ReportWindow):
                 iteminfo[key]['availablepoints'] = 0
                 iteminfo[key]['overcharge'] = 0
             else:
-                imbue = SC.calcImbue(item)
-                itemimbue = SC.getItemImbue(item)
+                imbue = item.totalImbue()
+                itemimbue = item.itemImbue()
                 if (imbue - itemimbue) >= 6:
                     success = 'Impossible!'
                 elif imbue > (itemimbue+0.5):
-                    success = SC.computeOverchargeSuccess(imbue, itemimbue, item, 
-                                                          self.parent.crafterSkill)
+                    success = item.overchargeSuccess(self.parent.crafterSkill)
                     if success < 0:
                         success = '%d%% (BOOM!)' % success
                     else:
