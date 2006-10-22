@@ -79,7 +79,6 @@
 <?endfor?>
 <?for slot in range(5,7)?>
 <dd>Effect <?slot?>: <slotattr attr="amount" width="2"/> <slotattr attr="effect"/> - <slotattr attr="name"/></dd>
-<dd>Effect <?slot?>: <slotattr attr="amount" width="2"/> <slotattr attr="effect"/> - <slotattr attr="name"/></dd>
 <dd>Utility: <itemattr attr="utility"/></dd>
 <?endif?>
 <?if itemtype=="drop"?>
