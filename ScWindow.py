@@ -595,7 +595,7 @@ class ScWindow(QMainWindow, Ui_B_SC):
 
         self.CharName.setText('')
         self.Realm.setCurrentIndex(Realms.index(self.realm))
-        self.RealmChanged(self.Realm.currentIndex())
+        self.RealmChanged(Realms.index(self.realm))
         self.CharLevel.setText('50')
         self.restoreItem(self.itemattrlist[self.currentTabLabel])
         self.modified = 0
@@ -1102,16 +1102,18 @@ class ScWindow(QMainWindow, Ui_B_SC):
         self.CharRace.clear()
         racelist = AllBonusList[self.realm][self.charclass]['Races']
         self.CharRace.insertItems(0, list(racelist))
-        if race in racelist:
-            self.CharRace.setCurrentIndex(racelist.index(race))
-        self.RaceChanged(self.CharRace.currentIndex())
+        if race not in racelist:
+            race = racelist[0]
+        self.CharRace.setCurrentIndex(racelist.index(race))
+        self.RaceChanged(racelist.index(race))
 
     def RealmChanged(self,a0):
         self.realm = str(self.Realm.currentText())
         self.CharClass.clear()
         self.CharClass.insertItems(0, list(ClassList[self.realm]))
-        if self.charclass in ClassList[self.realm]:
-            self.CharClass.setCurrentIndex(ClassList[self.realm].index(self.charclass))
+        if self.charclass not in ClassList[self.realm]:
+            self.charclass = ClassList[self.realm][0]
+        self.CharClass.setCurrentIndex(ClassList[self.realm].index(self.charclass))
         self.CharClassChanged(self.CharClass.currentIndex())
 
     def ItemLevelShow(self):
@@ -1563,10 +1565,10 @@ class ScWindow(QMainWindow, Ui_B_SC):
                 self.coop = eval(XMLHelper.getText(child.childNodes), 
                                  globals(), globals())
         self.Realm.setCurrentIndex(Realms.index(self.realm))
-        self.RealmChanged(self.Realm.currentIndex())
+        self.RealmChanged(Realms.index(self.realm))
         if AllBonusList[self.realm].has_key(self.charclass):
             self.CharClass.setCurrentIndex(ClassList[self.realm].index(self.charclass))
-            self.CharClassChanged(self.CharClass.currentIndex())
+            self.CharClassChanged(ClassList[self.realm].index(self.charclass))
         if racename in AllBonusList[self.realm][self.charclass]['Races']:
             self.CharRace.setCurrentIndex(AllBonusList[self.realm][self.charclass] \
                                                       ['Races'].index(racename))
@@ -1598,7 +1600,7 @@ class ScWindow(QMainWindow, Ui_B_SC):
                 self.RealmChanged(self.realm)
                 if AllBonusList[self.realm].has_key(self.charclass):
                    self.CharClass.setCurrentIndex(ClassList[self.realm].index(self.charclass))
-                   self.CharClassChanged(self.CharClass.currentIndex())
+                   self.CharClassChanged(ClassList[self.realm].index(self.charclass))
         for itemnum in range(0, 19):
             item = Item(realm=self.realm,loc=TabList[itemnum])
             item.loadLelaItemFromSCC(itemnum, scclines, self.realm)
