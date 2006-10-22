@@ -833,7 +833,8 @@ class ScWindow(QMainWindow, Ui_B_SC):
                     if i < len(imbuevals):
                         self.Cost[i].setText(SC.formatCost(slot.gemCost()))
                         self.Points[i].setText('%3.1f' % imbuevals[i])
-                    self.Name[i].setText(slot.gemName(self.realm))
+                    if i < len(self.Name):
+                          self.Name[i].setText(slot.gemName(self.realm))
                 if not item.Equipped == '1':
                     continue
                 if gemtype == 'Skill':
