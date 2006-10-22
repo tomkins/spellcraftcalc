@@ -8,7 +8,8 @@ import sys
 import string
 
 from PyQt4.QtGui import QComboBox, QFontMetrics, QStyleOptionComboBox, QStyle
-from PyQt4.QtCore import SIGNAL, Qt, QSize
+from PyQt4.QtGui import QStandardItemModel, QItemSelectionModel
+from PyQt4.QtCore import SIGNAL, Qt, QSize, QString
 from ComboListView import ComboListView
 
 class SearchingCombo(QComboBox):
@@ -16,29 +17,44 @@ class SearchingCombo(QComboBox):
         QComboBox.__init__(self, parent)
         self.setMaxVisibleItems(20)
         self.setEditable(editable)
-        self.minText = ' '
+        self.maxWidth = 0
         if name is not None:
             self.setObjectName(name)
+        # save the model, use our view, create a new selection model
+        model = self.model()
+        oldview = self.view()
         self.setView(ComboListView(self, self))
+        self.view().setModel(model)
+        self.view().setSelectionModel(QItemSelectionModel(model,self.view()))
 
     def insertItems(self, idx, lst):
-        len_ = 0
-        for s in lst:
-            if len(s) > len(self.minText):
-                self.minText = s
+        self.minWidth = 0
         QComboBox.insertItems(self, idx, lst)
 
     def getMinimumWidth(self, items = None):
-        if items:
-            len_ = 0
-            for s in items:
-                if len(s) > len(self.minText):
-                    self.minText = s
         fm = QFontMetrics(self.font())
         opt = QStyleOptionComboBox()
-        opt.setCurrentText = self.minText
-        sz = QSize(fm.width(self.minText), fm.height())
-        return self.style().sizeFromContents(QStyle.CT_ComboBox, opt, sz, self).width()
+        style = self.style()
+        mw = self.maxWidth
+        if items is not None:
+            for str in items:
+                opt.currentText = QString(str)
+                sz = QSize(fm.width(opt.currentText), fm.height())
+                mw = max(mw, style.sizeFromContents(QStyle.CT_ComboBox, 
+                                                    opt, sz, self).width())
+        elif mw == 0 and self.count() > 0:
+            for i in range(0, self.count()):
+                opt.currentText = self.itemText(i)
+                sz = QSize(fm.width(opt.currentText), fm.height())
+                mw = max(mw, style.sizeFromContents(QStyle.CT_ComboBox, 
+                                                    opt, sz, self).width())
+        elif mw == 0:
+            opt.currentText = QString(' ')
+            sz = QSize(fm.width(opt.currentText), fm.height())
+            mw = max(mw, style.sizeFromContents(QStyle.CT_ComboBox, 
+                                                opt, sz, self).width())
+        self.maxWidth = mw
+        return mw
 
     def buildItemKeys(self):
         keys = []

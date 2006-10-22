@@ -28,7 +28,8 @@ class ComboListView(QListView):
         mx += 25
 
         if mx > self.parent().parent().width():
-            self.setGeometry(self.pos().x(), self.pos().y(), mx, self.height())
+            self.setGeometry(self.pos().x(), self.pos().y(), 
+                             mx, self.height())
             self.parent().setGeometry(self.parent().pos().x(),
                 self.parent().pos().y(), mx, self.parent().height())
         QListView.showEvent(self, e)
@@ -43,7 +44,7 @@ class ComboListView(QListView):
         QListView.keyPressEvent(self, e)
 
     def event(self, e):
-        if e.type() == QEvent.ShortcutOverride and e.key() == Qt.Key_Escape: 
+        if e.type() == QEvent.ShortcutOverride and e.key() == Qt.Key_Escape:
             self.clearSelection()
         return QListView.event(self, e)
 
@@ -56,5 +57,6 @@ class ComboListView(QListView):
         if len(idxs) > 0 and combobox.currentIndex() != idxs[0].row():
             combobox.setCurrentIndex(idxs[0].row())
             combobox.emit(SIGNAL("activated(int)"),combobox.currentIndex())
-            combobox.emit(SIGNAL("activated(const QString &)"),combobox.currentText())
+            combobox.emit(SIGNAL("activated(const QString &)"),
+                          combobox.currentText())
         QListView.focusOutEvent(self, e)
