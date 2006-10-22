@@ -357,6 +357,7 @@ class ScWindow(QMainWindow, Ui_B_SC):
         self.filemenu.addSeparator()
         self.filemenu.addAction('Export &Quickbars...', self.openCraftBars)
         self.filemenu.addAction('Export &UI XML (Beta)...', self.generateUIXML)
+        self.filemenu.addAction('Export SCTemplate XML...', self.exportAsFile)
         self.filemenu.addSeparator()
         self.filemenu.addMenu(self.rf_menu)
         self.filemenu.addSeparator()
@@ -440,7 +441,6 @@ class ScWindow(QMainWindow, Ui_B_SC):
         self.viewmenu.addAction('&Configuration', self.openConfigReport,
                                 QKeySequence(Qt.ALT+Qt.Key_C))
         self.viewmenu.addAction('Choose Format...', self.chooseReportFile)
-        self.filemenu.addAction('Export SCTemplate XML...', self.exportAsFile)
         self.viewmenu.addSeparator()
         self.showcapmenuid = self.viewmenu.addAction('&Distance to Cap', self.showCap,
                                                      QKeySequence(Qt.ALT+Qt.Key_D))
