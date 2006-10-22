@@ -13,6 +13,7 @@ import types
 from PyQt4.QtGui import *
 from MyStringIO import UnicodeStringIO
 import sys
+import SC
 
 class ItemSlot:
     def __init__(self, slottype='player', type='Unused', amount='0', effect='',
@@ -36,19 +37,6 @@ class ItemSlot:
         self.Requirement = unicode(requirement)
         self.fixEffect()
         self.CraftOk = False
-
-    def asXML(self,document,slotnode):
-        if self.SlotType == 'player':
-            keys = ['Type', 'Effect', 'Amount', 'Qua', 'Remakes', 'Time', 'Done', ]
-        else:
-            keys = ['Type', 'Effect', 'Amount', 'Requirement', ]
-        for attrkey in keys:
-            if self.getAttr(attrkey) == '0' or self.getAttr(attrkey) == '':
-                continue
-            valnode = document.createElement(unicode(attrkey))
-            valtext = document.createTextNode(self.getAttr(attrkey))
-            valnode.appendChild(valtext)
-            slotnode.appendChild(valnode)
 
     def getAttr(self, attrname):
         if self.__dict__.has_key(attrname):
@@ -164,7 +152,7 @@ class ItemSlot:
         if (mval < 1): return 1.0
         return mval
 
-    def gemUtility(self):
+    def gemUtility(self,skilltable={}):
         mval = 0.0
         if self.Amount == '0' or self.Amount == '':
             pass
@@ -176,6 +164,9 @@ class ItemSlot:
         elif self.Type == 'Skill':
             mval = (int(self.Amount) - 1) * 5.0
             if int(self.Amount) == 1: mval = 1.0
+            #if self.Effect == 'All Magic Skills':
+            #    for e in skilltable[effect]:
+            #        mval += amount * 5
         elif self.Type == 'Focus':
             mval = 1.0
         elif self.Type == 'Hits':
@@ -241,15 +232,19 @@ class ItemSlot:
             ret['Liquids'][gemliquid] = gemindex + 1
         return ret
 
+    def gemRemakes(self):
+        remakes = int(self.Remakes) + 1
+        if self.Done == '0':
+            remakes += EstimatedMakes[self.quaIndex()] - 1
+        return remakes
+
     def gemCost(self, tries=0):
         if not self.crafted():
             return 0
         if tries > 0:
             remakes = tries
         else:
-            remakes = int(self.Remakes) + 1
-            if self.Done == '0':
-                remakes += EstimatedMakes[self.quaIndex()] - 1
+            remakes = self.gemRemakes()
         costindex = self.gemLevel() - 1
         cost = GemCosts[costindex]
         remakecost = RemakeCosts[costindex]
@@ -266,6 +261,62 @@ class ItemSlot:
         cost += remakecost * remakes
         return cost
 
+    def gemPrice(self, pricingInfo, tries=0):
+        price = 0
+        cost = self.gemCost(tries)
+        if cost > 0:
+            price += int(pricingInfo.get('PPGem', 0) * 10000)
+            if pricingInfo.get('HourInclude', 0):
+                price += int(pricingInfo.get('Hour', 0) * 10000 \
+                           * int(self.Time) / 60.0)
+            if pricingInfo.get('TierInclude', 0):
+                gemlvl = str(self.gemLevel())
+                tierp = pricingInfo.get('Tier', {})
+                price += int(float(tierp.get(gemlvl, 0)) * 10000)
+            if pricingInfo.get('QualInclude', 0):
+                qualp = pricingInfo.get('Qual', {})
+                price += int(cost * float(qualp.get(self.Qua, 0)) / 100.0)
+            price += int(cost * pricingInfo.get('General', 0) / 100.0)
+            if pricingInfo.get('CostInPrice', 1):
+                price += cost
+        return price
+
+    def asXML(self,slotnode,realm='',rich=False):
+        document = Document()
+        if self.Type == 'Unused' or self.Type == '':
+            savexml = [(u'Type', u'Unused',),]
+        else:
+            savexml = [(u'Type', self.Type,), 
+                       (u'Effect', self.Effect,),
+                       (u'Amount', self.Amount,)]
+            if self.SlotType == 'player':
+                savexml.extend([
+                       (u'Qua', self.Qua,), 
+                       (u'Remakes', self.Remakes,), 
+                       (u'Time', self.Time,), 
+                       (u'Done', self.Done,)])
+            if rich:
+                if self.crafted():
+                    savexml.extend([
+                       (u'Imbue', u"%.1f" % self.gemImbue(),),
+                       (u'Level', unicode(self.gemLevel()),),
+                       (u'Cost', unicode(self.gemCost()),)])
+                if self.Type[-6:] != "Effect":
+                    savexml.append(
+                       (u'Utility', u"%.1f" % self.gemUtility(),))
+                name = self.gemName(realm)
+                if len(name) > 0:
+                    savexml.append(
+                       (u'Name', name,))
+            if len(self.Requirement) > 0:
+                savexml.append((u'Requirement', self.Requirement,))
+        for attrkey, attrval in savexml:
+            if not rich and (attrval == '0' or attrval == ''):
+                continue
+            valnode = document.createElement(attrkey)
+            valtext = document.createTextNode(attrval)
+            valnode.appendChild(valtext)
+            slotnode.appendChild(valnode)
 
 class Item:
     def __init__(self, state='', loc='', realm='All'):
@@ -357,62 +408,148 @@ class Item:
 
     def __repr__(self):
         return unicode(self.itemslots)
-        
-    def asXML(self):
+
+    def itemImbue(self):
+        if self.ActiveState != "player": return 0
+        try: itemlevel = int(self.Level)
+        except: itemlevel = 0
+        if itemlevel < 1 or itemlevel > 51:
+            return 0.0
+        if (self.Level == self.AFDPS) \
+                and (itemlevel % 2 == 1) and (itemlevel > 1) and (itemlevel != 51):
+            itemlevel = itemlevel - 1
+        try: itemqual = int(self.ItemQuality) - 94
+        except: itemqual = -1
+        if itemqual < 0 or itemqual >= len(ImbuePts[itemlevel - 1]):
+            itemqual = 0
+        itemimbue = ImbuePts[itemlevel - 1][itemqual]
+        return itemimbue
+
+    def listGemImbue(self):
+        if self.ActiveState != 'player': return (0.0, 0.0, 0.0, 0.0,)
+        mvals = [self.slot(0).gemImbue(), self.slot(1).gemImbue(),
+                 self.slot(2).gemImbue(), self.slot(3).gemImbue(),]
+        maximbue = max(mvals)
+        for j in range(0, len(mvals)):
+            if j == mvals.index(maximbue): continue
+            mvals[j] = mvals[j] / 2.0
+        return mvals
+
+    def totalImbue(self):
+        if self.ActiveState != "player": return 0.0
+        return sum(self.listGemImbue())
+
+    def overchargeSuccess(self, crafterSkill=1000):
+        itemimbue = self.itemImbue()
+        gemimbue = self.listGemImbue()
+        imbuepts = sum(gemimbue)
+        if imbuepts == 0: return 0
+        if (imbuepts - itemimbue) >= 6:
+            return -100
+        elif imbuepts < (itemimbue + 1.0):
+            return 100
+        success = -OCStartPercentages[int(imbuepts-itemimbue)]
+        for i in range(0, len(gemimbue)):
+            if gemimbue[i] == 0.0: continue
+            success += GemQualOCModifiers[self.slot(i).qua()]
+        success += ItemQualOCModifiers[self.ItemQuality]
+        skillbonus = (int(crafterSkill / 50) - 10) * 5
+        if skillbonus > 50:
+            skillbonus = 50
+        success += skillbonus
+        return success
+
+    def cost(self):
+        cost = 0
+        for slot in self.slots():
+            cost += slot.gemCost()
+        return cost
+
+    def price(self, pricingInfo):
+        price = 0
+        cost = 0
+        for slot in self.slots():
+            cost += slot.gemCost()
+        if cost == 0: return 0
+        for slot in self.slots():
+            price += slot.gemPrice(pricingInfo)
+        if cost > 0:
+            imbuepts = self.totalImbue()
+            if pricingInfo.get('PPInclude', 0):
+                price += int(pricingInfo.get('PPImbue', 0) * 10000 \
+                           * imbuepts)
+                price += int(pricingInfo.get('PPOC', 0) * 10000 \
+                           * max(0, int(imbuepts - self.itemImbue())))
+                price += int(pricingInfo.get('PPLevel', 0) * 10000 \
+                           * int(self.Level))
+            price += int(pricingInfo.get('PPItem', 0) * 10000)
+        return price
+
+    def utility(self, skilltable={}):
+        utility = 0.0
+        for slot in self.slots():
+            utility += slot.gemUtility(skilltable)
+        return utility
+    
+    def asXML(self, pricingInfo=None, crafterSkill=1000, rich=False):
         document = Document()
         rootnode = document.createElement(unicode('SCItem'))
         document.appendChild(rootnode)
-        for key in ['ActiveState', 'Location', 'Realm',
-            'ItemName', 'AFDPS', 'Speed', 'Bonus',
-            'ItemQuality', 'Equipped', 'Level']:
-            val = getattr(self, key)
-            if val == '': continue
+        fields = [(u'ActiveState', self.ActiveState,),
+                  (u'Location',self.Location,),
+                  (u'Realm', self.Realm,),
+                  (u'ItemName', self.ItemName,),
+                  (u'AFDPS', self.AFDPS,),
+                  (u'Speed', self.Speed,),
+                  (u'Bonus', self.Bonus,),
+                  (u'ItemQuality', self.ItemQuality,),
+                  (u'Equipped', self.Equipped,),
+                  (u'Level', self.Level,),]
+        if rich:
+            imbuevals = self.listGemImbue()
+            fields.extend([
+                  (u'Utility', u"%.1f" % self.utility(),),
+                  (u'Cost', unicode(self.cost()),),
+                  (u'Price', unicode(self.price(pricingInfo)),),
+                  (u'Imbue', u"%.1f" % sum(imbuevals),),
+                  (u'ItemImbue', unicode(self.itemImbue()),),
+                  (u'Success',
+                       unicode(self.overchargeSuccess(crafterSkill)),),])
+        for key, val in fields:
+            if not rich and val == '': continue
             elem = document.createElement(key)
             elem.appendChild(document.createTextNode(val))
             rootnode.appendChild(elem)
+        slotnode = None
         for num in range(0,len(self.itemslots)):
             if self.itemslots[num].type() == "Unused": continue
             slotnode = document.createElement(unicode('SLOT'))
             slotnode.setAttribute(unicode("Number"), unicode(num))
-            if self.itemslots[num].slotType() != self.ActiveState:
+            if rich or self.itemslots[num].slotType() != self.ActiveState:
                 slotnode.setAttribute(unicode("Type"), 
                                       unicode(self.itemslots[num].slotType()))
-            self.itemslots[num].asXML(document,slotnode)
+            self.itemslots[num].asXML(slotnode,self.Realm,rich)
+            if rich and num < len(imbuevals) and imbuevals[num] > 0:
+                imbuenode = slotnode.getElementsByTagName('Imbue')[0]
+                elem = document.createTextNode(u"%.1f" % imbuevals[num])
+                imbuenode.replaceChild(elem, imbuenode.childNodes[0])
             rootnode.appendChild(slotnode)
+        if slotnode is None: 
+            return None
         return document
 
-    def utility(self, skilltable):
-        utility = 0.0
-        for slot in self.slots():
-            gemtype = slot.type()
-            if gemtype == 'Unused': continue
-            amount = int(slot.amount())
-            if slot.type() == 'Skill':
-                #if slot.effect()[0:4] == 'All Magic Skills':
-                #    for e in skilltable[effect]:
-                #        utility += amount * 5
-                #else:
-                utility += amount * 5
-            elif gemtype == 'Focus':
-                utility += 1
-            elif gemtype == 'Power':
-                utility += amount * 2
-            elif gemtype == 'Hits':
-                utility += amount / 4.0
-            elif gemtype == 'Resist':
-                utility += amount * 2
-            elif gemtype == 'Stat':
-                utility += amount * 2.0 / 3.0
-        return utility
-    
     def save(self, filename):
+        itemxml = self.asXML()
+        if itemxml is None:
+            QMessageBox.critical(None, 'Error!', 
+                'There was no item to save!', 'OK')
         try:
             f = file(filename, 'w')
         except IOError:
             QMessageBox.critical(None, 'Error!', 
                 'Error opening file: ' + filename, 'OK')
             return
-        f.write(XMLHelper.writexml(self.asXML(), UnicodeStringIO(), '', '\t', '\n'))
+        f.write(XMLHelper.writexml(itemxml, UnicodeStringIO(), '', '\t', '\n'))
         f.close()
 
     def load(self, filename, namehint = '', silent = 0):
@@ -645,3 +782,22 @@ class Item:
                                         slot['Remakes'], slot['Done'])
                             break
             slotindex += 1
+
+
+if __name__ == '__main__':
+    slots = {}
+    for filename in glob.glob("items/*/*/*.xml"):
+        f = None
+        try:
+            f = file(filename, 'r')
+            docstr = f.read()
+            xmldoc = parseString(docstr)
+            items = xmldoc.getElementsByTagName('SCItem')
+            testTreeXML(xmldoc, slots)
+        except:
+            traceback.print_exc()
+            sys.stderr.write("Error reading file: %s\n" % filename)
+        if f is not None:
+            f.close()
+
+    dumptree(slots,1)

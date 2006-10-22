@@ -481,6 +481,8 @@ class ScWindow(QMainWindow, Ui_B_SC):
 
     def showFixWidgets(self):
         for i in range(0,6):
+            self.GemLabel[i].setText('Slot &%d:' % (i + 1))
+            self.GemLabel[i].setEnabled(1)
             self.GemLabel[i].show()
             self.Type[i].show()
             self.Effect[i].show()
@@ -493,9 +495,6 @@ class ScWindow(QMainWindow, Ui_B_SC):
             w.hide()
         for w in self.switchOnType['drop']:
             w.show()
-        for i in range(0,4):
-            self.GemLabel[i].setEnabled(1)
-            self.GemLabel[i].setText('Slot &%d:' % (i + 1))
         #self.GroupItemFrame.updateGeometry()
         self.craftingmenuid.setEnabled(False)
         self.chooseitemmenuid.setEnabled(False)
@@ -513,8 +512,9 @@ class ScWindow(QMainWindow, Ui_B_SC):
             self.GemLabel[i].setEnabled(1)
             if item.slot(i).slotType() == 'player':
                 self.GemLabel[i].setText('Gem &%d:' % (i + 1))
+                if item.slot(i).done() == "1":
+                    self.GemLabel[i].setEnabled(0)
             else:
-                self.GemLabel[i].setText('Slot &%d:' % (i + 1))
                 if i < 4:
                     self.Quality[i].hide()
                     self.Points[i].hide()
@@ -626,10 +626,11 @@ class ScWindow(QMainWindow, Ui_B_SC):
         childnode.appendChild(document.createTextNode(str(self.noteText)))
         rootnode.appendChild(childnode)
 
-        for key, item in self.itemattrlist.iteritems():
+        for key in TabList:
+            item = self.itemattrlist[key]
             # use firstChild here because item.asXML() constructs a Document()
             while item is not None:
-                childnode = item.asXML()
+                childnode = item.asXML(self.pricingInfo, self.crafterSkill, True)
                 if childnode is not None:
                     rootnode.appendChild(childnode.firstChild)
                 item = item.next
@@ -801,35 +802,20 @@ class ScWindow(QMainWindow, Ui_B_SC):
         totalcost = 0
         totalprice = 0
         for key, item in self.itemattrlist.iteritems():
-            utility = 0.0
             itemtype = item.ActiveState
-            itemcost = 0
-            itemprice = 0
+            utility = item.utility()
+            itemcost = item.cost()
+            itemprice = item.price(self.pricingInfo)
+            imbuevals = item.listGemImbue()
+            imbuepts = sum(imbuevals)
+            itemimbue = item.itemImbue()
             gemeffects = []
             for i in range(0, item.slotCount()):
                 slot = item.slot(i)
-                utility += slot.gemUtility()
                 gemtype = slot.type()
                 effect = slot.effect()
                 amount = int('0'+re.sub('[^\d]', '', slot.amount()))
-                if i < 4 and itemtype == 'player':
-                    cost = slot.gemCost()
-                    itemcost += cost
-                    if key == self.currentTabLabel:
-                        self.Cost[i].setText(SC.formatCost(cost))
-                    if cost > 0:
-                        itemprice += int(self.pricingInfo.get('PPGem', 0) * 10000)
-                        if self.pricingInfo.get('HourInclude', 0):
-                            itemprice += int(self.pricingInfo.get('Hour', 0) * 10000 \
-                                           * int(slot.time()) / 60.0)
-                        if self.pricingInfo.get('TierInclude', 0):
-                            gemlvl = str(slot.gemLevel())
-                            tierp = self.pricingInfo.get('Tier', {})
-                            itemprice += int(float(tierp.get(gemlvl, 0)) * 10000)
-                        if self.pricingInfo.get('QualInclude', 0):
-                            gemqual = slot.qua()
-                            qualp = self.pricingInfo.get('Qual', {})
-                            itemprice += int(cost * float(qualp.get(gemqual, 0)) / 100.0)
+                if slot.slotType() == 'player':
                     if gemtype != 'Unused':
                         if [gemtype, effect] in gemeffects:
                             error_act = QAction('Two of same type of gem on %s' % key, self)
@@ -843,6 +829,11 @@ class ScWindow(QMainWindow, Ui_B_SC):
                             self.errorsmenu.addAction(error_act)
                             errorcount = errorcount + 1
                         gemeffects.append([gemtype, effect])
+                if key == self.currentTabLabel:
+                    if i < len(imbuevals):
+                        self.Cost[i].setText(SC.formatCost(slot.gemCost()))
+                        self.Points[i].setText('%3.1f' % imbuevals[i])
+                    self.Name[i].setText(slot.gemName(self.realm))
                 if not item.Equipped == '1':
                     continue
                 if gemtype == 'Skill':
@@ -896,23 +887,9 @@ class ScWindow(QMainWindow, Ui_B_SC):
                         effects = (effect,)
                     for effect in effects:
                         self.capTotals[effect] += amount
-            totalutility += utility
-            itemimbue = self.getItemImbue(item)
-            imbuepts = self.calcImbue(item, key == self.currentTabLabel)
-            if self.pricingInfo.get('PPInclude', 0):
-                itemprice += int(self.pricingInfo.get('PPImbue', 0) * 10000 * imbuepts)
-                itemprice += int(self.pricingInfo.get('PPOC', 0) * 10000 \
-                               * max(0, int(imbuepts - self.getItemImbue(item))))
-                if itemcost > 0:
-                    itemprice += int(self.pricingInfo.get('PPLevel', 0) * 10000 \
-                                   * int(item.Level))
-            if itemcost > 0:
-                itemprice += int(self.pricingInfo.get('PPItem', 0) * 10000)
-            itemprice += int(itemcost * self.pricingInfo.get('General', 0) / 100.0)
-            if self.pricingInfo.get('CostInPrice', 1):
-                itemprice += itemcost
             totalcost += itemcost
             totalprice += itemprice
+            totalutility += utility
             if itemtype == 'player':
                 if (imbuepts - itemimbue) >= 6:
                     error_act = QAction('Impossible Overcharge on %s' % key, self)
@@ -925,38 +902,23 @@ class ScWindow(QMainWindow, Ui_B_SC):
                     error_act.setData(QVariant((row << 8) | col))
                     self.errorsmenu.addAction(error_act)
                     errorcount = errorcount + 1
-                elif imbuepts > (itemimbue+0.5):
-                    success = -OCStartPercentages[int(imbuepts-itemimbue)]
-                    for slot in item.slots():
-                        if not slot.crafted(): continue
-                        success += GemQualOCModifiers[slot.qua()]
-                    success += ItemQualOCModifiers[str(self.QualDrop.currentText())]
-                    skillbonus = (int(self.crafterSkill / 50) - 10) * 5
-                    if skillbonus > 50: skillbonus = 50
-                    success += skillbonus
             if key == self.currentTabLabel:
                 self.ItemUtility.setText('%3.1f' % utility)
-                if item.ActiveState == 'player':
+                if itemtype == 'player':
                     self.ItemImbue.setText('%3.1f' % imbuepts)
                     self.ItemImbueTotal.setText(' / ' + unicode(itemimbue))
                     self.ItemCost.setText(SC.formatCost(itemcost))
                     self.ItemPrice.setText(SC.formatCost(itemprice))
-                    for i in range(0, item.slotCount()):
-                        slot = item.slot(i)
-                        self.Name[i].setText(slot.gemName(self.realm))
-                        if slot.crafted() and slot.done() == "1":
-                            self.GemLabel[i].setEnabled(0)
-                        else:
-                            self.GemLabel[i].setEnabled(1)
-                    if (imbuepts - itemimbue) >= 6:
-                        self.ItemOvercharge.setText('Impossible!')
-                    elif imbuepts > (itemimbue+0.5):
+                    if imbuepts >= (itemimbue + 6.0):
+                        self.ItemOvercharge.setText('Impossible')
+                    elif imbuepts < (itemimbue + 1.0):
+                        self.ItemOvercharge.setText('None')
+                    else:
+                        success = item.overchargeSuccess(self.crafterSkill)
                         if success < 0:
                             self.ItemOvercharge.setText('BOOM! (%d%%)' % success)
                         else:
                             self.ItemOvercharge.setText('%d%%' % success)
-                    else:
-                        self.ItemOvercharge.setText('None')
         for (key, val) in self.totals.iteritems():
             if not self.capDistance:
                 if self.includeRacials:
@@ -1026,42 +988,6 @@ class ScWindow(QMainWindow, Ui_B_SC):
         self.TotalPrice.setText(SC.formatCost(totalprice))
         self.TotalUtility.setText('%3.1f' % totalutility)
         self.errorsmenuid.setEnabled(errorcount > 0)
-
-    def getItemImbue(self, item):
-        try: itemlevel = int(item.Level)
-        except: itemlevel = 0
-        if itemlevel < 1 or itemlevel > 51:
-            itemlevel = 1
-            item.Level = '1'
-        if (item.Level == item.AFDPS) \
-                and (itemlevel % 2 == 1) and (itemlevel > 1) and (itemlevel != 51):
-            itemlevel = itemlevel - 1
-        try: itemqual = int(item.ItemQuality) - 94
-        except: itemqual = -1
-        if itemqual < 0 or itemqual >= len(ImbuePts[itemlevel - 1]):
-            itemqual = 0
-            item.ItemQuality = '94'
-        itemimbue = ImbuePts[itemlevel - 1][itemqual]
-        return itemimbue
-
-    def calcImbue(self, item, display):
-        itemstate = item.ActiveState
-        if itemstate == 'drop': return 0
-        mvals = []
-        for slot in item.slots():
-            mval = slot.gemImbue()
-            mvals.append(mval)
-        if len(mvals) < 4:
-            mvals.extend([0,0,0,0])
-        maximbue = max(mvals)
-        if display:
-            for j in range(0, 4):
-                if j != mvals.index(maximbue):
-                    self.Points[j].setText('%3.1f' % (mvals[j] / 2.0))
-                else:
-                    self.Points[j].setText('%3.1f' % mvals[j])
-        totalimbue = ((maximbue + sum(mvals)) / 2.0)
-        return totalimbue
         
     def getMultiplier(self, type):
         return ImbueMultipliers[type]
