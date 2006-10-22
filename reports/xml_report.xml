@@ -73,9 +73,9 @@
 <item>
 <dt><b><?item?></b></dt>
 <?if itemtype=="player"?>
-<dd>Imbue Points: <itemattr item="Chest" attr="usedpoints" /> of <itemattr item="Chest" attr="availablepoints" /> Quality: <itemattr item="Chest" attr="quality" /> Overcharge: <itemattr item="Chest" attr="overcharge" /></dd>
+<dd>Imbue Points: <itemattr attr="usedpoints" /> of <itemattr attr="availablepoints" /> Quality: <itemattr attr="quality" /> Overcharge: <itemattr attr="overcharge" /></dd>
 <?for slot in range(1,5)?>
-<dd>Gem <?slot?>: <slotattr item="Chest" attr="amount" width="2"/> <slotattr item="Chest" attr="effect"/> - <slotattr item="Chest" attr="quality"/> <slotattr item="Chest" attr="name"/></dd>
+<dd>Gem <?slot?>: <slotattr attr="amount" width="2"/> <slotattr attr="effect"/> - <slotattr attr="quality"/> <slotattr attr="name"/></dd>
 <?endfor?>
 <?for slot in range(5,7)?>
 <dd>Effect <?slot?>: <slotattr attr="amount" width="2"/> <slotattr attr="effect"/> - <slotattr attr="name"/></dd>
@@ -87,7 +87,7 @@
 <?for slot in range(1,13)?>
 <dd>Effect <?slot?>: <slotattr attr="amount" width="3"/> <slotattr attr="effect"/></dd>
 <?endfor?>
-<dd>Utility: <itemattr item="Chest" attr="utility"/></dd>
+<dd>Utility: <itemattr attr="utility"/></dd>
 <?endif?>
 </item>
 <?endfor?>
@@ -99,7 +99,7 @@
 <?for slot in range(1,13)?>
 <dd>Effect <?slot?>: <slotattr attr="amount" width="3"/> <slotattr attr="effect"/></dd>
 <?endfor?>
-<dd>Utility: <itemattr item="Neck" attr="utility"/></dd>
+<dd>Utility: <itemattr attr="utility"/></dd>
 </item>
 </dl>
 </ConfigReport>
