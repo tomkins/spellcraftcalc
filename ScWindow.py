@@ -89,8 +89,8 @@ class ScWindow(QMainWindow, Ui_B_SC):
         self.DaocPath = ''
         self.ItemPath = os.path.join(os.path.dirname(os.path.abspath(sys.argv[0])), "items")
         self.TemplatePath = os.path.join(os.path.dirname(os.path.abspath(sys.argv[0])), "templates")
-        self.reportFile = os.path.join(os.path.dirname(os.path.abspath(sys.argv[0])),
-                                       'reports', 'Default_Config_Report.xml')
+        self.ReportPath = os.path.join(os.path.dirname(os.path.abspath(sys.argv[0])), "reports")
+        self.reportFile = os.path.join(self.ReportPath, 'Default_Config_Report.xml')
         self.realm = 'Albion'
         self.charclass = 'Armsman'
         self.crafterSkill = 1000
@@ -440,6 +440,7 @@ class ScWindow(QMainWindow, Ui_B_SC):
         self.viewmenu.addAction('&Configuration', self.openConfigReport,
                                 QKeySequence(Qt.ALT+Qt.Key_C))
         self.viewmenu.addAction('Choose Format...', self.chooseReportFile)
+        self.filemenu.addAction('Export SCTemplate XML...', self.exportAsFile)
         self.viewmenu.addSeparator()
         self.showcapmenuid = self.viewmenu.addAction('&Distance to Cap', self.showCap,
                                                      QKeySequence(Qt.ALT+Qt.Key_D))
@@ -603,7 +604,7 @@ class ScWindow(QMainWindow, Ui_B_SC):
         if self.nocalc: return
         self.calculate()
 
-    def asXML(self):
+    def asXML(self, rich=False):
         document = Document()
         rootnode = document.createElement('SCTemplate')
         document.appendChild(rootnode)
@@ -630,7 +631,7 @@ class ScWindow(QMainWindow, Ui_B_SC):
             item = self.itemattrlist[key]
             # use firstChild here because item.asXML() constructs a Document()
             while item is not None:
-                childnode = item.asXML(self.pricingInfo, self.crafterSkill, True)
+                childnode = item.asXML(self.pricingInfo, self.crafterSkill, rich)
                 if childnode is not None:
                     rootnode.appendChild(childnode.firstChild)
                 item = item.next
@@ -1391,6 +1392,27 @@ class ScWindow(QMainWindow, Ui_B_SC):
             self.TemplatePath = os.path.dirname(self.filename)
             filetitle = os.path.basename(self.filename)
             self.setWindowTitle(filetitle + " - Kort's Spellcrafting Calculator")
+            
+    def exportAsFile(self):
+        filename = self.filename
+        if filename is None:
+            filename = os.path.join(self.ReportPath, str(self.CharName.text()) + "_report.xml")
+        filename = unicode(filename)
+        filename = QFileDialog.getSaveFileName(self, "Save SCTemplate XML", filename, 
+                                               "SCTemplates (*_report.xml);;All Files (*.*)")
+        filename = unicode(filename)
+        if filename != '':
+            if filename[-4:] != '.xml':
+                filename += '.xml'
+            try:
+                f = open(filename, 'w')
+                f.write(XMLHelper.writexml(self.asXML(True), UnicodeStringIO(), '', '\t', '\n'))
+                f.close()
+            except IOError:
+                QMessageBox.critical(None, 'Error!', 
+                    'Error writing to file: ' + filename, 'OK')
+                return
+            self.ReportPath = os.path.dirname(os.path.abspath(filename))
             
     def openFile(self, *args):
         if self.modified:
