@@ -48,39 +48,4 @@ def getGemNameParts(gemname):
         gemwords.pop()
     return gemwords
 
-def getItemImbue(item):
-    if not item.ActiveState == 'player': return 0
-    if item.Level == '': return 0
-    itemlevel = max(1,min(51,int(item.Level)))
-    if (item.Level == item.AFDPS) \
-            and (itemlevel % 2 == 1) and (itemlevel != 51):
-        itemlevel = itemlevel - 1
-    if item.ItemQuality == '':
-        qualityindex = 0
-    else:
-        qualityindex = int(item.ItemQuality) - 94
-    return ImbuePts[itemlevel - 1][qualityindex]
-
-def calcImbue(item):
-    if not item.ActiveState == 'player': return 0.0
-    mvals = []
-    for slot in item.slots():
-        if slot.crafted():
-            mvals.append(slot.gemImbue())
-    if len(mvals) < 1: return 0.0
-    maximbue = max(mvals)
-    totalimbue = ((maximbue + sum(mvals)) / 2.0)
-    return totalimbue
-
-def computeOverchargeSuccess(imbue, itemimbue, item, crafterskill):
-    success = -OCStartPercentages[int(imbue-itemimbue)]
-    for i in range(0, 4):
-        if item.slot(i).gemImbue() > 0 and GemQualOCModifiers.has_key(item.slot(i).qua()):
-            success += GemQualOCModifiers[item.slot(i).qua()]
-    success += ItemQualOCModifiers[item.ItemQuality]
-    skillbonus = (int(crafterskill / 50) - 10) * 5
-    if skillbonus > 50: skillbonus = 50
-    success += skillbonus
-    return success
-
 # vim: set ts=4 sw=4 et:
