@@ -1,21 +1,20 @@
 Things to fix before next beta release is announced;
 
-  Stop displaying unused slots in the reports!
+  Finish xslt conversion
 
-  Fix ESC key behavior when used to cancel the combobox item list popup.
-
-  Provide a dialog to choose the the root of the user's items\ directory
-  tree (already is stored in Spellcraft.xml)
-
-  Calculate 5th slot proc by level requirement.
-
-  Add 5th slot Drop tinctures (from epic dungeons) for crafted gear.
+  Add Drop tincture effects (from epic dungeons) for crafted gear.
   According to various searchs of alakazahm and the the autobestiary,
   Prissy's lists are (were) complete.
 
-  Add 1.85 Crafted armor lookups (by realm/style/piece)
+  Add 1.85 tincture effects for crafted gear.  Means we have to tear
+  apart the 
 
-  Prettify the display of stats with caps for reports.
+  Calculate 5th slot proc by level requirement.
+
+  Add 1.85 crafted slot armor lookups (by realm/style/piece).
+
+  Prettify the display of stats with caps for reports and the screen,
+  with a stat/maxstat flavor option.
 
   Allow users to choose to include class-specific bonuses for resists
   (mostly, applies to heavy tanks).

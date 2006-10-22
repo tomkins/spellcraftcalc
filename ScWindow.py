@@ -1319,6 +1319,8 @@ class ScWindow(QMainWindow, Ui_B_SC):
                     if realm != self.realm:
                         recentdir.append(os.path.join(self.ItemPath, realm, ext))
             recentdir.append(os.path.join(self.ItemPath, "All", ext))
+        elif os.path.exists(os.path.join(itemdir, 'All', ext)):
+            itemdir = os.path.join(self.ItemPath, 'All', ext)
         Qfd = ItemList.ItemListDialog(self, "Load Item", itemdir, extstr, 
                                       self.realm, self.charclass)
         Qfd.setHistory(recentdir)

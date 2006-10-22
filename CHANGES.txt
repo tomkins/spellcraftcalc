@@ -1,5 +1,8 @@
 Updated ??/??/2006 - Version 1.92
 
+  If there is no items\(realm)\(slot) dir, but items\All\(slot) exists,
+  then Load Item will default to the 'All\(slots) directory.
+
   Fixed a flaw that Edit - Item Type was creating a new item instead of
   modifying the current item.
 
@@ -7,7 +10,7 @@ Updated ??/??/2006 - Version 1.92
   the previously selected item as it closes the dropdown list.
 
   Qt 4.2 is now strongly recommended to enable all of the layout features
-  and easiest-to-use interface.  Several quirks fixed from this move.
+  and easiest-to-use interface.  Several 4.2-specific crash bugs fixed.
 
 Updated 10/16/2006 - Version 1.91
 
