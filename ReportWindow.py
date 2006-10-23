@@ -132,7 +132,7 @@ class ReportWindow(QDialog, Ui_B_ReportWindow):
         handler = XSLTMessageHandler()
         self.reportHtml = ''
         try:
-            report_html = libxsltmod.translate_to_string(
+            self.reportHtml = libxsltmod.translate_to_string(
                 'f', filename,
                 's', XMLHelper.writexml(scxmldoc, UnicodeStringIO(), '', '\t', '\n'),
                 handler, { })
