@@ -64,8 +64,6 @@ class ScWindow(QMainWindow, Ui_B_SC):
         self.newcount = 0
         self.startup = 1
         self.nocalc = 1
-        self.totals = { }
-        self.capTotals = { }
         self.recentFiles = []
         self.effectlists = GemLists['All'].copy()
         self.dropeffectlists = DropLists['All'].copy()
@@ -774,127 +772,145 @@ class ScWindow(QMainWindow, Ui_B_SC):
         model.setData(index, QVariant(bonus), Qt.DisplayRole)
         model.setData(index, QVariant(group), Qt.UserRole)
 
+    def summarize(self):
+        charlevel = int(self.CharLevel.text())
+        tot = {}
+        tot['Cost'] = 0
+        tot['Price'] = 0
+        tot['Utility'] = 0.0
+        tot['Stats'] = {}
+        for effect in GemLists['All']['Stat'] \
+                    + ('Acuity', 'AF', 'Hits', 'Power', '% Power Pool'):
+            tot['Stats'][effect] = {}
+            tot['Stats'][effect]['TotalBonus'] = 0
+            tot['Stats'][effect]['TotalCapBonus'] = 0
+            if HighCapBonusList.has_key(effect):
+                capcalc = HighCapBonusList[effect]
+                capcapcalc = HighCapBonusList[effect + ' Cap']
+            else:
+                capcalc = HighCapBonusList['Stat']
+                capcapcalc = HighCapBonusList['Stat Cap']
+            tot['Stats'][effect]['BaseCap'] \
+                    = int(charlevel * capcalc[0]) + capcalc[1]
+            tot['Stats'][effect]['BaseCapToCapBonus'] \
+                    = int(charlevel * capcapcalc[0]) + capcapcalc[1]
+        tot['Resists'] = {}
+        for effect in GemLists['All']['Resist']:
+            tot['Resists'][effect] = {}
+            tot['Resists'][effect]['TotalBonus'] = 0
+            race = str(self.CharRace.currentText())
+            if Races['All'][race]['Resists'].has_key(effect):
+                tot['Resists'][effect]['RacialBonus'] \
+                        = Races['All'][race]['Resists'][effect]
+            capcapcalc = HighCapBonusList['Resist']
+            tot['Resists'][effect]['BaseCap'] \
+                    = int(charlevel * capcalc[0]) + capcalc[1]
+        tot['Skills'] = {}
+        tot['Focus'] = {}
+        tot['OtherBonuses'] = {}
+        tot['PvEBonuses'] = {}
+        for key, item in self.itemattrlist.iteritems():
+            tot['Cost'] += item.cost()
+            tot['Price'] += item.price(self.pricingInfo)
+            if not item.Equipped == '1':
+                continue
+            tot['Utility'] += item.utility()
+            for i in range(0, item.slotCount()):
+                gemtype = item.slot(i).type()
+                effect = item.slot(i).effect()
+                amount = int('0'+re.sub('[^\d]', '', item.slot(i).amount()))
+                if gemtype == 'Skill':
+                    effects = [effect,]
+                    if effect[0:4] == 'All ':
+                        effects.extend(AllBonusList[self.realm][self.charclass][effect])
+                    for effect in effects:
+                        if not tot['Skills'].has_key(effect):
+                            tot['Skills'][effect] = {}
+                            tot['Skills'][effect]['TotalBonus'] = amount
+                            capcalc = HighCapBonusList['Skill']
+                            tot['Skills'][effect]['BaseCap'] \
+                                = int(charlevel * capcalc[0]) + capcalc[1]
+                        else:
+                            tot['Skills'][effect]['TotalBonus'] += amount
+                elif gemtype == 'Focus':
+                    effects = [effect,]
+                    if effect[0:4] == 'All ':
+                        effects.extend(AllBonusList[self.realm][self.charclass][effect])
+                    for effect in effects:
+                        if not tot['Focus'].has_key(effect):
+                            tot['Focus'][effect] = {}
+                            capcalc = HighCapBonusList['Focus']
+                            tot['Focus'][effect]['BaseCap'] \
+                                = int(charlevel * capcalc[0]) + capcalc[1]
+                        tot['Focus'][effect]['TotalBonus'] = amount
+                elif gemtype == 'Resist':
+                    tot['Resists'][effect]['TotalBonus'] += amount
+                elif gemtype in ('Hits', 'Power',):
+                    tot['Stats'][gemtype]['TotalBonus'] += amount
+                elif gemtype == 'Stat':
+                    effects = [effect,]
+                    if effect == 'Acuity':
+                        effects.extend(AllBonusList[self.realm][self.charclass][effect])
+                    for effect in effects:
+                        tot['Stats'][effect]['TotalBonus'] += amount
+                elif gemtype == 'Cap Increase':
+                    effects = [effect,]
+                    if effect == 'Power':
+                        effects.append('% Power Pool')
+                    elif effect == 'Acuity':
+                        effects.extend(AllBonusList[self.realm][self.charclass][effect])
+                    for effect in effects:
+                        tot['Stats'][effect]['TotalCapBonus'] += amount
+                elif gemtype == 'Other Bonus':
+                    if effect in ('AF', '% Power Pool',):
+                        tot['Stats'][effect]['TotalBonus'] += amount
+                    elif not tot['OtherBonuses'].has_key(effect):
+                        tot['OtherBonuses'][effect] = {}
+                        tot['OtherBonuses'][effect]['TotalBonus'] = amount
+                        if HighCapBonusList.has_key(effect):
+                            capcalc = HighCapBonusList[effect]
+                        else:
+                            capcalc = HighCapBonusList[gemtype]
+                        tot['OtherBonuses'][effect]['BaseCap'] \
+                                = int(charlevel * capcalc[0]) + capcalc[1]
+                    else:
+                        tot['OtherBonuses'][effect]['TotalBonus'] += amount
+                elif gemtype == 'PvE Bonus':
+                    if not tot['PvEBonuses'].has_key(effect):
+                        tot['PvEBonuses'][effect] = {}
+                        tot['PvEBonuses'][effect]['TotalBonus'] = amount
+                        if HighCapBonusList.has_key(effect):
+                            capcalc = HighCapBonusList[effect]
+                        else:
+                            capcalc = HighCapBonusList[gemtype]
+                        tot['PvEBonuses'][effect]['BaseCap'] \
+                                = int(charlevel * capcalc[0]) + capcalc[1]
+                    else:
+                        tot['PvEBonuses'][effect]['TotalBonus'] += amount
+        tot['Price'] += self.pricingInfo.get('PPOrder', 0) * 10000
+        return tot
+
     def calculate(self):
         if self.nocalc:
             return
+        errorcount = 0
         charleveltext = str(self.CharLevel.text())
         if charleveltext == '': 
             charlevel = 1
         else:
             charlevel = max(min(50, int(charleveltext)), 1)
         self.CharLevel.setText(str(charlevel))
-        self.totals = { }
-        self.capTotals = { }
-        for effect in GemLists['All']['Resist']:
-            self.totals[effect] = 0
-        for effect in GemLists['All']['Stat']:
-            self.totals[effect] = 0
-            self.capTotals[effect] = 0
-        self.totals['Hits'] = 0
-        self.totals['Power'] = 0
-        self.capTotals['Hits'] = 0
-        self.capTotals['Power'] = 0
-        self.capTotals['AF'] = 0
-        skillTotals = {}
-        otherTotals = {}
-        errorcount = 0
-        self.errorsmenu.clear()
-        totalutility = 0.0
-        totalcost = 0
-        totalprice = 0
         for key, item in self.itemattrlist.iteritems():
-            itemtype = item.ActiveState
-            utility = item.utility()
-            itemcost = item.cost()
-            itemprice = item.price(self.pricingInfo)
-            imbuevals = item.listGemImbue()
-            imbuepts = sum(imbuevals)
-            itemimbue = item.itemImbue()
+            if item.ActiveState != 'player': continue
             gemeffects = []
             for i in range(0, item.slotCount()):
                 slot = item.slot(i)
+                if slot.slotType() != 'player': continue
                 gemtype = slot.type()
+                if gemtype == 'Unused': continue
                 effect = slot.effect()
-                amount = int('0'+re.sub('[^\d]', '', slot.amount()))
-                if slot.slotType() == 'player':
-                    if gemtype != 'Unused':
-                        if [gemtype, effect] in gemeffects:
-                            error_act = QAction('Two of same type of gem on %s' % key, self)
-                            if item.Location in JewelTabList:
-                                row = 1
-                                col = JewelTabList.index(item.Location)
-                            else:
-                                row = 0
-                                col = PieceTabList.index(item.Location)
-                            error_act.setData(QVariant((row << 8) | col))
-                            self.errorsmenu.addAction(error_act)
-                            errorcount = errorcount + 1
-                        gemeffects.append([gemtype, effect])
-                if key == self.currentTabLabel:
-                    if i < len(imbuevals):
-                        self.Cost[i].setText(SC.formatCost(slot.gemCost()))
-                        self.Points[i].setText('%3.1f' % imbuevals[i])
-                    if i < len(self.Name):
-                          self.Name[i].setText(slot.gemName(self.realm))
-                if not item.Equipped == '1':
-                    continue
-                if gemtype == 'Skill':
-                    if effect[0:4] == 'All ':
-                        effects = AllBonusList[self.realm][self.charclass][effect]
-                    else:
-                        if self.hideNonClassSkills and \
-                                not AllBonusList[self.realm][self.charclass] \
-                                                ['Skills Hash'].has_key(effect):
-                            effects = tuple()
-                        else:
-                            effects = (effect,)
-                    for effect in effects:
-                        if not skillTotals.has_key(effect):
-                            skillTotals[effect] = amount
-                        else:
-                            skillTotals[effect] += amount
-                elif gemtype == 'Focus':
-                    if effect[0:4] == 'All ':
-                        effects = AllBonusList[self.realm][self.charclass][effect]
-                    elif self.hideNonClassSkills:
-                        if self.hideNonClassSkills and \
-                                not AllBonusList[self.realm][self.charclass] \
-                                                ['Skills Hash'].has_key(effect):
-                            effects = tuple()
-                    else:
-                        effects = (effect,)
-                    for effect in effects:
-                        skillTotals[effect + ' Focus'] = amount
-                elif gemtype == 'Power':
-                    self.totals[gemtype] += amount
-                elif gemtype == 'Hits':
-                    self.totals[gemtype] += amount
-                elif gemtype == 'Resist':
-                    self.totals[effect] += amount
-                elif gemtype == 'Stat':
-                    if effect == 'Acuity':
-                        for e in AllBonusList[self.realm][self.charclass][effect]:
-                            self.totals[e] += amount
-                    else:
-                        self.totals[effect] += amount
-                elif gemtype == 'Other Bonus' or gemtype == 'PvE Bonus':
-                    if not otherTotals.has_key(effect):
-                        otherTotals[effect] = amount
-                    else:
-                        otherTotals[effect] += amount
-                elif gemtype == 'Cap Increase':
-                    if effect == 'Acuity':
-                        effects = AllBonusList[self.realm][self.charclass][effect]
-                    else:
-                        effects = (effect,)
-                    for effect in effects:
-                        self.capTotals[effect] += amount
-            totalcost += itemcost
-            totalprice += itemprice
-            totalutility += utility
-            if itemtype == 'player':
-                if (imbuepts - itemimbue) >= 6:
-                    error_act = QAction('Impossible Overcharge on %s' % key, self)
+                if [gemtype, effect] in gemeffects:
+                    error_act = QAction('Two of same type of gem on %s' % key, self)
                     if item.Location in JewelTabList:
                         row = 1
                         col = JewelTabList.index(item.Location)
@@ -904,93 +920,98 @@ class ScWindow(QMainWindow, Ui_B_SC):
                     error_act.setData(QVariant((row << 8) | col))
                     self.errorsmenu.addAction(error_act)
                     errorcount = errorcount + 1
-            if key == self.currentTabLabel:
-                self.ItemUtility.setText('%3.1f' % utility)
-                if itemtype == 'player':
-                    self.ItemImbue.setText('%3.1f' % imbuepts)
-                    self.ItemImbueTotal.setText(' / ' + unicode(itemimbue))
-                    self.ItemCost.setText(SC.formatCost(itemcost))
-                    self.ItemPrice.setText(SC.formatCost(itemprice))
-                    if imbuepts >= (itemimbue + 6.0):
-                        self.ItemOvercharge.setText('Impossible')
-                    elif imbuepts < (itemimbue + 1.0):
-                        self.ItemOvercharge.setText('None')
-                    else:
-                        success = item.overchargeSuccess(self.crafterSkill)
-                        if success < 0:
-                            self.ItemOvercharge.setText('BOOM! (%d%%)' % success)
-                        else:
-                            self.ItemOvercharge.setText('%d%%' % success)
-        for (key, val) in self.totals.iteritems():
+                gemeffects.append([gemtype, effect])
+        item = self.itemattrlist[self.currentTabLabel]
+        self.ItemUtility.setText('%3.1f' % item.utility())
+        if item.ActiveState == 'player':
+            imbuevals = item.listGemImbue()
+            imbuepts = sum(imbuevals)
+            itemimbue = item.itemImbue()
+            for i in range(0, item.slotCount()):
+                slot = item.slot(i)
+                if i < len(imbuevals):
+                    self.Cost[i].setText(SC.formatCost(slot.gemCost()))
+                    self.Points[i].setText('%3.1f' % imbuevals[i])
+                if i < len(self.Name):
+                    self.Name[i].setText(slot.gemName(self.realm))
+            self.ItemImbue.setText('%3.1f' % imbuepts)
+            self.ItemImbueTotal.setText(' / ' + unicode(itemimbue))
+            self.ItemCost.setText(SC.formatCost(item.cost()))
+            self.ItemPrice.setText(SC.formatCost(item.price(self.pricingInfo)))
+            if imbuepts >= (itemimbue + 6.0):
+                self.ItemOvercharge.setText('Impossible')
+            elif imbuepts < (itemimbue + 1.0):
+                self.ItemOvercharge.setText('None')
+            else:
+                success = item.overchargeSuccess(self.crafterSkill)
+                if success < 0:
+                    self.ItemOvercharge.setText('BOOM! (%d%%)' % success)
+                else:
+                    self.ItemOvercharge.setText('%d%%' % success)
+        tot = self.summarize()
+        self.SkillsList.model().removeRows(0, self.SkillsList.model().rowCount())
+        for key, amounts in tot['Resists'].iteritems():
+            val = amounts['TotalBonus']
             if not self.capDistance:
                 if self.includeRacials:
-                    if GemTables['All']['Resist'].has_key(key):
-                        rr = str(self.StatBonus[key].text())
-                        if rr != '-':
-                            val += int(rr[1:-1])
-                if self.capTotals.has_key(key):
-                  if self.capTotals[key] > 0:
-                    self.StatCap[key].setText('('+str(self.capTotals[key])+')')
-                  else:
+                    if amounts.has_key('RacialBonus'):
+                        rr = amounts['RacialBonus']
+                        val += rr
+                self.StatValue[key].setText(unicode(val))
+            else:
+                basecap = datum['BaseCap']
+                self.StatValue[key].setText(unicode(basecap - val))
+        for (key, datum) in tot['Stats'].iteritems():
+            ### XXX fix it
+            if key == "% Power Pool" or key == "AF" or key == "Acuity": continue
+            val = datum['TotalBonus']
+            if not self.capDistance:
+                if tot['Stats'][key]['TotalCapBonus'] > 0:
+                    self.StatCap[key].setText( \
+                        '('+str(tot['Stats'][key]['TotalCapBonus'])+')')
+                else:
                     self.StatCap[key].setText('-')
                 self.StatValue[key].setText(unicode(val))
             else:
-                if HighCapBonusList.has_key(key):
-                    capcalc = HighCapBonusList[key]
-                elif Caps.has_key(key):
-                    capcalc = HighCapBonusList[Caps[key]]
-                else:
-                    capcalc = HighCapBonusList['Other Bonus']
-                basecap = int(charlevel * capcalc[0]) + capcalc[1]
-                if self.capTotals.has_key(key):
-                    if HighCapBonusList.has_key(key):
-                        capcalc = HighCapBonusList[key + ' Cap']
-                    else:
-                        capcalc = HighCapBonusList['Cap']
-                    addcap = int(charlevel * capcalc[0]) + capcalc[1]
-                    capmod = self.capTotals[key]
+                basecap = tot['Stats'][key]['BaseCap']
+                if tot['Stats'][key]['TotalCapBonus'] > 0:
+                    addcap = tot['Stats'][key]['CapToCapBonus']
+                    capmod = tot['Stats'][key]['TotalCapBonus']
                     capcap = addcap - capmod
                     if capmod > addcap:  capmod = addcap
                     self.StatCap[key].setText('('+unicode(int(capcap))+')')
                 else:
                     capmod = 0
                 self.StatValue[key].setText(unicode(int(basecap + capmod) - val))
-        self.SkillsList.model().removeRows(0, self.SkillsList.model().rowCount())
-        for skill, amount in skillTotals.iteritems():
-            if not self.capDistance:
-                self.insertSkill(amount, skill, "Skill")
+        for skill, amount in tot['Skills'].iteritems():
+            if self.capDistance:
+                amount = amounts['BaseCap'] - amounts['TotalBonus']
             else:
-                if skill[-6:] == " Focus":
-                    capcalc = HighCapBonusList['Focus']
-                else:
-                    capcalc = HighCapBonusList['Skill']
-                thiscap = int(charlevel * capcalc[0]) + capcalc[1]
-                self.insertSkill(thiscap - amount, skill, "Skill")
-        for bonus, amount in otherTotals.iteritems():
-            if not self.capDistance:
-                self.insertSkill(amount, bonus, "Bonus")
+                amount = amounts['TotalBonus']
+            self.insertSkill(amount, skill, "Skill")
+        for skill, amounts in tot['Focus'].iteritems():
+            if self.capDistance:
+                amount = amounts['BaseCap'] - amounts['TotalBonus']
             else:
-                if HighCapBonusList.has_key(bonus):
-                    capcalc = HighCapBonusList[bonus]
-                else:
-                    capcalc = HighCapBonusList['Other Bonus']
-                cap = int(charlevel * capcalc[0]) + capcalc[1]
-                if bonus == '% Power Pool' or bonus == 'AF':
-                    key = bonus
-                    if bonus == '% Power Pool': key = 'Power'
-                    capcalc = HighCapBonusList[key + ' Cap']
-                    addcap = int(charlevel * capcalc[0]) + capcalc[1]
-                    capmod = self.capTotals[key]
-                    if capmod > addcap:  capmod = addcap
-                else:
-                    capmod = 0
-                self.insertSkill(cap + capmod - amount, bonus, "Bonus")
-        totalprice += self.pricingInfo.get('PPOrder', 0) * 10000
-        self.TotalCost.setText(SC.formatCost(totalcost))
-        self.TotalPrice.setText(SC.formatCost(totalprice))
-        self.TotalUtility.setText('%3.1f' % totalutility)
+                amount = amounts['TotalBonus']
+            self.insertSkill(amount, skill + " Focus", "Skill")
+        for bonus, amount in tot['OtherBonuses'].iteritems():
+            if self.capDistance:
+                amount = amounts['BaseCap'] - amounts['TotalBonus']
+            else:
+                amount = amounts['TotalBonus']
+            self.insertSkill(amount, bonus, "Bonus")
+        for bonus, amount in tot['PvEBonuses'].iteritems():
+            if self.capDistance:
+                amount = amounts['BaseCap'] - amounts['TotalBonus']
+            else:
+                amount = amounts['TotalBonus']
+            self.insertSkill(amount, bonus, "Bonus")
+        self.TotalCost.setText(SC.formatCost(tot['Cost']))
+        self.TotalPrice.setText(SC.formatCost(tot['Price']))
+        self.TotalUtility.setText('%3.1f' % tot['Utility'])
         self.errorsmenuid.setEnabled(errorcount > 0)
-        
+                
     def getMultiplier(self, type):
         return ImbueMultipliers[type]
 
@@ -1706,8 +1727,11 @@ class ScWindow(QMainWindow, Ui_B_SC):
         part = self.itemattrlist[piece]
         if cur == part: return
         while part.ActiveState != 'player':
-            ## could offer a message here if we fail
-            if part.next is None: return
+            if part.next is None: 
+                QMessageBox.critical(None, 'Error!', 'There is no crafted ' \
+                    + piece + ' to swap gems with.  Create a new crafted ' \
+                    + piece + ' and try again.', 'OK')
+                return
             part = part.next
         for i in range(0,min(cur.slotCount(),part.slotCount())):
             if cur.slot(i).slotType() != 'player' \
