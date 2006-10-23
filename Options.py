@@ -124,7 +124,7 @@ class Options(QDialog, Ui_B_Options):
         templatepath = document.createElement('TemplatePath')
         templatepath.appendChild(document.createTextNode(unicode(self.parent.TemplatePath)))
         rootnode.appendChild(templatepath)
-        c_reportpath = document.createElement('ConfigReportFile')
+        c_reportpath = document.createElement('ConfigReportXSLT')
         c_reportpath.appendChild(document.createTextNode(os.path.abspath(unicode(self.parent.reportFile))))
         rootnode.appendChild(c_reportpath)
         for key, val in pricing.items():
@@ -210,7 +210,7 @@ class Options(QDialog, Ui_B_Options):
                 self.parent.ItemPath = unicode(XMLHelper.getText(child.childNodes))
             elif child.tagName == 'TemplatePath':
                 self.parent.TemplatePath = unicode(XMLHelper.getText(child.childNodes))
-            elif child.tagName == 'ConfigReportFile':
+            elif child.tagName == 'ConfigReportXSLT':
                 self.parent.reportFile = unicode(XMLHelper.getText(child.childNodes))
                 
         screenW = QApplication.desktop().width()
