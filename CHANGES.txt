@@ -1,7 +1,17 @@
 Updated ??/??/2006 - Version 1.92
 
-  If there is no items\(realm)\(slot) dir, but items\All\(slot) exists,
-  then Load Item will default to the 'All\(slots) directory.
+  Discarded the beloved Customizable report syntax that dates all the way
+  back to Leladia's, in favor of a much more flexible xslt implementation.
+  This means that earlier 'custom reports' must be rewritten in xslt.
+
+  Added a File - Export SCTemplate XML option; it is a template with much
+  too much data so that report authors can examine every field available
+  to incorporate into their xslt report translator.
+
+  Remember the ReportPath used to save reports.
+
+  Load Item now defaults to the 'All\(slots) directory, if there is no 
+  items\(realm)\(slot) directory found, but items\All\(slot) exists.
 
   Fixed a flaw that Edit - Item Type was creating a new item instead of
   modifying the current item.
