@@ -669,7 +669,7 @@ class ScWindow(QMainWindow, Ui_B_SC):
                         'OtherBonuses', 'PvEBonuses'):
                 if key == 'Stats':
                     types = GemLists['All']['Stat'] \
-                          + ('Acuity', 'AF', 'Hits', 'Power', '% Power Pool'):
+                          + ('Acuity', 'AF', 'Hits', 'Power', '% Power Pool')
                 elif key == 'Resists':
                     types = GemLists['All']['Resist']
                 else:
@@ -680,10 +680,10 @@ class ScWindow(QMainWindow, Ui_B_SC):
                     tagname = unicode(plainXMLTag(type))
                     effectnode = document.createElement(tagname)
                     if key == 'Stats':
-                        subs = ('TotalBonus', 'Bonus', 'BaseCap', 'CapBonus',
+                        subs = ('Bonus', 'TotalBonus', 'BaseCap', 'CapBonus',
                                 'TotalCapBonus', 'BaseCapToCapBonus',) 
                     else:
-                        subs = ('TotalBonus', 'Bonus', 'BaseCap',)
+                        subs = ('Bonus', 'TotalBonus', 'BaseCap',)
                         if key == 'Resists' and \
                                 totalsdict[key][type].has_key('RacialBonus'): 
                             subs = subs + ('RacialBonus',)
@@ -958,7 +958,7 @@ class ScWindow(QMainWindow, Ui_B_SC):
                         amts = tot['Stats'][effect]
                         amts['TotalCapBonus'] += amount
                         amts['CapBonus'] = min(amts['TotalCapBonus'],
-                                               amts['CapToCapBonus'])
+                                               amts['BaseCapToCapBonus'])
                         amts['Bonus'] = min(amts['TotalBonus'],
                                             amts['BaseCap'] + amts['CapBonus'])
                 elif gemtype == 'Other Bonus':
@@ -978,7 +978,7 @@ class ScWindow(QMainWindow, Ui_B_SC):
                             capcalc = HighCapBonusList[effect]
                         else:
                             capcalc = HighCapBonusList[gemtype]
-                        amts['BaseCap'] = int(charlevel * capcalc[0]) 
+                        amts['BaseCap'] = int(charlevel * capcalc[0]) \
                                         + capcalc[1]
                         amts['TotalBonus'] = amount
                         amts['Bonus'] = min(amts['TotalBonus'], amts['BaseCap'])
@@ -993,7 +993,7 @@ class ScWindow(QMainWindow, Ui_B_SC):
                             capcalc = HighCapBonusList[effect]
                         else:
                             capcalc = HighCapBonusList[gemtype]
-                        amts['BaseCap'] = int(charlevel * capcalc[0]) 
+                        amts['BaseCap'] = int(charlevel * capcalc[0]) \
                                         + capcalc[1]
                         amts['TotalBonus'] = amount
                     amts['Bonus'] = min(amts['TotalBonus'], amts['BaseCap'])
@@ -1087,7 +1087,7 @@ class ScWindow(QMainWindow, Ui_B_SC):
             else:
                 basecap = tot['Stats'][key]['BaseCap']
                 if tot['Stats'][key]['TotalCapBonus'] > 0:
-                    addcap = tot['Stats'][key]['CapToCapBonus']
+                    addcap = tot['Stats'][key]['BaseCapToCapBonus']
                     capmod = tot['Stats'][key]['TotalCapBonus']
                     capcap = addcap - capmod
                     if capmod > addcap:  capmod = addcap
