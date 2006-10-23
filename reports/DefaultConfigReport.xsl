@@ -23,28 +23,29 @@
 <center><b>Config Report</b></center><br />
 <center><b>Stats</b></center><hr />
 <table cellspacing="10" cellpadding="0">
-<tr><td>Str:</td><td><xsl:value-of select="Strength" /></td>
-<td>Int:</td><td><xsl:value-of select="Intelligence"/></td>
-<td>Hits:</td><td><xsl:value-of select="Hits" /></td></tr>
-<tr><td>Con:</td><td><xsl:value-of select="Constitution" /></td>
-<td>Pie:</td><td><xsl:value-of select="Piety" /></td>
-<td>Power:</td><td><xsl:value-of select="Power" /></td></tr>
-<tr><td>Dex:</td><td><xsl:value-of select="Dexterity" /></td>
-<td>Cha:</td><td><xsl:value-of select="Charisma" /></td></tr>
-<tr><td>Qui:</td><td><xsl:value-of select="Quickness" /></td>
-<td>Emp:</td><td><xsl:value-of select="Empathy" /></td></tr>
+<!-- Really should be / (BaseCap + CapBonus) here in Stats -->
+<tr><td>Str:</td><td><xsl:value-of select="Stats/Strength/TotalBonus"/> / <xsl:value-of select="Stats/Strength/Bonus"/></td>
+    <td>Int:</td><td><xsl:value-of select="Stats/Intelligence/TotalBonus"/> / <xsl:value-of select="Stats/Intelligence/Bonus"/></td>
+   <td>Hits:</td><td><xsl:value-of select="Stats/Hits/TotalBonus"/> / <xsl:value-of select="Stats/Hits/Bonus"/></td></tr>
+<tr><td>Con:</td><td><xsl:value-of select="Stats/Constitution/TotalBonus"/> / <xsl:value-of select="Stats/Constitution/Bonus"/></td>
+    <td>Pie:</td><td><xsl:value-of select="Stats/Piety/TotalBonus"/> / <xsl:value-of select="Stats/Piety/Bonus"/></td>
+  <td>Power:</td><td><xsl:value-of select="Stats/Power/TotalBonus"/> / <xsl:value-of select="Stats/Power/Bonus"/></td></tr>
+<tr><td>Dex:</td><td><xsl:value-of select="Stats/Dexterity/TotalBonus"/> / <xsl:value-of select="Stats/Dexterity/Bonus"/></td>
+    <td>Cha:</td><td><xsl:value-of select="Stats/Charisma/TotalBonus"/> / <xsl:value-of select="Stats/Charisma/Bonus"/></td></tr>
+<tr><td>Qui:</td><td><xsl:value-of select="Stats/Quickness/TotalBonus"/> / <xsl:value-of select="Stats/Quickness/Bonus"/></td>
+    <td>Emp:</td><td><xsl:value-of select="Stats/Empathy/TotalBonus"/> / <xsl:value-of select="Stats/Empathy/Bonus"/></td></tr>
 </table><br />
 <center><b>Resists</b></center><hr />
 <table cellspacing="10" cellpadding="0">
-<tr><td>Body:</td><td><xsl:value-of select="Body" /></td>
-<td>Energy:</td><td><xsl:value-of select="Energy" /></td>
-<td>Crush:</td><td><xsl:value-of select="Crush" /></td></tr>
-<tr><td>Cold:</td><td><xsl:value-of select="Cold" /></td>
-<td>Matter:</td><td><xsl:value-of select="Matter" /></td>
-<td>Thrust:</td><td><xsl:value-of select="Thrust" /></td></tr>
-<tr><td>Heat:</td><td><xsl:value-of select="Heat" /></td>
-<td>Spirit:</td><td><xsl:value-of select="Spirit" /></td>
-<td>Slash:</td><td><xsl:value-of select="Slash" /></td></tr>
+<tr><td>Body:</td><td><xsl:value-of select="Resists/Body/TotalBonus"/> / <xsl:value-of select="Resists/Body/BaseCap"/></td>
+  <td>Energy:</td><td><xsl:value-of select="Resists/Energy/TotalBonus"/> / <xsl:value-of select="Resists/Energy/BaseCap"/></td>
+   <td>Crush:</td><td><xsl:value-of select="Resists/Crush/TotalBonus"/> / <xsl:value-of select="Resists/Crush/BaseCap"/></td></tr>
+<tr><td>Cold:</td><td><xsl:value-of select="Resists/Cold/TotalBonus"/> / <xsl:value-of select="Resists/Cold/BaseCap"/></td>
+  <td>Matter:</td><td><xsl:value-of select="Resists/Matter/TotalBonus"/> / <xsl:value-of select="Resists/Matter/BaseCap"/></td>
+  <td>Thrust:</td><td><xsl:value-of select="Resists/Thrust/TotalBonus"/> / <xsl:value-of select="Resists/Thrust/BaseCap"/></td></tr>
+<tr><td>Heat:</td><td><xsl:value-of select="Resists/Heat/TotalBonus"/> / <xsl:value-of select="Resists/Heat/BaseCap"/></td>
+  <td>Spirit:</td><td><xsl:value-of select="Resists/Spirit/TotalBonus"/> / <xsl:value-of select="Resists/Spirit/BaseCap"/></td>
+   <td>Slash:</td><td><xsl:value-of select="Resists/Slash/TotalBonus"/> / <xsl:value-of select="Resists/Slash/BaseCap"/></td></tr>
 </table><br />
 <!--
 <center><b>Skills</b></center><hr />
@@ -53,10 +54,14 @@
 <skills/><br />
 <center><b>Focus</b></center><hr />
 <foci/><br />
-<center><b>Cap Increases</b></center><hr />
-<capbonuses/><br />
 <center><b>Other Bonuses</b></center><hr />
-<otherbonuses/><br />
+<table>
+<xsl:for-each select="OtherBonuses/">
+	<tr><td align="right"><xsl:value-of select="???/TotalBonus"/> / </td>
+	<td><xsl:value-of select="???/BaseCap"/>&#160;</td>
+	<td><xsl:value-of select="???"/>&#160;</td></tr>
+</xsl:for-each>
+</table>
 -->
 <center><b>Piece Listing</b></center><hr />
 <xsl:for-each select="SCItem">
