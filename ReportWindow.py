@@ -130,7 +130,7 @@ class ReportWindow(QDialog, Ui_B_ReportWindow):
 
     def parseConfigReport(self, filename, scxmldoc):
         handler = XSLTMessageHandler()
-        report_html = ''
+        self.reportHtml = ''
         try:
             report_html = libxsltmod.translate_to_string(
                 'f', filename,
@@ -146,7 +146,7 @@ class ReportWindow(QDialog, Ui_B_ReportWindow):
         self.MMLabel.hide()
         self.MatMultiplier.hide()
         self.setWindowTitle('Config Report')
-        self.ReportText.setHtml(report_html)
+        self.ReportText.setHtml(self.reportHtml)
 
     def saveToHTML(self):
         filename = QFileDialog.getSaveFileName(self, "Save HTML Report", "", "HTML (*.html);;All Files (*.*)")
