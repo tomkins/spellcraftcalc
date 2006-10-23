@@ -90,7 +90,7 @@ class ScWindow(QMainWindow, Ui_B_SC):
         self.ItemPath = os.path.join(os.path.dirname(os.path.abspath(sys.argv[0])), "items")
         self.TemplatePath = os.path.join(os.path.dirname(os.path.abspath(sys.argv[0])), "templates")
         self.ReportPath = os.path.join(os.path.dirname(os.path.abspath(sys.argv[0])), "reports")
-        self.reportFile = os.path.join(self.ReportPath, 'Default_Config_Report.xml')
+        self.reportFile = os.path.join(self.ReportPath, 'DefaultConfigReport.xsl')
         self.realm = 'Albion'
         self.charclass = 'Armsman'
         self.crafterSkill = 1000
@@ -1588,7 +1588,7 @@ class ScWindow(QMainWindow, Ui_B_SC):
 
     def openConfigReport(self):
         RW = ReportWindow.ReportWindow(self, '', 1)
-        RW.parseConfigReport(self.reportFile, self.itemattrlist)
+        RW.parseConfigReport(self.reportFile, self.asXML(True))
         RW.exec_()
 
     def chooseReportFile(self):

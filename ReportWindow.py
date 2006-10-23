@@ -11,12 +11,15 @@ from Character import *
 from constants import *
 from htmlplus import *
 from SC import *
+from MyStringIO import UnicodeStringIO
+import XMLHelper
 import Item
 import string
 import re
-import ReportParser
 import sys
 import os.path
+
+import libxsltmod
 
 class ReportWindow(QDialog, Ui_B_ReportWindow):
     def __init__(self,parent = None,name = None,modal = False,fl = Qt.Widget):
@@ -125,164 +128,17 @@ class ReportWindow(QDialog, Ui_B_ReportWindow):
         self.prevMultiplier = multiplier
         self.printMaterials()
 
-    def collectStats(self, itemlist):
-        skillTotals = { }
-        focusTotals = { }
-        totals = { 
-            'str' : 0, 'con' : 0, 'dex' : 0, 'qui' : 0,
-            'int' : 0, 'pie' : 0, 'cha' : 0, 'emp' : 0, 
-            'hits' : 0,   'power' : 0,
-            'body' : 0,   'cold' : 0,   'heat' : 0,
-            'energy' : 0, 'matter' : 0, 'spirit' : 0, 
-            'crush' : 0,  'thrust' : 0, 'slash' : 0
-        }
-        for key in GemLists['All']['Stat']:
-          totals[key] = 0
-        for key in GemLists['All']['Hits']:
-          totals[key] = 0
-        for key in GemLists['All']['Power']:
-          totals[key] = 0
-        for key in GemLists['All']['Resist']:
-          totals[key] = 0
-        totals['AF'] = 0
-        capTotals = { }
-        otherTotals = { }
-        iteminfo = { }
-        for key, item in itemlist.items():
-            iteminfo[key] = { }
-            iteminfo[key]['equipped'] = item.Equipped
-            iteminfo[key]['activestate'] = item.ActiveState
-            iteminfo[key]['level'] = item.Level
-            iteminfo[key]['name'] = item.ItemName
-            iteminfo[key]['quality'] = item.ItemQuality
-            iteminfo[key]['af'] = item.AFDPS
-            iteminfo[key]['bonus'] = item.Bonus
-            iteminfo[key]['speed'] = item.Speed
-            if item.ActiveState == 'drop':
-                iteminfo[key]['usedpoints'] = 0
-                iteminfo[key]['availablepoints'] = 0
-                iteminfo[key]['overcharge'] = 0
-            else:
-                imbue = item.totalImbue()
-                itemimbue = item.itemImbue()
-                if (imbue - itemimbue) >= 6:
-                    success = 'Impossible!'
-                elif imbue > (itemimbue+0.5):
-                    success = item.overchargeSuccess(self.parent.crafterSkill)
-                    if success < 0:
-                        success = '%d%% (BOOM!)' % success
-                    else:
-                        success = '%d%%' % success
-                else:
-                    success = 'None'
-                iteminfo[key]['usedpoints'] = imbue
-                iteminfo[key]['availablepoints'] = itemimbue
-                iteminfo[key]['overcharge'] = success
-            utility = 0
-            for slot in range(0, item.slotCount()):
-                gemnum = 'gem%d' % (slot+1)
-                iteminfo[key][gemnum] = { }
-                gemtype = item.slot(slot).type()
-                amount = item.slot(slot).amount()
-                effect = item.slot(slot).effect()
-                qua = item.slot(slot).qua()
-                #gemtype = re.sub(' ' , '', gemtype)
-                amount = re.sub('[^\d]', '', amount)
-                if amount == '':
-                    amount = 0
-                else:
-                    amount = int(amount)
-                iteminfo[key][gemnum]['type'] = gemtype
-                iteminfo[key][gemnum]['amount'] = amount
-                if gemtype in ('Unused', 'Stat', 'Hits', 'Power', 'Skill',):
-                    iteminfo[key][gemnum]['effect'] = effect
-                elif gemtype[0:5] == 'Other':
-                    iteminfo[key][gemnum]['effect'] = effect +' '+ gemtype[6:]
-                else:
-                    iteminfo[key][gemnum]['effect'] = effect +' '+ gemtype
-                iteminfo[key][gemnum]['quality'] = qua
-                if item.slot(slot).slotType() == 'player':
-                    iteminfo[key][gemnum]['name'] = item.slot(slot).gemName(self.parent.realm)
-                else:
-                    iteminfo[key][gemnum]['name'] = ''
-                utility += item.slot(slot).gemUtility()
-                if not item.Equipped == '1':
-                    continue
-                if gemtype == 'Skill':
-                    if effect[0:4] == 'All ':
-                        effects = AllBonusList[self.parent.realm][self.parent.charclass][effect]
-                    else:
-                        effects = (effect,)
-                    for effect in effects:
-                        if not skillTotals.has_key(effect):
-                            skillTotals[effect] = amount
-                        else:
-                            skillTotals[effect] += amount
-                elif gemtype == 'Focus':
-                    if effect == 'All Spell Lines':
-                        for f in AllBonusList[self.parent.realm][self.parent.charclass][effect]:
-                            focusTotals[f] = amount
-                    else:
-                        focusTotals[effect] = amount
-                elif gemtype == 'Power':
-                    totals[gemtype] += amount
-                    totals[gemtype.lower()] += amount
-                elif gemtype == 'Hits':
-                    totals[gemtype] += amount
-                    totals[gemtype.lower()] += amount
-                elif gemtype == 'Resist':
-                    totals[effect] += amount
-                    totals[effect.lower()] += amount
-                elif gemtype == 'Stat':
-                    if effect == 'Acuity':
-                        for e in AllBonusList[self.parent.realm][self.parent.charclass][effect]:
-                            totals[e] += amount
-                            totals[e[:3].lower()] += amount
-                    else:
-                        totals[effect] += amount
-                        totals[effect[:3].lower()] += amount
-                elif gemtype == 'Other Bonus':
-                    if effect == 'AF':
-                        totals[effect] += amount
-                    if not otherTotals.has_key(effect):
-                        otherTotals[effect] = amount
-                    else:
-                        otherTotals[effect] += amount
-                elif gemtype == 'PvE Bonus':
-                    if not otherTotals.has_key(effect + " PvE"):
-                        otherTotals[effect + " PvE"] = amount
-                    else:
-                        otherTotals[effect + " PvE"] += amount
-                elif gemtype == 'Cap Increase':
-                    if effect == 'Acuity':
-                        effect = AllBonusList[self.parent.realm][self.parent.charclass][effect][0]
-                    if not capTotals.has_key(effect):
-                        capTotals[effect] = amount
-                    else:
-                        capTotals[effect] += amount
-                    if effect == 'Hits':
-                        if capTotals['Hits'] > 200:
-                            capTotals['Hits'] = 200 
-                    elif capTotals[effect] > 26:
-                        capTotals[effect] = 26
-            iteminfo[key]['utility'] = utility
-
-        for (key, val) in totals.items():
-            if self.parent.includeRacials:
-                if GemTables['All']['Resist'].has_key(string.capitalize(key)):
-                    rr = str(getattr(self.parent, string.capitalize(key)+'RR').text())
-                    if rr != '-':
-                        val += int(rr[1:-1])
-                        totals[key] = str(val) + ' (' + str(rr[1:-1]) + ')'
-        return { 'Skills' : skillTotals, 'Focus' : focusTotals, 
-    'Stats' : totals, 'Other' : otherTotals, 'Caps' : capTotals, 'Items' : iteminfo }
-            
-    def parseConfigReport(self, filename, itemlist):
+    def parseConfigReport(self, filename, scxmldoc):
+        handler = XSLTMessageHandler()
+        report_html = ''
         try:
-            f = open(str(filename), 'r')
-            reportstr = f.read()
-            f.close()
-        except IOError:
+            report_html = libxsltmod.translate_to_string(
+                'f', filename,
+                's', XMLHelper.writexml(scxmldoc, UnicodeStringIO(), '', '\t', '\n'),
+                handler, { })
+        except RuntimeError, m:
+            messages = handler.getContent()
+            print messages
             QMessageBox.critical(None, 'Error!', 
                 'Error opening file: ' + filename, 'OK')
             return
@@ -290,10 +146,7 @@ class ReportWindow(QDialog, Ui_B_ReportWindow):
         self.MMLabel.hide()
         self.MatMultiplier.hide()
         self.setWindowTitle('Config Report')
-        info = self.collectStats(itemlist)
-        rp = ReportParser.ReportParser()
-        self.reportHtml = rp.parse(reportstr, info)
-        self.ReportText.setHtml(self.reportHtml)
+        self.ReportText.setHtml(report_html)
 
     def saveToHTML(self):
         filename = QFileDialog.getSaveFileName(self, "Save HTML Report", "", "HTML (*.html);;All Files (*.*)")
@@ -317,7 +170,6 @@ class ReportWindow(QDialog, Ui_B_ReportWindow):
                     filename = str(filename)
                     filename += '.txt'
                 f = open(str(filename), 'w')
-                #f.write(str(self.ReportText.toPlainText()))
                 w = DimWriter(f)
                 s = ObtuseFormatter(w)
                 p = HTMLPlusParser(s)
@@ -331,3 +183,12 @@ class ReportWindow(QDialog, Ui_B_ReportWindow):
         
     def closeWindow(self):
         self.done(1)                        
+
+class XSLTMessageHandler:
+    def __init__(self):
+        self.content = ''
+    def write(self, msg):
+        self.content = self.content + msg
+    def getContent(self):
+        return self.content
+
