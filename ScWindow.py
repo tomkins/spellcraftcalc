@@ -625,6 +625,27 @@ class ScWindow(QMainWindow, Ui_B_SC):
         childnode.appendChild(document.createTextNode(str(self.noteText)))
         rootnode.appendChild(childnode)
 
+        if rich():
+            totalsdict = self.summarize()
+            for key in ('Cost', 'Price', 'Utility',):
+                val = totalsdict
+                childnode = document.createElement(unicode(key))
+                childnode.appendChild(document.createTextNode(unicode(val)))
+                rootnode.appendChild(childnode)
+            for key in ('Stats', 'Resists', 'Skills', 'Focus', 
+                        'OtherBonuses', 'PvEBonuses'):
+                childnode = document.createElement(unicode(key))
+                ### XXX: order me!
+                for type in totalsdict[key].keys():
+                    effectnode = document.createElement(unicode(key))
+                    ### XXX: order me!
+                    for type in totalsdict[key][type].keys():
+                        val = unicode(totalsdict[key][type][val])
+                        valnode = document.createElement(unicode(key))
+                        valnode.appendChild(document.createTextNode(val))
+                        effectnode.appendChild(valnode)
+                    childnode.appendChild(effectnode)
+                rootnode.appendChild(childnode)
         for key in TabList:
             item = self.itemattrlist[key]
             # use firstChild here because item.asXML() constructs a Document()
@@ -779,6 +800,11 @@ class ScWindow(QMainWindow, Ui_B_SC):
         tot['Price'] = 0
         tot['Utility'] = 0.0
         tot['Stats'] = {}
+        tot['Resists'] = {}
+        tot['Skills'] = {}
+        tot['Focus'] = {}
+        tot['OtherBonuses'] = {}
+        tot['PvEBonuses'] = {}
         for effect in GemLists['All']['Stat'] \
                     + ('Acuity', 'AF', 'Hits', 'Power', '% Power Pool'):
             tot['Stats'][effect] = {}
@@ -794,7 +820,6 @@ class ScWindow(QMainWindow, Ui_B_SC):
                     = int(charlevel * capcalc[0]) + capcalc[1]
             tot['Stats'][effect]['BaseCapToCapBonus'] \
                     = int(charlevel * capcapcalc[0]) + capcapcalc[1]
-        tot['Resists'] = {}
         for effect in GemLists['All']['Resist']:
             tot['Resists'][effect] = {}
             tot['Resists'][effect]['TotalBonus'] = 0
@@ -805,10 +830,6 @@ class ScWindow(QMainWindow, Ui_B_SC):
             capcapcalc = HighCapBonusList['Resist']
             tot['Resists'][effect]['BaseCap'] \
                     = int(charlevel * capcalc[0]) + capcalc[1]
-        tot['Skills'] = {}
-        tot['Focus'] = {}
-        tot['OtherBonuses'] = {}
-        tot['PvEBonuses'] = {}
         for key, item in self.itemattrlist.iteritems():
             tot['Cost'] += item.cost()
             tot['Price'] += item.price(self.pricingInfo)
