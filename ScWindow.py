@@ -35,6 +35,14 @@ import encodings
 import codecs
 import sys
 
+def plainXMLTag(strval):
+    i = 0
+    while i < len(strval):
+        if not (strval[i].isalpha() or (i > 0 and strval[i].isdigit())):
+            strval = strval[:i] + strval[i+1:]
+        else:
+            i += 1
+    return strval
 
 class AboutScreen(QDialog):
     def __init__(self,parent = None,name = "About",modal = True,
@@ -85,10 +93,14 @@ class ScWindow(QMainWindow, Ui_B_SC):
 
         self.ItemLevelWindow = ItemLevel.ItemLevel(self.window(), '', 1)
         self.DaocPath = ''
-        self.ItemPath = os.path.join(os.path.dirname(os.path.abspath(sys.argv[0])), "items")
-        self.TemplatePath = os.path.join(os.path.dirname(os.path.abspath(sys.argv[0])), "templates")
-        self.ReportPath = os.path.join(os.path.dirname(os.path.abspath(sys.argv[0])), "reports")
-        self.reportFile = os.path.join(self.ReportPath, 'DefaultConfigReport.xsl')
+        self.ItemPath = os.path.join(os.path.dirname(
+                                os.path.abspath(sys.argv[0])), "items")
+        self.TemplatePath = os.path.join(os.path.dirname(
+                                os.path.abspath(sys.argv[0])), "templates")
+        self.ReportPath = os.path.join(os.path.dirname(
+                                os.path.abspath(sys.argv[0])), "reports")
+        self.reportFile = os.path.join(self.ReportPath, 
+                                'DefaultConfigReport.xsl')
         self.realm = 'Albion'
         self.charclass = 'Armsman'
         self.crafterSkill = 1000
@@ -220,7 +232,8 @@ class ScWindow(QMainWindow, Ui_B_SC):
         reqwidth += width + amtcbwidth
 
         typewidth = self.Type_1.getMinimumWidth(list(DropTypeList))
-        l = reduce(lambda x, y: x+y, [ list(x) for x in GemLists['All'].values() ])
+        l = reduce(lambda x, y: x+y, [ list(x) \
+                                       for x in GemLists['All'].values() ])
         effectwidth = self.Effect_1.getMinimumWidth(l)
 
         editAmountValidator = QIntValidator(-999, +999, self)
@@ -253,7 +266,8 @@ class ScWindow(QMainWindow, Ui_B_SC):
             self.Requirement.append(getattr(self, 'Requirement_%d' % idx))
             self.Requirement[i].setFixedSize(QSize(reqwidth, edheight))
             self.switchOnType['drop'].append(self.Requirement[i])
-            self.connect(self.Requirement[i],SIGNAL("textChanged(const QString&)"),
+            self.connect(self.Requirement[i],
+                         SIGNAL("textChanged(const QString&)"),
                          self.AmountsChanged)
 
             if i < 6:
@@ -287,7 +301,7 @@ class ScWindow(QMainWindow, Ui_B_SC):
         for tabname in JewelTabList:
             self.PieceTab.addTab(1, qApp.translate("B_SC",tabname,None))
         self.GroupItemFrame.stackUnder(self.PieceTab)
-        l = self.ScWinFrame.layout().itemAt(self.ScWinFrame.layout().count() - 1)
+        l = self.ScWinFrame.layout().itemAt(self.ScWinFrame.layout().count()-1)
         l.layout().itemAt(1).changeSize(1, -self.PieceTab.baseOverlap(),
                                         QSizePolicy.Minimum, QSizePolicy.Fixed)
 
@@ -301,7 +315,8 @@ class ScWindow(QMainWindow, Ui_B_SC):
                      self.mousePressEvent)
         self.connect(self.GroupResists,SIGNAL("mousePressEvent(QMouseEvent*)"),
                      self.mousePressEvent)
-        self.connect(self.GroupItemFrame,SIGNAL("mousePressEvent(QMouseEvent*)"),
+        self.connect(self.GroupItemFrame,
+                     SIGNAL("mousePressEvent(QMouseEvent*)"),
                      self.mousePressEvent)
 
         self.connect(self.CharName,SIGNAL("textChanged(const QString&)"),
@@ -315,10 +330,12 @@ class ScWindow(QMainWindow, Ui_B_SC):
         self.connect(self.CharLevel,SIGNAL("textChanged(const QString&)"),
                      self.TemplateChanged)
 
-        self.connect(self.PieceTab,SIGNAL("currentChanged"),self.PieceTabChanged)
+        self.connect(self.PieceTab,SIGNAL("currentChanged"),
+                     self.PieceTabChanged)
         self.connect(self.ItemLevel,SIGNAL("textChanged(const QString&)"),
                      self.ItemChanged)
-        self.connect(self.ItemLevelButton,SIGNAL("clicked()"),self.ItemLevelShow)
+        self.connect(self.ItemLevelButton,SIGNAL("clicked()"),
+                     self.ItemLevelShow)
         self.connect(self.QualDrop,SIGNAL("activated(int)"),
                      self.ItemChanged)
         self.connect(self.QualEdit,SIGNAL("textChanged(const QString&)"),
@@ -329,7 +346,8 @@ class ScWindow(QMainWindow, Ui_B_SC):
                      self.ItemChanged)
         self.connect(self.Speed_Edit,SIGNAL("textChanged(const QString&)"),
                      self.ItemChanged)
-        self.connect(self.Equipped,SIGNAL("stateChanged(int)"),self.ItemChanged)
+        self.connect(self.Equipped,SIGNAL("stateChanged(int)"),
+                     self.ItemChanged)
         self.connect(self.ItemNameCombo,SIGNAL("activated(int)"),
                      self.ItemNameSelected)
         self.connect(self.ItemNameCombo,SIGNAL("textChanged(const QString&)"),
@@ -339,12 +357,16 @@ class ScWindow(QMainWindow, Ui_B_SC):
 
     def initMenu(self):
         self.rf_menu = QMenu('&Recent Files')
-        self.connect(self.rf_menu, SIGNAL("triggered(QAction*)"), self.loadRecentFile)
+        self.connect(self.rf_menu, SIGNAL("triggered(QAction*)"),
+                     self.loadRecentFile)
         
         self.filemenu = QMenu('&File', self)
-        self.filemenu.addAction('&New', self.newFile, QKeySequence(Qt.CTRL+Qt.Key_N))
-        self.filemenu.addAction('&Open...', self.openFile, QKeySequence(Qt.CTRL+Qt.Key_O))
-        self.filemenu.addAction('&Save', self.saveFile, QKeySequence(Qt.CTRL+Qt.Key_S))
+        self.filemenu.addAction('&New', self.newFile,
+                                QKeySequence(Qt.CTRL+Qt.Key_N))
+        self.filemenu.addAction('&Open...', self.openFile,
+                                QKeySequence(Qt.CTRL+Qt.Key_O))
+        self.filemenu.addAction('&Save', self.saveFile,
+                                QKeySequence(Qt.CTRL+Qt.Key_S))
         self.filemenu.addAction('Save &As...', self.saveAsFile)
         self.filemenu.addSeparator()
         self.filemenu.addAction('&Load Item...', self.loadItem,
@@ -359,7 +381,8 @@ class ScWindow(QMainWindow, Ui_B_SC):
         self.filemenu.addSeparator()
         self.filemenu.addMenu(self.rf_menu)
         self.filemenu.addSeparator()
-        self.filemenu.addAction('E&xit', self.close, QKeySequence(Qt.CTRL+Qt.Key_X))
+        self.filemenu.addAction('E&xit', self.close,
+                                QKeySequence(Qt.CTRL+Qt.Key_X))
         self.menuBar().addMenu(self.filemenu)
 
         self.swapjewelmenu = QMenu('Jewel Slots', self)
@@ -373,9 +396,12 @@ class ScWindow(QMainWindow, Ui_B_SC):
             act.setData(QVariant(piece))
             self.swappiecemenu.addAction(act)
         self.swapgemsmenu = QMenu('S&wap Gems with',self)
-        self.connect(self.swapgemsmenu, SIGNAL("triggered(QAction*)"), self.swapWith)
-        self.connect(self.swappiecemenu, SIGNAL("triggered(QAction*)"), self.swapWith)
-        self.connect(self.swapjewelmenu, SIGNAL("triggered(QAction*)"), self.swapWith)
+        self.connect(self.swapgemsmenu, SIGNAL("triggered(QAction*)"),
+                     self.swapWith)
+        self.connect(self.swappiecemenu, SIGNAL("triggered(QAction*)"),
+                     self.swapWith)
+        self.connect(self.swapjewelmenu, SIGNAL("triggered(QAction*)"),
+                     self.swapWith)
 
         self.movejewelmenu = QMenu('Jewel Slots', self)
         for piece in range(0,len(JewelTabList)):
@@ -388,9 +414,12 @@ class ScWindow(QMainWindow, Ui_B_SC):
             act.setData(QVariant(piece))
             self.movepiecemenu.addAction(act)
         self.moveitemmenu = QMenu('&Move Item to',self)
-        self.connect(self.moveitemmenu, SIGNAL("triggered(QAction*)"), self.moveTo)
-        self.connect(self.movepiecemenu, SIGNAL("triggered(QAction*)"), self.moveTo)
-        self.connect(self.movejewelmenu, SIGNAL("triggered(QAction*)"), self.moveTo)
+        self.connect(self.moveitemmenu, SIGNAL("triggered(QAction*)"),
+                     self.moveTo)
+        self.connect(self.movepiecemenu, SIGNAL("triggered(QAction*)"),
+                     self.moveTo)
+        self.connect(self.movejewelmenu, SIGNAL("triggered(QAction*)"),
+                     self.moveTo)
 
         self.newitemmenu = QMenu('&New Item', self)
         act = QAction('Drop Item', self)
@@ -440,8 +469,8 @@ class ScWindow(QMainWindow, Ui_B_SC):
                                 QKeySequence(Qt.ALT+Qt.Key_C))
         self.viewmenu.addAction('Choose Format...', self.chooseReportFile)
         self.viewmenu.addSeparator()
-        self.showcapmenuid = self.viewmenu.addAction('&Distance to Cap', self.showCap,
-                                                     QKeySequence(Qt.ALT+Qt.Key_D))
+        self.showcapmenuid = self.viewmenu.addAction('&Distance to Cap',
+                                 self.showCap, QKeySequence(Qt.ALT+Qt.Key_D))
         self.showcapmenuid.setCheckable(True)
         self.showcapmenuid.setChecked(self.capDistance)
         self.menuBar().addMenu(self.viewmenu)
@@ -549,7 +578,8 @@ class ScWindow(QMainWindow, Ui_B_SC):
             ret = QMessageBox.warning(self, 'Save Changes?', 
                                       "This template has been changed.\n"
                                       "Do you want to save these changes?", 
-                                      QMessageBox.Yes, QMessageBox.No, QMessageBox.Cancel)
+                                      QMessageBox.Yes, QMessageBox.No,
+                                      QMessageBox.Cancel)
             if ret == QMessageBox.Cancel:
                 e.ignore()
                 return
@@ -579,15 +609,15 @@ class ScWindow(QMainWindow, Ui_B_SC):
         self.itemattrlist = { }
         self.itemnumbering = 1
         for tab in PieceTabList:
-            self.itemattrlist[tab] = Item(realm=self.realm,state='player',loc=tab)
-            self.itemattrlist[tab].next = Item(realm=self.realm,state='drop',loc=tab)
+            self.itemattrlist[tab] = Item('player', tab, self.realm)
+            self.itemattrlist[tab].next = Item('drop', tab, self.realm)
             self.itemattrlist[tab].ItemName = "Crafted Item" \
                                             + str(self.itemnumbering)
             self.itemattrlist[tab].next.ItemName = "Drop Item" \
                                                  + str(self.itemnumbering)
             self.itemnumbering += 1
         for tab in JewelTabList:
-            self.itemattrlist[tab] = Item(realm=self.realm,state='drop',loc=tab)
+            self.itemattrlist[tab] = Item('drop', tab, self.realm)
             self.itemattrlist[tab].ItemName = "Drop Item" \
                                             + str(self.itemnumbering)
             self.itemnumbering += 1
@@ -607,7 +637,8 @@ class ScWindow(QMainWindow, Ui_B_SC):
         rootnode = document.createElement('SCTemplate')
         document.appendChild(rootnode)
         childnode = document.createElement('Name')
-        childnode.appendChild(document.createTextNode(str(self.CharName.text())))
+        childnode.appendChild(document.createTextNode(
+                                       unicode(self.CharName.text())))
         rootnode.appendChild(childnode)
         childnode = document.createElement('Realm')
         childnode.appendChild(document.createTextNode(self.realm))
@@ -616,13 +647,15 @@ class ScWindow(QMainWindow, Ui_B_SC):
         childnode.appendChild(document.createTextNode(self.charclass))
         rootnode.appendChild(childnode)
         childnode = document.createElement('Race')
-        childnode.appendChild(document.createTextNode(unicode(self.CharRace.currentText())))
+        childnode.appendChild(document.createTextNode(
+                                       unicode(self.CharRace.currentText())))
         rootnode.appendChild(childnode)
         childnode = document.createElement('Level')
-        childnode.appendChild(document.createTextNode(unicode(self.CharLevel.text())))
+        childnode.appendChild(document.createTextNode(
+                                       unicode(self.CharLevel.text())))
         rootnode.appendChild(childnode)
         childnode = document.createElement('Notes')
-        childnode.appendChild(document.createTextNode(str(self.noteText)))
+        childnode.appendChild(document.createTextNode(unicode(self.noteText)))
         rootnode.appendChild(childnode)
 
         if rich:
@@ -634,18 +667,30 @@ class ScWindow(QMainWindow, Ui_B_SC):
                 rootnode.appendChild(childnode)
             for key in ('Stats', 'Resists', 'Skills', 'Focus', 
                         'OtherBonuses', 'PvEBonuses'):
+                if key == 'Stats':
+                    types = GemLists['All']['Stat'] \
+                          + ('Acuity', 'AF', 'Hits', 'Power', '% Power Pool'):
+                elif key == 'Resists':
+                    types = GemLists['All']['Resist']
+                else:
+                    types = totalsdict[key].keys()
+                    types.sort()
                 childnode = document.createElement(unicode(key))
-                ### XXX: order me!
-                for type in totalsdict[key].keys():
-                    if type == '% Power Pool':
-                        tagname = 'Power Pool'
+                for type in types:
+                    tagname = unicode(plainXMLTag(type))
+                    effectnode = document.createElement(tagname)
+                    if key == 'Stats':
+                        subs = ('TotalBonus', 'Bonus', 'BaseCap', 'CapBonus',
+                                'TotalCapBonus', 'BaseCapToCapBonus',) 
                     else:
-                        tagname = type
-                    effectnode = document.createElement(unicode(tagname.replace(' ', '')))
-                    ### XXX: order me!
-                    for subtype in totalsdict[key][type].keys():
+                        subs = ('TotalBonus', 'Bonus', 'BaseCap',)
+                        if key == 'Resists' and \
+                                totalsdict[key][type].has_key('RacialBonus'): 
+                            subs = subs + ('RacialBonus',)
+                    for subtype in subs:
+                        tagname = unicode(plainXMLTag(subtype))
+                        valnode = document.createElement(tagname)
                         val = unicode(totalsdict[key][type][subtype])
-                        valnode = document.createElement(unicode(subtype.replace(' ', '')))
                         valnode.appendChild(document.createTextNode(val))
                         effectnode.appendChild(valnode)
                     childnode.appendChild(effectnode)
@@ -654,14 +699,14 @@ class ScWindow(QMainWindow, Ui_B_SC):
             item = self.itemattrlist[key]
             # use firstChild here because item.asXML() constructs a Document()
             while item is not None:
-                childnode = item.asXML(self.pricingInfo, self.crafterSkill, rich)
+                childnode = item.asXML(self.pricingInfo, self.crafterSkill,rich)
                 if childnode is not None:
                     rootnode.appendChild(childnode.firstChild)
                 item = item.next
         return document
 
     def PieceTabChanged(self, row, col):
-        self.currentTabLabel = string.strip(str(self.PieceTab.tabText(row, col)))
+        self.currentTabLabel = string.strip(str(self.PieceTab.tabText(row,col)))
         if self.currentTabLabel in JewelTabList:
             swapactionlist = self.swapjewelmenu.actions()
             moveactionlist = self.swapjewelmenu.actions()
@@ -746,7 +791,8 @@ class ScWindow(QMainWindow, Ui_B_SC):
             if len(gemeffect) and effect < 0:
                 if itemtype == 'player':
                     self.Effect[slot].addItem(gemeffect)
-                    self.Effect[slot].setCurrentIndex(self.Effect[slot].count() - 1)
+                    self.Effect[slot].setCurrentIndex(
+                                          self.Effect[slot].count() - 1)
                     self.EffectChanged(effect, slot)
                 else:
                     if not self.Effect[slot].isEditable():
@@ -762,7 +808,8 @@ class ScWindow(QMainWindow, Ui_B_SC):
                 amount = self.AmountDrop[slot].findText(gemamount)
                 if len(gemamount) and gemamount != "0" and amount < 0:
                     self.AmountDrop[slot].addItem(gemamount)
-                    self.AmountDrop[slot].setCurrentIndex(self.AmountDrop[slot].count() - 1)
+                    self.AmountDrop[slot].setCurrentIndex(
+                                              self.AmountDrop[slot].count() - 1)
                 else:
                     self.AmountDrop[slot].setCurrentIndex(amount)
             if itemtype == 'player' and item.slot(slot).slotType() == 'player':
@@ -813,7 +860,9 @@ class ScWindow(QMainWindow, Ui_B_SC):
                     + ('Acuity', 'AF', 'Hits', 'Power', '% Power Pool'):
             tot['Stats'][effect] = {}
             tot['Stats'][effect]['TotalBonus'] = 0
+            tot['Stats'][effect]['Bonus'] = 0
             tot['Stats'][effect]['TotalCapBonus'] = 0
+            tot['Stats'][effect]['CapBonus'] = 0
             if HighCapBonusList.has_key(effect):
                 capcalc = HighCapBonusList[effect]
                 capcapcalc = HighCapBonusList[effect + ' Cap']
@@ -827,6 +876,7 @@ class ScWindow(QMainWindow, Ui_B_SC):
         for effect in GemLists['All']['Resist']:
             tot['Resists'][effect] = {}
             tot['Resists'][effect]['TotalBonus'] = 0
+            tot['Resists'][effect]['Bonus'] = 0
             race = str(self.CharRace.currentText())
             if Races['All'][race]['Resists'].has_key(effect):
                 tot['Resists'][effect]['RacialBonus'] \
@@ -847,71 +897,106 @@ class ScWindow(QMainWindow, Ui_B_SC):
                 if gemtype == 'Skill':
                     effects = [effect,]
                     if effect[0:4] == 'All ':
-                        effects.extend(AllBonusList[self.realm][self.charclass][effect])
+                        effects.extend(AllBonusList[self.realm] \
+                                                   [self.charclass][effect])
                     for effect in effects:
-                        if not tot['Skills'].has_key(effect):
-                            tot['Skills'][effect] = {}
-                            tot['Skills'][effect]['TotalBonus'] = amount
-                            capcalc = HighCapBonusList['Skill']
-                            tot['Skills'][effect]['BaseCap'] \
-                                = int(charlevel * capcalc[0]) + capcalc[1]
+                        if tot['Skills'].has_key(effect):
+                            amts = tot['Skills'][effect]
+                            amts['TotalBonus'] += amount
                         else:
-                            tot['Skills'][effect]['TotalBonus'] += amount
+                            tot['Skills'][effect] = {}
+                            amts = tot['Skills'][effect]
+                            amts['TotalBonus'] = amount
+                            capcalc = HighCapBonusList['Skill']
+                            amts['BaseCap'] = int(charlevel * capcalc[0]) \
+                                            + capcalc[1]
+                        amts['Bonus'] = min(amts['TotalBonus'], amts['BaseCap'])
                 elif gemtype == 'Focus':
                     effects = [effect,]
                     if effect[0:4] == 'All ':
-                        effects.extend(AllBonusList[self.realm][self.charclass][effect])
+                        effects.extend(AllBonusList[self.realm] \
+                                                   [self.charclass][effect])
                     for effect in effects:
-                        if not tot['Focus'].has_key(effect):
+                        if tot['Focus'].has_key(effect):
+                            amts = tot['Focus'][effect]
+                        else:
                             tot['Focus'][effect] = {}
+                            amts = tot['Focus'][effect]
                             capcalc = HighCapBonusList['Focus']
-                            tot['Focus'][effect]['BaseCap'] \
-                                = int(charlevel * capcalc[0]) + capcalc[1]
-                        tot['Focus'][effect]['TotalBonus'] = amount
+                            amts['BaseCap'] = int(charlevel * capcalc[0]) \
+                                            + capcalc[1]
+                        amts['TotalBonus'] = amount
+                        amts['Bonus'] = min(amts['TotalBonus'], amts['BaseCap'])
                 elif gemtype == 'Resist':
-                    tot['Resists'][effect]['TotalBonus'] += amount
+                    amts = tot['Resists'][effect]
+                    amts['TotalBonus'] += amount
+                    amts['Bonus'] = min(amts['TotalBonus'], amts['BaseCap'])
                 elif gemtype in ('Hits', 'Power',):
-                    tot['Stats'][gemtype]['TotalBonus'] += amount
+                    amts = tot['Stats'][gemtype]
+                    amts['TotalBonus'] += amount
+                    amts['Bonus'] = min(amts['TotalBonus'],
+                                        amts['BaseCap'] + amts['CapBonus'])
                 elif gemtype == 'Stat':
                     effects = [effect,]
                     if effect == 'Acuity':
-                        effects.extend(AllBonusList[self.realm][self.charclass][effect])
+                        effects.extend(AllBonusList[self.realm] \
+                                                   [self.charclass][effect])
                     for effect in effects:
-                        tot['Stats'][effect]['TotalBonus'] += amount
+                        amts = tot['Stats'][effect]
+                        amts['TotalBonus'] += amount
+                        amts['Bonus'] = min(amts['TotalBonus'],
+                                            amts['BaseCap'] + amts['CapBonus'])
                 elif gemtype == 'Cap Increase':
                     effects = [effect,]
+                    # Power cap affects both Power and % Power Pool
                     if effect == 'Power':
                         effects.append('% Power Pool')
                     elif effect == 'Acuity':
-                        effects.extend(AllBonusList[self.realm][self.charclass][effect])
+                        effects.extend(AllBonusList[self.realm] \
+                                                   [self.charclass][effect])
                     for effect in effects:
-                        tot['Stats'][effect]['TotalCapBonus'] += amount
+                        amts = tot['Stats'][effect]
+                        amts['TotalCapBonus'] += amount
+                        amts['CapBonus'] = min(amts['TotalCapBonus'],
+                                               amts['CapToCapBonus'])
+                        amts['Bonus'] = min(amts['TotalBonus'],
+                                            amts['BaseCap'] + amts['CapBonus'])
                 elif gemtype == 'Other Bonus':
                     if effect in ('AF', '% Power Pool',):
-                        tot['Stats'][effect]['TotalBonus'] += amount
-                    elif not tot['OtherBonuses'].has_key(effect):
+                        amts = tot['Stats'][effect]
+                        amts['TotalBonus'] += amount
+                        amts['Bonus'] = min(amts['TotalBonus'],
+                                            amts['BaseCap'] + amts['CapBonus'])
+                    elif tot['OtherBonuses'].has_key(effect):
+                        amts = tot['OtherBonuses'][effect]
+                        amts['TotalBonus'] += amount
+                        amts['Bonus'] = min(amts['TotalBonus'], amts['BaseCap'])
+                    else:
                         tot['OtherBonuses'][effect] = {}
-                        tot['OtherBonuses'][effect]['TotalBonus'] = amount
+                        amts = tot['OtherBonuses'][effect]
                         if HighCapBonusList.has_key(effect):
                             capcalc = HighCapBonusList[effect]
                         else:
                             capcalc = HighCapBonusList[gemtype]
-                        tot['OtherBonuses'][effect]['BaseCap'] \
-                                = int(charlevel * capcalc[0]) + capcalc[1]
-                    else:
-                        tot['OtherBonuses'][effect]['TotalBonus'] += amount
+                        amts['BaseCap'] = int(charlevel * capcalc[0]) 
+                                        + capcalc[1]
+                        amts['TotalBonus'] = amount
+                        amts['Bonus'] = min(amts['TotalBonus'], amts['BaseCap'])
                 elif gemtype == 'PvE Bonus':
-                    if not tot['PvEBonuses'].has_key(effect):
+                    if tot['PvEBonuses'].has_key(effect):
+                        amts = tot['PvEBonuses'][effect]
+                        amts['TotalBonus'] += amount
+                    else:
                         tot['PvEBonuses'][effect] = {}
-                        tot['PvEBonuses'][effect]['TotalBonus'] = amount
+                        amts = tot['PvEBonuses'][effect]
                         if HighCapBonusList.has_key(effect):
                             capcalc = HighCapBonusList[effect]
                         else:
                             capcalc = HighCapBonusList[gemtype]
-                        tot['PvEBonuses'][effect]['BaseCap'] \
-                                = int(charlevel * capcalc[0]) + capcalc[1]
-                    else:
-                        tot['PvEBonuses'][effect]['TotalBonus'] += amount
+                        amts['BaseCap'] = int(charlevel * capcalc[0]) 
+                                        + capcalc[1]
+                        amts['TotalBonus'] = amount
+                    amts['Bonus'] = min(amts['TotalBonus'], amts['BaseCap'])
         tot['Price'] += self.pricingInfo.get('PPOrder', 0) * 10000
         return tot
 
@@ -935,7 +1020,8 @@ class ScWindow(QMainWindow, Ui_B_SC):
                 if gemtype == 'Unused': continue
                 effect = slot.effect()
                 if [gemtype, effect] in gemeffects:
-                    error_act = QAction('Two of same type of gem on %s' % key, self)
+                    error_act = QAction('Two of same type of gem on %s' \
+                                        % key, self)
                     if item.Location in JewelTabList:
                         row = 1
                         col = JewelTabList.index(item.Location)
@@ -974,7 +1060,7 @@ class ScWindow(QMainWindow, Ui_B_SC):
                 else:
                     self.ItemOvercharge.setText('%d%%' % success)
         tot = self.summarize()
-        self.SkillsList.model().removeRows(0, self.SkillsList.model().rowCount())
+        self.SkillsList.model().removeRows(0,self.SkillsList.model().rowCount())
         for key, amounts in tot['Resists'].iteritems():
             val = amounts['TotalBonus']
             if not self.capDistance:
@@ -988,7 +1074,8 @@ class ScWindow(QMainWindow, Ui_B_SC):
                 self.StatValue[key].setText(unicode(basecap - val))
         for (key, datum) in tot['Stats'].iteritems():
             ### XXX fix it
-            if key == "% Power Pool" or key == "AF" or key == "Acuity": continue
+            if key == "% Power Pool" or key == "AF" or key == "Acuity":
+                continue
             val = datum['TotalBonus']
             if not self.capDistance:
                 if tot['Stats'][key]['TotalCapBonus'] > 0:
@@ -1007,8 +1094,8 @@ class ScWindow(QMainWindow, Ui_B_SC):
                     self.StatCap[key].setText('('+unicode(int(capcap))+')')
                 else:
                     capmod = 0
-                self.StatValue[key].setText(unicode(int(basecap + capmod) - val))
-        for skill, amount in tot['Skills'].iteritems():
+                self.StatValue[key].setText(unicode(int(basecap + capmod) -val))
+        for skill, amounts in tot['Skills'].iteritems():
             if self.capDistance:
                 amount = amounts['BaseCap'] - amounts['TotalBonus']
             else:
@@ -1020,13 +1107,13 @@ class ScWindow(QMainWindow, Ui_B_SC):
             else:
                 amount = amounts['TotalBonus']
             self.insertSkill(amount, skill + " Focus", "Skill")
-        for bonus, amount in tot['OtherBonuses'].iteritems():
+        for bonus, amounts in tot['OtherBonuses'].iteritems():
             if self.capDistance:
                 amount = amounts['BaseCap'] - amounts['TotalBonus']
             else:
                 amount = amounts['TotalBonus']
             self.insertSkill(amount, bonus, "Bonus")
-        for bonus, amount in tot['PvEBonuses'].iteritems():
+        for bonus, amounts in tot['PvEBonuses'].iteritems():
             if self.capDistance:
                 amount = amounts['BaseCap'] - amounts['TotalBonus']
             else:
@@ -1050,9 +1137,11 @@ class ScWindow(QMainWindow, Ui_B_SC):
         for rt in GemLists['All']['Resist']:
             if Races['All'][race]['Resists'].has_key(rt):
               if self.includeRacials:
-                self.StatBonus[rt].setText('('+str(Races['All'][race]['Resists'][rt])+')')
+                self.StatBonus[rt].setText('('+str(Races['All'][race] \
+                                                        ['Resists'][rt])+')')
               else:
-                self.StatBonus[rt].setText('+'+str(Races['All'][race]['Resists'][rt]))
+                self.StatBonus[rt].setText('+'+str(Races['All'][race] \
+                                                        ['Resists'][rt]))
             else:
                 self.StatBonus[rt].setText('-')
         if self.nocalc: return
@@ -1067,8 +1156,10 @@ class ScWindow(QMainWindow, Ui_B_SC):
         self.dropeffectlists['Skill'] = DropLists[showrealm]['Skill']
         self.dropeffectlists['Focus'] = DropLists[showrealm]['Focus']
         if self.hideNonClassSkills:
-            self.effectlists['Skill'] = AllBonusList['All'][self.charclass]['All Skills']
-            self.effectlists['Focus'] = AllBonusList['All'][self.charclass]['All Focus']
+            self.effectlists['Skill'] = AllBonusList['All'][self.charclass] \
+                                                    ['All Skills']
+            self.effectlists['Focus'] = AllBonusList['All'][self.charclass] \
+                                                    ['All Focus']
         else:
             self.effectlists['Skill'] = GemLists[showrealm]['Skill']
             self.effectlists['Focus'] = GemLists[showrealm]['Focus']
@@ -1087,7 +1178,8 @@ class ScWindow(QMainWindow, Ui_B_SC):
         self.CharClass.insertItems(0, list(ClassList[self.realm]))
         if self.charclass not in ClassList[self.realm]:
             self.charclass = ClassList[self.realm][0]
-        self.CharClass.setCurrentIndex(ClassList[self.realm].index(self.charclass))
+        self.CharClass.setCurrentIndex(
+                           ClassList[self.realm].index(self.charclass))
         self.CharClassChanged(self.CharClass.currentIndex())
 
     def ItemLevelShow(self):
@@ -1153,7 +1245,6 @@ class ScWindow(QMainWindow, Ui_B_SC):
         if self.nocalc: return
         if slot < 0:
             slot = self.senderSlot()      
-        #sys.stdout.write("Changes to slot %d %s\n" % (slot, str(self.sender().objectName())))
         item = self.itemattrlist[self.currentTabLabel]
         if item.ActiveState == 'player':
             item.slot(slot).setAmount(self.AmountDrop[slot].currentText())
@@ -1174,7 +1265,6 @@ class ScWindow(QMainWindow, Ui_B_SC):
             efftext = str(self.Effect[slot].currentText())
         else:
             efftext = str(self.Effect[slot].lineEdit().text())
-        #sys.stdout.write("Changes to slot %d Value %d Effect Item %s\n" % (slot, value, efftext))
         if not self.nocalc:
             item.slot(slot).setEffect(efftext)
             self.modified = 1
@@ -1287,13 +1377,14 @@ class ScWindow(QMainWindow, Ui_B_SC):
         self.restoreItem(self.itemattrlist[self.currentTabLabel])
 
     def chooseItemPath(self):
-        itemdir = QFileDialog.getExistingDirectory(self, 'Select Item Database Path', self.ItemPath)
+        itemdir = QFileDialog.getExistingDirectory(self, 
+                      'Select Item Database Path', self.ItemPath)
         if itemdir:
             self.ItemPath = os.path.abspath(unicode(itemdir))
             ret = QMessageBox.question(self, 'Create Database Directories?', 
-                                      "Create realm and item slot directories" +\
-                                      " underneath %s ?" % itemdir, 
-                                      QMessageBox.Yes, QMessageBox.No)
+                                       "Create realm and item slot directories"\
+                                     + " underneath %s ?" % itemdir, 
+                                       QMessageBox.Yes, QMessageBox.No)
             if ret == QMessageBox.Yes:
                 realms = list(Realms)
                 realms.append("All")
@@ -1311,7 +1402,8 @@ class ScWindow(QMainWindow, Ui_B_SC):
                             os.makedirs(itempath)
 
     def saveItem(self):
-        itemname = string.replace(unicode(self.ItemNameCombo.currentText()), ' ', '_')
+        itemname = string.replace(unicode(self.ItemNameCombo.currentText()),
+                                  ' ', '_')
         if itemname == '':
             QMessageBox.critical(self, 'Error!', 
                 'Cannot save item - You must specify a name!', 'OK')
@@ -1335,16 +1427,14 @@ class ScWindow(QMainWindow, Ui_B_SC):
             if self.coop:
                 for realm in Realms:
                     if realm != self.realm:
-                        recentdir.append(os.path.join(self.ItemPath, realm, ext))
+                        recentdir.append(os.path.join(self.ItemPath, realm,ext))
             recentdir.append(os.path.join(self.ItemPath, "All", ext))
         filename = os.path.join(itemdir, itemname)
         filename = QFileDialog.getSaveFileName(self, "Save Item", filename, 
-                                               "Templates (*.xml);;All Files (*.*)")
+                                   "Templates (*.xml);;All Files (*.*)")
         filename = unicode(filename)
         if filename != '':
             item.save(filename)
-            # QMessageBox.information(None, 'Success!',
-            #         '%s successfully saved!' % itemname, 'OK')
 
     def loadItem(self):
         ext = FileExt[self.currentTabLabel]
@@ -1363,7 +1453,7 @@ class ScWindow(QMainWindow, Ui_B_SC):
             if self.coop:
                 for realm in Realms:
                     if realm != self.realm:
-                        recentdir.append(os.path.join(self.ItemPath, realm, ext))
+                        recentdir.append(os.path.join(self.ItemPath, realm,ext))
             recentdir.append(os.path.join(self.ItemPath, "All", ext))
         elif os.path.exists(os.path.join(itemdir, 'All', ext)):
             itemdir = os.path.join(self.ItemPath, 'All', ext)
@@ -1373,13 +1463,14 @@ class ScWindow(QMainWindow, Ui_B_SC):
         if Qfd.exec_():
             if Qfd.selectedFiles().count() > 0:
                 filename = unicode(Qfd.selectedFiles()[0])
-                item = Item(realm=self.realm,state='drop',loc=self.currentTabLabel)
+                item = Item('drop', self.currentTabLabel, self.realm)
                 if item.load(filename,str(self.itemnumbering)) == -1: return
                 if string.lower(item.Realm) != string.lower(self.realm)\
                     and string.lower(item.Realm) != 'all'\
                     and not self.coop:
-                    QMessageBox.critical(None, 'Error!', 'You are trying to load an '
-                                                       + 'item for another realm!', 'OK')
+                    QMessageBox.critical(None, 'Error!',
+                                         'You are trying to load an ' \
+                                       + 'item for another realm!', 'OK')
                     return
                 self.itemnumbering += 1
                 item.Location = self.currentTabLabel
@@ -1395,7 +1486,8 @@ class ScWindow(QMainWindow, Ui_B_SC):
             ret = QMessageBox.warning(self, 'Save Changes?', 
                                       "This template has been changed.\n"
                                       "Do you want to save these changes?", 
-                                      QMessageBox.Yes, QMessageBox.No, QMessageBox.Cancel)
+                                      QMessageBox.Yes, QMessageBox.No,
+                                      QMessageBox.Cancel)
             if ret == QMessageBox.Cancel: return
             if ret == QMessageBox.Yes:
                 self.saveFile()
@@ -1408,7 +1500,8 @@ class ScWindow(QMainWindow, Ui_B_SC):
         else:
             try:
                 f = open(self.filename, 'w')
-                f.write(XMLHelper.writexml(self.asXML(), UnicodeStringIO(), '', '\t', '\n'))
+                f.write(XMLHelper.writexml(self.asXML(), UnicodeStringIO(),
+                                           '', '\t', '\n'))
                 f.close()
                 self.modified = 0
             except IOError:
@@ -1418,17 +1511,19 @@ class ScWindow(QMainWindow, Ui_B_SC):
     def saveAsFile(self):
         filename = self.filename
         if filename is None:
-            filename = os.path.join(self.TemplatePath, str(self.CharName.text()) + "_template.xml")
+            filename = os.path.join(self.TemplatePath,
+                                    str(self.CharName.text()) + "_template.xml")
         filename = unicode(filename)
         filename = QFileDialog.getSaveFileName(self, "Save Template", filename, 
-                                               "Templates (*.xml);;All Files (*.*)")
+                                   "Templates (*.xml);;All Files (*.*)")
         filename = unicode(filename)
         if filename != '':
             if filename[-4:] != '.xml':
                 filename += '.xml'
             try:
                 f = open(filename, 'w')
-                f.write(XMLHelper.writexml(self.asXML(), UnicodeStringIO(), '', '\t', '\n'))
+                f.write(XMLHelper.writexml(self.asXML(), UnicodeStringIO(),
+                                           '', '\t', '\n'))
                 f.close()
             except IOError:
                 QMessageBox.critical(None, 'Error!', 
@@ -1439,22 +1534,22 @@ class ScWindow(QMainWindow, Ui_B_SC):
             self.updateRecentFiles(self.filename)
             self.TemplatePath = os.path.dirname(self.filename)
             filetitle = os.path.basename(self.filename)
-            self.setWindowTitle(filetitle + " - Kort's Spellcrafting Calculator")
+            self.setWindowTitle(filetitle +" - Kort's Spellcrafting Calculator")
             
     def exportAsFile(self):
-        filename = self.filename
-        if filename is None:
-            filename = os.path.join(self.ReportPath, str(self.CharName.text()) + "_report.xml")
+        filename = os.path.join(self.ReportPath, str(self.CharName.text()) \
+                                               + "_report.xml")
         filename = unicode(filename)
-        filename = QFileDialog.getSaveFileName(self, "Save SCTemplate XML", filename, 
-                                               "SCTemplates (*_report.xml);;All Files (*.*)")
+        filename = QFileDialog.getSaveFileName(self, "Save SCTemplate XML", 
+                       filename, "SCTemplates (*_report.xml);;All Files (*.*)")
         filename = unicode(filename)
         if filename != '':
             if filename[-4:] != '.xml':
                 filename += '.xml'
             try:
                 f = open(filename, 'w')
-                f.write(XMLHelper.writexml(self.asXML(True), UnicodeStringIO(), '', '\t', '\n'))
+                f.write(XMLHelper.writexml(self.asXML(True), UnicodeStringIO(),
+                        '', '\t', '\n'))
                 f.close()
             except IOError:
                 QMessageBox.critical(None, 'Error!', 
@@ -1467,14 +1562,16 @@ class ScWindow(QMainWindow, Ui_B_SC):
             ret = QMessageBox.warning(self, 'Save Changes?', 
                                       "This template has been changed.\n"
                                       "Do you want to save these changes?", 
-                                      QMessageBox.Yes, QMessageBox.No, QMessageBox.Cancel)
+                                      QMessageBox.Yes, QMessageBox.No,
+                                      QMessageBox.Cancel)
             if ret == QMessageBox.Cancel: return
             if ret == QMessageBox.Yes:
                 self.saveFile()
                 if self.modified: return
         if len(args) == 0:
-            filename = QFileDialog.getOpenFileName(self, "Open Template", self.TemplatePath, 
-                                                   "Templates (*.xml *.scc);;All Files (*.*)")
+            filename = QFileDialog.getOpenFileName(self, "Open Template",
+                            self.TemplatePath, 
+                            "Templates (*.xml *.scc);;All Files (*.*)")
         else:
             filename = args[0]
         filename = unicode(filename)
@@ -1505,7 +1602,7 @@ class ScWindow(QMainWindow, Ui_B_SC):
             self.updateRecentFiles(self.filename)
             self.TemplatePath = os.path.dirname(self.filename)
             filetitle = os.path.basename(self.filename)
-            self.setWindowTitle(filetitle + " - Kort's Spellcrafting Calculator")
+            self.setWindowTitle(filetitle +" - Kort's Spellcrafting Calculator")
 
     def updateRecentFiles(self, fn):
         if fn is not None:
@@ -1544,7 +1641,8 @@ class ScWindow(QMainWindow, Ui_B_SC):
                 newItem = Item(realm=self.realm)
                 newItem.loadFromXML(child,str(self.itemnumbering))
                 self.itemnumbering += 1
-                if self.itemattrlist[newItem.Location] == itemdefault[newItem.Location]:
+                if self.itemattrlist[newItem.Location] \
+                      == itemdefault[newItem.Location]:
                     self.itemattrlist[newItem.Location] = newItem
                 elif newItem.Equipped == '1':
                     self.itemattrlist[newItem.Location].Equipped = '0'
@@ -1564,10 +1662,12 @@ class ScWindow(QMainWindow, Ui_B_SC):
         self.Realm.setCurrentIndex(Realms.index(self.realm))
         self.RealmChanged(Realms.index(self.realm))
         if AllBonusList[self.realm].has_key(self.charclass):
-            self.CharClass.setCurrentIndex(ClassList[self.realm].index(self.charclass))
+            self.CharClass.setCurrentIndex(
+                               ClassList[self.realm].index(self.charclass))
             self.CharClassChanged(ClassList[self.realm].index(self.charclass))
         if racename in AllBonusList[self.realm][self.charclass]['Races']:
-            self.CharRace.setCurrentIndex(AllBonusList[self.realm][self.charclass] \
+            self.CharRace.setCurrentIndex(
+                              AllBonusList[self.realm][self.charclass] \
                                                       ['Races'].index(racename))
             self.RaceChanged('')
         self.restoreItem(self.itemattrlist[self.currentTabLabel])
@@ -1577,7 +1677,8 @@ class ScWindow(QMainWindow, Ui_B_SC):
         
     def loadFromLela(self, scclines):
         self.initialize(1)
-        sublines = filter(lambda(x): re.compile('^ITEM').match(x) is None, scclines)
+        sublines = filter(lambda(x): re.compile('^ITEM').match(x) is None,
+                                     scclines)
         for line in sublines:
             line = string.strip(line, " \n\r")
             if line == '': continue
@@ -1596,8 +1697,10 @@ class ScWindow(QMainWindow, Ui_B_SC):
                 self.Realm.setCurrentIndex(Realms.index(self.realm))
                 self.RealmChanged(self.realm)
                 if AllBonusList[self.realm].has_key(self.charclass):
-                   self.CharClass.setCurrentIndex(ClassList[self.realm].index(self.charclass))
-                   self.CharClassChanged(ClassList[self.realm].index(self.charclass))
+                   self.CharClass.setCurrentIndex(
+                                    ClassList[self.realm].index(self.charclass))
+                   self.CharClassChanged(ClassList[self.realm].index(
+                                             self.charclass))
         for itemnum in range(0, 19):
             item = Item(realm=self.realm,loc=TabList[itemnum])
             item.loadLelaItemFromSCC(itemnum, scclines, self.realm)
@@ -1638,8 +1741,8 @@ class ScWindow(QMainWindow, Ui_B_SC):
         RW.exec_()
 
     def chooseReportFile(self):
-        filename = QFileDialog.getOpenFileName(self, "Choose Report Format", "reports", 
-                                               "Reports (*.xml *.rpt);;All Files (*.*)")
+        filename = QFileDialog.getOpenFileName(self, "Choose Report Format",
+                       "reports", "Reports (*.xml *.rpt);;All Files (*.*)")
         if filename is not None and str(filename) != '':
             self.reportFile = str(filename)
 
@@ -1675,12 +1778,15 @@ class ScWindow(QMainWindow, Ui_B_SC):
                        if effect != 'Power' and effect != '% Power Pool':
                            continue
                     elif effect == 'Acuity':
-                       if not find in AllBonusList[self.realm][self.charclass][effect]:
+                       if not find in AllBonusList[self.realm] \
+                                                  [self.charclass][effect]:
                            continue
                     elif (slottype == 'Skill' or slottype == 'Focus') \
                             and effect[0:4] == 'All ' \
-                            and effect in AllBonusList[self.realm][self.charclass].keys():
-                        if not find in AllBonusList[self.realm][self.charclass][effect]:
+                            and effect in AllBonusList[self.realm]\
+                                                      [self.charclass].keys():
+                        if not find in AllBonusList[self.realm] \
+                                                   [self.charclass][effect]:
                             continue
                     else:
                         continue
@@ -1840,14 +1946,14 @@ class ScWindow(QMainWindow, Ui_B_SC):
             item.slot(3).setAll('Other Bonus', '2', 'Archery Damage', 
                                 requirement="vs All Monsters")
             item.slot(4).setAll('Other Bonus', '10', 'AF')
-            item.slot(5).setAll('Offensive Effect', '25', 'Dmg w/Resist Debuff', 
+            item.slot(5).setAll('Offensive Effect', '25', 'Dmg w/Resist Debuff',
                                 requirement="Level 50")
         elif newtype == 'Legendary Weapon':
             item.slot(3).setSlotType('crafted')
             item.slot(3).setAll('Other Bonus', '2', 'Melee Damage', 
                                 requirement="vs All Monsters")
             item.slot(4).setAll('Other Bonus', '10', 'AF')
-            item.slot(5).setAll('Offensive Effect', '60', 'Dmg w/Resist Debuff', 
+            item.slot(5).setAll('Offensive Effect', '60', 'Dmg w/Resist Debuff',
                                 requirement="Level 50")
         elif newtype == 'Enhanced Armor':
             item.slot(3).setSlotType('player')
@@ -1861,10 +1967,10 @@ class ScWindow(QMainWindow, Ui_B_SC):
     def newItemType(self, action):
         newtype = str(action.data().toString())
         if newtype == 'Drop Item':
-            item = Item(realm=self.realm,loc=self.currentTabLabel,state='drop')
+            item = Item('drop', self.currentTabLabel, self.realm)
             item.ItemName = "Drop Item" + str(self.itemnumbering)
         else:
-            item = Item(realm=self.realm,loc=self.currentTabLabel,state='player')
+            item = Item('player', self.currentTabLabel, self.realm)
             item.ItemName = "Crafted Item" + str(self.itemnumbering)
         self.itemnumbering += 1
         item.next = self.itemattrlist[self.currentTabLabel]
