@@ -72,13 +72,13 @@
 		<dd>
 		<!--<tr><td colspan="4" align="center"><b><xsl:value-of select="Location" /></b></td></tr> -->
 		<table>
-		<tr><td colspan="4">Name: <xsl:value-of select="Name"/></td></tr>
-		<tr><td colspan="4">Level: <xsl:value-of select="Level"/>
+		<tr><td colspan="5">Name: <xsl:value-of select="Name"/></td></tr>
+		<tr><td colspan="5">Level: <xsl:value-of select="Level"/>
 		&#160;&#160;&#160;Quality: <xsl:value-of select="ItemQuality"/>
 		&#160;&#160;&#160;AF/DPS: <xsl:value-of select="AFDPS"/>
 		&#160;&#160;&#160;Bonus: <xsl:value-of select="Bonus"/></td></tr>
 		<xsl:if test="ActiveState = 'drop'">
-			<tr><td colspan="4">Imbue Points: <xsl:value-of select="format-number(sum(SLOT/Imbue), '##.0')"/>
+			<tr><td colspan="5">Imbue Points: <xsl:value-of select="format-number(sum(SLOT/Imbue), '##.0')"/>
 			of <xsl:value-of select="format-number(ItemImbue, '##.0')"/>
 			&#160;&#160;&#160;Quality: <xsl:value-of select="ItemQuality"/>
 			&#160;&#160;&#160;Overcharge: <xsl:value-of select="Overcharge"/></td></tr>
@@ -90,16 +90,16 @@
 			<xsl:if test="Type != 'Unused'">
 				<xsl:choose>
 					<xsl:when test="number(@Number) &lt;= 4 and ../ActiveState = 'player'">
-						<tr><td>Gem <xsl:copy-of select="$slotnum"/>:&#160;</td>
-                                                <td align="right"><xsl:value-of select="Amount"/>&#160;</td>
-						<td><xsl:value-of select="Effect"/>&#160;</td>
+						<tr><td>Gem <xsl:copy-of select="$slotnum"/>:</td>
+						<td align="right"><xsl:value-of select="Amount"/></td>
+						<td><xsl:value-of select="Effect"/></td>
 						<td> - <xsl:value-of select="Qua"/></td>
 						<td><xsl:value-of select="Name"/></td></tr>
 					</xsl:when>
 					<xsl:otherwise>
-						<tr><td>Effect <xsl:copy-of select="$slotnum"/>:&#160;</td>
-						<td align="right"><xsl:value-of select="Amount"/>&#160;</td>
-						<td><xsl:value-of select="Effect"/>&#160;</td>
+						<tr><td>Effect <xsl:copy-of select="$slotnum"/>:</td>
+						<td align="right"><xsl:value-of select="Amount"/></td>
+						<td><xsl:value-of select="Effect"/></td>
 						<td>
 						<xsl:if test="../ActiveState = 'player'">
 							 - <xsl:value-of select="Name"/>
@@ -109,9 +109,9 @@
 				</xsl:choose>
 			</xsl:if>
 		</xsl:for-each>
-		<tr><td colspan="4">Utility: <xsl:value-of select="Utility"/></td></tr>
+		<tr><td colspan="5">Utility: <xsl:value-of select="Utility"/></td></tr>
 		<xsl:if test="ActiveState = 'player'">
-			<tr><td colspan="4">Cost: 
+			<tr><td colspan="5">Cost: 
 				<xsl:call-template name="formatCost">
 					<xsl:with-param name="cost" select="Cost"/>
 				</xsl:call-template>
@@ -121,7 +121,7 @@
 				</xsl:call-template>
 			</td></tr>
 		</xsl:if>
-		<tr><td colspan="4">&#160;</td></tr>
+		<tr><td colspan="5">&#160;</td></tr>
 		</table>
 		</dd>
 		</dl>
