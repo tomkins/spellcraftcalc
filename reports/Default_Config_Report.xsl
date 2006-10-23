@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="iso-8859-1"?>
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns="http://www.w3.org/1999/xhtml" version="1.0">
-<xsl:output encoding="iso-8859-1" method="xml" doctype-public="-//W3C//DTD XHTML 1.0 Strict//EN" doctype-system="DTD/xhtml1-strict.dtd" indent="yes"/>
+<xsl:output encoding="iso-8859-1" method="xml" doctype-public="-//W3C//DTD XHTML 1.0 Strict//EN" doctype-system="DTD/xhtml1-strict.dtd" indent="yes" omit-xml-declaration="yes"/>
 <xsl:template name="formatCost">
-	<xsl:variable name="cost" select="number(.)"/>
+	<xsl:param name="cost"/>
 	<xsl:variable name="plat" select="floor($cost div 10000000)"/>
 	<xsl:variable name="gold" select="floor(($cost - $plat * 10000000) div 10000)"/>
 	<xsl:variable name="silver" select="floor(($cost - $plat * 10000000 - $gold * 10000) div 100)"/>
@@ -10,7 +10,7 @@
 	<xsl:if test="$plat &gt; 0"><xsl:copy-of select="$plat"/>p&#160;</xsl:if>
 	<xsl:if test="$gold &gt; 0 or $plat &gt; 0"><xsl:copy-of select="$gold"/>g&#160;</xsl:if>
 	<xsl:if test="$silver &gt; 0 or $gold &gt; 0 or $plat &gt; 0"><xsl:copy-of select="$silver"/>s&#160;</xsl:if>
-	<xsl:if test="$copper &gt; 0 or $silver &gt; 0 or $gold &gt; 0 or $plat &gt; 0"><xsl:copy-of select="$copper"/>c&#160;</xsl:if>
+	<xsl:if test="$copper &gt; 0 or $silver &gt; 0 or $gold &gt; 0 or $plat &gt; 0"><xsl:copy-of select="$copper"/>c</xsl:if>
 </xsl:template>
 
 <xsl:template name="lineBreak">
@@ -19,7 +19,6 @@
 </xsl:template>
 
 <xsl:template match="/SCTemplate">
-<html>
 <body>
 <center><b>Config Report</b></center><br />
 <center><b>Stats</b></center><hr />
@@ -58,10 +57,9 @@
 <capbonuses/><br />
 <center><b>Other Bonuses</b></center><hr />
 <otherbonuses/><br />
+-->
 <center><b>Piece Listing</b></center><hr />
 <dl>
--->
-
 <xsl:for-each select="SCItem">
 	<xsl:if test="count(SLOT) &gt; 0 and Equipped = '1'">
 		<dt><b><xsl:value-of select="Location" /></b></dt>
@@ -103,9 +101,16 @@
 			</xsl:if>
 		</xsl:for-each>
 		<dd>Utility: <xsl:value-of select="Utility"/></dd>
+		<xsl:if test="ActiveState = 'player'">
+			<dd>Cost: 
+				<xsl:call-template name="formatCost">
+					<xsl:with-param name="cost" select="Cost"/>
+				</xsl:call-template>
+			</dd>
+		</xsl:if>
 	</xsl:if>
 </xsl:for-each>
+</dl>
 </body>
-</html>
 </xsl:template>
 </xsl:stylesheet>
