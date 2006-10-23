@@ -625,10 +625,10 @@ class ScWindow(QMainWindow, Ui_B_SC):
         childnode.appendChild(document.createTextNode(str(self.noteText)))
         rootnode.appendChild(childnode)
 
-        if rich():
+        if rich:
             totalsdict = self.summarize()
             for key in ('Cost', 'Price', 'Utility',):
-                val = totalsdict
+                val = totalsdict[key]
                 childnode = document.createElement(unicode(key))
                 childnode.appendChild(document.createTextNode(unicode(val)))
                 rootnode.appendChild(childnode)
@@ -637,11 +637,15 @@ class ScWindow(QMainWindow, Ui_B_SC):
                 childnode = document.createElement(unicode(key))
                 ### XXX: order me!
                 for type in totalsdict[key].keys():
-                    effectnode = document.createElement(unicode(key))
+                    if type == '% Power Pool':
+                        tagname = 'Power Pool'
+                    else:
+                        tagname = type
+                    effectnode = document.createElement(unicode(tagname.replace(' ', '')))
                     ### XXX: order me!
-                    for type in totalsdict[key][type].keys():
-                        val = unicode(totalsdict[key][type][val])
-                        valnode = document.createElement(unicode(key))
+                    for subtype in totalsdict[key][type].keys():
+                        val = unicode(totalsdict[key][type][subtype])
+                        valnode = document.createElement(unicode(subtype.replace(' ', '')))
                         valnode.appendChild(document.createTextNode(val))
                         effectnode.appendChild(valnode)
                     childnode.appendChild(effectnode)
