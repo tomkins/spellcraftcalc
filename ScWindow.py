@@ -881,7 +881,7 @@ class ScWindow(QMainWindow, Ui_B_SC):
             if Races['All'][race]['Resists'].has_key(effect):
                 tot['Resists'][effect]['RacialBonus'] \
                         = Races['All'][race]['Resists'][effect]
-            capcapcalc = HighCapBonusList['Resist']
+            capcalc = HighCapBonusList['Resist']
             tot['Resists'][effect]['BaseCap'] \
                     = int(charlevel * capcalc[0]) + capcalc[1]
         for key, item in self.itemattrlist.iteritems():
