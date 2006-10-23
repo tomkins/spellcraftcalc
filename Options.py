@@ -124,6 +124,9 @@ class Options(QDialog, Ui_B_Options):
         templatepath = document.createElement('TemplatePath')
         templatepath.appendChild(document.createTextNode(unicode(self.parent.TemplatePath)))
         rootnode.appendChild(templatepath)
+        reportpath = document.createElement('ReportPath')
+        reportpath.appendChild(document.createTextNode(unicode(self.parent.ReportPath)))
+        rootnode.appendChild(reportpath)
         c_reportpath = document.createElement('ConfigReportXSLT')
         c_reportpath.appendChild(document.createTextNode(os.path.abspath(unicode(self.parent.reportFile))))
         rootnode.appendChild(c_reportpath)
@@ -210,6 +213,8 @@ class Options(QDialog, Ui_B_Options):
                 self.parent.ItemPath = unicode(XMLHelper.getText(child.childNodes))
             elif child.tagName == 'TemplatePath':
                 self.parent.TemplatePath = unicode(XMLHelper.getText(child.childNodes))
+            elif child.tagName == 'ReportPath':
+                self.parent.ReportPath = unicode(XMLHelper.getText(child.childNodes))
             elif child.tagName == 'ConfigReportXSLT':
                 self.parent.reportFile = unicode(XMLHelper.getText(child.childNodes))
                 
