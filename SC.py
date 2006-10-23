@@ -8,6 +8,7 @@ from Item import *
 from constants import *
 import string
 import sys
+import re
 
 def formatCost(cost):
     plat = (cost / 10000000) % 1000
@@ -48,4 +49,64 @@ def getGemNameParts(gemname):
         gemwords.pop()
     return gemwords
 
-# vim: set ts=4 sw=4 et:
+def gemTypeSort(a, b):
+    if MaterialGems.index(a) < MaterialGems.index(b):
+        return -1
+    elif MaterialGems.index(a) > MaterialGems.index(b):
+        return 1
+    else:
+        return 0
+
+def gemNameSort(a, b):
+    ## XXX need to be static singletons...
+    essence_re = re.compile("essence", re.IGNORECASE);
+    shielding_re = re.compile("shielding", re.IGNORECASE);
+    battle_re = re.compile("battle", re.IGNORECASE);
+    war_re = re.compile("war", re.IGNORECASE);
+    tincture_re = re.compile("tincture", re.IGNORECASE);
+    
+    t_a = tincture_re.search(a)
+    t_b = tincture_re.search(b)
+    if not (t_a is None and t_b is None):
+        if t_a is None: return  -1
+        if t_b is None: return  1
+        return cmp(a, b)
+        
+    gemlevel_a, r = string.split(a, ' ', 1)
+    gemlevel_b, r = string.split(b, ' ', 1)
+    if GemNames.index(gemlevel_a) < GemNames.index(gemlevel_b):
+        return -1
+    elif GemNames.index(gemlevel_a) > GemNames.index(gemlevel_b):
+        return 1
+
+    e_a = essence_re.search(a)
+    e_b = essence_re.search(b)
+    if e_a is not None:
+        if e_b is not None: return cmp(a, b)
+        else: return -1
+
+    s_a = shielding_re.search(a)
+    s_b = shielding_re.search(b)
+    if s_a is not None:
+        if s_b is not None: return cmp(a, b)
+        elif e_b is not None: return 1
+        else: return -1
+
+    b_a = battle_re.search(a)
+    b_b = battle_re.search(b)
+    if b_a is not None:
+        if s_b is not None: return 1
+        elif e_b is not None: return 1
+        elif b_b is not None: return cmp(a, b)
+        else: return -1
+
+    w_a = war_re.search(a)
+    w_b = war_re.search(b)
+    if w_a is not None:
+        if s_b is not None: return 1
+        elif e_b is not None: return 1
+        elif b_b is not None: return 1
+        elif w_b is not None: return cmp(a, b)
+        else: return -1
+    
+    return cmp(a, b)
