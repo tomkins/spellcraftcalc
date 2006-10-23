@@ -82,7 +82,7 @@ class SearchingCombo(QComboBox):
             e.accept()
             return
         if not self.isEditable() and len(e.text()) > 0:
-            key = str(e.text()).upper()
+            key = unicode(e.text()).upper()
             indexlist = []
             if len(key) == 1:
                 itemkeys = self.buildItemKeys()
