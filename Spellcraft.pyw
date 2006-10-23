@@ -53,8 +53,8 @@ class ScApplication(QApplication):
         # Mac and Windows NT+ (on Windows 98 it just blows up)
         #
         font = QFont(self.font())
-        if str(QApplication.style().objectName()[0:9]).lower() == "macintosh" and \
-           sys.platform == "darwin":
+        if str(QApplication.style().objectName()[0:9]).lower() == "macintosh" \
+           and sys.platform == "darwin":
             font.setFamily("Trebuchet MS")
             #font.setFamily("Lucida Grande")
             font.setPointSize(12)
@@ -66,8 +66,8 @@ class ScApplication(QApplication):
                 font.setFamily("Trebuchet MS")
             font.setPointSize(8)
         else:
-            font.setFamily("Trebuchet MS")
-            font.setPointSize(8)
+            font.setPointSize(10)
+            #font.setStyleHint(QFont.SansSerif, QFont.PreferQuality)
         self.setFont(font)
 
         import ScWindow
