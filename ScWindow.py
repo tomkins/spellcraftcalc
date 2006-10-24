@@ -669,7 +669,7 @@ class ScWindow(QMainWindow, Ui_B_SC):
                         'OtherBonuses', 'PvEBonuses'):
                 if key == 'Stats':
                     types = GemLists['All']['Stat'] \
-                          + ('Acuity', 'AF', 'Hits', 'Power', '% Power Pool')
+                          + ('Acuity', 'Hits', 'Power', '% Power Pool', 'AF')
                 elif key == 'Resists':
                     types = GemLists['All']['Resist']
                 else:

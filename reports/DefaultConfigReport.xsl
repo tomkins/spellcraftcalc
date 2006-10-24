@@ -25,7 +25,7 @@
 <table cellspacing="10" cellpadding="0">
 <xsl:call-template name="lineBreak"/>
 <xsl:for-each select="Stats/*">
-	<xsl:if test="name() != 'AF'">
+	<xsl:if test="name() != 'AF' and name() != 'PowerPool'">
 	<xsl:if test="position() mod 3 = 1"><xsl:text disable-output-escaping="yes">&lt;tr&gt;</xsl:text></xsl:if>
 	<td><xsl:value-of select="substring(name(),1,3)"/>:</td>
 	<td><xsl:value-of select="TotalBonus"/> / </td>
@@ -74,9 +74,9 @@
 		<table>
 		<tr><td colspan="5">Name: <xsl:value-of select="Name"/></td></tr>
 		<tr><td colspan="5">Level: <xsl:value-of select="Level"/>
-		&#160;&#160;&#160;Quality: <xsl:value-of select="ItemQuality"/>
-		&#160;&#160;&#160;AF/DPS: <xsl:value-of select="AFDPS"/>
-		&#160;&#160;&#160;Bonus: <xsl:value-of select="Bonus"/></td></tr>
+		Quality: <xsl:value-of select="ItemQuality"/>
+		AF/DPS: <xsl:value-of select="AFDPS"/>
+		Bonus: <xsl:value-of select="Bonus"/></td></tr>
 		<xsl:if test="ActiveState = 'drop'">
 			<tr><td colspan="5">Imbue Points: <xsl:value-of select="format-number(sum(SLOT/Imbue), '##.0')"/>
 			of <xsl:value-of select="format-number(ItemImbue, '##.0')"/>
