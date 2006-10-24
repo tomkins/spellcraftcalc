@@ -19,7 +19,11 @@ import re
 import sys
 import os.path
 
-import libxsltmod
+from Ft.Xml.Xslt import Processor
+from Ft.Xml import InputSource
+from Ft.Lib.Uri import OsPathToUri
+
+#import libxsltmod
 
 class ReportWindow(QDialog, Ui_B_ReportWindow):
     def __init__(self,parent = None,name = None,modal = False,fl = Qt.Widget):
@@ -129,6 +133,17 @@ class ReportWindow(QDialog, Ui_B_ReportWindow):
         self.printMaterials()
 
     def parseConfigReport(self, filename, scxmldoc):
+        processor = Processor.Processor()
+        source = InputSource.DefaultFactory.fromString(
+            XMLHelper.writexml(scxmldoc, UnicodeStringIO(), '', '\t', '\n'))
+
+        xsltUri = OsPathToUri(filename)
+        transform = InputSource.DefaultFactory.fromUri(xsltUri)
+
+        processor.appendStylesheet(transform)
+        self.reportHtml = processor.run(source)
+
+        """
         handler = XSLTMessageHandler()
         self.reportHtml = ''
         try:
@@ -142,6 +157,9 @@ class ReportWindow(QDialog, Ui_B_ReportWindow):
             QMessageBox.critical(None, 'Error!', 
                 'Error opening file: ' + filename, 'OK')
             return
+        """
+
+        print self.reportHtml
 
         self.MMLabel.hide()
         self.MatMultiplier.hide()
