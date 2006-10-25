@@ -1,7 +1,4 @@
 <ui version="4.0" >
- <author></author>
- <comment></comment>
- <exportmacro></exportmacro>
  <class>B_ReportWindow</class>
  <widget class="QDialog" name="B_ReportWindow" >
   <property name="geometry" >
@@ -43,6 +40,14 @@
        </property>
        <item>
         <widget class="QPushButton" name="PushButton1" >
+         <property name="sizePolicy" >
+          <sizepolicy>
+           <hsizetype>3</hsizetype>
+           <vsizetype>0</vsizetype>
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
          <property name="text" >
           <string>Save As HTML</string>
          </property>
@@ -50,6 +55,14 @@
        </item>
        <item>
         <widget class="QPushButton" name="PushButton1_2" >
+         <property name="sizePolicy" >
+          <sizepolicy>
+           <hsizetype>3</hsizetype>
+           <vsizetype>0</vsizetype>
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
          <property name="text" >
           <string>Save As Text</string>
          </property>

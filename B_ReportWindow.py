@@ -2,8 +2,8 @@
 
 # Form implementation generated from reading ui file 'ReportWindow.ui'
 #
-# Created: Thu Oct  5 16:47:49 2006
-#      by: PyQt4 UI code generator 4.0.1
+# Created: Wed Oct 25 16:17:28 2006
+#      by: PyQt4 UI code generator 4-snapshot-20061022
 #
 # WARNING! All changes made in this file will be lost!
 
@@ -35,10 +35,22 @@ class Ui_B_ReportWindow(object):
         self.hboxlayout.setObjectName("hboxlayout")
 
         self.PushButton1 = QtGui.QPushButton(B_ReportWindow)
+
+        sizePolicy = QtGui.QSizePolicy(QtGui.QSizePolicy.Policy(3),QtGui.QSizePolicy.Policy(0))
+        sizePolicy.setHorizontalStretch(0)
+        sizePolicy.setVerticalStretch(0)
+        sizePolicy.setHeightForWidth(self.PushButton1.sizePolicy().hasHeightForWidth())
+        self.PushButton1.setSizePolicy(sizePolicy)
         self.PushButton1.setObjectName("PushButton1")
         self.hboxlayout.addWidget(self.PushButton1)
 
         self.PushButton1_2 = QtGui.QPushButton(B_ReportWindow)
+
+        sizePolicy = QtGui.QSizePolicy(QtGui.QSizePolicy.Policy(3),QtGui.QSizePolicy.Policy(0))
+        sizePolicy.setHorizontalStretch(0)
+        sizePolicy.setVerticalStretch(0)
+        sizePolicy.setHeightForWidth(self.PushButton1_2.sizePolicy().hasHeightForWidth())
+        self.PushButton1_2.setSizePolicy(sizePolicy)
         self.PushButton1_2.setObjectName("PushButton1_2")
         self.hboxlayout.addWidget(self.PushButton1_2)
 
@@ -82,3 +94,4 @@ class Ui_B_ReportWindow(object):
         self.PushButton1_2.setText(QtGui.QApplication.translate("B_ReportWindow", "Save As Text", None, QtGui.QApplication.UnicodeUTF8))
         self.MMLabel.setText(QtGui.QApplication.translate("B_ReportWindow", "Materials Multiplier", None, QtGui.QApplication.UnicodeUTF8))
         self.PushButton2.setText(QtGui.QApplication.translate("B_ReportWindow", "Close", None, QtGui.QApplication.UnicodeUTF8))
+
