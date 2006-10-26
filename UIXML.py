@@ -9,19 +9,50 @@ import sys
 import re
 import os.path
 import string
+from MyStringIO import UnicodeStringIO
+import XMLHelper
 
-import ReportWindow
-import ReportParser
+from Ft.Xml.Xslt import Processor
+from Ft.Xml import InputSource
+from Ft.Lib.Uri import OsPathToUri
 
 def uixml(scwin):
-    pwd = os.path.dirname(os.path.abspath(sys.argv[0]))
-    path = os.path.join(pwd, 'Reports')
-    srcpath = os.path.join(path, 'windowgen.xml')
+    srcpath = os.path.join(scwin.ReportPath, 'windowgen.xsl')
+    path = os.path.abspath(os.path.dirname(sys.argv[0]))
+    xslt2 = os.path.join(path, 'reports', 'windowgen-post.xsl')
 
-    filename = QFileDialog.getOpenFileName(scwin, "Choose a report file", "", "Reports (*.xml);;All Files (*.*)")
-    if str(filename) == '':
+    uixslt = QFileDialog.getOpenFileName(scwin, "Choose a UI XSLT",
+        srcpath, "UI XSLT (*.xsl);;All Files (*.*)")
+    if str(uixslt) == '':
         return
-    filename = str(filename)
+    uixslt = str(uixslt)
+    
+    try:
+        processor = Processor.Processor()
+        source = InputSource.DefaultFactory.fromString(
+            XMLHelper.writexml(scwin.asXML(True), UnicodeStringIO(), '', '\t', '\n'))
+
+        xsltUri = OsPathToUri(uixslt)
+        transform = InputSource.DefaultFactory.fromUri(xsltUri)
+
+        xslt2Uri = OsPathToUri(xslt2)
+        posttransform = InputSource.DefaultFactory.fromUri(xslt2Uri)
+
+        processor.appendStylesheet(transform)
+        step1 = processor.run(source)
+
+        print step1
+
+        processor = Processor.Processor()
+        processor.appendStylesheet(posttransform)
+        uixmlstr = processor.run(InputSource.DefaultFactory.fromString(step1))
+    except:
+        QMessageBox.critical(None, 'Error!', 
+            'Error with XSLT transform!', 'OK')
+        return
+        
+
+    """
     try:
         f = open(str(filename), 'r')
         uixmlin = f.read()
@@ -95,8 +126,10 @@ def uixml(scwin):
                 labeledstr += '\n'
             y += 17
     uixmlstr = uixmlheader + labeledstr + uixmlfooter
+    """
     savepath = os.path.join(path, 'custom1.xml')
-    filename = QFileDialog.getSaveFileName(path, "WindowXML (*.xml);;All Files (*.*)")
+    filename = QFileDialog.getSaveFileName(scwin, "Save UI XML As:",
+        savepath, "WindowXML (*.xml);;All Files (*.*)")
     if str(filename) == '':
         return
     try:
