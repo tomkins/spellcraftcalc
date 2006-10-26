@@ -30,7 +30,7 @@
 	<td><xsl:value-of select="substring(name(),1,3)"/>:</td>
 	<td><xsl:value-of select="TotalBonus"/> / </td>
 	<td><xsl:value-of select="BaseCap"/></td>
-	<xsl:if test="position() mod 3 = 0 or position() = last()"><xsl:text disable-output-escaping="yes">&lt;/tr&gt;
+	<xsl:if test="position() mod 3 = 0 or position() = (last() - 2)"><xsl:text disable-output-escaping="yes">&lt;/tr&gt;
 	</xsl:text></xsl:if>
 	</xsl:if>
 </xsl:for-each>
@@ -49,8 +49,8 @@
 <xsl:call-template name="lineBreak"/>
 <xsl:for-each select="Skills|Focus|OtherBonuses|PvEBonuses">
 	<xsl:if test="math:max(./*/TotalBonus) &gt; 0">
-		<table>
 		<center><b><xsl:value-of select="name()"/></b></center><hr />
+		<table>
 		<xsl:for-each select="./*">
 			<xsl:if test="substring(name(),1,3) != 'All'">
 				<xsl:call-template name="lineBreak"/>
@@ -78,8 +78,8 @@
 		AF/DPS: <xsl:value-of select="AFDPS"/>
 		Bonus: <xsl:value-of select="Bonus"/></td></tr>
 		<xsl:if test="ActiveState = 'drop'">
-			<tr><td colspan="5">Imbue Points: <xsl:value-of select="format-number(sum(SLOT/Imbue), '##.0')"/>
-			of <xsl:value-of select="format-number(ItemImbue, '##.0')"/>
+			<tr><td colspan="5">Imbue Points: <xsl:value-of select="Imbue"/>
+			&#160;&#160;&#160;of <xsl:value-of select="ItemImbue"/>
 			&#160;&#160;&#160;Quality: <xsl:value-of select="ItemQuality"/>
 			&#160;&#160;&#160;Overcharge: <xsl:value-of select="Overcharge"/></td></tr>
 		</xsl:if>
