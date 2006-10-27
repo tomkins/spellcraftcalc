@@ -131,10 +131,11 @@ class CraftWindow(QDialog, Ui_B_CraftWindow):
             done = '0'
         self.currentItem.slot(i).setDone(done)
         self.computeMaterials()
+        self.recomputeCosts(i, int(self.currentItem.slot(i).remakes()))
 
     def RemakeChanged(self, val):
         i = int(self.sender().objectName()[3]) - 1
-        self.currentItem.slot(i).setRemakes(self.GemRemakes[i].text())
+        self.currentItem.slot(i).setRemakes(val)
         self.recomputeCosts(i, val)
         self.computeMaterials()
 

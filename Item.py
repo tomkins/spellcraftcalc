@@ -233,7 +233,7 @@ class ItemSlot:
         return ret
 
     def gemRemakes(self):
-        remakes = int(self.Remakes) + 1
+        remakes = int(self.Remakes)
         if self.Done == '0':
             remakes += EstimatedMakes[self.quaIndex()] - 1
         return remakes
@@ -800,4 +800,4 @@ if __name__ == '__main__':
         if f is not None:
             f.close()
 
-    dumptree(slots,1)
+    dumptree(slots, 1)
