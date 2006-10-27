@@ -69,20 +69,18 @@
 	<xsl:if test="count(SLOT) &gt; 0 and Equipped = '1'">
 		<dl>
 		<dt><b><xsl:value-of select="Location" /></b></dt>
-		<dd>
-		<!--<tr><td colspan="4" align="center"><b><xsl:value-of select="Location" /></b></td></tr> -->
-		<table>
-		<tr><td colspan="5">Name: <xsl:value-of select="Name"/></td></tr>
-		<tr><td colspan="5">Level: <xsl:value-of select="Level"/>
+		<dt>Name: <xsl:value-of select="Name"/></dt>
+		<dt>Level: <xsl:value-of select="Level"/>
 		Quality: <xsl:value-of select="ItemQuality"/>
 		AF/DPS: <xsl:value-of select="AFDPS"/>
-		Bonus: <xsl:value-of select="Bonus"/></td></tr>
+		Bonus: <xsl:value-of select="Bonus"/></dt>
 		<xsl:if test="ActiveState = 'drop'">
-			<tr><td colspan="5">Imbue Points: <xsl:value-of select="Imbue"/>
+			<dt>Imbue Points: <xsl:value-of select="Imbue"/>
 			&#160;&#160;&#160;of <xsl:value-of select="ItemImbue"/>
 			&#160;&#160;&#160;Quality: <xsl:value-of select="ItemQuality"/>
-			&#160;&#160;&#160;Overcharge: <xsl:value-of select="Overcharge"/></td></tr>
+			&#160;&#160;&#160;Overcharge: <xsl:value-of select="Overcharge"/></dt>
 		</xsl:if>
+		<dt><table>
 		<xsl:for-each select="SLOT">
 			<xsl:variable name="slotnum">
 				<xsl:value-of select="number(@Number) + 1"/>
@@ -109,9 +107,10 @@
 				</xsl:choose>
 			</xsl:if>
 		</xsl:for-each>
-		<tr><td colspan="5">Utility: <xsl:value-of select="Utility"/></td></tr>
+		</table></dt>
+		<dt>Utility: <xsl:value-of select="Utility"/></dt>
 		<xsl:if test="ActiveState = 'player'">
-			<tr><td colspan="5">Cost: 
+			<dt>Cost: 
 				<xsl:call-template name="formatCost">
 					<xsl:with-param name="cost" select="Cost"/>
 				</xsl:call-template>
@@ -119,11 +118,9 @@
 				<xsl:call-template name="formatCost">
 					<xsl:with-param name="cost" select="Price"/>
 				</xsl:call-template>
-			</td></tr>
+			</dt>
 		</xsl:if>
-		<tr><td colspan="5">&#160;</td></tr>
-		</table>
-		</dd>
+		<dt>&#160;</dt>
 		</dl>
 	</xsl:if>
 </xsl:for-each>
