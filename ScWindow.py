@@ -99,8 +99,10 @@ class ScWindow(QMainWindow, Ui_B_SC):
                                 os.path.abspath(sys.argv[0])), "templates")
         self.ReportPath = os.path.join(os.path.dirname(
                                 os.path.abspath(sys.argv[0])), "reports")
-        self.reportFile = os.path.join(self.ReportPath, 
+        self.ReportFile = os.path.join(self.ReportPath, 
                                 'DefaultConfigReport.xsl')
+        self.UiReportFile = os.path.join(self.ReportPath, 
+                                'DefaultUiXmlWindow.xsl')
         self.realm = 'Albion'
         self.charclass = 'Armsman'
         self.crafterSkill = 1000
@@ -376,8 +378,9 @@ class ScWindow(QMainWindow, Ui_B_SC):
         self.filemenu.addAction('Item Database Path...', self.chooseItemPath)
         self.filemenu.addSeparator()
         self.filemenu.addAction('Export &Quickbars...', self.openCraftBars)
-        self.filemenu.addAction('Export &UI XML (Beta)...', self.generateUIXML)
         self.filemenu.addAction('Export SCTemplate XML...', self.exportAsFile)
+        self.filemenu.addAction('Export &UI Window...', self.generateUIXML)
+        self.filemenu.addAction('Choose UI Format...', self.chooseXMLUIFile)
         self.filemenu.addSeparator()
         self.filemenu.addMenu(self.rf_menu)
         self.filemenu.addSeparator()
@@ -1710,6 +1713,25 @@ class ScWindow(QMainWindow, Ui_B_SC):
         self.nocalc = 0
         self.calculate()
         
+    def chooseXMLUIFile(self):
+        filters = "UI XML Templates (*.xsl *.xslt);;All Files (*.*)"
+        filename = QFileDialog.getOpenFileName(self, "Choose UI Window Format",
+                       self.ReportPath, filters)
+        filename = unicode(filename)
+        if filename is not None and str(filename) != '':
+            self.UiReportFile = os.path.abspath(filename)
+            #if templates are in one path, do we really want to
+            #assume the report files would be saved to the same?
+            #
+            #self.ReportPath = os.path.dirname(self.UiReportFile)
+
+    def generateUIXML(self):
+        UIXML.uixml(self, self.UiReportFile)
+   
+    def loadRecentFile(self, action):
+        index = action.data().toInt()[0]
+        self.openFile(self.recentFiles[index], True)
+
     def openOptions(self):
         self.nocalc = 1
         res = Options.Options(self).exec_()
@@ -1737,18 +1759,20 @@ class ScWindow(QMainWindow, Ui_B_SC):
 
     def openConfigReport(self):
         RW = ReportWindow.ReportWindow(self, '', 1)
-        RW.parseConfigReport(self.reportFile, self.asXML(True))
+        RW.parseConfigReport(self.ReportFile, self.asXML(True))
         RW.exec_()
 
     def chooseReportFile(self):
+        filters = "Report Templates (*.xsl *.xslt);;All Files (*.*)"
         filename = QFileDialog.getOpenFileName(self, "Choose Report Format",
-                       "reports", "Reports (*.xml *.rpt);;All Files (*.*)")
+                       self.ReportPath, filters)
+        filename = unicode(filename)
         if filename is not None and str(filename) != '':
-            self.reportFile = str(filename)
-
-    def aboutBox(self):
-        splash = AboutScreen(parent=self,modal=True)
-        splash.exec_()
+            self.ReportFile = os.path.abspath(filename)
+            #if templates are in one path, would we really want to
+            #assume the report files will be saved to the same?
+            #
+            #self.ReportPath = os.path.dirname(self.ReportFile)
 
     def openCraftBars(self):
         CB = CraftBar.CraftBar(self, '', 1)
@@ -1980,13 +2004,10 @@ class ScWindow(QMainWindow, Ui_B_SC):
         else:
             self.chooseItemType(action)
 
-    def loadRecentFile(self, action):
-        index = action.data().toInt()[0]
-        self.openFile(self.recentFiles[index], True)
+    def aboutBox(self):
+        splash = AboutScreen(parent=self,modal=True)
+        splash.exec_()
 
-    def generateUIXML(self):
-        UIXML.uixml(self)
-   
     def ignoreMouseEvent(self, e):
         e.ignore()
 

@@ -16,17 +16,11 @@ from Ft.Xml.Xslt import Processor
 from Ft.Xml import InputSource
 from Ft.Lib.Uri import OsPathToUri
 
-def uixml(scwin):
+def uixml(scwin, uixslt):
     srcpath = os.path.join(scwin.ReportPath, 'windowgen.xsl')
     path = os.path.abspath(os.path.dirname(sys.argv[0]))
     xslt2 = os.path.join(path, 'reports', 'windowgen-post.xsl')
 
-    uixslt = QFileDialog.getOpenFileName(scwin, "Choose a UI XSLT",
-        srcpath, "UI XSLT (*.xsl);;All Files (*.*)")
-    if str(uixslt) == '':
-        return
-    uixslt = str(uixslt)
-    
     try:
         processor = Processor.Processor()
         source = InputSource.DefaultFactory.fromString(

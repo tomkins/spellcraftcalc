@@ -128,7 +128,10 @@ class Options(QDialog, Ui_B_Options):
         reportpath.appendChild(document.createTextNode(unicode(self.parent.ReportPath)))
         rootnode.appendChild(reportpath)
         c_reportpath = document.createElement('ConfigReportXSLT')
-        c_reportpath.appendChild(document.createTextNode(os.path.abspath(unicode(self.parent.reportFile))))
+        c_reportpath.appendChild(document.createTextNode(os.path.abspath(unicode(self.parent.ReportFile))))
+        rootnode.appendChild(c_reportpath)
+        c_reportpath = document.createElement('ConfigUiReportXSLT')
+        c_reportpath.appendChild(document.createTextNode(os.path.abspath(unicode(self.parent.UiReportFile))))
         rootnode.appendChild(c_reportpath)
         for key, val in pricing.items():
             node = document.createElement(key)
@@ -216,7 +219,9 @@ class Options(QDialog, Ui_B_Options):
             elif child.tagName == 'ReportPath':
                 self.parent.ReportPath = unicode(XMLHelper.getText(child.childNodes))
             elif child.tagName == 'ConfigReportXSLT':
-                self.parent.reportFile = unicode(XMLHelper.getText(child.childNodes))
+                self.parent.ReportFile = unicode(XMLHelper.getText(child.childNodes))
+            elif child.tagName == 'UiReportXSLT':
+                self.parent.UiReportFile = unicode(XMLHelper.getText(child.childNodes))
                 
         screenW = QApplication.desktop().width()
         screenH = QApplication.desktop().height()
