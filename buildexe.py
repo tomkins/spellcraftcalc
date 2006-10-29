@@ -1,5 +1,6 @@
 from distutils.core import setup
-import py2exe
+import Ft.Lib.DistExt.Py2Exe
+#import py2exe
 import glob
 import sys
 
@@ -11,7 +12,7 @@ sc = {
     "icon_resources" : [(100, 'ScWindow.ico')],
     }
 
-setup(name="kscraftsetup", 
+setup(name="kscraftsetup",
     zipfile=None,
     windows=[sc],
     data_files=[
@@ -21,8 +22,10 @@ setup(name="kscraftsetup",
         ('.', ['./ScWindow.png']),
         ('.', ['./Spellcraft.png']),
         ('reports', ['reports/Reports.txt']), 
-        ('reports', glob.glob("reports/*.xml"))],
-    options = {'py2exe': {'excludes' : ['_ssl', '_socket',], 
+        ('reports', glob.glob("reports/*.xml")),
+        ('reports', glob.glob("reports/*.xsl")),
+    ],
+    options = {'py2exe': {'excludes' : ['_ssl',], 
                           'includes' : ['sip',],
                           'bundle_files' : 3,
         }
