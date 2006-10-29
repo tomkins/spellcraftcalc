@@ -13,37 +13,37 @@ from MyStringIO import UnicodeStringIO
 import XMLHelper
 
 from Ft.Xml.Xslt import Processor
-from Ft.Xml import InputSource
+from Ft.Xml.InputSource import DefaultFactory
 from Ft.Lib.Uri import OsPathToUri
 
 def uixml(scwin, uixslt):
     extidx = uixslt.rindex('.')
     xslt2 = uixslt[:extidx] + "Post" + uixslt[extidx:]
+    sctemplate = XMLHelper.writexml(scwin.asXML(True), UnicodeStringIO(), '', '\t', '\n')
 
     try:
-        sctemplate = XMLHelper.writexml(scwin.asXML(True), UnicodeStringIO(), '', '\t', '\n')
-        source = InputSource.DefaultFactory.fromString(sctemplate)
+        source = DefaultFactory.fromString(sctemplate, "urn:pass1")
         xsltUri = OsPathToUri(uixslt)
-        transform = InputSource.DefaultFactory.fromUri(xsltUri)
+        transform = DefaultFactory.fromUri(xsltUri)
 
         processor = Processor.Processor()
         processor.appendStylesheet(transform)
         uixmlstr = processor.run(source)
 
         if os.path.exists(xslt2):
-            source = InputSource.DefaultFactory.fromString(uixmlstr)
+            source = DefaultFactory.fromString(uixmlstr, "urn:pass2")
             xsltUri = OsPathToUri(xslt2)
-            transform = InputSource.DefaultFactory.fromUri(xsltUri)
+            transform = DefaultFactory.fromUri(xsltUri)
 
             processor = Processor.Processor()
-            processor.appendStylesheet(posttransform)
+            processor.appendStylesheet(transform)
             uixmlstr = processor.run(source)
     except:
         QMessageBox.critical(None, 'Error!', 
             'Error with XSLT transform!', 'OK')
         return
         
-    path = os.path.join(self.parent.ReportPath, 'custom1_window.xml')
+    path = os.path.join(scwin.ReportPath, 'custom1_window.xml')
     filename = QFileDialog.getSaveFileName(scwin, "Save UI Window as",
                    path, "UI Window XML (*_window.xml);;All Files (*.*)")
     if str(filename) == '':

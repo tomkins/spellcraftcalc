@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="iso-8859-1"?>
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" version="1.0">
-<xsl:output encoding="iso-8859-1" method="xml" doctype-public="-//W3C//DTD XHTML 1.0 Strict//EN" doctype-system="DTD/xhtml1-strict.dtd" indent="yes" omit-xml-declaration="yes"/>
+<xsl:output encoding="iso-8859-1" method="xml" indent="yes" />
 <xsl:template name="labeldef">
     <xsl:param name="uiwidth"/>
     <xsl:param name="uiposx"/>
@@ -32,7 +32,7 @@
 </LabelDef>
 </xsl:template>
 
-<xsl:template match="/windowgen/label">
+<xsl:template match="label">
 	<xsl:call-template name="labeldef">
 		<xsl:with-param name="uiwidth"><xsl:value-of select="@width"/></xsl:with-param>
 		<xsl:with-param name="uiposx"><xsl:value-of select="@x"/></xsl:with-param>
@@ -40,6 +40,46 @@
 		<xsl:with-param name="uidata"><xsl:value-of select="data"/></xsl:with-param>
 	</xsl:call-template>
 </xsl:template>
+
+<xsl:template match="/Root_Element/WindowTemplate">
+<Root_Element ID="DAOCUi">
+	<WindowTemplate>
+		<Name>custom1_window</Name>
+		<CloseButton>true</CloseButton>
+		<MoveButton>true</MoveButton>
+		<Width>384</Width>
+		<Height>320</Height>
+		<TitleWidth>384</TitleWidth>
+		<TitleHeight>18</TitleHeight>
+		<ResizeableWidth>5</ResizeableWidth>
+		<ResizeableHeight>5</ResizeableHeight>
+		<WindowId>Interact</WindowId>
+		<MinWidth>120</MinWidth>
+		<MinHeight>120</MinHeight>
+		<BottomRightResizeButton>true</BottomRightResizeButton>
+		<BottomLeftResizeButton>true</BottomLeftResizeButton>
+		<ResizeButtonOffsetX>9</ResizeButtonOffsetX>
+		<FullResizeImageDef>
+			<ControlId>Background</ControlId>
+			<Height>320</Height>
+			<Width>384</Width>
+			<Position>
+				<X>0</X>
+				<Y>0</Y>
+			</Position>
+			<TemplateName>dlg_background_resize</TemplateName>
+			<Alignment>
+				<GrowWidth>true</GrowWidth>
+				<GrowHeight>true</GrowHeight>
+			</Alignment>
+		</FullResizeImageDef>
+
+                <xsl:apply-templates select="label"/>
+
+	</WindowTemplate>
+</Root_Element>
+</xsl:template>
+
 </xsl:stylesheet>
 
 

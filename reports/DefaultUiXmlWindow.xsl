@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="iso-8859-1"?>
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" version="1.0">
-<xsl:output encoding="iso-8859-1" method="xml" doctype-public="-//W3C//DTD XHTML 1.0 Strict//EN" doctype-system="DTD/xhtml1-strict.dtd" indent="yes"/>
+<xsl:output encoding="iso-8859-1" method="xml" indent="yes"/>
 <xsl:template name="formatCost">
 	<xsl:param name="cost"/>
 	<xsl:variable name="plat" select="floor($cost div 10000000)"/>
@@ -11,11 +11,6 @@
 	<xsl:if test="$gold &gt; 0 or $plat &gt; 0"><xsl:copy-of select="$gold"/>g </xsl:if>
 	<xsl:if test="$silver &gt; 0 or $gold &gt; 0 or $plat &gt; 0"><xsl:copy-of select="$silver"/>s </xsl:if>
 	<xsl:if test="$copper &gt; 0 or $silver &gt; 0 or $gold &gt; 0 or $plat &gt; 0"><xsl:copy-of select="$copper"/>c</xsl:if>
-</xsl:template>
-
-<xsl:template name="lineBreak">
-<xsl:text>
-</xsl:text>
 </xsl:template>
 
 <xsl:template name="labeldef">
@@ -50,7 +45,9 @@
 </xsl:template>
 
 <xsl:template match="/SCTemplate">
-<windowgen>
+<Root_Element ID="DAOCUi">
+	<WindowTemplate>
+
 <label width="-1" x="5"><data>Config Report</data></label>
 <empty/>
 <label width="-1" x="5"><data>Stats</data></label>
@@ -138,6 +135,8 @@
 		</xsl:if>
 	</xsl:if>
 </xsl:for-each>
-</windowgen>
+
+	</WindowTemplate>
+</Root_Element>
 </xsl:template>
 </xsl:stylesheet>
