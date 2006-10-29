@@ -9,6 +9,7 @@ import sys
 import re
 import os.path
 import string
+import traceback
 from MyStringIO import UnicodeStringIO
 import XMLHelper
 
@@ -41,9 +42,9 @@ def uixml(scwin, uixslt):
             processor = Processor.Processor()
             processor.appendStylesheet(transform)
             uixmlstr = processor.run(source)
-    except:
+    except Exception, e:
         QMessageBox.critical(None, 'Error!', 
-            'Error with XSLT transform!', 'OK')
+            'Error with XSLT transform!\n\n'+str(e), 'OK')
         return
         
     path = os.path.join(scwin.ReportPath, 'custom1_window.xml')
