@@ -135,31 +135,19 @@ class ReportWindow(QDialog, Ui_B_ReportWindow):
     def parseConfigReport(self, filename, scxmldoc):
         processor = Processor.Processor()
         source = InputSource.DefaultFactory.fromString(
-            XMLHelper.writexml(scxmldoc, UnicodeStringIO(), '', '\t', '\n'))
+            XMLHelper.writexml(scxmldoc, UnicodeStringIO(), '', '\t', '\n'),
+            "uri:sctemplate")
 
-        xsltUri = OsPathToUri(filename)
-        transform = InputSource.DefaultFactory.fromUri(xsltUri)
-
-        processor.appendStylesheet(transform)
-        self.reportHtml = processor.run(source)
-
-        """
-        handler = XSLTMessageHandler()
-        self.reportHtml = ''
         try:
-            self.reportHtml = libxsltmod.translate_to_string(
-                'f', filename,
-                's', XMLHelper.writexml(scxmldoc, UnicodeStringIO(), '', '\t', '\n'),
-                handler, { })
-        except RuntimeError, m:
-            messages = handler.getContent()
-            print messages
-            QMessageBox.critical(None, 'Error!', 
-                'Error opening file: ' + filename, 'OK')
-            return
-        """
+            xsltUri = OsPathToUri(filename)
+            transform = InputSource.DefaultFactory.fromUri(xsltUri)
 
-        print self.reportHtml
+            processor.appendStylesheet(transform)
+            self.reportHtml = processor.run(source)
+        except Exception, e:
+            QMessageBox.critical(None, 'Error!', 
+                'Error composing report ' + filename + "\n\n" + str(e), 'OK')
+            return
 
         self.MMLabel.hide()
         self.MatMultiplier.hide()
