@@ -53,7 +53,7 @@
     <label width="-1" x="5">
       <data>
 	<xsl:value-of select="Location"/><xsl:text> - </xsl:text>
-	<xsl:value-of select="Name"/>
+	<xsl:value-of select="ItemName"/>
       </data>
     </label>
     <label width="-1" x="5">
