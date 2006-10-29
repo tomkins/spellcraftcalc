@@ -13,17 +13,11 @@
 	<xsl:if test="$copper &gt; 0 or $silver &gt; 0 or $gold &gt; 0 or $plat &gt; 0"><xsl:copy-of select="$copper"/>c</xsl:if>
 </xsl:template>
 
-<xsl:template name="lineBreak">
-<xsl:text>
-</xsl:text>
-</xsl:template>
-
 <xsl:template match="/SCTemplate">
 <body>
 <center><b>Config Report</b></center><br />
 <center><b>Stats</b></center><hr />
 <table cellspacing="10" cellpadding="0">
-<xsl:call-template name="lineBreak"/>
 <xsl:for-each select="Stats/*">
 	<xsl:if test="name() != 'AF' and name() != 'PowerPool'">
 	<xsl:if test="position() mod 3 = 1"><xsl:text disable-output-escaping="yes">&lt;tr&gt;</xsl:text></xsl:if>
@@ -44,32 +38,27 @@
 	<td><xsl:value-of select="BaseCap"/></td>
 	<xsl:if test="position() mod 3 = 0 or position() = last()"><xsl:text disable-output-escaping="yes">&lt;/tr&gt;</xsl:text></xsl:if>
 </xsl:for-each>
-<xsl:call-template name="lineBreak"/>
 </table><br />
-<xsl:call-template name="lineBreak"/>
 <xsl:for-each select="Skills|Focus|OtherBonuses|PvEBonuses">
 	<xsl:if test="math:max(./*/TotalBonus) &gt; 0">
 		<center><b><xsl:value-of select="name()"/></b></center><hr />
 		<table>
 		<xsl:for-each select="./*">
 			<xsl:if test="substring(name(),1,3) != 'All'">
-				<xsl:call-template name="lineBreak"/>
 				<tr><td align="right"><xsl:value-of select="TotalBonus"/> / </td>
 				<td><xsl:value-of select="BaseCap"/></td>
 				<td><xsl:value-of select="name()"/></td></tr>
 			</xsl:if>
 		</xsl:for-each>
-		<xsl:call-template name="lineBreak"/>
 		</table>
 	</xsl:if>
 </xsl:for-each>
-<xsl:call-template name="lineBreak"/>
 <center><b>Piece Listing</b></center><hr />
 <xsl:for-each select="SCItem">
 	<xsl:if test="count(SLOT) &gt; 0 and Equipped = '1'">
 		<dl>
 		<dt><b><xsl:value-of select="Location" /></b></dt>
-		<dt>Name: <xsl:value-of select="Name"/></dt>
+		<dt>Name: <xsl:value-of select="ItemName"/></dt>
 		<dt>Level: <xsl:value-of select="Level"/>
 		Quality: <xsl:value-of select="ItemQuality"/>
 		AF/DPS: <xsl:value-of select="AFDPS"/>
