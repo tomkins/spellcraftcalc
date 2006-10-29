@@ -20,9 +20,6 @@ from Ft.Lib.Uri import OsPathToUri
 def uixml(scwin, uixslt):
     extidx = uixslt.rindex('.')
     xslt2 = uixslt[:extidx] + "Post" + uixslt[extidx:]
-    if not os.path.exists(xslt2):
-        xslt2 = os.path.combine(os.path.abspath(os.path.dirname(sys.argv[0])),
-            'reports', 'DefaultUiXmlWindowPost.xsl')
     sctemplate = XMLHelper.writexml(scwin.asXML(True), UnicodeStringIO(), '', '\t', '\n')
 
     try:
