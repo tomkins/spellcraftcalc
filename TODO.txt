@@ -23,10 +23,6 @@ Things to fix before next beta release is announced;
   each character to the end of the text (YUCK!)  Save the caret before
   updating the combo list and restore it.
 
-  Bug: Move Item To ... isn't moving drop items!  Crafted items do move.
-
-  Slots 6 & 7 appear too-tall (win xp skin).
-
   Drop Amount can't be a decimal (such as 6.1 Dmg Shield effect).  999.9
   seems like a better template.
 
