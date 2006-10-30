@@ -222,6 +222,7 @@ class ScWindow(QMainWindow, Ui_B_SC):
         self.AFDPS_Edit.setFixedSize(QSize(amtedwidth, edheight))
         self.Speed_Edit.setFixedSize(QSize(amtedwidth, edheight))
         self.ItemNameCombo.setFixedHeight(cbheight)
+        self.ItemNameCombo.setCompleter(None)
 
         self.GroupItemFrame.layout().setColumnStretch(8, 1)
         width = testfont.size(Qt.TextSingleLine, " Slot 10:").width()
@@ -1236,7 +1237,9 @@ class ScWindow(QMainWindow, Ui_B_SC):
         if self.ItemNameCombo.findText(a0) > 0: return
         item = self.itemattrlist[self.currentTabLabel]
         item.ItemName = unicode(self.ItemNameCombo.lineEdit().text())
+        cursorpos = self.ItemNameCombo.lineEdit().cursorPosition()
         self.ItemNameCombo.setItemText(0,item.ItemName)
+        self.ItemNameCombo.lineEdit().setCursorPosition(cursorpos)
         self.modified = 1
 
     def senderSlot(self):
