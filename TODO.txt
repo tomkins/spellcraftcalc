@@ -19,8 +19,29 @@ Things to fix before next beta release is announced;
   Allow users to choose to include class-specific bonuses for resists
   (mostly, applies to heavy tanks).
 
+  When editing Item name in the middle, cursor is always advanced on
+  each character to the end of the text (YUCK!)  Save the caret before
+  updating the combo list and restore it.
+
+  Bug: Move Item To ... isn't moving drop items!  Crafted items do move.
+
+  Slots 6 & 7 appear too-tall (win xp skin).
+
+  Drop Amount can't be a decimal (such as 6.1 Dmg Shield effect).  999.9
+  seems like a better template.
+
+  Translate Eitharg's 'PvE' item Type -> 'PvE Bonus', some of the specific
+  bonuses need to be added to the fixup table, and -1's in some fields
+  should become blank amounts.
+
+  Identify (PvE) in the skills list.
 
 Things to fix before 2.0 final (non-beta) is announced;
+
+  Blend Power and Hits into the "Stats" list finally?  Our Type dropdown
+  has grown somewhat long.
+
+  Deal with Mythical slot items, however those go live in the game.
 
   Let slots share an Item list, e.g. both Left Ring and Right Ring
   keep track of the same unused Rings.  "Move to" sort of provides this,
