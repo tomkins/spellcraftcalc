@@ -2,15 +2,12 @@
 
 # Form implementation generated from reading ui file 'ScWindow.ui'
 #
-# Created: Thu Oct 19 22:04:36 2006
-#      by: PyQt4 UI code generator 4.0.1
+# Created: Sun Oct 29 21:24:12 2006
+#      by: PyQt4 UI code generator 4-snapshot-20061020
 #
 # WARNING! All changes made in this file will be lost!
 
 import sys
-from SearchingCombo import SearchingCombo
-from MultiTabBar4 import MultiTabBar4
-from MultiTabBar4 import MultiTabFrame
 from PyQt4 import QtCore, QtGui
 
 class Ui_B_SC(object):
@@ -976,13 +973,13 @@ class Ui_B_SC(object):
         self.Requirement_12.setObjectName("Requirement_12")
         self.gridlayout5.addWidget(self.Requirement_12,14,4,1,3)
 
-        spacerItem18 = QtGui.QSpacerItem(5,21,QtGui.QSizePolicy.Minimum,QtGui.QSizePolicy.Minimum)
+        spacerItem18 = QtGui.QSpacerItem(5,5,QtGui.QSizePolicy.Minimum,QtGui.QSizePolicy.Minimum)
         self.gridlayout5.addItem(spacerItem18,8,0,7,3)
 
-        spacerItem19 = QtGui.QSpacerItem(5,21,QtGui.QSizePolicy.Minimum,QtGui.QSizePolicy.Minimum)
+        spacerItem19 = QtGui.QSpacerItem(5,5,QtGui.QSizePolicy.Minimum,QtGui.QSizePolicy.Minimum)
         self.gridlayout5.addItem(spacerItem19,8,3,1,4)
 
-        spacerItem20 = QtGui.QSpacerItem(5,21,QtGui.QSizePolicy.Minimum,QtGui.QSizePolicy.Minimum)
+        spacerItem20 = QtGui.QSpacerItem(5,5,QtGui.QSizePolicy.Minimum,QtGui.QSizePolicy.Minimum)
         self.gridlayout5.addItem(spacerItem20,9,3,1,4)
 
         self.ItemImbueLabel = QtGui.QLabel(self.GroupItemFrame)
@@ -1247,3 +1244,6 @@ class Ui_B_SC(object):
         self.ItemPriceLabel.setText(QtGui.QApplication.translate("B_SC", "Item Price: ", None, QtGui.QApplication.UnicodeUTF8))
         self.ItemUtilityLabel.setText(QtGui.QApplication.translate("B_SC", "Utility: ", None, QtGui.QApplication.UnicodeUTF8))
         self.ItemUtility.setText(QtGui.QApplication.translate("B_SC", "0.0", None, QtGui.QApplication.UnicodeUTF8))
+
+from SearchingCombo import SearchingCombo
+from MultiTabBar4 import MultiTabBar4, MultiTabFrame
