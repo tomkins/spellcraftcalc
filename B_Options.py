@@ -2,8 +2,8 @@
 
 # Form implementation generated from reading ui file 'Options.ui'
 #
-# Created: Sun Oct 22 21:32:44 2006
-#      by: PyQt4 UI code generator 4.0.1
+# Created: Sun Oct 29 21:24:18 2006
+#      by: PyQt4 UI code generator 4-snapshot-20061020
 #
 # WARNING! All changes made in this file will be lost!
 
@@ -95,7 +95,7 @@ class Ui_B_Options(object):
         spacerItem1 = QtGui.QSpacerItem(20,40,QtGui.QSizePolicy.Minimum,QtGui.QSizePolicy.Expanding)
         self.vboxlayout3.addItem(spacerItem1)
         self.vboxlayout2.addLayout(self.vboxlayout3)
-        self.Tab.addTab(self.General, "")
+        self.Tab.addTab(self.General,"")
 
         self.Notes = QtGui.QWidget()
         self.Notes.setObjectName("Notes")
@@ -118,7 +118,7 @@ class Ui_B_Options(object):
         self.NoteText.setObjectName("NoteText")
         self.vboxlayout5.addWidget(self.NoteText)
         self.vboxlayout4.addLayout(self.vboxlayout5)
-        self.Tab.addTab(self.Notes, "")
+        self.Tab.addTab(self.Notes,"")
 
         self.Price = QtGui.QWidget()
         self.Price.setObjectName("Price")
@@ -437,7 +437,7 @@ class Ui_B_Options(object):
         self.TextLabel7.setObjectName("TextLabel7")
         self.gridlayout1.addWidget(self.TextLabel7,0,4,1,1)
         self.vboxlayout16.addLayout(self.gridlayout1)
-        self.Tab.addTab(self.Price, "")
+        self.Tab.addTab(self.Price,"")
         self.vboxlayout1.addWidget(self.Tab)
 
         self.hboxlayout8 = QtGui.QHBoxLayout()
@@ -535,3 +535,4 @@ class Ui_B_Options(object):
         self.Tab.setTabText(self.Tab.indexOf(self.Price), QtGui.QApplication.translate("B_Options", "Price", None, QtGui.QApplication.UnicodeUTF8))
         self.OK.setText(QtGui.QApplication.translate("B_Options", "OK", None, QtGui.QApplication.UnicodeUTF8))
         self.Cancel.setText(QtGui.QApplication.translate("B_Options", "Cancel", None, QtGui.QApplication.UnicodeUTF8))
+
