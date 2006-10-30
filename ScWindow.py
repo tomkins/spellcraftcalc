@@ -1073,7 +1073,7 @@ class ScWindow(QMainWindow, Ui_B_SC):
                         val += rr
                 self.StatValue[key].setText(unicode(val))
             else:
-                basecap = datum['BaseCap']
+                basecap = amounts['BaseCap']
                 self.StatValue[key].setText(unicode(basecap - val))
         for (key, datum) in tot['Stats'].iteritems():
             ### XXX fix it
@@ -1900,7 +1900,6 @@ class ScWindow(QMainWindow, Ui_B_SC):
 
     def moveTo(self, action):
         cur = self.itemattrlist[self.currentTabLabel]
-        if cur.ActiveState != 'player': return
         piece = str(action.text())
         part = self.itemattrlist[piece]
         if cur == part: return
@@ -1943,6 +1942,7 @@ class ScWindow(QMainWindow, Ui_B_SC):
             if item.slot(4).type()[-6:] == 'Effect':
                 item.slot(5).setAll(item.slot(4).type(), item.slot(4).amount(), 
                              item.slot(4).effect(), item.slot(4).requirement())
+                item.slot(4).setType('Unused')
             item.slot(4).setSlotType('crafted')
 
         if newtype == 'Caster Staff' or newtype == 'Legendary Staff':
