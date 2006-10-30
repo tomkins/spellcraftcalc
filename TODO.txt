@@ -1,13 +1,25 @@
 Things to fix before next beta release is announced;
 
-  Finish xslt conversion
+  Test our UI XML results (can we avoid double-xslt followed by our
+  custom rewriting?)
+
+  Add an option between 'expected cost' v.s. cost of single gem.
+
+  Fix the GroupBox to frames with GroupBox looks (for Mac which hates
+  unnamed group boxes).
+
+  Can we make the 'editing' flavor of the dropdown controls line up
+  with their look when they are in drop-pick only mode on Mac?
 
   Add Drop tincture effects (from epic dungeons) for crafted gear.
   According to various searchs of alakazahm and the the autobestiary,
-  Prissy's lists are (were) complete.
+  Prissy's lists were complete.
 
   Add 1.85 tincture effects for crafted gear.  Means we have to tear
-  apart the 
+  apart the tables because the levels don't 'just line up'.  We have
+  lv 43 and 45 netherium and lv 47 and 49 arcanium procs depending 
+  on the name of the proc and the drop ablative lv 48 has the same
+  effect name as the crafted (different amounts).
 
   Calculate 5th slot proc by level requirement.
 
