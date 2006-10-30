@@ -1122,7 +1122,7 @@ class ScWindow(QMainWindow, Ui_B_SC):
                 amount = amounts['BaseCap'] - amounts['TotalBonus']
             else:
                 amount = amounts['TotalBonus']
-            self.insertSkill(amount, bonus, "Bonus")
+            self.insertSkill(amount, bonus + " (PvE)", "Bonus")
         self.TotalCost.setText(SC.formatCost(tot['Cost']))
         self.TotalPrice.setText(SC.formatCost(tot['Price']))
         self.TotalUtility.setText('%3.1f' % tot['Utility'])
@@ -1870,6 +1870,8 @@ class ScWindow(QMainWindow, Ui_B_SC):
     def SkillClicked(self,index):
         effect = str(index.data(Qt.DisplayRole).toString())
         bonus = str(index.data(Qt.UserRole).toString())
+        if effect[-6:] == ' (PvE)':
+            effect = effect[:-6]
         amount, effect = string.split(effect.lstrip(), ' ', 1)
         self.DelveItemsDialog(effect, bonus)
 

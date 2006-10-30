@@ -26,9 +26,9 @@ Things to fix before next beta release is announced;
   bonuses need to be added to the fixup table, and -1's in some fields
   should become blank amounts.
 
-  Identify (PvE) in the skills list.
-
 Things to fix before 2.0 final (non-beta) is announced;
+
+  Show Bonuses of % as #% at last?
 
   Blend Power and Hits into the "Stats" list finally?  Our Type dropdown
   has grown somewhat long.
@@ -48,4 +48,4 @@ Things to fix before 2.0 final (non-beta) is announced;
   Fill in Bonus based on itemlevel dialog, when known from material level.  
 
   Calculate Piece Ablative as an average based on chance-to-hit-body-part.
-
+  Show Reactive Effects ordered by %chance to hit body part.
