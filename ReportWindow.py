@@ -54,37 +54,34 @@ class ReportWindow(QDialog, Ui_B_ReportWindow):
         self.materials = { 'Gems' : { }, 'Liquids' : {}, 'Dusts': {} }
         self.gemnames = { }
         self.totalcost = 0
-        if showslot == 0:
-            lastslot = 6
-        else:
-            lastslot = showslot
         for loc, item in itemlist.items():
             if item.ActiveState != 'player':
                 continue
-            for slot in range(max(showslot - 1,0), lastslot):
-                if item.slot(slot).done() == '1' \
+            for slot in item.slots():
+		if slot.slotType() != 'player':
+                    continue
+                if slot.done() == '1' \
                         and showslot == 0 \
                         and self.parent.showDoneInMatsList:
                     continue
-                gemtype = item.slot(slot).type()
-                effect = item.slot(slot).effect()
-                amount = item.slot(slot).amount()
-                for mattype, matl in item.slot(slot).gemMaterials(self.parent.realm).items():
+                gemtype = slot.type()
+                if gemtype == 'Unused':
+                    continue
+                effect = slot.effect()
+                amount = slot.amount()
+                for mattype, matl in slot.gemMaterials(self.parent.realm).items():
                     for mat, val in matl.items():
                         if self.materials[mattype].has_key(mat):
                             self.materials[mattype][mat] += val
                         else:
                             self.materials[mattype][mat] = val
-        
-                if gemtype == 'Unused':
-                    continue
-                gemname = item.slot(slot).gemName(self.parent.realm)
+                gemname = slot.gemName(self.parent.realm)
                 if self.gemnames.has_key(gemname):
                     self.gemnames[gemname] += 1
                 else:
                     self.gemnames[gemname] = 1
 
-                cost = item.slot(slot).gemCost()
+                cost = slot.gemCost()
                 self.totalcost += cost
         keys = self.gemnames.keys()
         keys.sort(gemNameSort)
