@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'ScWindow.ui'
 #
-# Created: Sun Oct 29 21:24:12 2006
+# Created: Mon Oct 30 01:19:04 2006
 #      by: PyQt4 UI code generator 4-snapshot-20061020
 #
 # WARNING! All changes made in this file will be lost!
@@ -550,6 +550,7 @@ class Ui_B_SC(object):
         self.ItemNameCombo.setSizePolicy(sizePolicy)
         self.ItemNameCombo.setEditable(True)
         self.ItemNameCombo.setInsertPolicy(QtGui.QComboBox.NoInsert)
+        self.ItemNameCombo.setDuplicatesEnabled(True)
         self.ItemNameCombo.setObjectName("ItemNameCombo")
         self.hboxlayout.addWidget(self.ItemNameCombo)
 
