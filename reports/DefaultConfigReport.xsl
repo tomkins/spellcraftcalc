@@ -13,106 +13,165 @@
 	<xsl:if test="$copper &gt; 0 or $silver &gt; 0 or $gold &gt; 0 or $plat &gt; 0"><xsl:copy-of select="$copper"/>c</xsl:if>
 </xsl:template>
 
+<xsl:template name="nl">
+<xsl:text>
+</xsl:text>
+</xsl:template>
+
+<xsl:template match="SLOT">
+  <xsl:variable name="slotnum">
+    <xsl:value-of select="number(@Number) + 1"/>
+  </xsl:variable>
+  <xsl:if test="Type != 'Unused'">
+    <xsl:choose>
+      <xsl:when test="@Type = 'player'">
+	<tr>
+	  <td>Gem <xsl:copy-of select="$slotnum"/>:</td>
+	  <td align="right"><xsl:value-of select="Amount"/></td>
+	  <td><xsl:value-of select="Effect"/></td>
+	  <td>&#160;- <xsl:value-of select="Qua"/></td>
+	  <td><xsl:value-of select="Name"/></td>
+	</tr>
+      </xsl:when>
+      <xsl:otherwise>
+	<tr>
+	  <td>Slot <xsl:copy-of select="$slotnum"/>:</td>
+	  <td align="right"><xsl:value-of select="Amount"/></td>
+	  <td><xsl:value-of select="Effect"/></td>
+	  <td colspan="2">
+	    <xsl:text>&#160;</xsl:text>
+	    <xsl:if test="@Type = 'effect'">
+	      <xsl:text>- </xsl:text><xsl:value-of select="Name"/>
+	    </xsl:if>
+	  </td>
+	</tr>
+      </xsl:otherwise>
+    </xsl:choose>
+  </xsl:if>
+</xsl:template>
+
+<xsl:template match="SCItem">
+  <xsl:if test="count(SLOT) &gt; 0 and Equipped = '1'">
+    <dl>
+      <dt><b><xsl:value-of select="Location" /></b></dt>
+      <dt>Name: <xsl:value-of select="ItemName"/></dt>
+      <dt>
+	<xsl:text>Level: </xsl:text><xsl:value-of select="Level"/>
+	<xsl:text> &#160; Quality: </xsl:text><xsl:value-of select="ItemQuality"/>
+	<xsl:text> &#160; AF/DPS: </xsl:text><xsl:value-of select="AFDPS"/>
+	<xsl:text> &#160; Bonus: </xsl:text><xsl:value-of select="Bonus"/>
+      </dt>
+      <xsl:if test="ActiveState = 'player'">
+	<dt>
+	  <xsl:text>Imbue Points: </xsl:text><xsl:value-of select="Imbue"/>
+	  <xsl:text> of </xsl:text><xsl:value-of select="ItemImbue"/>
+	  <xsl:text> &#160; Quality: </xsl:text><xsl:value-of select="ItemQuality"/>
+	  <xsl:text> &#160; Overcharge: </xsl:text><xsl:value-of select="Overcharge"/>
+	</dt>
+      </xsl:if>
+      <dt>
+	<table>
+	  <xsl:apply-templates select="SLOT"/>
+	</table>
+      </dt>
+      <dt>
+	<xsl:text>Utility: </xsl:text><xsl:value-of select="Utility"/>
+        <xsl:if test="ActiveState = 'player'">
+	  <xsl:text> &#160; SC Cost: </xsl:text>
+	  <xsl:call-template name="formatCost">
+	    <xsl:with-param name="cost" select="Cost"/>
+	  </xsl:call-template>
+	  <xsl:text> &#160; SC Price: </xsl:text>
+	  <xsl:call-template name="formatCost">
+	    <xsl:with-param name="cost" select="Price"/>
+	  </xsl:call-template>
+        </xsl:if>
+      </dt>
+    </dl>
+    <br />
+  </xsl:if>
+</xsl:template>
+
 <xsl:template match="/SCTemplate">
-<body>
-<center><b>Config Report</b></center><br />
-<center><b>Stats</b></center><hr />
-<table cellspacing="10" cellpadding="0">
-<xsl:for-each select="Stats/*">
-	<xsl:if test="name() != 'AF' and name() != 'PowerPool'">
-	<xsl:if test="position() mod 3 = 1"><xsl:text disable-output-escaping="yes">&lt;tr&gt;</xsl:text></xsl:if>
-	<td><xsl:value-of select="substring(name(),1,3)"/>:</td>
-	<td><xsl:value-of select="TotalBonus"/> / </td>
-	<td><xsl:value-of select="BaseCap"/></td>
-	<xsl:if test="position() mod 3 = 0 or position() = (last() - 2)"><xsl:text disable-output-escaping="yes">&lt;/tr&gt;
-	</xsl:text></xsl:if>
+  <xsl:variable name="lowercase" select="'abcdefghijklmnopqrstuvwxyz'" />
+  <xsl:variable name="uppercase" select="'ABCDEFGHIJKLMNOPQRSTUVWXYZ'" />
+  <body>
+  <center><b>Config Report</b></center><br />
+  <center><b>Stats</b></center><hr />
+  <table cellspacing="10" cellpadding="0">
+    <xsl:for-each select="Stats/*">
+      <xsl:if test="name() != 'Acuity'">
+	<xsl:if test="position() = 1 or position() = 5 or position() = 10">
+	  <xsl:text disable-output-escaping="yes">&lt;tr&gt;</xsl:text>
 	</xsl:if>
-</xsl:for-each>
-</table><br />
-<center><b>Resists</b></center><hr />
-<table cellspacing="10" cellpadding="0">
-<xsl:for-each select="Resists/*">
-	<xsl:if test="position() mod 3 = 1"><xsl:text disable-output-escaping="yes">&lt;tr&gt;</xsl:text></xsl:if>
-	<td><xsl:value-of select="name()"/>:</td>
-	<td><xsl:value-of select="TotalBonus"/><xsl:for-each select="RacialBonus"> (+<xsl:value-of select="."/>)</xsl:for-each> / </td>
-	<td><xsl:value-of select="BaseCap"/></td>
-	<xsl:if test="position() mod 3 = 0 or position() = last()"><xsl:text disable-output-escaping="yes">&lt;/tr&gt;</xsl:text></xsl:if>
-</xsl:for-each>
-</table><br />
-<xsl:for-each select="Skills|Focus|OtherBonuses|PvEBonuses">
-	<xsl:if test="math:max(./*/TotalBonus) &gt; 0">
-		<center><b><xsl:value-of select="name()"/></b></center><hr />
-		<table>
-		<xsl:for-each select="./*">
-			<xsl:if test="substring(name(),1,3) != 'All'">
-				<tr><td align="right"><xsl:value-of select="TotalBonus"/> / </td>
-				<td><xsl:value-of select="BaseCap"/></td>
-				<td><xsl:value-of select="name()"/></td></tr>
-			</xsl:if>
-		</xsl:for-each>
-		</table>
+	<xsl:choose>
+	  <xsl:when test="name() = 'Hits'">
+	    <td>Hits:</td>
+	  </xsl:when>
+	  <xsl:when test="name() = 'Power'">
+	    <td>Pow:</td>
+	  </xsl:when>
+	  <xsl:when test="name() = 'PowerPool'">
+	    <td>%PP:</td>
+	  </xsl:when>
+	  <xsl:otherwise>
+   	    <td><xsl:value-of select="translate(substring(name(),1,3), $lowercase, $uppercase)"/>:</td>
+	  </xsl:otherwise>
+	</xsl:choose>
+	<td>
+	  <xsl:value-of select="TotalBonus"/>
+	  <xsl:if test="name() = 'PowerPool'"><xsl:text>%</xsl:text></xsl:if>
+	  <xsl:text> / </xsl:text>
+	  <xsl:value-of select="BaseCap + CapBonus"/>
+	</td>
+	<xsl:if test="position() = 0 or position() = 4 or position() = last()">
+	  <xsl:text disable-output-escaping="yes">&lt;/tr&gt;</xsl:text>
+	  <xsl:call-template name="nl"/>
 	</xsl:if>
-</xsl:for-each>
-<center><b>Piece Listing</b></center><hr />
-<xsl:for-each select="SCItem">
-	<xsl:if test="count(SLOT) &gt; 0 and Equipped = '1'">
-		<dl>
-		<dt><b><xsl:value-of select="Location" /></b></dt>
-		<dt>Name: <xsl:value-of select="ItemName"/></dt>
-		<dt>Level: <xsl:value-of select="Level"/>
-		Quality: <xsl:value-of select="ItemQuality"/>
-		AF/DPS: <xsl:value-of select="AFDPS"/>
-		Bonus: <xsl:value-of select="Bonus"/></dt>
-		<xsl:if test="ActiveState = 'drop'">
-			<dt>Imbue Points: <xsl:value-of select="Imbue"/>
-			&#160;&#160;&#160;of <xsl:value-of select="ItemImbue"/>
-			&#160;&#160;&#160;Quality: <xsl:value-of select="ItemQuality"/>
-			&#160;&#160;&#160;Overcharge: <xsl:value-of select="Overcharge"/></dt>
-		</xsl:if>
-		<dt><table>
-		<xsl:for-each select="SLOT">
-			<xsl:variable name="slotnum">
-				<xsl:value-of select="number(@Number) + 1"/>
-			</xsl:variable>
-			<xsl:if test="Type != 'Unused'">
-				<xsl:choose>
-					<xsl:when test="number(@Number) &lt;= 4 and ../ActiveState = 'player'">
-						<tr><td>Gem <xsl:copy-of select="$slotnum"/>:</td>
-						<td align="right"><xsl:value-of select="Amount"/></td>
-						<td><xsl:value-of select="Effect"/></td>
-						<td> - <xsl:value-of select="Qua"/></td>
-						<td><xsl:value-of select="Name"/></td></tr>
-					</xsl:when>
-					<xsl:otherwise>
-						<tr><td>Effect <xsl:copy-of select="$slotnum"/>:</td>
-						<td align="right"><xsl:value-of select="Amount"/></td>
-						<td><xsl:value-of select="Effect"/></td>
-						<td>
-						<xsl:if test="../ActiveState = 'player'">
-							 - <xsl:value-of select="Name"/>
-						</xsl:if>
-						</td></tr>
-					</xsl:otherwise>
-				</xsl:choose>
-			</xsl:if>
-		</xsl:for-each>
-		</table></dt>
-		<dt>Utility: <xsl:value-of select="Utility"/></dt>
-		<xsl:if test="ActiveState = 'player'">
-			<dt>Cost: 
-				<xsl:call-template name="formatCost">
-					<xsl:with-param name="cost" select="Cost"/>
-				</xsl:call-template>
-			&#160;&#160;&#160;Price: 
-				<xsl:call-template name="formatCost">
-					<xsl:with-param name="cost" select="Price"/>
-				</xsl:call-template>
-			</dt>
-		</xsl:if>
-		<dt>&#160;</dt>
-		</dl>
-	</xsl:if>
-</xsl:for-each>
+      </xsl:if>
+    </xsl:for-each>
+  </table>
+  <br />
+  <center><b>Resists</b></center>
+  <hr />
+  <table cellspacing="10" cellpadding="0">
+    <xsl:for-each select="Resists/*">
+      <xsl:if test="position() mod 3 = 1">
+	<xsl:text disable-output-escaping="yes">&lt;tr&gt;</xsl:text>
+      </xsl:if>
+      <td><xsl:value-of select="name()"/>:</td>
+      <td>
+	<xsl:value-of select="TotalBonus"/>
+	<xsl:text> / </xsl:text>
+	<xsl:value-of select="BaseCap"/>
+	<xsl:for-each select="RacialBonus">
+	  <xsl:text> (+</xsl:text><xsl:value-of select="."/><xsl:text>)</xsl:text>
+	</xsl:for-each>
+      </td>
+      <xsl:if test="position() mod 3 = 0 or position() = last()">
+	<xsl:text disable-output-escaping="yes">&lt;/tr&gt;</xsl:text>
+      </xsl:if>
+    </xsl:for-each>
+  </table>
+  <br />
+  <xsl:for-each select="Skills|Focus|OtherBonuses|PvEBonuses">
+    <xsl:if test="math:max(./*/TotalBonus) &gt; 0">
+      <center><b><xsl:value-of select="name()"/></b></center><hr />
+      <table>
+	<xsl:for-each select="./*">
+	  <tr>
+	    <td align="right"><xsl:value-of select="TotalBonus"/></td>
+	    <td> / <xsl:value-of select="BaseCap"/></td>
+	    <td>&#160;<xsl:value-of select="name()"/></td>
+	  </tr>
+	</xsl:for-each>
+      </table>
+      <br />
+    </xsl:if>
+  </xsl:for-each>
+  <center><b>Piece Listing</b></center>
+  <hr />
+  <xsl:apply-templates select="SCItem"/>
 </body>
 </xsl:template>
 </xsl:stylesheet>
