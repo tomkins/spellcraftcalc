@@ -1,90 +1,72 @@
-Configurable Reports
+Reports have been completely overhauled.  The classic Leladia-style
+Kort's templates will NOT work anymore, you must convert your own
+custom reports to XSLT format.
 
-My configurable reports work pretty much the same way as Leladia's.
-The only caveat is that the file gets rendered as an HTML file.
-So, in order to do line breaks, you must use <br />, but this allows you 
-to use <table>, <hr />, etc... in your report to make it look really nice.
+The Reports in version 2.0 and later (since beta 1.92) are based
+on XSLT stylesheet translation.  To modify the reports you must
+work in XSLT to describe how a SCTemplate xml becomes the document
+you want.  It's a very powerful - if you can do some basic stuff
+with the UI XML files in DAoC, you can probably learn XSLT with
+not much hassle (plus you'll find it's a valuable skill to know.)
 
-The available tags are:
-<attribute #/>
-Where attribute can be:
-str con dex qui pie int hits power cha emp
-body energy crush thrust slash cold matter heat spirit
+STEP ONE - Learn what you have to work with.  A saved template
+only contains the essentials - XML that describes the toon, and
+the items they have and items to craft.
 
-And # is the field width, and it uses max(#, width of text) as the field width.
-Of course, you don't really need this if you use <table>s everywhere, and you
-don't export to text often.
+SCTemplate input to your XSLT report has this AND MORE.  Explore
+this using the 'File' - 'Export SCTemplate XML' feature, to create
+the SCTemplate report input.  The PRIMARY difference is that many
+values that you see on the screen or in reports are calculated for
+you to insert in your report.
 
-And the trailing / in <something/> tells XML parsers the tag stands on it's own
-(it doesn't have a matching </something> to close it).  These are not required,
-but they are encouraged for every tag listed here, because some .xml editors 
-will groan without them.
+STEP TWO - Learn a little XSLT.  For starters, take a look at the
+DefaultConfigReport.xsl file in the reports directory.  It reports
+most (but not all) the variables from an SCTemplate, using a short
+one-row SLOT template and another SCItem template for each piece.
 
-Note that good html style is encouraged.  Some browsers won't show <br/> and
-<hr/> - but they must all correctly show <br /> and <hr />, so we just add the
-extra space before the /> to close every unmatched html tag, for compatibility, 
-clarity and style.
+Anything you want to report should be either provided for you, or 
+one simple calculation away.  If something seems too complicated 
+to calculate, you possibly missed something, and we are more than 
+happy to help (and, fix it if needed!)  Post your issue on the 
+developers forum at http://sourceforge.net/projects/kscraft and 
+we'll have a look.
 
-Focus Tags
-Same as Leladia's:
-<focus1> <focus2> <focus3> <focus4>
+STEP THREE - Try it.  First, you can use ANY xslt 1.0 parser to
+merge the exported SCTemplate xml to your new report.  Second, you
+can test from inside the program by choosing your own report xslt
+template file with the View - Choose Format option.  
 
-Also <foci>  - lists all the focuses on separate lines
+Try to View - Configuration, if the parser can't understand your 
+template. it will throw up a detailed error message with the exact 
+line and column where it encountered the mistake.  Fix and just retry, 
+you don't need to quit the program to retest (your template is read 
+each time you select View - Configuration).
 
-Skill Tags
-Same as Leladia's:
-<skill#> so <skill1> <skill2> etc...
-And <skills> - lists all the skills on separate lines
+STEP FOUR - Get Crazy!  Try a UI XML Window!  This offers two-pass
+parsing so the X and Y window coordinates can be handled in a second
+pass through the XSLT engine.  DefaultUiXmlWindow.xsl creates just
+the label's Data elements - while DefaultUiXmlWindowPost.xsl will
+place those in a window in <LabelDef> elements.
 
-Other Bonus Tags
-<otherbonuses> - lists all the Other Bonuses (from ToA/PvE) on separate lines
+You can try your own UI XML Window with either one or two passes.
+If MyWindow.xsl has a corresponding MyWindowPost.xsl that will be
+run after the first pass, otherwise if there is no Post.xsl file
+for your template, it will run only one pass.
 
-Cap Increase Tags
-<capbonuses> - lists all the Cap Increase bonuses (from ToA) on separate lines
+That's it!  We are even willing to consider helping the first few
+people who ask to convert their templates for them, provided
 
-Piece/Jewelry tags:
-These tags are of the form:
-<location prop>
-location can be one of:
-chest arms head legs hands feet rweapon lweapon 2handed ranged
-neck cloak jewel belt rring lring rwrist lwrist
+  * IT'S ORIGINAL!  Nothing just a bit different from the norm.
+    We need to see your example report output to decide if it's
+    original, and also to make sure our results match yours.
 
-prop can be one of:
-name (drop only)
-level
-quality
-bonus
-af - this tag has a dual meaning (AF for armor and DPS for weapons)
-utility
-usedpoints (PC made only)
-availablepoints (PC made only)
-overcharge (PC made only)
-<chest quality> <arms af> etc..
+  * YOU LICENSE IT for all the kscraft users under the GPL (or 
+    a less restrictive license, attribution clauses aren't even 
+    accepted although WE happily acknowledge contributions.)
+    Submitting anything to the project by email or forums or the
+    bug/enhancement trackers is an implicit grant of license.
 
-Gem/Effect tags:
-<location gem# prop>
-See above for location values
+That's it - we are happy to help a little or a lot if it helps the
+entire user community.
 
-gem# can be: gem1 gem2 gem3 gem4 gem5 (and gem6 through gem10 for drop only)
-
-prop can be:
-quality (PC made only) - gem quality
-amount - amount of bonus
-name (PC made only) - name of the gem
-effect - what stat/skill/etc
-<chest gem1 amount> <chest gem1 name>, etc
-
-Conditionals:
-<if location pcmade>.......</if>
-<if location drop>.........</if>
-Report generation is based on which radio button, drop or player crafted,
-that you have selected at time of the report.  The old <endif> instead of
-</if> is still supported, but not recommended, as it isn't valid xml/sgml.
-
-Also there is <ifnotempty location>.....</ifnotempty>
-This excludes an item from printing in the config report if the slots are
-all completed 'Unused'.  The old <endifnotempty> instead of </ifnotempty>
-is still supported, but not recommended, as it isn't valid xml/sgml.
-
-The default report file (which pretty much shows everything) is in: 
-reports\Default_Config_Report.xml
+Give it a try!
