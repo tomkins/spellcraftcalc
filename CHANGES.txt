@@ -1,8 +1,18 @@
 Updated ??/??/2006 - Version 1.92
 
+  Corrected Move Item so even drop items can be moved from slot to slot
+  (the entire item, not just the gems).  Also fixed a Swap Gems bug.
+
   Discarded the beloved Customizable report syntax that dates all the way
   back to Leladia's, in favor of a much more flexible xslt implementation.
-  This means that earlier 'custom reports' must be rewritten in xslt.
+  This means that earlier 'custom reports' must be rewritten in xslt. See
+  DefaultConfigReport.xsl for a fairly complete example
+
+  The same xslt change has been applied to the custom UI Window beta
+  feature from earlier versions.  Here, too, any UI Window templates
+  must b written in xslt.  This is a two-pass flavor to allow the window
+  positions to be updated, see DefaultUiXmlWindow.xsl for an example,
+  with DefaultUiXmlWindowPost.xsl as the second pass.
 
   Added a File - Export SCTemplate XML option; it is a template with much
   too much data so that report authors can examine every field available
@@ -11,16 +21,20 @@ Updated ??/??/2006 - Version 1.92
   Remember the ReportPath used to save reports.
 
   Load Item now defaults to the 'All\(slots) directory, if there is no 
-  items\(realm)\(slot) directory found, but items\All\(slot) exists.
+  (realm)\(slot) directory found, but All\(slot) directory exists.
 
-  Fixed a flaw that Edit - Item Type was creating a new item instead of
-  modifying the current item.
+  Fixed a flaw that Edit - Item Type was creating a new item, instead
+  of modifying the current item.
+
+  Fixed a bug in Materials reports for new armors and other non-imbued
+  item bonuses that caused the report to crash.
 
   Fixed the escape key within the dropdown lists.  Escape will not change
-  the previously selected item as it closes the dropdown list.
+  the previously selected item when it closes the dropdown list.
 
   Qt 4.2 is now strongly recommended to enable all of the layout features
   and easiest-to-use interface.  Several 4.2-specific crash bugs fixed.
+  Version 4.2.1 is now packaged in the Windows installer.
 
 Updated 10/16/2006 - Version 1.91
 
