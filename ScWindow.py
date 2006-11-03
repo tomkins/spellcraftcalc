@@ -156,7 +156,8 @@ class ScWindow(QMainWindow, Ui_B_SC):
         self.StatCap = {}
         self.StatBonus = {}
 
-        for stat in (GemLists['All']['Stat'] + ('Power', 'Hits',)):
+        for stat in (GemLists['All']['Stat'] \
+                   + ('Power', 'PowerPool', 'AF', 'Hits',)):
             self.StatLabel[stat] = getattr(self, stat + 'Label')
             self.StatValue[stat] = getattr(self, stat)
             self.StatCap[stat] = getattr(self, stat + 'Cap')
@@ -1085,21 +1086,23 @@ class ScWindow(QMainWindow, Ui_B_SC):
                 self.StatValue[key].setText(unicode(basecap - val))
         for (key, datum) in tot['Stats'].iteritems():
             ### XXX fix it
-            if key == "% Power Pool" or key == "AF" or key == "Acuity":
+            if key == "Acuity":
                 continue
             val = datum['TotalBonus']
+            if key == "% Power Pool":
+                key = "PowerPool"
             if not self.capDistance:
-                if tot['Stats'][key]['TotalCapBonus'] > 0:
+                if datum['TotalCapBonus'] > 0:
                     self.StatCap[key].setText( \
-                        '('+str(tot['Stats'][key]['TotalCapBonus'])+')')
+                        '('+str(datum['TotalCapBonus'])+')')
                 else:
                     self.StatCap[key].setText('-')
                 self.StatValue[key].setText(unicode(val))
             else:
-                basecap = tot['Stats'][key]['BaseCap']
-                if tot['Stats'][key]['TotalCapBonus'] > 0:
-                    addcap = tot['Stats'][key]['BaseCapToCapBonus']
-                    capmod = tot['Stats'][key]['TotalCapBonus']
+                basecap = datum['BaseCap']
+                if datum['TotalCapBonus'] > 0:
+                    addcap = datum['BaseCapToCapBonus']
+                    capmod = datum['TotalCapBonus']
                     capcap = addcap - capmod
                     if capmod > addcap:  capmod = addcap
                     self.StatCap[key].setText('('+unicode(int(capcap))+')')
@@ -1843,7 +1846,7 @@ class ScWindow(QMainWindow, Ui_B_SC):
         if not isinstance(child, QLabel): return
         if str(child.text()) == '': return
         shortname = str(child.objectName())
-        nameidx = 1
+        nameidx = 2
         while nameidx < len(shortname):
             if shortname[nameidx] < 'a' or shortname[nameidx] > 'z':
                 shorttype = shortname[nameidx:]

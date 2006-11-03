@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'ScWindow.ui'
 #
-# Created: Mon Oct 30 01:19:04 2006
+# Created: Fri Nov 03 04:29:51 2006
 #      by: PyQt4 UI code generator 4-snapshot-20061020
 #
 # WARNING! All changes made in this file will be lost!
@@ -250,22 +250,50 @@ class Ui_B_SC(object):
         self.PowerCap.setObjectName("PowerCap")
         self.gridlayout2.addWidget(self.PowerCap,8,2,1,1)
 
+        self.PowerPoolLabel = QtGui.QLabel(self.GroupStats)
+        self.PowerPoolLabel.setObjectName("PowerPoolLabel")
+        self.gridlayout2.addWidget(self.PowerPoolLabel,9,0,1,1)
+
+        self.PowerPool = QtGui.QLabel(self.GroupStats)
+        self.PowerPool.setAlignment(QtCore.Qt.AlignRight|QtCore.Qt.AlignTrailing|QtCore.Qt.AlignVCenter)
+        self.PowerPool.setObjectName("PowerPool")
+        self.gridlayout2.addWidget(self.PowerPool,9,1,1,1)
+
+        self.PowerPoolCap = QtGui.QLabel(self.GroupStats)
+        self.PowerPoolCap.setAlignment(QtCore.Qt.AlignRight|QtCore.Qt.AlignTrailing|QtCore.Qt.AlignVCenter)
+        self.PowerPoolCap.setObjectName("PowerPoolCap")
+        self.gridlayout2.addWidget(self.PowerPoolCap,9,2,1,1)
+
+        self.AFLabel = QtGui.QLabel(self.GroupStats)
+        self.AFLabel.setObjectName("AFLabel")
+        self.gridlayout2.addWidget(self.AFLabel,10,0,1,1)
+
+        self.AF = QtGui.QLabel(self.GroupStats)
+        self.AF.setAlignment(QtCore.Qt.AlignRight|QtCore.Qt.AlignTrailing|QtCore.Qt.AlignVCenter)
+        self.AF.setObjectName("AF")
+        self.gridlayout2.addWidget(self.AF,10,1,1,1)
+
+        self.AFCap = QtGui.QLabel(self.GroupStats)
+        self.AFCap.setAlignment(QtCore.Qt.AlignRight|QtCore.Qt.AlignTrailing|QtCore.Qt.AlignVCenter)
+        self.AFCap.setObjectName("AFCap")
+        self.gridlayout2.addWidget(self.AFCap,10,2,1,1)
+
         self.HitsLabel = QtGui.QLabel(self.GroupStats)
         self.HitsLabel.setObjectName("HitsLabel")
-        self.gridlayout2.addWidget(self.HitsLabel,9,0,1,1)
+        self.gridlayout2.addWidget(self.HitsLabel,11,0,1,1)
 
         self.Hits = QtGui.QLabel(self.GroupStats)
         self.Hits.setAlignment(QtCore.Qt.AlignRight|QtCore.Qt.AlignTrailing|QtCore.Qt.AlignVCenter)
         self.Hits.setObjectName("Hits")
-        self.gridlayout2.addWidget(self.Hits,9,1,1,1)
+        self.gridlayout2.addWidget(self.Hits,11,1,1,1)
 
         self.HitsCap = QtGui.QLabel(self.GroupStats)
         self.HitsCap.setAlignment(QtCore.Qt.AlignRight|QtCore.Qt.AlignTrailing|QtCore.Qt.AlignVCenter)
         self.HitsCap.setObjectName("HitsCap")
-        self.gridlayout2.addWidget(self.HitsCap,9,2,1,1)
+        self.gridlayout2.addWidget(self.HitsCap,11,2,1,1)
 
         spacerItem3 = QtGui.QSpacerItem(5,0,QtGui.QSizePolicy.Minimum,QtGui.QSizePolicy.MinimumExpanding)
-        self.gridlayout2.addItem(spacerItem3,10,0,1,3)
+        self.gridlayout2.addItem(spacerItem3,12,0,1,3)
         self.gridlayout.addWidget(self.GroupStats,0,2,1,1)
 
         spacerItem4 = QtGui.QSpacerItem(3,0,QtGui.QSizePolicy.Fixed,QtGui.QSizePolicy.Minimum)
@@ -1169,6 +1197,12 @@ class Ui_B_SC(object):
         self.PowerLabel.setText(QtGui.QApplication.translate("B_SC", "Pow: ", None, QtGui.QApplication.UnicodeUTF8))
         self.Power.setText(QtGui.QApplication.translate("B_SC", "0", None, QtGui.QApplication.UnicodeUTF8))
         self.PowerCap.setText(QtGui.QApplication.translate("B_SC", "-", None, QtGui.QApplication.UnicodeUTF8))
+        self.PowerPoolLabel.setText(QtGui.QApplication.translate("B_SC", "PP%: ", None, QtGui.QApplication.UnicodeUTF8))
+        self.PowerPool.setText(QtGui.QApplication.translate("B_SC", "0", None, QtGui.QApplication.UnicodeUTF8))
+        self.PowerPoolCap.setText(QtGui.QApplication.translate("B_SC", "-", None, QtGui.QApplication.UnicodeUTF8))
+        self.AFLabel.setText(QtGui.QApplication.translate("B_SC", "AF: ", None, QtGui.QApplication.UnicodeUTF8))
+        self.AF.setText(QtGui.QApplication.translate("B_SC", "0", None, QtGui.QApplication.UnicodeUTF8))
+        self.AFCap.setText(QtGui.QApplication.translate("B_SC", "-", None, QtGui.QApplication.UnicodeUTF8))
         self.HitsLabel.setText(QtGui.QApplication.translate("B_SC", "Hits: ", None, QtGui.QApplication.UnicodeUTF8))
         self.Hits.setText(QtGui.QApplication.translate("B_SC", "0", None, QtGui.QApplication.UnicodeUTF8))
         self.HitsCap.setText(QtGui.QApplication.translate("B_SC", "-", None, QtGui.QApplication.UnicodeUTF8))
