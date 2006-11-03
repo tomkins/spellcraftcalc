@@ -1099,30 +1099,20 @@ class ScWindow(QMainWindow, Ui_B_SC):
                 else:
                     capmod = 0
                 self.StatValue[key].setText(unicode(int(basecap + capmod) -val))
-        for skill, amounts in tot['Skills'].iteritems():
-            if self.capDistance:
-                amount = amounts['BaseCap'] - amounts['TotalBonus']
-            else:
-                amount = amounts['TotalBonus']
-            self.insertSkill(amount, skill, "Skill")
-        for skill, amounts in tot['Focus'].iteritems():
-            if self.capDistance:
-                amount = amounts['BaseCap'] - amounts['TotalBonus']
-            else:
-                amount = amounts['TotalBonus']
-            self.insertSkill(amount, skill + " Focus", "Skill")
-        for bonus, amounts in tot['OtherBonuses'].iteritems():
-            if self.capDistance:
-                amount = amounts['BaseCap'] - amounts['TotalBonus']
-            else:
-                amount = amounts['TotalBonus']
-            self.insertSkill(amount, bonus, "Bonus")
-        for bonus, amounts in tot['PvEBonuses'].iteritems():
-            if self.capDistance:
-                amount = amounts['BaseCap'] - amounts['TotalBonus']
-            else:
-                amount = amounts['TotalBonus']
-            self.insertSkill(amount, bonus + " (PvE)", "Bonus")
+        for skillkey, suffix, lookup in (
+                ('Skills', '', 'Skill'),
+                ('Focus', ' Focus', 'Focus'),
+                ('OtherBonuses', '', 'Bonus'),
+                ('PvEBonuses', ' (PvE)', 'Bonus')):
+            skills = tot[skillkey].keys()
+            skills.sort()
+            for skill in skills:
+                amounts = tot[skillkey][skill]
+                if self.capDistance:
+                    amount = amounts['BaseCap'] - amounts['TotalBonus']
+                else:
+                    amount = amounts['TotalBonus']
+                self.insertSkill(amount, skill + suffix, lookup)
         self.TotalCost.setText(SC.formatCost(tot['Cost']))
         self.TotalPrice.setText(SC.formatCost(tot['Price']))
         self.TotalUtility.setText('%3.1f' % tot['Utility'])
@@ -1870,7 +1860,7 @@ class ScWindow(QMainWindow, Ui_B_SC):
     def SkillClicked(self,index):
         effect = str(index.data(Qt.DisplayRole).toString())
         bonus = str(index.data(Qt.UserRole).toString())
-        if effect[-6:] == ' (PvE)':
+        if effect[-6:] == ' (PvE)' or effect[-6:] == ' Focus':
             effect = effect[:-6]
         amount, effect = string.split(effect.lstrip(), ' ', 1)
         self.DelveItemsDialog(effect, bonus)
