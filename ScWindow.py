@@ -664,13 +664,13 @@ class ScWindow(QMainWindow, Ui_B_SC):
 
         if rich:
             totalsdict = self.summarize()
-            for key in ('Cost', 'Price', 'Utility',):
+            for key in (u'Cost', u'Price', u'Utility',):
                 val = totalsdict[key]
-                childnode = document.createElement(unicode(key))
+                childnode = document.createElement(key)
                 childnode.appendChild(document.createTextNode(unicode(val)))
                 rootnode.appendChild(childnode)
-            for key in ('Stats', 'Resists', 'Skills', 'Focus', 
-                        'OtherBonuses', 'PvEBonuses'):
+            for key in (u'Stats', u'Resists', u'Skills', u'Focus', 
+                        u'OtherBonuses', u'PvEBonuses'):
                 if key == 'Stats':
                     types = GemLists['All']['Stat'] \
                           + ('Acuity', 'Hits', 'Power', '% Power Pool', 'AF')
@@ -679,21 +679,28 @@ class ScWindow(QMainWindow, Ui_B_SC):
                 else:
                     types = totalsdict[key].keys()
                     types.sort()
-                childnode = document.createElement(unicode(key))
+                childnode = document.createElement(key)
+                if key[-7:] == 'Bonuses':
+                    childnode.setAttribute(u'text', key[:-7] + u' ' + key[-7:])
                 for type in types:
                     tagname = unicode(plainXMLTag(type))
                     effectnode = document.createElement(tagname)
+                    if tagname != type:
+                        effectnode.setAttribute(u'text', unicode(type))
                     if key == 'Stats':
-                        subs = ('Bonus', 'TotalBonus', 'BaseCap', 'CapBonus',
-                                'TotalCapBonus', 'BaseCapToCapBonus',) 
+                        subs = (u'Bonus', u'TotalBonus', u'BaseCap', 
+                                u'CapBonus', u'TotalCapBonus', 
+                                u'BaseCapToCapBonus',) 
                     else:
-                        subs = ('Bonus', 'TotalBonus', 'BaseCap',)
-                        if key == 'Resists' and \
+                        subs = (u'Bonus', u'TotalBonus', u'BaseCap',)
+                        if key == u'Resists' and \
                                 totalsdict[key][type].has_key('RacialBonus'): 
                             subs = subs + ('RacialBonus',)
                     for subtype in subs:
                         tagname = unicode(plainXMLTag(subtype))
                         valnode = document.createElement(tagname)
+                        if tagname != subtype:
+                            effectnode.setAttribute(u'text', unicode(subtype))
                         val = unicode(totalsdict[key][type][subtype])
                         valnode.appendChild(document.createTextNode(val))
                         effectnode.appendChild(valnode)
