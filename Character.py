@@ -21,7 +21,7 @@ AllBonusList = {
     'Armsman' : {
         'All Melee Weapon Skills' : ('Crush', 'Slash', 'Thrust', 'Polearm', 'Two Handed',),
         'Other Skills' : ('Parry', 'Shield',),
-        'Races' : t2(('Avalonian', 'Briton', 'Half Ogre', 'Highlander', 'Inconnu', 'Saracen',)),
+        'Races' : t2(('Avalonian', 'Briton', 'Half Ogre', 'Highlander', 'Inconnu', 'Korazh', 'Saracen',)),
     },
 
     'Cabalist' : {
@@ -49,7 +49,7 @@ AllBonusList = {
         'All Magic Skills' : ('Rejuvenation', 'Enhancement',),
         'All Melee Weapon Skills' : ('Crush', 'Flexible',),
         'Other Skills' : ('Shield',),
-        'Races' : t2(('Avalonian', 'Briton', 'Inconnu',)),
+        'Races' : t2(('Avalonian', 'Briton', 'Inconnu', 'Korazh',)),
         'Acuity' : ('Piety',),
     },
 
@@ -60,11 +60,18 @@ AllBonusList = {
         'Races' : t2(('Briton', 'Inconnu', 'Saracen',)),
     },
 
+    'Mauler' : {
+        'All Magic Skills' : ('Aura Manipulation', 'Magnetism', 'Power Strikes',),
+        'All Melee Weapon Skills' : ('Fist Wraps', 'Mauler Staff',),
+        'Races' : t2(('Briton', 'Korazh',)),
+#       no bonus from 'Acuity' : ('Strength',),
+    },
+
     'Mercenary' : {
         'All Melee Weapon Skills' : ('Crush', 'Slash', 'Thrust',),
         'All Dual Wield Skills' : ('Dual Wield',),
         'Other Skills' : ('Parry', 'Shield',),
-        'Races' : t2(('Avalonian', 'Briton', 'Half Ogre', 'Highlander', 'Inconnu', 'Saracen',)),
+        'Races' : t2(('Avalonian', 'Briton', 'Half Ogre', 'Highlander', 'Inconnu', 'Korazh', 'Saracen',)),
     },
 
     'Minstrel' : {
@@ -154,7 +161,7 @@ AllBonusList = {
         'All Melee Weapon Skills' : ('Blades', 'Blunt', 'Piercing',),
         'All Dual Wield Skills' : ('Celtic Dual',),
         'Other Skills' : ('Parry', 'Shield',),
-        'Races' : t2(('Celt', 'Elf', 'Firbolg', 'Shar',)),
+        'Races' : t2(('Celt', 'Elf', 'Firbolg', 'Graoch', 'Shar',)),
     },
 
     'Champion' : {
@@ -185,6 +192,13 @@ AllBonusList = {
         'Acuity' : ('Intelligence',),
     },
 
+    'Mauler' : {
+        'All Magic Skills' : ('Aura Manipulation', 'Magnetism', 'Power Strikes',),
+        'All Melee Weapon Skills' : ('Fist Wraps', 'Mauler Staff',),
+        'Races' : t2(('Celt', 'Graoch',)),
+#       no bonus from 'Acuity' : ('Strength',),
+    },
+
     'Mentalist' : {
         'All Spell Lines' : ('Light', 'Mana', 'Mentalism',),
         'All Magic Skills' : ('Light', 'Mana', 'Mentalism',),
@@ -195,7 +209,7 @@ AllBonusList = {
     'Hero' : {
         'All Melee Weapon Skills' : ('Blades', 'Blunt', 'Celtic Spear', 'Large Weaponry', 'Piercing',),
         'Other Skills' : ('Parry', 'Shield',),
-        'Races' : t2(('Celt', 'Firbolg', 'Lurikeen', 'Shar', 'Sylvan',)),
+        'Races' : t2(('Celt', 'Firbolg', 'Graoch', 'Lurikeen', 'Shar', 'Sylvan',)),
     },
 
     'Nightshade' : {
@@ -231,7 +245,7 @@ AllBonusList = {
         'All Magic Skills' : ('Nurture', 'Regrowth',),
         'All Melee Weapon Skills' : ('Blades', 'Blunt',),
         'Other Skills' : ('Parry', 'Shield',),
-        'Races' : t2(('Celt', 'Firbolg', 'Sylvan',)),
+        'Races' : t2(('Celt', 'Firbolg', 'Graoch', 'Sylvan',)),
         'Acuity' : ('Empathy',),
     },
   },
@@ -242,7 +256,7 @@ AllBonusList = {
         'All Melee Weapon Skills' : ('Axe', 'Hammer', 'Sword',),
         'All Dual Wield Skills' : ('Left Axe',),
         'Other Skills' : ('Parry',),
-        'Races' : t2(('Dwarf', 'Norseman', 'Troll', 'Valkyn',)),
+        'Races' : t2(('Deifrang', 'Dwarf', 'Norseman', 'Troll', 'Valkyn',)),
     },
 
     'Bonedancer' : {
@@ -265,6 +279,13 @@ AllBonusList = {
         'All Archery Skills' : ('Composite Bow',),
         'Other Skills' : ('Stealth',),
         'Races' : t2(('Dwarf', 'Frostalf', 'Kobold', 'Norseman', 'Valkyn',)),
+    },
+
+    'Mauler' : {
+        'All Magic Skills' : ('Aura Manipulation', 'Magnetism', 'Power Strikes',),
+        'All Melee Weapon Skills' : ('Fist Wraps', 'Mauler Staff',),
+        'Races' : t2(('Norseman', 'Deifrang',)),
+#       no bonus from 'Acuity' : ('Strength',),
     },
 
     'Runemaster' : {
@@ -313,7 +334,7 @@ AllBonusList = {
         'All Magic Skills' : ('Stormcalling',),
         'All Melee Weapon Skills' : ('Sword', 'Hammer', 'Axe',),
         'Other Skills' : ('Parry', 'Shield',),
-        'Races' : t2(('Dwarf', 'Frostalf', 'Norseman', 'Troll',)),
+        'Races' : t2(('Deifrang', 'Dwarf', 'Frostalf', 'Norseman', 'Troll',)),
         'Acuity' : ('Piety',),
     },
 
@@ -337,7 +358,7 @@ AllBonusList = {
         'All Melee Weapon Skills' : ('Sword', 'Hammer', 'Axe',),
         'Other Skills' : ('Parry', 'Shield',),
         'No Skill Effect' : ('Thrown Weapons',),
-        'Races' : t2(('Dwarf', 'Kobold', 'Norseman', 'Troll', 'Valkyn',)),
+        'Races' : t2(('Deifrang', 'Dwarf', 'Kobold', 'Norseman', 'Troll', 'Valkyn',)),
     },
   }, 
 }
@@ -424,6 +445,10 @@ Races = {
       'Resists' : d2({'Thrust' : 3, 'Crush'  : 2, 'Heat'   : 5, 'Spirit' : 5}),
       'Stats' :   (50, 60, 70, 50, 70, 60, 60, 60),
     }),
+    'Korazh' : d2({
+      'Resists' : d2({'Crush'  : 4, 'Cold' : 3, 'Heat' : 3}),
+      'Stats' :   (80, 70, 50, 40, 60, 60, 60, 60),
+    }),
     'Saracen' : d2({
       'Resists' : d2({'Thrust' : 3, 'Slash'  : 2, 'Heat'   : 5}),
       'Stats' :   (50, 50, 80, 60, 60, 60, 60, 60),
@@ -443,6 +468,10 @@ Races = {
       'Resists' : d2({'Crush'  : 3, 'Slash'  : 2, 'Heat'   : 5}),
       'Stats' :   (90, 60, 40, 40, 60, 60, 70, 60),
     }),
+    'Graoch' : d2({
+      'Resists' : d2({'Crush'  : 4, 'Cold' : 3, 'Heat' : 3}),
+      'Stats' :   (80, 70, 50, 40, 60, 60, 60, 60),
+    }),
     'Lurikeen' : d2({
       'Resists' : d2({'Crush'  : 5, 'Energy' : 5}),
       'Stats' :   (40, 40, 80, 80, 60, 60, 60, 60),
@@ -458,6 +487,10 @@ Races = {
   }),
 
   'Midgard' : d2({
+    'Deifrang' : d2({
+      'Resists' : d2({'Crush'  : 4, 'Cold' : 3, 'Heat' : 3}),
+      'Stats' :   (80, 70, 50, 40, 60, 60, 60, 60),
+    }),
     'Dwarf' : d2({
       'Resists' : d2({'Thrust' : 3, 'Slash'  : 2, 'Body'   : 5}),
       'Stats' :   (60, 80, 50, 50, 60, 60, 60, 60),
