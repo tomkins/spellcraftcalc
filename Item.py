@@ -493,7 +493,7 @@ class Item:
     
     def asXML(self, pricingInfo=None, crafterSkill=1000, rich=False):
         document = Document()
-        rootnode = document.createElement(unicode('SCItem'))
+        rootnode = document.createElement(u'SCItem')
         document.appendChild(rootnode)
         fields = [(u'ActiveState', self.ActiveState,),
                   (u'Location',self.Location,),
@@ -523,11 +523,10 @@ class Item:
         slotnode = None
         for num in range(0,len(self.itemslots)):
             if self.itemslots[num].type() == "Unused": continue
-            slotnode = document.createElement(unicode('SLOT'))
-            slotnode.setAttribute(unicode("Number"), unicode(num))
+            slotnode = document.createElement(u'SLOT')
+            slotnode.setAttribute(u'Number', unicode(num))
             if rich or self.itemslots[num].slotType() != self.ActiveState:
-                slotnode.setAttribute(unicode("Type"), 
-                                      unicode(self.itemslots[num].slotType()))
+                slotnode.setAttribute(u'Type', unicode(self.itemslots[num].slotType()))
             self.itemslots[num].asXML(slotnode,self.Realm,rich)
             if rich and num < len(imbuevals) and imbuevals[num] > 0:
                 imbuenode = slotnode.getElementsByTagName('Imbue')[0]
