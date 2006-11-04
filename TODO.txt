@@ -1,7 +1,5 @@
 Things to fix before next beta release is announced;
 
-  Allow Drop item amounts to accept 1 decimal (such as a 5.1 DS effect).
-
   Prettify the display of stats with caps for the screen, with
   a stat/maxstat flavor option.  Rebalance between two or three rows
   of resists and bonuses to shorten the screen again after AF & PP%.
@@ -15,6 +13,9 @@ Things to fix before next beta release is announced;
   
   Add 'materials' to SCTemplate XML report, perhaps per-item and 
   per-template?  Or per-gem, then sum them?
+
+  Allow Drop Effect slots to have any value (such as a 5.1 DS effect
+  or 64/5 DoT effect).
 
   Add Drop tincture effects (from epic dungeons) for crafted gear.
   According to various searchs of alakazahm and the the autobestiary,
@@ -38,9 +39,11 @@ Things to fix before next beta release is announced;
 
 Things to fix before 2.0 final (non-beta) is announced;
 
-  Show Bonuses of % as #% finally?
+  Change Mauler gems if and as they evolve to release.
 
-  Change Mauler gems for next weeks patch.
+  Add Mythrian bonuses - especially over-cap logic!
+
+  Show Bonuses of % as #% finally?
 
   Deal with Mythical slot items, however those go live in the game.
 

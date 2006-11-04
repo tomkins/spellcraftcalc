@@ -1,12 +1,13 @@
-Updated ??/??/2006 - Version 1.92
+Updated 11/04/2006 - Version 1.92
 
   IMPORTANT: Leladia Template support is dropped for good.  If you have 
   any old template files from Leladia's calculator, open and save them
   in an older version of Kort's, then you can load them in the current
   version of Kort's.
 
-  IMPORTANT: Combined the Power and Hits effects into the "Stat" effect 
-  list.
+  IMPORTANT: Combined the Power and Hits effects into the "Stat" effects
+  list.  Sorry to confuse some of you, but this makes room for more things
+  especially in the drop effect-type list.
 
   AF and PP% (Power Pool %) are now in the stat list. Added Essense resist.  
 
@@ -16,11 +17,12 @@ Updated ??/??/2006 - Version 1.92
   Discarded the beloved Customizable report syntax that dates all the way
   back to Leladia's, in favor of a much more flexible xslt implementation.
   This means that earlier 'custom reports' must be rewritten in xslt. See
-  DefaultConfigReport.xsl for a fairly complete example
+  DefaultConfigReport.xsl for a fairly complete example.  Lots of most
+  requested changes to this report!
 
   The same xslt change has been applied to the custom UI Window beta
   feature from earlier versions.  Here, too, any UI Window templates
-  must b written in xslt.  This is a two-pass flavor to allow the window
+  must be written in xslt.  This is a two-pass flavor to allow the window
   positions to be updated, see DefaultUiXmlWindow.xsl for an example,
   with DefaultUiXmlWindowPost.xsl as the second pass.
 
