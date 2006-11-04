@@ -243,7 +243,8 @@ class ScWindow(QMainWindow, Ui_B_SC):
                                        for x in GemLists['All'].values() ])
         effectwidth = self.Effect_1.getMinimumWidth(l)
 
-        editAmountValidator = QDoubleValidator(-999, +999, 1, self)
+        # XXX FIX ME - I want to have a decimal!  But Double validator isn't working
+        editAmountValidator = QIntValidator(-999, +999, self)
 
         for i in range(0, 12):
             idx = i + 1

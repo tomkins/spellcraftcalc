@@ -10,8 +10,6 @@ Updated ??/??/2006 - Version 1.92
 
   AF and PP% (Power Pool %) are now in the stat list. Added Essense resist.  
 
-  Drop item amounts now accept 1 decimal (such as a 5.1 DS effect).
-
   Load Item now defaults to the 'All\(slots) directory, if there is no 
   (realm)\(slot) directory found, but All\(slot) directory exists.
 

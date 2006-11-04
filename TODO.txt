@@ -1,5 +1,7 @@
 Things to fix before next beta release is announced;
 
+  Allow Drop item amounts to accept 1 decimal (such as a 5.1 DS effect).
+
   Prettify the display of stats with caps for the screen, with
   a stat/maxstat flavor option.  Rebalance between two or three rows
   of resists and bonuses to shorten the screen again after AF & PP%.
