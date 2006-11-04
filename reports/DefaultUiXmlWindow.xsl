@@ -25,11 +25,11 @@
 	    <xsl:text>Gem </xsl:text><xsl:copy-of select="$slotnum"/>
 	    <xsl:text>: </xsl:text>
 	    <xsl:value-of select="Amount"/><xsl:text> </xsl:text>
-	    <xsl:value-of select="Effect"/>
+	    <xsl:value-of select="Effect"/><xsl:text> </xsl:text>
 	    <xsl:if test="Type != 'Stat' and substring(Effect, 1, 3) != 'All'">
-	      <xsl:text> </xsl:text><xsl:value-of select="Type"/>
+	      <xsl:value-of select="Type"/><xsl:text> </xsl:text>
             </xsl:if>
-	    <xsl:text> - </xsl:text>
+	    <xsl:text>- </xsl:text>
 	    <xsl:value-of select="Qua"/><xsl:text> </xsl:text>
 	    <xsl:value-of select="Name"/>
 	  </data>
@@ -41,7 +41,7 @@
 	    <xsl:text>Slot </xsl:text><xsl:copy-of select="$slotnum"/>
 	    <xsl:text>: </xsl:text>
 	    <xsl:value-of select="Amount"/><xsl:text> </xsl:text>
-	    <xsl:value-of select="Effect"/>
+	    <xsl:value-of select="Effect"/><xsl:text> </xsl:text>
 	    <xsl:if test="Type != 'Stat' and Type != 'Other Bonus' and Type != 'PvE Bonus' and Type != 'Other Effect' and substring(Effect, 1, 4) != 'All '">
 	      <xsl:value-of select="Type"/><xsl:text> </xsl:text>
             </xsl:if>
@@ -52,7 +52,7 @@
 	      <xsl:text>Effect </xsl:text>
 	    </xsl:if>
 	    <xsl:if test="Name != ''">
-	      <xsl:text> - </xsl:text><xsl:value-of select="Name"/>
+	      <xsl:text>- </xsl:text><xsl:value-of select="Name"/>
             </xsl:if>
 	  </data>
 	</label>
