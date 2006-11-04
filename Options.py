@@ -220,7 +220,7 @@ class Options(QDialog, Ui_B_Options):
                 self.parent.ReportPath = unicode(XMLHelper.getText(child.childNodes))
             elif child.tagName == 'ConfigReportXSLT':
                 self.parent.ReportFile = unicode(XMLHelper.getText(child.childNodes))
-            elif child.tagName == 'UiReportXSLT':
+            elif child.tagName == 'ConfigUiReportXSLT':
                 self.parent.UiReportFile = unicode(XMLHelper.getText(child.childNodes))
                 
         screenW = QApplication.desktop().width()
