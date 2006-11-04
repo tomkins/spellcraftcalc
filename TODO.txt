@@ -1,15 +1,18 @@
 Things to fix before next beta release is announced;
 
-  Test our UI XML results (can we avoid double-xslt followed by our
-  custom rewriting?)
+  Prettify the display of stats with caps for the screen, with
+  a stat/maxstat flavor option.  Rebalance between two or three rows
+  of resists and bonuses to shorten the screen again after AF & PP%.
 
   Add an option between 'expected cost' v.s. cost of single gem.
 
-  Fix the GroupBox to frames with GroupBox looks (for Mac which hates
-  unnamed group boxes).
+  Allow users to choose to include class-specific bonuses for resists
+  (mostly, applies to heavy tanks).
 
-  Can we make the 'editing' flavor of the dropdown controls line up
-  with their look when they are in drop-pick only mode on Mac?
+  Test our UI XML results (can we avoid double-xslt transformations?)
+  
+  Add 'materials' to SCTemplate XML report, perhaps per-item and 
+  per-template?  Or per-gem, then sum them?
 
   Add Drop tincture effects (from epic dungeons) for crafted gear.
   According to various searchs of alakazahm and the the autobestiary,
@@ -21,29 +24,21 @@ Things to fix before next beta release is announced;
   on the name of the proc and the drop ablative lv 48 has the same
   effect name as the crafted (different amounts).
 
-  Calculate 5th slot proc by level requirement.
+  Calculate 5th slot tincture by level fill in the Requirement.
 
   Add 1.85 crafted slot armor lookups (by realm/style/piece).
 
-  Prettify the display of stats with caps for reports and the screen,
-  with a stat/maxstat flavor option.
+  Fix the GroupBox to frames with GroupBox looks (for Mac which hates
+  unnamed group boxes).
 
-  Allow users to choose to include class-specific bonuses for resists
-  (mostly, applies to heavy tanks).
-
-  Drop Amount can't be a decimal (such as 6.1 Dmg Shield effect).  999.9
-  seems like a better template.
-
-  Translate Eitharg's 'PvE' item Type -> 'PvE Bonus', some of the specific
-  bonuses need to be added to the fixup table, and -1's in some fields
-  should become blank amounts.
+  Can we make the 'editing' flavor of the dropdown controls line up
+  with their look when they are in drop-pick only mode on Mac?
 
 Things to fix before 2.0 final (non-beta) is announced;
 
-  Show Bonuses of % as #% at last?
+  Show Bonuses of % as #% finally?
 
-  Blend Power and Hits into the "Stats" list finally?  Our Type dropdown
-  has grown somewhat long.
+  Change Mauler gems for next weeks patch.
 
   Deal with Mythical slot items, however those go live in the game.
 
@@ -60,4 +55,5 @@ Things to fix before 2.0 final (non-beta) is announced;
   Fill in Bonus based on itemlevel dialog, when known from material level.  
 
   Calculate Piece Ablative as an average based on chance-to-hit-body-part.
-  Show Reactive Effects ordered by %chance to hit body part.
+
+  List Reactive Effects ordered by %chance to hit body part.

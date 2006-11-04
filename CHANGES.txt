@@ -1,7 +1,19 @@
 Updated ??/??/2006 - Version 1.92
 
-  Corrected Move Item so even drop items can be moved from slot to slot
-  (the entire item, not just the gems).  Also fixed a Swap Gems bug.
+  IMPORTANT: Leladia Template support is dropped for good.  If you have 
+  any old template files from Leladia's calculator, open and save them
+  in an older version of Kort's, then you can load them in the current
+  version of Kort's.
+
+  IMPORTANT: Combined the Power and Hits effects into the "Stat" effect 
+  list.
+
+  AF and PP% (Power Pool %) are now in the stat list. Added Essense resist.  
+
+  Drop item amounts now accept 1 decimal (such as a 5.1 DS effect).
+
+  Load Item now defaults to the 'All\(slots) directory, if there is no 
+  (realm)\(slot) directory found, but All\(slot) directory exists.
 
   Discarded the beloved Customizable report syntax that dates all the way
   back to Leladia's, in favor of a much more flexible xslt implementation.
@@ -16,12 +28,12 @@ Updated ??/??/2006 - Version 1.92
 
   Added a File - Export SCTemplate XML option; it is a template with much
   too much data so that report authors can examine every field available
-  to incorporate into their xslt report translator.
+  for report authors to include in their xslt report formats.
 
-  Remember the ReportPath used to save reports.
+  The report window now remembers the last directory used to save reports.
 
-  Load Item now defaults to the 'All\(slots) directory, if there is no 
-  (realm)\(slot) directory found, but All\(slot) directory exists.
+  Corrected Move Item so even drop items can be moved from slot to slot
+  (the entire item, not just the gems).  Also fixed a Swap Gems bug.
 
   Fixed a flaw that Edit - Item Type was creating a new item, instead
   of modifying the current item.
