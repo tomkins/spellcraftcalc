@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'ScWindow.ui'
 #
-# Created: Fri Nov 03 04:29:51 2006
+# Created: Fri Nov 03 17:59:40 2006
 #      by: PyQt4 UI code generator 4-snapshot-20061020
 #
 # WARNING! All changes made in this file will be lost!
@@ -316,10 +316,10 @@ class Ui_B_SC(object):
         self.Body.setObjectName("Body")
         self.gridlayout3.addWidget(self.Body,0,1,1,1)
 
-        self.BodyRR = QtGui.QLabel(self.GroupResists)
-        self.BodyRR.setAlignment(QtCore.Qt.AlignRight|QtCore.Qt.AlignTrailing|QtCore.Qt.AlignVCenter)
-        self.BodyRR.setObjectName("BodyRR")
-        self.gridlayout3.addWidget(self.BodyRR,0,2,1,1)
+        self.BodyCap = QtGui.QLabel(self.GroupResists)
+        self.BodyCap.setAlignment(QtCore.Qt.AlignRight|QtCore.Qt.AlignTrailing|QtCore.Qt.AlignVCenter)
+        self.BodyCap.setObjectName("BodyCap")
+        self.gridlayout3.addWidget(self.BodyCap,0,2,1,1)
 
         self.ColdLabel = QtGui.QLabel(self.GroupResists)
         self.ColdLabel.setObjectName("ColdLabel")
@@ -330,10 +330,10 @@ class Ui_B_SC(object):
         self.Cold.setObjectName("Cold")
         self.gridlayout3.addWidget(self.Cold,1,1,1,1)
 
-        self.ColdRR = QtGui.QLabel(self.GroupResists)
-        self.ColdRR.setAlignment(QtCore.Qt.AlignRight|QtCore.Qt.AlignTrailing|QtCore.Qt.AlignVCenter)
-        self.ColdRR.setObjectName("ColdRR")
-        self.gridlayout3.addWidget(self.ColdRR,1,2,1,1)
+        self.ColdCap = QtGui.QLabel(self.GroupResists)
+        self.ColdCap.setAlignment(QtCore.Qt.AlignRight|QtCore.Qt.AlignTrailing|QtCore.Qt.AlignVCenter)
+        self.ColdCap.setObjectName("ColdCap")
+        self.gridlayout3.addWidget(self.ColdCap,1,2,1,1)
 
         self.HeatLabel = QtGui.QLabel(self.GroupResists)
         self.HeatLabel.setObjectName("HeatLabel")
@@ -344,10 +344,10 @@ class Ui_B_SC(object):
         self.Heat.setObjectName("Heat")
         self.gridlayout3.addWidget(self.Heat,2,1,1,1)
 
-        self.HeatRR = QtGui.QLabel(self.GroupResists)
-        self.HeatRR.setAlignment(QtCore.Qt.AlignRight|QtCore.Qt.AlignTrailing|QtCore.Qt.AlignVCenter)
-        self.HeatRR.setObjectName("HeatRR")
-        self.gridlayout3.addWidget(self.HeatRR,2,2,1,1)
+        self.HeatCap = QtGui.QLabel(self.GroupResists)
+        self.HeatCap.setAlignment(QtCore.Qt.AlignRight|QtCore.Qt.AlignTrailing|QtCore.Qt.AlignVCenter)
+        self.HeatCap.setObjectName("HeatCap")
+        self.gridlayout3.addWidget(self.HeatCap,2,2,1,1)
 
         self.EnergyLabel = QtGui.QLabel(self.GroupResists)
         self.EnergyLabel.setObjectName("EnergyLabel")
@@ -358,10 +358,10 @@ class Ui_B_SC(object):
         self.Energy.setObjectName("Energy")
         self.gridlayout3.addWidget(self.Energy,3,1,1,1)
 
-        self.EnergyRR = QtGui.QLabel(self.GroupResists)
-        self.EnergyRR.setAlignment(QtCore.Qt.AlignRight|QtCore.Qt.AlignTrailing|QtCore.Qt.AlignVCenter)
-        self.EnergyRR.setObjectName("EnergyRR")
-        self.gridlayout3.addWidget(self.EnergyRR,3,2,1,1)
+        self.EnergyCap = QtGui.QLabel(self.GroupResists)
+        self.EnergyCap.setAlignment(QtCore.Qt.AlignRight|QtCore.Qt.AlignTrailing|QtCore.Qt.AlignVCenter)
+        self.EnergyCap.setObjectName("EnergyCap")
+        self.gridlayout3.addWidget(self.EnergyCap,3,2,1,1)
 
         self.MatterLabel = QtGui.QLabel(self.GroupResists)
         self.MatterLabel.setObjectName("MatterLabel")
@@ -372,10 +372,10 @@ class Ui_B_SC(object):
         self.Matter.setObjectName("Matter")
         self.gridlayout3.addWidget(self.Matter,4,1,1,1)
 
-        self.MatterRR = QtGui.QLabel(self.GroupResists)
-        self.MatterRR.setAlignment(QtCore.Qt.AlignRight|QtCore.Qt.AlignTrailing|QtCore.Qt.AlignVCenter)
-        self.MatterRR.setObjectName("MatterRR")
-        self.gridlayout3.addWidget(self.MatterRR,4,2,1,1)
+        self.MatterCap = QtGui.QLabel(self.GroupResists)
+        self.MatterCap.setAlignment(QtCore.Qt.AlignRight|QtCore.Qt.AlignTrailing|QtCore.Qt.AlignVCenter)
+        self.MatterCap.setObjectName("MatterCap")
+        self.gridlayout3.addWidget(self.MatterCap,4,2,1,1)
 
         self.SpiritLabel = QtGui.QLabel(self.GroupResists)
         self.SpiritLabel.setObjectName("SpiritLabel")
@@ -386,10 +386,10 @@ class Ui_B_SC(object):
         self.Spirit.setObjectName("Spirit")
         self.gridlayout3.addWidget(self.Spirit,5,1,1,1)
 
-        self.SpiritRR = QtGui.QLabel(self.GroupResists)
-        self.SpiritRR.setAlignment(QtCore.Qt.AlignRight|QtCore.Qt.AlignTrailing|QtCore.Qt.AlignVCenter)
-        self.SpiritRR.setObjectName("SpiritRR")
-        self.gridlayout3.addWidget(self.SpiritRR,5,2,1,1)
+        self.SpiritCap = QtGui.QLabel(self.GroupResists)
+        self.SpiritCap.setAlignment(QtCore.Qt.AlignRight|QtCore.Qt.AlignTrailing|QtCore.Qt.AlignVCenter)
+        self.SpiritCap.setObjectName("SpiritCap")
+        self.gridlayout3.addWidget(self.SpiritCap,5,2,1,1)
 
         self.CrushLabel = QtGui.QLabel(self.GroupResists)
         self.CrushLabel.setObjectName("CrushLabel")
@@ -400,10 +400,10 @@ class Ui_B_SC(object):
         self.Crush.setObjectName("Crush")
         self.gridlayout3.addWidget(self.Crush,6,1,1,1)
 
-        self.CrushRR = QtGui.QLabel(self.GroupResists)
-        self.CrushRR.setAlignment(QtCore.Qt.AlignRight|QtCore.Qt.AlignTrailing|QtCore.Qt.AlignVCenter)
-        self.CrushRR.setObjectName("CrushRR")
-        self.gridlayout3.addWidget(self.CrushRR,6,2,1,1)
+        self.CrushCap = QtGui.QLabel(self.GroupResists)
+        self.CrushCap.setAlignment(QtCore.Qt.AlignRight|QtCore.Qt.AlignTrailing|QtCore.Qt.AlignVCenter)
+        self.CrushCap.setObjectName("CrushCap")
+        self.gridlayout3.addWidget(self.CrushCap,6,2,1,1)
 
         self.ThrustLabel = QtGui.QLabel(self.GroupResists)
         self.ThrustLabel.setObjectName("ThrustLabel")
@@ -414,10 +414,10 @@ class Ui_B_SC(object):
         self.Thrust.setObjectName("Thrust")
         self.gridlayout3.addWidget(self.Thrust,7,1,1,1)
 
-        self.ThrustRR = QtGui.QLabel(self.GroupResists)
-        self.ThrustRR.setAlignment(QtCore.Qt.AlignRight|QtCore.Qt.AlignTrailing|QtCore.Qt.AlignVCenter)
-        self.ThrustRR.setObjectName("ThrustRR")
-        self.gridlayout3.addWidget(self.ThrustRR,7,2,1,1)
+        self.ThrustCap = QtGui.QLabel(self.GroupResists)
+        self.ThrustCap.setAlignment(QtCore.Qt.AlignRight|QtCore.Qt.AlignTrailing|QtCore.Qt.AlignVCenter)
+        self.ThrustCap.setObjectName("ThrustCap")
+        self.gridlayout3.addWidget(self.ThrustCap,7,2,1,1)
 
         self.SlashLabel = QtGui.QLabel(self.GroupResists)
         self.SlashLabel.setObjectName("SlashLabel")
@@ -428,13 +428,27 @@ class Ui_B_SC(object):
         self.Slash.setObjectName("Slash")
         self.gridlayout3.addWidget(self.Slash,8,1,1,1)
 
-        self.SlashRR = QtGui.QLabel(self.GroupResists)
-        self.SlashRR.setAlignment(QtCore.Qt.AlignRight|QtCore.Qt.AlignTrailing|QtCore.Qt.AlignVCenter)
-        self.SlashRR.setObjectName("SlashRR")
-        self.gridlayout3.addWidget(self.SlashRR,8,2,1,1)
+        self.SlashCap = QtGui.QLabel(self.GroupResists)
+        self.SlashCap.setAlignment(QtCore.Qt.AlignRight|QtCore.Qt.AlignTrailing|QtCore.Qt.AlignVCenter)
+        self.SlashCap.setObjectName("SlashCap")
+        self.gridlayout3.addWidget(self.SlashCap,8,2,1,1)
+
+        self.EssenceLabel = QtGui.QLabel(self.GroupResists)
+        self.EssenceLabel.setObjectName("EssenceLabel")
+        self.gridlayout3.addWidget(self.EssenceLabel,9,0,1,1)
+
+        self.Essence = QtGui.QLabel(self.GroupResists)
+        self.Essence.setAlignment(QtCore.Qt.AlignRight|QtCore.Qt.AlignTrailing|QtCore.Qt.AlignVCenter)
+        self.Essence.setObjectName("Essence")
+        self.gridlayout3.addWidget(self.Essence,9,1,1,1)
+
+        self.EssenceCap = QtGui.QLabel(self.GroupResists)
+        self.EssenceCap.setAlignment(QtCore.Qt.AlignRight|QtCore.Qt.AlignTrailing|QtCore.Qt.AlignVCenter)
+        self.EssenceCap.setObjectName("EssenceCap")
+        self.gridlayout3.addWidget(self.EssenceCap,9,2,1,1)
 
         spacerItem5 = QtGui.QSpacerItem(5,0,QtGui.QSizePolicy.Minimum,QtGui.QSizePolicy.MinimumExpanding)
-        self.gridlayout3.addItem(spacerItem5,9,0,1,3)
+        self.gridlayout3.addItem(spacerItem5,10,0,1,3)
         self.gridlayout.addWidget(self.GroupResists,0,4,1,1)
 
         spacerItem6 = QtGui.QSpacerItem(3,1,QtGui.QSizePolicy.Fixed,QtGui.QSizePolicy.Minimum)
@@ -1208,31 +1222,34 @@ class Ui_B_SC(object):
         self.HitsCap.setText(QtGui.QApplication.translate("B_SC", "-", None, QtGui.QApplication.UnicodeUTF8))
         self.BodyLabel.setText(QtGui.QApplication.translate("B_SC", "Body: ", None, QtGui.QApplication.UnicodeUTF8))
         self.Body.setText(QtGui.QApplication.translate("B_SC", "0", None, QtGui.QApplication.UnicodeUTF8))
-        self.BodyRR.setText(QtGui.QApplication.translate("B_SC", "-", None, QtGui.QApplication.UnicodeUTF8))
+        self.BodyCap.setText(QtGui.QApplication.translate("B_SC", "-", None, QtGui.QApplication.UnicodeUTF8))
         self.ColdLabel.setText(QtGui.QApplication.translate("B_SC", "Cold: ", None, QtGui.QApplication.UnicodeUTF8))
         self.Cold.setText(QtGui.QApplication.translate("B_SC", "0", None, QtGui.QApplication.UnicodeUTF8))
-        self.ColdRR.setText(QtGui.QApplication.translate("B_SC", "-", None, QtGui.QApplication.UnicodeUTF8))
+        self.ColdCap.setText(QtGui.QApplication.translate("B_SC", "-", None, QtGui.QApplication.UnicodeUTF8))
         self.HeatLabel.setText(QtGui.QApplication.translate("B_SC", "Heat: ", None, QtGui.QApplication.UnicodeUTF8))
         self.Heat.setText(QtGui.QApplication.translate("B_SC", "0", None, QtGui.QApplication.UnicodeUTF8))
-        self.HeatRR.setText(QtGui.QApplication.translate("B_SC", "-", None, QtGui.QApplication.UnicodeUTF8))
+        self.HeatCap.setText(QtGui.QApplication.translate("B_SC", "-", None, QtGui.QApplication.UnicodeUTF8))
         self.EnergyLabel.setText(QtGui.QApplication.translate("B_SC", "Energy: ", None, QtGui.QApplication.UnicodeUTF8))
         self.Energy.setText(QtGui.QApplication.translate("B_SC", "0", None, QtGui.QApplication.UnicodeUTF8))
-        self.EnergyRR.setText(QtGui.QApplication.translate("B_SC", "-", None, QtGui.QApplication.UnicodeUTF8))
+        self.EnergyCap.setText(QtGui.QApplication.translate("B_SC", "-", None, QtGui.QApplication.UnicodeUTF8))
         self.MatterLabel.setText(QtGui.QApplication.translate("B_SC", "Matter: ", None, QtGui.QApplication.UnicodeUTF8))
         self.Matter.setText(QtGui.QApplication.translate("B_SC", "0", None, QtGui.QApplication.UnicodeUTF8))
-        self.MatterRR.setText(QtGui.QApplication.translate("B_SC", "-", None, QtGui.QApplication.UnicodeUTF8))
+        self.MatterCap.setText(QtGui.QApplication.translate("B_SC", "-", None, QtGui.QApplication.UnicodeUTF8))
         self.SpiritLabel.setText(QtGui.QApplication.translate("B_SC", "Spirit: ", None, QtGui.QApplication.UnicodeUTF8))
         self.Spirit.setText(QtGui.QApplication.translate("B_SC", "0", None, QtGui.QApplication.UnicodeUTF8))
-        self.SpiritRR.setText(QtGui.QApplication.translate("B_SC", "-", None, QtGui.QApplication.UnicodeUTF8))
+        self.SpiritCap.setText(QtGui.QApplication.translate("B_SC", "-", None, QtGui.QApplication.UnicodeUTF8))
         self.CrushLabel.setText(QtGui.QApplication.translate("B_SC", "Crush: ", None, QtGui.QApplication.UnicodeUTF8))
         self.Crush.setText(QtGui.QApplication.translate("B_SC", "0", None, QtGui.QApplication.UnicodeUTF8))
-        self.CrushRR.setText(QtGui.QApplication.translate("B_SC", "-", None, QtGui.QApplication.UnicodeUTF8))
+        self.CrushCap.setText(QtGui.QApplication.translate("B_SC", "-", None, QtGui.QApplication.UnicodeUTF8))
         self.ThrustLabel.setText(QtGui.QApplication.translate("B_SC", "Thrust: ", None, QtGui.QApplication.UnicodeUTF8))
         self.Thrust.setText(QtGui.QApplication.translate("B_SC", "0", None, QtGui.QApplication.UnicodeUTF8))
-        self.ThrustRR.setText(QtGui.QApplication.translate("B_SC", "-", None, QtGui.QApplication.UnicodeUTF8))
+        self.ThrustCap.setText(QtGui.QApplication.translate("B_SC", "-", None, QtGui.QApplication.UnicodeUTF8))
         self.SlashLabel.setText(QtGui.QApplication.translate("B_SC", "Slash: ", None, QtGui.QApplication.UnicodeUTF8))
         self.Slash.setText(QtGui.QApplication.translate("B_SC", "0", None, QtGui.QApplication.UnicodeUTF8))
-        self.SlashRR.setText(QtGui.QApplication.translate("B_SC", "-", None, QtGui.QApplication.UnicodeUTF8))
+        self.SlashCap.setText(QtGui.QApplication.translate("B_SC", "-", None, QtGui.QApplication.UnicodeUTF8))
+        self.EssenceLabel.setText(QtGui.QApplication.translate("B_SC", "Essence: ", None, QtGui.QApplication.UnicodeUTF8))
+        self.Essence.setText(QtGui.QApplication.translate("B_SC", "0", None, QtGui.QApplication.UnicodeUTF8))
+        self.EssenceCap.setText(QtGui.QApplication.translate("B_SC", "-", None, QtGui.QApplication.UnicodeUTF8))
         self.ItemLevelLabel.setText(QtGui.QApplication.translate("B_SC", "&Level: ", None, QtGui.QApplication.UnicodeUTF8))
         self.ItemLevelButton.setText(QtGui.QApplication.translate("B_SC", "...", None, QtGui.QApplication.UnicodeUTF8))
         self.ItemQualityLabel.setText(QtGui.QApplication.translate("B_SC", "Quality: ", None, QtGui.QApplication.UnicodeUTF8))

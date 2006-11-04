@@ -161,15 +161,19 @@ class ScWindow(QMainWindow, Ui_B_SC):
             self.StatLabel[stat] = getattr(self, stat + 'Label')
             self.StatValue[stat] = getattr(self, stat)
             self.StatCap[stat] = getattr(self, stat + 'Cap')
+        width = testfont.size(Qt.TextSingleLine, "CON: ").width()
+        self.GroupStats.layout().setColumnMinimumWidth(0,width)
         width = testfont.size(Qt.TextSingleLine, "400").width()
         self.GroupStats.layout().setColumnMinimumWidth(1,width)
         width = testfont.size(Qt.TextSingleLine, " (400)").width()
         self.GroupStats.layout().setColumnMinimumWidth(2,width)
 
-        for stat in (GemLists['All']['Resist']):
+        for stat in (DropLists['All']['Resist']):
             self.StatLabel[stat] = getattr(self, stat + 'Label')
             self.StatValue[stat] = getattr(self, stat)
-            self.StatBonus[stat] = getattr(self, stat + 'RR')
+            self.StatBonus[stat] = getattr(self, stat + 'Cap')
+        width = testfont.size(Qt.TextSingleLine, "Energy: ").width()
+        self.GroupResists.layout().setColumnMinimumWidth(0,width)
         width = testfont.size(Qt.TextSingleLine, "26").width()
         self.GroupResists.layout().setColumnMinimumWidth(1,width)
         width = testfont.size(Qt.TextSingleLine, " (5)").width()
@@ -240,7 +244,7 @@ class ScWindow(QMainWindow, Ui_B_SC):
                                        for x in GemLists['All'].values() ])
         effectwidth = self.Effect_1.getMinimumWidth(l)
 
-        editAmountValidator = QIntValidator(-999, +999, self)
+        editAmountValidator = QDoubleValidator(-999, +999, 1, self)
 
         for i in range(0, 12):
             idx = i + 1
@@ -673,10 +677,10 @@ class ScWindow(QMainWindow, Ui_B_SC):
             for key in (u'Stats', u'Resists', u'Skills', u'Focus', 
                         u'OtherBonuses', u'PvEBonuses'):
                 if key == 'Stats':
-                    types = GemLists['All']['Stat'] \
-                          + ('Acuity', 'Hits', 'Power', '% Power Pool', 'AF')
+                    types = DropLists['All']['Stat'] \
+                          + ('Hits', 'Power', '% Power Pool', 'AF')
                 elif key == 'Resists':
-                    types = GemLists['All']['Resist']
+                    types = DropLists['All']['Resist']
                 else:
                     types = totalsdict[key].keys()
                     types.sort()
@@ -868,8 +872,8 @@ class ScWindow(QMainWindow, Ui_B_SC):
         tot['Focus'] = {}
         tot['OtherBonuses'] = {}
         tot['PvEBonuses'] = {}
-        for effect in GemLists['All']['Stat'] \
-                    + ('Acuity', 'AF', 'Hits', 'Power', '% Power Pool'):
+        for effect in DropLists['All']['Stat'] \
+                    + ('AF', 'Hits', 'Power', '% Power Pool'):
             tot['Stats'][effect] = {}
             tot['Stats'][effect]['TotalBonus'] = 0
             tot['Stats'][effect]['Bonus'] = 0
@@ -885,7 +889,7 @@ class ScWindow(QMainWindow, Ui_B_SC):
                     = int(charlevel * capcalc[0]) + capcalc[1]
             tot['Stats'][effect]['BaseCapToCapBonus'] \
                     = int(charlevel * capcapcalc[0]) + capcapcalc[1]
-        for effect in GemLists['All']['Resist']:
+        for effect in DropLists['All']['Resist']:
             tot['Resists'][effect] = {}
             tot['Resists'][effect]['TotalBonus'] = 0
             tot['Resists'][effect]['Bonus'] = 0
@@ -1138,7 +1142,7 @@ class ScWindow(QMainWindow, Ui_B_SC):
 
     def RaceChanged(self, a0):
         race = str(self.CharRace.currentText())
-        for rt in GemLists['All']['Resist']:
+        for rt in DropLists['All']['Resist']:
             if Races['All'][race]['Resists'].has_key(rt):
               if self.includeRacials:
                 self.StatBonus[rt].setText('('+str(Races['All'][race] \
