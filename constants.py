@@ -15,7 +15,7 @@ __all__ = [
   'GemTables', 'GemDusts', 'GemLiquids', 'GemSubName',
   'GemNames', 'MaterialGems', 'GemCosts', 'RemakeCosts', 
   'EffectTypeNames', 'EffectItemNames', 'EffectMetal', 'EffectRequiredLevel',
-  'FixEffectsTable', 'HotkeyGems', 'ImbueMultipliers',  
+  'FixTypeTable', 'FixEffectsTable', 'HotkeyGems', 'ImbueMultipliers',  
   'ShieldTypes',
   'TabList', 'PieceTabList', 'JewelTabList',
 ]
@@ -31,8 +31,6 @@ TypeList = t2((
     'Unused', 
     'Stat', 
     'Resist', 
-    'Hits', 
-    'Power', 
     'Focus', 
     'Skill',
 ))
@@ -151,6 +149,8 @@ statTableOrdered = (
     ('Piety',        'Watery',),
     ('Charisma',     'Icy',),
     ('Empathy',      'Heated',),
+    ('Power',        'Mystical',),
+    ('Hits',         'Blood',),
 )
 
 statTable = dict(statTableOrdered)
@@ -164,6 +164,10 @@ del statTableOrdered
 
 statValues = t2(('1', '4', '7', '10', '13', '16', '19', '22', '25', '28',))
 
+hitsValues = t2(('4', '12', '20', '28', '36', '44', '52', '60', '68', '76',))
+
+powerValues = t2(('1', '2', '3', '5', '7', '9', '11', '13', '15', '17'))
+
 # Duplicate the Stat lists as DropStat lists, add non-craftable 'Acuity' stat
 #
 dropStatList = t2(statList + (
@@ -171,24 +175,6 @@ dropStatList = t2(statList + (
 ))
 
 dropStatTable = dict().fromkeys(dropStatList)
-
-
-hitsTable = d2({
-    'Hits' : ('Blood', type, GemDusts[type], GemLiquids['Blood'],),
-})
-
-hitsList = t2(hitsTable.keys())
-
-hitsValues = t2(('4', '12', '20', '28', '36', '44', '52', '60', '68', '76',))
-
-
-powerTable = d2({
-    'Power' : ('Mystical', type, GemDusts[type], GemLiquids['Mystical'],),
-})
-
-powerList = t2(powerTable.keys())
-
-powerValues = t2(('1', '2', '3', '5', '7', '9', '11', '13', '15', '17'))
 
 
 type = 'Shielding Jewel'
@@ -456,8 +442,6 @@ skillValues = t2(('1', '2', '3', '4', '5', '6', '7', '8',))
 
 
 capIncreaseList = t2(dropStatList + (
-    'Hits', 
-    'Power', 
     'AF',
 ))
 
@@ -590,11 +574,9 @@ EffectTypeNames = d2({
 
 GemTables = {
   'All': {
+    'Unused' :  unusedTable,
     'Stat' :    statTable,
     'Resist' :  resistTable,
-    'Hits' :    hitsTable,
-    'Power' :   powerTable,
-    'Unused' :  unusedTable
   }
 }
 
@@ -603,8 +585,6 @@ GemLists = {
     'Unused' :           unusedList,
     'Stat' :             statList,
     'Resist' :           resistList,
-    'Hits' :             hitsList,
-    'Power' :            powerList,
   }
 }
 
@@ -612,8 +592,6 @@ DropLists = {
   'All': {
     'Unused' :           unusedList,
     'Resist' :           dropResistList,
-    'Hits' :             hitsList,
-    'Power' :            powerList,
     'Stat' :             dropStatList,
     'Cap Increase' :     capIncreaseList,
     'PvE Bonus' :        pveBonusList,
@@ -651,10 +629,12 @@ DropLists = d2(DropLists)
 
 
 ValuesLists = d2({
-    'Stat' :             statValues,
+    'Stat' : d2({
+        None :           statValues,
+        'Hits' :         hitsValues,
+        'Power' :        powerValues,
+    }),
     'Resist' :           resistValues,
-    'Hits' :             hitsValues,
-    'Power' :            powerValues,
     'Focus' :            focusValues,
     'Skill' :            skillValues,
     'Unused' :           unusedValues,
@@ -666,11 +646,7 @@ CraftedValuesLists = d2({
     'Focus' :              t2(('50',)),
     'Skill' :              t2(('3',)),
     'Cap Increase' : d2({
-        'Strength' :       t2(('5',)),
-        'Constitution' :   t2(('5',)),
-        'Dexterity' :      t2(('5',)),
-        'Quickness' :      t2(('5',)),
-        'Acuity' :         t2(('5',)),
+        None :             t2(('5',)),
         'Hits' :           t2(('40',)),
     }),
     'Other Bonus' : d2({
@@ -1187,7 +1163,15 @@ ShieldTypes = t2((
 ))
 
 
-# Rename old skills to new skills, from previously saved template files
+# Rename old slot types to new types, from older template and item files
+#
+FixTypeTable = d2({
+    'PvE' :     'PvE Bonus',
+    'Hits' :    'Stat',
+    'Power' :   'Stat',
+})
+
+# Rename old skills to new skills, from older template and item files
 #
 FixEffectsTable = d2({
     'Bonedancing' :    'Bone Army',

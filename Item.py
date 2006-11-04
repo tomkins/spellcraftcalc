@@ -48,10 +48,12 @@ class ItemSlot:
             self.__dict__[attrname] = unicode(value)
 
     def fixEffect(self):
-        if FixEffectsTable.has_key(self.Effect):
-            self.Effect = FixEffectsTable[self.Effect]
+        if FixTypeTable.has_key(self.Type):
+            self.Type = FixTypeTable[self.Type]
         if self.Type == 'Focus' and len(self.Effect) > 6 and self.Effect[-6:] == ' Focus':
             self.Effect = self.Effect[:-6]
+        if FixEffectsTable.has_key(self.Effect):
+            self.Effect = FixEffectsTable[self.Effect]
 
     def slotType(self):
         return self.SlotType
@@ -133,8 +135,12 @@ class ItemSlot:
         if not ValuesLists.has_key(self.Type): return -1
         amountlist = ValuesLists[self.Type]
         if not isinstance(amountlist, tuple):
-            if not amountlist.has_key(self.Effect): return -1
-            amountlist = amountlist[self.Effect]
+            if amountlist.has_key(self.Effect):
+                amountlist = amountlist[self.Effect]
+            elif amountlist.has_key(None):
+                amountlist = amountlist[None]
+            else:
+                return -1            
         if not self.Amount in amountlist: return -1
         return amountlist.index(self.Amount) + 1
 
@@ -142,10 +148,13 @@ class ItemSlot:
         mval = 0
         if not self.crafted(): return 0.0
         if self.Type == 'Stat':
-            return ((int(self.Amount) - 1) / 3.0) * 2.0 + 1.0
-        if self.Type == 'Hits':
-            return int(self.Amount) / 4.0
-        if self.Type == 'Resist' or self.Type == 'Power':
+            if self.Effect == 'Hits':
+                return int(self.Amount) / 4.0
+            elif self.Effect == 'Power':
+                mval = (int(self.Amount) - 1) * 2.0
+            else:
+                return ((int(self.Amount) - 1) / 3.0) * 2.0 + 1.0
+        elif self.Type == 'Resist':
             mval = (int(self.Amount) - 1) * 2.0
         elif self.Type == 'Skill':
             mval = (int(self.Amount) - 1) * 5.0
@@ -654,130 +663,3 @@ class Item:
             elif len(item.ItemName) == 0:
                 item.ItemName = 'Drop Item' + namehint
             item = item.next
-
-    def importLela(self, f):
-        f.seek(0)
-        lines = f.readlines()
-        slots = []
-        for l in range(0, len(lines)):
-            line = string.strip(lines[l], " \n\r")
-            if l == 1:
-                self.Realm = line
-            elif l == 5:
-                self.ItemName = line
-            elif l in range(6, 10):
-                slots.append([])
-                slots[l-6].append(TypeList[int(line)])  
-            elif l in range(10, 14):
-                slots[l-10].append(line)
-            elif l in range(14, 18):
-                if slots[l-14][0] == 'Unused':
-                    slots[l-14].append('')
-                else:
-                    efflist = GemTables[self.Realm][slots[l-14][0]]
-                    slots[l-14].append(efflist[int(line)])
-            elif l in range(18, 22):
-                if line == '0': line = '99'
-                slots[l-18].append(line)
-            elif l == 22:
-                self.Level = line
-            elif l == 23:
-                self.ItemQuality = line
-            elif l == 24:
-                self.AF = line
-            elif l == 25:
-                self.Speed = line
-            elif l == 26:
-                self.Bonus = line
-        s = 0
-        self.ActiveState = 'drop'
-        for type, amount, effect, qua in slots:
-            self.slot(s).setAll(type, amount, effect, qua, self.Realm) 
-            s += 1
-
-    def loadLelaItemFromSCC(self, itemnum, scclines, realm, sepitem=False):
-        slotattrs = []
-        self.loadAttr('Realm', realm)
-        itemquality = '0'
-        for line in scclines:
-            line = string.strip(line, " \n\r")
-            if re.compile('^ITEM%02d' % itemnum).match(line) is not None\
-                    or sepitem:
-                itemname, value = string.split(line, '=', 1)
-                if not sepitem:
-                    i, attr = string.split(itemname, '_', 1)
-                else:
-                    attr = itemname
-                gem_match = re.compile('^GEM(\d)').match(attr)
-                if gem_match is not None:
-                    slotnum = int(gem_match.group(1))
-                    if len(slotattrs) < (slotnum + 1):
-                        slotattrs.append({})
-                    a, gem_attr = string.split(attr, '_', 1)
-                    if gem_attr == 'QUALITY':
-                        gemqual = QualityValues[int(value)]
-                        slotattrs[slotnum]['Qual'] = gemqual
-                    elif gem_attr == 'LEVEL':
-                        slotattrs[slotnum]['Level'] = int(value)
-                    elif gem_attr == 'GEM_ID':
-                        value = re.sub('FOCUS_', '', value)
-                        slotattrs[slotnum]['ID'] = value
-                    elif gem_attr == 'REMAKES':
-                        slotattrs[slotnum]['Remakes'] = value
-                    elif gem_attr == 'MINUTES':
-                        slotattrs[slotnum]['Time'] = value
-                    elif gem_attr == 'DONE':
-                        slotattrs[slotnum]['Done'] = value
-                else:
-                    if attr == 'QUALITY':
-                        itemquality = value
-                        #self.loadAttr('ItemQuality', QualityValues[int(value)])
-                    elif attr == 'LEVEL':
-                        self.loadAttr('Level', value)
-                    elif attr == 'EQUIPPED':
-                        self.loadAttr('Equipped', value)
-                    elif attr == 'PLAYER_MADE':
-                        if value == '1':
-                            self.loadAttr('ActiveState', 'player')
-                            self.loadAttr('ItemQuality', QualityValues[int(itemquality)])
-                        else:   
-                            self.loadAttr('ActiveState', 'drop')
-                            self.loadAttr('ItemQuality', itemquality)
-                    elif attr == 'DPS':
-                        self.loadAttr('AFDPS', value)
-                    elif attr == 'SPEED':
-                        self.loadAttr('Speed', value)
-                    elif attr == 'BONUS':
-                        self.loadAttr('Bonus', value)
-                    elif attr == 'NAME':
-                        self.loadAttr('ItemName', value)
-        slotindex = 0
-        for slot in slotattrs:
-            id = re.sub('_', ' ', slot['ID'])           
-            if id == 'ASHEN CHAOS RUNE':
-                id = 'ASHEN PRIMAL RUNE'
-            if id == 'LIGHTNING WAR RUNE':
-                id = 'LIGHTNING CHARGED WAR RUNE'
-            if id == 'MYSTIC ESSENCE':
-                id = 'MYSTICAL ESSENCE'
-            if not id == '':
-                for gem, subname in GemSubName.items():
-                    namelist = GemTables[realm][gem]
-                    gemamounts = ValuesLists[gem]
-                    for effect in namelist.keys():
-                        if re.compile('%s' % id, re.IGNORECASE)\
-                                .search(string.strip(namelist[effect] + ' ' + subname))\
-                                is not None:
-                            if (self.getAttr('ActiveState') == 'player'):
-                                self.slot(slotindex).setAll(gem, 
-                                        gemamounts[slot['Level']], 
-                                        string.strip(effect), slot['Qual'],
-                                        self.Realm, slot['Time'],
-                                        slot['Remakes'], slot['Done'])
-                            else:
-                                self.slot(slotindex).setAll(gem,  slot['Level'], 
-                                        string.strip(effect), slot['Qual'],
-                                        self.Realm, slot['Time'], 
-                                        slot['Remakes'], slot['Done'])
-                            break
-            slotindex += 1

@@ -156,8 +156,7 @@ class ScWindow(QMainWindow, Ui_B_SC):
         self.StatCap = {}
         self.StatBonus = {}
 
-        for stat in (GemLists['All']['Stat'] \
-                   + ('Power', 'PowerPool', 'AF', 'Hits',)):
+        for stat in (GemLists['All']['Stat'] + ('PowerPool', 'AF',)):
             self.StatLabel[stat] = getattr(self, stat + 'Label')
             self.StatValue[stat] = getattr(self, stat)
             self.StatCap[stat] = getattr(self, stat + 'Cap')
@@ -677,8 +676,7 @@ class ScWindow(QMainWindow, Ui_B_SC):
             for key in (u'Stats', u'Resists', u'Skills', u'Focus', 
                         u'OtherBonuses', u'PvEBonuses'):
                 if key == 'Stats':
-                    types = DropLists['All']['Stat'] \
-                          + ('Hits', 'Power', '% Power Pool', 'AF')
+                    types = DropLists['All']['Stat'] + ('% Power Pool', 'AF')
                 elif key == 'Resists':
                     types = DropLists['All']['Resist']
                 else:
@@ -872,8 +870,7 @@ class ScWindow(QMainWindow, Ui_B_SC):
         tot['Focus'] = {}
         tot['OtherBonuses'] = {}
         tot['PvEBonuses'] = {}
-        for effect in DropLists['All']['Stat'] \
-                    + ('AF', 'Hits', 'Power', '% Power Pool'):
+        for effect in DropLists['All']['Stat'] + ('AF', '% Power Pool'):
             tot['Stats'][effect] = {}
             tot['Stats'][effect]['TotalBonus'] = 0
             tot['Stats'][effect]['Bonus'] = 0
@@ -947,11 +944,6 @@ class ScWindow(QMainWindow, Ui_B_SC):
                     amts = tot['Resists'][effect]
                     amts['TotalBonus'] += amount
                     amts['Bonus'] = min(amts['TotalBonus'], amts['BaseCap'])
-                elif gemtype in ('Hits', 'Power',):
-                    amts = tot['Stats'][gemtype]
-                    amts['TotalBonus'] += amount
-                    amts['Bonus'] = min(amts['TotalBonus'],
-                                        amts['BaseCap'] + amts['CapBonus'])
                 elif gemtype == 'Stat':
                     effects = [effect,]
                     if effect == 'Acuity':
@@ -1316,6 +1308,8 @@ class ScWindow(QMainWindow, Ui_B_SC):
                 if isinstance(valueslist, dict):
                     if valueslist.has_key(efftext):
                         valueslist = valueslist[efftext]
+                    elif valueslist.has_key(None):
+                        valueslist = valueslist[None]
                     else:
                         valueslist = tuple()
                 elif efftext[0:5] == "All M":
@@ -1581,7 +1575,7 @@ class ScWindow(QMainWindow, Ui_B_SC):
         if len(args) == 0:
             filename = QFileDialog.getOpenFileName(self, "Open Template",
                             self.TemplatePath, 
-                            "Templates (*.xml *.scc);;All Files (*.*)")
+                            "Templates (*.xml);;All Files (*.*)")
         else:
             filename = args[0]
         filename = unicode(filename)
@@ -1594,9 +1588,6 @@ class ScWindow(QMainWindow, Ui_B_SC):
                     xmldoc = parseString(docstr)
                     template = xmldoc.getElementsByTagName('SCTemplate')
                     self.loadFromXML(template[0])
-                elif docstr[0:5] == 'CHAR_':
-                    f.seek(0)
-                    self.loadFromLela(f.readlines())
                 else:
                     QMessageBox.critical(None, 'Error!', 
                         'Unrecognized Template Type', 'OK')
@@ -1680,41 +1671,6 @@ class ScWindow(QMainWindow, Ui_B_SC):
                               AllBonusList[self.realm][self.charclass] \
                                                       ['Races'].index(racename))
             self.RaceChanged('')
-        self.restoreItem(self.itemattrlist[self.currentTabLabel])
-        self.modified = 0
-        self.nocalc = 0
-        self.calculate()
-        
-    def loadFromLela(self, scclines):
-        self.initialize(1)
-        sublines = filter(lambda(x): re.compile('^ITEM').match(x) is None,
-                                     scclines)
-        for line in sublines:
-            line = string.strip(line, " \n\r")
-            if line == '': continue
-            attr, value = string.split(line, '=', 1)
-            if attr == 'CHAR_NAME':
-                self.CharName.setText(value)
-            elif attr == 'CHAR_CLASS':
-                self.realm, charclass = string.split(value, '_', 1)
-                self.charclass = charclass[0]+string.lower(charclass[1:])
-                if self.realm == 'HIB':
-                    self.realm = 'Hibernia'
-                elif self.realm == 'ALB':
-                    self.realm = 'Albion'
-                elif self.realm == 'MID':
-                    self.realm = 'Midgard'
-                self.Realm.setCurrentIndex(Realms.index(self.realm))
-                self.RealmChanged(self.realm)
-                if AllBonusList[self.realm].has_key(self.charclass):
-                   self.CharClass.setCurrentIndex(
-                                    ClassList[self.realm].index(self.charclass))
-                   self.CharClassChanged(ClassList[self.realm].index(
-                                             self.charclass))
-        for itemnum in range(0, 19):
-            item = Item(realm=self.realm,loc=TabList[itemnum])
-            item.loadLelaItemFromSCC(itemnum, scclines, self.realm)
-            self.itemattrlist[item.Location] = item
         self.restoreItem(self.itemattrlist[self.currentTabLabel])
         self.modified = 0
         self.nocalc = 0
