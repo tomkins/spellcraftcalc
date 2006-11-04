@@ -210,9 +210,17 @@ for (key, val) in resistTable.iteritems():
     resistTable[key] = (val, type, GemDusts[type], GemLiquids[val])
 resistTable = d2(resistTable)
 
-resistList = map(lambda(x): x[0], resistTableOrdered)
+resistList = t2(map(lambda(x): x[0], resistTableOrdered))
 
 resistValues = t2(('1', '2', '3', '5', '7', '9', '11', '13', '15', '17',))
+
+# Duplicate the Resist lists as DropResist lists, add non-craftable 'Essence' stat
+#
+dropResistList = t2(resistList + (
+    'Essence',
+))
+
+dropResistTable = dict().fromkeys(dropResistList)
 
 del resistTableOrdered
 
@@ -592,20 +600,20 @@ GemTables = {
 
 GemLists = {
   'All': {
+    'Unused' :           unusedList,
     'Stat' :             statList,
     'Resist' :           resistList,
     'Hits' :             hitsList,
     'Power' :            powerList,
-    'Unused' :           unusedList
   }
 }
 
 DropLists = {
   'All': {
-    'Resist' :           resistList,
+    'Unused' :           unusedList,
+    'Resist' :           dropResistList,
     'Hits' :             hitsList,
     'Power' :            powerList,
-    'Unused' :           unusedList,
     'Stat' :             dropStatList,
     'Cap Increase' :     capIncreaseList,
     'PvE Bonus' :        pveBonusList,
