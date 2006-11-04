@@ -37,7 +37,7 @@
   <xsl:call-template name="labeldef">
     <xsl:with-param name="uiwidth"><xsl:value-of select="@width"/></xsl:with-param>
     <xsl:with-param name="uiposx"><xsl:value-of select="@x"/></xsl:with-param>
-    <xsl:with-param name="uiposy" select="position() * 12 + 20"/>
+    <xsl:with-param name="uiposy" select="position() * 12 + 8"/>
     <xsl:with-param name="uidata"><xsl:value-of select="data"/></xsl:with-param>
   </xsl:call-template>
 </xsl:template>
@@ -49,27 +49,27 @@
       <WindowId>custom1_window</WindowId>
       <CloseButton>true</CloseButton>
       <MoveButton>true</MoveButton>
+      <Height><xsl:value-of select="count(label) * 12 + 22 "/></Height>
       <Width>384</Width>
-      <Height>320</Height>
-      <TitleWidth>384</TitleWidth>
       <TitleHeight>18</TitleHeight>
+      <TitleWidth>384</TitleWidth>
       <ResizeableWidth>5</ResizeableWidth>
       <ResizeableHeight>5</ResizeableHeight>
-      <MinWidth>120</MinWidth>
       <MinHeight>120</MinHeight>
-      <BottomRightResizeButton>true</BottomRightResizeButton>
-      <BottomLeftResizeButton>true</BottomLeftResizeButton>
+      <MinWidth>120</MinWidth>
+      <BottomRightResizeButton>false</BottomRightResizeButton>
+      <BottomLeftResizeButton>false</BottomLeftResizeButton>
       <ResizeButtonOffsetX>9</ResizeButtonOffsetX>
 
       <FullResizeImageDef>
 	<ControlId>Background</ControlId>
-	<Height>320</Height>
+	<Height><xsl:value-of select="count(label) * 12 + 22 "/></Height>
 	<Width>384</Width>
 	<Position>
 	  <X>0</X>
 	  <Y>0</Y>
 	</Position>
-	<TemplateName>dlg_background_resize</TemplateName>
+	<TemplateName>dlg_background</TemplateName>
 	<Alignment>
 	  <GrowWidth>true</GrowWidth>
 	  <GrowHeight>true</GrowHeight>
@@ -88,7 +88,7 @@
 	<Height>16</Height>
 	<Position>
 	  <X>0</X>
-	  <Y>4</Y>
+	  <Y>5</Y>
 	</Position>
 	<MaxCharacters>21</MaxCharacters>
 	<Data>Configuration Report</Data>

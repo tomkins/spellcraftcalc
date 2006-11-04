@@ -36,18 +36,32 @@
 	<tr>
 	  <td>Gem <xsl:copy-of select="$slotnum"/>:&#160;</td>
 	  <td align="right"><xsl:value-of select="Amount"/>&#160;</td>
-	  <td><xsl:value-of select="Effect"/>&#160;</td>
-	  <td>- <xsl:value-of select="Qua"/>&#160;</td>
-	  <td><xsl:value-of select="Name"/></td>
+	  <td>
+	    <xsl:value-of select="Effect"/><xsl:text>&#160;</xsl:text>
+	    <xsl:if test="Type != 'Stat' and substring(Type, 1, 3) != 'All'">
+	      <xsl:value-of select="Type"/><xsl:text>&#160;</xsl:text>
+	    </xsl:if>
+	    <xsl:text>- </xsl:text><xsl:value-of select="Qua"/><xsl:text>&#160;</xsl:text>
+	    <xsl:value-of select="Name"/>
+	  </td>
 	</tr>
       </xsl:when>
       <xsl:otherwise>
 	<tr>
 	  <td>Slot <xsl:copy-of select="$slotnum"/>:&#160;</td>
 	  <td align="right"><xsl:value-of select="Amount"/>&#160;</td>
-	  <td><xsl:value-of select="Effect"/>&#160;</td>
-	  <td colspan="2">
-	    <xsl:if test="@Type = 'effect'">
+	  <td>
+	    <xsl:value-of select="Effect"/><xsl:text>&#160;</xsl:text>
+	    <xsl:if test="Type != 'Stat' and Type != 'Other Bonus' and Type != 'PvE Bonus' and Type != 'Other Effect' and substring(Effect, 1, 4) != 'All '">
+	      <xsl:value-of select="Type"/><xsl:text>&#160;</xsl:text>
+	    </xsl:if>
+	    <xsl:if test="Type = 'PvE Bonus'">
+	      <xsl:text>(PvE)&#160;</xsl:text>
+	    </xsl:if>
+	    <xsl:if test="Type = 'Other Effect'">
+	      <xsl:text>Effect&#160;</xsl:text>
+	    </xsl:if>
+	    <xsl:if test="Name != ''">
 	      <xsl:text>- </xsl:text><xsl:value-of select="Name"/>
 	    </xsl:if>
 	    <xsl:text>&#160;</xsl:text>
@@ -66,8 +80,15 @@
       <dt>
 	<xsl:text>Level: </xsl:text><xsl:value-of select="Level"/>
 	<xsl:text> &#160; Quality: </xsl:text><xsl:value-of select="ItemQuality"/>
-	<xsl:text> &#160; AF/DPS: </xsl:text><xsl:value-of select="AFDPS"/>
-	<xsl:text> &#160; Bonus: </xsl:text><xsl:value-of select="Bonus"/>
+	<xsl:if test="AFDPS != '' and AFDPS != '0' and AFDPS != '-1'">
+	  <xsl:text> &#160; AF/DPS: </xsl:text><xsl:value-of select="AFDPS"/>
+	</xsl:if>
+	<xsl:if test="Speed != '' and Speed != '0' and Speed != '-1' ">
+	  <xsl:text> &#160; Speed: </xsl:text><xsl:value-of select="Speed"/>
+	</xsl:if>
+	<xsl:if test="Bonus != '' and Bonus != '0' and Bonus != '-1' ">
+	  <xsl:text> &#160; Bonus: </xsl:text><xsl:value-of select="Bonus"/>
+	</xsl:if>
       </dt>
       <xsl:if test="ActiveState = 'player'">
 	<dt>
@@ -158,6 +179,7 @@
       <xsl:with-param name="nodes" select="Quickness|Charisma|PowerPool"/>
     </xsl:call-template>
   </table>
+  <xsl:call-template name="br"/>
 </xsl:template>
 
 <xsl:template name="resistsRow">
@@ -198,7 +220,11 @@
     <xsl:call-template name="resistsRow">
       <xsl:with-param name="nodes" select="Thrust|Heat|Spirit"/>
     </xsl:call-template>
+    <xsl:call-template name="resistsRow">
+      <xsl:with-param name="nodes" select="Essence"/>
+    </xsl:call-template>
   </table>
+  <xsl:call-template name="br"/>
 </xsl:template>
 
 <xsl:template name="bonuslist">
@@ -211,7 +237,14 @@
       <tr>
 	<td align="right"><xsl:value-of select="TotalBonus"/>&#160;</td>
 	<td>/ <xsl:value-of select="BaseCap"/>&#160;</td>
-	<td><xsl:value-of select="name()"/></td>
+	<xsl:choose>
+	  <xsl:when test="@text != ''">
+	    <td><xsl:value-of select="@text"/></td>
+	  </xsl:when>
+	  <xsl:otherwise>
+	    <td><xsl:value-of select="name()"/></td>
+	  </xsl:otherwise>
+	</xsl:choose>
       </tr>
     </xsl:for-each>
   </table>
@@ -227,15 +260,23 @@
   <center><b>Config Report</b></center>
   <xsl:call-template name="br"/>
   <xsl:apply-templates select="Stats"/>
-  <xsl:call-template name="br"/>  
   <xsl:apply-templates select="Resists"/>
-  <xsl:call-template name="br"/>  
   <xsl:for-each select="Skills|Focus|OtherBonuses|PvEBonuses">
     <xsl:if test="count(./*) &gt; 0">
-      <xsl:call-template name="bonuslist">
-        <xsl:with-param name="title" select="name()"/>
-        <xsl:with-param name="nodes" select="./*"/>
-      </xsl:call-template>
+      <xsl:choose>
+	<xsl:when test="@text != ''">
+	  <xsl:call-template name="bonuslist">
+	    <xsl:with-param name="title" select="@text"/>
+	    <xsl:with-param name="nodes" select="./*"/>
+	  </xsl:call-template>
+	</xsl:when>
+	<xsl:otherwise>
+	  <xsl:call-template name="bonuslist">
+	    <xsl:with-param name="title" select="name()"/>
+	    <xsl:with-param name="nodes" select="./*"/>
+	  </xsl:call-template>
+	</xsl:otherwise>
+      </xsl:choose>
     </xsl:if>
   </xsl:for-each>
   <center><b>Piece Listing</b></center>
