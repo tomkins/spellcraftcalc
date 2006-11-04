@@ -69,7 +69,7 @@
 	  <X>0</X>
 	  <Y>0</Y>
 	</Position>
-	<TemplateName>dlg_background</TemplateName>
+	<TemplateName>dlg_background_noresize</TemplateName>
 	<Alignment>
 	  <GrowWidth>true</GrowWidth>
 	  <GrowHeight>true</GrowHeight>
