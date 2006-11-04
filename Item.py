@@ -781,22 +781,3 @@ class Item:
                                         slot['Remakes'], slot['Done'])
                             break
             slotindex += 1
-
-
-if __name__ == '__main__':
-    slots = {}
-    for filename in glob.glob("items/*/*/*.xml"):
-        f = None
-        try:
-            f = file(filename, 'r')
-            docstr = f.read()
-            xmldoc = parseString(docstr)
-            items = xmldoc.getElementsByTagName('SCItem')
-            testTreeXML(xmldoc, slots)
-        except:
-            traceback.print_exc()
-            sys.stderr.write("Error reading file: %s\n" % filename)
-        if f is not None:
-            f.close()
-
-    dumptree(slots, 1)
