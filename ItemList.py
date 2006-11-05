@@ -9,6 +9,7 @@ from PyQt4.QtCore import *
 from Item import *
 from Character import *
 from constants import *
+from ScOptions import ScOptions
 import sys
 
 def fixlayout(parent):
@@ -70,6 +71,47 @@ class ItemListDialog(QFileDialog):
         self.setViewMode(QFileDialog.List)
         self.preview = ItemPreview(self, realm, charclass)
         self.connect(self,SIGNAL("currentChanged(const QString&)"),self.currentChanged)
+        self.connect(self,SIGNAL("finished(int)"),self.finish)
+
+        self.loadOptions()
 
     def currentChanged(self, file):
         self.preview.preView(file)
+
+    def finish(self, res):
+        self.saveOptions()
+
+    def saveOptions(self):
+        ScOptions.instance().setOption('ItemListX', self.pos().x())
+        ScOptions.instance().setOption('ItemListY', self.pos().y())
+        ScOptions.instance().setOption('ItemListW', self.width())
+        ScOptions.instance().setOption('ItemListH', self.height())
+
+    def loadOptions(self):
+        x = ScOptions.instance().getOption('ItemListX', self.pos().x())
+        y = ScOptions.instance().getOption('ItemListY', self.pos().y())
+        w = ScOptions.instance().getOption('ItemListW', self.width())
+        h = ScOptions.instance().getOption('ItemListH', self.height())
+
+        screenW = QApplication.desktop().width()
+        screenH = QApplication.desktop().height()
+        if w < 100:
+            w = 781
+        if h < 100:
+            w = 589
+
+        if w > screenW:
+            w = 781
+        if h > screenH:
+            h = 589
+
+        if x < 20 or x > (screenW - 20):
+            x = 20
+        if y < 20 or y > (screenH - 20):
+            y = 20
+
+        self.resize(w, h)
+        self.move(x, y)
+        self.updateGeometry()
+
+

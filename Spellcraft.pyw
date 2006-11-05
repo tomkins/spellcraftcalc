@@ -16,6 +16,7 @@ except:
 import os
 import sys
 import locale
+from ScOptions import ScOptions
 from PyQt4.QtCore import *
 from PyQt4.QtGui import *
 
@@ -69,6 +70,9 @@ class ScApplication(QApplication):
             font.setPointSize(10)
             #font.setStyleHint(QFont.SansSerif, QFont.PreferQuality)
         self.setFont(font)
+
+        ScOptions()
+        ScOptions.instance().load()
 
         import ScWindow
         scw = ScWindow.ScWindow()

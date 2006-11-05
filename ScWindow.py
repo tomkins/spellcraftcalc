@@ -12,6 +12,7 @@ from Character import *
 from constants import *
 from xml.dom.minidom import *
 from MyStringIO import UnicodeStringIO
+from ScOptions import ScOptions
 import types
 import re
 import string
@@ -90,33 +91,11 @@ class ScWindow(QMainWindow, Ui_B_SC):
         self.initLayout()
         self.initControls()
         self.updateGeometry()
+        self.charclass = 'Armsman'
 
         self.ItemLevelWindow = ItemLevel.ItemLevel(self.window(), '', 1)
-        self.DaocPath = ''
-        self.ItemPath = os.path.join(os.path.dirname(
-                                os.path.abspath(sys.argv[0])), "items")
-        self.TemplatePath = os.path.join(os.path.dirname(
-                                os.path.abspath(sys.argv[0])), "templates")
-        self.ReportPath = os.path.join(os.path.dirname(
-                                os.path.abspath(sys.argv[0])), "reports")
-        self.ReportFile = os.path.join(self.ReportPath, 
-                                'DefaultConfigReport.xsl')
-        self.UiReportFile = os.path.join(self.ReportPath, 
-                                'DefaultUiXmlWindow.xsl')
-        self.realm = 'Albion'
-        self.charclass = 'Armsman'
-        self.crafterSkill = 1000
-        self.showDoneInMatsList = 0
-        self.coop = False
-        self.noteText = ''
-        self.capDistance = False
-        self.includeRacials = False
-        self.hideNonClassSkills = False
-        self.pricingInfo = {}
-        OW = Options.Options(self)
-        OW.load()
+        self.loadOptions()
         self.initMenu()
-        self.pricingInfo = OW.getPriceInfo()
         self.updateRecentFiles(None)
         self.initialize(0)
         
@@ -581,8 +560,8 @@ class ScWindow(QMainWindow, Ui_B_SC):
         self.craftingmenuid.setEnabled(enableCrafting)
 
     def closeEvent(self, e):
-        OW = Options.Options(self)
-        OW.save()
+        self.saveOptions()
+        ScOptions.instance().save()
         if self.modified:
             ret = QMessageBox.warning(self, 'Save Changes?', 
                                       "This template has been changed.\n"
@@ -599,6 +578,69 @@ class ScWindow(QMainWindow, Ui_B_SC):
                     return
         e.accept()
 
+    def loadOptions(self):
+        self.realm = ScOptions.instance().getOption('Realm', 'Albion')
+        self.crafterSkill = ScOptions.instance().getOption('CrafterSkill', 1000)
+        self.showDoneInMatsList = ScOptions.instance().getOption('DontShowDoneGems', False)
+        self.includeRacials = ScOptions.instance().getOption('IncludeRRInRacials', False)
+        self.capDistance = ScOptions.instance().getOption('DistanceToCap', False)
+        self.hideNonClassSkills = ScOptions.instance().getOption('HideNonClassSkills', False)
+        self.coop = ScOptions.instance().getOption('Coop', False)
+        self.pricingInfo = ScOptions.instance().getOption('Pricing', {})
+        self.recentFiles = ScOptions.instance().getOption('RecentFiles', [])
+        self.ItemPath = ScOptions.instance().getOption('ItemPath',
+            os.path.join(os.path.dirname(
+                os.path.abspath(sys.argv[0])), "items"))
+        self.TemplatePath = ScOptions.instance().getOption('TemplatePath',
+            os.path.join(os.path.dirname(
+                os.path.abspath(sys.argv[0])), "templates"))
+        self.ReportPath = ScOptions.instance().getOption('ReportPath',
+            os.path.join(os.path.dirname(
+                os.path.abspath(sys.argv[0])), "reports"))
+        self.ReportFile = ScOptions.instance().getOption('ConfigReportXSLT',
+            os.path.join(self.ReportPath, 'DefaultConfigReport.xsl'))
+        self.UiReportFile = ScOptions.instance().getOption('ConfigUiReportXSLT',
+            os.path.join(self.ReportPath, 'DefaultUiXmlWindow.xsl'))
+
+        x = ScOptions.instance().getOption('WindowX', self.pos().x())
+        y = ScOptions.instance().getOption('WindowY', self.pos().y())
+        w = ScOptions.instance().getOption('WindowW', self.width())
+        h = ScOptions.instance().getOption('WindowH', self.height())
+
+        screenW = QApplication.desktop().width()
+        screenH = QApplication.desktop().height()
+        if w < 100:
+            w = 781
+        if h < 100:
+            w = 589
+
+        if w > screenW:
+            w = 781
+        if h > screenH:
+            h = 589
+
+        if x < 20 or x > (screenW - 20):
+            x = 20
+        if y < 20 or y > (screenH - 20):
+            y = 20
+
+        self.resize(w, h)
+        self.move(x, y)
+        self.updateGeometry()
+
+    def saveOptions(self):
+        ScOptions.instance().setOption('Realm', self.realm)
+        ScOptions.instance().setOption('RecentFiles', self.recentFiles)
+        ScOptions.instance().setOption('ItemPath', self.ItemPath)
+        ScOptions.instance().setOption('TemplatePath', self.TemplatePath)
+        ScOptions.instance().setOption('ReportPath', self.ReportPath)
+        ScOptions.instance().setOption('ConfigReportXSLT', self.ReportFile)
+        ScOptions.instance().setOption('ConfigUiReportXSLT', self.UiReportFile)
+
+        ScOptions.instance().setOption('WindowX', self.pos().x())
+        ScOptions.instance().setOption('WindowY', self.pos().y())
+        ScOptions.instance().setOption('WindowW', self.width())
+        ScOptions.instance().setOption('WindowH', self.height())
 
     def initialize(self, moretodo):
         self.nocalc = 1
@@ -1698,12 +1740,14 @@ class ScWindow(QMainWindow, Ui_B_SC):
 
     def openOptions(self):
         self.nocalc = 1
+        self.saveOptions()
         res = Options.Options(self).exec_()
         if res == 1:
-             self.showcapmenuid.setChecked(self.capDistance)
-             self.RealmChanged(self.Realm.currentIndex())
-             self.restoreItem(self.itemattrlist[self.currentTabLabel])
-             self.modified = 1
+            self.loadOptions()
+            self.showcapmenuid.setChecked(self.capDistance)
+            self.RealmChanged(self.Realm.currentIndex())
+            self.restoreItem(self.itemattrlist[self.currentTabLabel])
+            self.modified = 1
         self.nocalc = 0
         self.calculate()
 
@@ -1839,6 +1883,7 @@ class ScWindow(QMainWindow, Ui_B_SC):
     def showCap(self):
         self.capDistance = not self.capDistance
         self.showcapmenuid.setChecked(self.capDistance)
+        ScOptions.instance().setOption('DistanceToCap', self.capDistance)
         self.calculate()
 
     def swapWith(self, action):

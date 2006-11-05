@@ -9,6 +9,7 @@ from PyQt4.QtGui import *
 from B_CraftBar import *
 from Character import *
 from constants import *
+from ScOptions import ScOptions
 import os
 import os.path
 import glob
@@ -121,7 +122,7 @@ class CraftBar(QDialog, Ui_B_CraftBar):
         self.HotbarNum.setValue(1)
         self.HotbarRow.setValue(1)
         self.HotbarPos.setValue(1)
-        self.DaocPath.setText(self.parent.DaocPath)
+        self.DaocPath.setText(ScOptions.instance().getOption('DaocPath', ''))
         self.PieceBoxChanged()
         self.computeGemCount()
         self.computeBarEnd()
@@ -258,7 +259,7 @@ class CraftBar(QDialog, Ui_B_CraftBar):
                 index = self.model.index(self.model.rowCount()-1, 1, QModelIndex())
                 self.model.setData(index, QVariant(m.group(1)), Qt.DisplayRole)
             if len(filelist) > 0:
-                self.parent.DaocPath = a0
+                ScOptions.instance().setOption('DaocPath', a0)
         self.CharList.resizeRowsToContents()
 
     def openFileDialog(self):

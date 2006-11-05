@@ -120,8 +120,6 @@ class ScOptions(Singleton):
                 traceback.print_exc()
                 pass
 
-        print self.__options
-
     def save(self):        
         scfile = os.path.join(os.path.dirname(os.path.abspath(sys.argv[0])),
                               'Spellcraft.xml')
