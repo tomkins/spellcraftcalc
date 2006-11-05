@@ -36,7 +36,7 @@ class ScOptions(Singleton):
 
     def writeOption(self, doc, key, val):
         if key[0].isdigit():
-            key = '__' + key
+            key = 'N__' + key
         elem = doc.createElement(key)
         if isinstance(val, dict):
             for subkey, subval in val.items():
