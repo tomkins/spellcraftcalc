@@ -301,13 +301,13 @@ OF OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
 
 *******************************************************************
 
-py2exe version 0.63 - A distutils extension to create standalone 
+py2exe version 0.65 - A distutils extension to create standalone 
                       windows programs from python scripts.
 
   Copyright (c) 2000-2005 Thomas Heller, Jimmy Retzlaff
 
   http://www.py2exe.org/
-  http://sourceforge.net/project/showfiles.php?group_id=15583&package_id=35995&release_id=403086
+  http://sourceforge.net/project/showfiles.php?group_id=15583&package_id=35995
 
 ## Permission is hereby granted, free of charge, to any person obtaining
 ## a copy of this software and associated documentation files (the
