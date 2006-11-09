@@ -948,9 +948,9 @@ HotkeyGems = d2({
         'Finesse Nature Spell Stone' :    130,
         'Glacial War Spell Stone' :       132,
         'Cinder War Spell Stone' :        134,
-        'Radiant Arcane Spell Stone' :    136,
-        'Magnetic Arcane Spell Stone' :   138,
-        'Clout Arcane Spell Stone' :      140,
+        'Radiant Nature Spell Stone' :    136,
+        'Magnetic Nature Spell Stone' :   138,
+        'Clout Nature Spell Stone' :      140,
     }),
 
     'Midgard' : d2({
