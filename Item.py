@@ -328,7 +328,7 @@ class ItemSlot:
             slotnode.appendChild(valnode)
 
 class Item:
-    def __init__(self, state='', loc='', realm='All'):
+    def __init__(self, state='', loc='', realm='All', idx = -1):
         self.__dict__ = { 
             'ActiveState' : state,
             'Equipped' : '0',
@@ -340,6 +340,7 @@ class Item:
             'AFDPS' : '',
             'Speed' : '',
             'Bonus' : '',
+            'TemplateIndex' : idx,
         }
 
         self.itemslots = list()
@@ -500,7 +501,7 @@ class Item:
             utility += slot.gemUtility(skilltable)
         return utility
     
-    def asXML(self, pricingInfo=None, crafterSkill=1000, rich=False):
+    def asXML(self, pricingInfo=None, crafterSkill=1000, rich=False, writeIndex=False):
         document = Document()
         rootnode = document.createElement(u'SCItem')
         document.appendChild(rootnode)
@@ -524,6 +525,9 @@ class Item:
                   (u'ItemImbue', unicode(self.itemImbue()),),
                   (u'Success',
                        unicode(self.overchargeSuccess(crafterSkill)),),])
+        if writeIndex:
+            fields.extend([(u'TemplateIndex', unicode(self.TemplateIndex),),])
+
         for key, val in fields:
             if not rich and val == '': continue
             elem = document.createElement(key)
@@ -602,6 +606,8 @@ class Item:
                 #    XMLHelper.getText(child.childNodes)))
                 if child.tagName == 'ActiveState':
                     self.itemslots = self.makeSlots()
+                elif child.tagName == 'TemplateIndex':
+                    self.TemplateIndex = int(self.TemplateIndex)
             elif child.tagName == 'SLOT':
                 slotval = child.getAttribute("Number")
                 itemslot = self.itemslots[int(slotval)]

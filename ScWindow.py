@@ -73,6 +73,7 @@ class ScWindow(QMainWindow, Ui_B_SC):
         self.newcount = 0
         self.startup = 1
         self.nocalc = 1
+        self.itemIndex = 0
         self.recentFiles = []
         self.effectlists = GemLists['All'].copy()
         self.dropeffectlists = DropLists['All'].copy()
@@ -644,6 +645,7 @@ class ScWindow(QMainWindow, Ui_B_SC):
 
     def initialize(self, moretodo):
         self.nocalc = 1
+        self.itemIndex = 0
         self.noteText = ''
         self.craftMultiplier = 1
         self.filename = None
@@ -660,17 +662,23 @@ class ScWindow(QMainWindow, Ui_B_SC):
         self.itemattrlist = { }
         self.itemnumbering = 1
         for tab in PieceTabList:
-            self.itemattrlist[tab] = Item('player', tab, self.realm)
-            self.itemattrlist[tab].next = Item('drop', tab, self.realm)
+            self.itemattrlist[tab] = Item('player', tab, self.realm, 
+                self.itemIndex)
+            self.itemIndex += 1
+            self.itemattrlist[tab].next = Item('drop', tab, self.realm,
+                self.itemIndex)
+            self.itemIndex += 1
             self.itemattrlist[tab].ItemName = "Crafted Item" \
                                             + str(self.itemnumbering)
             self.itemattrlist[tab].next.ItemName = "Drop Item" \
                                                  + str(self.itemnumbering)
             self.itemnumbering += 1
         for tab in JewelTabList:
-            self.itemattrlist[tab] = Item('drop', tab, self.realm)
+            self.itemattrlist[tab] = Item('drop', tab, self.realm,
+                self.itemIndex)
             self.itemattrlist[tab].ItemName = "Drop Item" \
                                             + str(self.itemnumbering)
+            self.itemIndex += 1
             self.itemnumbering += 1
 
         self.CharName.setText('')
@@ -756,7 +764,7 @@ class ScWindow(QMainWindow, Ui_B_SC):
             item = self.itemattrlist[key]
             # use firstChild here because item.asXML() constructs a Document()
             while item is not None:
-                childnode = item.asXML(self.pricingInfo, self.crafterSkill,rich)
+                childnode = item.asXML(self.pricingInfo, self.crafterSkill,rich,True)
                 if childnode is not None:
                     rootnode.appendChild(childnode.firstChild)
                 item = item.next
@@ -1401,12 +1409,14 @@ class ScWindow(QMainWindow, Ui_B_SC):
     
     def clearCurrentItem(self):
         item = Item(realm=self.realm,loc=self.currentTabLabel,
-                    state=self.itemattrlist[self.currentTabLabel].ActiveState)
+                    state=self.itemattrlist[self.currentTabLabel].ActiveState,
+                    idx=self.itemIndex)
         if item.ActiveState == 'drop':
             item.ItemName = "Drop Item" + str(self.itemnumbering)
         else:
             item.ItemName = "Crafted Item" + str(self.itemnumbering)
         self.itemattrlist[self.currentTabLabel] = item
+        self.itemIndex += 1
         self.itemnumbering += 1
         if self.nocalc: return
         self.modified = 1
@@ -1510,7 +1520,8 @@ class ScWindow(QMainWindow, Ui_B_SC):
         if Qfd.exec_():
             if Qfd.selectedFiles().count() > 0:
                 filename = unicode(Qfd.selectedFiles()[0])
-                item = Item('drop', self.currentTabLabel, self.realm)
+                item = Item('drop', self.currentTabLabel, self.realm,
+                    self.itemIndex)
                 if item.load(filename,str(self.itemnumbering)) == -1: return
                 if string.lower(item.Realm) != string.lower(self.realm)\
                     and string.lower(item.Realm) != 'all'\
@@ -1519,7 +1530,11 @@ class ScWindow(QMainWindow, Ui_B_SC):
                                          'You are trying to load an ' \
                                        + 'item for another realm!', 'OK')
                     return
+                self.itemIndex += 1
                 self.itemnumbering += 1
+                if item.next:
+                    item.next.TemplateIndex = self.itemIndex
+                    self.itemIndex += 1
                 item.Location = self.currentTabLabel
                 item.Equipped = self.itemattrlist[self.currentTabLabel].Equipped
                 self.itemattrlist[self.currentTabLabel].Equipped = '0'
@@ -1684,6 +1699,18 @@ class ScWindow(QMainWindow, Ui_B_SC):
             elif child.tagName == 'SCItem':
                 newItem = Item(realm=self.realm)
                 newItem.loadFromXML(child,str(self.itemnumbering))
+                if newItem.TemplateIndex == -1:
+                    newItem.TemplateIndex = self.itemIndex
+                    self.itemIndex += 1
+                else:
+                    self.itemIndex = max(newItem.TemplateIndex + 1, self.itemIndex)
+                if newItem.next:
+                    if newItem.next.TemplateIndex == -1:
+                        newItem.next.TemplateIndex = self.itemIndex
+                        self.itemIndex += 1
+                    else:
+                        self.itemIndex = max(newItem.next.TemplateIndex + 1, self.itemIndex)
+
                 self.itemnumbering += 1
                 if self.itemattrlist[newItem.Location] \
                       == itemdefault[newItem.Location]:
@@ -2002,11 +2029,12 @@ class ScWindow(QMainWindow, Ui_B_SC):
     def newItemType(self, action):
         newtype = str(action.data().toString())
         if newtype == 'Drop Item':
-            item = Item('drop', self.currentTabLabel, self.realm)
+            item = Item('drop', self.currentTabLabel, self.realm, self.itemIndex)
             item.ItemName = "Drop Item" + str(self.itemnumbering)
         else:
-            item = Item('player', self.currentTabLabel, self.realm)
+            item = Item('player', self.currentTabLabel, self.realm, self.itemIndex)
             item.ItemName = "Crafted Item" + str(self.itemnumbering)
+        self.itemIndex += 1
         self.itemnumbering += 1
         item.next = self.itemattrlist[self.currentTabLabel]
         self.itemattrlist[self.currentTabLabel] = item
