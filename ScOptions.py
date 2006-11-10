@@ -18,7 +18,8 @@ class ScOptions(Singleton):
         self.__options = {}
 
     def getOption(self, name, defaultValue):
-        if self.__options.has_key(name):
+        if self.__options.has_key(name) and \
+                isinstance(self.__options[name], type(defaultValue)):
             return self.__options[name]
 
         return defaultValue
@@ -44,7 +45,7 @@ class ScOptions(Singleton):
             return elem
         elif isinstance(val, list):
             for v in val:
-                elem.appendChild(doc, key + 'Item', v)
+                elem.appendChild(self.writeOption(doc, key + 'Item', v))
         else:
             elem.appendChild(doc.createTextNode(unicode(val)))
 
