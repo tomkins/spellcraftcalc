@@ -1,6 +1,8 @@
 Updated ??/??/2006 - Version 1.93
 
+  Updated mauler class gems for LoTM patch 1.85k
 
+  Overhauled saving preferences (options).
 
 Updated 11/04/2006 - Version 1.92
 
