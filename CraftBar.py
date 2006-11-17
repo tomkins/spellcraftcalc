@@ -19,6 +19,11 @@ import SC
 import ConfigParser 
 import sys
 
+# For pick-daoc default paths, note...
+# C:\Mythic\Atlantis
+# C:\Mythic\Catacombs
+# C:\Mythic\Darkness
+# C:\Program Files\Electronic Arts\Labyrinth
 
 class IniConfigParser(ConfigParser.RawConfigParser):
     def __init__(self, defaults=None):
