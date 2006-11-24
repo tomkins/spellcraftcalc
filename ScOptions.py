@@ -109,7 +109,6 @@ class ScOptions(Singleton):
             if len(nodeName) > 3 and nodeName[:3] == 'N__':
                 nodeName = nodeName[3:]
             self.__options[nodeName] = self.parseOption(child)
-        print self.__options
             
     def load(self):
         scfile = os.path.join(os.path.dirname(os.path.abspath(sys.argv[0])),
