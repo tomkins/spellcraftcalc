@@ -40,10 +40,12 @@ class ScOptions(Singleton):
             key = 'N__' + key
         elem = doc.createElement(key)
         if isinstance(val, dict):
+            elem.setAttribute('type', 'dict')
             for subkey, subval in val.items():
                 elem.appendChild(self.writeOption(doc, subkey, subval))
             return elem
         elif isinstance(val, list):
+            elem.setAttribute('type', 'list')
             for v in val:
                 elem.appendChild(self.writeOption(doc, key + 'Item', v))
         else:
@@ -56,6 +58,7 @@ class ScOptions(Singleton):
         sameElements = True
         ptag = None
 
+        
         for child in node.childNodes:
             if child.nodeType == Node.ELEMENT_NODE:
                 hasElements = True
@@ -63,7 +66,7 @@ class ScOptions(Singleton):
                     sameElements = False
                 ptag = child.nodeName
 
-        if not hasElements:
+        if not node.hasAttribute('type'):
             val = XMLHelper.getText(node.childNodes)
             if val.lower() == 'true' or val.lower() == 'false':
                 return bool(val)
@@ -78,7 +81,7 @@ class ScOptions(Singleton):
                     pass
                 return val
         else:
-            if not sameElements:
+            if node.getAttribute('type') == 'dict':
                 vals = {}
                 for child in node.childNodes:
                     if child.nodeType == Node.TEXT_NODE: continue
@@ -90,7 +93,7 @@ class ScOptions(Singleton):
                     vals[nodeName] = self.parseOption(child)
 
                 return vals
-            else:
+            elif node.getAttribute('type') == 'list':
                 vals = []
                 for child in node.childNodes:
                     if child.nodeType == Node.TEXT_NODE: continue
@@ -106,6 +109,7 @@ class ScOptions(Singleton):
             if len(nodeName) > 3 and nodeName[:3] == 'N__':
                 nodeName = nodeName[3:]
             self.__options[nodeName] = self.parseOption(child)
+        print self.__options
             
     def load(self):
         scfile = os.path.join(os.path.dirname(os.path.abspath(sys.argv[0])),
