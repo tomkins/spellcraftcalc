@@ -66,7 +66,7 @@ class ScOptions(Singleton):
                     sameElements = False
                 ptag = child.nodeName
 
-        if not node.hasAttribute('type'):
+        if not node.hasAttribute('type') and not hasElements:
             val = XMLHelper.getText(node.childNodes)
             if val.lower() == 'true' or val.lower() == 'false':
                 return bool(val)
@@ -81,7 +81,8 @@ class ScOptions(Singleton):
                     pass
                 return val
         else:
-            if node.getAttribute('type') == 'dict':
+            if node.getAttribute('type') == 'dict' or \
+                    (not node.hasAttribute('type') and not sameElements):
                 vals = {}
                 for child in node.childNodes:
                     if child.nodeType == Node.TEXT_NODE: continue
@@ -93,7 +94,8 @@ class ScOptions(Singleton):
                     vals[nodeName] = self.parseOption(child)
 
                 return vals
-            elif node.getAttribute('type') == 'list':
+            elif node.getAttribute('type') == 'list' or \
+                    (not node.hasAttribute('type') and sameElements):
                 vals = []
                 for child in node.childNodes:
                     if child.nodeType == Node.TEXT_NODE: continue

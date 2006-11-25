@@ -54,6 +54,12 @@ class Options(QDialog, Ui_B_Options):
         self.CapDistance.setChecked(ScOptions.instance().getOption('DistanceToCap', False))
         self.HideNonClassSkills.setChecked(ScOptions.instance().getOption('HideNonClassSkills', False))
 
+        # do some consistency checks
+        if not isinstance(self.QualPricing, dict):
+            self.QualPricing = {}
+        if not isinstance(self.TierPricing, dict):
+            self.TierPricing = {}
+
     def saveOptions(self):
         ScOptions.instance().setOption('CrafterSkill', int(str(self.Skill.currentText())))
         self.parent.noteText = str(self.NoteText.toPlainText())
