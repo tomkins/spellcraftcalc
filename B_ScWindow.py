@@ -2,8 +2,8 @@
 
 # Form implementation generated from reading ui file 'ScWindow.ui'
 #
-# Created: Fri Nov 03 17:59:40 2006
-#      by: PyQt4 UI code generator 4-snapshot-20061020
+# Created: Mon Nov 27 17:11:30 2006
+#      by: PyQt4 UI code generator 4.1
 #
 # WARNING! All changes made in this file will be lost!
 
@@ -586,7 +586,7 @@ class Ui_B_SC(object):
         self.ItemNameCombo = SearchingCombo(self.GroupItemFrame)
 
         sizePolicy = QtGui.QSizePolicy(QtGui.QSizePolicy.Policy(3),QtGui.QSizePolicy.Policy(0))
-        sizePolicy.setHorizontalStretch(1)
+        sizePolicy.setHorizontalStretch(10)
         sizePolicy.setVerticalStretch(0)
         sizePolicy.setHeightForWidth(self.ItemNameCombo.sizePolicy().hasHeightForWidth())
         self.ItemNameCombo.setSizePolicy(sizePolicy)
