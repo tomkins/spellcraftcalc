@@ -1919,13 +1919,22 @@ class ScWindow(QMainWindow, Ui_B_SC):
         piece = str(action.text())
         part = self.itemattrlist[piece]
         if cur == part: return
+        prev = None
         while part.ActiveState != 'player':
             if part.next is None: 
                 QMessageBox.critical(None, 'Error!', 'There is no crafted ' \
                     + piece + ' to swap gems with.  Create a new crafted ' \
                     + piece + ' and try again.', 'OK')
                 return
+            prev = part
             part = part.next
+        if prev is not None:
+            if self.itemattrlist[piece].Equipped == '1':
+                self.itemattrlist[piece] = '0'
+                part.Equipped = '1'
+            prev.next = part.next
+            part.next = self.itemattrlist[piece]
+            self.itemattrlist[piece] = part
         for i in range(0,min(cur.slotCount(),part.slotCount())):
             if cur.slot(i).slotType() != 'player' \
                     or part.slot(i).slotType()  != 'player':
