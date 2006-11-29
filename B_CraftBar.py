@@ -2,8 +2,8 @@
 
 # Form implementation generated from reading ui file 'CraftBar.ui'
 #
-# Created: Sat Oct 07 23:05:44 2006
-#      by: PyQt4 UI code generator 4.0.1
+# Created: Tue Nov 28 23:19:09 2006
+#      by: PyQt4 UI code generator 4.1
 #
 # WARNING! All changes made in this file will be lost!
 
@@ -384,3 +384,4 @@ class Ui_B_CraftBar(object):
         self.LoadGemsButton.setText(QtGui.QApplication.translate("B_CraftBar", "Load Gems", None, QtGui.QApplication.UnicodeUTF8))
         self.TextLabel9.setText(QtGui.QApplication.translate("B_CraftBar", "This dialog lets you automatically set up hotbars for crafting gems. It takes all \"non-finished\" gems and places them in order on your hotbars starting at the bar and position you specify. It will place all the gems consecutively, so make sure you do not have anything on your bars in that range. If you do not leave enough space, it will error w/o changing your bars. A backup copy of your character will be saved as [charname]-[server].ini.bak in your DAoC folder.  Replacing the file with the .bak copy will restore your settings.", None, QtGui.QApplication.UnicodeUTF8))
         self.PushButton19.setText(QtGui.QApplication.translate("B_CraftBar", "Close", None, QtGui.QApplication.UnicodeUTF8))
+

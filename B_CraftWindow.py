@@ -2,8 +2,8 @@
 
 # Form implementation generated from reading ui file 'CraftWindow.ui'
 #
-# Created: Tue Oct  3 09:09:25 2006
-#      by: PyQt4 UI code generator 4.0.1
+# Created: Tue Nov 28 23:19:00 2006
+#      by: PyQt4 UI code generator 4.1
 #
 # WARNING! All changes made in this file will be lost!
 
@@ -377,3 +377,4 @@ class Ui_B_CraftWindow(object):
         self.TextLabel8.setText(QtGui.QApplication.translate("B_CraftWindow", "Total Cost:", None, QtGui.QApplication.UnicodeUTF8))
         self.TotalCost.setText(QtGui.QApplication.translate("B_CraftWindow", "0c", None, QtGui.QApplication.UnicodeUTF8))
         self.Close.setText(QtGui.QApplication.translate("B_CraftWindow", "Close", None, QtGui.QApplication.UnicodeUTF8))
+

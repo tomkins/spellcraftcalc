@@ -2,8 +2,8 @@
 
 # Form implementation generated from reading ui file 'DisplayWindow.ui'
 #
-# Created: Thu Oct  5 18:35:38 2006
-#      by: PyQt4 UI code generator 4.0.1
+# Created: Tue Nov 28 23:19:02 2006
+#      by: PyQt4 UI code generator 4.1
 #
 # WARNING! All changes made in this file will be lost!
 
@@ -51,3 +51,4 @@ class Ui_B_DisplayWindow(object):
 
     def retranslateUi(self, B_DisplayWindow):
         self.PushButton1.setText(QtGui.QApplication.translate("B_DisplayWindow", "Close", None, QtGui.QApplication.UnicodeUTF8))
+

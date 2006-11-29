@@ -2,13 +2,12 @@
 
 # Form implementation generated from reading ui file 'ItemLevel4.ui'
 #
-# Created: Wed Sep 20 18:36:30 2006
-#      by: PyQt4 UI code generator 4.0.1
+# Created: Tue Nov 28 23:19:07 2006
+#      by: PyQt4 UI code generator 4.1
 #
 # WARNING! All changes made in this file will be lost!
 
 import sys
-from SearchingCombo import SearchingCombo
 from PyQt4 import QtCore, QtGui
 
 class Ui_B_ItemLevel(object):
@@ -175,3 +174,5 @@ class Ui_B_ItemLevel(object):
         self.AFDPSLabel.setText(QtGui.QApplication.translate("B_ItemLevel", "AF/DPS:", None, QtGui.QApplication.UnicodeUTF8))
         self.OK.setText(QtGui.QApplication.translate("B_ItemLevel", "OK", None, QtGui.QApplication.UnicodeUTF8))
         self.Cancel.setText(QtGui.QApplication.translate("B_ItemLevel", "Cancel", None, QtGui.QApplication.UnicodeUTF8))
+
+from SearchingCombo import SearchingCombo

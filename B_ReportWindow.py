@@ -2,8 +2,8 @@
 
 # Form implementation generated from reading ui file 'ReportWindow.ui'
 #
-# Created: Sun Oct 29 21:24:16 2006
-#      by: PyQt4 UI code generator 4-snapshot-20061020
+# Created: Tue Nov 28 23:19:04 2006
+#      by: PyQt4 UI code generator 4.1
 #
 # WARNING! All changes made in this file will be lost!
 
