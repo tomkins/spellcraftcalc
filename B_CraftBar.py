@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'CraftBar.ui'
 #
-# Created: Tue Nov 28 23:19:09 2006
+# Created: Tue Nov 28 22:36:54 2006
 #      by: PyQt4 UI code generator 4.1
 #
 # WARNING! All changes made in this file will be lost!
@@ -281,13 +281,20 @@ class Ui_B_CraftBar(object):
 
         self.hboxlayout6 = QtGui.QHBoxLayout()
         self.hboxlayout6.setMargin(0)
-        self.hboxlayout6.setSpacing(6)
+        self.hboxlayout6.setSpacing(11)
         self.hboxlayout6.setObjectName("hboxlayout6")
 
         spacerItem6 = QtGui.QSpacerItem(40,20,QtGui.QSizePolicy.Expanding,QtGui.QSizePolicy.Minimum)
         self.hboxlayout6.addItem(spacerItem6)
 
         self.LoadGemsButton = QtGui.QPushButton(self.layoutWidget)
+
+        sizePolicy = QtGui.QSizePolicy(QtGui.QSizePolicy.Policy(3),QtGui.QSizePolicy.Policy(0))
+        sizePolicy.setHorizontalStretch(0)
+        sizePolicy.setVerticalStretch(0)
+        sizePolicy.setHeightForWidth(self.LoadGemsButton.sizePolicy().hasHeightForWidth())
+        self.LoadGemsButton.setSizePolicy(sizePolicy)
+        self.LoadGemsButton.setMinimumSize(QtCore.QSize(110,0))
         self.LoadGemsButton.setObjectName("LoadGemsButton")
         self.hboxlayout6.addWidget(self.LoadGemsButton)
 
