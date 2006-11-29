@@ -37,8 +37,6 @@ class ScApplication(QApplication):
         else:
              args[0] = unicode(QDir(self.curPath).absoluteFilePath(__file__, True))
         self.appPath = unicode(QDir.cleanPath(QDir(args[0]).absoluteFilePath("..")))
-
-        self.splashFile = ":/images/Spellcraft.png"
  
         if len(args) > 1:
            args[1] = unicode(QDir.cleanPath(QDir(self.curPath).absoluteFilePath(args[1], True)))
@@ -46,8 +44,7 @@ class ScApplication(QApplication):
         QApplication.__init__(self, args)
 
     def start(self):
-        splash = QSplashScreen(QPixmap(self.splashFile),
-                               Qt.SplashScreen|Qt.MSWindowsFixedSizeDialogHint)
+        splash = QSplashScreen(QPixmap(":/images/Spellcraft.png"))
         splash.show()
 
         # Font sizes are strange things on Mac, while our favorite
@@ -77,13 +74,12 @@ class ScApplication(QApplication):
 
         import ScWindow
         scw = ScWindow.ScWindow()
-        scw.splashFile = self.splashFile
         app.setActiveWindow(scw)
-        scw.setWindowIcon(QIcon(QPixmap("ScWindow.png")));
+        scw.setWindowIcon(QIcon(":/images/ScWindow.png"))
         if len(app.argv()) > 1:
             scw.openFile(app.argv()[1], True)
         scw.show()
-        splash.finish(scw);
+        splash.finish(scw)
 
 
 if __name__ == '__main__':
