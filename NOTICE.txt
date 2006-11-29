@@ -491,6 +491,11 @@ All rights reserved.
 
 *******************************************************************
 
+Toolbar Icons derived from NeatUI's Neat Icons Core Set, freely
+redistributable, and available from http://www.neatui.com/
+
+*******************************************************************
+
 Artwork and screen shots Copyright (C) 2001-2006 Mythic Entertainment, Inc. 
 All rights reserved. Used with permission of Mythic Entertainment. 
 
