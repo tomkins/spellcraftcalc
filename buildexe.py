@@ -9,7 +9,7 @@ if __name__ == "__main__":
 
 sc = {
     "script" : "Spellcraft.pyw",
-    "icon_resources" : [(100, 'ScWindow.ico')],
+    "icon_resources" : [(100, 'images/ScWindow.ico')],
     }
 
 setup(name="kscraftsetup",
@@ -19,8 +19,7 @@ setup(name="kscraftsetup",
         ('.', ['./LICENSE.txt']),
         ('.', ['./NOTICE.txt']),
         ('.', ['./CHANGES.txt']),
-        ('.', ['./ScWindow.png']),
-        ('.', ['./Spellcraft.png']),
+        ('.', ['./SC.rcc']),
         ('reports', ['reports/Reports.txt']), 
         ('reports', glob.glob("reports/*.xml")),
         ('reports', glob.glob("reports/*.xsl")),

@@ -31,13 +31,14 @@ class ScApplication(QApplication):
     def __init__(self):
         args = sys.argv
         self.curPath = QDir.cleanPath(QDir.currentPath())
+        QResource.registerResource(QDir(self.curPath).absoluteFilePath("SC.rcc"))
         if args[0]:
              args[0] = unicode(QDir(self.curPath).absoluteFilePath(args[0]))
         else:
              args[0] = unicode(QDir(self.curPath).absoluteFilePath(__file__, True))
         self.appPath = unicode(QDir.cleanPath(QDir(args[0]).absoluteFilePath("..")))
 
-        self.splashFile = unicode(QDir(self.appPath).absoluteFilePath("Spellcraft.png"))
+        self.splashFile = ":/images/Spellcraft.png"
  
         if len(args) > 1:
            args[1] = unicode(QDir.cleanPath(QDir(self.curPath).absoluteFilePath(args[1], True)))

@@ -38,3 +38,9 @@ for ui, py in files:
         del scstr
 
     sys.stdout.write("Generated %s from %s\n" % (py, ui))
+
+# a bit of magic, if a file changes in images/*, the dir's mtime bumps too:
+if os.stat("SC.qrc").st_mtime >= os.stat("SC.rcc").st_mtime \
+        or os.stat("images").st_mtime >= os.stat("SC.rcc").st_mtime:
+    os.system('rcc -binary SC.qrc -o SC.rcc');
+    sys.stdout.write("Generated SC.rcc from SC.qrc\n")

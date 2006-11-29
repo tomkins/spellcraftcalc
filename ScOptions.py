@@ -123,6 +123,7 @@ class ScOptions(Singleton):
                 self.loadFromXML(template[0])
                 f.close()
             except: 
+                # By default, be quiet? - upgrade noise is dirty
                 traceback.print_exc()
                 pass
 
