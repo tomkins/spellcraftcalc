@@ -3,11 +3,11 @@
     <file>images/ScWindow.png</file>
     <file>images/Spellcraft.png</file>
     <file>images/Error.png</file>
-    <file>images/New24.png</file>
-    <file>images/Open24.png</file>
-    <file>images/Save24.png</file>
-    <file>images/Save-as24.png</file>
-    <file>images/Properties24.png</file>
-    <file>images/ExportGems24.png</file>
+    <file>images/normal/New24.png</file>
+    <file>images/normal/Open24.png</file>
+    <file>images/normal/Save24.png</file>
+    <file>images/normal/Save-as24.png</file>
+    <file>images/normal/Properties24.png</file>
+    <file>images/normal/ExportGems24.png</file>
   </qresource>
 </RCC>
