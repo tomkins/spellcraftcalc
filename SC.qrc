@@ -2,7 +2,18 @@
   <qresource>
     <file>images/ScWindow.png</file>
     <file>images/Spellcraft.png</file>
-    <file>images/Error.png</file>
+    <file>images/disabled/New24.png</file>
+    <file>images/disabled/Open24.png</file>
+    <file>images/disabled/Save24.png</file>
+    <file>images/disabled/Save-as24.png</file>
+    <file>images/disabled/Properties24.png</file>
+    <file>images/disabled/ExportGems24.png</file>
+    <file>images/hot/New24.png</file>
+    <file>images/hot/Open24.png</file>
+    <file>images/hot/Save24.png</file>
+    <file>images/hot/Save-as24.png</file>
+    <file>images/hot/Properties24.png</file>
+    <file>images/hot/ExportGems24.png</file>
     <file>images/normal/New24.png</file>
     <file>images/normal/Open24.png</file>
     <file>images/normal/Save24.png</file>
