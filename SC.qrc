@@ -2,6 +2,24 @@
   <qresource>
     <file>images/ScWindow.png</file>
     <file>images/Spellcraft.png</file>
+    <file>images/disabled/New16.png</file>
+    <file>images/disabled/Open16.png</file>
+    <file>images/disabled/Save16.png</file>
+    <file>images/disabled/Save-as16.png</file>
+    <file>images/disabled/Properties16.png</file>
+    <file>images/disabled/ExportGems16.png</file>
+    <file>images/hot/New16.png</file>
+    <file>images/hot/Open16.png</file>
+    <file>images/hot/Save16.png</file>
+    <file>images/hot/Save-as16.png</file>
+    <file>images/hot/Properties16.png</file>
+    <file>images/hot/ExportGems16.png</file>
+    <file>images/normal/New16.png</file>
+    <file>images/normal/Open16.png</file>
+    <file>images/normal/Save16.png</file>
+    <file>images/normal/Save-as16.png</file>
+    <file>images/normal/Properties16.png</file>
+    <file>images/normal/ExportGems16.png</file>
     <file>images/disabled/New24.png</file>
     <file>images/disabled/Open24.png</file>
     <file>images/disabled/Save24.png</file>
@@ -20,5 +38,23 @@
     <file>images/normal/Save-as24.png</file>
     <file>images/normal/Properties24.png</file>
     <file>images/normal/ExportGems24.png</file>
+    <file>images/disabled/New32.png</file>
+    <file>images/disabled/Open32.png</file>
+    <file>images/disabled/Save32.png</file>
+    <file>images/disabled/Save-as32.png</file>
+    <file>images/disabled/Properties32.png</file>
+    <file>images/disabled/ExportGems32.png</file>
+    <file>images/hot/New32.png</file>
+    <file>images/hot/Open32.png</file>
+    <file>images/hot/Save32.png</file>
+    <file>images/hot/Save-as32.png</file>
+    <file>images/hot/Properties32.png</file>
+    <file>images/hot/ExportGems32.png</file>
+    <file>images/normal/New32.png</file>
+    <file>images/normal/Open32.png</file>
+    <file>images/normal/Save32.png</file>
+    <file>images/normal/Save-as32.png</file>
+    <file>images/normal/Properties32.png</file>
+    <file>images/normal/ExportGems32.png</file>
   </qresource>
 </RCC>
