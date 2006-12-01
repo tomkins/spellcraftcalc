@@ -343,10 +343,19 @@ class ScWindow(QMainWindow, Ui_B_SC):
         self.connect(self.SkillsList,SIGNAL("activated(const QModelIndex&)"),
                      self.SkillClicked)
 
+    def getIcon(self, namebase):
+        thisicon = QIcon()
+        for size in (16, 24, 32,):
+             thisicon.addFile(':/images/normal/' + namebase + str(size) + '.png',
+                              QSize(size, size), QIcon.Normal, QIcon.Off)
+             thisicon.addFile(':/images/disabled/' + namebase + str(size) + '.png',
+                              QSize(size, size), QIcon.Disabled, QIcon.Off)
+             thisicon.addFile(':/images/hot/' + namebase + str(size) + '.png',
+                              QSize(size, size), QIcon.Active, QIcon.Off)
+        return thisicon
+
     def initMenu(self):
         self.toolbar = QToolBar()
-        icon = ':/images/normal/'
-        img = '24.png'
 
         self.rf_menu = QMenu('&Recent Files')
         self.connect(self.rf_menu, SIGNAL("triggered(QAction*)"),
@@ -355,15 +364,15 @@ class ScWindow(QMainWindow, Ui_B_SC):
         self.filemenu = QMenu('&File', self)
         self.filemenu.addAction('&New', self.newFile,
                                 QKeySequence(Qt.CTRL+Qt.Key_N))
-        self.toolbar.addAction(QIcon(icon+'New'+img), 'New', self.newFile)
+        self.toolbar.addAction(self.getIcon('New'), 'New', self.newFile)
         self.filemenu.addAction('&Open...', self.openFile,
                                 QKeySequence(Qt.CTRL+Qt.Key_O))
-        self.toolbar.addAction(QIcon(icon+'Open'+img), 'Open', self.openFile)
+        self.toolbar.addAction(self.getIcon('Open'), 'Open', self.openFile)
         self.filemenu.addAction('&Save', self.saveFile,
                                 QKeySequence(Qt.CTRL+Qt.Key_S))
-        self.toolbar.addAction(QIcon(icon+'Save'+img), 'Save', self.saveFile)
+        self.toolbar.addAction(self.getIcon('Save'), 'Save', self.saveFile)
         self.filemenu.addAction('Save &As...', self.saveAsFile)
-        self.toolbar.addAction(QIcon(icon+'Save-as'+img), 'Save As', self.saveAsFile)
+        self.toolbar.addAction(self.getIcon('Save-as'), 'Save As', self.saveAsFile)
         self.filemenu.addSeparator()
         self.toolbar.addSeparator()
         self.filemenu.addAction('&Load Item...', self.loadItem,
@@ -373,7 +382,7 @@ class ScWindow(QMainWindow, Ui_B_SC):
         self.filemenu.addAction('Item Database Path...', self.chooseItemPath)
         self.filemenu.addSeparator()
         self.filemenu.addAction('Export &Quickbars...', self.openCraftBars)
-        self.toolbar.addAction(QIcon(icon+'ExportGems'+img), 'Quickbars', 
+        self.toolbar.addAction(self.getIcon('ExportGems'), 'Quickbars', 
                                self.openCraftBars)
         self.filemenu.addAction('Export SCTemplate XML...', self.exportAsFile)
         self.filemenu.addAction('Export &UI Window...', self.generateUIXML)
@@ -462,8 +471,7 @@ class ScWindow(QMainWindow, Ui_B_SC):
         self.craftingmenuid = self.viewmenu.addAction('&Gem Crafting',
                                   self.openCraftWindow,
                                   QKeySequence(Qt.ALT+Qt.Key_G))
-        self.craftingbtnid = self.toolbar.addAction(
-                                  QIcon(icon+'Properties'+img),
+        self.craftingtoolid = self.toolbar.addAction(self.getIcon('Properties'),
                                   'Craft Gems', self.openCraftWindow)
 
         self.viewmenu.addSeparator()
@@ -531,7 +539,7 @@ class ScWindow(QMainWindow, Ui_B_SC):
             w.show()
         #self.GroupItemFrame.updateGeometry()
         self.craftingmenuid.setEnabled(False)
-        self.craftingbtnid.setEnabled(False)
+        self.craftingtoolid.setEnabled(False)
         self.chooseitemmenuid.setEnabled(False)
         self.swapgemsmenuid.setEnabled(False)
         self.GroupItemFrame.show()
@@ -575,7 +583,7 @@ class ScWindow(QMainWindow, Ui_B_SC):
             if slot.crafted():
                 enableCrafting = True
         self.craftingmenuid.setEnabled(enableCrafting)
-        self.craftingbtnid.setEnabled(enableCrafting)
+        self.craftingtoolid.setEnabled(enableCrafting)
 
     def closeEvent(self, e):
         self.saveOptions()
