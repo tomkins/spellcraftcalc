@@ -75,6 +75,7 @@ class ScWindow(QMainWindow, Ui_B_SC):
         self.nocalc = 1
         self.itemIndex = 0
         self.recentFiles = []
+        self.suits = {}
         self.effectlists = GemLists['All'].copy()
         self.dropeffectlists = DropLists['All'].copy()
         self.itemeffectlists = CraftedLists['All'].copy()
@@ -465,6 +466,10 @@ class ScWindow(QMainWindow, Ui_B_SC):
         self.editmenu.addSeparator()
         self.editmenu.addAction('&Options...', self.openOptions,
                                 QKeySequence(Qt.ALT+Qt.Key_O))
+        self.editmenu.addSeparator()
+        self.editmenu.addAction('&Save Suit', self.saveSuit,
+            QKeySequence(Qt.ALT+Qt.Key_S))
+
         self.menuBar().addMenu(self.editmenu)
 
         self.viewmenu = QMenu('&View', self)
@@ -480,7 +485,14 @@ class ScWindow(QMainWindow, Ui_B_SC):
         self.viewmenu.addAction('&Configuration', self.openConfigReport,
                                 QKeySequence(Qt.ALT+Qt.Key_C))
         self.viewmenu.addAction('Choose Format...', self.chooseReportFile)
+
+        self.suitMenu = QMenu('Saved Suits', self)
+        self.connect(self.suitMenu, SIGNAL('triggered(QAction*)'),
+            self.recallSuit)
+        self.suitMenu.setEnabled(False)
+        self.viewmenu.addMenu(self.suitMenu)
         self.viewmenu.addSeparator()
+
         self.showcapmenuid = self.viewmenu.addAction('&Distance to Cap',
                                  self.showCap, QKeySequence(Qt.ALT+Qt.Key_D))
         self.showcapmenuid.setCheckable(True)
@@ -674,6 +686,7 @@ class ScWindow(QMainWindow, Ui_B_SC):
         self.noteText = ''
         self.craftMultiplier = 1
         self.filename = None
+        self.suits = {}
         self.newcount = self.newcount + 1
         filetitle = unicode("Template" + str(self.newcount))
         self.setWindowTitle(filetitle + " - Kort's Spellcrafting Calculator")
@@ -710,6 +723,7 @@ class ScWindow(QMainWindow, Ui_B_SC):
         self.Realm.setCurrentIndex(Realms.index(self.realm))
         self.RealmChanged(Realms.index(self.realm))
         self.CharLevel.setText('50')
+        self.suitMenu.clear()
         self.restoreItem(self.itemattrlist[self.currentTabLabel])
         self.modified = 0
         self.nocalc = moretodo
@@ -741,6 +755,18 @@ class ScWindow(QMainWindow, Ui_B_SC):
         childnode = document.createElement('Notes')
         childnode.appendChild(document.createTextNode(unicode(self.noteText)))
         rootnode.appendChild(childnode)
+
+        suitsnode = document.createElement('Suits')
+        for suitname, suit in self.suits.items():
+            suitnode = document.createElement('Suit')
+            suitnode.setAttribute(u'name', suitname)
+            for piece, index in suit.items():
+                piecenode = document.createElement('SuitItem')
+                piecenode.setAttribute('Location', piece)
+                piecenode.setAttribute('Index', unicode(index))
+                suitnode.appendChild(piecenode)
+            suitsnode.appendChild(suitnode)
+        rootnode.appendChild(suitsnode)
 
         if rich:
             totalsdict = self.summarize()
@@ -1755,6 +1781,23 @@ class ScWindow(QMainWindow, Ui_B_SC):
             elif child.tagName == 'Coop':
                 self.coop = eval(XMLHelper.getText(child.childNodes), 
                                  globals(), globals())
+            elif child.tagName == 'Suits':
+                for suitnode in child.childNodes:
+                    if suitnode.nodeType == Node.TEXT_NODE: continue
+                    if suitnode.tagName == 'Suit':
+                        suitname = suitnode.getAttribute(u'name')
+                        self.suits[suitname] = {}
+                        for piecenode in suitnode.childNodes:
+                            if piecenode.nodeType == Node.TEXT_NODE: continue
+                            piecename = piecenode.getAttribute('Location')
+                            index = int(piecenode.getAttribute('Index'))
+                            self.suits[suitname][piecename] = index
+
+                        act = QAction(suitname, self)
+                        act.setData(QVariant(suitname))
+                        self.suitMenu.addAction(act)
+                        self.suitMenu.setEnabled(True)
+                        
         self.Realm.setCurrentIndex(Realms.index(self.realm))
         self.RealmChanged(Realms.index(self.realm))
         if AllBonusList[self.realm].has_key(self.charclass):
@@ -2076,6 +2119,49 @@ class ScWindow(QMainWindow, Ui_B_SC):
             self.restoreItem(item)
         else:
             self.chooseItemType(action)
+
+    def saveSuit(self):
+        suitname, ok = QInputDialog.getText(self, 'New Suit',
+            'Enter New Suit Name')
+
+        suitname = unicode(suitname)
+
+        if not ok:
+            return
+
+        suit = {}
+        for key, item in self.itemattrlist.iteritems():
+            if not item.isEmpty():
+                suit[key] = item.TemplateIndex
+
+        overwrite = suitname in self.suits.keys()
+        self.suits[suitname] = suit
+
+        if not overwrite:
+            act = QAction(suitname, self)
+            act.setData(QVariant(suitname))
+            self.suitMenu.addAction(act)
+            self.suitMenu.setEnabled(True)
+
+    def recallSuit(self, action):
+        suitname = unicode(action.data().toString())    
+
+        if self.suits.has_key(suitname):
+            suit = self.suits[suitname]
+            for piece, index in suit.items():
+                item = self.itemattrlist[piece]
+                prev = None
+                while item and item.TemplateIndex != index:
+                    prev = item
+                    item = item.next
+
+                if item:
+                    if prev:
+                        prev.next = prev.next.next
+                        item.next = self.itemattrlist[piece]
+                    self.itemattrlist[piece] = item
+            self.restoreItem(self.itemattrlist[self.currentTabLabel])
+            self.calculate()
 
     def aboutBox(self):
         splash = AboutScreen(parent=self,modal=True)
