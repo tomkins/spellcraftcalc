@@ -166,7 +166,10 @@ class ItemSlot:
         if self.Amount == '0' or self.Amount == '':
             pass
         elif self.Type == 'Stat':
-            mval = ((int(self.Amount) - 1) / 3.0) * 2.0 + 1.0
+            if self.Effect == 'Hits':
+                mval = int(self.Amount) / 4.0
+            else:
+                mval = ((int(self.Amount) - 1) / 3.0) * 2.0 + 1.0
         elif self.Type == 'Resist' or self.Type == 'Power':
             mval = (int(self.Amount) - 1) * 2.0
             if int(self.Amount) == 1: mval = 1.0
@@ -500,6 +503,12 @@ class Item:
         for slot in self.slots():
             utility += slot.gemUtility(skilltable)
         return utility
+
+    def isEmpty(self):
+        for num in range(0,len(self.itemslots)):
+            if self.itemslots[num].type() != "Unused": return False
+
+        return True
     
     def asXML(self, pricingInfo=None, crafterSkill=1000, rich=False, writeIndex=False):
         document = Document()
