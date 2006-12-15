@@ -1114,6 +1114,7 @@ class ScWindow(QMainWindow, Ui_B_SC):
         if self.nocalc:
             return
         errorcount = 0
+        self.errorsmenu.clear()
         charleveltext = str(self.CharLevel.text())
         if charleveltext == '': 
             charlevel = 1
@@ -1161,6 +1162,16 @@ class ScWindow(QMainWindow, Ui_B_SC):
             self.ItemPrice.setText(SC.formatCost(item.price(self.pricingInfo)))
             if imbuepts >= (itemimbue + 6.0):
                 self.ItemOvercharge.setText('Impossible')
+                error_act = QAction('Impossible overcharge on %s' % key, self)
+                if item.Location in JewelTabList:
+                    row = 1
+                    col = JewelTabList.index(item.Location)
+                else:
+                    row = 0
+                    col = PieceTabList.index(item.Location)
+                error_act.setData(QVariant((row << 8) | col))
+                self.errorsmenu.addAction(error_act)
+                errorcount = errorcount + 1
             elif imbuepts < (itemimbue + 1.0):
                 self.ItemOvercharge.setText('None')
             else:
