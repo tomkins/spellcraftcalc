@@ -1209,14 +1209,14 @@ class ScWindow(QMainWindow, Ui_B_SC):
                 self.StatValue[key].setText(unicode(val))
             else:
                 basecap = datum['BaseCap']
+                addcap = datum['BaseCapToCapBonus']
                 if datum['TotalCapBonus'] > 0:
-                    addcap = datum['BaseCapToCapBonus']
                     capmod = datum['TotalCapBonus']
-                    capcap = addcap - capmod
-                    if capmod > addcap:  capmod = addcap
-                    self.StatCap[key].setText('('+unicode(int(capcap))+')')
                 else:
                     capmod = 0
+                capcap = addcap - capmod
+                if capmod > addcap:  capmod = addcap
+                self.StatCap[key].setText('('+unicode(int(capcap))+')')
                 self.StatValue[key].setText(unicode(int(basecap + capmod) -val))
         for skillkey, suffix, lookup in (
                 ('Skills', '', 'Skill'),
