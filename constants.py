@@ -690,6 +690,7 @@ CraftedLists = {
         'All Dual Wield Skills',
         'All Magic Skills',
         'All Melee Weapon Skills',
+        'Shield',
     )),
     'Cap Increase' : t2((
         'Strength',
