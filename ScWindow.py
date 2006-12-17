@@ -75,7 +75,9 @@ class ScWindow(QMainWindow, Ui_B_SC):
         self.nocalc = 1
         self.itemIndex = 0
         self.recentFiles = []
-        self.suits = {}
+        self.outfits = {}
+        self.outfitCounter = 1
+        self.currentOutfitName = ""
         self.effectlists = GemLists['All'].copy()
         self.dropeffectlists = DropLists['All'].copy()
         self.itemeffectlists = CraftedLists['All'].copy()
@@ -300,6 +302,15 @@ class ScWindow(QMainWindow, Ui_B_SC):
         self.GroupResists.mousePressEvent = self.ignoreMouseEvent
         self.GroupItemFrame.mousePressEvent = self.ignoreMouseEvent
 
+        self.Outfit.setEditable(True)
+        self.Outfit.setEnabled(False)
+        self.Outfit.setInsertPolicy(QComboBox.InsertAtCurrent)
+        self.connect(self.Outfit,SIGNAL("activated(int)"), self.recallOutfit)
+        self.connect(self.Outfit.lineEdit(),SIGNAL("editingFinished()"),
+            self.outfitNameChanged) 
+        #self.connect(self.Outfit,SIGNAL("editTextChanged(const QString&)"),
+        #    self.outfitNameChanged)
+
         self.connect(self.GroupStats,SIGNAL("mousePressEvent(QMouseEvent*)"),
                      self.mousePressEvent)
         self.connect(self.GroupResists,SIGNAL("mousePressEvent(QMouseEvent*)"),
@@ -467,8 +478,10 @@ class ScWindow(QMainWindow, Ui_B_SC):
         self.editmenu.addAction('&Options...', self.openOptions,
                                 QKeySequence(Qt.ALT+Qt.Key_O))
         self.editmenu.addSeparator()
-        self.editmenu.addAction('&Save Suit', self.saveSuit,
-            QKeySequence(Qt.ALT+Qt.Key_S))
+
+        # FIXME
+        self.editmenu.addAction('&New Outfit', self.newOutfit)
+        self.editmenu.addAction('&Delete Current Outfit', self.removeOutfit)
 
         self.menuBar().addMenu(self.editmenu)
 
@@ -486,11 +499,6 @@ class ScWindow(QMainWindow, Ui_B_SC):
                                 QKeySequence(Qt.ALT+Qt.Key_C))
         self.viewmenu.addAction('Choose Format...', self.chooseReportFile)
 
-        self.suitMenu = QMenu('Saved Suits', self)
-        self.connect(self.suitMenu, SIGNAL('triggered(QAction*)'),
-            self.recallSuit)
-        self.suitMenu.setEnabled(False)
-        self.viewmenu.addMenu(self.suitMenu)
         self.viewmenu.addSeparator()
 
         self.showcapmenuid = self.viewmenu.addAction('&Distance to Cap',
@@ -686,7 +694,11 @@ class ScWindow(QMainWindow, Ui_B_SC):
         self.noteText = ''
         self.craftMultiplier = 1
         self.filename = None
-        self.suits = {}
+        self.outfits = {}
+        self.outfitCounter = 1
+        self.currentOutfitName = ""
+        self.Outfit.setEnabled(False)
+        self.Outfit.clear()
         self.newcount = self.newcount + 1
         filetitle = unicode("Template" + str(self.newcount))
         self.setWindowTitle(filetitle + " - Kort's Spellcrafting Calculator")
@@ -723,7 +735,6 @@ class ScWindow(QMainWindow, Ui_B_SC):
         self.Realm.setCurrentIndex(Realms.index(self.realm))
         self.RealmChanged(Realms.index(self.realm))
         self.CharLevel.setText('50')
-        self.suitMenu.clear()
         self.restoreItem(self.itemattrlist[self.currentTabLabel])
         self.modified = 0
         self.nocalc = moretodo
@@ -756,17 +767,17 @@ class ScWindow(QMainWindow, Ui_B_SC):
         childnode.appendChild(document.createTextNode(unicode(self.noteText)))
         rootnode.appendChild(childnode)
 
-        suitsnode = document.createElement('Suits')
-        for suitname, suit in self.suits.items():
-            suitnode = document.createElement('Suit')
-            suitnode.setAttribute(u'name', suitname)
-            for piece, index in suit.items():
-                piecenode = document.createElement('SuitItem')
+        outfitsnode = document.createElement('Outfits')
+        for outfitname, outfit in self.outfits.items():
+            outfitnode = document.createElement('Outfit')
+            outfitnode.setAttribute(u'name', outfitname)
+            for piece, index in outfit.items():
+                piecenode = document.createElement('OutfitItem')
                 piecenode.setAttribute('Location', piece)
                 piecenode.setAttribute('Index', unicode(index))
-                suitnode.appendChild(piecenode)
-            suitsnode.appendChild(suitnode)
-        rootnode.appendChild(suitsnode)
+                outfitnode.appendChild(piecenode)
+            outfitsnode.appendChild(outfitnode)
+        rootnode.appendChild(outfitsnode)
 
         if rich:
             totalsdict = self.summarize()
@@ -946,6 +957,7 @@ class ScWindow(QMainWindow, Ui_B_SC):
             if item.ItemQuality in QualityValues:
                 self.QualDrop.setCurrentIndex(
                     QualityValues.index(item.ItemQuality))
+        self.saveCurrentOutfit()
         self.nocalc = wasnocalc
         if self.nocalc: return
         self.calculate()
@@ -1032,6 +1044,7 @@ class ScWindow(QMainWindow, Ui_B_SC):
                         effects.extend(AllBonusList[self.realm] \
                                                    [self.charclass][effect])
                     for effect in effects:
+                        if effect == '': continue
                         if tot['Focus'].has_key(effect):
                             amts = tot['Focus'][effect]
                         else:
@@ -1319,6 +1332,7 @@ class ScWindow(QMainWindow, Ui_B_SC):
         else:
             #item.ItemNameCombo = unicode(self.ItemName.text())
             item.ItemQuality = unicode(self.QualEdit.text())
+
         self.calculate()
 
     def ItemNameSelected(self,a0):
@@ -1792,23 +1806,19 @@ class ScWindow(QMainWindow, Ui_B_SC):
             elif child.tagName == 'Coop':
                 self.coop = eval(XMLHelper.getText(child.childNodes), 
                                  globals(), globals())
-            elif child.tagName == 'Suits':
-                for suitnode in child.childNodes:
-                    if suitnode.nodeType == Node.TEXT_NODE: continue
-                    if suitnode.tagName == 'Suit':
-                        suitname = suitnode.getAttribute(u'name')
-                        self.suits[suitname] = {}
-                        for piecenode in suitnode.childNodes:
+            elif child.tagName == 'Outfits':
+                self.outfitCounter += 1
+                for outfitnode in child.childNodes:
+                    if outfitnode.nodeType == Node.TEXT_NODE: continue
+                    if outfitnode.tagName == 'Outfit':
+                        outfitname = outfitnode.getAttribute(u'name')
+                        self.outfits[outfitname] = {}
+                        for piecenode in outfitnode.childNodes:
                             if piecenode.nodeType == Node.TEXT_NODE: continue
                             piecename = piecenode.getAttribute('Location')
                             index = int(piecenode.getAttribute('Index'))
-                            self.suits[suitname][piecename] = index
+                            self.outfits[outfitname][piecename] = index
 
-                        act = QAction(suitname, self)
-                        act.setData(QVariant(suitname))
-                        self.suitMenu.addAction(act)
-                        self.suitMenu.setEnabled(True)
-                        
         self.Realm.setCurrentIndex(Realms.index(self.realm))
         self.RealmChanged(Realms.index(self.realm))
         if AllBonusList[self.realm].has_key(self.charclass):
@@ -1823,6 +1833,15 @@ class ScWindow(QMainWindow, Ui_B_SC):
         self.restoreItem(self.itemattrlist[self.currentTabLabel])
         self.modified = 0
         self.nocalc = 0
+        if len(self.outfits.keys()) > 0:
+            self.Outfit.blockSignals(True)
+            for oname in self.outfits.keys():
+                self.Outfit.addItem(oname)
+            self.Outfit.blockSignals(False)
+            self.Outfit.setCurrentIndex(0)
+            self.Outfit.setEnabled(True)
+            self.recallOutfit(0)
+
         self.calculate()
         
     def chooseXMLUIFile(self):
@@ -2131,35 +2150,46 @@ class ScWindow(QMainWindow, Ui_B_SC):
         else:
             self.chooseItemType(action)
 
-    def saveSuit(self):
-        suitname, ok = QInputDialog.getText(self, 'New Suit',
-            'Enter New Suit Name')
+    def newOutfit(self):
+        outfitname = 'Outfit %d' % self.outfitCounter
 
-        suitname = unicode(suitname)
+        outfit = {}
+        self.saveOutfit(outfit)
 
-        if not ok:
-            return
+        self.outfits[outfitname] = outfit
+        self.Outfit.addItem(outfitname)
 
-        suit = {}
+        self.Outfit.setCurrentIndex(self.Outfit.findText(outfitname))
+        self.Outfit.setEnabled(True)
+        self.currentOutfitName = outfitname
+        self.outfitCounter += 1
+
+    def saveCurrentOutfit(self):
+        if self.currentOutfitName != "" and \
+                self.outfits.has_key(self.currentOutfitName):
+            self.saveOutfit(self.outfits[self.currentOutfitName])
+
+    def saveOutfit(self, outfit):
         for key, item in self.itemattrlist.iteritems():
-            if not item.isEmpty():
-                suit[key] = item.TemplateIndex
+        #    if not item.isEmpty():
+            outfit[key] = item.TemplateIndex
 
-        overwrite = suitname in self.suits.keys()
-        self.suits[suitname] = suit
+    def removeOutfit(self):
+        if self.Outfit.currentIndex() != -1:
+            outfitname = str(self.Outfit.currentText())
+            self.Outfit.removeItem(self.Outfit.currentIndex())
+            del self.outfits[outfitname]
 
-        if not overwrite:
-            act = QAction(suitname, self)
-            act.setData(QVariant(suitname))
-            self.suitMenu.addAction(act)
-            self.suitMenu.setEnabled(True)
+            if self.Outfit.count() == 0:
+                self.Outfit.setEnabled(False)
 
-    def recallSuit(self, action):
-        suitname = unicode(action.data().toString())    
+    def recallOutfit(self, idx):
+        outfitname = str(self.Outfit.itemText(idx))
 
-        if self.suits.has_key(suitname):
-            suit = self.suits[suitname]
-            for piece, index in suit.items():
+        if self.outfits.has_key(outfitname):
+            outfit = self.outfits[outfitname]
+            self.currentOutfitName = outfitname
+            for piece, index in outfit.items():
                 item = self.itemattrlist[piece]
                 prev = None
                 while item and item.TemplateIndex != index:
@@ -2174,6 +2204,13 @@ class ScWindow(QMainWindow, Ui_B_SC):
             self.restoreItem(self.itemattrlist[self.currentTabLabel])
             self.calculate()
 
+    def outfitNameChanged(self):
+        outfitname = str(self.Outfit.currentText())
+        if outfitname != self.currentOutfitName:
+            outfit = self.outfits.pop(self.currentOutfitName)
+            self.outfits[outfitname] = outfit
+            self.currentOutfitName = outfitname
+        
     def aboutBox(self):
         splash = AboutScreen(parent=self,modal=True)
         splash.exec_()

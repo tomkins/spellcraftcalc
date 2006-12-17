@@ -100,7 +100,20 @@
        <item row="4" column="1" colspan="2" >
         <widget class="QLineEdit" name="CharLevel" />
        </item>
-       <item row="5" column="0" colspan="3">
+       <item row="5" column="0" >
+        <widget class="QLabel" name="LabelCurOutfit" >
+         <property name="text" >
+          <string>Outfit: </string>
+         </property>
+         <property name="textFormat" >
+          <enum>Qt::PlainText</enum>
+         </property>
+        </widget>
+       </item>
+       <item row="5" column="1" colspan="2" >
+        <widget class="SearchingCombo" name="Outfit" />
+       </item>
+       <item row="6" column="0" colspan="3">
         <spacer>
          <property name="orientation" >
           <enum>Qt::Vertical</enum>
@@ -116,7 +129,7 @@
          </property>
         </spacer>
        </item>
-       <item row="6" column="0" >
+       <item row="7" column="0" >
         <widget class="QLabel" name="LabelTotalCost" >
          <property name="text" >
           <string>Cost: </string>
@@ -126,7 +139,7 @@
          </property>
         </widget>
        </item>
-       <item row="6" column="1" colspan="2" >
+       <item row="7" column="1" colspan="2" >
         <widget class="QLabel" name="TotalCost" >
          <property name="text" >
           <string>0</string>
@@ -136,7 +149,7 @@
          </property>
         </widget>
        </item>
-       <item row="7" column="0" >
+       <item row="8" column="0" >
         <widget class="QLabel" name="LabelTotalPrice" >
          <property name="text" >
           <string>Price: </string>
@@ -146,7 +159,7 @@
          </property>
         </widget>
        </item>
-       <item row="7" column="1" colspan="2" >
+       <item row="8" column="1" colspan="2" >
         <widget class="QLabel" name="TotalPrice" >
          <property name="text" >
           <string>0</string>
@@ -156,7 +169,7 @@
          </property>
         </widget>
        </item>
-       <item row="8" column="0" colspan="2" >
+       <item row="9" column="0" colspan="2" >
         <widget class="QLabel" name="LabelTotalUtility" >
          <property name="text" >
           <string>Total Utility: </string>
@@ -166,7 +179,7 @@
          </property>
         </widget>
        </item>
-       <item row="8" column="2" >
+       <item row="9" column="2" >
         <widget class="QLabel" name="TotalUtility" >
          <property name="text" >
           <string>0.0</string>
@@ -176,7 +189,7 @@
          </property>
         </widget>
        </item>
-       <item row="9" column="0" colspan="3">
+       <item row="10" column="0" colspan="3">
         <spacer>
          <property name="orientation" >
           <enum>Qt::Vertical</enum>
