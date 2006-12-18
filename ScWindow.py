@@ -486,7 +486,7 @@ class ScWindow(QMainWindow, Ui_B_SC):
 
         # FIXME
         self.editmenu.addAction('&New Outfit', self.newOutfit)
-        self.editmenu.addAction('&Delete Current Outfit', self.removeOutfit)
+        self.deleteOutfitAction = self.editmenu.addAction('&Delete Current Outfit', self.removeOutfit)
 
         self.menuBar().addMenu(self.editmenu)
 
@@ -704,6 +704,7 @@ class ScWindow(QMainWindow, Ui_B_SC):
         self.currentOutfitName = ""
         self.Outfit.setEnabled(False)
         self.Outfit.clear()
+        self.deleteOutfitAction.setEnabled(False)
         self.newcount = self.newcount + 1
         filetitle = unicode("Template" + str(self.newcount))
         self.setWindowTitle(filetitle + " - Kort's Spellcrafting Calculator")
@@ -1880,6 +1881,7 @@ class ScWindow(QMainWindow, Ui_B_SC):
             self.Outfit.blockSignals(False)
             self.Outfit.setCurrentIndex(0)
             self.Outfit.setEnabled(True)
+            self.deleteOutfitAction.setEnabled(True)
             self.recallOutfit(0)
 
         self.calculate()
@@ -2203,6 +2205,7 @@ class ScWindow(QMainWindow, Ui_B_SC):
         self.Outfit.setEnabled(True)
         self.currentOutfitName = outfitname
         self.outfitCounter += 1
+        self.deleteOutfitAction.setEnabled(True)
 
     def saveCurrentOutfit(self):
         if self.currentOutfitName != "" and \
@@ -2222,6 +2225,7 @@ class ScWindow(QMainWindow, Ui_B_SC):
 
             if self.Outfit.count() == 0:
                 self.Outfit.setEnabled(False)
+                self.deleteOutfitAction.setEnabled(False)
 
     def recallOutfit(self, idx):
         outfitname = str(self.Outfit.itemText(idx))
