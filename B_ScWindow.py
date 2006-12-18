@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'ScWindow.ui'
 #
-# Created: Sun Dec 17 11:13:05 2006
+# Created: Sun Dec 17 22:59:21 2006
 #      by: PyQt4 UI code generator 4.1
 #
 # WARNING! All changes made in this file will be lost!
@@ -1110,7 +1110,8 @@ class Ui_B_SC(object):
         B_SC.setTabOrder(self.Realm,self.CharClass)
         B_SC.setTabOrder(self.CharClass,self.CharRace)
         B_SC.setTabOrder(self.CharRace,self.CharLevel)
-        B_SC.setTabOrder(self.CharLevel,self.PieceTab)
+        B_SC.setTabOrder(self.CharLevel,self.Outfit)
+        B_SC.setTabOrder(self.Outfit,self.PieceTab)
         B_SC.setTabOrder(self.PieceTab,self.ItemLevel)
         B_SC.setTabOrder(self.ItemLevel,self.ItemLevelButton)
         B_SC.setTabOrder(self.ItemLevelButton,self.QualEdit)
