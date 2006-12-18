@@ -45,6 +45,11 @@ def plainXMLTag(strval):
             i += 1
     return strval
 
+class UpdateTypeListEvent(QEvent):
+    def __init__(self, slot):
+        QEvent.__init__(self, QEvent.User)
+        self.slot = slot
+
 class AboutScreen(QDialog):
     def __init__(self,parent = None,name = "About",modal = True,
                  fl = Qt.SplashScreen):
@@ -908,8 +913,14 @@ class ScWindow(QMainWindow, Ui_B_SC):
             else:
                 typelist = list(DropTypeList)
             gemtype = str(item.slot(slot).type())
+            if self.hideNonClassSkills:
+                if len(AllBonusList[self.realm][self.charclass]\
+                        ['Focus Hash'].keys()) == 0 and \
+                        location not in FocusTabList:
+                    typelist.remove('Focus')
             if not gemtype in typelist:
                 typelist.append(gemtype)
+
             typecombo.insertItems(0, typelist)
             typecombo.setCurrentIndex(typelist.index(gemtype))
             self.TypeChanged(typelist.index(gemtype), slot)
@@ -1297,6 +1308,7 @@ class ScWindow(QMainWindow, Ui_B_SC):
             race = racelist[0]
         self.CharRace.setCurrentIndex(racelist.index(race))
         self.RaceChanged(racelist.index(race))
+        self.restoreItem(self.itemattrlist[self.currentTabLabel])
 
     def RealmChanged(self,a0):
         self.realm = str(self.Realm.currentText())
@@ -1452,6 +1464,31 @@ class ScWindow(QMainWindow, Ui_B_SC):
         # Cascade the changes
         self.AmountsChanged(0, slot)
 
+    def updateTypeList(self, slot):
+        item = self.itemattrlist[self.currentTabLabel]
+        itemtype = item.ActiveState
+        location = item.Location
+        typecombo = self.Type[slot]
+        typecombo.clear()
+        if itemtype == 'player':
+            if item.slot(slot).slotType() == 'player':
+                typelist = list(TypeList)
+            else:
+                typelist = list(CraftedTypeList)
+        else:
+            typelist = list(DropTypeList)
+        gemtype = str(item.slot(slot).type())
+        if self.hideNonClassSkills:
+            if len(AllBonusList[self.realm][self.charclass]\
+                    ['Focus Hash'].keys()) == 0 and \
+                    location not in FocusTabList:
+                typelist.remove('Focus')
+        if not gemtype in typelist:
+            typelist.append(gemtype)
+
+        typecombo.insertItems(0, typelist)
+        typecombo.setCurrentIndex(typelist.index(gemtype))
+
     def TypeChanged(self, Value, slot = -1):
         if slot < 0:
             slot = self.senderSlot()
@@ -1460,6 +1497,7 @@ class ScWindow(QMainWindow, Ui_B_SC):
         if not self.nocalc:
             item.slot(slot).setType(typetext)
             self.modified = 1
+
         effcombo = self.Effect[slot]
         if effcombo.isEditable():
             effcombo.setEditable(False)
@@ -1483,6 +1521,8 @@ class ScWindow(QMainWindow, Ui_B_SC):
         self.EffectChanged(0, slot)
         self.testCraftingMenu()
     
+        QApplication.postEvent(self, UpdateTypeListEvent(slot))
+        
     def clearCurrentItem(self):
         item = Item(realm=self.realm,loc=self.currentTabLabel,
                     state=self.itemattrlist[self.currentTabLabel].ActiveState,
@@ -2221,6 +2261,13 @@ class ScWindow(QMainWindow, Ui_B_SC):
     def resizeEvent(self, e):
         if str(QApplication.style().objectName()[0:9]).lower() == "macintosh":
             self.sizegrip.move(self.width() - 15, self.height() - 15)
+
+    def event(self, e):
+        if e.type() == QEvent.User:
+            self.updateTypeList(e.slot)
+            return True
+        else:
+            return QMainWindow.event(self, e)
 
 if __name__ == '__main__':
     app = QApplication([])
