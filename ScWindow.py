@@ -798,17 +798,18 @@ class ScWindow(QMainWindow, Ui_B_SC):
         childnode.appendChild(document.createTextNode(unicode(self.noteText)))
         rootnode.appendChild(childnode)
 
-        outfitsnode = document.createElement('Outfits')
-        for outfitname, outfit in self.outfits.items():
-            outfitnode = document.createElement('Outfit')
-            outfitnode.setAttribute(u'name', outfitname)
-            for piece, index in outfit.items():
-                piecenode = document.createElement('OutfitItem')
-                piecenode.setAttribute('Location', piece)
-                piecenode.setAttribute('Index', unicode(index))
-                outfitnode.appendChild(piecenode)
-            outfitsnode.appendChild(outfitnode)
-        rootnode.appendChild(outfitsnode)
+        if len(self.outfits.keys()) > 0:
+            outfitsnode = document.createElement('Outfits')
+            for outfitname, outfit in self.outfits.items():
+                outfitnode = document.createElement('Outfit')
+                outfitnode.setAttribute(u'name', outfitname)
+                for piece, index in outfit.items():
+                    piecenode = document.createElement('OutfitItem')
+                    piecenode.setAttribute('Location', piece)
+                    piecenode.setAttribute('Index', unicode(index))
+                    outfitnode.appendChild(piecenode)
+                outfitsnode.appendChild(outfitnode)
+            rootnode.appendChild(outfitsnode)
 
         if rich:
             totalsdict = self.summarize()
@@ -1873,10 +1874,10 @@ class ScWindow(QMainWindow, Ui_B_SC):
                 self.coop = eval(XMLHelper.getText(child.childNodes), 
                                  globals(), globals())
             elif child.tagName == 'Outfits':
-                self.outfitCounter += 1
                 for outfitnode in child.childNodes:
                     if outfitnode.nodeType == Node.TEXT_NODE: continue
                     if outfitnode.tagName == 'Outfit':
+                        self.outfitCounter += 1
                         outfitname = outfitnode.getAttribute(u'name')
                         self.outfits[outfitname] = {}
                         for piecenode in outfitnode.childNodes:
@@ -1899,7 +1900,10 @@ class ScWindow(QMainWindow, Ui_B_SC):
         self.restoreItem(self.itemattrlist[self.currentTabLabel])
         self.modified = 0
         self.nocalc = 0
-        if len(self.outfits.keys()) > 0:
+
+        if len(self.outfits.keys()) == 0:
+            self.newOutfit()
+        else:
             self.Outfit.blockSignals(True)
             for oname in self.outfits.keys():
                 self.Outfit.addItem(oname)
