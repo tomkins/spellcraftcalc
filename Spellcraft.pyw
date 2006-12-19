@@ -9,7 +9,8 @@ try:
     import psyco
 
     if __name__ == '__main__':
-        psyco.full()
+        #psyco.full()
+        psyco.profile(memory=5000,maxmemory=5000)
 except:
     pass
 
