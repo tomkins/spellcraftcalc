@@ -47,6 +47,8 @@ class DimWriter(formatter.DumbWriter):
         self.send_literal_data('  ')
 
     def send_flowing_data(self, data, label = 0):
+        if data:
+            data = data.replace('\xa0', '')
         if not data: return
         atbreak = self.atbreak or data[0].isspace()
         col = self.col

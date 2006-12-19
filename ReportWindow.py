@@ -187,7 +187,7 @@ class ReportWindow(QDialog, Ui_B_ReportWindow):
                 p.close()
                 w.flush()
                 f.close()
-                self.parent.ReportPath = os.path.dirname(os.path.abspath(filename))
+                self.parent.ReportPath = os.path.dirname(os.path.abspath(str(filename)))
             except IOError:
                 QMessageBox.critical(None, 'Error!', 
                     'Error writing to file: ' + filename, 'OK')
