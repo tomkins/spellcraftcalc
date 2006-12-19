@@ -389,22 +389,34 @@ class ScWindow(QMainWindow, Ui_B_SC):
                                 QKeySequence(Qt.CTRL+Qt.Key_S))
         self.toolbar.addAction(self.getIcon('Save'), 'Save', self.saveFile)
         self.filemenu.addAction('Save &As...', self.saveAsFile)
-        self.toolbar.addAction(self.getIcon('Save-as'), 'Save As', self.saveAsFile)
+        self.toolbar.addAction(self.getIcon('SaveAs'), 'Save As',
+                               self.saveAsFile)
+
         self.filemenu.addSeparator()
         self.toolbar.addSeparator()
+
         self.filemenu.addAction('&Load Item...', self.loadItem,
                                 QKeySequence(Qt.CTRL+Qt.SHIFT+Qt.Key_L))
+        self.toolbar.addAction(self.getIcon('LoadItem'), 'Load Item', 
+                               self.loadItem)
         self.filemenu.addAction('Sa&ve Item...', self.saveItem,
                                 QKeySequence(Qt.CTRL+Qt.SHIFT+Qt.Key_S))
+        self.toolbar.addAction(self.getIcon('SaveItem'), 'Save Item', 
+                               self.saveItem)
         self.filemenu.addAction('Item Database Path...', self.chooseItemPath)
+
         self.filemenu.addSeparator()
+        self.toolbar.addSeparator()
+
         self.filemenu.addAction('Export &Quickbars...', self.openCraftBars)
         self.toolbar.addAction(self.getIcon('ExportGems'), 'Quickbars', 
                                self.openCraftBars)
         self.filemenu.addAction('Export SCTemplate XML...', self.exportAsFile)
         self.filemenu.addAction('Export &UI Window...', self.generateUIXML)
         self.filemenu.addAction('Choose UI Format...', self.chooseXMLUIFile)
+
         self.filemenu.addSeparator()
+
         self.filemenu.addMenu(self.rf_menu)
         self.filemenu.addSeparator()
         self.filemenu.addAction('E&xit', self.close,
@@ -491,18 +503,24 @@ class ScWindow(QMainWindow, Ui_B_SC):
         self.menuBar().addMenu(self.editmenu)
 
         self.viewmenu = QMenu('&View', self)
-        self.craftingmenuid = self.viewmenu.addAction('&Gem Crafting',
+        self.craftingmenuid = self.viewmenu.addAction('Craft &Gems',
                                   self.openCraftWindow,
                                   QKeySequence(Qt.ALT+Qt.Key_G))
-        self.craftingtoolid = self.toolbar.addAction(self.getIcon('Properties'),
+        self.craftingtoolid = self.toolbar.addAction(self.getIcon('CraftGems'),
                                   'Craft Gems', self.openCraftWindow)
 
         self.viewmenu.addSeparator()
-        self.viewmenu.addAction('&Materials', self.openMaterialsReport,
+
+        self.viewmenu.addAction('&Materials Report', self.openMaterialsReport,
                                 QKeySequence(Qt.ALT+Qt.Key_M))
-        self.viewmenu.addAction('&Configuration', self.openConfigReport,
+        self.toolbar.addAction(self.getIcon('MatsReport'), 'Materials Report',
+                               self.openMaterialsReport)
+        self.viewmenu.addAction('&Configuration Report', self.openConfigReport,
                                 QKeySequence(Qt.ALT+Qt.Key_C))
-        self.viewmenu.addAction('Choose Format...', self.chooseReportFile)
+        self.toolbar.addAction(self.getIcon('ConfReport'), 'Config Report',
+                               self.openMaterialsReport)
+        self.viewmenu.addAction('Choose Config Template...',
+                                self.chooseReportFile)
 
         self.viewmenu.addSeparator()
 
