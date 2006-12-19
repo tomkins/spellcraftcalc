@@ -7,7 +7,7 @@
 from PyQt4.QtCore import *
 from PyQt4.QtGui import *
 from constants import *
-from B_ItemLevel4 import *
+from B_ItemLevel import *
 import re
 
 class ItemLevel(QDialog, Ui_B_ItemLevel):

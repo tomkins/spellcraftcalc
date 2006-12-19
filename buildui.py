@@ -8,7 +8,6 @@ files = (
     ('DisplayWindow.ui', 'B_DisplayWindow.py'),
     ('ReportWindow.ui', 'B_ReportWindow.py'),
     ('ItemLevel.ui', 'B_ItemLevel.py'),
-    ('ItemLevel4.ui', 'B_ItemLevel4.py'),
     ('CraftBar.ui', 'B_CraftBar.py'),
     ('Options.ui', 'B_Options.py'),
 #   ('CraftBar3.ui', 'B_CraftBar3.py'),
