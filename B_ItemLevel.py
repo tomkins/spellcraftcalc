@@ -1,9 +1,9 @@
 # -*- coding: utf-8 -*-
 
-# Form implementation generated from reading ui file 'ItemLevel4.ui'
+# Form implementation generated from reading ui file 'ItemLevel.ui'
 #
-# Created: Tue Nov 28 23:19:07 2006
-#      by: PyQt4 UI code generator 4.1
+# Created: Tue Dec 19 00:02:23 2006
+#      by: PyQt4 UI code generator 4.1.1
 #
 # WARNING! All changes made in this file will be lost!
 
