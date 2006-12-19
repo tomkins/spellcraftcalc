@@ -697,6 +697,13 @@ class ScWindow(QMainWindow, Ui_B_SC):
         self.move(x, y)
         self.updateGeometry()
 
+        if not isinstance(self.pricingInfo['Qual'], dict):
+            self.pricingInfo['Qual'] = {}
+            ScOptions.instance().setOption('Pricing', self.pricingInfo)
+        if not isinstance(self.pricingInfo['Tier'], dict):
+            self.pricingInfo['Tier'] = {}
+            ScOptions.instance().setOption('Pricing', self.pricingInfo)
+
     def saveOptions(self):
         ScOptions.instance().setOption('Realm', self.realm)
         ScOptions.instance().setOption('RecentFiles', self.recentFiles)
