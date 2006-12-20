@@ -5,12 +5,17 @@
 #
 # See NOTICE.txt for copyrights and grant of license
 
+import ScWindow
+
 try:
     import psyco
 
     if __name__ == '__main__':
         #psyco.full()
-        psyco.profile(memory=5000,maxmemory=5000)
+	#psyco.log()
+	psyco.bind(ScWindow.ScWindow.calculate)
+	psyco.bind(ScWindow.ScWindow.summarize)
+        psyco.profile(memory=5000)
 except:
     pass
 
@@ -73,7 +78,6 @@ class ScApplication(QApplication):
         ScOptions()
         ScOptions.instance().load()
 
-        import ScWindow
         scw = ScWindow.ScWindow()
         app.setActiveWindow(scw)
         scw.setWindowIcon(QIcon(":/images/ScWindow.png"))
