@@ -36,6 +36,8 @@ Updated 12/20/2006 - Version 1.93
   Fixed a bug with the 'Save as Text' option for config reports where
   non-printable characters were showing up in the output.
   
+  Memory usage has been reduced significantly. 
+  On program startup it should be down to around 30M.
 
 Updated 11/04/2006 - Version 1.92
 
