@@ -1,8 +1,41 @@
-Updated ??/??/2006 - Version 1.93
+Updated 12/20/2006 - Version 1.93
 
   Updated mauler class gems for LoTM patch 1.85k
 
   Overhauled saving preferences (options).
+
+  Added ability to save 'Outfits'
+    An outfit is a record of the current state of items. So, it is
+    possible to create multiple outfits (e.g. PvP, RvR...) inside
+    the same Spellcrafting template, thereby making item/drop reuse
+    much easier.
+    This goes along with the idea that was implemented in 1.92 of item
+    stacks. So an RVR outfit might reference a 'RVR Chest piece' and 
+    a PvP outfit may reference a 'PVP Chest Piece'.
+    Some caveats to note:
+      - An Outfit does not save all the properties of an item, it just
+        saves the current item that is selected for each piece of armor
+        or jewelry. So, if you save an outfit, but then edit the item,
+        switch to another outfit, and then switch back, it will reflect
+        the changes you made to the item. You can think of an outfit as
+        just pointers to the items.
+
+  Quickbar loading should be fixed. Mythic changed the server codes on
+  us in one of their patches.
+
+  Focus does not show up in the drop-down type lists on each slot if
+  the character class you have selected does not support focus.
+  This feature is only turned on if the 'Hide Non Class Skills' box
+  is checked in the options.
+
+  The utility calculation for hits has been fixed.
+
+  Added a toolbar with icons for easier access to common functions like
+  New Template, Save Template, New Item, Save Item, Load Item, etc.
+
+  Fixed a bug with the 'Save as Text' option for config reports where
+  non-printable characters were showing up in the output.
+  
 
 Updated 11/04/2006 - Version 1.92
 
