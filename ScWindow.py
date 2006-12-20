@@ -309,6 +309,8 @@ class ScWindow(QMainWindow, Ui_B_SC):
 
         self.Outfit.setEditable(True)
         self.Outfit.setEnabled(False)
+        self.Outfit.setCompleter(None)
+        self.Outfit.duplicatesEnabled(False)
         self.Outfit.setInsertPolicy(QComboBox.InsertAtCurrent)
         self.connect(self.Outfit,SIGNAL("activated(int)"), self.recallOutfit)
         self.connect(self.Outfit.lineEdit(),SIGNAL("editingFinished()"),
@@ -2283,6 +2285,10 @@ class ScWindow(QMainWindow, Ui_B_SC):
             outfit = self.outfits.pop(self.currentOutfitName)
             self.outfits[outfitname] = outfit
             self.currentOutfitName = outfitname
+
+        # Need this so the combobox will keep the current text since it
+        # only listens to the return key
+        self.Outfit.lineEdit().emit(SIGNAL("returnPressed()"))
         
     def aboutBox(self):
         splash = AboutScreen(parent=self,modal=True)
