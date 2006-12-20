@@ -119,9 +119,11 @@ class Options(QDialog, Ui_B_Options):
         if not pinfo.has_key('PPGem'): return
 
         # do some consistency checks
-        if not isinstance(pinfo['Qual'], dict):
+        if not self.pricingInfo.has_key('Qual') or\
+                not isinstance(pinfo['Qual'], dict):
             pinfo['Qual'] = {}
-        if not isinstance(pinfo['Tier'], dict):
+        if not self.pricingInfo.has_key('Tier') or\
+                not isinstance(pinfo['Tier'], dict):
             pinfo['Tier'] = {}
 
         self.PPGem.setText(str(pinfo['PPGem']))
