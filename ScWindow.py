@@ -310,7 +310,7 @@ class ScWindow(QMainWindow, Ui_B_SC):
         self.Outfit.setEditable(True)
         self.Outfit.setEnabled(False)
         self.Outfit.setCompleter(None)
-        self.Outfit.duplicatesEnabled(False)
+        self.Outfit.setDuplicatesEnabled(False)
         self.Outfit.setInsertPolicy(QComboBox.InsertAtCurrent)
         self.connect(self.Outfit,SIGNAL("activated(int)"), self.recallOutfit)
         self.connect(self.Outfit.lineEdit(),SIGNAL("editingFinished()"),
