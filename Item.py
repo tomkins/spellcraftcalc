@@ -162,28 +162,20 @@ class ItemSlot:
         return mval
 
     def gemUtility(self,skilltable={}):
-        mval = 0.0
         if self.Amount == '0' or self.Amount == '':
-            pass
-        elif self.Type == 'Stat':
-            if self.Effect == 'Hits':
-                mval = int(self.Amount) / 4.0
-            else:
-                mval = ((int(self.Amount) - 1) / 3.0) * 2.0 + 1.0
-        elif self.Type == 'Resist' or self.Type == 'Power':
-            mval = (int(self.Amount) - 1) * 2.0
-            if int(self.Amount) == 1: mval = 1.0
-        elif self.Type == 'Skill':
-            mval = (int(self.Amount) - 1) * 5.0
-            if int(self.Amount) == 1: mval = 1.0
-            #if self.Effect == 'All Magic Skills':
-            #    for e in skilltable[effect]:
-            #        mval += amount * 5
-        elif self.Type == 'Focus':
-            mval = 1.0
-        elif self.Type == 'Hits':
-            return int(self.Amount) / 4.0
-        return mval
+            return 0.0
+
+        # Go lambda!
+        try:
+            return { 
+                'Stat': lambda x: (self.Effect == 'Hits' and [x / 4.0] or [x * 2.0 / 3.0])[0],
+                'Resist': lambda x: x * 2,
+                'Power': lambda x: x * 2,
+                'Skill': lambda x: x * 5,
+                'Focus': lambda x: 1.0,
+            }[self.Type](float(self.Amount))
+        except KeyError:
+            return 0
 
     def gemName(self, realm, parts = 7):
         if not GemTables.has_key(realm): return ''
