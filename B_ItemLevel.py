@@ -2,8 +2,8 @@
 
 # Form implementation generated from reading ui file 'ItemLevel.ui'
 #
-# Created: Tue Dec 19 00:02:23 2006
-#      by: PyQt4 UI code generator 4.1.1
+# Created: Tue Dec 26 16:44:22 2006
+#      by: PyQt4 UI code generator 4-snapshot-20061020
 #
 # WARNING! All changes made in this file will be lost!
 
@@ -30,7 +30,7 @@ class Ui_B_ItemLevel(object):
         self.hboxlayout1.setSpacing(6)
         self.hboxlayout1.setObjectName("hboxlayout1")
 
-        self.ButtonGroup3 = QtGui.QGroupBox(B_ItemLevel)
+        self.ButtonGroup3 = QtGui.QFrame(B_ItemLevel)
 
         sizePolicy = QtGui.QSizePolicy(QtGui.QSizePolicy.Policy(7),QtGui.QSizePolicy.Policy(7))
         sizePolicy.setHorizontalStretch(0)
