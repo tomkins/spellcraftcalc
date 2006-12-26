@@ -185,20 +185,26 @@ class ItemSlot:
         if self.Type[-6:] == 'Effect':
             if not EffectTypeNames.has_key(self.Type): return ''
             if not EffectItemNames.has_key(self.Effect): return ''
-            return string.strip(EffectItemNames[self.Effect][0]
-                    + ' ' + EffectTypeNames[self.Type][0]
-                    + ' ' + EffectItemNames[self.Effect][1]
-                    + ' ' + EffectMetal[realm][amountindex]
-                    + ' ' + EffectTypeNames[self.Type][1])
+            return string.strip(
+                ' '.join([
+                    EffectItemNames[self.Effect][0],
+                    EffectTypeNames[self.Type][0],
+                    EffectItemNames[self.Effect][1],
+                    EffectMetal[realm][amountindex],
+                    EffectTypeNames[self.Type][1]
+                ]))
         if not GemTables[realm].has_key(self.Type): return ''
         gemlist = GemTables[realm][self.Type]
         if not gemlist.has_key(self.Effect):
             gemlist = GemTables['All'][self.Type]
             if not gemlist.has_key(self.Effect): return ''
         if parts == 7:
-            return string.strip(GemNames[amountindex]
-                        + ' ' + gemlist[self.Effect][0]
-                        + ' ' + gemlist[self.Effect][1])
+            return string.strip(
+                ' '.join([
+                    GemNames[amountindex],
+                    gemlist[self.Effect][0],
+                    gemlist[self.Effect][1]
+                ]))
         else:
             name = ""
             if parts & 4:
