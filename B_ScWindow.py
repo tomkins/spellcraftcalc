@@ -2,8 +2,8 @@
 
 # Form implementation generated from reading ui file 'ScWindow.ui'
 #
-# Created: Sun Dec 17 22:59:21 2006
-#      by: PyQt4 UI code generator 4.1
+# Created: Wed Dec 27 20:01:49 2006
+#      by: PyQt4 UI code generator 4-snapshot-20061020
 #
 # WARNING! All changes made in this file will be lost!
 
@@ -23,7 +23,7 @@ class Ui_B_SC(object):
         self.gridlayout.setSpacing(0)
         self.gridlayout.setObjectName("gridlayout")
 
-        self.GroupCharInfo = QtGui.QGroupBox(self.ScWinFrame)
+        self.GroupCharInfo = GroupFrame(self.ScWinFrame)
         self.GroupCharInfo.setObjectName("GroupCharInfo")
 
         self.gridlayout1 = QtGui.QGridLayout(self.GroupCharInfo)
@@ -125,7 +125,7 @@ class Ui_B_SC(object):
         spacerItem2 = QtGui.QSpacerItem(3,1,QtGui.QSizePolicy.Fixed,QtGui.QSizePolicy.Minimum)
         self.gridlayout.addItem(spacerItem2,0,1,1,1)
 
-        self.GroupStats = QtGui.QGroupBox(self.ScWinFrame)
+        self.GroupStats = GroupFrame(self.ScWinFrame)
         self.GroupStats.setObjectName("GroupStats")
 
         self.gridlayout2 = QtGui.QGridLayout(self.GroupStats)
@@ -308,7 +308,7 @@ class Ui_B_SC(object):
         spacerItem4 = QtGui.QSpacerItem(3,0,QtGui.QSizePolicy.Fixed,QtGui.QSizePolicy.Minimum)
         self.gridlayout.addItem(spacerItem4,0,3,1,1)
 
-        self.GroupResists = QtGui.QGroupBox(self.ScWinFrame)
+        self.GroupResists = GroupFrame(self.ScWinFrame)
         self.GroupResists.setObjectName("GroupResists")
 
         self.gridlayout3 = QtGui.QGridLayout(self.GroupResists)
@@ -463,7 +463,7 @@ class Ui_B_SC(object):
         spacerItem6 = QtGui.QSpacerItem(3,1,QtGui.QSizePolicy.Fixed,QtGui.QSizePolicy.Minimum)
         self.gridlayout.addItem(spacerItem6,0,5,1,1)
 
-        self.GroupSkillsList = QtGui.QGroupBox(self.ScWinFrame)
+        self.GroupSkillsList = GroupFrame(self.ScWinFrame)
         self.GroupSkillsList.setObjectName("GroupSkillsList")
 
         self.gridlayout4 = QtGui.QGridLayout(self.GroupSkillsList)
@@ -494,7 +494,7 @@ class Ui_B_SC(object):
         self.vboxlayout.setSpacing(0)
         self.vboxlayout.setObjectName("vboxlayout")
 
-        self.PieceTab = MultiTabBar4(self.ScWinFrame)
+        self.PieceTab = MultiTabBar(self.ScWinFrame)
         self.PieceTab.setFocusPolicy(QtCore.Qt.StrongFocus)
         self.PieceTab.setObjectName("PieceTab")
         self.vboxlayout.addWidget(self.PieceTab)
@@ -1309,4 +1309,5 @@ class Ui_B_SC(object):
         self.ItemUtility.setText(QtGui.QApplication.translate("B_SC", "0.0", None, QtGui.QApplication.UnicodeUTF8))
 
 from SearchingCombo import SearchingCombo
-from MultiTabBar4 import MultiTabBar4, MultiTabFrame
+from MultiTabBar import MultiTabBar, MultiTabFrame
+from GroupFrame import GroupFrame

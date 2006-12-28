@@ -21,7 +21,7 @@ class MultiTab:
         self.textColor = QColor(0, 0, 0)
         self.data = None
 
-class MultiTabBar4(QWidget):
+class MultiTabBar(QWidget):
     def __init__(self, parent = None, name = None):
         self.__tabList = []
         self.__selectedIndex = (0, 0)
@@ -606,7 +606,7 @@ if __name__ == '__main__':
     child = QWidget(wind)
     wind.setCentralWidget(child)
 
-    bar = MultiTabBar4(child)
+    bar = MultiTabBar(child)
     bar.addTab(0, 'One')
     bar.addTab(0, 'two')
     bar.addTab(0, 'three')

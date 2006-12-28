@@ -24,7 +24,7 @@ import ReportWindow
 import DisplayWindow
 import CraftBar
 import SearchingCombo
-import MultiTabBar4
+import MultiTabBar
 import UIXML
 import os
 import os.path
