@@ -24,7 +24,7 @@
      <number>0</number>
     </property>
     <item row="0" column="0" >
-     <widget class="QGroupBox" name="GroupCharInfo" >
+     <widget class="GroupFrame" name="GroupCharInfo" >
       <layout class="QGridLayout" >
        <property name="margin" >
         <number>4</number>
@@ -225,7 +225,7 @@
      </spacer>
     </item>
     <item row="0" column="2" >
-     <widget class="QGroupBox" name="GroupStats" >
+     <widget class="GroupFrame" name="GroupStats" >
       <layout class="QGridLayout" >
        <property name="margin" >
         <number>4</number>
@@ -593,7 +593,7 @@
      </spacer>
     </item>
     <item row="0" column="4" >
-     <widget class="QGroupBox" name="GroupResists" >
+     <widget class="GroupFrame" name="GroupResists" >
       <layout class="QGridLayout" >
        <property name="margin" >
         <number>4</number>
@@ -907,7 +907,7 @@
      </spacer>
     </item>
     <item row="0" column="6" >
-     <widget class="QGroupBox" name="GroupSkillsList" >
+     <widget class="GroupFrame" name="GroupSkillsList" >
       <layout class="QGridLayout" >
        <property name="margin" >
         <number>4</number>
@@ -977,7 +977,7 @@
        <number>0</number>
       </property>
       <item>
-       <widget class="MultiTabBar4" name="PieceTab" >
+       <widget class="MultiTabBar" name="PieceTab" >
         <property name="focusPolicy" >
          <enum>Qt::StrongFocus</enum>
         </property>
@@ -2071,16 +2071,23 @@
    <pixmap></pixmap>
   </customwidget>
   <customwidget>
-   <class>MultiTabBar4</class>
+   <class>MultiTabBar</class>
    <extends>QWidget</extends>
-   <header>MultiTabBar4.h</header>
+   <header>MultiTabBar.h</header>
    <container>1</container>
    <pixmap></pixmap>
   </customwidget>
   <customwidget>
    <class>MultiTabFrame</class>
    <extends>QFrame</extends>
-   <header>MultiTabBar4.h</header>
+   <header>MultiTabBar.h</header>
+   <container>1</container>
+   <pixmap></pixmap>
+  </customwidget>
+  <customwidget>
+   <class>GroupFrame</class>
+   <extends>QFrame</extends>
+   <header>GroupFrame.h</header>
    <container>1</container>
    <pixmap></pixmap>
   </customwidget>
