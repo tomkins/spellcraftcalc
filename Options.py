@@ -119,10 +119,10 @@ class Options(QDialog, Ui_B_Options):
         if not pinfo.has_key('PPGem'): return
 
         # do some consistency checks
-        if not self.pricingInfo.has_key('Qual') or\
+        if not pinfo.has_key('Qual') or\
                 not isinstance(pinfo['Qual'], dict):
             pinfo['Qual'] = {}
-        if not self.pricingInfo.has_key('Tier') or\
+        if not pinfo.has_key('Tier') or\
                 not isinstance(pinfo['Tier'], dict):
             pinfo['Tier'] = {}
 
