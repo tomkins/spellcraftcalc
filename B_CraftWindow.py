@@ -2,8 +2,8 @@
 
 # Form implementation generated from reading ui file 'CraftWindow.ui'
 #
-# Created: Tue Nov 28 23:19:00 2006
-#      by: PyQt4 UI code generator 4.1
+# Created: Wed Dec 27 21:57:49 2006
+#      by: PyQt4 UI code generator 4.1.1
 #
 # WARNING! All changes made in this file will be lost!
 

@@ -2,8 +2,8 @@
 
 # Form implementation generated from reading ui file 'CraftBar.ui'
 #
-# Created: Tue Nov 28 22:36:54 2006
-#      by: PyQt4 UI code generator 4.1
+# Created: Wed Dec 27 21:57:51 2006
+#      by: PyQt4 UI code generator 4.1.1
 #
 # WARNING! All changes made in this file will be lost!
 

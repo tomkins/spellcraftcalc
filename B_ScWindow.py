@@ -2,8 +2,8 @@
 
 # Form implementation generated from reading ui file 'ScWindow.ui'
 #
-# Created: Wed Dec 27 20:01:49 2006
-#      by: PyQt4 UI code generator 4-snapshot-20061020
+# Created: Wed Dec 27 21:57:48 2006
+#      by: PyQt4 UI code generator 4.1.1
 #
 # WARNING! All changes made in this file will be lost!
 
