@@ -1,4 +1,4 @@
-from PyQt4.QtGui import QFrame, QPainter, QStyle, QStyleOptionFrame
+from PyQt4.QtGui import QFrame, QPainter, QStyle, QStyleOptionFrameV2
 
 class GroupFrame(QFrame):
     def __init__(self, parent = None):
@@ -6,7 +6,7 @@ class GroupFrame(QFrame):
 
     def paintEvent(self, pevent):
         painter = QPainter(self)
-        groupframe = QStyleOptionFrame()
+        groupframe = QStyleOptionFrameV2()
         groupframe.init(self);
         self.style().drawPrimitive(QStyle.PE_FrameGroupBox,
                                    groupframe, painter, self)
