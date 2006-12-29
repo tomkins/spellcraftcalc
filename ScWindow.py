@@ -248,8 +248,10 @@ class ScWindow(QMainWindow, Ui_B_SC):
             self.AmountEdit[i].setFixedSize(QSize(amtcbwidth, edheight))
             self.AmountEdit[i].setValidator(editAmountValidator)
             self.switchOnType['drop'].append(self.AmountEdit[i])
-            self.connect(self.AmountEdit[i],SIGNAL("textChanged(const QString&)"),
+            self.connect(self.AmountEdit[i],SIGNAL("editingFinished()"),
                          self.AmountsChanged)
+            #self.connect(self.AmountEdit[i],SIGNAL("textChanged(const QString&)"),
+            #             self.AmountsChanged)
 
             self.Effect.append(getattr(self, 'Effect_%d' % idx))
             self.Effect[i].setFixedSize(QSize(effectwidth, cbheight))
@@ -262,9 +264,10 @@ class ScWindow(QMainWindow, Ui_B_SC):
             self.Requirement.append(getattr(self, 'Requirement_%d' % idx))
             self.Requirement[i].setFixedSize(QSize(reqwidth, edheight))
             self.switchOnType['drop'].append(self.Requirement[i])
-            self.connect(self.Requirement[i],
-                         SIGNAL("textChanged(const QString&)"),
+            self.connect(self.Requirement[i],SIGNAL("editingFinished()"),
                          self.AmountsChanged)
+            #self.connect(self.Requirement[i],SIGNAL("textChanged(const QString&)"),
+            #            self.AmountsChanged)
 
             if i < 6:
                 self.AmountDrop.append(getattr(self, 'Amount_Drop_%d' % idx))
@@ -314,9 +317,9 @@ class ScWindow(QMainWindow, Ui_B_SC):
         self.Outfit.setInsertPolicy(QComboBox.InsertAtCurrent)
         self.connect(self.Outfit,SIGNAL("activated(int)"), self.recallOutfit)
         self.connect(self.Outfit.lineEdit(),SIGNAL("editingFinished()"),
-            self.outfitNameChanged) 
+                     self.outfitNameChanged)
         #self.connect(self.Outfit,SIGNAL("editTextChanged(const QString&)"),
-        #    self.outfitNameChanged)
+        #             self.outfitNameChanged)
 
         self.connect(self.GroupStats,SIGNAL("mousePressEvent(QMouseEvent*)"),
                      self.mousePressEvent)
@@ -326,39 +329,55 @@ class ScWindow(QMainWindow, Ui_B_SC):
                      SIGNAL("mousePressEvent(QMouseEvent*)"),
                      self.mousePressEvent)
 
-        self.connect(self.CharName,SIGNAL("textChanged(const QString&)"),
+        self.connect(self.CharName,SIGNAL("editingFinished()"),
                      self.TemplateChanged)
+        #self.connect(self.CharName,SIGNAL("textChanged(const QString&)"),
+        #             self.TemplateChanged)
         self.connect(self.Realm,SIGNAL("activated(int)"),
                      self.RealmChanged)
         self.connect(self.CharClass,SIGNAL("activated(int)"),
                      self.CharClassChanged)
         self.connect(self.CharRace,SIGNAL("activated(int)"),
                      self.RaceChanged)
-        self.connect(self.CharLevel,SIGNAL("textChanged(const QString&)"),
+        self.connect(self.CharLevel,SIGNAL("editingFinished()"),
                      self.TemplateChanged)
+        #self.connect(self.CharLevel,SIGNAL("textChanged(const QString&)"),
+        #             self.TemplateChanged)
 
         self.connect(self.PieceTab,SIGNAL("currentChanged"),
                      self.PieceTabChanged)
-        self.connect(self.ItemLevel,SIGNAL("textChanged(const QString&)"),
+        self.connect(self.ItemLevel,SIGNAL("editingFinished()"),
                      self.ItemChanged)
+        #self.connect(self.ItemLevel,SIGNAL("textChanged(const QString&)"),
+        #             self.ItemChanged)
         self.connect(self.ItemLevelButton,SIGNAL("clicked()"),
                      self.ItemLevelShow)
         self.connect(self.QualDrop,SIGNAL("activated(int)"),
                      self.ItemChanged)
-        self.connect(self.QualEdit,SIGNAL("textChanged(const QString&)"),
+        self.connect(self.ItemLevel,SIGNAL("editingFinished()"),
                      self.ItemChanged)
-        self.connect(self.Bonus_Edit,SIGNAL("textChanged(const QString&)"),
+        #self.connect(self.QualEdit,SIGNAL("textChanged(const QString&)"),
+        #             self.ItemChanged)
+        self.connect(self.Bonus_Edit,SIGNAL("editingFinished()"),
                      self.ItemChanged)
-        self.connect(self.AFDPS_Edit,SIGNAL("textChanged(const QString&)"),
+        #self.connect(self.Bonus_Edit,SIGNAL("textChanged(const QString&)"),
+        #             self.ItemChanged)
+        self.connect(self.AFDPS_Edit,SIGNAL("editingFinished()"),
                      self.ItemChanged)
-        self.connect(self.Speed_Edit,SIGNAL("textChanged(const QString&)"),
+        #self.connect(self.AFDPS_Edit,SIGNAL("textChanged(const QString&)"),
+        #             self.ItemChanged)
+        self.connect(self.Speed_Edit,SIGNAL("editingFinished()"),
                      self.ItemChanged)
+        #self.connect(self.Speed_Edit,SIGNAL("textChanged(const QString&)"),
+        #             self.ItemChanged)
         self.connect(self.Equipped,SIGNAL("stateChanged(int)"),
                      self.ItemChanged)
         self.connect(self.ItemNameCombo,SIGNAL("activated(int)"),
                      self.ItemNameSelected)
-        self.connect(self.ItemNameCombo,SIGNAL("textChanged(const QString&)"),
+        self.connect(self.ItemNameCombo.lineEdit(),SIGNAL("editingFinished()"),
                      self.ItemNameEdited)
+        #self.connect(self.ItemNameCombo,SIGNAL("textChanged(const QString&)"),
+        #             self.ItemNameEdited)
         self.connect(self.SkillsList,SIGNAL("activated(const QModelIndex&)"),
                      self.SkillClicked)
 
@@ -374,7 +393,7 @@ class ScWindow(QMainWindow, Ui_B_SC):
         return thisicon
 
     def initMenu(self):
-        self.toolbar = QToolBar()
+        self.toolbar = QToolBar("Crafting Toolbar")
 
         self.rf_menu = QMenu('&Recent Files')
         self.connect(self.rf_menu, SIGNAL("triggered(QAction*)"),
@@ -523,6 +542,20 @@ class ScWindow(QMainWindow, Ui_B_SC):
                                self.openMaterialsReport)
         self.viewmenu.addAction('Choose Config Template...',
                                 self.chooseReportFile)
+
+        self.viewmenu.addSeparator()
+
+        self.viewtoolbarmenu = QMenu('&Toolbar', self)
+        for (title, res) in (("Large", 32,), ("Normal", 24,),
+                             ("Tiny", 16,),  ("Hide", 0,),):
+            act = QAction(title, self)
+            act.setData(QVariant(res))
+            act.setCheckable(True)
+            self.viewtoolbarmenu.addAction(act)
+        self.viewtoolbarmenu.actions()[1].setChecked(True)
+        self.connect(self.viewtoolbarmenu, SIGNAL("triggered(QAction*)"), 
+                     self.viewToolbar)
+        self.viewmenu.addMenu(self.viewtoolbarmenu)
 
         self.viewmenu.addSeparator()
 
@@ -1295,7 +1328,7 @@ class ScWindow(QMainWindow, Ui_B_SC):
     def getMultiplier(self, type):
         return ImbueMultipliers[type]
 
-    def TemplateChanged(self,a0):
+    def TemplateChanged(self,a0=None):
         if self.nocalc: return
         self.modified = 1
         self.calculate()
@@ -1357,7 +1390,7 @@ class ScWindow(QMainWindow, Ui_B_SC):
             self.ItemLevel.setText(str(level))
             self.AFDPS_Edit.setText(str(self.ItemLevelWindow.afdps))
 
-    def ItemChanged(self,a0):
+    def ItemChanged(self,a0=None):
         if self.nocalc: return
         self.modified = 1
         item = self.itemattrlist[self.currentTabLabel]
@@ -1395,11 +1428,13 @@ class ScWindow(QMainWindow, Ui_B_SC):
             item.Equipped = wasequipped
             self.restoreItem(item)
 
-    def ItemNameEdited(self,a0):
+    def ItemNameEdited(self,a0=None):
         if self.nocalc: return
         if self.ItemNameCombo.currentIndex() == -1:
             # strange interactions with focusOut...
             self.ItemNameCombo.setCurrentIndex(0)
+        if a0 is None:
+            a0 = unicode(self.ItemNameCombo.lineEdit().text())
         if self.ItemNameCombo.findText(a0) > 0: return
         item = self.itemattrlist[self.currentTabLabel]
         item.ItemName = unicode(self.ItemNameCombo.lineEdit().text())
@@ -1413,7 +1448,7 @@ class ScWindow(QMainWindow, Ui_B_SC):
         if index[0] == '_': index = index[1:]
         return int(index) - 1
 
-    def AmountsChanged(self, amount, slot = -1):
+    def AmountsChanged(self, amount = None, slot = -1):
         if self.nocalc: return
         if slot < 0:
             slot = self.senderSlot()      
@@ -1429,7 +1464,7 @@ class ScWindow(QMainWindow, Ui_B_SC):
         self.modified = 1
         self.calculate()
 
-    def EffectChanged(self, value, slot = -1):
+    def EffectChanged(self, value = None, slot = -1):
         if slot < 0:
             slot = self.senderSlot()        
         item = self.itemattrlist[self.currentTabLabel]
@@ -1520,7 +1555,7 @@ class ScWindow(QMainWindow, Ui_B_SC):
         typecombo.insertItems(0, typelist)
         typecombo.setCurrentIndex(typelist.index(gemtype))
 
-    def TypeChanged(self, Value, slot = -1):
+    def TypeChanged(self, Value = None, slot = -1):
         if slot < 0:
             slot = self.senderSlot()
         item = self.itemattrlist[self.currentTabLabel]
@@ -2224,6 +2259,22 @@ class ScWindow(QMainWindow, Ui_B_SC):
             self.restoreItem(item)
         else:
             self.chooseItemType(action)
+
+    def viewToolbar(self, action):
+        view = action.data().toInt()[0]
+        for act in self.viewtoolbarmenu.actions():
+            if act.data().toInt()[0] == view:
+                if not act.isChecked():
+                    act.setChecked(True)
+                    return
+            else:
+                if act.isChecked():
+                    act.setChecked(False)
+        if view == 0:
+            self.toolbar.hide()
+        else:
+            self.setIconSize(QSize(view,view))
+            self.toolbar.show()
 
     def newOutfit(self):
         outfitname = 'Outfit %d' % self.outfitCounter
