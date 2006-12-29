@@ -1,4 +1,4 @@
-# ScWindow.py: Dark Age of Camelot Spellcrafting Calculator (main Window)
+#/ ScWindow.py: Dark Age of Camelot Spellcrafting Calculator (main Window)
 #
 # See http://kscraft.sourceforge.net/ for updates
 #
@@ -36,6 +36,7 @@ import encodings
 import codecs
 import sys
 
+UPDATE_ITEMNAME_COMBO_EVENT = QEvent.Type(QEvent.User + 1)
 def plainXMLTag(strval):
     i = 0
     while i < len(strval):
@@ -49,6 +50,11 @@ class UpdateTypeListEvent(QEvent):
     def __init__(self, slot):
         QEvent.__init__(self, QEvent.User)
         self.slot = slot
+
+class UpdateItemNameComboEvent(QEvent):
+    def __init__(self, item):
+        QEvent.__init__(self, UPDATE_ITEMNAME_COMBO_EVENT)
+        self.item = item
 
 class AboutScreen(QDialog):
     def __init__(self,parent = None,name = "About",modal = True,
@@ -215,6 +221,8 @@ class ScWindow(QMainWindow, Ui_B_SC):
         self.Speed_Edit.setFixedSize(QSize(amtedwidth, edheight))
         self.ItemNameCombo.setFixedHeight(cbheight)
         self.ItemNameCombo.setCompleter(None)
+        self.ItemNameCombo.setInsertPolicy(QComboBox.InsertAtCurrent)
+        self.ItemNameCombo.setDuplicatesEnabled(False)
 
         self.GroupItemFrame.layout().setColumnStretch(8, 1)
         width = testfont.size(Qt.TextSingleLine, " Slot 10:").width()
@@ -960,7 +968,12 @@ class ScWindow(QMainWindow, Ui_B_SC):
         while altitem is not None:
             self.ItemNameCombo.addItem(altitem.ItemName)
             altitem = altitem.next
+
+        # Make sure the combo doesn't do anything stupid...
+        self.ItemNameCombo.blockSignals(True)
         self.ItemNameCombo.setCurrentIndex(0)
+        self.ItemNameCombo.blockSignals(False)
+
         #self.ItemNameCombo.setEditText(item.ItemName)
 
         self.ItemLevel.setText(item.Level)
@@ -1426,22 +1439,30 @@ class ScWindow(QMainWindow, Ui_B_SC):
             item.next = self.itemattrlist[self.currentTabLabel]
             self.itemattrlist[self.currentTabLabel] = item
             item.Equipped = wasequipped
-            self.restoreItem(item)
+
+            # Block any additional signals here until AFTER we
+            # execute restoreItem, so subsequent signals get the correct
+            # currentIndex which short circuits this routine
+            # (see a0 == 0 check above)
+            self.ItemNameCombo.blockSignals(True)
+            QApplication.postEvent(self, UpdateItemNameComboEvent(item))
+            #self.restoreItem(item)
 
     def ItemNameEdited(self,a0=None):
         if self.nocalc: return
         if self.ItemNameCombo.currentIndex() == -1:
             # strange interactions with focusOut...
             self.ItemNameCombo.setCurrentIndex(0)
-        if a0 is None:
-            a0 = unicode(self.ItemNameCombo.lineEdit().text())
-        if self.ItemNameCombo.findText(a0) > 0: return
+        #if a0 is None:
+        #    a0 = unicode(self.ItemNameCombo.lineEdit().text())
+        #if self.ItemNameCombo.findText(a0) > 0: return
         item = self.itemattrlist[self.currentTabLabel]
         item.ItemName = unicode(self.ItemNameCombo.lineEdit().text())
-        cursorpos = self.ItemNameCombo.lineEdit().cursorPosition()
-        self.ItemNameCombo.setItemText(0,item.ItemName)
-        self.ItemNameCombo.lineEdit().setCursorPosition(cursorpos)
+        #cursorpos = self.ItemNameCombo.lineEdit().cursorPosition()
+        #self.ItemNameCombo.setItemText(0,item.ItemName)
+        #self.ItemNameCombo.lineEdit().setCursorPosition(cursorpos)
         self.modified = 1
+        self.ItemNameCombo.lineEdit().emit(SIGNAL("returnPressed()"))
 
     def senderSlot(self):
         index = self.sender().objectName()[-2:]
@@ -2357,6 +2378,11 @@ class ScWindow(QMainWindow, Ui_B_SC):
     def event(self, e):
         if e.type() == QEvent.User:
             self.updateTypeList(e.slot)
+            return True
+        elif e.type() == UPDATE_ITEMNAME_COMBO_EVENT:
+            self.restoreItem(e.item)
+            # Unblock any signals we may have blocked in ItemNameSelected()
+            self.ItemNameCombo.blockSignals(False)
             return True
         else:
             return QMainWindow.event(self, e)
