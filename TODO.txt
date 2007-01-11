@@ -1,10 +1,17 @@
+Urgent things to fix before next beta release!!!
+
+  All items are saving <realm>Albion</realm> - outch.
+
 Things to fix before next beta release is announced;
+
+  Fix Classic Windows skin view of Group boxes (XP is fine, Mac and X11
+  are now working correctly).
 
   Prettify the display of stats with caps for the screen, with
   a stat/maxstat flavor option.  Rebalance between two or three rows
   of resists and bonuses to shorten the screen again after AF & PP%.
-
-  Add an option between 'expected cost' v.s. cost of single gem.
+  OR - Drop the three or four acuity stats that "don't apply" for
+  a given class, unless they have a bonus present?
 
   Allow users to choose to include class-specific bonuses for resists
   (mostly, applies to heavy tanks).
@@ -15,9 +22,9 @@ Things to fix before next beta release is announced;
   per-template?  Or per-gem, then sum them?
 
   Allow Drop Effect slots to have any value (such as a 5.1 DS effect
-  or 64/5 DoT effect).
+  or 64/5 DoT effect), not just pure integers.
 
-  Add Drop tincture effects (from epic dungeons) for crafted gear.
+  Add lookup of Drop tincture effects (from epic dungeons) for crafted gear.
   According to various searchs of alakazahm and the the autobestiary,
   Prissy's lists were complete.
 
@@ -27,25 +34,15 @@ Things to fix before next beta release is announced;
   on the name of the proc and the drop ablative lv 48 has the same
   effect name as the crafted (different amounts).
 
-  Calculate 5th slot tincture by level fill in the Requirement.
-
-  Add 1.85 crafted slot armor lookups (by realm/style/piece).
-
-  Fix the GroupBox to frames with GroupBox looks (for Mac which hates
-  unnamed group boxes).
-
-  Can we make the 'editing' flavor of the dropdown controls line up
-  with their look when they are in drop-pick only mode on Mac?
+  Fill in the Requirement field with the proc level requirement.
 
 Things to fix before 2.0 final (non-beta) is announced;
 
-  Change Mauler gems if and as they evolve to release.
+  Add 1.85-1.87 crafted slot lookups (by realm/style/piece).
 
   Add Mythrian bonuses - especially over-cap logic!
 
   Show Bonuses of % as #% finally?
-
-  Deal with Mythical slot items, however those go live in the game.
 
   Let slots share an Item list, e.g. both Left Ring and Right Ring
   keep track of the same unused Rings.  "Move to" sort of provides this,
@@ -61,4 +58,11 @@ Things to fix before 2.0 final (non-beta) is announced;
 
   Calculate Piece Ablative as an average based on chance-to-hit-body-part.
 
-  List Reactive Effects ordered by %chance to hit body part.
+  List Reactive Effects ordered by %chance to hit body part?
+
+  Can we make the 'editing' flavor of the dropdown controls line up
+  with their look when they are in drop-pick only mode on Mac?  They
+  seem off by -3,-1 (x,y) pixels and offsized -4,-1 or so.  Or just
+  blame trolltech?  How about the corresponding pure-edit controls so
+  they line up, too?
+
