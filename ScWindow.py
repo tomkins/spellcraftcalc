@@ -1670,6 +1670,8 @@ class ScWindow(QMainWindow, Ui_B_SC):
             return
         item = self.itemattrlist[self.currentTabLabel]
 
+        item.Realm = self.realm
+
         ext = FileExt[self.currentTabLabel]
         extstr = ''
         if not isinstance(ext, types.StringType):
