@@ -562,6 +562,7 @@ class Item:
         if itemxml is None:
             QMessageBox.critical(None, 'Error!', 
                 'There was no item to save!', 'OK')
+            return
         try:
             f = file(filename, 'w')
         except IOError:
