@@ -101,17 +101,30 @@
         <widget class="QLineEdit" name="CharLevel" />
        </item>
        <item row="5" column="0" >
-        <widget class="QLabel" name="LabelCurOutfit" >
+        <widget class="QLabel" name="LabelOutfitName" >
          <property name="text" >
-          <string>Outfit: </string>
+          <string>&amp;Outfit: </string>
          </property>
          <property name="textFormat" >
           <enum>Qt::PlainText</enum>
          </property>
+         <property name="buddy" >
+          <cstring>OutfitName</cstring>
+         </property>
         </widget>
        </item>
        <item row="5" column="1" colspan="2" >
-        <widget class="SearchingCombo" name="Outfit" />
+        <widget class="SearchingCombo" name="OutfitName">
+         <property name="editable" >
+          <bool>true</bool>
+         </property>
+         <property name="insertPolicy" >
+          <enum>QComboBox::NoInsert</enum>
+         </property>
+         <property name="duplicatesEnabled" >
+          <bool>true</bool>
+         </property>
+        </widget>
        </item>
        <item row="6" column="0" colspan="3">
         <spacer>
@@ -2098,7 +2111,7 @@
   <tabstop>CharClass</tabstop>
   <tabstop>CharRace</tabstop>
   <tabstop>CharLevel</tabstop>
-  <tabstop>Outfit</tabstop>
+  <tabstop>OutfitName</tabstop>
   <tabstop>PieceTab</tabstop>
   <tabstop>ItemLevel</tabstop>
   <tabstop>ItemLevelButton</tabstop>
