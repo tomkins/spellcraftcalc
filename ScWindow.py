@@ -770,8 +770,6 @@ class ScWindow(QMainWindow, Ui_B_SC):
         self.currentTab = self.PieceTab
         self.currentTabLabel = string.strip(str(self.PieceTab.tabText(0, 0)))
 
-        self.Equipped.setChecked(1)
-
         self.outfits = {}
         self.outfitnumbering = 1
         self.currentOutfitName = ""
