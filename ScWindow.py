@@ -37,14 +37,6 @@ import codecs
 import sys
 
 UPDATE_ITEMNAME_COMBO_EVENT = QEvent.Type(QEvent.User + 1)
-def plainXMLTag(strval):
-    i = 0
-    while i < len(strval):
-        if not (strval[i].isalpha() or (i > 0 and strval[i].isdigit())):
-            strval = strval[:i] + strval[i+1:]
-        else:
-            i += 1
-    return strval
 
 class UpdateTypeListEvent(QEvent):
     def __init__(self, slot):
@@ -55,6 +47,15 @@ class UpdateItemNameComboEvent(QEvent):
     def __init__(self, item):
         QEvent.__init__(self, UPDATE_ITEMNAME_COMBO_EVENT)
         self.item = item
+
+def plainXMLTag(strval):
+    i = 0
+    while i < len(strval):
+        if not (strval[i].isalpha() or (i > 0 and strval[i].isdigit())):
+            strval = strval[:i] + strval[i+1:]
+        else:
+            i += 1
+    return strval
 
 class AboutScreen(QDialog):
     def __init__(self,parent = None,name = "About",modal = True,
@@ -246,7 +247,7 @@ class ScWindow(QMainWindow, Ui_B_SC):
             self.Type.append(getattr(self, 'Type_%d' % idx))
             self.Type[i].setFixedSize(QSize(typewidth, cbheight))
             self.connect(self.Type[i],SIGNAL("activated(int)"),
-                         self.TypeChanged)
+                         self.typeChanged)
             self.GemLabel[i].setBuddy(self.Type[i])
 
             self.AmountEdit.append(getattr(self, 'Amount_Edit_%d' % idx))
@@ -254,31 +255,31 @@ class ScWindow(QMainWindow, Ui_B_SC):
             self.AmountEdit[i].setValidator(editAmountValidator)
             self.switchOnType['drop'].append(self.AmountEdit[i])
             self.connect(self.AmountEdit[i],SIGNAL("editingFinished()"),
-                         self.AmountsChanged)
+                         self.amountsChanged)
             #self.connect(self.AmountEdit[i],SIGNAL("textChanged(const QString&)"),
-            #             self.AmountsChanged)
+            #             self.amountsChanged)
 
             self.Effect.append(getattr(self, 'Effect_%d' % idx))
             self.Effect[i].setFixedSize(QSize(effectwidth, cbheight))
             self.Effect[i].setInsertPolicy(QComboBox.NoInsert)
             self.connect(self.Effect[i],SIGNAL("activated(int)"),
-                         self.EffectChanged)
+                         self.effectChanged)
             self.connect(self.Effect[i],SIGNAL("editTextChanged(const QString&)"),
-                         self.EffectChanged)
+                         self.effectChanged)
 
             self.Requirement.append(getattr(self, 'Requirement_%d' % idx))
             self.Requirement[i].setFixedSize(QSize(reqwidth, edheight))
             self.switchOnType['drop'].append(self.Requirement[i])
             self.connect(self.Requirement[i],SIGNAL("editingFinished()"),
-                         self.AmountsChanged)
+                         self.amountsChanged)
             #self.connect(self.Requirement[i],SIGNAL("textChanged(const QString&)"),
-            #            self.AmountsChanged)
+            #            self.amountsChanged)
 
             if i < 6:
                 self.AmountDrop.append(getattr(self, 'Amount_Drop_%d' % idx))
                 self.AmountDrop[i].setFixedSize(QSize(amtcbwidth, cbheight))
                 self.connect(self.AmountDrop[i],SIGNAL("activated(int)"),
-                             self.AmountsChanged)
+                             self.amountsChanged)
                 self.Name.append(getattr(self, 'Name_%d' % idx))
                 self.switchOnType['player'].extend([
                     self.AmountDrop[i], self.Name[i], ])
@@ -291,7 +292,7 @@ class ScWindow(QMainWindow, Ui_B_SC):
                 self.Quality[i].insertItems(0, list(QualityValues))
                 self.Quality[i].setFixedSize(QSize(amtcbwidth, cbheight))
                 self.connect(self.Quality[i],SIGNAL("activated(int)"),
-                             self.AmountsChanged)
+                             self.amountsChanged)
                 self.Points.append(getattr(self, 'Points_%d' % idx))
                 self.Cost.append(getattr(self, 'Cost_%d' % idx))
                 self.switchOnType['player'].extend([
@@ -324,62 +325,63 @@ class ScWindow(QMainWindow, Ui_B_SC):
                      self.mousePressEvent)
 
         self.connect(self.CharName,SIGNAL("editingFinished()"),
-                     self.TemplateChanged)
+                     self.templateChanged)
         #self.connect(self.CharName,SIGNAL("textChanged(const QString&)"),
-        #             self.TemplateChanged)
+        #             self.templateChanged)
         self.connect(self.Realm,SIGNAL("activated(int)"),
-                     self.RealmChanged)
+                     self.realmChanged)
         self.connect(self.CharClass,SIGNAL("activated(int)"),
-                     self.CharClassChanged)
+                     self.charClassChanged)
         self.connect(self.CharRace,SIGNAL("activated(int)"),
-                     self.RaceChanged)
+                     self.raceChanged)
         self.connect(self.CharLevel,SIGNAL("editingFinished()"),
-                     self.TemplateChanged)
+                     self.templateChanged)
         #self.connect(self.CharLevel,SIGNAL("textChanged(const QString&)"),
-        #             self.TemplateChanged)
-        self.connect(self.OutfitName,SIGNAL("activated(int)"), self.recallOutfit)
+        #             self.templateChanged)
+        self.connect(self.OutfitName,SIGNAL("activated(int)"), 
+                     self.outfitNameSelected)
         self.connect(self.OutfitName.lineEdit(),SIGNAL("editingFinished()"),
-                     self.outfitNameChanged)
+                     self.outfitNameEdited)
         #self.connect(self.OutfitName,SIGNAL("editTextChanged(const QString&)"),
-        #             self.outfitNameChanged)
+        #             self.outfitNameEdited)
 
 
         self.connect(self.PieceTab,SIGNAL("currentChanged"),
-                     self.PieceTabChanged)
+                     self.pieceTabChanged)
         self.connect(self.ItemLevel,SIGNAL("editingFinished()"),
-                     self.ItemChanged)
+                     self.itemChanged)
         #self.connect(self.ItemLevel,SIGNAL("textChanged(const QString&)"),
-        #             self.ItemChanged)
+        #             self.itemChanged)
         self.connect(self.ItemLevelButton,SIGNAL("clicked()"),
-                     self.ItemLevelShow)
+                     self.itemLevelShow)
         self.connect(self.QualDrop,SIGNAL("activated(int)"),
-                     self.ItemChanged)
+                     self.itemChanged)
         self.connect(self.ItemLevel,SIGNAL("editingFinished()"),
-                     self.ItemChanged)
+                     self.itemChanged)
         #self.connect(self.QualEdit,SIGNAL("textChanged(const QString&)"),
-        #             self.ItemChanged)
+        #             self.itemChanged)
         self.connect(self.Bonus_Edit,SIGNAL("editingFinished()"),
-                     self.ItemChanged)
+                     self.itemChanged)
         #self.connect(self.Bonus_Edit,SIGNAL("textChanged(const QString&)"),
-        #             self.ItemChanged)
+        #             self.itemChanged)
         self.connect(self.AFDPS_Edit,SIGNAL("editingFinished()"),
-                     self.ItemChanged)
+                     self.itemChanged)
         #self.connect(self.AFDPS_Edit,SIGNAL("textChanged(const QString&)"),
-        #             self.ItemChanged)
+        #             self.itemChanged)
         self.connect(self.Speed_Edit,SIGNAL("editingFinished()"),
-                     self.ItemChanged)
+                     self.itemChanged)
         #self.connect(self.Speed_Edit,SIGNAL("textChanged(const QString&)"),
-        #             self.ItemChanged)
+        #             self.itemChanged)
         self.connect(self.Equipped,SIGNAL("stateChanged(int)"),
-                     self.ItemChanged)
+                     self.itemChanged)
         self.connect(self.ItemNameCombo,SIGNAL("activated(int)"),
-                     self.ItemNameSelected)
+                     self.itemNameSelected)
         self.connect(self.ItemNameCombo.lineEdit(),SIGNAL("editingFinished()"),
-                     self.ItemNameEdited)
+                     self.itemNameEdited)
         #self.connect(self.ItemNameCombo,SIGNAL("textChanged(const QString&)"),
-        #             self.ItemNameEdited)
+        #             self.itemNameEdited)
         self.connect(self.SkillsList,SIGNAL("activated(const QModelIndex&)"),
-                     self.SkillClicked)
+                     self.skillClicked)
 
     def getIcon(self, namebase):
         thisicon = QIcon()
@@ -757,15 +759,9 @@ class ScWindow(QMainWindow, Ui_B_SC):
 
     def initialize(self, moretodo):
         self.nocalc = 1
-        self.itemIndex = 0
         self.noteText = ''
         self.craftMultiplier = 1
         self.filename = None
-        self.outfits = {}
-        self.outfitCounter = 1
-        self.currentOutfitName = ""
-        self.OutfitName.clear()
-        self.deleteOutfitAction.setEnabled(False)
         self.newcount = self.newcount + 1
         filetitle = unicode("Template" + str(self.newcount))
         self.setWindowTitle(filetitle + " - Kort's Spellcrafting Calculator")
@@ -776,8 +772,16 @@ class ScWindow(QMainWindow, Ui_B_SC):
 
         self.Equipped.setChecked(1)
 
+        self.outfits = {}
+        self.outfitnumbering = 1
+        self.currentOutfitName = ""
+        self.OutfitName.clear()
+        self.deleteOutfitAction.setEnabled(False)
+
+        self.itemIndex = 0
         self.itemattrlist = { }
         self.itemnumbering = 1
+
         for tab in PieceTabList:
             self.itemattrlist[tab] = Item('player', tab, self.realm, 
                 self.itemIndex)
@@ -793,14 +797,14 @@ class ScWindow(QMainWindow, Ui_B_SC):
         for tab in JewelTabList:
             self.itemattrlist[tab] = Item('drop', tab, self.realm,
                 self.itemIndex)
+            self.itemIndex += 1
             self.itemattrlist[tab].ItemName = "Drop Item" \
                                             + str(self.itemnumbering)
-            self.itemIndex += 1
             self.itemnumbering += 1
 
         self.CharName.setText('')
         self.Realm.setCurrentIndex(Realms.index(self.realm))
-        self.RealmChanged(Realms.index(self.realm))
+        self.realmChanged(Realms.index(self.realm))
         self.CharLevel.setText('50')
         self.restoreItem(self.itemattrlist[self.currentTabLabel])
         self.newOutfit()
@@ -901,7 +905,7 @@ class ScWindow(QMainWindow, Ui_B_SC):
                 item = item.next
         return document
 
-    def PieceTabChanged(self, row, col):
+    def pieceTabChanged(self, row, col):
         self.currentTabLabel = string.strip(str(self.PieceTab.tabText(row,col)))
         if self.currentTabLabel in JewelTabList:
             swapactionlist = self.swapjewelmenu.actions()
@@ -935,7 +939,7 @@ class ScWindow(QMainWindow, Ui_B_SC):
         col = mask & 0xff
         self.PieceTab.setCurrentIndex(row, col)
 
-    def FixupItemLevel(self):
+    def fixupItemLevel(self):
         if str(self.ItemLevel.text()) == '' \
                 or re.compile('\D').search(str(self.ItemLevel.text())):
             itemimbue = 0
@@ -992,7 +996,7 @@ class ScWindow(QMainWindow, Ui_B_SC):
 
             typecombo.insertItems(0, typelist)
             typecombo.setCurrentIndex(typelist.index(gemtype))
-            self.TypeChanged(typelist.index(gemtype), slot)
+            self.typeChanged(typelist.index(gemtype), slot)
             gemeffect = str(item.slot(slot).effect())
             effect = self.Effect[slot].findText(gemeffect)
             if len(gemeffect) and effect < 0:
@@ -1000,14 +1004,14 @@ class ScWindow(QMainWindow, Ui_B_SC):
                     self.Effect[slot].addItem(gemeffect)
                     self.Effect[slot].setCurrentIndex(
                                           self.Effect[slot].count() - 1)
-                    self.EffectChanged(effect, slot)
+                    self.effectChanged(effect, slot)
                 else:
                     if not self.Effect[slot].isEditable():
                         self.Effect[slot].setEditable(True)
                     self.Effect[slot].setEditText(gemeffect)
             else:
                 self.Effect[slot].setCurrentIndex(effect)
-                self.EffectChanged(effect, slot)
+                self.effectChanged(effect, slot)
             if itemtype == 'drop':
                 self.AmountEdit[slot].setText(item.slot(slot).amount())
             else:
@@ -1333,12 +1337,12 @@ class ScWindow(QMainWindow, Ui_B_SC):
     def getMultiplier(self, type):
         return ImbueMultipliers[type]
 
-    def TemplateChanged(self,a0=None):
+    def templateChanged(self,a0=None):
         if self.nocalc: return
         self.modified = 1
         self.calculate()
 
-    def RaceChanged(self, a0):
+    def raceChanged(self, a0):
         race = str(self.CharRace.currentText())
         for rt in DropLists['All']['Resist']:
             if Races['All'][race]['Resists'].has_key(rt):
@@ -1354,7 +1358,7 @@ class ScWindow(QMainWindow, Ui_B_SC):
         self.modified = 1
         self.restoreItem(self.itemattrlist[self.currentTabLabel])
 
-    def CharClassChanged(self,a0):
+    def charClassChanged(self,a0):
         self.charclass = str(self.CharClass.currentText())
         showrealm = self.realm
         if self.coop:
@@ -1376,10 +1380,10 @@ class ScWindow(QMainWindow, Ui_B_SC):
         if race not in racelist:
             race = racelist[0]
         self.CharRace.setCurrentIndex(racelist.index(race))
-        self.RaceChanged(racelist.index(race))
+        self.raceChanged(racelist.index(race))
         self.restoreItem(self.itemattrlist[self.currentTabLabel])
 
-    def RealmChanged(self,a0):
+    def realmChanged(self,a0):
         self.realm = str(self.Realm.currentText())
         self.CharClass.clear()
         self.CharClass.insertItems(0, list(ClassList[self.realm]))
@@ -1387,19 +1391,19 @@ class ScWindow(QMainWindow, Ui_B_SC):
             self.charclass = ClassList[self.realm][0]
         self.CharClass.setCurrentIndex(
                            ClassList[self.realm].index(self.charclass))
-        self.CharClassChanged(self.CharClass.currentIndex())
+        self.charClassChanged(self.CharClass.currentIndex())
 
-    def ItemLevelShow(self):
+    def itemLevelShow(self):
         level = self.ItemLevelWindow.exec_()
         if level != -1:
             self.ItemLevel.setText(str(level))
             self.AFDPS_Edit.setText(str(self.ItemLevelWindow.afdps))
 
-    def ItemChanged(self,a0=None):
+    def itemChanged(self,a0=None):
         if self.nocalc: return
         self.modified = 1
         item = self.itemattrlist[self.currentTabLabel]
-        self.FixupItemLevel()
+        self.fixupItemLevel()
         item.Level = unicode(self.ItemLevel.text())
         item.AFDPS = unicode(self.AFDPS_Edit.text())
         item.Speed = unicode(self.Speed_Edit.text())
@@ -1416,7 +1420,7 @@ class ScWindow(QMainWindow, Ui_B_SC):
 
         self.calculate()
 
-    def ItemNameSelected(self,a0):
+    def itemNameSelected(self,a0):
         if self.nocalc: return
         if isinstance(a0,int):
             if a0 == 0: return
@@ -1440,7 +1444,7 @@ class ScWindow(QMainWindow, Ui_B_SC):
             QApplication.postEvent(self, UpdateItemNameComboEvent(item))
             #self.restoreItem(item)
 
-    def ItemNameEdited(self,a0=None):
+    def itemNameEdited(self,a0=None):
         if self.nocalc: return
         if self.ItemNameCombo.currentIndex() == -1:
             # strange interactions with focusOut...
@@ -1461,7 +1465,7 @@ class ScWindow(QMainWindow, Ui_B_SC):
         if index[0] == '_': index = index[1:]
         return int(index) - 1
 
-    def AmountsChanged(self, amount = None, slot = -1):
+    def amountsChanged(self, amount = None, slot = -1):
         if self.nocalc: return
         if slot < 0:
             slot = self.senderSlot()      
@@ -1477,7 +1481,7 @@ class ScWindow(QMainWindow, Ui_B_SC):
         self.modified = 1
         self.calculate()
 
-    def EffectChanged(self, value = None, slot = -1):
+    def effectChanged(self, value = None, slot = -1):
         if slot < 0:
             slot = self.senderSlot()        
         item = self.itemattrlist[self.currentTabLabel]
@@ -1541,7 +1545,7 @@ class ScWindow(QMainWindow, Ui_B_SC):
             if item.slot(slot).slotType() == 'player':
                 self.Quality[slot].setCurrentIndex(len(QualityValues)-2)
         # Cascade the changes
-        self.AmountsChanged(0, slot)
+        self.amountsChanged(0, slot)
 
     def updateTypeList(self, slot):
         item = self.itemattrlist[self.currentTabLabel]
@@ -1568,7 +1572,7 @@ class ScWindow(QMainWindow, Ui_B_SC):
         typecombo.insertItems(0, typelist)
         typecombo.setCurrentIndex(typelist.index(gemtype))
 
-    def TypeChanged(self, Value = None, slot = -1):
+    def typeChanged(self, Value = None, slot = -1):
         if slot < 0:
             slot = self.senderSlot()
         item = self.itemattrlist[self.currentTabLabel]
@@ -1597,7 +1601,7 @@ class ScWindow(QMainWindow, Ui_B_SC):
             effcombo.insertItems(0, list(effectlist))
         # Here we go... cascade
         effcombo.setCurrentIndex(0)
-        self.EffectChanged(0, slot)
+        self.effectChanged(0, slot)
         self.testCraftingMenu()
     
         QApplication.postEvent(self, UpdateTypeListEvent(slot))
@@ -1879,7 +1883,7 @@ class ScWindow(QMainWindow, Ui_B_SC):
         racename = ''
         classname = ''
         self.outfits = {}
-        self.outfitCounter = 1
+        self.outfitnumbering = 1
         self.currentOutfitName = ""
         self.itemnumbering = 1
         itemdefault = self.itemattrlist.copy()
@@ -1935,7 +1939,7 @@ class ScWindow(QMainWindow, Ui_B_SC):
                 for outfitnode in child.childNodes:
                     if outfitnode.nodeType == Node.TEXT_NODE: continue
                     if outfitnode.tagName == 'Outfit':
-                        self.outfitCounter += 1
+                        self.outfitnumbering += 1
                         outfitname = outfitnode.getAttribute(u'name')
                         self.outfits[outfitname] = {}
                         for piecenode in outfitnode.childNodes:
@@ -1945,16 +1949,16 @@ class ScWindow(QMainWindow, Ui_B_SC):
                             self.outfits[outfitname][piecename] = index
 
         self.Realm.setCurrentIndex(Realms.index(self.realm))
-        self.RealmChanged(Realms.index(self.realm))
+        self.realmChanged(Realms.index(self.realm))
         if AllBonusList[self.realm].has_key(self.charclass):
             self.CharClass.setCurrentIndex(
                                ClassList[self.realm].index(self.charclass))
-            self.CharClassChanged(ClassList[self.realm].index(self.charclass))
+            self.charClassChanged(ClassList[self.realm].index(self.charclass))
         if racename in AllBonusList[self.realm][self.charclass]['Races']:
             self.CharRace.setCurrentIndex(
                               AllBonusList[self.realm][self.charclass] \
                                                       ['Races'].index(racename))
-            self.RaceChanged('')
+            self.raceChanged('')
         self.restoreItem(self.itemattrlist[self.currentTabLabel])
         self.modified = 0
         self.nocalc = 0
@@ -1969,7 +1973,7 @@ class ScWindow(QMainWindow, Ui_B_SC):
             self.OutfitName.setCurrentIndex(0)
             if len(self.outfits.keys()) > 1:
                 self.deleteOutfitAction.setEnabled(True)
-            self.recallOutfit(0)
+            self.outfitNameSelected(0)
 
         self.calculate()
         
@@ -1999,7 +2003,7 @@ class ScWindow(QMainWindow, Ui_B_SC):
         if res == 1:
             self.loadOptions()
             self.showcapmenuid.setChecked(self.capDistance)
-            self.RealmChanged(self.Realm.currentIndex())
+            self.realmChanged(self.Realm.currentIndex())
             self.restoreItem(self.itemattrlist[self.currentTabLabel])
             self.modified = 1
         self.nocalc = 0
@@ -2040,7 +2044,7 @@ class ScWindow(QMainWindow, Ui_B_SC):
         CB = CraftBar.CraftBar(self, '', 1)
         CB.exec_()
 
-    def DelveItemsDialog(self, find, findtype = None):
+    def delveItemsDialog(self, find, findtype = None):
         locs = []
         finddesc = findtype
         if findtype is not None:
@@ -2122,17 +2126,17 @@ class ScWindow(QMainWindow, Ui_B_SC):
             return
         if shortname in ['', 'Label', 'Total', 'Item']: return
         if child.parent().objectName() == 'GroupResists':
-           self.DelveItemsDialog(shortname, 'Resist')
+           self.delveItemsDialog(shortname, 'Resist')
         else:
-           self.DelveItemsDialog(shortname)
+           self.delveItemsDialog(shortname)
 
-    def SkillClicked(self,index):
+    def skillClicked(self,index):
         effect = str(index.data(Qt.DisplayRole).toString())
         bonus = str(index.data(Qt.UserRole).toString())
         if effect[-6:] == ' (PvE)' or effect[-6:] == ' Focus':
             effect = effect[:-6]
         amount, effect = string.split(effect.lstrip(), ' ', 1)
-        self.DelveItemsDialog(effect, bonus)
+        self.delveItemsDialog(effect, bonus)
 
     def showCap(self):
         self.capDistance = not self.capDistance
@@ -2296,7 +2300,7 @@ class ScWindow(QMainWindow, Ui_B_SC):
             self.toolbar.show()
 
     def newOutfit(self):
-        outfitname = 'Outfit%d' % self.outfitCounter
+        outfitname = 'Outfit%d' % self.outfitnumbering
 
         outfit = {}
         self.saveOutfit(outfit)
@@ -2306,7 +2310,7 @@ class ScWindow(QMainWindow, Ui_B_SC):
 
         self.OutfitName.setCurrentIndex(self.OutfitName.findText(outfitname))
         self.currentOutfitName = outfitname
-        self.outfitCounter += 1
+        self.outfitnumbering += 1
         
         if len(self.outfits.keys()) > 0:
             self.deleteOutfitAction.setEnabled(True)
@@ -2330,7 +2334,7 @@ class ScWindow(QMainWindow, Ui_B_SC):
             if self.OutfitName.count() < 2:
                 self.deleteOutfitAction.setEnabled(False)
 
-    def recallOutfit(self, idx):
+    def outfitNameSelected(self, idx):
         outfitname = str(self.OutfitName.itemText(idx))
 
         if self.outfits.has_key(outfitname):
@@ -2351,7 +2355,7 @@ class ScWindow(QMainWindow, Ui_B_SC):
             self.restoreItem(self.itemattrlist[self.currentTabLabel])
             self.calculate()
 
-    def outfitNameChanged(self):
+    def outfitNameEdited(self):
         outfitname = str(self.OutfitName.currentText())
         if outfitname != self.currentOutfitName:
             outfit = self.outfits.pop(self.currentOutfitName)
@@ -2379,7 +2383,7 @@ class ScWindow(QMainWindow, Ui_B_SC):
             return True
         elif e.type() == UPDATE_ITEMNAME_COMBO_EVENT:
             self.restoreItem(e.item)
-            # Unblock any signals we may have blocked in ItemNameSelected()
+            # Unblock any signals we may have blocked in itemNameSelected()
             self.ItemNameCombo.blockSignals(False)
             return True
         else:
