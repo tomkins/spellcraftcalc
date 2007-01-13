@@ -521,7 +521,7 @@ class ScWindow(QMainWindow, Ui_B_SC):
 
         # FIXME
         self.editmenu.addAction('&New Outfit', self.newOutfit)
-        self.deleteOutfitAction = self.editmenu.addAction('&Delete Current Outfit', self.removeOutfit)
+        self.deleteOutfitAction = self.editmenu.addAction('&Delete Current Outfit', self.deleteOutfit)
 
         self.menuBar().addMenu(self.editmenu)
 
@@ -770,7 +770,7 @@ class ScWindow(QMainWindow, Ui_B_SC):
         self.currentTab = self.PieceTab
         self.currentTabLabel = string.strip(str(self.PieceTab.tabText(0, 0)))
 
-        self.outfits = {}
+        self.outfitlist = {}
         self.outfitnumbering = 1
         self.currentOutfitName = ""
         self.OutfitName.clear()
@@ -837,9 +837,9 @@ class ScWindow(QMainWindow, Ui_B_SC):
         childnode.appendChild(document.createTextNode(unicode(self.noteText)))
         rootnode.appendChild(childnode)
 
-        if len(self.outfits.keys()) > 0:
+        if len(self.outfitlist.keys()) > 0:
             outfitsnode = document.createElement('Outfits')
-            for outfitname, outfit in self.outfits.items():
+            for outfitname, outfit in self.outfitlist.items():
                 outfitnode = document.createElement('Outfit')
                 outfitnode.setAttribute(u'name', outfitname)
                 for piece, index in outfit.items():
@@ -1880,7 +1880,7 @@ class ScWindow(QMainWindow, Ui_B_SC):
         self.OutfitName.clear()
         racename = ''
         classname = ''
-        self.outfits = {}
+        self.outfitlist = {}
         self.outfitnumbering = 1
         self.currentOutfitName = ""
         self.itemnumbering = 1
@@ -1939,12 +1939,12 @@ class ScWindow(QMainWindow, Ui_B_SC):
                     if outfitnode.tagName == 'Outfit':
                         self.outfitnumbering += 1
                         outfitname = outfitnode.getAttribute(u'name')
-                        self.outfits[outfitname] = {}
+                        self.outfitlist[outfitname] = {}
                         for piecenode in outfitnode.childNodes:
                             if piecenode.nodeType == Node.TEXT_NODE: continue
                             piecename = piecenode.getAttribute('Location')
                             index = int(piecenode.getAttribute('Index'))
-                            self.outfits[outfitname][piecename] = index
+                            self.outfitlist[outfitname][piecename] = index
 
         self.Realm.setCurrentIndex(Realms.index(self.realm))
         self.realmChanged(Realms.index(self.realm))
@@ -1961,15 +1961,15 @@ class ScWindow(QMainWindow, Ui_B_SC):
         self.modified = 0
         self.nocalc = 0
 
-        if len(self.outfits.keys()) == 0:
+        if len(self.outfitlist.keys()) == 0:
             self.newOutfit()
         else:
             self.OutfitName.blockSignals(True)
-            for oname in self.outfits.keys():
+            for oname in self.outfitlist.keys():
                 self.OutfitName.addItem(oname)
             self.OutfitName.blockSignals(False)
             self.OutfitName.setCurrentIndex(0)
-            if len(self.outfits.keys()) > 1:
+            if len(self.outfitlist.keys()) > 1:
                 self.deleteOutfitAction.setEnabled(True)
             self.outfitNameSelected(0)
 
@@ -2303,31 +2303,31 @@ class ScWindow(QMainWindow, Ui_B_SC):
         outfit = {}
         self.saveOutfit(outfit)
 
-        self.outfits[outfitname] = outfit
+        self.outfitlist[outfitname] = outfit
         self.OutfitName.addItem(outfitname)
 
         self.OutfitName.setCurrentIndex(self.OutfitName.findText(outfitname))
         self.currentOutfitName = outfitname
         self.outfitnumbering += 1
         
-        if len(self.outfits.keys()) > 0:
+        if len(self.outfitlist.keys()) > 0:
             self.deleteOutfitAction.setEnabled(True)
 
     def saveCurrentOutfit(self):
         if self.currentOutfitName != "" and \
-                self.outfits.has_key(self.currentOutfitName):
-            self.saveOutfit(self.outfits[self.currentOutfitName])
+                self.outfitlist.has_key(self.currentOutfitName):
+            self.saveOutfit(self.outfitlist[self.currentOutfitName])
 
     def saveOutfit(self, outfit):
         for key, item in self.itemattrlist.iteritems():
         #    if not item.isEmpty():
             outfit[key] = item.TemplateIndex
 
-    def removeOutfit(self):
+    def deleteOutfit(self):
         if self.OutfitName.currentIndex() != -1:
             outfitname = str(self.OutfitName.currentText())
             self.OutfitName.removeItem(self.OutfitName.currentIndex())
-            del self.outfits[outfitname]
+            del self.outfitlist[outfitname]
 
             if self.OutfitName.count() < 2:
                 self.deleteOutfitAction.setEnabled(False)
@@ -2335,8 +2335,8 @@ class ScWindow(QMainWindow, Ui_B_SC):
     def outfitNameSelected(self, idx):
         outfitname = str(self.OutfitName.itemText(idx))
 
-        if self.outfits.has_key(outfitname):
-            outfit = self.outfits[outfitname]
+        if self.outfitlist.has_key(outfitname):
+            outfit = self.outfitlist[outfitname]
             self.currentOutfitName = outfitname
             for piece, index in outfit.items():
                 item = self.itemattrlist[piece]
@@ -2356,8 +2356,8 @@ class ScWindow(QMainWindow, Ui_B_SC):
     def outfitNameEdited(self):
         outfitname = str(self.OutfitName.currentText())
         if outfitname != self.currentOutfitName:
-            outfit = self.outfits.pop(self.currentOutfitName)
-            self.outfits[outfitname] = outfit
+            outfit = self.outfitlist.pop(self.currentOutfitName)
+            self.outfitlist[outfitname] = outfit
             self.currentOutfitName = outfitname
 
         # Need this so the combobox will keep the current text since it
