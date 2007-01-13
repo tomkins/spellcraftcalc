@@ -1,4 +1,4 @@
-#/ ScWindow.py: Dark Age of Camelot Spellcrafting Calculator (main Window)
+# ScWindow.py: Dark Age of Camelot Spellcrafting Calculator (main Window)
 #
 # See http://kscraft.sourceforge.net/ for updates
 #
@@ -84,11 +84,7 @@ class ScWindow(QMainWindow, Ui_B_SC):
         self.newcount = 0
         self.startup = 1
         self.nocalc = 1
-        self.itemIndex = 0
         self.recentFiles = []
-        self.outfits = {}
-        self.outfitCounter = 1
-        self.currentOutfitName = ""
         self.effectlists = GemLists['All'].copy()
         self.dropeffectlists = DropLists['All'].copy()
         self.itemeffectlists = CraftedLists['All'].copy()
@@ -187,8 +183,11 @@ class ScWindow(QMainWindow, Ui_B_SC):
         self.CharClass.setFixedSize(QSize(cbwidth, cbheight + 2))
         self.CharRace.setFixedSize(QSize(cbwidth, cbheight + 2))
         self.CharLevel.setFixedSize(QSize(amtedwidth, edheight + 2))
+        self.OutfitName.setFixedSize(QSize(cbwidth, cbheight + 2))
 
         self.Realm.insertItems(0, list(Realms))
+        self.OutfitName.setCompleter(None)
+
         self.QualDrop.insertItems(0, list(QualityValues))
 
         self.CharLevel.setValidator(QIntValidator(0, 99, self))
@@ -221,8 +220,6 @@ class ScWindow(QMainWindow, Ui_B_SC):
         self.Speed_Edit.setFixedSize(QSize(amtedwidth, edheight))
         self.ItemNameCombo.setFixedHeight(cbheight)
         self.ItemNameCombo.setCompleter(None)
-        self.ItemNameCombo.setInsertPolicy(QComboBox.InsertAtCurrent)
-        self.ItemNameCombo.setDuplicatesEnabled(False)
 
         self.GroupItemFrame.layout().setColumnStretch(8, 1)
         width = testfont.size(Qt.TextSingleLine, " Slot 10:").width()
@@ -318,17 +315,6 @@ class ScWindow(QMainWindow, Ui_B_SC):
         self.GroupResists.mousePressEvent = self.ignoreMouseEvent
         self.GroupItemFrame.mousePressEvent = self.ignoreMouseEvent
 
-        self.Outfit.setEditable(True)
-        self.Outfit.setEnabled(False)
-        self.Outfit.setCompleter(None)
-        self.Outfit.setDuplicatesEnabled(False)
-        self.Outfit.setInsertPolicy(QComboBox.InsertAtCurrent)
-        self.connect(self.Outfit,SIGNAL("activated(int)"), self.recallOutfit)
-        self.connect(self.Outfit.lineEdit(),SIGNAL("editingFinished()"),
-                     self.outfitNameChanged)
-        #self.connect(self.Outfit,SIGNAL("editTextChanged(const QString&)"),
-        #             self.outfitNameChanged)
-
         self.connect(self.GroupStats,SIGNAL("mousePressEvent(QMouseEvent*)"),
                      self.mousePressEvent)
         self.connect(self.GroupResists,SIGNAL("mousePressEvent(QMouseEvent*)"),
@@ -351,6 +337,12 @@ class ScWindow(QMainWindow, Ui_B_SC):
                      self.TemplateChanged)
         #self.connect(self.CharLevel,SIGNAL("textChanged(const QString&)"),
         #             self.TemplateChanged)
+        self.connect(self.OutfitName,SIGNAL("activated(int)"), self.recallOutfit)
+        self.connect(self.OutfitName.lineEdit(),SIGNAL("editingFinished()"),
+                     self.outfitNameChanged)
+        #self.connect(self.OutfitName,SIGNAL("editTextChanged(const QString&)"),
+        #             self.outfitNameChanged)
+
 
         self.connect(self.PieceTab,SIGNAL("currentChanged"),
                      self.PieceTabChanged)
@@ -772,8 +764,7 @@ class ScWindow(QMainWindow, Ui_B_SC):
         self.outfits = {}
         self.outfitCounter = 1
         self.currentOutfitName = ""
-        self.Outfit.setEnabled(False)
-        self.Outfit.clear()
+        self.OutfitName.clear()
         self.deleteOutfitAction.setEnabled(False)
         self.newcount = self.newcount + 1
         filetitle = unicode("Template" + str(self.newcount))
@@ -812,6 +803,7 @@ class ScWindow(QMainWindow, Ui_B_SC):
         self.RealmChanged(Realms.index(self.realm))
         self.CharLevel.setText('50')
         self.restoreItem(self.itemattrlist[self.currentTabLabel])
+        self.newOutfit()
         self.modified = 0
         self.nocalc = moretodo
         if self.nocalc: return
@@ -1883,8 +1875,12 @@ class ScWindow(QMainWindow, Ui_B_SC):
 
     def loadFromXML(self, template):
         self.initialize(1)
+        self.OutfitName.clear()
         racename = ''
         classname = ''
+        self.outfits = {}
+        self.outfitCounter = 1
+        self.currentOutfitName = ""
         self.itemnumbering = 1
         itemdefault = self.itemattrlist.copy()
         for child in template.childNodes:
@@ -1966,13 +1962,13 @@ class ScWindow(QMainWindow, Ui_B_SC):
         if len(self.outfits.keys()) == 0:
             self.newOutfit()
         else:
-            self.Outfit.blockSignals(True)
+            self.OutfitName.blockSignals(True)
             for oname in self.outfits.keys():
-                self.Outfit.addItem(oname)
-            self.Outfit.blockSignals(False)
-            self.Outfit.setCurrentIndex(0)
-            self.Outfit.setEnabled(True)
-            self.deleteOutfitAction.setEnabled(True)
+                self.OutfitName.addItem(oname)
+            self.OutfitName.blockSignals(False)
+            self.OutfitName.setCurrentIndex(0)
+            if len(self.outfits.keys()) > 1:
+                self.deleteOutfitAction.setEnabled(True)
             self.recallOutfit(0)
 
         self.calculate()
@@ -2300,19 +2296,20 @@ class ScWindow(QMainWindow, Ui_B_SC):
             self.toolbar.show()
 
     def newOutfit(self):
-        outfitname = 'Outfit %d' % self.outfitCounter
+        outfitname = 'Outfit%d' % self.outfitCounter
 
         outfit = {}
         self.saveOutfit(outfit)
 
         self.outfits[outfitname] = outfit
-        self.Outfit.addItem(outfitname)
+        self.OutfitName.addItem(outfitname)
 
-        self.Outfit.setCurrentIndex(self.Outfit.findText(outfitname))
-        self.Outfit.setEnabled(True)
+        self.OutfitName.setCurrentIndex(self.OutfitName.findText(outfitname))
         self.currentOutfitName = outfitname
         self.outfitCounter += 1
-        self.deleteOutfitAction.setEnabled(True)
+        
+        if len(self.outfits.keys()) > 0:
+            self.deleteOutfitAction.setEnabled(True)
 
     def saveCurrentOutfit(self):
         if self.currentOutfitName != "" and \
@@ -2325,17 +2322,16 @@ class ScWindow(QMainWindow, Ui_B_SC):
             outfit[key] = item.TemplateIndex
 
     def removeOutfit(self):
-        if self.Outfit.currentIndex() != -1:
-            outfitname = str(self.Outfit.currentText())
-            self.Outfit.removeItem(self.Outfit.currentIndex())
+        if self.OutfitName.currentIndex() != -1:
+            outfitname = str(self.OutfitName.currentText())
+            self.OutfitName.removeItem(self.OutfitName.currentIndex())
             del self.outfits[outfitname]
 
-            if self.Outfit.count() == 0:
-                self.Outfit.setEnabled(False)
+            if self.OutfitName.count() < 2:
                 self.deleteOutfitAction.setEnabled(False)
 
     def recallOutfit(self, idx):
-        outfitname = str(self.Outfit.itemText(idx))
+        outfitname = str(self.OutfitName.itemText(idx))
 
         if self.outfits.has_key(outfitname):
             outfit = self.outfits[outfitname]
@@ -2356,7 +2352,7 @@ class ScWindow(QMainWindow, Ui_B_SC):
             self.calculate()
 
     def outfitNameChanged(self):
-        outfitname = str(self.Outfit.currentText())
+        outfitname = str(self.OutfitName.currentText())
         if outfitname != self.currentOutfitName:
             outfit = self.outfits.pop(self.currentOutfitName)
             self.outfits[outfitname] = outfit
@@ -2364,7 +2360,7 @@ class ScWindow(QMainWindow, Ui_B_SC):
 
         # Need this so the combobox will keep the current text since it
         # only listens to the return key
-        self.Outfit.lineEdit().emit(SIGNAL("returnPressed()"))
+        self.OutfitName.lineEdit().emit(SIGNAL("returnPressed()"))
         
     def aboutBox(self):
         splash = AboutScreen(parent=self,modal=True)

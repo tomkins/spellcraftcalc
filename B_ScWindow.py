@@ -2,8 +2,8 @@
 
 # Form implementation generated from reading ui file 'ScWindow.ui'
 #
-# Created: Wed Dec 27 21:57:48 2006
-#      by: PyQt4 UI code generator 4.1.1
+# Created: Thu Jan 04 22:04:21 2007
+#      by: PyQt4 UI code generator 4.1
 #
 # WARNING! All changes made in this file will be lost!
 
@@ -76,14 +76,17 @@ class Ui_B_SC(object):
         self.CharLevel.setObjectName("CharLevel")
         self.gridlayout1.addWidget(self.CharLevel,4,1,1,2)
 
-        self.LabelCurOutfit = QtGui.QLabel(self.GroupCharInfo)
-        self.LabelCurOutfit.setTextFormat(QtCore.Qt.PlainText)
-        self.LabelCurOutfit.setObjectName("LabelCurOutfit")
-        self.gridlayout1.addWidget(self.LabelCurOutfit,5,0,1,1)
+        self.LabelOutfitName = QtGui.QLabel(self.GroupCharInfo)
+        self.LabelOutfitName.setTextFormat(QtCore.Qt.PlainText)
+        self.LabelOutfitName.setObjectName("LabelOutfitName")
+        self.gridlayout1.addWidget(self.LabelOutfitName,5,0,1,1)
 
-        self.Outfit = SearchingCombo(self.GroupCharInfo)
-        self.Outfit.setObjectName("Outfit")
-        self.gridlayout1.addWidget(self.Outfit,5,1,1,2)
+        self.OutfitName = SearchingCombo(self.GroupCharInfo)
+        self.OutfitName.setEditable(True)
+        self.OutfitName.setInsertPolicy(QtGui.QComboBox.NoInsert)
+        self.OutfitName.setDuplicatesEnabled(True)
+        self.OutfitName.setObjectName("OutfitName")
+        self.gridlayout1.addWidget(self.OutfitName,5,1,1,2)
 
         spacerItem = QtGui.QSpacerItem(5,4,QtGui.QSizePolicy.Minimum,QtGui.QSizePolicy.Fixed)
         self.gridlayout1.addItem(spacerItem,6,0,1,3)
@@ -1101,6 +1104,7 @@ class Ui_B_SC(object):
         self.gridlayout.addLayout(self.vboxlayout,2,0,1,7)
         B_SC.setCentralWidget(self.ScWinFrame)
         self.LabelCharName.setBuddy(self.CharName)
+        self.LabelOutfitName.setBuddy(self.OutfitName)
         self.ItemLevelLabel.setBuddy(self.ItemLevel)
         self.ItemNameLabel.setBuddy(self.ItemNameCombo)
 
@@ -1110,8 +1114,8 @@ class Ui_B_SC(object):
         B_SC.setTabOrder(self.Realm,self.CharClass)
         B_SC.setTabOrder(self.CharClass,self.CharRace)
         B_SC.setTabOrder(self.CharRace,self.CharLevel)
-        B_SC.setTabOrder(self.CharLevel,self.Outfit)
-        B_SC.setTabOrder(self.Outfit,self.PieceTab)
+        B_SC.setTabOrder(self.CharLevel,self.OutfitName)
+        B_SC.setTabOrder(self.OutfitName,self.PieceTab)
         B_SC.setTabOrder(self.PieceTab,self.ItemLevel)
         B_SC.setTabOrder(self.ItemLevel,self.ItemLevelButton)
         B_SC.setTabOrder(self.ItemLevelButton,self.QualEdit)
@@ -1188,7 +1192,7 @@ class Ui_B_SC(object):
         self.LabelCharClass.setText(QtGui.QApplication.translate("B_SC", "Class: ", None, QtGui.QApplication.UnicodeUTF8))
         self.LabelCharRace.setText(QtGui.QApplication.translate("B_SC", "Race: ", None, QtGui.QApplication.UnicodeUTF8))
         self.LabelCharLevel.setText(QtGui.QApplication.translate("B_SC", "Level: ", None, QtGui.QApplication.UnicodeUTF8))
-        self.LabelCurOutfit.setText(QtGui.QApplication.translate("B_SC", "Outfit: ", None, QtGui.QApplication.UnicodeUTF8))
+        self.LabelOutfitName.setText(QtGui.QApplication.translate("B_SC", "&Outfit: ", None, QtGui.QApplication.UnicodeUTF8))
         self.LabelTotalCost.setText(QtGui.QApplication.translate("B_SC", "Cost: ", None, QtGui.QApplication.UnicodeUTF8))
         self.TotalCost.setText(QtGui.QApplication.translate("B_SC", "0", None, QtGui.QApplication.UnicodeUTF8))
         self.LabelTotalPrice.setText(QtGui.QApplication.translate("B_SC", "Price: ", None, QtGui.QApplication.UnicodeUTF8))
