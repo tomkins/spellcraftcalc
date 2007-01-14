@@ -7,6 +7,10 @@ Urgent things to fix before next beta release!!!
 
 Things to fix before next beta release is announced;
 
+  Allow users to choose the Realm (or 'All') for items, drop and crafted.
+  (Crafted items all have a specific realm, even on Gaheris/Mordred, while
+  drop items can be 'All/Any'.)
+
   Fix Classic Windows skin view of Group boxes (XP is fine, Mac and X11
   are now working correctly).
 

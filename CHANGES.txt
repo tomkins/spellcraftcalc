@@ -31,7 +31,7 @@ Updated 01/14/2006 - Version 1.93 - The Last Old Flavor (Quality)
 
   Updated mauler class gems for LoTM patch 1.85k
 
-  Fixed 
+  Fixed item's Realm by assuming it is the realm of the class, for now.
 
   Overhauled saving preferences (options).
 
