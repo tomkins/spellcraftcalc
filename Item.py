@@ -248,12 +248,10 @@ class ItemSlot:
             remakes += EstimatedMakes[self.quaIndex()] - 1
         return remakes
 
-    def gemCost(self, tries=0):
+    def gemCost(self, remakes=0):
         if not self.crafted():
             return 0
-        if tries > 0:
-            remakes = tries
-        else:
+        if remakes < 0:
             remakes = self.gemRemakes()
         costindex = self.gemLevel() - 1
         cost = GemCosts[costindex]
