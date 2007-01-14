@@ -1,34 +1,39 @@
-Updated 12/20/2006 - Version 1.93
+Updated 01/14/2006 - Version 1.93 - The Last Old Flavor (Quality)
+
+  ** This version preserves Quality for our European friends, until
+  ** the crafting patch arrives on their hemisphere.  The number 1.94
+  ** is reserved, in case some updates from 1.93 are necessary to
+  ** hold them over until that day comes.
+
+  Added 'Outfits' - An outfit is a collection each item selected for
+  each tab.  Create multiple outfits (e.g. PvP, RvR, Buffing, etc...)
+  in the same Spellcrafting template to make it easier to work out
+  specific stats.  This works along with the feature added in 1.92 for
+  multiple items per slot.  An Outfit ONLY keeps track of which item 
+  is selected and if it is equipped.  If more than one outfit shares the 
+  same item, and you modify it on one outfit, the changes appear on the 
+  other outfits.  Create New Items when they really are distinct items,
+  items, such as Gloves (Summoning), Gloves (RvR) and Gloves (PvP). 
+  Name these items however you like by editing their Item Names.
+
+  The main window now shows single-gem cost and not the estimated cost,
+  no matter if multiple makes are already recorded, or if the quality
+  would demand multiple makes.
+
+  The utility calculation for hits has been fixed.
+
+  Fixed Quickbar loading.  Mythic has changed the server codes with the 
+  Labyrinth of the Minotaur expansion patch.
+
+  Focus does not show up in the drop-down gem type lists on each effect
+  if the character class you have selected does not have a focus skill.
+  This feature is disabled with the 'Hide Non Class Skills' option.
 
   Updated mauler class gems for LoTM patch 1.85k
 
+  Fixed 
+
   Overhauled saving preferences (options).
-
-  Added ability to save 'Outfits'
-    An outfit is a record of the current state of items. So, it is
-    possible to create multiple outfits (e.g. PvP, RvR...) inside
-    the same Spellcrafting template, thereby making item/drop reuse
-    much easier.
-    This goes along with the idea that was implemented in 1.92 of item
-    stacks. So an RVR outfit might reference a 'RVR Chest piece' and 
-    a PvP outfit may reference a 'PVP Chest Piece'.
-    Some caveats to note:
-      - An Outfit does not save all the properties of an item, it just
-        saves the current item that is selected for each piece of armor
-        or jewelry. So, if you save an outfit, but then edit the item,
-        switch to another outfit, and then switch back, it will reflect
-        the changes you made to the item. You can think of an outfit as
-        just pointers to the items.
-
-  Quickbar loading should be fixed. Mythic changed the server codes on
-  us in one of their patches.
-
-  Focus does not show up in the drop-down type lists on each slot if
-  the character class you have selected does not support focus.
-  This feature is only turned on if the 'Hide Non Class Skills' box
-  is checked in the options.
-
-  The utility calculation for hits has been fixed.
 
   Added a toolbar with icons for easier access to common functions like
   New Template, Save Template, New Item, Save Item, Load Item, etc.
@@ -36,8 +41,8 @@ Updated 12/20/2006 - Version 1.93
   Fixed a bug with the 'Save as Text' option for config reports where
   non-printable characters were showing up in the output.
   
-  Memory usage has been reduced significantly. 
-  On program startup it should be down to around 30M.
+  Memory usage has been cut in half.  On program startup it should be down 
+  to around 30MB.
 
 Updated 11/04/2006 - Version 1.92
 

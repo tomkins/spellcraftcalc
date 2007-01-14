@@ -1,6 +1,9 @@
 Urgent things to fix before next beta release!!!
 
-  All items are saving <realm>Albion</realm> - outch.
+  Options does not open with the first options page - ugly.
+
+  Selecting the menu DOES NOT TRIGGER editingFinished!  Damn TT.
+  Causes worrysome side effects.
 
 Things to fix before next beta release is announced;
 
