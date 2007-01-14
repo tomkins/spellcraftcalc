@@ -837,10 +837,11 @@ class ScWindow(QMainWindow, Ui_B_SC):
         childnode.appendChild(document.createTextNode(unicode(self.noteText)))
         rootnode.appendChild(childnode)
 
-        outfitsnode = document.createElement('Outfits')
-        for outfit in self.outfitlist:
+        for idx in range(0, len(self.outfitlist)):
+            outfit = self.outfitlist[idx]
             outfitnode = document.createElement('Outfit')
-            outfitnode.setAttribute(u'name', outfit[None])
+            outfitnode.setAttribute(u'Name', outfit[None])
+            outfitnode.setAttribute(u'Active', unicode(int(idx == self.currentOutfit)))
             for piece, item in outfit.iteritems():
                 if piece is None: continue
                 piecenode = document.createElement('OutfitItem')
@@ -848,8 +849,7 @@ class ScWindow(QMainWindow, Ui_B_SC):
                 piecenode.setAttribute('Index', unicode(item[0]))
                 piecenode.setAttribute('Equipped', unicode(item[1]))
                 outfitnode.appendChild(piecenode)
-            outfitsnode.appendChild(outfitnode)
-        rootnode.appendChild(outfitsnode)
+            rootnode.appendChild(outfitnode)
 
         if rich:
             totalsdict = self.summarize()
@@ -1937,19 +1937,19 @@ class ScWindow(QMainWindow, Ui_B_SC):
             elif child.tagName == 'Coop':
                 self.coop = eval(XMLHelper.getText(child.childNodes), 
                                  globals(), globals())
-            elif child.tagName == 'Outfits':
-                for outfitnode in child.childNodes:
-                    if outfitnode.nodeType == Node.TEXT_NODE: continue
-                    if outfitnode.tagName == 'Outfit':
-                        self.outfitnumbering += 1
-                        outfitname = outfitnode.getAttribute(u'name')
-                        self.outfitlist.append( { None : outfitname } )
-                        for piecenode in outfitnode.childNodes:
-                            if piecenode.nodeType == Node.TEXT_NODE: continue
-                            piecename = piecenode.getAttribute('Location')
-                            index = int(piecenode.getAttribute('Index'))
-                            equipped = int(piecenode.getAttribute('Equipped'))
-                            self.outfitlist[-1][piecename] = ( index, equipped )
+            elif child.tagName == 'Outfit':
+                if child.nodeType == Node.TEXT_NODE: continue
+                self.outfitnumbering += 1
+                outfitname = child.getAttribute('Name')
+                active = child.getAttribute('Active')
+                self.outfitlist.append( { None : outfitname } )
+                if active == "1": self.currentOutfit = len(self.outfitlist) - 1
+                for piecenode in child.childNodes:
+                    if piecenode.nodeType == Node.TEXT_NODE: continue
+                    piecename = piecenode.getAttribute('Location')
+                    index = int(piecenode.getAttribute('Index'))
+                    equipped = int(piecenode.getAttribute('Equipped'))
+                    self.outfitlist[-1][piecename] = ( index, equipped )
 
         self.Realm.setCurrentIndex(Realms.index(self.realm))
         self.realmChanged(Realms.index(self.realm))
