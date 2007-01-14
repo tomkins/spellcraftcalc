@@ -770,9 +770,9 @@ class ScWindow(QMainWindow, Ui_B_SC):
         self.currentTab = self.PieceTab
         self.currentTabLabel = string.strip(str(self.PieceTab.tabText(0, 0)))
 
-        self.outfitlist = []
         self.outfitnumbering = 1
-        self.currentOutfit = -1
+        self.currentOutfit = 0
+        self.outfitlist = []
         self.OutfitName.clear()
         self.deleteOutfitAction.setEnabled(False)
 
@@ -781,31 +781,27 @@ class ScWindow(QMainWindow, Ui_B_SC):
         self.itemnumbering = 1
 
         for tab in PieceTabList:
-            self.itemattrlist[tab] = Item('player', tab, self.realm, 
-                self.itemIndex)
+            item = Item('player', tab, self.realm, self.itemIndex)
             self.itemIndex += 1
-            self.itemattrlist[tab].next = Item('drop', tab, self.realm,
-                self.itemIndex)
+            item.next = Item('drop', tab, self.realm, self.itemIndex)
             self.itemIndex += 1
-            self.itemattrlist[tab].ItemName = "Crafted Item" \
-                                            + str(self.itemnumbering)
-            self.itemattrlist[tab].next.ItemName = "Drop Item" \
-                                                 + str(self.itemnumbering)
+            item.ItemName = "Crafted Item" + str(self.itemnumbering)
+            item.next.ItemName = "Drop Item" + str(self.itemnumbering)
             self.itemnumbering += 1
+            self.itemattrlist[tab] = item
         for tab in JewelTabList:
-            self.itemattrlist[tab] = Item('drop', tab, self.realm,
-                self.itemIndex)
+            item = Item('drop', tab, self.realm, self.itemIndex)
             self.itemIndex += 1
-            self.itemattrlist[tab].ItemName = "Drop Item" \
-                                            + str(self.itemnumbering)
+            item.ItemName = "Drop Item" + str(self.itemnumbering)
             self.itemnumbering += 1
+            self.itemattrlist[tab] = item
 
         self.CharName.setText('')
         self.Realm.setCurrentIndex(Realms.index(self.realm))
         self.realmChanged(Realms.index(self.realm))
         self.CharLevel.setText('50')
+        self.appendOutfit()
         self.restoreItem(self.itemattrlist[self.currentTabLabel])
-        self.newOutfit()
         self.modified = 0
         self.nocalc = moretodo
         if self.nocalc: return
@@ -836,20 +832,6 @@ class ScWindow(QMainWindow, Ui_B_SC):
         childnode = document.createElement('Notes')
         childnode.appendChild(document.createTextNode(unicode(self.noteText)))
         rootnode.appendChild(childnode)
-
-        for idx in range(0, len(self.outfitlist)):
-            outfit = self.outfitlist[idx]
-            outfitnode = document.createElement('Outfit')
-            outfitnode.setAttribute(u'Name', outfit[None])
-            outfitnode.setAttribute(u'Active', unicode(int(idx == self.currentOutfit)))
-            for piece, item in outfit.iteritems():
-                if piece is None: continue
-                piecenode = document.createElement('OutfitItem')
-                piecenode.setAttribute('Location', piece)
-                piecenode.setAttribute('Index', unicode(item[0]))
-                piecenode.setAttribute('Equipped', unicode(item[1]))
-                outfitnode.appendChild(piecenode)
-            rootnode.appendChild(outfitnode)
 
         if rich:
             totalsdict = self.summarize()
@@ -894,6 +876,7 @@ class ScWindow(QMainWindow, Ui_B_SC):
                         effectnode.appendChild(valnode)
                     childnode.appendChild(effectnode)
                 rootnode.appendChild(childnode)
+
         for key in TabList:
             item = self.itemattrlist[key]
             # use firstChild here because item.asXML() constructs a Document()
@@ -902,6 +885,21 @@ class ScWindow(QMainWindow, Ui_B_SC):
                 if childnode is not None:
                     rootnode.appendChild(childnode.firstChild)
                 item = item.next
+
+        for idx in range(0, len(self.outfitlist)):
+            outfit = self.outfitlist[idx]
+            outfitnode = document.createElement('Outfit')
+            outfitnode.setAttribute(u'Name', outfit[None])
+            outfitnode.setAttribute(u'Active', unicode(int(idx == self.currentOutfit)))
+            for piece, item in outfit.iteritems():
+                if piece is None: continue
+                piecenode = document.createElement('OutfitItem')
+                piecenode.setAttribute('Location', piece)
+                piecenode.setAttribute('Index', unicode(item[0]))
+                piecenode.setAttribute('Equipped', unicode(item[1]))
+                outfitnode.appendChild(piecenode)
+            rootnode.appendChild(outfitnode)
+
         return document
 
     def pieceTabChanged(self, row, col):
@@ -1411,7 +1409,7 @@ class ScWindow(QMainWindow, Ui_B_SC):
         else:
             item.Equipped = '0'
         self.outfitlist[self.currentOutfit][self.currentTabLabel] \
-                = ( item.TemplateIndex, item.Equipped )
+                = ( item.TemplateIndex, item.Equipped, )
 
         if item.ActiveState == 'player':
             item.ItemQuality = unicode(self.QualDrop.currentText())
@@ -1436,7 +1434,7 @@ class ScWindow(QMainWindow, Ui_B_SC):
         self.itemattrlist[self.currentTabLabel] = item
         item.Equipped = wasequipped
         self.outfitlist[self.currentOutfit][self.currentTabLabel] \
-                = ( item.TemplateIndex, item.Equipped )
+                = ( item.TemplateIndex, item.Equipped, )
 
         # Block any additional signals here until AFTER we
         # execute restoreItem, so subsequent signals get the correct
@@ -1460,7 +1458,7 @@ class ScWindow(QMainWindow, Ui_B_SC):
         #self.ItemNameCombo.setItemText(0,item.ItemName)
         #self.ItemNameCombo.lineEdit().setCursorPosition(cursorpos)
         self.modified = 1
-        self.ItemNameCombo.lineEdit().emit(SIGNAL("returnPressed()"))
+        #self.ItemNameCombo.lineEdit().emit(SIGNAL("returnPressed()"))
 
     def senderSlot(self):
         index = self.sender().objectName()[-2:]
@@ -1949,7 +1947,7 @@ class ScWindow(QMainWindow, Ui_B_SC):
                     piecename = piecenode.getAttribute('Location')
                     index = int(piecenode.getAttribute('Index'))
                     equipped = int(piecenode.getAttribute('Equipped'))
-                    self.outfitlist[-1][piecename] = ( index, equipped )
+                    self.outfitlist[-1][piecename] = ( index, equipped, )
 
         self.Realm.setCurrentIndex(Realms.index(self.realm))
         self.realmChanged(Realms.index(self.realm))
@@ -1967,7 +1965,7 @@ class ScWindow(QMainWindow, Ui_B_SC):
         self.nocalc = 0
 
         if len(self.outfitlist) < 1:
-            self.newOutfit()
+            self.appendOutfit()
         else:
             self.OutfitName.blockSignals(True)
             for outfit in self.outfitlist:
@@ -2281,6 +2279,8 @@ class ScWindow(QMainWindow, Ui_B_SC):
         self.itemnumbering += 1
         item.next = self.itemattrlist[self.currentTabLabel]
         self.itemattrlist[self.currentTabLabel] = item
+        self.outfitlist[self.currentOutfit][self.currentTabLabel] \
+                  = ( item.TemplateIndex, item.Equipped, )
         if newtype == 'Drop Item' or newtype == 'Normal Item':
             self.restoreItem(item)
         else:
@@ -2302,7 +2302,7 @@ class ScWindow(QMainWindow, Ui_B_SC):
             self.setIconSize(QSize(view,view))
             self.toolbar.show()
 
-    def newOutfit(self):
+    def appendOutfit(self):
         outfitname = 'Outfit%d' % self.outfitnumbering
         self.outfitnumbering += 1
 
@@ -2313,10 +2313,13 @@ class ScWindow(QMainWindow, Ui_B_SC):
         if idx != -1 and idx < len(self.outfitlist):
             for key, item in self.itemattrlist.iteritems():
                 self.outfitlist[idx][key] = ( item.TemplateIndex, item.Equipped )
-
-        #sys.stdout.write("Created Outfit %d\n" % idx)
-
+        self.OutfitName.blockSignals(True)
         self.OutfitName.addItem(outfitname)
+        self.OutfitName.blockSignals(False)
+
+    def newOutfit(self):
+        self.appendOutfit()
+        #sys.stdout.write("Created Outfit %d\n" % idx)
         self.OutfitName.setCurrentIndex(self.currentOutfit)
         if len(self.outfitlist) > 1:
             self.deleteOutfitAction.setEnabled(True)
@@ -2368,7 +2371,11 @@ class ScWindow(QMainWindow, Ui_B_SC):
         if idx != -1 and outfitname != self.OutfitName.itemText(idx):
             sys.stdout.write("Edited Outfit %d named %s\n" % (idx, outfitname))
             self.OutfitName.setItemText(idx, outfitname)
+            if self.ItemNameCombo.currentIndex() == -1:
+                # strange interactions with focusOut...
+                self.ItemNameCombo.setCurrentIndex(self.currentOutfit)
             self.outfitlist[idx][None] = outfitname
+        self.modified = 1
 
         # Need this so the combobox will keep the current text since it
         # only listens to the return key
