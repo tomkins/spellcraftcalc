@@ -770,9 +770,9 @@ class ScWindow(QMainWindow, Ui_B_SC):
         self.currentTab = self.PieceTab
         self.currentTabLabel = string.strip(str(self.PieceTab.tabText(0, 0)))
 
-        self.outfitlist = {}
+        self.outfitlist = []
         self.outfitnumbering = 1
-        self.currentOutfitName = ""
+        self.currentOutfit = -1
         self.OutfitName.clear()
         self.deleteOutfitAction.setEnabled(False)
 
@@ -837,18 +837,19 @@ class ScWindow(QMainWindow, Ui_B_SC):
         childnode.appendChild(document.createTextNode(unicode(self.noteText)))
         rootnode.appendChild(childnode)
 
-        if len(self.outfitlist.keys()) > 0:
-            outfitsnode = document.createElement('Outfits')
-            for outfitname, outfit in self.outfitlist.items():
-                outfitnode = document.createElement('Outfit')
-                outfitnode.setAttribute(u'name', outfitname)
-                for piece, index in outfit.items():
-                    piecenode = document.createElement('OutfitItem')
-                    piecenode.setAttribute('Location', piece)
-                    piecenode.setAttribute('Index', unicode(index))
-                    outfitnode.appendChild(piecenode)
-                outfitsnode.appendChild(outfitnode)
-            rootnode.appendChild(outfitsnode)
+        outfitsnode = document.createElement('Outfits')
+        for outfit in self.outfitlist:
+            outfitnode = document.createElement('Outfit')
+            outfitnode.setAttribute(u'name', outfit[None])
+            for piece, item in outfit.iteritems():
+                if piece is None: continue
+                piecenode = document.createElement('OutfitItem')
+                piecenode.setAttribute('Location', piece)
+                piecenode.setAttribute('Index', unicode(item[0]))
+                piecenode.setAttribute('Equipped', unicode(item[1]))
+                outfitnode.appendChild(piecenode)
+            outfitsnode.appendChild(outfitnode)
+        rootnode.appendChild(outfitsnode)
 
         if rich:
             totalsdict = self.summarize()
@@ -1039,7 +1040,6 @@ class ScWindow(QMainWindow, Ui_B_SC):
             if item.ItemQuality in QualityValues:
                 self.QualDrop.setCurrentIndex(
                     QualityValues.index(item.ItemQuality))
-        self.saveCurrentOutfit()
         self.nocalc = wasnocalc
         if self.nocalc: return
         self.calculate()
@@ -1410,6 +1410,9 @@ class ScWindow(QMainWindow, Ui_B_SC):
             item.Equipped = '1'
         else:
             item.Equipped = '0'
+        self.outfitlist[self.currentOutfit][self.currentTabLabel] \
+                = ( item.TemplateIndex, item.Equipped )
+
         if item.ActiveState == 'player':
             item.ItemQuality = unicode(self.QualDrop.currentText())
         else:
@@ -1420,38 +1423,39 @@ class ScWindow(QMainWindow, Ui_B_SC):
 
     def itemNameSelected(self,a0):
         if self.nocalc: return
-        if isinstance(a0,int):
-            if a0 == 0: return
-            item = self.itemattrlist[self.currentTabLabel]
-            wasequipped = item.Equipped
-            item.Equipped = '0'
-            prev = item
-            for a1 in range(0, a0 - 1):
-                prev = prev.next
-            item = prev.next
-            prev.next = prev.next.next
-            item.next = self.itemattrlist[self.currentTabLabel]
-            self.itemattrlist[self.currentTabLabel] = item
-            item.Equipped = wasequipped
+        if not isinstance(a0, int) or a0 < 1: return
+        item = self.itemattrlist[self.currentTabLabel]
+        wasequipped = item.Equipped
+        item.Equipped = '0'
+        prev = item
+        for a1 in range(0, a0 - 1):
+            prev = prev.next
+        item = prev.next
+        prev.next = prev.next.next
+        item.next = self.itemattrlist[self.currentTabLabel]
+        self.itemattrlist[self.currentTabLabel] = item
+        item.Equipped = wasequipped
+        self.outfitlist[self.currentOutfit][self.currentTabLabel] \
+                = ( item.TemplateIndex, item.Equipped )
 
-            # Block any additional signals here until AFTER we
-            # execute restoreItem, so subsequent signals get the correct
-            # currentIndex which short circuits this routine
-            # (see a0 == 0 check above)
-            self.ItemNameCombo.blockSignals(True)
-            QApplication.postEvent(self, UpdateItemNameComboEvent(item))
-            #self.restoreItem(item)
+        # Block any additional signals here until AFTER we
+        # execute restoreItem, so subsequent signals get the correct
+        # currentIndex which short circuits this routine
+        # (see a0 == 0 check above)
+        self.ItemNameCombo.blockSignals(True)
+        QApplication.postEvent(self, UpdateItemNameComboEvent(item))
+        #self.restoreItem(item)
 
     def itemNameEdited(self,a0=None):
         if self.nocalc: return
+        item = self.itemattrlist[self.currentTabLabel]
+        item.ItemName = unicode(self.ItemNameCombo.lineEdit().text())
         if self.ItemNameCombo.currentIndex() == -1:
             # strange interactions with focusOut...
             self.ItemNameCombo.setCurrentIndex(0)
         #if a0 is None:
         #    a0 = unicode(self.ItemNameCombo.lineEdit().text())
         #if self.ItemNameCombo.findText(a0) > 0: return
-        item = self.itemattrlist[self.currentTabLabel]
-        item.ItemName = unicode(self.ItemNameCombo.lineEdit().text())
         #cursorpos = self.ItemNameCombo.lineEdit().cursorPosition()
         #self.ItemNameCombo.setItemText(0,item.ItemName)
         #self.ItemNameCombo.lineEdit().setCursorPosition(cursorpos)
@@ -1880,9 +1884,9 @@ class ScWindow(QMainWindow, Ui_B_SC):
         self.OutfitName.clear()
         racename = ''
         classname = ''
-        self.outfitlist = {}
+        self.outfitlist = []
         self.outfitnumbering = 1
-        self.currentOutfitName = ""
+        self.currentOutfit = 0
         self.itemnumbering = 1
         itemdefault = self.itemattrlist.copy()
         for child in template.childNodes:
@@ -1939,12 +1943,13 @@ class ScWindow(QMainWindow, Ui_B_SC):
                     if outfitnode.tagName == 'Outfit':
                         self.outfitnumbering += 1
                         outfitname = outfitnode.getAttribute(u'name')
-                        self.outfitlist[outfitname] = {}
+                        self.outfitlist.append( { None : outfitname } )
                         for piecenode in outfitnode.childNodes:
                             if piecenode.nodeType == Node.TEXT_NODE: continue
                             piecename = piecenode.getAttribute('Location')
                             index = int(piecenode.getAttribute('Index'))
-                            self.outfitlist[outfitname][piecename] = index
+                            equipped = int(piecenode.getAttribute('Equipped'))
+                            self.outfitlist[-1][piecename] = ( index, equipped )
 
         self.Realm.setCurrentIndex(Realms.index(self.realm))
         self.realmChanged(Realms.index(self.realm))
@@ -1961,17 +1966,17 @@ class ScWindow(QMainWindow, Ui_B_SC):
         self.modified = 0
         self.nocalc = 0
 
-        if len(self.outfitlist.keys()) == 0:
+        if len(self.outfitlist) < 1:
             self.newOutfit()
         else:
             self.OutfitName.blockSignals(True)
-            for oname in self.outfitlist.keys():
-                self.OutfitName.addItem(oname)
+            for outfit in self.outfitlist:
+                self.OutfitName.addItem(outfit[None])
             self.OutfitName.blockSignals(False)
-            self.OutfitName.setCurrentIndex(0)
-            if len(self.outfitlist.keys()) > 1:
-                self.deleteOutfitAction.setEnabled(True)
-            self.outfitNameSelected(0)
+            self.OutfitName.setCurrentIndex(currentoutfit)
+            self.outfitNameSelected(currentoutfit)
+
+        self.deleteOutfitAction.setEnabled(len(self.outfitlist) > 1)
 
         self.calculate()
         
@@ -2299,70 +2304,75 @@ class ScWindow(QMainWindow, Ui_B_SC):
 
     def newOutfit(self):
         outfitname = 'Outfit%d' % self.outfitnumbering
-
-        outfit = {}
-        self.saveOutfit(outfit)
-
-        self.outfitlist[outfitname] = outfit
-        self.OutfitName.addItem(outfitname)
-
-        self.OutfitName.setCurrentIndex(self.OutfitName.findText(outfitname))
-        self.currentOutfitName = outfitname
         self.outfitnumbering += 1
-        
-        if len(self.outfitlist.keys()) > 0:
+
+        self.outfitlist.append( { None: outfitname } )
+        idx = len(self.outfitlist) - 1
+
+        self.currentOutfit = idx
+        if idx != -1 and idx < len(self.outfitlist):
+            for key, item in self.itemattrlist.iteritems():
+                self.outfitlist[idx][key] = ( item.TemplateIndex, item.Equipped )
+
+        #sys.stdout.write("Created Outfit %d\n" % idx)
+
+        self.OutfitName.addItem(outfitname)
+        self.OutfitName.setCurrentIndex(self.currentOutfit)
+        if len(self.outfitlist) > 1:
             self.deleteOutfitAction.setEnabled(True)
-
-    def saveCurrentOutfit(self):
-        if self.currentOutfitName != "" and \
-                self.outfitlist.has_key(self.currentOutfitName):
-            self.saveOutfit(self.outfitlist[self.currentOutfitName])
-
-    def saveOutfit(self, outfit):
-        for key, item in self.itemattrlist.iteritems():
-        #    if not item.isEmpty():
-            outfit[key] = item.TemplateIndex
+        self.modified = 1
 
     def deleteOutfit(self):
-        if self.OutfitName.currentIndex() != -1:
-            outfitname = str(self.OutfitName.currentText())
-            self.OutfitName.removeItem(self.OutfitName.currentIndex())
-            del self.outfitlist[outfitname]
+        if self.currentOutfit < 0 or len(self.outfitlist) < 2: return
+        #sys.stdout.write("Deleted Outfit %d\n" % self.currentOutfit)
+        del self.outfitlist[self.currentOutfit]
+        self.OutfitName.removeItem(self.currentOutfit)
+        self.currentOutfit = self.OutfitName.currentIndex()
+        if self.currentOutfit < 0:
+            self.currentOutfit = 0
+            self.OutfitName.setCurrentIndex(0)
+        self.outfitNameSelected(self.currentOutfit)
+        self.modified = 1
 
-            if self.OutfitName.count() < 2:
-                self.deleteOutfitAction.setEnabled(False)
+        if self.OutfitName.count() < 2:
+            self.deleteOutfitAction.setEnabled(False)
 
     def outfitNameSelected(self, idx):
-        outfitname = str(self.OutfitName.itemText(idx))
-
-        if self.outfitlist.has_key(outfitname):
-            outfit = self.outfitlist[outfitname]
-            self.currentOutfitName = outfitname
-            for piece, index in outfit.items():
-                item = self.itemattrlist[piece]
-                prev = None
-                while item and item.TemplateIndex != index:
-                    prev = item
-                    item = item.next
-
-                if item:
-                    if prev:
-                        prev.next = prev.next.next
-                        item.next = self.itemattrlist[piece]
+        if not isinstance(idx, int) or idx < 0: return
+        sys.stdout.write("Selected Outfit %d\n" % idx)
+        self.currentOutfit = idx
+        outfit = self.outfitlist[idx]
+        for piece, indexes in outfit.iteritems():
+            if piece is None: continue
+            item = self.itemattrlist[piece]
+            prev = None
+            while item and item.TemplateIndex != indexes[0]:
+                prev = item
+                item = item.next
+            if item: 
+                if prev:
+                    prev.next = prev.next.next
+                    item.next = self.itemattrlist[piece]
+                    self.itemattrlist[piece].Equipped = '0'
                     self.itemattrlist[piece] = item
-            self.restoreItem(self.itemattrlist[self.currentTabLabel])
-            self.calculate()
+                self.itemattrlist[piece].Equipped = indexes[1]
+            else:
+                self.outfitlist[idx][piece] = ( self.itemattrlist[piece].TemplateIndex, 
+                                                self.itemattrlist[piece].Equipped )
+        self.restoreItem(self.itemattrlist[self.currentTabLabel])
+        self.calculate()
 
     def outfitNameEdited(self):
+        idx = self.currentOutfit
         outfitname = str(self.OutfitName.currentText())
-        if outfitname != self.currentOutfitName:
-            outfit = self.outfitlist.pop(self.currentOutfitName)
-            self.outfitlist[outfitname] = outfit
-            self.currentOutfitName = outfitname
+        if idx != -1 and outfitname != self.OutfitName.itemText(idx):
+            sys.stdout.write("Edited Outfit %d named %s\n" % (idx, outfitname))
+            self.OutfitName.setItemText(idx, outfitname)
+            self.outfitlist[idx][None] = outfitname
 
         # Need this so the combobox will keep the current text since it
         # only listens to the return key
-        self.OutfitName.lineEdit().emit(SIGNAL("returnPressed()"))
+        #self.OutfitName.lineEdit().emit(SIGNAL("returnPressed()"))
         
     def aboutBox(self):
         splash = AboutScreen(parent=self,modal=True)
