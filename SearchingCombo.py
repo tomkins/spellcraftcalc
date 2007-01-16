@@ -59,7 +59,7 @@ class SearchingCombo(QComboBox):
     def buildItemKeys(self):
         keys = []
         for i in range(0, self.count()):
-            txt = str(self.itemText(i))
+            txt = unicode(self.itemText(i))
             keys.append(string.join(map(lambda s: s[0], txt.split()), "").upper())
         return keys
 
