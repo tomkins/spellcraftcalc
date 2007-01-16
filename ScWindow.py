@@ -36,16 +36,16 @@ import encodings
 import codecs
 import sys
 
-UPDATE_ITEMNAME_COMBO_EVENT = QEvent.Type(QEvent.User + 1)
-
 class UpdateTypeListEvent(QEvent):
     def __init__(self, slot):
         QEvent.__init__(self, QEvent.User)
         self.slot = slot
 
-class UpdateItemNameComboEvent(QEvent):
+UserEventIDRestoreItem = QEvent.Type(QEvent.User + 1)
+
+class RestoreItemEvent(QEvent):
     def __init__(self, item):
-        QEvent.__init__(self, UPDATE_ITEMNAME_COMBO_EVENT)
+        QEvent.__init__(self, UserEventIDRestoreItem)
         self.item = item
 
 def plainXMLTag(strval):
@@ -312,6 +312,7 @@ class ScWindow(QMainWindow, Ui_B_SC):
 
 
     def initControls(self):
+        # Send these home to the parent form (this QMainWindow), they are dumb QFrames:
         self.GroupStats.mousePressEvent = self.ignoreMouseEvent
         self.GroupResists.mousePressEvent = self.ignoreMouseEvent
         self.GroupItemFrame.mousePressEvent = self.ignoreMouseEvent
@@ -324,62 +325,62 @@ class ScWindow(QMainWindow, Ui_B_SC):
                      SIGNAL("mousePressEvent(QMouseEvent*)"),
                      self.mousePressEvent)
 
-        self.connect(self.CharName,SIGNAL("editingFinished()"),
-                     self.templateChanged)
-        #self.connect(self.CharName,SIGNAL("textChanged(const QString&)"),
+        #self.connect(self.CharName,SIGNAL("editingFinished()"),
         #             self.templateChanged)
+        self.connect(self.CharName,SIGNAL("textChanged(const QString&)"),
+                     self.templateChanged)
         self.connect(self.Realm,SIGNAL("activated(int)"),
                      self.realmChanged)
         self.connect(self.CharClass,SIGNAL("activated(int)"),
                      self.charClassChanged)
         self.connect(self.CharRace,SIGNAL("activated(int)"),
                      self.raceChanged)
-        self.connect(self.CharLevel,SIGNAL("editingFinished()"),
-                     self.templateChanged)
-        #self.connect(self.CharLevel,SIGNAL("textChanged(const QString&)"),
+        #self.connect(self.CharLevel,SIGNAL("editingFinished()"),
         #             self.templateChanged)
+        self.connect(self.CharLevel,SIGNAL("textChanged(const QString&)"),
+                     self.templateChanged)
         self.connect(self.OutfitName,SIGNAL("activated(int)"), 
                      self.outfitNameSelected)
-        self.connect(self.OutfitName.lineEdit(),SIGNAL("editingFinished()"),
-                     self.outfitNameEdited)
-        #self.connect(self.OutfitName,SIGNAL("editTextChanged(const QString&)"),
+        #self.connect(self.OutfitName.lineEdit(),SIGNAL("editingFinished()"),
         #             self.outfitNameEdited)
+        self.connect(self.OutfitName,SIGNAL("editTextChanged(const QString&)"),
+                     self.outfitNameEdited)
 
 
         self.connect(self.PieceTab,SIGNAL("currentChanged"),
                      self.pieceTabChanged)
-        self.connect(self.ItemLevel,SIGNAL("editingFinished()"),
-                     self.itemChanged)
-        #self.connect(self.ItemLevel,SIGNAL("textChanged(const QString&)"),
+        #self.connect(self.ItemLevel,SIGNAL("editingFinished()"),
         #             self.itemChanged)
+        self.connect(self.ItemLevel,SIGNAL("textChanged(const QString&)"),
+                     self.itemChanged)
         self.connect(self.ItemLevelButton,SIGNAL("clicked()"),
                      self.itemLevelShow)
         self.connect(self.QualDrop,SIGNAL("activated(int)"),
                      self.itemChanged)
-        self.connect(self.ItemLevel,SIGNAL("editingFinished()"),
-                     self.itemChanged)
-        #self.connect(self.QualEdit,SIGNAL("textChanged(const QString&)"),
+        #self.connect(self.ItemLevel,SIGNAL("editingFinished()"),
         #             self.itemChanged)
-        self.connect(self.Bonus_Edit,SIGNAL("editingFinished()"),
+        self.connect(self.QualEdit,SIGNAL("textChanged(const QString&)"),
                      self.itemChanged)
-        #self.connect(self.Bonus_Edit,SIGNAL("textChanged(const QString&)"),
+        #self.connect(self.Bonus_Edit,SIGNAL("editingFinished()"),
         #             self.itemChanged)
-        self.connect(self.AFDPS_Edit,SIGNAL("editingFinished()"),
+        self.connect(self.Bonus_Edit,SIGNAL("textChanged(const QString&)"),
                      self.itemChanged)
-        #self.connect(self.AFDPS_Edit,SIGNAL("textChanged(const QString&)"),
+        #self.connect(self.AFDPS_Edit,SIGNAL("editingFinished()"),
         #             self.itemChanged)
-        self.connect(self.Speed_Edit,SIGNAL("editingFinished()"),
+        self.connect(self.AFDPS_Edit,SIGNAL("textChanged(const QString&)"),
                      self.itemChanged)
-        #self.connect(self.Speed_Edit,SIGNAL("textChanged(const QString&)"),
+        #self.connect(self.Speed_Edit,SIGNAL("editingFinished()"),
         #             self.itemChanged)
+        self.connect(self.Speed_Edit,SIGNAL("textChanged(const QString&)"),
+                     self.itemChanged)
         self.connect(self.Equipped,SIGNAL("stateChanged(int)"),
                      self.itemChanged)
         self.connect(self.ItemNameCombo,SIGNAL("activated(int)"),
                      self.itemNameSelected)
-        self.connect(self.ItemNameCombo.lineEdit(),SIGNAL("editingFinished()"),
-                     self.itemNameEdited)
-        #self.connect(self.ItemNameCombo,SIGNAL("textChanged(const QString&)"),
+        #self.connect(self.ItemNameCombo.lineEdit(),SIGNAL("editingFinished()"),
         #             self.itemNameEdited)
+        self.connect(self.ItemNameCombo,SIGNAL("textChanged(const QString&)"),
+                    self.itemNameEdited)
         self.connect(self.SkillsList,SIGNAL("activated(const QModelIndex&)"),
                      self.skillClicked)
 
@@ -955,19 +956,17 @@ class ScWindow(QMainWindow, Ui_B_SC):
             self.showPlayerWidgets(item)
         else:
             self.showDropWidgets(item)
-        self.ItemNameCombo.clear()
 
+        # Make sure the combo doesn't do anything stupid...
+        self.ItemNameCombo.blockSignals(True)
+        self.ItemNameCombo.clear()
         altitem = item
         while altitem is not None:
             self.ItemNameCombo.addItem(altitem.ItemName)
             altitem = altitem.next
-
-        # Make sure the combo doesn't do anything stupid...
-        self.ItemNameCombo.blockSignals(True)
         self.ItemNameCombo.setCurrentIndex(0)
+        self.ItemNameCombo.setEditText(item.ItemName)
         self.ItemNameCombo.blockSignals(False)
-
-        #self.ItemNameCombo.setEditText(item.ItemName)
 
         self.ItemLevel.setText(item.Level)
         location = item.Location
@@ -1033,7 +1032,6 @@ class ScWindow(QMainWindow, Ui_B_SC):
         self.Bonus_Edit.setText(item.Bonus)
         if itemtype == 'drop':
             self.QualEdit.setText(item.ItemQuality)
-            #self.ItemNameCombo.setText(item.ItemName)
         else:
             if item.ItemQuality in QualityValues:
                 self.QualDrop.setCurrentIndex(
@@ -1414,12 +1412,11 @@ class ScWindow(QMainWindow, Ui_B_SC):
         if item.ActiveState == 'player':
             item.ItemQuality = unicode(self.QualDrop.currentText())
         else:
-            #item.ItemNameCombo = unicode(self.ItemName.text())
             item.ItemQuality = unicode(self.QualEdit.text())
-
         self.calculate()
 
     def itemNameSelected(self,a0):
+        sys.stdout.write("Selected Item %d\n" % a0)
         if self.nocalc: return
         if not isinstance(a0, int) or a0 < 1: return
         item = self.itemattrlist[self.currentTabLabel]
@@ -1435,30 +1432,28 @@ class ScWindow(QMainWindow, Ui_B_SC):
         item.Equipped = wasequipped
         self.outfitlist[self.currentOutfit][self.currentTabLabel] \
                 = ( item.TemplateIndex, item.Equipped, )
-
         # Block any additional signals here until AFTER we
         # execute restoreItem, so subsequent signals get the correct
         # currentIndex which short circuits this routine
         # (see a0 == 0 check above)
         self.ItemNameCombo.blockSignals(True)
-        QApplication.postEvent(self, UpdateItemNameComboEvent(item))
-        #self.restoreItem(item)
+        QApplication.postEvent(self, RestoreItemEvent(item))
+        # self.restoreItem(item)
 
-    def itemNameEdited(self,a0=None):
+    def itemNameEdited(self,a0):
+        sys.stdout.write("Edited Item %d named %s\n" % (self.ItemNameCombo.currentIndex(), a0))
         if self.nocalc: return
+        # Ignore side-effect signal textEditChanged() prior to activated()
+        if self.ItemNameCombo.currentIndex() != 0: return
+        # Don't update as we stumble upon a duplicate name, let them keep editing
+        if self.ItemNameCombo.findText(a0) > -1: return
         item = self.itemattrlist[self.currentTabLabel]
         item.ItemName = unicode(self.ItemNameCombo.lineEdit().text())
-        if self.ItemNameCombo.currentIndex() == -1:
-            # strange interactions with focusOut...
-            self.ItemNameCombo.setCurrentIndex(0)
-        #if a0 is None:
-        #    a0 = unicode(self.ItemNameCombo.lineEdit().text())
-        #if self.ItemNameCombo.findText(a0) > 0: return
-        #cursorpos = self.ItemNameCombo.lineEdit().cursorPosition()
-        #self.ItemNameCombo.setItemText(0,item.ItemName)
-        #self.ItemNameCombo.lineEdit().setCursorPosition(cursorpos)
+        # blockSignals will not have the desired effect, save/restore the cursor as they insert
+        cursorpos = self.ItemNameCombo.lineEdit().cursorPosition()
+        self.ItemNameCombo.setItemText(0,item.ItemName)
+        self.ItemNameCombo.lineEdit().setCursorPosition(cursorpos)
         self.modified = 1
-        #self.ItemNameCombo.lineEdit().emit(SIGNAL("returnPressed()"))
 
     def senderSlot(self):
         index = self.sender().objectName()[-2:]
@@ -1960,9 +1955,6 @@ class ScWindow(QMainWindow, Ui_B_SC):
                               AllBonusList[self.realm][self.charclass] \
                                                       ['Races'].index(racename))
             self.raceChanged('')
-        self.restoreItem(self.itemattrlist[self.currentTabLabel])
-        self.modified = 0
-        self.nocalc = 0
 
         if len(self.outfitlist) < 1:
             self.appendOutfit()
@@ -1970,13 +1962,14 @@ class ScWindow(QMainWindow, Ui_B_SC):
             self.OutfitName.blockSignals(True)
             for outfit in self.outfitlist:
                 self.OutfitName.addItem(outfit[None])
-            self.OutfitName.blockSignals(False)
             self.OutfitName.setCurrentIndex(currentoutfit)
+            self.OutfitName.blockSignals(False)
             self.outfitNameSelected(currentoutfit)
 
         self.deleteOutfitAction.setEnabled(len(self.outfitlist) > 1)
-
-        self.calculate()
+        self.modified = 0
+        self.nocalc = 0
+        self.restoreItem(self.itemattrlist[self.currentTabLabel])
         
     def chooseXMLUIFile(self):
         filters = "UI XML Templates (*.xsl *.xslt);;All Files (*.*)"
@@ -2005,10 +1998,12 @@ class ScWindow(QMainWindow, Ui_B_SC):
             self.loadOptions()
             self.showcapmenuid.setChecked(self.capDistance)
             self.realmChanged(self.Realm.currentIndex())
-            self.restoreItem(self.itemattrlist[self.currentTabLabel])
             self.modified = 1
-        self.nocalc = 0
-        self.calculate()
+            self.nocalc = 0
+            self.restoreItem(self.itemattrlist[self.currentTabLabel])
+        else:
+            self.nocalc = 0
+            self.calculate()
 
     def openCraftWindow(self):
         CW = CraftWindow.CraftWindow(self, '', 1)
@@ -2318,6 +2313,8 @@ class ScWindow(QMainWindow, Ui_B_SC):
         self.OutfitName.blockSignals(False)
 
     def newOutfit(self):
+        f = QApplication.focusWidget()
+        if f is not None: f.setFocus()
         self.appendOutfit()
         #sys.stdout.write("Created Outfit %d\n" % idx)
         self.OutfitName.setCurrentIndex(self.currentOutfit)
@@ -2327,22 +2324,23 @@ class ScWindow(QMainWindow, Ui_B_SC):
 
     def deleteOutfit(self):
         if self.currentOutfit < 0 or len(self.outfitlist) < 2: return
-        #sys.stdout.write("Deleted Outfit %d\n" % self.currentOutfit)
-        del self.outfitlist[self.currentOutfit]
-        self.OutfitName.removeItem(self.currentOutfit)
-        self.currentOutfit = self.OutfitName.currentIndex()
-        if self.currentOutfit < 0:
-            self.currentOutfit = 0
-            self.OutfitName.setCurrentIndex(0)
-        self.outfitNameSelected(self.currentOutfit)
+        sys.stdout.write("Deleted Outfit %d\n" % self.currentOutfit)
+        outfit = self.currentOutfit
+        self.currentOutfit = 0
+        del self.outfitlist[outfit]
+        self.OutfitName.blockSignals(True)
+        self.OutfitName.removeItem(outfit)
+        self.OutfitName.setCurrentIndex(self.currentOutfit)
+        self.OutfitName.blockSignals(False)
         self.modified = 1
-
-        if self.OutfitName.count() < 2:
+        if len(self.outfitlist) < 2:
             self.deleteOutfitAction.setEnabled(False)
+        self.outfitNameSelected(self.currentOutfit)
 
     def outfitNameSelected(self, idx):
-        if not isinstance(idx, int) or idx < 0: return
-        sys.stdout.write("Selected Outfit %d\n" % idx)
+        if not isinstance(idx, int): return
+        if self.currentOutfit == idx: return
+        #sys.stdout.write("Selected Outfit %d\n" % idx)
         self.currentOutfit = idx
         outfit = self.outfitlist[idx]
         for piece, indexes in outfit.iteritems():
@@ -2361,26 +2359,25 @@ class ScWindow(QMainWindow, Ui_B_SC):
                 self.itemattrlist[piece].Equipped = indexes[1]
             else:
                 self.outfitlist[idx][piece] = ( self.itemattrlist[piece].TemplateIndex, 
-                                                self.itemattrlist[piece].Equipped )
+                                                self.itemattrlist[piece].Equipped, )
+        if self.nocalc: return
         self.restoreItem(self.itemattrlist[self.currentTabLabel])
-        self.calculate()
 
-    def outfitNameEdited(self):
+    def outfitNameEdited(self, a0=None):
         idx = self.currentOutfit
-        outfitname = str(self.OutfitName.currentText())
-        if idx != -1 and outfitname != self.OutfitName.itemText(idx):
-            sys.stdout.write("Edited Outfit %d named %s\n" % (idx, outfitname))
-            self.OutfitName.setItemText(idx, outfitname)
-            if self.ItemNameCombo.currentIndex() == -1:
-                # strange interactions with focusOut...
-                self.ItemNameCombo.setCurrentIndex(self.currentOutfit)
-            self.outfitlist[idx][None] = outfitname
+        # Ignore side-effect signal textEditChanged() prior to activated()
+        if idx != self.OutfitName.currentIndex(): return
+        # Don't update as we stumble upon a duplicate name, let them keep editing
+        if self.OutfitName.findText(a0) > -1: return
+        #sys.stdout.write("Edited Outfit %d named %s\n" % (idx, a0))
+        outfitname = unicode(self.OutfitName.currentText())
+        self.outfitlist[idx][None] = outfitname
+        # blockSignals will not have the desired effect, save/restore the cursor as they insert
+        cursorpos = self.OutfitName.lineEdit().cursorPosition()
+        self.OutfitName.setItemText(idx, outfitname)
+        self.OutfitName.lineEdit().setCursorPosition(cursorpos)
         self.modified = 1
 
-        # Need this so the combobox will keep the current text since it
-        # only listens to the return key
-        #self.OutfitName.lineEdit().emit(SIGNAL("returnPressed()"))
-        
     def aboutBox(self):
         splash = AboutScreen(parent=self,modal=True)
         splash.exec_()
@@ -2396,7 +2393,8 @@ class ScWindow(QMainWindow, Ui_B_SC):
         if e.type() == QEvent.User:
             self.updateTypeList(e.slot)
             return True
-        elif e.type() == UPDATE_ITEMNAME_COMBO_EVENT:
+        elif e.type() == UserEventIDRestoreItem:
+            sys.stdout.write("Restoring Item\n")
             self.restoreItem(e.item)
             # Unblock any signals we may have blocked in itemNameSelected()
             self.ItemNameCombo.blockSignals(False)
