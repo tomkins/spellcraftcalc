@@ -36,12 +36,13 @@ import encodings
 import codecs
 import sys
 
+UserEventIDRestoreItem = QEvent.Type(QEvent.User + 1)
+UserEventIDUpdateTypeList = QEvent.Type(QEvent.User + 2)
+
 class UpdateTypeListEvent(QEvent):
     def __init__(self, slot):
-        QEvent.__init__(self, QEvent.User)
+        QEvent.__init__(self, UserEventIDUpdateTypeList)
         self.slot = slot
-
-UserEventIDRestoreItem = QEvent.Type(QEvent.User + 1)
 
 class RestoreItemEvent(QEvent):
     def __init__(self, item):
@@ -2390,7 +2391,7 @@ class ScWindow(QMainWindow, Ui_B_SC):
             self.sizegrip.move(self.width() - 15, self.height() - 15)
 
     def event(self, e):
-        if e.type() == QEvent.User:
+        if e.type() == UserEventIDUpdateTypeList:
             self.updateTypeList(e.slot)
             return True
         elif e.type() == UserEventIDRestoreItem:
