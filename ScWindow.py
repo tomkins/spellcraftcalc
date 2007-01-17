@@ -1963,9 +1963,9 @@ class ScWindow(QMainWindow, Ui_B_SC):
             self.OutfitName.blockSignals(True)
             for outfit in self.outfitlist:
                 self.OutfitName.addItem(outfit[None])
-            self.OutfitName.setCurrentIndex(currentoutfit)
+            self.OutfitName.setCurrentIndex(self.currentOutfit)
             self.OutfitName.blockSignals(False)
-            self.outfitNameSelected(currentoutfit)
+            self.outfitNameSelected(self.currentOutfit)
 
         self.deleteOutfitAction.setEnabled(len(self.outfitlist) > 1)
         self.modified = 0
