@@ -1417,7 +1417,7 @@ class ScWindow(QMainWindow, Ui_B_SC):
         self.calculate()
 
     def itemNameSelected(self,a0):
-        sys.stdout.write("Selected Item %d\n" % a0)
+        #sys.stdout.write("Selected Item %d\n" % a0)
         if self.nocalc: return
         if not isinstance(a0, int) or a0 < 1: return
         item = self.itemattrlist[self.currentTabLabel]
@@ -1442,7 +1442,7 @@ class ScWindow(QMainWindow, Ui_B_SC):
         # self.restoreItem(item)
 
     def itemNameEdited(self,a0):
-        sys.stdout.write("Edited Item %d named %s\n" % (self.ItemNameCombo.currentIndex(), a0))
+        #sys.stdout.write("Edited Item %d named %s\n" % (self.ItemNameCombo.currentIndex(), a0))
         if self.nocalc: return
         # Ignore side-effect signal textEditChanged() prior to activated()
         if self.ItemNameCombo.currentIndex() != 0: return
@@ -2325,7 +2325,7 @@ class ScWindow(QMainWindow, Ui_B_SC):
 
     def deleteOutfit(self):
         if self.currentOutfit < 0 or len(self.outfitlist) < 2: return
-        sys.stdout.write("Deleted Outfit %d\n" % self.currentOutfit)
+        #sys.stdout.write("Deleted Outfit %d\n" % self.currentOutfit)
         outfit = self.currentOutfit
         self.currentOutfit = 0
         del self.outfitlist[outfit]
@@ -2395,7 +2395,7 @@ class ScWindow(QMainWindow, Ui_B_SC):
             self.updateTypeList(e.slot)
             return True
         elif e.type() == UserEventIDRestoreItem:
-            sys.stdout.write("Restoring Item\n")
+            #sys.stdout.write("Restoring Item\n")
             self.restoreItem(e.item)
             # Unblock any signals we may have blocked in itemNameSelected()
             self.ItemNameCombo.blockSignals(False)
