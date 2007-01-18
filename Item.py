@@ -17,20 +17,20 @@ import SC
 
 class ItemSlot:
     def __init__(self, slottype='player', type='Unused', amount='0', effect='',
-                 qua='94', time='0', remakes='0', done='0', requirement=''):
+                 time='0', remakes='0', done='0', requirement=''):
         self.__dict__ = { 
             'SlotType' : unicode(slottype),
             'Type': '', 'Effect' : '', 'Amount' : '', 'Requirement' : '',
-            'Qua' : '', 'Time' : '',   'Remakes' : '', 'Done' : '', }
-        self.setAll(type, amount, effect, qua, time, remakes, done, requirement)
+            'Time' : '',   'Remakes' : '', 'Done' : '', }
+        self.setAll(type, amount, effect, time, remakes, done, requirement)
 
     def setAll(self, type='Unused', amount='0', effect='',
-               qua='94', time='0', remakes='0', done='0',
+               time='0', remakes='0', done='0',
                requirement=''):
         self.Type = unicode(type)
         self.Amount = unicode(amount)
         self.Effect = unicode(effect)
-        self.Qua = unicode(qua)
+        #self.Qua = '94' # leave as a noop-placeholder?
         self.Time = unicode(time)
         self.Remakes = unicode(remakes)
         self.Done = unicode(done)
@@ -90,18 +90,6 @@ class ItemSlot:
         self.CraftOk = False
         self.Requirement = unicode(requirement)
 
-    def qua(self):
-        return self.Qua
-    def setQua(self, qua):
-        self.CraftOk = False
-        if qua == '': qua = '94'
-        self.Qua = unicode(qua)
-
-    def quaIndex(self):
-        if self.Qua in QualityValues:
-            return QualityValues.index(self.Qua)
-        return -1
-
     def time(self):
         return self.Time
     def setTime(self, time):
@@ -127,7 +115,6 @@ class ItemSlot:
         if self.Effect == '': return False
         if self.Amount == '' or self.Amount == '0': return False
         if self.gemLevel() < 0: return False
-        if self.quaIndex < 0: return False
         self.CraftOk = True
         return self.CraftOk
 
@@ -244,8 +231,6 @@ class ItemSlot:
 
     def gemRemakes(self):
         remakes = int(self.Remakes)
-        if self.Done == '0':
-            remakes += EstimatedMakes[self.quaIndex()] - 1
         return remakes
 
     def gemCost(self, remakes=0):
@@ -255,18 +240,14 @@ class ItemSlot:
             remakes = self.gemRemakes()
         costindex = self.gemLevel() - 1
         cost = GemCosts[costindex]
-        remakecost = RemakeCosts[costindex]
         if self.Effect[0:4] == 'All ':
             if self.Type == 'Focus':
                 cost = cost * 3 + 180 * costindex
-                remakecost = remakecost * 3 + 180 * costindex
             else:
                 cost += 200 + 180 * costindex
-                remakecost += 120 + 180 * costindex
         elif self.Type == 'Resist' or self.Type == 'Focus':
             cost += 60 * costindex
-            remakecost += 60 * costindex
-        cost += remakecost * remakes
+        cost += cost * remakes
         return cost
 
     def gemPrice(self, pricingInfo, tries=0):
@@ -281,9 +262,6 @@ class ItemSlot:
                 gemlvl = str(self.gemLevel())
                 tierp = pricingInfo.get('Tier', {})
                 price += int(float(tierp.get(gemlvl, 0)) * 10000)
-            if pricingInfo.get('QualInclude', 0):
-                qualp = pricingInfo.get('Qual', {})
-                price += int(cost * float(qualp.get(self.Qua, 0)) / 100.0)
             price += int(cost * pricingInfo.get('General', 0) / 100.0)
             if pricingInfo.get('CostInPrice', 1):
                 price += cost
@@ -299,7 +277,6 @@ class ItemSlot:
                        (u'Amount', self.Amount,)]
             if self.SlotType == 'player':
                 savexml.extend([
-                       (u'Qua', self.Qua,), 
                        (u'Remakes', self.Remakes,), 
                        (u'Time', self.Time,), 
                        (u'Done', self.Done,)])
@@ -424,14 +401,11 @@ class Item:
         except: itemlevel = 0
         if itemlevel < 1 or itemlevel > 51:
             return 0.0
-        if (self.Level == self.AFDPS) \
-                and (itemlevel % 2 == 1) and (itemlevel > 1) and (itemlevel != 51):
+        if (self.Level == self.AFDPS) and (itemlevel % 2 == 1) \
+                and (itemlevel > 1) and (itemlevel != 51):
+            # Cloth armor imbue points quirk
             itemlevel = itemlevel - 1
-        try: itemqual = int(self.ItemQuality) - 94
-        except: itemqual = -1
-        if itemqual < 0 or itemqual >= len(ImbuePts[itemlevel - 1]):
-            itemqual = 0
-        itemimbue = ImbuePts[itemlevel - 1][itemqual]
+        itemimbue = ImbuePts[itemlevel - 1]
         return itemimbue
 
     def listGemImbue(self):
@@ -457,11 +431,8 @@ class Item:
             return -100
         elif imbuepts < (itemimbue + 1.0):
             return 100
-        success = -OCStartPercentages[int(imbuepts-itemimbue)]
-        for i in range(0, len(gemimbue)):
-            if gemimbue[i] == 0.0: continue
-            success += GemQualOCModifiers[self.slot(i).qua()]
-        success += ItemQualOCModifiers[self.ItemQuality]
+        success = -OCStartPercentages[int(imbuepts-itemimbue)] \
+                + ItemQualOCModifiers[self.ItemQuality]
         skillbonus = (int(crafterSkill / 50) - 10) * 5
         if skillbonus > 50:
             skillbonus = 50
