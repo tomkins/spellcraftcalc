@@ -1,4 +1,5 @@
-Updated 01/14/2006 - Version 1.93 - The Last Old Flavor (Quality)
+
+Updated 01/17/2007 - Version 1.93 - The Last Old Flavor (Quality)
 
   ** This version preserves Quality for our European friends, until
   ** the crafting patch arrives on their hemisphere.  The number 1.94
