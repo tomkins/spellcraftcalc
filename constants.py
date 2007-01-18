@@ -20,7 +20,7 @@ __all__ = [
   'TabList', 'PieceTabList', 'JewelTabList', 'FocusTabList',
 ]
 
-ScVersion = "Kort's Spellcrafting Calulator 1.93"
+ScVersion = "Kort's Spellcrafting Calulator 1.94"
 
 from Character import *
 from tuple2 import * 
