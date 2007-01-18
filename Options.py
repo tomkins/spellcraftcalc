@@ -30,8 +30,6 @@ class Options(QDialog, Ui_B_Options):
         self.connect(self.OK,SIGNAL("clicked()"),self.OK_pressed)
         self.connect(self.Cancel,SIGNAL("clicked()"),self.Cancel_pressed)
         self.connect(self.Tier,SIGNAL("activated(const QString&)"),self.TierMarkupChanged)
-        self.connect(self.QualLevel,SIGNAL("activated(const QString&)"),self.QualMarkupChanged)
-        self.connect(self.QualMarkup,SIGNAL("textChanged(const QString&)"),self.QualMarkupSet)
         self.connect(self.TierPrice,SIGNAL("textChanged(const QString&)"),self.TierMarkupSet)
 
 #       self.Tab.setTabEnabled(self.Price, 0)
@@ -39,7 +37,6 @@ class Options(QDialog, Ui_B_Options):
         skilllist = range(1000, -1, -50)
         self.Skill.clear()
         self.Skill.addItems(map(lambda(x):str(x), skilllist))
-        self.QualPricing = {}
         self.TierPricing = {}
         self.loadOptions()
 
@@ -71,23 +68,11 @@ class Options(QDialog, Ui_B_Options):
     def Cancel_pressed(self):
         self.done(-1)
 
-    def QualMarkupSet(self, a0):
-        st = re.sub('[^\d.]', '', str(a0))
-        if st == '': st = '0'
-        self.QualMarkup.setText(st)
-        self.QualPricing[str(self.QualLevel.currentText())] = float(st)
-
     def TierMarkupSet(self, a0):
         st = re.sub('[^\d]', '', str(a0))
         if st == '': st = '0'
         self.TierPrice.setText(st)
         self.TierPricing[str(self.Tier.currentText())] = int(st)
-
-    def QualMarkupChanged(self, a0):
-        if self.QualPricing.has_key(str(a0)):
-            self.QualMarkup.setText(str(self.QualPricing[str(a0)]))
-        else:
-            self.QualMarkup.setText('0')    
 
     def TierMarkupChanged(self, a0):
         if self.TierPricing.has_key(str(a0)):
@@ -101,8 +86,6 @@ class Options(QDialog, Ui_B_Options):
         pricing['PPGem'] = int(str(self.PPGem.text()))
         pricing['PPItem'] = int(str(self.PPItem.text()))
         pricing['PPOrder'] = int(str(self.PPOrder.text()))
-        pricing['QualInclude'] = self.QualInclude.isChecked()
-        pricing['Qual'] = self.QualPricing
         pricing['PPInclude'] = self.PPInclude.isChecked()
         pricing['PPLevel'] = int(str(self.PPLevel.text()))
         pricing['PPImbue'] = int(str(self.PPImbue.text()))
@@ -119,9 +102,6 @@ class Options(QDialog, Ui_B_Options):
         if not pinfo.has_key('PPGem'): return
 
         # do some consistency checks
-        if not pinfo.has_key('Qual') or\
-                not isinstance(pinfo['Qual'], dict):
-            pinfo['Qual'] = {}
         if not pinfo.has_key('Tier') or\
                 not isinstance(pinfo['Tier'], dict):
             pinfo['Tier'] = {}
@@ -130,12 +110,6 @@ class Options(QDialog, Ui_B_Options):
         self.PPItem.setText(str(pinfo['PPItem']))
         self.PPOrder.setText(str(pinfo['PPOrder']))
         self.GenMarkup.setText(str(pinfo['General']))
-        if pinfo['QualInclude']:
-            self.QualInclude.setChecked(1)
-        else:
-            self.QualInclude.setChecked(0)
-        self.QualPricing = pinfo['Qual']
-        self.QualMarkupChanged(self.QualLevel.currentText())
         if pinfo['PPInclude']:
             self.PPInclude.setChecked(1)
         else:

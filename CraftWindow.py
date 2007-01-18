@@ -22,7 +22,6 @@ class CraftWindow(QDialog, Ui_B_CraftWindow):
         self.GemDone = []
         self.GemTime = []
         self.GemCost = []
-        self.GemQuality = []
         self.GemName = []
         for i in range (0, 4):
             idx = i + 1
@@ -33,7 +32,6 @@ class CraftWindow(QDialog, Ui_B_CraftWindow):
             self.GemTime.append(getattr(self, 'Gem%dTime' % idx))
             self.connect(self.GemTime[i],SIGNAL("textChanged(const QString&)"),self.TimeChanged)
             self.GemCost.append(getattr(self, 'Gem%dCost' % idx))
-            self.GemQuality.append(getattr(self, 'Gem%dQua' % idx))
             self.GemName.append(getattr(self, 'Gem%dName' % idx))
         self.connect(self.ExpMultiplier,SIGNAL("valueChanged(int)"),self.computeMaterials)
         self.connect(self.Close,SIGNAL("clicked()"),self.CloseWindow)
@@ -53,7 +51,6 @@ class CraftWindow(QDialog, Ui_B_CraftWindow):
                 self.GemTime[slot].hide()
                 self.GemCost[slot].hide()
                 self.GemName[slot].hide()
-                self.GemQuality[slot].hide()
                 continue
             
             if item.slot(slot).done() == '1':
@@ -68,7 +65,6 @@ class CraftWindow(QDialog, Ui_B_CraftWindow):
             self.gemCosts[slot] = item.slot(slot).gemCost(numremakes)
             self.totalCost += self.gemCosts[slot]
 
-            self.GemQuality[slot].setText('%s%%' % item.slot(slot).qua())
             self.GemTime[slot].setText(item.slot(slot).time())
             self.GemCost[slot].setText(SC.formatCost(self.gemCosts[slot]))
             

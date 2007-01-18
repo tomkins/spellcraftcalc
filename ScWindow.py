@@ -121,7 +121,7 @@ class ScWindow(QMainWindow, Ui_B_SC):
         ]
         self.switchOnType['player'] = [
             self.QualDrop,
-            self.LabelGemQuality, self.LabelGemPoints,
+            self.LabelGemPoints,
             self.LabelGemCost, self.LabelGemName,
             self.ItemImbueLabel, self.ItemImbue, self.ItemImbueTotal,
             self.ItemOverchargeLabel, self.ItemOvercharge,
@@ -206,7 +206,6 @@ class ScWindow(QMainWindow, Ui_B_SC):
         self.Effect = []
         self.AmountEdit = []
         self.AmountDrop = []
-        self.Quality = []
         self.Points = []
         self.Cost = []
         self.Requirement = []
@@ -223,15 +222,15 @@ class ScWindow(QMainWindow, Ui_B_SC):
         self.ItemNameCombo.setFixedHeight(cbheight)
         self.ItemNameCombo.setCompleter(None)
 
-        self.GroupItemFrame.layout().setColumnStretch(8, 1)
         width = testfont.size(Qt.TextSingleLine, " Slot 10:").width()
         self.GroupItemFrame.layout().setColumnMinimumWidth(0,width)
         width = testfont.size(Qt.TextSingleLine, " Points").width()
-        self.GroupItemFrame.layout().setColumnMinimumWidth(5,width)
+        self.GroupItemFrame.layout().setColumnMinimumWidth(4,width)
         reqwidth = width
         width = testfont.size(Qt.TextSingleLine, "  999g 00s 00c").width()
-        self.GroupItemFrame.layout().setColumnMinimumWidth(6,width)
+        self.GroupItemFrame.layout().setColumnMinimumWidth(5,width)
         reqwidth += width + amtcbwidth
+        self.GroupItemFrame.layout().setColumnStretch(8, 1)
 
         typewidth = self.Type_1.getMinimumWidth(list(DropTypeList))
         l = reduce(lambda x, y: x+y, [ list(x) \
@@ -289,15 +288,10 @@ class ScWindow(QMainWindow, Ui_B_SC):
                     self.GemLabel[i], self.Type[i], self.Effect[i], ])
 
             if i < 4:
-                self.Quality.append(getattr(self, 'Quality_%d' % idx))
-                self.Quality[i].insertItems(0, list(QualityValues))
-                self.Quality[i].setFixedSize(QSize(amtcbwidth, cbheight))
-                self.connect(self.Quality[i],SIGNAL("activated(int)"),
-                             self.amountsChanged)
                 self.Points.append(getattr(self, 'Points_%d' % idx))
                 self.Cost.append(getattr(self, 'Cost_%d' % idx))
                 self.switchOnType['player'].extend([
-                    self.Quality[i], self.Points[i], self.Cost[i], ])
+                    self.Points[i], self.Cost[i], ])
 
             self.GroupItemFrame.layout().setRowMinimumHeight(i + 3, 
                 max(cbheight, edheight))
@@ -592,11 +586,7 @@ class ScWindow(QMainWindow, Ui_B_SC):
             if i < 6:
                 self.setTabOrder(self.AmountEdit[i],self.AmountDrop[i])
                 self.setTabOrder(self.AmountDrop[i],self.Effect[i])
-                if i < 4:
-                    self.setTabOrder(self.Effect[i],self.Quality[i])
-                    self.setTabOrder(self.Quality[i],self.Requirement[i])
-                else:
-                    self.setTabOrder(self.Effect[i],self.Requirement[i])
+                self.setTabOrder(self.Effect[i],self.Requirement[i])
             else:
                 self.setTabOrder(self.AmountEdit[i],self.Effect[i])
                 self.setTabOrder(self.Effect[i],self.Requirement[i])
@@ -641,7 +631,6 @@ class ScWindow(QMainWindow, Ui_B_SC):
                     self.GemLabel[i].setEnabled(0)
             else:
                 if i < 4:
-                    self.Quality[i].hide()
                     self.Points[i].hide()
                     self.Cost[i].hide()
                 self.Requirement[i].show()
@@ -736,10 +725,6 @@ class ScWindow(QMainWindow, Ui_B_SC):
         self.move(x, y)
         self.updateGeometry()
 
-        if not self.pricingInfo.has_key('Qual') or\
-                not isinstance(self.pricingInfo['Qual'], dict):
-            self.pricingInfo['Qual'] = {}
-            ScOptions.instance().setOption('Pricing', self.pricingInfo)
         if not self.pricingInfo.has_key('Tier') or\
                 not isinstance(self.pricingInfo['Tier'], dict):
             self.pricingInfo['Tier'] = {}
@@ -1020,13 +1005,7 @@ class ScWindow(QMainWindow, Ui_B_SC):
                                               self.AmountDrop[slot].count() - 1)
                 else:
                     self.AmountDrop[slot].setCurrentIndex(amount)
-            if itemtype == 'player' and item.slot(slot).slotType() == 'player':
-                quacombo = self.Quality[slot]
-                gemqua = item.slot(slot).qua()
-                if gemqua in QualityValues:
-                    if quacombo.count() > 0:
-                        quacombo.setCurrentIndex(QualityValues.index(gemqua))
-            else:
+            if itemtype != 'player' or item.slot(slot).slotType() != 'player':
                 self.Requirement[slot].setText(item.slot(slot).requirement())
         self.AFDPS_Edit.setText(item.AFDPS)
         self.Speed_Edit.setText(item.Speed)
@@ -1470,9 +1449,7 @@ class ScWindow(QMainWindow, Ui_B_SC):
             item.slot(slot).setAmount(self.AmountDrop[slot].currentText())
         else:
             item.slot(slot).setAmount(self.AmountEdit[slot].text())
-        if item.slot(slot).slotType() == 'player':
-            item.slot(slot).setQua(self.Quality[slot].currentText())
-        else:
+        if item.slot(slot).slotType() != 'player':
             item.slot(slot).setRequirement(self.Requirement[slot].text())
         self.modified = 1
         self.calculate()
@@ -1512,8 +1489,6 @@ class ScWindow(QMainWindow, Ui_B_SC):
             amount = self.AmountEdit[slot]
         if typetext == 'Unused':
             amount.clear()
-            if item.slot(slot).slotType() == 'player':
-                self.Quality[slot].setCurrentIndex(0)
         elif item.ActiveState == 'player':
             amtindex = amount.currentIndex()
             amount.clear()
@@ -1538,8 +1513,6 @@ class ScWindow(QMainWindow, Ui_B_SC):
                     amtindex = 0
                 if amtindex < len(valueslist):
                     amount.setCurrentIndex(amtindex)
-            if item.slot(slot).slotType() == 'player':
-                self.Quality[slot].setCurrentIndex(len(QualityValues)-2)
         # Cascade the changes
         self.amountsChanged(0, slot)
 
