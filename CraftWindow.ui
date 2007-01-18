@@ -58,7 +58,7 @@
             <property name="spacing" >
              <number>3</number>
             </property>
-            <item row="3" column="5" >
+            <item row="3" column="4" >
              <widget class="QLabel" name="Gem3Cost" >
               <property name="text" >
                <string>0c</string>
@@ -68,10 +68,10 @@
               </property>
              </widget>
             </item>
-            <item row="2" column="3" >
+            <item row="2" column="2" >
              <widget class="QSpinBox" name="Gem2Remakes" />
             </item>
-            <item row="4" column="4" >
+            <item row="4" column="3" >
              <widget class="QLineEdit" name="Gem4Time" >
               <property name="sizePolicy" >
                <sizepolicy>
@@ -86,7 +86,7 @@
               </property>
              </widget>
             </item>
-            <item row="1" column="3" >
+            <item row="1" column="2" >
              <widget class="QSpinBox" name="Gem1Remakes" >
               <property name="sizePolicy" >
                <sizepolicy>
@@ -98,7 +98,7 @@
               </property>
              </widget>
             </item>
-            <item row="4" column="2" >
+            <item row="4" column="1" >
              <widget class="QLabel" name="Gem4Name" >
               <property name="sizePolicy" >
                <sizepolicy>
@@ -113,7 +113,7 @@
               </property>
              </widget>
             </item>
-            <item row="1" column="5" >
+            <item row="1" column="4" >
              <widget class="QLabel" name="Gem1Cost" >
               <property name="sizePolicy" >
                <sizepolicy>
@@ -131,7 +131,7 @@
               </property>
              </widget>
             </item>
-            <item row="4" column="5" >
+            <item row="4" column="4" >
              <widget class="QLabel" name="Gem4Cost" >
               <property name="text" >
                <string>0c</string>
@@ -141,13 +141,13 @@
               </property>
              </widget>
             </item>
-            <item row="4" column="3" >
+            <item row="4" column="2" >
              <widget class="QSpinBox" name="Gem4Remakes" />
             </item>
-            <item row="3" column="3" >
+            <item row="3" column="2" >
              <widget class="QSpinBox" name="Gem3Remakes" />
             </item>
-            <item row="2" column="2" >
+            <item row="2" column="1" >
              <widget class="QLabel" name="Gem2Name" >
               <property name="sizePolicy" >
                <sizepolicy>
@@ -169,7 +169,7 @@
               </property>
              </widget>
             </item>
-            <item row="2" column="5" >
+            <item row="2" column="4" >
              <widget class="QLabel" name="Gem2Cost" >
               <property name="text" >
                <string>0c</string>
@@ -179,31 +179,21 @@
               </property>
              </widget>
             </item>
-            <item row="0" column="4" >
+            <item row="0" column="3" >
              <widget class="QLabel" name="TextLabel6" >
               <property name="text" >
                <string>Time (m):</string>
               </property>
              </widget>
             </item>
-            <item row="0" column="3" >
+            <item row="0" column="2" >
              <widget class="QLabel" name="TextLabel5" >
               <property name="text" >
                <string>Remakes:</string>
               </property>
              </widget>
             </item>
-            <item row="2" column="1" >
-             <widget class="QLabel" name="Gem2Qua" >
-              <property name="text" >
-               <string>99%</string>
-              </property>
-              <property name="alignment" >
-               <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-              </property>
-             </widget>
-            </item>
-            <item row="1" column="2" >
+            <item row="1" column="1" >
              <widget class="QLabel" name="Gem1Name" >
               <property name="sizePolicy" >
                <sizepolicy>
@@ -218,24 +208,6 @@
               </property>
              </widget>
             </item>
-            <item row="1" column="1" >
-             <widget class="QLabel" name="Gem1Qua" >
-              <property name="sizePolicy" >
-               <sizepolicy>
-                <hsizetype>5</hsizetype>
-                <vsizetype>4</vsizetype>
-                <horstretch>0</horstretch>
-                <verstretch>0</verstretch>
-               </sizepolicy>
-              </property>
-              <property name="text" >
-               <string>99%</string>
-              </property>
-              <property name="alignment" >
-               <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-              </property>
-             </widget>
-            </item>
             <item row="4" column="0" >
              <widget class="QCheckBox" name="Gem4Done" >
               <property name="text" >
@@ -243,7 +215,7 @@
               </property>
              </widget>
             </item>
-            <item row="3" column="4" >
+            <item row="3" column="3" >
              <widget class="QLineEdit" name="Gem3Time" >
               <property name="sizePolicy" >
                <sizepolicy>
@@ -258,17 +230,7 @@
               </property>
              </widget>
             </item>
-            <item row="4" column="1" >
-             <widget class="QLabel" name="Gem4Qua" >
-              <property name="text" >
-               <string>99%</string>
-              </property>
-              <property name="alignment" >
-               <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-              </property>
-             </widget>
-            </item>
-            <item row="1" column="4" >
+            <item row="1" column="3" >
              <widget class="QLineEdit" name="Gem1Time" >
               <property name="sizePolicy" >
                <sizepolicy>
@@ -298,7 +260,7 @@
               </property>
              </widget>
             </item>
-            <item row="2" column="4" >
+            <item row="2" column="3" >
              <widget class="QLineEdit" name="Gem2Time" >
               <property name="sizePolicy" >
                <sizepolicy>
@@ -317,16 +279,6 @@
              <widget class="QLabel" name="TextLabel1" >
               <property name="text" >
                <string>Done:</string>
-              </property>
-             </widget>
-            </item>
-            <item row="3" column="1" >
-             <widget class="QLabel" name="Gem3Qua" >
-              <property name="text" >
-               <string>99%</string>
-              </property>
-              <property name="alignment" >
-               <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
               </property>
              </widget>
             </item>
@@ -352,7 +304,7 @@
               </property>
              </widget>
             </item>
-            <item row="3" column="2" >
+            <item row="3" column="1" >
              <widget class="QLabel" name="Gem3Name" >
               <property name="sizePolicy" >
                <sizepolicy>
@@ -367,7 +319,7 @@
               </property>
              </widget>
             </item>
-            <item row="0" column="5" >
+            <item row="0" column="4" >
              <widget class="QLabel" name="TextLabel7" >
               <property name="text" >
                <string>Cost:</string>

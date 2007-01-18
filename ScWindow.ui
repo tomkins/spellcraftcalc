@@ -1021,7 +1021,7 @@
          <property name="spacing" >
           <number>0</number>
          </property>
-         <item row="0" column="0" colspan="10" >
+         <item row="0" column="0" colspan="9" >
           <spacer>
            <property name="orientation" >
             <enum>Qt::Vertical</enum>
@@ -1037,7 +1037,7 @@
            </property>
           </spacer>
          </item>
-         <item row="1" column="0" colspan="10" >
+         <item row="1" column="0" colspan="9" >
           <layout class="QHBoxLayout" >
            <property name="margin" >
             <number>0</number>
@@ -1337,21 +1337,14 @@
            </property>
           </widget>
          </item>
-         <item row="2" column="4" >
-          <widget class="QLabel" name="LabelGemQuality" >
-           <property name="text" >
-            <string> Quality</string>
-           </property>
-          </widget>
-         </item>
-         <item row="2" column="4" colspan="3" >
+         <item row="2" column="4" colspan="2" >
           <widget class="QLabel" name="LabelRequirement" >
            <property name="text" >
             <string> Requirement</string>
            </property>
           </widget>
          </item>
-         <item row="2" column="5" >
+         <item row="2" column="4" >
           <widget class="QLabel" name="LabelGemPoints" >
            <property name="text" >
             <string>Points</string>
@@ -1361,7 +1354,7 @@
            </property>
           </widget>
          </item>
-         <item row="2" column="6" >
+         <item row="2" column="5" >
           <widget class="QLabel" name="LabelGemCost" >
            <property name="text" >
             <string>Cost</string>
@@ -1371,7 +1364,7 @@
            </property>
           </widget>
          </item>
-         <item row="2" column="7" rowspan="13">
+         <item row="2" column="6" rowspan="13">
           <spacer>
            <property name="orientation" >
             <enum>Qt::Horizontal</enum>
@@ -1387,14 +1380,14 @@
            </property>
           </spacer>
          </item>
-         <item row="2" column="8" colspan="2" >
+         <item row="2" column="7" colspan="2" >
           <widget class="QLabel" name="LabelGemName" >
            <property name="text" >
             <string>Name</string>
            </property>
           </widget>
          </item>
-         <item row="2" column="8" rowspan="12" colspan="2" >
+         <item row="2" column="7" rowspan="12" colspan="2" >
           <spacer>
            <property name="orientation" >
             <enum>Qt::Horizontal</enum>
@@ -1436,13 +1429,10 @@
            </property>
           </widget>
          </item>
-         <item row="3" column="4" >
-          <widget class="SearchingCombo" name="Quality_1" />
-         </item>
-         <item row="3" column="4" colspan="3" >
+         <item row="3" column="4" colspan="2" >
           <widget class="QLineEdit" name="Requirement_1" />
          </item>
-         <item row="3" column="5" >
+         <item row="3" column="4" >
           <widget class="QLabel" name="Points_1" >
            <property name="text" >
             <string>0.0</string>
@@ -1452,7 +1442,7 @@
            </property>
           </widget>
          </item>
-         <item row="3" column="6" >
+         <item row="3" column="5" >
           <widget class="QLabel" name="Cost_1" >
            <property name="text" >
             <string>0c</string>
@@ -1462,7 +1452,7 @@
            </property>
           </widget>
          </item>
-         <item row="3" column="8" colspan="2" >
+         <item row="3" column="7" colspan="2" >
           <widget class="QLabel" name="Name_1" >
            <property name="text" >
             <string/>
@@ -1495,13 +1485,10 @@
            </property>
           </widget>
          </item>
-         <item row="4" column="4" >
-          <widget class="SearchingCombo" name="Quality_2" />
-         </item>
-         <item row="4" column="4" colspan="3" >
+         <item row="4" column="4" colspan="2" >
           <widget class="QLineEdit" name="Requirement_2" />
          </item>
-         <item row="4" column="5" >
+         <item row="4" column="4" >
           <widget class="QLabel" name="Points_2" >
            <property name="text" >
             <string>0.0</string>
@@ -1511,7 +1498,7 @@
            </property>
           </widget>
          </item>
-         <item row="4" column="6" >
+         <item row="4" column="5" >
           <widget class="QLabel" name="Cost_2" >
            <property name="text" >
             <string>0c</string>
@@ -1521,7 +1508,7 @@
            </property>
           </widget>
          </item>
-         <item row="4" column="8" colspan="2" >
+         <item row="4" column="7" colspan="2" >
           <widget class="QLabel" name="Name_2" >
            <property name="text" >
             <string/>
@@ -1554,13 +1541,10 @@
            </property>
           </widget>
          </item>
-         <item row="5" column="4" >
-          <widget class="SearchingCombo" name="Quality_3" />
-         </item>
-         <item row="5" column="4" colspan="3" >
+         <item row="5" column="4" colspan="2" >
           <widget class="QLineEdit" name="Requirement_3" />
          </item>
-         <item row="5" column="5" >
+         <item row="5" column="4" >
           <widget class="QLabel" name="Points_3" >
            <property name="text" >
             <string>0.0</string>
@@ -1570,7 +1554,7 @@
            </property>
           </widget>
          </item>
-         <item row="5" column="6" >
+         <item row="5" column="5" >
           <widget class="QLabel" name="Cost_3" >
            <property name="text" >
             <string>0c</string>
@@ -1580,7 +1564,7 @@
            </property>
           </widget>
          </item>
-         <item row="5" column="8" colspan="2" >
+         <item row="5" column="7" colspan="2" >
           <widget class="QLabel" name="Name_3" >
            <property name="text" >
             <string/>
@@ -1613,13 +1597,10 @@
            </property>
           </widget>
          </item>
-         <item row="6" column="4" >
-          <widget class="SearchingCombo" name="Quality_4" />
-         </item>
-         <item row="6" column="4" colspan="3" >
+         <item row="6" column="4" colspan="2" >
           <widget class="QLineEdit" name="Requirement_4" />
          </item>
-         <item row="6" column="5" >
+         <item row="6" column="4" >
           <widget class="QLabel" name="Points_4" >
            <property name="text" >
             <string>0.0</string>
@@ -1629,7 +1610,7 @@
            </property>
           </widget>
          </item>
-         <item row="6" column="6" >
+         <item row="6" column="5" >
           <widget class="QLabel" name="Cost_4" >
            <property name="text" >
             <string>0c</string>
@@ -1639,7 +1620,7 @@
            </property>
           </widget>
          </item>
-         <item row="6" column="8" colspan="2" >
+         <item row="6" column="7" colspan="2" >
           <widget class="QLabel" name="Name_4" >
            <property name="text" >
             <string/>
@@ -1672,17 +1653,17 @@
            </property>
           </widget>
          </item>
-         <item row="7" column="4" colspan="3" >
+         <item row="7" column="4" colspan="2" >
           <widget class="QLineEdit" name="Requirement_5" />
          </item>
-         <item row="7" column="8" colspan="2" >
+         <item row="7" column="7" colspan="2" >
           <widget class="QLabel" name="Name_5" >
            <property name="text" >
             <string/>
            </property>
           </widget>
          </item>
-         <item row="7" column="8" colspan="2" >
+         <item row="7" column="7" colspan="2" >
           <widget class="QLabel" name="LabelRequirement2" >
            <property name="text" >
             <string>(Requirement)</string>
@@ -1715,10 +1696,10 @@
            </property>
           </widget>
          </item>
-         <item row="8" column="4" colspan="3" >
+         <item row="8" column="4" colspan="2" >
           <widget class="QLineEdit" name="Requirement_6" />
          </item>
-         <item row="8" column="8" colspan="2" >
+         <item row="8" column="7" colspan="2" >
           <widget class="QLabel" name="Name_6" >
            <property name="text" >
             <string/>
@@ -1748,7 +1729,7 @@
            </property>
           </widget>
          </item>
-         <item row="9" column="4" colspan="3" >
+         <item row="9" column="4" colspan="2" >
           <widget class="QLineEdit" name="Requirement_7" />
          </item>
          <item row="10" column="0" >
@@ -1774,7 +1755,7 @@
            </property>
           </widget>
          </item>
-         <item row="10" column="4" colspan="3" >
+         <item row="10" column="4" colspan="2" >
           <widget class="QLineEdit" name="Requirement_8" />
          </item>
          <item row="11" column="0" >
@@ -1800,7 +1781,7 @@
            </property>
           </widget>
          </item>
-         <item row="11" column="4" colspan="3" >
+         <item row="11" column="4" colspan="2" >
           <widget class="QLineEdit" name="Requirement_9" />
          </item>
          <item row="12" column="0" >
@@ -1826,7 +1807,7 @@
            </property>
           </widget>
          </item>
-         <item row="12" column="4" colspan="3" >
+         <item row="12" column="4" colspan="2" >
           <widget class="QLineEdit" name="Requirement_10" />
          </item>
          <item row="13" column="0" >
@@ -1852,7 +1833,7 @@
            </property>
           </widget>
          </item>
-         <item row="13" column="4" colspan="3" >
+         <item row="13" column="4" colspan="2" >
           <widget class="QLineEdit" name="Requirement_11" />
          </item>
          <item row="14" column="0" >
@@ -1878,7 +1859,7 @@
            </property>
           </widget>
          </item>
-         <item row="14" column="4" colspan="3" >
+         <item row="14" column="4" colspan="2" >
           <widget class="QLineEdit" name="Requirement_12" />
          </item>
          <item row="8" column="0" rowspan="7" colspan="3" >
@@ -1897,7 +1878,7 @@
            </property>
           </spacer>
          </item>
-         <item row="8" column="3" colspan="4" >
+         <item row="8" column="3" colspan="3" >
           <spacer>
            <property name="orientation" >
             <enum>Qt::Vertical</enum>
@@ -1913,7 +1894,7 @@
            </property>
           </spacer>
          </item>
-         <item row="9" column="3" colspan="4" >
+         <item row="9" column="3" colspan="3" >
           <spacer>
            <property name="orientation" >
             <enum>Qt::Vertical</enum>
@@ -1929,7 +1910,7 @@
            </property>
           </spacer>
          </item>
-         <item row="10" column="3" colspan="2" >
+         <item row="10" column="3" >
           <widget class="QLabel" name="ItemImbueLabel" >
            <property name="text" >
             <string>Imbue Points: </string>
@@ -1939,7 +1920,7 @@
            </property>
           </widget>
          </item>
-         <item row="10" column="5" >
+         <item row="10" column="4" >
           <widget class="QLabel" name="ItemImbue" >
            <property name="text" >
             <string>0.0</string>
@@ -1949,7 +1930,7 @@
            </property>
           </widget>
          </item>
-         <item row="10" column="6" >
+         <item row="10" column="5" >
           <widget class="QLabel" name="ItemImbueTotal" >
            <property name="text" >
             <string> / 0.0</string>
@@ -1959,7 +1940,7 @@
            </property>
           </widget>
          </item>
-         <item row="11" column="3" colspan="2" >
+         <item row="11" column="3" >
           <widget class="QLabel" name="ItemOverchargeLabel" >
            <property name="text" >
             <string>Overcharge: </string>
@@ -1969,7 +1950,7 @@
            </property>
           </widget>
          </item>
-         <item row="11" column="5" colspan="2" >
+         <item row="11" column="4" colspan="2" >
           <widget class="QLabel" name="ItemOvercharge" >
            <property name="text" >
             <string>None</string>
@@ -1979,7 +1960,7 @@
            </property>
           </widget>
          </item>
-         <item row="12" column="3" colspan="2" >
+         <item row="12" column="3" >
           <widget class="QLabel" name="ItemCostLabel" >
            <property name="text" >
             <string>Item Cost: </string>
@@ -1989,7 +1970,7 @@
            </property>
           </widget>
          </item>
-         <item row="12" column="5" colspan="2" >
+         <item row="12" column="4" colspan="2" >
           <widget class="QLabel" name="ItemCost" >
            <property name="text" >
             <string/>
@@ -1999,7 +1980,7 @@
            </property>
           </widget>
          </item>
-         <item row="13" column="3" colspan="2" >
+         <item row="13" column="3" >
           <widget class="QLabel" name="ItemPriceLabel" >
            <property name="text" >
             <string>Item Price: </string>
@@ -2009,7 +1990,7 @@
            </property>
           </widget>
          </item>
-         <item row="13" column="5" colspan="2" >
+         <item row="13" column="4" colspan="2" >
           <widget class="QLabel" name="ItemPrice" >
            <property name="text" >
             <string/>
@@ -2019,7 +2000,7 @@
            </property>
           </widget>
          </item>
-         <item row="14" column="8" >
+         <item row="14" column="7" >
           <layout class="QHBoxLayout" >
            <property name="margin" >
             <number>0</number>
@@ -2049,7 +2030,7 @@
            </item>
           </layout>
          </item>
-         <item row="14" column="9" >
+         <item row="14" column="8" >
           <spacer>
            <property name="orientation" >
             <enum>Qt::Horizontal</enum>
@@ -2126,25 +2107,21 @@
   <tabstop>Amount_Edit_1</tabstop>
   <tabstop>Amount_Drop_1</tabstop>
   <tabstop>Effect_1</tabstop>
-  <tabstop>Quality_1</tabstop>
   <tabstop>Requirement_1</tabstop>
   <tabstop>Type_2</tabstop>
   <tabstop>Amount_Edit_2</tabstop>
   <tabstop>Amount_Drop_2</tabstop>
   <tabstop>Effect_2</tabstop>
-  <tabstop>Quality_2</tabstop>
   <tabstop>Requirement_2</tabstop>
   <tabstop>Type_3</tabstop>
   <tabstop>Amount_Edit_3</tabstop>
   <tabstop>Amount_Drop_3</tabstop>
   <tabstop>Effect_3</tabstop>
-  <tabstop>Quality_3</tabstop>
   <tabstop>Requirement_3</tabstop>
   <tabstop>Type_4</tabstop>
   <tabstop>Amount_Edit_4</tabstop>
   <tabstop>Amount_Drop_4</tabstop>
   <tabstop>Effect_4</tabstop>
-  <tabstop>Quality_4</tabstop>
   <tabstop>Requirement_4</tabstop>
   <tabstop>Type_5</tabstop>
   <tabstop>Amount_Edit_5</tabstop>
