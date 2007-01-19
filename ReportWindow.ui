@@ -81,23 +81,6 @@
          </property>
         </spacer>
        </item>
-       <item>
-        <widget class="QSpinBox" name="MatMultiplier" >
-         <property name="minimum" >
-          <number>1</number>
-         </property>
-         <property name="value" >
-          <number>1</number>
-         </property>
-        </widget>
-       </item>
-       <item>
-        <widget class="QLabel" name="MMLabel" >
-         <property name="text" >
-          <string>Materials Multiplier</string>
-         </property>
-        </widget>
-       </item>
       </layout>
      </item>
      <item>
