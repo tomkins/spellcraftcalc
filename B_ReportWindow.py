@@ -2,8 +2,8 @@
 
 # Form implementation generated from reading ui file 'ReportWindow.ui'
 #
-# Created: Wed Dec 27 21:57:50 2006
-#      by: PyQt4 UI code generator 4.1.1
+# Created: Fri Jan 19 03:07:13 2007
+#      by: PyQt4 UI code generator 4.1
 #
 # WARNING! All changes made in this file will be lost!
 
@@ -56,16 +56,6 @@ class Ui_B_ReportWindow(object):
 
         spacerItem = QtGui.QSpacerItem(16,20,QtGui.QSizePolicy.Expanding,QtGui.QSizePolicy.Minimum)
         self.hboxlayout.addItem(spacerItem)
-
-        self.MatMultiplier = QtGui.QSpinBox(B_ReportWindow)
-        self.MatMultiplier.setMinimum(1)
-        self.MatMultiplier.setProperty("value",QtCore.QVariant(1))
-        self.MatMultiplier.setObjectName("MatMultiplier")
-        self.hboxlayout.addWidget(self.MatMultiplier)
-
-        self.MMLabel = QtGui.QLabel(B_ReportWindow)
-        self.MMLabel.setObjectName("MMLabel")
-        self.hboxlayout.addWidget(self.MMLabel)
         self.vboxlayout1.addLayout(self.hboxlayout)
 
         self.hboxlayout1 = QtGui.QHBoxLayout()
@@ -92,6 +82,5 @@ class Ui_B_ReportWindow(object):
         B_ReportWindow.setWindowTitle(QtGui.QApplication.translate("B_ReportWindow", "B_ReportWindow", None, QtGui.QApplication.UnicodeUTF8))
         self.PushButton1.setText(QtGui.QApplication.translate("B_ReportWindow", "Save As HTML", None, QtGui.QApplication.UnicodeUTF8))
         self.PushButton1_2.setText(QtGui.QApplication.translate("B_ReportWindow", "Save As Text", None, QtGui.QApplication.UnicodeUTF8))
-        self.MMLabel.setText(QtGui.QApplication.translate("B_ReportWindow", "Materials Multiplier", None, QtGui.QApplication.UnicodeUTF8))
         self.PushButton2.setText(QtGui.QApplication.translate("B_ReportWindow", "Close", None, QtGui.QApplication.UnicodeUTF8))
 

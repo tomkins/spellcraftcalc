@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'CraftWindow.ui'
 #
-# Created: Wed Jan 17 21:29:49 2007
+# Created: Fri Jan 19 03:10:27 2007
 #      by: PyQt4 UI code generator 4.1
 #
 # WARNING! All changes made in this file will be lost!
@@ -269,49 +269,32 @@ class Ui_B_CraftWindow(object):
         self.hboxlayout3.setSpacing(6)
         self.hboxlayout3.setObjectName("hboxlayout3")
 
-        self.TextLabel1_2 = QtGui.QLabel(self.GroupBox1)
-        self.TextLabel1_2.setObjectName("TextLabel1_2")
-        self.hboxlayout3.addWidget(self.TextLabel1_2)
+        self.TextLabel8 = QtGui.QLabel(self.GroupBox1)
+        self.TextLabel8.setObjectName("TextLabel8")
+        self.hboxlayout3.addWidget(self.TextLabel8)
 
-        self.ExpMultiplier = QtGui.QSpinBox(self.GroupBox1)
-        self.ExpMultiplier.setObjectName("ExpMultiplier")
-        self.hboxlayout3.addWidget(self.ExpMultiplier)
+        self.TotalCost = QtGui.QLabel(self.GroupBox1)
+        self.TotalCost.setObjectName("TotalCost")
+        self.hboxlayout3.addWidget(self.TotalCost)
         self.hboxlayout2.addLayout(self.hboxlayout3)
-
-        spacerItem = QtGui.QSpacerItem(40,20,QtGui.QSizePolicy.Expanding,QtGui.QSizePolicy.Minimum)
-        self.hboxlayout2.addItem(spacerItem)
+        self.vboxlayout1.addLayout(self.hboxlayout2)
+        self.vboxlayout.addWidget(self.GroupBox1)
 
         self.hboxlayout4 = QtGui.QHBoxLayout()
         self.hboxlayout4.setMargin(0)
         self.hboxlayout4.setSpacing(6)
         self.hboxlayout4.setObjectName("hboxlayout4")
 
-        self.TextLabel8 = QtGui.QLabel(self.GroupBox1)
-        self.TextLabel8.setObjectName("TextLabel8")
-        self.hboxlayout4.addWidget(self.TextLabel8)
-
-        self.TotalCost = QtGui.QLabel(self.GroupBox1)
-        self.TotalCost.setObjectName("TotalCost")
-        self.hboxlayout4.addWidget(self.TotalCost)
-        self.hboxlayout2.addLayout(self.hboxlayout4)
-        self.vboxlayout1.addLayout(self.hboxlayout2)
-        self.vboxlayout.addWidget(self.GroupBox1)
-
-        self.hboxlayout5 = QtGui.QHBoxLayout()
-        self.hboxlayout5.setMargin(0)
-        self.hboxlayout5.setSpacing(6)
-        self.hboxlayout5.setObjectName("hboxlayout5")
-
-        spacerItem1 = QtGui.QSpacerItem(16,20,QtGui.QSizePolicy.Expanding,QtGui.QSizePolicy.Minimum)
-        self.hboxlayout5.addItem(spacerItem1)
+        spacerItem = QtGui.QSpacerItem(16,20,QtGui.QSizePolicy.Expanding,QtGui.QSizePolicy.Minimum)
+        self.hboxlayout4.addItem(spacerItem)
 
         self.Close = QtGui.QPushButton(B_CraftWindow)
         self.Close.setObjectName("Close")
-        self.hboxlayout5.addWidget(self.Close)
+        self.hboxlayout4.addWidget(self.Close)
 
-        spacerItem2 = QtGui.QSpacerItem(102,20,QtGui.QSizePolicy.Expanding,QtGui.QSizePolicy.Minimum)
-        self.hboxlayout5.addItem(spacerItem2)
-        self.vboxlayout.addLayout(self.hboxlayout5)
+        spacerItem1 = QtGui.QSpacerItem(102,20,QtGui.QSizePolicy.Expanding,QtGui.QSizePolicy.Minimum)
+        self.hboxlayout4.addItem(spacerItem1)
+        self.vboxlayout.addLayout(self.hboxlayout4)
         self.hboxlayout.addLayout(self.vboxlayout)
 
         self.retranslateUi(B_CraftWindow)
@@ -343,7 +326,6 @@ class Ui_B_CraftWindow(object):
         self.TextLabel7.setText(QtGui.QApplication.translate("B_CraftWindow", "Cost:", None, QtGui.QApplication.UnicodeUTF8))
         self.GroupBox2_2_2.setTitle(QtGui.QApplication.translate("B_CraftWindow", "Materials (expected)", None, QtGui.QApplication.UnicodeUTF8))
         self.GroupBox2_2.setTitle(QtGui.QApplication.translate("B_CraftWindow", "Materials (used)", None, QtGui.QApplication.UnicodeUTF8))
-        self.TextLabel1_2.setText(QtGui.QApplication.translate("B_CraftWindow", "Expected Multiplier", None, QtGui.QApplication.UnicodeUTF8))
         self.TextLabel8.setText(QtGui.QApplication.translate("B_CraftWindow", "Total Cost:", None, QtGui.QApplication.UnicodeUTF8))
         self.TotalCost.setText(QtGui.QApplication.translate("B_CraftWindow", "0c", None, QtGui.QApplication.UnicodeUTF8))
         self.Close.setText(QtGui.QApplication.translate("B_CraftWindow", "Close", None, QtGui.QApplication.UnicodeUTF8))

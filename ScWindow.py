@@ -180,12 +180,12 @@ class ScWindow(QMainWindow, Ui_B_SC):
         self.ScWinFrame.layout().setColumnStretch(6, 1)
 
         cbwidth = self.CharClass.getMinimumWidth(['Necromancer'])
-        self.CharName.setFixedSize(QSize(cbwidth, edheight + 2))
-        self.Realm.setFixedSize(QSize(cbwidth, cbheight + 2))
-        self.CharClass.setFixedSize(QSize(cbwidth, cbheight + 2))
-        self.CharRace.setFixedSize(QSize(cbwidth, cbheight + 2))
-        self.CharLevel.setFixedSize(QSize(amtedwidth, edheight + 2))
-        self.OutfitName.setFixedSize(QSize(cbwidth, cbheight + 2))
+        self.CharName.setFixedSize(QSize(cbwidth, edheight))
+        self.Realm.setFixedSize(QSize(cbwidth, cbheight))
+        self.CharClass.setFixedSize(QSize(cbwidth, cbheight))
+        self.CharRace.setFixedSize(QSize(cbwidth, cbheight))
+        self.CharLevel.setFixedSize(QSize(amtedwidth, edheight))
+        self.OutfitName.setFixedSize(QSize(cbwidth, cbheight))
 
         self.Realm.insertItems(0, list(Realms))
         self.OutfitName.setCompleter(None)

@@ -37,19 +37,15 @@ class ReportWindow(QDialog, Ui_B_ReportWindow):
         self.connect(self.PushButton2,SIGNAL("clicked()"),self.closeWindow)
         self.connect(self.PushButton1,SIGNAL("clicked()"),self.saveToHTML)
         self.connect(self.PushButton1_2,SIGNAL("clicked()"),self.saveToText)
-        self.connect(self.MatMultiplier,SIGNAL("valueChanged(int)"),self.matMultiplierUpdate)
 
         #self.font().setPointSize(8)
         #self.ReportText.setTextFormat(Qt.RichText)
         self.parent = parent
         self.gemnames = None
         self.materials = None
-        self.prevMultiplier = 1
         self.totalcost = 0
         
     def materialsReport(self, itemlist, showslot = 0):
-        self.MMLabel.show()
-        self.MatMultiplier.show()
         self.setWindowTitle('Materials Report')
         self.materials = { 'Gems' : { }, 'Liquids' : {}, 'Dusts': {} }
         self.gemnames = { }
@@ -117,18 +113,6 @@ class ReportWindow(QDialog, Ui_B_ReportWindow):
         self.reportHtml = materialsstr
         self.ReportText.setHtml(self.reportHtml)
 
-    def matMultiplierUpdate(self, multiplier):
-        for i in range(0, len(self.gemnames)):
-            name, amount = self.gemnames[i]
-            self.gemnames[i] = [name, amount * multiplier / self.prevMultiplier]
-        for type, matlist in self.materials.items():
-            for i in range(0, len(matlist)):
-                matl, val = matlist[i]
-                self.materials[type][i] = [matl, val * multiplier / self.prevMultiplier]
-        self.totalcost = self.totalcost * multiplier / self.prevMultiplier
-        self.prevMultiplier = multiplier
-        self.printMaterials()
-
     def parseConfigReport(self, filename, scxmldoc):
         processor = Processor.Processor()
         source = InputSource.DefaultFactory.fromString(
@@ -146,8 +130,6 @@ class ReportWindow(QDialog, Ui_B_ReportWindow):
                 'Error composing report ' + filename + "\n\n" + str(e), 'OK')
             return
 
-        self.MMLabel.hide()
-        self.MatMultiplier.hide()
         self.setWindowTitle('Config Report')
         self.ReportText.setHtml(self.reportHtml)
 

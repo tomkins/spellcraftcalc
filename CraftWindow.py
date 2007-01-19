@@ -33,7 +33,6 @@ class CraftWindow(QDialog, Ui_B_CraftWindow):
             self.connect(self.GemTime[i],SIGNAL("textChanged(const QString&)"),self.TimeChanged)
             self.GemCost.append(getattr(self, 'Gem%dCost' % idx))
             self.GemName.append(getattr(self, 'Gem%dName' % idx))
-        self.connect(self.ExpMultiplier,SIGNAL("valueChanged(int)"),self.computeMaterials)
         self.connect(self.Close,SIGNAL("clicked()"),self.CloseWindow)
         self.currentItem = None
         self.totalCost = 0
@@ -75,13 +74,11 @@ class CraftWindow(QDialog, Ui_B_CraftWindow):
             self.GemName[slot].setText(item.slot(slot).gemName(self.parent.realm))
 
         self.TotalCost.setText(SC.formatCost(self.totalCost))
-        self.ExpMultiplier.setValue(6)
         self.computeMaterials()
 
     def computeMaterials(self):
         materials = { 'Used' : { 'Gems' : { }, 'Dusts' : {}, 'Liquids': {} },
             'Expected' : { 'Gems' : { }, 'Dusts' : {}, 'Liquids': {} } }
-        expmultiplier = int(self.ExpMultiplier.value())
         for slot in range(0, 4):
             numremakes = int(self.currentItem.slot(slot).remakes())
             done = int(self.currentItem.slot(slot).done())
@@ -93,9 +90,9 @@ class CraftWindow(QDialog, Ui_B_CraftWindow):
                         materials['Used'][mattype][mat] = val * (numremakes + 1)
                     if not done:
                         if materials['Expected'][mattype].has_key(mat):
-                            materials['Expected'][mattype][mat] += val * (expmultiplier)
+                            materials['Expected'][mattype][mat] += val
                         else:
-                            materials['Expected'][mattype][mat] = val * (expmultiplier)
+                            materials['Expected'][mattype][mat] = val
         self.MatsUsed.clear()
         self.MatsExpected.clear()
         for mat, val in materials['Used']['Gems'].items():
