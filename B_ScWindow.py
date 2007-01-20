@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'ScWindow.ui'
 #
-# Created: Wed Jan 17 21:29:46 2007
+# Created: Sat Jan 20 14:49:31 2007
 #      by: PyQt4 UI code generator 4.1
 #
 # WARNING! All changes made in this file will be lost!
@@ -514,7 +514,7 @@ class Ui_B_SC(object):
         self.gridlayout5.setObjectName("gridlayout5")
 
         spacerItem9 = QtGui.QSpacerItem(0,0,QtGui.QSizePolicy.Minimum,QtGui.QSizePolicy.Fixed)
-        self.gridlayout5.addItem(spacerItem9,0,0,1,9)
+        self.gridlayout5.addItem(spacerItem9,0,0,1,10)
 
         self.hboxlayout = QtGui.QHBoxLayout()
         self.hboxlayout.setMargin(0)
@@ -614,7 +614,7 @@ class Ui_B_SC(object):
         self.Equipped = QtGui.QCheckBox(self.GroupItemFrame)
         self.Equipped.setObjectName("Equipped")
         self.hboxlayout.addWidget(self.Equipped)
-        self.gridlayout5.addLayout(self.hboxlayout,1,0,1,9)
+        self.gridlayout5.addLayout(self.hboxlayout,1,0,1,10)
 
         self.LabelGemType = QtGui.QLabel(self.GroupItemFrame)
         self.LabelGemType.setObjectName("LabelGemType")
@@ -628,29 +628,33 @@ class Ui_B_SC(object):
         self.LabelGemEffect.setObjectName("LabelGemEffect")
         self.gridlayout5.addWidget(self.LabelGemEffect,2,3,1,1)
 
+        self.LabelGemMakes = QtGui.QLabel(self.GroupItemFrame)
+        self.LabelGemMakes.setObjectName("LabelGemMakes")
+        self.gridlayout5.addWidget(self.LabelGemMakes,2,4,1,1)
+
         self.LabelRequirement = QtGui.QLabel(self.GroupItemFrame)
         self.LabelRequirement.setObjectName("LabelRequirement")
-        self.gridlayout5.addWidget(self.LabelRequirement,2,4,1,2)
+        self.gridlayout5.addWidget(self.LabelRequirement,2,4,1,3)
 
         self.LabelGemPoints = QtGui.QLabel(self.GroupItemFrame)
         self.LabelGemPoints.setAlignment(QtCore.Qt.AlignRight|QtCore.Qt.AlignTrailing|QtCore.Qt.AlignVCenter)
         self.LabelGemPoints.setObjectName("LabelGemPoints")
-        self.gridlayout5.addWidget(self.LabelGemPoints,2,4,1,1)
+        self.gridlayout5.addWidget(self.LabelGemPoints,2,5,1,1)
 
         self.LabelGemCost = QtGui.QLabel(self.GroupItemFrame)
         self.LabelGemCost.setAlignment(QtCore.Qt.AlignRight|QtCore.Qt.AlignTrailing|QtCore.Qt.AlignVCenter)
         self.LabelGemCost.setObjectName("LabelGemCost")
-        self.gridlayout5.addWidget(self.LabelGemCost,2,5,1,1)
+        self.gridlayout5.addWidget(self.LabelGemCost,2,6,1,1)
 
         spacerItem16 = QtGui.QSpacerItem(5,1,QtGui.QSizePolicy.Minimum,QtGui.QSizePolicy.Minimum)
-        self.gridlayout5.addItem(spacerItem16,2,6,13,1)
+        self.gridlayout5.addItem(spacerItem16,2,7,13,1)
 
         self.LabelGemName = QtGui.QLabel(self.GroupItemFrame)
         self.LabelGemName.setObjectName("LabelGemName")
-        self.gridlayout5.addWidget(self.LabelGemName,2,7,1,2)
+        self.gridlayout5.addWidget(self.LabelGemName,2,8,1,2)
 
         spacerItem17 = QtGui.QSpacerItem(5,5,QtGui.QSizePolicy.MinimumExpanding,QtGui.QSizePolicy.Minimum)
-        self.gridlayout5.addItem(spacerItem17,2,7,12,2)
+        self.gridlayout5.addItem(spacerItem17,2,8,12,2)
 
         self.Gem_Label_1 = QtGui.QLabel(self.GroupItemFrame)
         self.Gem_Label_1.setTextFormat(QtCore.Qt.PlainText)
@@ -674,23 +678,27 @@ class Ui_B_SC(object):
         self.Effect_1.setObjectName("Effect_1")
         self.gridlayout5.addWidget(self.Effect_1,3,3,1,1)
 
+        self.Makes_1 = QtGui.QSpinBox(self.GroupItemFrame)
+        self.Makes_1.setObjectName("Makes_1")
+        self.gridlayout5.addWidget(self.Makes_1,3,4,1,1)
+
         self.Requirement_1 = QtGui.QLineEdit(self.GroupItemFrame)
         self.Requirement_1.setObjectName("Requirement_1")
-        self.gridlayout5.addWidget(self.Requirement_1,3,4,1,2)
+        self.gridlayout5.addWidget(self.Requirement_1,3,4,1,3)
 
         self.Points_1 = QtGui.QLabel(self.GroupItemFrame)
         self.Points_1.setAlignment(QtCore.Qt.AlignRight|QtCore.Qt.AlignTrailing|QtCore.Qt.AlignVCenter)
         self.Points_1.setObjectName("Points_1")
-        self.gridlayout5.addWidget(self.Points_1,3,4,1,1)
+        self.gridlayout5.addWidget(self.Points_1,3,5,1,1)
 
         self.Cost_1 = QtGui.QLabel(self.GroupItemFrame)
         self.Cost_1.setAlignment(QtCore.Qt.AlignRight|QtCore.Qt.AlignTrailing|QtCore.Qt.AlignVCenter)
         self.Cost_1.setObjectName("Cost_1")
-        self.gridlayout5.addWidget(self.Cost_1,3,5,1,1)
+        self.gridlayout5.addWidget(self.Cost_1,3,6,1,1)
 
         self.Name_1 = QtGui.QLabel(self.GroupItemFrame)
         self.Name_1.setObjectName("Name_1")
-        self.gridlayout5.addWidget(self.Name_1,3,7,1,2)
+        self.gridlayout5.addWidget(self.Name_1,3,8,1,2)
 
         self.Gem_Label_2 = QtGui.QLabel(self.GroupItemFrame)
         self.Gem_Label_2.setTextFormat(QtCore.Qt.PlainText)
@@ -714,23 +722,27 @@ class Ui_B_SC(object):
         self.Effect_2.setObjectName("Effect_2")
         self.gridlayout5.addWidget(self.Effect_2,4,3,1,1)
 
+        self.Makes_2 = QtGui.QSpinBox(self.GroupItemFrame)
+        self.Makes_2.setObjectName("Makes_2")
+        self.gridlayout5.addWidget(self.Makes_2,4,4,1,1)
+
         self.Requirement_2 = QtGui.QLineEdit(self.GroupItemFrame)
         self.Requirement_2.setObjectName("Requirement_2")
-        self.gridlayout5.addWidget(self.Requirement_2,4,4,1,2)
+        self.gridlayout5.addWidget(self.Requirement_2,4,4,1,3)
 
         self.Points_2 = QtGui.QLabel(self.GroupItemFrame)
         self.Points_2.setAlignment(QtCore.Qt.AlignRight|QtCore.Qt.AlignTrailing|QtCore.Qt.AlignVCenter)
         self.Points_2.setObjectName("Points_2")
-        self.gridlayout5.addWidget(self.Points_2,4,4,1,1)
+        self.gridlayout5.addWidget(self.Points_2,4,5,1,1)
 
         self.Cost_2 = QtGui.QLabel(self.GroupItemFrame)
         self.Cost_2.setAlignment(QtCore.Qt.AlignRight|QtCore.Qt.AlignTrailing|QtCore.Qt.AlignVCenter)
         self.Cost_2.setObjectName("Cost_2")
-        self.gridlayout5.addWidget(self.Cost_2,4,5,1,1)
+        self.gridlayout5.addWidget(self.Cost_2,4,6,1,1)
 
         self.Name_2 = QtGui.QLabel(self.GroupItemFrame)
         self.Name_2.setObjectName("Name_2")
-        self.gridlayout5.addWidget(self.Name_2,4,7,1,2)
+        self.gridlayout5.addWidget(self.Name_2,4,8,1,2)
 
         self.Gem_Label_3 = QtGui.QLabel(self.GroupItemFrame)
         self.Gem_Label_3.setTextFormat(QtCore.Qt.PlainText)
@@ -754,23 +766,27 @@ class Ui_B_SC(object):
         self.Effect_3.setObjectName("Effect_3")
         self.gridlayout5.addWidget(self.Effect_3,5,3,1,1)
 
+        self.Makes_3 = QtGui.QSpinBox(self.GroupItemFrame)
+        self.Makes_3.setObjectName("Makes_3")
+        self.gridlayout5.addWidget(self.Makes_3,5,4,1,1)
+
         self.Requirement_3 = QtGui.QLineEdit(self.GroupItemFrame)
         self.Requirement_3.setObjectName("Requirement_3")
-        self.gridlayout5.addWidget(self.Requirement_3,5,4,1,2)
+        self.gridlayout5.addWidget(self.Requirement_3,5,4,1,3)
 
         self.Points_3 = QtGui.QLabel(self.GroupItemFrame)
         self.Points_3.setAlignment(QtCore.Qt.AlignRight|QtCore.Qt.AlignTrailing|QtCore.Qt.AlignVCenter)
         self.Points_3.setObjectName("Points_3")
-        self.gridlayout5.addWidget(self.Points_3,5,4,1,1)
+        self.gridlayout5.addWidget(self.Points_3,5,5,1,1)
 
         self.Cost_3 = QtGui.QLabel(self.GroupItemFrame)
         self.Cost_3.setAlignment(QtCore.Qt.AlignRight|QtCore.Qt.AlignTrailing|QtCore.Qt.AlignVCenter)
         self.Cost_3.setObjectName("Cost_3")
-        self.gridlayout5.addWidget(self.Cost_3,5,5,1,1)
+        self.gridlayout5.addWidget(self.Cost_3,5,6,1,1)
 
         self.Name_3 = QtGui.QLabel(self.GroupItemFrame)
         self.Name_3.setObjectName("Name_3")
-        self.gridlayout5.addWidget(self.Name_3,5,7,1,2)
+        self.gridlayout5.addWidget(self.Name_3,5,8,1,2)
 
         self.Gem_Label_4 = QtGui.QLabel(self.GroupItemFrame)
         self.Gem_Label_4.setTextFormat(QtCore.Qt.PlainText)
@@ -794,23 +810,27 @@ class Ui_B_SC(object):
         self.Effect_4.setObjectName("Effect_4")
         self.gridlayout5.addWidget(self.Effect_4,6,3,1,1)
 
+        self.Makes_4 = QtGui.QSpinBox(self.GroupItemFrame)
+        self.Makes_4.setObjectName("Makes_4")
+        self.gridlayout5.addWidget(self.Makes_4,6,4,1,1)
+
         self.Requirement_4 = QtGui.QLineEdit(self.GroupItemFrame)
         self.Requirement_4.setObjectName("Requirement_4")
-        self.gridlayout5.addWidget(self.Requirement_4,6,4,1,2)
+        self.gridlayout5.addWidget(self.Requirement_4,6,4,1,3)
 
         self.Points_4 = QtGui.QLabel(self.GroupItemFrame)
         self.Points_4.setAlignment(QtCore.Qt.AlignRight|QtCore.Qt.AlignTrailing|QtCore.Qt.AlignVCenter)
         self.Points_4.setObjectName("Points_4")
-        self.gridlayout5.addWidget(self.Points_4,6,4,1,1)
+        self.gridlayout5.addWidget(self.Points_4,6,5,1,1)
 
         self.Cost_4 = QtGui.QLabel(self.GroupItemFrame)
         self.Cost_4.setAlignment(QtCore.Qt.AlignRight|QtCore.Qt.AlignTrailing|QtCore.Qt.AlignVCenter)
         self.Cost_4.setObjectName("Cost_4")
-        self.gridlayout5.addWidget(self.Cost_4,6,5,1,1)
+        self.gridlayout5.addWidget(self.Cost_4,6,6,1,1)
 
         self.Name_4 = QtGui.QLabel(self.GroupItemFrame)
         self.Name_4.setObjectName("Name_4")
-        self.gridlayout5.addWidget(self.Name_4,6,7,1,2)
+        self.gridlayout5.addWidget(self.Name_4,6,8,1,2)
 
         self.Gem_Label_5 = QtGui.QLabel(self.GroupItemFrame)
         self.Gem_Label_5.setTextFormat(QtCore.Qt.PlainText)
@@ -836,15 +856,15 @@ class Ui_B_SC(object):
 
         self.Requirement_5 = QtGui.QLineEdit(self.GroupItemFrame)
         self.Requirement_5.setObjectName("Requirement_5")
-        self.gridlayout5.addWidget(self.Requirement_5,7,4,1,2)
+        self.gridlayout5.addWidget(self.Requirement_5,7,4,1,3)
 
         self.Name_5 = QtGui.QLabel(self.GroupItemFrame)
         self.Name_5.setObjectName("Name_5")
-        self.gridlayout5.addWidget(self.Name_5,7,7,1,2)
+        self.gridlayout5.addWidget(self.Name_5,7,8,1,2)
 
         self.LabelRequirement2 = QtGui.QLabel(self.GroupItemFrame)
         self.LabelRequirement2.setObjectName("LabelRequirement2")
-        self.gridlayout5.addWidget(self.LabelRequirement2,7,7,1,2)
+        self.gridlayout5.addWidget(self.LabelRequirement2,7,8,1,2)
 
         self.Gem_Label_6 = QtGui.QLabel(self.GroupItemFrame)
         self.Gem_Label_6.setTextFormat(QtCore.Qt.PlainText)
@@ -870,11 +890,11 @@ class Ui_B_SC(object):
 
         self.Requirement_6 = QtGui.QLineEdit(self.GroupItemFrame)
         self.Requirement_6.setObjectName("Requirement_6")
-        self.gridlayout5.addWidget(self.Requirement_6,8,4,1,2)
+        self.gridlayout5.addWidget(self.Requirement_6,8,4,1,3)
 
         self.Name_6 = QtGui.QLabel(self.GroupItemFrame)
         self.Name_6.setObjectName("Name_6")
-        self.gridlayout5.addWidget(self.Name_6,8,7,1,2)
+        self.gridlayout5.addWidget(self.Name_6,8,8,1,2)
 
         self.Gem_Label_7 = QtGui.QLabel(self.GroupItemFrame)
         self.Gem_Label_7.setTextFormat(QtCore.Qt.PlainText)
@@ -896,7 +916,7 @@ class Ui_B_SC(object):
 
         self.Requirement_7 = QtGui.QLineEdit(self.GroupItemFrame)
         self.Requirement_7.setObjectName("Requirement_7")
-        self.gridlayout5.addWidget(self.Requirement_7,9,4,1,2)
+        self.gridlayout5.addWidget(self.Requirement_7,9,4,1,3)
 
         self.Gem_Label_8 = QtGui.QLabel(self.GroupItemFrame)
         self.Gem_Label_8.setTextFormat(QtCore.Qt.PlainText)
@@ -918,7 +938,7 @@ class Ui_B_SC(object):
 
         self.Requirement_8 = QtGui.QLineEdit(self.GroupItemFrame)
         self.Requirement_8.setObjectName("Requirement_8")
-        self.gridlayout5.addWidget(self.Requirement_8,10,4,1,2)
+        self.gridlayout5.addWidget(self.Requirement_8,10,4,1,3)
 
         self.Gem_Label_9 = QtGui.QLabel(self.GroupItemFrame)
         self.Gem_Label_9.setTextFormat(QtCore.Qt.PlainText)
@@ -940,7 +960,7 @@ class Ui_B_SC(object):
 
         self.Requirement_9 = QtGui.QLineEdit(self.GroupItemFrame)
         self.Requirement_9.setObjectName("Requirement_9")
-        self.gridlayout5.addWidget(self.Requirement_9,11,4,1,2)
+        self.gridlayout5.addWidget(self.Requirement_9,11,4,1,3)
 
         self.Gem_Label_10 = QtGui.QLabel(self.GroupItemFrame)
         self.Gem_Label_10.setTextFormat(QtCore.Qt.PlainText)
@@ -962,7 +982,7 @@ class Ui_B_SC(object):
 
         self.Requirement_10 = QtGui.QLineEdit(self.GroupItemFrame)
         self.Requirement_10.setObjectName("Requirement_10")
-        self.gridlayout5.addWidget(self.Requirement_10,12,4,1,2)
+        self.gridlayout5.addWidget(self.Requirement_10,12,4,1,3)
 
         self.Gem_Label_11 = QtGui.QLabel(self.GroupItemFrame)
         self.Gem_Label_11.setTextFormat(QtCore.Qt.PlainText)
@@ -984,7 +1004,7 @@ class Ui_B_SC(object):
 
         self.Requirement_11 = QtGui.QLineEdit(self.GroupItemFrame)
         self.Requirement_11.setObjectName("Requirement_11")
-        self.gridlayout5.addWidget(self.Requirement_11,13,4,1,2)
+        self.gridlayout5.addWidget(self.Requirement_11,13,4,1,3)
 
         self.Gem_Label_12 = QtGui.QLabel(self.GroupItemFrame)
         self.Gem_Label_12.setTextFormat(QtCore.Qt.PlainText)
@@ -1006,61 +1026,61 @@ class Ui_B_SC(object):
 
         self.Requirement_12 = QtGui.QLineEdit(self.GroupItemFrame)
         self.Requirement_12.setObjectName("Requirement_12")
-        self.gridlayout5.addWidget(self.Requirement_12,14,4,1,2)
+        self.gridlayout5.addWidget(self.Requirement_12,14,4,1,3)
 
         spacerItem18 = QtGui.QSpacerItem(5,5,QtGui.QSizePolicy.Minimum,QtGui.QSizePolicy.Minimum)
         self.gridlayout5.addItem(spacerItem18,8,0,7,3)
 
         spacerItem19 = QtGui.QSpacerItem(5,5,QtGui.QSizePolicy.Minimum,QtGui.QSizePolicy.Minimum)
-        self.gridlayout5.addItem(spacerItem19,8,3,1,3)
+        self.gridlayout5.addItem(spacerItem19,8,3,1,4)
 
         spacerItem20 = QtGui.QSpacerItem(5,5,QtGui.QSizePolicy.Minimum,QtGui.QSizePolicy.Minimum)
-        self.gridlayout5.addItem(spacerItem20,9,3,1,3)
+        self.gridlayout5.addItem(spacerItem20,9,3,1,4)
 
         self.ItemImbueLabel = QtGui.QLabel(self.GroupItemFrame)
         self.ItemImbueLabel.setAlignment(QtCore.Qt.AlignRight|QtCore.Qt.AlignTrailing|QtCore.Qt.AlignVCenter)
         self.ItemImbueLabel.setObjectName("ItemImbueLabel")
-        self.gridlayout5.addWidget(self.ItemImbueLabel,10,3,1,1)
+        self.gridlayout5.addWidget(self.ItemImbueLabel,10,3,1,2)
 
         self.ItemImbue = QtGui.QLabel(self.GroupItemFrame)
         self.ItemImbue.setAlignment(QtCore.Qt.AlignRight|QtCore.Qt.AlignTrailing|QtCore.Qt.AlignVCenter)
         self.ItemImbue.setObjectName("ItemImbue")
-        self.gridlayout5.addWidget(self.ItemImbue,10,4,1,1)
+        self.gridlayout5.addWidget(self.ItemImbue,10,5,1,1)
 
         self.ItemImbueTotal = QtGui.QLabel(self.GroupItemFrame)
         self.ItemImbueTotal.setAlignment(QtCore.Qt.AlignLeading|QtCore.Qt.AlignLeft|QtCore.Qt.AlignVCenter)
         self.ItemImbueTotal.setObjectName("ItemImbueTotal")
-        self.gridlayout5.addWidget(self.ItemImbueTotal,10,5,1,1)
+        self.gridlayout5.addWidget(self.ItemImbueTotal,10,6,1,1)
 
         self.ItemOverchargeLabel = QtGui.QLabel(self.GroupItemFrame)
         self.ItemOverchargeLabel.setAlignment(QtCore.Qt.AlignRight|QtCore.Qt.AlignTrailing|QtCore.Qt.AlignVCenter)
         self.ItemOverchargeLabel.setObjectName("ItemOverchargeLabel")
-        self.gridlayout5.addWidget(self.ItemOverchargeLabel,11,3,1,1)
+        self.gridlayout5.addWidget(self.ItemOverchargeLabel,11,3,1,2)
 
         self.ItemOvercharge = QtGui.QLabel(self.GroupItemFrame)
         self.ItemOvercharge.setAlignment(QtCore.Qt.AlignCenter)
         self.ItemOvercharge.setObjectName("ItemOvercharge")
-        self.gridlayout5.addWidget(self.ItemOvercharge,11,4,1,2)
+        self.gridlayout5.addWidget(self.ItemOvercharge,11,5,1,2)
 
         self.ItemCostLabel = QtGui.QLabel(self.GroupItemFrame)
         self.ItemCostLabel.setAlignment(QtCore.Qt.AlignRight|QtCore.Qt.AlignTrailing|QtCore.Qt.AlignVCenter)
         self.ItemCostLabel.setObjectName("ItemCostLabel")
-        self.gridlayout5.addWidget(self.ItemCostLabel,12,3,1,1)
+        self.gridlayout5.addWidget(self.ItemCostLabel,12,3,1,2)
 
         self.ItemCost = QtGui.QLabel(self.GroupItemFrame)
         self.ItemCost.setAlignment(QtCore.Qt.AlignRight|QtCore.Qt.AlignTrailing|QtCore.Qt.AlignVCenter)
         self.ItemCost.setObjectName("ItemCost")
-        self.gridlayout5.addWidget(self.ItemCost,12,4,1,2)
+        self.gridlayout5.addWidget(self.ItemCost,12,5,1,2)
 
         self.ItemPriceLabel = QtGui.QLabel(self.GroupItemFrame)
         self.ItemPriceLabel.setAlignment(QtCore.Qt.AlignRight|QtCore.Qt.AlignTrailing|QtCore.Qt.AlignVCenter)
         self.ItemPriceLabel.setObjectName("ItemPriceLabel")
-        self.gridlayout5.addWidget(self.ItemPriceLabel,13,3,1,1)
+        self.gridlayout5.addWidget(self.ItemPriceLabel,13,3,1,2)
 
         self.ItemPrice = QtGui.QLabel(self.GroupItemFrame)
         self.ItemPrice.setAlignment(QtCore.Qt.AlignRight|QtCore.Qt.AlignTrailing|QtCore.Qt.AlignVCenter)
         self.ItemPrice.setObjectName("ItemPrice")
-        self.gridlayout5.addWidget(self.ItemPrice,13,4,1,2)
+        self.gridlayout5.addWidget(self.ItemPrice,13,5,1,2)
 
         self.hboxlayout1 = QtGui.QHBoxLayout()
         self.hboxlayout1.setMargin(0)
@@ -1076,10 +1096,10 @@ class Ui_B_SC(object):
         self.ItemUtility.setAlignment(QtCore.Qt.AlignRight|QtCore.Qt.AlignTrailing|QtCore.Qt.AlignVCenter)
         self.ItemUtility.setObjectName("ItemUtility")
         self.hboxlayout1.addWidget(self.ItemUtility)
-        self.gridlayout5.addLayout(self.hboxlayout1,14,7,1,1)
+        self.gridlayout5.addLayout(self.hboxlayout1,14,8,1,1)
 
         spacerItem21 = QtGui.QSpacerItem(20,5,QtGui.QSizePolicy.Preferred,QtGui.QSizePolicy.Minimum)
-        self.gridlayout5.addItem(spacerItem21,14,8,1,1)
+        self.gridlayout5.addItem(spacerItem21,14,9,1,1)
         self.vboxlayout.addWidget(self.GroupItemFrame)
         self.gridlayout.addLayout(self.vboxlayout,2,0,1,7)
         B_SC.setCentralWidget(self.ScWinFrame)
@@ -1109,22 +1129,26 @@ class Ui_B_SC(object):
         B_SC.setTabOrder(self.Type_1,self.Amount_Edit_1)
         B_SC.setTabOrder(self.Amount_Edit_1,self.Amount_Drop_1)
         B_SC.setTabOrder(self.Amount_Drop_1,self.Effect_1)
-        B_SC.setTabOrder(self.Effect_1,self.Requirement_1)
+        B_SC.setTabOrder(self.Effect_1,self.Makes_1)
+        B_SC.setTabOrder(self.Makes_1,self.Requirement_1)
         B_SC.setTabOrder(self.Requirement_1,self.Type_2)
         B_SC.setTabOrder(self.Type_2,self.Amount_Edit_2)
         B_SC.setTabOrder(self.Amount_Edit_2,self.Amount_Drop_2)
         B_SC.setTabOrder(self.Amount_Drop_2,self.Effect_2)
-        B_SC.setTabOrder(self.Effect_2,self.Requirement_2)
+        B_SC.setTabOrder(self.Effect_2,self.Makes_2)
+        B_SC.setTabOrder(self.Makes_2,self.Requirement_2)
         B_SC.setTabOrder(self.Requirement_2,self.Type_3)
         B_SC.setTabOrder(self.Type_3,self.Amount_Edit_3)
         B_SC.setTabOrder(self.Amount_Edit_3,self.Amount_Drop_3)
         B_SC.setTabOrder(self.Amount_Drop_3,self.Effect_3)
-        B_SC.setTabOrder(self.Effect_3,self.Requirement_3)
+        B_SC.setTabOrder(self.Effect_3,self.Makes_3)
+        B_SC.setTabOrder(self.Makes_3,self.Requirement_3)
         B_SC.setTabOrder(self.Requirement_3,self.Type_4)
         B_SC.setTabOrder(self.Type_4,self.Amount_Edit_4)
         B_SC.setTabOrder(self.Amount_Edit_4,self.Amount_Drop_4)
         B_SC.setTabOrder(self.Amount_Drop_4,self.Effect_4)
-        B_SC.setTabOrder(self.Effect_4,self.Requirement_4)
+        B_SC.setTabOrder(self.Effect_4,self.Makes_4)
+        B_SC.setTabOrder(self.Makes_4,self.Requirement_4)
         B_SC.setTabOrder(self.Requirement_4,self.Type_5)
         B_SC.setTabOrder(self.Type_5,self.Amount_Edit_5)
         B_SC.setTabOrder(self.Amount_Edit_5,self.Amount_Drop_5)
@@ -1252,6 +1276,7 @@ class Ui_B_SC(object):
         self.LabelGemType.setText(QtGui.QApplication.translate("B_SC", " Type", None, QtGui.QApplication.UnicodeUTF8))
         self.LabelGemAmount.setText(QtGui.QApplication.translate("B_SC", " Amount", None, QtGui.QApplication.UnicodeUTF8))
         self.LabelGemEffect.setText(QtGui.QApplication.translate("B_SC", " Effect", None, QtGui.QApplication.UnicodeUTF8))
+        self.LabelGemMakes.setText(QtGui.QApplication.translate("B_SC", " Makes", None, QtGui.QApplication.UnicodeUTF8))
         self.LabelRequirement.setText(QtGui.QApplication.translate("B_SC", " Requirement", None, QtGui.QApplication.UnicodeUTF8))
         self.LabelGemPoints.setText(QtGui.QApplication.translate("B_SC", "Points", None, QtGui.QApplication.UnicodeUTF8))
         self.LabelGemCost.setText(QtGui.QApplication.translate("B_SC", "Cost", None, QtGui.QApplication.UnicodeUTF8))

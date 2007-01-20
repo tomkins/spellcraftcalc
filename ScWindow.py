@@ -121,7 +121,7 @@ class ScWindow(QMainWindow, Ui_B_SC):
         ]
         self.switchOnType['player'] = [
             self.QualDrop,
-            self.LabelGemPoints,
+            self.LabelGemMakes, self.LabelGemPoints,
             self.LabelGemCost, self.LabelGemName,
             self.ItemImbueLabel, self.ItemImbue, self.ItemImbueTotal,
             self.ItemOverchargeLabel, self.ItemOvercharge,
@@ -206,6 +206,7 @@ class ScWindow(QMainWindow, Ui_B_SC):
         self.Effect = []
         self.AmountEdit = []
         self.AmountDrop = []
+        self.Makes = []
         self.Points = []
         self.Cost = []
         self.Requirement = []
@@ -225,10 +226,10 @@ class ScWindow(QMainWindow, Ui_B_SC):
         width = testfont.size(Qt.TextSingleLine, " Slot 10:").width()
         self.GroupItemFrame.layout().setColumnMinimumWidth(0,width)
         width = testfont.size(Qt.TextSingleLine, " Points").width()
-        self.GroupItemFrame.layout().setColumnMinimumWidth(4,width)
+        self.GroupItemFrame.layout().setColumnMinimumWidth(5,width)
         reqwidth = width
         width = testfont.size(Qt.TextSingleLine, "  999g 00s 00c").width()
-        self.GroupItemFrame.layout().setColumnMinimumWidth(5,width)
+        self.GroupItemFrame.layout().setColumnMinimumWidth(6,width)
         reqwidth += width + amtcbwidth
         self.GroupItemFrame.layout().setColumnStretch(8, 1)
 
@@ -288,10 +289,16 @@ class ScWindow(QMainWindow, Ui_B_SC):
                     self.GemLabel[i], self.Type[i], self.Effect[i], ])
 
             if i < 4:
+                self.Makes.append(getattr(self, 'Makes_%d' % idx))
+                self.Makes[i].setFixedSize(QSize(amtcbwidth, cbheight))
+                self.connect(self.Makes[i],SIGNAL("valueChanged(int)"),
+                             self.amountsChanged)
+                # Hide '0' values
+                self.Makes[i].setSpecialValueText(" ")
                 self.Points.append(getattr(self, 'Points_%d' % idx))
                 self.Cost.append(getattr(self, 'Cost_%d' % idx))
                 self.switchOnType['player'].extend([
-                    self.Points[i], self.Cost[i], ])
+                    self.Makes[i], self.Points[i], self.Cost[i], ])
 
             self.GroupItemFrame.layout().setRowMinimumHeight(i + 3, 
                 max(cbheight, edheight))
@@ -586,7 +593,11 @@ class ScWindow(QMainWindow, Ui_B_SC):
             if i < 6:
                 self.setTabOrder(self.AmountEdit[i],self.AmountDrop[i])
                 self.setTabOrder(self.AmountDrop[i],self.Effect[i])
-                self.setTabOrder(self.Effect[i],self.Requirement[i])
+                if i < 4:
+                    self.setTabOrder(self.Effect[i],self.Makes[i])
+                    self.setTabOrder(self.Makes[i],self.Requirement[i])
+                else:
+                    self.setTabOrder(self.Effect[i],self.Requirement[i])
             else:
                 self.setTabOrder(self.AmountEdit[i],self.Effect[i])
                 self.setTabOrder(self.Effect[i],self.Requirement[i])
@@ -596,7 +607,6 @@ class ScWindow(QMainWindow, Ui_B_SC):
     def showFixWidgets(self):
         for i in range(0,6):
             self.GemLabel[i].setText('Slot &%d:' % (i + 1))
-            self.GemLabel[i].setEnabled(1)
             self.GemLabel[i].show()
             self.Type[i].show()
             self.Effect[i].show()
@@ -624,13 +634,11 @@ class ScWindow(QMainWindow, Ui_B_SC):
         for w in self.switchOnType['player']:
             w.show()
         for i in range(0,item.slotCount()):
-            self.GemLabel[i].setEnabled(1)
             if item.slot(i).slotType() == 'player':
                 self.GemLabel[i].setText('Gem &%d:' % (i + 1))
-                if item.slot(i).done() == "1":
-                    self.GemLabel[i].setEnabled(0)
             else:
                 if i < 4:
+                    self.Makes[i].hide()
                     self.Points[i].hide()
                     self.Cost[i].hide()
                 self.Requirement[i].show()
@@ -1004,7 +1012,12 @@ class ScWindow(QMainWindow, Ui_B_SC):
                                               self.AmountDrop[slot].count() - 1)
                 else:
                     self.AmountDrop[slot].setCurrentIndex(amount)
-            if itemtype != 'player' or item.slot(slot).slotType() != 'player':
+            if itemtype == 'player' and item.slot(slot).slotType() == 'player':
+                if (item.slot(slot).done() == '1'):
+                    self.Makes[slot].setValue(int(item.slot(slot).remakes()) + 1)
+                else:
+                    self.Makes[slot].setValue(0)
+            else:
                 self.Requirement[slot].setText(item.slot(slot).requirement())
         self.AFDPS_Edit.setText(item.AFDPS)
         self.Speed_Edit.setText(item.Speed)
@@ -1445,7 +1458,14 @@ class ScWindow(QMainWindow, Ui_B_SC):
             item.slot(slot).setAmount(self.AmountDrop[slot].currentText())
         else:
             item.slot(slot).setAmount(self.AmountEdit[slot].text())
-        if item.slot(slot).slotType() != 'player':
+        if item.slot(slot).slotType() == 'player':
+            if (self.Makes[slot].value() > 0):
+                item.slot(slot).setDone('1')
+                item.slot(slot).setRemakes(str(self.Makes[slot].value() - 1))
+            else:
+                item.slot(slot).setDone('0')
+                item.slot(slot).setRemakes('0')
+        else:
             item.slot(slot).setRequirement(self.Requirement[slot].text())
         self.modified = 1
         self.calculate()
@@ -1485,6 +1505,11 @@ class ScWindow(QMainWindow, Ui_B_SC):
             amount = self.AmountEdit[slot]
         if typetext == 'Unused':
             amount.clear()
+            if item.slot(slot).slotType() == 'player':
+                self.Makes[slot].setValue(0)
+                self.Makes[slot].setMaximum(0)
+            else:
+                self.Requirement[slot].setText("")
         elif item.ActiveState == 'player':
             amtindex = amount.currentIndex()
             amount.clear()
@@ -1509,6 +1534,8 @@ class ScWindow(QMainWindow, Ui_B_SC):
                     amtindex = 0
                 if amtindex < len(valueslist):
                     amount.setCurrentIndex(amtindex)
+            if item.slot(slot).slotType() == 'player':
+                self.Makes[slot].setMaximum(99)
         # Cascade the changes
         self.amountsChanged(0, slot)
 
