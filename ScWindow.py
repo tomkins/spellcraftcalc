@@ -747,7 +747,6 @@ class ScWindow(QMainWindow, Ui_B_SC):
     def initialize(self, moretodo):
         self.nocalc = 1
         self.noteText = ''
-        self.craftMultiplier = 1
         self.filename = None
         self.newcount = self.newcount + 1
         filetitle = unicode("Template" + str(self.newcount))
@@ -1308,9 +1307,6 @@ class ScWindow(QMainWindow, Ui_B_SC):
         self.TotalUtility.setText('%3.1f' % tot['Utility'])
         self.errorsmenuid.setEnabled(errorcount > 0)
                 
-    def getMultiplier(self, type):
-        return ImbueMultipliers[type]
-
     def templateChanged(self,a0=None):
         if self.nocalc: return
         self.modified = 1
@@ -1982,9 +1978,7 @@ class ScWindow(QMainWindow, Ui_B_SC):
     def openCraftWindow(self):
         CW = CraftWindow.CraftWindow(self, '', 1)
         CW.loadItem(self.itemattrlist[self.currentTabLabel])
-        CW.ExpMultiplier.setValue(self.craftMultiplier)
         CW.exec_()
-        self.craftMultiplier = int(CW.ExpMultiplier.value())
         self.restoreItem(self.itemattrlist[self.currentTabLabel])
         self.modified = 1
     
