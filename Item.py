@@ -288,7 +288,7 @@ class ItemSlot:
                     savexml.extend([
                        (u'Imbue', u"%.1f" % self.gemImbue(),),
                        (u'Level', unicode(self.gemLevel()),),
-                       (u'Cost', unicode(self.gemCost(-1)),)])
+                       (u'Cost', unicode(self.gemCost()),)])
                 if self.Type[-6:] != "Effect":
                     savexml.append(
                        (u'Utility', u"%.1f" % self.gemUtility(),))
