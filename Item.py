@@ -237,7 +237,10 @@ class ItemSlot:
         if not self.crafted():
             return 0
         if remakes < 0:
-            remakes = self.gemRemakes()
+            if self.done() == "1":
+                remakes = self.gemRemakes()
+            else:
+                remakes = 0
         costindex = self.gemLevel() - 1
         cost = GemCosts[costindex]
         if self.Effect[0:4] == 'All ':
@@ -285,7 +288,7 @@ class ItemSlot:
                     savexml.extend([
                        (u'Imbue', u"%.1f" % self.gemImbue(),),
                        (u'Level', unicode(self.gemLevel()),),
-                       (u'Cost', unicode(self.gemCost()),)])
+                       (u'Cost', unicode(self.gemCost(-1)),)])
                 if self.Type[-6:] != "Effect":
                     savexml.append(
                        (u'Utility', u"%.1f" % self.gemUtility(),))
@@ -442,17 +445,17 @@ class Item:
     def cost(self):
         cost = 0
         for slot in self.slots():
-            cost += slot.gemCost()
+            cost += slot.gemCost(-1)
         return cost
 
     def price(self, pricingInfo):
         price = 0
         cost = 0
         for slot in self.slots():
-            cost += slot.gemCost()
+            cost += slot.gemCost(-1)
         if cost == 0: return 0
         for slot in self.slots():
-            price += slot.gemPrice(pricingInfo)
+            price += slot.gemPrice(pricingInfo, -1)
         if cost > 0:
             imbuepts = self.totalImbue()
             if pricingInfo.get('PPInclude', 0):
