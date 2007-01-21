@@ -1,11 +1,15 @@
 Urgent things to fix before next beta release!!!
 
+  Item pane should learn time, Remove time from gems.  Add a total
+  time that can be adjusted (when an item's time is changed, bump 
+  it up or down, but preserve the user's time such as when they 
+  spend 20 min helping the customer figure out the template before 
+  crafting.)
+
+  Pull time off the gem slot() into the item, but be certain to
+  total the time into the item when loading old item xml.
+
   Options does not open with the first options page - ugly.
-
-  Selecting the menu DOES NOT TRIGGER editingFinished!  Damn TT.
-  Causes worrysome side effects.
-
-Things to fix before next beta release is announced;
 
   Allow users to choose the Realm (or 'All') for items, drop and crafted.
   (Crafted items all have a specific realm, even on Gaheris/Mordred, while
@@ -13,6 +17,8 @@ Things to fix before next beta release is announced;
 
   Fix Classic Windows skin view of Group boxes (XP is fine, Mac and X11
   are now working correctly).
+
+Things to fix before next beta release is announced;
 
   Prettify the display of stats with caps for the screen, with
   a stat/maxstat flavor option.  Rebalance between two or three rows
