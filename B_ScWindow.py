@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'ScWindow.ui'
 #
-# Created: Sat Jan 20 14:49:31 2007
+# Created: Sun Jan 21 02:46:46 2007
 #      by: PyQt4 UI code generator 4.1
 #
 # WARNING! All changes made in this file will be lost!
@@ -248,64 +248,78 @@ class Ui_B_SC(object):
         self.EmpathyCap.setObjectName("EmpathyCap")
         self.gridlayout2.addWidget(self.EmpathyCap,7,2,1,1)
 
+        self.AcuityLabel = QtGui.QLabel(self.GroupStats)
+        self.AcuityLabel.setObjectName("AcuityLabel")
+        self.gridlayout2.addWidget(self.AcuityLabel,8,0,1,1)
+
+        self.Acuity = QtGui.QLabel(self.GroupStats)
+        self.Acuity.setAlignment(QtCore.Qt.AlignRight|QtCore.Qt.AlignTrailing|QtCore.Qt.AlignVCenter)
+        self.Acuity.setObjectName("Acuity")
+        self.gridlayout2.addWidget(self.Acuity,8,1,1,1)
+
+        self.AcuityCap = QtGui.QLabel(self.GroupStats)
+        self.AcuityCap.setAlignment(QtCore.Qt.AlignRight|QtCore.Qt.AlignTrailing|QtCore.Qt.AlignVCenter)
+        self.AcuityCap.setObjectName("AcuityCap")
+        self.gridlayout2.addWidget(self.AcuityCap,8,2,1,1)
+
         self.PowerLabel = QtGui.QLabel(self.GroupStats)
         self.PowerLabel.setObjectName("PowerLabel")
-        self.gridlayout2.addWidget(self.PowerLabel,8,0,1,1)
+        self.gridlayout2.addWidget(self.PowerLabel,9,0,1,1)
 
         self.Power = QtGui.QLabel(self.GroupStats)
         self.Power.setAlignment(QtCore.Qt.AlignRight|QtCore.Qt.AlignTrailing|QtCore.Qt.AlignVCenter)
         self.Power.setObjectName("Power")
-        self.gridlayout2.addWidget(self.Power,8,1,1,1)
+        self.gridlayout2.addWidget(self.Power,9,1,1,1)
 
         self.PowerCap = QtGui.QLabel(self.GroupStats)
         self.PowerCap.setAlignment(QtCore.Qt.AlignRight|QtCore.Qt.AlignTrailing|QtCore.Qt.AlignVCenter)
         self.PowerCap.setObjectName("PowerCap")
-        self.gridlayout2.addWidget(self.PowerCap,8,2,1,1)
+        self.gridlayout2.addWidget(self.PowerCap,9,2,1,1)
 
         self.PowerPoolLabel = QtGui.QLabel(self.GroupStats)
         self.PowerPoolLabel.setObjectName("PowerPoolLabel")
-        self.gridlayout2.addWidget(self.PowerPoolLabel,9,0,1,1)
+        self.gridlayout2.addWidget(self.PowerPoolLabel,10,0,1,1)
 
         self.PowerPool = QtGui.QLabel(self.GroupStats)
         self.PowerPool.setAlignment(QtCore.Qt.AlignRight|QtCore.Qt.AlignTrailing|QtCore.Qt.AlignVCenter)
         self.PowerPool.setObjectName("PowerPool")
-        self.gridlayout2.addWidget(self.PowerPool,9,1,1,1)
+        self.gridlayout2.addWidget(self.PowerPool,10,1,1,1)
 
         self.PowerPoolCap = QtGui.QLabel(self.GroupStats)
         self.PowerPoolCap.setAlignment(QtCore.Qt.AlignRight|QtCore.Qt.AlignTrailing|QtCore.Qt.AlignVCenter)
         self.PowerPoolCap.setObjectName("PowerPoolCap")
-        self.gridlayout2.addWidget(self.PowerPoolCap,9,2,1,1)
+        self.gridlayout2.addWidget(self.PowerPoolCap,10,2,1,1)
 
         self.AFLabel = QtGui.QLabel(self.GroupStats)
         self.AFLabel.setObjectName("AFLabel")
-        self.gridlayout2.addWidget(self.AFLabel,10,0,1,1)
+        self.gridlayout2.addWidget(self.AFLabel,11,0,1,1)
 
         self.AF = QtGui.QLabel(self.GroupStats)
         self.AF.setAlignment(QtCore.Qt.AlignRight|QtCore.Qt.AlignTrailing|QtCore.Qt.AlignVCenter)
         self.AF.setObjectName("AF")
-        self.gridlayout2.addWidget(self.AF,10,1,1,1)
+        self.gridlayout2.addWidget(self.AF,11,1,1,1)
 
         self.AFCap = QtGui.QLabel(self.GroupStats)
         self.AFCap.setAlignment(QtCore.Qt.AlignRight|QtCore.Qt.AlignTrailing|QtCore.Qt.AlignVCenter)
         self.AFCap.setObjectName("AFCap")
-        self.gridlayout2.addWidget(self.AFCap,10,2,1,1)
+        self.gridlayout2.addWidget(self.AFCap,11,2,1,1)
 
         self.HitsLabel = QtGui.QLabel(self.GroupStats)
         self.HitsLabel.setObjectName("HitsLabel")
-        self.gridlayout2.addWidget(self.HitsLabel,11,0,1,1)
+        self.gridlayout2.addWidget(self.HitsLabel,12,0,1,1)
 
         self.Hits = QtGui.QLabel(self.GroupStats)
         self.Hits.setAlignment(QtCore.Qt.AlignRight|QtCore.Qt.AlignTrailing|QtCore.Qt.AlignVCenter)
         self.Hits.setObjectName("Hits")
-        self.gridlayout2.addWidget(self.Hits,11,1,1,1)
+        self.gridlayout2.addWidget(self.Hits,12,1,1,1)
 
         self.HitsCap = QtGui.QLabel(self.GroupStats)
         self.HitsCap.setAlignment(QtCore.Qt.AlignRight|QtCore.Qt.AlignTrailing|QtCore.Qt.AlignVCenter)
         self.HitsCap.setObjectName("HitsCap")
-        self.gridlayout2.addWidget(self.HitsCap,11,2,1,1)
+        self.gridlayout2.addWidget(self.HitsCap,12,2,1,1)
 
         spacerItem3 = QtGui.QSpacerItem(5,0,QtGui.QSizePolicy.Minimum,QtGui.QSizePolicy.MinimumExpanding)
-        self.gridlayout2.addItem(spacerItem3,12,0,1,3)
+        self.gridlayout2.addItem(spacerItem3,13,0,1,3)
         self.gridlayout.addWidget(self.GroupStats,0,2,1,1)
 
         spacerItem4 = QtGui.QSpacerItem(3,0,QtGui.QSizePolicy.Fixed,QtGui.QSizePolicy.Minimum)
@@ -1223,6 +1237,9 @@ class Ui_B_SC(object):
         self.EmpathyLabel.setText(QtGui.QApplication.translate("B_SC", "EMP: ", None, QtGui.QApplication.UnicodeUTF8))
         self.Empathy.setText(QtGui.QApplication.translate("B_SC", "0", None, QtGui.QApplication.UnicodeUTF8))
         self.EmpathyCap.setText(QtGui.QApplication.translate("B_SC", "-", None, QtGui.QApplication.UnicodeUTF8))
+        self.AcuityLabel.setText(QtGui.QApplication.translate("B_SC", "ACU: ", None, QtGui.QApplication.UnicodeUTF8))
+        self.Acuity.setText(QtGui.QApplication.translate("B_SC", "0", None, QtGui.QApplication.UnicodeUTF8))
+        self.AcuityCap.setText(QtGui.QApplication.translate("B_SC", "-", None, QtGui.QApplication.UnicodeUTF8))
         self.PowerLabel.setText(QtGui.QApplication.translate("B_SC", "Pow: ", None, QtGui.QApplication.UnicodeUTF8))
         self.Power.setText(QtGui.QApplication.translate("B_SC", "0", None, QtGui.QApplication.UnicodeUTF8))
         self.PowerCap.setText(QtGui.QApplication.translate("B_SC", "-", None, QtGui.QApplication.UnicodeUTF8))

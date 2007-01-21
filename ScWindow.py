@@ -148,7 +148,7 @@ class ScWindow(QMainWindow, Ui_B_SC):
         self.StatCap = {}
         self.StatBonus = {}
 
-        for stat in (GemLists['All']['Stat'] + ('PowerPool', 'AF',)):
+        for stat in (DropLists['All']['Stat'] + ('PowerPool', 'AF',)):
             self.StatLabel[stat] = getattr(self, stat + 'Label')
             self.StatValue[stat] = getattr(self, stat)
             self.StatCap[stat] = getattr(self, stat + 'Cap')
@@ -1193,6 +1193,13 @@ class ScWindow(QMainWindow, Ui_B_SC):
         tot['Price'] += self.pricingInfo.get('PPOrder', 0) * 10000
         return tot
 
+    def showStat(self, stat, show):
+        if self.StatLabel[stat].isHidden() != show:
+            return
+        self.StatLabel[stat].setVisible(show)
+        self.StatValue[stat].setVisible(show)
+        self.StatCap[stat].setVisible(show)
+
     def calculate(self):
         if self.nocalc:
             return
@@ -1277,12 +1284,16 @@ class ScWindow(QMainWindow, Ui_B_SC):
                 basecap = amounts['BaseCap']
                 self.StatValue[key].setText(unicode(basecap - val))
         for (key, datum) in tot['Stats'].iteritems():
-            ### XXX fix it
-            if key == "Acuity":
-                continue
             val = datum['TotalBonus']
+            acuity = AllBonusList[self.realm][self.charclass]["Acuity"]
             if key == "% Power Pool":
                 key = "PowerPool"
+            elif key == "Acuity":
+                 self.showStat(key, ((datum['TotalCapBonus'] > 0) \
+                                  or (val > 0)) and (len(acuity) == 0))
+            elif key in ("Charisma", "Empathy", "Intelligence", "Piety"):
+                 self.showStat(key, (datum['TotalCapBonus'] > 0) \
+                                 or (val > 0) or (key in acuity))
             if not self.capDistance:
                 if datum['TotalCapBonus'] > 0:
                     self.StatCap[key].setText( \
