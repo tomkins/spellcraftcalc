@@ -2,6 +2,9 @@ Updated ??/??/???? - Version 1.96 - Patch 1.87 SC Overhaul
 
   Removed Quality factor entirely from gems.
 
+  Hide acuity-type stats that don't apply to the class when zero,
+  and display "ACU" for classes with no acuity stat.
+
   Track makes on the main item info pane (where Quality used to be).
 
   Total all remade gem costs by item and in grand total, this was 

@@ -21,10 +21,7 @@ Urgent things to fix before next beta release!!!
 Things to fix before next beta release is announced;
 
   Prettify the display of stats with caps for the screen, with
-  a stat/maxstat flavor option.  Rebalance between two or three rows
-  of resists and bonuses to shorten the screen again after AF & PP%.
-  OR - Drop the three or four acuity stats that "don't apply" for
-  a given class, unless they have a bonus present?
+  a stat/maxstat flavor option.
 
   Allow users to choose to include class-specific bonuses for resists
   (mostly, applies to heavy tanks).
