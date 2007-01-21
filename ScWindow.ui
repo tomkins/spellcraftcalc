@@ -1391,7 +1391,7 @@
          <item row="2" column="6" >
           <widget class="QLabel" name="LabelGemCost" >
            <property name="text" >
-            <string>Cost</string>
+            <string>Unit Cost</string>
            </property>
            <property name="alignment" >
             <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
