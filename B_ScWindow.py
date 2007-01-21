@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'ScWindow.ui'
 #
-# Created: Sun Jan 21 02:46:46 2007
+# Created: Sun Jan 21 11:52:44 2007
 #      by: PyQt4 UI code generator 4.1
 #
 # WARNING! All changes made in this file will be lost!
@@ -1296,7 +1296,7 @@ class Ui_B_SC(object):
         self.LabelGemMakes.setText(QtGui.QApplication.translate("B_SC", " Makes", None, QtGui.QApplication.UnicodeUTF8))
         self.LabelRequirement.setText(QtGui.QApplication.translate("B_SC", " Requirement", None, QtGui.QApplication.UnicodeUTF8))
         self.LabelGemPoints.setText(QtGui.QApplication.translate("B_SC", "Points", None, QtGui.QApplication.UnicodeUTF8))
-        self.LabelGemCost.setText(QtGui.QApplication.translate("B_SC", "Cost", None, QtGui.QApplication.UnicodeUTF8))
+        self.LabelGemCost.setText(QtGui.QApplication.translate("B_SC", "Unit Cost", None, QtGui.QApplication.UnicodeUTF8))
         self.LabelGemName.setText(QtGui.QApplication.translate("B_SC", "Name", None, QtGui.QApplication.UnicodeUTF8))
         self.Gem_Label_1.setText(QtGui.QApplication.translate("B_SC", "Slot &1: ", None, QtGui.QApplication.UnicodeUTF8))
         self.Points_1.setText(QtGui.QApplication.translate("B_SC", "0.0", None, QtGui.QApplication.UnicodeUTF8))
