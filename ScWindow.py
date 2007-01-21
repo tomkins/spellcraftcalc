@@ -35,6 +35,7 @@ import traceback
 import encodings
 import codecs
 import sys
+import binascii
 
 UserEventIDRestoreItem = QEvent.Type(QEvent.User + 1)
 UserEventIDUpdateTypeList = QEvent.Type(QEvent.User + 2)
@@ -399,6 +400,7 @@ class ScWindow(QMainWindow, Ui_B_SC):
 
     def initMenu(self):
         self.toolbar = QToolBar("Crafting Toolbar")
+        self.toolbar.setObjectName("CraftingToolbar")
 
         self.rf_menu = QMenu('&Recent Files')
         self.connect(self.rf_menu, SIGNAL("triggered(QAction*)"),
@@ -580,6 +582,19 @@ class ScWindow(QMainWindow, Ui_B_SC):
         self.menuBar().addMenu(self.helpmenu)
 
         self.addToolBar(self.toolbar)
+        state = ScOptions.instance().getOption('WindowState', None)
+        if state:
+            self.restoreState(binascii.a2b_base64(state), 0)
+            iconsz = ScOptions.instance().getOption('ToolbarSize', 16)
+            if self.toolbar.isHidden():
+                iconsz = 0
+            for act in self.viewtoolbarmenu.actions():
+                if act.data().toInt()[0] == iconsz:
+                    act.setChecked(True)
+                else:
+                    act.setChecked(False)
+            if iconsz != 0:
+                self.setIconSize(QSize(iconsz, iconsz))
 
     def fix_taborder(self, line):
         if line > 0:
@@ -751,6 +766,11 @@ class ScWindow(QMainWindow, Ui_B_SC):
         ScOptions.instance().setOption('WindowY', self.pos().y())
         ScOptions.instance().setOption('WindowW', self.width())
         ScOptions.instance().setOption('WindowH', self.height())
+
+        ScOptions.instance().setOption('WindowState', 
+            binascii.b2a_base64(self.saveState(0))[:-1])
+        ScOptions.instance().setOption('ToolbarSize',
+            self.iconSize().width())
 
     def initialize(self, moretodo):
         self.nocalc = 1

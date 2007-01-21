@@ -19,7 +19,8 @@ class ScOptions(Singleton):
 
     def getOption(self, name, defaultValue):
         if self.__options.has_key(name) and \
-                isinstance(self.__options[name], type(defaultValue)):
+                (isinstance(self.__options[name], type(defaultValue)) or \
+                defaultValue is None):
             return self.__options[name]
 
         return defaultValue
