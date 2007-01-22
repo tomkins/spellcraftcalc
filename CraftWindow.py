@@ -18,123 +18,105 @@ class CraftWindow(QDialog, Ui_B_CraftWindow):
             self.setObjectName(name)
         if (modal):
             self.setModal(modal)
-        self.GemRemakes = []
-        self.GemDone = []
-        self.GemTime = []
-        self.GemCost = []
+        self.gems = []
         self.GemName = []
+        self.GemCost = []
+        self.GemMakes = []
+        self.GemTime = []
         for i in range (0, 4):
             idx = i + 1
-            self.GemRemakes.append(getattr(self, 'Gem%dRemakes' % idx))
-            self.connect(self.GemRemakes[i],SIGNAL("valueChanged(int)"),self.RemakeChanged)
-            self.GemDone.append(getattr(self, 'Gem%dDone' % idx))
-            self.connect(self.GemDone[i],SIGNAL("clicked()"),self.GemClicked)
+            self.GemName.append(getattr(self, 'Gem%dName' % idx))
+            self.GemCost.append(getattr(self, 'Gem%dCost' % idx))
+            self.GemMakes.append(getattr(self, 'Gem%dMakes' % idx))
+            # Hide '0' values
+            self.GemMakes[i].setSpecialValueText(" ")
+            self.connect(self.GemMakes[i],SIGNAL("valueChanged(int)"),self.RemakeChanged)
             self.GemTime.append(getattr(self, 'Gem%dTime' % idx))
             self.connect(self.GemTime[i],SIGNAL("textChanged(const QString&)"),self.TimeChanged)
-            self.GemCost.append(getattr(self, 'Gem%dCost' % idx))
-            self.GemName.append(getattr(self, 'Gem%dName' % idx))
         self.connect(self.Close,SIGNAL("clicked()"),self.CloseWindow)
-        self.currentItem = None
-        self.totalCost = 0
-        self.gemCosts = [0, 0, 0, 0]
         self.parent = parent
 
-    def loadItem(self, item):
-        self.currentItem = item
+    def loadgems(self, gems):
         materials = { 'Gems': { }, 'Dusts' : { }, 'Liquids' : { } }
         for slot in range(0, 4):
-            gemtype = item.slot(slot).type()
-            if gemtype == 'Unused' or item.slot(slot).slotType() != 'player':
-                self.GemRemakes[slot].hide()
-                self.GemDone[slot].hide()
-                self.GemTime[slot].hide()
-                self.GemCost[slot].hide()
-                self.GemName[slot].hide()
+            while slot < len(gems) and (gems[slot].type() == 'Unused' 
+                                     or gems[slot].slotType() != 'player'):
+                del gems[slot]
+        self.gems = gems
+        for slot in range(0, 4):
+            self.GemMakes[slot].setVisible(slot < len(gems))
+            self.GemTime[slot].setVisible(slot < len(gems))
+            self.GemCost[slot].setVisible(slot < len(gems))
+            self.GemName[slot].setVisible(slot < len(gems))
+
+            if slot >= len(gems):
                 continue
+
+            if (gems[slot].done() == '1'):
+                nummakes = int(gems[slot].remakes()) + 1
+            else:
+                nummakes = 0
+            self.GemMakes[slot].setValue(nummakes)
+
+            self.GemName[slot].setText(gems[slot].gemName(self.parent.realm))
+
+            gemamount = gems[slot].amount()
             
-            if item.slot(slot).done() == '1':
-                self.GemDone[slot].setChecked(1)
-
-            numremakes = int(item.slot(slot).remakes())
-            self.GemRemakes[slot].setValue(numremakes)
-            self.GemName[slot].setText(item.slot(slot).gemName(self.parent.realm))
-
-            gemamount = item.slot(slot).amount()
+            self.GemTime[slot].setText(gems[slot].time())
+            self.GemCost[slot].setText(SC.formatCost(gems[slot].gemCost()))
             
-            self.gemCosts[slot] = item.slot(slot).gemCost(numremakes)
-            self.totalCost += self.gemCosts[slot]
-
-            self.GemTime[slot].setText(item.slot(slot).time())
-            self.GemCost[slot].setText(SC.formatCost(self.gemCosts[slot]))
-            
-            if item.slot(slot).done() == '1':
-                self.GemDone[slot].setChecked(1)
-
-            self.GemRemakes[slot].setValue(numremakes)
-            self.GemName[slot].setText(item.slot(slot).gemName(self.parent.realm))
-
-        self.TotalCost.setText(SC.formatCost(self.totalCost))
+            self.GemMakes[slot].setValue(nummakes)
+            self.GemName[slot].setText(gems[slot].gemName(self.parent.realm))
         self.computeMaterials()
 
     def computeMaterials(self):
         materials = { 'Used' : { 'Gems' : { }, 'Dusts' : {}, 'Liquids': {} },
             'Expected' : { 'Gems' : { }, 'Dusts' : {}, 'Liquids': {} } }
+        totalcost = 0
         for slot in range(0, 4):
-            numremakes = int(self.currentItem.slot(slot).remakes())
-            done = int(self.currentItem.slot(slot).done())
-            for mattype, matl in self.currentItem.slot(slot).gemMaterials(self.parent.realm).items():
+            if (slot >= len(self.gems)): continue
+            if (self.gems[slot].done() == '1'):
+                nummakes = int(self.gems[slot].remakes()) + 1
+            else:
+                nummakes = 0
+            totalcost += self.gems[slot].gemCost() * nummakes
+            for mattype, matl in self.gems[slot].gemMaterials(self.parent.realm).items():
                 for mat, val in matl.items():
-                    if materials['Used'][mattype].has_key(mat):
-                        materials['Used'][mattype][mat] += val * (numremakes + 1)
-                    else:
-                        materials['Used'][mattype][mat] = val * (numremakes + 1)
-                    if not done:
-                        if materials['Expected'][mattype].has_key(mat):
-                            materials['Expected'][mattype][mat] += val
+                    if (nummakes) > 0:
+                        if materials['Used'][mattype].has_key(mat):
+                            materials['Used'][mattype][mat] += val * nummakes
                         else:
-                            materials['Expected'][mattype][mat] = val
-        self.MatsUsed.clear()
-        self.MatsExpected.clear()
-        for mat, val in materials['Used']['Gems'].items():
-            self.MatsUsed.append("%d %s Gem" % (val, mat))
-        for mat, val in materials['Used']['Dusts'].items():
-            self.MatsUsed.append("%d %s" % (val, mat))
-        for mat, val in materials['Used']['Liquids'].items():
-            self.MatsUsed.append("%d %s" % (val, mat))
-        for mat, val in materials['Expected']['Gems'].items():
-            self.MatsExpected.append("%d %s Gem" % (val, mat))
-        for mat, val in materials['Expected']['Dusts'].items():
-            self.MatsExpected.append("%d %s" % (val, mat))
-        for mat, val in materials['Expected']['Liquids'].items():
-            self.MatsExpected.append("%d %s" % (val, mat))
-
-    def recomputeCosts(self, slotindex, val):
-        self.gemCosts[slotindex] = self.currentItem.slot(slotindex).gemCost(val)
-        self.GemCost[slotindex].setText(SC.formatCost(self.gemCosts[slotindex]))
-        self.totalCost = 0
-        for slot in range(0, 4):
-            self.totalCost += self.gemCosts[slot]
-        self.TotalCost.setText(SC.formatCost(self.totalCost))
-        
-    def GemClicked(self):
-        i = int(self.sender().objectName()[3]) - 1
-        if self.GemDone[i].isChecked():
-            done = '1'
-        else:
-            done = '0'
-        self.currentItem.slot(i).setDone(done)
-        self.computeMaterials()
-        self.recomputeCosts(i, int(self.currentItem.slot(i).remakes()))
+                            materials['Used'][mattype][mat] = val * nummakes
+                    if materials['Expected'][mattype].has_key(mat):
+                        materials['Expected'][mattype][mat] += val
+                    else:
+                        materials['Expected'][mattype][mat] = val
+        self.TotalCost.setText(SC.formatCost(totalcost))
+        for matctl, matlist in ((self.MatsUsed, materials['Used'],),
+                                (self.MatsExpected, materials['Expected'],),):
+            matctl.clear()
+            for mat in MaterialGems:
+                if (matlist['Gems'].has_key(mat)):
+                    matctl.append("%d %s Gem" % (matlist['Gems'][mat], mat))
+            for mattype in ('Liquids', 'Dusts',):
+                matsorted = list(matlist[mattype].items())
+                matsorted.sort()
+                for mat, val in matsorted:
+                    matctl.append("%d %s" % (val, mat))
 
     def RemakeChanged(self, val):
         i = int(self.sender().objectName()[3]) - 1
-        self.currentItem.slot(i).setRemakes(val)
-        self.recomputeCosts(i, val)
+        if val > 0:
+            self.gems[i].setDone('1')
+            self.gems[i].setRemakes(str(val - 1))
+        else:
+            self.gems[i].setDone('0')
+            self.gems[i].setRemakes('0')
         self.computeMaterials()
 
     def TimeChanged(self,a0):
         i = int(self.sender().objectName()[3]) - 1
-        self.currentItem.slot(i).setTime(self.GemTime[i].text())
+        self.gems[i].setTime(self.GemTime[i].text())
 
     def CloseWindow(self):
         self.done(1)

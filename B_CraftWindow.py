@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'CraftWindow.ui'
 #
-# Created: Fri Jan 19 03:10:27 2007
+# Created: Sun Jan 21 20:38:15 2007
 #      by: PyQt4 UI code generator 4.1
 #
 # WARNING! All changes made in this file will be lost!
@@ -48,9 +48,9 @@ class Ui_B_CraftWindow(object):
         self.Gem3Cost.setObjectName("Gem3Cost")
         self.gridlayout.addWidget(self.Gem3Cost,3,4,1,1)
 
-        self.Gem2Remakes = QtGui.QSpinBox(self.GroupBox1)
-        self.Gem2Remakes.setObjectName("Gem2Remakes")
-        self.gridlayout.addWidget(self.Gem2Remakes,2,2,1,1)
+        self.Gem2Makes = QtGui.QSpinBox(self.GroupBox1)
+        self.Gem2Makes.setObjectName("Gem2Makes")
+        self.gridlayout.addWidget(self.Gem2Makes,2,2,1,1)
 
         self.Gem4Time = QtGui.QLineEdit(self.GroupBox1)
 
@@ -62,15 +62,15 @@ class Ui_B_CraftWindow(object):
         self.Gem4Time.setObjectName("Gem4Time")
         self.gridlayout.addWidget(self.Gem4Time,4,3,1,1)
 
-        self.Gem1Remakes = QtGui.QSpinBox(self.GroupBox1)
+        self.Gem1Makes = QtGui.QSpinBox(self.GroupBox1)
 
         sizePolicy = QtGui.QSizePolicy(QtGui.QSizePolicy.Policy(1),QtGui.QSizePolicy.Policy(4))
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(0)
-        sizePolicy.setHeightForWidth(self.Gem1Remakes.sizePolicy().hasHeightForWidth())
-        self.Gem1Remakes.setSizePolicy(sizePolicy)
-        self.Gem1Remakes.setObjectName("Gem1Remakes")
-        self.gridlayout.addWidget(self.Gem1Remakes,1,2,1,1)
+        sizePolicy.setHeightForWidth(self.Gem1Makes.sizePolicy().hasHeightForWidth())
+        self.Gem1Makes.setSizePolicy(sizePolicy)
+        self.Gem1Makes.setObjectName("Gem1Makes")
+        self.gridlayout.addWidget(self.Gem1Makes,1,2,1,1)
 
         self.Gem4Name = QtGui.QLabel(self.GroupBox1)
 
@@ -98,13 +98,13 @@ class Ui_B_CraftWindow(object):
         self.Gem4Cost.setObjectName("Gem4Cost")
         self.gridlayout.addWidget(self.Gem4Cost,4,4,1,1)
 
-        self.Gem4Remakes = QtGui.QSpinBox(self.GroupBox1)
-        self.Gem4Remakes.setObjectName("Gem4Remakes")
-        self.gridlayout.addWidget(self.Gem4Remakes,4,2,1,1)
+        self.Gem4Makes = QtGui.QSpinBox(self.GroupBox1)
+        self.Gem4Makes.setObjectName("Gem4Makes")
+        self.gridlayout.addWidget(self.Gem4Makes,4,2,1,1)
 
-        self.Gem3Remakes = QtGui.QSpinBox(self.GroupBox1)
-        self.Gem3Remakes.setObjectName("Gem3Remakes")
-        self.gridlayout.addWidget(self.Gem3Remakes,3,2,1,1)
+        self.Gem3Makes = QtGui.QSpinBox(self.GroupBox1)
+        self.Gem3Makes.setObjectName("Gem3Makes")
+        self.gridlayout.addWidget(self.Gem3Makes,3,2,1,1)
 
         self.Gem2Name = QtGui.QLabel(self.GroupBox1)
 
@@ -115,10 +115,6 @@ class Ui_B_CraftWindow(object):
         self.Gem2Name.setSizePolicy(sizePolicy)
         self.Gem2Name.setObjectName("Gem2Name")
         self.gridlayout.addWidget(self.Gem2Name,2,1,1,1)
-
-        self.Gem3Done = QtGui.QCheckBox(self.GroupBox1)
-        self.Gem3Done.setObjectName("Gem3Done")
-        self.gridlayout.addWidget(self.Gem3Done,3,0,1,1)
 
         self.Gem2Cost = QtGui.QLabel(self.GroupBox1)
         self.Gem2Cost.setAlignment(QtCore.Qt.AlignLeading|QtCore.Qt.AlignLeft|QtCore.Qt.AlignVCenter)
@@ -143,10 +139,6 @@ class Ui_B_CraftWindow(object):
         self.Gem1Name.setObjectName("Gem1Name")
         self.gridlayout.addWidget(self.Gem1Name,1,1,1,1)
 
-        self.Gem4Done = QtGui.QCheckBox(self.GroupBox1)
-        self.Gem4Done.setObjectName("Gem4Done")
-        self.gridlayout.addWidget(self.Gem4Done,4,0,1,1)
-
         self.Gem3Time = QtGui.QLineEdit(self.GroupBox1)
 
         sizePolicy = QtGui.QSizePolicy(QtGui.QSizePolicy.Policy(4),QtGui.QSizePolicy.Policy(0))
@@ -167,16 +159,6 @@ class Ui_B_CraftWindow(object):
         self.Gem1Time.setObjectName("Gem1Time")
         self.gridlayout.addWidget(self.Gem1Time,1,3,1,1)
 
-        self.Gem1Done = QtGui.QCheckBox(self.GroupBox1)
-
-        sizePolicy = QtGui.QSizePolicy(QtGui.QSizePolicy.Policy(1),QtGui.QSizePolicy.Policy(4))
-        sizePolicy.setHorizontalStretch(0)
-        sizePolicy.setVerticalStretch(0)
-        sizePolicy.setHeightForWidth(self.Gem1Done.sizePolicy().hasHeightForWidth())
-        self.Gem1Done.setSizePolicy(sizePolicy)
-        self.Gem1Done.setObjectName("Gem1Done")
-        self.gridlayout.addWidget(self.Gem1Done,1,0,1,1)
-
         self.Gem2Time = QtGui.QLineEdit(self.GroupBox1)
 
         sizePolicy = QtGui.QSizePolicy(QtGui.QSizePolicy.Policy(4),QtGui.QSizePolicy.Policy(0))
@@ -186,14 +168,6 @@ class Ui_B_CraftWindow(object):
         self.Gem2Time.setSizePolicy(sizePolicy)
         self.Gem2Time.setObjectName("Gem2Time")
         self.gridlayout.addWidget(self.Gem2Time,2,3,1,1)
-
-        self.TextLabel1 = QtGui.QLabel(self.GroupBox1)
-        self.TextLabel1.setObjectName("TextLabel1")
-        self.gridlayout.addWidget(self.TextLabel1,0,0,1,1)
-
-        self.Gem2Done = QtGui.QCheckBox(self.GroupBox1)
-        self.Gem2Done.setObjectName("Gem2Done")
-        self.gridlayout.addWidget(self.Gem2Done,2,0,1,1)
 
         self.TextLabel2 = QtGui.QLabel(self.GroupBox1)
 
@@ -225,13 +199,26 @@ class Ui_B_CraftWindow(object):
         self.hboxlayout1.setSpacing(6)
         self.hboxlayout1.setObjectName("hboxlayout1")
 
-        self.GroupBox2_2_2 = QtGui.QGroupBox(self.GroupBox1)
-        self.GroupBox2_2_2.setObjectName("GroupBox2_2_2")
+        self.GroupBox2_2 = QtGui.QGroupBox(self.GroupBox1)
+        self.GroupBox2_2.setObjectName("GroupBox2_2")
 
-        self.vboxlayout3 = QtGui.QVBoxLayout(self.GroupBox2_2_2)
+        self.vboxlayout3 = QtGui.QVBoxLayout(self.GroupBox2_2)
         self.vboxlayout3.setMargin(9)
         self.vboxlayout3.setSpacing(6)
         self.vboxlayout3.setObjectName("vboxlayout3")
+
+        self.MatsUsed = QtGui.QTextEdit(self.GroupBox2_2)
+        self.MatsUsed.setObjectName("MatsUsed")
+        self.vboxlayout3.addWidget(self.MatsUsed)
+        self.hboxlayout1.addWidget(self.GroupBox2_2)
+
+        self.GroupBox2_2_2 = QtGui.QGroupBox(self.GroupBox1)
+        self.GroupBox2_2_2.setObjectName("GroupBox2_2_2")
+
+        self.vboxlayout4 = QtGui.QVBoxLayout(self.GroupBox2_2_2)
+        self.vboxlayout4.setMargin(9)
+        self.vboxlayout4.setSpacing(6)
+        self.vboxlayout4.setObjectName("vboxlayout4")
 
         self.MatsExpected = QtGui.QTextEdit(self.GroupBox2_2_2)
 
@@ -241,21 +228,8 @@ class Ui_B_CraftWindow(object):
         sizePolicy.setHeightForWidth(self.MatsExpected.sizePolicy().hasHeightForWidth())
         self.MatsExpected.setSizePolicy(sizePolicy)
         self.MatsExpected.setObjectName("MatsExpected")
-        self.vboxlayout3.addWidget(self.MatsExpected)
+        self.vboxlayout4.addWidget(self.MatsExpected)
         self.hboxlayout1.addWidget(self.GroupBox2_2_2)
-
-        self.GroupBox2_2 = QtGui.QGroupBox(self.GroupBox1)
-        self.GroupBox2_2.setObjectName("GroupBox2_2")
-
-        self.vboxlayout4 = QtGui.QVBoxLayout(self.GroupBox2_2)
-        self.vboxlayout4.setMargin(9)
-        self.vboxlayout4.setSpacing(6)
-        self.vboxlayout4.setObjectName("vboxlayout4")
-
-        self.MatsUsed = QtGui.QTextEdit(self.GroupBox2_2)
-        self.MatsUsed.setObjectName("MatsUsed")
-        self.vboxlayout4.addWidget(self.MatsUsed)
-        self.hboxlayout1.addWidget(self.GroupBox2_2)
         self.vboxlayout2.addLayout(self.hboxlayout1)
         self.vboxlayout1.addLayout(self.vboxlayout2)
 
@@ -309,23 +283,18 @@ class Ui_B_CraftWindow(object):
         self.Gem1Cost.setText(QtGui.QApplication.translate("B_CraftWindow", "0c", None, QtGui.QApplication.UnicodeUTF8))
         self.Gem4Cost.setText(QtGui.QApplication.translate("B_CraftWindow", "0c", None, QtGui.QApplication.UnicodeUTF8))
         self.Gem2Name.setText(QtGui.QApplication.translate("B_CraftWindow", "None", None, QtGui.QApplication.UnicodeUTF8))
-        self.Gem3Done.setText(QtGui.QApplication.translate("B_CraftWindow", "Gem 3:", None, QtGui.QApplication.UnicodeUTF8))
         self.Gem2Cost.setText(QtGui.QApplication.translate("B_CraftWindow", "0c", None, QtGui.QApplication.UnicodeUTF8))
         self.TextLabel6.setText(QtGui.QApplication.translate("B_CraftWindow", "Time (m):", None, QtGui.QApplication.UnicodeUTF8))
-        self.TextLabel5.setText(QtGui.QApplication.translate("B_CraftWindow", "Remakes:", None, QtGui.QApplication.UnicodeUTF8))
+        self.TextLabel5.setText(QtGui.QApplication.translate("B_CraftWindow", "Makes:", None, QtGui.QApplication.UnicodeUTF8))
         self.Gem1Name.setText(QtGui.QApplication.translate("B_CraftWindow", "None", None, QtGui.QApplication.UnicodeUTF8))
-        self.Gem4Done.setText(QtGui.QApplication.translate("B_CraftWindow", "Gem 4:", None, QtGui.QApplication.UnicodeUTF8))
         self.Gem3Time.setText(QtGui.QApplication.translate("B_CraftWindow", "0", None, QtGui.QApplication.UnicodeUTF8))
         self.Gem1Time.setText(QtGui.QApplication.translate("B_CraftWindow", "0", None, QtGui.QApplication.UnicodeUTF8))
-        self.Gem1Done.setText(QtGui.QApplication.translate("B_CraftWindow", "Gem 1:", None, QtGui.QApplication.UnicodeUTF8))
         self.Gem2Time.setText(QtGui.QApplication.translate("B_CraftWindow", "0", None, QtGui.QApplication.UnicodeUTF8))
-        self.TextLabel1.setText(QtGui.QApplication.translate("B_CraftWindow", "Done:", None, QtGui.QApplication.UnicodeUTF8))
-        self.Gem2Done.setText(QtGui.QApplication.translate("B_CraftWindow", "Gem 2:", None, QtGui.QApplication.UnicodeUTF8))
         self.TextLabel2.setText(QtGui.QApplication.translate("B_CraftWindow", "Name:", None, QtGui.QApplication.UnicodeUTF8))
         self.Gem3Name.setText(QtGui.QApplication.translate("B_CraftWindow", "None", None, QtGui.QApplication.UnicodeUTF8))
         self.TextLabel7.setText(QtGui.QApplication.translate("B_CraftWindow", "Cost:", None, QtGui.QApplication.UnicodeUTF8))
-        self.GroupBox2_2_2.setTitle(QtGui.QApplication.translate("B_CraftWindow", "Materials (expected)", None, QtGui.QApplication.UnicodeUTF8))
         self.GroupBox2_2.setTitle(QtGui.QApplication.translate("B_CraftWindow", "Materials (used)", None, QtGui.QApplication.UnicodeUTF8))
+        self.GroupBox2_2_2.setTitle(QtGui.QApplication.translate("B_CraftWindow", "Materials (one make)", None, QtGui.QApplication.UnicodeUTF8))
         self.TextLabel8.setText(QtGui.QApplication.translate("B_CraftWindow", "Total Cost:", None, QtGui.QApplication.UnicodeUTF8))
         self.TotalCost.setText(QtGui.QApplication.translate("B_CraftWindow", "0c", None, QtGui.QApplication.UnicodeUTF8))
         self.Close.setText(QtGui.QApplication.translate("B_CraftWindow", "Close", None, QtGui.QApplication.UnicodeUTF8))

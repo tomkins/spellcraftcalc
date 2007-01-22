@@ -2035,7 +2035,18 @@ class ScWindow(QMainWindow, Ui_B_SC):
 
     def openCraftWindow(self):
         CW = CraftWindow.CraftWindow(self, '', 1)
-        CW.loadItem(self.itemattrlist[self.currentTabLabel])
+        CW.loadgems(list(self.itemattrlist[self.currentTabLabel].slots()))
+        CW.exec_()
+        self.restoreItem(self.itemattrlist[self.currentTabLabel])
+        self.modified = 1
+
+    def gemClicked(self, item, slot):
+        #RW = ReportWindow.ReportWindow(self, '', True)
+        #RW.setWindowTitle('Materials')
+        #RW.materialsReport({item: self.itemattrlist[item]}, slot)
+        #RW.exec_()
+        CW = CraftWindow.CraftWindow(self, '', 1)
+        CW.loadgems([self.itemattrlist[self.currentTabLabel].slot(slot - 1)],)
         CW.exec_()
         self.restoreItem(self.itemattrlist[self.currentTabLabel])
         self.modified = 1
@@ -2117,12 +2128,6 @@ class ScWindow(QMainWindow, Ui_B_SC):
             DW.setWindowTitle('Slots With %s' % find)
         DW.loadLocations(locs)
         DW.exec_()
-
-    def gemClicked(self, item, slot):
-        RW = ReportWindow.ReportWindow(self, '', True)
-        RW.setWindowTitle('Materials')
-        RW.materialsReport({item: self.itemattrlist[item]}, slot)
-        RW.exec_()
 
     def mousePressEvent(self, e):
         if e is None: return
