@@ -75,9 +75,6 @@ class ScApplication(QApplication):
             #font.setStyleHint(QFont.SansSerif, QFont.PreferQuality)
         self.setFont(font)
 
-        ScOptions()
-        ScOptions.instance().load()
-
         scw = ScWindow.ScWindow()
         app.setActiveWindow(scw)
         scw.setWindowIcon(QIcon(":/images/ScWindow.png"))

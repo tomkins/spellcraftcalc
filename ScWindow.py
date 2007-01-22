@@ -83,6 +83,9 @@ class AboutScreen(QDialog):
 
 class ScWindow(QMainWindow, Ui_B_SC):
     def __init__(self):
+        ScOptions()
+        ScOptions.instance().load()
+
         self.splashFile = None
         self.newcount = 0
         self.startup = 1
