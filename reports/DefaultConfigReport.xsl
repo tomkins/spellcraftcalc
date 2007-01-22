@@ -94,8 +94,16 @@
 	<dt>
 	  <xsl:text>Imbue Points: </xsl:text><xsl:value-of select="Imbue"/>
 	  <xsl:text> of </xsl:text><xsl:value-of select="ItemImbue"/>
-	  <xsl:text> &#160; Quality: </xsl:text><xsl:value-of select="ItemQuality"/>
-	  <xsl:text> &#160; Overcharge: </xsl:text><xsl:value-of select="Overcharge"/>
+	  <!--<xsl:text> &#160; Quality: </xsl:text><xsl:value-of select="ItemQuality"/>-->
+	  <xsl:text> &#160; Overcharge: </xsl:text>
+      <xsl:choose>
+	    <xsl:when test="(Imbue - ItemImbue) &lt; 0">
+	      <xsl:text>0</xsl:text>
+	    </xsl:when>
+	    <xsl:otherwise>
+		  <xsl:value-of select="Imbue - ItemImbue"/>
+		</xsl:otherwise>
+	  </xsl:choose>
 	</dt>
       </xsl:if>
       <dt>
