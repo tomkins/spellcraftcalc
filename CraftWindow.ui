@@ -69,7 +69,7 @@
              </widget>
             </item>
             <item row="2" column="2" >
-             <widget class="QSpinBox" name="Gem2Remakes" />
+             <widget class="QSpinBox" name="Gem2Makes" />
             </item>
             <item row="4" column="3" >
              <widget class="QLineEdit" name="Gem4Time" >
@@ -87,7 +87,7 @@
              </widget>
             </item>
             <item row="1" column="2" >
-             <widget class="QSpinBox" name="Gem1Remakes" >
+             <widget class="QSpinBox" name="Gem1Makes" >
               <property name="sizePolicy" >
                <sizepolicy>
                 <hsizetype>1</hsizetype>
@@ -142,10 +142,10 @@
              </widget>
             </item>
             <item row="4" column="2" >
-             <widget class="QSpinBox" name="Gem4Remakes" />
+             <widget class="QSpinBox" name="Gem4Makes" />
             </item>
             <item row="3" column="2" >
-             <widget class="QSpinBox" name="Gem3Remakes" />
+             <widget class="QSpinBox" name="Gem3Makes" />
             </item>
             <item row="2" column="1" >
              <widget class="QLabel" name="Gem2Name" >
@@ -159,13 +159,6 @@
               </property>
               <property name="text" >
                <string>None</string>
-              </property>
-             </widget>
-            </item>
-            <item row="3" column="0" >
-             <widget class="QCheckBox" name="Gem3Done" >
-              <property name="text" >
-               <string>Gem 3:</string>
               </property>
              </widget>
             </item>
@@ -189,7 +182,7 @@
             <item row="0" column="2" >
              <widget class="QLabel" name="TextLabel5" >
               <property name="text" >
-               <string>Remakes:</string>
+               <string>Makes:</string>
               </property>
              </widget>
             </item>
@@ -205,13 +198,6 @@
               </property>
               <property name="text" >
                <string>None</string>
-              </property>
-             </widget>
-            </item>
-            <item row="4" column="0" >
-             <widget class="QCheckBox" name="Gem4Done" >
-              <property name="text" >
-               <string>Gem 4:</string>
               </property>
              </widget>
             </item>
@@ -245,21 +231,6 @@
               </property>
              </widget>
             </item>
-            <item row="1" column="0" >
-             <widget class="QCheckBox" name="Gem1Done" >
-              <property name="sizePolicy" >
-               <sizepolicy>
-                <hsizetype>1</hsizetype>
-                <vsizetype>4</vsizetype>
-                <horstretch>0</horstretch>
-                <verstretch>0</verstretch>
-               </sizepolicy>
-              </property>
-              <property name="text" >
-               <string>Gem 1:</string>
-              </property>
-             </widget>
-            </item>
             <item row="2" column="3" >
              <widget class="QLineEdit" name="Gem2Time" >
               <property name="sizePolicy" >
@@ -272,20 +243,6 @@
               </property>
               <property name="text" >
                <string>0</string>
-              </property>
-             </widget>
-            </item>
-            <item row="0" column="0" >
-             <widget class="QLabel" name="TextLabel1" >
-              <property name="text" >
-               <string>Done:</string>
-              </property>
-             </widget>
-            </item>
-            <item row="2" column="0" >
-             <widget class="QCheckBox" name="Gem2Done" >
-              <property name="text" >
-               <string>Gem 2:</string>
               </property>
              </widget>
             </item>
@@ -337,9 +294,27 @@
              <number>6</number>
             </property>
             <item>
+             <widget class="QGroupBox" name="GroupBox2_2" >
+              <property name="title" >
+               <string>Materials (used)</string>
+              </property>
+              <layout class="QVBoxLayout" >
+               <property name="margin" >
+                <number>9</number>
+               </property>
+               <property name="spacing" >
+                <number>6</number>
+               </property>
+               <item>
+                <widget class="QTextEdit" name="MatsUsed" />
+               </item>
+              </layout>
+             </widget>
+            </item>
+            <item>
              <widget class="QGroupBox" name="GroupBox2_2_2" >
               <property name="title" >
-               <string>Materials (expected)</string>
+               <string>Materials (one make)</string>
               </property>
               <layout class="QVBoxLayout" >
                <property name="margin" >
@@ -359,24 +334,6 @@
                   </sizepolicy>
                  </property>
                 </widget>
-               </item>
-              </layout>
-             </widget>
-            </item>
-            <item>
-             <widget class="QGroupBox" name="GroupBox2_2" >
-              <property name="title" >
-               <string>Materials (used)</string>
-              </property>
-              <layout class="QVBoxLayout" >
-               <property name="margin" >
-                <number>9</number>
-               </property>
-               <property name="spacing" >
-                <number>6</number>
-               </property>
-               <item>
-                <widget class="QTextEdit" name="MatsUsed" />
                </item>
               </layout>
              </widget>
