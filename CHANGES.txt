@@ -2,10 +2,22 @@ Updated ??/??/???? - Version 1.96 - Patch 1.87 SC Overhaul
 
   Removed Quality factor entirely from gems.
 
+  Change the concept of tracking 'remakes' to tracking 'makes',
+  where zero makes is anticipated to become onn make, and one 
+  or more makes are the actual number of gems that were imbued
+  (replaced one-by-one as the crafter goes Kaboom.)  The classic
+  'expected multiplier' goes away because the SC'er doesn't know
+  exactly when they will go Kaboom, and will replace only one
+  gem if they planned ahead - imbued three with no overcharge,
+  and holds off the overcharged gem so only one gem explodes.
+
   Hide acuity-type stats that don't apply to the class when zero,
   and display "ACU" for classes with no acuity stat.
 
   Track makes on the main item info pane (where Quality used to be).
+
+  Save the last View -> Toolbar preference and the toolbar's current 
+  location (top/bottom/left/right) from session to session.
 
   Total all remade gem costs by item and in grand total, this was 
   broken in 1.93.
