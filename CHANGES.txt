@@ -19,6 +19,9 @@ Updated ??/??/???? - Version 1.96 - Patch 1.87 SC Overhaul
   Save the last View -> Toolbar preference and the toolbar's current 
   location (top/bottom/left/right) from session to session.
 
+  Fix export gems so all Spellcrafting toons show up, it choked
+  on antique -###.ini toons when ### was an unknown server number.
+
   Total all remade gem costs by item and in grand total, this was 
   broken in 1.93.
 
