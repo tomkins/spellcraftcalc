@@ -28,6 +28,8 @@ class ScOptions(Singleton):
         return defaultValue
 
     def setOption(self, name, val):
+        if isinstance(val, str):
+            val = unicode(val)
         self.__options[name] = val
 
     def asXML(self):
