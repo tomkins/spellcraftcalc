@@ -234,7 +234,7 @@ class CraftBar(QDialog, Ui_B_CraftBar):
             filelist = glob.glob(a0+'/*-*.ini')
             for file in filelist:
                 m = reini.search(file)
-                if m is None:
+                if m is None or not ServerCodes.has_key(m.group(2)):
                     continue
                 # search the section(s) for the pattern
                 # [Quickbar[2-3]*]
