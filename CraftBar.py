@@ -127,7 +127,7 @@ class CraftBar(QDialog, Ui_B_CraftBar):
         self.HotbarNum.setValue(1)
         self.HotbarRow.setValue(1)
         self.HotbarPos.setValue(1)
-        self.DaocPath.setText(ScOptions.instance().getOption('DaocPath', ''))
+        self.DaocPath.setText(ScOptions.instance().getOption('DaocPath', u''))
         self.PieceBoxChanged()
         self.computeGemCount()
         self.computeBarEnd()
@@ -269,8 +269,8 @@ class CraftBar(QDialog, Ui_B_CraftBar):
 
     def openFileDialog(self):
         daocdir = QFileDialog.getExistingDirectory(self, 'Select DAoC Directory', self.DaocPath.text())
-        if (daocdir):
-            self.DaocPath.setText(os.path.abspath(daocdir))
+        if daocdir:
+            self.DaocPath.setText(os.path.abspath(str(daocdir)))
 
     def computeBarEnd(self):
         pos = (self.HotbarNum.value() - 1) * 100 \
