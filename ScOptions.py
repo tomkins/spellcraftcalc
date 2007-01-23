@@ -18,6 +18,8 @@ class ScOptions(Singleton):
         self.__options = {}
 
     def getOption(self, name, defaultValue):
+        if isinstance(defaultValue, str):
+            defaultValue = unicode(defaultValue)
         if self.__options.has_key(name) and \
                 (isinstance(self.__options[name], type(defaultValue)) or \
                 defaultValue is None):

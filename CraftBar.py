@@ -127,7 +127,7 @@ class CraftBar(QDialog, Ui_B_CraftBar):
         self.HotbarNum.setValue(1)
         self.HotbarRow.setValue(1)
         self.HotbarPos.setValue(1)
-        self.DaocPath.setText(ScOptions.instance().getOption('DaocPath', u''))
+        self.DaocPath.setText(ScOptions.instance().getOption('DaocPath', ''))
         self.PieceBoxChanged()
         self.computeGemCount()
         self.computeBarEnd()
