@@ -1149,6 +1149,7 @@ FixEffectsTable = d2({
     'Casting Range' :          'Spell Range',
     'Casting Speed Bonus' :    'Casting Speed',
     'Debuff Bonus' :           'Stat Debuff Effectiveness',
+    'Defensive Bonus' :        'Defensive',
     'Healing Bonus' :          'Healing Effectiveness',
     'Spell Damage Bonus' :     'Spell Damage',
     'Magic Damage' :           'Spell Damage',
