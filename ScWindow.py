@@ -1633,27 +1633,17 @@ class ScWindow(QMainWindow, Ui_B_SC):
         QApplication.postEvent(self, UpdateTypeListEvent(slot))
         
     def clearCurrentItem(self):
-        item = Item(realm=self.realm,loc=self.currentTabLabel,
-                    state=self.itemattrlist[self.currentTabLabel].ActiveState,
-                    idx=self.itemIndex)
-        if item.ActiveState == 'drop':
-            item.ItemName = "Drop Item" + str(self.itemnumbering)
-        else:
-            item.ItemName = "Crafted Item" + str(self.itemnumbering)
-        self.itemattrlist[self.currentTabLabel] = item
-        self.itemIndex += 1
-        self.itemnumbering += 1
-
-        if item.ActiveState == 'drop':
-            item.next = Item(realm=self.realm, loc=self.currentTabLabel,
-                             state='player', idx=self.itemIndex)
-            item.next.ItemName = "Crafted Item" + str(self.itemnumbering)
-        else:
-            item.next = Item(realm=self.realm, loc=self.currentTabLabel,
-                             state='drop', idx=self.itemIndex)
-            item.next.ItemName = "Drop Item" + str(self.itemnumbering)
-        self.itemIndex += 1
-        self.itemnumbering += 1
+        self.itemattrlist[self.currentTabLabel].clear()
+        #item = Item(realm=self.realm,loc=self.currentTabLabel,
+        #            state=self.itemattrlist[self.currentTabLabel].ActiveState,
+        #            idx=self.itemIndex)
+        #if item.ActiveState == 'drop':
+        #    item.ItemName = "Drop Item" + str(self.itemnumbering)
+        #else:
+        #    item.ItemName = "Crafted Item" + str(self.itemnumbering)
+        #self.itemattrlist[self.currentTabLabel] = item
+        #self.itemIndex += 1
+        #self.itemnumbering += 1
         if self.nocalc: return
         self.modified = 1
         self.restoreItem(self.itemattrlist[self.currentTabLabel])
