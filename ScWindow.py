@@ -548,8 +548,8 @@ class ScWindow(QMainWindow, Ui_B_SC):
                                self.openMaterialsReport)
         self.viewmenu.addAction('&Configuration Report', self.openConfigReport,
                                 QKeySequence(Qt.ALT+Qt.Key_C))
-        self.toolbar.addAction(self.getIcon('ConfReport'), 'Config Report',
-                               self.openMaterialsReport)
+        self.toolbar.addAction(self.getIcon('ConfReport'), 'Configuration Report',
+                               self.openConfigReport)
         self.viewmenu.addAction('Choose Config Template...',
                                 self.chooseReportFile)
 
