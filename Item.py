@@ -17,23 +17,20 @@ import SC
 
 class ItemSlot:
     def __init__(self, slottype='player', type='Unused', amount='0', effect='',
-                 time='0', remakes='0', done='0', requirement=''):
+                 requirement='', time='0', makes='0'):
         self.__dict__ = { 
             'SlotType' : unicode(slottype),
             'Type': '', 'Effect' : '', 'Amount' : '', 'Requirement' : '',
-            'Time' : '',   'Remakes' : '', 'Done' : '', }
-        self.setAll(type, amount, effect, time, remakes, done, requirement)
+            'Time' : '',   'Makes' : '', }
+        self.setAll(type, amount, effect, requirement, time, makes)
 
     def setAll(self, type='Unused', amount='0', effect='',
-               time='0', remakes='0', done='0',
-               requirement=''):
+               requirement='', time='0', makes='0'):
         self.Type = unicode(type)
         self.Amount = unicode(amount)
         self.Effect = unicode(effect)
-        #self.Qua = '94' # leave as a noop-placeholder?
         self.Time = unicode(time)
-        self.Remakes = unicode(remakes)
-        self.Done = unicode(done)
+        self.Makes = unicode(makes)
         self.Requirement = unicode(requirement)
         self.fixEffect()
         self.CraftOk = False
@@ -96,17 +93,11 @@ class ItemSlot:
         if time == '': time = '0'
         self.Time = unicode(time)
 
-    def remakes(self):
-        return self.Remakes
-    def setRemakes(self, remakes):
-        if remakes == '': remakes = '0'
-        self.Remakes = unicode(remakes)
-
-    def done(self):
-        return self.Done
-    def setDone(self, done):
-        if done == '': done = '0'
-        self.Done = unicode(done)
+    def makes(self):
+        return self.Makes
+    def setMakes(self, makes):
+        if makes == '': makes = '0'
+        self.Makes = unicode(makes)
 
     def crafted(self):
         if self.CraftOk: return True
@@ -229,18 +220,16 @@ class ItemSlot:
             ret['Liquids'][gemliquid] = gemindex + 1
         return ret
 
-    def gemRemakes(self):
-        remakes = int(self.Remakes)
-        return remakes
+    def gemMakes(self):
+        makes = int(self.Makes)
+        if makes == 0: makes = 1
+        return makes
 
-    def gemCost(self, remakes=0):
+    def gemCost(self, makes=1):
         if not self.crafted():
             return 0
-        if remakes < 0:
-            if self.done() == "1":
-                remakes = self.gemRemakes()
-            else:
-                remakes = 0
+        if makes <= 0:
+            makes = self.gemMakes()
         costindex = self.gemLevel() - 1
         cost = GemCosts[costindex]
         if self.Effect[0:4] == 'All ':
@@ -250,7 +239,7 @@ class ItemSlot:
                 cost += 200 + 180 * costindex
         elif self.Type == 'Resist' or self.Type == 'Focus':
             cost += 60 * costindex
-        cost += cost * remakes
+        cost = cost * makes
         return cost
 
     def gemPrice(self, pricingInfo, tries=0):
@@ -280,9 +269,8 @@ class ItemSlot:
                        (u'Amount', self.Amount,)]
             if self.SlotType == 'player':
                 savexml.extend([
-                       (u'Remakes', self.Remakes,), 
-                       (u'Time', self.Time,), 
-                       (u'Done', self.Done,)])
+                       (u'Makes', self.Makes,), 
+                       (u'Time', self.Time,)])
             if rich:
                 if self.crafted():
                     savexml.extend([

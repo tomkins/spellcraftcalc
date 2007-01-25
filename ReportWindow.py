@@ -56,7 +56,7 @@ class ReportWindow(QDialog, Ui_B_ReportWindow):
             for slot in item.slots():
 		if slot.slotType() != 'player':
                     continue
-                if slot.done() == '1' \
+                if int(slot.makes()) > 0 \
                         and showslot == 0 \
                         and self.parent.showDoneInMatsList:
                     continue

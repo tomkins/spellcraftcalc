@@ -1036,10 +1036,7 @@ class ScWindow(QMainWindow, Ui_B_SC):
                 else:
                     self.AmountDrop[slot].setCurrentIndex(amount)
             if itemtype == 'player' and item.slot(slot).slotType() == 'player':
-                if (item.slot(slot).done() == '1'):
-                    self.Makes[slot].setValue(int(item.slot(slot).remakes()) + 1)
-                else:
-                    self.Makes[slot].setValue(0)
+                self.Makes[slot].setValue(int(item.slot(slot).makes()))
             else:
                 self.Requirement[slot].setText(item.slot(slot).requirement())
         self.AFDPS_Edit.setText(item.AFDPS)
@@ -1493,12 +1490,7 @@ class ScWindow(QMainWindow, Ui_B_SC):
         else:
             item.slot(slot).setAmount(self.AmountEdit[slot].text())
         if item.slot(slot).slotType() == 'player':
-            if (self.Makes[slot].value() > 0):
-                item.slot(slot).setDone('1')
-                item.slot(slot).setRemakes(str(self.Makes[slot].value() - 1))
-            else:
-                item.slot(slot).setDone('0')
-                item.slot(slot).setRemakes('0')
+            item.slot(slot).setMakes(str(self.Makes[slot].value()))
         else:
             item.slot(slot).setRequirement(self.Requirement[slot].text())
         self.modified = 1

@@ -52,20 +52,9 @@ class CraftWindow(QDialog, Ui_B_CraftWindow):
             if slot >= len(gems):
                 continue
 
-            if (gems[slot].done() == '1'):
-                nummakes = int(gems[slot].remakes()) + 1
-            else:
-                nummakes = 0
-            self.GemMakes[slot].setValue(nummakes)
-
-            self.GemName[slot].setText(gems[slot].gemName(self.parent.realm))
-
-            gemamount = gems[slot].amount()
-            
+            self.GemMakes[slot].setValue(int(gems[slot].makes()))
             self.GemTime[slot].setText(gems[slot].time())
             self.GemCost[slot].setText(SC.formatCost(gems[slot].gemCost()))
-            
-            self.GemMakes[slot].setValue(nummakes)
             self.GemName[slot].setText(gems[slot].gemName(self.parent.realm))
         self.computeMaterials()
 
@@ -75,14 +64,11 @@ class CraftWindow(QDialog, Ui_B_CraftWindow):
         totalcost = 0
         for slot in range(0, 4):
             if (slot >= len(self.gems)): continue
-            if (self.gems[slot].done() == '1'):
-                nummakes = int(self.gems[slot].remakes()) + 1
-            else:
-                nummakes = 0
-            totalcost += self.gems[slot].gemCost() * nummakes
+            totalcost += self.gems[slot].gemCost()
             for mattype, matl in self.gems[slot].gemMaterials(self.parent.realm).items():
                 for mat, val in matl.items():
-                    if (nummakes) > 0:
+                    nummakes = int(self.gems[slot].makes())
+                    if nummakes > 0:
                         if materials['Used'][mattype].has_key(mat):
                             materials['Used'][mattype][mat] += val * nummakes
                         else:
@@ -106,12 +92,7 @@ class CraftWindow(QDialog, Ui_B_CraftWindow):
 
     def RemakeChanged(self, val):
         i = int(self.sender().objectName()[3]) - 1
-        if val > 0:
-            self.gems[i].setDone('1')
-            self.gems[i].setRemakes(str(val - 1))
-        else:
-            self.gems[i].setDone('0')
-            self.gems[i].setRemakes('0')
+        self.gems[i].setMakes(str(val))
         self.computeMaterials()
 
     def TimeChanged(self,a0):
