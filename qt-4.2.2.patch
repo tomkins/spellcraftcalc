@@ -1,0 +1,132 @@
+diff -dur qt-win-opensource-src-4.2.2/src/corelib/io/qfileinfo.cpp qt-win-opensource-src-4.2.2-new/src/corelib/io/qfileinfo.cpp
+--- qt-win-opensource-src-4.2.2/src/corelib/io/qfileinfo.cpp	2006-11-27 09:11:12.000000000 -0800
++++ qt-win-opensource-src-4.2.2-new/src/corelib/io/qfileinfo.cpp	2007-01-24 21:45:25.000000000 -0800
+@@ -50,7 +50,7 @@
+     QDateTime &getFileTime(QAbstractFileEngine::FileTime) const;
+     QString getFileName(QAbstractFileEngine::FileName) const;
+ 
+-    enum { CachedFileFlags=0x01, CachedLinkTypeFlag=0x02,
++    enum { CachedFileFlags=0x01, CachedLinkTypeFlag=0x02, CachedRootFlag=0x04,
+            CachedMTime=0x10, CachedCTime=0x20, CachedATime=0x40,
+            CachedSize =0x08 };
+     struct Data {
+@@ -188,18 +188,8 @@
+     // interested in that information, we might as well avoid one extra syscall.
+ 
+     QAbstractFileEngine::FileFlags flags;
+-    if (!data->getCachedFlag(CachedFileFlags)) {
+-        QAbstractFileEngine::FileFlags req = QAbstractFileEngine::FileInfoAll;
+-        req &= (~QAbstractFileEngine::LinkType);
+-
+-        flags = data->fileEngine->fileFlags(req);
+-        data->setCachedFlag(CachedFileFlags);
+-        data->fileFlags |= uint(flags);
+-    } else {
+-        flags = QAbstractFileEngine::FileFlags(data->fileFlags & request);
+-    }
+ 
+-    if (request & QAbstractFileEngine::LinkType) {
++	if (request == QAbstractFileEngine::LinkType) {
+         if (!data->getCachedFlag(CachedLinkTypeFlag)) {
+             QAbstractFileEngine::FileFlags linkflag;
+             linkflag = data->fileEngine->fileFlags(QAbstractFileEngine::LinkType);
+@@ -207,10 +197,36 @@
+             data->setCachedFlag(CachedLinkTypeFlag);
+             data->fileFlags |= uint(linkflag);
+             flags |= linkflag;
++        } else {
++            flags |= QAbstractFileEngine::FileFlags(data->fileFlags & request);
++        }
++    }
++
++	if (request & QAbstractFileEngine::RootFlag) {
++        if (!data->getCachedFlag(CachedRootFlag)) {
++            QAbstractFileEngine::FileFlags rootflag;
++            rootflag = data->fileEngine->fileFlags(QAbstractFileEngine::RootFlag);
++
++            data->setCachedFlag(CachedRootFlag);
++            data->fileFlags |= uint(rootflag);
++            flags |= rootflag;
++        } else {
++            flags |= QAbstractFileEngine::FileFlags(data->fileFlags & request);
++        }
++    }
++
++    if (request & ~(QAbstractFileEngine::RootFlag | QAbstractFileEngine::LinkType)) {
++        if (!data->getCachedFlag(CachedFileFlags)) {
++            QAbstractFileEngine::FileFlags req = QAbstractFileEngine::FileInfoAll;
++            req &= (~(QAbstractFileEngine::LinkType | QAbstractFileEngine::RootFlag));
++
++            flags = data->fileEngine->fileFlags(req);
++            data->setCachedFlag(CachedFileFlags);
++            data->fileFlags |= uint(flags);
++        } else {
++            flags = QAbstractFileEngine::FileFlags(data->fileFlags & request);
+         }
+     }
+-    // no else branch
+-    // if we had it cached, it was caught in the previous else branch
+ 
+     return flags & request;
+ }
+diff -dur qt-win-opensource-src-4.2.2/src/corelib/io/qfsfileengine_win.cpp qt-win-opensource-src-4.2.2-new/src/corelib/io/qfsfileengine_win.cpp
+--- qt-win-opensource-src-4.2.2/src/corelib/io/qfsfileengine_win.cpp	2006-11-27 09:11:12.000000000 -0800
++++ qt-win-opensource-src-4.2.2-new/src/corelib/io/qfsfileengine_win.cpp	2007-01-24 22:09:03.000000000 -0800
+@@ -338,6 +338,23 @@
+     return false;
+ }
+ 
++static bool isDrive(const QString &path)
++{
++    if (!path.length())
++        return false;
++    return path.at(0).isLetter() && path.mid(1,path.length()) == ":/";
++}
++
++static bool driveExists(const QString &path)
++{
++    if (!isDrive(path))
++        return false;
++
++    DWORD drivesBitmask = ::GetLogicalDrives();
++    int drivebit = 1 << (path.at(0).toUpper().unicode() - QLatin1Char('A').unicode());
++    return (drivesBitmask & drivebit) > 0;
++}
++
+ /*!
+     \internal
+ */
+@@ -1458,6 +1475,8 @@
+                 else
+                     ret |= FileType;
+             }
++        } else if (isDrive(d->file)) {
++            ret |= DirectoryType;
+         } else if (d->doStat()) {
+             if (d->fileAttrib & FILE_ATTRIBUTE_DIRECTORY) {
+                 ret |= DirectoryType;
+@@ -1467,7 +1486,10 @@
+         }
+     }
+     if (type & FlagsMask) {
+-        if(d->doStat()) {
++        if (driveExists(d->file)) {
++            ret |= QAbstractFileEngine::FileFlags(ExistsFlag | LocalDiskFlag 
++                | RootFlag);
++        } else if(d->doStat()) {
+             ret |= QAbstractFileEngine::FileFlags(ExistsFlag | LocalDiskFlag);
+             if (d->fileAttrib & FILE_ATTRIBUTE_HIDDEN)
+                 ret |= HiddenFlag;
+diff -dur qt-win-opensource-src-4.2.2/src/gui/itemviews/qdirmodel.cpp qt-win-opensource-src-4.2.2-new/src/gui/itemviews/qdirmodel.cpp
+--- qt-win-opensource-src-4.2.2/src/gui/itemviews/qdirmodel.cpp	2006-11-27 09:11:18.000000000 -0800
++++ qt-win-opensource-src-4.2.2-new/src/gui/itemviews/qdirmodel.cpp	2007-01-24 22:38:09.000000000 -0800
+@@ -193,7 +193,8 @@
+ {
+     Q_D(const QFileIconProvider);
+     if (info.isRoot())
+-#ifdef Q_OS_WIN
++//#ifdef Q_OS_WIN
++#ifdef 0
+     {
+         uint type = DRIVE_UNKNOWN;
+ 	QT_WA({ type = GetDriveTypeW((wchar_t *)info.absoluteFilePath().utf16()); },
