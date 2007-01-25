@@ -17,19 +17,18 @@ import SC
 
 class ItemSlot:
     def __init__(self, slottype='player', type='Unused', amount='0', effect='',
-                 requirement='', time='0', makes='0'):
+                 requirement='', makes='0'):
         self.__dict__ = { 
             'SlotType' : unicode(slottype),
             'Type': '', 'Effect' : '', 'Amount' : '', 'Requirement' : '',
-            'Time' : '',   'Makes' : '', }
-        self.setAll(type, amount, effect, requirement, time, makes)
+            'Makes' : '', }
+        self.setAll(type, amount, effect, requirement, makes)
 
     def setAll(self, type='Unused', amount='0', effect='',
-               requirement='', time='0', makes='0'):
+               requirement='', makes='0'):
         self.Type = unicode(type)
         self.Amount = unicode(amount)
         self.Effect = unicode(effect)
-        self.Time = unicode(time)
         self.Makes = unicode(makes)
         self.Requirement = unicode(requirement)
         self.fixEffect()
@@ -86,12 +85,6 @@ class ItemSlot:
     def setRequirement(self, requirement):
         self.CraftOk = False
         self.Requirement = unicode(requirement)
-
-    def time(self):
-        return self.Time
-    def setTime(self, time):
-        if time == '': time = '0'
-        self.Time = unicode(time)
 
     def makes(self):
         return self.Makes
@@ -225,7 +218,7 @@ class ItemSlot:
         if makes == 0: makes = 1
         return makes
 
-    def gemCost(self, makes=1):
+    def gemCost(self, makes=0):
         if not self.crafted():
             return 0
         if makes <= 0:
@@ -242,14 +235,11 @@ class ItemSlot:
         cost = cost * makes
         return cost
 
-    def gemPrice(self, pricingInfo, tries=0):
+    def gemPrice(self, pricingInfo, makes=0):
         price = 0
-        cost = self.gemCost(tries)
+        cost = self.gemCost(makes)
         if cost > 0:
             price += int(pricingInfo.get('PPGem', 0) * 10000)
-            if pricingInfo.get('HourInclude', 0):
-                price += int(pricingInfo.get('Hour', 0) * 10000 \
-                           * int(self.Time) / 60.0)
             if pricingInfo.get('TierInclude', 0):
                 gemlvl = str(self.gemLevel())
                 tierp = pricingInfo.get('Tier', {})
@@ -269,8 +259,7 @@ class ItemSlot:
                        (u'Amount', self.Amount,)]
             if self.SlotType == 'player':
                 savexml.extend([
-                       (u'Makes', self.Makes,), 
-                       (u'Time', self.Time,)])
+                       (u'Makes', self.Makes,)])
             if rich:
                 if self.crafted():
                     savexml.extend([
@@ -307,6 +296,7 @@ class Item:
             'AFDPS' : '',
             'Speed' : '',
             'Bonus' : '',
+            'Time' : '0',
             'TemplateIndex' : idx,
         }
 
@@ -433,14 +423,14 @@ class Item:
     def cost(self):
         cost = 0
         for slot in self.slots():
-            cost += slot.gemCost(-1)
+            cost += slot.gemCost()
         return cost
 
     def price(self, pricingInfo):
         price = 0
         cost = 0
         for slot in self.slots():
-            cost += slot.gemCost(-1)
+            cost += slot.gemCost()
         if cost == 0: return 0
         for slot in self.slots():
             price += slot.gemPrice(pricingInfo, -1)
@@ -453,6 +443,9 @@ class Item:
                            * max(0, int(imbuepts - self.itemImbue())))
                 price += int(pricingInfo.get('PPLevel', 0) * 10000 \
                            * int(self.Level))
+            if pricingInfo.get('HourInclude', 0):
+                price += int(pricingInfo.get('Hour', 0) * 10000 \
+                           * int(self.Time) / 60.0)
             price += int(pricingInfo.get('PPItem', 0) * 10000)
         return price
 
