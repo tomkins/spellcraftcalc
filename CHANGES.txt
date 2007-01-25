@@ -1,3 +1,7 @@
+Updated ??/??/2007 - Version 1.97
+
+
+
 Updated 1/25/2007 - Version 1.96 - Patch 1.87 SC Overhaul
 
   Removed Quality factor entirely from gems.
