@@ -475,6 +475,12 @@ class Item:
                   (u'ItemQuality', self.ItemQuality,),
                   (u'Equipped', self.Equipped,),
                   (u'Level', self.Level,),]
+        if self.Time > "0":
+            fields.extend([
+                  (u'Time', self.Time,),]
+        if writeIndex:
+            fields.extend([
+                  (u'TemplateIndex', unicode(self.TemplateIndex),),])
         if rich:
             imbuevals = self.listGemImbue()
             fields.extend([
@@ -485,8 +491,6 @@ class Item:
                   (u'ItemImbue', unicode(self.itemImbue()),),
                   (u'Success',
                        unicode(self.overchargeSuccess(crafterSkill)),),])
-        if writeIndex:
-            fields.extend([(u'TemplateIndex', unicode(self.TemplateIndex),),])
 
         for key, val in fields:
             if not rich and val == '': continue
