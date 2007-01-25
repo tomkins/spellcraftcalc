@@ -60,11 +60,11 @@ diff -dur qt-win-opensource-src-4.2.2/src/corelib/io/qfileinfo.cpp qt-win-openso
 +            QAbstractFileEngine::FileFlags req = QAbstractFileEngine::FileInfoAll;
 +            req &= (~(QAbstractFileEngine::LinkType | QAbstractFileEngine::RootFlag));
 +
-+            flags = data->fileEngine->fileFlags(req);
++            flags |= data->fileEngine->fileFlags(req);
 +            data->setCachedFlag(CachedFileFlags);
 +            data->fileFlags |= uint(flags);
 +        } else {
-+            flags = QAbstractFileEngine::FileFlags(data->fileFlags & request);
++            flags |= QAbstractFileEngine::FileFlags(data->fileFlags & request);
          }
      }
 -    // no else branch
