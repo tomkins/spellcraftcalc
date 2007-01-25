@@ -477,7 +477,7 @@ class Item:
                   (u'Level', self.Level,),]
         if self.Time > "0":
             fields.extend([
-                  (u'Time', self.Time,),]
+                  (u'Time', self.Time,),])
         if writeIndex:
             fields.extend([
                   (u'TemplateIndex', unicode(self.TemplateIndex),),])
