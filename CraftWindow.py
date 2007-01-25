@@ -32,6 +32,10 @@ class CraftWindow(QDialog, Ui_B_CraftWindow):
             self.connect(self.GemMakes[i],SIGNAL("valueChanged(int)"),self.RemakeChanged)
         self.connect(self.Close,SIGNAL("clicked()"),self.CloseWindow)
         self.parent = parent
+        testfont = QFontMetrics(QApplication.font())
+        width = testfont.size(Qt.TextSingleLine, "  199g 00s 00c").width()
+        self.gridlayout.setColumnMinimumWidth(2,width)
+
 
     def loadgems(self, gems):
         materials = { 'Gems': { }, 'Dusts' : { }, 'Liquids' : { } }
