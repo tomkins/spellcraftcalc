@@ -319,6 +319,9 @@ class Item:
 
         self.itemslots = self.makeSlots()
 
+    def clear(self):
+        self.itemslots = self.makeSlots()
+
     def makeSlots(self, type=''):
         if type == '':
             type = self.ActiveState
