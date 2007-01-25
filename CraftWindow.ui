@@ -59,7 +59,7 @@
              <number>3</number>
             </property>
             <item row="0" column="0" >
-             <widget class="QLabel" name="TextLabel2" >
+             <widget class="QLabel" name="GemNameLabel" >
               <property name="sizePolicy" >
                <sizepolicy>
                 <hsizetype>5</hsizetype>
@@ -74,16 +74,19 @@
              </widget>
             </item>
             <item row="0" column="1" >
-             <widget class="QLabel" name="TextLabel5" >
+             <widget class="QLabel" name="GemMakesLabel" >
               <property name="text" >
                <string>Makes:</string>
               </property>
              </widget>
             </item>
             <item row="0" column="2" >
-             <widget class="QLabel" name="TextLabel7" >
+             <widget class="QLabel" name="GemCostLabel" >
               <property name="text" >
                <string>Cost:</string>
+              </property>
+              <property name="alignment" >
+               <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
               </property>
              </widget>
             </item>
@@ -128,7 +131,7 @@
                <string>0c</string>
               </property>
               <property name="alignment" >
-               <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+               <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
               </property>
              </widget>
             </item>
@@ -156,7 +159,7 @@
                <string>0c</string>
               </property>
               <property name="alignment" >
-               <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+               <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
               </property>
              </widget>
             </item>
@@ -184,7 +187,7 @@
                <string>0c</string>
               </property>
               <property name="alignment" >
-               <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+               <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
               </property>
              </widget>
             </item>
@@ -212,7 +215,7 @@
                <string>0c</string>
               </property>
               <property name="alignment" >
-               <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+               <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
               </property>
              </widget>
             </item>
