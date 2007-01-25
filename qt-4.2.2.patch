@@ -1,6 +1,9 @@
+Only in qt-win-opensource-src-4.2.2-new/src: .DS_Store
+Only in qt-win-opensource-src-4.2.2-new/src/corelib: .DS_Store
+Only in qt-win-opensource-src-4.2.2-new/src/corelib/io: .DS_Store
 diff -dur qt-win-opensource-src-4.2.2/src/corelib/io/qfileinfo.cpp qt-win-opensource-src-4.2.2-new/src/corelib/io/qfileinfo.cpp
 --- qt-win-opensource-src-4.2.2/src/corelib/io/qfileinfo.cpp	2006-11-27 09:11:12.000000000 -0800
-+++ qt-win-opensource-src-4.2.2-new/src/corelib/io/qfileinfo.cpp	2007-01-24 21:45:25.000000000 -0800
++++ qt-win-opensource-src-4.2.2-new/src/corelib/io/qfileinfo.cpp	2007-01-24 22:47:31.000000000 -0800
 @@ -50,7 +50,7 @@
      QDateTime &getFileTime(QAbstractFileEngine::FileTime) const;
      QString getFileName(QAbstractFileEngine::FileName) const;
@@ -26,7 +29,7 @@ diff -dur qt-win-opensource-src-4.2.2/src/corelib/io/qfileinfo.cpp qt-win-openso
 -    }
  
 -    if (request & QAbstractFileEngine::LinkType) {
-+	if (request == QAbstractFileEngine::LinkType) {
++	if (request & QAbstractFileEngine::LinkType) {
          if (!data->getCachedFlag(CachedLinkTypeFlag)) {
              QAbstractFileEngine::FileFlags linkflag;
              linkflag = data->fileEngine->fileFlags(QAbstractFileEngine::LinkType);
