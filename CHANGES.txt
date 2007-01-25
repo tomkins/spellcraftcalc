@@ -1,4 +1,4 @@
-Updated ??/??/???? - Version 1.96 - Patch 1.87 SC Overhaul
+Updated 1/25/2007 - Version 1.96 - Patch 1.87 SC Overhaul
 
   Removed Quality factor entirely from gems.
 
@@ -29,6 +29,9 @@ Updated ??/??/???? - Version 1.96 - Patch 1.87 SC Overhaul
 
   Total all remade gem costs by item and in grand total, this was 
   broken in 1.93.
+
+  Patched Qt so that opening the ItemList with broken network drives
+  or floppy drives doesn't timeout for > 10s.
 
 Updated 01/17/2007 - Version 1.93 - The Last Old Flavor (Quality)
 
