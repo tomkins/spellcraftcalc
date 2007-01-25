@@ -499,7 +499,8 @@ class Item:
             rootnode.appendChild(elem)
         slotnode = None
         for num in range(0,len(self.itemslots)):
-            if self.itemslots[num].type() == "Unused": continue
+            if self.itemslots[num].type() == "Unused": 
+                continue
             slotnode = document.createElement(u'SLOT')
             slotnode.setAttribute(u'Number', unicode(num))
             if rich or self.itemslots[num].slotType() != self.ActiveState:
@@ -510,8 +511,6 @@ class Item:
                 elem = document.createTextNode(u"%.1f" % imbuevals[num])
                 imbuenode.replaceChild(elem, imbuenode.childNodes[0])
             rootnode.appendChild(slotnode)
-        if slotnode is None: 
-            return None
         return document
 
     def save(self, filename):
