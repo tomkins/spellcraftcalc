@@ -54,7 +54,7 @@ class CraftWindow(QDialog, Ui_B_CraftWindow):
 
             self.GemMakes[slot].setValue(int(gems[slot].makes()))
             self.GemTime[slot].setText(gems[slot].time())
-            self.GemCost[slot].setText(SC.formatCost(gems[slot].gemCost()))
+            self.GemCost[slot].setText(SC.formatCost(gems[slot].gemCost(1)))
             self.GemName[slot].setText(gems[slot].gemName(self.parent.realm))
         self.computeMaterials()
 

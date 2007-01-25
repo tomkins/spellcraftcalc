@@ -77,7 +77,7 @@ class ReportWindow(QDialog, Ui_B_ReportWindow):
                 else:
                     self.gemnames[gemname] = 1
 
-                cost = slot.gemCost()
+                cost = slot.gemCost(1)
                 self.totalcost += cost
         keys = self.gemnames.keys()
         keys.sort(gemNameSort)

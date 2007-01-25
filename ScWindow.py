@@ -1262,7 +1262,7 @@ class ScWindow(QMainWindow, Ui_B_SC):
             for i in range(0, item.slotCount()):
                 slot = item.slot(i)
                 if i < len(imbuevals):
-                    self.Cost[i].setText(SC.formatCost(slot.gemCost()))
+                    self.Cost[i].setText(SC.formatCost(slot.gemCost(1)))
                     self.Points[i].setText('%3.1f' % imbuevals[i])
                 if i < len(self.Name):
                     self.Name[i].setText(slot.gemName(self.realm))
