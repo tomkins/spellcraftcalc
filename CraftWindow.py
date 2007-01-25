@@ -22,7 +22,6 @@ class CraftWindow(QDialog, Ui_B_CraftWindow):
         self.GemName = []
         self.GemCost = []
         self.GemMakes = []
-        self.GemTime = []
         for i in range (0, 4):
             idx = i + 1
             self.GemName.append(getattr(self, 'Gem%dName' % idx))
@@ -31,8 +30,6 @@ class CraftWindow(QDialog, Ui_B_CraftWindow):
             # Hide '0' values
             self.GemMakes[i].setSpecialValueText(" ")
             self.connect(self.GemMakes[i],SIGNAL("valueChanged(int)"),self.RemakeChanged)
-            self.GemTime.append(getattr(self, 'Gem%dTime' % idx))
-            self.connect(self.GemTime[i],SIGNAL("textChanged(const QString&)"),self.TimeChanged)
         self.connect(self.Close,SIGNAL("clicked()"),self.CloseWindow)
         self.parent = parent
 
@@ -45,7 +42,6 @@ class CraftWindow(QDialog, Ui_B_CraftWindow):
         self.gems = gems
         for slot in range(0, 4):
             self.GemMakes[slot].setVisible(slot < len(gems))
-            self.GemTime[slot].setVisible(slot < len(gems))
             self.GemCost[slot].setVisible(slot < len(gems))
             self.GemName[slot].setVisible(slot < len(gems))
 
@@ -53,7 +49,6 @@ class CraftWindow(QDialog, Ui_B_CraftWindow):
                 continue
 
             self.GemMakes[slot].setValue(int(gems[slot].makes()))
-            self.GemTime[slot].setText(gems[slot].time())
             self.GemCost[slot].setText(SC.formatCost(gems[slot].gemCost(1)))
             self.GemName[slot].setText(gems[slot].gemName(self.parent.realm))
         self.computeMaterials()
@@ -94,10 +89,6 @@ class CraftWindow(QDialog, Ui_B_CraftWindow):
         i = int(self.sender().objectName()[3]) - 1
         self.gems[i].setMakes(str(val))
         self.computeMaterials()
-
-    def TimeChanged(self,a0):
-        i = int(self.sender().objectName()[3]) - 1
-        self.gems[i].setTime(self.GemTime[i].text())
 
     def CloseWindow(self):
         self.done(1)
