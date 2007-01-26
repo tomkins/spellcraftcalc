@@ -385,7 +385,7 @@ class ScWindow(QMainWindow, Ui_B_SC):
                      self.itemNameSelected)
         #self.connect(self.ItemNameCombo.lineEdit(),SIGNAL("editingFinished()"),
         #             self.itemNameEdited)
-        self.connect(self.ItemNameCombo,SIGNAL("textChanged(const QString&)"),
+        self.connect(self.ItemNameCombo,SIGNAL("editTextChanged(const QString&)"),
                     self.itemNameEdited)
         self.connect(self.SkillsList,SIGNAL("activated(const QModelIndex&)"),
                      self.skillClicked)
