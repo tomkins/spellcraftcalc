@@ -97,7 +97,7 @@
            <item>
             <widget class="QCheckBox" name="ShowDoneGems" >
              <property name="text" >
-              <string>Hide "Done" Gems in Materials List</string>
+              <string>Hide "Made" Gems from Materials List and Exported Gems</string>
              </property>
             </widget>
            </item>
