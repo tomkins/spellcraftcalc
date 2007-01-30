@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'Options.ui'
 #
-# Created: Wed Jan 17 21:29:51 2007
+# Created: Tue Jan 30 16:38:01 2007
 #      by: PyQt4 UI code generator 4.1
 #
 # WARNING! All changes made in this file will be lost!
@@ -471,7 +471,7 @@ class Ui_B_Options(object):
         B_Options.setWindowTitle(QtGui.QApplication.translate("B_Options", "Options", None, QtGui.QApplication.UnicodeUTF8))
         self.TextLabel1.setText(QtGui.QApplication.translate("B_Options", "Crafter Skill:", None, QtGui.QApplication.UnicodeUTF8))
         self.CapDistance.setText(QtGui.QApplication.translate("B_Options", "Show Distance To Cap (instead of total)", None, QtGui.QApplication.UnicodeUTF8))
-        self.ShowDoneGems.setText(QtGui.QApplication.translate("B_Options", "Hide \"Done\" Gems in Materials List", None, QtGui.QApplication.UnicodeUTF8))
+        self.ShowDoneGems.setText(QtGui.QApplication.translate("B_Options", "Hide \"Made\" Gems from Materials List and Exported Gems", None, QtGui.QApplication.UnicodeUTF8))
         self.IncludeRR.setText(QtGui.QApplication.translate("B_Options", "Include Racial Resists in Totals", None, QtGui.QApplication.UnicodeUTF8))
         self.HideNonClassSkills.setText(QtGui.QApplication.translate("B_Options", "Hide Skills not usable by this Class", None, QtGui.QApplication.UnicodeUTF8))
         self.Coop.setText(QtGui.QApplication.translate("B_Options", "Co-op / PvP Server", None, QtGui.QApplication.UnicodeUTF8))
