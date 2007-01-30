@@ -1,6 +1,12 @@
 Updated ??/??/2007 - Version 1.97
 
+  Export Gems fixes: don't die looking for made gems, set the crafted
+  gems to marked (but not checked), update the next quickbar slot
+  after exporting, and disable the export button when there is no
+  crafter or no gems chosen to export.  This makes it easier to see
+  when gems are successfully exported.
 
+  Changed the description from "Hide 'done' gems" to "Hide 'made' gems".
 
 Updated 1/25/2007 - Version 1.96 - Patch 1.87 SC Overhaul
 
