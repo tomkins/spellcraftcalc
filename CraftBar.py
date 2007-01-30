@@ -96,7 +96,7 @@ class CraftBar(QDialog, Ui_B_CraftBar):
             for slot in item.slots():
                  if slot.crafted():
                      unused = False
-                     if slot.done() == '0':
+                     if slot.makes() == "0":
                          done = False
                          break
             if unused:
