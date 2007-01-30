@@ -84,7 +84,17 @@ class CraftBar(QDialog, Ui_B_CraftBar):
             'Spare', 'Right Hand', 'Left Hand', '2 Handed', 'Ranged',
         ]
 
+        self.connect(self.PathSelectButton,SIGNAL("clicked()"),self.openFileDialog)
+        self.connect(self.PushButton19,SIGNAL("clicked()"),self.accept)
+        self.connect(self.LoadGemsButton,SIGNAL("clicked()"),self.loadGems)
+        self.connect(self.DaocPath,SIGNAL("textChanged(const QString&)"),self.findPath)
+        self.connect(self.HotbarNum,SIGNAL("valueChanged(int)"),self.hotbarNumChanged)
+        self.connect(self.HotbarRow,SIGNAL("valueChanged(int)"),self.hotbarNumChanged)
+        self.connect(self.HotbarPos,SIGNAL("valueChanged(int)"),self.hotbarNumChanged)
+        self.connect(self.CharList,SIGNAL("selectionChanged(const QItemSelection&, const QItemSelection&)"),self.charChanged)
+
         for i in range(0, len(self.ItemSelect)):
+            self.connect(self.ItemSelect[i],SIGNAL("clicked()"),self.pieceBoxChanged)
             item = self.parent.itemattrlist[self.items[i]]
             while item.ActiveState == 'drop' and item.next is not None:
                 item = item.next
@@ -104,31 +114,12 @@ class CraftBar(QDialog, Ui_B_CraftBar):
                 continue
             if not done and item == self.parent.itemattrlist[self.items[i]]:
                 self.ItemSelect[i].setCheckState(Qt.Checked)
-                
-        self.connect(self.PathSelectButton,SIGNAL("clicked()"),self.openFileDialog)
-        self.connect(self.PushButton19,SIGNAL("clicked()"),self.accept)
-        self.connect(self.LoadGemsButton,SIGNAL("clicked()"),self.loadGems)
-        self.connect(self.DaocPath,SIGNAL("textChanged(const QString&)"),self.findPath)
-        self.connect(self.HotbarNum,SIGNAL("valueChanged(int)"),self.hotbarNumChanged)
-        self.connect(self.HotbarRow,SIGNAL("valueChanged(int)"),self.hotbarNumChanged)
-        self.connect(self.HotbarPos,SIGNAL("valueChanged(int)"),self.hotbarNumChanged)
-        self.connect(self.ChestSelect,SIGNAL("clicked()"),self.PieceBoxChanged)
-        self.connect(self.ArmsSelect,SIGNAL("clicked()"),self.PieceBoxChanged)
-        self.connect(self.HeadSelect,SIGNAL("clicked()"),self.PieceBoxChanged)
-        self.connect(self.LegsSelect,SIGNAL("clicked()"),self.PieceBoxChanged)
-        self.connect(self.HandsSelect,SIGNAL("clicked()"),self.PieceBoxChanged)
-        self.connect(self.FeetSelect,SIGNAL("clicked()"),self.PieceBoxChanged)
-        self.connect(self.SpareSelect,SIGNAL("clicked()"),self.PieceBoxChanged)
-        self.connect(self.RangedSelect,SIGNAL("clicked()"),self.PieceBoxChanged)
-        self.connect(self.RHSelect,SIGNAL("clicked()"),self.PieceBoxChanged)
-        self.connect(self.LHSelect,SIGNAL("clicked()"),self.PieceBoxChanged)
-        self.connect(self.THSelect,SIGNAL("clicked()"),self.PieceBoxChanged)
 
         self.HotbarNum.setValue(1)
         self.HotbarRow.setValue(1)
         self.HotbarPos.setValue(1)
         self.DaocPath.setText(ScOptions.instance().getOption('DaocPath', ''))
-        self.PieceBoxChanged()
+        self.pieceBoxChanged()
         self.computeGemCount()
         self.computeBarEnd()
 
@@ -222,7 +213,15 @@ class CraftBar(QDialog, Ui_B_CraftBar):
         f.close()
         self.LabelNumGems.setText('Number of Quickbar Buttons Loaded:')
         self.NumGems.setText(str(slotcounter - startslot))
-        self.LoadGemsButton.setEnabled(1)
+        self.HotbarNum.setValue(int(slotcounter / 100) + 1)
+        self.HotbarRow.setValue(int(slotcounter / 10) % 10 + 1)
+        self.HotbarPos.setValue(slotcounter % 10 + 1)
+        self.piecelist = { }
+        for ctl in self.ItemSelect:
+            if ctl.checkState() == Qt.Checked:
+                ctl.setCheckState(Qt.PartiallyChecked)
+        self.gemcount = 0
+        self.computeBarEnd()
 
     def findPath(self,a0):
         self.model.removeRows(0, self.model.rowCount())
@@ -281,11 +280,13 @@ class CraftBar(QDialog, Ui_B_CraftBar):
         ep = (pos + self.gemcount - 1) % 10 + 1
         if eb > 3 or self.gemcount == 0:
             self.LoadGemsButton.setEnabled(0)
+            self.LoadGemsButton.update()
             self.EndBar.setText('-')
             self.EndRow.setText('-')
             self.EndPos.setText('-')
         else:
-            self.LoadGemsButton.setEnabled(1)
+            self.LoadGemsButton.setEnabled(len(self.CharList.selectedIndexes()) > 0)
+            self.LoadGemsButton.update()
             self.EndBar.setText(str(eb))
             self.EndRow.setText(str(er))
             self.EndPos.setText(str(ep))
@@ -303,13 +304,16 @@ class CraftBar(QDialog, Ui_B_CraftBar):
         self.LabelNumGems.setText('Total Number of Gems to Load:')
         self.NumGems.setText(str(self.gemcount))
 
-    def PieceBoxChanged(self):
+    def pieceBoxChanged(self):
         self.piecelist = {}
         for i in range(0, len(self.ItemSelect)):
-            if self.ItemSelect[i].isChecked():
+            if self.ItemSelect[i].checkState() == Qt.Checked:
                 item = self.parent.itemattrlist[self.items[i]]
                 while item.ActiveState == 'drop' and item.next is not None:
                     item = item.next
-                self.piecelist[self.items[i]] =item
+                self.piecelist[self.items[i]] = item
         self.computeGemCount()
+        self.computeBarEnd()
+
+    def charChanged(self, a1, a2):
         self.computeBarEnd()
