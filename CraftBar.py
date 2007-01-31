@@ -91,7 +91,7 @@ class CraftBar(QDialog, Ui_B_CraftBar):
         self.connect(self.HotbarNum,SIGNAL("valueChanged(int)"),self.hotbarNumChanged)
         self.connect(self.HotbarRow,SIGNAL("valueChanged(int)"),self.hotbarNumChanged)
         self.connect(self.HotbarPos,SIGNAL("valueChanged(int)"),self.hotbarNumChanged)
-        self.connect(self.CharList,SIGNAL("selectionChanged(const QItemSelection&, const QItemSelection&)"),self.charChanged)
+        self.connect(self.CharList.selectionModel(),SIGNAL("selectionChanged(const QItemSelection&, const QItemSelection&)"),self.charChanged)
 
         for i in range(0, len(self.ItemSelect)):
             self.connect(self.ItemSelect[i],SIGNAL("clicked()"),self.pieceBoxChanged)
