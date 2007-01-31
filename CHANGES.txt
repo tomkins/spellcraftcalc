@@ -8,6 +8,8 @@ Updated ??/??/2007 - Version 1.97
 
   Changed the description from "Hide 'done' gems" to "Hide 'made' gems".
 
+  Item renaming now works properly again.
+
 Updated 1/25/2007 - Version 1.96 - Patch 1.87 SC Overhaul
 
   Removed Quality factor entirely from gems.
