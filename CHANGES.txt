@@ -1,3 +1,7 @@
+Updated ??/??/2007 - Version 1.98
+
+
+
 Updated 01/30/2007 - Version 1.97
 
   Export Gems fixes: don't die looking for made gems, set the crafted
