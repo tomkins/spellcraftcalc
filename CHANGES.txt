@@ -1,4 +1,4 @@
-Updated ??/??/2007 - Version 1.97
+Updated 01/30/2007 - Version 1.97
 
   Export Gems fixes: don't die looking for made gems, set the crafted
   gems to marked (but not checked), update the next quickbar slot
@@ -8,7 +8,7 @@ Updated ??/??/2007 - Version 1.97
 
   Changed the description from "Hide 'done' gems" to "Hide 'made' gems".
 
-  Item renaming now works properly again.
+  Item renaming now works properly again (signal name broken in 1.96).
 
 Updated 1/25/2007 - Version 1.96 - Patch 1.87 SC Overhaul
 
