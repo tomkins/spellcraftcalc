@@ -465,8 +465,10 @@ class ScWindow(QMainWindow, Ui_B_SC):
             act.setData(QVariant(piece))
             self.swappiecemenu.addAction(act)
         self.swapgemsmenu = QMenu('S&wap Gems with',self)
-        self.connect(self.swapgemsmenu, SIGNAL("triggered(QAction*)"),
-                     self.swapWith)
+
+        # DON"T SWAP TWICE!!!!!!
+        #self.connect(self.swapgemsmenu, SIGNAL("triggered(QAction*)"),
+        #             self.swapWith)
         self.connect(self.swappiecemenu, SIGNAL("triggered(QAction*)"),
                      self.swapWith)
         self.connect(self.swapjewelmenu, SIGNAL("triggered(QAction*)"),
@@ -2168,6 +2170,7 @@ class ScWindow(QMainWindow, Ui_B_SC):
         self.calculate()
 
     def swapWith(self, action):
+        traceback.print_stack()
         cur = self.itemattrlist[self.currentTabLabel]
         if cur.ActiveState != 'player': return
         piece = str(action.text())
