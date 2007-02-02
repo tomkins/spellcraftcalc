@@ -2170,7 +2170,6 @@ class ScWindow(QMainWindow, Ui_B_SC):
         self.calculate()
 
     def swapWith(self, action):
-        traceback.print_stack()
         cur = self.itemattrlist[self.currentTabLabel]
         if cur.ActiveState != 'player': return
         piece = str(action.text())
