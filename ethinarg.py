@@ -1,0 +1,318 @@
+import httplib, urllib
+import HTMLParser
+import re
+import sys
+from PyQt4.QtCore import *
+from PyQt4.QtGui import *
+from Item import *
+from xml.dom.minidom import *
+from B_Ethinarg import *
+
+class EthinargFormParser(HTMLParser.HTMLParser):
+    def __init__(self):
+        HTMLParser.HTMLParser.__init__(self)
+        self.inSelect = False
+        self.formTags = {}
+        self.currentValue = None
+        self.tagName = ''
+
+    def handle_starttag(self, tag, attrs):
+        if tag == 'select':
+            self.inSelect = True
+            for k, v in attrs:
+                if k == 'name':
+                    self.tagName = v
+                    self.formTags[self.tagName] = []
+        elif tag == 'option' and self.inSelect:
+            for k, v in attrs:
+                if k == 'value':
+                    self.currentValue = v
+
+    def handle_data(self, data):
+        if self.inSelect and self.currentValue:
+            v = data.strip()
+            if len(v) > 0:
+                self.formTags[self.tagName].append((v, self.currentValue))
+
+    def handle_endtag(self, tag):
+        if tag == 'select' and self.inSelect:
+            self.inSelect = False
+            self.currentValue = None
+
+    def getFormData(self):
+        return self.formTags
+
+class EthinargItemParser(HTMLParser.HTMLParser):
+    def __init__(self):
+        HTMLParser.HTMLParser.__init__(self)
+        self.tableLevel = 0
+        self.saveTableLevel = 0
+        self.rowCount = 0
+        self.columnCount = 0
+        self.inTable = False
+        self.onItemName = False
+        self.testTable = False
+        self.testColumn = False
+        self.linkCount = 0
+        self.items = []
+        self.htmlList = []
+        self.done = False
+
+    def handle_starttag(self, tag, attrs):
+        if self.done:
+            return
+        if tag == 'table':
+            self.tableLevel += 1
+        if not self.inTable and tag == 'table':
+            for k, v in attrs:
+                if k == 'class' and v == 'forumline':
+                    self.testTable = True
+                    self.rowCount = 0
+        elif self.testTable and tag == 'tr':
+            self.columnCount = 0
+            self.rowCount += 1
+        elif self.inTable and tag == 'tr' and self.tableLevel == self.saveTableLevel:
+            self.columnCount = 0
+            self.rowCount += 1
+        elif self.testTable and self.rowCount == 1 and tag == 'td':
+            self.testColumn = True
+        elif self.inTable and self.rowCount > 1 and tag == 'td':
+            self.columnCount += 1
+            self.linkCount = 0
+        elif self.inTable and self.rowCount > 1 and self.columnCount == 2 and tag == 'a':
+            #print attrs
+            if self.linkCount == 0:
+                self.onItemName = True
+            elif self.linkCount == 1:
+                name, e = self.items[-1]
+                for k, v in attrs:
+                    if k == 'href':
+                        self.items[-1] = (name, v)
+            self.linkCount += 1
+
+        if self.inTable or self.testTable:
+            if tag != 'a':
+                h = '<%s ' % tag
+                for k, v in attrs:
+                    h += '%s="%s" ' % (k, v)
+                h += '>'
+                self.htmlList.append(h)
+
+    def handle_data(self, data):
+        if self.onItemName:
+            self.items.append((data.strip(), None))
+            self.onItemName = False
+        elif self.testColumn:
+            if data.strip().lower() == 'name':
+                self.inTable = True
+                self.saveTableLevel = self.tableLevel
+                self.testColumn = False
+                self.testTable = False
+            else:
+                self.testColumn = False
+                self.testTable = False
+                self.htmlList = []
+        if self.inTable or self.testTable:
+            self.htmlList.append(data.strip())
+
+        #if self.inTable: print data
+
+    def handle_endtag(self, tag):
+        if tag == 'table':
+            if self.tableLevel == self.saveTableLevel:
+                self.inTable = False
+                self.done = True
+            self.tableLevel -= 1
+        if self.inTable or self.testTable:
+            if tag == 'tr' and self.tableLevel == self.saveTableLevel and \
+                    self.rowCount > 1:
+                self.htmlList.append('<td><a href="%d">Add Item To Template</a></td>' % (self.rowCount - 2))
+            if tag != 'a':
+                self.htmlList.append('</' + tag + '>')
+
+    def getItemNames(self):
+        return self.items
+
+class EthinargQuery:
+    def __init__(self):
+        self.htmlText = ''
+        self.sid = ''
+
+        self.queryparams = {
+            'dmgType' : '1',
+            'ma' : '9999',
+            'realm' : '0',
+            'class' : '14',
+            'min_level' : '1',
+            'max_level' : '51',
+            'location' : '9999',
+            'location2' : '0',
+            'itemtype' : '9999',
+            'stat1' : '9999',
+            'stat2' : '9999',
+            'stat3' : '9999',
+            'min_uv' : '0',
+            'max_uv' : '10',
+            'ipp' : '2',
+            'itemName' : '',
+            'order_by' : '',
+            'curr_page' : '1',
+        }
+
+        self.formValues = self.makeInitialQuery()
+
+    def makeQueryString(self):
+        return '&'.join(['%s=%s' % (k, v) for k,v in self.queryparams.items()])
+
+    def makeInitialQuery(self):
+        self.conn = httplib.HTTPConnection("www.ethinarg.com")
+        self.conn.request("GET",
+            "http://www.ethinarg.com/itemdb/main.php?" +
+            self.makeQueryString())
+        resp = self.conn.getresponse()
+
+        html = resp.read()
+        self.conn.close()
+
+        p = EthinargFormParser()
+        p.feed(html)
+        return p.getFormData()
+
+    def makeQuery(self, username, password):
+        if not self.login(username, password):
+            return False
+
+        self.conn = httplib.HTTPConnection("www.ethinarg.com")
+        self.conn.request("GET",
+            "http://www.ethinarg.com/itemdb/main.php?" +
+            self.makeQueryString()
+            + "&sid=" + self.sid)
+        resp = self.conn.getresponse()
+
+        html = resp.read()
+        self.conn.close()
+        p2 = EthinargItemParser()
+        p2.feed(html)
+
+        self.htmlText = ''.join(p2.htmlList).replace("(xml)", "")
+        self.htmlText = self.htmlText.replace("(Save)", "")
+        self.htmlText = re.compile(r'\(#\d+\)').sub("", self.htmlText)
+        self.htmlText = '<html><body>%s</body></html>' % self.htmlText
+        self.itemData = p2.getItemNames()
+
+        return True
+
+    def getXML(self, path):
+        self.conn = httplib.HTTPConnection("www.ethinarg.com")
+        self.conn.request("GET", '/itemdb/' + path)
+
+        return self.conn.getresponse().read()
+
+    def login(self, username, password):
+        conn = httplib.HTTPConnection('www.ethinarg.com')
+        conn.request('GET', '/phpbb2/login.php')
+        resp = conn.getresponse()
+        resp.read()
+        cookie = resp.getheader('Set-Cookie')
+        params = urllib.urlencode({'username' : username, 
+            'password' : password, 'autologin' : 'on',
+            'login' : 'Log in', 'redirect' : ''})
+        headers = {"Content-Type": "application/x-www-form-urlencoded", 
+            "Accept": "text/xml,text/html,application/xml,text/plain", 'Cookie' : cookie,
+            "Referrer" : 'http://www.ethinarg.com/phpbb2/login.php' }
+
+        conn.request('POST', '/phpbb2/login.php', params, headers)
+
+        resp = conn.getresponse()
+        cookie = resp.getheader('Location')
+        if not cookie or len(cookie) == 0:
+            return False
+        m = re.compile(r'sid=([a-zA-Z0-9]*)').search(cookie)
+        sid = m.group(1)
+        resp.read()
+
+        conn.close()
+
+        self.sid = sid
+
+        return True
+
+    def setItemName(self, name):
+        self.queryparams['itemName'] = name
+
+    def setItemSlot(self, slot):
+        self.queryparams['itemtype'] = slot
+
+class EthinargTestWindow(QDialog, Ui_B_Ethinarg):
+    def __init__(self,scwin,parent = None,name = None,modal = False,fl = Qt.Widget):
+        QDialog.__init__(self, parent, fl)
+        Ui_B_Ethinarg.setupUi(self,self)
+
+        self.query = EthinargQuery()
+        self.scwin = scwin
+        self.browser.connect(self.browser, SIGNAL('anchorClicked(const QUrl&)'), self.anchorClicked)
+        self.queryButton.connect(self.queryButton, SIGNAL('clicked()'),
+            self.runQuery)
+
+        self.slotCombo.clear()
+        for k,v in self.query.formValues['itemtype']:
+            self.slotCombo.addItem(k, QVariant(v))
+
+        self.slotCombo.setCurrentIndex(0)
+
+    def runQuery(self):
+        uname = str(self.usernameBox.text())
+        pwd = str(self.passwordBox.text())
+
+        if len(uname) == 0 or len(pwd) == 0:
+            QMessageBox.critical(self, "Login Error!",
+                "You must enter a username and password for Ethinarg's database!")
+            return
+
+        self.query.setItemName(str(self.itemNameBox.text()))
+        idx = str(self.slotCombo.itemData(self.slotCombo.currentIndex()).toString())
+        self.query.setItemSlot(idx)
+
+        if self.query.makeQuery(uname, pwd):
+            self.browser.setHtml(self.query.htmlText)
+        else:
+            QMessageBox.critical(self, "Login Error!",
+                "Could not login, please check username and password")
+
+    def anchorClicked(self, link):
+        self.browser.setSource(QUrl()) # don't navigate
+
+        idx = int(str(link.path()))
+
+        name, xml_url = self.query.itemData[idx]
+
+        xmlstring = self.query.getXML(xml_url)
+
+        item = Item()
+
+        xmldoc = parseString(xmlstring)
+        items = xmldoc.getElementsByTagName('SCItem')
+        item.loadFromXML(items[0])
+
+        self.scwin.addItem(item)
+
+b = None
+
+def anchorClicked(link):
+    global b
+
+    print link.path()
+    b.setSource(QUrl())
+
+if __name__ == '__main__':
+    e = EthinargQuery()
+
+    app=QApplication(sys.argv)
+    b = QTextBrowser()
+    b.connect(b, SIGNAL('anchorClicked(const QUrl&)'), anchorClicked)
+    b.setHtml(e.htmlText)
+    b.show()
+    app.setActiveWindow(b)
+
+    sys.exit(app.exec_())
+

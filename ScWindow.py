@@ -4,6 +4,8 @@
 #
 # See NOTICE.txt for copyrights and grant of license
 
+import ethinarg
+
 from PyQt4.QtCore import *
 from PyQt4.QtGui import *
 from B_ScWindow import *
@@ -445,6 +447,7 @@ class ScWindow(QMainWindow, Ui_B_SC):
         self.filemenu.addAction('Export SCTemplate XML...', self.exportAsFile)
         self.filemenu.addAction('Export &UI Window...', self.generateUIXML)
         self.filemenu.addAction('Choose UI Format...', self.chooseXMLUIFile)
+        self.filemenu.addAction('Ethinarg Test', self.ethinargTest)
 
         self.filemenu.addSeparator()
 
@@ -1606,6 +1609,7 @@ class ScWindow(QMainWindow, Ui_B_SC):
             effcombo.setEditable(False)
             self.fix_taborder(slot)
         effcombo.clear()
+
         if item.ActiveState == 'player':
             if item.slot(slot).slotType() == 'player':
                 effectlist = self.effectlists
@@ -2310,6 +2314,18 @@ class ScWindow(QMainWindow, Ui_B_SC):
         else:
             self.chooseItemType(action)
 
+    def addItem(self, item):
+        item.TemplateIndex = self.itemIndex
+        self.itemIndex += 1
+        self.itemnumbering += 1
+        item.next = self.itemattrlist[item.Location]
+        self.itemattrlist[item.Location] = item
+        self.outfitlist[self.currentOutfit][item.Location] \
+                  = ( item.TemplateIndex, item.Equipped, )
+
+        self.currentTabLabel = item.Location
+        self.restoreItem(item)
+
     def viewToolbar(self, action):
         view = action.data().toInt()[0]
         for act in self.viewtoolbarmenu.actions():
@@ -2430,6 +2446,10 @@ class ScWindow(QMainWindow, Ui_B_SC):
             return True
         else:
             return QMainWindow.event(self, e)
+
+    def ethinargTest(self):
+        w = ethinarg.EthinargTestWindow(self, self)
+        w.show()
 
 if __name__ == '__main__':
     app = QApplication([])
