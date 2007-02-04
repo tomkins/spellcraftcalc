@@ -9,6 +9,38 @@ from PyQt4.QtGui import *
 from Item import *
 from xml.dom.minidom import *
 from B_Ethinarg import *
+from B_QueryBox import *
+
+LoginFailedEvent = QEvent.Type(QEvent.User + 1)
+PostResultsEvent = QEvent.Type(QEvent.User + 2)
+
+class QueryProgress(QDialog, Ui_B_QueryBox):
+    def __init__(self,parent = None,name = None,modal = False,fl = Qt.Widget):
+        QDialog.__init__(self, parent, fl)
+        Ui_B_QueryBox.setupUi(self,self)
+
+        self.state = 0
+        self.timer = None
+
+    def start(self):
+        self.show()
+        self.timer = QTimer(self)
+        self.connect(self.timer, SIGNAL('timeout()'), self.advance)
+        self.timer.setInterval(100)
+        self.timer.start()
+
+    def stop(self):
+        self.timer.stop()
+        self.hide()
+
+    def advance(self):
+        self.state += 1
+        self.state %= 4
+        self.updateText()
+
+    def updateText(self):
+        self.statusLabel.setText(''.join(['.' for x in range(0, self.state)]))
+        
 
 class EthinargFormParser(HTMLParser.HTMLParser):
     def __init__(self):
@@ -272,6 +304,16 @@ class EthinargQuery:
     def setPageNumber(self, num):
         self.queryparams['curr_page'] = str(num)
 
+class QueryRunner(QThread):
+    def __init__(self, parent, uname, pwd):
+        QThread.__init__(self, parent)
+        self.qb = parent
+        self.uname = uname
+        self.pwd = pwd
+
+    def run(self):
+        self.qb._doQuery(self.uname, self.pwd)
+
 class EthinargTestWindow(QDialog, Ui_B_Ethinarg):
     def __init__(self,scwin,parent = None,name = None,modal = False,fl = Qt.Widget):
         QDialog.__init__(self, parent, fl)
@@ -286,6 +328,7 @@ class EthinargTestWindow(QDialog, Ui_B_Ethinarg):
         self.connect(self.goButton, SIGNAL('clicked()'), self.goPage)
         self.currentPage = 1
         self.pageStatus.setText('')
+        self.processBox = QueryProgress(self)
 
         self.slotCombo.clear()
         for k,v in self.query.formValues['itemtype']:
@@ -311,13 +354,19 @@ class EthinargTestWindow(QDialog, Ui_B_Ethinarg):
         self.doQuery(uname, pwd)
 
     def doQuery(self, uname = None, pwd = None):
+        self.processBox.start()
+        QueryRunner(self, uname, pwd).start()
+
+    def _doQuery(self, uname = None, pwd = None):
         if not self.query.makeQuery(uname, pwd):
-            QMessageBox.critical(self, "Login Error!",
-                "Could not login, please check username and password")
+            QApplication.postEvent(self, QEvent(LoginFailedEvent))
+            #QMessageBox.critical(self, "Login Error!",
+            #    "Could not login, please check username and password")
             return
 
-        self.browser.setHtml(self.query.htmlText)
-        self.updatePageStatus()
+        QApplication.postEvent(self, QEvent(PostResultsEvent))
+        #self.browser.setHtml(self.query.htmlText)
+        #self.updatePageStatus()
         
     def updatePageStatus(self):
         numpages = self.query.numPages
@@ -371,6 +420,19 @@ class EthinargTestWindow(QDialog, Ui_B_Ethinarg):
         item.loadFromXML(items[0])
 
         self.scwin.addItem(item)
+
+    def event(self, e):
+        if e.type() == LoginFailedEvent:
+            QMessageBox.critical(self, "Login Error!",
+                "Could not login, please check username and password")
+            return True
+        elif e.type() == PostResultsEvent:
+            self.processBox.stop()
+            self.browser.setHtml(self.query.htmlText)
+            self.updatePageStatus()
+            return True
+        else:
+            return QDialog.event(self, e)
 
 b = None
 
