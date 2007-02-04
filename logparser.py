@@ -13,6 +13,7 @@ time_exp = re.compile(r'\[\d+:\d+:\d+\] ')
 begin_exp = re.compile(r'^<Begin Info: (.*?)>')
 in_item = False
 cur_item = None
+pve = False
 
 def updateRealm(lst):
     realm = lst[0]
@@ -118,6 +119,7 @@ for line in lines:
             print item_name
             in_item = True
     else:
+        pve = (line.find('PvE Only') != -1)
         for exp, groups, func in re_table:
             m = exp.match(line)
             if m:

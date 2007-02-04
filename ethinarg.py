@@ -13,34 +13,7 @@ from B_QueryBox import *
 
 LoginFailedEvent = QEvent.Type(QEvent.User + 1)
 PostResultsEvent = QEvent.Type(QEvent.User + 2)
-
-class QueryProgress(QDialog, Ui_B_QueryBox):
-    def __init__(self,parent = None,name = None,modal = False,fl = Qt.Widget):
-        QDialog.__init__(self, parent, fl)
-        Ui_B_QueryBox.setupUi(self,self)
-
-        self.state = 0
-        self.timer = None
-
-    def start(self):
-        self.show()
-        self.timer = QTimer(self)
-        self.connect(self.timer, SIGNAL('timeout()'), self.advance)
-        self.timer.setInterval(100)
-        self.timer.start()
-
-    def stop(self):
-        self.timer.stop()
-        self.hide()
-
-    def advance(self):
-        self.state += 1
-        self.state %= 4
-        self.updateText()
-
-    def updateText(self):
-        self.statusLabel.setText(''.join(['.' for x in range(0, self.state)]))
-        
+InitializedEvent = QEvent.Type(QEvent.User + 3)
 
 class EthinargFormParser(HTMLParser.HTMLParser):
     def __init__(self):
@@ -314,12 +287,19 @@ class QueryRunner(QThread):
     def run(self):
         self.qb._doQuery(self.uname, self.pwd)
 
+class InitializeThread(QThread):
+    def __init__(self, parent):
+        QThread.__init__(self, parent)
+        self.qb = parent
+
+    def run(self):
+        self.qb.initialize()
+
 class EthinargTestWindow(QDialog, Ui_B_Ethinarg):
     def __init__(self,scwin,parent = None,name = None,modal = False,fl = Qt.Widget):
         QDialog.__init__(self, parent, fl)
         Ui_B_Ethinarg.setupUi(self,self)
 
-        self.query = EthinargQuery()
         self.scwin = scwin
         self.connect(self.browser, SIGNAL('anchorClicked(const QUrl&)'), self.anchorClicked)
         self.connect(self.queryButton, SIGNAL('clicked()'), self.runQuery)
@@ -328,13 +308,24 @@ class EthinargTestWindow(QDialog, Ui_B_Ethinarg):
         self.connect(self.goButton, SIGNAL('clicked()'), self.goPage)
         self.currentPage = 1
         self.pageStatus.setText('')
-        self.processBox = QueryProgress(self)
+        #self.processBox = QueryProgress(self)
 
-        self.slotCombo.clear()
-        for k,v in self.query.formValues['itemtype']:
-            self.slotCombo.addItem(k, QVariant(v))
+        self.show()
+
+        self.processBox = QProgressDialog('Querying the database', 'Cancel',
+            0, 0, self)
+        self.processBox.setCancelButton(None)
 
         self.slotCombo.setCurrentIndex(0)
+
+        self.processBox.setLabelText('Initializing...')
+        InitializeThread(self).start()
+        self.processBox.setWindowModality(Qt.WindowModal)
+        self.processBox.show()
+
+    def initialize(self):
+        self.query = EthinargQuery()
+        QApplication.postEvent(self, QEvent(InitializedEvent))
 
     def runQuery(self):
         uname = str(self.usernameBox.text())
@@ -354,7 +345,10 @@ class EthinargTestWindow(QDialog, Ui_B_Ethinarg):
         self.doQuery(uname, pwd)
 
     def doQuery(self, uname = None, pwd = None):
-        self.processBox.start()
+        self.processBox.reset()
+        self.processBox.setLabelText('Querying the database...')
+        self.processBox.show()
+        #self.processBox.start()
         QueryRunner(self, uname, pwd).start()
 
     def _doQuery(self, uname = None, pwd = None):
@@ -423,13 +417,22 @@ class EthinargTestWindow(QDialog, Ui_B_Ethinarg):
 
     def event(self, e):
         if e.type() == LoginFailedEvent:
+            #self.processbox.stop()
+            self.processBox.cancel()
             QMessageBox.critical(self, "Login Error!",
                 "Could not login, please check username and password")
             return True
         elif e.type() == PostResultsEvent:
-            self.processBox.stop()
+            #self.processBox.stop()
+            self.processBox.cancel()
             self.browser.setHtml(self.query.htmlText)
             self.updatePageStatus()
+            return True
+        elif e.type() == InitializedEvent:
+            self.slotCombo.clear()
+            for k,v in self.query.formValues['itemtype']:
+                self.slotCombo.addItem(k, QVariant(v))
+            self.processBox.cancel()
             return True
         else:
             return QDialog.event(self, e)

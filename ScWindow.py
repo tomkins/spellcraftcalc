@@ -89,6 +89,7 @@ class ScWindow(QMainWindow, Ui_B_SC):
         ScOptions.instance().load()
 
         self.splashFile = None
+        self.ethinargWindow = None
         self.newcount = 0
         self.startup = 1
         self.nocalc = 1
@@ -688,6 +689,9 @@ class ScWindow(QMainWindow, Ui_B_SC):
         self.craftingtoolid.setEnabled(enableCrafting)
 
     def closeEvent(self, e):
+        if self.ethinargWindow:
+            self.ethinargWindow.close()
+
         self.saveOptions()
         ScOptions.instance().save()
         if self.modified:
@@ -2448,8 +2452,9 @@ class ScWindow(QMainWindow, Ui_B_SC):
             return QMainWindow.event(self, e)
 
     def ethinargTest(self):
-        w = ethinarg.EthinargTestWindow(self, self)
-        w.show()
+        if not self.ethinargWindow:
+            self.ethinargWindow = ethinarg.EthinargTestWindow(self, self)
+        self.ethinargWindow.show()
 
 if __name__ == '__main__':
     app = QApplication([])
