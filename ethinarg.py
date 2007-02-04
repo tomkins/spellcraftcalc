@@ -2,6 +2,8 @@ import httplib, urllib
 import HTMLParser
 import re
 import sys
+import time
+
 from PyQt4.QtCore import *
 from PyQt4.QtGui import *
 from Item import *
@@ -57,8 +59,17 @@ class EthinargItemParser(HTMLParser.HTMLParser):
         self.items = []
         self.htmlList = []
         self.done = False
+        self.numPages = 0
+        self.pageRE = re.compile(r'curr_page=(\d+)')
 
     def handle_starttag(self, tag, attrs):
+        if tag == 'a':
+            for k,v in attrs:
+                if k == 'href':
+                    m = self.pageRE.search(v)
+                    if m:
+                        self.numPages = max(self.numPages, int(m.group(1)))
+                    break
         if self.done:
             return
         if tag == 'table':
@@ -136,7 +147,11 @@ class EthinargItemParser(HTMLParser.HTMLParser):
 class EthinargQuery:
     def __init__(self):
         self.htmlText = ''
-        self.sid = ''
+        self.sid = None
+        self.username = None
+        self.password = None
+        self.lastLogin = -1
+        self.numPages = 0
 
         self.queryparams = {
             'dmgType' : '1',
@@ -178,9 +193,17 @@ class EthinargQuery:
         p.feed(html)
         return p.getFormData()
 
-    def makeQuery(self, username, password):
-        if not self.login(username, password):
-            return False
+    def makeQuery(self, username = None, password = None):
+        if username:
+            self.username = username
+        if password:
+            self.password = password
+            
+        curtime = time.time()
+
+        if not self.sid or (curtime - self.lastLogin) > 60 * 20:
+            if not self.login(self.username, self.password):
+                return False
 
         self.conn = httplib.HTTPConnection("www.ethinarg.com")
         self.conn.request("GET",
@@ -199,6 +222,7 @@ class EthinargQuery:
         self.htmlText = re.compile(r'\(#\d+\)').sub("", self.htmlText)
         self.htmlText = '<html><body>%s</body></html>' % self.htmlText
         self.itemData = p2.getItemNames()
+        self.numPages = p2.numPages
 
         return True
 
@@ -226,6 +250,7 @@ class EthinargQuery:
         resp = conn.getresponse()
         cookie = resp.getheader('Location')
         if not cookie or len(cookie) == 0:
+            self.sid = None
             return False
         m = re.compile(r'sid=([a-zA-Z0-9]*)').search(cookie)
         sid = m.group(1)
@@ -234,6 +259,7 @@ class EthinargQuery:
         conn.close()
 
         self.sid = sid
+        self.lastLogin = time.time()
 
         return True
 
@@ -243,6 +269,9 @@ class EthinargQuery:
     def setItemSlot(self, slot):
         self.queryparams['itemtype'] = slot
 
+    def setPageNumber(self, num):
+        self.queryparams['curr_page'] = str(num)
+
 class EthinargTestWindow(QDialog, Ui_B_Ethinarg):
     def __init__(self,scwin,parent = None,name = None,modal = False,fl = Qt.Widget):
         QDialog.__init__(self, parent, fl)
@@ -250,9 +279,13 @@ class EthinargTestWindow(QDialog, Ui_B_Ethinarg):
 
         self.query = EthinargQuery()
         self.scwin = scwin
-        self.browser.connect(self.browser, SIGNAL('anchorClicked(const QUrl&)'), self.anchorClicked)
-        self.queryButton.connect(self.queryButton, SIGNAL('clicked()'),
-            self.runQuery)
+        self.connect(self.browser, SIGNAL('anchorClicked(const QUrl&)'), self.anchorClicked)
+        self.connect(self.queryButton, SIGNAL('clicked()'), self.runQuery)
+        self.connect(self.nextButton, SIGNAL('clicked()'), self.nextPage)
+        self.connect(self.prevButton, SIGNAL('clicked()'), self.prevPage)
+        self.connect(self.goButton, SIGNAL('clicked()'), self.goPage)
+        self.currentPage = 1
+        self.pageStatus.setText('')
 
         self.slotCombo.clear()
         for k,v in self.query.formValues['itemtype']:
@@ -269,16 +302,59 @@ class EthinargTestWindow(QDialog, Ui_B_Ethinarg):
                 "You must enter a username and password for Ethinarg's database!")
             return
 
+        self.currentPage = 1
         self.query.setItemName(str(self.itemNameBox.text()))
         idx = str(self.slotCombo.itemData(self.slotCombo.currentIndex()).toString())
         self.query.setItemSlot(idx)
+        self.query.setPageNumber(self.currentPage)
 
-        if self.query.makeQuery(uname, pwd):
-            self.browser.setHtml(self.query.htmlText)
-        else:
+        self.doQuery(uname, pwd)
+
+    def doQuery(self, uname = None, pwd = None):
+        if not self.query.makeQuery(uname, pwd):
             QMessageBox.critical(self, "Login Error!",
                 "Could not login, please check username and password")
+            return
 
+        self.browser.setHtml(self.query.htmlText)
+        self.updatePageStatus()
+        
+    def updatePageStatus(self):
+        numpages = self.query.numPages
+        if numpages == 1:
+            self.nextButton.setEnabled(False)
+            self.goButton.setEnabled(False)
+            self.prevButton.setEnabled(False)
+        else:
+            self.goButton.setEnabled(True)
+            self.nextButton.setEnabled(self.currentPage < numpages)
+            self.prevButton.setEnabled(self.currentPage > 1)
+
+        self.pageNum.setText(str(self.currentPage))
+        self.pageStatus.setText('%d/%d' % (self.currentPage, numpages))
+
+    def nextPage(self):
+        self.currentPage += 1
+        self.query.setPageNumber(self.currentPage)
+        self.doQuery()
+
+    def prevPage(self):
+        self.currentPage -= 1
+        self.query.setPageNumber(self.currentPage)
+        self.doQuery()
+
+    def goPage(self):
+        try:
+            num = int(str(self.pageNum.text()))
+            if num > self.query.numPages:
+                self.pageNum.setText(str(self.currentPage))
+            else:
+                self.currentPage = num
+                self.query.setPageNumber(self.currentPage)
+                self.doQuery()
+        except:
+            self.pageNum.setText(str(self.currentPage))
+            
     def anchorClicked(self, link):
         self.browser.setSource(QUrl()) # don't navigate
 
