@@ -92,7 +92,7 @@ class ScWindow(QMainWindow, Ui_B_SC):
         self.ethinargWindow = None
         self.newcount = 0
         self.startup = 1
-        self.nocalc = 1
+        self.nocalc = True
         self.recentFiles = []
         self.effectlists = GemLists['All'].copy()
         self.dropeffectlists = DropLists['All'].copy()
@@ -117,7 +117,7 @@ class ScWindow(QMainWindow, Ui_B_SC):
         self.loadOptions()
         self.initMenu()
         self.updateRecentFiles(None)
-        self.initialize(0)
+        self.initialize(False)
         
     def initLayout(self):
         testfont = QFontMetrics(QApplication.font())
@@ -785,7 +785,7 @@ class ScWindow(QMainWindow, Ui_B_SC):
             self.iconSize().width())
 
     def initialize(self, moretodo):
-        self.nocalc = 1
+        self.nocalc = True
         self.noteText = ''
         self.filename = None
         self.newcount = self.newcount + 1
@@ -828,7 +828,7 @@ class ScWindow(QMainWindow, Ui_B_SC):
         self.CharLevel.setText('50')
         self.appendOutfit()
         self.restoreItem(self.itemattrlist[self.currentTabLabel])
-        self.modified = 0
+        self.modified = False
         self.nocalc = moretodo
         if self.nocalc: return
         self.calculate()
@@ -975,7 +975,7 @@ class ScWindow(QMainWindow, Ui_B_SC):
     def restoreItem(self, item):
         if item is None: return
         wasnocalc = self.nocalc
-        self.nocalc = 1
+        self.nocalc = True
         itemtype = item.ActiveState
         if itemtype == 'player':
             self.showPlayerWidgets(item)
@@ -1362,7 +1362,7 @@ class ScWindow(QMainWindow, Ui_B_SC):
                 
     def templateChanged(self,a0=None):
         if self.nocalc: return
-        self.modified = 1
+        self.modified = True
         self.calculate()
 
     def raceChanged(self, a0):
@@ -1378,7 +1378,7 @@ class ScWindow(QMainWindow, Ui_B_SC):
             else:
                 self.StatBonus[rt].setText('-')
         if self.nocalc: return
-        self.modified = 1
+        self.modified = True
         self.restoreItem(self.itemattrlist[self.currentTabLabel])
 
     def charClassChanged(self,a0):
@@ -1424,7 +1424,7 @@ class ScWindow(QMainWindow, Ui_B_SC):
 
     def itemChanged(self,a0=None):
         if self.nocalc: return
-        self.modified = 1
+        self.modified = True
         item = self.itemattrlist[self.currentTabLabel]
         self.fixupItemLevel()
         item.Level = unicode(self.ItemLevel.text())
@@ -1482,7 +1482,7 @@ class ScWindow(QMainWindow, Ui_B_SC):
         cursorpos = self.ItemNameCombo.lineEdit().cursorPosition()
         self.ItemNameCombo.setItemText(0,item.ItemName)
         self.ItemNameCombo.lineEdit().setCursorPosition(cursorpos)
-        self.modified = 1
+        self.modified = True
 
     def senderSlot(self):
         index = self.sender().objectName()[-2:]
@@ -1502,7 +1502,7 @@ class ScWindow(QMainWindow, Ui_B_SC):
             item.slot(slot).setMakes(str(self.Makes[slot].value()))
         else:
             item.slot(slot).setRequirement(self.Requirement[slot].text())
-        self.modified = 1
+        self.modified = True
         self.calculate()
 
     def effectChanged(self, value = None, slot = -1):
@@ -1515,7 +1515,7 @@ class ScWindow(QMainWindow, Ui_B_SC):
             efftext = str(self.Effect[slot].lineEdit().text())
         if not self.nocalc:
             item.slot(slot).setEffect(efftext)
-            self.modified = 1
+            self.modified = True
         typetext = str(item.slot(slot).type())
         effcombo = self.Effect[slot]
         unique = ((len(efftext) > 3 and efftext[-3:] == "...") \
@@ -1606,7 +1606,7 @@ class ScWindow(QMainWindow, Ui_B_SC):
         typetext = str(self.Type[slot].currentText())
         if not self.nocalc:
             item.slot(slot).setType(typetext)
-            self.modified = 1
+            self.modified = True
 
         effcombo = self.Effect[slot]
         if effcombo.isEditable():
@@ -1647,7 +1647,7 @@ class ScWindow(QMainWindow, Ui_B_SC):
         #self.itemIndex += 1
         #self.itemnumbering += 1
         if self.nocalc: return
-        self.modified = 1
+        self.modified = True
         self.restoreItem(self.itemattrlist[self.currentTabLabel])
 
     def deleteCurrentItem(self):
@@ -1658,7 +1658,7 @@ class ScWindow(QMainWindow, Ui_B_SC):
         self.itemattrlist[self.currentTabLabel] = item.next
         item.next = None
         if self.nocalc: return
-        self.modified = 1
+        self.modified = True
         self.restoreItem(self.itemattrlist[self.currentTabLabel])
 
     def chooseItemPath(self):
@@ -1771,7 +1771,7 @@ class ScWindow(QMainWindow, Ui_B_SC):
                 item.next = self.itemattrlist[self.currentTabLabel]
                 self.itemattrlist[self.currentTabLabel] = item
                 self.restoreItem(item)
-                self.modified = 1
+                self.modified = True
 
     def newFile(self):
         if self.modified:
@@ -1784,7 +1784,7 @@ class ScWindow(QMainWindow, Ui_B_SC):
             if ret == QMessageBox.Yes:
                 self.saveFile()
                 if self.modified: return
-        self.initialize(0)
+        self.initialize(False)
 
     def saveFile(self):
         if self.filename is None:
@@ -1795,7 +1795,7 @@ class ScWindow(QMainWindow, Ui_B_SC):
                 f.write(XMLHelper.writexml(self.asXML(), UnicodeStringIO(),
                                            '', '\t', '\n'))
                 f.close()
-                self.modified = 0
+                self.modified = False
             except IOError:
                 QMessageBox.critical(None, 'Error!', 
                     'Error writing to file: ' + self.filename, 'OK')
@@ -1821,7 +1821,7 @@ class ScWindow(QMainWindow, Ui_B_SC):
                 QMessageBox.critical(None, 'Error!', 
                     'Error writing to file: ' + filename, 'OK')
                 return
-            self.modified = 0
+            self.modified = False
             self.filename = os.path.abspath(filename)
             self.updateRecentFiles(self.filename)
             self.TemplatePath = os.path.dirname(self.filename)
@@ -1907,7 +1907,7 @@ class ScWindow(QMainWindow, Ui_B_SC):
             self.rf_menu.addAction(act)
 
     def loadFromXML(self, template):
-        self.initialize(1)
+        self.initialize(True)
         self.OutfitName.clear()
         racename = ''
         classname = ''
@@ -2001,8 +2001,8 @@ class ScWindow(QMainWindow, Ui_B_SC):
             self.outfitNameSelected(self.currentOutfit)
 
         self.deleteOutfitAction.setEnabled(len(self.outfitlist) > 1)
-        self.modified = 0
-        self.nocalc = 0
+        self.modified = False
+        self.nocalc = False
         self.restoreItem(self.itemattrlist[self.currentTabLabel])
         
     def chooseXMLUIFile(self):
@@ -2025,18 +2025,18 @@ class ScWindow(QMainWindow, Ui_B_SC):
         self.openFile(self.recentFiles[index], True)
 
     def openOptions(self):
-        self.nocalc = 1
+        self.nocalc = True
         self.saveOptions()
         res = Options.Options(self).exec_()
         if res == 1:
             self.loadOptions()
             self.showcapmenuid.setChecked(self.capDistance)
             self.realmChanged(self.Realm.currentIndex())
-            self.modified = 1
-            self.nocalc = 0
+            self.modified = True
+            self.nocalc = False
             self.restoreItem(self.itemattrlist[self.currentTabLabel])
         else:
-            self.nocalc = 0
+            self.nocalc = False
             self.calculate()
 
     def openCraftWindow(self):
@@ -2044,7 +2044,7 @@ class ScWindow(QMainWindow, Ui_B_SC):
         CW.loadgems(list(self.itemattrlist[self.currentTabLabel].slots()))
         CW.exec_()
         self.restoreItem(self.itemattrlist[self.currentTabLabel])
-        self.modified = 1
+        self.modified = True
 
     def gemClicked(self, item, slot):
         #RW = ReportWindow.ReportWindow(self, '', True)
@@ -2055,7 +2055,7 @@ class ScWindow(QMainWindow, Ui_B_SC):
         CW.loadgems([self.itemattrlist[self.currentTabLabel].slot(slot - 1)],)
         CW.exec_()
         self.restoreItem(self.itemattrlist[self.currentTabLabel])
-        self.modified = 1
+        self.modified = True
     
     def openMaterialsReport(self):
         RW = ReportWindow.ReportWindow(self, '', 1)
@@ -2206,7 +2206,7 @@ class ScWindow(QMainWindow, Ui_B_SC):
             itemslot = cur.itemslots[i]
             cur.itemslots[i] = part.itemslots[i]
             part.itemslots[i] = itemslot
-        self.modified = 1
+        self.modified = True
         self.restoreItem(self.itemattrlist[self.currentTabLabel])
 
     def moveTo(self, action):
@@ -2235,7 +2235,7 @@ class ScWindow(QMainWindow, Ui_B_SC):
         else:
             row = 0
             col = PieceTabList.index(piece)
-        self.modified = 1
+        self.modified = True
         self.PieceTab.setCurrentIndex(row, col)
 
     def chooseItemType(self, action):
@@ -2319,6 +2319,7 @@ class ScWindow(QMainWindow, Ui_B_SC):
             self.chooseItemType(action)
 
     def addItem(self, item):
+        self.modified = True
         item.TemplateIndex = self.itemIndex
         self.itemIndex += 1
         self.itemnumbering += 1
@@ -2369,7 +2370,7 @@ class ScWindow(QMainWindow, Ui_B_SC):
         self.OutfitName.setCurrentIndex(self.currentOutfit)
         if len(self.outfitlist) > 1:
             self.deleteOutfitAction.setEnabled(True)
-        self.modified = 1
+        self.modified = True
 
     def deleteOutfit(self):
         if self.currentOutfit < 0 or len(self.outfitlist) < 2: return
@@ -2381,7 +2382,7 @@ class ScWindow(QMainWindow, Ui_B_SC):
         self.OutfitName.removeItem(outfit)
         self.OutfitName.setCurrentIndex(self.currentOutfit)
         self.OutfitName.blockSignals(False)
-        self.modified = 1
+        self.modified = True
         if len(self.outfitlist) < 2:
             self.deleteOutfitAction.setEnabled(False)
         self.outfitNameSelected(self.currentOutfit)
@@ -2425,7 +2426,7 @@ class ScWindow(QMainWindow, Ui_B_SC):
         cursorpos = self.OutfitName.lineEdit().cursorPosition()
         self.OutfitName.setItemText(idx, outfitname)
         self.OutfitName.lineEdit().setCursorPosition(cursorpos)
-        self.modified = 1
+        self.modified = True
 
     def aboutBox(self):
         splash = AboutScreen(parent=self,modal=True)
