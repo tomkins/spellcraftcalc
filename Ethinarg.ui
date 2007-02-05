@@ -5,8 +5,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>769</width>
-    <height>596</height>
+    <width>779</width>
+    <height>711</height>
    </rect>
   </property>
   <property name="windowTitle" >
@@ -235,61 +235,154 @@
            </layout>
           </item>
           <item>
-           <layout class="QHBoxLayout" >
-            <property name="margin" >
-             <number>0</number>
+           <widget class="QGroupBox" name="groupBox_3" >
+            <property name="title" >
+             <string>Search Parameters</string>
             </property>
-            <property name="spacing" >
-             <number>6</number>
-            </property>
-            <item>
-             <widget class="QLabel" name="label_3" >
-              <property name="text" >
-               <string>Item Name</string>
-              </property>
-             </widget>
-            </item>
-            <item>
-             <widget class="QLineEdit" name="itemNameBox" >
-              <property name="text" >
-               <string/>
-              </property>
-             </widget>
-            </item>
-           </layout>
-          </item>
-          <item>
-           <layout class="QHBoxLayout" >
-            <property name="margin" >
-             <number>0</number>
-            </property>
-            <property name="spacing" >
-             <number>6</number>
-            </property>
-            <item>
-             <widget class="QLabel" name="label_4" >
-              <property name="text" >
-               <string>Item Slot</string>
-              </property>
-             </widget>
-            </item>
-            <item>
-             <widget class="QComboBox" name="slotCombo" />
-            </item>
-            <item>
-             <spacer>
-              <property name="orientation" >
-               <enum>Qt::Horizontal</enum>
-              </property>
-              <property name="sizeHint" >
-               <size>
-                <width>40</width>
-                <height>20</height>
-               </size>
-              </property>
-             </spacer>
-            </item>
-           </layout>
+            <layout class="QVBoxLayout" >
+             <property name="margin" >
+              <number>9</number>
+             </property>
+             <property name="spacing" >
+              <number>6</number>
+             </property>
+             <item>
+              <layout class="QVBoxLayout" >
+               <property name="margin" >
+                <number>0</number>
+               </property>
+               <property name="spacing" >
+                <number>6</number>
+               </property>
+               <item>
+                <layout class="QHBoxLayout" >
+                 <property name="margin" >
+                  <number>0</number>
+                 </property>
+                 <property name="spacing" >
+                  <number>6</number>
+                 </property>
+                 <item>
+                  <widget class="QLabel" name="label_6" >
+                   <property name="text" >
+                    <string>Item Realm</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item>
+                  <widget class="SearchingCombo" name="realmCombo" >
+                   <property name="sizeAdjustPolicy" >
+                    <enum>QComboBox::AdjustToContents</enum>
+                   </property>
+                  </widget>
+                 </item>
+                 <item>
+                  <spacer>
+                   <property name="orientation" >
+                    <enum>Qt::Horizontal</enum>
+                   </property>
+                   <property name="sizeHint" >
+                    <size>
+                     <width>40</width>
+                     <height>20</height>
+                    </size>
+                   </property>
+                  </spacer>
+                 </item>
+                </layout>
+               </item>
+               <item>
+                <layout class="QHBoxLayout" >
+                 <property name="margin" >
+                  <number>0</number>
+                 </property>
+                 <property name="spacing" >
+                  <number>6</number>
+                 </property>
+                 <item>
+                  <widget class="QLabel" name="label_3" >
+                   <property name="text" >
+                    <string>Item Name</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item>
+                  <widget class="QLineEdit" name="itemNameBox" >
+                   <property name="text" >
+                    <string/>
+                   </property>
+                  </widget>
+                 </item>
+                 <item>
+                  <widget class="QLabel" name="label_4" >
+                   <property name="text" >
+                    <string>Item Type</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item>
+                  <widget class="SearchingCombo" name="slotCombo" >
+                   <property name="sizeAdjustPolicy" >
+                    <enum>QComboBox::AdjustToContents</enum>
+                   </property>
+                  </widget>
+                 </item>
+                 <item>
+                  <spacer>
+                   <property name="orientation" >
+                    <enum>Qt::Horizontal</enum>
+                   </property>
+                   <property name="sizeHint" >
+                    <size>
+                     <width>40</width>
+                     <height>20</height>
+                    </size>
+                   </property>
+                  </spacer>
+                 </item>
+                </layout>
+               </item>
+               <item>
+                <layout class="QHBoxLayout" >
+                 <property name="margin" >
+                  <number>0</number>
+                 </property>
+                 <property name="spacing" >
+                  <number>6</number>
+                 </property>
+                 <item>
+                  <widget class="QLabel" name="label_5" >
+                   <property name="text" >
+                    <string>Item Class</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item>
+                  <widget class="SearchingCombo" name="classCombo" >
+                   <property name="sizeAdjustPolicy" >
+                    <enum>QComboBox::AdjustToContents</enum>
+                   </property>
+                  </widget>
+                 </item>
+                 <item>
+                  <spacer>
+                   <property name="orientation" >
+                    <enum>Qt::Horizontal</enum>
+                   </property>
+                   <property name="sizeHint" >
+                    <size>
+                     <width>40</width>
+                     <height>20</height>
+                    </size>
+                   </property>
+                  </spacer>
+                 </item>
+                </layout>
+               </item>
+              </layout>
+             </item>
+            </layout>
+           </widget>
           </item>
           <item>
            <layout class="QHBoxLayout" >
@@ -317,6 +410,9 @@
               <property name="text" >
                <string>Run Query</string>
               </property>
+              <property name="default" >
+               <bool>true</bool>
+              </property>
              </widget>
             </item>
             <item>
@@ -343,6 +439,13 @@
    </item>
   </layout>
  </widget>
+ <customwidgets>
+  <customwidget>
+   <class>SearchingCombo</class>
+   <extends>QComboBox</extends>
+   <header>SearchingCombo.h</header>
+  </customwidget>
+ </customwidgets>
  <resources/>
  <connections/>
 </ui>
