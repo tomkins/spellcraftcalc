@@ -273,6 +273,12 @@ class EthinargQuery:
     def setItemSlot(self, slot):
         self.queryparams['itemtype'] = slot
 
+    def setRealm(self, realm):
+        self.queryparams['realm'] = realm
+
+    def setClass(self, cls):
+        self.queryparams['class'] = cls
+
     def setPageNumber(self, num):
         self.queryparams['curr_page'] = str(num)
 
@@ -324,7 +330,26 @@ class EthinargTestWindow(QDialog, Ui_B_Ethinarg):
 
     def initialize(self):
         self.query = EthinargQuery()
+        self.queryBoxes = [
+            (self.slotCombo, 'itemtype', self.query.setItemSlot),
+            (self.realmCombo, 'realm', self.query.setRealm),
+            (self.classCombo, 'class', self.query.setClass),
+        ]
         QApplication.postEvent(self, QEvent(InitializedEvent))
+
+    def loadCombos(self):
+        for ctrl, key, func in self.queryBoxes:
+            ctrl.clear()
+            for k, v in self.query.formValues[key]:
+                ctrl.addItem(k, QVariant(v))
+
+    def setQueryParams(self):
+        self.query.setItemName(str(self.itemNameBox.text()))
+        for ctrl, key, func in self.queryBoxes:
+            idx = str(ctrl.itemData(ctrl.currentIndex()).toString())
+            func(idx)
+        self.query.setPageNumber(self.currentPage)
+
 
     def runQuery(self):
         uname = str(self.usernameBox.text())
@@ -336,10 +361,11 @@ class EthinargTestWindow(QDialog, Ui_B_Ethinarg):
             return
 
         self.currentPage = 1
-        self.query.setItemName(str(self.itemNameBox.text()))
-        idx = str(self.slotCombo.itemData(self.slotCombo.currentIndex()).toString())
-        self.query.setItemSlot(idx)
-        self.query.setPageNumber(self.currentPage)
+        self.setQueryParams()
+        #self.query.setItemName(str(self.itemNameBox.text()))
+        #idx = str(self.slotCombo.itemData(self.slotCombo.currentIndex()).toString())
+        #self.query.setItemSlot(idx)
+        #self.query.setPageNumber(self.currentPage)
 
         self.doQuery(uname, pwd)
 
@@ -428,9 +454,7 @@ class EthinargTestWindow(QDialog, Ui_B_Ethinarg):
             self.updatePageStatus()
             return True
         elif e.type() == InitializedEvent:
-            self.slotCombo.clear()
-            for k,v in self.query.formValues['itemtype']:
-                self.slotCombo.addItem(k, QVariant(v))
+            self.loadCombos()
             self.processBox.cancel()
             return True
         else:
@@ -453,6 +477,7 @@ if __name__ == '__main__':
     b.setHtml(e.htmlText)
     b.show()
     app.setActiveWindow(b)
-
+ 
     sys.exit(app.exec_())
 
+# vim: set ts=4 sw=4 et:

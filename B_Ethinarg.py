@@ -2,8 +2,8 @@
 
 # Form implementation generated from reading ui file 'Ethinarg.ui'
 #
-# Created: Sun Feb  4 09:37:11 2007
-#      by: PyQt4 UI code generator 4.1
+# Created: Mon Feb 05 15:48:39 2007
+#      by: PyQt4 UI code generator 4.1.1
 #
 # WARNING! All changes made in this file will be lost!
 
@@ -13,7 +13,7 @@ from PyQt4 import QtCore, QtGui
 class Ui_B_Ethinarg(object):
     def setupUi(self, B_Ethinarg):
         B_Ethinarg.setObjectName("B_Ethinarg")
-        B_Ethinarg.resize(QtCore.QSize(QtCore.QRect(0,0,769,596).size()).expandedTo(B_Ethinarg.minimumSizeHint()))
+        B_Ethinarg.resize(QtCore.QSize(QtCore.QRect(0,0,779,711).size()).expandedTo(B_Ethinarg.minimumSizeHint()))
 
         self.vboxlayout = QtGui.QVBoxLayout(B_Ethinarg)
         self.vboxlayout.setMargin(9)
@@ -146,52 +146,99 @@ class Ui_B_Ethinarg(object):
         self.hboxlayout1.addWidget(self.passwordBox)
         self.vboxlayout5.addLayout(self.hboxlayout1)
 
+        self.groupBox_3 = QtGui.QGroupBox(self.groupBox_2)
+        self.groupBox_3.setObjectName("groupBox_3")
+
+        self.vboxlayout6 = QtGui.QVBoxLayout(self.groupBox_3)
+        self.vboxlayout6.setMargin(9)
+        self.vboxlayout6.setSpacing(6)
+        self.vboxlayout6.setObjectName("vboxlayout6")
+
+        self.vboxlayout7 = QtGui.QVBoxLayout()
+        self.vboxlayout7.setMargin(0)
+        self.vboxlayout7.setSpacing(6)
+        self.vboxlayout7.setObjectName("vboxlayout7")
+
         self.hboxlayout2 = QtGui.QHBoxLayout()
         self.hboxlayout2.setMargin(0)
         self.hboxlayout2.setSpacing(6)
         self.hboxlayout2.setObjectName("hboxlayout2")
 
-        self.label_3 = QtGui.QLabel(self.groupBox_2)
-        self.label_3.setObjectName("label_3")
-        self.hboxlayout2.addWidget(self.label_3)
+        self.label_6 = QtGui.QLabel(self.groupBox_3)
+        self.label_6.setObjectName("label_6")
+        self.hboxlayout2.addWidget(self.label_6)
 
-        self.itemNameBox = QtGui.QLineEdit(self.groupBox_2)
-        self.itemNameBox.setObjectName("itemNameBox")
-        self.hboxlayout2.addWidget(self.itemNameBox)
-        self.vboxlayout5.addLayout(self.hboxlayout2)
+        self.realmCombo = SearchingCombo(self.groupBox_3)
+        self.realmCombo.setSizeAdjustPolicy(QtGui.QComboBox.AdjustToContents)
+        self.realmCombo.setObjectName("realmCombo")
+        self.hboxlayout2.addWidget(self.realmCombo)
+
+        spacerItem1 = QtGui.QSpacerItem(40,20,QtGui.QSizePolicy.Expanding,QtGui.QSizePolicy.Minimum)
+        self.hboxlayout2.addItem(spacerItem1)
+        self.vboxlayout7.addLayout(self.hboxlayout2)
 
         self.hboxlayout3 = QtGui.QHBoxLayout()
         self.hboxlayout3.setMargin(0)
         self.hboxlayout3.setSpacing(6)
         self.hboxlayout3.setObjectName("hboxlayout3")
 
-        self.label_4 = QtGui.QLabel(self.groupBox_2)
+        self.label_3 = QtGui.QLabel(self.groupBox_3)
+        self.label_3.setObjectName("label_3")
+        self.hboxlayout3.addWidget(self.label_3)
+
+        self.itemNameBox = QtGui.QLineEdit(self.groupBox_3)
+        self.itemNameBox.setObjectName("itemNameBox")
+        self.hboxlayout3.addWidget(self.itemNameBox)
+
+        self.label_4 = QtGui.QLabel(self.groupBox_3)
         self.label_4.setObjectName("label_4")
         self.hboxlayout3.addWidget(self.label_4)
 
-        self.slotCombo = QtGui.QComboBox(self.groupBox_2)
+        self.slotCombo = SearchingCombo(self.groupBox_3)
+        self.slotCombo.setSizeAdjustPolicy(QtGui.QComboBox.AdjustToContents)
         self.slotCombo.setObjectName("slotCombo")
         self.hboxlayout3.addWidget(self.slotCombo)
 
-        spacerItem1 = QtGui.QSpacerItem(40,20,QtGui.QSizePolicy.Expanding,QtGui.QSizePolicy.Minimum)
-        self.hboxlayout3.addItem(spacerItem1)
-        self.vboxlayout5.addLayout(self.hboxlayout3)
+        spacerItem2 = QtGui.QSpacerItem(40,20,QtGui.QSizePolicy.Expanding,QtGui.QSizePolicy.Minimum)
+        self.hboxlayout3.addItem(spacerItem2)
+        self.vboxlayout7.addLayout(self.hboxlayout3)
 
         self.hboxlayout4 = QtGui.QHBoxLayout()
         self.hboxlayout4.setMargin(0)
         self.hboxlayout4.setSpacing(6)
         self.hboxlayout4.setObjectName("hboxlayout4")
 
-        spacerItem2 = QtGui.QSpacerItem(40,20,QtGui.QSizePolicy.Expanding,QtGui.QSizePolicy.Minimum)
-        self.hboxlayout4.addItem(spacerItem2)
+        self.label_5 = QtGui.QLabel(self.groupBox_3)
+        self.label_5.setObjectName("label_5")
+        self.hboxlayout4.addWidget(self.label_5)
 
-        self.queryButton = QtGui.QPushButton(self.groupBox_2)
-        self.queryButton.setObjectName("queryButton")
-        self.hboxlayout4.addWidget(self.queryButton)
+        self.classCombo = SearchingCombo(self.groupBox_3)
+        self.classCombo.setSizeAdjustPolicy(QtGui.QComboBox.AdjustToContents)
+        self.classCombo.setObjectName("classCombo")
+        self.hboxlayout4.addWidget(self.classCombo)
 
         spacerItem3 = QtGui.QSpacerItem(40,20,QtGui.QSizePolicy.Expanding,QtGui.QSizePolicy.Minimum)
         self.hboxlayout4.addItem(spacerItem3)
-        self.vboxlayout5.addLayout(self.hboxlayout4)
+        self.vboxlayout7.addLayout(self.hboxlayout4)
+        self.vboxlayout6.addLayout(self.vboxlayout7)
+        self.vboxlayout5.addWidget(self.groupBox_3)
+
+        self.hboxlayout5 = QtGui.QHBoxLayout()
+        self.hboxlayout5.setMargin(0)
+        self.hboxlayout5.setSpacing(6)
+        self.hboxlayout5.setObjectName("hboxlayout5")
+
+        spacerItem4 = QtGui.QSpacerItem(40,20,QtGui.QSizePolicy.Expanding,QtGui.QSizePolicy.Minimum)
+        self.hboxlayout5.addItem(spacerItem4)
+
+        self.queryButton = QtGui.QPushButton(self.groupBox_2)
+        self.queryButton.setDefault(True)
+        self.queryButton.setObjectName("queryButton")
+        self.hboxlayout5.addWidget(self.queryButton)
+
+        spacerItem5 = QtGui.QSpacerItem(40,20,QtGui.QSizePolicy.Expanding,QtGui.QSizePolicy.Minimum)
+        self.hboxlayout5.addItem(spacerItem5)
+        self.vboxlayout5.addLayout(self.hboxlayout5)
         self.vboxlayout4.addLayout(self.vboxlayout5)
         self.vboxlayout1.addWidget(self.groupBox_2)
         self.vboxlayout.addLayout(self.vboxlayout1)
@@ -209,7 +256,11 @@ class Ui_B_Ethinarg(object):
         self.groupBox_2.setTitle(QtGui.QApplication.translate("B_Ethinarg", "Search Info", None, QtGui.QApplication.UnicodeUTF8))
         self.label.setText(QtGui.QApplication.translate("B_Ethinarg", "Username", None, QtGui.QApplication.UnicodeUTF8))
         self.label_2.setText(QtGui.QApplication.translate("B_Ethinarg", "Password", None, QtGui.QApplication.UnicodeUTF8))
+        self.groupBox_3.setTitle(QtGui.QApplication.translate("B_Ethinarg", "Search Parameters", None, QtGui.QApplication.UnicodeUTF8))
+        self.label_6.setText(QtGui.QApplication.translate("B_Ethinarg", "Item Realm", None, QtGui.QApplication.UnicodeUTF8))
         self.label_3.setText(QtGui.QApplication.translate("B_Ethinarg", "Item Name", None, QtGui.QApplication.UnicodeUTF8))
-        self.label_4.setText(QtGui.QApplication.translate("B_Ethinarg", "Item Slot", None, QtGui.QApplication.UnicodeUTF8))
+        self.label_4.setText(QtGui.QApplication.translate("B_Ethinarg", "Item Type", None, QtGui.QApplication.UnicodeUTF8))
+        self.label_5.setText(QtGui.QApplication.translate("B_Ethinarg", "Item Class", None, QtGui.QApplication.UnicodeUTF8))
         self.queryButton.setText(QtGui.QApplication.translate("B_Ethinarg", "Run Query", None, QtGui.QApplication.UnicodeUTF8))
 
+from SearchingCombo import SearchingCombo
