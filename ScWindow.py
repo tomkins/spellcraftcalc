@@ -1932,7 +1932,7 @@ class ScWindow(QMainWindow, Ui_B_SC):
                 self.noteText = XMLHelper.getText(child.childNodes)
             elif child.tagName == 'SCItem':
                 newItem = Item(realm=self.realm)
-                newItem.loadFromXML(child,str(self.itemnumbering))
+                newItem.loadFromXML(child,str(self.itemnumbering),True)
                 if newItem.TemplateIndex == -1:
                     newItem.TemplateIndex = self.itemIndex
                     self.itemIndex += 1

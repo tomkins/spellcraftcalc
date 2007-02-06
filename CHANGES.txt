@@ -1,6 +1,10 @@
 Updated ??/??/2007 - Version 1.98
 
-
+  When loading a classic template, don't throw away either the drop
+  or crafted 'empty item' just because they have no slots filled in.
+  Users -expect- to see an empty item waiting for them, it was there
+  when they saved it.  We still collapse the empty drop or crafted
+  item when an item, alone, is loaded.
 
 Updated 01/30/2007 - Version 1.97
 

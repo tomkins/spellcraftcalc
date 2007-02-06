@@ -497,6 +497,8 @@ class Item:
 
         for key, val in fields:
             if not rich and val == '': continue
+            if not isinstance(val, basestring):
+                sys.stderr.write("%s value %s is not a string\n" % (key, str(val)))
             elem = document.createElement(key)
             elem.appendChild(document.createTextNode(val))
             rootnode.appendChild(elem)
@@ -560,7 +562,7 @@ class Item:
                 self.loadLelaItemFromSCC(0, f.readlines(), self.Realm, True)
         f.close()
 
-    def loadFromXML(self, itemnode, namehint = ''):
+    def loadFromXML(self, itemnode, namehint = '', convert = False):
         slots = {}
         for child in itemnode.childNodes:
             if child.nodeType == Node.TEXT_NODE: continue
@@ -615,13 +617,13 @@ class Item:
                     if itemslot.type() != 'Unused':
                         found = True
                     itemslot.fixEffect()
-                if not found:
+                if not (convert or found):
                     slots.pop(type)
-        if len(slots) > 0:
+        if convert or len(slots) > 0:
             if slots.has_key(self.ActiveState):
                 self.itemslots = slots[self.ActiveState]
                 self.itemslots = slots.pop(self.ActiveState)
-            if len(slots) > 0:
+            if convert or len(slots) > 0:
                 self.next = self.copy()
                 type = slots.keys()[0]
                 self.next.Equipped = '0'
