@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'ScWindow.ui'
 #
-# Created: Sun Jan 21 19:48:18 2007
+# Created: Tue Feb 06 00:06:02 2007
 #      by: PyQt4 UI code generator 4.1
 #
 # WARNING! All changes made in this file will be lost!
@@ -88,7 +88,7 @@ class Ui_B_SC(object):
         self.OutfitName.setObjectName("OutfitName")
         self.gridlayout1.addWidget(self.OutfitName,5,1,1,2)
 
-        spacerItem = QtGui.QSpacerItem(5,4,QtGui.QSizePolicy.Minimum,QtGui.QSizePolicy.Fixed)
+        spacerItem = QtGui.QSpacerItem(1,5,QtGui.QSizePolicy.Minimum,QtGui.QSizePolicy.Fixed)
         self.gridlayout1.addItem(spacerItem,6,0,1,3)
 
         self.LabelTotalCost = QtGui.QLabel(self.GroupCharInfo)
