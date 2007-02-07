@@ -24,7 +24,7 @@ def writexml(self, writer, indent="", addindent="", newl=""):
                 writexml(node, writer, indent, addindent, newl)
         return writer.getvalue()
     elif self.nodeType == Node.TEXT_NODE:
-        writer.write(self.data, True)
+        _write_data(writer, self.data)
         return
     writer.write(indent+"<" + self.tagName)
 
@@ -65,7 +65,7 @@ def getText(nodelist):
 
 def _write_data(writer, data):
     "Writes datachars to writer."
-    #data = data.replace("&", "&amp;").replace("<", "&lt;")
-    #data = data.replace("\"", "&quot;").replace(">", "&gt;")
+    data = data.replace("&", "&amp;").replace("<", "&lt;")
+    data = data.replace("\"", "&quot;").replace(">", "&gt;")
     writer.write(data, True)    
 
