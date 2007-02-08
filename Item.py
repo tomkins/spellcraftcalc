@@ -619,11 +619,11 @@ class Item:
                     itemslot.fixEffect()
                 if not (convert or found):
                     slots.pop(type)
-        if convert or len(slots) > 0:
+        if len(slots) > 0:
             if slots.has_key(self.ActiveState):
                 self.itemslots = slots[self.ActiveState]
                 self.itemslots = slots.pop(self.ActiveState)
-            if convert or len(slots) > 0:
+            if len(slots) > 0:
                 self.next = self.copy()
                 type = slots.keys()[0]
                 self.next.Equipped = '0'
