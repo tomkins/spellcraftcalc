@@ -519,6 +519,8 @@ class EthinargTestWindow(QDialog, Ui_B_Ethinarg):
             return True
         elif e.type() == InitializedEvent:
             self.loadCombos()
+            self.maxLevelCombo.setCurrentIndex(
+                self.maxLevelCombo.findText('51'))
             self.processBox.cancel()
             return True
         else:
