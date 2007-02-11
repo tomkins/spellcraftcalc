@@ -279,6 +279,24 @@ class EthinargQuery:
     def setClass(self, cls):
         self.queryparams['class'] = cls
 
+    def setMinLevel(self, lvl):
+        self.queryparams['min_level'] = lvl
+
+    def setMaxLevel(self, lvl):
+        self.queryparams['max_level'] = lvl
+
+    def setBonus1(self, stat):
+        self.queryparams['stat1'] = stat
+
+    def setBonus2(self, stat):
+        self.queryparams['stat2'] = stat
+
+    def setBonus3(self, stat):
+        self.queryparams['stat3'] = stat
+
+    def setMagicalAbility(self, ma):
+        self.queryparams['ma'] = ma
+
     def setPageNumber(self, num):
         self.queryparams['curr_page'] = str(num)
 
@@ -315,6 +333,10 @@ class EthinargTestWindow(QDialog, Ui_B_Ethinarg):
             self.collapsePane)
         self.connect(self.openSearchButton, SIGNAL('clicked()'),
             self.openSearch)
+        self.connect(self.minLevelCombo, SIGNAL('currentIndexChanged(int)'),
+            self.minLevelChanged)
+        self.connect(self.maxLevelCombo, SIGNAL('currentIndexChanged(int)'),
+            self.maxLevelChanged)
         self.currentPage = 1
         self.pageStatus.setText('')
         #self.processBox = QueryProgress(self)
@@ -338,6 +360,12 @@ class EthinargTestWindow(QDialog, Ui_B_Ethinarg):
             (self.slotCombo, 'itemtype', self.query.setItemSlot),
             (self.realmCombo, 'realm', self.query.setRealm),
             (self.classCombo, 'class', self.query.setClass),
+            (self.minLevelCombo, 'min_level', self.query.setMinLevel),
+            (self.maxLevelCombo, 'max_level', self.query.setMaxLevel),
+            (self.bonus1Combo, 'stat1', self.query.setBonus1),
+            (self.bonus2Combo, 'stat2', self.query.setBonus2),
+            (self.bonus3Combo, 'stat3', self.query.setBonus3),
+            (self.magicalCombo, 'ma', self.query.setMagicalAbility),
         ]
         QApplication.postEvent(self, QEvent(InitializedEvent))
 
@@ -433,6 +461,30 @@ class EthinargTestWindow(QDialog, Ui_B_Ethinarg):
     def openSearch(self):
         self.splitter.setSizes([self.width(),
             self.splitter.widget(1).minimumSizeHint().width()])
+
+    def minLevelChanged(self, idx):
+        if str(self.minLevelCombo.currentText()) == '' or \
+                str(self.maxLevelCombo.currentText()) == '':
+            return
+
+        lvl = int(str(self.minLevelCombo.currentText()))
+        max_level = int(str(self.maxLevelCombo.currentText()))
+
+        if lvl > max_level:
+            self.maxLevelCombo.setCurrentIndex(
+                self.maxLevelCombo.findText(str(lvl)))
+
+    def maxLevelChanged(self, idx):
+        if str(self.minLevelCombo.currentText()) == '' or \
+                str(self.maxLevelCombo.currentText()) == '':
+            return
+
+        min_level = int(str(self.minLevelCombo.currentText()))
+        lvl = int(str(self.maxLevelCombo.currentText()))
+
+        if lvl < min_level:
+            self.minLevelCombo.setCurrentIndex(
+                self.minLevelCombo.findText(str(lvl)))
             
     def anchorClicked(self, link):
         self.browser.setSource(QUrl()) # don't navigate

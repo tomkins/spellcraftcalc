@@ -5,8 +5,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>894</width>
-    <height>707</height>
+    <width>897</width>
+    <height>552</height>
    </rect>
   </property>
   <property name="windowTitle" >
@@ -374,6 +374,296 @@
                 </item>
                 <item>
                  <widget class="SearchingCombo" name="classCombo" >
+                  <property name="sizeAdjustPolicy" >
+                   <enum>QComboBox::AdjustToContents</enum>
+                  </property>
+                 </widget>
+                </item>
+               </layout>
+              </item>
+              <item>
+               <layout class="QHBoxLayout" >
+                <property name="margin" >
+                 <number>0</number>
+                </property>
+                <property name="spacing" >
+                 <number>6</number>
+                </property>
+                <item>
+                 <widget class="QLabel" name="label_7" >
+                  <property name="text" >
+                   <string>Item Level</string>
+                  </property>
+                 </widget>
+                </item>
+                <item>
+                 <widget class="SearchingCombo" name="minLevelCombo" >
+                  <property name="sizePolicy" >
+                   <sizepolicy>
+                    <hsizetype>13</hsizetype>
+                    <vsizetype>0</vsizetype>
+                    <horstretch>0</horstretch>
+                    <verstretch>0</verstretch>
+                   </sizepolicy>
+                  </property>
+                  <property name="sizeAdjustPolicy" >
+                   <enum>QComboBox::AdjustToContents</enum>
+                  </property>
+                 </widget>
+                </item>
+                <item>
+                 <widget class="QLabel" name="label_8" >
+                  <property name="sizePolicy" >
+                   <sizepolicy>
+                    <hsizetype>4</hsizetype>
+                    <vsizetype>5</vsizetype>
+                    <horstretch>0</horstretch>
+                    <verstretch>0</verstretch>
+                   </sizepolicy>
+                  </property>
+                  <property name="text" >
+                   <string>~</string>
+                  </property>
+                 </widget>
+                </item>
+                <item>
+                 <widget class="SearchingCombo" name="maxLevelCombo" >
+                  <property name="sizePolicy" >
+                   <sizepolicy>
+                    <hsizetype>13</hsizetype>
+                    <vsizetype>0</vsizetype>
+                    <horstretch>0</horstretch>
+                    <verstretch>0</verstretch>
+                   </sizepolicy>
+                  </property>
+                  <property name="sizeAdjustPolicy" >
+                   <enum>QComboBox::AdjustToContents</enum>
+                  </property>
+                 </widget>
+                </item>
+               </layout>
+              </item>
+              <item>
+               <layout class="QVBoxLayout" >
+                <property name="margin" >
+                 <number>0</number>
+                </property>
+                <property name="spacing" >
+                 <number>6</number>
+                </property>
+                <item>
+                 <layout class="QHBoxLayout" >
+                  <property name="margin" >
+                   <number>0</number>
+                  </property>
+                  <property name="spacing" >
+                   <number>6</number>
+                  </property>
+                  <item>
+                   <widget class="QLabel" name="label_9" >
+                    <property name="sizePolicy" >
+                     <sizepolicy>
+                      <hsizetype>4</hsizetype>
+                      <vsizetype>5</vsizetype>
+                      <horstretch>0</horstretch>
+                      <verstretch>0</verstretch>
+                     </sizepolicy>
+                    </property>
+                    <property name="text" >
+                     <string>Bonus 1</string>
+                    </property>
+                   </widget>
+                  </item>
+                  <item>
+                   <widget class="Line" name="line" >
+                    <property name="orientation" >
+                     <enum>Qt::Horizontal</enum>
+                    </property>
+                   </widget>
+                  </item>
+                 </layout>
+                </item>
+                <item>
+                 <widget class="SearchingCombo" name="bonus1Combo" >
+                  <property name="sizePolicy" >
+                   <sizepolicy>
+                    <hsizetype>13</hsizetype>
+                    <vsizetype>0</vsizetype>
+                    <horstretch>0</horstretch>
+                    <verstretch>0</verstretch>
+                   </sizepolicy>
+                  </property>
+                  <property name="sizeAdjustPolicy" >
+                   <enum>QComboBox::AdjustToContents</enum>
+                  </property>
+                 </widget>
+                </item>
+               </layout>
+              </item>
+              <item>
+               <layout class="QVBoxLayout" >
+                <property name="margin" >
+                 <number>0</number>
+                </property>
+                <property name="spacing" >
+                 <number>6</number>
+                </property>
+                <item>
+                 <layout class="QHBoxLayout" >
+                  <property name="margin" >
+                   <number>0</number>
+                  </property>
+                  <property name="spacing" >
+                   <number>6</number>
+                  </property>
+                  <item>
+                   <widget class="QLabel" name="label_10" >
+                    <property name="sizePolicy" >
+                     <sizepolicy>
+                      <hsizetype>4</hsizetype>
+                      <vsizetype>5</vsizetype>
+                      <horstretch>0</horstretch>
+                      <verstretch>0</verstretch>
+                     </sizepolicy>
+                    </property>
+                    <property name="text" >
+                     <string>Bonus 2</string>
+                    </property>
+                   </widget>
+                  </item>
+                  <item>
+                   <widget class="Line" name="line_2" >
+                    <property name="orientation" >
+                     <enum>Qt::Horizontal</enum>
+                    </property>
+                   </widget>
+                  </item>
+                 </layout>
+                </item>
+                <item>
+                 <widget class="SearchingCombo" name="bonus2Combo" >
+                  <property name="sizePolicy" >
+                   <sizepolicy>
+                    <hsizetype>13</hsizetype>
+                    <vsizetype>0</vsizetype>
+                    <horstretch>0</horstretch>
+                    <verstretch>0</verstretch>
+                   </sizepolicy>
+                  </property>
+                  <property name="sizeAdjustPolicy" >
+                   <enum>QComboBox::AdjustToContents</enum>
+                  </property>
+                 </widget>
+                </item>
+               </layout>
+              </item>
+              <item>
+               <layout class="QVBoxLayout" >
+                <property name="margin" >
+                 <number>0</number>
+                </property>
+                <property name="spacing" >
+                 <number>6</number>
+                </property>
+                <item>
+                 <layout class="QHBoxLayout" >
+                  <property name="margin" >
+                   <number>0</number>
+                  </property>
+                  <property name="spacing" >
+                   <number>6</number>
+                  </property>
+                  <item>
+                   <widget class="QLabel" name="label_11" >
+                    <property name="sizePolicy" >
+                     <sizepolicy>
+                      <hsizetype>4</hsizetype>
+                      <vsizetype>5</vsizetype>
+                      <horstretch>0</horstretch>
+                      <verstretch>0</verstretch>
+                     </sizepolicy>
+                    </property>
+                    <property name="text" >
+                     <string>Bonus 3</string>
+                    </property>
+                   </widget>
+                  </item>
+                  <item>
+                   <widget class="Line" name="line_3" >
+                    <property name="orientation" >
+                     <enum>Qt::Horizontal</enum>
+                    </property>
+                   </widget>
+                  </item>
+                 </layout>
+                </item>
+                <item>
+                 <widget class="SearchingCombo" name="bonus3Combo" >
+                  <property name="sizePolicy" >
+                   <sizepolicy>
+                    <hsizetype>13</hsizetype>
+                    <vsizetype>0</vsizetype>
+                    <horstretch>0</horstretch>
+                    <verstretch>0</verstretch>
+                   </sizepolicy>
+                  </property>
+                  <property name="sizeAdjustPolicy" >
+                   <enum>QComboBox::AdjustToContents</enum>
+                  </property>
+                 </widget>
+                </item>
+               </layout>
+              </item>
+              <item>
+               <layout class="QVBoxLayout" >
+                <property name="margin" >
+                 <number>0</number>
+                </property>
+                <property name="spacing" >
+                 <number>6</number>
+                </property>
+                <item>
+                 <layout class="QHBoxLayout" >
+                  <property name="margin" >
+                   <number>0</number>
+                  </property>
+                  <property name="spacing" >
+                   <number>6</number>
+                  </property>
+                  <item>
+                   <widget class="QLabel" name="label_12" >
+                    <property name="sizePolicy" >
+                     <sizepolicy>
+                      <hsizetype>4</hsizetype>
+                      <vsizetype>5</vsizetype>
+                      <horstretch>0</horstretch>
+                      <verstretch>0</verstretch>
+                     </sizepolicy>
+                    </property>
+                    <property name="text" >
+                     <string>Magical Ability</string>
+                    </property>
+                   </widget>
+                  </item>
+                  <item>
+                   <widget class="Line" name="line_4" >
+                    <property name="orientation" >
+                     <enum>Qt::Horizontal</enum>
+                    </property>
+                   </widget>
+                  </item>
+                 </layout>
+                </item>
+                <item>
+                 <widget class="SearchingCombo" name="magicalCombo" >
+                  <property name="sizePolicy" >
+                   <sizepolicy>
+                    <hsizetype>13</hsizetype>
+                    <vsizetype>0</vsizetype>
+                    <horstretch>0</horstretch>
+                    <verstretch>0</verstretch>
+                   </sizepolicy>
+                  </property>
                   <property name="sizeAdjustPolicy" >
                    <enum>QComboBox::AdjustToContents</enum>
                   </property>
