@@ -8,7 +8,7 @@ from PyQt4.QtCore import *
 from PyQt4.QtGui import *
 from Item import *
 from xml.dom.minidom import *
-from B_Ethinarg import *
+from B_Ethinarg2 import *
 
 LoginFailedEvent = QEvent.Type(QEvent.User + 1)
 PostResultsEvent = QEvent.Type(QEvent.User + 2)
@@ -311,6 +311,10 @@ class EthinargTestWindow(QDialog, Ui_B_Ethinarg):
         self.connect(self.nextButton, SIGNAL('clicked()'), self.nextPage)
         self.connect(self.prevButton, SIGNAL('clicked()'), self.prevPage)
         self.connect(self.goButton, SIGNAL('clicked()'), self.goPage)
+        self.connect(self.collapseButton, SIGNAL('clicked()'),
+            self.collapsePane)
+        self.connect(self.openSearchButton, SIGNAL('clicked()'),
+            self.openSearch)
         self.currentPage = 1
         self.pageStatus.setText('')
         #self.processBox = QueryProgress(self)
@@ -422,6 +426,13 @@ class EthinargTestWindow(QDialog, Ui_B_Ethinarg):
                 self.doQuery()
         except:
             self.pageNum.setText(str(self.currentPage))
+
+    def collapsePane(self):
+        self.splitter.setSizes([self.width(), 0])
+
+    def openSearch(self):
+        self.splitter.setSizes([self.width(),
+            self.splitter.widget(1).minimumSizeHint().width()])
             
     def anchorClicked(self, link):
         self.browser.setSource(QUrl()) # don't navigate
@@ -452,6 +463,7 @@ class EthinargTestWindow(QDialog, Ui_B_Ethinarg):
             self.processBox.cancel()
             self.browser.setHtml(self.query.htmlText)
             self.updatePageStatus()
+            self.collapsePane()
             return True
         elif e.type() == InitializedEvent:
             self.loadCombos()
