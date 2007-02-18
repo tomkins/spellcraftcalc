@@ -191,6 +191,9 @@ class ScWindow(QMainWindow, Ui_B_SC):
         self.CharClass.setFixedSize(QSize(cbwidth, cbheight))
         self.CharRace.setFixedSize(QSize(cbwidth, cbheight))
         self.CharLevel.setFixedSize(QSize(amtedwidth, edheight))
+        self.RealmRank.setFixedSize(QSize(amtedwidth, edheight))
+        self.ChampionLevel.setFixedSize(QSize(amtedwidth, edheight))
+        self.CraftTime.setFixedSize(QSize(amtedwidth, edheight))
         self.OutfitName.setFixedSize(QSize(cbwidth, cbheight))
 
         self.Realm.insertItems(0, list(Realms))

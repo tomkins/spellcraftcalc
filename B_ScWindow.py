@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'ScWindow.ui'
 #
-# Created: Tue Feb 06 00:06:02 2007
+# Created: Sat Feb 17 22:47:37 2007
 #      by: PyQt4 UI code generator 4.1
 #
 # WARNING! All changes made in this file will be lost!
@@ -38,7 +38,7 @@ class Ui_B_SC(object):
 
         self.CharName = QtGui.QLineEdit(self.GroupCharInfo)
         self.CharName.setObjectName("CharName")
-        self.gridlayout1.addWidget(self.CharName,0,1,1,2)
+        self.gridlayout1.addWidget(self.CharName,0,1,1,3)
 
         self.LabelRealm = QtGui.QLabel(self.GroupCharInfo)
         self.LabelRealm.setTextFormat(QtCore.Qt.PlainText)
@@ -47,7 +47,7 @@ class Ui_B_SC(object):
 
         self.Realm = SearchingCombo(self.GroupCharInfo)
         self.Realm.setObjectName("Realm")
-        self.gridlayout1.addWidget(self.Realm,1,1,1,2)
+        self.gridlayout1.addWidget(self.Realm,1,1,1,3)
 
         self.LabelCharClass = QtGui.QLabel(self.GroupCharInfo)
         self.LabelCharClass.setTextFormat(QtCore.Qt.PlainText)
@@ -56,7 +56,7 @@ class Ui_B_SC(object):
 
         self.CharClass = SearchingCombo(self.GroupCharInfo)
         self.CharClass.setObjectName("CharClass")
-        self.gridlayout1.addWidget(self.CharClass,2,1,1,2)
+        self.gridlayout1.addWidget(self.CharClass,2,1,1,3)
 
         self.LabelCharRace = QtGui.QLabel(self.GroupCharInfo)
         self.LabelCharRace.setTextFormat(QtCore.Qt.PlainText)
@@ -65,7 +65,7 @@ class Ui_B_SC(object):
 
         self.CharRace = SearchingCombo(self.GroupCharInfo)
         self.CharRace.setObjectName("CharRace")
-        self.gridlayout1.addWidget(self.CharRace,3,1,1,2)
+        self.gridlayout1.addWidget(self.CharRace,3,1,1,3)
 
         self.LabelCharLevel = QtGui.QLabel(self.GroupCharInfo)
         self.LabelCharLevel.setTextFormat(QtCore.Qt.PlainText)
@@ -74,55 +74,86 @@ class Ui_B_SC(object):
 
         self.CharLevel = QtGui.QLineEdit(self.GroupCharInfo)
         self.CharLevel.setObjectName("CharLevel")
-        self.gridlayout1.addWidget(self.CharLevel,4,1,1,2)
+        self.gridlayout1.addWidget(self.CharLevel,4,1,1,1)
+
+        self.LabelRealmRank = QtGui.QLabel(self.GroupCharInfo)
+
+        sizePolicy = QtGui.QSizePolicy(QtGui.QSizePolicy.Policy(3),QtGui.QSizePolicy.Policy(13))
+        sizePolicy.setHorizontalStretch(0)
+        sizePolicy.setVerticalStretch(0)
+        sizePolicy.setHeightForWidth(self.LabelRealmRank.sizePolicy().hasHeightForWidth())
+        self.LabelRealmRank.setSizePolicy(sizePolicy)
+        self.LabelRealmRank.setTextFormat(QtCore.Qt.PlainText)
+        self.LabelRealmRank.setAlignment(QtCore.Qt.AlignRight|QtCore.Qt.AlignTrailing|QtCore.Qt.AlignVCenter)
+        self.LabelRealmRank.setObjectName("LabelRealmRank")
+        self.gridlayout1.addWidget(self.LabelRealmRank,4,2,1,1)
+
+        self.RealmRank = QtGui.QLineEdit(self.GroupCharInfo)
+        self.RealmRank.setObjectName("RealmRank")
+        self.gridlayout1.addWidget(self.RealmRank,4,3,1,1)
+
+        self.LabelCraftTime = QtGui.QLabel(self.GroupCharInfo)
+        self.LabelCraftTime.setTextFormat(QtCore.Qt.PlainText)
+        self.LabelCraftTime.setObjectName("LabelCraftTime")
+        self.gridlayout1.addWidget(self.LabelCraftTime,5,0,1,1)
+
+        self.CraftTime = QtGui.QLineEdit(self.GroupCharInfo)
+        self.CraftTime.setObjectName("CraftTime")
+        self.gridlayout1.addWidget(self.CraftTime,5,1,1,1)
+
+        self.LabelChampionLevel = QtGui.QLabel(self.GroupCharInfo)
+
+        sizePolicy = QtGui.QSizePolicy(QtGui.QSizePolicy.Policy(3),QtGui.QSizePolicy.Policy(13))
+        sizePolicy.setHorizontalStretch(0)
+        sizePolicy.setVerticalStretch(0)
+        sizePolicy.setHeightForWidth(self.LabelChampionLevel.sizePolicy().hasHeightForWidth())
+        self.LabelChampionLevel.setSizePolicy(sizePolicy)
+        self.LabelChampionLevel.setTextFormat(QtCore.Qt.PlainText)
+        self.LabelChampionLevel.setAlignment(QtCore.Qt.AlignRight|QtCore.Qt.AlignTrailing|QtCore.Qt.AlignVCenter)
+        self.LabelChampionLevel.setObjectName("LabelChampionLevel")
+        self.gridlayout1.addWidget(self.LabelChampionLevel,5,2,1,1)
+
+        self.ChampionLevel = QtGui.QLineEdit(self.GroupCharInfo)
+        self.ChampionLevel.setObjectName("ChampionLevel")
+        self.gridlayout1.addWidget(self.ChampionLevel,5,3,1,1)
 
         self.LabelOutfitName = QtGui.QLabel(self.GroupCharInfo)
         self.LabelOutfitName.setTextFormat(QtCore.Qt.PlainText)
         self.LabelOutfitName.setObjectName("LabelOutfitName")
-        self.gridlayout1.addWidget(self.LabelOutfitName,5,0,1,1)
+        self.gridlayout1.addWidget(self.LabelOutfitName,6,0,1,1)
 
         self.OutfitName = SearchingCombo(self.GroupCharInfo)
         self.OutfitName.setEditable(True)
         self.OutfitName.setInsertPolicy(QtGui.QComboBox.NoInsert)
         self.OutfitName.setDuplicatesEnabled(True)
         self.OutfitName.setObjectName("OutfitName")
-        self.gridlayout1.addWidget(self.OutfitName,5,1,1,2)
+        self.gridlayout1.addWidget(self.OutfitName,6,1,1,3)
 
-        spacerItem = QtGui.QSpacerItem(1,5,QtGui.QSizePolicy.Minimum,QtGui.QSizePolicy.Fixed)
-        self.gridlayout1.addItem(spacerItem,6,0,1,3)
+        spacerItem = QtGui.QSpacerItem(1,3,QtGui.QSizePolicy.Minimum,QtGui.QSizePolicy.Fixed)
+        self.gridlayout1.addItem(spacerItem,7,0,1,4)
 
         self.LabelTotalCost = QtGui.QLabel(self.GroupCharInfo)
         self.LabelTotalCost.setAlignment(QtCore.Qt.AlignLeading|QtCore.Qt.AlignLeft|QtCore.Qt.AlignVCenter)
         self.LabelTotalCost.setObjectName("LabelTotalCost")
-        self.gridlayout1.addWidget(self.LabelTotalCost,7,0,1,1)
+        self.gridlayout1.addWidget(self.LabelTotalCost,8,0,1,1)
 
         self.TotalCost = QtGui.QLabel(self.GroupCharInfo)
         self.TotalCost.setAlignment(QtCore.Qt.AlignRight|QtCore.Qt.AlignTrailing|QtCore.Qt.AlignVCenter)
         self.TotalCost.setObjectName("TotalCost")
-        self.gridlayout1.addWidget(self.TotalCost,7,1,1,2)
+        self.gridlayout1.addWidget(self.TotalCost,8,1,1,3)
 
         self.LabelTotalPrice = QtGui.QLabel(self.GroupCharInfo)
         self.LabelTotalPrice.setAlignment(QtCore.Qt.AlignLeading|QtCore.Qt.AlignLeft|QtCore.Qt.AlignVCenter)
         self.LabelTotalPrice.setObjectName("LabelTotalPrice")
-        self.gridlayout1.addWidget(self.LabelTotalPrice,8,0,1,1)
+        self.gridlayout1.addWidget(self.LabelTotalPrice,9,0,1,1)
 
         self.TotalPrice = QtGui.QLabel(self.GroupCharInfo)
         self.TotalPrice.setAlignment(QtCore.Qt.AlignRight|QtCore.Qt.AlignTrailing|QtCore.Qt.AlignVCenter)
         self.TotalPrice.setObjectName("TotalPrice")
-        self.gridlayout1.addWidget(self.TotalPrice,8,1,1,2)
+        self.gridlayout1.addWidget(self.TotalPrice,9,1,1,3)
 
-        self.LabelTotalUtility = QtGui.QLabel(self.GroupCharInfo)
-        self.LabelTotalUtility.setAlignment(QtCore.Qt.AlignLeading|QtCore.Qt.AlignLeft|QtCore.Qt.AlignVCenter)
-        self.LabelTotalUtility.setObjectName("LabelTotalUtility")
-        self.gridlayout1.addWidget(self.LabelTotalUtility,9,0,1,2)
-
-        self.TotalUtility = QtGui.QLabel(self.GroupCharInfo)
-        self.TotalUtility.setAlignment(QtCore.Qt.AlignRight|QtCore.Qt.AlignTrailing|QtCore.Qt.AlignVCenter)
-        self.TotalUtility.setObjectName("TotalUtility")
-        self.gridlayout1.addWidget(self.TotalUtility,9,2,1,1)
-
-        spacerItem1 = QtGui.QSpacerItem(5,2,QtGui.QSizePolicy.Minimum,QtGui.QSizePolicy.MinimumExpanding)
-        self.gridlayout1.addItem(spacerItem1,10,0,1,3)
+        spacerItem1 = QtGui.QSpacerItem(1,0,QtGui.QSizePolicy.Minimum,QtGui.QSizePolicy.MinimumExpanding)
+        self.gridlayout1.addItem(spacerItem1,10,0,1,4)
         self.gridlayout.addWidget(self.GroupCharInfo,0,0,1,1)
 
         spacerItem2 = QtGui.QSpacerItem(3,1,QtGui.QSizePolicy.Fixed,QtGui.QSizePolicy.Minimum)
@@ -318,12 +349,31 @@ class Ui_B_SC(object):
         self.HitsCap.setObjectName("HitsCap")
         self.gridlayout2.addWidget(self.HitsCap,12,2,1,1)
 
-        spacerItem3 = QtGui.QSpacerItem(5,0,QtGui.QSizePolicy.Minimum,QtGui.QSizePolicy.MinimumExpanding)
-        self.gridlayout2.addItem(spacerItem3,13,0,1,3)
+        self.hboxlayout = QtGui.QHBoxLayout()
+        self.hboxlayout.setMargin(0)
+        self.hboxlayout.setSpacing(0)
+        self.hboxlayout.setObjectName("hboxlayout")
+
+        self.LabelTotalUtility = QtGui.QLabel(self.GroupStats)
+        self.LabelTotalUtility.setAlignment(QtCore.Qt.AlignRight|QtCore.Qt.AlignTrailing|QtCore.Qt.AlignVCenter)
+        self.LabelTotalUtility.setObjectName("LabelTotalUtility")
+        self.hboxlayout.addWidget(self.LabelTotalUtility)
+
+        spacerItem3 = QtGui.QSpacerItem(5,1,QtGui.QSizePolicy.MinimumExpanding,QtGui.QSizePolicy.Minimum)
+        self.hboxlayout.addItem(spacerItem3)
+
+        self.TotalUtility = QtGui.QLabel(self.GroupStats)
+        self.TotalUtility.setAlignment(QtCore.Qt.AlignRight|QtCore.Qt.AlignTrailing|QtCore.Qt.AlignVCenter)
+        self.TotalUtility.setObjectName("TotalUtility")
+        self.hboxlayout.addWidget(self.TotalUtility)
+        self.gridlayout2.addLayout(self.hboxlayout,13,0,1,3)
+
+        spacerItem4 = QtGui.QSpacerItem(5,0,QtGui.QSizePolicy.Minimum,QtGui.QSizePolicy.MinimumExpanding)
+        self.gridlayout2.addItem(spacerItem4,14,0,1,3)
         self.gridlayout.addWidget(self.GroupStats,0,2,1,1)
 
-        spacerItem4 = QtGui.QSpacerItem(3,0,QtGui.QSizePolicy.Fixed,QtGui.QSizePolicy.Minimum)
-        self.gridlayout.addItem(spacerItem4,0,3,1,1)
+        spacerItem5 = QtGui.QSpacerItem(3,0,QtGui.QSizePolicy.Fixed,QtGui.QSizePolicy.Minimum)
+        self.gridlayout.addItem(spacerItem5,0,3,1,1)
 
         self.GroupResists = GroupFrame(self.ScWinFrame)
         self.GroupResists.setObjectName("GroupResists")
@@ -473,12 +523,12 @@ class Ui_B_SC(object):
         self.EssenceCap.setObjectName("EssenceCap")
         self.gridlayout3.addWidget(self.EssenceCap,9,2,1,1)
 
-        spacerItem5 = QtGui.QSpacerItem(5,0,QtGui.QSizePolicy.Minimum,QtGui.QSizePolicy.MinimumExpanding)
-        self.gridlayout3.addItem(spacerItem5,10,0,1,3)
+        spacerItem6 = QtGui.QSpacerItem(1,2,QtGui.QSizePolicy.Minimum,QtGui.QSizePolicy.MinimumExpanding)
+        self.gridlayout3.addItem(spacerItem6,10,0,1,3)
         self.gridlayout.addWidget(self.GroupResists,0,4,1,1)
 
-        spacerItem6 = QtGui.QSpacerItem(3,1,QtGui.QSizePolicy.Fixed,QtGui.QSizePolicy.Minimum)
-        self.gridlayout.addItem(spacerItem6,0,5,1,1)
+        spacerItem7 = QtGui.QSpacerItem(3,1,QtGui.QSizePolicy.Fixed,QtGui.QSizePolicy.Minimum)
+        self.gridlayout.addItem(spacerItem7,0,5,1,1)
 
         self.GroupSkillsList = GroupFrame(self.ScWinFrame)
         self.GroupSkillsList.setObjectName("GroupSkillsList")
@@ -503,8 +553,8 @@ class Ui_B_SC(object):
         self.gridlayout4.addWidget(self.SkillsList,0,0,1,1)
         self.gridlayout.addWidget(self.GroupSkillsList,0,6,1,1)
 
-        spacerItem7 = QtGui.QSpacerItem(1,4,QtGui.QSizePolicy.Minimum,QtGui.QSizePolicy.Fixed)
-        self.gridlayout.addItem(spacerItem7,1,0,1,7)
+        spacerItem8 = QtGui.QSpacerItem(1,4,QtGui.QSizePolicy.Minimum,QtGui.QSizePolicy.Fixed)
+        self.gridlayout.addItem(spacerItem8,1,0,1,7)
 
         self.vboxlayout = QtGui.QVBoxLayout()
         self.vboxlayout.setMargin(0)
@@ -516,8 +566,8 @@ class Ui_B_SC(object):
         self.PieceTab.setObjectName("PieceTab")
         self.vboxlayout.addWidget(self.PieceTab)
 
-        spacerItem8 = QtGui.QSpacerItem(1,1,QtGui.QSizePolicy.Minimum,QtGui.QSizePolicy.Fixed)
-        self.vboxlayout.addItem(spacerItem8)
+        spacerItem9 = QtGui.QSpacerItem(1,1,QtGui.QSizePolicy.Minimum,QtGui.QSizePolicy.Fixed)
+        self.vboxlayout.addItem(spacerItem9)
 
         self.GroupItemFrame = MultiTabFrame(self.ScWinFrame)
         self.GroupItemFrame.setObjectName("GroupItemFrame")
@@ -527,87 +577,87 @@ class Ui_B_SC(object):
         self.gridlayout5.setSpacing(0)
         self.gridlayout5.setObjectName("gridlayout5")
 
-        spacerItem9 = QtGui.QSpacerItem(0,0,QtGui.QSizePolicy.Minimum,QtGui.QSizePolicy.Fixed)
-        self.gridlayout5.addItem(spacerItem9,0,0,1,10)
+        spacerItem10 = QtGui.QSpacerItem(0,0,QtGui.QSizePolicy.Minimum,QtGui.QSizePolicy.Fixed)
+        self.gridlayout5.addItem(spacerItem10,0,0,1,10)
 
-        self.hboxlayout = QtGui.QHBoxLayout()
-        self.hboxlayout.setMargin(0)
-        self.hboxlayout.setSpacing(0)
-        self.hboxlayout.setObjectName("hboxlayout")
+        self.hboxlayout1 = QtGui.QHBoxLayout()
+        self.hboxlayout1.setMargin(0)
+        self.hboxlayout1.setSpacing(0)
+        self.hboxlayout1.setObjectName("hboxlayout1")
 
         self.ItemLevelLabel = QtGui.QLabel(self.GroupItemFrame)
         self.ItemLevelLabel.setTextFormat(QtCore.Qt.PlainText)
         self.ItemLevelLabel.setObjectName("ItemLevelLabel")
-        self.hboxlayout.addWidget(self.ItemLevelLabel)
+        self.hboxlayout1.addWidget(self.ItemLevelLabel)
 
         self.ItemLevel = QtGui.QLineEdit(self.GroupItemFrame)
         self.ItemLevel.setObjectName("ItemLevel")
-        self.hboxlayout.addWidget(self.ItemLevel)
+        self.hboxlayout1.addWidget(self.ItemLevel)
 
         self.ItemLevelButton = QtGui.QPushButton(self.GroupItemFrame)
         self.ItemLevelButton.setMaximumSize(QtCore.QSize(21,21))
         self.ItemLevelButton.setObjectName("ItemLevelButton")
-        self.hboxlayout.addWidget(self.ItemLevelButton)
+        self.hboxlayout1.addWidget(self.ItemLevelButton)
 
-        spacerItem10 = QtGui.QSpacerItem(5,1,QtGui.QSizePolicy.MinimumExpanding,QtGui.QSizePolicy.Minimum)
-        self.hboxlayout.addItem(spacerItem10)
+        spacerItem11 = QtGui.QSpacerItem(5,1,QtGui.QSizePolicy.MinimumExpanding,QtGui.QSizePolicy.Minimum)
+        self.hboxlayout1.addItem(spacerItem11)
 
         self.ItemQualityLabel = QtGui.QLabel(self.GroupItemFrame)
         self.ItemQualityLabel.setTextFormat(QtCore.Qt.PlainText)
         self.ItemQualityLabel.setObjectName("ItemQualityLabel")
-        self.hboxlayout.addWidget(self.ItemQualityLabel)
+        self.hboxlayout1.addWidget(self.ItemQualityLabel)
 
         self.QualDrop = SearchingCombo(self.GroupItemFrame)
         self.QualDrop.setObjectName("QualDrop")
-        self.hboxlayout.addWidget(self.QualDrop)
+        self.hboxlayout1.addWidget(self.QualDrop)
 
         self.QualEdit = QtGui.QLineEdit(self.GroupItemFrame)
         self.QualEdit.setObjectName("QualEdit")
-        self.hboxlayout.addWidget(self.QualEdit)
+        self.hboxlayout1.addWidget(self.QualEdit)
 
-        spacerItem11 = QtGui.QSpacerItem(5,1,QtGui.QSizePolicy.MinimumExpanding,QtGui.QSizePolicy.Minimum)
-        self.hboxlayout.addItem(spacerItem11)
+        spacerItem12 = QtGui.QSpacerItem(5,1,QtGui.QSizePolicy.MinimumExpanding,QtGui.QSizePolicy.Minimum)
+        self.hboxlayout1.addItem(spacerItem12)
 
         self.ItemBonusLabel = QtGui.QLabel(self.GroupItemFrame)
         self.ItemBonusLabel.setTextFormat(QtCore.Qt.PlainText)
         self.ItemBonusLabel.setObjectName("ItemBonusLabel")
-        self.hboxlayout.addWidget(self.ItemBonusLabel)
+        self.hboxlayout1.addWidget(self.ItemBonusLabel)
 
         self.Bonus_Edit = QtGui.QLineEdit(self.GroupItemFrame)
         self.Bonus_Edit.setObjectName("Bonus_Edit")
-        self.hboxlayout.addWidget(self.Bonus_Edit)
+        self.hboxlayout1.addWidget(self.Bonus_Edit)
 
-        spacerItem12 = QtGui.QSpacerItem(5,1,QtGui.QSizePolicy.MinimumExpanding,QtGui.QSizePolicy.Minimum)
-        self.hboxlayout.addItem(spacerItem12)
+        spacerItem13 = QtGui.QSpacerItem(5,1,QtGui.QSizePolicy.MinimumExpanding,QtGui.QSizePolicy.Minimum)
+        self.hboxlayout1.addItem(spacerItem13)
 
         self.ItemAFDPSLabel = QtGui.QLabel(self.GroupItemFrame)
         self.ItemAFDPSLabel.setTextFormat(QtCore.Qt.PlainText)
         self.ItemAFDPSLabel.setObjectName("ItemAFDPSLabel")
-        self.hboxlayout.addWidget(self.ItemAFDPSLabel)
+        self.hboxlayout1.addWidget(self.ItemAFDPSLabel)
 
         self.AFDPS_Edit = QtGui.QLineEdit(self.GroupItemFrame)
         self.AFDPS_Edit.setObjectName("AFDPS_Edit")
-        self.hboxlayout.addWidget(self.AFDPS_Edit)
+        self.hboxlayout1.addWidget(self.AFDPS_Edit)
 
-        spacerItem13 = QtGui.QSpacerItem(5,1,QtGui.QSizePolicy.MinimumExpanding,QtGui.QSizePolicy.Minimum)
-        self.hboxlayout.addItem(spacerItem13)
+        spacerItem14 = QtGui.QSpacerItem(5,1,QtGui.QSizePolicy.MinimumExpanding,QtGui.QSizePolicy.Minimum)
+        self.hboxlayout1.addItem(spacerItem14)
 
         self.ItemSpeedLabel = QtGui.QLabel(self.GroupItemFrame)
         self.ItemSpeedLabel.setTextFormat(QtCore.Qt.PlainText)
         self.ItemSpeedLabel.setObjectName("ItemSpeedLabel")
-        self.hboxlayout.addWidget(self.ItemSpeedLabel)
+        self.hboxlayout1.addWidget(self.ItemSpeedLabel)
 
         self.Speed_Edit = QtGui.QLineEdit(self.GroupItemFrame)
         self.Speed_Edit.setObjectName("Speed_Edit")
-        self.hboxlayout.addWidget(self.Speed_Edit)
+        self.hboxlayout1.addWidget(self.Speed_Edit)
 
-        spacerItem14 = QtGui.QSpacerItem(5,1,QtGui.QSizePolicy.MinimumExpanding,QtGui.QSizePolicy.Minimum)
-        self.hboxlayout.addItem(spacerItem14)
+        spacerItem15 = QtGui.QSpacerItem(5,1,QtGui.QSizePolicy.MinimumExpanding,QtGui.QSizePolicy.Minimum)
+        self.hboxlayout1.addItem(spacerItem15)
 
         self.ItemNameLabel = QtGui.QLabel(self.GroupItemFrame)
         self.ItemNameLabel.setTextFormat(QtCore.Qt.PlainText)
         self.ItemNameLabel.setObjectName("ItemNameLabel")
-        self.hboxlayout.addWidget(self.ItemNameLabel)
+        self.hboxlayout1.addWidget(self.ItemNameLabel)
 
         self.ItemNameCombo = SearchingCombo(self.GroupItemFrame)
 
@@ -620,15 +670,15 @@ class Ui_B_SC(object):
         self.ItemNameCombo.setInsertPolicy(QtGui.QComboBox.NoInsert)
         self.ItemNameCombo.setDuplicatesEnabled(True)
         self.ItemNameCombo.setObjectName("ItemNameCombo")
-        self.hboxlayout.addWidget(self.ItemNameCombo)
+        self.hboxlayout1.addWidget(self.ItemNameCombo)
 
-        spacerItem15 = QtGui.QSpacerItem(5,1,QtGui.QSizePolicy.MinimumExpanding,QtGui.QSizePolicy.Minimum)
-        self.hboxlayout.addItem(spacerItem15)
+        spacerItem16 = QtGui.QSpacerItem(5,1,QtGui.QSizePolicy.MinimumExpanding,QtGui.QSizePolicy.Minimum)
+        self.hboxlayout1.addItem(spacerItem16)
 
         self.Equipped = QtGui.QCheckBox(self.GroupItemFrame)
         self.Equipped.setObjectName("Equipped")
-        self.hboxlayout.addWidget(self.Equipped)
-        self.gridlayout5.addLayout(self.hboxlayout,1,0,1,10)
+        self.hboxlayout1.addWidget(self.Equipped)
+        self.gridlayout5.addLayout(self.hboxlayout1,1,0,1,10)
 
         self.LabelGemType = QtGui.QLabel(self.GroupItemFrame)
         self.LabelGemType.setObjectName("LabelGemType")
@@ -660,15 +710,15 @@ class Ui_B_SC(object):
         self.LabelGemCost.setObjectName("LabelGemCost")
         self.gridlayout5.addWidget(self.LabelGemCost,2,6,1,1)
 
-        spacerItem16 = QtGui.QSpacerItem(5,1,QtGui.QSizePolicy.Minimum,QtGui.QSizePolicy.Minimum)
-        self.gridlayout5.addItem(spacerItem16,2,7,13,1)
+        spacerItem17 = QtGui.QSpacerItem(5,1,QtGui.QSizePolicy.Minimum,QtGui.QSizePolicy.Minimum)
+        self.gridlayout5.addItem(spacerItem17,2,7,13,1)
 
         self.LabelGemName = QtGui.QLabel(self.GroupItemFrame)
         self.LabelGemName.setObjectName("LabelGemName")
         self.gridlayout5.addWidget(self.LabelGemName,2,8,1,2)
 
-        spacerItem17 = QtGui.QSpacerItem(5,5,QtGui.QSizePolicy.MinimumExpanding,QtGui.QSizePolicy.Minimum)
-        self.gridlayout5.addItem(spacerItem17,2,8,12,2)
+        spacerItem18 = QtGui.QSpacerItem(5,5,QtGui.QSizePolicy.MinimumExpanding,QtGui.QSizePolicy.Minimum)
+        self.gridlayout5.addItem(spacerItem18,2,8,12,2)
 
         self.Gem_Label_1 = QtGui.QLabel(self.GroupItemFrame)
         self.Gem_Label_1.setTextFormat(QtCore.Qt.PlainText)
@@ -1042,14 +1092,14 @@ class Ui_B_SC(object):
         self.Requirement_12.setObjectName("Requirement_12")
         self.gridlayout5.addWidget(self.Requirement_12,14,4,1,3)
 
-        spacerItem18 = QtGui.QSpacerItem(5,5,QtGui.QSizePolicy.Minimum,QtGui.QSizePolicy.Minimum)
-        self.gridlayout5.addItem(spacerItem18,8,0,7,3)
-
         spacerItem19 = QtGui.QSpacerItem(5,5,QtGui.QSizePolicy.Minimum,QtGui.QSizePolicy.Minimum)
-        self.gridlayout5.addItem(spacerItem19,8,3,1,4)
+        self.gridlayout5.addItem(spacerItem19,8,0,7,3)
 
         spacerItem20 = QtGui.QSpacerItem(5,5,QtGui.QSizePolicy.Minimum,QtGui.QSizePolicy.Minimum)
-        self.gridlayout5.addItem(spacerItem20,9,3,1,4)
+        self.gridlayout5.addItem(spacerItem20,8,3,1,4)
+
+        spacerItem21 = QtGui.QSpacerItem(5,5,QtGui.QSizePolicy.Minimum,QtGui.QSizePolicy.Minimum)
+        self.gridlayout5.addItem(spacerItem21,9,3,1,4)
 
         self.ItemImbueLabel = QtGui.QLabel(self.GroupItemFrame)
         self.ItemImbueLabel.setAlignment(QtCore.Qt.AlignRight|QtCore.Qt.AlignTrailing|QtCore.Qt.AlignVCenter)
@@ -1096,24 +1146,27 @@ class Ui_B_SC(object):
         self.ItemPrice.setObjectName("ItemPrice")
         self.gridlayout5.addWidget(self.ItemPrice,13,5,1,2)
 
-        self.hboxlayout1 = QtGui.QHBoxLayout()
-        self.hboxlayout1.setMargin(0)
-        self.hboxlayout1.setSpacing(0)
-        self.hboxlayout1.setObjectName("hboxlayout1")
+        self.hboxlayout2 = QtGui.QHBoxLayout()
+        self.hboxlayout2.setMargin(0)
+        self.hboxlayout2.setSpacing(0)
+        self.hboxlayout2.setObjectName("hboxlayout2")
+
+        spacerItem22 = QtGui.QSpacerItem(5,1,QtGui.QSizePolicy.MinimumExpanding,QtGui.QSizePolicy.Minimum)
+        self.hboxlayout2.addItem(spacerItem22)
 
         self.ItemUtilityLabel = QtGui.QLabel(self.GroupItemFrame)
         self.ItemUtilityLabel.setAlignment(QtCore.Qt.AlignRight|QtCore.Qt.AlignTrailing|QtCore.Qt.AlignVCenter)
         self.ItemUtilityLabel.setObjectName("ItemUtilityLabel")
-        self.hboxlayout1.addWidget(self.ItemUtilityLabel)
+        self.hboxlayout2.addWidget(self.ItemUtilityLabel)
 
         self.ItemUtility = QtGui.QLabel(self.GroupItemFrame)
         self.ItemUtility.setAlignment(QtCore.Qt.AlignRight|QtCore.Qt.AlignTrailing|QtCore.Qt.AlignVCenter)
         self.ItemUtility.setObjectName("ItemUtility")
-        self.hboxlayout1.addWidget(self.ItemUtility)
-        self.gridlayout5.addLayout(self.hboxlayout1,14,8,1,1)
+        self.hboxlayout2.addWidget(self.ItemUtility)
+        self.gridlayout5.addLayout(self.hboxlayout2,14,8,1,1)
 
-        spacerItem21 = QtGui.QSpacerItem(20,5,QtGui.QSizePolicy.Preferred,QtGui.QSizePolicy.Minimum)
-        self.gridlayout5.addItem(spacerItem21,14,9,1,1)
+        spacerItem23 = QtGui.QSpacerItem(20,5,QtGui.QSizePolicy.Preferred,QtGui.QSizePolicy.Minimum)
+        self.gridlayout5.addItem(spacerItem23,14,9,1,1)
         self.vboxlayout.addWidget(self.GroupItemFrame)
         self.gridlayout.addLayout(self.vboxlayout,2,0,1,7)
         B_SC.setCentralWidget(self.ScWinFrame)
@@ -1128,7 +1181,10 @@ class Ui_B_SC(object):
         B_SC.setTabOrder(self.Realm,self.CharClass)
         B_SC.setTabOrder(self.CharClass,self.CharRace)
         B_SC.setTabOrder(self.CharRace,self.CharLevel)
-        B_SC.setTabOrder(self.CharLevel,self.OutfitName)
+        B_SC.setTabOrder(self.CharLevel,self.RealmRank)
+        B_SC.setTabOrder(self.RealmRank,self.ChampionLevel)
+        B_SC.setTabOrder(self.ChampionLevel,self.CraftTime)
+        B_SC.setTabOrder(self.CraftTime,self.OutfitName)
         B_SC.setTabOrder(self.OutfitName,self.PieceTab)
         B_SC.setTabOrder(self.PieceTab,self.ItemLevel)
         B_SC.setTabOrder(self.ItemLevel,self.ItemLevelButton)
@@ -1206,13 +1262,14 @@ class Ui_B_SC(object):
         self.LabelCharClass.setText(QtGui.QApplication.translate("B_SC", "Class: ", None, QtGui.QApplication.UnicodeUTF8))
         self.LabelCharRace.setText(QtGui.QApplication.translate("B_SC", "Race: ", None, QtGui.QApplication.UnicodeUTF8))
         self.LabelCharLevel.setText(QtGui.QApplication.translate("B_SC", "Level: ", None, QtGui.QApplication.UnicodeUTF8))
+        self.LabelRealmRank.setText(QtGui.QApplication.translate("B_SC", "RR: ", None, QtGui.QApplication.UnicodeUTF8))
+        self.LabelCraftTime.setText(QtGui.QApplication.translate("B_SC", "Time: ", None, QtGui.QApplication.UnicodeUTF8))
+        self.LabelChampionLevel.setText(QtGui.QApplication.translate("B_SC", "CL: ", None, QtGui.QApplication.UnicodeUTF8))
         self.LabelOutfitName.setText(QtGui.QApplication.translate("B_SC", "&Outfit: ", None, QtGui.QApplication.UnicodeUTF8))
         self.LabelTotalCost.setText(QtGui.QApplication.translate("B_SC", "Cost: ", None, QtGui.QApplication.UnicodeUTF8))
         self.TotalCost.setText(QtGui.QApplication.translate("B_SC", "0", None, QtGui.QApplication.UnicodeUTF8))
         self.LabelTotalPrice.setText(QtGui.QApplication.translate("B_SC", "Price: ", None, QtGui.QApplication.UnicodeUTF8))
         self.TotalPrice.setText(QtGui.QApplication.translate("B_SC", "0", None, QtGui.QApplication.UnicodeUTF8))
-        self.LabelTotalUtility.setText(QtGui.QApplication.translate("B_SC", "Total Utility: ", None, QtGui.QApplication.UnicodeUTF8))
-        self.TotalUtility.setText(QtGui.QApplication.translate("B_SC", "0.0", None, QtGui.QApplication.UnicodeUTF8))
         self.StrengthLabel.setText(QtGui.QApplication.translate("B_SC", "STR: ", None, QtGui.QApplication.UnicodeUTF8))
         self.Strength.setText(QtGui.QApplication.translate("B_SC", "0", None, QtGui.QApplication.UnicodeUTF8))
         self.StrengthCap.setText(QtGui.QApplication.translate("B_SC", "-", None, QtGui.QApplication.UnicodeUTF8))
@@ -1252,6 +1309,8 @@ class Ui_B_SC(object):
         self.HitsLabel.setText(QtGui.QApplication.translate("B_SC", "Hits: ", None, QtGui.QApplication.UnicodeUTF8))
         self.Hits.setText(QtGui.QApplication.translate("B_SC", "0", None, QtGui.QApplication.UnicodeUTF8))
         self.HitsCap.setText(QtGui.QApplication.translate("B_SC", "-", None, QtGui.QApplication.UnicodeUTF8))
+        self.LabelTotalUtility.setText(QtGui.QApplication.translate("B_SC", "Utility: ", None, QtGui.QApplication.UnicodeUTF8))
+        self.TotalUtility.setText(QtGui.QApplication.translate("B_SC", "0.0", None, QtGui.QApplication.UnicodeUTF8))
         self.BodyLabel.setText(QtGui.QApplication.translate("B_SC", "Body: ", None, QtGui.QApplication.UnicodeUTF8))
         self.Body.setText(QtGui.QApplication.translate("B_SC", "0", None, QtGui.QApplication.UnicodeUTF8))
         self.BodyCap.setText(QtGui.QApplication.translate("B_SC", "-", None, QtGui.QApplication.UnicodeUTF8))
@@ -1326,7 +1385,7 @@ class Ui_B_SC(object):
         self.ItemOvercharge.setText(QtGui.QApplication.translate("B_SC", "None", None, QtGui.QApplication.UnicodeUTF8))
         self.ItemCostLabel.setText(QtGui.QApplication.translate("B_SC", "Item Cost: ", None, QtGui.QApplication.UnicodeUTF8))
         self.ItemPriceLabel.setText(QtGui.QApplication.translate("B_SC", "Item Price: ", None, QtGui.QApplication.UnicodeUTF8))
-        self.ItemUtilityLabel.setText(QtGui.QApplication.translate("B_SC", "Utility: ", None, QtGui.QApplication.UnicodeUTF8))
+        self.ItemUtilityLabel.setText(QtGui.QApplication.translate("B_SC", "Utility:   ", None, QtGui.QApplication.UnicodeUTF8))
         self.ItemUtility.setText(QtGui.QApplication.translate("B_SC", "0.0", None, QtGui.QApplication.UnicodeUTF8))
 
 from SearchingCombo import SearchingCombo
