@@ -4,8 +4,6 @@
 #
 # See NOTICE.txt for copyrights and grant of license
 
-import ethinarg
-
 from PyQt4.QtCore import *
 from PyQt4.QtGui import *
 from B_ScWindow import *
@@ -27,6 +25,7 @@ import DisplayWindow
 import CraftBar
 import SearchingCombo
 import MultiTabBar
+import Ethinarg
 import UIXML
 import os
 import os.path
@@ -2454,7 +2453,7 @@ class ScWindow(QMainWindow, Ui_B_SC):
 
     def ethinargTest(self):
         if not self.ethinargWindow:
-            self.ethinargWindow = ethinarg.EthinargTestWindow(self, self)
+            self.ethinargWindow = Ethinarg.EthinargTestWindow(self, self)
         self.ethinargWindow.show()
 
 if __name__ == '__main__':
