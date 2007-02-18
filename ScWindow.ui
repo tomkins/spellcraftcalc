@@ -127,7 +127,7 @@
        <item row="5" column="0" >
         <widget class="QLabel" name="LabelCraftTime" >
          <property name="text" >
-          <string>Level: </string>
+          <string>Time: </string>
          </property>
          <property name="textFormat" >
           <enum>Qt::PlainText</enum>
