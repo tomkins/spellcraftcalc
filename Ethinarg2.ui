@@ -265,26 +265,6 @@
            </item>
           </layout>
          </item>
-         <item>
-          <widget class="QGroupBox" name="groupBox_3" >
-           <property name="title" >
-            <string>Search Parameters</string>
-           </property>
-           <layout class="QVBoxLayout" >
-            <property name="margin" >
-             <number>9</number>
-            </property>
-            <property name="spacing" >
-             <number>6</number>
-            </property>
-            <item>
-             <layout class="QVBoxLayout" >
-              <property name="margin" >
-               <number>0</number>
-              </property>
-              <property name="spacing" >
-               <number>6</number>
-              </property>
               <item>
                <layout class="QHBoxLayout" >
                 <property name="margin" >
@@ -787,11 +767,6 @@
                 </property>
                </spacer>
               </item>
-             </layout>
-            </item>
-           </layout>
-          </widget>
-         </item>
         </layout>
        </item>
       </layout>
