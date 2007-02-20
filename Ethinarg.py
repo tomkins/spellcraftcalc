@@ -329,9 +329,11 @@ class EthinargTestWindow(QDialog, Ui_B_Ethinarg):
         self.connect(self.nextButton, SIGNAL('clicked()'), self.nextPage)
         self.connect(self.prevButton, SIGNAL('clicked()'), self.prevPage)
         self.connect(self.goButton, SIGNAL('clicked()'), self.goPage)
-        self.connect(self.collapseButton, SIGNAL('clicked()'),
-            self.collapsePane)
-        self.connect(self.openSearchButton, SIGNAL('clicked()'),
+        #self.connect(self.collapseButton, SIGNAL('clicked()'),
+        #    self.collapsePane)
+        #self.connect(self.openSearchButton, SIGNAL('clicked()'),
+        #    self.openSearch)
+        self.connect(self.openSearchButton, SIGNAL('toggled(bool)'),
             self.openSearch)
         self.connect(self.minLevelCombo, SIGNAL('currentIndexChanged(int)'),
             self.minLevelChanged)
@@ -339,6 +341,7 @@ class EthinargTestWindow(QDialog, Ui_B_Ethinarg):
             self.maxLevelChanged)
         self.currentPage = 1
         self.pageStatus.setText('')
+        self.openSearchButton.setChecked(True)
         #self.processBox = QueryProgress(self)
 
         self.show()
@@ -458,9 +461,14 @@ class EthinargTestWindow(QDialog, Ui_B_Ethinarg):
     def collapsePane(self):
         self.splitter.setSizes([self.width(), 0])
 
-    def openSearch(self):
-        self.splitter.setSizes([self.width(),
-            self.splitter.widget(1).minimumSizeHint().width()])
+    def openSearch(self, toggle):
+        if toggle:
+            self.openSearchButton.setText("<<< Collapse")
+            self.splitter.setSizes([self.width(),
+                self.splitter.widget(1).minimumSizeHint().width()])
+        else:
+            self.openSearchButton.setText("Open Search >>>")
+            self.splitter.setSizes([self.width(), 0])
 
     def minLevelChanged(self, idx):
         if str(self.minLevelCombo.currentText()) == '' or \
@@ -515,7 +523,8 @@ class EthinargTestWindow(QDialog, Ui_B_Ethinarg):
             self.processBox.cancel()
             self.browser.setHtml(self.query.htmlText)
             self.updatePageStatus()
-            self.collapsePane()
+            self.openSearchButton.setChecked(False)
+            #self.collapsePane()
             return True
         elif e.type() == InitializedEvent:
             self.loadCombos()
