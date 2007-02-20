@@ -8,7 +8,7 @@ from PyQt4.QtCore import *
 from PyQt4.QtGui import *
 from Item import *
 from xml.dom.minidom import *
-from B_Ethinarg2 import *
+from B_Ethinarg import *
 
 LoginFailedEvent = QEvent.Type(QEvent.User + 1)
 PostResultsEvent = QEvent.Type(QEvent.User + 2)
