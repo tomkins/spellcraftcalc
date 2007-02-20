@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'Ethinarg2.ui'
 #
-# Created: Mon Feb 19 08:02:14 2007
+# Created: Mon Feb 19 16:57:14 2007
 #      by: PyQt4 UI code generator 4.1
 #
 # WARNING! All changes made in this file will be lost!
@@ -54,6 +54,7 @@ class Ui_B_Ethinarg(object):
         sizePolicy.setHeightForWidth(self.openSearchButton.sizePolicy().hasHeightForWidth())
         self.openSearchButton.setSizePolicy(sizePolicy)
         self.openSearchButton.setMinimumSize(QtCore.QSize(150,0))
+        self.openSearchButton.setCheckable(True)
         self.openSearchButton.setObjectName("openSearchButton")
         self.hboxlayout1.addWidget(self.openSearchButton)
 
@@ -436,33 +437,8 @@ class Ui_B_Ethinarg(object):
         self.hboxlayout13.addItem(spacerItem2)
         self.vboxlayout3.addLayout(self.hboxlayout13)
 
-        self.hboxlayout14 = QtGui.QHBoxLayout()
-        self.hboxlayout14.setMargin(0)
-        self.hboxlayout14.setSpacing(6)
-        self.hboxlayout14.setObjectName("hboxlayout14")
-
-        spacerItem3 = QtGui.QSpacerItem(40,20,QtGui.QSizePolicy.MinimumExpanding,QtGui.QSizePolicy.Minimum)
-        self.hboxlayout14.addItem(spacerItem3)
-
-        self.collapseButton = QtGui.QPushButton(self.groupBox_2)
-
-        sizePolicy = QtGui.QSizePolicy(QtGui.QSizePolicy.Policy(3),QtGui.QSizePolicy.Policy(0))
-        sizePolicy.setHorizontalStretch(0)
-        sizePolicy.setVerticalStretch(0)
-        sizePolicy.setHeightForWidth(self.collapseButton.sizePolicy().hasHeightForWidth())
-        self.collapseButton.setSizePolicy(sizePolicy)
-        self.collapseButton.setMinimumSize(QtCore.QSize(116,0))
-        self.collapseButton.setAutoDefault(False)
-        self.collapseButton.setDefault(False)
-        self.collapseButton.setObjectName("collapseButton")
-        self.hboxlayout14.addWidget(self.collapseButton)
-
-        spacerItem4 = QtGui.QSpacerItem(40,20,QtGui.QSizePolicy.MinimumExpanding,QtGui.QSizePolicy.Minimum)
-        self.hboxlayout14.addItem(spacerItem4)
-        self.vboxlayout3.addLayout(self.hboxlayout14)
-
-        spacerItem5 = QtGui.QSpacerItem(20,311,QtGui.QSizePolicy.Minimum,QtGui.QSizePolicy.Expanding)
-        self.vboxlayout3.addItem(spacerItem5)
+        spacerItem3 = QtGui.QSpacerItem(20,311,QtGui.QSizePolicy.Minimum,QtGui.QSizePolicy.Expanding)
+        self.vboxlayout3.addItem(spacerItem3)
         self.vboxlayout2.addLayout(self.vboxlayout3)
         self.hboxlayout.addWidget(self.splitter)
 
@@ -491,6 +467,5 @@ class Ui_B_Ethinarg(object):
         self.label_11.setText(QtGui.QApplication.translate("B_Ethinarg", "Bonus 3", None, QtGui.QApplication.UnicodeUTF8))
         self.label_12.setText(QtGui.QApplication.translate("B_Ethinarg", "Magical Ability", None, QtGui.QApplication.UnicodeUTF8))
         self.queryButton.setText(QtGui.QApplication.translate("B_Ethinarg", "Run Query", None, QtGui.QApplication.UnicodeUTF8))
-        self.collapseButton.setText(QtGui.QApplication.translate("B_Ethinarg", "Collapse >>", None, QtGui.QApplication.UnicodeUTF8))
 
 from SearchingCombo import SearchingCombo
