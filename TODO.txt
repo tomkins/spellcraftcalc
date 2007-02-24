@@ -13,9 +13,6 @@ Urgent things to fix before next beta release!!!
   drop items can be 'All/Any'.)  Look at Eithargs' xml for other fields
   we should edit, such as class restrictions.
 
-  Fix Classic Windows skin view of Group boxes (XP is fine, Mac and X11
-  are now working correctly).
-
 Things to fix before next beta release is announced;
 
   Prettify the display of stats with caps for the screen, with
@@ -67,6 +64,9 @@ Things to fix before 2.0 final (non-beta) is announced;
   Calculate Piece Ablative as an average based on chance-to-hit-body-part.
 
   List Reactive Effects ordered by %chance to hit body part?
+
+  Fix WindowsXP skin view of Group boxes (which we override universally
+  because of the Classic appearance stupidity).
 
   Can we make the 'editing' flavor of the dropdown controls line up
   with their look when they are in drop-pick only mode on Mac?  They
