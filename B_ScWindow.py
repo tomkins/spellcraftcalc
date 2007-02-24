@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'ScWindow.ui'
 #
-# Created: Sat Feb 17 23:01:01 2007
+# Created: Sat Feb 24 17:11:57 2007
 #      by: PyQt4 UI code generator 4.1
 #
 # WARNING! All changes made in this file will be lost!
@@ -24,6 +24,8 @@ class Ui_B_SC(object):
         self.gridlayout.setObjectName("gridlayout")
 
         self.GroupCharInfo = GroupFrame(self.ScWinFrame)
+        self.GroupCharInfo.setFrameShape(QtGui.QFrame.StyledPanel)
+        self.GroupCharInfo.setLineWidth(1)
         self.GroupCharInfo.setObjectName("GroupCharInfo")
 
         self.gridlayout1 = QtGui.QGridLayout(self.GroupCharInfo)
@@ -160,6 +162,8 @@ class Ui_B_SC(object):
         self.gridlayout.addItem(spacerItem2,0,1,1,1)
 
         self.GroupStats = GroupFrame(self.ScWinFrame)
+        self.GroupStats.setFrameShape(QtGui.QFrame.StyledPanel)
+        self.GroupStats.setLineWidth(1)
         self.GroupStats.setObjectName("GroupStats")
 
         self.gridlayout2 = QtGui.QGridLayout(self.GroupStats)
@@ -376,6 +380,8 @@ class Ui_B_SC(object):
         self.gridlayout.addItem(spacerItem5,0,3,1,1)
 
         self.GroupResists = GroupFrame(self.ScWinFrame)
+        self.GroupResists.setFrameShape(QtGui.QFrame.StyledPanel)
+        self.GroupResists.setLineWidth(1)
         self.GroupResists.setObjectName("GroupResists")
 
         self.gridlayout3 = QtGui.QGridLayout(self.GroupResists)
@@ -531,6 +537,8 @@ class Ui_B_SC(object):
         self.gridlayout.addItem(spacerItem7,0,5,1,1)
 
         self.GroupSkillsList = GroupFrame(self.ScWinFrame)
+        self.GroupSkillsList.setFrameShape(QtGui.QFrame.StyledPanel)
+        self.GroupSkillsList.setLineWidth(1)
         self.GroupSkillsList.setObjectName("GroupSkillsList")
 
         self.gridlayout4 = QtGui.QGridLayout(self.GroupSkillsList)
