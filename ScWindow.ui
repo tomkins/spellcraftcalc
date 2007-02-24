@@ -25,6 +25,12 @@
     </property>
     <item row="0" column="0" >
      <widget class="GroupFrame" name="GroupCharInfo" >
+      <property name="frameShape" >
+       <enum>QFrame::StyledPanel</enum>
+      </property>
+      <property name="lineWidth" >
+       <number>1</number>
+      </property>
       <layout class="QGridLayout" >
        <property name="margin" >
         <number>4</number>
@@ -280,6 +286,12 @@
     </item>
     <item row="0" column="2" >
      <widget class="GroupFrame" name="GroupStats" >
+      <property name="frameShape" >
+       <enum>QFrame::StyledPanel</enum>
+      </property>
+      <property name="lineWidth" >
+       <number>1</number>
+      </property>
       <layout class="QGridLayout" >
        <property name="margin" >
         <number>4</number>
@@ -729,6 +741,12 @@
     </item>
     <item row="0" column="4" >
      <widget class="GroupFrame" name="GroupResists" >
+      <property name="frameShape" >
+       <enum>QFrame::StyledPanel</enum>
+      </property>
+      <property name="lineWidth" >
+       <number>1</number>
+      </property>
       <layout class="QGridLayout" >
        <property name="margin" >
         <number>4</number>
@@ -1043,6 +1061,12 @@
     </item>
     <item row="0" column="6" >
      <widget class="GroupFrame" name="GroupSkillsList" >
+      <property name="frameShape" >
+       <enum>QFrame::StyledPanel</enum>
+      </property>
+      <property name="lineWidth" >
+       <number>1</number>
+      </property>
       <layout class="QGridLayout" >
        <property name="margin" >
         <number>4</number>
