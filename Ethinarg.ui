@@ -383,14 +383,20 @@
             <widget class="SearchingCombo" name="minLevelCombo" >
              <property name="sizePolicy" >
               <sizepolicy>
-               <hsizetype>13</hsizetype>
+               <hsizetype>1</hsizetype>
                <vsizetype>0</vsizetype>
                <horstretch>0</horstretch>
                <verstretch>0</verstretch>
               </sizepolicy>
              </property>
+             <property name="minimumSize" >
+              <size>
+               <width>55</width>
+               <height>0</height>
+              </size>
+             </property>
              <property name="sizeAdjustPolicy" >
-              <enum>QComboBox::AdjustToContents</enum>
+              <enum>QComboBox::AdjustToContentsOnFirstShow</enum>
              </property>
             </widget>
            </item>
@@ -413,11 +419,17 @@
             <widget class="SearchingCombo" name="maxLevelCombo" >
              <property name="sizePolicy" >
               <sizepolicy>
-               <hsizetype>13</hsizetype>
+               <hsizetype>1</hsizetype>
                <vsizetype>0</vsizetype>
                <horstretch>0</horstretch>
                <verstretch>0</verstretch>
               </sizepolicy>
+             </property>
+             <property name="minimumSize" >
+              <size>
+               <width>55</width>
+               <height>0</height>
+              </size>
              </property>
              <property name="sizeAdjustPolicy" >
               <enum>QComboBox::AdjustToContents</enum>
