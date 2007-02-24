@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'Ethinarg.ui'
 #
-# Created: Fri Feb 23 21:34:27 2007
+# Created: Sat Feb 24 11:11:00 2007
 #      by: PyQt4 UI code generator 4.1
 #
 # WARNING! All changes made in this file will be lost!
@@ -233,12 +233,13 @@ class Ui_B_Ethinarg(object):
 
         self.minLevelCombo = SearchingCombo(self.groupBox_2)
 
-        sizePolicy = QtGui.QSizePolicy(QtGui.QSizePolicy.Policy(13),QtGui.QSizePolicy.Policy(0))
+        sizePolicy = QtGui.QSizePolicy(QtGui.QSizePolicy.Policy(1),QtGui.QSizePolicy.Policy(0))
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(0)
         sizePolicy.setHeightForWidth(self.minLevelCombo.sizePolicy().hasHeightForWidth())
         self.minLevelCombo.setSizePolicy(sizePolicy)
-        self.minLevelCombo.setSizeAdjustPolicy(QtGui.QComboBox.AdjustToContents)
+        self.minLevelCombo.setMinimumSize(QtCore.QSize(55,0))
+        self.minLevelCombo.setSizeAdjustPolicy(QtGui.QComboBox.AdjustToContentsOnFirstShow)
         self.minLevelCombo.setObjectName("minLevelCombo")
         self.hboxlayout8.addWidget(self.minLevelCombo)
 
@@ -254,11 +255,12 @@ class Ui_B_Ethinarg(object):
 
         self.maxLevelCombo = SearchingCombo(self.groupBox_2)
 
-        sizePolicy = QtGui.QSizePolicy(QtGui.QSizePolicy.Policy(13),QtGui.QSizePolicy.Policy(0))
+        sizePolicy = QtGui.QSizePolicy(QtGui.QSizePolicy.Policy(1),QtGui.QSizePolicy.Policy(0))
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(0)
         sizePolicy.setHeightForWidth(self.maxLevelCombo.sizePolicy().hasHeightForWidth())
         self.maxLevelCombo.setSizePolicy(sizePolicy)
+        self.maxLevelCombo.setMinimumSize(QtCore.QSize(55,0))
         self.maxLevelCombo.setSizeAdjustPolicy(QtGui.QComboBox.AdjustToContents)
         self.maxLevelCombo.setObjectName("maxLevelCombo")
         self.hboxlayout8.addWidget(self.maxLevelCombo)
