@@ -439,6 +439,7 @@ class ScWindow(QMainWindow, Ui_B_SC):
                                 QKeySequence(Qt.CTRL+Qt.SHIFT+Qt.Key_S))
         self.toolbar.addAction(self.getIcon('SaveItem'), 'Save Item', 
                                self.saveItem)
+        self.filemenu.addAction('Search &Ethinarg\'s Items', self.ethinargTest)
         self.filemenu.addAction('Item Database Path...', self.chooseItemPath)
 
         self.filemenu.addSeparator()
@@ -450,7 +451,6 @@ class ScWindow(QMainWindow, Ui_B_SC):
         self.filemenu.addAction('Export SCTemplate XML...', self.exportAsFile)
         self.filemenu.addAction('Export &UI Window...', self.generateUIXML)
         self.filemenu.addAction('Choose UI Format...', self.chooseXMLUIFile)
-        self.filemenu.addAction('Ethinarg Test', self.ethinargTest)
 
         self.filemenu.addSeparator()
 
@@ -525,19 +525,23 @@ class ScWindow(QMainWindow, Ui_B_SC):
         self.editmenu = QMenu('&Edit', self)
         self.chooseitemmenuid = self.editmenu.addMenu(self.chooseitemmenu)
         self.swapgemsmenuid = self.editmenu.addMenu(self.swapgemsmenu)
+
         self.editmenu.addSeparator()
+
         self.editmenu.addMenu(self.newitemmenu)
         self.editmenu.addMenu(self.moveitemmenu)
         self.editmenu.addAction('Delete Item', self.deleteCurrentItem)
         self.editmenu.addAction('Clear Item', self.clearCurrentItem)
-        self.editmenu.addSeparator()
-        self.editmenu.addAction('&Options...', self.openOptions,
-                                QKeySequence(Qt.ALT+Qt.Key_O))
+
         self.editmenu.addSeparator()
 
-        # FIXME
-        self.editmenu.addAction('&New Outfit', self.newOutfit)
-        self.deleteOutfitAction = self.editmenu.addAction('&Delete Current Outfit', self.deleteOutfit)
+        self.editmenu.addAction('Ne&w Outfit', self.newOutfit)
+        self.deleteOutfitAction = self.editmenu.addAction('Delete Outfit', self.deleteOutfit)
+
+        self.editmenu.addSeparator()
+
+        self.editmenu.addAction('&Options...', self.openOptions,
+                                QKeySequence(Qt.ALT+Qt.Key_O))
 
         self.menuBar().addMenu(self.editmenu)
 
