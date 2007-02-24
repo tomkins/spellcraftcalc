@@ -50,6 +50,7 @@ class Options(QDialog, Ui_B_Options):
         self.IncludeRR.setChecked(ScOptions.instance().getOption('IncludeRRInTotals', False))
         self.CapDistance.setChecked(ScOptions.instance().getOption('DistanceToCap', False))
         self.HideNonClassSkills.setChecked(ScOptions.instance().getOption('HideNonClassSkills', False))
+        self.EuroServers.setChecked(ScOptions.instance().getOption('EuroServers', False))
 
     def saveOptions(self):
         ScOptions.instance().setOption('CrafterSkill', int(str(self.Skill.currentText())))
@@ -60,6 +61,7 @@ class Options(QDialog, Ui_B_Options):
         ScOptions.instance().setOption('IncludeRRInTotals', self.IncludeRR.isChecked())
         ScOptions.instance().setOption('DistanceToCap', self.CapDistance.isChecked())
         ScOptions.instance().setOption('HideNonClassSkills', self.HideNonClassSkills.isChecked())
+        ScOptions.instance().setOption('EuroServers', self.EuroServers.isChecked())
 
     def OK_pressed(self):
         self.saveOptions()

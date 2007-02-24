@@ -6,7 +6,7 @@
 
 __all__ = [
   'AllBonusList', 'ClassList', 'RaceList', 'Races', 'Realms', 
-  'ServerCodes', 
+  'ServerCodes', 'EuroServerCodes', 'ServerIgnCodes', 
 ]
 
 from tuple2 import * 
@@ -592,8 +592,10 @@ ServerCodes = d2({
       '5' : 'Pendragon',
      '12' : 'Percival',
      '27' : 'Tristan',
+})
 
 #Euro
+EuroServerCodes = d2({
      '33' : 'Excalibur',
     '177' : 'Prydwen',
      '45' : 'Avalon',

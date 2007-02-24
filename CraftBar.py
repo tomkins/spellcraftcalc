@@ -224,6 +224,9 @@ class CraftBar(QDialog, Ui_B_CraftBar):
         self.computeBarEnd()
 
     def findPath(self,a0):
+        servers = ServerCodes
+        if self.parent.euroServers:
+            servers = EuroServerCodes
         self.model.removeRows(0, self.model.rowCount())
         a0 = unicode(a0)
         reini = re.compile('(\w+)-(\d+)\.ini$')
@@ -233,7 +236,7 @@ class CraftBar(QDialog, Ui_B_CraftBar):
             filelist = glob.glob(a0+'/*-*.ini')
             for file in filelist:
                 m = reini.search(file)
-                if m is None or not ServerCodes.has_key(m.group(2)):
+                if m is None or not servers.has_key(m.group(2)):
                     continue
                 # search the section(s) for the pattern
                 # [Quickbar[2-3]*]
@@ -255,7 +258,7 @@ class CraftBar(QDialog, Ui_B_CraftBar):
                 f.close()
                 if find < 2:
                     continue
-                server = ServerCodes[m.group(2)]
+                server = servers[m.group(2)]
                 self.model.insertRows(self.model.rowCount(), 1)
                 index = self.model.index(self.model.rowCount()-1, 0, QModelIndex())
                 self.model.setData(index, QVariant(server), Qt.DisplayRole)
