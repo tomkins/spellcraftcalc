@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
 
-# Form implementation generated from reading ui file 'Ethinarg2.ui'
+# Form implementation generated from reading ui file 'Ethinarg.ui'
 #
-# Created: Mon Feb 19 16:57:14 2007
+# Created: Fri Feb 23 21:34:27 2007
 #      by: PyQt4 UI code generator 4.1
 #
 # WARNING! All changes made in this file will be lost!
