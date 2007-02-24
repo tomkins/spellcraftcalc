@@ -17,6 +17,30 @@ class ScOptions(Singleton):
         Singleton.__init__(self)
         self.__options = {}
 
+    def getAppDirectory():
+        if sys.platform == 'win32':
+            extradirs = os.path.join('kscraft', 'spellcraft')
+            path = os.environ.get('APPDATA', '')
+            if not os.path.isdir(path):
+                path = os.path.dirname(os.path.abspath(sys.argv[0]))
+        else:
+            extradirs = '.kscraft'
+            path = os.environ.get('HOME', '')
+            if not os.path.isdir(path):
+                path = os.path.dirname(os.path.abspath(sys.argv[0]))
+
+        path = os.path.join(path, extradirs)
+        if not os.path.isdir(path):
+            try:
+                os.makedirs(path)
+            except error:
+                print 'Error creating subdirectories'
+                path = os.path.dirname(os.path.abspath(sys.argv[0]))
+
+        return path
+    getAppDirectory = staticmethod(getAppDirectory)
+
+
     def getOption(self, name, defaultValue):
         if isinstance(defaultValue, str):
             defaultValue = unicode(defaultValue)
@@ -118,8 +142,23 @@ class ScOptions(Singleton):
             self.__options[nodeName] = self.parseOption(child)
             
     def load(self):
-        scfile = os.path.join(os.path.dirname(os.path.abspath(sys.argv[0])),
+        oldscfile = os.path.join(os.path.dirname(os.path.abspath(sys.argv[0])),
                               'Spellcraft.xml')
+        if os.path.exists(oldscfile):
+            newscfile = os.path.join(ScOptions.getAppDirectory(),
+                'Spellcraft.xml')
+            if not os.path.exists(newscfile) and \
+                    os.access(os.path.dirname(newscfile), os.W_OK):
+                f = open(oldscfile, 'r') 
+                f2 = open(newscfile, 'w')
+                f2.write(f.read())
+                f.close()
+                f2.close()
+                os.unlink(oldscfile)
+
+        scfile = os.path.join(ScOptions.getAppDirectory(),
+            'Spellcraft.xml')
+
         if os.path.exists(scfile):
             try:
                 f = open(scfile, 'r')
@@ -133,8 +172,8 @@ class ScOptions(Singleton):
                 pass
 
     def save(self):        
-        scfile = os.path.join(os.path.dirname(os.path.abspath(sys.argv[0])),
-                              'Spellcraft.xml')
+        scfile = os.path.join(ScOptions.getAppDirectory(),
+            'Spellcraft.xml')
         if os.access(os.path.dirname(scfile), os.W_OK):
             try:
                 f = open(scfile, 'w')
