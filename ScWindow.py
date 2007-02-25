@@ -2039,7 +2039,7 @@ class ScWindow(QMainWindow, Ui_B_SC):
             self.loadOptions()
             self.showcapmenuid.setChecked(self.capDistance)
             self.realmChanged(self.Realm.currentIndex())
-            self.modified = True
+            #self.modified = True
             self.nocalc = False
             self.restoreItem(self.itemattrlist[self.currentTabLabel])
         else:
