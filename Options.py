@@ -27,10 +27,26 @@ class Options(QDialog, Ui_B_Options):
         if (modal):
             self.setModal(modal)
 
+        self.TierPriceTable.verticalHeader().hide()
+        self.TierPriceTable.setHorizontalHeaderItem(0, QTableWidgetItem('Tier'))
+        self.TierPriceTable.setHorizontalHeaderItem(1, QTableWidgetItem('Price'))
+        for i in range(0, self.TierPriceTable.rowCount()):
+            item = QTableWidgetItem(str(i+1))
+            item.setFlags(Qt.ItemIsSelectable)
+            self.TierPriceTable.setItem(i, 0, item)
+            item = QTableWidgetItem('0')
+            self.TierPriceTable.setItem(i, 1, item)
+
+        self.TierPriceTable.horizontalHeader().setResizeMode(QHeaderView.Stretch)
+        self.TierPriceTable.setEditTriggers(QAbstractItemView.CurrentChanged)
+        self.TierPriceTable.resizeRowsToContents()
+
         self.connect(self.OK,SIGNAL("clicked()"),self.OK_pressed)
         self.connect(self.Cancel,SIGNAL("clicked()"),self.Cancel_pressed)
-        self.connect(self.Tier,SIGNAL("activated(const QString&)"),self.TierMarkupChanged)
-        self.connect(self.TierPrice,SIGNAL("textChanged(const QString&)"),self.TierMarkupSet)
+        self.connect(self.TierPriceTable, SIGNAL('itemChanged(QTableWidgetItem *)'), 
+            self.tierPriceSet)
+        #self.connect(self.Tier,SIGNAL("activated(const QString&)"),self.TierMarkupChanged)
+        #self.connect(self.TierPrice,SIGNAL("textChanged(const QString&)"),self.TierMarkupSet)
 
 #       self.Tab.setTabEnabled(self.Price, 0)
         self.parent = parent
@@ -54,6 +70,8 @@ class Options(QDialog, Ui_B_Options):
 
     def saveOptions(self):
         ScOptions.instance().setOption('CrafterSkill', int(str(self.Skill.currentText())))
+        if str(self.NoteText.toPlainText()) != self.parent.noteText:
+            self.parent.modified = True
         self.parent.noteText = str(self.NoteText.toPlainText())
         ScOptions.instance().setOption('DontShowDoneGems', self.ShowDoneGems.isChecked())
         ScOptions.instance().setOption('Pricing', self.getPriceInfo())
@@ -76,11 +94,11 @@ class Options(QDialog, Ui_B_Options):
         self.TierPrice.setText(st)
         self.TierPricing[str(self.Tier.currentText())] = int(st)
 
-    def TierMarkupChanged(self, a0):
-        if self.TierPricing.has_key(str(a0)):
-            self.TierPrice.setText(str(self.TierPricing[str(a0)]))
-        else:
-            self.TierPrice.setText('0') 
+    def tierPriceSet(self, a0):
+        st = re.sub('[^\d]', '', str(a0.text()))
+        if st == '': st = '0'
+        a0.setText(st)
+        self.TierPricing[str(a0.row() + 1)] = int(st)
 
     def getPriceInfo(self):
         pricing = { }
@@ -124,7 +142,7 @@ class Options(QDialog, Ui_B_Options):
         else:
             self.TierInclude.setChecked(0)
         self.TierPricing = pinfo['Tier']
-        self.TierMarkupChanged(self.Tier.currentText())
+        #self.TierMarkupChanged(self.Tier.currentText())
         if pinfo['HourInclude']:
             self.HourInclude.setChecked(1)
         else:
@@ -134,3 +152,7 @@ class Options(QDialog, Ui_B_Options):
             self.CostInPrice.setChecked(1)
         else:
             self.CostInPrice.setChecked(0)
+
+        for tier, price in self.TierPricing.items():
+            tnum = int(tier)
+            self.TierPriceTable.item(tnum - 1, 1).setText(str(price))

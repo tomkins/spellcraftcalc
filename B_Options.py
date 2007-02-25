@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'Options.ui'
 #
-# Created: Sat Feb 24 13:42:24 2007
+# Created: Sat Feb 24 19:04:11 2007
 #      by: PyQt4 UI code generator 4.1
 #
 # WARNING! All changes made in this file will be lost!
@@ -13,7 +13,7 @@ from PyQt4 import QtCore, QtGui
 class Ui_B_Options(object):
     def setupUi(self, B_Options):
         B_Options.setObjectName("B_Options")
-        B_Options.resize(QtCore.QSize(QtCore.QRect(0,0,634,455).size()).expandedTo(B_Options.minimumSizeHint()))
+        B_Options.resize(QtCore.QSize(QtCore.QRect(0,0,634,484).size()).expandedTo(B_Options.minimumSizeHint()))
 
         self.hboxlayout = QtGui.QHBoxLayout(B_Options)
         self.hboxlayout.setMargin(9)
@@ -308,53 +308,23 @@ class Ui_B_Options(object):
         self.vboxlayout13.setSpacing(6)
         self.vboxlayout13.setObjectName("vboxlayout13")
 
+        self.TierPriceTable = QtGui.QTableWidget(self.GroupBox5)
+        self.TierPriceTable.setObjectName("TierPriceTable")
+        self.vboxlayout13.addWidget(self.TierPriceTable)
+
         self.hboxlayout5 = QtGui.QHBoxLayout()
         self.hboxlayout5.setMargin(0)
         self.hboxlayout5.setSpacing(6)
         self.hboxlayout5.setObjectName("hboxlayout5")
 
-        self.TextLabel13 = QtGui.QLabel(self.GroupBox5)
-        self.TextLabel13.setObjectName("TextLabel13")
-        self.hboxlayout5.addWidget(self.TextLabel13)
-
-        self.Tier = QtGui.QComboBox(self.GroupBox5)
-
-        sizePolicy = QtGui.QSizePolicy(QtGui.QSizePolicy.Policy(0),QtGui.QSizePolicy.Policy(0))
-        sizePolicy.setHorizontalStretch(0)
-        sizePolicy.setVerticalStretch(0)
-        sizePolicy.setHeightForWidth(self.Tier.sizePolicy().hasHeightForWidth())
-        self.Tier.setSizePolicy(sizePolicy)
-        self.Tier.setObjectName("Tier")
-        self.hboxlayout5.addWidget(self.Tier)
-
-        self.TextLabel14 = QtGui.QLabel(self.GroupBox5)
-        self.TextLabel14.setObjectName("TextLabel14")
-        self.hboxlayout5.addWidget(self.TextLabel14)
-
-        self.TierPrice = QtGui.QLineEdit(self.GroupBox5)
-
-        sizePolicy = QtGui.QSizePolicy(QtGui.QSizePolicy.Policy(7),QtGui.QSizePolicy.Policy(0))
-        sizePolicy.setHorizontalStretch(1)
-        sizePolicy.setVerticalStretch(0)
-        sizePolicy.setHeightForWidth(self.TierPrice.sizePolicy().hasHeightForWidth())
-        self.TierPrice.setSizePolicy(sizePolicy)
-        self.TierPrice.setObjectName("TierPrice")
-        self.hboxlayout5.addWidget(self.TierPrice)
-        self.vboxlayout13.addLayout(self.hboxlayout5)
-
-        self.hboxlayout6 = QtGui.QHBoxLayout()
-        self.hboxlayout6.setMargin(0)
-        self.hboxlayout6.setSpacing(6)
-        self.hboxlayout6.setObjectName("hboxlayout6")
-
         self.TierInclude = QtGui.QCheckBox(self.GroupBox5)
         self.TierInclude.setObjectName("TierInclude")
-        self.hboxlayout6.addWidget(self.TierInclude)
+        self.hboxlayout5.addWidget(self.TierInclude)
 
         self.TextLabel15 = QtGui.QLabel(self.GroupBox5)
         self.TextLabel15.setObjectName("TextLabel15")
-        self.hboxlayout6.addWidget(self.TextLabel15)
-        self.vboxlayout13.addLayout(self.hboxlayout6)
+        self.hboxlayout5.addWidget(self.TextLabel15)
+        self.vboxlayout13.addLayout(self.hboxlayout5)
         self.vboxlayout12.addLayout(self.vboxlayout13)
         self.hboxlayout3.addWidget(self.GroupBox5)
 
@@ -382,30 +352,30 @@ class Ui_B_Options(object):
         self.hboxlayout3.addWidget(self.GroupBox6)
         self.vboxlayout6.addLayout(self.hboxlayout3)
 
+        self.hboxlayout6 = QtGui.QHBoxLayout()
+        self.hboxlayout6.setMargin(0)
+        self.hboxlayout6.setSpacing(6)
+        self.hboxlayout6.setObjectName("hboxlayout6")
+
+        spacerItem2 = QtGui.QSpacerItem(40,20,QtGui.QSizePolicy.Expanding,QtGui.QSizePolicy.Minimum)
+        self.hboxlayout6.addItem(spacerItem2)
+
+        self.CostInPrice = QtGui.QCheckBox(self.Price)
+        self.CostInPrice.setChecked(True)
+        self.CostInPrice.setObjectName("CostInPrice")
+        self.hboxlayout6.addWidget(self.CostInPrice)
+
+        spacerItem3 = QtGui.QSpacerItem(40,20,QtGui.QSizePolicy.Expanding,QtGui.QSizePolicy.Minimum)
+        self.hboxlayout6.addItem(spacerItem3)
+        self.vboxlayout6.addLayout(self.hboxlayout6)
+
         self.hboxlayout7 = QtGui.QHBoxLayout()
         self.hboxlayout7.setMargin(0)
         self.hboxlayout7.setSpacing(6)
         self.hboxlayout7.setObjectName("hboxlayout7")
 
-        spacerItem2 = QtGui.QSpacerItem(40,20,QtGui.QSizePolicy.Expanding,QtGui.QSizePolicy.Minimum)
-        self.hboxlayout7.addItem(spacerItem2)
-
-        self.CostInPrice = QtGui.QCheckBox(self.Price)
-        self.CostInPrice.setChecked(True)
-        self.CostInPrice.setObjectName("CostInPrice")
-        self.hboxlayout7.addWidget(self.CostInPrice)
-
-        spacerItem3 = QtGui.QSpacerItem(40,20,QtGui.QSizePolicy.Expanding,QtGui.QSizePolicy.Minimum)
-        self.hboxlayout7.addItem(spacerItem3)
-        self.vboxlayout6.addLayout(self.hboxlayout7)
-
-        self.hboxlayout8 = QtGui.QHBoxLayout()
-        self.hboxlayout8.setMargin(0)
-        self.hboxlayout8.setSpacing(6)
-        self.hboxlayout8.setObjectName("hboxlayout8")
-
         spacerItem4 = QtGui.QSpacerItem(40,20,QtGui.QSizePolicy.Expanding,QtGui.QSizePolicy.Minimum)
-        self.hboxlayout8.addItem(spacerItem4)
+        self.hboxlayout7.addItem(spacerItem4)
 
         self.TextLabel2_4 = QtGui.QLabel(self.Price)
 
@@ -415,38 +385,38 @@ class Ui_B_Options(object):
         sizePolicy.setHeightForWidth(self.TextLabel2_4.sizePolicy().hasHeightForWidth())
         self.TextLabel2_4.setSizePolicy(sizePolicy)
         self.TextLabel2_4.setObjectName("TextLabel2_4")
-        self.hboxlayout8.addWidget(self.TextLabel2_4)
+        self.hboxlayout7.addWidget(self.TextLabel2_4)
 
         spacerItem5 = QtGui.QSpacerItem(40,20,QtGui.QSizePolicy.Expanding,QtGui.QSizePolicy.Minimum)
-        self.hboxlayout8.addItem(spacerItem5)
-        self.vboxlayout6.addLayout(self.hboxlayout8)
+        self.hboxlayout7.addItem(spacerItem5)
+        self.vboxlayout6.addLayout(self.hboxlayout7)
         self.vboxlayout5.addLayout(self.vboxlayout6)
         self.Tab.addTab(self.Price,"")
         self.vboxlayout.addWidget(self.Tab)
 
-        self.hboxlayout9 = QtGui.QHBoxLayout()
-        self.hboxlayout9.setMargin(0)
-        self.hboxlayout9.setSpacing(25)
-        self.hboxlayout9.setObjectName("hboxlayout9")
+        self.hboxlayout8 = QtGui.QHBoxLayout()
+        self.hboxlayout8.setMargin(0)
+        self.hboxlayout8.setSpacing(25)
+        self.hboxlayout8.setObjectName("hboxlayout8")
 
         spacerItem6 = QtGui.QSpacerItem(40,20,QtGui.QSizePolicy.Expanding,QtGui.QSizePolicy.Minimum)
-        self.hboxlayout9.addItem(spacerItem6)
+        self.hboxlayout8.addItem(spacerItem6)
 
         self.OK = QtGui.QPushButton(B_Options)
         self.OK.setObjectName("OK")
-        self.hboxlayout9.addWidget(self.OK)
+        self.hboxlayout8.addWidget(self.OK)
 
         self.Cancel = QtGui.QPushButton(B_Options)
         self.Cancel.setObjectName("Cancel")
-        self.hboxlayout9.addWidget(self.Cancel)
+        self.hboxlayout8.addWidget(self.Cancel)
 
         spacerItem7 = QtGui.QSpacerItem(40,20,QtGui.QSizePolicy.Expanding,QtGui.QSizePolicy.Minimum)
-        self.hboxlayout9.addItem(spacerItem7)
-        self.vboxlayout.addLayout(self.hboxlayout9)
+        self.hboxlayout8.addItem(spacerItem7)
+        self.vboxlayout.addLayout(self.hboxlayout8)
         self.hboxlayout.addLayout(self.vboxlayout)
 
         self.retranslateUi(B_Options)
-        self.Tab.setCurrentIndex(0)
+        self.Tab.setCurrentIndex(2)
         QtCore.QMetaObject.connectSlotsByName(B_Options)
         B_Options.setTabOrder(self.PPGem,self.PPItem)
         B_Options.setTabOrder(self.PPItem,self.PPOrder)
@@ -455,9 +425,7 @@ class Ui_B_Options(object):
         B_Options.setTabOrder(self.PPImbue,self.PPOC)
         B_Options.setTabOrder(self.PPOC,self.PPInclude)
         B_Options.setTabOrder(self.PPInclude,self.GenMarkup)
-        B_Options.setTabOrder(self.GenMarkup,self.Tier)
-        B_Options.setTabOrder(self.Tier,self.TierPrice)
-        B_Options.setTabOrder(self.TierPrice,self.TierInclude)
+        B_Options.setTabOrder(self.GenMarkup,self.TierInclude)
         B_Options.setTabOrder(self.TierInclude,self.HourPrice)
         B_Options.setTabOrder(self.HourPrice,self.HourInclude)
         B_Options.setTabOrder(self.HourInclude,self.CostInPrice)
@@ -507,19 +475,11 @@ class Ui_B_Options(object):
         self.TextLabel11.setText(QtGui.QApplication.translate("B_Options", "%", None, QtGui.QApplication.UnicodeUTF8))
         self.TextLabel12.setText(QtGui.QApplication.translate("B_Options", "(cost + (cost * X%))", None, QtGui.QApplication.UnicodeUTF8))
         self.GroupBox5.setTitle(QtGui.QApplication.translate("B_Options", "Price by gem tier", None, QtGui.QApplication.UnicodeUTF8))
-        self.TextLabel13.setText(QtGui.QApplication.translate("B_Options", "Tier:", None, QtGui.QApplication.UnicodeUTF8))
-        self.Tier.addItem(QtGui.QApplication.translate("B_Options", "1", None, QtGui.QApplication.UnicodeUTF8))
-        self.Tier.addItem(QtGui.QApplication.translate("B_Options", "2", None, QtGui.QApplication.UnicodeUTF8))
-        self.Tier.addItem(QtGui.QApplication.translate("B_Options", "3", None, QtGui.QApplication.UnicodeUTF8))
-        self.Tier.addItem(QtGui.QApplication.translate("B_Options", "4", None, QtGui.QApplication.UnicodeUTF8))
-        self.Tier.addItem(QtGui.QApplication.translate("B_Options", "5", None, QtGui.QApplication.UnicodeUTF8))
-        self.Tier.addItem(QtGui.QApplication.translate("B_Options", "6", None, QtGui.QApplication.UnicodeUTF8))
-        self.Tier.addItem(QtGui.QApplication.translate("B_Options", "7", None, QtGui.QApplication.UnicodeUTF8))
-        self.Tier.addItem(QtGui.QApplication.translate("B_Options", "8", None, QtGui.QApplication.UnicodeUTF8))
-        self.Tier.addItem(QtGui.QApplication.translate("B_Options", "9", None, QtGui.QApplication.UnicodeUTF8))
-        self.Tier.addItem(QtGui.QApplication.translate("B_Options", "10", None, QtGui.QApplication.UnicodeUTF8))
-        self.TextLabel14.setText(QtGui.QApplication.translate("B_Options", "Price:", None, QtGui.QApplication.UnicodeUTF8))
-        self.TierPrice.setText(QtGui.QApplication.translate("B_Options", "0", None, QtGui.QApplication.UnicodeUTF8))
+        self.TierPriceTable.setRowCount(10)
+        self.TierPriceTable.setColumnCount(2)
+        self.TierPriceTable.clear()
+        self.TierPriceTable.setColumnCount(2)
+        self.TierPriceTable.setRowCount(10)
         self.TierInclude.setText(QtGui.QApplication.translate("B_Options", "Include", None, QtGui.QApplication.UnicodeUTF8))
         self.TextLabel15.setText(QtGui.QApplication.translate("B_Options", "(cost + X)", None, QtGui.QApplication.UnicodeUTF8))
         self.GroupBox6.setTitle(QtGui.QApplication.translate("B_Options", "Per hour", None, QtGui.QApplication.UnicodeUTF8))
