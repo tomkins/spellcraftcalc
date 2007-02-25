@@ -4,6 +4,11 @@ import traceback
 import glob
 import sys
 
+# This program is designed to collect the data from
+# http://ethinarg.com/itemdb/tools/complete.zip
+# to ensure the entire breadth of values and fields
+# can be recorded
+
 def testTreeXML(itemnode, slots):
     text = ''
     if itemnode.tagName[0:4] == "SLOT":
@@ -46,7 +51,8 @@ if __name__ == '__main__':
             docstr = f.read()
             xmldoc = parseString(docstr)
             items = xmldoc.getElementsByTagName('SCItem')
-            testTreeXML(xmldoc, rootslot)
+            for item in items:
+                testTreeXML(item, rootslot)
         except:
             traceback.print_exc()
             sys.stderr.write("Error reading file: %s\n" % filename)
