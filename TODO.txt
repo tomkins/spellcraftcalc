@@ -1,19 +1,47 @@
 Urgent things to fix before next beta release!!!
 
-  Item pane should learn time, Remove time from gems.  Add a total
-  time that can be adjusted? (when an item's time is changed, bump 
-  it up or down, but preserve the user's time such as when they 
-  spend 20 min helping the customer figure out the template before 
-  crafting.)
+  Remember username/password in Spellcraft.xml
+
+  Change class to Mauler (and convert the three mauler names to the
+  general Mauler class on open template/item).
+
+  Need to save character's RealmRank/ChampionLevel/TemplateTime.
 
   Options does not open with the first options page - ugly.
+
+  Item pane must learn time, Remove time from gems.  Track the total
+  time in the char info... when an item's time is changed, bump 
+  it up or down, but preserve the user's time such as when they 
+  spend 20 min helping the customer figure out the template before 
+  crafting.
+
+
+Things to fix before next beta release is announced;
+
+  When opening Search Items, populate the slot with the currently
+  selected tab (let them pick Any Slot of course).  Default the 
+  realm to the current Realm.  Default the class to the currently
+  selected class.
+
+  When choosing Add Item to Template, make sure it lands in an
+  appropriate slot(!)  If it's the correct slot move on. If not,
+  perhaps prompt ring/wrist with Left Right buttons, for LH usable
+  weapons prompt right hand/left hand/2 handed?  For RH usable
+  weapons prompt right hand/2 handed. For 2 handed drop into 2h
+  and For shields drop in left hand.
+
+  Utility Value should be Utility<br />Value, we can hide the # 
+  {or fold it into row 2 as #) Itemname}, and Add to Template
+  link can be added to the Itemname<br />Add to Template.  This
+  would reclaim a bit of space and lay out the table a bit cleaner.
+
+  It would be really cool to display Ethinarg's table of database
+  item counts on startup.
 
   Allow users to choose the Realm (or 'All') for items, drop and crafted.
   (Crafted items all have a specific realm, even on Gaheris/Mordred, while
   drop items can be 'All/Any'.)  Look at Eithargs' xml for other fields
   we should edit, such as class restrictions.
-
-Things to fix before next beta release is announced;
 
   Prettify the display of stats with caps for the screen, with
   a stat/maxstat flavor option.
