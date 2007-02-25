@@ -13,6 +13,7 @@ import XMLHelper
 import sys
 import os.path
 import traceback
+import constants
 from xml.dom.minidom import *
 from MyStringIO import UnicodeStringIO
 
@@ -31,7 +32,8 @@ class Options(QDialog, Ui_B_Options):
         self.TierPriceTable.setHorizontalHeaderItem(0, QTableWidgetItem('Tier'))
         self.TierPriceTable.setHorizontalHeaderItem(1, QTableWidgetItem('Price'))
         for i in range(0, self.TierPriceTable.rowCount()):
-            item = QTableWidgetItem(str(i+1))
+            item = QTableWidgetItem('%d %s / %s' % (i+1,
+                constants.MaterialGems[i], constants.GemNames[i]))
             item.setFlags(Qt.ItemIsSelectable)
             self.TierPriceTable.setItem(i, 0, item)
             item = QTableWidgetItem('0')
