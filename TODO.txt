@@ -1,5 +1,7 @@
 Urgent things to fix before next beta release!!!
 
+  Properly accumulate Mythical item bonuses (not capped!)
+
   On Load or Search/Add Item to Template - be certain to ignore
   Equipped and Location and rename them to their current Location,
   flag Equipped based on the old item's Equipped flag.
