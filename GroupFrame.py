@@ -5,7 +5,10 @@ class GroupFrame(QFrame):
     def __init__(self, parent = None):
         QFrame.__init__(self, parent)
         ltrb = self.getContentsMargins()
-        self.setContentsMargins(ltrb[0]+1, ltrb[1], ltrb[2]+2, ltrb[3]+1)
+        if str(self.style().objectName()).lower() == "windowsxp":
+          self.setContentsMargins(ltrb[0]+1, ltrb[1], ltrb[2]+2, ltrb[3]+1)
+        else:
+          self.setContentsMargins(ltrb[0]+1, ltrb[1], ltrb[2]+1, ltrb[3])
 
     def paintEvent(self, pevent):
         painter = QPainter(self)
