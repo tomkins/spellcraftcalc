@@ -178,9 +178,12 @@ class ScWindow(QMainWindow, Ui_B_SC):
 
         skillmodel = QStandardItemModel(0,1,self.SkillsList)
         self.SkillsList.setModel(skillmodel)
+        # The FrameV2 palettes all lie, the OS has control, so make
+        # this SkillsList object transparent
+        # basepalette = QPalette(self.GroupSkillsList.palette())
         palette = QPalette(self.SkillsList.palette())
-        palette.setColor(QPalette.Base, palette.color(QPalette.Window))
-        palette.setBrush(QPalette.Base, palette.window())
+        palette.setColor(QPalette.Base, QColor(0,0,0,0))
+        palette.setBrush(QPalette.Base, QBrush(QColor(0,0,0,0)))
         self.SkillsList.setPalette(palette)
         self.GroupSkillsList.layout().setColumnStretch(0, 1)
         self.ScWinFrame.layout().setColumnStretch(6, 1)
