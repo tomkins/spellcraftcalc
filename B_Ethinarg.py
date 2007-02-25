@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'Ethinarg.ui'
 #
-# Created: Sat Feb 24 11:11:00 2007
+# Created: Sat Feb 24 23:58:50 2007
 #      by: PyQt4 UI code generator 4.1
 #
 # WARNING! All changes made in this file will be lost!
@@ -449,7 +449,7 @@ class Ui_B_Ethinarg(object):
 
     def retranslateUi(self, B_Ethinarg):
         B_Ethinarg.setWindowTitle(QtGui.QApplication.translate("B_Ethinarg", "Dialog", None, QtGui.QApplication.UnicodeUTF8))
-        self.groupBox.setTitle(QtGui.QApplication.translate("B_Ethinarg", "Search Results", None, QtGui.QApplication.UnicodeUTF8))
+        self.groupBox.setTitle(QtGui.QApplication.translate("B_Ethinarg", "Ethinarg\'s Item Database Search Results", None, QtGui.QApplication.UnicodeUTF8))
         self.openSearchButton.setText(QtGui.QApplication.translate("B_Ethinarg", "Open Search Pane", None, QtGui.QApplication.UnicodeUTF8))
         self.prevButton.setText(QtGui.QApplication.translate("B_Ethinarg", "< Prev", None, QtGui.QApplication.UnicodeUTF8))
         self.nextButton.setText(QtGui.QApplication.translate("B_Ethinarg", "Next >", None, QtGui.QApplication.UnicodeUTF8))
