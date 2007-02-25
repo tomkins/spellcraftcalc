@@ -1,5 +1,5 @@
-from PyQt4.QtGui import QFrame, QPainter, QStyle
-from PyQt4.QtGui import QStyleOptionFrame, QStyleOptionFrameV2
+from PyQt4.QtGui import QFrame, QPainter, QStyle, QPalette
+from PyQt4.QtGui import QStyleOptionTabWidgetFrame, QStyleOptionFrameV2
 
 class GroupFrame(QFrame):
     def __init__(self, parent = None):
@@ -7,13 +7,13 @@ class GroupFrame(QFrame):
 
     def paintEvent(self, pevent):
         painter = QPainter(self)
-        styleoptions = QStyleOptionFrameV2()
-        styleoptions.init(self);
-        #styleoptions.FrameFeatures = QStyleOptionFrameV2.None
         if str(self.style().objectName()).lower() == "windowsxp":
           # it sucks, but windowsxp in classic view displays no groupframe
+          styleoptions = QStyleOptionTabWidgetFrame()
           frame = QStyle.PE_FrameTabWidget
         else:
+          styleoptions = QStyleOptionFrameV2()
           frame = QStyle.PE_FrameGroupBox
+        styleoptions.initFrom(self);
         self.style().drawPrimitive(frame, styleoptions, painter, self)
 
