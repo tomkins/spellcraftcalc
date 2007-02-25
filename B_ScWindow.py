@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'ScWindow.ui'
 #
-# Created: Sat Feb 24 17:11:57 2007
+# Created: Sat Feb 24 23:37:03 2007
 #      by: PyQt4 UI code generator 4.1
 #
 # WARNING! All changes made in this file will be lost!
@@ -372,7 +372,7 @@ class Ui_B_SC(object):
         self.hboxlayout.addWidget(self.TotalUtility)
         self.gridlayout2.addLayout(self.hboxlayout,13,0,1,3)
 
-        spacerItem4 = QtGui.QSpacerItem(5,0,QtGui.QSizePolicy.Minimum,QtGui.QSizePolicy.MinimumExpanding)
+        spacerItem4 = QtGui.QSpacerItem(1,0,QtGui.QSizePolicy.Minimum,QtGui.QSizePolicy.MinimumExpanding)
         self.gridlayout2.addItem(spacerItem4,14,0,1,3)
         self.gridlayout.addWidget(self.GroupStats,0,2,1,1)
 
@@ -529,7 +529,7 @@ class Ui_B_SC(object):
         self.EssenceCap.setObjectName("EssenceCap")
         self.gridlayout3.addWidget(self.EssenceCap,9,2,1,1)
 
-        spacerItem6 = QtGui.QSpacerItem(1,2,QtGui.QSizePolicy.Minimum,QtGui.QSizePolicy.MinimumExpanding)
+        spacerItem6 = QtGui.QSpacerItem(1,1,QtGui.QSizePolicy.Minimum,QtGui.QSizePolicy.MinimumExpanding)
         self.gridlayout3.addItem(spacerItem6,10,0,1,3)
         self.gridlayout.addWidget(self.GroupResists,0,4,1,1)
 

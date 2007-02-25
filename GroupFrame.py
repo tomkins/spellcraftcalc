@@ -4,6 +4,8 @@ from PyQt4.QtGui import QStyleOptionTabWidgetFrame, QStyleOptionFrameV2
 class GroupFrame(QFrame):
     def __init__(self, parent = None):
         QFrame.__init__(self, parent)
+        ltrb = self.getContentsMargins()
+        self.setContentsMargins(ltrb[0]+1, ltrb[1], ltrb[2]+2, ltrb[3]+1)
 
     def paintEvent(self, pevent):
         painter = QPainter(self)
