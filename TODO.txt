@@ -1,5 +1,9 @@
 Urgent things to fix before next beta release!!!
 
+  On Load or Search/Add Item to Template - be certain to ignore
+  Equipped and Location and rename them to their current Location,
+  flag Equipped based on the old item's Equipped flag.
+
   Remember username/password in Spellcraft.xml
 
   Change class to Mauler (and convert the three mauler names to the
@@ -15,6 +19,8 @@ Urgent things to fix before next beta release!!!
 
 
 Things to fix before next beta release is announced;
+
+  Add the <SCMaterials> entries to the SCData report format.
 
   When opening Search Items, populate the slot with the currently
   selected tab (let them pick Any Slot of course).  Default the 
