@@ -353,6 +353,10 @@ class ScWindow(QMainWindow, Ui_B_SC):
         #             self.templateChanged)
         self.connect(self.CharLevel,SIGNAL("textChanged(const QString&)"),
                      self.templateChanged)
+        self.connect(self.RealmRank,SIGNAL("textChanged(const QString&)"),
+                     self.templateChanged)
+        self.connect(self.ChampionLevel,SIGNAL("textChanged(const QString&)"),
+                     self.templateChanged)
         self.connect(self.OutfitName,SIGNAL("activated(int)"), 
                      self.outfitNameSelected)
         #self.connect(self.OutfitName.lineEdit(),SIGNAL("editingFinished()"),
@@ -864,6 +868,14 @@ class ScWindow(QMainWindow, Ui_B_SC):
         childnode = document.createElement('Level')
         childnode.appendChild(document.createTextNode(
                                        unicode(self.CharLevel.text())))
+        rootnode.appendChild(childnode)
+        childnode = document.createElement('RealmRank')
+        childnode.appendChild(document.createTextNode(
+                                       unicode(self.RealmRank.text())))
+        rootnode.appendChild(childnode)
+        childnode = document.createElement('ChampionLevel')
+        childnode.appendChild(document.createTextNode(
+                                       unicode(self.ChampionLevel.text())))
         rootnode.appendChild(childnode)
         childnode = document.createElement('Notes')
         childnode.appendChild(document.createTextNode(unicode(self.noteText)))
@@ -1938,6 +1950,10 @@ class ScWindow(QMainWindow, Ui_B_SC):
                 self.realm = XMLHelper.getText(child.childNodes)
             elif child.tagName == 'Level':
                 self.CharLevel.setText(XMLHelper.getText(child.childNodes))
+            elif child.tagName == 'RealmRank':
+                self.RealmRank.setText(XMLHelper.getText(child.childNodes))
+            elif child.tagName == 'ChampionLevel':
+                self.ChampionLevel.setText(XMLHelper.getText(child.childNodes))
             elif child.tagName == 'Notes':
                 self.noteText = XMLHelper.getText(child.childNodes)
             elif child.tagName == 'SCItem':

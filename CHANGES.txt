@@ -1,5 +1,8 @@
 Updated ??/??/2007 - Version 1.98
 
+  By popular request (and possibly to test Requirements at some point
+  in a future patch) added Champion Level and Realm Rank to templates.
+
   EA Mythic US server ini file numbers now clash with Euro/GOA server
   ini file numbers, so US players saw the wrong server name for their
   characters.  Added a new Option to show Euro/GOA servers.
