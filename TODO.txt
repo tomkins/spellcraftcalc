@@ -6,12 +6,8 @@ Urgent things to fix before next beta release!!!
   Equipped and Location and rename them to their current Location,
   flag Equipped based on the old item's Equipped flag.
 
-  Remember username/password in Spellcraft.xml
-
   Change class to Mauler (and convert the three mauler names to the
   general Mauler class on open template/item).
-
-  Options does not open with the first options page - ugly.
 
   Item pane must learn time, Remove time from gems.  Track the total
   time in the char info... when an item's time is changed, bump 

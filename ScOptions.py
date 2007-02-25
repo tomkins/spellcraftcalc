@@ -7,6 +7,7 @@
 import XMLHelper
 import sys
 import os.path
+import stat
 import traceback
 from xml.dom.minidom import *
 from MyStringIO import UnicodeStringIO
@@ -142,22 +143,18 @@ class ScOptions(Singleton):
             self.__options[nodeName] = self.parseOption(child)
             
     def load(self):
+        scfile = os.path.join(ScOptions.getAppDirectory(),
+            'Spellcraft.xml')
         oldscfile = os.path.join(os.path.dirname(os.path.abspath(sys.argv[0])),
                               'Spellcraft.xml')
-        if os.path.exists(oldscfile):
-            newscfile = os.path.join(ScOptions.getAppDirectory(),
-                'Spellcraft.xml')
-            if not os.path.exists(newscfile) and \
-                    os.access(os.path.dirname(newscfile), os.W_OK):
+        if not os.path.exists(scfile) and os.path.exists(oldscfile):
+            if os.access(os.path.dirname(scfile), os.W_OK):
                 f = open(oldscfile, 'r') 
-                f2 = open(newscfile, 'w')
+                f2 = open(scfile, 'w')
                 f2.write(f.read())
                 f.close()
                 f2.close()
                 os.unlink(oldscfile)
-
-        scfile = os.path.join(ScOptions.getAppDirectory(),
-            'Spellcraft.xml')
 
         if os.path.exists(scfile):
             try:
@@ -181,4 +178,8 @@ class ScOptions(Singleton):
                 f.close()
             except:
                 traceback.print_exc()
+                pass
+            try:
+                os.chmod(scfile, stat.S_IRUSR | stat.S_IWUSR)
+            except:
                 pass
