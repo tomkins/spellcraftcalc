@@ -3,6 +3,7 @@ import HTMLParser
 import re
 import sys
 import time
+from ScOptions import ScOptions
 
 from PyQt4.QtCore import *
 from PyQt4.QtGui import *
@@ -357,6 +358,12 @@ class EthinargTestWindow(QDialog, Ui_B_Ethinarg):
         self.processBox.setWindowModality(Qt.WindowModal)
         self.processBox.show()
 
+        self.usernameBox.setText(ScOptions.instance().getOption(
+            'Ethinarg_username', ''))
+        self.passwordBox.setText(ScOptions.instance().getOption(
+            'Ethinarg_password', ''))
+    
+
     def initialize(self):
         self.query = EthinargQuery()
         self.queryBoxes = [
@@ -401,6 +408,11 @@ class EthinargTestWindow(QDialog, Ui_B_Ethinarg):
         #idx = str(self.slotCombo.itemData(self.slotCombo.currentIndex()).toString())
         #self.query.setItemSlot(idx)
         #self.query.setPageNumber(self.currentPage)
+
+        ScOptions.instance().setOption('Ethinarg_username', 
+            str(self.usernameBox.text()))
+        ScOptions.instance().setOption('Ethinarg_password', 
+            str(self.passwordBox.text()))
 
         self.doQuery(uname, pwd)
 
