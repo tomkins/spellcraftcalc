@@ -1160,30 +1160,30 @@
       </item>
       <item>
        <widget class="MultiTabFrame" name="GroupItemFrame" >
-        <layout class="QGridLayout" >
+        <layout class="QVBoxLayout" >
          <property name="margin" >
           <number>6</number>
          </property>
          <property name="spacing" >
           <number>0</number>
          </property>
-         <item row="0" column="0" colspan="10" >
-          <spacer>
-           <property name="orientation" >
-            <enum>Qt::Vertical</enum>
-           </property>
-           <property name="sizeType" >
-            <enum>QSizePolicy::Fixed</enum>
-           </property>
-           <property name="sizeHint" >
-            <size>
-             <width>0</width>
-             <height>0</height>
-            </size>
-           </property>
-          </spacer>
-         </item>
-         <item row="1" column="0" colspan="10" >
+    <item>
+     <spacer>
+      <property name="orientation" >
+       <enum>Qt::Vertical</enum>
+      </property>
+      <property name="sizeType" >
+       <enum>QSizePolicy::Fixed</enum>
+      </property>
+      <property name="sizeHint" >
+       <size>
+        <width>1</width>
+        <height>2</height>
+       </size>
+      </property>
+     </spacer>
+    </item>
+         <item>
           <layout class="QHBoxLayout" >
            <property name="margin" >
             <number>0</number>
@@ -1462,42 +1462,53 @@
            </item>
           </layout>
          </item>
-         <item row="2" column="1" >
+    <item>
+     <layout class="QVBoxLayout" >
+      <item>
+       <widget class="QWidget" name="ItemSlotsFrame" >
+        <layout class="QGridLayout" >
+         <property name="margin" >
+          <number>0</number>
+         </property>
+         <property name="spacing" >
+          <number>0</number>
+         </property>
+         <item row="0" column="1" >
           <widget class="QLabel" name="LabelGemType" >
            <property name="text" >
             <string> Type</string>
            </property>
           </widget>
          </item>
-         <item row="2" column="2" >
+         <item row="0" column="2" >
           <widget class="QLabel" name="LabelGemAmount" >
            <property name="text" >
             <string> Amount</string>
            </property>
           </widget>
          </item>
-         <item row="2" column="3" >
+         <item row="0" column="3" >
           <widget class="QLabel" name="LabelGemEffect" >
            <property name="text" >
             <string> Effect</string>
            </property>
           </widget>
          </item>
-         <item row="2" column="4" >
+         <item row="0" column="4" >
           <widget class="QLabel" name="LabelGemMakes" >
            <property name="text" >
             <string> Makes</string>
            </property>
           </widget>
          </item>
-         <item row="2" column="4" colspan="3" >
+         <item row="0" column="4" colspan="3" >
           <widget class="QLabel" name="LabelRequirement" >
            <property name="text" >
             <string> Requirement</string>
            </property>
           </widget>
          </item>
-         <item row="2" column="5" >
+         <item row="0" column="5" >
           <widget class="QLabel" name="LabelGemPoints" >
            <property name="text" >
             <string>Points</string>
@@ -1507,7 +1518,7 @@
            </property>
           </widget>
          </item>
-         <item row="2" column="6" >
+         <item row="0" column="6" >
           <widget class="QLabel" name="LabelGemCost" >
            <property name="text" >
             <string>Unit Cost</string>
@@ -1517,7 +1528,7 @@
            </property>
           </widget>
          </item>
-         <item row="2" column="7" rowspan="13" >
+         <item row="0" column="7" rowspan="13" >
           <spacer>
            <property name="orientation" >
             <enum>Qt::Horizontal</enum>
@@ -1533,14 +1544,14 @@
            </property>
           </spacer>
          </item>
-         <item row="2" column="8" colspan="2" >
+         <item row="0" column="8" colspan="2" >
           <widget class="QLabel" name="LabelGemName" >
            <property name="text" >
             <string>Name</string>
            </property>
           </widget>
          </item>
-         <item row="2" column="8" rowspan="12" colspan="2" >
+         <item row="0" column="8" rowspan="12" colspan="2" >
           <spacer>
            <property name="orientation" >
             <enum>Qt::Horizontal</enum>
@@ -1556,7 +1567,7 @@
            </property>
           </spacer>
          </item>
-         <item row="3" column="0" >
+         <item row="1" column="0" >
           <widget class="QLabel" name="Gem_Label_1" >
            <property name="text" >
             <string>Slot &amp;1: </string>
@@ -1566,23 +1577,23 @@
            </property>
           </widget>
          </item>
-         <item row="3" column="1" >
+         <item row="1" column="1" >
           <widget class="SearchingCombo" name="Type_1" />
          </item>
-         <item row="3" column="2" >
+         <item row="1" column="2" >
           <widget class="QLineEdit" name="Amount_Edit_1" />
          </item>
-         <item row="3" column="2" >
+         <item row="1" column="2" >
           <widget class="SearchingCombo" name="Amount_Drop_1" />
          </item>
-         <item row="3" column="3" >
+         <item row="1" column="3" >
           <widget class="SearchingCombo" name="Effect_1" >
            <property name="editable" >
             <bool>true</bool>
            </property>
           </widget>
          </item>
-         <item row="3" column="4" >
+         <item row="1" column="4" >
           <widget class="QSpinBox" name="Makes_1" />
            <property name="focusPolicy" >
             <enum>Qt::StrongFocus</enum>
@@ -1591,10 +1602,10 @@
             <string> </string>
            </property>
          </item>
-         <item row="3" column="4" colspan="3" >
+         <item row="1" column="4" colspan="3" >
           <widget class="QLineEdit" name="Requirement_1" />
          </item>
-         <item row="3" column="5" >
+         <item row="2" column="5" >
           <widget class="QLabel" name="Points_1" >
            <property name="text" >
             <string>0.0</string>
@@ -1604,7 +1615,7 @@
            </property>
           </widget>
          </item>
-         <item row="3" column="6" >
+         <item row="1" column="6" >
           <widget class="QLabel" name="Cost_1" >
            <property name="text" >
             <string>0c</string>
@@ -1614,14 +1625,14 @@
            </property>
           </widget>
          </item>
-         <item row="3" column="8" colspan="2" >
+         <item row="1" column="8" colspan="2" >
           <widget class="QLabel" name="Name_1" >
            <property name="text" >
             <string/>
            </property>
           </widget>
          </item>
-         <item row="4" column="0" >
+         <item row="2" column="0" >
           <widget class="QLabel" name="Gem_Label_2" >
            <property name="text" >
             <string>Slot &amp;2: </string>
@@ -1631,23 +1642,23 @@
            </property>
           </widget>
          </item>
-         <item row="4" column="1" >
+         <item row="2" column="1" >
           <widget class="SearchingCombo" name="Type_2" />
          </item>
-         <item row="4" column="2" >
+         <item row="2" column="2" >
           <widget class="QLineEdit" name="Amount_Edit_2" />
          </item>
-         <item row="4" column="2" >
+         <item row="2" column="2" >
           <widget class="SearchingCombo" name="Amount_Drop_2" />
          </item>
-         <item row="4" column="3" >
+         <item row="2" column="3" >
           <widget class="SearchingCombo" name="Effect_2" >
            <property name="editable" >
             <bool>true</bool>
            </property>
           </widget>
          </item>
-         <item row="4" column="4" >
+         <item row="2" column="4" >
           <widget class="QSpinBox" name="Makes_2" />
            <property name="focusPolicy" >
             <enum>Qt::StrongFocus</enum>
@@ -1656,10 +1667,10 @@
             <string> </string>
            </property>
          </item>
-         <item row="4" column="4" colspan="3" >
+         <item row="2" column="4" colspan="3" >
           <widget class="QLineEdit" name="Requirement_2" />
          </item>
-         <item row="4" column="5" >
+         <item row="2" column="5" >
           <widget class="QLabel" name="Points_2" >
            <property name="text" >
             <string>0.0</string>
@@ -1669,7 +1680,7 @@
            </property>
           </widget>
          </item>
-         <item row="4" column="6" >
+         <item row="2" column="6" >
           <widget class="QLabel" name="Cost_2" >
            <property name="text" >
             <string>0c</string>
@@ -1679,14 +1690,14 @@
            </property>
           </widget>
          </item>
-         <item row="4" column="8" colspan="2" >
+         <item row="2" column="8" colspan="2" >
           <widget class="QLabel" name="Name_2" >
            <property name="text" >
             <string/>
            </property>
           </widget>
          </item>
-         <item row="5" column="0" >
+         <item row="3" column="0" >
           <widget class="QLabel" name="Gem_Label_3" >
            <property name="text" >
             <string>Slot &amp;3: </string>
@@ -1696,23 +1707,23 @@
            </property>
           </widget>
          </item>
-         <item row="5" column="1" >
+         <item row="3" column="1" >
           <widget class="SearchingCombo" name="Type_3" />
          </item>
-         <item row="5" column="2" >
+         <item row="3" column="2" >
           <widget class="QLineEdit" name="Amount_Edit_3" />
          </item>
-         <item row="5" column="2" >
+         <item row="3" column="2" >
           <widget class="SearchingCombo" name="Amount_Drop_3" />
          </item>
-         <item row="5" column="3" >
+         <item row="3" column="3" >
           <widget class="SearchingCombo" name="Effect_3" >
            <property name="editable" >
             <bool>true</bool>
            </property>
           </widget>
          </item>
-         <item row="5" column="4" >
+         <item row="3" column="4" >
           <widget class="QSpinBox" name="Makes_3" />
            <property name="focusPolicy" >
             <enum>Qt::StrongFocus</enum>
@@ -1721,10 +1732,10 @@
             <string> </string>
            </property>
          </item>
-         <item row="5" column="4" colspan="3" >
+         <item row="3" column="4" colspan="3" >
           <widget class="QLineEdit" name="Requirement_3" />
          </item>
-         <item row="5" column="5" >
+         <item row="3" column="5" >
           <widget class="QLabel" name="Points_3" >
            <property name="text" >
             <string>0.0</string>
@@ -1734,7 +1745,7 @@
            </property>
           </widget>
          </item>
-         <item row="5" column="6" >
+         <item row="3" column="6" >
           <widget class="QLabel" name="Cost_3" >
            <property name="text" >
             <string>0c</string>
@@ -1744,14 +1755,14 @@
            </property>
           </widget>
          </item>
-         <item row="5" column="8" colspan="2" >
+         <item row="3" column="8" colspan="2" >
           <widget class="QLabel" name="Name_3" >
            <property name="text" >
             <string/>
            </property>
           </widget>
          </item>
-         <item row="6" column="0" >
+         <item row="4" column="0" >
           <widget class="QLabel" name="Gem_Label_4" >
            <property name="text" >
             <string>Slot &amp;4: </string>
@@ -1761,23 +1772,23 @@
            </property>
           </widget>
          </item>
-         <item row="6" column="1" >
+         <item row="4" column="1" >
           <widget class="SearchingCombo" name="Type_4" />
          </item>
-         <item row="6" column="2" >
+         <item row="4" column="2" >
           <widget class="QLineEdit" name="Amount_Edit_4" />
          </item>
-         <item row="6" column="2" >
+         <item row="4" column="2" >
           <widget class="SearchingCombo" name="Amount_Drop_4" />
          </item>
-         <item row="6" column="3" >
+         <item row="4" column="3" >
           <widget class="SearchingCombo" name="Effect_4" >
            <property name="editable" >
             <bool>true</bool>
            </property>
           </widget>
          </item>
-         <item row="6" column="4" >
+         <item row="4" column="4" >
           <widget class="QSpinBox" name="Makes_4" />
            <property name="focusPolicy" >
             <enum>Qt::StrongFocus</enum>
@@ -1786,10 +1797,10 @@
             <string> </string>
            </property>
          </item>
-         <item row="6" column="4" colspan="3" >
+         <item row="4" column="4" colspan="3" >
           <widget class="QLineEdit" name="Requirement_4" />
          </item>
-         <item row="6" column="5" >
+         <item row="4" column="5" >
           <widget class="QLabel" name="Points_4" >
            <property name="text" >
             <string>0.0</string>
@@ -1799,7 +1810,7 @@
            </property>
           </widget>
          </item>
-         <item row="6" column="6" >
+         <item row="4" column="6" >
           <widget class="QLabel" name="Cost_4" >
            <property name="text" >
             <string>0c</string>
@@ -1809,14 +1820,14 @@
            </property>
           </widget>
          </item>
-         <item row="6" column="8" colspan="2" >
+         <item row="4" column="8" colspan="2" >
           <widget class="QLabel" name="Name_4" >
            <property name="text" >
             <string/>
            </property>
           </widget>
          </item>
-         <item row="7" column="0" >
+         <item row="5" column="0" >
           <widget class="QLabel" name="Gem_Label_5" >
            <property name="text" >
             <string>Slot &amp;5: </string>
@@ -1826,40 +1837,40 @@
            </property>
           </widget>
          </item>
-         <item row="7" column="1" >
+         <item row="5" column="1" >
           <widget class="SearchingCombo" name="Type_5" />
          </item>
-         <item row="7" column="2" >
+         <item row="5" column="2" >
           <widget class="QLineEdit" name="Amount_Edit_5" />
          </item>
-         <item row="7" column="2" >
+         <item row="5" column="2" >
           <widget class="SearchingCombo" name="Amount_Drop_5" />
          </item>
-         <item row="7" column="3" >
+         <item row="5" column="3" >
           <widget class="SearchingCombo" name="Effect_5" >
            <property name="editable" >
             <bool>true</bool>
            </property>
           </widget>
          </item>
-         <item row="7" column="4" colspan="3" >
+         <item row="5" column="4" colspan="3" >
           <widget class="QLineEdit" name="Requirement_5" />
          </item>
-         <item row="7" column="8" colspan="2" >
+         <item row="5" column="8" colspan="2" >
           <widget class="QLabel" name="Name_5" >
            <property name="text" >
             <string/>
            </property>
           </widget>
          </item>
-         <item row="7" column="8" colspan="2" >
+         <item row="5" column="8" colspan="2" >
           <widget class="QLabel" name="LabelRequirement2" >
            <property name="text" >
             <string>(Requirement)</string>
            </property>
           </widget>
          </item>
-         <item row="8" column="0" >
+         <item row="6" column="0" >
           <widget class="QLabel" name="Gem_Label_6" >
            <property name="text" >
             <string>Slot &amp;6: </string>
@@ -1869,33 +1880,33 @@
            </property>
           </widget>
          </item>
-         <item row="8" column="1" >
+         <item row="6" column="1" >
           <widget class="SearchingCombo" name="Type_6" />
          </item>
-         <item row="8" column="2" >
+         <item row="6" column="2" >
           <widget class="QLineEdit" name="Amount_Edit_6" />
          </item>
-         <item row="8" column="2" >
+         <item row="6" column="2" >
           <widget class="SearchingCombo" name="Amount_Drop_6" />
          </item>
-         <item row="8" column="3" >
+         <item row="6" column="3" >
           <widget class="SearchingCombo" name="Effect_6" >
            <property name="editable" >
             <bool>true</bool>
            </property>
           </widget>
          </item>
-         <item row="8" column="4" colspan="3" >
+         <item row="6" column="4" colspan="3" >
           <widget class="QLineEdit" name="Requirement_6" />
          </item>
-         <item row="8" column="8" colspan="2" >
+         <item row="6" column="8" colspan="2" >
           <widget class="QLabel" name="Name_6" >
            <property name="text" >
             <string/>
            </property>
           </widget>
          </item>
-         <item row="9" column="0" >
+         <item row="7" column="0" >
           <widget class="QLabel" name="Gem_Label_7" >
            <property name="text" >
             <string>Slot &amp;7: </string>
@@ -1905,23 +1916,23 @@
            </property>
           </widget>
          </item>
-         <item row="9" column="1" >
+         <item row="7" column="1" >
           <widget class="SearchingCombo" name="Type_7" />
          </item>
-         <item row="9" column="2" >
+         <item row="7" column="2" >
           <widget class="QLineEdit" name="Amount_Edit_7" />
          </item>
-         <item row="9" column="3" >
+         <item row="7" column="3" >
           <widget class="SearchingCombo" name="Effect_7" >
            <property name="editable" >
             <bool>true</bool>
            </property>
           </widget>
          </item>
-         <item row="9" column="4" colspan="3" >
+         <item row="7" column="4" colspan="3" >
           <widget class="QLineEdit" name="Requirement_7" />
          </item>
-         <item row="10" column="0" >
+         <item row="8" column="0" >
           <widget class="QLabel" name="Gem_Label_8" >
            <property name="text" >
             <string>Slot &amp;8: </string>
@@ -1931,23 +1942,23 @@
            </property>
           </widget>
          </item>
-         <item row="10" column="1" >
+         <item row="8" column="1" >
           <widget class="SearchingCombo" name="Type_8" />
          </item>
-         <item row="10" column="2" >
+         <item row="8" column="2" >
           <widget class="QLineEdit" name="Amount_Edit_8" />
          </item>
-         <item row="10" column="3" >
+         <item row="8" column="3" >
           <widget class="SearchingCombo" name="Effect_8" >
            <property name="editable" >
             <bool>true</bool>
            </property>
           </widget>
          </item>
-         <item row="10" column="4" colspan="3" >
+         <item row="8" column="4" colspan="3" >
           <widget class="QLineEdit" name="Requirement_8" />
          </item>
-         <item row="11" column="0" >
+         <item row="9" column="0" >
           <widget class="QLabel" name="Gem_Label_9" >
            <property name="text" >
             <string>Slot &amp;9: </string>
@@ -1957,23 +1968,23 @@
            </property>
           </widget>
          </item>
-         <item row="11" column="1" >
+         <item row="9" column="1" >
           <widget class="SearchingCombo" name="Type_9" />
          </item>
-         <item row="11" column="2" >
+         <item row="9" column="2" >
           <widget class="QLineEdit" name="Amount_Edit_9" />
          </item>
-         <item row="11" column="3" >
+         <item row="9" column="3" >
           <widget class="SearchingCombo" name="Effect_9" >
            <property name="editable" >
             <bool>true</bool>
            </property>
           </widget>
          </item>
-         <item row="11" column="4" colspan="3" >
+         <item row="9" column="4" colspan="3" >
           <widget class="QLineEdit" name="Requirement_9" />
          </item>
-         <item row="12" column="0" >
+         <item row="10" column="0" >
           <widget class="QLabel" name="Gem_Label_10" >
            <property name="text" >
             <string>Slot 1&amp;0:</string>
@@ -1983,23 +1994,23 @@
            </property>
           </widget>
          </item>
-         <item row="12" column="1" >
+         <item row="10" column="1" >
           <widget class="SearchingCombo" name="Type_10" />
          </item>
-         <item row="12" column="2" >
+         <item row="10" column="2" >
           <widget class="QLineEdit" name="Amount_Edit_10" />
          </item>
-         <item row="12" column="3" >
+         <item row="10" column="3" >
           <widget class="SearchingCombo" name="Effect_10" >
            <property name="editable" >
             <bool>true</bool>
            </property>
           </widget>
          </item>
-         <item row="12" column="4" colspan="3" >
+         <item row="10" column="4" colspan="3" >
           <widget class="QLineEdit" name="Requirement_10" />
          </item>
-         <item row="13" column="0" >
+         <item row="11" column="0" >
           <widget class="QLabel" name="Gem_Label_11" >
            <property name="text" >
             <string>Slot 11&amp;- </string>
@@ -2009,23 +2020,23 @@
            </property>
           </widget>
          </item>
-         <item row="13" column="1" >
+         <item row="11" column="1" >
           <widget class="SearchingCombo" name="Type_11" />
          </item>
-         <item row="13" column="2" >
+         <item row="11" column="2" >
           <widget class="QLineEdit" name="Amount_Edit_11" />
          </item>
-         <item row="13" column="3" >
+         <item row="11" column="3" >
           <widget class="SearchingCombo" name="Effect_11" >
            <property name="editable" >
             <bool>true</bool>
            </property>
           </widget>
          </item>
-         <item row="13" column="4" colspan="3" >
+         <item row="11" column="4" colspan="3" >
           <widget class="QLineEdit" name="Requirement_11" />
          </item>
-         <item row="14" column="0" >
+         <item row="12" column="0" >
           <widget class="QLabel" name="Gem_Label_12" >
            <property name="text" >
             <string>Slot 12&amp;=</string>
@@ -2035,23 +2046,23 @@
            </property>
           </widget>
          </item>
-         <item row="14" column="1" >
+         <item row="12" column="1" >
           <widget class="SearchingCombo" name="Type_12" />
          </item>
-         <item row="14" column="2" >
+         <item row="12" column="2" >
           <widget class="QLineEdit" name="Amount_Edit_12" />
          </item>
-         <item row="14" column="3" >
+         <item row="12" column="3" >
           <widget class="SearchingCombo" name="Effect_12" >
            <property name="editable" >
             <bool>true</bool>
            </property>
           </widget>
          </item>
-         <item row="14" column="4" colspan="3" >
+         <item row="12" column="4" colspan="3" >
           <widget class="QLineEdit" name="Requirement_12" />
          </item>
-         <item row="8" column="0" rowspan="7" colspan="3" >
+         <item row="6" column="0" rowspan="7" colspan="3" >
           <spacer>
            <property name="orientation" >
             <enum>Qt::Vertical</enum>
@@ -2067,7 +2078,7 @@
            </property>
           </spacer>
          </item>
-         <item row="8" column="3" colspan="4" >
+         <item row="6" column="3" colspan="4" >
           <spacer>
            <property name="orientation" >
             <enum>Qt::Vertical</enum>
@@ -2083,7 +2094,7 @@
            </property>
           </spacer>
          </item>
-         <item row="9" column="3" colspan="4" >
+         <item row="7" column="3" colspan="4" >
           <spacer>
            <property name="orientation" >
             <enum>Qt::Vertical</enum>
@@ -2099,7 +2110,7 @@
            </property>
           </spacer>
          </item>
-         <item row="10" column="3" colspan="2" >
+         <item row="8" column="3" colspan="2" >
           <widget class="QLabel" name="ItemImbueLabel" >
            <property name="text" >
             <string>Imbue Points: </string>
@@ -2109,7 +2120,7 @@
            </property>
           </widget>
          </item>
-         <item row="10" column="5" >
+         <item row="8" column="5" >
           <widget class="QLabel" name="ItemImbue" >
            <property name="text" >
             <string>0.0</string>
@@ -2119,7 +2130,7 @@
            </property>
           </widget>
          </item>
-         <item row="10" column="6" >
+         <item row="8" column="6" >
           <widget class="QLabel" name="ItemImbueTotal" >
            <property name="text" >
             <string> / 0.0</string>
@@ -2129,7 +2140,7 @@
            </property>
           </widget>
          </item>
-         <item row="11" column="3" colspan="2" >
+         <item row="9" column="3" colspan="2" >
           <widget class="QLabel" name="ItemOverchargeLabel" >
            <property name="text" >
             <string>Overcharge: </string>
@@ -2139,7 +2150,7 @@
            </property>
           </widget>
          </item>
-         <item row="11" column="5" colspan="2" >
+         <item row="9" column="5" colspan="2" >
           <widget class="QLabel" name="ItemOvercharge" >
            <property name="text" >
             <string>None</string>
@@ -2149,7 +2160,7 @@
            </property>
           </widget>
          </item>
-         <item row="12" column="3" colspan="2" >
+         <item row="10" column="3" colspan="2" >
           <widget class="QLabel" name="ItemCostLabel" >
            <property name="text" >
             <string>Item Cost: </string>
@@ -2159,7 +2170,7 @@
            </property>
           </widget>
          </item>
-         <item row="12" column="5" colspan="2" >
+         <item row="10" column="5" colspan="2" >
           <widget class="QLabel" name="ItemCost" >
            <property name="text" >
             <string/>
@@ -2169,7 +2180,7 @@
            </property>
           </widget>
          </item>
-         <item row="13" column="3" colspan="2" >
+         <item row="11" column="3" colspan="2" >
           <widget class="QLabel" name="ItemPriceLabel" >
            <property name="text" >
             <string>Item Price: </string>
@@ -2179,7 +2190,7 @@
            </property>
           </widget>
          </item>
-         <item row="13" column="5" colspan="2" >
+         <item row="11" column="5" colspan="2" >
           <widget class="QLabel" name="ItemPrice" >
            <property name="text" >
             <string/>
@@ -2189,7 +2200,7 @@
            </property>
           </widget>
          </item>
-         <item row="14" column="8" >
+         <item row="12" column="8" >
           <layout class="QHBoxLayout" >
            <property name="margin" >
             <number>0</number>
@@ -2243,7 +2254,7 @@
            </item>
           </layout>
          </item>
-         <item row="14" column="9" >
+         <item row="12" column="9" >
           <spacer>
            <property name="orientation" >
             <enum>Qt::Horizontal</enum>
@@ -2259,6 +2270,11 @@
            </property>
           </spacer>
          </item>
+        </layout>
+       </widget>
+      </item>
+     </layout>
+    </item>
         </layout>
        </widget>
       </item>
