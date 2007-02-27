@@ -3,6 +3,7 @@ import HTMLParser
 import re
 import sys
 import time
+import traceback
 from ScOptions import ScOptions
 
 from PyQt4.QtCore import *
@@ -22,6 +23,12 @@ class EthinargFormParser(HTMLParser.HTMLParser):
         self.formTags = {}
         self.currentValue = None
         self.tagName = ''
+        self.tableNumber = 0
+        self.statRow = 0
+        self.inStatTable = False
+        self.inStatColumn = False
+        self.statTable = []
+        self.itemCounts = None
 
     def handle_starttag(self, tag, attrs):
         if tag == 'select':
@@ -34,12 +41,26 @@ class EthinargFormParser(HTMLParser.HTMLParser):
             for k, v in attrs:
                 if k == 'value':
                     self.currentValue = v
+        elif tag == 'table':
+            self.tableNumber += 1
+            if self.tableNumber == 2:
+                self.inStatTable = True
+            else:
+                self.inStatTable = False
+        elif self.inStatTable and tag == 'tr':
+            self.statRow += 1
+        elif self.inStatTable and self.statRow > 1 and tag == 'td':
+            self.inStatColumn = True
+            
 
     def handle_data(self, data):
         if self.inSelect and self.currentValue:
             v = data.strip()
             if len(v) > 0:
                 self.formTags[self.tagName].append((v, self.currentValue))
+        elif self.inStatColumn:
+            self.statTable.append(data.strip())
+            self.inStatColumn = False
 
     def handle_endtag(self, tag):
         if tag == 'select' and self.inSelect:
@@ -48,6 +69,34 @@ class EthinargFormParser(HTMLParser.HTMLParser):
 
     def getFormData(self):
         return self.formTags
+
+    def getItemCounts(self):
+        if self.itemCounts: return self.itemCounts
+        self.itemCounts = {}
+        self.itemCounts['Hibernia'] = {}
+        self.itemCounts['Midgard'] = {}
+        self.itemCounts['Albion'] = {}
+        self.itemCounts['All'] = {}
+        self.itemCounts['Total'] = {}
+
+        self.itemCounts['Hibernia']['Verified'] = int(self.statTable[1])
+        self.itemCounts['Midgard']['Verified'] = int(self.statTable[2])
+        self.itemCounts['Albion']['Verified'] = int(self.statTable[3])
+        self.itemCounts['All']['Verified'] = int(self.statTable[4])
+        self.itemCounts['Total']['Verified'] = int(self.statTable[5])
+
+        self.itemCounts['Hibernia']['Non-Verified'] = int(self.statTable[7])
+        self.itemCounts['Midgard']['Non-Verified'] = int(self.statTable[8])
+        self.itemCounts['Albion']['Non-Verified'] = int(self.statTable[9])
+        self.itemCounts['All']['Non-Verified'] = int(self.statTable[10])
+        self.itemCounts['Total']['Non-Verified'] = int(self.statTable[11])
+
+        self.itemCounts['Hibernia']['Total'] = int(self.statTable[13])
+        self.itemCounts['Midgard']['Total'] = int(self.statTable[14])
+        self.itemCounts['Albion']['Total'] = int(self.statTable[15])
+        self.itemCounts['All']['Total'] = int(self.statTable[16])
+
+        return self.itemCounts
 
 class EthinargItemParser(HTMLParser.HTMLParser):
     def __init__(self):
@@ -157,6 +206,7 @@ class EthinargQuery:
         self.password = None
         self.lastLogin = -1
         self.numPages = 0
+        self.itemCounts = None
 
         self.queryparams = {
             'dmgType' : '1',
@@ -196,6 +246,7 @@ class EthinargQuery:
 
         p = EthinargFormParser()
         p.feed(html)
+        self.itemCounts = p.getItemCounts()
         return p.getFormData()
 
     def makeQuery(self, username = None, password = None):
@@ -482,6 +533,32 @@ class EthinargTestWindow(QDialog, Ui_B_Ethinarg):
             self.openSearchButton.setText("Open Search >>>")
             self.splitter.setSizes([self.width(), 0])
 
+    def displayItemCounts(self):
+        cnts = self.query.itemCounts
+        html = """<html><center><h3>Current Item Counts</h3><table border=0
+        width="75%%" cellspacing=10 cellpadding=0>
+        <tr><td></td><td>Hibernia</td><td>Midgard</td><td>Albion</td><td>All</td><td>Total</td></tr>
+        <tr><td>Verified Items</td><td>%d</td><td>%d</td><td>%d</td><td>%d</td><td>%d</td></tr>
+        <tr><td>Non Verified Items</td><td>%d</td><td>%d</td><td>%d</td><td>%d</td><td>%d</td></tr>
+        <tr><td>Total</td><td>%d</td><td>%d</td><td>%d</td><td>%d</td><td></td></tr>
+        </table></html>""" % (
+            cnts['Hibernia']['Verified'],
+            cnts['Midgard']['Verified'],
+            cnts['Albion']['Verified'],
+            cnts['All']['Verified'],
+            cnts['Total']['Verified'],
+            cnts['Hibernia']['Non-Verified'],
+            cnts['Midgard']['Non-Verified'],
+            cnts['Albion']['Non-Verified'],
+            cnts['All']['Non-Verified'],
+            cnts['Total']['Non-Verified'],
+            cnts['Hibernia']['Total'],
+            cnts['Midgard']['Total'],
+            cnts['Albion']['Total'],
+            cnts['All']['Total'])
+
+        self.browser.setHtml(html)
+
     def minLevelChanged(self, idx):
         if str(self.minLevelCombo.currentText()) == '' or \
                 str(self.maxLevelCombo.currentText()) == '':
@@ -540,6 +617,7 @@ class EthinargTestWindow(QDialog, Ui_B_Ethinarg):
             return True
         elif e.type() == InitializedEvent:
             self.loadCombos()
+            self.displayItemCounts()
             self.maxLevelCombo.setCurrentIndex(
                 self.maxLevelCombo.findText('51'))
             self.processBox.cancel()
