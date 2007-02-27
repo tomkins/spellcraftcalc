@@ -236,14 +236,14 @@ class ScWindow(QMainWindow, Ui_B_SC):
         self.ItemNameCombo.setCompleter(None)
 
         width = testfont.size(Qt.TextSingleLine, " Slot 10:").width()
-        self.GroupItemFrame.layout().setColumnMinimumWidth(0,width)
+        self.ItemSlotsFrame.layout().setColumnMinimumWidth(0,width)
         width = testfont.size(Qt.TextSingleLine, " Points").width()
-        self.GroupItemFrame.layout().setColumnMinimumWidth(5,width)
+        self.ItemSlotsFrame.layout().setColumnMinimumWidth(5,width)
         reqwidth = width
         width = testfont.size(Qt.TextSingleLine, "  999g 00s 00c").width()
-        self.GroupItemFrame.layout().setColumnMinimumWidth(6,width)
+        self.ItemSlotsFrame.layout().setColumnMinimumWidth(6,width)
         reqwidth += width + amtcbwidth
-        self.GroupItemFrame.layout().setColumnStretch(8, 1)
+        self.ItemSlotsFrame.layout().setColumnStretch(8, 1)
 
         typewidth = self.Type_1.getMinimumWidth(list(DropTypeList))
         l = reduce(lambda x, y: x+y, [ list(x) \
@@ -312,7 +312,7 @@ class ScWindow(QMainWindow, Ui_B_SC):
                 self.switchOnType['player'].extend([
                     self.Makes[i], self.Points[i], self.Cost[i], ])
 
-            self.GroupItemFrame.layout().setRowMinimumHeight(i + 3, 
+            self.ItemSlotsFrame.layout().setRowMinimumHeight(i + 1, 
                 max(cbheight, edheight))
 
         for tabname in PieceTabList:
