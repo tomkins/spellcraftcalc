@@ -414,7 +414,9 @@ for realm in Realms:
   AllBonusList['All'].update(AllBonusList[realm])
   ClassList['All'].extend(ClassList[realm])
 ClassList['All'].sort()
-
+i = ClassList['All'].index('Mauler')
+while ClassList['All'][i+1] == 'Mauler':
+    del ClassList['All'][i+1]
 ClassList['All'] = t2(ClassList['All'])
 ClassList = d2(ClassList)
 
