@@ -510,22 +510,19 @@ class ScWindow(QMainWindow, Ui_B_SC):
         act.setData(QVariant('Drop Item'))
         self.newitemmenu.addAction(act)
         self.newitemmenu.addSeparator()
-        for type in ('Normal Item', 'Caster Staff', 'Legendary Staff',
-                     'Enhanced Bow', 'Legendary Bow',
-                     'Legendary Weapon', 'Enhanced Armor'):
-            act = QAction(type, self)
-            act.setData(QVariant(type))
-            self.newitemmenu.addAction(act)
-        self.connect(self.newitemmenu, SIGNAL("triggered(QAction*)"), 
-                     self.newItemType)
-
         self.chooseitemmenu = QMenu('Item &Type', self)
         for type in ('Normal Item', 'Caster Staff', 'Legendary Staff',
                      'Enhanced Bow', 'Legendary Bow',
-                     'Legendary Weapon', 'Enhanced Armor'):
+                     'Legendary Weapon', 'Enhanced Sheild', 
+                     'Enhanced Armor', 'Enhanced Harp',):
+            act = QAction(type, self)
+            act.setData(QVariant(type))
+            self.newitemmenu.addAction(act)
             act = QAction(type, self)
             act.setData(QVariant(type))
             self.chooseitemmenu.addAction(act)
+        self.connect(self.newitemmenu, SIGNAL("triggered(QAction*)"), 
+                     self.newItemType)
         self.connect(self.chooseitemmenu, SIGNAL("triggered(QAction*)"), 
                      self.chooseItemType)
 
@@ -2287,9 +2284,7 @@ class ScWindow(QMainWindow, Ui_B_SC):
                  if fixslot.type() == 'Focus':
                      fixslot.setType('Unused')
 
-        if newtype == 'Normal Item':
-            item.slot(3).setSlotType('player')
-        elif newtype == 'Caster Staff':
+        if newtype == 'Caster Staff':
             item.slot(3).setSlotType('player')
             item.slot(4).setAll('Focus', '50', 'All Spell Lines')
         elif newtype == 'Legendary Staff':
@@ -2316,7 +2311,7 @@ class ScWindow(QMainWindow, Ui_B_SC):
             item.slot(4).setAll('Other Bonus', '10', 'AF')
             item.slot(5).setAll('Offensive Effect', '60', 'Dmg w/Resist Debuff',
                                 requirement="Level 50")
-        elif newtype == 'Enhanced Armor':
+        else:
             item.slot(3).setSlotType('player')
 
         # Recover from previously legendary items

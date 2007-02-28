@@ -37,9 +37,6 @@ Things to fix before next beta release is announced;
   link can be added to the Itemname<br />Add to Template.  This
   would reclaim a bit of space and lay out the table a bit cleaner.
 
-  It would be really cool to display Ethinarg's table of database
-  item counts on startup.
-
   Allow users to choose the Realm (or 'All') for items, drop and crafted.
   (Crafted items all have a specific realm, even on Gaheris/Mordred, while
   drop items can be 'All/Any'.)  Look at Eithargs' xml for other fields
@@ -48,8 +45,9 @@ Things to fix before next beta release is announced;
   Prettify the display of stats with caps for the screen, with
   a stat/maxstat flavor option.
 
-  Allow users to choose to include class-specific bonuses for resists
-  (mostly, applies to heavy tanks).
+  Allow users to choose to include class-specific bonuses for resists?
+  (mostly, applies to heavy tanks).  Need the growth table from level
+  40 through 50.
 
   Test our UI XML results (can we avoid double-xslt transformations?)
   
@@ -73,7 +71,7 @@ Things to fix before next beta release is announced;
 
 Things to fix before 2.0 final (non-beta) is announced;
 
-  Add 1.85-1.87 crafted slot lookups (by realm/style/piece).
+  Add 1.85-1.87 enchanced craft slot5 lookups (by realm/style/piece).
 
   Add Mythrian bonuses - especially over-cap logic!
 
