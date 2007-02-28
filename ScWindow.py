@@ -2345,6 +2345,8 @@ class ScWindow(QMainWindow, Ui_B_SC):
         self.itemIndex += 1
         self.itemnumbering += 1
         item.next = self.itemattrlist[item.Location]
+        item.Equipped = item.next.Equipped
+        item.next.Equipped = '0'
         self.itemattrlist[item.Location] = item
         self.outfitlist[self.currentOutfit][item.Location] \
                   = ( item.TemplateIndex, item.Equipped, )
