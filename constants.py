@@ -17,7 +17,8 @@ __all__ = [
   'EffectTypeNames', 'EffectItemNames', 'EffectMetal', 'EffectRequiredLevel',
   'FixTypeTable', 'FixEffectsTable', 'HotkeyGems', 'ImbueMultipliers',  
   'ShieldTypes',
-  'TabList', 'PieceTabList', 'JewelTabList', 'FocusTabList',
+  'TabList', 'PieceTabList', 'JewelTabList',
+  'ArmorTabList', 'WeaponTabList', 'FocusTabList',
 ]
 
 ScVersion = "Kort's Spellcrafting Calulator 1.98"
@@ -1077,7 +1078,11 @@ JewelTabList = t2((
 
 TabList = t2(PieceTabList + JewelTabList)
 
-FocusTabList = t2(('Right Hand', 'Left Hand', '2 Handed', 'Ranged', 'Spare'))
+ArmorTabList = list(PieceTabList[:6])
+ArmorTabList.append('Spare')
+ArmorTabList = t2(ArmorTabList)
+WeaponTabList = t2(PieceTabList[6:])
+FocusTabList = t2(('2 Handed', 'Spare',))
 
 FileExt = d2({ 
     'Neck' :         'neck', 
