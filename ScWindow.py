@@ -189,21 +189,26 @@ class ScWindow(QMainWindow, Ui_B_SC):
         self.ScWinFrame.layout().setColumnStretch(6, 1)
 
         cbwidth = self.CharClass.getMinimumWidth(['Necromancer'])
+        gridlayout = self.ItemInfoFrame.layout().itemAt(0).layout()
+        gridlayout = gridlayout.itemAt(1).layout()
+        gridlayout.setColumnStretch(2, 1)
         if str(QApplication.style().objectName()[0:9]).lower() == "macintosh":
             # mac is including a checkbox/icon width which is absurd
             cbwidth = cbwidth - 14
             amtcbwidth = amtcbwidth - 14
             lbheight = self.LabelTotalCost.sizeHint().height() + 5
-            for i in (0, 4, 5, 6,):
-                self.gridlayout1.setRowMinimumHeight(i, cbheight)
             for i in (4, 5, 7, 10):
-                self.gridlayout5.setRowMinimumHeight(i, cbheight)
+                gridlayout.setRowMinimumHeight(i, cbheight)
+            gridlayout = self.GroupCharInfo.layout()
+            for i in (0, 4, 5, 6,):
+                gridlayout1.setRowMinimumHeight(i, cbheight)
             for ctl in self.StatLabel.itervalues():
                 ctl.setFixedHeight(lbheight)
             self.LabelTotalCost.setFixedHeight(lbheight)
             self.LabelTotalPrice.setFixedHeight(lbheight)
             self.LabelTotalUtility.setFixedHeight(lbheight)
 
+        self.GroupCharInfo.layout().setColumnStretch(2, 1)
         self.CharName.setFixedSize(QSize(cbwidth, edheight))
         self.Realm.setFixedSize(QSize(cbwidth, cbheight))
         self.CharClass.setFixedSize(QSize(cbwidth, cbheight))
@@ -240,9 +245,11 @@ class ScWindow(QMainWindow, Ui_B_SC):
         self.ItemType.setFixedSize(QSize(cbwidth, cbheight))
         self.Material.setFixedSize(QSize(cbwidth, cbheight))
         self.ItemSource.setFixedSize(QSize(cbwidth, cbheight))
-        self.AFDPSEdit.setFixedSize(QSize(amtedwidth, edheight))
         self.BonusEdit.setFixedSize(QSize(amtedwidth, edheight))
+        self.AFDPSEdit.setFixedSize(QSize(amtedwidth, edheight))
         self.SpeedEdit.setFixedSize(QSize(amtedwidth, edheight))
+        self.Offhand.setFixedSize(QSize(self.Offhand.sizeHint().width()-4,
+                                        edheight))
         self.DamageType.setFixedSize(QSize(cbwidth, cbheight))
         self.ItemRequirement.setFixedHeight(edheight)
 
@@ -1123,9 +1130,12 @@ class ScWindow(QMainWindow, Ui_B_SC):
             self.ItemSource.insertItems(0, ['Crafted'])
             damagetypes = ['Slash', 'Crush', 'Thrust']
 
-        if not isweapon:
+        if isarmor:
+            self.LabelAFDPSEdit.setText('AF: ')
+        if isweapon:
+            self.LabelAFDPSEdit.setText('DPS: ')
+        else:
             damagetypes = ['']
-        #if isarmor:
 
         if item.DAMAGETYPE not in damagetypes:
             damagetypes.append(item.DAMAGETYPE)

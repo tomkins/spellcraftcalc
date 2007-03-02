@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'ScWindow.ui'
 #
-# Created: Fri Mar 02 03:59:12 2007
+# Created: Fri Mar 02 05:21:32 2007
 #      by: PyQt4 UI code generator 4.1
 #
 # WARNING! All changes made in this file will be lost!
@@ -717,15 +717,6 @@ class Ui_B_SC(object):
         self.ItemSource.setObjectName("ItemSource")
         self.gridlayout5.addWidget(self.ItemSource,3,1,1,3)
 
-        self.LabelAFDPSEdit = QtGui.QLabel(self.ItemInfoFrame)
-        self.LabelAFDPSEdit.setTextFormat(QtCore.Qt.PlainText)
-        self.LabelAFDPSEdit.setObjectName("LabelAFDPSEdit")
-        self.gridlayout5.addWidget(self.LabelAFDPSEdit,4,0,1,1)
-
-        self.AFDPSEdit = QtGui.QLineEdit(self.ItemInfoFrame)
-        self.AFDPSEdit.setObjectName("AFDPSEdit")
-        self.gridlayout5.addWidget(self.AFDPSEdit,4,1,1,1)
-
         self.LabelBonusEdit = QtGui.QLabel(self.ItemInfoFrame)
 
         sizePolicy = QtGui.QSizePolicy(QtGui.QSizePolicy.Policy(3),QtGui.QSizePolicy.Policy(13))
@@ -734,13 +725,22 @@ class Ui_B_SC(object):
         sizePolicy.setHeightForWidth(self.LabelBonusEdit.sizePolicy().hasHeightForWidth())
         self.LabelBonusEdit.setSizePolicy(sizePolicy)
         self.LabelBonusEdit.setTextFormat(QtCore.Qt.PlainText)
-        self.LabelBonusEdit.setAlignment(QtCore.Qt.AlignRight|QtCore.Qt.AlignTrailing|QtCore.Qt.AlignVCenter)
         self.LabelBonusEdit.setObjectName("LabelBonusEdit")
-        self.gridlayout5.addWidget(self.LabelBonusEdit,4,2,1,1)
+        self.gridlayout5.addWidget(self.LabelBonusEdit,4,0,1,1)
 
         self.BonusEdit = QtGui.QLineEdit(self.ItemInfoFrame)
         self.BonusEdit.setObjectName("BonusEdit")
-        self.gridlayout5.addWidget(self.BonusEdit,4,3,1,1)
+        self.gridlayout5.addWidget(self.BonusEdit,4,1,1,1)
+
+        self.LabelAFDPSEdit = QtGui.QLabel(self.ItemInfoFrame)
+        self.LabelAFDPSEdit.setTextFormat(QtCore.Qt.PlainText)
+        self.LabelAFDPSEdit.setAlignment(QtCore.Qt.AlignRight|QtCore.Qt.AlignTrailing|QtCore.Qt.AlignVCenter)
+        self.LabelAFDPSEdit.setObjectName("LabelAFDPSEdit")
+        self.gridlayout5.addWidget(self.LabelAFDPSEdit,4,2,1,1)
+
+        self.AFDPSEdit = QtGui.QLineEdit(self.ItemInfoFrame)
+        self.AFDPSEdit.setObjectName("AFDPSEdit")
+        self.gridlayout5.addWidget(self.AFDPSEdit,4,3,1,1)
 
         self.LabelSpeedEdit = QtGui.QLabel(self.ItemInfoFrame)
         self.LabelSpeedEdit.setTextFormat(QtCore.Qt.PlainText)
@@ -785,7 +785,7 @@ class Ui_B_SC(object):
         self.ItemRequirement.setObjectName("ItemRequirement")
         self.gridlayout5.addWidget(self.ItemRequirement,9,0,1,4)
 
-        spacerItem16 = QtGui.QSpacerItem(1,3,QtGui.QSizePolicy.Minimum,QtGui.QSizePolicy.Fixed)
+        spacerItem16 = QtGui.QSpacerItem(1,3,QtGui.QSizePolicy.Minimum,QtGui.QSizePolicy.MinimumExpanding)
         self.gridlayout5.addItem(spacerItem16,10,0,1,4)
 
         self.LabelDBSource = QtGui.QLabel(self.ItemInfoFrame)
@@ -798,9 +798,6 @@ class Ui_B_SC(object):
         self.DBSource.setObjectName("DBSource")
         self.gridlayout5.addWidget(self.DBSource,11,1,1,3)
         self.vboxlayout2.addLayout(self.gridlayout5)
-
-        spacerItem17 = QtGui.QSpacerItem(1,3,QtGui.QSizePolicy.Minimum,QtGui.QSizePolicy.MinimumExpanding)
-        self.vboxlayout2.addItem(spacerItem17)
         self.hboxlayout2.addLayout(self.vboxlayout2)
 
         self.vboxlayout3 = QtGui.QVBoxLayout()
@@ -870,8 +867,8 @@ class Ui_B_SC(object):
         self.gridlayout6.setSpacing(0)
         self.gridlayout6.setObjectName("gridlayout6")
 
-        spacerItem18 = QtGui.QSpacerItem(5,5,QtGui.QSizePolicy.MinimumExpanding,QtGui.QSizePolicy.Minimum)
-        self.gridlayout6.addItem(spacerItem18,0,0,1,1)
+        spacerItem17 = QtGui.QSpacerItem(5,5,QtGui.QSizePolicy.MinimumExpanding,QtGui.QSizePolicy.Minimum)
+        self.gridlayout6.addItem(spacerItem17,0,0,1,1)
 
         self.LabelGemType = QtGui.QLabel(self.ItemSlotsHeader)
         self.LabelGemType.setObjectName("LabelGemType")
@@ -903,8 +900,8 @@ class Ui_B_SC(object):
         self.LabelGemCost.setObjectName("LabelGemCost")
         self.gridlayout6.addWidget(self.LabelGemCost,0,6,1,1)
 
-        spacerItem19 = QtGui.QSpacerItem(5,1,QtGui.QSizePolicy.Minimum,QtGui.QSizePolicy.Minimum)
-        self.gridlayout6.addItem(spacerItem19,0,7,1,1)
+        spacerItem18 = QtGui.QSpacerItem(5,1,QtGui.QSizePolicy.Minimum,QtGui.QSizePolicy.Minimum)
+        self.gridlayout6.addItem(spacerItem18,0,7,1,1)
 
         self.LabelGemName = QtGui.QLabel(self.ItemSlotsHeader)
         self.LabelGemName.setObjectName("LabelGemName")
@@ -965,15 +962,15 @@ class Ui_B_SC(object):
         self.Cost_1.setObjectName("Cost_1")
         self.gridlayout7.addWidget(self.Cost_1,0,6,1,1)
 
-        spacerItem20 = QtGui.QSpacerItem(5,1,QtGui.QSizePolicy.Minimum,QtGui.QSizePolicy.Minimum)
-        self.gridlayout7.addItem(spacerItem20,0,7,12,1)
+        spacerItem19 = QtGui.QSpacerItem(5,1,QtGui.QSizePolicy.Minimum,QtGui.QSizePolicy.Minimum)
+        self.gridlayout7.addItem(spacerItem19,0,7,12,1)
 
         self.Name_1 = QtGui.QLabel(self.ItemSlotsGrid)
         self.Name_1.setObjectName("Name_1")
         self.gridlayout7.addWidget(self.Name_1,0,8,1,1)
 
-        spacerItem21 = QtGui.QSpacerItem(5,5,QtGui.QSizePolicy.MinimumExpanding,QtGui.QSizePolicy.Minimum)
-        self.gridlayout7.addItem(spacerItem21,0,8,4,1)
+        spacerItem20 = QtGui.QSpacerItem(5,5,QtGui.QSizePolicy.MinimumExpanding,QtGui.QSizePolicy.Minimum)
+        self.gridlayout7.addItem(spacerItem20,0,8,4,1)
 
         self.Gem_Label_2 = QtGui.QLabel(self.ItemSlotsGrid)
         self.Gem_Label_2.setTextFormat(QtCore.Qt.PlainText)
@@ -1141,8 +1138,8 @@ class Ui_B_SC(object):
         self.LabelRequirement2.setObjectName("LabelRequirement2")
         self.gridlayout7.addWidget(self.LabelRequirement2,4,8,1,1)
 
-        spacerItem22 = QtGui.QSpacerItem(5,5,QtGui.QSizePolicy.MinimumExpanding,QtGui.QSizePolicy.Minimum)
-        self.gridlayout7.addItem(spacerItem22,4,8,1,1)
+        spacerItem21 = QtGui.QSpacerItem(5,5,QtGui.QSizePolicy.MinimumExpanding,QtGui.QSizePolicy.Minimum)
+        self.gridlayout7.addItem(spacerItem21,4,8,1,1)
 
         self.Gem_Label_6 = QtGui.QLabel(self.ItemSlotsGrid)
         self.Gem_Label_6.setTextFormat(QtCore.Qt.PlainText)
@@ -1174,8 +1171,8 @@ class Ui_B_SC(object):
         self.Name_6.setObjectName("Name_6")
         self.gridlayout7.addWidget(self.Name_6,5,8,1,1)
 
-        spacerItem23 = QtGui.QSpacerItem(5,5,QtGui.QSizePolicy.MinimumExpanding,QtGui.QSizePolicy.Minimum)
-        self.gridlayout7.addItem(spacerItem23,5,8,1,1)
+        spacerItem22 = QtGui.QSpacerItem(5,5,QtGui.QSizePolicy.MinimumExpanding,QtGui.QSizePolicy.Minimum)
+        self.gridlayout7.addItem(spacerItem22,5,8,1,1)
 
         self.Gem_Label_7 = QtGui.QLabel(self.ItemSlotsGrid)
         self.Gem_Label_7.setTextFormat(QtCore.Qt.PlainText)
@@ -1199,8 +1196,8 @@ class Ui_B_SC(object):
         self.Requirement_7.setObjectName("Requirement_7")
         self.gridlayout7.addWidget(self.Requirement_7,6,4,1,3)
 
-        spacerItem24 = QtGui.QSpacerItem(5,5,QtGui.QSizePolicy.MinimumExpanding,QtGui.QSizePolicy.Minimum)
-        self.gridlayout7.addItem(spacerItem24,6,8,5,1)
+        spacerItem23 = QtGui.QSpacerItem(5,5,QtGui.QSizePolicy.MinimumExpanding,QtGui.QSizePolicy.Minimum)
+        self.gridlayout7.addItem(spacerItem23,6,8,5,1)
 
         self.Gem_Label_8 = QtGui.QLabel(self.ItemSlotsGrid)
         self.Gem_Label_8.setTextFormat(QtCore.Qt.PlainText)
@@ -1312,14 +1309,14 @@ class Ui_B_SC(object):
         self.Requirement_12.setObjectName("Requirement_12")
         self.gridlayout7.addWidget(self.Requirement_12,11,4,1,3)
 
+        spacerItem24 = QtGui.QSpacerItem(5,5,QtGui.QSizePolicy.Minimum,QtGui.QSizePolicy.Minimum)
+        self.gridlayout7.addItem(spacerItem24,5,0,1,7)
+
         spacerItem25 = QtGui.QSpacerItem(5,5,QtGui.QSizePolicy.Minimum,QtGui.QSizePolicy.Minimum)
-        self.gridlayout7.addItem(spacerItem25,5,0,1,7)
+        self.gridlayout7.addItem(spacerItem25,6,0,6,3)
 
         spacerItem26 = QtGui.QSpacerItem(5,5,QtGui.QSizePolicy.Minimum,QtGui.QSizePolicy.Minimum)
-        self.gridlayout7.addItem(spacerItem26,6,0,6,3)
-
-        spacerItem27 = QtGui.QSpacerItem(5,5,QtGui.QSizePolicy.Minimum,QtGui.QSizePolicy.Minimum)
-        self.gridlayout7.addItem(spacerItem27,6,3,1,4)
+        self.gridlayout7.addItem(spacerItem26,6,3,1,4)
 
         self.ItemImbueLabel = QtGui.QLabel(self.ItemSlotsGrid)
         self.ItemImbueLabel.setAlignment(QtCore.Qt.AlignRight|QtCore.Qt.AlignTrailing|QtCore.Qt.AlignVCenter)
@@ -1366,16 +1363,16 @@ class Ui_B_SC(object):
         self.ItemPrice.setObjectName("ItemPrice")
         self.gridlayout7.addWidget(self.ItemPrice,10,5,1,2)
 
-        spacerItem28 = QtGui.QSpacerItem(5,5,QtGui.QSizePolicy.Minimum,QtGui.QSizePolicy.Minimum)
-        self.gridlayout7.addItem(spacerItem28,11,0,1,7)
+        spacerItem27 = QtGui.QSpacerItem(5,5,QtGui.QSizePolicy.Minimum,QtGui.QSizePolicy.Minimum)
+        self.gridlayout7.addItem(spacerItem27,11,0,1,7)
 
         self.hboxlayout4 = QtGui.QHBoxLayout()
         self.hboxlayout4.setMargin(0)
         self.hboxlayout4.setSpacing(0)
         self.hboxlayout4.setObjectName("hboxlayout4")
 
-        spacerItem29 = QtGui.QSpacerItem(5,1,QtGui.QSizePolicy.MinimumExpanding,QtGui.QSizePolicy.Minimum)
-        self.hboxlayout4.addItem(spacerItem29)
+        spacerItem28 = QtGui.QSpacerItem(5,1,QtGui.QSizePolicy.MinimumExpanding,QtGui.QSizePolicy.Minimum)
+        self.hboxlayout4.addItem(spacerItem28)
 
         self.ItemUtilityLabel = QtGui.QLabel(self.ItemSlotsGrid)
         self.ItemUtilityLabel.setAlignment(QtCore.Qt.AlignRight|QtCore.Qt.AlignTrailing|QtCore.Qt.AlignVCenter)
@@ -1496,9 +1493,9 @@ class Ui_B_SC(object):
         self.LabelCharClass.setText(QtGui.QApplication.translate("B_SC", "Class: ", None, QtGui.QApplication.UnicodeUTF8))
         self.LabelCharRace.setText(QtGui.QApplication.translate("B_SC", "Race: ", None, QtGui.QApplication.UnicodeUTF8))
         self.LabelCharLevel.setText(QtGui.QApplication.translate("B_SC", "Level: ", None, QtGui.QApplication.UnicodeUTF8))
-        self.LabelRealmRank.setText(QtGui.QApplication.translate("B_SC", "  RR: ", None, QtGui.QApplication.UnicodeUTF8))
+        self.LabelRealmRank.setText(QtGui.QApplication.translate("B_SC", "RR: ", None, QtGui.QApplication.UnicodeUTF8))
         self.LabelCraftTime.setText(QtGui.QApplication.translate("B_SC", "Time: ", None, QtGui.QApplication.UnicodeUTF8))
-        self.LabelChampionLevel.setText(QtGui.QApplication.translate("B_SC", "  CL: ", None, QtGui.QApplication.UnicodeUTF8))
+        self.LabelChampionLevel.setText(QtGui.QApplication.translate("B_SC", "CL: ", None, QtGui.QApplication.UnicodeUTF8))
         self.LabelOutfitName.setText(QtGui.QApplication.translate("B_SC", "&Outfit: ", None, QtGui.QApplication.UnicodeUTF8))
         self.LabelTotalCost.setText(QtGui.QApplication.translate("B_SC", "Cost: ", None, QtGui.QApplication.UnicodeUTF8))
         self.TotalCost.setText(QtGui.QApplication.translate("B_SC", "0", None, QtGui.QApplication.UnicodeUTF8))
@@ -1586,8 +1583,8 @@ class Ui_B_SC(object):
         self.LabelItemType.setText(QtGui.QApplication.translate("B_SC", "Type: ", None, QtGui.QApplication.UnicodeUTF8))
         self.LabelMaterial.setText(QtGui.QApplication.translate("B_SC", "Material: ", None, QtGui.QApplication.UnicodeUTF8))
         self.LabelItemSource.setText(QtGui.QApplication.translate("B_SC", "Origin: ", None, QtGui.QApplication.UnicodeUTF8))
-        self.LabelAFDPSEdit.setText(QtGui.QApplication.translate("B_SC", "AF/DPS: ", None, QtGui.QApplication.UnicodeUTF8))
-        self.LabelBonusEdit.setText(QtGui.QApplication.translate("B_SC", "  Bonus: ", None, QtGui.QApplication.UnicodeUTF8))
+        self.LabelBonusEdit.setText(QtGui.QApplication.translate("B_SC", "Bonus: ", None, QtGui.QApplication.UnicodeUTF8))
+        self.LabelAFDPSEdit.setText(QtGui.QApplication.translate("B_SC", "DPS: ", None, QtGui.QApplication.UnicodeUTF8))
         self.LabelSpeedEdit.setText(QtGui.QApplication.translate("B_SC", "Speed: ", None, QtGui.QApplication.UnicodeUTF8))
         self.Offhand.setText(QtGui.QApplication.translate("B_SC", "Offhand", None, QtGui.QApplication.UnicodeUTF8))
         self.LabelDamageType.setText(QtGui.QApplication.translate("B_SC", "Damage: ", None, QtGui.QApplication.UnicodeUTF8))
