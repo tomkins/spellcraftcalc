@@ -264,7 +264,6 @@ class ScWindow(QMainWindow, Ui_B_SC):
             i = i + 1
         self.ClassRestrictionTable.resizeRowsToContents()
         self.ClassRestrictionTable.resizeColumnsToContents()
-        self.ClassRestrictionTable.resizeColumnsToContents()
         ltrb = self.ClassRestrictionTable.getContentsMargins()
         self.ClassRestrictionTable.setFixedWidth(ltrb[0] + ltrb[2] + \
             self.ClassRestrictionTable.columnWidth(0) + \
@@ -290,6 +289,11 @@ class ScWindow(QMainWindow, Ui_B_SC):
             # mac is including a checkbox/icon width which is absurd
             typewidth = typewidth - 14
             effectwidth = effectwidth - 14
+
+        palette = QPalette(self.ScrollSlots.palette())
+        palette.setColor(QPalette.Window, QColor(0,0,0,0))
+        palette.setBrush(QPalette.Window, QBrush(QColor(0,0,0,0)))
+        self.ScrollSlots.setPalette(palette)
 
         headergrid = self.ItemSlotsHeader.layout()
         itemslotgrid = self.ItemSlotsGrid.layout()
