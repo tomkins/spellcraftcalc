@@ -98,8 +98,8 @@ class ScOptions(Singleton):
 
         if not node.hasAttribute('type') and not hasElements:
             val = XMLHelper.getText(node.childNodes)
-            if val.lower() == 'true' or val.lower() == 'false':
-                return bool(val)
+            if val.lower() == 'true': return True
+            elif val.lower() == 'false': return False
             else:
                 try:
                     return int(val)
