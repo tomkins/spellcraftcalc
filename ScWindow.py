@@ -197,11 +197,12 @@ class ScWindow(QMainWindow, Ui_B_SC):
             cbwidth = cbwidth - 14
             amtcbwidth = amtcbwidth - 14
             lbheight = self.LabelTotalCost.sizeHint().height() + 5
-            for i in (4, 5, 7, 10):
+            gridlayout.setRowMinimumHeight(7, lbheight)
+            for i in (4, 5, 8):
                 gridlayout.setRowMinimumHeight(i, cbheight)
             gridlayout = self.GroupCharInfo.layout()
             for i in (0, 4, 5, 6,):
-                gridlayout1.setRowMinimumHeight(i, cbheight)
+                gridlayout.setRowMinimumHeight(i, cbheight)
             for ctl in self.StatLabel.itervalues():
                 ctl.setFixedHeight(lbheight)
             self.LabelTotalCost.setFixedHeight(lbheight)
@@ -406,14 +407,6 @@ class ScWindow(QMainWindow, Ui_B_SC):
         l.layout().itemAt(1).changeSize(1, -self.PieceTab.baseOverlap(),
                                         QSizePolicy.Minimum, QSizePolicy.Fixed)
         self.ScrollSlots.setWidget(self.ItemSlotsGrid)
-        sys.stdout.write("%d %d %d\n" %
-           (self.ItemSlotsFrame.sizePolicy().horizontalPolicy(),
-            self.ItemSlotsFrame.sizePolicy().verticalPolicy(),
-            self.ItemSlotsFrame.sizePolicy().expandingDirections()))
-        sys.stdout.write("%d %d %d\n" %
-           (self.ItemSlotsGrid.sizePolicy().horizontalPolicy(),
-            self.ItemSlotsGrid.sizePolicy().verticalPolicy(),
-            self.ItemSlotsGrid.sizePolicy().expandingDirections()))
         self.ScWinFrame.updateGeometry()
 
     def initControls(self):

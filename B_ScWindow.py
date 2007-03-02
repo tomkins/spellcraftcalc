@@ -2,8 +2,8 @@
 
 # Form implementation generated from reading ui file 'ScWindow.ui'
 #
-# Created: Fri Mar 02 05:21:32 2007
-#      by: PyQt4 UI code generator 4.1
+# Created: Fri Mar  2 05:31:40 2007
+#      by: PyQt4 UI code generator 4-snapshot-20061020
 #
 # WARNING! All changes made in this file will be lost!
 
@@ -773,30 +773,27 @@ class Ui_B_SC(object):
         self.DamageType.setObjectName("DamageType")
         self.gridlayout5.addWidget(self.DamageType,6,1,1,3)
 
-        spacerItem15 = QtGui.QSpacerItem(1,3,QtGui.QSizePolicy.Minimum,QtGui.QSizePolicy.Fixed)
-        self.gridlayout5.addItem(spacerItem15,7,0,1,4)
-
         self.LabelItemRequirement = QtGui.QLabel(self.ItemInfoFrame)
         self.LabelItemRequirement.setTextFormat(QtCore.Qt.PlainText)
         self.LabelItemRequirement.setObjectName("LabelItemRequirement")
-        self.gridlayout5.addWidget(self.LabelItemRequirement,8,0,1,4)
+        self.gridlayout5.addWidget(self.LabelItemRequirement,7,0,1,4)
 
         self.ItemRequirement = QtGui.QLineEdit(self.ItemInfoFrame)
         self.ItemRequirement.setObjectName("ItemRequirement")
-        self.gridlayout5.addWidget(self.ItemRequirement,9,0,1,4)
+        self.gridlayout5.addWidget(self.ItemRequirement,8,0,1,4)
 
-        spacerItem16 = QtGui.QSpacerItem(1,3,QtGui.QSizePolicy.Minimum,QtGui.QSizePolicy.MinimumExpanding)
-        self.gridlayout5.addItem(spacerItem16,10,0,1,4)
+        spacerItem15 = QtGui.QSpacerItem(1,3,QtGui.QSizePolicy.Minimum,QtGui.QSizePolicy.MinimumExpanding)
+        self.gridlayout5.addItem(spacerItem15,9,0,1,4)
 
         self.LabelDBSource = QtGui.QLabel(self.ItemInfoFrame)
         self.LabelDBSource.setTextFormat(QtCore.Qt.PlainText)
         self.LabelDBSource.setObjectName("LabelDBSource")
-        self.gridlayout5.addWidget(self.LabelDBSource,11,0,1,1)
+        self.gridlayout5.addWidget(self.LabelDBSource,10,0,1,1)
 
         self.DBSource = QtGui.QLabel(self.ItemInfoFrame)
         self.DBSource.setTextFormat(QtCore.Qt.PlainText)
         self.DBSource.setObjectName("DBSource")
-        self.gridlayout5.addWidget(self.DBSource,11,1,1,3)
+        self.gridlayout5.addWidget(self.DBSource,10,1,1,3)
         self.vboxlayout2.addLayout(self.gridlayout5)
         self.hboxlayout2.addLayout(self.vboxlayout2)
 
@@ -867,8 +864,8 @@ class Ui_B_SC(object):
         self.gridlayout6.setSpacing(0)
         self.gridlayout6.setObjectName("gridlayout6")
 
-        spacerItem17 = QtGui.QSpacerItem(5,5,QtGui.QSizePolicy.MinimumExpanding,QtGui.QSizePolicy.Minimum)
-        self.gridlayout6.addItem(spacerItem17,0,0,1,1)
+        spacerItem16 = QtGui.QSpacerItem(5,5,QtGui.QSizePolicy.MinimumExpanding,QtGui.QSizePolicy.Minimum)
+        self.gridlayout6.addItem(spacerItem16,0,0,1,1)
 
         self.LabelGemType = QtGui.QLabel(self.ItemSlotsHeader)
         self.LabelGemType.setObjectName("LabelGemType")
@@ -900,8 +897,8 @@ class Ui_B_SC(object):
         self.LabelGemCost.setObjectName("LabelGemCost")
         self.gridlayout6.addWidget(self.LabelGemCost,0,6,1,1)
 
-        spacerItem18 = QtGui.QSpacerItem(5,1,QtGui.QSizePolicy.Minimum,QtGui.QSizePolicy.Minimum)
-        self.gridlayout6.addItem(spacerItem18,0,7,1,1)
+        spacerItem17 = QtGui.QSpacerItem(5,1,QtGui.QSizePolicy.Minimum,QtGui.QSizePolicy.Minimum)
+        self.gridlayout6.addItem(spacerItem17,0,7,1,1)
 
         self.LabelGemName = QtGui.QLabel(self.ItemSlotsHeader)
         self.LabelGemName.setObjectName("LabelGemName")
@@ -962,15 +959,15 @@ class Ui_B_SC(object):
         self.Cost_1.setObjectName("Cost_1")
         self.gridlayout7.addWidget(self.Cost_1,0,6,1,1)
 
-        spacerItem19 = QtGui.QSpacerItem(5,1,QtGui.QSizePolicy.Minimum,QtGui.QSizePolicy.Minimum)
-        self.gridlayout7.addItem(spacerItem19,0,7,12,1)
+        spacerItem18 = QtGui.QSpacerItem(5,1,QtGui.QSizePolicy.Minimum,QtGui.QSizePolicy.Minimum)
+        self.gridlayout7.addItem(spacerItem18,0,7,12,1)
 
         self.Name_1 = QtGui.QLabel(self.ItemSlotsGrid)
         self.Name_1.setObjectName("Name_1")
         self.gridlayout7.addWidget(self.Name_1,0,8,1,1)
 
-        spacerItem20 = QtGui.QSpacerItem(5,5,QtGui.QSizePolicy.MinimumExpanding,QtGui.QSizePolicy.Minimum)
-        self.gridlayout7.addItem(spacerItem20,0,8,4,1)
+        spacerItem19 = QtGui.QSpacerItem(5,5,QtGui.QSizePolicy.MinimumExpanding,QtGui.QSizePolicy.Minimum)
+        self.gridlayout7.addItem(spacerItem19,0,8,4,1)
 
         self.Gem_Label_2 = QtGui.QLabel(self.ItemSlotsGrid)
         self.Gem_Label_2.setTextFormat(QtCore.Qt.PlainText)
@@ -1138,8 +1135,8 @@ class Ui_B_SC(object):
         self.LabelRequirement2.setObjectName("LabelRequirement2")
         self.gridlayout7.addWidget(self.LabelRequirement2,4,8,1,1)
 
-        spacerItem21 = QtGui.QSpacerItem(5,5,QtGui.QSizePolicy.MinimumExpanding,QtGui.QSizePolicy.Minimum)
-        self.gridlayout7.addItem(spacerItem21,4,8,1,1)
+        spacerItem20 = QtGui.QSpacerItem(5,5,QtGui.QSizePolicy.MinimumExpanding,QtGui.QSizePolicy.Minimum)
+        self.gridlayout7.addItem(spacerItem20,4,8,1,1)
 
         self.Gem_Label_6 = QtGui.QLabel(self.ItemSlotsGrid)
         self.Gem_Label_6.setTextFormat(QtCore.Qt.PlainText)
@@ -1171,8 +1168,8 @@ class Ui_B_SC(object):
         self.Name_6.setObjectName("Name_6")
         self.gridlayout7.addWidget(self.Name_6,5,8,1,1)
 
-        spacerItem22 = QtGui.QSpacerItem(5,5,QtGui.QSizePolicy.MinimumExpanding,QtGui.QSizePolicy.Minimum)
-        self.gridlayout7.addItem(spacerItem22,5,8,1,1)
+        spacerItem21 = QtGui.QSpacerItem(5,5,QtGui.QSizePolicy.MinimumExpanding,QtGui.QSizePolicy.Minimum)
+        self.gridlayout7.addItem(spacerItem21,5,8,1,1)
 
         self.Gem_Label_7 = QtGui.QLabel(self.ItemSlotsGrid)
         self.Gem_Label_7.setTextFormat(QtCore.Qt.PlainText)
@@ -1196,8 +1193,8 @@ class Ui_B_SC(object):
         self.Requirement_7.setObjectName("Requirement_7")
         self.gridlayout7.addWidget(self.Requirement_7,6,4,1,3)
 
-        spacerItem23 = QtGui.QSpacerItem(5,5,QtGui.QSizePolicy.MinimumExpanding,QtGui.QSizePolicy.Minimum)
-        self.gridlayout7.addItem(spacerItem23,6,8,5,1)
+        spacerItem22 = QtGui.QSpacerItem(5,5,QtGui.QSizePolicy.MinimumExpanding,QtGui.QSizePolicy.Minimum)
+        self.gridlayout7.addItem(spacerItem22,6,8,5,1)
 
         self.Gem_Label_8 = QtGui.QLabel(self.ItemSlotsGrid)
         self.Gem_Label_8.setTextFormat(QtCore.Qt.PlainText)
@@ -1309,14 +1306,14 @@ class Ui_B_SC(object):
         self.Requirement_12.setObjectName("Requirement_12")
         self.gridlayout7.addWidget(self.Requirement_12,11,4,1,3)
 
+        spacerItem23 = QtGui.QSpacerItem(5,5,QtGui.QSizePolicy.Minimum,QtGui.QSizePolicy.Minimum)
+        self.gridlayout7.addItem(spacerItem23,5,0,1,7)
+
         spacerItem24 = QtGui.QSpacerItem(5,5,QtGui.QSizePolicy.Minimum,QtGui.QSizePolicy.Minimum)
-        self.gridlayout7.addItem(spacerItem24,5,0,1,7)
+        self.gridlayout7.addItem(spacerItem24,6,0,6,3)
 
         spacerItem25 = QtGui.QSpacerItem(5,5,QtGui.QSizePolicy.Minimum,QtGui.QSizePolicy.Minimum)
-        self.gridlayout7.addItem(spacerItem25,6,0,6,3)
-
-        spacerItem26 = QtGui.QSpacerItem(5,5,QtGui.QSizePolicy.Minimum,QtGui.QSizePolicy.Minimum)
-        self.gridlayout7.addItem(spacerItem26,6,3,1,4)
+        self.gridlayout7.addItem(spacerItem25,6,3,1,4)
 
         self.ItemImbueLabel = QtGui.QLabel(self.ItemSlotsGrid)
         self.ItemImbueLabel.setAlignment(QtCore.Qt.AlignRight|QtCore.Qt.AlignTrailing|QtCore.Qt.AlignVCenter)
@@ -1363,16 +1360,16 @@ class Ui_B_SC(object):
         self.ItemPrice.setObjectName("ItemPrice")
         self.gridlayout7.addWidget(self.ItemPrice,10,5,1,2)
 
-        spacerItem27 = QtGui.QSpacerItem(5,5,QtGui.QSizePolicy.Minimum,QtGui.QSizePolicy.Minimum)
-        self.gridlayout7.addItem(spacerItem27,11,0,1,7)
+        spacerItem26 = QtGui.QSpacerItem(5,5,QtGui.QSizePolicy.Minimum,QtGui.QSizePolicy.Minimum)
+        self.gridlayout7.addItem(spacerItem26,11,0,1,7)
 
         self.hboxlayout4 = QtGui.QHBoxLayout()
         self.hboxlayout4.setMargin(0)
         self.hboxlayout4.setSpacing(0)
         self.hboxlayout4.setObjectName("hboxlayout4")
 
-        spacerItem28 = QtGui.QSpacerItem(5,1,QtGui.QSizePolicy.MinimumExpanding,QtGui.QSizePolicy.Minimum)
-        self.hboxlayout4.addItem(spacerItem28)
+        spacerItem27 = QtGui.QSpacerItem(5,1,QtGui.QSizePolicy.MinimumExpanding,QtGui.QSizePolicy.Minimum)
+        self.hboxlayout4.addItem(spacerItem27)
 
         self.ItemUtilityLabel = QtGui.QLabel(self.ItemSlotsGrid)
         self.ItemUtilityLabel.setAlignment(QtCore.Qt.AlignRight|QtCore.Qt.AlignTrailing|QtCore.Qt.AlignVCenter)
