@@ -1720,11 +1720,22 @@
         </layout>
        </item>
 
-        </layout>
-       </widget>
-           </item>
-           <item>
-       <widget class="QWidget" name="ItemSlotsFrame" >
+            </layout>
+           </widget>
+          </item>
+       <item>
+        <widget class="QWidget" name="ItemSlotsFrame" >
+         <layout class="QVBoxLayout" >
+          <property name="margin" >
+           <number>0</number>
+          </property>
+          <property name="spacing" >
+           <number>0</number>
+          </property>
+
+
+          <item>
+           <widget class="QWidget" name="ItemSlotsHeader" >
             <layout class="QGridLayout" >
              <property name="margin" >
               <number>0</number>
@@ -1787,7 +1798,7 @@
                </property>
               </widget>
              </item>
-         <item row="0" column="7" rowspan="13" >
+             <item row="0" column="7" rowspan="13" >
               <spacer>
                <property name="orientation" >
                 <enum>Qt::Horizontal</enum>
@@ -1810,7 +1821,7 @@
                </property>
               </widget>
              </item>
-         <item row="0" column="8" rowspan="12" colspan="2" >
+             <item row="0" column="8" rowspan="12" colspan="2" >
               <spacer>
                <property name="orientation" >
                 <enum>Qt::Horizontal</enum>
@@ -1826,6 +1837,28 @@
                </property>
               </spacer>
              </item>
+            </layout>
+           </widget>
+          </item>
+          <item>
+          <widget class="QScrollArea" name="ScrollSlots" >
+           <property name="frameShape" >
+            <enum>QFrame::NoFrame</enum>
+           </property>
+           <property name="verticalScrollBarPolicy" >
+            <enum>Qt::ScrollBarAsNeeded</enum>
+           </property>
+           <property name="horizontalScrollBarPolicy" >
+            <enum>Qt::ScrollBarAlwaysOff</enum>
+           </property>
+           <widget class="QWidget" name="ItemSlotsGrid" >
+            <layout class="QGridLayout" >
+             <property name="margin" >
+              <number>0</number>
+             </property>
+             <property name="spacing" >
+              <number>0</number>
+             </property>
              <item row="1" column="0" >
               <widget class="QLabel" name="Gem_Label_1" >
                <property name="text" >
@@ -2530,9 +2563,14 @@
               </spacer>
              </item>
             </layout>
+           </widget>
+          </widget>
+         </item>
+        </layout>
        </widget>
-           </item>
-          </layout>
+      </item>
+     </layout>
+
          </item>
         </layout>
        </widget>
