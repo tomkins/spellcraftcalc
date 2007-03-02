@@ -1096,19 +1096,21 @@ class ScWindow(QMainWindow, Ui_B_SC):
             damagetypes = ['']
         #if isarmor:
 
-        if item.DAMAGETYPE not in damagetype:
+        if item.DAMAGETYPE not in damagetypes:
             damagetypes.append(item.DAMAGETYPE)
         self.DamageType.clear()
-        self.DamageType.setCurrentIndex(damagetype.index(item.DAMAGETYPE))
+        self.DamageType.setCurrentIndex(damagetypes.index(item.DAMAGETYPE))
         self.ItemType.clear()
+        itemtypes = ['', item.TYPE]
         if item.TYPE not in itemtypes:
             itemtypes.append(item.TYPE)
         self.ItemType.insertItems(0, itemtypes)
-        self.DamageType.setCurrentIndex(damagetype.index(item.DAMAGETYPE))
+        self.ItemType.setCurrentIndex(itemtypes.index(item.TYPE))
+        materialtypes = ['']
         self.Material.clear()
         self.Material.insertItems(0, materialtypes)
-        if item.MATERIAL in materialtypes:
-            self.DamageType.setCurrentIndex(damagetype.index(item.DAMAGETYPE))
+        if item.Material in materialtypes:
+            self.Material.setCurrentIndex(materialtypes.index(item.Material))
         self.AFDPSEdit.setText(item.AFDPS)
         self.BonusEdit.setText(item.Bonus)
         self.SpeedEdit.setText(item.Speed)
