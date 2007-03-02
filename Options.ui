@@ -173,39 +173,6 @@
          </item>
         </layout>
        </widget>
-       <widget class="QWidget" name="Notes" >
-        <attribute name="title" >
-         <string>Notes</string>
-        </attribute>
-        <layout class="QVBoxLayout" >
-         <property name="margin" >
-          <number>9</number>
-         </property>
-         <property name="spacing" >
-          <number>6</number>
-         </property>
-         <item>
-          <layout class="QVBoxLayout" >
-           <property name="margin" >
-            <number>0</number>
-           </property>
-           <property name="spacing" >
-            <number>6</number>
-           </property>
-           <item>
-            <widget class="QLabel" name="TextLabel2_2" >
-             <property name="text" >
-              <string>Template Notes:</string>
-             </property>
-            </widget>
-           </item>
-           <item>
-            <widget class="QTextEdit" name="NoteText" />
-           </item>
-          </layout>
-         </item>
-        </layout>
-       </widget>
        <widget class="QWidget" name="Price" >
         <attribute name="title" >
          <string>Price</string>
