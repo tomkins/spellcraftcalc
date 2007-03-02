@@ -2,8 +2,8 @@
 
 # Form implementation generated from reading ui file 'Options.ui'
 #
-# Created: Sat Feb 24 21:37:00 2007
-#      by: PyQt4 UI code generator 4.1
+# Created: Tue Feb 27 11:45:55 2007
+#      by: PyQt4 UI code generator 4-snapshot-20061020
 #
 # WARNING! All changes made in this file will be lost!
 
@@ -102,10 +102,10 @@ class Ui_B_Options(object):
         self.vboxlayout2.addLayout(self.vboxlayout3)
         self.Tab.addTab(self.General,"")
 
-        self.Notes = QtGui.QWidget()
-        self.Notes.setObjectName("Notes")
+        self.Price = QtGui.QWidget()
+        self.Price.setObjectName("Price")
 
-        self.vboxlayout4 = QtGui.QVBoxLayout(self.Notes)
+        self.vboxlayout4 = QtGui.QVBoxLayout(self.Price)
         self.vboxlayout4.setMargin(9)
         self.vboxlayout4.setSpacing(6)
         self.vboxlayout4.setObjectName("vboxlayout4")
@@ -115,38 +115,15 @@ class Ui_B_Options(object):
         self.vboxlayout5.setSpacing(6)
         self.vboxlayout5.setObjectName("vboxlayout5")
 
-        self.TextLabel2_2 = QtGui.QLabel(self.Notes)
-        self.TextLabel2_2.setObjectName("TextLabel2_2")
-        self.vboxlayout5.addWidget(self.TextLabel2_2)
-
-        self.NoteText = QtGui.QTextEdit(self.Notes)
-        self.NoteText.setObjectName("NoteText")
-        self.vboxlayout5.addWidget(self.NoteText)
-        self.vboxlayout4.addLayout(self.vboxlayout5)
-        self.Tab.addTab(self.Notes,"")
-
-        self.Price = QtGui.QWidget()
-        self.Price.setObjectName("Price")
-
-        self.vboxlayout6 = QtGui.QVBoxLayout(self.Price)
-        self.vboxlayout6.setMargin(9)
-        self.vboxlayout6.setSpacing(6)
-        self.vboxlayout6.setObjectName("vboxlayout6")
-
-        self.vboxlayout7 = QtGui.QVBoxLayout()
-        self.vboxlayout7.setMargin(0)
-        self.vboxlayout7.setSpacing(6)
-        self.vboxlayout7.setObjectName("vboxlayout7")
-
         self.hboxlayout1 = QtGui.QHBoxLayout()
         self.hboxlayout1.setMargin(0)
         self.hboxlayout1.setSpacing(6)
         self.hboxlayout1.setObjectName("hboxlayout1")
 
-        self.vboxlayout8 = QtGui.QVBoxLayout()
-        self.vboxlayout8.setMargin(0)
-        self.vboxlayout8.setSpacing(6)
-        self.vboxlayout8.setObjectName("vboxlayout8")
+        self.vboxlayout6 = QtGui.QVBoxLayout()
+        self.vboxlayout6.setMargin(0)
+        self.vboxlayout6.setSpacing(6)
+        self.vboxlayout6.setObjectName("vboxlayout6")
 
         self.hboxlayout2 = QtGui.QHBoxLayout()
         self.hboxlayout2.setMargin(0)
@@ -167,10 +144,10 @@ class Ui_B_Options(object):
         self.hboxlayout3.setSpacing(6)
         self.hboxlayout3.setObjectName("hboxlayout3")
 
-        self.vboxlayout9 = QtGui.QVBoxLayout()
-        self.vboxlayout9.setMargin(0)
-        self.vboxlayout9.setSpacing(6)
-        self.vboxlayout9.setObjectName("vboxlayout9")
+        self.vboxlayout7 = QtGui.QVBoxLayout()
+        self.vboxlayout7.setMargin(0)
+        self.vboxlayout7.setSpacing(6)
+        self.vboxlayout7.setObjectName("vboxlayout7")
 
         self.gridlayout = QtGui.QGridLayout()
         self.gridlayout.setMargin(0)
@@ -203,42 +180,42 @@ class Ui_B_Options(object):
         self.PPItem = QtGui.QLineEdit(self.GroupBox1)
         self.PPItem.setObjectName("PPItem")
         self.gridlayout.addWidget(self.PPItem,1,1,1,1)
-        self.vboxlayout9.addLayout(self.gridlayout)
+        self.vboxlayout7.addLayout(self.gridlayout)
 
         self.TextLabel2_3 = QtGui.QLabel(self.GroupBox1)
         self.TextLabel2_3.setAlignment(QtCore.Qt.AlignCenter)
         self.TextLabel2_3.setObjectName("TextLabel2_3")
-        self.vboxlayout9.addWidget(self.TextLabel2_3)
-        self.hboxlayout3.addLayout(self.vboxlayout9)
+        self.vboxlayout7.addWidget(self.TextLabel2_3)
+        self.hboxlayout3.addLayout(self.vboxlayout7)
         self.hboxlayout2.addWidget(self.GroupBox1)
+
+        self.vboxlayout8 = QtGui.QVBoxLayout()
+        self.vboxlayout8.setMargin(0)
+        self.vboxlayout8.setSpacing(6)
+        self.vboxlayout8.setObjectName("vboxlayout8")
+
+        self.GroupBox6 = QtGui.QGroupBox(self.Price)
+        self.GroupBox6.setObjectName("GroupBox6")
+
+        self.vboxlayout9 = QtGui.QVBoxLayout(self.GroupBox6)
+        self.vboxlayout9.setMargin(9)
+        self.vboxlayout9.setSpacing(6)
+        self.vboxlayout9.setObjectName("vboxlayout9")
 
         self.vboxlayout10 = QtGui.QVBoxLayout()
         self.vboxlayout10.setMargin(0)
         self.vboxlayout10.setSpacing(6)
         self.vboxlayout10.setObjectName("vboxlayout10")
 
-        self.GroupBox6 = QtGui.QGroupBox(self.Price)
-        self.GroupBox6.setObjectName("GroupBox6")
-
-        self.vboxlayout11 = QtGui.QVBoxLayout(self.GroupBox6)
-        self.vboxlayout11.setMargin(9)
-        self.vboxlayout11.setSpacing(6)
-        self.vboxlayout11.setObjectName("vboxlayout11")
-
-        self.vboxlayout12 = QtGui.QVBoxLayout()
-        self.vboxlayout12.setMargin(0)
-        self.vboxlayout12.setSpacing(6)
-        self.vboxlayout12.setObjectName("vboxlayout12")
-
         self.HourPrice = QtGui.QLineEdit(self.GroupBox6)
         self.HourPrice.setObjectName("HourPrice")
-        self.vboxlayout12.addWidget(self.HourPrice)
+        self.vboxlayout10.addWidget(self.HourPrice)
 
         self.HourInclude = QtGui.QCheckBox(self.GroupBox6)
         self.HourInclude.setObjectName("HourInclude")
-        self.vboxlayout12.addWidget(self.HourInclude)
-        self.vboxlayout11.addLayout(self.vboxlayout12)
-        self.vboxlayout10.addWidget(self.GroupBox6)
+        self.vboxlayout10.addWidget(self.HourInclude)
+        self.vboxlayout9.addLayout(self.vboxlayout10)
+        self.vboxlayout8.addWidget(self.GroupBox6)
 
         self.GroupBox4 = QtGui.QGroupBox(self.Price)
 
@@ -249,15 +226,15 @@ class Ui_B_Options(object):
         self.GroupBox4.setSizePolicy(sizePolicy)
         self.GroupBox4.setObjectName("GroupBox4")
 
-        self.vboxlayout13 = QtGui.QVBoxLayout(self.GroupBox4)
-        self.vboxlayout13.setMargin(9)
-        self.vboxlayout13.setSpacing(6)
-        self.vboxlayout13.setObjectName("vboxlayout13")
+        self.vboxlayout11 = QtGui.QVBoxLayout(self.GroupBox4)
+        self.vboxlayout11.setMargin(9)
+        self.vboxlayout11.setSpacing(6)
+        self.vboxlayout11.setObjectName("vboxlayout11")
 
-        self.vboxlayout14 = QtGui.QVBoxLayout()
-        self.vboxlayout14.setMargin(0)
-        self.vboxlayout14.setSpacing(6)
-        self.vboxlayout14.setObjectName("vboxlayout14")
+        self.vboxlayout12 = QtGui.QVBoxLayout()
+        self.vboxlayout12.setMargin(0)
+        self.vboxlayout12.setSpacing(6)
+        self.vboxlayout12.setObjectName("vboxlayout12")
 
         self.hboxlayout4 = QtGui.QHBoxLayout()
         self.hboxlayout4.setMargin(0)
@@ -271,23 +248,23 @@ class Ui_B_Options(object):
         self.TextLabel11 = QtGui.QLabel(self.GroupBox4)
         self.TextLabel11.setObjectName("TextLabel11")
         self.hboxlayout4.addWidget(self.TextLabel11)
-        self.vboxlayout14.addLayout(self.hboxlayout4)
+        self.vboxlayout12.addLayout(self.hboxlayout4)
 
         self.TextLabel12 = QtGui.QLabel(self.GroupBox4)
         self.TextLabel12.setObjectName("TextLabel12")
-        self.vboxlayout14.addWidget(self.TextLabel12)
-        self.vboxlayout13.addLayout(self.vboxlayout14)
-        self.vboxlayout10.addWidget(self.GroupBox4)
-        self.hboxlayout2.addLayout(self.vboxlayout10)
-        self.vboxlayout8.addLayout(self.hboxlayout2)
+        self.vboxlayout12.addWidget(self.TextLabel12)
+        self.vboxlayout11.addLayout(self.vboxlayout12)
+        self.vboxlayout8.addWidget(self.GroupBox4)
+        self.hboxlayout2.addLayout(self.vboxlayout8)
+        self.vboxlayout6.addLayout(self.hboxlayout2)
 
         self.GroupBox3 = QtGui.QGroupBox(self.Price)
         self.GroupBox3.setObjectName("GroupBox3")
 
-        self.vboxlayout15 = QtGui.QVBoxLayout(self.GroupBox3)
-        self.vboxlayout15.setMargin(9)
-        self.vboxlayout15.setSpacing(6)
-        self.vboxlayout15.setObjectName("vboxlayout15")
+        self.vboxlayout13 = QtGui.QVBoxLayout(self.GroupBox3)
+        self.vboxlayout13.setMargin(9)
+        self.vboxlayout13.setSpacing(6)
+        self.vboxlayout13.setObjectName("vboxlayout13")
 
         self.gridlayout1 = QtGui.QGridLayout()
         self.gridlayout1.setMargin(0)
@@ -326,26 +303,26 @@ class Ui_B_Options(object):
         self.TextLabel10.setAlignment(QtCore.Qt.AlignRight|QtCore.Qt.AlignTrailing|QtCore.Qt.AlignVCenter)
         self.TextLabel10.setObjectName("TextLabel10")
         self.gridlayout1.addWidget(self.TextLabel10,3,2,1,3)
-        self.vboxlayout15.addLayout(self.gridlayout1)
-        self.vboxlayout8.addWidget(self.GroupBox3)
-        self.hboxlayout1.addLayout(self.vboxlayout8)
+        self.vboxlayout13.addLayout(self.gridlayout1)
+        self.vboxlayout6.addWidget(self.GroupBox3)
+        self.hboxlayout1.addLayout(self.vboxlayout6)
 
         self.GroupBox5 = QtGui.QGroupBox(self.Price)
         self.GroupBox5.setObjectName("GroupBox5")
 
-        self.vboxlayout16 = QtGui.QVBoxLayout(self.GroupBox5)
-        self.vboxlayout16.setMargin(9)
-        self.vboxlayout16.setSpacing(6)
-        self.vboxlayout16.setObjectName("vboxlayout16")
+        self.vboxlayout14 = QtGui.QVBoxLayout(self.GroupBox5)
+        self.vboxlayout14.setMargin(9)
+        self.vboxlayout14.setSpacing(6)
+        self.vboxlayout14.setObjectName("vboxlayout14")
 
-        self.vboxlayout17 = QtGui.QVBoxLayout()
-        self.vboxlayout17.setMargin(0)
-        self.vboxlayout17.setSpacing(6)
-        self.vboxlayout17.setObjectName("vboxlayout17")
+        self.vboxlayout15 = QtGui.QVBoxLayout()
+        self.vboxlayout15.setMargin(0)
+        self.vboxlayout15.setSpacing(6)
+        self.vboxlayout15.setObjectName("vboxlayout15")
 
         self.TierPriceTable = QtGui.QTableWidget(self.GroupBox5)
         self.TierPriceTable.setObjectName("TierPriceTable")
-        self.vboxlayout17.addWidget(self.TierPriceTable)
+        self.vboxlayout15.addWidget(self.TierPriceTable)
 
         self.hboxlayout5 = QtGui.QHBoxLayout()
         self.hboxlayout5.setMargin(0)
@@ -359,10 +336,10 @@ class Ui_B_Options(object):
         self.TextLabel15 = QtGui.QLabel(self.GroupBox5)
         self.TextLabel15.setObjectName("TextLabel15")
         self.hboxlayout5.addWidget(self.TextLabel15)
-        self.vboxlayout17.addLayout(self.hboxlayout5)
-        self.vboxlayout16.addLayout(self.vboxlayout17)
+        self.vboxlayout15.addLayout(self.hboxlayout5)
+        self.vboxlayout14.addLayout(self.vboxlayout15)
         self.hboxlayout1.addWidget(self.GroupBox5)
-        self.vboxlayout7.addLayout(self.hboxlayout1)
+        self.vboxlayout5.addLayout(self.hboxlayout1)
 
         self.hboxlayout6 = QtGui.QHBoxLayout()
         self.hboxlayout6.setMargin(0)
@@ -379,7 +356,7 @@ class Ui_B_Options(object):
 
         spacerItem3 = QtGui.QSpacerItem(40,20,QtGui.QSizePolicy.Expanding,QtGui.QSizePolicy.Minimum)
         self.hboxlayout6.addItem(spacerItem3)
-        self.vboxlayout7.addLayout(self.hboxlayout6)
+        self.vboxlayout5.addLayout(self.hboxlayout6)
 
         self.hboxlayout7 = QtGui.QHBoxLayout()
         self.hboxlayout7.setMargin(0)
@@ -401,8 +378,8 @@ class Ui_B_Options(object):
 
         spacerItem5 = QtGui.QSpacerItem(40,20,QtGui.QSizePolicy.Expanding,QtGui.QSizePolicy.Minimum)
         self.hboxlayout7.addItem(spacerItem5)
-        self.vboxlayout7.addLayout(self.hboxlayout7)
-        self.vboxlayout6.addLayout(self.vboxlayout7)
+        self.vboxlayout5.addLayout(self.hboxlayout7)
+        self.vboxlayout4.addLayout(self.vboxlayout5)
         self.Tab.addTab(self.Price,"")
         self.vboxlayout1.addWidget(self.Tab)
 
@@ -449,8 +426,8 @@ class Ui_B_Options(object):
         B_Options.setTabOrder(self.ShowDoneGems,self.IncludeRR)
         B_Options.setTabOrder(self.IncludeRR,self.HideNonClassSkills)
         B_Options.setTabOrder(self.HideNonClassSkills,self.Coop)
-        B_Options.setTabOrder(self.Coop,self.NoteText)
-        B_Options.setTabOrder(self.NoteText,self.Tab)
+        B_Options.setTabOrder(self.Coop,B_Options.NoteText)
+        B_Options.setTabOrder(B_Options.NoteText,self.Tab)
 
     def retranslateUi(self, B_Options):
         B_Options.setWindowTitle(QtGui.QApplication.translate("B_Options", "Options", None, QtGui.QApplication.UnicodeUTF8))
@@ -463,8 +440,6 @@ class Ui_B_Options(object):
         self.Coop.setText(QtGui.QApplication.translate("B_Options", "Co-op / PvP Server", None, QtGui.QApplication.UnicodeUTF8))
         self.TextLabel2_5.setText(QtGui.QApplication.translate("B_Options", "        (Lets you access items from all realms)", None, QtGui.QApplication.UnicodeUTF8))
         self.Tab.setTabText(self.Tab.indexOf(self.General), QtGui.QApplication.translate("B_Options", "General", None, QtGui.QApplication.UnicodeUTF8))
-        self.TextLabel2_2.setText(QtGui.QApplication.translate("B_Options", "Template Notes:", None, QtGui.QApplication.UnicodeUTF8))
-        self.Tab.setTabText(self.Tab.indexOf(self.Notes), QtGui.QApplication.translate("B_Options", "Notes", None, QtGui.QApplication.UnicodeUTF8))
         self.GroupBox1.setTitle(QtGui.QApplication.translate("B_Options", "Price per", None, QtGui.QApplication.UnicodeUTF8))
         self.PPGem.setText(QtGui.QApplication.translate("B_Options", "0", None, QtGui.QApplication.UnicodeUTF8))
         self.TextLabel1_2.setText(QtGui.QApplication.translate("B_Options", "Gem:", None, QtGui.QApplication.UnicodeUTF8))

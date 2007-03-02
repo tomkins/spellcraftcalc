@@ -61,7 +61,6 @@ class Options(QDialog, Ui_B_Options):
     def loadOptions(self):
         li = self.Skill.findText(str(ScOptions.instance().getOption('CrafterSkill', 1000)))
         self.Skill.setCurrentIndex(li)
-        self.NoteText.setHtml(self.parent.noteText)
         self.ShowDoneGems.setChecked(ScOptions.instance().getOption('DontShowDoneGems', False))
         self.loadPriceInfo(ScOptions.instance().getOption('Pricing', {}))
         self.Coop.setChecked(ScOptions.instance().getOption('Coop', False))
@@ -72,9 +71,6 @@ class Options(QDialog, Ui_B_Options):
 
     def saveOptions(self):
         ScOptions.instance().setOption('CrafterSkill', int(str(self.Skill.currentText())))
-        if str(self.NoteText.toPlainText()) != self.parent.noteText:
-            self.parent.modified = True
-        self.parent.noteText = str(self.NoteText.toPlainText())
         ScOptions.instance().setOption('DontShowDoneGems', self.ShowDoneGems.isChecked())
         ScOptions.instance().setOption('Pricing', self.getPriceInfo())
         ScOptions.instance().setOption('Coop', self.Coop.isChecked())
