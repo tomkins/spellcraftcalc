@@ -189,6 +189,21 @@ class ScWindow(QMainWindow, Ui_B_SC):
         self.ScWinFrame.layout().setColumnStretch(6, 1)
 
         cbwidth = self.CharClass.getMinimumWidth(['Necromancer'])
+        if str(QApplication.style().objectName()[0:9]).lower() == "macintosh":
+            # mac is including a checkbox/icon width which is absurd
+            cbwidth = cbwidth - 14
+            amtcbwidth = amtcbwidth - 14
+            lbheight = self.LabelTotalCost.sizeHint().height() + 5
+            for i in (0, 4, 5, 6,):
+                self.gridlayout1.setRowMinimumHeight(i, cbheight)
+            for i in (4, 5, 7, 10):
+                self.gridlayout5.setRowMinimumHeight(i, cbheight)
+            for ctl in self.StatLabel.itervalues():
+                ctl.setFixedHeight(lbheight)
+            self.LabelTotalCost.setFixedHeight(lbheight)
+            self.LabelTotalPrice.setFixedHeight(lbheight)
+            self.LabelTotalUtility.setFixedHeight(lbheight)
+
         self.CharName.setFixedSize(QSize(cbwidth, edheight))
         self.Realm.setFixedSize(QSize(cbwidth, cbheight))
         self.CharClass.setFixedSize(QSize(cbwidth, cbheight))
@@ -207,11 +222,56 @@ class ScWindow(QMainWindow, Ui_B_SC):
         self.CharLevel.setValidator(QIntValidator(0, 99, self))
         self.ItemLevel.setValidator(QIntValidator(0, 99, self))
         self.QualEdit.setValidator(QIntValidator(0, 100, self))
-        self.Bonus_Edit.setValidator(QIntValidator(0, 99, self))
+        self.BonusEdit.setValidator(QIntValidator(0, 99, self))
 
         self.GroupItemFrame.layout().itemAt(0).changeSize(1, 
                                     self.PieceTab.baseOverlap(),
                                     QSizePolicy.Minimum, QSizePolicy.Fixed)
+
+        self.ItemLevel.setFixedSize(QSize(amtedwidth, edheight))
+        self.ItemLevelButton.setFixedSize(
+            QSize(self.ItemLevelButton.width(), edheight))
+        self.QualDrop.setFixedSize(QSize(amtcbwidth, cbheight))
+        self.QualEdit.setFixedSize(QSize(amtcbwidth, edheight))
+        self.ItemNameCombo.setFixedHeight(cbheight)
+        self.ItemNameCombo.setCompleter(None)
+
+        self.ItemRealm.setFixedSize(QSize(cbwidth, cbheight))
+        self.ItemType.setFixedSize(QSize(cbwidth, cbheight))
+        self.Material.setFixedSize(QSize(cbwidth, cbheight))
+        self.ItemSource.setFixedSize(QSize(cbwidth, cbheight))
+        self.AFDPSEdit.setFixedSize(QSize(amtedwidth, edheight))
+        self.BonusEdit.setFixedSize(QSize(amtedwidth, edheight))
+        self.SpeedEdit.setFixedSize(QSize(amtedwidth, edheight))
+        self.DamageType.setFixedSize(QSize(cbwidth, cbheight))
+        self.ItemRequirement.setFixedHeight(edheight)
+
+        self.ClassRestrictionTable.verticalHeader().hide()
+        self.ClassRestrictionTable.horizontalHeader().hide()
+        self.ClassRestrictionTable.setShowGrid(False)
+        self.ClassRestrictionTable.setTabKeyNavigation(False)
+        self.ClassRestrictionTable.setRowCount(1 + len(ClassList['All']))
+        item = QTableWidgetItem('All')
+        item.setFlags(Qt.ItemIsUserCheckable | Qt.ItemIsEnabled)
+# | Qt.ItemIsSelectable)
+        item.setCheckState(Qt.Unchecked)
+        self.ClassRestrictionTable.setItem(0, 0, item)
+        i = 1
+        for classname in ClassList['All']:
+            item = QTableWidgetItem(classname)
+            item.setFlags(Qt.ItemIsUserCheckable | Qt.ItemIsEnabled)
+# | Qt.ItemIsSelectable)
+            item.setCheckState(Qt.Unchecked)
+            self.ClassRestrictionTable.setItem(i, 0, item)
+            i = i + 1
+        self.ClassRestrictionTable.resizeRowsToContents()
+        self.ClassRestrictionTable.resizeColumnsToContents()
+        self.ClassRestrictionTable.resizeColumnsToContents()
+        ltrb = self.ClassRestrictionTable.getContentsMargins()
+        self.ClassRestrictionTable.setFixedWidth(ltrb[0] + ltrb[2] + \
+            self.ClassRestrictionTable.columnWidth(0) + \
+            self.ClassRestrictionTable.verticalScrollBar().width())
+        self.ClassRestrictionTable.updateGeometry()
 
         self.GemLabel = []
         self.Type = []
@@ -223,17 +283,6 @@ class ScWindow(QMainWindow, Ui_B_SC):
         self.Cost = []
         self.Requirement = []
         self.Name = []
-
-        self.ItemLevel.setFixedSize(QSize(amtedwidth, edheight))
-        self.ItemLevelButton.setFixedSize(
-            QSize(self.ItemLevelButton.width(), edheight))
-        self.QualDrop.setFixedSize(QSize(amtcbwidth, cbheight))
-        self.QualEdit.setFixedSize(QSize(amtcbwidth, edheight))
-        self.Bonus_Edit.setFixedSize(QSize(amtedwidth, edheight))
-        self.AFDPS_Edit.setFixedSize(QSize(amtedwidth, edheight))
-        self.Speed_Edit.setFixedSize(QSize(amtedwidth, edheight))
-        self.ItemNameCombo.setFixedHeight(cbheight)
-        self.ItemNameCombo.setCompleter(None)
 
         width = testfont.size(Qt.TextSingleLine, " Slot 10:").width()
         self.ItemSlotsFrame.layout().setColumnMinimumWidth(0,width)
@@ -249,6 +298,10 @@ class ScWindow(QMainWindow, Ui_B_SC):
         l = reduce(lambda x, y: x+y, [ list(x) \
                                        for x in GemLists['All'].values() ])
         effectwidth = self.Effect_1.getMinimumWidth(l)
+        if str(QApplication.style().objectName()[0:9]).lower() == "macintosh":
+            # mac is including a checkbox/icon width which is absurd
+            typewidth = typewidth - 14
+            effectwidth = effectwidth - 14
 
         # XXX FIX ME - I want to have a decimal!  But Double validator isn't working
         editAmountValidator = QIntValidator(-999, +999, self)
@@ -323,7 +376,7 @@ class ScWindow(QMainWindow, Ui_B_SC):
         l = self.ScWinFrame.layout().itemAt(self.ScWinFrame.layout().count()-1)
         l.layout().itemAt(1).changeSize(1, -self.PieceTab.baseOverlap(),
                                         QSizePolicy.Minimum, QSizePolicy.Fixed)
-
+        self.ScWinFrame.updateGeometry()
 
     def initControls(self):
         # Send these home to the parent form (this QMainWindow), they are dumb QFrames:
@@ -339,8 +392,6 @@ class ScWindow(QMainWindow, Ui_B_SC):
                      SIGNAL("mousePressEvent(QMouseEvent*)"),
                      self.mousePressEvent)
 
-        #self.connect(self.CharName,SIGNAL("editingFinished()"),
-        #             self.templateChanged)
         self.connect(self.CharName,SIGNAL("textChanged(const QString&)"),
                      self.templateChanged)
         self.connect(self.Realm,SIGNAL("activated(int)"),
@@ -349,8 +400,6 @@ class ScWindow(QMainWindow, Ui_B_SC):
                      self.charClassChanged)
         self.connect(self.CharRace,SIGNAL("activated(int)"),
                      self.raceChanged)
-        #self.connect(self.CharLevel,SIGNAL("editingFinished()"),
-        #             self.templateChanged)
         self.connect(self.CharLevel,SIGNAL("textChanged(const QString&)"),
                      self.templateChanged)
         self.connect(self.RealmRank,SIGNAL("textChanged(const QString&)"),
@@ -359,46 +408,51 @@ class ScWindow(QMainWindow, Ui_B_SC):
                      self.templateChanged)
         self.connect(self.OutfitName,SIGNAL("activated(int)"), 
                      self.outfitNameSelected)
-        #self.connect(self.OutfitName.lineEdit(),SIGNAL("editingFinished()"),
-        #             self.outfitNameEdited)
         self.connect(self.OutfitName,SIGNAL("editTextChanged(const QString&)"),
                      self.outfitNameEdited)
 
-
         self.connect(self.PieceTab,SIGNAL("currentChanged"),
                      self.pieceTabChanged)
-        #self.connect(self.ItemLevel,SIGNAL("editingFinished()"),
-        #             self.itemChanged)
+        self.connect(self.ToggleItemView,SIGNAL("clicked(bool)"),
+                     self.toggleItemView)
         self.connect(self.ItemLevel,SIGNAL("textChanged(const QString&)"),
                      self.itemChanged)
         self.connect(self.ItemLevelButton,SIGNAL("clicked()"),
                      self.itemLevelShow)
         self.connect(self.QualDrop,SIGNAL("activated(int)"),
                      self.itemChanged)
-        #self.connect(self.ItemLevel,SIGNAL("editingFinished()"),
-        #             self.itemChanged)
         self.connect(self.QualEdit,SIGNAL("textChanged(const QString&)"),
-                     self.itemChanged)
-        #self.connect(self.Bonus_Edit,SIGNAL("editingFinished()"),
-        #             self.itemChanged)
-        self.connect(self.Bonus_Edit,SIGNAL("textChanged(const QString&)"),
-                     self.itemChanged)
-        #self.connect(self.AFDPS_Edit,SIGNAL("editingFinished()"),
-        #             self.itemChanged)
-        self.connect(self.AFDPS_Edit,SIGNAL("textChanged(const QString&)"),
-                     self.itemChanged)
-        #self.connect(self.Speed_Edit,SIGNAL("editingFinished()"),
-        #             self.itemChanged)
-        self.connect(self.Speed_Edit,SIGNAL("textChanged(const QString&)"),
-                     self.itemChanged)
-        self.connect(self.Equipped,SIGNAL("stateChanged(int)"),
                      self.itemChanged)
         self.connect(self.ItemNameCombo,SIGNAL("activated(int)"),
                      self.itemNameSelected)
-        #self.connect(self.ItemNameCombo.lineEdit(),SIGNAL("editingFinished()"),
-        #             self.itemNameEdited)
-        self.connect(self.ItemNameCombo,SIGNAL("editTextChanged(const QString&)"),
-                    self.itemNameEdited)
+        self.connect(self.ItemNameCombo,
+                     SIGNAL("editTextChanged(const QString&)"),
+                     self.itemNameEdited)
+        self.connect(self.Equipped,SIGNAL("stateChanged(int)"),
+                     self.itemChanged)
+        self.connect(self.ItemRealm,SIGNAL("activated(int)"),
+                     self.itemInfoChanged)
+        self.connect(self.ItemType,SIGNAL("activated(int)"),
+                     self.itemInfoChanged)
+        self.connect(self.Material,SIGNAL("activated(int)"),
+                     self.itemInfoChanged)
+        self.connect(self.ItemSource,SIGNAL("activated(int)"),
+                     self.itemInfoChanged)
+        self.connect(self.AFDPSEdit,SIGNAL("textChanged(const QString&)"),
+                     self.itemInfoChanged)
+        self.connect(self.BonusEdit,SIGNAL("textChanged(const QString&)"),
+                     self.itemInfoChanged)
+        self.connect(self.SpeedEdit,SIGNAL("textChanged(const QString&)"),
+                     self.itemInfoChanged)
+        self.connect(self.Offhand,SIGNAL("stateChanged(int)"),
+                     self.itemInfoChanged)
+        self.connect(self.DamageType,SIGNAL("activated(int)"),
+                     self.itemInfoChanged)
+        self.connect(self.ItemRequirement,SIGNAL("textChanged(const QString&)"),
+                     self.itemInfoChanged)
+        self.connect(self.ClassRestrictionTable, 
+                     SIGNAL('itemChanged(QTableWidgetItem *)'), 
+                     self.itemClassesChanged)
         self.connect(self.SkillsList,SIGNAL("activated(const QModelIndex&)"),
                      self.skillClicked)
 
@@ -619,7 +673,7 @@ class ScWindow(QMainWindow, Ui_B_SC):
         if line > 0:
             prev = self.Requirement[line - 1]
         else: 
-            prev = self.Equipped
+            prev = self.NoteText
         for i in range(line, 12):
             # Create the (sometimes used) edit boxes
             self.setTabOrder(prev,self.Type[i])
@@ -1001,6 +1055,14 @@ class ScWindow(QMainWindow, Ui_B_SC):
         else:
             self.showDropWidgets(item)
 
+        self.ItemLevel.setText(item.Level)
+        if itemtype == 'drop':
+            self.QualEdit.setText(item.ItemQuality)
+        else:
+            if item.ItemQuality in QualityValues:
+                self.QualDrop.setCurrentIndex(
+                    QualityValues.index(item.ItemQuality))
+
         # Make sure the combo doesn't do anything stupid...
         self.ItemNameCombo.blockSignals(True)
         self.ItemNameCombo.clear()
@@ -1012,9 +1074,63 @@ class ScWindow(QMainWindow, Ui_B_SC):
         self.ItemNameCombo.setEditText(item.ItemName)
         self.ItemNameCombo.blockSignals(False)
 
-        self.ItemLevel.setText(item.Level)
-        location = item.Location
         self.Equipped.setChecked(int(item.Equipped))
+
+        location = item.Location
+        isarmor = (location in ArmorTabList)
+        isweapon = (location in WeaponTabList)
+
+        self.ItemRealm.clear()
+        self.ItemSource.clear()
+        if itemtype == 'drop':
+            self.ItemRealm.insertItems(0, AllRealms)
+            self.ItemSource.insertItems(0, ['Drop', 'Quest', 'Artifact', 
+                                            'Merchant'])
+            damagetypes = list(DropLists['All']['Resist'])
+        else:
+            self.ItemRealm.insertItems(0, list(Realms))
+            self.ItemSource.insertItems(0, ['Crafted'])
+            damagetypes = ['Slash', 'Crush', 'Thrust']
+
+        if not isweapon:
+            damagetypes = ['']
+        #if isarmor:
+
+        if item.DAMAGETYPE not in damagetype:
+            damagetypes.append(item.DAMAGETYPE)
+        self.DamageType.clear()
+        self.DamageType.setCurrentIndex(damagetype.index(item.DAMAGETYPE))
+        self.ItemType.clear()
+        if item.TYPE not in itemtypes:
+            itemtypes.append(item.TYPE)
+        self.ItemType.insertItems(0, itemtypes)
+        self.DamageType.setCurrentIndex(damagetype.index(item.DAMAGETYPE))
+        self.Material.clear()
+        self.Material.insertItems(0, materialtypes)
+        if item.MATERIAL in materialtypes:
+            self.DamageType.setCurrentIndex(damagetype.index(item.DAMAGETYPE))
+        self.AFDPSEdit.setText(item.AFDPS)
+        self.BonusEdit.setText(item.Bonus)
+        self.SpeedEdit.setText(item.Speed)
+        if item.OFFHAND == 'yes':
+            self.Offhand.setCheckState(Qt.Checked)
+        else:
+            self.Offhand.setCheckState(Qt.Unchecked)
+        self.ItemRequirement.setText(item.Requirement)
+        self.DBSource.setText(item.DBSOURCE)
+
+        self.LabelSpeedEdit.setVisible(isweapon)
+        self.SpeedEdit.setVisible(isweapon)
+        self.Offhand.setVisible(isweapon)
+        self.LabelDamageType.setVisible(isweapon)
+        self.DamageType.setVisible(isweapon)
+
+        #self.ItemNoteText.toHTML(item.Notes)
+        #if str(self.NoteText.toPlainText()) != self.noteText:
+        #    self.modified = True
+        #self.noteText = str(self.NoteText.toPlainText())
+        # XXX
+
         for slot in range(0, item.slotCount()):
             typecombo = self.Type[slot]
             typecombo.clear()
@@ -1067,18 +1183,18 @@ class ScWindow(QMainWindow, Ui_B_SC):
                 self.Makes[slot].setValue(int(item.slot(slot).makes()))
             else:
                 self.Requirement[slot].setText(item.slot(slot).requirement())
-        self.AFDPS_Edit.setText(item.AFDPS)
-        self.Speed_Edit.setText(item.Speed)
-        self.Bonus_Edit.setText(item.Bonus)
-        if itemtype == 'drop':
-            self.QualEdit.setText(item.ItemQuality)
-        else:
-            if item.ItemQuality in QualityValues:
-                self.QualDrop.setCurrentIndex(
-                    QualityValues.index(item.ItemQuality))
         self.nocalc = wasnocalc
         if self.nocalc: return
         self.calculate()
+
+    def toggleItemView(self):
+        if self.stackedlayout.currentWidget().objectName() == "ItemInfoFrame":
+            self.ToggleItemView.setText("Item Info")
+            self.stackedlayout.setCurrentWidget(self.ItemSlotsFrame)
+        else:
+            self.ToggleItemView.setText("Item Slots")
+            self.stackedlayout.setCurrentWidget(self.ItemInfoFrame)
+           
 
     def insertSkill(self,amt,bonus,group):
         model = self.SkillsList.model()
@@ -1439,7 +1555,21 @@ class ScWindow(QMainWindow, Ui_B_SC):
         level = self.ItemLevelWindow.exec_()
         if level != -1:
             self.ItemLevel.setText(str(level))
-            self.AFDPS_Edit.setText(str(self.ItemLevelWindow.afdps))
+            self.AFDPSEdit.setText(str(self.ItemLevelWindow.afdps))
+        self.itemInfoChanged()
+
+    def itemClassesChanged(self,a0=None):
+        if a0.checkState() == Qt.Checked and a0.text == "All":
+            for row in range(1, a0.tableWidget().rows):
+                a0.tableWidget().item(row, 0).setCheckState(Qt.Unchecked)
+
+    def itemInfoChanged(self,a0=None):
+        if self.nocalc: return
+        self.modified = True
+        item = self.itemattrlist[self.currentTabLabel]
+        item.AFDPS = unicode(self.AFDPSEdit.text())
+        item.Speed = unicode(self.SpeedEdit.text())
+        item.Bonus = unicode(self.BonusEdit.text())
 
     def itemChanged(self,a0=None):
         if self.nocalc: return
@@ -1447,16 +1577,12 @@ class ScWindow(QMainWindow, Ui_B_SC):
         item = self.itemattrlist[self.currentTabLabel]
         self.fixupItemLevel()
         item.Level = unicode(self.ItemLevel.text())
-        item.AFDPS = unicode(self.AFDPS_Edit.text())
-        item.Speed = unicode(self.Speed_Edit.text())
-        item.Bonus = unicode(self.Bonus_Edit.text())
         if self.Equipped.isChecked():
             item.Equipped = '1'
         else:
             item.Equipped = '0'
         self.outfitlist[self.currentOutfit][self.currentTabLabel] \
                 = ( item.TemplateIndex, item.Equipped, )
-
         if item.ActiveState == 'player':
             item.ItemQuality = unicode(self.QualDrop.currentText())
         else:
