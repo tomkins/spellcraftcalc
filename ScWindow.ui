@@ -117,7 +117,7 @@
           </sizepolicy>
          </property>
          <property name="text" >
-          <string>  RR: </string>
+          <string>RR: </string>
          </property>
          <property name="textFormat" >
           <enum>Qt::PlainText</enum>
@@ -154,7 +154,7 @@
           </sizepolicy>
          </property>
          <property name="text" >
-          <string>  CL: </string>
+          <string>CL: </string>
          </property>
          <property name="textFormat" >
           <enum>Qt::PlainText</enum>
@@ -1361,15 +1361,15 @@
          <item>
           <layout class="QStackedLayout" >
            <item>
-       <widget class="QWidget" name="ItemInfoFrame" >
-        <layout class="QHBoxLayout" >
-         <property name="margin" >
-          <number>0</number>
-         </property>
-         <property name="spacing" >
-          <number>9</number>
-         </property>
-         <item>
+     <widget class="QWidget" name="ItemInfoFrame" >
+      <layout class="QHBoxLayout" >
+       <property name="margin" >
+        <number>0</number>
+       </property>
+       <property name="spacing" >
+        <number>9</number>
+       </property>
+       <item>
         <layout class="QVBoxLayout" >
          <property name="margin" >
           <number>0</number>
@@ -1445,19 +1445,6 @@
             <widget class="SearchingCombo" name="ItemSource" />
            </item>
            <item row="4" column="0" >
-            <widget class="QLabel" name="LabelAFDPSEdit" >
-             <property name="text" >
-              <string>AF/DPS: </string>
-             </property>
-             <property name="textFormat" >
-              <enum>Qt::PlainText</enum>
-             </property>
-            </widget>
-           </item>
-           <item row="4" column="1" >
-            <widget class="QLineEdit" name="AFDPSEdit" />
-           </item>
-           <item row="4" column="2" >
             <widget class="QLabel" name="LabelBonusEdit" >
              <property name="sizePolicy" >
               <sizepolicy>
@@ -1468,7 +1455,20 @@
               </sizepolicy>
              </property>
              <property name="text" >
-              <string>  Bonus: </string>
+              <string>Bonus: </string>
+             </property>
+             <property name="textFormat" >
+              <enum>Qt::PlainText</enum>
+             </property>
+            </widget>
+           </item>
+           <item row="4" column="1" >
+            <widget class="QLineEdit" name="BonusEdit" />
+           </item>
+           <item row="4" column="2" >
+            <widget class="QLabel" name="LabelAFDPSEdit" >
+             <property name="text" >
+              <string>DPS: </string>
              </property>
              <property name="textFormat" >
               <enum>Qt::PlainText</enum>
@@ -1479,7 +1479,7 @@
             </widget>
            </item>
            <item row="4" column="3" >
-            <widget class="QLineEdit" name="BonusEdit" />
+            <widget class="QLineEdit" name="AFDPSEdit" />
            </item>
            <item row="5" column="0" >
             <widget class="QLabel" name="LabelSpeedEdit" >
@@ -1575,7 +1575,7 @@
           <enum>Qt::Vertical</enum>
          </property>
          <property name="sizeType" >
-          <enum>QSizePolicy::Fixed</enum>
+          <enum>QSizePolicy::MinimumExpanding</enum>
          </property>
          <property name="sizeHint" >
           <size>
@@ -1607,22 +1607,6 @@
            </item>
           </layout>
          </item>
-       <item>
-        <spacer>
-         <property name="orientation" >
-          <enum>Qt::Vertical</enum>
-         </property>
-         <property name="sizeType" >
-          <enum>QSizePolicy::MinimumExpanding</enum>
-         </property>
-         <property name="sizeHint" >
-          <size>
-           <width>1</width>
-           <height>3</height>
-          </size>
-         </property>
-        </spacer>
-       </item>
         </layout>
        </item>
        <item>
