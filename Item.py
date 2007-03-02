@@ -296,6 +296,13 @@ class Item:
             'AFDPS' : '',
             'Speed' : '',
             'Bonus' : '',
+            'TYPE' : '',
+            'SOURCE' : '',
+            'OFFHAND' : '',
+            'DAMAGETYPE' : '',
+            'DBSOURCE' : 'kscraft',
+            'CLASSRESTRICTIONS' : list(),
+            'Requirement' : '',
             'Time' : '0',
             'TemplateIndex' : idx,
         }
@@ -477,7 +484,13 @@ class Item:
                   (u'Bonus', self.Bonus,),
                   (u'ItemQuality', self.ItemQuality,),
                   (u'Equipped', self.Equipped,),
-                  (u'Level', self.Level,),]
+                  (u'Level', self.Level,),
+                  (u'Requirements', self.Requirements,),
+                  (u'TYPE', self.TYPE,),
+                  (u'SOURCE', self.SOURCE,),
+                  (u'OFFHAND', self.OFFHAND,),
+                  (u'DAMAGETYPE', self.DAMAGETYPE,),
+                  (u'DBSOURCE', self.DBSOURCE,),]
         if self.Time > "0":
             fields.extend([
                   (u'Time', self.Time,),])
@@ -502,6 +515,13 @@ class Item:
             elem = document.createElement(key)
             elem.appendChild(document.createTextNode(val))
             rootnode.appendChild(elem)
+        if (len(self.CLASSRESTRICTIONS) > 0):
+            elem = document.createElement(u'CLASSRESTRICTIONS')
+            rootnode.appendChild(elem)
+            for val in self.CLASSRESTRICTIONS:
+                classnode = document.createElement(u'CLASS')
+                classnode.appendChild(document.createTextNode(val))
+                elem.appendChild(classnode)
         slotnode = None
         for num in range(0,len(self.itemslots)):
             if self.itemslots[num].type() == "Unused": 
@@ -566,18 +586,7 @@ class Item:
         slots = {}
         for child in itemnode.childNodes:
             if child.nodeType == Node.TEXT_NODE: continue
-            if self.__dict__.has_key(child.tagName):
-                #if child.tagName == 'ItemName':
-                #    print 'ItemName'
-                #print XMLHelper.getText(child.childNodes)
-                setattr(self, child.tagName, XMLHelper.getText(child.childNodes))
-                #exec('%s = "%s"' % (self.attrs[child.tagName],
-                #    XMLHelper.getText(child.childNodes)))
-                if child.tagName == 'ActiveState':
-                    self.itemslots = self.makeSlots()
-                elif child.tagName == 'TemplateIndex':
-                    self.TemplateIndex = int(self.TemplateIndex)
-            elif child.tagName == 'SLOT':
+            if child.tagName == 'SLOT':
                 slotval = child.getAttribute("Number")
                 itemslot = self.itemslots[int(slotval)]
                 slottype = child.getAttribute("Type")
@@ -589,6 +598,11 @@ class Item:
                     if itemslot.__dict__.has_key(attr.tagName):
                         itemslot.setAttr(attr.tagName, val)
                     itemslot.fixEffect()
+            elif child.tagName == 'CLASSRESTRICTIONS':
+                for classnode in child.childNodes:
+                    if classnode.nodeType == Node.TEXT_NODE: continue
+                    val = XMLHelper.getText(classnode.childNodes)
+                    self.CLASSRESTRICTIONS.append(val)
             elif child.tagName[-4:] == "ITEM":
                 # Legacy nested DROPITEM/PLAYERITEM slots
                 type = string.lower(child.tagName[:-4])
@@ -619,6 +633,17 @@ class Item:
                     itemslot.fixEffect()
                 if not (convert or found):
                     slots.pop(type)
+            elif self.__dict__.has_key(child.tagName):
+                #if child.tagName == 'ItemName':
+                #    print 'ItemName'
+                #print XMLHelper.getText(child.childNodes)
+                setattr(self, child.tagName, XMLHelper.getText(child.childNodes))
+                #exec('%s = "%s"' % (self.attrs[child.tagName],
+                #    XMLHelper.getText(child.childNodes)))
+                if child.tagName == 'ActiveState':
+                    self.itemslots = self.makeSlots()
+                elif child.tagName == 'TemplateIndex':
+                    self.TemplateIndex = int(self.TemplateIndex)
         if len(slots) > 0:
             if slots.has_key(self.ActiveState):
                 self.itemslots = slots[self.ActiveState]
