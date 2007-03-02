@@ -253,14 +253,12 @@ class ScWindow(QMainWindow, Ui_B_SC):
         self.ClassRestrictionTable.setRowCount(1 + len(ClassList['All']))
         item = QTableWidgetItem('All')
         item.setFlags(Qt.ItemIsUserCheckable | Qt.ItemIsEnabled)
-# | Qt.ItemIsSelectable)
         item.setCheckState(Qt.Unchecked)
         self.ClassRestrictionTable.setItem(0, 0, item)
         i = 1
         for classname in ClassList['All']:
             item = QTableWidgetItem(classname)
             item.setFlags(Qt.ItemIsUserCheckable | Qt.ItemIsEnabled)
-# | Qt.ItemIsSelectable)
             item.setCheckState(Qt.Unchecked)
             self.ClassRestrictionTable.setItem(i, 0, item)
             i = i + 1
@@ -284,16 +282,6 @@ class ScWindow(QMainWindow, Ui_B_SC):
         self.Requirement = []
         self.Name = []
 
-        width = testfont.size(Qt.TextSingleLine, " Slot 10:").width()
-        self.ItemSlotsFrame.layout().setColumnMinimumWidth(0,width)
-        width = testfont.size(Qt.TextSingleLine, " Points").width()
-        self.ItemSlotsFrame.layout().setColumnMinimumWidth(5,width)
-        reqwidth = width
-        width = testfont.size(Qt.TextSingleLine, "  999g 00s 00c").width()
-        self.ItemSlotsFrame.layout().setColumnMinimumWidth(6,width)
-        reqwidth += width + amtcbwidth
-        self.ItemSlotsFrame.layout().setColumnStretch(8, 1)
-
         typewidth = self.Type_1.getMinimumWidth(list(DropTypeList))
         l = reduce(lambda x, y: x+y, [ list(x) \
                                        for x in GemLists['All'].values() ])
@@ -302,6 +290,37 @@ class ScWindow(QMainWindow, Ui_B_SC):
             # mac is including a checkbox/icon width which is absurd
             typewidth = typewidth - 14
             effectwidth = effectwidth - 14
+
+        headergrid = self.ItemSlotsHeader.layout()
+        itemslotgrid = self.ItemSlotsGrid.layout()
+        for i in range(0, 8):
+            headergrid.setColumnStretch(i, 0)
+            itemslotgrid.setColumnStretch(i, 0)
+        headergrid.setColumnStretch(8, 1)
+        itemslotgrid.setColumnStretch(8, 1)
+
+        width = testfont.size(Qt.TextSingleLine, " Slot 10:").width()
+        headergrid.setColumnMinimumWidth(0,width)
+        itemslotgrid.setColumnMinimumWidth(0,width)
+        headergrid.setColumnMinimumWidth(1,typewidth)
+        headergrid.setColumnMinimumWidth(2,amtcbwidth)
+        headergrid.setColumnMinimumWidth(3,effectwidth)
+        headergrid.setColumnMinimumWidth(4,amtcbwidth)
+        reqwidth = amtcbwidth
+        width = testfont.size(Qt.TextSingleLine, " Points").width()
+        headergrid.setColumnMinimumWidth(5,width)
+        itemslotgrid.setColumnMinimumWidth(5,width)
+        reqwidth += width
+        width = testfont.size(Qt.TextSingleLine, "  999g 00s 00c").width()
+        headergrid.setColumnMinimumWidth(6,width)
+        itemslotgrid.setColumnMinimumWidth(6,width)
+        reqwidth += width
+        width = testfont.size(Qt.TextSingleLine, "  ").width()
+        headergrid.setColumnMinimumWidth(7,width)
+        itemslotgrid.setColumnMinimumWidth(7,width)
+        width = testfont.size(Qt.TextSingleLine, 
+                  "Imperfect Mineral Encrusted Nature Spell Stone").width()
+        itemslotgrid.setColumnMinimumWidth(8,width)
 
         # XXX FIX ME - I want to have a decimal!  But Double validator isn't working
         editAmountValidator = QIntValidator(-999, +999, self)
@@ -365,8 +384,7 @@ class ScWindow(QMainWindow, Ui_B_SC):
                 self.switchOnType['player'].extend([
                     self.Makes[i], self.Points[i], self.Cost[i], ])
 
-            self.ItemSlotsFrame.layout().setRowMinimumHeight(i + 1, 
-                max(cbheight, edheight))
+            itemslotgrid.setRowMinimumHeight(i, max(cbheight, edheight))
 
         for tabname in PieceTabList:
             self.PieceTab.addTab(0, qApp.translate("B_SC",tabname,None))
@@ -376,6 +394,15 @@ class ScWindow(QMainWindow, Ui_B_SC):
         l = self.ScWinFrame.layout().itemAt(self.ScWinFrame.layout().count()-1)
         l.layout().itemAt(1).changeSize(1, -self.PieceTab.baseOverlap(),
                                         QSizePolicy.Minimum, QSizePolicy.Fixed)
+        self.ScrollSlots.setWidget(self.ItemSlotsGrid)
+        sys.stdout.write("%d %d %d\n" %
+           (self.ItemSlotsFrame.sizePolicy().horizontalPolicy(),
+            self.ItemSlotsFrame.sizePolicy().verticalPolicy(),
+            self.ItemSlotsFrame.sizePolicy().expandingDirections()))
+        sys.stdout.write("%d %d %d\n" %
+           (self.ItemSlotsGrid.sizePolicy().horizontalPolicy(),
+            self.ItemSlotsGrid.sizePolicy().verticalPolicy(),
+            self.ItemSlotsGrid.sizePolicy().expandingDirections()))
         self.ScWinFrame.updateGeometry()
 
     def initControls(self):
@@ -1412,6 +1439,7 @@ class ScWindow(QMainWindow, Ui_B_SC):
                     self.Points[i].setText('%3.1f' % imbuevals[i])
                 if i < len(self.Name):
                     self.Name[i].setText(slot.gemName(self.realm))
+                    self.Name[i].setToolTip(slot.gemName(self.realm))
             self.ItemImbue.setText('%3.1f' % imbuepts)
             self.ItemImbueTotal.setText(' / ' + unicode(itemimbue))
             self.ItemCost.setText(SC.formatCost(item.cost()))
