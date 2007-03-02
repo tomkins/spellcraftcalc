@@ -1541,22 +1541,6 @@
             <widget class="SearchingCombo" name="DamageType" />
            </item>
        <item row="7" column="0" colspan="4" >
-        <spacer>
-         <property name="orientation" >
-          <enum>Qt::Vertical</enum>
-         </property>
-         <property name="sizeType" >
-          <enum>QSizePolicy::Fixed</enum>
-         </property>
-         <property name="sizeHint" >
-          <size>
-           <width>1</width>
-           <height>3</height>
-          </size>
-         </property>
-        </spacer>
-       </item>
-       <item row="8" column="0" colspan="4" >
         <widget class="QLabel" name="LabelItemRequirement" >
          <property name="text" >
           <string>Requirement: </string>
@@ -1566,10 +1550,10 @@
          </property>
         </widget>
        </item>
-       <item row="9" column="0" colspan="4" >
+       <item row="8" column="0" colspan="4" >
         <widget class="QLineEdit" name="ItemRequirement" />
        </item>
-       <item row="10" column="0" colspan="4" >
+       <item row="9" column="0" colspan="4" >
         <spacer>
          <property name="orientation" >
           <enum>Qt::Vertical</enum>
@@ -1585,7 +1569,7 @@
          </property>
         </spacer>
        </item>
-           <item row="11" column="0" >
+           <item row="10" column="0" >
             <widget class="QLabel" name="LabelDBSource" >
              <property name="text" >
               <string>Source: </string>
@@ -1595,7 +1579,7 @@
              </property>
             </widget>
            </item>
-           <item row="11" column="1" colspan="3" >
+           <item row="10" column="1" colspan="3" >
             <widget class="QLabel" name="DBSource" >
              <property name="text" >
               <string> </string>
