@@ -5,7 +5,7 @@
 # See NOTICE.txt for copyrights and grant of license
 
 __all__ = [
-  'AllBonusList', 'ClassList', 'RaceList', 'Races', 'Realms', 
+  'AllBonusList', 'ClassList', 'RaceList', 'Races', 'Realms', 'AllRealms',
   'ServerCodes', 'EuroServerCodes', 'ServerIgnCodes', 
 ]
 
@@ -13,6 +13,7 @@ from tuple2 import *
 from dict2 import * 
 
 Realms = t2(('Albion', 'Hibernia', 'Midgard'))
+AllRealms = t2(('All', 'Albion', 'Hibernia', 'Midgard'))
 
 AllBonusList = { 
 
