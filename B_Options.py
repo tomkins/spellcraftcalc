@@ -2,8 +2,8 @@
 
 # Form implementation generated from reading ui file 'Options.ui'
 #
-# Created: Tue Feb 27 11:45:55 2007
-#      by: PyQt4 UI code generator 4-snapshot-20061020
+# Created: Fri Mar 02 03:05:31 2007
+#      by: PyQt4 UI code generator 4.1
 #
 # WARNING! All changes made in this file will be lost!
 
@@ -426,8 +426,7 @@ class Ui_B_Options(object):
         B_Options.setTabOrder(self.ShowDoneGems,self.IncludeRR)
         B_Options.setTabOrder(self.IncludeRR,self.HideNonClassSkills)
         B_Options.setTabOrder(self.HideNonClassSkills,self.Coop)
-        B_Options.setTabOrder(self.Coop,B_Options.NoteText)
-        B_Options.setTabOrder(B_Options.NoteText,self.Tab)
+        B_Options.setTabOrder(self.Coop,self.Tab)
 
     def retranslateUi(self, B_Options):
         B_Options.setWindowTitle(QtGui.QApplication.translate("B_Options", "Options", None, QtGui.QApplication.UnicodeUTF8))
