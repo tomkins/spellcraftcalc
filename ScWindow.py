@@ -446,13 +446,13 @@ class ScWindow(QMainWindow, Ui_B_SC):
         self.connect(self.OutfitName,SIGNAL("editTextChanged(const QString&)"),
                      self.outfitNameEdited)
 
-        self.connect(self.PieceTab,SIGNAL("currentChanged()"),
+        self.connect(self.PieceTab,SIGNAL("currentChanged"),
                      self.pieceTabChanged)
         self.connect(self.ToggleItemView,SIGNAL("clicked(bool)"),
                      self.toggleItemView)
         self.connect(self.ItemLevel,SIGNAL("textChanged(const QString&)"),
                      self.itemChanged)
-        self.connect(self.ItemLevelButton,SIGNAL("clicked()"),
+        self.connect(self.ItemLevelButton,SIGNAL("clicked"),
                      self.itemLevelShow)
         self.connect(self.QualDrop,SIGNAL("activated(int)"),
                      self.itemChanged)
@@ -488,10 +488,10 @@ class ScWindow(QMainWindow, Ui_B_SC):
 
         self.connect(self.ClassRestrictionTable, 
                      SIGNAL('itemChanged(QTableWidgetItem *)'), 
-                     self.itemClassesChanged)
+                     self.classRestrictionsChanged)
         self.connect(self.ItemNoteText,SIGNAL("textChanged()"),
                      self.itemInfoChanged)
-        self.connect(self.NoteText,SIGNAL("textChanged()"),
+        self.connect(self.NoteText,SIGNAL("textChanged"),
                      self.templateChanged)
 
 
@@ -1172,18 +1172,15 @@ class ScWindow(QMainWindow, Ui_B_SC):
         self.ItemRequirement.setText(item.Requirement)
         self.DBSource.setText(item.DBSOURCE)
         self.ItemNoteText.setPlainText(item.Notes)
+        self.displayClassRestrictions(item)
 
         self.LabelSpeedEdit.setVisible(isweapon)
         self.SpeedEdit.setVisible(isweapon)
+        self.LabelAFDPSEdit.setVisible(isweapon or isarmor)
+        self.AFDPSEdit.setVisible(isweapon or isarmor)
         self.Offhand.setVisible(isweapon)
         self.LabelDamageType.setVisible(isweapon)
         self.DamageType.setVisible(isweapon)
-
-        #self.ItemNoteText.toHTML(item.Notes)
-        #if str(self.NoteText.toPlainText()) != self.noteText:
-        #    self.modified = True
-        #self.noteText = str(self.NoteText.toPlainText())
-        # XXX
 
         for slot in range(0, item.slotCount()):
             typecombo = self.Type[slot]
@@ -1623,10 +1620,61 @@ class ScWindow(QMainWindow, Ui_B_SC):
             self.AFDPSEdit.setText(str(self.ItemLevelWindow.afdps))
         self.itemInfoChanged()
 
-    def itemClassesChanged(self,a0=None):
-        if a0.checkState() == Qt.Checked and a0.text == "All":
-            for row in range(1, a0.tableWidget().rows):
-                a0.tableWidget().item(row, 0).setCheckState(Qt.Unchecked)
+    def displayClassRestrictions(self, item):
+        classitem = self.ClassRestrictionTable.item(0, 0)
+        if len(item.CLASSRESTRICTIONS) > 0 and \
+               item.CLASSRESTRICTIONS[0] == 'All':
+            classitem.setCheckState(Qt.Checked)
+            cr = 1
+        else:
+            classitem.setCheckState(Qt.Unchecked)
+            cr = 0
+        classlist = ClassList[item.Realm]
+        rc = 0
+        i = 1
+        for classname in ClassList['All']:
+            classitem = self.ClassRestrictionTable.item(i, 0)
+            if rc < len(classlist) and classlist[rc] == classname:
+                self.ClassRestrictionTable.setRowHidden(i, False)
+                if cr < len(item.CLASSRESTRICTIONS) and \
+                   self.CLASSRESTRICTIONS[cr] == classname:
+                    classitem.setCheckState(Qt.Checked)
+                    cr = cr + 1
+                else:
+                    classitem.setCheckState(Qt.Unchecked)
+                rc = rc + 1
+            else:
+                self.ClassRestrictionTable.setRowHidden(i, True)
+                classitem.setCheckState(Qt.Unchecked)
+                if cr < len(item.CLASSRESTRICTIONS) and \
+                   item.CLASSRESTRICTIONS[cr] == classname:
+                    del self.CLASSRESTRICTIONS[cr]
+            i = i + 1
+
+    def classRestrictionsChanged(self,a0=None):
+        if self.nocalc: return
+        if a0.text() == "All":
+            if a0.checkState() == Qt.Checked:
+                for row in range(1, a0.tableWidget().rows):
+                   a0.tableWidget().item(row, 0).setCheckState(Qt.Unchecked)
+                self.CLASSRESTRICTIONS = ['All']
+            elif self.CLASSRESTRICTIONS[0] == 'All':
+                del self.CLASSRESTRICTIONS[0]
+            else:
+                return
+        elif a0.checkState() == Qt.Checked:
+            for i in range(0, len(self.CLASSRESTRICTIONS)):
+                if a0.text() == self.CLASSRESTRICTIONS[i]:
+                    return
+                if a0.text() > self.CLASSRESTRICTIONS[i]:
+                    break
+            self.CLASSRESTRICTIONS.insert(i, a0.text())
+        elif a0.text() in self.CLASSRESTRICTIONS:
+            index = self.CLASSRESTRICTIONS[0].index(a0.text())
+            del self.CLASSRESTRICTIONS[index]
+        else:
+            return
+        self.modified = True
 
     def itemInfoChanged(self,a0=None):
         if self.nocalc: return
@@ -1638,7 +1686,7 @@ class ScWindow(QMainWindow, Ui_B_SC):
         item.SOURCE = unicode(self.ItemSource.currentText())
         item.Bonus = unicode(self.BonusEdit.text())
         item.Notes = self.ItemNoteText.toPlainText()
-        item.Requirement = unicode(self.ItemRequirement)
+        item.Requirement = unicode(self.ItemRequirement.text())
         item.AFDPS = unicode(self.AFDPSEdit.text())
         item.Speed = unicode(self.SpeedEdit.text())
         item.DAMAGETYPE = unicode(self.DamageType.currentText())
