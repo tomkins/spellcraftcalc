@@ -1637,7 +1637,7 @@ class ScWindow(QMainWindow, Ui_B_SC):
             if rc < len(classlist) and classlist[rc] == classname:
                 self.ClassRestrictionTable.setRowHidden(i, False)
                 if cr < len(item.CLASSRESTRICTIONS) and \
-                   self.CLASSRESTRICTIONS[cr] == classname:
+                   item.CLASSRESTRICTIONS[cr] == classname:
                     classitem.setCheckState(Qt.Checked)
                     cr = cr + 1
                 else:
@@ -1652,26 +1652,29 @@ class ScWindow(QMainWindow, Ui_B_SC):
             i = i + 1
 
     def classRestrictionsChanged(self,a0=None):
+        item = self.itemattrlist[self.currentTabLabel]
         if self.nocalc: return
         if a0.text() == "All":
             if a0.checkState() == Qt.Checked:
-                for row in range(1, a0.tableWidget().rows):
+                for row in range(1, a0.tableWidget().rowCount()):
                    a0.tableWidget().item(row, 0).setCheckState(Qt.Unchecked)
-                self.CLASSRESTRICTIONS = ['All']
-            elif self.CLASSRESTRICTIONS[0] == 'All':
-                del self.CLASSRESTRICTIONS[0]
+                item.CLASSRESTRICTIONS = ['All']
+            elif item.CLASSRESTRICTIONS[0] == 'All':
+                del item.CLASSRESTRICTIONS[0]
             else:
                 return
         elif a0.checkState() == Qt.Checked:
-            for i in range(0, len(self.CLASSRESTRICTIONS)):
-                if a0.text() == self.CLASSRESTRICTIONS[i]:
+            i = 0
+            while i < len(item.CLASSRESTRICTIONS):
+                if a0.text() == item.CLASSRESTRICTIONS[i]:
                     return
-                if a0.text() > self.CLASSRESTRICTIONS[i]:
+                if a0.text() > item.CLASSRESTRICTIONS[i]:
                     break
-            self.CLASSRESTRICTIONS.insert(i, a0.text())
-        elif a0.text() in self.CLASSRESTRICTIONS:
-            index = self.CLASSRESTRICTIONS[0].index(a0.text())
-            del self.CLASSRESTRICTIONS[index]
+                i = i + 1
+            item.CLASSRESTRICTIONS.insert(i, a0.text())
+        elif a0.text() in item.CLASSRESTRICTIONS:
+            index = item.CLASSRESTRICTIONS.index(a0.text())
+            del item.CLASSRESTRICTIONS[index]
         else:
             return
         self.modified = True
