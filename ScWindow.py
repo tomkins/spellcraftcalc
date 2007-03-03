@@ -1632,19 +1632,19 @@ class ScWindow(QMainWindow, Ui_B_SC):
         if self.nocalc: return
         self.modified = True
         item = self.itemattrlist[self.currentTabLabel]
-        item.Realm = unicode(self.ItemRealm)
-        item.TYPE = unicode(self.ItemType)
-        item.Material = unicode(self.Material)
-        item.SOURCE = unicode(self.ItemSource)
+        item.Realm = unicode(self.ItemRealm.currentText())
+        item.TYPE = unicode(self.ItemType.currentText())
+        item.Material = unicode(self.Material.currentText())
+        item.SOURCE = unicode(self.ItemSource.currentText())
         item.Bonus = unicode(self.BonusEdit.text())
         item.Notes = self.ItemNoteText.toPlainText()
         item.Requirement = unicode(self.ItemRequirement)
         item.AFDPS = unicode(self.AFDPSEdit.text())
         item.Speed = unicode(self.SpeedEdit.text())
-        item.DAMAGETYPE = unicode(self.DamageType)
-	if self.Offhand.checkState == Qt.Checked:
+        item.DAMAGETYPE = unicode(self.DamageType.currentText())
+	if self.Offhand.checkState() == Qt.Checked:
             item.OFFHAND = 'yes'
-        elif self.Offhand.visible() or len(item.OFFHAND) > 0:
+        elif self.Offhand.isVisible() or len(item.OFFHAND) > 0:
             item.OFFHAND = 'no' 
 
     def itemChanged(self,a0=None):
