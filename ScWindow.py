@@ -829,6 +829,9 @@ class ScWindow(QMainWindow, Ui_B_SC):
             os.path.join(self.ReportPath, 'DefaultConfigReport.xsl'))
         self.UiReportFile = ScOptions.instance().getOption('ConfigUiReportXSLT',
             os.path.join(self.ReportPath, 'DefaultUiXmlWindow.xsl'))
+        self.toggleItemViewWFrame(ScOptions.instance().getOption('CurrentItemFrame',
+            'ItemSlotsFrame'))
+
 
         x = ScOptions.instance().getOption('WindowX', self.pos().x())
         y = ScOptions.instance().getOption('WindowY', self.pos().y())
@@ -879,6 +882,8 @@ class ScWindow(QMainWindow, Ui_B_SC):
             binascii.b2a_base64(self.saveState(0))[:-1])
         ScOptions.instance().setOption('ToolbarSize',
             self.iconSize().width())
+        ScOptions.instance().setOption('CurrentItemFrame',
+            self.stackedlayout.currentWidget().objectName())
 
     def initialize(self, moretodo):
         self.nocalc = True
@@ -1230,7 +1235,14 @@ class ScWindow(QMainWindow, Ui_B_SC):
         else:
             self.ToggleItemView.setText("Item Slots")
             self.stackedlayout.setCurrentWidget(self.ItemInfoFrame)
-           
+
+    def toggleItemViewWFrame(self, frame):
+        if frame == "ItemSlotsFrame":
+            self.ToggleItemView.setText("Item Info")
+            self.stackedlayout.setCurrentWidget(self.ItemSlotsFrame)
+        else:
+            self.ToggleItemView.setText("Item Slots")
+            self.stackedlayout.setCurrentWidget(self.ItemInfoFrame)
 
     def insertSkill(self,amt,bonus,group):
         model = self.SkillsList.model()
