@@ -278,6 +278,9 @@ class ScWindow(QMainWindow, Ui_B_SC):
             self.ClassRestrictionTable.verticalScrollBar().width())
         self.ClassRestrictionTable.updateGeometry()
 
+        self.NoteText.setAcceptRichText(False)
+        self.ItemNoteText.setAcceptRichText(False)
+
         self.GemLabel = []
         self.Type = []
         self.Effect = []
@@ -432,7 +435,8 @@ class ScWindow(QMainWindow, Ui_B_SC):
         self.connect(self.CharRace,SIGNAL("activated(int)"),
                      self.raceChanged)
         self.connect(self.CharLevel,SIGNAL("textChanged(const QString&)"),
-                     self.templateChanged)
+                     self.totalsChanged)
+        # Change these to totalsChanged if Restrictions are finally tested:
         self.connect(self.RealmRank,SIGNAL("textChanged(const QString&)"),
                      self.templateChanged)
         self.connect(self.ChampionLevel,SIGNAL("textChanged(const QString&)"),
@@ -442,7 +446,7 @@ class ScWindow(QMainWindow, Ui_B_SC):
         self.connect(self.OutfitName,SIGNAL("editTextChanged(const QString&)"),
                      self.outfitNameEdited)
 
-        self.connect(self.PieceTab,SIGNAL("currentChanged"),
+        self.connect(self.PieceTab,SIGNAL("currentChanged()"),
                      self.pieceTabChanged)
         self.connect(self.ToggleItemView,SIGNAL("clicked(bool)"),
                      self.toggleItemView)
@@ -481,9 +485,15 @@ class ScWindow(QMainWindow, Ui_B_SC):
                      self.itemInfoChanged)
         self.connect(self.ItemRequirement,SIGNAL("textChanged(const QString&)"),
                      self.itemInfoChanged)
+
         self.connect(self.ClassRestrictionTable, 
                      SIGNAL('itemChanged(QTableWidgetItem *)'), 
                      self.itemClassesChanged)
+
+        self.connect(self.NoteText,SIGNAL("textChanged()"),
+                     self.templateChanged)
+
+
         self.connect(self.SkillsList,SIGNAL("activated(const QModelIndex&)"),
                      self.skillClicked)
 
@@ -887,7 +897,7 @@ class ScWindow(QMainWindow, Ui_B_SC):
 
     def initialize(self, moretodo):
         self.nocalc = True
-        self.noteText = ''
+        self.NoteText.setPlainText('')
         self.filename = None
         self.newcount = self.newcount + 1
         filetitle = unicode("Template" + str(self.newcount))
@@ -965,7 +975,8 @@ class ScWindow(QMainWindow, Ui_B_SC):
                                        unicode(self.ChampionLevel.text())))
         rootnode.appendChild(childnode)
         childnode = document.createElement('Notes')
-        childnode.appendChild(document.createTextNode(unicode(self.noteText)))
+        childnode.appendChild(document.createTextNode(
+                                  unicode(self.NoteText.toPlainText())))
         rootnode.appendChild(childnode)
 
         if rich:
@@ -1545,6 +1556,9 @@ class ScWindow(QMainWindow, Ui_B_SC):
         self.errorsmenuid.setEnabled(errorcount > 0)
                 
     def templateChanged(self,a0=None):
+        self.modified = True
+
+    def totalsChanged(self,a0=None):
         if self.nocalc: return
         self.modified = True
         self.calculate()
@@ -2127,7 +2141,7 @@ class ScWindow(QMainWindow, Ui_B_SC):
             elif child.tagName == 'ChampionLevel':
                 self.ChampionLevel.setText(XMLHelper.getText(child.childNodes))
             elif child.tagName == 'Notes':
-                self.noteText = XMLHelper.getText(child.childNodes)
+                self.NoteText.setPlainText(XMLHelper.getText(child.childNodes))
             elif child.tagName == 'SCItem':
                 newItem = Item(realm=self.realm)
                 newItem.loadFromXML(child,str(self.itemnumbering),True)
