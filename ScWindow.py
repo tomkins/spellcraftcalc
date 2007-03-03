@@ -452,7 +452,7 @@ class ScWindow(QMainWindow, Ui_B_SC):
                      self.toggleItemView)
         self.connect(self.ItemLevel,SIGNAL("textChanged(const QString&)"),
                      self.itemChanged)
-        self.connect(self.ItemLevelButton,SIGNAL("clicked"),
+        self.connect(self.ItemLevelButton,SIGNAL("clicked()"),
                      self.itemLevelShow)
         self.connect(self.QualDrop,SIGNAL("activated(int)"),
                      self.itemChanged)
@@ -483,7 +483,8 @@ class ScWindow(QMainWindow, Ui_B_SC):
                      self.itemInfoChanged)
         self.connect(self.DamageType,SIGNAL("activated(int)"),
                      self.itemInfoChanged)
-        self.connect(self.ItemRequirement,SIGNAL("textChanged(const QString&)"),
+        self.connect(self.ItemRequirement,
+                     SIGNAL("textChanged(const QString&)"),
                      self.itemInfoChanged)
 
         self.connect(self.ClassRestrictionTable, 
@@ -491,11 +492,11 @@ class ScWindow(QMainWindow, Ui_B_SC):
                      self.classRestrictionsChanged)
         self.connect(self.ItemNoteText,SIGNAL("textChanged()"),
                      self.itemInfoChanged)
-        self.connect(self.NoteText,SIGNAL("textChanged"),
+        self.connect(self.NoteText,SIGNAL("textChanged()"),
                      self.templateChanged)
 
-
-        self.connect(self.SkillsList,SIGNAL("activated(const QModelIndex&)"),
+        self.connect(self.SkillsList,
+                     SIGNAL("activated(const QModelIndex&)"),
                      self.skillClicked)
 
     def getIcon(self, namebase):
