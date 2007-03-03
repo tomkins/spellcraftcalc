@@ -489,7 +489,8 @@ class ScWindow(QMainWindow, Ui_B_SC):
         self.connect(self.ClassRestrictionTable, 
                      SIGNAL('itemChanged(QTableWidgetItem *)'), 
                      self.itemClassesChanged)
-
+        self.connect(self.ItemNoteText,SIGNAL("textChanged()"),
+                     self.itemInfoChanged)
         self.connect(self.NoteText,SIGNAL("textChanged()"),
                      self.templateChanged)
 
@@ -1170,6 +1171,7 @@ class ScWindow(QMainWindow, Ui_B_SC):
             self.Offhand.setCheckState(Qt.Unchecked)
         self.ItemRequirement.setText(item.Requirement)
         self.DBSource.setText(item.DBSOURCE)
+        self.ItemNoteText.setPlainText(item.Notes)
 
         self.LabelSpeedEdit.setVisible(isweapon)
         self.SpeedEdit.setVisible(isweapon)
@@ -1630,9 +1632,20 @@ class ScWindow(QMainWindow, Ui_B_SC):
         if self.nocalc: return
         self.modified = True
         item = self.itemattrlist[self.currentTabLabel]
+        item.Realm = unicode(self.ItemRealm)
+        item.TYPE = unicode(self.ItemType)
+        item.Material = unicode(self.Material)
+        item.SOURCE = unicode(self.ItemSource)
+        item.Bonus = unicode(self.BonusEdit.text())
+        item.Notes = self.ItemNoteText.toPlainText()
+        item.Requirement = unicode(self.ItemRequirement)
         item.AFDPS = unicode(self.AFDPSEdit.text())
         item.Speed = unicode(self.SpeedEdit.text())
-        item.Bonus = unicode(self.BonusEdit.text())
+        item.DAMAGETYPE = unicode(self.DamageType)
+	if self.Offhand.checkState == Qt.Checked:
+            item.OFFHAND = 'yes'
+        elif self.Offhand.visible() or len(item.OFFHAND) > 0:
+            item.OFFHAND = 'no' 
 
     def itemChanged(self,a0=None):
         if self.nocalc: return
