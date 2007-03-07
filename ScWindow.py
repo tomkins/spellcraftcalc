@@ -1202,11 +1202,9 @@ class ScWindow(QMainWindow, Ui_B_SC):
 
         self.ItemRealm.clear()
         self.ItemRealm.insertItems(0, realms)
-        if item.Realm in realms:
-            self.ItemType.setCurrentIndex(realms.index(item.Realm))
-        else:
+        if item.Realm not in realms:
             item.Realm = self.realm
-            self.ItemType.setCurrentIndex(realms.index(self.Realm))
+        self.ItemRealm.setCurrentIndex(realms.index(item.Realm))
 
         self.ItemSource.clear()
         self.ItemSource.insertItems(0, sources)
