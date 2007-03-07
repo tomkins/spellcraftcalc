@@ -6,9 +6,6 @@ Urgent things to fix before next beta release!!!
   Equipped and Location and rename them to their current Location,
   flag Equipped based on the old item's Equipped flag.
 
-  Change class to Mauler (and convert the three mauler names to the
-  general Mauler class on open template/item).
-
   Item pane must learn time, Remove time from gems.  Track the total
   time in the char info... when an item's time is changed, bump 
   it up or down, but preserve the user's time such as when they 
