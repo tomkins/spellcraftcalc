@@ -1,5 +1,12 @@
 Updated ??/??/2007 - Version 1.98
 
+  Added a second page of Item Info (the button switches between
+  the Item Info and Item Slots views).  These include the Bonus,
+  AF/DPS and Speed plus additional item Realm, Type and other 
+  database item fields inspired by Ethinarg, a grid of the race
+  restrictions, and per item notes.  The template notes moved 
+  from the Options window to this display.
+
   Mythrian items will no longer affect the distance to bonus cap 
   (these cap-caps are now correctly raised).
 
