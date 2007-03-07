@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'ScWindow.ui'
 #
-# Created: Wed Mar 07 13:28:43 2007
+# Created: Wed Mar 07 16:47:25 2007
 #      by: PyQt4 UI code generator 4.1
 #
 # WARNING! All changes made in this file will be lost!
@@ -1644,7 +1644,7 @@ class Ui_B_SC(object):
         self.Gem_Label_10.setText(QtGui.QApplication.translate("B_SC", "Slot 1&0:", None, QtGui.QApplication.UnicodeUTF8))
         self.Gem_Label_11.setText(QtGui.QApplication.translate("B_SC", "Slot 11&- ", None, QtGui.QApplication.UnicodeUTF8))
         self.Gem_Label_12.setText(QtGui.QApplication.translate("B_SC", "Slot 12&=", None, QtGui.QApplication.UnicodeUTF8))
-        self.LabelItemCraftTime.setText(QtGui.QApplication.translate("B_SC", "Item SC &Time (min): ", None, QtGui.QApplication.UnicodeUTF8))
+        self.LabelItemCraftTime.setText(QtGui.QApplication.translate("B_SC", "Item SC Time (min): ", None, QtGui.QApplication.UnicodeUTF8))
         self.ItemImbueLabel.setText(QtGui.QApplication.translate("B_SC", "Imbue Points: ", None, QtGui.QApplication.UnicodeUTF8))
         self.ItemImbue.setText(QtGui.QApplication.translate("B_SC", "0.0", None, QtGui.QApplication.UnicodeUTF8))
         self.ItemImbueTotal.setText(QtGui.QApplication.translate("B_SC", " / 0.0", None, QtGui.QApplication.UnicodeUTF8))
