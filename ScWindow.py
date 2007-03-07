@@ -1369,7 +1369,8 @@ class ScWindow(QMainWindow, Ui_B_SC):
                             capcalc = HighCapBonusList['Skill']
                             amts['BaseCap'] = int(charlevel * capcalc[0]) \
                                             + capcalc[1]
-                        amts['Bonus'] = min(amts['TotalBonus'], amts['BaseCap'])
+                        amts['Bonus'] = min(amts['TotalBonus'], 
+                                            amts['BaseCap'])
                 elif gemtype == 'Focus':
                     effects = [effect,]
                     if effect[0:4] == 'All ':
@@ -1386,11 +1387,18 @@ class ScWindow(QMainWindow, Ui_B_SC):
                             amts['BaseCap'] = int(charlevel * capcalc[0]) \
                                             + capcalc[1]
                         amts['TotalBonus'] = amount
-                        amts['Bonus'] = min(amts['TotalBonus'], amts['BaseCap'])
+                        amts['Bonus'] = min(amts['TotalBonus'], 
+                                            amts['BaseCap'])
                 elif gemtype == 'Resist':
                     amts = tot['Resists'][effect]
                     amts['TotalBonus'] += amount
-                    amts['Bonus'] = min(amts['TotalBonus'], amts['BaseCap'])
+                    amts['Bonus'] = min(amts['TotalBonus'], 
+                                        amts['BaseCap'])
+                elif gemtype == 'Resist Cap' and key == 'Mythical':
+                    amts = tot['Resists'][effect]
+                    amts['BaseCap'] += amount
+                    amts['Bonus'] = min(amts['TotalBonus'], 
+                                        amts['BaseCap'])
                 elif gemtype == 'Stat':
                     effects = [effect,]
                     if effect == 'Acuity':
@@ -1412,6 +1420,8 @@ class ScWindow(QMainWindow, Ui_B_SC):
                     for effect in effects:
                         amts = tot['Stats'][effect]
                         amts['TotalCapBonus'] += amount
+                        if key == 'Mythical'
+                            amts['BaseCapToCapBonus'] += amount
                         amts['CapBonus'] = min(amts['TotalCapBonus'],
                                                amts['BaseCapToCapBonus'])
                         amts['Bonus'] = min(amts['TotalBonus'],
@@ -1425,7 +1435,10 @@ class ScWindow(QMainWindow, Ui_B_SC):
                     elif tot['OtherBonuses'].has_key(effect):
                         amts = tot['OtherBonuses'][effect]
                         amts['TotalBonus'] += amount
-                        amts['Bonus'] = min(amts['TotalBonus'], amts['BaseCap'])
+                        if key == 'Mythical'
+                            amts['BaseCap'] += amount
+                        amts['Bonus'] = min(amts['TotalBonus'], 
+                                            amts['BaseCap'])
                     else:
                         tot['OtherBonuses'][effect] = {}
                         amts = tot['OtherBonuses'][effect]
@@ -1436,6 +1449,8 @@ class ScWindow(QMainWindow, Ui_B_SC):
                         amts['BaseCap'] = int(charlevel * capcalc[0]) \
                                         + capcalc[1]
                         amts['TotalBonus'] = amount
+                        if key == 'Mythical'
+                            amts['BaseCap'] += amount
                         amts['Bonus'] = min(amts['TotalBonus'], amts['BaseCap'])
                 elif gemtype == 'PvE Bonus':
                     if tot['PvEBonuses'].has_key(effect):
