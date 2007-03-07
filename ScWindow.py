@@ -1689,7 +1689,7 @@ class ScWindow(QMainWindow, Ui_B_SC):
         item.Material = unicode(self.Material.currentText())
         item.SOURCE = unicode(self.ItemSource.currentText())
         item.Bonus = unicode(self.BonusEdit.text())
-        item.Notes = self.ItemNoteText.toPlainText()
+        item.Notes = unicode(self.ItemNoteText.toPlainText())
         item.Requirement = unicode(self.ItemRequirement.text())
         item.AFDPS = unicode(self.AFDPSEdit.text())
         item.Speed = unicode(self.SpeedEdit.text())
