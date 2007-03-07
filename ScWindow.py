@@ -1153,7 +1153,7 @@ class ScWindow(QMainWindow, Ui_B_SC):
             else:
                 item.TYPE = itemtypes[0]
         elif item.TYPE not in itemtypes and len(item.TYPE) > 0:
-            itemtypes = itemtypes + (item.TYPE,)
+            itemtypes = itemtypes + [item.TYPE,]
         self.ItemType.clear()
         self.ItemType.insertItems(0, itemtypes)
         if len(item.TYPE) > 0:
