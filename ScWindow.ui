@@ -1260,7 +1260,7 @@
            <item>
             <widget class="QLabel" name="ItemNameLabel" >
              <property name="text" >
-              <string>&amp;Item: </string>
+              <string>Item &amp;Name: </string>
              </property>
              <property name="textFormat" >
               <enum>Qt::PlainText</enum>
@@ -2479,7 +2479,7 @@
                    </property>
                   </spacer>
                  </item>
-                 <item rowspan="6" row="6" column="0" colspan="3" >
+                 <item row="6" column="0" colspan="3" >
                   <spacer>
                    <property name="orientation" >
                     <enum>Qt::Vertical</enum>
@@ -2511,6 +2511,38 @@
                    </property>
                   </spacer>
                  </item>
+                 <item row="7" column="0" >
+                  <spacer>
+                   <property name="orientation" >
+                    <enum>Qt::Vertical</enum>
+                   </property>
+                   <property name="sizeType" >
+                    <enum>QSizePolicy::Minimum</enum>
+                   </property>
+                   <property name="sizeHint" >
+                    <size>
+                     <width>5</width>
+                     <height>5</height>
+                    </size>
+                   </property>
+                  </spacer>
+                 </item>
+                 <item row="7" column="1" >
+                  <widget class="QLabel" name="LabelItemCraftTime" >
+                   <property name="text" >
+                    <string>Item SC Time (min): </string>
+                   </property>
+                   <property name="textFormat" >
+                    <enum>Qt::PlainText</enum>
+                   </property>
+                  </widget>
+                  <property name="buddy" >
+                   <cstring>ItemCraftTime</cstring>
+                  </property>
+                 </item>
+                 <item row="7" column="2" >
+                  <widget class="QLineEdit" name="ItemCraftTime" />
+                 </item>
                  <item row="7" column="3" colspan="2" >
                   <widget class="QLabel" name="ItemImbueLabel" >
                    <property name="text" >
@@ -2540,6 +2572,22 @@
                     <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
                    </property>
                   </widget>
+                 </item>
+                 <item rowspan="4" row="8" column="0" colspan="3" >
+                  <spacer>
+                   <property name="orientation" >
+                    <enum>Qt::Vertical</enum>
+                   </property>
+                   <property name="sizeType" >
+                    <enum>QSizePolicy::Minimum</enum>
+                   </property>
+                   <property name="sizeHint" >
+                    <size>
+                     <width>5</width>
+                     <height>5</height>
+                    </size>
+                   </property>
+                  </spacer>
                  </item>
                  <item row="8" column="3" colspan="2" >
                   <widget class="QLabel" name="ItemOverchargeLabel" >
@@ -2756,6 +2804,7 @@
   <tabstop>Amount_Edit_12</tabstop>
   <tabstop>Effect_12</tabstop>
   <tabstop>Requirement_12</tabstop>
+  <tabstop>ItemCraftTime</tabstop>
   <tabstop>SkillsList</tabstop>
  </tabstops>
  <resources/>
