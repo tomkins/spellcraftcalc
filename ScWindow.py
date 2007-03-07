@@ -126,14 +126,14 @@ class ScWindow(QMainWindow, Ui_B_SC):
             self.QualEdit, self.LabelRequirement,
         ]
         self.switchOnType['player'] = [
-            self.QualDrop,
+            self.QualDrop, self.LabelRequirement2,
+            self.LabelItemCraftTime, self.ItemCraftTime, 
             self.LabelGemMakes, self.LabelGemPoints,
             self.LabelGemCost, self.LabelGemName,
             self.ItemImbueLabel, self.ItemImbue, self.ItemImbueTotal,
             self.ItemOverchargeLabel, self.ItemOvercharge,
             self.ItemCostLabel, self.ItemCost,
             self.ItemPriceLabel, self.ItemPrice,
-            self.LabelRequirement2,
         ]
 
         if str(QApplication.style().objectName()[0:9]).lower() == "macintosh":
@@ -241,6 +241,7 @@ class ScWindow(QMainWindow, Ui_B_SC):
         self.QualEdit.setFixedSize(QSize(amtcbwidth, edheight))
         self.ItemNameCombo.setFixedHeight(cbheight)
         self.ItemNameCombo.setCompleter(None)
+        self.ItemCraftTime.setFixedSize(QSize(amtcbwidth, edheight))
 
         self.ItemRealm.setFixedSize(QSize(cbwidth, cbheight))
         self.ItemType.setFixedSize(QSize(cbwidth, cbheight))
@@ -731,7 +732,7 @@ class ScWindow(QMainWindow, Ui_B_SC):
                 self.setTabOrder(self.AmountEdit[i],self.Effect[i])
                 self.setTabOrder(self.Effect[i],self.Requirement[i])
             prev = self.Requirement[i]
-        self.setTabOrder(prev,self.SkillsList)
+        self.setTabOrder(prev, self.ItemCraftTime)
 
     def showFixWidgets(self):
         for i in range(0,6):

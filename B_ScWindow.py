@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'ScWindow.ui'
 #
-# Created: Wed Mar 07 00:53:01 2007
+# Created: Wed Mar 07 13:28:43 2007
 #      by: PyQt4 UI code generator 4.1
 #
 # WARNING! All changes made in this file will be lost!
@@ -1329,10 +1329,22 @@ class Ui_B_SC(object):
         self.gridlayout7.addItem(spacerItem25,5,0,1,7)
 
         spacerItem26 = QtGui.QSpacerItem(5,5,QtGui.QSizePolicy.Minimum,QtGui.QSizePolicy.Minimum)
-        self.gridlayout7.addItem(spacerItem26,6,0,6,3)
+        self.gridlayout7.addItem(spacerItem26,6,0,1,3)
 
         spacerItem27 = QtGui.QSpacerItem(5,5,QtGui.QSizePolicy.Minimum,QtGui.QSizePolicy.Minimum)
         self.gridlayout7.addItem(spacerItem27,6,3,1,4)
+
+        spacerItem28 = QtGui.QSpacerItem(5,5,QtGui.QSizePolicy.Minimum,QtGui.QSizePolicy.Minimum)
+        self.gridlayout7.addItem(spacerItem28,7,0,1,1)
+
+        self.LabelItemCraftTime = QtGui.QLabel(self.ItemSlotsGrid)
+        self.LabelItemCraftTime.setTextFormat(QtCore.Qt.PlainText)
+        self.LabelItemCraftTime.setObjectName("LabelItemCraftTime")
+        self.gridlayout7.addWidget(self.LabelItemCraftTime,7,1,1,1)
+
+        self.ItemCraftTime = QtGui.QLineEdit(self.ItemSlotsGrid)
+        self.ItemCraftTime.setObjectName("ItemCraftTime")
+        self.gridlayout7.addWidget(self.ItemCraftTime,7,2,1,1)
 
         self.ItemImbueLabel = QtGui.QLabel(self.ItemSlotsGrid)
         self.ItemImbueLabel.setAlignment(QtCore.Qt.AlignRight|QtCore.Qt.AlignTrailing|QtCore.Qt.AlignVCenter)
@@ -1348,6 +1360,9 @@ class Ui_B_SC(object):
         self.ItemImbueTotal.setAlignment(QtCore.Qt.AlignLeading|QtCore.Qt.AlignLeft|QtCore.Qt.AlignVCenter)
         self.ItemImbueTotal.setObjectName("ItemImbueTotal")
         self.gridlayout7.addWidget(self.ItemImbueTotal,7,6,1,1)
+
+        spacerItem29 = QtGui.QSpacerItem(5,5,QtGui.QSizePolicy.Minimum,QtGui.QSizePolicy.Minimum)
+        self.gridlayout7.addItem(spacerItem29,8,0,4,3)
 
         self.ItemOverchargeLabel = QtGui.QLabel(self.ItemSlotsGrid)
         self.ItemOverchargeLabel.setAlignment(QtCore.Qt.AlignRight|QtCore.Qt.AlignTrailing|QtCore.Qt.AlignVCenter)
@@ -1379,8 +1394,8 @@ class Ui_B_SC(object):
         self.ItemPrice.setObjectName("ItemPrice")
         self.gridlayout7.addWidget(self.ItemPrice,10,5,1,2)
 
-        spacerItem28 = QtGui.QSpacerItem(5,5,QtGui.QSizePolicy.Minimum,QtGui.QSizePolicy.Minimum)
-        self.gridlayout7.addItem(spacerItem28,11,0,1,7)
+        spacerItem30 = QtGui.QSpacerItem(5,5,QtGui.QSizePolicy.Minimum,QtGui.QSizePolicy.Minimum)
+        self.gridlayout7.addItem(spacerItem30,11,0,1,7)
         self.vboxlayout6.addWidget(self.ScrollSlots)
         self.stackedlayout.addWidget(self.ItemSlotsFrame)
         self.vboxlayout1.addLayout(self.stackedlayout)
@@ -1480,7 +1495,8 @@ class Ui_B_SC(object):
         B_SC.setTabOrder(self.Type_12,self.Amount_Edit_12)
         B_SC.setTabOrder(self.Amount_Edit_12,self.Effect_12)
         B_SC.setTabOrder(self.Effect_12,self.Requirement_12)
-        B_SC.setTabOrder(self.Requirement_12,self.SkillsList)
+        B_SC.setTabOrder(self.Requirement_12,self.ItemCraftTime)
+        B_SC.setTabOrder(self.ItemCraftTime,self.SkillsList)
 
     def retranslateUi(self, B_SC):
         B_SC.setWindowTitle(QtGui.QApplication.translate("B_SC", "Spellcrafting Calculator", None, QtGui.QApplication.UnicodeUTF8))
@@ -1571,7 +1587,7 @@ class Ui_B_SC(object):
         self.ItemLevelLabel.setText(QtGui.QApplication.translate("B_SC", "&Level: ", None, QtGui.QApplication.UnicodeUTF8))
         self.ItemLevelButton.setText(QtGui.QApplication.translate("B_SC", "...", None, QtGui.QApplication.UnicodeUTF8))
         self.ItemQualityLabel.setText(QtGui.QApplication.translate("B_SC", "Quality: ", None, QtGui.QApplication.UnicodeUTF8))
-        self.ItemNameLabel.setText(QtGui.QApplication.translate("B_SC", "&Item: ", None, QtGui.QApplication.UnicodeUTF8))
+        self.ItemNameLabel.setText(QtGui.QApplication.translate("B_SC", "Item &Name: ", None, QtGui.QApplication.UnicodeUTF8))
         self.Equipped.setText(QtGui.QApplication.translate("B_SC", "Equi&pped", None, QtGui.QApplication.UnicodeUTF8))
         self.ToggleItemView.setText(QtGui.QApplication.translate("B_SC", "Item Slots", None, QtGui.QApplication.UnicodeUTF8))
         self.LabelItemInfo.setText(QtGui.QApplication.translate("B_SC", "Item Information:", None, QtGui.QApplication.UnicodeUTF8))
@@ -1628,6 +1644,7 @@ class Ui_B_SC(object):
         self.Gem_Label_10.setText(QtGui.QApplication.translate("B_SC", "Slot 1&0:", None, QtGui.QApplication.UnicodeUTF8))
         self.Gem_Label_11.setText(QtGui.QApplication.translate("B_SC", "Slot 11&- ", None, QtGui.QApplication.UnicodeUTF8))
         self.Gem_Label_12.setText(QtGui.QApplication.translate("B_SC", "Slot 12&=", None, QtGui.QApplication.UnicodeUTF8))
+        self.LabelItemCraftTime.setText(QtGui.QApplication.translate("B_SC", "Item SC &Time (min): ", None, QtGui.QApplication.UnicodeUTF8))
         self.ItemImbueLabel.setText(QtGui.QApplication.translate("B_SC", "Imbue Points: ", None, QtGui.QApplication.UnicodeUTF8))
         self.ItemImbue.setText(QtGui.QApplication.translate("B_SC", "0.0", None, QtGui.QApplication.UnicodeUTF8))
         self.ItemImbueTotal.setText(QtGui.QApplication.translate("B_SC", " / 0.0", None, QtGui.QApplication.UnicodeUTF8))
