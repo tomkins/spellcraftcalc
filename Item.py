@@ -473,7 +473,10 @@ class Item:
 
         return True
     
-    def asXML(self, pricingInfo=None, crafterSkill=1000, rich=False, writeIndex=False):
+    def asXML(self, pricingInfo=None, crafterSkill=1000, 
+                    realm=None, rich=False, writeIndex=False):
+        if realm is None:
+            realm = self.Realm
         document = Document()
         rootnode = document.createElement(u'SCItem')
         document.appendChild(rootnode)
@@ -534,7 +537,7 @@ class Item:
             slotnode.setAttribute(u'Number', unicode(num))
             if rich or self.itemslots[num].slotType() != self.ActiveState:
                 slotnode.setAttribute(u'Type', unicode(self.itemslots[num].slotType()))
-            self.itemslots[num].asXML(slotnode,self.Realm,rich)
+            self.itemslots[num].asXML(slotnode,realm,rich)
             if rich and num < len(imbuevals) and imbuevals[num] > 0:
                 imbuenode = slotnode.getElementsByTagName('Imbue')[0]
                 elem = document.createTextNode(u"%.1f" % imbuevals[num])

@@ -1029,7 +1029,8 @@ class ScWindow(QMainWindow, Ui_B_SC):
             item = self.itemattrlist[key]
             # use firstChild here because item.asXML() constructs a Document()
             while item is not None:
-                childnode = item.asXML(self.pricingInfo, self.crafterSkill,rich,True)
+                childnode = item.asXML(self.pricingInfo, self.crafterSkill, 
+                                       self.realm, rich, True)
                 if childnode is not None:
                     rootnode.appendChild(childnode.firstChild)
                 item = item.next
