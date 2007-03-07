@@ -630,6 +630,7 @@ class ScWindow(QMainWindow, Ui_B_SC):
         self.editmenu.addMenu(self.moveitemmenu)
         self.editmenu.addAction('Delete Item', self.deleteCurrentItem)
         self.editmenu.addAction('Clear Item', self.clearCurrentItem)
+        self.editmenu.addAction('Clear Slots', self.clearCurrentItemSlots)
 
         self.editmenu.addSeparator()
 
@@ -1946,18 +1947,23 @@ class ScWindow(QMainWindow, Ui_B_SC):
     
         QApplication.postEvent(self, UpdateTypeListEvent(slot))
         
+    def clearCurrentItemSlots(self):
+        self.itemattrlist[self.currentTabLabel].clearSlots()
+        if self.nocalc: return
+        self.modified = True
+        self.restoreItem(self.itemattrlist[self.currentTabLabel])
+
     def clearCurrentItem(self):
-        self.itemattrlist[self.currentTabLabel].clear()
-        #item = Item(realm=self.realm,loc=self.currentTabLabel,
-        #            state=self.itemattrlist[self.currentTabLabel].ActiveState,
-        #            idx=self.itemIndex)
-        #if item.ActiveState == 'drop':
-        #    item.ItemName = "Drop Item" + str(self.itemnumbering)
-        #else:
-        #    item.ItemName = "Crafted Item" + str(self.itemnumbering)
-        #self.itemattrlist[self.currentTabLabel] = item
-        #self.itemIndex += 1
-        #self.itemnumbering += 1
+        item = self.itemattrlist[self.currentTabLabel]
+        item = Item(realm=self.realm,loc=self.currentTabLabel,
+                    state=item.ActiveState,
+                    idx=item.TemplateIndex)
+        if item.ActiveState == 'drop':
+            item.ItemName = "Drop Item" + str(self.itemnumbering)
+        else:
+            item.ItemName = "Crafted Item" + str(self.itemnumbering)
+        self.itemattrlist[self.currentTabLabel] = item
+        self.itemnumbering += 1
         if self.nocalc: return
         self.modified = True
         self.restoreItem(self.itemattrlist[self.currentTabLabel])

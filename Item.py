@@ -327,7 +327,7 @@ class Item:
 
         self.itemslots = self.makeSlots()
 
-    def clear(self):
+    def clearSlots(self):
         self.itemslots = self.makeSlots()
 
     def makeSlots(self, type=''):
