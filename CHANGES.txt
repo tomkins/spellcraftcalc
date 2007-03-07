@@ -1,5 +1,11 @@
 Updated ??/??/2007 - Version 1.98
 
+  Mythrian items will no longer affect the distance to bonus cap 
+  (these cap-caps are now correctly raised).
+
+  Fixed Configuration Report/Save Template to name all gems by the
+  realm of the Character, not the realm of the item.
+
   Added Enhanced Shield and Harp to the new item, item type menus.
 
   Fixed Swap Gems (again).  For good this time, we hope.
