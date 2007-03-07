@@ -244,7 +244,6 @@ class ScWindow(QMainWindow, Ui_B_SC):
 
         self.ItemRealm.setFixedSize(QSize(cbwidth, cbheight))
         self.ItemType.setFixedSize(QSize(cbwidth, cbheight))
-        self.Material.setFixedSize(QSize(cbwidth, cbheight))
         self.ItemSource.setFixedSize(QSize(cbwidth, cbheight))
         self.BonusEdit.setFixedSize(QSize(amtedwidth, edheight))
         self.AFDPSEdit.setFixedSize(QSize(amtedwidth, edheight))
@@ -466,11 +465,9 @@ class ScWindow(QMainWindow, Ui_B_SC):
         self.connect(self.Equipped,SIGNAL("stateChanged(int)"),
                      self.itemChanged)
         self.connect(self.ItemRealm,SIGNAL("activated(int)"),
-                     self.itemInfoChanged)
+                     self.itemRealmChanged)
         self.connect(self.ItemType,SIGNAL("activated(int)"),
-                     self.itemInfoChanged)
-        self.connect(self.Material,SIGNAL("activated(int)"),
-                     self.itemInfoChanged)
+                     self.itemTypeChanged)
         self.connect(self.ItemSource,SIGNAL("activated(int)"),
                      self.itemInfoChanged)
         self.connect(self.AFDPSEdit,SIGNAL("textChanged(const QString&)"),
@@ -1095,6 +1092,74 @@ class ScWindow(QMainWindow, Ui_B_SC):
             if itemlevel < 1: itemlevel = 1
             self.ItemLevel.setText('%d' % itemlevel)
 
+    def itemTypeChanged(self, a0=None, item=None):
+        if item is None: 
+            if self.nocalc:
+                return
+            item = self.itemattrlist[self.currentTabLabel]
+            item.TYPE = unicode(self.ItemType.currentText())
+            self.modified = True
+
+        isarmor = (item.TYPE in ItemTypes['Chest'][item.Realm])
+        isweapon = ((item.TYPE in ItemTypes['Left Hand'][item.Realm])
+                 or (item.TYPE in ItemTypes['2 Handed'][item.Realm])
+                 or (item.TYPE in ItemTypes['Ranged'][item.Realm]))
+        if item.ActiveState == 'drop':
+            damagetypes = list(DropLists['All']['Resist'])
+        else:
+            damagetypes = ['Slash', 'Crush', 'Thrust']
+        if isweapon:
+            self.LabelAFDPSEdit.setText('DPS: ')
+        else:
+            damagetypes = ['']
+            if isarmor:
+                self.LabelAFDPSEdit.setText('AF: ')
+
+        if item.DAMAGETYPE not in damagetypes:
+            damagetypes.append(item.DAMAGETYPE)
+        self.DamageType.clear()
+        self.DamageType.setCurrentIndex(damagetypes.index(item.DAMAGETYPE))
+        self.AFDPSEdit.setText(item.AFDPS)
+        self.BonusEdit.setText(item.Bonus)
+        self.SpeedEdit.setText(item.Speed)
+        if item.OFFHAND == 'yes':
+            self.Offhand.setCheckState(Qt.Checked)
+        else:
+            self.Offhand.setCheckState(Qt.Unchecked)
+
+        self.LabelSpeedEdit.setVisible(isweapon)
+        self.SpeedEdit.setVisible(isweapon)
+        self.LabelAFDPSEdit.setVisible(isweapon or isarmor)
+        self.AFDPSEdit.setVisible(isweapon or isarmor)
+        self.Offhand.setVisible(isweapon)
+        self.LabelDamageType.setVisible(isweapon)
+        self.DamageType.setVisible(isweapon)
+
+    def itemRealmChanged(self, a0=None, item=None):
+        if item is None: 
+            if self.nocalc:
+                return
+            item = self.itemattrlist[self.currentTabLabel]
+            item.Realm = unicode(self.ItemRealm.currentText())
+            self.modified = True
+        itemtypes = ItemTypes[self.currentTabLabel]
+        if isinstance(itemtypes, dict):
+            itemtypes = itemtypes[item.Realm]
+        if a0 is not None:
+            if self.ItemType.currentIndex() < len(itemtypes):
+                item.TYPE = itemtypes[self.ItemType.currentIndex()]
+            else:
+                item.TYPE = itemtypes[0]
+        elif item.TYPE not in itemtypes and len(item.TYPE) > 0:
+            itemtypes = itemtypes + (item.TYPE,)
+        self.ItemType.clear()
+        self.ItemType.insertItems(0, itemtypes)
+        if len(item.TYPE) > 0:
+            self.ItemType.setCurrentIndex(itemtypes.index(item.TYPE))
+        else:
+            item.TYPE = itemtypes[0]
+        self.itemTypeChanged(item=item)
+
     def restoreItem(self, item):
         if item is None: return
         wasnocalc = self.nocalc
@@ -1126,63 +1191,35 @@ class ScWindow(QMainWindow, Ui_B_SC):
 
         self.Equipped.setChecked(int(item.Equipped))
 
-        location = item.Location
-        isarmor = (location in ArmorTabList)
-        isweapon = (location in WeaponTabList)
+        if itemtype == 'drop':
+            realms = AllRealms
+            sources = ['Drop', 'Quest', 'Artifact', 'Merchant', 'Unique',]
+        else:
+            realms = Realms
+            sources = ['Crafted']
 
         self.ItemRealm.clear()
+        self.ItemRealm.insertItems(0, realms)
+        if item.Realm in realms:
+            self.ItemType.setCurrentIndex(realms.index(item.Realm))
+        else:
+            item.Realm = self.realm
+            self.ItemType.setCurrentIndex(realms.index(self.Realm))
+
         self.ItemSource.clear()
-        if itemtype == 'drop':
-            self.ItemRealm.insertItems(0, AllRealms)
-            self.ItemSource.insertItems(0, ['Drop', 'Quest', 'Artifact', 
-                                            'Merchant'])
-            damagetypes = list(DropLists['All']['Resist'])
+        self.ItemSource.insertItems(0, sources)
+        sourceindex = self.ItemSource.findText(item.SOURCE, Qt.MatchExactly)
+        if sourceindex >= 0:
+            self.ItemSource.setCurrentIndex(sourceindex)
         else:
-            self.ItemRealm.insertItems(0, list(Realms))
-            self.ItemSource.insertItems(0, ['Crafted'])
-            damagetypes = ['Slash', 'Crush', 'Thrust']
+            item.SOURCE = unicode(self.ItemSource.currentText())
 
-        if isarmor:
-            self.LabelAFDPSEdit.setText('AF: ')
-        if isweapon:
-            self.LabelAFDPSEdit.setText('DPS: ')
-        else:
-            damagetypes = ['']
+        self.itemRealmChanged(item=item)
 
-        if item.DAMAGETYPE not in damagetypes:
-            damagetypes.append(item.DAMAGETYPE)
-        self.DamageType.clear()
-        self.DamageType.setCurrentIndex(damagetypes.index(item.DAMAGETYPE))
-        self.ItemType.clear()
-        itemtypes = ['', item.TYPE]
-        if item.TYPE not in itemtypes:
-            itemtypes.append(item.TYPE)
-        self.ItemType.insertItems(0, itemtypes)
-        self.ItemType.setCurrentIndex(itemtypes.index(item.TYPE))
-        materialtypes = ['']
-        self.Material.clear()
-        self.Material.insertItems(0, materialtypes)
-        if item.Material in materialtypes:
-            self.Material.setCurrentIndex(materialtypes.index(item.Material))
-        self.AFDPSEdit.setText(item.AFDPS)
-        self.BonusEdit.setText(item.Bonus)
-        self.SpeedEdit.setText(item.Speed)
-        if item.OFFHAND == 'yes':
-            self.Offhand.setCheckState(Qt.Checked)
-        else:
-            self.Offhand.setCheckState(Qt.Unchecked)
         self.ItemRequirement.setText(item.Requirement)
         self.DBSource.setText(item.DBSOURCE)
         self.ItemNoteText.setPlainText(item.Notes)
         self.displayClassRestrictions(item)
-
-        self.LabelSpeedEdit.setVisible(isweapon)
-        self.SpeedEdit.setVisible(isweapon)
-        self.LabelAFDPSEdit.setVisible(isweapon or isarmor)
-        self.AFDPSEdit.setVisible(isweapon or isarmor)
-        self.Offhand.setVisible(isweapon)
-        self.LabelDamageType.setVisible(isweapon)
-        self.DamageType.setVisible(isweapon)
 
         for slot in range(0, item.slotCount()):
             typecombo = self.Type[slot]
@@ -1198,7 +1235,7 @@ class ScWindow(QMainWindow, Ui_B_SC):
             if self.hideNonClassSkills:
                 if len(AllBonusList[self.realm][self.charclass]\
                         ['Focus Hash'].keys()) == 0 and \
-                        location not in FocusTabList:
+                        item.Location not in FocusTabList:
                     typelist.remove('Focus')
             if not gemtype in typelist:
                 typelist.append(gemtype)
@@ -1685,12 +1722,8 @@ class ScWindow(QMainWindow, Ui_B_SC):
         if self.nocalc: return
         self.modified = True
         item = self.itemattrlist[self.currentTabLabel]
-        item.Realm = unicode(self.ItemRealm.currentText())
-        item.TYPE = unicode(self.ItemType.currentText())
-        item.Material = unicode(self.Material.currentText())
         item.SOURCE = unicode(self.ItemSource.currentText())
         item.Bonus = unicode(self.BonusEdit.text())
-        item.Notes = unicode(self.ItemNoteText.toPlainText())
         item.Requirement = unicode(self.ItemRequirement.text())
         item.AFDPS = unicode(self.AFDPSEdit.text())
         item.Speed = unicode(self.SpeedEdit.text())
@@ -1699,6 +1732,11 @@ class ScWindow(QMainWindow, Ui_B_SC):
             item.OFFHAND = 'yes'
         elif self.Offhand.isVisible() or len(item.OFFHAND) > 0:
             item.OFFHAND = 'no' 
+
+    def itemNotesChanged(self,a0=None):
+        if self.nocalc: return
+        self.modified = True
+        item.Notes = unicode(self.ItemNoteText.toPlainText())
 
     def itemChanged(self,a0=None):
         if self.nocalc: return
@@ -2325,10 +2363,6 @@ class ScWindow(QMainWindow, Ui_B_SC):
         self.modified = True
 
     def gemClicked(self, item, slot):
-        #RW = ReportWindow.ReportWindow(self, '', True)
-        #RW.setWindowTitle('Materials')
-        #RW.materialsReport({item: self.itemattrlist[item]}, slot)
-        #RW.exec_()
         CW = CraftWindow.CraftWindow(self, '', 1)
         CW.loadgems([self.itemattrlist[self.currentTabLabel].slot(slot - 1)],)
         CW.exec_()

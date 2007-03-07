@@ -6,7 +6,7 @@
 
 __all__ = [
   'AllBonusList', 'ClassList', 'RaceList', 'Races', 'Realms', 'AllRealms',
-  'ServerCodes', 'EuroServerCodes', 'ServerIgnCodes', 
+  'ItemTypes', 'ServerCodes', 'EuroServerCodes', 'ServerIgnCodes', 
 ]
 
 from tuple2 import * 
@@ -539,6 +539,107 @@ RaceList = d2(RaceList)
 
 Races['All'] = d2(Races['All'])
 Races = d2(Races)
+
+
+# The order of the 'All' groups below are important, as it should
+# make things simpler for users to jump between related/equivilant
+# item types between realms, please use care in reordering them
+# for crossrealm server players.
+
+armorTypes = d2({
+    'Albion':   t2(('Cloth', 'Leather', 'Studded', 'Chain', 'Plate',)),
+    'Hibernia': t2(('Cloth', 'Leather', 'Reinforced', 'Scale',)),
+    'Midgard':  t2(('Cloth', 'Leather', 'Studded', 'Chain',)),
+    'All':      t2(('Cloth', 'Leather', 'Studded', 'Reinforced', 
+                    'Chain', 'Scale', 'Plate',)),
+})
+
+righthandTypes = d2({
+    'Albion':   t2(('Slash', 'Crush', 'Thrust', 'Flex', 'Fist Wraps',)),
+    'Hibernia': t2(('Blade', 'Blunt', 'Piercing', 'Fist Wraps',)),
+    'Midgard':  t2(('Axe', 'Hammer', 'Sword', 'Hand to Hand', 'Fist Wraps',)),
+    'All':      t2(('Slash', 'Blade', 'Sword', 'Axe', 
+                    'Crush', 'Blunt', 'Hammer', 
+                    'Thrust', 'Piercing', 'Flex', 
+                    'Hand to Hand', 'Fist Wraps',)),
+})
+       
+shields = ('Small Shield', 'Medium Shield', 'Large Shield',)
+
+lefthandTypes = d2({
+    'Albion':   t2(righthandTypes['Albion']   + shields),
+    'Hibernia': t2(righthandTypes['Hibernia'] + shields),
+    'Midgard':  t2(righthandTypes['Midgard']  + shields),
+    'All':      t2(righthandTypes['All']      + shields),
+})
+
+staves = ('Mauler Staff', 'Staff', )
+
+instruments = ('Drum', 'Flute', 'Lute', 'Harp')
+
+twohandTypes = d2({
+    'Albion':   t2(righthandTypes['Albion']
+                    + ('Two-Handed', 'Polearm', 'Quarterstaff',) 
+                    + staves + instruments),
+    'Hibernia': t2(righthandTypes['Hibernia']
+                    + ('Large Weapon', 'Celtic Spear', 'Scythe',) 
+                    + staves + instruments),
+    'Midgard':  t2(righthandTypes['Midgard']
+                    + ('Spear',) + staves),
+    'All':      t2(righthandTypes['All']
+                    + ('Two-Handed', 'Large Weapon', 
+                       'Polearm', 'Celtic Spear', 
+                       'Axe', 'Hammer', 'Sword', 'Spear', 'Scythe', 
+                       'Quarterstaff', ) + staves + instruments),
+})
+
+rangedTypes = d2({
+    'Albion':   t2(('Bow', 'Crossbow', 'Longbow',) + instruments),
+    'Hibernia': t2(('Bow', 'Recurve Bow',) + instruments),
+    'Midgard':  t2(('Bow', 'Composite Bow',)),
+    'All':      t2(('Bow', 'Composite Bow', 'Crossbow', 'Longbow', 
+                    'Recurve Bow',) + instruments),
+})
+
+spares = ('Belt', 'Cloak', 'Jewelry', 'Necklass', 
+          'Ring', 'Wrist', 'Mythical',)
+
+spareTypes = d2({
+    'Albion':   t2(twohandTypes['Albion']   + rangedTypes['Albion'][:-4]
+                    + shields + spares),
+    'Hibernia': t2(twohandTypes['Hibernia'] + rangedTypes['Hibernia'][:-4]
+                    + shields + spares),
+    'Midgard':  t2(twohandTypes['Midgard']  + rangedTypes['Midgard']
+                    + shields + spares),
+    'All':      t2(twohandTypes['All']      + rangedTypes['All'][:-4]
+                    + shields + spares),
+})
+
+ItemTypes = d2({
+    'Neck':        t2(('Necklass',)),
+    'Cloak':       t2(('Cloak',)),
+    'Jewel':       t2(('Jewelry',)),
+    'Belt':        t2(('Belt')),
+    'Left Ring':   t2(('Ring',)),
+    'Right Ring':  t2(('Ring',)),
+    'Left Wrist':  t2(('Wrist',)),
+    'Right Wrist': t2(('Wrist',)),
+    'Mythical':    t2(('Mythical',)),
+
+    'Chest':       armorTypes,
+    'Arms':        armorTypes,
+    'Head':        armorTypes,
+    'Legs':        armorTypes,
+    'Hands':       armorTypes,
+    'Feet':        armorTypes,
+
+    'Right Hand':  righthandTypes,
+    'Left Hand':   lefthandTypes,
+    '2 Handed':    twohandTypes,
+    'Ranged':      rangedTypes,
+    'Spare':       spareTypes,
+})
+
 
 # It looks like 1.86 is moving twords one .ign file per cluster,
 # so .ign server numbers are shared across servers now.
