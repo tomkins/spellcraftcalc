@@ -2649,6 +2649,10 @@ class ScWindow(QMainWindow, Ui_B_SC):
             self.chooseItemType(action)
 
     def addItem(self, item):
+        if not item.Location in TabList:
+            print 'Could not resolve: ', item.Location
+            return
+
         self.modified = True
         item.TemplateIndex = self.itemIndex
         self.itemIndex += 1
@@ -2659,9 +2663,9 @@ class ScWindow(QMainWindow, Ui_B_SC):
         self.itemattrlist[item.Location] = item
         self.outfitlist[self.currentOutfit][item.Location] \
                   = ( item.TemplateIndex, item.Equipped, )
-
-        self.currentTabLabel = item.Location
-        self.restoreItem(item)
+        idx = self.PieceTab.index(item.Location)
+        if idx:
+            self.PieceTab.setCurrentIndex(idx)
 
     def viewToolbar(self, action):
         view = action.data().toInt()[0]
