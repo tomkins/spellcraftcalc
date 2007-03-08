@@ -1538,6 +1538,9 @@
                    <property name="textFormat" >
                     <enum>Qt::PlainText</enum>
                    </property>
+                   <property name="alignment" >
+                    <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignBottom</set>
+                   </property>
                   </widget>
                  </item>
                  <item row="7" column="0" colspan="4" >

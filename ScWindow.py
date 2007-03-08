@@ -197,16 +197,18 @@ class ScWindow(QMainWindow, Ui_B_SC):
             cbwidth = cbwidth - 14
             amtcbwidth = amtcbwidth - 14
             lbheight = self.LabelTotalCost.sizeHint().height() + 5
-            gridlayout.setRowMinimumHeight(7, lbheight)
-            for i in (4, 5, 8):
-                gridlayout.setRowMinimumHeight(i, cbheight)
-            gridlayout = self.GroupCharInfo.layout()
-            for i in (0, 4, 5, 6,):
-                gridlayout.setRowMinimumHeight(i, cbheight)
-            for ctl in self.StatLabel.itervalues():
-                ctl.setFixedHeight(lbheight)
+            self.LabelBonusEdit.setFixedHeight(cbheight)
+            self.LabelSpeedEdit.setFixedHeight(cbheight)
+            self.LabelItemRequirement.setFixedHeight(lbheight)
+            self.ItemRequirement.setFixedHeight(cbheight)
+            self.LabelDBSource.setFixedHeight(lbheight)
+            self.LabelCharName.setFixedHeight(cbheight)
+            self.LabelCharLevel.setFixedHeight(cbheight)
+            self.LabelCraftTime.setFixedHeight(cbheight)
             self.LabelTotalCost.setFixedHeight(lbheight)
             self.LabelTotalPrice.setFixedHeight(lbheight)
+            for ctl in self.StatLabel.itervalues():
+                ctl.setFixedHeight(lbheight)
             self.LabelTotalUtility.setFixedHeight(lbheight)
 
         self.GroupCharInfo.layout().setColumnStretch(2, 1)
@@ -389,6 +391,10 @@ class ScWindow(QMainWindow, Ui_B_SC):
 
             if i < 4:
                 self.Makes.append(getattr(self, 'Makes_%d' % idx))
+                if str(QApplication.style().objectName()[0:9]).lower() \
+                        == "macintosh":
+                    self.Makes[i].setFrame(False)
+                    self.Makes[i].lineEdit().setFrame(True)
                 self.Makes[i].setFixedSize(QSize(amtcbwidth, cbheight))
                 self.connect(self.Makes[i],SIGNAL("valueChanged(int)"),
                              self.amountsChanged)

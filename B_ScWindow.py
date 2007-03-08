@@ -2,8 +2,8 @@
 
 # Form implementation generated from reading ui file 'ScWindow.ui'
 #
-# Created: Wed Mar 07 16:47:25 2007
-#      by: PyQt4 UI code generator 4.1
+# Created: Thu Mar  8 15:33:22 2007
+#      by: PyQt4 UI code generator 4-snapshot-20061020
 #
 # WARNING! All changes made in this file will be lost!
 
@@ -768,6 +768,7 @@ class Ui_B_SC(object):
 
         self.LabelItemRequirement = QtGui.QLabel(self.ItemInfoFrame)
         self.LabelItemRequirement.setTextFormat(QtCore.Qt.PlainText)
+        self.LabelItemRequirement.setAlignment(QtCore.Qt.AlignLeading|QtCore.Qt.AlignLeft|QtCore.Qt.AlignBottom)
         self.LabelItemRequirement.setObjectName("LabelItemRequirement")
         self.gridlayout5.addWidget(self.LabelItemRequirement,6,0,1,4)
 
