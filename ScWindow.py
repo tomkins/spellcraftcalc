@@ -228,9 +228,12 @@ class ScWindow(QMainWindow, Ui_B_SC):
         self.QualDrop.insertItems(0, list(QualityValues))
 
         self.CharLevel.setValidator(QIntValidator(0, 99, self))
+        self.ChampionLevel.setValidator(QIntValidator(0, 10, self))
+        self.CraftTime.setValidator(QIntValidator(0, 999, self))
         self.ItemLevel.setValidator(QIntValidator(0, 99, self))
         self.QualEdit.setValidator(QIntValidator(0, 100, self))
         self.BonusEdit.setValidator(QIntValidator(0, 99, self))
+        self.ItemCraftTime.setValidator(QIntValidator(0, 99, self))
 
         self.GroupItemFrame.layout().itemAt(0).changeSize(1, 
                                     self.PieceTab.baseOverlap(),
@@ -519,6 +522,8 @@ class ScWindow(QMainWindow, Ui_B_SC):
                      self.templateChanged)
         self.connect(self.ChampionLevel,SIGNAL("textChanged(const QString&)"),
                      self.templateChanged)
+        self.connect(self.CraftTime,SIGNAL("textChanged(const QString&)"),
+                     self.totalsChanged)
         self.connect(self.OutfitName,SIGNAL("activated(int)"), 
                      self.outfitNameSelected)
         self.connect(self.OutfitName,SIGNAL("editTextChanged(const QString&)"),
@@ -542,6 +547,8 @@ class ScWindow(QMainWindow, Ui_B_SC):
                      SIGNAL("editTextChanged(const QString&)"),
                      self.itemNameEdited)
         self.connect(self.Equipped,SIGNAL("stateChanged(int)"),
+                     self.itemChanged)
+        self.connect(self.ItemCraftTime,SIGNAL("textChanged(const QString&)"),
                      self.itemChanged)
         self.connect(self.ItemRealm,SIGNAL("activated(int)"),
                      self.itemRealmChanged)
@@ -1016,6 +1023,9 @@ class ScWindow(QMainWindow, Ui_B_SC):
         self.Realm.setCurrentIndex(Realms.index(self.realm))
         self.realmChanged(Realms.index(self.realm))
         self.CharLevel.setText('50')
+        self.RealmRank.setText('1L1')
+        self.ChampionLevel.setText('0')
+        self.CraftTime.setText('0')
         self.appendOutfit()
         self.restoreItem(self.itemattrlist[self.currentTabLabel])
         self.modified = False
@@ -1052,6 +1062,11 @@ class ScWindow(QMainWindow, Ui_B_SC):
         childnode = document.createElement('ChampionLevel')
         childnode.appendChild(document.createTextNode(
                                        unicode(self.ChampionLevel.text())))
+        rootnode.appendChild(childnode)
+        rootnode.appendChild(childnode)
+        childnode = document.createElement('CraftTime')
+        childnode.appendChild(document.createTextNode(
+                                       unicode(self.CraftTime.text())))
         rootnode.appendChild(childnode)
         childnode = document.createElement('Notes')
         childnode.appendChild(document.createTextNode(
@@ -1280,6 +1295,7 @@ class ScWindow(QMainWindow, Ui_B_SC):
         self.ItemNameCombo.blockSignals(False)
 
         self.Equipped.setChecked(int(item.Equipped))
+        self.ItemCraftTime.setText(item.Time)
 
         if itemtype == 'drop':
             realms = AllRealms
@@ -1552,6 +1568,10 @@ class ScWindow(QMainWindow, Ui_B_SC):
                         amts['TotalBonus'] = amount
                     amts['Bonus'] = min(amts['TotalBonus'], amts['BaseCap'])
         tot['Price'] += self.pricingInfo.get('PPOrder', 0) * 10000
+        if self.pricingInfo.get('HourInclude', 0) \
+                   and self.CraftTime.text() > '':
+            tot['Price'] += int(self.pricingInfo.get('Hour', 0) * 10000 \
+                           * int(self.CraftTime.text()) / 60.0)
         return tot
 
     def showStat(self, stat, show):
@@ -1852,6 +1872,8 @@ class ScWindow(QMainWindow, Ui_B_SC):
                 = ( item.TemplateIndex, item.Equipped, )
         if item.ActiveState == 'player':
             item.ItemQuality = unicode(self.QualDrop.currentText())
+            item.Time = unicode(self.ItemCraftTime.text())
+            if item.Time == '': item.Time = u'0'
         else:
             item.ItemQuality = unicode(self.QualEdit.text())
         self.calculate()
@@ -2349,6 +2371,8 @@ class ScWindow(QMainWindow, Ui_B_SC):
                 self.RealmRank.setText(XMLHelper.getText(child.childNodes))
             elif child.tagName == 'ChampionLevel':
                 self.ChampionLevel.setText(XMLHelper.getText(child.childNodes))
+            elif child.tagName == 'CraftTime':
+                self.CraftTime.setText(XMLHelper.getText(child.childNodes))
             elif child.tagName == 'Notes':
                 self.NoteText.setPlainText(XMLHelper.getText(child.childNodes))
             elif child.tagName == 'SCItem':
