@@ -1264,6 +1264,7 @@ class ScWindow(QMainWindow, Ui_B_SC):
         else:
             item.TYPE = itemtypes[0]
         self.itemTypeChanged(item=item)
+        self.displayClassRestrictions(item)
 
     def restoreItem(self, item):
         if item is None: return
@@ -1323,7 +1324,6 @@ class ScWindow(QMainWindow, Ui_B_SC):
         self.ItemRequirement.setText(item.Requirement)
         self.DBSource.setText(item.DBSOURCE)
         self.ItemNoteText.setPlainText(item.Notes)
-        self.displayClassRestrictions(item)
 
         for slot in range(0, item.slotCount()):
             typecombo = self.Type[slot]
