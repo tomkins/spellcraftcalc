@@ -1364,7 +1364,7 @@
             <number>0</number>
            </property>
            <item>
-           <widget class="QWidget" name="ItemInfoFrame" >
+           <widget class="QWidget" name="ItemSummaryFrame" >
             <layout class="QHBoxLayout" >
              <property name="margin" >
               <number>0</number>
@@ -1373,6 +1373,7 @@
               <number>9</number>
              </property>
              <item>
+              <widget class="QWidget" name="ItemInfoFrame" >
               <layout class="QVBoxLayout" >
                <property name="margin" >
                 <number>0</number>
@@ -1585,6 +1586,7 @@
                 </layout>
                </item>
               </layout>
+              </widget>
              </item>
              <item>
               <layout class="QVBoxLayout" >
@@ -1685,6 +1687,14 @@
            </item>
            <item>
            <widget class="QWidget" name="ItemSlotsFrame" >
+            <layout class="QHBoxLayout" >
+             <property name="margin" >
+              <number>0</number>
+             </property>
+             <property name="spacing" >
+              <number>9</number>
+             </property>
+             <item>
             <layout class="QVBoxLayout" >
              <property name="margin" >
               <number>0</number>
@@ -2671,6 +2681,8 @@
                 </layout>
                </widget>
               </widget>
+             </item>
+            </layout>
              </item>
             </layout>
            </widget>
