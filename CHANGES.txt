@@ -47,6 +47,9 @@ Updated ??/??/2007 - Version 1.98
   when they saved it.  We still collapse the empty drop or crafted
   item when an item, alone, is loaded.
 
+  Added ability to search Ethinarg's database from within the 
+  application and add found items directly to the current template.
+
 Updated 01/30/2007 - Version 1.97
 
   Export Gems fixes: don't die looking for made gems, set the crafted
