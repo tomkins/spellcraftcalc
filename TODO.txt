@@ -8,6 +8,9 @@ Urgent things to fix before next beta release!!!
   Equipped and Location and rename them to their current Location,
   flag Equipped based on the old item's Equipped flag.
 
+  Default to %USERPROFILE%/My Documents/Spellcrafting/Templates
+  for saving Templates and .../Reports for saving exported reports 
+  on Windows?  Keep Items/ by default under the program dir?
 
 Things to fix before next beta release is announced;
 
