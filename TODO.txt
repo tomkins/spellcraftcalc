@@ -1,16 +1,12 @@
 Urgent things to fix before next beta release!!!
 
-  Properly accumulate Mythical item bonuses (not capped!)
+  Add new Mythical item bonuses to the list, and make the Mythrian's
+  item list specific to that item type.  (NOT including stat+statcap
+  because they can add two slots for the statcap and the stat!)
 
   On Load or Search/Add Item to Template - be certain to ignore
   Equipped and Location and rename them to their current Location,
   flag Equipped based on the old item's Equipped flag.
-
-  Item pane must learn time, Remove time from gems.  Track the total
-  time in the char info... when an item's time is changed, bump 
-  it up or down, but preserve the user's time such as when they 
-  spend 20 min helping the customer figure out the template before 
-  crafting.
 
 
 Things to fix before next beta release is announced;

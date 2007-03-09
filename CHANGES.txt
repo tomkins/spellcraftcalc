@@ -7,15 +7,26 @@ Updated ??/??/2007 - Version 1.98
   restrictions, and per item notes.  The template notes moved 
   from the Options window to this display.
 
+  Craft Times now work - either for the entire template (look
+  beneath the Character Level) plus by-item (below
+
   Mythrian items will no longer affect the distance to bonus cap 
   (these cap-caps are now correctly raised).
 
   Fixed Configuration Report/Save Template to name all gems by the
-  realm of the Character, not the realm of the item.
+  realm of the Character, not by the realm of the item.
 
   Added Enhanced Shield and Harp to the new item, item type menus.
 
+  Split Clear Item from Clear Slots (we actually argued about what
+  the feature was supposed to do, until we decided we aught to give
+  users both features).
+
   Fixed Swap Gems (again).  For good this time, we hope.
+
+  Squished the slots with a scrollbar when needed for good old 
+  800x600 displays (we haven't heard of anyone still using 640x480
+  and won't support them.)
 
   By popular request (and possibly to test Requirements at some point
   in a future patch) added Champion Level and Realm Rank to templates.
