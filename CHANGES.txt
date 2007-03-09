@@ -1,5 +1,11 @@
 Updated ??/??/2007 - Version 1.98
 
+  You will find your Spellcraft.xml preferences file saved in
+  \Documents and Settings\(you)\Application Data\KSCraft\
+  on Windows or in ~/.kscraft/Spellcraft.xml on unix or mac.
+  Your existing file will be renamed oldSpellcraft.xml in the
+  program's directory.
+
   Added a second page of Item Info (the button switches between
   the Item Info and Item Slots views).  These include the Bonus,
   AF/DPS and Speed plus additional item Realm, Type and other 

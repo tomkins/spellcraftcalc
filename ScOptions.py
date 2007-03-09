@@ -20,7 +20,7 @@ class ScOptions(Singleton):
 
     def getAppDirectory():
         if sys.platform == 'win32':
-            extradirs = os.path.join('kscraft', 'spellcraft')
+            extradirs = 'KSCraft'
             path = os.environ.get('APPDATA', '')
             if not os.path.isdir(path):
                 path = os.path.dirname(os.path.abspath(sys.argv[0]))
