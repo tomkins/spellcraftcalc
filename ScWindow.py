@@ -236,7 +236,10 @@ class ScWindow(QMainWindow, Ui_B_SC):
                                     self.PieceTab.baseOverlap(),
                                     QSizePolicy.Minimum, QSizePolicy.Fixed)
 
-        self.ItemInfoFrame.layout().itemAt(1).layout().setColumnStretch(2, 1)
+        width = testfont.size(Qt.TextSingleLine, "Damage: ").width()
+        iteminfogrid = self.ItemInfoFrame.layout().itemAt(1).layout()
+        iteminfogrid.setColumnMinimumWidth(0, width)
+        iteminfogrid.setColumnStretch(2, 1)
         self.ItemLevel.setFixedSize(QSize(amtedwidth, edheight))
         self.ItemLevelButton.setFixedSize(
             QSize(self.ItemLevelButton.width(), edheight))
@@ -1181,6 +1184,13 @@ class ScWindow(QMainWindow, Ui_B_SC):
         isweapon = ((item.TYPE in ItemTypes['Left Hand'][item.Realm])
                  or (item.TYPE in ItemTypes['2 Handed'][item.Realm])
                  or (item.TYPE in ItemTypes['Ranged'][item.Realm]))
+        notoffhand = ((item.TYPE in ItemTypes['Ranged'][item.Realm])
+                   or (((item.TYPE in ItemTypes['2 Handed'][item.Realm])
+                     or (item.TYPE in ItemTypes['Left Hand'][item.Realm]))
+                   and (item.TYPE not in ItemTypes['Right Hand'][item.Realm])))
+        isinstrument = ((item.TYPE in ItemTypes['Ranged'][item.Realm])
+                    and (item.TYPE in ItemTypes['2 Handed'][item.Realm]))
+
         if item.ActiveState == 'drop':
             damagetypes = list(DropLists['All']['Resist'])
         else:
@@ -1195,6 +1205,7 @@ class ScWindow(QMainWindow, Ui_B_SC):
         if item.DAMAGETYPE not in damagetypes:
             damagetypes.append(item.DAMAGETYPE)
         self.DamageType.clear()
+        self.DamageType.insertItems(0, damagetypes)
         self.DamageType.setCurrentIndex(damagetypes.index(item.DAMAGETYPE))
         self.AFDPSEdit.setText(item.AFDPS)
         self.BonusEdit.setText(item.Bonus)
@@ -1204,11 +1215,13 @@ class ScWindow(QMainWindow, Ui_B_SC):
         else:
             self.Offhand.setCheckState(Qt.Unchecked)
 
-        self.LabelSpeedEdit.setVisible(isweapon)
-        self.SpeedEdit.setVisible(isweapon)
-        self.LabelAFDPSEdit.setVisible(isweapon or isarmor)
-        self.AFDPSEdit.setVisible(isweapon or isarmor)
-        self.Offhand.setVisible(isweapon)
+        self.LabelSpeedEdit.setVisible(isweapon and not isinstrument)
+        self.SpeedEdit.setVisible(isweapon and not isinstrument)
+        self.LabelAFDPSEdit.setVisible((isweapon or isarmor) 
+                                       and not isinstrument)
+        self.AFDPSEdit.setVisible((isweapon or isarmor)
+                                  and not isinstrument)
+        self.Offhand.setVisible(isweapon and not notoffhand)
         self.LabelDamageType.setVisible(isweapon)
         self.DamageType.setVisible(isweapon)
 
