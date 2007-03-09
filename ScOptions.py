@@ -175,6 +175,7 @@ class ScOptions(Singleton):
             try:
                 f = open(scfile, 'w')
                 f.write(XMLHelper.writexml(self.asXML(), UnicodeStringIO(), '', '\t', '\n'))
+                f.write('\n')
                 f.close()
             except:
                 traceback.print_exc()
