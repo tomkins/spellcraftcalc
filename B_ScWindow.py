@@ -2,8 +2,8 @@
 
 # Form implementation generated from reading ui file 'ScWindow.ui'
 #
-# Created: Thu Mar  8 15:33:22 2007
-#      by: PyQt4 UI code generator 4-snapshot-20061020
+# Created: Fri Mar 09 01:18:39 2007
+#      by: PyQt4 UI code generator 4.1
 #
 # WARNING! All changes made in this file will be lost!
 
@@ -661,15 +661,18 @@ class Ui_B_SC(object):
         self.stackedlayout.setSpacing(0)
         self.stackedlayout.setObjectName("stackedlayout")
 
-        self.ItemInfoFrame = QtGui.QWidget(self.GroupItemFrame)
-        self.ItemInfoFrame.setObjectName("ItemInfoFrame")
+        self.ItemSummaryFrame = QtGui.QWidget(self.GroupItemFrame)
+        self.ItemSummaryFrame.setObjectName("ItemSummaryFrame")
 
-        self.hboxlayout2 = QtGui.QHBoxLayout(self.ItemInfoFrame)
+        self.hboxlayout2 = QtGui.QHBoxLayout(self.ItemSummaryFrame)
         self.hboxlayout2.setMargin(0)
         self.hboxlayout2.setSpacing(9)
         self.hboxlayout2.setObjectName("hboxlayout2")
 
-        self.vboxlayout2 = QtGui.QVBoxLayout()
+        self.ItemInfoFrame = QtGui.QWidget(self.ItemSummaryFrame)
+        self.ItemInfoFrame.setObjectName("ItemInfoFrame")
+
+        self.vboxlayout2 = QtGui.QVBoxLayout(self.ItemInfoFrame)
         self.vboxlayout2.setMargin(0)
         self.vboxlayout2.setSpacing(0)
         self.vboxlayout2.setObjectName("vboxlayout2")
@@ -789,18 +792,18 @@ class Ui_B_SC(object):
         self.DBSource.setObjectName("DBSource")
         self.gridlayout5.addWidget(self.DBSource,9,1,1,3)
         self.vboxlayout2.addLayout(self.gridlayout5)
-        self.hboxlayout2.addLayout(self.vboxlayout2)
+        self.hboxlayout2.addWidget(self.ItemInfoFrame)
 
         self.vboxlayout3 = QtGui.QVBoxLayout()
         self.vboxlayout3.setMargin(0)
         self.vboxlayout3.setSpacing(0)
         self.vboxlayout3.setObjectName("vboxlayout3")
 
-        self.LabelClassRestrictionTable = QtGui.QLabel(self.ItemInfoFrame)
+        self.LabelClassRestrictionTable = QtGui.QLabel(self.ItemSummaryFrame)
         self.LabelClassRestrictionTable.setObjectName("LabelClassRestrictionTable")
         self.vboxlayout3.addWidget(self.LabelClassRestrictionTable)
 
-        self.ClassRestrictionTable = QtGui.QTableWidget(self.ItemInfoFrame)
+        self.ClassRestrictionTable = QtGui.QTableWidget(self.ItemSummaryFrame)
         self.ClassRestrictionTable.setObjectName("ClassRestrictionTable")
         self.vboxlayout3.addWidget(self.ClassRestrictionTable)
         self.hboxlayout2.addLayout(self.vboxlayout3)
@@ -810,11 +813,11 @@ class Ui_B_SC(object):
         self.vboxlayout4.setSpacing(0)
         self.vboxlayout4.setObjectName("vboxlayout4")
 
-        self.LabelItemNoteText = QtGui.QLabel(self.ItemInfoFrame)
+        self.LabelItemNoteText = QtGui.QLabel(self.ItemSummaryFrame)
         self.LabelItemNoteText.setObjectName("LabelItemNoteText")
         self.vboxlayout4.addWidget(self.LabelItemNoteText)
 
-        self.ItemNoteText = QtGui.QTextEdit(self.ItemInfoFrame)
+        self.ItemNoteText = QtGui.QTextEdit(self.ItemSummaryFrame)
         self.ItemNoteText.setFocusPolicy(QtCore.Qt.StrongFocus)
         self.ItemNoteText.setTabChangesFocus(True)
         self.ItemNoteText.setAcceptRichText(False)
@@ -828,11 +831,11 @@ class Ui_B_SC(object):
         self.vboxlayout5.setSpacing(0)
         self.vboxlayout5.setObjectName("vboxlayout5")
 
-        self.LabelNoteText = QtGui.QLabel(self.ItemInfoFrame)
+        self.LabelNoteText = QtGui.QLabel(self.ItemSummaryFrame)
         self.LabelNoteText.setObjectName("LabelNoteText")
         self.vboxlayout5.addWidget(self.LabelNoteText)
 
-        self.NoteText = QtGui.QTextEdit(self.ItemInfoFrame)
+        self.NoteText = QtGui.QTextEdit(self.ItemSummaryFrame)
         self.NoteText.setFocusPolicy(QtCore.Qt.StrongFocus)
         self.NoteText.setTabChangesFocus(True)
         self.NoteText.setAcceptRichText(False)
@@ -840,12 +843,17 @@ class Ui_B_SC(object):
         self.NoteText.setObjectName("NoteText")
         self.vboxlayout5.addWidget(self.NoteText)
         self.hboxlayout2.addLayout(self.vboxlayout5)
-        self.stackedlayout.addWidget(self.ItemInfoFrame)
+        self.stackedlayout.addWidget(self.ItemSummaryFrame)
 
         self.ItemSlotsFrame = QtGui.QWidget(self.GroupItemFrame)
         self.ItemSlotsFrame.setObjectName("ItemSlotsFrame")
 
-        self.vboxlayout6 = QtGui.QVBoxLayout(self.ItemSlotsFrame)
+        self.hboxlayout4 = QtGui.QHBoxLayout(self.ItemSlotsFrame)
+        self.hboxlayout4.setMargin(0)
+        self.hboxlayout4.setSpacing(9)
+        self.hboxlayout4.setObjectName("hboxlayout4")
+
+        self.vboxlayout6 = QtGui.QVBoxLayout()
         self.vboxlayout6.setMargin(0)
         self.vboxlayout6.setSpacing(0)
         self.vboxlayout6.setObjectName("vboxlayout6")
@@ -1216,24 +1224,24 @@ class Ui_B_SC(object):
         self.Requirement_8.setObjectName("Requirement_8")
         self.gridlayout7.addWidget(self.Requirement_8,7,4,1,3)
 
-        self.hboxlayout4 = QtGui.QHBoxLayout()
-        self.hboxlayout4.setMargin(0)
-        self.hboxlayout4.setSpacing(0)
-        self.hboxlayout4.setObjectName("hboxlayout4")
+        self.hboxlayout5 = QtGui.QHBoxLayout()
+        self.hboxlayout5.setMargin(0)
+        self.hboxlayout5.setSpacing(0)
+        self.hboxlayout5.setObjectName("hboxlayout5")
 
         self.ItemUtilityLabel = QtGui.QLabel(self.ItemSlotsGrid)
         self.ItemUtilityLabel.setAlignment(QtCore.Qt.AlignRight|QtCore.Qt.AlignTrailing|QtCore.Qt.AlignVCenter)
         self.ItemUtilityLabel.setObjectName("ItemUtilityLabel")
-        self.hboxlayout4.addWidget(self.ItemUtilityLabel)
+        self.hboxlayout5.addWidget(self.ItemUtilityLabel)
 
         self.ItemUtility = QtGui.QLabel(self.ItemSlotsGrid)
         self.ItemUtility.setAlignment(QtCore.Qt.AlignRight|QtCore.Qt.AlignTrailing|QtCore.Qt.AlignVCenter)
         self.ItemUtility.setObjectName("ItemUtility")
-        self.hboxlayout4.addWidget(self.ItemUtility)
+        self.hboxlayout5.addWidget(self.ItemUtility)
 
         spacerItem23 = QtGui.QSpacerItem(5,1,QtGui.QSizePolicy.MinimumExpanding,QtGui.QSizePolicy.Minimum)
-        self.hboxlayout4.addItem(spacerItem23)
-        self.gridlayout7.addLayout(self.hboxlayout4,7,8,1,1)
+        self.hboxlayout5.addItem(spacerItem23)
+        self.gridlayout7.addLayout(self.hboxlayout5,7,8,1,1)
 
         self.Gem_Label_9 = QtGui.QLabel(self.ItemSlotsGrid)
         self.Gem_Label_9.setTextFormat(QtCore.Qt.PlainText)
@@ -1398,6 +1406,7 @@ class Ui_B_SC(object):
         spacerItem30 = QtGui.QSpacerItem(5,5,QtGui.QSizePolicy.Minimum,QtGui.QSizePolicy.Minimum)
         self.gridlayout7.addItem(spacerItem30,11,0,1,7)
         self.vboxlayout6.addWidget(self.ScrollSlots)
+        self.hboxlayout4.addLayout(self.vboxlayout6)
         self.stackedlayout.addWidget(self.ItemSlotsFrame)
         self.vboxlayout1.addLayout(self.stackedlayout)
         self.vboxlayout.addWidget(self.GroupItemFrame)

@@ -136,18 +136,22 @@ class ScWindow(QMainWindow, Ui_B_SC):
             self.ItemPriceLabel, self.ItemPrice,
         ]
 
+        cbwidth = self.CharClass.getMinimumWidth(['Necromancer'])
+        amtcbwidth = self.QualDrop.getMinimumWidth(['100'])
+        # minSizeHint includes one char, test 19.9 width...
+        amtedwidth = self.ItemLevel.minimumSizeHint().width()
+        amtedwidth += testfont.size(Qt.TextSingleLine, "19.").width()
+
         if str(QApplication.style().objectName()[0:9]).lower() == "macintosh":
+            # mac is including a checkbox/icon width which is absurd
+            cbwidth = cbwidth - 14
+            amtcbwidth = amtcbwidth - 14
             edheight = self.CharName.sizeHint().height() - 1
             cbheight = self.Realm.sizeHint().height()
         else:
             edheight = min(self.CharName.minimumSizeHint().height(),
                            self.Realm.minimumSizeHint().height()) - 2
             cbheight = edheight
-
-        amtcbwidth = self.QualDrop.getMinimumWidth(['100'])
-        # minSizeHint includes one char, test 19.9 width...
-        amtedwidth = self.ItemLevel.minimumSizeHint().width()
-        amtedwidth += testfont.size(Qt.TextSingleLine, "19.").width()
 
         self.StatLabel = {}
         self.StatValue = {}
@@ -188,20 +192,12 @@ class ScWindow(QMainWindow, Ui_B_SC):
         self.GroupSkillsList.layout().setColumnStretch(0, 1)
         self.ScWinFrame.layout().setColumnStretch(6, 1)
 
-        cbwidth = self.CharClass.getMinimumWidth(['Necromancer'])
-        gridlayout = self.ItemInfoFrame.layout().itemAt(0).layout()
-        gridlayout = gridlayout.itemAt(1).layout()
-        gridlayout.setColumnStretch(2, 1)
         if str(QApplication.style().objectName()[0:9]).lower() == "macintosh":
-            # mac is including a checkbox/icon width which is absurd
-            cbwidth = cbwidth - 14
-            amtcbwidth = amtcbwidth - 14
+            # Mac's text is entirely too compressed, and edit boxes a bit
+            # shorter than cbheights.  Adjust some label heights so that we
+            # compensate and balance out the display of these grids.
+            # Hiding the controls will still hide the grid rows.
             lbheight = self.LabelTotalCost.sizeHint().height() + 5
-            self.LabelBonusEdit.setFixedHeight(cbheight)
-            self.LabelSpeedEdit.setFixedHeight(cbheight)
-            self.LabelItemRequirement.setFixedHeight(lbheight)
-            self.ItemRequirement.setFixedHeight(cbheight)
-            self.LabelDBSource.setFixedHeight(lbheight)
             self.LabelCharName.setFixedHeight(cbheight)
             self.LabelCharLevel.setFixedHeight(cbheight)
             self.LabelCraftTime.setFixedHeight(cbheight)
@@ -210,6 +206,10 @@ class ScWindow(QMainWindow, Ui_B_SC):
             for ctl in self.StatLabel.itervalues():
                 ctl.setFixedHeight(lbheight)
             self.LabelTotalUtility.setFixedHeight(lbheight)
+            self.LabelBonusEdit.setFixedHeight(cbheight)
+            self.LabelSpeedEdit.setFixedHeight(cbheight)
+            self.LabelItemRequirement.setFixedHeight(lbheight)
+            self.LabelDBSource.setFixedHeight(lbheight)
 
         self.GroupCharInfo.layout().setColumnStretch(2, 1)
         self.CharName.setFixedSize(QSize(cbwidth, edheight))
@@ -236,6 +236,7 @@ class ScWindow(QMainWindow, Ui_B_SC):
                                     self.PieceTab.baseOverlap(),
                                     QSizePolicy.Minimum, QSizePolicy.Fixed)
 
+        self.ItemInfoFrame.layout().itemAt(1).layout().setColumnStretch(2, 1)
         self.ItemLevel.setFixedSize(QSize(amtedwidth, edheight))
         self.ItemLevelButton.setFixedSize(
             QSize(self.ItemLevelButton.width(), edheight))
@@ -251,6 +252,8 @@ class ScWindow(QMainWindow, Ui_B_SC):
         self.BonusEdit.setFixedSize(QSize(amtedwidth, edheight))
         self.AFDPSEdit.setFixedSize(QSize(amtedwidth, edheight))
         self.SpeedEdit.setFixedSize(QSize(amtedwidth, edheight))
+        # Check boxes are about four pixels of whitespace to the right,
+        # line this up within the grid.
         self.Offhand.setFixedSize(QSize(self.Offhand.sizeHint().width()-4,
                                         edheight))
         self.DamageType.setFixedSize(QSize(cbwidth, cbheight))
@@ -302,11 +305,6 @@ class ScWindow(QMainWindow, Ui_B_SC):
             # mac is including a checkbox/icon width which is absurd
             typewidth = typewidth - 14
             effectwidth = effectwidth - 14
-
-        palette = QPalette(self.ScrollSlots.palette())
-        palette.setColor(QPalette.Window, QColor(0,0,0,0))
-        palette.setBrush(QPalette.Window, QBrush(QColor(0,0,0,0)))
-        self.ScrollSlots.setPalette(palette)
 
         headergrid = self.ItemSlotsHeader.layout()
         itemslotgrid = self.ItemSlotsGrid.layout()
@@ -407,6 +405,77 @@ class ScWindow(QMainWindow, Ui_B_SC):
 
             itemslotgrid.setRowMinimumHeight(i, max(cbheight, edheight))
 
+        # Lock the height of ItemSlotsGrid, this is all we need.  Then
+        # optimize based on the height of ItemInfoFrame and round it out
+        # to the next-multiple of a combobox height.  Scroll the lines
+        # by the combobox height, page from the top to bottom slots.
+        #
+        self.ItemSlotsGrid.setFixedHeight(cbheight * 12)
+        iteminfogrid = self.ItemInfoFrame.layout().itemAt(1).layout()
+        minheight = iteminfogrid.sizeHint().height()
+        minheight = ((minheight - 1) / cbheight + 1) * cbheight
+        maxheight = cbheight * 12
+        self.ScrollSlots.setWidget(self.ItemSlotsGrid)
+        self.ScrollSlots.setMaximumHeight(maxheight)
+        self.ScrollSlots.setMinimumHeight(minheight)
+        self.ScrollSlots.verticalScrollBar().setSingleStep(cbheight)
+        self.ScrollSlots.verticalScrollBar().setPageStep(cbheight * 6)
+        self.ScrollSlots.updateGeometry()
+
+        # Improve the look of scrollslots - it should have no background
+        #
+        palette = QPalette(self.ScrollSlots.palette())
+        palette.setColor(QPalette.Window, QColor(0,0,0,0))
+        palette.setBrush(QPalette.Window, QBrush(QColor(0,0,0,0)))
+        self.ScrollSlots.setPalette(palette)
+
+        # To round this out, we want the ItemSummaryFrame and ItemSlotsFrame
+        # to grow first to a maximum of the height of the ScrollSlots plus
+        # the height of the labels above.  
+        #
+        minheight += self.ItemSlotsHeader.sizeHint().height()
+        self.ItemSummaryFrame.setMinimumHeight(minheight)
+        self.ItemSlotsFrame.setMinimumHeight(minheight)
+        maxheight = self.LabelGemType.sizeHint().height() + cbheight * 12
+        self.ItemSummaryFrame.setMaximumHeight(maxheight)
+        self.ItemSlotsFrame.setMaximumHeight(maxheight)
+
+        # We would really like to grow and shrink ItemSlotsFrame and the
+        # ItemSummaryFrame in multiples of the height of a combo box.
+        # This doesn't appear to work either.
+        #
+        # self.ItemSlotsFrame.setBaseSize(self.ItemSlotsHeader.sizeHint())
+        # self.ItemSlotsFrame.setSizeIncrement(1, cbheight)
+        # self.ItemSummaryFrame.setBaseSize(self.ItemSlotsHeader.sizeHint())
+        # self.ItemSlotsFrame.setSizeIncrement(1, cbheight)
+
+        # We would really like to grow tye ItemSlotsFrame and the
+        # ItemSummaryFrame before other expanding labels, NOTHING
+        # tried appear to work.
+        #
+        #self.ItemInfoFrame.setMaximumHeight(cbheight * 12)
+        #self.ClassRestrictionTable.setMaximumHeight(cbheight * 12)
+        #self.ItemNoteText.setMaximumHeight(cbheight * 12)
+        #self.NoteText.setMaximumHeight(cbheight * 12)
+        #policy = QSizePolicy(QSizePolicy.Preferred, QSizePolicy.Preferred)
+        #self.ScrollSlots.setSizePolicy(QSizePolicy(policy))
+        #self.ItemSummaryFrame.setSizePolicy(QSizePolicy(policy))
+        #self.ItemSlotsFrame.setSizePolicy(QSizePolicy(policy))
+        #self.GroupItemFrame.setSizePolicy(QSizePolicy(policy))
+        #growfirst = QSizePolicy.Maximum
+        #self.ItemSummaryFrame.sizePolicy().setVerticalPolicy(growfirst)
+        #self.ItemSlotsFrame.sizePolicy().setVerticalPolicy(growfirst)
+        #self.ItemSummaryFrame.sizePolicy().setVerticalStretch(5)
+        #self.ItemSlotsFrame.sizePolicy().setVerticalStretch(5)
+        #self.GroupItemFrame.sizePolicy().setVerticalStretch(5)
+        #self..sizePolicy().setVerticalStretch(5)
+
+        # Experiments in extracting ItemInfoFrame from the ISF and dropping
+        # it into the ItemSlotsFrame, without crashing
+        #move = self.ItemSummaryFrame.layout().takeAt(0).widget()
+        #move.setParent(self.ItemSlotsFrame)
+        #self.ItemSlotsFrame.layout().insertLayout(0, move.layout())
+
         for tabname in PieceTabList:
             self.PieceTab.addTab(0, qApp.translate("B_SC",tabname,None))
         for tabname in JewelTabList:
@@ -415,7 +484,7 @@ class ScWindow(QMainWindow, Ui_B_SC):
         l = self.ScWinFrame.layout().itemAt(self.ScWinFrame.layout().count()-1)
         l.layout().itemAt(1).changeSize(1, -self.PieceTab.baseOverlap(),
                                         QSizePolicy.Minimum, QSizePolicy.Fixed)
-        self.ScrollSlots.setWidget(self.ItemSlotsGrid)
+
         self.ScWinFrame.updateGeometry()
 
     def initControls(self):
@@ -846,7 +915,7 @@ class ScWindow(QMainWindow, Ui_B_SC):
             os.path.join(self.ReportPath, 'DefaultConfigReport.xsl'))
         self.UiReportFile = ScOptions.instance().getOption('ConfigUiReportXSLT',
             os.path.join(self.ReportPath, 'DefaultUiXmlWindow.xsl'))
-        self.toggleItemViewWFrame(ScOptions.instance().getOption('CurrentItemFrame',
+        self.toggleItemView(ScOptions.instance().getOption('CurrentItemFrame',
             'ItemSlotsFrame'))
 
 
@@ -1283,21 +1352,18 @@ class ScWindow(QMainWindow, Ui_B_SC):
         if self.nocalc: return
         self.calculate()
 
-    def toggleItemView(self):
-        if self.stackedlayout.currentWidget().objectName() == "ItemInfoFrame":
+    def toggleItemView(self, frame=None):
+        if not isinstance(frame,basestring):
+            if self.stackedlayout.currentWidget().objectName() == "ItemSlotsFrame":
+                frame = "ItemSummaryFrame"
+            else:
+                frame = "ItemSlotsFrame"
+        if frame == "ItemSummaryFrame":
+            self.ToggleItemView.setText("Item Slots")
+            self.stackedlayout.setCurrentWidget(self.ItemSummaryFrame)
+        else:
             self.ToggleItemView.setText("Item Info")
             self.stackedlayout.setCurrentWidget(self.ItemSlotsFrame)
-        else:
-            self.ToggleItemView.setText("Item Slots")
-            self.stackedlayout.setCurrentWidget(self.ItemInfoFrame)
-
-    def toggleItemViewWFrame(self, frame):
-        if frame == "ItemSlotsFrame":
-            self.ToggleItemView.setText("Item Info")
-            self.stackedlayout.setCurrentWidget(self.ItemSlotsFrame)
-        else:
-            self.ToggleItemView.setText("Item Slots")
-            self.stackedlayout.setCurrentWidget(self.ItemInfoFrame)
 
     def insertSkill(self,amt,bonus,group):
         model = self.SkillsList.model()
