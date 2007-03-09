@@ -1,4 +1,8 @@
-Updated ??/??/2007 - Version 1.98
+Updated ??/??/2007 - Version 1.99
+
+
+
+Updated 03/09/2007 - Version 1.98
 
   You will find your Spellcraft.xml preferences file saved in
   \Documents and Settings\(you)\Application Data\KSCraft\
