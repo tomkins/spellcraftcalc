@@ -2096,6 +2096,13 @@ class ScWindow(QMainWindow, Ui_B_SC):
         item = self.itemattrlist[self.currentTabLabel]
         self.itemattrlist[self.currentTabLabel] = item.next
         item.next = None
+        if item.Equipped == "1":
+            self.itemattrlist[self.currentTabLabel].Equipped = 1
+        for outfit in self.outfitlist:
+             outfititem = outfit[self.currentTabLabel]:
+             if outfititem[0] == item.TemplateIndex:
+                 outfititem[0] = \
+                     self.itemattrlist[self.currentTabLabel].TemplateIndex
         if self.nocalc: return
         self.modified = True
         self.restoreItem(self.itemattrlist[self.currentTabLabel])
@@ -2811,7 +2818,6 @@ class ScWindow(QMainWindow, Ui_B_SC):
         f = QApplication.focusWidget()
         if f is not None: f.setFocus()
         self.appendOutfit()
-        #sys.stdout.write("Created Outfit %d\n" % idx)
         self.OutfitName.setCurrentIndex(self.currentOutfit)
         if len(self.outfitlist) > 1:
             self.deleteOutfitAction.setEnabled(True)
@@ -2819,7 +2825,6 @@ class ScWindow(QMainWindow, Ui_B_SC):
 
     def deleteOutfit(self):
         if self.currentOutfit < 0 or len(self.outfitlist) < 2: return
-        #sys.stdout.write("Deleted Outfit %d\n" % self.currentOutfit)
         outfit = self.currentOutfit
         self.currentOutfit = 0
         del self.outfitlist[outfit]
@@ -2864,7 +2869,6 @@ class ScWindow(QMainWindow, Ui_B_SC):
         if idx != self.OutfitName.currentIndex(): return
         # Don't update as we stumble upon a duplicate name, let them keep editing
         if self.OutfitName.findText(a0) > -1: return
-        #sys.stdout.write("Edited Outfit %d named %s\n" % (idx, a0))
         outfitname = unicode(self.OutfitName.currentText())
         self.outfitlist[idx][None] = outfitname
         # blockSignals will not have the desired effect, save/restore the cursor as they insert
