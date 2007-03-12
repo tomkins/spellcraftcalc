@@ -1,6 +1,7 @@
 import httplib, urllib
 import HTMLParser
 import re
+import urllib
 import sys
 import time
 import traceback
@@ -232,7 +233,7 @@ class EthinargQuery:
         self.formValues = self.makeInitialQuery()
 
     def makeQueryString(self):
-        return '&'.join(['%s=%s' % (k, v) for k,v in self.queryparams.items()])
+        return urllib.urlencode(self.queryparams)
 
     def makeInitialQuery(self):
         self.conn = httplib.HTTPConnection("www.ethinarg.com")
