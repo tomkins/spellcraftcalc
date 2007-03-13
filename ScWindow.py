@@ -2096,13 +2096,14 @@ class ScWindow(QMainWindow, Ui_B_SC):
         item = self.itemattrlist[self.currentTabLabel]
         self.itemattrlist[self.currentTabLabel] = item.next
         item.next = None
-        if item.Equipped == "1":
-            self.itemattrlist[self.currentTabLabel].Equipped = 1
+        if item.Equipped == '1':
+            self.itemattrlist[self.currentTabLabel].Equipped = '1'
         for outfit in self.outfitlist:
-             outfititem = outfit[self.currentTabLabel]:
+             outfititem = outfit[self.currentTabLabel]
              if outfititem[0] == item.TemplateIndex:
-                 outfititem[0] = \
-                     self.itemattrlist[self.currentTabLabel].TemplateIndex
+                 outfit[self.currentTabLabel] = (
+                     self.itemattrlist[self.currentTabLabel].TemplateIndex,
+                     self.itemattrlist[self.currentTabLabel].Equipped,)
         if self.nocalc: return
         self.modified = True
         self.restoreItem(self.itemattrlist[self.currentTabLabel])
@@ -2237,8 +2238,17 @@ class ScWindow(QMainWindow, Ui_B_SC):
             self.saveAsFile()
         else:
             try:
+                xmlbody = self.asXML()
+            except:
+                traceback.print_exc()                                
+                QMessageBox.critical(None, 'Error!', 
+                    "Error creating xml to save this template\r\n\r\n" \
+                  + "Please share your Spellcraft.exe.log error report with " \
+                  + "http://sourceforge.net/projects/kscraft", 'OK')
+                return
+            try:
                 f = open(self.filename, 'w')
-                f.write(XMLHelper.writexml(self.asXML(), UnicodeStringIO(),
+                f.write(XMLHelper.writexml(xmlbody, UnicodeStringIO(),
                                            '', '\t', '\n'))
                 f.close()
                 self.modified = False
@@ -2259,8 +2269,17 @@ class ScWindow(QMainWindow, Ui_B_SC):
             if filename[-4:] != '.xml':
                 filename += '.xml'
             try:
+                xmlbody = self.asXML()
+            except:
+                traceback.print_exc()                                
+                QMessageBox.critical(None, 'Error!', 
+                    "Error creating xml to save this template\r\n\r\n" \
+                  + "Please share your Spellcraft.exe.log error report with " \
+                  + "http://sourceforge.net/projects/kscraft", 'OK')
+                return
+            try:
                 f = open(filename, 'w')
-                f.write(XMLHelper.writexml(self.asXML(), UnicodeStringIO(),
+                f.write(XMLHelper.writexml(xmlbody, UnicodeStringIO(),
                                            '', '\t', '\n'))
                 f.close()
             except IOError:
@@ -2285,9 +2304,18 @@ class ScWindow(QMainWindow, Ui_B_SC):
             if filename[-4:] != '.xml':
                 filename += '.xml'
             try:
+                xmlbody = self.asXML(True)
+            except:
+                traceback.print_exc()                                
+                QMessageBox.critical(None, 'Error!', 
+                    "Error creating xml to export this template\r\n\r\n" \
+                  + "Please share your Spellcraft.exe.log error report with " \
+                  + "http://sourceforge.net/projects/kscraft", 'OK')
+                return
+            try:
                 f = open(filename, 'w')
-                f.write(XMLHelper.writexml(self.asXML(True), UnicodeStringIO(),
-                        '', '\t', '\n'))
+                f.write(XMLHelper.writexml(xmlbody, UnicodeStringIO(),
+                                           '', '\t', '\n'))
                 f.close()
             except IOError:
                 QMessageBox.critical(None, 'Error!', 
@@ -2318,6 +2346,14 @@ class ScWindow(QMainWindow, Ui_B_SC):
             try:
                 f = open(filename, 'r')
                 docstr = f.read()
+            except:
+                QMessageBox.critical(None, 'Error!', 
+                    'Error reading template file ' + unicode(filename), 'OK')
+                if f is not None: f.close()
+                return
+            try:
+                f = open(filename, 'r')
+                docstr = f.read()
                 if docstr[0:5] == '<?xml':
                     xmldoc = parseString(docstr)
                     template = xmldoc.getElementsByTagName('SCTemplate')
@@ -2329,8 +2365,11 @@ class ScWindow(QMainWindow, Ui_B_SC):
                     return
             except:
                 traceback.print_exc()
-                QMessageBox.critical(None, 'Error!', 
-                    'Error loading template file ' + unicode(filename), 'OK')
+                QMessageBox.critical(None, 'Error!', \
+                    "Error loading template file " + unicode(filename) \
+                  + "\r\n\r\nPlease share this template file and your " \
+                  + "Spellcraft.exe.log error report with the authors at " \
+                  + "http://sourceforge.net/projects/kscraft", 'OK')
                 if f is not None: f.close()
                 return
             self.filename = os.path.abspath(filename)
@@ -2673,9 +2712,24 @@ class ScWindow(QMainWindow, Ui_B_SC):
             self.itemattrlist[self.currentTabLabel] = item
         else:
             self.itemattrlist[self.currentTabLabel] = cur.next
+        if cur.Equipped == '1':
+            self.itemattrlist[self.currentTabLabel].Equipped = '1'
+        if part.Equipped == '1':
+            part.Equipped = '0'
+            cur.Equipped = '1'
+        else:
+            cur.Equipped = '1'
         cur.next = part
         cur.Location = piece
         self.itemattrlist[piece] = cur
+        for outfit in self.outfitlist:
+             outfititem = outfit[self.currentTabLabel]
+             if outfititem[0] == cur.TemplateIndex:
+                 outfit[self.currentTabLabel] = (
+                     self.itemattrlist[self.currentTabLabel].TemplateIndex,
+                     self.itemattrlist[self.currentTabLabel].Equipped,)
+        self.outfitlist[self.currentOutfit][piece] = (cur.TemplateIndex,
+                                                      cur.Equipped,)
         self.currentTabLabel = piece
         if piece in JewelTabList:
             row = 1

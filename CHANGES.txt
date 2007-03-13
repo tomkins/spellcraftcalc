@@ -1,6 +1,22 @@
 Updated ??/??/2007 - Version 1.99
 
+  If there is a program bug and a template or export document
+  can't be prepared, the template or exported xml will no longer 
+  be overwritten as a blank file.
 
+  Now asking the user to please send in the Spellcraft.exe.log error 
+  messages when the template XML can't be created to be saved, and
+  asking the user to send in the Spellcraft.exe.log AND the template 
+  when a template can't be reloaded due to XML, template or item 
+  processing errors, in the error messagebox.
+
+  If an equipped item is deleted or moved, the next item in the
+  list will be Equipped at it becomes the selected item.
+
+  Delete or Move item now updates all outfits that used to point
+  at the removed item, and points them to the next item in this
+  slot.  Outfits will continue to point to the same newly blank 
+  item when the entire item or its slots are Cleared.
 
 Updated 03/09/2007 - Version 1.98
 
