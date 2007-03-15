@@ -680,7 +680,7 @@ ServerCodes = d2({
      '10' : 'Galahad',
      '33' : 'Gareth',
      '18' : 'Gawaine',
-     '15' : 'Gwinevere',
+     '15' : 'Guinevere',
      '40' : 'Hector',
      '28' : 'Igraine',
      '20' : 'Iseult',
