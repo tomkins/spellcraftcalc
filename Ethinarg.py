@@ -437,13 +437,24 @@ class EthinargTestWindow(QDialog, Ui_B_Ethinarg):
             for k, v in self.query.formValues[key]:
                 ctrl.addItem(k, QVariant(v))
 
+    def loadSavedOptions(self):
+        options_dict = ScOptions.instance().getOption('EthinargValues', {})
+        for ctrl, key, func in self.queryBoxes:
+            if options_dict.has_key(key):
+                ctrl.setCurrentIndex(ctrl.findText(str(options_dict[key])))
+        if options_dict.has_key('item_name'):
+            self.itemNameBox.setText(options_dict['item_name'])
+
     def setQueryParams(self):
+        options_dict = {}
         self.query.setItemName(str(self.itemNameBox.text()))
+        options_dict['item_name'] = str(self.itemNameBox.text())
         for ctrl, key, func in self.queryBoxes:
             idx = str(ctrl.itemData(ctrl.currentIndex()).toString())
             func(idx)
+            options_dict[key] = str(ctrl.currentText())
         self.query.setPageNumber(self.currentPage)
-
+        ScOptions.instance().setOption('EthinargValues', options_dict)
 
     def runQuery(self):
         uname = str(self.usernameBox.text())
@@ -602,7 +613,7 @@ class EthinargTestWindow(QDialog, Ui_B_Ethinarg):
         self.scwin.addItem(item)
 
         QMessageBox.information(self, "Item Added!",
-            "Item Successfully Added to Template!")
+            "'%s' Successfully Added to Template!" % item.ItemName)
 
     def event(self, e):
         if e.type() == LoginFailedEvent:
@@ -621,6 +632,7 @@ class EthinargTestWindow(QDialog, Ui_B_Ethinarg):
             return True
         elif e.type() == InitializedEvent:
             self.loadCombos()
+            self.loadSavedOptions()
             self.displayItemCounts()
             self.maxLevelCombo.setCurrentIndex(
                 self.maxLevelCombo.findText('51'))
