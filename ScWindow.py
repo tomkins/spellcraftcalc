@@ -930,7 +930,7 @@ class ScWindow(QMainWindow, Ui_B_SC):
         self.updateGeometry()
 
         maximized = ScOptions.instance().getOption('Maximized', False)
-        if maximized:
+        if maximized and sys.platform == 'win32':
             self.setWindowState(Qt.WindowMaximized)
         
     def loadOptions(self):
@@ -973,8 +973,7 @@ class ScWindow(QMainWindow, Ui_B_SC):
         ScOptions.instance().setOption('ConfigReportXSLT', self.ReportFile)
         ScOptions.instance().setOption('ConfigUiReportXSLT', self.UiReportFile)
 
-        maximized = (self.windowState() & Qt.WindowMaximized) > 0 \
-            and sys.platform != "darwin"
+        maximized = self.isMaximized() and sys.platform == 'win32'
 
         if not maximized:
             ScOptions.instance().setOption('WindowX', self.pos().x())
