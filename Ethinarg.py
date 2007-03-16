@@ -601,6 +601,9 @@ class EthinargTestWindow(QDialog, Ui_B_Ethinarg):
 
         self.scwin.addItem(item)
 
+        QMessageBox.information(self, "Item Added!",
+            "Item Successfully Added to Template!")
+
     def event(self, e):
         if e.type() == LoginFailedEvent:
             #self.processbox.stop()

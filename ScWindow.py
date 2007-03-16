@@ -114,33 +114,7 @@ class ScWindow(QMainWindow, Ui_B_SC):
 
         self.ItemLevelWindow = ItemLevel.ItemLevel(self.window(), '', 1)
         self.loadOptions()
-
-        x = ScOptions.instance().getOption('WindowX', self.pos().x())
-        y = ScOptions.instance().getOption('WindowY', self.pos().y())
-        w = ScOptions.instance().getOption('WindowW', self.width())
-        h = ScOptions.instance().getOption('WindowH', self.height())
-
-        screenW = QApplication.desktop().width()
-        screenH = QApplication.desktop().height()
-        if w < 100:
-            w = 781
-        if h < 100:
-            w = 589
-
-        if w > screenW:
-            w = 781
-        if h > screenH:
-            h = 589
-
-        if x < 20 or x > (screenW - 20):
-            x = 20
-        if y < 20 or y > (screenH - 20):
-            y = 20
-
-        self.resize(w, h)
-        self.move(x, y)
-        self.updateGeometry()
-
+        self.setWindowGeometry()
         self.initMenu()
         self.updateRecentFiles(None)
         self.initialize(False)
@@ -928,6 +902,37 @@ class ScWindow(QMainWindow, Ui_B_SC):
                     return
         e.accept()
 
+    def setWindowGeometry(self):
+        x = ScOptions.instance().getOption('WindowX', self.pos().x())
+        y = ScOptions.instance().getOption('WindowY', self.pos().y())
+        w = ScOptions.instance().getOption('WindowW', self.width())
+        h = ScOptions.instance().getOption('WindowH', self.height())
+
+        screenW = QApplication.desktop().width()
+        screenH = QApplication.desktop().height()
+        if w < 100:
+            w = 781
+        if h < 100:
+            w = 589
+
+        if w > screenW:
+            w = 781
+        if h > screenH:
+            h = 589
+
+        if x < 20 or x > (screenW - 20):
+            x = 20
+        if y < 20 or y > (screenH - 20):
+            y = 20
+
+        self.resize(w, h)
+        self.move(x, y)
+        self.updateGeometry()
+
+        maximized = ScOptions.instance().getOption('Maximized', False)
+        if maximized:
+            self.setWindowState(Qt.WindowMaximized)
+        
     def loadOptions(self):
         self.realm = ScOptions.instance().getOption('Realm', 'Albion')
         self.crafterSkill = ScOptions.instance().getOption('CrafterSkill', 1000)
@@ -968,10 +973,16 @@ class ScWindow(QMainWindow, Ui_B_SC):
         ScOptions.instance().setOption('ConfigReportXSLT', self.ReportFile)
         ScOptions.instance().setOption('ConfigUiReportXSLT', self.UiReportFile)
 
-        ScOptions.instance().setOption('WindowX', self.pos().x())
-        ScOptions.instance().setOption('WindowY', self.pos().y())
-        ScOptions.instance().setOption('WindowW', self.width())
-        ScOptions.instance().setOption('WindowH', self.height())
+        maximized = (self.windowState() & Qt.WindowMaximized) > 0 \
+            and sys.platform != "darwin"
+
+        if not maximized:
+            ScOptions.instance().setOption('WindowX', self.pos().x())
+            ScOptions.instance().setOption('WindowY', self.pos().y())
+            ScOptions.instance().setOption('WindowW', self.width())
+            ScOptions.instance().setOption('WindowH', self.height())
+
+        ScOptions.instance().setOption('Maximized', maximized)
 
         ScOptions.instance().setOption('WindowState', 
             binascii.b2a_base64(self.saveState(0))[:-1])
