@@ -258,7 +258,7 @@ class EthinargQuery:
             
         curtime = time.time()
 
-        if not self.sid or (curtime - self.lastLogin) > 60 * 20:
+        if not self.sid or (curtime - self.lastLogin) > 60 * 60 * 24:
             if not self.login(self.username, self.password):
                 return False
 
@@ -353,6 +353,9 @@ class EthinargQuery:
     def setPageNumber(self, num):
         self.queryparams['curr_page'] = str(num)
 
+    def setLocation(self, loc):
+        self.queryparams['location'] = loc
+
 class QueryRunner(QThread):
     def __init__(self, parent, uname, pwd):
         QThread.__init__(self, parent)
@@ -428,6 +431,7 @@ class EthinargTestWindow(QDialog, Ui_B_Ethinarg):
             (self.bonus2Combo, 'stat2', self.query.setBonus2),
             (self.bonus3Combo, 'stat3', self.query.setBonus3),
             (self.magicalCombo, 'ma', self.query.setMagicalAbility),
+            (self.locationCombo, 'location', self.query.setLocation),
         ]
         QApplication.postEvent(self, QEvent(InitializedEvent))
 
