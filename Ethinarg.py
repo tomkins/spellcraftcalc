@@ -385,6 +385,7 @@ class EthinargTestWindow(QDialog, Ui_B_Ethinarg):
         self.connect(self.nextButton, SIGNAL('clicked()'), self.nextPage)
         self.connect(self.prevButton, SIGNAL('clicked()'), self.prevPage)
         self.connect(self.goButton, SIGNAL('clicked()'), self.goPage)
+        self.connect(self.closeButton, SIGNAL('clicked()'), self.close)
         #self.connect(self.collapseButton, SIGNAL('clicked()'),
         #    self.collapsePane)
         #self.connect(self.openSearchButton, SIGNAL('clicked()'),
@@ -513,7 +514,7 @@ class EthinargTestWindow(QDialog, Ui_B_Ethinarg):
             self.prevButton.setEnabled(self.currentPage > 1)
 
         self.pageNum.setText(str(self.currentPage))
-        self.pageStatus.setText('%d/%d' % (self.currentPage, numpages))
+        self.pageStatus.setText('Page: %d/%d' % (self.currentPage, numpages))
 
     def nextPage(self):
         self.currentPage += 1
