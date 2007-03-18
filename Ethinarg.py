@@ -399,26 +399,20 @@ class EthinargTestWindow(QDialog, Ui_B_Ethinarg):
         self.currentPage = 1
         self.pageStatus.setText('')
         self.openSearchButton.setChecked(True)
-        #self.processBox = QueryProgress(self)
-
+        self.slotCombo.setCurrentIndex(0)
+        self.usernameBox.setText(ScOptions.instance().getOption(
+            'Ethinarg_username', ''))
+        self.passwordBox.setText(ScOptions.instance().getOption(
+            'Ethinarg_password', ''))
         self.show()
 
         self.processBox = QProgressDialog('Querying the database', 'Cancel',
             0, 0, self)
         self.processBox.setCancelButton(None)
-
-        self.slotCombo.setCurrentIndex(0)
-
         self.processBox.setLabelText('Initializing...')
-        InitializeThread(self).start()
         self.processBox.setWindowModality(Qt.WindowModal)
+        InitializeThread(self).start()
         self.processBox.show()
-
-        self.usernameBox.setText(ScOptions.instance().getOption(
-            'Ethinarg_username', ''))
-        self.passwordBox.setText(ScOptions.instance().getOption(
-            'Ethinarg_password', ''))
-    
 
     def initialize(self):
         self.query = EthinargQuery()
@@ -488,7 +482,6 @@ class EthinargTestWindow(QDialog, Ui_B_Ethinarg):
         self.processBox.reset()
         self.processBox.setLabelText('Querying the database...')
         self.processBox.show()
-        #self.processBox.start()
         QueryRunner(self, uname, pwd).start()
 
     def _doQuery(self, uname = None, pwd = None):
@@ -498,9 +491,10 @@ class EthinargTestWindow(QDialog, Ui_B_Ethinarg):
             #    "Could not login, please check username and password")
             return
 
-        QApplication.postEvent(self, QEvent(PostResultsEvent))
-        #self.browser.setHtml(self.query.htmlText)
-        #self.updatePageStatus()
+        try:
+            QApplication.postEvent(self, QEvent(PostResultsEvent))
+        except:
+            pass
         
     def updatePageStatus(self):
         numpages = self.query.numPages
@@ -622,18 +616,15 @@ class EthinargTestWindow(QDialog, Ui_B_Ethinarg):
 
     def event(self, e):
         if e.type() == LoginFailedEvent:
-            #self.processbox.stop()
             self.processBox.cancel()
             QMessageBox.critical(self, "Login Error!",
                 "Could not login, please check username and password")
             return True
         elif e.type() == PostResultsEvent:
-            #self.processBox.stop()
             self.processBox.cancel()
             self.browser.setHtml(self.query.htmlText)
             self.updatePageStatus()
             self.openSearchButton.setChecked(False)
-            #self.collapsePane()
             return True
         elif e.type() == InitializedEvent:
             self.loadCombos()

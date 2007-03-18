@@ -2966,7 +2966,7 @@ class ScWindow(QMainWindow, Ui_B_SC):
 
     def ethinargTest(self):
         if not self.ethinargWindow:
-            self.ethinargWindow = Ethinarg.EthinargTestWindow(self, self)
+            self.ethinargWindow = Ethinarg.EthinargTestWindow(self, None)
         self.ethinargWindow.show()
 
 if __name__ == '__main__':
