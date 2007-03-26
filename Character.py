@@ -619,7 +619,7 @@ ItemTypes = d2({
     'Neck':        t2(('Necklass',)),
     'Cloak':       t2(('Cloak',)),
     'Jewel':       t2(('Jewelry',)),
-    'Belt':        t2(('Belt')),
+    'Belt':        t2(('Belt',)),
     'Left Ring':   t2(('Ring',)),
     'Right Ring':  t2(('Ring',)),
     'Left Wrist':  t2(('Wrist',)),
