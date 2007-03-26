@@ -10,7 +10,7 @@
    </rect>
   </property>
   <property name="windowTitle" >
-   <string>Dialog</string>
+   <string>Ethinarg Search</string>
   </property>
   <layout class="QHBoxLayout" >
    <property name="margin" >
