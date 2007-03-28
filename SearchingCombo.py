@@ -29,6 +29,7 @@ class SearchingCombo(QComboBox):
 
     def insertItems(self, idx, lst):
         self.minWidth = 0
+        if not isinstance(lst, basestring): lst = [lst,]
         if not isinstance(lst, list): lst = list(lst)
         QComboBox.insertItems(self, idx, lst)
 
