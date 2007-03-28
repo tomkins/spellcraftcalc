@@ -223,7 +223,7 @@ AllBonusList = {
     'Ranger' : {
         'All Melee Weapon Skills' : ('Blades', 'Piercing',),
         'All Dual Wield Skills' : ('Celtic Dual',),
-        'All Archery Skills' : ('Archery'),
+        'All Archery Skills' : ('Archery',),
         'Other Skills' : ('Stealth',),
         'Races' : t2(('Celt', 'Elf', 'Lurikeen', 'Shar',)),
     },
