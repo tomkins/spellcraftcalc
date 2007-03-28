@@ -108,7 +108,7 @@ AllBonusList = {
 
     'Scout' : {
         'All Melee Weapon Skills' : ('Slash', 'Thrust',),
-        'All Archery Skills' : ('Longbow',),
+        'All Archery Skills' : ('Archery',),
         'Other Skills' : ('Stealth', 'Shield',),
         'Races' : t2(('Briton', 'Highlander', 'Inconnu', 'Saracen',)),
     },
@@ -223,8 +223,8 @@ AllBonusList = {
     'Ranger' : {
         'All Melee Weapon Skills' : ('Blades', 'Piercing',),
         'All Dual Wield Skills' : ('Celtic Dual',),
-        'All Archery Skills' : ('Recurve Bow',),
-        'Other Skills' : ('Stealth','Pathfinding',),
+        'All Archery Skills' : ('Archery'),
+        'Other Skills' : ('Stealth',),
         'Races' : t2(('Celt', 'Elf', 'Lurikeen', 'Shar',)),
     },
 
@@ -277,7 +277,7 @@ AllBonusList = {
     'Hunter' : {
         'All Magic Skills' : ('Beastcraft',),
         'All Melee Weapon Skills' : ('Spear', 'Sword',),
-        'All Archery Skills' : ('Composite Bow',),
+        'All Archery Skills' : ('Archery',),
         'Other Skills' : ('Stealth',),
         'Races' : t2(('Dwarf', 'Frostalf', 'Kobold', 'Norseman', 'Valkyn',)),
     },

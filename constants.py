@@ -1140,6 +1140,10 @@ FixEffectsTable = d2({
     'Spirit Focus' :   'Spirit Magic',
     'Wind Focus' :     'Wind Magic',
 
+    'Composite Bow':   'Archery',
+    'Recurve Bow':     'Archery',
+    'Longbow':         'Archery',
+
     'All Focus Bonus' :             'All Spell Lines',
     'All Melee Skill Bonus' :       'All Melee Weapon Skills',
     'All Magic Skill Bonus' :       'All Magic Skills',
