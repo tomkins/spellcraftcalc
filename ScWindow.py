@@ -1464,7 +1464,8 @@ class ScWindow(QMainWindow, Ui_B_SC):
                 amount = int('0'+re.sub('[^\d]', '', item.slot(i).amount()))
                 if gemtype == 'Skill':
                     effects = [effect,]
-                    if effect[0:4] == 'All ':
+                    if effect[0:4] == 'All ' and \
+                       AllBonusList[self.realm][self.charclass].has_key(effect):
                         effects.extend(AllBonusList[self.realm] \
                                                    [self.charclass][effect])
                     for effect in effects:
@@ -2606,10 +2607,9 @@ class ScWindow(QMainWindow, Ui_B_SC):
                        if not find in AllBonusList[self.realm] \
                                                   [self.charclass][effect]:
                            continue
-                    elif (slottype == 'Skill' or slottype == 'Focus') \
-                            and effect[0:4] == 'All ' \
-                            and effect in AllBonusList[self.realm]\
-                                                      [self.charclass].keys():
+                    elif (slottype == 'Skill' or slottype == 'Focus') and \
+                       effect[0:4] == 'All ' and \
+                       AllBonusList[self.realm][self.charclass].has_key(effect):
                         if not find in AllBonusList[self.realm] \
                                                    [self.charclass][effect]:
                             continue
@@ -2778,7 +2778,7 @@ class ScWindow(QMainWindow, Ui_B_SC):
         elif newtype == 'Legendary Staff':
             item.slot(3).setSlotType('crafted')
             item.slot(3).setAll('Focus', '50', 'All Spell Lines')
-            item.slot(4).setAll('Other Bonus', '2', 'Magic Damage', 
+            item.slot(4).setAll('Other Bonus', '2', 'Archery and Spell Damage', 
                                 requirement="vs All Monsters")
             item.slot(5).setAll('Charged Effect', '60', 'Dmg w/Resist Debuff', 
                                 requirement="Level 50")
@@ -2787,7 +2787,7 @@ class ScWindow(QMainWindow, Ui_B_SC):
             item.slot(4).setAll('Offensive Effect', '20', 'Direct Damage')
         elif newtype == 'Legendary Bow':
             item.slot(3).setSlotType('crafted')
-            item.slot(3).setAll('Other Bonus', '2', 'Archery Damage', 
+            item.slot(3).setAll('Other Bonus', '2', 'Archery and Spell Damage', 
                                 requirement="vs All Monsters")
             item.slot(4).setAll('Other Bonus', '10', 'AF')
             item.slot(5).setAll('Offensive Effect', '25', 'Dmg w/Resist Debuff',
