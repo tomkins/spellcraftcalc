@@ -1,4 +1,4 @@
-Updated ??/??/2007 - Version 1.99 - catch up to DAoC 1.88
+Updated 3/29/2007 - Version 1.99 - catch up to DAoC 1.88
 
   Removed Pathfinding for Rangers, changed primary bow-skills to all
   be 'All Archery Skills', as well as Airy War gems for 1.88.
@@ -22,6 +22,18 @@ Updated ??/??/2007 - Version 1.99 - catch up to DAoC 1.88
   at the removed item, and points them to the next item in this
   slot.  Outfits will continue to point to the same newly blank 
   item when the entire item or its slots are Cleared.
+
+  Changed modality of progress box with Ethinarg search. Now it
+  is only modal with regards to the Ethinarg search dialog.
+
+  Added the 'location' search to the Ethinarg item search.
+
+  Fixed encoding of spaces in item name with Ethinarg search.
+
+  Ethinarg search options are now saved on program exit.
+
+  When adding a found item to a template, there is a much more
+  informative dialog box.
 
 Updated 03/09/2007 - Version 1.98
 
