@@ -1,7 +1,9 @@
-Updated ??/??/2007 - Version 1.99
+Updated ??/??/2007 - Version 1.99 - catch up to DAoC 1.88
 
   Removed Pathfinding for Rangers, changed primary bow-skills to all
-  be 'Archery', as well as Airy War gems.
+  be 'All Archery Skills', as well as Airy War gems for 1.88.
+
+  Stop moving the maximized window around when changing options.
 
   If there is a program bug and a template or export document
   can't be prepared, the template or exported xml will no longer 
