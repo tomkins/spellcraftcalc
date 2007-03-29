@@ -431,7 +431,6 @@ for realm in skillTable.keys():
   skills.sort()
   skillList[realm] = t2(skills)
   skills.insert(2, 'All Dual Wield Skills')
-  skills.insert(3, 'All Archery Skills')
   # bug - CM Explorer shows +Witchcraft, but no craftable gem
   if realm == 'Midgard': skills.append('Witchcraft')
   dropSkillList[realm] = t2(skills)
@@ -1140,9 +1139,9 @@ FixEffectsTable = d2({
     'Spirit Focus' :   'Spirit Magic',
     'Wind Focus' :     'Wind Magic',
 
-    'Composite Bow' :  'Archery',
-    'Recurve Bow' :    'Archery',
-    'Longbow' :        'Archery',
+    'Composite Bow' :  'All Archery Skills',
+    'Recurve Bow' :    'All Archery Skills',
+    'Longbow' :        'All Archery Skills',
 
     'All Focus Bonus' :             'All Spell Lines',
     'All Melee Skill Bonus' :       'All Melee Weapon Skills',
@@ -1151,19 +1150,25 @@ FixEffectsTable = d2({
     'Archery Skill Bonus' :         'All Archery Skills',
 
     'AF Bonus' :               'AF',
-    'Archery Damage Bonus' :   'Archery Damage',
-    'Archery Range Bonus' :    'Archery Range',
-    'Archery Speed Bonus' :    'Archery Speed',
+    'Archery Damage Bonus' :   'Archery and Spell Damage',
+    'Archery Damage' :         'Archery and Spell Damage',
+    'Spell Damage' :           'Archery and Spell Damage',
+    'Spell Damage Bonus' :     'Archery and Spell Damage',
+    'Magic Damage' :           'Archery and Spell Damage',
+    'Archery Range' :          'Archery and Spell Range',
+    'Archery Range Bonus' :    'Archery and Spell Range',
+    'Casting Range' :          'Archery and Spell Range',
+    'Spell Range' :            'Archery and Spell Range',
+    'Spell Range Bonus' :      'Archery and Spell Range',
+    'Archery Speed' :          'Archery and Casting Speed',
+    'Archery Speed Bonus' :    'Archery and Casting Speed',
+    'Casting Speed' :          'Archery and Casting Speed',
+    'Casting Speed Bonus' :    'Archery and Casting Speed',
     'Buff Bonus' :             'Stat Buff Effectiveness',
-    'Casting Range' :          'Spell Range',
-    'Casting Speed Bonus' :    'Casting Speed',
     'Debuff Bonus' :           'Stat Debuff Effectiveness',
     'Defensive Bonus' :        'Defensive',
     'Healing Bonus' :          'Healing Effectiveness',
-    'Spell Damage Bonus' :     'Spell Damage',
-    'Magic Damage' :           'Spell Damage',
     'Spell Duration Bonus' :   'Duration of Spells',
-    'Spell Range Bonus' :      'Spell Range',
     'Style Damage Bonus' :     'Style Damage',
     'Melee Damage Bonus' :     'Melee Damage',
     'Melee Speed Bonus' :      'Melee Combat Speed',   
