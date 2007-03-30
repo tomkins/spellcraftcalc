@@ -21,7 +21,8 @@ AllBonusList = {
 
     'Armsman' : {
         'All Melee Weapon Skills' : ('Crush', 'Slash', 'Thrust', 'Polearm', 'Two Handed',),
-        'Other Skills' : ('Crossbow', 'Parry', 'Shield',),
+        'All Archery Skills' : ('Crossbow',),
+        'Other Skills' : ('Parry', 'Shield',),
         'Races' : t2(('Avalonian', 'Briton', 'Half Ogre', 'Highlander', 'Inconnu', 'Korazh', 'Saracen',)),
     },
 
@@ -108,7 +109,8 @@ AllBonusList = {
 
     'Scout' : {
         'All Melee Weapon Skills' : ('Slash', 'Thrust',),
-        'Other Skills' : ('Archery','Stealth', 'Shield',),
+        'All Archery Skills' : ('Archery',),
+        'Other Skills' : ('Stealth', 'Shield',),
         'Races' : t2(('Briton', 'Highlander', 'Inconnu', 'Saracen',)),
     },
 
@@ -222,7 +224,8 @@ AllBonusList = {
     'Ranger' : {
         'All Melee Weapon Skills' : ('Blades', 'Piercing',),
         'All Dual Wield Skills' : ('Celtic Dual',),
-        'Other Skills' : ('Archery','Stealth',),
+        'All Archery Skills' : ('Archery',),
+        'Other Skills' : ('Stealth',),
         'Races' : t2(('Celt', 'Elf', 'Lurikeen', 'Shar',)),
     },
 
@@ -275,7 +278,8 @@ AllBonusList = {
     'Hunter' : {
         'All Magic Skills' : ('Beastcraft',),
         'All Melee Weapon Skills' : ('Spear', 'Sword',),
-        'Other Skills' : ('Archery','Stealth',),
+        'All Archery Skills' : ('Archery',),
+        'Other Skills' : ('Stealth',),
         'Races' : t2(('Dwarf', 'Frostalf', 'Kobold', 'Norseman', 'Valkyn',)),
     },
 
@@ -380,7 +384,8 @@ for realm in Realms:
   for charclass in AllBonusList[realm]:
     skills = []
     for listname in ('All Magic Skills', 'All Melee Weapon Skills',
-                     'All Dual Wield Skills', 'Other Skills', ):
+                     'All Dual Wield Skills', 'All Archery Skills', 
+                     'Other Skills', ):
         if not AllBonusList[realm][charclass].has_key(listname):
             AllBonusList[realm][charclass][listname] = ()
         skills.extend(AllBonusList[realm][charclass][listname])
