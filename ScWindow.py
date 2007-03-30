@@ -17,6 +17,7 @@ import types
 import re
 import string
 import ItemLevel
+import ChooseSlot
 import Options
 import SC
 import CraftWindow
@@ -2835,10 +2836,29 @@ class ScWindow(QMainWindow, Ui_B_SC):
             self.chooseItemType(action)
 
     def addItem(self, item):
-        if not item.Location in TabList:
-            print 'Could not resolve: ', item.Location
+        if item.Location[-4:] == 'Ring':
+            locations = ('Left Ring', 'Right Ring', 'Spare',)
+        elif item.Location[-5:] == 'Wrist':
+            locations = ('Left Wrist', 'Right Wrist', 'Spare',)
+        elif ((item.TYPE in ItemTypes['Left Hand'][item.Realm])
+              or (item.TYPE in ItemTypes['2 Handed'][item.Realm])):
+            # Items in the left hand or two hand list might also be
+            # in the ranged or right hand list, let's offer them...
+            locations = []
+            for test in ('Left Hand','Right Hand','Two Handed','Ranged',):
+                if item.TYPE in ItemTypes[test][item.Realm]:
+                    locations.append(test)
+            locations.append('Spare')
+        elif item.Location in TabList:
+            locations = (item.Location, 'Spare',)
+        else:
+            locations = ('Spare',)
+        chooseItemSlot = ChooseSlot.ChooseSlot(self.window(), locations)
+        slot = chooseItemSlot.exec_()
+        if slot < 0:
             return
-
+        else:
+            item.Location = locations[slot]
         self.modified = True
         item.TemplateIndex = self.itemIndex
         self.itemIndex += 1
