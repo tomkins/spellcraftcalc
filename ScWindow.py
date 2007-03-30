@@ -2845,7 +2845,7 @@ class ScWindow(QMainWindow, Ui_B_SC):
             # Items in the left hand or two hand list might also be
             # in the ranged or right hand list, let's offer them...
             locations = []
-            for test in ('Left Hand','Right Hand','Two Handed','Ranged',):
+            for test in ('Left Hand','Right Hand','2 Handed','Ranged',):
                 if item.TYPE in ItemTypes[test][item.Realm]:
                     locations.append(test)
             locations.append('Spare')
