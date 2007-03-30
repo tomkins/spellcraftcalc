@@ -1,7 +1,23 @@
 Updated 3/29/2007 - Version 1.99 - catch up to DAoC 1.88
 
-  Removed Pathfinding for Rangers, changed primary bow-skills to all
-  be 'All Archery Skills', as well as Airy War gems for 1.88.
+  For purposes of the Spellcrafting program, there are now three
+  bonuses "Archery and Spell Damage", "Archery and Spell Range",
+  and "Archery and Casting Speed" as was wrote by Mythic in the
+  1.88 patch notes.  The game has yet to display these as such,
+  but Archery now affects Spells and Spell now affects Archery.
+
+  Removed Pathfinding for Rangers, changed bow-skills of Hunters,
+  Rangers and Scouts and to all be 'Archery', and changed Airy War 
+  gems to 'Archery' for 1.88.  Yes, it doesn't match the delve,
+  the name may be adjusted again, later.  
+
+  Although pre-1.88 crafted bonuses show up in game as Recurve Bow, 
+  Composite Bow, or Archery, all will display in the Calculator 
+  as 'Archery'.  For inquiring minds from Mordred and Gaheris, 
+  they all affect all primary Archers.  'All Archery Skills' but 
+  not 'Archery' will also affect Crossbow.  So imported items will 
+  be changed to 'Archery', and can be switched to All Archery Skills 
+  where it's appropriate (this really only affects Crossbow classes).
 
   Stop moving the maximized window around when changing options.
 
