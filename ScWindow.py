@@ -1408,7 +1408,10 @@ class ScWindow(QMainWindow, Ui_B_SC):
         model.insertRows(model.rowCount(), 1)
         wid = 3
         if amt > -10 and amt < 10: wid += 1
-        bonus = "%*d %s" % (wid, amt, bonus)
+        if bonus[0:4] == 'All ':
+            bonus = "%*s%d %s)" % (wid - 1, "(", amt, bonus,)
+        else:
+            bonus = "%*d %s" % (wid, amt, bonus,)
         index = model.index(model.rowCount()-1, 0, QModelIndex())
         model.setData(index, QVariant(bonus), Qt.DisplayRole)
         model.setData(index, QVariant(group), Qt.UserRole)
@@ -2664,7 +2667,11 @@ class ScWindow(QMainWindow, Ui_B_SC):
         bonus = str(index.data(Qt.UserRole).toString())
         if effect[-6:] == ' (PvE)' or effect[-6:] == ' Focus':
             effect = effect[:-6]
-        amount, effect = string.split(effect.lstrip(), ' ', 1)
+        if effect[-1:] == ')':
+            amount, effect = string.split(effect.lstrip()[:-1], ' ', 1)
+            ignore, amount = string.split(amount, '(', 1)
+        else:
+            amount, effect = string.split(effect.lstrip(), ' ', 1)
         self.delveItemsDialog(effect, bonus)
 
     def showCap(self):
