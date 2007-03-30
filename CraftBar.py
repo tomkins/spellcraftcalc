@@ -119,7 +119,6 @@ class CraftBar(QDialog, Ui_B_CraftBar):
         self.HotbarRow.setValue(1)
         self.HotbarPos.setValue(1)
         if sys.platform == 'win32':
-            extradirs = 
             path = os.environ.get('APPDATA', '')
             if not os.path.isdir(path):
                 path = os.environ.get('HOMEDRIVE', '')
