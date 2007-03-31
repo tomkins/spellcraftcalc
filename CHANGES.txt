@@ -1,3 +1,10 @@
+Updated ?/??/2007 - Version 2.00 - in sync with DAoC 1.88
+
+  Akatsuki moved from the GOA/Euro list to the US list with
+  their new server number, for exporting gems.
+
+
+
 Updated 3/30/2007 - Version 1.99 - catch up to DAoC 1.88
 
   Search Ethinarg's Database grew a quickbar button.  It also 
