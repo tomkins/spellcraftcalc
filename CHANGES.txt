@@ -1,5 +1,12 @@
 Updated 3/29/2007 - Version 1.99 - catch up to DAoC 1.88
 
+  Search Ethinarg's Database grew a quickbar button.  It also 
+  pops up a window prompting the user to choose a spot to stick 
+  the item, when choosing to 'Add Item to template', from what 
+  we can second-guess for good slot choices.  Solves a bug where 
+  most rings could not be imported, and lets the user pick from
+  left and right hand for rings and wrists, for example.
+
   For purposes of the Spellcrafting program, there are now three
   bonuses "Archery and Spell Damage", "Archery and Spell Range",
   and "Archery and Casting Speed" as was wrote by Mythic in the
@@ -8,16 +15,26 @@ Updated 3/29/2007 - Version 1.99 - catch up to DAoC 1.88
 
   Removed Pathfinding for Rangers, changed bow-skills of Hunters,
   Rangers and Scouts and to all be 'Archery', and changed Airy War 
-  gems to 'Archery' for 1.88.  Yes, it doesn't match the delve,
-  the name may be adjusted again, later.  
+  gems to 'Archery' for 1.88.  Yes, it doesn't match the delve.
+  The name may be adjusted again, later, just waiting to see.
 
   Although pre-1.88 crafted bonuses show up in game as Recurve Bow, 
   Composite Bow, or Archery, all will display in the Calculator 
   as 'Archery'.  For inquiring minds from Mordred and Gaheris, 
   they all affect all primary Archers.  'All Archery Skills' but 
-  not 'Archery' will also affect Crossbow.  So imported items will 
-  be changed to 'Archery', and can be switched to All Archery Skills 
-  where it's appropriate (this really only affects Crossbow classes).
+  not 'Archery' will also affect Crossbow.  
+
+  So imported items archery-skills will be changed to 'Archery', 
+  and the user can switch them to All Archery Skills where it's 
+  appropriate (this really only affects Crossbow classes).  This 
+  is less misleading then changing items to say "All Archery Skills"
+  when they are not, tricking Crossbow specs into adding such an 
+  item to the template.  It is part of the reason the crafted-gem
+  skill will show as "Archery" for now, as well.
+
+  Many users were confused seeing "2 All Melee Skills" followed by
+  "4 Slash" "4 Thrust" etc.  It IS added, but now to make clearer
+  that it's a subtotal, it will show as "(2 All Melee Skills)".
 
   Stop moving the maximized window around when changing options.
 
