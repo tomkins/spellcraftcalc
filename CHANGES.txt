@@ -1,4 +1,4 @@
-Updated 3/29/2007 - Version 1.99 - catch up to DAoC 1.88
+Updated 3/30/2007 - Version 1.99 - catch up to DAoC 1.88
 
   Search Ethinarg's Database grew a quickbar button.  It also 
   pops up a window prompting the user to choose a spot to stick 
