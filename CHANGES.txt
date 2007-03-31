@@ -36,7 +36,13 @@ Updated 3/30/2007 - Version 1.99 - catch up to DAoC 1.88
   "4 Slash" "4 Thrust" etc.  It IS added, but now to make clearer
   that it's a subtotal, it will show as "(2 All Melee Skills)".
 
-  Stop moving the maximized window around when changing options.
+  Have quit moving the maximized window around when changing options.
+
+  Export Gems works again (it always did, actually) and will reset
+  your path to your .ini files on first-use.  Your .ini files are
+  being moved (as you log into them one by one) into your profile's
+  Application Data\Electronic Arts\Dark Age of Camelot directory.
+  This is the -new- default for export-gems path.
 
   If there is a program bug and a template or export document
   can't be prepared, the template or exported xml will no longer 
@@ -67,6 +73,9 @@ Updated 3/30/2007 - Version 1.99 - catch up to DAoC 1.88
 
   When adding a found item to a template, there is a much more
   informative dialog box.
+
+  Fixed spelling of Guinevere for our diehard roleplayers (who
+  don't have alot of humor for spelling errors :)
 
 Updated 03/09/2007 - Version 1.98
 
