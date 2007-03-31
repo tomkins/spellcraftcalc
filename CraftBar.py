@@ -118,7 +118,17 @@ class CraftBar(QDialog, Ui_B_CraftBar):
         self.HotbarNum.setValue(1)
         self.HotbarRow.setValue(1)
         self.HotbarPos.setValue(1)
-        self.DaocPath.setText(ScOptions.instance().getOption('DaocPath', ''))
+        if sys.platform == 'win32':
+            path = os.environ.get('APPDATA', '')
+            if not os.path.isdir(path):
+                path = os.environ.get('HOMEDRIVE', '')
+                path = os.path.join(path, os.environ.get('HOMEPATH', ''))
+                path = os.path.join(path, 'Application Data')
+            path = os.path.join(path, 'Electronic Arts\Dark Age of Camelot')
+        else:
+            path = os.environ.get('HOME', '')
+        self.DaocPath.setText(ScOptions.instance().getOption('DaocIniPath', 
+            path))
         self.pieceBoxChanged()
         self.computeGemCount()
         self.computeBarEnd()

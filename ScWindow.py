@@ -17,6 +17,7 @@ import types
 import re
 import string
 import ItemLevel
+import ChooseSlot
 import Options
 import SC
 import CraftWindow
@@ -628,6 +629,8 @@ class ScWindow(QMainWindow, Ui_B_SC):
         self.toolbar.addAction(self.getIcon('SaveItem'), 'Save Item', 
                                self.saveItem)
         self.filemenu.addAction('Search &Ethinarg\'s Items', self.ethinargTest)
+        self.toolbar.addAction(self.getIcon('Search'), 'Search Ethinarg\'s Items',
+                               self.ethinargTest)
         self.filemenu.addAction('Item Database Path...', self.chooseItemPath)
 
         self.filemenu.addSeparator()
@@ -1408,7 +1411,10 @@ class ScWindow(QMainWindow, Ui_B_SC):
         model.insertRows(model.rowCount(), 1)
         wid = 3
         if amt > -10 and amt < 10: wid += 1
-        bonus = "%*d %s" % (wid, amt, bonus)
+        if bonus[0:4] == 'All ':
+            bonus = "%*s%d %s)" % (wid - 1, "(", amt, bonus,)
+        else:
+            bonus = "%*d %s" % (wid, amt, bonus,)
         index = model.index(model.rowCount()-1, 0, QModelIndex())
         model.setData(index, QVariant(bonus), Qt.DisplayRole)
         model.setData(index, QVariant(group), Qt.UserRole)
@@ -2664,7 +2670,11 @@ class ScWindow(QMainWindow, Ui_B_SC):
         bonus = str(index.data(Qt.UserRole).toString())
         if effect[-6:] == ' (PvE)' or effect[-6:] == ' Focus':
             effect = effect[:-6]
-        amount, effect = string.split(effect.lstrip(), ' ', 1)
+        if effect[-1:] == ')':
+            amount, effect = string.split(effect.lstrip()[:-1], ' ', 1)
+            ignore, amount = string.split(amount, '(', 1)
+        else:
+            amount, effect = string.split(effect.lstrip(), ' ', 1)
         self.delveItemsDialog(effect, bonus)
 
     def showCap(self):
@@ -2828,10 +2838,29 @@ class ScWindow(QMainWindow, Ui_B_SC):
             self.chooseItemType(action)
 
     def addItem(self, item):
-        if not item.Location in TabList:
-            print 'Could not resolve: ', item.Location
+        if item.Location[-4:] == 'Ring':
+            locations = ('Left Ring', 'Right Ring', 'Spare',)
+        elif item.Location[-5:] == 'Wrist':
+            locations = ('Left Wrist', 'Right Wrist', 'Spare',)
+        elif ((item.TYPE in ItemTypes['Left Hand'][item.Realm])
+              or (item.TYPE in ItemTypes['2 Handed'][item.Realm])):
+            # Items in the left hand or two hand list might also be
+            # in the ranged or right hand list, let's offer them...
+            locations = []
+            for test in ('Left Hand','Right Hand','2 Handed','Ranged',):
+                if item.TYPE in ItemTypes[test][item.Realm]:
+                    locations.append(test)
+            locations.append('Spare')
+        elif item.Location in TabList:
+            locations = (item.Location, 'Spare',)
+        else:
+            locations = ('Spare',)
+        chooseItemSlot = ChooseSlot.ChooseSlot(self.window(), locations)
+        slot = chooseItemSlot.exec_()
+        if slot < 0:
             return
-
+        else:
+            item.Location = locations[slot]
         self.modified = True
         item.TemplateIndex = self.itemIndex
         self.itemIndex += 1

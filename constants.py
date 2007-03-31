@@ -285,8 +285,9 @@ skillTable = {
 
     'Albion' : {
 
-        'All Melee Weapon Skills' : ('Finesse', 'War Sigil',),
         'All Magic Skills' :  ('Finesse', 'Fervor Sigil',),
+        'All Melee Weapon Skills' : ('Finesse', 'War Sigil',),
+        'Archery' :           ('Airy', 'War Sigil',),
         'Aura Manipulation' : ('Radiant', 'Fervor Sigil',),
         'Body Magic' :        ('Heated', 'Evocation Sigil',),
         'Chants' :            ('Earthen', 'Fervor Sigil',),
@@ -304,7 +305,6 @@ skillTable = {
         'Fire Magic' :        ('Fiery', 'Evocation Sigil',),
         'Fist Wraps' :        ('Glacial', 'War Sigil',),
         'Instruments' :       ('Vapor', 'Fervor Sigil',),
-        'All Archery Skills': ('Airy', 'War Sigil',),
         'Magnetism' :         ('Magnetic', 'Fervor Sigil',),
         'Matter Magic' :      ('Dusty', 'Evocation Sigil',),
         'Mauler Staff' :      ('Cinder', 'War Sigil',),
@@ -328,9 +328,10 @@ skillTable = {
 
     'Hibernia' : {
 
-        'All Melee Weapon Skills' : ('Finesse', 'War Spell Stone',),
         'All Magic Skills' :  ('Finesse', 'Nature Spell Stone',),
+        'All Melee Weapon Skills' : ('Finesse', 'War Spell Stone',),
         'Arboreal Path' :     ('Steaming', 'Nature Spell Stone',),
+        'Archery' :           ('Airy', 'War Spell Stone',),
         'Aura Manipulation' : ('Radiant', 'Nature Spell Stone'),
         'Blades' :            ('Watery', 'War Spell Stone',),
         'Blunt' :             ('Fiery', 'War Spell Stone',),
@@ -356,7 +357,6 @@ skillTable = {
         'Phantasmal Wail' :   ('Phantasmal', 'Arcane Spell Stone',),
         'Piercing' :          ('Dusty', 'War Spell Stone',),
         'Power Strikes' :     ('Clout', 'Nature Spell Stone'),
-        'All Archery Skills': ('Airy', 'War Spell Stone',),
         'Regrowth' :          ('Watery', 'Nature Spell Stone',),
         'Scythe' :            ('Light', 'War Spell Stone',),
         'Shadow Mastery' :    ('Shadowy', 'Arcane Spell Stone',),
@@ -372,8 +372,9 @@ skillTable = {
 
     'Midgard' : { 
 
-        'All Melee Weapon Skills' : ('Finesse', 'War Rune',),
         'All Magic Skills' :  ('Finesse', 'Primal Rune',),
+        'All Melee Weapon Skills' : ('Finesse', 'War Rune',),
+        'Archery' :           ('Airy', 'War Rune',),
         'Augmentation' :      ('Airy', 'Chaos Rune',),
         'Aura Manipulation' : ('Radiant', 'Primal Rune',),
         'Axe' :               ('Earthen', 'War Rune',),
@@ -381,7 +382,6 @@ skillTable = {
         'Beastcraft' :        ('Earthen', 'Primal Rune',),
         'Bone Army' :         ('Ashen', 'Primal Rune',),
         'Cave Magic' :        ('Fiery', 'Chaos Rune',),
-        'All Archery Skills': ('Airy', 'War Rune',),
         'Critical Strike' :   ('Heated', 'Battle Jewel',),
         'Cursing' :           ('Blighted', 'Primal Rune',),
         'Darkness' :          ('Icy', 'Chaos Rune',),
@@ -430,7 +430,8 @@ for realm in skillTable.keys():
   skills = skillTable[realm].keys()
   skills.sort()
   skillList[realm] = t2(skills)
-  skills.insert(2, 'All Dual Wield Skills')
+  skills.insert(2, 'All Archery Skills')
+  skills.insert(3, 'All Dual Wield Skills')
   # bug - CM Explorer shows +Witchcraft, but no craftable gem
   if realm == 'Midgard': skills.append('Witchcraft')
   dropSkillList[realm] = t2(skills)
@@ -1134,9 +1135,9 @@ FixEffectsTable = d2({
     'Spirit Focus' :   'Spirit Magic',
     'Wind Focus' :     'Wind Magic',
 
-    'Composite Bow' :  'All Archery Skills',
-    'Recurve Bow' :    'All Archery Skills',
-    'Longbow' :        'All Archery Skills',
+    'Composite Bow' :  'Archery',
+    'Recurve Bow' :    'Archery',
+    'Longbow' :        'Archery',
 
     'All Focus Bonus' :             'All Spell Lines',
     'All Melee Skill Bonus' :       'All Melee Weapon Skills',

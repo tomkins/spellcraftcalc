@@ -8,6 +8,7 @@
     <file>images/disabled/SaveAs16.png</file>
     <file>images/disabled/LoadItem16.png</file>
     <file>images/disabled/SaveItem16.png</file>
+    <file>images/disabled/Search16.png</file>
     <file>images/disabled/ExportGems16.png</file>
     <file>images/disabled/CraftGems16.png</file>
     <file>images/disabled/MatsReport16.png</file>
@@ -18,6 +19,7 @@
     <file>images/hot/SaveAs16.png</file>
     <file>images/hot/LoadItem16.png</file>
     <file>images/hot/SaveItem16.png</file>
+    <file>images/hot/Search16.png</file>
     <file>images/hot/ExportGems16.png</file>
     <file>images/hot/CraftGems16.png</file>
     <file>images/hot/MatsReport16.png</file>
@@ -28,6 +30,7 @@
     <file>images/normal/SaveAs16.png</file>
     <file>images/normal/LoadItem16.png</file>
     <file>images/normal/SaveItem16.png</file>
+    <file>images/normal/Search16.png</file>
     <file>images/normal/ExportGems16.png</file>
     <file>images/normal/CraftGems16.png</file>
     <file>images/normal/MatsReport16.png</file>
@@ -38,6 +41,7 @@
     <file>images/disabled/SaveAs24.png</file>
     <file>images/disabled/LoadItem24.png</file>
     <file>images/disabled/SaveItem24.png</file>
+    <file>images/disabled/Search24.png</file>
     <file>images/disabled/ExportGems24.png</file>
     <file>images/disabled/CraftGems24.png</file>
     <file>images/disabled/MatsReport24.png</file>
@@ -48,6 +52,7 @@
     <file>images/hot/SaveAs24.png</file>
     <file>images/hot/LoadItem24.png</file>
     <file>images/hot/SaveItem24.png</file>
+    <file>images/hot/Search24.png</file>
     <file>images/hot/ExportGems24.png</file>
     <file>images/hot/CraftGems24.png</file>
     <file>images/hot/MatsReport24.png</file>
@@ -58,6 +63,7 @@
     <file>images/normal/SaveAs24.png</file>
     <file>images/normal/LoadItem24.png</file>
     <file>images/normal/SaveItem24.png</file>
+    <file>images/normal/Search24.png</file>
     <file>images/normal/ExportGems24.png</file>
     <file>images/normal/CraftGems24.png</file>
     <file>images/normal/MatsReport24.png</file>
@@ -68,6 +74,7 @@
     <file>images/disabled/SaveAs32.png</file>
     <file>images/disabled/LoadItem32.png</file>
     <file>images/disabled/SaveItem32.png</file>
+    <file>images/disabled/Search32.png</file>
     <file>images/disabled/ExportGems32.png</file>
     <file>images/disabled/CraftGems32.png</file>
     <file>images/disabled/MatsReport32.png</file>
@@ -78,6 +85,7 @@
     <file>images/hot/SaveAs32.png</file>
     <file>images/hot/LoadItem32.png</file>
     <file>images/hot/SaveItem32.png</file>
+    <file>images/hot/Search32.png</file>
     <file>images/hot/ExportGems32.png</file>
     <file>images/hot/CraftGems32.png</file>
     <file>images/hot/MatsReport32.png</file>
@@ -88,6 +96,7 @@
     <file>images/normal/SaveAs32.png</file>
     <file>images/normal/LoadItem32.png</file>
     <file>images/normal/SaveItem32.png</file>
+    <file>images/normal/Search32.png</file>
     <file>images/normal/ExportGems32.png</file>
     <file>images/normal/CraftGems32.png</file>
     <file>images/normal/MatsReport32.png</file>
