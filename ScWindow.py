@@ -629,6 +629,8 @@ class ScWindow(QMainWindow, Ui_B_SC):
         self.toolbar.addAction(self.getIcon('SaveItem'), 'Save Item', 
                                self.saveItem)
         self.filemenu.addAction('Search &Ethinarg\'s Items', self.ethinargTest)
+        self.toolbar.addAction(self.getIcon('Search'), 'Search Ethinarg\'s Items',
+                               self.ethinargTest)
         self.filemenu.addAction('Item Database Path...', self.chooseItemPath)
 
         self.filemenu.addSeparator()
