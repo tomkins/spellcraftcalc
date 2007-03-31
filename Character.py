@@ -646,6 +646,7 @@ ItemTypes = d2({
 # so .ign server numbers are shared across servers now.
 #
 ServerIgnCodes = d2({
+    'Akatsuki' :       '80', 
     'Bedevere' :       '85',
     'Bors' :          '100',
     'Ector' :          '27',
@@ -674,6 +675,8 @@ ServerIgnCodes = d2({
 # .ini file server codes
 #
 ServerCodes = d2({
+
+     '35' : 'Akatsuki', 
      '16' : 'Bedevere',
      '19' : 'Bors',
      '34' : 'Ector',
@@ -716,7 +719,6 @@ EuroServerCodes = d2({
     '103' : 'Deira',
     '148' : 'Gorr',
     '147' : 'Camlann',
-    '145' : 'Akatsuki', 
      '20' : 'Glastonbury',
 })
 
