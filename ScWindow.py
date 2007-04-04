@@ -2852,7 +2852,7 @@ class ScWindow(QMainWindow, Ui_B_SC):
                     locations.append(test)
             locations.append('Spare')
         elif item.Location in TabList:
-            locations = (item.Location, 'Spare',)
+            locations = (str(item.Location), 'Spare',)
         else:
             locations = ('Spare',)
         chooseItemSlot = ChooseSlot.ChooseSlot(self.window(), locations)
