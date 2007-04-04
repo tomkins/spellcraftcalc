@@ -2078,8 +2078,11 @@ class ScWindow(QMainWindow, Ui_B_SC):
         if len(effectlist) > 0:
             effcombo.insertItems(0, list(effectlist))
         # Here we go... cascade
-        effcombo.setCurrentIndex(0)
-        self.effectChanged(0, slot)
+        i = 0
+        while (i < len(effectlist) and effectlist[i][:5] == 'All M'):
+            i = i + 1
+        effcombo.setCurrentIndex(i)
+        self.effectChanged(i, slot)
         self.testCraftingMenu()
     
         QApplication.postEvent(self, UpdateTypeListEvent(slot))

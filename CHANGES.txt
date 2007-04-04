@@ -1,5 +1,8 @@
 Updated ?/??/2007 - Version 2.00 - in sync with DAoC 1.88
 
+  Default to the first non-All Magic, non-All Melee skill
+  so the user can enter an amount before choosing a skill.
+  (All Magic/All Melee are restricted to an amount of 1).
 
   Fixed Ethinarg 'Add Item to Template' to display the slot
   choice for non-ring/wrist/weapon slots.
