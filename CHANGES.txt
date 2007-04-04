@@ -1,9 +1,15 @@
 Updated ?/??/2007 - Version 2.00 - in sync with DAoC 1.88
 
+
+  Fixed Ethinarg 'Add Item to Template' to display the slot
+  choice for non-ring/wrist/weapon slots.
+
+  Save new DaocIniPath in preferences (important for users
+  not on an actual game PC.)  Select the first toon to help
+  users who are often confused at first.
+
   Akatsuki moved from the GOA/Euro list to the US list with
   their new server number, for exporting gems.
-
-
 
 Updated 3/30/2007 - Version 1.99 - catch up to DAoC 1.88
 

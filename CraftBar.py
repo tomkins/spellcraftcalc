@@ -275,8 +275,10 @@ class CraftBar(QDialog, Ui_B_CraftBar):
                 self.model.setData(index, QVariant(file), Qt.UserRole)
                 index = self.model.index(self.model.rowCount()-1, 1, QModelIndex())
                 self.model.setData(index, QVariant(m.group(1)), Qt.DisplayRole)
+                if self.model.rowCount() == 1:
+                    self.CharList.selectRow(0)
             if len(filelist) > 0:
-                ScOptions.instance().setOption('DaocPath', a0)
+                ScOptions.instance().setOption('DaocIniPath', a0)
         self.CharList.resizeRowsToContents()
 
     def openFileDialog(self):
