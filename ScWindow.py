@@ -2485,7 +2485,7 @@ class ScWindow(QMainWindow, Ui_B_SC):
                     if piecenode.nodeType == Node.TEXT_NODE: continue
                     piecename = piecenode.getAttribute('Location')
                     index = int(piecenode.getAttribute('Index'))
-                    equipped = int(piecenode.getAttribute('Equipped'))
+                    equipped = piecenode.getAttribute('Equipped')
                     self.outfitlist[-1][piecename] = ( index, equipped, )
 
         self.Realm.setCurrentIndex(Realms.index(self.realm))
