@@ -1916,7 +1916,7 @@ class ScWindow(QMainWindow, Ui_B_SC):
         # currentIndex which short circuits this routine
         # (see a0 == 0 check above)
         self.ItemNameCombo.blockSignals(True)
-        QApplication.postEvent(self, RestoreItemEvent(item))
+        QApplication.sendEvent(self, RestoreItemEvent(item))
         # self.restoreItem(item)
 
     def itemNameEdited(self,a0):
@@ -2085,7 +2085,7 @@ class ScWindow(QMainWindow, Ui_B_SC):
         self.effectChanged(i, slot)
         self.testCraftingMenu()
     
-        QApplication.postEvent(self, UpdateTypeListEvent(slot))
+        QApplication.sendEvent(self, UpdateTypeListEvent(slot))
         
     def clearCurrentItemSlots(self):
         self.itemattrlist[self.currentTabLabel].clearSlots()
@@ -2934,7 +2934,7 @@ class ScWindow(QMainWindow, Ui_B_SC):
 
     def outfitNameSelected(self, idx):
         if not isinstance(idx, int): return
-        if self.currentOutfit == idx: return
+        #if self.currentOutfit == idx: return
         #sys.stdout.write("Selected Outfit %d\n" % idx)
         self.currentOutfit = idx
         outfit = self.outfitlist[idx]
