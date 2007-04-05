@@ -1,38 +1,30 @@
-Urgent things to fix before next beta release!!!
+Ethinarg search related things;
 
-  Add new Mythical item bonuses to the list, and make the Mythrian's
-  item list specific to that item type.  (NOT including stat+statcap
-  because they can add two slots for the statcap and the stat!)
+  Utility Value should be Utility<br />Value, we can hide the # 
+  {or fold it into row 2 as #) Itemname}, and 'Add to Template'
+  link can be added to the Itemname<br />Add to Template in that
+  same table cell.  This would reclaim a bit of space and lay out 
+  the table a bit cleaner, without the need for another column.
 
-  On Load or Search/Add Item to Template - be certain to ignore
-  Equipped and Location and rename them to their current Location,
-  flag Equipped based on the old item's Equipped flag.
+  When opening Search Items, default the realm to the current Realm,
+  default the class to the currently selected class.  Populate the 
+  slot with the currently selected tab (let them pick Any Slot,
+  of course)?
+
+Oddball things;
+
+  Add the <SCMaterials> entries to the SCData report format.
+  Perhaps per-item and per-template?  Or per-gem, then sum them?
+
+  Let slots share an Item list, e.g. both Left Ring and Right Ring
+  keep track of the same unused Rings.  "Move to" sort of provides this,
+  but not very elegantly.
 
   Default to %USERPROFILE%/My Documents/Spellcrafting/Templates
   for saving Templates and .../Reports for saving exported reports 
   on Windows?  Keep Items/ by default under the program dir?
 
-Things to fix before next beta release is announced;
-
-  Add the <SCMaterials> entries to the SCData report format.
-  Perhaps per-item and per-template?  Or per-gem, then sum them?
-
-  When opening Search Items, populate the slot with the currently
-  selected tab (let them pick Any Slot of course).  Default the 
-  realm to the current Realm.  Default the class to the currently
-  selected class.
-
-  When choosing Add Item to Template, make sure it lands in an
-  appropriate slot(!)  If it's the correct slot move on. If not,
-  perhaps prompt ring/wrist with Left Right buttons, for LH usable
-  weapons prompt right hand/left hand/2 handed?  For RH usable
-  weapons prompt right hand/2 handed. For 2 handed drop into 2h
-  and For shields drop in left hand.
-
-  Utility Value should be Utility<br />Value, we can hide the # 
-  {or fold it into row 2 as #) Itemname}, and Add to Template
-  link can be added to the Itemname<br />Add to Template.  This
-  would reclaim a bit of space and lay out the table a bit cleaner.
+  Show Bonuses of % as #% finally?
 
   Prettify the display of stats with caps for the screen, with
   a stat/maxstat flavor option.
@@ -41,8 +33,8 @@ Things to fix before next beta release is announced;
   (mostly, applies to heavy tanks).  Need the growth table from level
   40 through 50.
 
-  Test our UI XML results (can we avoid double-xslt transformations?)
-  
+Tincture;
+
   Allow Drop Effect slots to have any value (such as a 5.1 DS effect
   or 64/5 DoT effect), not just pure integers.
 
@@ -58,15 +50,17 @@ Things to fix before next beta release is announced;
 
   Fill in the Requirement field with the proc level requirement.
 
+  Calculate Piece Ablative as an average based on chance-to-hit-body-part.
+
+  List Reactive Effects ordered by %chance to hit body part?
+
+Ideas for New Items/Item Type;
+
+  Add new Mythical item bonuses to the list, and make the Mythrian's
+  item list specific to that item type.  (NOT including stat+statcap
+  because they can add two slots for the statcap and the stat!)
+
   Add 1.85-1.87 enchanced craft slot5 lookups (by realm/style/piece).
-
-Nice to Have when someone's bored
-
-  Let slots share an Item list, e.g. both Left Ring and Right Ring
-  keep track of the same unused Rings.  "Move to" sort of provides this,
-  but not very elegantly.
-
-  Show Bonuses of % as #% finally?
 
   A guildy suggested that the user could fix all of the body armor
   pieces or all the weapons which are crafted, based on popping up
@@ -76,9 +70,7 @@ Nice to Have when someone's bored
 
   Fill in Bonus based on itemlevel dialog, when known from material level.  
 
-  Calculate Piece Ablative as an average based on chance-to-hit-body-part.
-
-  List Reactive Effects ordered by %chance to hit body part?
+GUI Gooey Ideas;
 
   Fix WindowsXP skin view of Group boxes (which we override universally
   because of the Classic appearance stupidity).
@@ -88,3 +80,4 @@ Nice to Have when someone's bored
   seem off by -3,-1 (x,y) pixels and offsized -4,-1 or so.  Or just
   blame trolltech?  How about the corresponding pure-edit controls so
   they line up, too?
+
