@@ -128,7 +128,7 @@ class ScWindow(QMainWindow, Ui_B_SC):
             self.QualEdit, self.LabelRequirement,
         ]
         self.switchOnType['player'] = [
-            self.QualDrop, self.LabelRequirement2,
+            self.QualDrop, 
             self.LabelItemCraftTime, self.ItemCraftTime, 
             self.LabelGemMakes, self.LabelGemPoints,
             self.LabelGemCost, self.LabelGemName,

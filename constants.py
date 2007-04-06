@@ -560,11 +560,12 @@ chargedEffectValues.update({
                                   ("47", "35", "25",), 9,),
     'Self Damage Shield' :       (t2(("4.2", "2.9", "2.1",)), 
                                   ("47", "35", "25",), 9,),
-    'Self Melee Celerity' :      (t2(("15%", "10%",)),  ("49", "45",), 1,),
+    'Self Melee Attack Speed' :  (t2(("15%", "10%",)),  
+                                  ("49", "45",), 1,),
     'Power Transfer' :           (t2(("60",)),   ("45",), 2,),
     'Health Transfer' :          (t2(("70",)),   ("45",), 2,),
-    'Self Cure Poison' :         (t2(("",)),     ("49",), 1,),
-    'Self Cure Disease' :        (t2(("",)),     ("49",), 1,),
+    'Self Cure Poison' :         (t2(("1",)),    ("49",), 1,),
+    'Self Cure Disease' :        (t2(("1",)),    ("49",), 1,),
 })
 chargedEffectValues = d2(chargedEffectValues)
 
@@ -591,11 +592,12 @@ ProcItemNames = d2({
     'Direct Damage (Spirit)' :   t2(('', 'Spirit',)),
     'Damage Over Time' :         t2(('', 'Eroding',)),
     'Self AF Shield' :           t2(('', 'Hardening',)),
-    'Self Melee Haste' :         t2(('', 'Celeric',)),
     'Self Damage Shield' :       t2(('Barbed', 'Shard',)),
-    'Heal' :                     t2(('', '', 'Mending',)),
-    'Lifedrain' :                t2(('', '', 'Soul Leeching',)),
+    'Self Melee Haste' :         t2(('', 'Celeric',)),
+    'Self Melee Health Buffer' : t2(('', 'Ablative', 'Harm Turning')),
     'Self Damage Add' :          t2(('', '', 'Retributive',)),
+    'Lifedrain' :                t2(('', '', 'Soul Leeching',)),
+    'Heal' :                     t2(('', '', 'Mending',)),
     'Taunt' :                    t2(('', 'Provoking',)),
     'Power Drain' :              t2(('', 'Depletion',)),
     'Omni Life Drain' :          t2(('', 'Draining',)),
@@ -604,15 +606,20 @@ ProcItemNames = d2({
 
 StableItemNames = ProcItemNames.copy()
 del StableItemNames['Heal']
+del StableItemNames['Taunt']
+del StableItemNames['Power Drain']
+del StableItemNames['Omni Life Drain']
+del StableItemNames['Speed Decrease']
 StableItemNames.update({
     'Damage Over Time' :         t2(('Illbane', 'Eroding',)),
-    'Lifedrain' :                t2(('Soul Drinker', 'Leeching',)),
+    'Self AF Shield' :           t2(('Hardening', 'Hardening',)),
     'Self Damage Add' :          t2(('Keen', 'Honing',)),
-    'Str/Con Debuff' :           t2(('', 'Withering',)),
-    'Dex/Qui Debuff' :           t2(('Crippling', 'Crippling',)),
+    'Lifedrain' :                t2(('Soul Drinker', 'Leeching',)),
     'Self Acuity Buff' :         t2(('Owl-runed', 'Enlightening',)),
+    'Dex/Qui Debuff' :           t2(('Crippling', 'Crippling',)),
+    'Str/Con Debuff' :           t2(('', 'Withering',)),
     'Power Regeneration' :       t2(('', '', 'Mind\'s Eye',)),
-    'Self Celerity' :            t2(('', 'Greater Celeric',)),
+    'Self Melee Attack Speed' :  t2(('', 'Greater Celeric',)),
     'Power Transfer' :           t2(('', 'Transference',)),
     'Health Transfer' :          t2(('', 'Shifting',)),
     'Self Cure Poison' :         t2(('', 'Neutralizing',)),

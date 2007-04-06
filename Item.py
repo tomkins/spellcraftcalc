@@ -94,17 +94,20 @@ class ItemSlot:
 
     def crafted(self):
         if self.CraftOk: return True
-        if not self.SlotType == 'player': return False
         if self.Type == '' or self.Type == 'Unused': return False
         if self.Effect == '': return False
-        if self.Amount == '' or self.Amount == '0': return False
+        if not self.SlotType in ('player', 'effect',): return False
         if self.gemLevel() < 0: return False
         self.CraftOk = True
         return self.CraftOk
 
     def gemLevel(self):
-        if not ValuesLists.has_key(self.Type): return -1
-        amountlist = ValuesLists[self.Type]
+        if self.SlotType == 'player' and ValuesLists.has_key(self.Type): 
+            amountlist = ValuesLists[self.Type]
+        elif self.SlotType == 'effect' and CraftedValuesLists.has_key(self.Type):
+            amountlist = CraftedValuesLists[self.Type]
+        else:
+            return -1
         if not isinstance(amountlist, tuple):
             if amountlist.has_key(self.Effect):
                 amountlist = amountlist[self.Effect]
@@ -161,22 +164,32 @@ class ItemSlot:
                 effectItemNames = StableItemNames
             else:
                 effectItemNames = ProcItemNames
-            if not (effectItemNames.has_key(self.Effect)
-                and ValuesLists.has_key(self.Type)
-                and isinstance(ValuesLists[self.Type], dict)
-                and ValuesLists[self.Type].has_key(self.Effect)
-                and isinstance(ValuesLists[self.Type][self.Effect][0], tuple)):
+            if not effectItemNames.has_key(self.Effect): return ''
+            if not (CraftedValuesLists.has_key(self.Type)
+                and isinstance(CraftedValuesLists[self.Type], dict)
+                and CraftedValuesLists[self.Type].has_key(self.Effect)
+                and isinstance(CraftedValuesLists[self.Type][self.Effect][0], tuple)):
                     return ''
-            #requiredlevel = ValuesLists[self.Type][self.Effect][1][gemLevel()]
-            amountindex += ValuesLists[self.Type][self.Effect][2]
-            return string.strip(
-                ' '.join([
-                    effectItemNames[self.Effect][0],
-                    EffectTypeNames[self.Type][0],
-                    effectItemNames[self.Effect][1],
-                    EffectMetal['All'][amountindex],
-                    EffectTypeNames[self.Type][1]
-                ]))
+            #requiredlevel = CraftedValuesLists[self.Type][self.Effect][1][self.gemLevel()]
+            amountindex += CraftedValuesLists[self.Type][self.Effect][2]
+            sys.stdout.write("%s %s %s (%d)\n" % (self.Type, self.Effect, self.Amount, amountindex,))
+            if (len(effectItemNames[self.Effect]) > 2 
+            and EffectMetal['All'][amountindex] == ""):
+                return string.strip(
+                    ' '.join([
+                        EffectTypeNames[self.Type][0],
+                        effectItemNames[self.Effect][2],
+                        "(Drop) Tincture"
+                    ]))
+            else:
+                return string.strip(
+                    ' '.join([
+                        effectItemNames[self.Effect][0],
+                        EffectTypeNames[self.Type][0],
+                        effectItemNames[self.Effect][1],
+                        EffectMetal['All'][amountindex],
+                        EffectTypeNames[self.Type][1]
+                    ]))
         if not GemTables[realm].has_key(self.Type): return ''
         gemlist = GemTables[realm][self.Type]
         if not gemlist.has_key(self.Effect):
