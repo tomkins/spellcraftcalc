@@ -1946,6 +1946,20 @@ class ScWindow(QMainWindow, Ui_B_SC):
         item = self.itemattrlist[self.currentTabLabel]
         if item.ActiveState == 'player':
             item.slot(slot).setAmount(self.AmountDrop[slot].currentText())
+            if item.slot(slot).slotType() == 'effect':
+                amount = self.AmountDrop[slot].currentIndex()
+                typetext = item.slot(slot).type()
+                efftext = item.slot(slot).effect()
+                if (CraftedValuesLists.has_key(typetext)
+                and isinstance(CraftedValuesLists[typetext], dict)):
+                    valueslist = CraftedValuesLists[typetext]
+                    if (valueslist.has_key(efftext)
+                    and isinstance(valueslist[efftext][0], tuple)
+                    and len(valueslist[efftext][1]) > amount):
+                        # On change-tincture amounts, fix requirement
+                        valueslist = valueslist[efftext]
+                        req = "Level %s" % valueslist[1][amount]
+                        self.Requirement[slot].setText(req)
         else:
             item.slot(slot).setAmount(self.AmountEdit[slot].text())
         if item.slot(slot).slotType() == 'player':
@@ -2008,9 +2022,9 @@ class ScWindow(QMainWindow, Ui_B_SC):
                     if valueslist.has_key(efftext):
                         valueslist = valueslist[efftext]
                         if isinstance(valueslist[0], tuple):
-                            if len(valueslist[0]) > 1 and (valueslist[2] == 0
-                                                        or valueslist[2] == 8):
-                                # Let's show only crafted tincts, by default
+                            if (len(valueslist[0]) > 1 and amtindex < 1
+                            and (valueslist[2] == 0 or valueslist[2] == 8)):
+                                # Let's default to crafted tincts
                                 amtindex = 1
                             valueslist = valueslist[0]
                     elif valueslist.has_key(None):
@@ -2028,7 +2042,7 @@ class ScWindow(QMainWindow, Ui_B_SC):
             if item.slot(slot).slotType() == 'player':
                 self.Makes[slot].setMaximum(99)
         # Cascade the changes
-        self.amountsChanged(0, slot)
+        self.amountsChanged(None, slot)
 
     def updateTypeList(self, slot):
         item = self.itemattrlist[self.currentTabLabel]

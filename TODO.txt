@@ -1,15 +1,12 @@
 Ethinarg search related things;
 
-  Utility Value should be Utility<br />Value, we can hide the # 
-  {or fold it into row 2 as #) Itemname}, and 'Add to Template'
-  link can be added to the Itemname<br />Add to Template in that
-  same table cell.  This would reclaim a bit of space and lay out 
-  the table a bit cleaner, without the need for another column.
-
   When opening Search Items, default the realm to the current Realm,
   default the class to the currently selected class.  Populate the 
   slot with the currently selected tab (let them pick Any Slot,
   of course)?
+
+  It seems the Utility<br />Value is still wider than most, but the
+  results page otherwise is looking great!
 
 Oddball things;
 
@@ -33,26 +30,15 @@ Oddball things;
   (mostly, applies to heavy tanks).  Need the growth table from level
   40 through 50.
 
+  Calculate "Piece Ablative" as an average based on chance-to-hit-body-part?
+
 Tincture;
 
-  Allow Drop Effect slots to have any value (such as a 5.1 DS effect
-  or 64/5 DoT effect), not just pure integers.
+  Allow *Drop* Effect slots to have any value (such as a 5.1 DS effect
+  or 64/5 DoT effect), not just pure integers.  Requires us to flip the
+  validator, non-trivial.
 
-  Add lookup of Drop tincture effects (from epic dungeons) for crafted gear.
-  According to various searchs of alakazahm and the the autobestiary,
-  Prissy's lists were complete.
-
-  Add 1.85 tincture effects for crafted gear.  Means we have to tear
-  apart the tables because the levels don't 'just line up'.  We have
-  lv 43 and 45 netherium and lv 47 and 49 arcanium procs depending 
-  on the name of the proc and the drop ablative lv 48 has the same
-  effect name as the crafted (different amounts).
-
-  Fill in the Requirement field with the proc level requirement.
-
-  Calculate Piece Ablative as an average based on chance-to-hit-body-part.
-
-  List Reactive Effects ordered by %chance to hit body part?
+  List Reactive Effects, ordered by %chance to hit body part?
 
 Ideas for New Items/Item Type;
 
