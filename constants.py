@@ -486,50 +486,78 @@ pveBonusList = t2((
 ))
 
 
-EffectRequiredLevel =    t2(("47", "43", "40", "35", "30", "25", "20",))
-
-ddMetalCommon =  t2(("Arcanium", "Netherium", "Asterite", 
-                     "Adamantium", "Mithril", "Fine Alloy", "Alloy",))
+metalCommon =    ("", "Arcanium", "Netherium", "Asterite", 
+                  "Adamantium", "Mithril", "Fine Alloy", "Alloy",
+                  "", "Arcanium", "Adamantium", "Fine Alloy",)
 EffectMetal = d2({
-    'Albion'   : ddMetalCommon,
-    'Hibernia' : t2(("Arcanite", "Netherite", "Diamond", 
-                     "Sapphire", "Carbide", "Cobolt", "Dolomite",)),
-    'Midgard'  : ddMetalCommon,
+    'Albion'   : metalCommon,
+    'Hibernia' : ("", "Arcanite", "Netherite", "Diamond", 
+                  "Sapphire", "Carbide", "Cobolt", "Dolomite",
+                  "", "Arcanite", "Sapphire", "Cobolt",),
+    'Midgard'  : metalCommon,
 })
 
-ddEffectDamageSubtable = t2(("95", "86", "77", "68", "59", "50", "41",))
+ddEffDmgTable = t2(("95", "86", "77", "68", "59", "50", "41",))
+ddEffReqLevel = ("47", "43", "40", "35", "30", "25", "20",)
 
 offensiveEffectValues = d2({
-    'Direct Damage (Fire)' :     ddEffectDamageSubtable,
-    'Direct Damage (Cold)' :     ddEffectDamageSubtable,
-    'Direct Damage (Energy)' :   ddEffectDamageSubtable,
-    'Direct Damage (Spirit)' :   ddEffectDamageSubtable,
-    'Damage Over Time' :         t2(("64",)),
-    'Self AF Shield' :           t2(("75",)),
-    'Self Melee Health Buffer' : t2(("50",)),
-    'Self Melee Haste' :         t2(("20%",)),
-    'Self Damage Shield' :       t2(("5.1",)),
+    'Direct Damage (Fire)' :     (ddEffDmgTable, ddEffReqLevel, 1,),
+    'Direct Damage (Cold)' :     (ddEffDmgTable, ddEffReqLevel, 1,),
+    'Direct Damage (Energy)' :   (ddEffDmgTable, ddEffReqLevel, 1,),
+    'Direct Damage (Spirit)' :   (ddEffDmgTable, ddEffReqLevel, 1,),
+    'Damage Over Time' :         (t2(("64",)),       ("47",), 1,),
+    'Self AF Shield' :           (t2(("75",)),       ("47",), 1,),
+    'Self Melee Haste' :         (t2(("20%",)),      ("47",), 1,),
+    'Self Damage Shield' :       (t2(("5.1",)),      ("47",), 1,),
+    'Self Melee Health Buffer' : (t2(("150", "50",), ("48", "47",), 0,),
+    'Self Damage Add' :          (t2(("11.3",)),     ("48",), 0,),
+    'Lifedrain' :                (t2(("65",)),       ("48",), 0,),
+    'Heal' :                     (t2(("80",)),       ("48",), 0,),
+    'Taunt' :                    (t2(("2", "1",)),   ("49", "45",), 1,),
+    'Power Drain' :              (t2(("55", "35",)), ("49", "45",), 1,),
 })
 
+ddEffDmgTable = t2(ddEffDmgTable[0:3])
+
 reactiveEffectValues = offensiveEffectValues.copy()
+del reactiveEffectValues['Taunt']
 reactiveEffectValues.update({
-    'Direct Damage (Fire)' :     t2(ddEffectDamageSubtable[0:3]),
-    'Direct Damage (Cold)' :     t2(ddEffectDamageSubtable[0:3]),
-    'Direct Damage (Energy)' :   t2(ddEffectDamageSubtable[0:3]),
-    'Direct Damage (Spirit)' :   t2(ddEffectDamageSubtable[0:3]),
-    'Self Melee Health Buffer' : t2(("100",)),
+    'Direct Damage (Fire)' :     (ddEffDmgTable, ddEffReqLevel, 1,),
+    'Direct Damage (Cold)' :     (ddEffDmgTable, ddEffReqLevel, 1,),
+    'Direct Damage (Energy)' :   (ddEffDmgTable, ddEffReqLevel, 1,),
+    'Direct Damage (Spirit)' :   (ddEffDmgTable, ddEffReqLevel, 1,),
+    'Self AF Shield' :           (t2(("75", "56", "37",)), 
+                                  ("47", "35", "25",), 9,),
+    'Self Damage Shield' :       (t2(("5.1", "3.6", "2.6",)), 
+                                  ("47", "35", "25",), 9,),
+    'Self Melee Health Buffer' : (t2(("150", "100", "75", "50",)), 
+                                  ("48", "47", "35", "25",), 8,),
+    'Omni Life Drain' :          (t2(("100", "75",)),  ("49", "45",), 1,),
+    'Speed Decrease' :           (t2(("35%", "30%",)), ("49", "45",), 1,),
 })
 reactiveEffectValues = d2(reactiveEffectValues)
 
 chargedEffectValues = offensiveEffectValues.copy()
+del chargedEffectValues['Heal']
+del chargedEffectValues['Taunt']
+del chargedEffectValues['Power Drain']
 chargedEffectValues.update({
-    'Self Melee Haste' :         t2(("17%",)),
-    'Self Damage Shield' :       t2(("4.2",)),
-    'Lifedrain' :                t2(("65",)),
-    'Str/Con Debuff' :           t2(("56",)),
-    'Dex/Qui Debuff' :           t2(("56",)),
-    'Self Damage Add' :          t2(("11.3",)),
-    'Self Acuity Buff' :         t2(("75",)),
+    'Self Melee Haste' :         (t2(("17%",)),  ("47",), 1,),
+    'Str/Con Debuff' :           (t2(("56",)),   ("47",), 1,),
+    'Dex/Qui Debuff' :           (t2(("56",)),   ("47",), 1,),
+    'Self Damage Add' :          (t2(("11.3",)), ("47",), 1,),
+    'Power Regeneration' :       (t2(("2",)),    ("48",), 0,),
+    'Self Acuity Buff' :         (t2(("75", "56", "37",)),
+                                  ("47", "35", "25",), 9,),
+    'Self AF Shield' :           (t2(("75", "56", "37",)), 
+                                  ("47", "35", "25",), 9,),
+    'Self Damage Shield' :       (t2(("4.2", "2.9", "2.1",)), 
+                                  ("47", "35", "25",), 9,),
+    'Self Melee Celerity' :      (t2(("15%", "10%",)),  ("49", "45",), 1,),
+    'Power Transfer' :           (t2(("60",)),   ("45",), 2,),
+    'Health Transfer' :          (t2(("70",)),   ("45",), 2,),
+    'Self Cure Poison' :         (t2(("",)),     ("49",), 1,),
+    'Self Cure Disease' :        (t2(("",)),     ("49",), 1,),
 })
 chargedEffectValues = d2(chargedEffectValues)
 
@@ -545,23 +573,41 @@ otherEffectList = t2(stableEffectList[:] + (
     "Unique Effect...",
 ))
 
-EffectItemNames = d2({
+ProcItemNames = d2({
     'Direct Damage (Fire)' :     t2(('Fiery', 'Fire',)),
     'Direct Damage (Cold)' :     t2(('', 'Cold',)),
     'Direct Damage (Energy)' :   t2(('', 'Energy',)),
     'Direct Damage (Spirit)' :   t2(('', 'Spirit',)),
-    # Stables are Illbane's but don't confuse readers of Reactive/Volatile
     'Damage Over Time' :         t2(('', 'Eroding',)),
     'Self AF Shield' :           t2(('', 'Hardening',)),
-    'Self Melee Health Buffer' : t2(('', 'Ablative',)),
     'Self Melee Haste' :         t2(('', 'Celeric',)),
     'Self Damage Shield' :       t2(('Barbed', 'Shard',)),
+    'Heal' :                     t2(('', '', 'Mending',)),
+    'Lifedrain' :                t2(('', '', 'Soul Leeching',)),
+    'Self Damage Add' :          t2(('', '', 'Retributive',)),
+    'Taunt' :                    t2(('', 'Provoking',)),
+    'Power Drain' :              t2(('', 'Depletion',)),
+    'Omni Life Drain' :          t2(('', 'Draining',)),
+    'Speed Decrease' :           t2(('', 'Coil',)),
+})
+
+StableItemNames = ProcItemNames.copy()
+del StableItemNames['Heal']
+StableItemNames.update({
+    'Damage Over Time' :         t2(('Illbane', 'Eroding',)),
     'Lifedrain' :                t2(('Soul Drinker', 'Leeching',)),
+    'Self Damage Add' :          t2(('Keen', 'Honing',)),
     'Str/Con Debuff' :           t2(('', 'Withering',)),
     'Dex/Qui Debuff' :           t2(('Crippling', 'Crippling',)),
-    'Self Damage Add' :          t2(('Keen', 'Honing',)),
     'Self Acuity Buff' :         t2(('Owl-runed', 'Enlightening',)),
+    'Power Regeneration' :       t2(('', '', 'Mind\'s Eye',)),
+    'Self Celerity' :            t2(('', 'Greater Celeric',)),
+    'Power Transfer' :           t2(('', 'Transference',)),
+    'Health Transfer' :          t2(('', 'Shifting',)),
+    'Self Cure Poison' :         t2(('', 'Neutralizing',)),
+    'Self Cure Disease' :        t2(('', 'Revivifying',)),
 })
+StableItemNames = d2(StableItemNames)
 
 EffectTypeNames = d2({
     'Charged Effect' :   t2(("Stable",   "Tincture",)),
