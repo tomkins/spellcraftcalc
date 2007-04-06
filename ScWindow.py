@@ -342,7 +342,8 @@ class ScWindow(QMainWindow, Ui_B_SC):
         headergrid.setColumnMinimumWidth(7,width)
         itemslotgrid.setColumnMinimumWidth(7,width)
         width = testfont.size(Qt.TextSingleLine, 
-                  "Imperfect Mineral Encrusted Nature Spell Stone").width()
+                  "Owl-runed Stable Enlightening Adamantium Tincture").width()
+        #            "Imperfect Mineral Encrusted Nature Spell Stone").width()
         itemslotgrid.setColumnMinimumWidth(8,width)
 
         # XXX FIX ME - I want to have a decimal!  But Double validator isn't working

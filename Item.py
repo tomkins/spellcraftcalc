@@ -172,7 +172,6 @@ class ItemSlot:
                     return ''
             #requiredlevel = CraftedValuesLists[self.Type][self.Effect][1][self.gemLevel()]
             amountindex += CraftedValuesLists[self.Type][self.Effect][2]
-            sys.stdout.write("%s %s %s (%d)\n" % (self.Type, self.Effect, self.Amount, amountindex,))
             if (len(effectItemNames[self.Effect]) > 2 
             and EffectMetal['All'][amountindex] == ""):
                 return string.strip(
