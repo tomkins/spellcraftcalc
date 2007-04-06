@@ -2008,6 +2008,10 @@ class ScWindow(QMainWindow, Ui_B_SC):
                     if valueslist.has_key(efftext):
                         valueslist = valueslist[efftext]
                         if isinstance(valueslist[0], tuple):
+                            if len(valueslist[0]) > 1 and (valueslist[2] == 0
+                                                        or valueslist[2] == 8):
+                                # Let's show only crafted tincts, by default
+                                amtindex = 1
                             valueslist = valueslist[0]
                     elif valueslist.has_key(None):
                         valueslist = valueslist[None]

@@ -539,7 +539,7 @@ reactiveEffectValues.update({
                                   ("47", "35", "25",), 9,),
     'Self Melee Health Buffer' : (t2(("150", "100", "75", "50",)), 
                                   ("48", "47", "35", "25",), 8,),
-    'Omni Life Drain' :          (t2(("100", "75",)),  ("49", "45",), 1,),
+    'Omni Lifedrain' :           (t2(("100", "75",)),  ("49", "45",), 1,),
     'Speed Decrease' :           (t2(("35%", "30%",)), ("49", "45",), 1,),
 })
 reactiveEffectValues = d2(reactiveEffectValues)
@@ -600,7 +600,7 @@ ProcItemNames = d2({
     'Heal' :                     t2(('', '', 'Mending',)),
     'Taunt' :                    t2(('', 'Provoking',)),
     'Power Drain' :              t2(('', 'Depletion',)),
-    'Omni Life Drain' :          t2(('', 'Draining',)),
+    'Omni Lifedrain' :           t2(('', 'Draining',)),
     'Speed Decrease' :           t2(('', 'Coil',)),
 })
 
@@ -608,7 +608,7 @@ StableItemNames = ProcItemNames.copy()
 del StableItemNames['Heal']
 del StableItemNames['Taunt']
 del StableItemNames['Power Drain']
-del StableItemNames['Omni Life Drain']
+del StableItemNames['Omni Lifedrain']
 del StableItemNames['Speed Decrease']
 StableItemNames.update({
     'Damage Over Time' :         t2(('Illbane', 'Eroding',)),
@@ -745,7 +745,7 @@ CraftedLists = {
     'Unused' : 
         unusedList,
     'Focus' : t2((
-        'All Magic Skills',
+        'All Spell Lines',
     )),
     'Skill' : t2((
         'All Archery Skills',

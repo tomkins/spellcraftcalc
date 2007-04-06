@@ -178,7 +178,7 @@ class ItemSlot:
                     ' '.join([
                         EffectTypeNames[self.Type][0],
                         effectItemNames[self.Effect][2],
-                        "(Drop) Tincture"
+                        "Tincture (Drop)"
                     ]))
             else:
                 return string.strip(
