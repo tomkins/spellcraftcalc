@@ -14,7 +14,7 @@ __all__ = [
   'FileExt', 'Caps', 'HighCapBonusList', 'BodyHitOdds',
   'GemTables', 'GemDusts', 'GemLiquids', 'GemSubName',
   'GemNames', 'MaterialGems', 'GemCosts', 'RemakeCosts', 
-  'EffectTypeNames', 'EffectItemNames', 'EffectMetal', 'EffectRequiredLevel',
+  'EffectTypeNames', 'ProcItemNames', 'StableItemNames', 'EffectMetal', 
   'FixTypeTable', 'FixEffectsTable', 'HotkeyGems', 'ImbueMultipliers',  
   'ShieldTypes',
   'TabList', 'PieceTabList', 'JewelTabList',
@@ -486,10 +486,17 @@ pveBonusList = t2((
 ))
 
 
+# The tier (dropped), 10, 7, 5 repeat is for newer tinctures that
+# jump from level 47 to 35 to 25.  The third elt of the tuples
+# in the effects tables is an index to the metals (offset by the
+# selected effect).  Drop tinctures have no metal, so they have
+# been omitted from these lists.
+
 metalCommon =    ("", "Arcanium", "Netherium", "Asterite", 
                   "Adamantium", "Mithril", "Fine Alloy", "Alloy",
                   "", "Arcanium", "Adamantium", "Fine Alloy",)
 EffectMetal = d2({
+    'All'      : metalCommon,
     'Albion'   : metalCommon,
     'Hibernia' : ("", "Arcanite", "Netherite", "Diamond", 
                   "Sapphire", "Carbide", "Cobolt", "Dolomite",
@@ -505,16 +512,16 @@ offensiveEffectValues = d2({
     'Direct Damage (Cold)' :     (ddEffDmgTable, ddEffReqLevel, 1,),
     'Direct Damage (Energy)' :   (ddEffDmgTable, ddEffReqLevel, 1,),
     'Direct Damage (Spirit)' :   (ddEffDmgTable, ddEffReqLevel, 1,),
-    'Damage Over Time' :         (t2(("64",)),       ("47",), 1,),
-    'Self AF Shield' :           (t2(("75",)),       ("47",), 1,),
-    'Self Melee Haste' :         (t2(("20%",)),      ("47",), 1,),
-    'Self Damage Shield' :       (t2(("5.1",)),      ("47",), 1,),
-    'Self Melee Health Buffer' : (t2(("150", "50",), ("48", "47",), 0,),
-    'Self Damage Add' :          (t2(("11.3",)),     ("48",), 0,),
-    'Lifedrain' :                (t2(("65",)),       ("48",), 0,),
-    'Heal' :                     (t2(("80",)),       ("48",), 0,),
-    'Taunt' :                    (t2(("2", "1",)),   ("49", "45",), 1,),
-    'Power Drain' :              (t2(("55", "35",)), ("49", "45",), 1,),
+    'Damage Over Time' :         (t2(("64",)),        ("47",), 1,),
+    'Self AF Shield' :           (t2(("75",)),        ("47",), 1,),
+    'Self Melee Haste' :         (t2(("20%",)),       ("47",), 1,),
+    'Self Damage Shield' :       (t2(("5.1",)),       ("47",), 1,),
+    'Self Melee Health Buffer' : (t2(("150", "50",)), ("48", "47",), 0,),
+    'Self Damage Add' :          (t2(("11.3",)),      ("48",), 0,),
+    'Lifedrain' :                (t2(("65",)),        ("48",), 0,),
+    'Heal' :                     (t2(("80",)),        ("48",), 0,),
+    'Taunt' :                    (t2(("2", "1",)),    ("49", "45",), 1,),
+    'Power Drain' :              (t2(("55", "35",)),  ("49", "45",), 1,),
 })
 
 ddEffDmgTable = t2(ddEffDmgTable[0:3])
@@ -561,9 +568,13 @@ chargedEffectValues.update({
 })
 chargedEffectValues = d2(chargedEffectValues)
 
-procEffectList = offensiveEffectValues.keys()
-procEffectList.sort()
-procEffectList = t2(procEffectList)
+offensiveEffectList = offensiveEffectValues.keys()
+offensiveEffectList.sort()
+offensiveEffectList = t2(offensiveEffectList)
+
+reactiveEffectList = reactiveEffectValues.keys()
+reactiveEffectList.sort()
+reactiveEffectList = t2(reactiveEffectList)
 
 stableEffectList = chargedEffectValues.keys()
 stableEffectList.sort()
@@ -757,8 +768,8 @@ CraftedLists = {
         'Defensive',
     )),
     'Charged Effect' :   stableEffectList,
-    'Reactive Effect' :  procEffectList,
-    'Offensive Effect' : procEffectList,
+    'Reactive Effect' :  reactiveEffectList,
+    'Offensive Effect' : offensiveEffectList,
   }),
 }
 for realm in Realms:

@@ -1641,9 +1641,8 @@ class ScWindow(QMainWindow, Ui_B_SC):
                 if i < len(imbuevals):
                     self.Cost[i].setText(SC.formatCost(slot.gemCost(1)))
                     self.Points[i].setText('%3.1f' % imbuevals[i])
-                if i < len(self.Name):
-                    self.Name[i].setText(slot.gemName(self.realm))
-                    self.Name[i].setToolTip(slot.gemName(self.realm))
+                self.Name[i].setText(slot.gemName(self.realm))
+                self.Name[i].setToolTip(slot.gemName(self.realm))
             self.ItemImbue.setText('%3.1f' % imbuepts)
             self.ItemImbueTotal.setText(' / ' + unicode(itemimbue))
             self.ItemCost.setText(SC.formatCost(item.cost()))
@@ -2007,6 +2006,8 @@ class ScWindow(QMainWindow, Ui_B_SC):
                 if isinstance(valueslist, dict):
                     if valueslist.has_key(efftext):
                         valueslist = valueslist[efftext]
+                        if isinstance(valueslist[0], tuple):
+                            valueslist = valueslist[0]
                     elif valueslist.has_key(None):
                         valueslist = valueslist[None]
                     else:
@@ -2077,15 +2078,16 @@ class ScWindow(QMainWindow, Ui_B_SC):
             effectlist = list()
         if len(effectlist) > 0:
             effcombo.insertItems(0, list(effectlist))
-        # Here we go... cascade
         i = 0
-        while (i < len(effectlist) and effectlist[i][:5] == 'All M'):
-            i = i + 1
+        if typetext == 'Skill':
+            while (i < len(effectlist) and effectlist[i][:5] == 'All M'):
+                i = i + 1
         effcombo.setCurrentIndex(i)
+        # Here we go... cascade
         self.effectChanged(i, slot)
         self.testCraftingMenu()
     
-        QApplication.sendEvent(self, UpdateTypeListEvent(slot))
+        #QApplication.sendEvent(self, UpdateTypeListEvent(slot))
         
     def clearCurrentItemSlots(self):
         self.itemattrlist[self.currentTabLabel].clearSlots()

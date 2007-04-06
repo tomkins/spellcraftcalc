@@ -108,6 +108,8 @@ class ItemSlot:
         if not isinstance(amountlist, tuple):
             if amountlist.has_key(self.Effect):
                 amountlist = amountlist[self.Effect]
+                if isinstance(amountlist[0], tuple):
+                    amountlist = amountlist[0]
             elif amountlist.has_key(None):
                 amountlist = amountlist[None]
             else:
@@ -155,13 +157,24 @@ class ItemSlot:
         amountindex = self.gemLevel() - 1
         if self.Type[-6:] == 'Effect':
             if not EffectTypeNames.has_key(self.Type): return ''
-            if not EffectItemNames.has_key(self.Effect): return ''
+            if self.Type == 'Charged Effect':
+                effectItemNames = StableItemNames
+            else:
+                effectItemNames = ProcItemNames
+            if not (effectItemNames.has_key(self.Effect)
+                and ValuesLists.has_key(self.Type)
+                and isinstance(ValuesLists[self.Type], dict)
+                and ValuesLists[self.Type].has_key(self.Effect)
+                and isinstance(ValuesLists[self.Type][self.Effect][0], tuple)):
+                    return ''
+            #requiredlevel = ValuesLists[self.Type][self.Effect][1][gemLevel()]
+            amountindex += ValuesLists[self.Type][self.Effect][2]
             return string.strip(
                 ' '.join([
-                    EffectItemNames[self.Effect][0],
+                    effectItemNames[self.Effect][0],
                     EffectTypeNames[self.Type][0],
-                    EffectItemNames[self.Effect][1],
-                    EffectMetal[realm][amountindex],
+                    effectItemNames[self.Effect][1],
+                    EffectMetal['All'][amountindex],
                     EffectTypeNames[self.Type][1]
                 ]))
         if not GemTables[realm].has_key(self.Type): return ''
