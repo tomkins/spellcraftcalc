@@ -116,6 +116,7 @@ class EthinargItemParser(HTMLParser.HTMLParser):
         self.done = False
         self.numPages = 0
         self.pageRE = re.compile(r'curr_page=(\d+)')
+        self.linkSet = False
 
     def handle_starttag(self, tag, attrs):
         if tag == 'a':
@@ -137,9 +138,11 @@ class EthinargItemParser(HTMLParser.HTMLParser):
         elif self.testTable and tag == 'tr':
             self.columnCount = 0
             self.rowCount += 1
+            self.linkSet = False
         elif self.inTable and tag == 'tr' and self.tableLevel == self.saveTableLevel:
             self.columnCount = 0
             self.rowCount += 1
+            self.linkSet = False
         elif self.testTable and self.rowCount == 1 and tag == 'td':
             self.testColumn = True
         elif self.inTable and self.rowCount > 1 and tag == 'td':
@@ -179,7 +182,17 @@ class EthinargItemParser(HTMLParser.HTMLParser):
                 self.testTable = False
                 self.htmlList = []
         if self.inTable or self.testTable:
-            self.htmlList.append(data.strip())
+            txt = data.strip()
+            if txt == 'Utility Value':
+                txt = 'Utility<br />Value'
+            elif txt == 'Magical Ability':
+                txt = 'Magical<br />Ability'
+            if self.rowCount > 1 and self.columnCount == 2 and \
+                    not self.linkSet and len(txt) > 0:
+                txt = '<a href="%d">%s</a>' % (self.rowCount - 2, txt)
+                self.linkSet = True
+                
+            self.htmlList.append(txt)
 
         #if self.inTable: print data
 
@@ -190,9 +203,9 @@ class EthinargItemParser(HTMLParser.HTMLParser):
                 self.done = True
             self.tableLevel -= 1
         if self.inTable or self.testTable:
-            if tag == 'tr' and self.tableLevel == self.saveTableLevel and \
-                    self.rowCount > 1:
-                self.htmlList.append('<td><a href="%d">Add Item To Template</a></td>' % (self.rowCount - 2))
+            #if tag == 'tr' and self.tableLevel == self.saveTableLevel and \
+            #        self.rowCount > 1:
+            #    self.htmlList.append('<td><a href="%d">Add Item To Template</a></td>' % (self.rowCount - 2))
             if tag != 'a':
                 self.htmlList.append('</' + tag + '>')
 
@@ -642,7 +655,6 @@ b = None
 def anchorClicked(link):
     global b
 
-    print link.path()
     b.setSource(QUrl())
 
 if __name__ == '__main__':
