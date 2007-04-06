@@ -2160,13 +2160,6 @@
                   </widget>
                  </item>
                  <item row="4" column="8" >
-                  <widget class="QLabel" name="LabelRequirement2" >
-                   <property name="text" >
-                    <string>(Requirement)</string>
-                   </property>
-                  </widget>
-                 </item>
-                 <item row="4" column="8" >
                   <spacer>
                    <property name="orientation" >
                     <enum>Qt::Horizontal</enum>
