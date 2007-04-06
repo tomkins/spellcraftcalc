@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'ScWindow.ui'
 #
-# Created: Mon Mar 12 02:51:17 2007
+# Created: Thu Apr 05 21:44:57 2007
 #      by: PyQt4 UI code generator 4.1
 #
 # WARNING! All changes made in this file will be lost!
@@ -229,87 +229,72 @@ class Ui_B_SC(object):
 
         self.IntelligenceLabel = QtGui.QLabel(self.GroupStats)
         self.IntelligenceLabel.setObjectName("IntelligenceLabel")
-        self.IntelligenceLabel.setVisible(False)
         self.gridlayout2.addWidget(self.IntelligenceLabel,4,0,1,1)
 
         self.Intelligence = QtGui.QLabel(self.GroupStats)
         self.Intelligence.setAlignment(QtCore.Qt.AlignRight|QtCore.Qt.AlignTrailing|QtCore.Qt.AlignVCenter)
         self.Intelligence.setObjectName("Intelligence")
-        self.Intelligence.setVisible(False)
         self.gridlayout2.addWidget(self.Intelligence,4,1,1,1)
 
         self.IntelligenceCap = QtGui.QLabel(self.GroupStats)
         self.IntelligenceCap.setAlignment(QtCore.Qt.AlignRight|QtCore.Qt.AlignTrailing|QtCore.Qt.AlignVCenter)
         self.IntelligenceCap.setObjectName("IntelligenceCap")
-        self.IntelligenceCap.setVisible(False)
         self.gridlayout2.addWidget(self.IntelligenceCap,4,2,1,1)
 
         self.PietyLabel = QtGui.QLabel(self.GroupStats)
         self.PietyLabel.setObjectName("PietyLabel")
-        self.PietyLabel.setVisible(False)
         self.gridlayout2.addWidget(self.PietyLabel,5,0,1,1)
 
         self.Piety = QtGui.QLabel(self.GroupStats)
         self.Piety.setAlignment(QtCore.Qt.AlignRight|QtCore.Qt.AlignTrailing|QtCore.Qt.AlignVCenter)
         self.Piety.setObjectName("Piety")
-        self.Piety.setVisible(False)
         self.gridlayout2.addWidget(self.Piety,5,1,1,1)
 
         self.PietyCap = QtGui.QLabel(self.GroupStats)
         self.PietyCap.setAlignment(QtCore.Qt.AlignRight|QtCore.Qt.AlignTrailing|QtCore.Qt.AlignVCenter)
         self.PietyCap.setObjectName("PietyCap")
-        self.PietyCap.setVisible(False)
         self.gridlayout2.addWidget(self.PietyCap,5,2,1,1)
 
         self.CharismaLabel = QtGui.QLabel(self.GroupStats)
         self.CharismaLabel.setObjectName("CharismaLabel")
-        self.CharismaLabel.setVisible(False)
         self.gridlayout2.addWidget(self.CharismaLabel,6,0,1,1)
 
         self.Charisma = QtGui.QLabel(self.GroupStats)
         self.Charisma.setAlignment(QtCore.Qt.AlignRight|QtCore.Qt.AlignTrailing|QtCore.Qt.AlignVCenter)
         self.Charisma.setObjectName("Charisma")
-        self.Charisma.setVisible(False)
         self.gridlayout2.addWidget(self.Charisma,6,1,1,1)
 
         self.CharismaCap = QtGui.QLabel(self.GroupStats)
         self.CharismaCap.setAlignment(QtCore.Qt.AlignRight|QtCore.Qt.AlignTrailing|QtCore.Qt.AlignVCenter)
         self.CharismaCap.setObjectName("CharismaCap")
-        self.CharismaCap.setVisible(False)
         self.gridlayout2.addWidget(self.CharismaCap,6,2,1,1)
 
         self.EmpathyLabel = QtGui.QLabel(self.GroupStats)
         self.EmpathyLabel.setObjectName("EmpathyLabel")
-        self.EmpathyLabel.setVisible(False)
         self.gridlayout2.addWidget(self.EmpathyLabel,7,0,1,1)
 
         self.Empathy = QtGui.QLabel(self.GroupStats)
         self.Empathy.setAlignment(QtCore.Qt.AlignRight|QtCore.Qt.AlignTrailing|QtCore.Qt.AlignVCenter)
         self.Empathy.setObjectName("Empathy")
-        self.Empathy.setVisible(False)
         self.gridlayout2.addWidget(self.Empathy,7,1,1,1)
 
         self.EmpathyCap = QtGui.QLabel(self.GroupStats)
         self.EmpathyCap.setAlignment(QtCore.Qt.AlignRight|QtCore.Qt.AlignTrailing|QtCore.Qt.AlignVCenter)
         self.EmpathyCap.setObjectName("EmpathyCap")
-        self.EmpathyCap.setVisible(False)
         self.gridlayout2.addWidget(self.EmpathyCap,7,2,1,1)
 
         self.AcuityLabel = QtGui.QLabel(self.GroupStats)
         self.AcuityLabel.setObjectName("AcuityLabel")
-        self.AcuityLabel.setVisible(False)
         self.gridlayout2.addWidget(self.AcuityLabel,8,0,1,1)
 
         self.Acuity = QtGui.QLabel(self.GroupStats)
         self.Acuity.setAlignment(QtCore.Qt.AlignRight|QtCore.Qt.AlignTrailing|QtCore.Qt.AlignVCenter)
         self.Acuity.setObjectName("Acuity")
-        self.Acuity.setVisible(False)
         self.gridlayout2.addWidget(self.Acuity,8,1,1,1)
 
         self.AcuityCap = QtGui.QLabel(self.GroupStats)
         self.AcuityCap.setAlignment(QtCore.Qt.AlignRight|QtCore.Qt.AlignTrailing|QtCore.Qt.AlignVCenter)
         self.AcuityCap.setObjectName("AcuityCap")
-        self.AcuityCap.setVisible(False)
         self.gridlayout2.addWidget(self.AcuityCap,8,2,1,1)
 
         self.PowerLabel = QtGui.QLabel(self.GroupStats)
@@ -1152,10 +1137,6 @@ class Ui_B_SC(object):
         self.Name_5.setObjectName("Name_5")
         self.gridlayout7.addWidget(self.Name_5,4,8,1,1)
 
-        self.LabelRequirement2 = QtGui.QLabel(self.ItemSlotsGrid)
-        self.LabelRequirement2.setObjectName("LabelRequirement2")
-        self.gridlayout7.addWidget(self.LabelRequirement2,4,8,1,1)
-
         spacerItem20 = QtGui.QSpacerItem(5,5,QtGui.QSizePolicy.MinimumExpanding,QtGui.QSizePolicy.Minimum)
         self.gridlayout7.addItem(spacerItem20,4,8,1,1)
 
@@ -1659,7 +1640,6 @@ class Ui_B_SC(object):
         self.Points_4.setText(QtGui.QApplication.translate("B_SC", "0.0", None, QtGui.QApplication.UnicodeUTF8))
         self.Cost_4.setText(QtGui.QApplication.translate("B_SC", "0c", None, QtGui.QApplication.UnicodeUTF8))
         self.Gem_Label_5.setText(QtGui.QApplication.translate("B_SC", "Slot &5: ", None, QtGui.QApplication.UnicodeUTF8))
-        self.LabelRequirement2.setText(QtGui.QApplication.translate("B_SC", "(Requirement)", None, QtGui.QApplication.UnicodeUTF8))
         self.Gem_Label_6.setText(QtGui.QApplication.translate("B_SC", "Slot &6: ", None, QtGui.QApplication.UnicodeUTF8))
         self.Gem_Label_7.setText(QtGui.QApplication.translate("B_SC", "Slot &7: ", None, QtGui.QApplication.UnicodeUTF8))
         self.Gem_Label_8.setText(QtGui.QApplication.translate("B_SC", "Slot &8: ", None, QtGui.QApplication.UnicodeUTF8))
