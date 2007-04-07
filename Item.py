@@ -456,9 +456,8 @@ class Item:
         fudgefactor = int(100.0 * ((skillbonus / 100.0 - 1.0) \
                                  * (OCStartPercentages[int(imbuepts-itemimbue)] / 200.0)))
         success += fudgefactor
-        sys.stdout.write("34 + %d - %d + %d = %d" % (ItemQualOCModifiers[self.ItemQuality],
-                                                     OCStartPercentages[int(imbuepts-itemimbue)],
-                                                     skillbonus, success,))
+        if success > 100: success = 100
+        if success < 0: success = 0
         return success
 
     def cost(self):
