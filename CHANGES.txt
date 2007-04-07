@@ -1,5 +1,20 @@
 Updated ?/??/2007 - Version 2.00 - in sync with DAoC 1.88
 
+  Aproximate the chances of success based on Mythic's half-hearted
+  post about chances to blow up.  Our approximation is full of .5%
+  rounding errors (in both directions), which shouldn't make a big 
+  difference.  The chance to succeed (and not blow up) appears to be
+    34% + ItemQualModifier (6% to 26%) - OCPenalty(10 to 70%) 
+        + SkillBonus (0% to 100%) - (SkillBonus - 100%) * OCPenalty / 2
+  so 1000 skill crafters aren't affected, while the younger the crafter,
+  with the larger the overcharge, the more the penalty affects them (a
+  level 1 toon doing a 5 point overcharge would suffer a full 35% penalty 
+  on top of the old formula, with a -45% (impossible) chance of success).
+
+  Touched up layout of Ethinarg's search results view, the list
+  now shows the item name as clickable link (instead of seperate
+  "Add to Template" link) to add the item.
+
   Solved loading and switching outfits, loading a template
   now shows the selected outfit and each outfit's selected
   items correctly.

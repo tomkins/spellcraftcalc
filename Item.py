@@ -448,12 +448,17 @@ class Item:
             return -100
         elif imbuepts < (itemimbue + 1.0):
             return 100
-        success = -OCStartPercentages[int(imbuepts-itemimbue)] \
-                + ItemQualOCModifiers[self.ItemQuality]
-        skillbonus = (int(crafterSkill / 50) - 10) * 5
-        if skillbonus > 50:
-            skillbonus = 50
+        success = 34 + ItemQualOCModifiers[self.ItemQuality]
+        success -= OCStartPercentages[int(imbuepts-itemimbue)]
+        skillbonus = int(crafterSkill / 10)
+        if skillbonus > 100: skillbonus = 100
         success += skillbonus
+        fudgefactor = int(100.0 * ((skillbonus / 100.0 - 1.0) \
+                                 * (OCStartPercentages[int(imbuepts-itemimbue)] / 200.0)))
+        success += fudgefactor
+        sys.stdout.write("34 + %d - %d + %d = %d" % (ItemQualOCModifiers[self.ItemQuality],
+                                                     OCStartPercentages[int(imbuepts-itemimbue)],
+                                                     skillbonus, success,))
         return success
 
     def cost(self):
