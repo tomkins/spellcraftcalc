@@ -457,7 +457,6 @@ class Item:
                                  * (OCStartPercentages[int(imbuepts-itemimbue)] / 200.0)))
         success += fudgefactor
         if success > 100: success = 100
-        if success < 0: success = 0
         return success
 
     def cost(self):
