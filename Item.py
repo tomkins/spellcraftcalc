@@ -154,6 +154,8 @@ class ItemSlot:
             return 0
 
     def gemName(self, realm, parts = 7):
+        if self.SlotType == 'crafted': 
+            return '(Crafted Item Bonus)'
         if not GemTables.has_key(realm): return ''
         if not self.crafted():
             return ''
