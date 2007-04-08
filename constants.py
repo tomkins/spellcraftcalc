@@ -550,6 +550,7 @@ del chargedEffectValues['Taunt']
 del chargedEffectValues['Power Drain']
 chargedEffectValues.update({
     'Self Melee Haste' :         (t2(("17%",)),  ("47",), 1,),
+    'Lifedrain' :                (t2(("65",)),   ("47",), 1,),
     'Str/Con Debuff' :           (t2(("56",)),   ("47",), 1,),
     'Dex/Qui Debuff' :           (t2(("56",)),   ("47",), 1,),
     'Self Damage Add' :          (t2(("11.3",)), ("47",), 1,),
@@ -581,9 +582,17 @@ stableEffectList = chargedEffectValues.keys()
 stableEffectList.sort()
 stableEffectList = t2(stableEffectList)
 
-otherEffectList = t2(stableEffectList[:] + (
-    "Unique Effect...",
-))
+otherEffectList = list(stableEffectList) + [
+    'Heal',
+    'Taunt',
+    'Power Drain',
+    'Omni Lifedrain',
+    'Speed Decrease',
+]
+otherEffectList.sort()
+otherEffectList = t2(otherEffectList + [
+    'Unique Effect...',
+])
 
 ProcItemNames = d2({
     'Direct Damage (Fire)' :     t2(('Fiery', 'Fire',)),
