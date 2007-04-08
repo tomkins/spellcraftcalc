@@ -578,11 +578,19 @@ reactiveEffectList = reactiveEffectValues.keys()
 reactiveEffectList.sort()
 reactiveEffectList = t2(reactiveEffectList)
 
-stableEffectList = chargedEffectValues.keys()
-stableEffectList.sort()
-stableEffectList = t2(stableEffectList)
+chargedEffectList = chargedEffectValues.keys()
+chargedEffectList.sort()
+chargedEffectList = t2(chargedEffectList)
 
-otherEffectList = list(stableEffectList) + [
+otherEffectList = list(chargedEffectList) + [
+    'Direct Damage (Body)',
+    'Direct Damage (Energy)',
+    'Dmg w/Resist Debuff (Fire)',
+    'Dmg w/Resist Debuff (Cold)',
+    'Dmg w/Resist Debuff (Body)',
+    'Dmg w/Resist Debuff (Energy)',
+    'Dmg w/Resist Debuff (Matter)',
+    'Dmg w/Resist Debuff (Spirit)',
     'Heal',
     'Taunt',
     'Power Drain',
@@ -660,6 +668,9 @@ GemLists = {
     'Unused' :           unusedList,
     'Stat' :             statList,
     'Resist' :           resistList,
+    'Charged Effect' :   chargedEffectList,
+    'Offensive Effect':  offensiveEffectList,
+    'Reactive Effect':   reactiveEffectList,
   }
 }
 
@@ -712,31 +723,10 @@ ValuesLists = d2({
     'Resist' :           resistValues,
     'Focus' :            focusValues,
     'Skill' :            skillValues,
+    'Charged Effect' :   chargedEffectValues,
+    'Offensive Effect':  offensiveEffectValues,
+    'Reactive Effect':   reactiveEffectValues,
     'Unused' :           unusedValues,
-})
-
-
-CraftedValuesLists = d2({
-    'Unused' :             unusedValues,
-    'Focus' :              t2(('50',)),
-    'Skill' :              t2(('3',)),
-    'Cap Increase' : d2({
-        None :             t2(('5',)),
-        'Hits' :           t2(('40',)),
-    }),
-    'Other Bonus' : d2({
-        '% Power Pool' :   t2(('5',)),
-        'AF' :             t2(('10',)),
-        'Archery and Spell Damage' : t2(('2',)),
-        'Melee Damage' :   t2(('2',)),
-        'Duration of Spells' :      t2(('5',)),
-        'Healing Effectiveness' :   t2(('5',)),
-        'Stat Buff Effectiveness' : t2(('5',)),
-    }),
-    'PvE Bonus' :          t2(('5',)),
-    'Offensive Effect' :   offensiveEffectValues,
-    'Reactive Effect' :    reactiveEffectValues,
-    'Charged Effect' :     chargedEffectValues,
 })
 
 
@@ -747,11 +737,31 @@ CraftedTypeList = t2((
     'Cap Increase', 
     'PvE Bonus', 
     'Other Bonus',
-    'Offensive Effect',
-    'Reactive Effect',
     'Charged Effect',
+    'Offensive Effect',
 ))
 
+CraftedValuesLists = d2({
+    'Unused' :             unusedValues,
+    'Focus' :              t2(('50',)),
+    'Skill' :              t2(('3',)),
+    'Cap Increase' : d2({
+        None :             t2(('5',)),
+        'Hits' :           t2(('40',)),
+    }),
+    'PvE Bonus' :          t2(('5',)),
+    'Other Bonus' : d2({
+        '% Power Pool' :   t2(('5',)),
+        'AF' :             t2(('10',)),
+        'Archery and Spell Damage' : t2(('2',)),
+        'Melee Damage' :   t2(('2',)),
+        'Duration of Spells' :      t2(('5',)),
+        'Healing Effectiveness' :   t2(('5',)),
+        'Stat Buff Effectiveness' : t2(('5',)),
+    }),
+    'Charged Effect' :     t2(("60",)),
+    'Offensive Effect' :   t2(("60", "25", "20",)),
+})
 
 CraftedLists = {
   'All' : d2({
@@ -787,11 +797,24 @@ CraftedLists = {
     'PvE Bonus' : t2((
         'Defensive',
     )),
-    'Charged Effect' :   stableEffectList,
-    'Reactive Effect' :  reactiveEffectList,
-    'Offensive Effect' : offensiveEffectList,
+    'Charged Effect' : t2((
+        'Dmg w/Resist Debuff (Fire)',
+        'Dmg w/Resist Debuff (Cold)',
+        'Dmg w/Resist Debuff (Matter)',
+        'Dmg w/Resist Debuff (Spirit)',
+    )),
+    'Offensive Effect' : t2((
+        'Direct Damage (Fire)',
+        'Direct Damage (Cold)',
+        'Direct Damage (Energy)',
+        'Dmg w/Resist Debuff (Fire)',
+        'Dmg w/Resist Debuff (Cold)',
+        'Dmg w/Resist Debuff (Matter)',
+        'Dmg w/Resist Debuff (Spirit)',
+    )),
   }),
 }
+
 for realm in Realms:
     CraftedLists[realm] = CraftedLists['All'] 
 CraftedLists = d2(CraftedLists)

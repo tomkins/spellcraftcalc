@@ -102,12 +102,11 @@ class ItemSlot:
         return self.CraftOk
 
     def gemLevel(self):
-        if self.SlotType == 'player' and ValuesLists.has_key(self.Type): 
-            amountlist = ValuesLists[self.Type]
-        elif self.SlotType == 'effect' and CraftedValuesLists.has_key(self.Type):
-            amountlist = CraftedValuesLists[self.Type]
-        else:
+        sys.stdout.write("looking for %s\n" % self.Effect)
+        if ((self.SlotType != 'player' and self.SlotType != 'effect')
+         or not ValuesLists.has_key(self.Type)): 
             return -1
+        amountlist = ValuesLists[self.Type]
         if not isinstance(amountlist, tuple):
             if amountlist.has_key(self.Effect):
                 amountlist = amountlist[self.Effect]
@@ -167,15 +166,15 @@ class ItemSlot:
             else:
                 effectItemNames = ProcItemNames
             if not effectItemNames.has_key(self.Effect): return ''
-            if not (CraftedValuesLists.has_key(self.Type)
-                and isinstance(CraftedValuesLists[self.Type], dict)
-                and CraftedValuesLists[self.Type].has_key(self.Effect)
-                and isinstance(CraftedValuesLists[self.Type][self.Effect][0], tuple)):
+            if not (isinstance(ValuesLists[self.Type], dict)
+                and ValuesLists[self.Type].has_key(self.Effect)
+                and isinstance(ValuesLists[self.Type][self.Effect][0], tuple)):
                     return ''
-            #requiredlevel = CraftedValuesLists[self.Type][self.Effect][1][self.gemLevel()]
-            amountindex += CraftedValuesLists[self.Type][self.Effect][2]
+            #requiredlevel = ValuesLists[self.Type][self.Effect][1][self.gemLevel()]
+            amountindex += ValuesLists[self.Type][self.Effect][2]
             if (len(effectItemNames[self.Effect]) > 2 
             and EffectMetal['All'][amountindex] == ""):
+                # Different naming for the Drop tinctures
                 return string.strip(
                     ' '.join([
                         EffectTypeNames[self.Type][0],

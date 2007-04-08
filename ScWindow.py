@@ -1342,10 +1342,10 @@ class ScWindow(QMainWindow, Ui_B_SC):
             else:
                 typelist = list(DropTypeList)
             gemtype = str(item.slot(slot).type())
-            if self.hideNonClassSkills:
-                if len(AllBonusList[self.realm][self.charclass]\
-                        ['Focus Hash'].keys()) == 0 and \
-                        item.Location not in FocusTabList:
+            if ('Focus' in typelist 
+            and (item.Location not in FocusTabList 
+              or (self.hideNonClassSkills
+              and len(AllBonusList[self.realm][self.charclass]['Focus Hash']) == 0))):
                     typelist.remove('Focus')
             if not gemtype in typelist:
                 typelist.append(gemtype)
@@ -2006,10 +2006,10 @@ class ScWindow(QMainWindow, Ui_B_SC):
         elif item.ActiveState == 'player':
             amtindex = amount.currentIndex()
             amount.clear()
-            if item.slot(slot).slotType() == 'player':
-                valueslist = ValuesLists
-            else:
+            if item.slot(slot).slotType() == 'crafted':
                 valueslist = CraftedValuesLists
+            else:
+                valueslist = ValuesLists
             if valueslist.has_key(typetext):
                 valueslist = valueslist[typetext]
                 if isinstance(valueslist, dict):
@@ -2054,10 +2054,10 @@ class ScWindow(QMainWindow, Ui_B_SC):
         effcombo.clear()
 
         if item.ActiveState == 'player':
-            if item.slot(slot).slotType() == 'player':
-                effectlist = self.effectlists
-            else:
+            if item.slot(slot).slotType() == 'crafted':
                 effectlist = self.itemeffectlists
+            else:
+                effectlist = self.effectlists
         else:
             effectlist = self.dropeffectlists
         if effectlist.has_key(typetext):
@@ -2754,24 +2754,39 @@ class ScWindow(QMainWindow, Ui_B_SC):
         newtype = str(action.data().toString())
         item = self.itemattrlist[self.currentTabLabel]
         if newtype == 'Normal Item' or newtype == 'Enhanced Bow':
-            item.slot(4).setSlotType('effect')
+            if newtype == 'Normal Item':
+                item.slot(4).setSlotType('effect')
+            else:
+                item.slot(4).setSlotType('crafted')
             if item.slot(5).type()[-6:] == "Effect":
                 item.slot(4).setAll(item.slot(5).type(), item.slot(5).amount(), 
                              item.slot(5).effect(), item.slot(5).requirement())
             item.slot(5).setType('Unused')
             item.slot(5).setSlotType('unused')
         else:
-            item.slot(5).setSlotType('effect')
+            item.slot(4).setSlotType('crafted')
+            if newtype[:9] == 'Legendary':
+                item.slot(5).setSlotType('crafted')
+            else:
+                item.slot(5).setSlotType('effect')
             if item.slot(4).type()[-6:] == 'Effect':
                 item.slot(5).setAll(item.slot(4).type(), item.slot(4).amount(), 
                              item.slot(4).effect(), item.slot(4).requirement())
                 item.slot(4).setType('Unused')
-            item.slot(4).setSlotType('crafted')
 
         if newtype == 'Caster Staff' or newtype == 'Legendary Staff':
             for fixslot in item.slots():
-                 if fixslot.type() == 'Focus':
-                     fixslot.setType('Unused')
+                if fixslot.type() == 'Focus':
+                    if (item.slot(3).slotType() == 'player'
+                    and item.slot(3).type() != 'Unused'
+                    and item.slot(3).type() != 'Focus'
+                    and fixslot.slotType() == 'player'
+                    and newtype == 'Legendary Staff'):
+                        # Replace an existing Focus slot with the 4th slot's bonus
+                        fixslot.setAll(item.slot(3).type(), item.slot(3).amount(), 
+                                      item.slot(3).effect(),)
+                    else:
+                        fixslot.setType('Unused')
 
         if newtype == 'Caster Staff':
             item.slot(3).setSlotType('player')
@@ -2781,24 +2796,28 @@ class ScWindow(QMainWindow, Ui_B_SC):
             item.slot(3).setAll('Focus', '50', 'All Spell Lines')
             item.slot(4).setAll('Other Bonus', '2', 'Archery and Spell Damage', 
                                 requirement="vs All Monsters")
-            item.slot(5).setAll('Charged Effect', '60', 'Dmg w/Resist Debuff', 
+            item.slot(5).setSlotType('crafted')
+            item.slot(5).setAll('Charged Effect', '60', 'Dmg w/Resist Debuff (Fire)', 
                                 requirement="Level 50")
         elif newtype == 'Enhanced Bow':
             item.slot(3).setSlotType('player')
-            item.slot(4).setAll('Offensive Effect', '20', 'Direct Damage')
+            item.slot(4).setSlotType('crafted')
+            item.slot(4).setAll('Offensive Effect', '20', 'Direct Damage (Fire)')
         elif newtype == 'Legendary Bow':
             item.slot(3).setSlotType('crafted')
             item.slot(3).setAll('Other Bonus', '2', 'Archery and Spell Damage', 
                                 requirement="vs All Monsters")
             item.slot(4).setAll('Other Bonus', '10', 'AF')
-            item.slot(5).setAll('Offensive Effect', '25', 'Dmg w/Resist Debuff',
+            item.slot(5).setSlotType('crafted')
+            item.slot(5).setAll('Offensive Effect', '25', 'Dmg w/Resist Debuff (Fire)',
                                 requirement="Level 50")
         elif newtype == 'Legendary Weapon':
             item.slot(3).setSlotType('crafted')
             item.slot(3).setAll('Other Bonus', '2', 'Melee Damage', 
                                 requirement="vs All Monsters")
             item.slot(4).setAll('Other Bonus', '10', 'AF')
-            item.slot(5).setAll('Offensive Effect', '60', 'Dmg w/Resist Debuff',
+            item.slot(5).setSlotType('crafted')
+            item.slot(5).setAll('Offensive Effect', '60', 'Dmg w/Resist Debuff (Fire)',
                                 requirement="Level 50")
         else:
             item.slot(3).setSlotType('player')
