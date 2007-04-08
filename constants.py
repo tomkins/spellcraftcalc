@@ -611,6 +611,10 @@ del StableItemNames['Power Drain']
 del StableItemNames['Omni Lifedrain']
 del StableItemNames['Speed Decrease']
 StableItemNames.update({
+    'Direct Damage (Cold)' :     t2(('Frostbringer', 'Cold',)),
+    'Direct Damage (Energy)' :   t2(('Crackling', 'Energy',)),
+    # Most Frenzied, some not (Fine Alloy, Admantium, Netherium)
+    'Direct Damage (Spirit)' :   t2(('Frenzied', 'Spirit',)),
     'Damage Over Time' :         t2(('Illbane', 'Eroding',)),
     'Self AF Shield' :           t2(('Hardening', 'Hardening',)),
     'Self Damage Add' :          t2(('Keen', 'Honing',)),
