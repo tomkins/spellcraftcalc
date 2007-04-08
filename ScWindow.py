@@ -305,9 +305,7 @@ class ScWindow(QMainWindow, Ui_B_SC):
         self.Name = []
 
         typewidth = self.Type_1.getMinimumWidth(list(DropTypeList))
-        l = reduce(lambda x, y: x+y, [ list(x) \
-                                       for x in GemLists['All'].values() ])
-        effectwidth = self.Effect_1.getMinimumWidth(l)
+        effectwidth = self.Effect_1.getMinimumWidth(["Archery and Casting Speed"])
         if str(QApplication.style().objectName()[0:9]).lower() == "macintosh":
             # mac is including a checkbox/icon width which is absurd
             typewidth = typewidth - 14
