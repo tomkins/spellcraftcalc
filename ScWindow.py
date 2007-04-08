@@ -39,12 +39,6 @@ import sys
 import binascii
 
 UserEventIDRestoreItem = QEvent.Type(QEvent.User + 1)
-UserEventIDUpdateTypeList = QEvent.Type(QEvent.User + 2)
-
-class UpdateTypeListEvent(QEvent):
-    def __init__(self, slot):
-        QEvent.__init__(self, UserEventIDUpdateTypeList)
-        self.slot = slot
 
 class RestoreItemEvent(QEvent):
     def __init__(self, item):
@@ -1341,6 +1335,8 @@ class ScWindow(QMainWindow, Ui_B_SC):
             if itemtype == 'player':
                 if item.slot(slot).slotType() == 'player':
                     typelist = list(TypeList)
+                elif item.slot(slot).slotType() == 'effect':
+                    typelist = list(EffectTypeList)
                 else:
                     typelist = list(CraftedTypeList)
             else:
@@ -1357,6 +1353,7 @@ class ScWindow(QMainWindow, Ui_B_SC):
             typecombo.insertItems(0, typelist)
             typecombo.setCurrentIndex(typelist.index(gemtype))
             self.typeChanged(typelist.index(gemtype), slot)
+
             gemeffect = str(item.slot(slot).effect())
             effect = self.Effect[slot].findText(gemeffect)
             if len(gemeffect) and effect < 0:
@@ -2041,31 +2038,6 @@ class ScWindow(QMainWindow, Ui_B_SC):
         # Cascade the changes
         self.amountsChanged(None, slot)
 
-    def updateTypeList(self, slot):
-        item = self.itemattrlist[self.currentTabLabel]
-        itemtype = item.ActiveState
-        location = item.Location
-        typecombo = self.Type[slot]
-        typecombo.clear()
-        if itemtype == 'player':
-            if item.slot(slot).slotType() == 'player':
-                typelist = list(TypeList)
-            else:
-                typelist = list(CraftedTypeList)
-        else:
-            typelist = list(DropTypeList)
-        gemtype = str(item.slot(slot).type())
-        if self.hideNonClassSkills:
-            if len(AllBonusList[self.realm][self.charclass]\
-                    ['Focus Hash'].keys()) == 0 and \
-                    location not in FocusTabList:
-                typelist.remove('Focus')
-        if not gemtype in typelist:
-            typelist.append(gemtype)
-
-        typecombo.insertItems(0, typelist)
-        typecombo.setCurrentIndex(typelist.index(gemtype))
-
     def typeChanged(self, Value = None, slot = -1):
         if slot < 0:
             slot = self.senderSlot()
@@ -2103,8 +2075,6 @@ class ScWindow(QMainWindow, Ui_B_SC):
         self.effectChanged(i, slot)
         self.testCraftingMenu()
     
-        #QApplication.sendEvent(self, UpdateTypeListEvent(slot))
-        
     def clearCurrentItemSlots(self):
         self.itemattrlist[self.currentTabLabel].clearSlots()
         if self.nocalc: return
@@ -3002,10 +2972,7 @@ class ScWindow(QMainWindow, Ui_B_SC):
             self.sizegrip.move(self.width() - 15, self.height() - 15)
 
     def event(self, e):
-        if e.type() == UserEventIDUpdateTypeList:
-            self.updateTypeList(e.slot)
-            return True
-        elif e.type() == UserEventIDRestoreItem:
+        if e.type() == UserEventIDRestoreItem:
             #sys.stdout.write("Restoring Item\n")
             self.restoreItem(e.item)
             # Unblock any signals we may have blocked in itemNameSelected()
