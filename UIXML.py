@@ -9,7 +9,6 @@ import sys
 import re
 import os.path
 import string
-import traceback
 from MyStringIO import UnicodeStringIO
 import XMLHelper
 

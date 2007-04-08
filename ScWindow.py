@@ -33,7 +33,6 @@ import os.path
 import ItemList
 import time
 import locale
-import traceback
 import encodings
 import codecs
 import sys
@@ -2279,8 +2278,8 @@ class ScWindow(QMainWindow, Ui_B_SC):
         else:
             try:
                 xmlbody = self.asXML()
-            except:
-                traceback.print_exc()                                
+            except Exception, ex:
+                print 'Error converting template to XML: ', ex
                 QMessageBox.critical(None, 'Error!', 
                     "Error creating xml to save this template\r\n\r\n" \
                   + "Please share your Spellcraft.exe.log error report with " \
@@ -2310,8 +2309,8 @@ class ScWindow(QMainWindow, Ui_B_SC):
                 filename += '.xml'
             try:
                 xmlbody = self.asXML()
-            except:
-                traceback.print_exc()                                
+            except Exception, ex:
+                print 'Error converting template to XML: ', ex
                 QMessageBox.critical(None, 'Error!', 
                     "Error creating xml to save this template\r\n\r\n" \
                   + "Please share your Spellcraft.exe.log error report with " \
@@ -2345,8 +2344,8 @@ class ScWindow(QMainWindow, Ui_B_SC):
                 filename += '.xml'
             try:
                 xmlbody = self.asXML(True)
-            except:
-                traceback.print_exc()                                
+            except Exception, ex:
+                print 'Error converting template to XML: ', ex
                 QMessageBox.critical(None, 'Error!', 
                     "Error creating xml to export this template\r\n\r\n" \
                   + "Please share your Spellcraft.exe.log error report with " \
@@ -2403,8 +2402,8 @@ class ScWindow(QMainWindow, Ui_B_SC):
                         'Unrecognized Template Type', 'OK')
                     f.close()
                     return
-            except:
-                traceback.print_exc()
+            except Exception, ex:
+                print 'Error loading template file: ', ex
                 QMessageBox.critical(None, 'Error!', \
                     "Error loading template file " + unicode(filename) \
                   + "\r\n\r\nPlease share this template file and your " \

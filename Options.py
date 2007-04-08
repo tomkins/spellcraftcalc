@@ -12,7 +12,6 @@ import types
 import XMLHelper
 import sys
 import os.path
-import traceback
 import constants
 from xml.dom.minidom import *
 from MyStringIO import UnicodeStringIO

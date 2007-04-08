@@ -8,7 +8,6 @@ import XMLHelper
 import sys
 import os.path
 import stat
-import traceback
 from xml.dom.minidom import *
 from MyStringIO import UnicodeStringIO
 from Singleton import Singleton
@@ -163,9 +162,9 @@ class ScOptions(Singleton):
                 template = xmldoc.getElementsByTagName('DefaultOptions')
                 self.loadFromXML(template[0])
                 f.close()
-            except: 
-                # By default, be quiet? - upgrade noise is dirty
-                traceback.print_exc()
+            except xml.parsers.expat.ExpatError, ex: 
+                print 'Error parsing XML document, code: %d line: %d offset %d', (
+                    ex.code, ex.lineno, ex.offset)
                 pass
 
     def save(self):        
@@ -177,8 +176,8 @@ class ScOptions(Singleton):
                 f.write(XMLHelper.writexml(self.asXML(), UnicodeStringIO(), '', '\t', '\n'))
                 f.write('\n')
                 f.close()
-            except:
-                traceback.print_exc()
+            except Exception, ex:
+                print 'Error saving Spellcraft.xml!! ', ex
                 pass
             try:
                 os.chmod(scfile, stat.S_IRUSR | stat.S_IWUSR)
