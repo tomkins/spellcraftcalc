@@ -102,7 +102,6 @@ class ItemSlot:
         return self.CraftOk
 
     def gemLevel(self):
-        sys.stdout.write("looking for %s\n" % self.Effect)
         if ((self.SlotType != 'player' and self.SlotType != 'effect')
          or not ValuesLists.has_key(self.Type)): 
             return -1
