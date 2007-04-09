@@ -219,7 +219,7 @@ class ItemSlot:
         gemlist = GemTables[realm][self.Type]
         if not gemlist.has_key(self.Effect):
             gemlist = GemTables['All'][self.Type]
-            if not gemlist.has_key(self.Effect): return ''
+            if not gemlist.has_key(self.Effect): return ret
         gemdust = gemlist[self.Effect][2]
         gemliquid = gemlist[self.Effect][3]
         ret['Gems'][MaterialGems[gemindex]] = 1
@@ -285,12 +285,9 @@ class ItemSlot:
             if self.SlotType == 'player':
                 savexml.extend([
                        (u'Makes', self.Makes,)])
+            if len(self.Requirement) > 0:
+                savexml.append((u'Requirement', self.Requirement,))
             if rich:
-                if self.crafted():
-                    savexml.extend([
-                       (u'Imbue', u"%.1f" % self.gemImbue(),),
-                       (u'Level', unicode(self.gemLevel()),),
-                       (u'Cost', unicode(self.gemCost()),)])
                 if self.Type[-6:] != "Effect":
                     savexml.append(
                        (u'Utility', u"%.1f" % self.gemUtility(),))
@@ -298,14 +295,36 @@ class ItemSlot:
                 if len(name) > 0:
                     savexml.append(
                        (u'Name', name,))
-            if len(self.Requirement) > 0:
-                savexml.append((u'Requirement', self.Requirement,))
+                if self.crafted():
+                    savexml.extend([
+                       (u'Imbue', u"%.1f" % self.gemImbue(),),
+                       (u'Level', unicode(self.gemLevel()),),
+                       (u'Cost', unicode(self.gemCost()),)])
         for attrkey, attrval in savexml:
             if not rich and (attrval == '0' or attrval == ''):
                 continue
             valnode = document.createElement(attrkey)
             valtext = document.createTextNode(attrval)
             valnode.appendChild(valtext)
+            slotnode.appendChild(valnode)
+        if rich and (self.SlotType == 'player') and self.crafted():
+            matslist = self.gemMaterials(realm)
+            valnode = document.createElement(u'Materials')
+            for mattype in (u'Gems', u'Dusts', u'Liquids',):
+                typenode = document.createElement(mattype[:-1])
+                matnames = matslist[mattype].keys()
+                matnames.sort()
+                for mat in matnames:
+                    matnode = document.createElement(u'Name')
+                    valtext = document.createTextNode(unicode(mat))
+                    matnode.appendChild(valtext)
+                    typenode.appendChild(matnode)
+                    matnode = document.createElement(u'Quantity')
+                    valtext = document.createTextNode(
+                                  unicode(matslist[mattype][mat]))
+                    matnode.appendChild(valtext)
+                    typenode.appendChild(matnode)
+                valnode.appendChild(typenode)
             slotnode.appendChild(valnode)
 
 class Item:
