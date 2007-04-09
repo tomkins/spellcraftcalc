@@ -643,60 +643,40 @@ class ScWindow(QMainWindow, Ui_B_SC):
                                 QKeySequence(Qt.CTRL+Qt.Key_X))
         self.menuBar().addMenu(self.filemenu)
 
-        self.swapjewelmenu = QMenu('Jewel Slots', self)
-        for piece in range(0,len(JewelTabList)):
-            act = QAction(JewelTabList[piece], self)
-            act.setData(QVariant(piece + len(PieceTabList)))
-            self.swapjewelmenu.addAction(act)
-        self.swappiecemenu = QMenu('Body Slots', self)
-        for piece in range(0,len(PieceTabList)):
-            act = QAction(PieceTabList[piece], self)
-            act.setData(QVariant(piece))
-            self.swappiecemenu.addAction(act)
-        self.swapgemsmenu = QMenu('S&wap Gems with',self)
-
-        # DON"T SWAP TWICE!!!!!!
-        #self.connect(self.swapgemsmenu, SIGNAL("triggered(QAction*)"),
-        #             self.swapWith)
-        self.connect(self.swappiecemenu, SIGNAL("triggered(QAction*)"),
-                     self.swapWith)
-        self.connect(self.swapjewelmenu, SIGNAL("triggered(QAction*)"),
-                     self.swapWith)
-
         self.movejewelmenu = QMenu('Jewel Slots', self)
         for piece in range(0,len(JewelTabList)):
             act = QAction(JewelTabList[piece], self)
             act.setData(QVariant(piece + len(PieceTabList)))
             self.movejewelmenu.addAction(act)
         self.movepiecemenu = QMenu('Body Slots', self)
+        self.swappiecemenu = QMenu('Body Slots', self)
         for piece in range(0,len(PieceTabList)):
             act = QAction(PieceTabList[piece], self)
             act.setData(QVariant(piece))
             self.movepiecemenu.addAction(act)
+            act = QAction(PieceTabList[piece], self)
+            act.setData(QVariant(piece))
+            self.swappiecemenu.addAction(act)
         self.moveitemmenu = QMenu('&Move Item to',self)
-        self.connect(self.moveitemmenu, SIGNAL("triggered(QAction*)"),
-                     self.moveTo)
+        self.swapgemsmenu = QMenu('S&wap Gems with',self)
+
+        # DON'T SWAP OR MOVE TWICE!!!!!!
+        #self.connect(self.swapgemsmenu, SIGNAL("triggered(QAction*)"),
+        #             self.swapWith)
+        self.connect(self.swappiecemenu, SIGNAL("triggered(QAction*)"),
+                     self.swapWith)
+        #self.connect(self.moveitemmenu, SIGNAL("triggered(QAction*)"),
+        #             self.moveTo)
         self.connect(self.movepiecemenu, SIGNAL("triggered(QAction*)"),
                      self.moveTo)
         self.connect(self.movejewelmenu, SIGNAL("triggered(QAction*)"),
                      self.moveTo)
 
         self.newitemmenu = QMenu('&New Item', self)
-        act = QAction('Drop Item', self)
-        act.setData(QVariant('Drop Item'))
-        self.newitemmenu.addAction(act)
-        self.newitemmenu.addSeparator()
         self.chooseitemmenu = QMenu('Item &Type', self)
-        for type in ('Normal Item', 'Caster Staff', 'Legendary Staff',
-                     'Enhanced Bow', 'Legendary Bow',
-                     'Legendary Weapon', 'Enhanced Sheild', 
-                     'Enhanced Armor', 'Enhanced Harp',):
-            act = QAction(type, self)
-            act.setData(QVariant(type))
-            self.newitemmenu.addAction(act)
-            act = QAction(type, self)
-            act.setData(QVariant(type))
-            self.chooseitemmenu.addAction(act)
+
+        self.newitemmenu = QMenu('&New Item', self)
+        self.chooseitemmenu = QMenu('Item &Type', self)
         self.connect(self.newitemmenu, SIGNAL("triggered(QAction*)"), 
                      self.newItemType)
         self.connect(self.chooseitemmenu, SIGNAL("triggered(QAction*)"), 
@@ -772,7 +752,6 @@ class ScWindow(QMainWindow, Ui_B_SC):
         self.errorsmenuid = self.menuBar().addMenu(self.errorsmenu)
         self.connect(self.errorsmenu, SIGNAL('triggered(QAction*)'), 
                      self.changePieceTab)
-        self.errorsmenuid.setEnabled(False)
         self.helpmenu = QMenu('&Help', self)
         self.helpmenu.addAction('&About', self.aboutBox)
         self.menuBar().addMenu(self.helpmenu)
@@ -831,10 +810,6 @@ class ScWindow(QMainWindow, Ui_B_SC):
         for w in self.switchOnType['drop']:
             w.show()
         #self.GroupItemFrame.updateGeometry()
-        self.craftingmenuid.setEnabled(False)
-        self.craftingtoolid.setEnabled(False)
-        self.chooseitemmenuid.setEnabled(False)
-        self.swapgemsmenuid.setEnabled(False)
         self.GroupItemFrame.show()
 
     def showPlayerWidgets(self, item):
@@ -860,20 +835,7 @@ class ScWindow(QMainWindow, Ui_B_SC):
                     self.AmountDrop[i].hide()
                     self.Effect[i].hide()
                     self.Requirement[i].hide()
-
-        self.testCraftingMenu()
-        self.chooseitemmenuid.setEnabled(True)
-        self.swapgemsmenuid.setEnabled(True)
         self.GroupItemFrame.show()
-
-    def testCraftingMenu(self):
-        item = self.itemattrlist[self.currentTabLabel]
-        enableCrafting = False
-        for slot in item.slots():
-            if slot.crafted():
-                enableCrafting = True
-        self.craftingmenuid.setEnabled(enableCrafting)
-        self.craftingtoolid.setEnabled(enableCrafting)
 
     def closeEvent(self, e):
         if self.ethinargWindow:
@@ -1147,33 +1109,66 @@ class ScWindow(QMainWindow, Ui_B_SC):
 
         return document
 
-    def pieceTabChanged(self, row, col):
-        self.currentTabLabel = string.strip(str(self.PieceTab.tabText(row,col)))
+    def slotUpdateMenus(self):
+        self.newitemmenu.clear()
+        act = QAction('Drop Item', self)
+        act.setData(QVariant('Drop Item'))
+        self.newitemmenu.addAction(act)
+
         if self.currentTabLabel in JewelTabList:
-            swapactionlist = self.swapjewelmenu.actions()
-            moveactionlist = self.swapjewelmenu.actions()
-            swapsubmenu = self.swappiecemenu
+            moveactionlist = self.movejewelmenu.actions()
             movesubmenu = self.movepiecemenu
+            craftedslot = False
+            crafteditem = False
         else:
             swapactionlist = self.swappiecemenu.actions()
             moveactionlist = self.movepiecemenu.actions()
-            swapsubmenu = self.swapjewelmenu
             movesubmenu = self.movejewelmenu
-        self.swapgemsmenu.clear()
+            craftedslot = True
+            crafteditem = (
+                self.itemattrlist[self.currentTabLabel].ActiveState == 'player')
         self.moveitemmenu.clear()
-        self.swapgemsmenu.addMenu(swapsubmenu)
-        self.moveitemmenu.addMenu(movesubmenu)
-        for act in swapactionlist:
-            if str(act.text()) == self.currentTabLabel: continue
-            self.swapgemsmenu.addAction(act)
         for act in moveactionlist:
             if str(act.text()) == self.currentTabLabel: continue
             self.moveitemmenu.addAction(act)
+        if not crafteditem:
+            self.moveitemmenu.addSeparator()
+            self.moveitemmenu.addMenu(movesubmenu)
+
+        self.chooseitemmenuid.setEnabled(crafteditem)
+        self.swapgemsmenuid.setEnabled(crafteditem)
+        if not craftedslot:
+            return
+
+        self.swapgemsmenu.clear()
+        for act in swapactionlist:
+            if str(act.text()) == self.currentTabLabel: continue
+            self.swapgemsmenu.addAction(act)
+
+        itemtypes = ['Normal Item',]
+        if (self.currentTabLabel in PieceTabList[:6] 
+         or self.currentTabLabel == PieceTabList[-1]):
+            itemtypes.append('Enhanced Armor')
+        if self.currentTabLabel in PieceTabList[6:]:
+            itemtypes.extend(('Caster Staff', 'Legendary Staff',
+                              'Enhanced Bow', 'Legendary Bow',
+                              'Legendary Weapon', 'Enhanced Sheild', 
+                              'Enhanced Harp',))
+        self.newitemmenu.addSeparator()
+        self.chooseitemmenu.clear()
+        for type in itemtypes:
+            act = QAction(type, self)
+            act.setData(QVariant(type))
+            self.newitemmenu.addAction(act)
+            act = QAction(type, self)
+            act.setData(QVariant(type))
+            self.chooseitemmenu.addAction(act)
+
+    def pieceTabChanged(self, row, col):
+        self.currentTabLabel = string.strip(str(self.PieceTab.tabText(row,col)))
         if self.nocalc:
             return
         self.restoreItem(self.itemattrlist[self.currentTabLabel])
-
-        self.testCraftingMenu()
 
     def changePieceTab(self,a0):
         mask = a0.data().toInt()[0]
@@ -1384,6 +1379,7 @@ class ScWindow(QMainWindow, Ui_B_SC):
                 self.Makes[slot].setValue(int(item.slot(slot).makes()))
             else:
                 self.Requirement[slot].setText(item.slot(slot).requirement())
+        self.slotUpdateMenus()
         self.nocalc = wasnocalc
         if self.nocalc: return
         self.calculate()
@@ -1596,6 +1592,7 @@ class ScWindow(QMainWindow, Ui_B_SC):
         if self.nocalc:
             return
         errorcount = 0
+        enableCrafting = False
         self.errorsmenu.clear()
         charleveltext = str(self.CharLevel.text())
         if charleveltext == '': 
@@ -1636,6 +1633,8 @@ class ScWindow(QMainWindow, Ui_B_SC):
                 if i < len(imbuevals):
                     self.Cost[i].setText(SC.formatCost(slot.gemCost(1)))
                     self.Points[i].setText('%3.1f' % imbuevals[i])
+                    if slot.crafted():
+                        enableCrafting = True
                 self.Name[i].setText(slot.gemName(self.realm))
                 self.Name[i].setToolTip(slot.gemName(self.realm))
             self.ItemImbue.setText('%3.1f' % imbuepts)
@@ -1722,6 +1721,9 @@ class ScWindow(QMainWindow, Ui_B_SC):
         self.TotalPrice.setText(SC.formatCost(tot['Price']))
         self.TotalUtility.setText('%3.1f' % tot['Utility'])
         self.errorsmenuid.setEnabled(errorcount > 0)
+        item = self.itemattrlist[self.currentTabLabel]
+        self.craftingmenuid.setEnabled(enableCrafting)
+        self.craftingtoolid.setEnabled(enableCrafting)
                 
     def templateChanged(self,a0=None):
         self.modified = True
@@ -2073,7 +2075,6 @@ class ScWindow(QMainWindow, Ui_B_SC):
         effcombo.setCurrentIndex(i)
         # Here we go... cascade
         self.effectChanged(i, slot)
-        self.testCraftingMenu()
     
     def clearCurrentItemSlots(self):
         self.itemattrlist[self.currentTabLabel].clearSlots()

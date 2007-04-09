@@ -9,6 +9,9 @@ Ethinarg search related things;
 
 Oddball things;
 
+  Prettify the display of stats with caps for the screen, with
+  a stat/maxstat flavor option (75/101 or similar).
+
   Add the <SCMaterials> entries to the SCData report format.
   Perhaps per-item and per-template?  Or per-gem, then sum them?
 
@@ -20,10 +23,9 @@ Oddball things;
   for saving Templates and .../Reports for saving exported reports 
   on Windows?  Keep Items/ by default under the program dir?
 
-  Show Bonuses of % as #% finally?
+  Folks have asked for RvR and PvE utility numbers.  Not easy though.
 
-  Prettify the display of stats with caps for the screen, with
-  a stat/maxstat flavor option.
+  Show Bonuses of % as #% finally?
 
   Allow users to choose to include class-specific bonuses for resists?
   (mostly, applies to heavy tanks).  Need the growth table from level
@@ -46,6 +48,8 @@ Ideas for New Items/Item Type;
   because they can add two slots for the statcap and the stat!)
 
   Add 1.85-1.87 enchanced craft slot5 lookups (by realm/style/piece).
+  Use the 'Item Level' dialog to choose a specialty-crafted item?
+  (Don't get rid of choosing bonuses, since Mythic keeps adding on.)
 
   A guildy suggested that the user could fix all of the body armor
   pieces or all the weapons which are crafted, based on popping up
