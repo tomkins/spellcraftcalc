@@ -5,8 +5,7 @@ Ethinarg search related things;
   slot with the currently selected tab (let them pick Any Slot,
   of course)?
 
-  It seems the Utility<br />Value is still wider than most, but the
-  results page otherwise is looking great!
+  Add a *clear* button to Search to start fresh.
 
 Oddball things;
 
