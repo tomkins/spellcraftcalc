@@ -1944,9 +1944,9 @@ class ScWindow(QMainWindow, Ui_B_SC):
                 amount = self.AmountDrop[slot].currentIndex()
                 typetext = item.slot(slot).type()
                 efftext = item.slot(slot).effect()
-                if (CraftedValuesLists.has_key(typetext)
-                and isinstance(CraftedValuesLists[typetext], dict)):
-                    valueslist = CraftedValuesLists[typetext]
+                if (ValuesLists.has_key(typetext)
+                and isinstance(ValuesLists[typetext], dict)):
+                    valueslist = ValuesLists[typetext]
                     if (valueslist.has_key(efftext)
                     and isinstance(valueslist[efftext][0], tuple)
                     and len(valueslist[efftext][1]) > amount):
