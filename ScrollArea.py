@@ -41,6 +41,9 @@ class ScrollArea(QtGui.QScrollArea):
         if self.widget() is None: return
 
         bestheight = self.widget().sizeHint().height()
+        rows = ((bestheight - 1) / self.rowheight) + 1
+        bestheight = rows * self.rowheight
+
         viewheight = self.size().height()
 
         if ((self.horizontalScrollBarPolicy() != 

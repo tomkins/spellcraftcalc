@@ -1219,6 +1219,8 @@ class ScWindow(QMainWindow, Ui_B_SC):
         self.Offhand.setVisible(isweapon and not notoffhand)
         self.LabelDamageType.setVisible(isweapon)
         self.DamageType.setVisible(isweapon)
+        self.ScrollItemInfo.bestFit()
+        self.ScrollItemInfo.setMaximumHeight(self.ScrollSlots.maximumHeight())
 
     def itemRealmChanged(self, a0=None, item=None):
         if item is None: 
