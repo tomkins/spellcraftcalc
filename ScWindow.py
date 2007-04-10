@@ -215,9 +215,8 @@ class ScWindow(QMainWindow, Ui_B_SC):
         self.OutfitName.setFixedSize(QSize(cbwidth, cbheight))
         sksize = self.GroupCharInfo.layout().minimumSize()
         sksize.expandedTo(self.GroupResists.layout().minimumSize())
-        sys.stdout.write("%dw x %dh\n" % (sksize.width(), sksize.height(),))
         self.SkillsList.setSizeHint(sksize)
-        sys.stdout.write("%dw x %dh\n" % (self.SkillsList.sizeHint().width(), self.SkillsList.sizeHint().height(),))
+        self.SkillsList.setMinimumHeight(self.SkillsList.sizeHint().height())
 
         self.Realm.insertItems(0, list(Realms))
         self.OutfitName.setCompleter(None)

@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# ItemLevel.py: Dark Age of Camelot Spellcrafting Calculator 
+# ChooseSlot.py: Dark Age of Camelot Spellcrafting Calculator 
 #
 # See http://kscraft.sourceforge.net/ for updates
 #
