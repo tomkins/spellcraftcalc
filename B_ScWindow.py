@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'ScWindow.ui'
 #
-# Created: Thu Apr 05 21:44:57 2007
+# Created: Mon Apr 09 18:41:59 2007
 #      by: PyQt4 UI code generator 4.1
 #
 # WARNING! All changes made in this file will be lost!
@@ -803,7 +803,7 @@ class Ui_B_SC(object):
         self.LabelClassRestrictionTable.setObjectName("LabelClassRestrictionTable")
         self.vboxlayout3.addWidget(self.LabelClassRestrictionTable)
 
-        self.ClassRestrictionTable = QtGui.QTableWidget(self.ItemSummaryFrame)
+        self.ClassRestrictionTable = QtGui.QListWidget(self.ItemSummaryFrame)
         self.ClassRestrictionTable.setObjectName("ClassRestrictionTable")
         self.vboxlayout3.addWidget(self.ClassRestrictionTable)
         self.hboxlayout2.addLayout(self.vboxlayout3)
@@ -1608,11 +1608,6 @@ class Ui_B_SC(object):
         self.LabelItemRequirement.setText(QtGui.QApplication.translate("B_SC", "Requirement: ", None, QtGui.QApplication.UnicodeUTF8))
         self.LabelDBSource.setText(QtGui.QApplication.translate("B_SC", "Source: ", None, QtGui.QApplication.UnicodeUTF8))
         self.LabelClassRestrictionTable.setText(QtGui.QApplication.translate("B_SC", "Class Restrictions:", None, QtGui.QApplication.UnicodeUTF8))
-        self.ClassRestrictionTable.setRowCount(0)
-        self.ClassRestrictionTable.setColumnCount(1)
-        self.ClassRestrictionTable.clear()
-        self.ClassRestrictionTable.setColumnCount(1)
-        self.ClassRestrictionTable.setRowCount(0)
         self.LabelItemNoteText.setText(QtGui.QApplication.translate("B_SC", "Item Notes:", None, QtGui.QApplication.UnicodeUTF8))
         self.LabelNoteText.setText(QtGui.QApplication.translate("B_SC", "Template Notes:", None, QtGui.QApplication.UnicodeUTF8))
         self.LabelGemType.setText(QtGui.QApplication.translate("B_SC", " Type", None, QtGui.QApplication.UnicodeUTF8))

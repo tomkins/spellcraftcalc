@@ -260,28 +260,31 @@ class ScWindow(QMainWindow, Ui_B_SC):
         self.DamageType.setFixedSize(QSize(cbwidth, cbheight))
         self.ItemRequirement.setFixedHeight(edheight)
 
-        self.ClassRestrictionTable.verticalHeader().hide()
-        self.ClassRestrictionTable.horizontalHeader().hide()
-        self.ClassRestrictionTable.setShowGrid(False)
         self.ClassRestrictionTable.setTabKeyNavigation(False)
-        self.ClassRestrictionTable.setRowCount(1 + len(ClassList['All']))
-        item = QTableWidgetItem('All')
+        self.ClassRestrictionTable.setFrameStyle(QFrame.NoFrame)
+        # The FrameV2 palettes all lie, the OS has control, so make
+        # this ClassRestrictionTable object transparent
+        palette = QPalette(self.ClassRestrictionTable.palette())
+        palette.setColor(QPalette.Base, QColor(0,0,0,0))
+        palette.setBrush(QPalette.Base, QBrush(QColor(0,0,0,0)))
+        self.ClassRestrictionTable.setPalette(palette)
+        self.ClassRestrictionTable.clear()
+        testsizewidget = QCheckBox("Necromancer")
+        testsizewidget.updateGeometry()
+        chkboxwidth = testsizewidget.sizeHint().width() + 4
+        item = QListWidgetItem('All')
         item.setFlags(Qt.ItemIsUserCheckable | Qt.ItemIsEnabled)
         item.setCheckState(Qt.Unchecked)
-        self.ClassRestrictionTable.setItem(0, 0, item)
-        i = 1
+        item.setSizeHint(QSize(chkboxwidth, cbheight))
+        self.ClassRestrictionTable.addItem(item)
         for classname in ClassList['All']:
-            item = QTableWidgetItem(classname)
+            item = QListWidgetItem(classname)
             item.setFlags(Qt.ItemIsUserCheckable | Qt.ItemIsEnabled)
             item.setCheckState(Qt.Unchecked)
-            self.ClassRestrictionTable.setItem(i, 0, item)
-            i = i + 1
-        self.ClassRestrictionTable.resizeRowsToContents()
-        self.ClassRestrictionTable.resizeColumnsToContents()
-        ltrb = self.ClassRestrictionTable.getContentsMargins()
-        self.ClassRestrictionTable.setFixedWidth(ltrb[0] + ltrb[2] + \
-            self.ClassRestrictionTable.columnWidth(0) + \
-            self.ClassRestrictionTable.verticalScrollBar().width())
+            item.setSizeHint(QSize(chkboxwidth, cbheight))
+            self.ClassRestrictionTable.addItem(item)
+        self.ClassRestrictionTable.setFixedWidth(chkboxwidth + \
+            self.ClassRestrictionTable.verticalScrollBar().sizeHint().width())
         self.ClassRestrictionTable.updateGeometry()
 
         self.NoteText.setAcceptRichText(False)
@@ -565,7 +568,7 @@ class ScWindow(QMainWindow, Ui_B_SC):
                      self.itemInfoChanged)
 
         self.connect(self.ClassRestrictionTable, 
-                     SIGNAL('itemChanged(QTableWidgetItem *)'), 
+                     SIGNAL('itemChanged(QListWidgetItem *)'), 
                      self.classRestrictionsChanged)
         self.connect(self.ItemNoteText,SIGNAL("textChanged()"),
                      self.itemInfoChanged)
@@ -1792,7 +1795,7 @@ class ScWindow(QMainWindow, Ui_B_SC):
         self.itemInfoChanged()
 
     def displayClassRestrictions(self, item):
-        classitem = self.ClassRestrictionTable.item(0, 0)
+        classitem = self.ClassRestrictionTable.item(0)
         if len(item.CLASSRESTRICTIONS) > 0 and \
                item.CLASSRESTRICTIONS[0] == 'All':
             classitem.setCheckState(Qt.Checked)
@@ -1804,9 +1807,9 @@ class ScWindow(QMainWindow, Ui_B_SC):
         rc = 0
         i = 1
         for classname in ClassList['All']:
-            classitem = self.ClassRestrictionTable.item(i, 0)
+            classitem = self.ClassRestrictionTable.item(i)
             if rc < len(classlist) and classlist[rc] == classname:
-                self.ClassRestrictionTable.setRowHidden(i, False)
+                self.ClassRestrictionTable.item(i).setHidden(False)
                 if cr < len(item.CLASSRESTRICTIONS) and \
                    item.CLASSRESTRICTIONS[cr] == classname:
                     classitem.setCheckState(Qt.Checked)
@@ -1815,7 +1818,7 @@ class ScWindow(QMainWindow, Ui_B_SC):
                     classitem.setCheckState(Qt.Unchecked)
                 rc = rc + 1
             else:
-                self.ClassRestrictionTable.setRowHidden(i, True)
+                self.ClassRestrictionTable.item(i).setHidden(True)
                 classitem.setCheckState(Qt.Unchecked)
                 if cr < len(item.CLASSRESTRICTIONS) and \
                    item.CLASSRESTRICTIONS[cr] == classname:
@@ -1827,14 +1830,20 @@ class ScWindow(QMainWindow, Ui_B_SC):
         if self.nocalc: return
         if a0.text() == "All":
             if a0.checkState() == Qt.Checked:
-                for row in range(1, a0.tableWidget().rowCount()):
-                   a0.tableWidget().item(row, 0).setCheckState(Qt.Unchecked)
+                for row in range(1, self.ClassRestrictionTable.count()):
+                   self.ClassRestrictionTable.item(row).setCheckState(Qt.Unchecked)
                 item.CLASSRESTRICTIONS = ['All']
-            elif item.CLASSRESTRICTIONS[0] == 'All':
-                del item.CLASSRESTRICTIONS[0]
+            elif 'All' in item.CLASSRESTRICTIONS:
+                index = item.CLASSRESTRICTIONS.index('All')
+                del item.CLASSRESTRICTIONS[index]
             else:
                 return
         elif a0.checkState() == Qt.Checked:
+            if self.ClassRestrictionTable.item(0).checkState() == Qt.Checked:
+                self.ClassRestrictionTable.item(0).setCheckState(Qt.Unchecked)
+            if 'All' in item.CLASSRESTRICTIONS:
+                index = item.CLASSRESTRICTIONS.index('All')
+                del item.CLASSRESTRICTIONS[index]
             i = 0
             while i < len(item.CLASSRESTRICTIONS):
                 if a0.text() == item.CLASSRESTRICTIONS[i]:
