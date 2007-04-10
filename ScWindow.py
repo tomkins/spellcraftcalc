@@ -185,13 +185,13 @@ class ScWindow(QMainWindow, Ui_B_SC):
         palette.setColor(QPalette.Base, QColor(0,0,0,0))
         palette.setBrush(QPalette.Base, QBrush(QColor(0,0,0,0)))
         self.SkillsList.setPalette(palette)
-        skillsize = self.GroupResists.sizeHint()
-        self.SkillsList.setMinimumSize(skillsize)
-        sys.stdout.write("min %d minhint %d hint %d max %d\n" % 
-                         (self.SkillsList.minimumSize().height(),
-                          self.SkillsList.minimumSizeHint().height(),
-                          self.SkillsList.sizeHint().height(),
-                          self.SkillsList.maximumSize().height(),))
+        #skillsize = self.GroupResists.sizeHint()
+        #self.SkillsList.setMinimumSize(skillsize)
+        #sys.stdout.write("min %d minhint %d hint %d max %d\n" % 
+        #                 (self.SkillsList.minimumSize().height(),
+        #                  self.SkillsList.minimumSizeHint().height(),
+        #                  self.SkillsList.sizeHint().height(),
+        #                  self.SkillsList.maximumSize().height(),))
         self.GroupSkillsList.layout().setColumnStretch(0, 1)
         self.ScWinFrame.layout().setColumnStretch(3, 1)
 
