@@ -429,49 +429,25 @@ class ScWindow(QMainWindow, Ui_B_SC):
         # to the next-multiple of a combobox height.  Scroll the lines
         # by the combobox height, page from the top to bottom slots.
         #
-        self.ItemSlotsGrid.setFixedHeight(cbheight * 12)
-        #minheight = self.ItemInfoGrid.layout().sizeHint().height()
-        #minheight = ((minheight - 1) / cbheight + 1) * cbheight
-        minheight = cbheight * 4
-        maxheight = cbheight * 12
-
-        fixheight = self.ItemInfoGrid.layout().sizeHint().height()
-        fixheight = ((fixheight - 1) / cbheight + 1) * cbheight
-        self.ItemInfoGrid.setFixedHeight(fixheight)
-        fixwidth = self.ItemInfoGrid.sizeHint().width()
-        fixwidth += self.ScrollItemInfo.verticalScrollBar().sizeHint().width()
-
-        self.ScrollItemInfo.setWidget(self.ItemInfoGrid)
-        self.ScrollItemInfo.setFixedWidth(fixwidth)
-        self.ScrollItemInfo.setMinimumHeight(minheight)
-        self.ScrollItemInfo.setMaximumHeight(maxheight)
-        self.ScrollItemInfo.verticalScrollBar().setSingleStep(cbheight)
-        self.ScrollItemInfo.verticalScrollBar().setPageStep(cbheight * 4)
-
+        self.ScrollSlots.setWidgetResizable(False)
         self.ScrollSlots.setWidget(self.ItemSlotsGrid)
-        self.ScrollSlots.setMinimumHeight(minheight)
-        self.ScrollSlots.setMaximumHeight(maxheight)
-        self.ScrollSlots.verticalScrollBar().setSingleStep(cbheight)
-        self.ScrollSlots.verticalScrollBar().setPageStep(cbheight * 4)
-        #self.ScrollSlots.updateGeometry()
+        self.ScrollSlots.setRowHeight(cbheight)
 
-        # Improve the look of QScrollArea's - should have no background
-        #
-        palette = QPalette(self.ScrollItemInfo.palette())
-        palette.setColor(QPalette.Window, QColor(0,0,0,0))
-        palette.setBrush(QPalette.Window, QBrush(QColor(0,0,0,0)))
-        self.ScrollItemInfo.setPalette(palette)
-        palette = QPalette(palette)
-        self.ScrollSlots.setPalette(palette)
+        self.ScrollItemInfo.setWidgetResizable(False)
+        self.ScrollItemInfo.setWidget(self.ItemInfoGrid)
+        self.ScrollItemInfo.setRowHeight(cbheight)
+        self.ScrollItemInfo.setMaximumHeight(self.ScrollSlots.maximumHeight())
 
         # To round this out, we want the ItemSummaryFrame and ItemSlotsFrame
         # to grow first to a maximum of the height of the ScrollSlots plus
         # the height of the labels above.  
         #
-        minheight += self.ItemSlotsHeader.sizeHint().height()
+        minheight = self.ItemSlotsHeader.sizeHint().height()
+        minheight += self.ScrollItemInfo.minimumHeight()
         self.ItemSummaryFrame.setMinimumHeight(minheight)
         self.ItemSlotsFrame.setMinimumHeight(minheight)
-        maxheight = self.LabelGemType.sizeHint().height() + cbheight * 12
+        maxheight = self.LabelGemType.sizeHint().height()
+        maxheight += self.ScrollSlots.maximumHeight()
         self.ItemSummaryFrame.setMaximumHeight(maxheight)
         self.ItemSlotsFrame.setMaximumHeight(maxheight)
 
