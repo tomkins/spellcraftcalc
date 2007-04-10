@@ -984,7 +984,7 @@
         <number>0</number>
        </property>
        <item row="0" column="0" >
-        <widget class="QListView" name="SkillsList" >
+        <widget class="SkillsView" native="1" name="SkillsList" >
          <property name="sizePolicy" >
           <sizepolicy>
            <hsizetype>7</hsizetype>
@@ -1154,7 +1154,7 @@
             <widget class="SearchingCombo" name="ItemNameCombo" >
              <property name="sizePolicy" >
               <sizepolicy>
-               <hsizetype>3</hsizetype>
+               <hsizetype>7</hsizetype>
                <vsizetype>0</vsizetype>
                <horstretch>20</horstretch>
                <verstretch>0</verstretch>
@@ -1651,7 +1651,7 @@
               <widget class="ScrollArea" native="1" name="ScrollSlots" >
                <property name="sizePolicy" >
                 <sizepolicy>
-                 <hsizetype>3</hsizetype>
+                 <hsizetype>7</hsizetype>
                  <vsizetype>7</vsizetype>
                  <horstretch>0</horstretch>
                  <verstretch>1</verstretch>
@@ -2552,6 +2552,12 @@
    <class>SearchingCombo</class>
    <extends>QComboBox</extends>
    <header>SearchingCombo.h</header>
+   <container>1</container>
+  </customwidget>
+  <customwidget>
+   <class>SkillsView</class>
+   <extends>QListView</extends>
+   <header>SkillsView.h</header>
    <container>1</container>
   </customwidget>
   <customwidget>
