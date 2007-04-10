@@ -18,7 +18,7 @@
      <number>3</number>
     </property>
     <property name="spacing" >
-     <number>0</number>
+     <number>4</number>
     </property>
     <item row="0" column="0" >
      <widget class="GroupFrame" name="GroupCharInfo" >
@@ -105,14 +105,6 @@
        </item>
        <item row="4" column="2" >
         <widget class="QLabel" name="LabelRealmRank" >
-         <property name="sizePolicy" >
-          <sizepolicy>
-           <hsizetype>3</hsizetype>
-           <vsizetype>13</vsizetype>
-           <horstretch>0</horstretch>
-           <verstretch>0</verstretch>
-          </sizepolicy>
-         </property>
          <property name="text" >
           <string>RR: </string>
          </property>
@@ -142,14 +134,6 @@
        </item>
        <item row="5" column="2" >
         <widget class="QLabel" name="LabelChampionLevel" >
-         <property name="sizePolicy" >
-          <sizepolicy>
-           <hsizetype>3</hsizetype>
-           <vsizetype>13</vsizetype>
-           <horstretch>0</horstretch>
-           <verstretch>0</verstretch>
-          </sizepolicy>
-         </property>
          <property name="text" >
           <string>CL: </string>
          </property>
@@ -266,22 +250,6 @@
      </widget>
     </item>
     <item row="0" column="1" >
-     <spacer>
-      <property name="orientation" >
-       <enum>Qt::Horizontal</enum>
-      </property>
-      <property name="sizeType" >
-       <enum>QSizePolicy::Fixed</enum>
-      </property>
-      <property name="sizeHint" >
-       <size>
-        <width>3</width>
-        <height>1</height>
-       </size>
-      </property>
-     </spacer>
-    </item>
-    <item row="0" column="2" >
      <widget class="GroupFrame" name="GroupStats" >
       <property name="frameShape" >
        <enum>QFrame::StyledPanel</enum>
@@ -696,23 +664,7 @@
       </layout>
      </widget>
     </item>
-    <item row="0" column="3" >
-     <spacer>
-      <property name="orientation" >
-       <enum>Qt::Horizontal</enum>
-      </property>
-      <property name="sizeType" >
-       <enum>QSizePolicy::Fixed</enum>
-      </property>
-      <property name="sizeHint" >
-       <size>
-        <width>3</width>
-        <height>0</height>
-       </size>
-      </property>
-     </spacer>
-    </item>
-    <item row="0" column="4" >
+    <item row="0" column="2" >
      <widget class="GroupFrame" name="GroupResists" >
       <property name="frameShape" >
        <enum>QFrame::StyledPanel</enum>
@@ -1016,23 +968,7 @@
       </layout>
      </widget>
     </item>
-    <item row="0" column="5" >
-     <spacer>
-      <property name="orientation" >
-       <enum>Qt::Horizontal</enum>
-      </property>
-      <property name="sizeType" >
-       <enum>QSizePolicy::Fixed</enum>
-      </property>
-      <property name="sizeHint" >
-       <size>
-        <width>3</width>
-        <height>1</height>
-       </size>
-      </property>
-     </spacer>
-    </item>
-    <item row="0" column="6" >
+    <item row="0" column="3" >
      <widget class="GroupFrame" name="GroupSkillsList" >
       <property name="frameShape" >
        <enum>QFrame::StyledPanel</enum>
@@ -1049,6 +985,14 @@
        </property>
        <item row="0" column="0" >
         <widget class="QListView" name="SkillsList" >
+         <property name="sizePolicy" >
+          <sizepolicy>
+           <hsizetype>7</hsizetype>
+           <vsizetype>7</vsizetype>
+           <horstretch>1</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
          <property name="focusPolicy" >
           <enum>Qt::StrongFocus</enum>
          </property>
@@ -1084,23 +1028,7 @@
       </layout>
      </widget>
     </item>
-    <item row="1" column="0" colspan="7" >
-     <spacer>
-      <property name="orientation" >
-       <enum>Qt::Vertical</enum>
-      </property>
-      <property name="sizeType" >
-       <enum>QSizePolicy::Fixed</enum>
-      </property>
-      <property name="sizeHint" >
-       <size>
-        <width>1</width>
-        <height>2</height>
-       </size>
-      </property>
-     </spacer>
-    </item>
-    <item row="2" column="0" colspan="7" >
+    <item row="1" column="0" colspan="4" >
      <layout class="QVBoxLayout" >
       <property name="margin" >
        <number>0</number>
@@ -1132,7 +1060,7 @@
        </spacer>
       </item>
       <item>
-       <widget class="MultiTabFrame" name="GroupItemFrame" >
+       <widget class="MultiTabFrame" native="1" name="GroupItemFrame" >
         <layout class="QVBoxLayout" >
          <property name="margin" >
           <number>6</number>
@@ -1194,30 +1122,6 @@
             </widget>
            </item>
            <item>
-            <spacer>
-             <property name="sizePolicy" >
-              <sizepolicy>
-               <hsizetype>3</hsizetype>
-               <vsizetype>1</vsizetype>
-               <horstretch>0</horstretch>
-               <verstretch>0</verstretch>
-              </sizepolicy>
-             </property>
-             <property name="orientation" >
-              <enum>Qt::Horizontal</enum>
-             </property>
-             <property name="sizeType" >
-              <enum>QSizePolicy::MinimumExpanding</enum>
-             </property>
-             <property name="sizeHint" >
-              <size>
-               <width>5</width>
-               <height>1</height>
-              </size>
-             </property>
-            </spacer>
-           </item>
-           <item>
             <widget class="QLabel" name="ItemQualityLabel" >
              <property name="text" >
               <string>Quality: </string>
@@ -1232,30 +1136,6 @@
            </item>
            <item>
             <widget class="QLineEdit" name="QualEdit" />
-           </item>
-           <item>
-            <spacer>
-             <property name="sizePolicy" >
-              <sizepolicy>
-               <hsizetype>3</hsizetype>
-               <vsizetype>1</vsizetype>
-               <horstretch>0</horstretch>
-               <verstretch>0</verstretch>
-              </sizepolicy>
-             </property>
-             <property name="orientation" >
-              <enum>Qt::Horizontal</enum>
-             </property>
-             <property name="sizeType" >
-              <enum>QSizePolicy::MinimumExpanding</enum>
-             </property>
-             <property name="sizeHint" >
-              <size>
-               <width>5</width>
-               <height>1</height>
-              </size>
-             </property>
-            </spacer>
            </item>
            <item>
             <widget class="QLabel" name="ItemNameLabel" >
@@ -1276,7 +1156,7 @@
               <sizepolicy>
                <hsizetype>3</hsizetype>
                <vsizetype>0</vsizetype>
-               <horstretch>10</horstretch>
+               <horstretch>20</horstretch>
                <verstretch>0</verstretch>
               </sizepolicy>
              </property>
@@ -1292,59 +1172,11 @@
             </widget>
            </item>
            <item>
-            <spacer>
-             <property name="sizePolicy" >
-              <sizepolicy>
-               <hsizetype>3</hsizetype>
-               <vsizetype>1</vsizetype>
-               <horstretch>0</horstretch>
-               <verstretch>0</verstretch>
-              </sizepolicy>
-             </property>
-             <property name="orientation" >
-              <enum>Qt::Horizontal</enum>
-             </property>
-             <property name="sizeType" >
-              <enum>QSizePolicy::MinimumExpanding</enum>
-             </property>
-             <property name="sizeHint" >
-              <size>
-               <width>5</width>
-               <height>1</height>
-              </size>
-             </property>
-            </spacer>
-           </item>
-           <item>
             <widget class="QCheckBox" name="Equipped" >
              <property name="text" >
               <string>Equi&amp;pped</string>
              </property>
             </widget>
-           </item>
-           <item>
-            <spacer>
-             <property name="sizePolicy" >
-              <sizepolicy>
-               <hsizetype>3</hsizetype>
-               <vsizetype>1</vsizetype>
-               <horstretch>0</horstretch>
-               <verstretch>0</verstretch>
-              </sizepolicy>
-             </property>
-             <property name="orientation" >
-              <enum>Qt::Horizontal</enum>
-             </property>
-             <property name="sizeType" >
-              <enum>QSizePolicy::MinimumExpanding</enum>
-             </property>
-             <property name="sizeHint" >
-              <size>
-               <width>5</width>
-               <height>1</height>
-              </size>
-             </property>
-            </spacer>
            </item>
            <item>
             <widget class="QPushButton" name="ToggleItemView" >
@@ -1389,6 +1221,26 @@
                 </widget>
                </item>
                <item>
+                <widget class="ScrollArea" native="1" name="ScrollItemInfo" >
+                 <property name="sizePolicy" >
+                  <sizepolicy>
+                   <hsizetype>0</hsizetype>
+                   <vsizetype>7</vsizetype>
+                   <horstretch>0</horstretch>
+                   <verstretch>1</verstretch>
+                  </sizepolicy>
+                 </property>
+                 <property name="frameShape" >
+                  <enum>QFrame::NoFrame</enum>
+                 </property>
+                 <property name="verticalScrollBarPolicy" >
+                  <enum>Qt::ScrollBarAsNeeded</enum>
+                 </property>
+                 <property name="horizontalScrollBarPolicy" >
+                  <enum>Qt::ScrollBarAlwaysOff</enum>
+                 </property>
+                 <widget class="QWidget" name="ItemInfoGrid" >
+
                 <layout class="QGridLayout" >
                  <property name="margin" >
                   <number>0</number>
@@ -1437,14 +1289,6 @@
                  </item>
                  <item row="3" column="0" >
                   <widget class="QLabel" name="LabelBonusEdit" >
-                   <property name="sizePolicy" >
-                    <sizepolicy>
-                     <hsizetype>3</hsizetype>
-                     <vsizetype>13</vsizetype>
-                     <horstretch>0</horstretch>
-                     <verstretch>0</verstretch>
-                    </sizepolicy>
-                   </property>
                    <property name="text" >
                     <string>Bonus: </string>
                    </property>
@@ -1499,7 +1343,7 @@
                       <enum>Qt::Horizontal</enum>
                      </property>
                      <property name="sizeType" >
-                      <enum>QSizePolicy::MinimumExpanding</enum>
+                      <enum>QSizePolicy::Minimum</enum>
                      </property>
                      <property name="sizeHint" >
                       <size>
@@ -1584,6 +1428,9 @@
                   </widget>
                  </item>
                 </layout>
+
+                 </widget>
+                </widget>
                </item>
               </layout>
               </widget>
@@ -1709,7 +1556,7 @@
                   <enum>Qt::Horizontal</enum>
                  </property>
                  <property name="sizeType" >
-                  <enum>QSizePolicy::MinimumExpanding</enum>
+                  <enum>QSizePolicy::Minimum</enum>
                  </property>
                  <property name="sizeHint" >
                   <size>
@@ -1801,7 +1648,15 @@
              </widget>
              </item>
              <item>
-              <widget class="QScrollArea" native="1" name="ScrollSlots" >
+              <widget class="ScrollArea" native="1" name="ScrollSlots" >
+               <property name="sizePolicy" >
+                <sizepolicy>
+                 <hsizetype>3</hsizetype>
+                 <vsizetype>7</vsizetype>
+                 <horstretch>0</horstretch>
+                 <verstretch>1</verstretch>
+                </sizepolicy>
+               </property>
                <property name="frameShape" >
                 <enum>QFrame::NoFrame</enum>
                </property>
@@ -1907,7 +1762,7 @@
                     <enum>Qt::Horizontal</enum>
                    </property>
                    <property name="sizeType" >
-                    <enum>QSizePolicy::MinimumExpanding</enum>
+                    <enum>QSizePolicy::Minimum</enum>
                    </property>
                    <property name="sizeHint" >
                     <size>
@@ -2157,7 +2012,7 @@
                     <enum>Qt::Horizontal</enum>
                    </property>
                    <property name="sizeType" >
-                    <enum>QSizePolicy::MinimumExpanding</enum>
+                    <enum>QSizePolicy::Minimum</enum>
                    </property>
                    <property name="sizeHint" >
                     <size>
@@ -2209,7 +2064,7 @@
                     <enum>Qt::Horizontal</enum>
                    </property>
                    <property name="sizeType" >
-                    <enum>QSizePolicy::MinimumExpanding</enum>
+                    <enum>QSizePolicy::Minimum</enum>
                    </property>
                    <property name="sizeHint" >
                     <size>
@@ -2251,7 +2106,7 @@
                     <enum>Qt::Horizontal</enum>
                    </property>
                    <property name="sizeType" >
-                    <enum>QSizePolicy::MinimumExpanding</enum>
+                    <enum>QSizePolicy::Minimum</enum>
                    </property>
                    <property name="sizeHint" >
                     <size>
@@ -2317,14 +2172,6 @@
                    </item>
                    <item>
                     <spacer>
-                     <property name="sizePolicy" >
-                      <sizepolicy>
-                       <hsizetype>3</hsizetype>
-                       <vsizetype>1</vsizetype>
-                       <horstretch>0</horstretch>
-                       <verstretch>0</verstretch>
-                      </sizepolicy>
-                     </property>
                      <property name="orientation" >
                       <enum>Qt::Horizontal</enum>
                      </property>
@@ -2373,7 +2220,7 @@
                     <enum>Qt::Horizontal</enum>
                    </property>
                    <property name="sizeType" >
-                    <enum>QSizePolicy::MinimumExpanding</enum>
+                    <enum>QSizePolicy::Minimum</enum>
                    </property>
                    <property name="sizeHint" >
                     <size>
@@ -2663,6 +2510,22 @@
                    </property>
                   </spacer>
                  </item>
+                 <item row="12" column="0" colspan="9" >
+                  <spacer>
+                   <property name="orientation" >
+                    <enum>Qt::Vertical</enum>
+                   </property>
+                   <property name="sizeType" >
+                    <enum>QSizePolicy::MinimumExpanding</enum>
+                   </property>
+                   <property name="sizeHint" >
+                    <size>
+                     <width>1</width>
+                     <height>0</height>
+                    </size>
+                   </property>
+                  </spacer>
+                 </item>
                 </layout>
                </widget>
               </widget>
@@ -2692,9 +2555,9 @@
    <container>1</container>
   </customwidget>
   <customwidget>
-   <class>QScrollArea</class>
+   <class>ScrollArea</class>
    <extends>QWidget</extends>
-   <header>qscrollarea.h</header>
+   <header>ScrollArea.h</header>
    <container>1</container>
   </customwidget>
   <customwidget>
