@@ -33,12 +33,12 @@ class SkillsView(QtGui.QListView):
         bestheight = self.sizehint.height()
         if (self.horizontalScrollBarPolicy() != 
                     QtCore.Qt.ScrollBarAlwaysOff):
-            scrollheight = self.horizontalScrollBar().sizeHint().height()
+            scrollheight = self.horizontalScrollBar().sizeHint().height() + 1
         else:
             scrollheight = 0
         bestheight -= scrollheight
         rows = (bestheight + 4) / self.rowheight
         bestheight = (rows * self.rowheight) + scrollheight
         minheight = self.rowheight * 3 + scrollheight
-        self.setMinimumHeight(minheight)
         self.sizehint.setHeight(bestheight)
+        self.setMinimumHeight(minheight)

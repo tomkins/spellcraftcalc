@@ -1,5 +1,12 @@
+# GroupFrame.py: Dark Age of Camelot Spellcrafting Calculator
+#
+# See http://kscraft.sourceforge.net/ for updates
+#
+# See NOTICE.txt for copyrights and grant of license
+
 from PyQt4.QtGui import QFrame, QPainter, QStyle, QPalette
 from PyQt4.QtGui import QStyleOptionTabWidgetFrame, QStyleOptionFrameV2
+import sys
 
 class GroupFrame(QFrame):
     def __init__(self, parent = None):
