@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'ScWindow.ui'
 #
-# Created: Mon Apr 09 18:41:59 2007
+# Created: Mon Apr 09 21:09:56 2007
 #      by: PyQt4 UI code generator 4.1
 #
 # WARNING! All changes made in this file will be lost!
@@ -779,7 +779,7 @@ class Ui_B_SC(object):
         self.ItemRequirement.setObjectName("ItemRequirement")
         self.gridlayout5.addWidget(self.ItemRequirement,7,0,1,4)
 
-        spacerItem15 = QtGui.QSpacerItem(1,3,QtGui.QSizePolicy.Minimum,QtGui.QSizePolicy.MinimumExpanding)
+        spacerItem15 = QtGui.QSpacerItem(1,1,QtGui.QSizePolicy.Minimum,QtGui.QSizePolicy.MinimumExpanding)
         self.gridlayout5.addItem(spacerItem15,8,0,1,4)
 
         self.LabelDBSource = QtGui.QLabel(self.ItemInfoFrame)
