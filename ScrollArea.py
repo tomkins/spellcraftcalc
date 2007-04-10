@@ -1,4 +1,4 @@
-# ScWindow.py: Dark Age of Camelot Spellcrafting Calculator
+# ScrollArea.py: Dark Age of Camelot Spellcrafting Calculator
 #
 # See http://kscraft.sourceforge.net/ for updates
 #
@@ -18,6 +18,15 @@ class ScrollArea(QtGui.QScrollArea):
         self.setPalette(palette)
         self.sizehint = QtCore.QSize(QtGui.QScrollArea.sizeHint(self))
         self.rowheight = -1
+
+        #self.connect(self.verticalScrollBar(),
+        #             QtCore.SIGNAL("mouseReleaseEvent(QMouseEvent*)"),
+        #             self.mouseReleaseEvent)
+        #self.verticalScrollBar().mouseReleaseEvent = self.mouseReleaseEvent
+
+        self.connect(self.verticalScrollBar(),
+                     QtCore.SIGNAL("valueChanged(int)"),
+                     self.positionNearest)
 
     def setWidget(self, widget):
         QtGui.QScrollArea.setWidget(self, widget)
@@ -89,3 +98,31 @@ class ScrollArea(QtGui.QScrollArea):
     def resizeEvent(self, e):
         self.resizeHeight()
         QtGui.QScrollArea.resizeEvent(self, e)
+
+    def TDBmouseDoubleClickEvent(self, e):
+        if (e.modifiers() != QtCore.Qt.AltModifier 
+                    or e.button() != QtCore.Qt.LeftButton):
+            return
+        ctl = self
+        while ctl.parent() is not None:
+            ctl = ctl.parent()
+        origpolicy = self.sizePolicy()
+        policy = QtGui.QSizePolicy(origpolicy.horizontalPolicy(),
+                                   QtGui.QSizePolicy.MinimumExpanding)
+        self.setSizePolicy(policy)
+        ctl.adjustSize()
+        self.setSizePolicy(origpolicy)
+        #bestheight = self.widget().sizeHint().height()
+        #rows = ((bestheight - 1) / self.rowheight) + 1
+        #bestheight = rows * self.rowheight
+
+        #if ((self.horizontalScrollBarPolicy() != 
+        #            QtCore.Qt.ScrollBarAlwaysOff)
+        #        and self.horizontalScrollBar().isVisible()):
+        #    bestheight += self.horizontalScrollBar().sizeHint().height()
+        #self.setFixedHeight(bestheight)
+        e.accept()
+
+    def positionNearest(self, value):
+        row = (value + self.rowheight / 2) / self.rowheight
+        self.verticalScrollBar().setSliderPosition(row * self.rowheight)
