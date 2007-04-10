@@ -1604,15 +1604,7 @@
                 </widget>
                </item>
                <item>
-                <widget class="QTableWidget" name="ClassRestrictionTable" >
-                 <property name="rowCount" >
-                  <number>0</number>
-                 </property>
-                 <property name="columnCount" >
-                  <number>1</number>
-                 </property>
-                 <column/>
-                </widget>
+                <widget class="QListWidget" name="ClassRestrictionTable" />
                </item>
               </layout>
              </item>
