@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'ScWindow.ui'
 #
-# Created: Tue Apr 10 04:13:13 2007
+# Created: Tue Apr 10 05:21:03 2007
 #      by: PyQt4 UI code generator 4.1
 #
 # WARNING! All changes made in this file will be lost!
@@ -522,7 +522,7 @@ class Ui_B_SC(object):
         self.gridlayout4.setSpacing(0)
         self.gridlayout4.setObjectName("gridlayout4")
 
-        self.SkillsList = QtGui.QListView(self.GroupSkillsList)
+        self.SkillsList = SkillsView(self.GroupSkillsList)
 
         sizePolicy = QtGui.QSizePolicy(QtGui.QSizePolicy.Policy(7),QtGui.QSizePolicy.Policy(7))
         sizePolicy.setHorizontalStretch(1)
@@ -606,7 +606,7 @@ class Ui_B_SC(object):
 
         self.ItemNameCombo = SearchingCombo(self.GroupItemFrame)
 
-        sizePolicy = QtGui.QSizePolicy(QtGui.QSizePolicy.Policy(3),QtGui.QSizePolicy.Policy(0))
+        sizePolicy = QtGui.QSizePolicy(QtGui.QSizePolicy.Policy(7),QtGui.QSizePolicy.Policy(0))
         sizePolicy.setHorizontalStretch(20)
         sizePolicy.setVerticalStretch(0)
         sizePolicy.setHeightForWidth(self.ItemNameCombo.sizePolicy().hasHeightForWidth())
@@ -888,7 +888,7 @@ class Ui_B_SC(object):
 
         self.ScrollSlots = ScrollArea(self.ItemSlotsFrame)
 
-        sizePolicy = QtGui.QSizePolicy(QtGui.QSizePolicy.Policy(3),QtGui.QSizePolicy.Policy(7))
+        sizePolicy = QtGui.QSizePolicy(QtGui.QSizePolicy.Policy(7),QtGui.QSizePolicy.Policy(7))
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(1)
         sizePolicy.setHeightForWidth(self.ScrollSlots.sizePolicy().hasHeightForWidth())
@@ -1642,6 +1642,7 @@ class Ui_B_SC(object):
         self.ItemPriceLabel.setText(QtGui.QApplication.translate("B_SC", "Item Price: ", None, QtGui.QApplication.UnicodeUTF8))
 
 from SearchingCombo import SearchingCombo
-from MultiTabBar import MultiTabBar, MultiTabFrame
+from MultiTabBar import MultiTabFrame, MultiTabBar
 from GroupFrame import GroupFrame
+from SkillsView import SkillsView
 from ScrollArea import ScrollArea

@@ -179,19 +179,9 @@ class ScWindow(QMainWindow, Ui_B_SC):
 
         skillmodel = QStandardItemModel(0,1,self.SkillsList)
         self.SkillsList.setModel(skillmodel)
-        # The FrameV2 palettes all lie, the OS has control, so make
-        # this SkillsList object transparent
-        palette = QPalette(self.SkillsList.palette())
-        palette.setColor(QPalette.Base, QColor(0,0,0,0))
-        palette.setBrush(QPalette.Base, QBrush(QColor(0,0,0,0)))
-        self.SkillsList.setPalette(palette)
-        #skillsize = self.GroupResists.sizeHint()
-        #self.SkillsList.setMinimumSize(skillsize)
-        #sys.stdout.write("min %d minhint %d hint %d max %d\n" % 
-        #                 (self.SkillsList.minimumSize().height(),
-        #                  self.SkillsList.minimumSizeHint().height(),
-        #                  self.SkillsList.sizeHint().height(),
-        #                  self.SkillsList.maximumSize().height(),))
+        skillmodel.insertRows(0, 1)
+        index = skillmodel.index(0, 0, QModelIndex())
+        skillmodel.setData(index, QVariant("  "), Qt.DisplayRole)
         self.GroupSkillsList.layout().setColumnStretch(0, 1)
         self.ScWinFrame.layout().setColumnStretch(3, 1)
 
@@ -223,6 +213,11 @@ class ScWindow(QMainWindow, Ui_B_SC):
         self.ChampionLevel.setFixedSize(QSize(amtedwidth, edheight))
         self.CraftTime.setFixedSize(QSize(amtedwidth, edheight))
         self.OutfitName.setFixedSize(QSize(cbwidth, cbheight))
+        sksize = self.GroupCharInfo.layout().minimumSize()
+        sksize.expandedTo(self.GroupResists.layout().minimumSize())
+        sys.stdout.write("%dw x %dh\n" % (sksize.width(), sksize.height(),))
+        self.SkillsList.setSizeHint(sksize)
+        sys.stdout.write("%dw x %dh\n" % (self.SkillsList.sizeHint().width(), self.SkillsList.sizeHint().height(),))
 
         self.Realm.insertItems(0, list(Realms))
         self.OutfitName.setCompleter(None)
