@@ -132,6 +132,7 @@ class ScWindow(QMainWindow, Ui_B_SC):
         ]
 
         cbwidth = self.CharClass.getMinimumWidth(['Necromancer'])
+        itmcbwidth = self.ItemType.getMinimumWidth(['Composite Bow'])
         amtcbwidth = self.QualDrop.getMinimumWidth(['100'])
         # minSizeHint includes one char, test 19.9 width...
         amtedwidth = self.ItemLevel.minimumSizeHint().width()
@@ -140,6 +141,7 @@ class ScWindow(QMainWindow, Ui_B_SC):
         if str(QApplication.style().objectName()[0:9]).lower() == "macintosh":
             # mac is including a checkbox/icon width which is absurd
             cbwidth = cbwidth - 14
+            itmwidth = itmwidth - 14
             amtcbwidth = amtcbwidth - 14
             edheight = self.CharName.sizeHint().height() - 1
             cbheight = self.Realm.sizeHint().height()
@@ -179,13 +181,19 @@ class ScWindow(QMainWindow, Ui_B_SC):
         self.SkillsList.setModel(skillmodel)
         # The FrameV2 palettes all lie, the OS has control, so make
         # this SkillsList object transparent
-        # basepalette = QPalette(self.GroupSkillsList.palette())
         palette = QPalette(self.SkillsList.palette())
         palette.setColor(QPalette.Base, QColor(0,0,0,0))
         palette.setBrush(QPalette.Base, QBrush(QColor(0,0,0,0)))
         self.SkillsList.setPalette(palette)
+        skillsize = self.GroupResists.sizeHint()
+        self.SkillsList.setMinimumSize(skillsize)
+        sys.stdout.write("min %d minhint %d hint %d max %d\n" % 
+                         (self.SkillsList.minimumSize().height(),
+                          self.SkillsList.minimumSizeHint().height(),
+                          self.SkillsList.sizeHint().height(),
+                          self.SkillsList.maximumSize().height(),))
         self.GroupSkillsList.layout().setColumnStretch(0, 1)
-        self.ScWinFrame.layout().setColumnStretch(6, 1)
+        self.ScWinFrame.layout().setColumnStretch(3, 1)
 
         if str(QApplication.style().objectName()[0:9]).lower() == "macintosh":
             # Mac's text is entirely too compressed, and edit boxes a bit
@@ -203,7 +211,6 @@ class ScWindow(QMainWindow, Ui_B_SC):
             self.LabelTotalUtility.setFixedHeight(lbheight)
             self.LabelBonusEdit.setFixedHeight(cbheight)
             self.LabelSpeedEdit.setFixedHeight(cbheight)
-            self.LabelItemRequirement.setFixedHeight(lbheight)
             self.LabelDBSource.setFixedHeight(lbheight)
 
         self.GroupCharInfo.layout().setColumnStretch(2, 1)
@@ -234,22 +241,30 @@ class ScWindow(QMainWindow, Ui_B_SC):
                                     self.PieceTab.baseOverlap(),
                                     QSizePolicy.Minimum, QSizePolicy.Fixed)
 
-        width = testfont.size(Qt.TextSingleLine, "Damage: ").width()
-        iteminfogrid = self.ItemInfoFrame.layout().itemAt(1).layout()
-        iteminfogrid.setColumnMinimumWidth(0, width)
-        iteminfogrid.setColumnStretch(2, 1)
+        itemctllayout = self.GroupItemFrame.layout().itemAt(1).layout()
         self.ItemLevel.setFixedSize(QSize(amtedwidth, edheight))
         self.ItemLevelButton.setFixedSize(
             QSize(self.ItemLevelButton.width(), edheight))
+        itemctllayout.insertStretch(3, 1)
         self.QualDrop.setFixedSize(QSize(amtcbwidth, cbheight))
         self.QualEdit.setFixedSize(QSize(amtcbwidth, edheight))
+        itemctllayout.insertStretch(7, 1)
+        #itemctllayout.itemAt(7).spacerItem().sizePolicy().setVerticalStretch(1)
         self.ItemNameCombo.setFixedHeight(cbheight)
         self.ItemNameCombo.setCompleter(None)
+        itemctllayout.insertStretch(10, 1)
+        itemctllayout.insertStretch(12, 1)
+        
         self.ItemCraftTime.setFixedSize(QSize(amtcbwidth, edheight))
 
-        self.ItemRealm.setFixedSize(QSize(cbwidth, cbheight))
-        self.ItemType.setFixedSize(QSize(cbwidth, cbheight))
-        self.ItemSource.setFixedSize(QSize(cbwidth, cbheight))
+        width = testfont.size(Qt.TextSingleLine, "Damage: ").width()
+        iteminfogrid = self.ItemInfoGrid.layout()
+        iteminfogrid.setColumnMinimumWidth(0, width)
+        iteminfogrid.setColumnStretch(2, 1)
+
+        self.ItemRealm.setFixedSize(QSize(itmcbwidth, cbheight))
+        self.ItemType.setFixedSize(QSize(itmcbwidth, cbheight))
+        self.ItemSource.setFixedSize(QSize(itmcbwidth, edheight))
         self.BonusEdit.setFixedSize(QSize(amtedwidth, edheight))
         self.AFDPSEdit.setFixedSize(QSize(amtedwidth, edheight))
         self.SpeedEdit.setFixedSize(QSize(amtedwidth, edheight))
@@ -257,7 +272,8 @@ class ScWindow(QMainWindow, Ui_B_SC):
         # line this up within the grid.
         self.Offhand.setFixedSize(QSize(self.Offhand.sizeHint().width()-4,
                                         edheight))
-        self.DamageType.setFixedSize(QSize(cbwidth, cbheight))
+        self.DamageType.setFixedSize(QSize(itmcbwidth, cbheight))
+        self.LabelItemRequirement.setFixedHeight(edheight)
         self.ItemRequirement.setFixedHeight(edheight)
 
         self.ClassRestrictionTable.setTabKeyNavigation(False)
@@ -310,9 +326,9 @@ class ScWindow(QMainWindow, Ui_B_SC):
 
         headergrid = self.ItemSlotsHeader.layout()
         itemslotgrid = self.ItemSlotsGrid.layout()
-        for i in range(0, 8):
-            headergrid.setColumnStretch(i, 0)
-            itemslotgrid.setColumnStretch(i, 0)
+        #for i in range(0, 8):
+            #headergrid.setColumnStretch(i, 0)
+            #itemslotgrid.setColumnStretch(i, 0)
         headergrid.setColumnStretch(8, 1)
         itemslotgrid.setColumnStretch(8, 1)
 
@@ -414,22 +430,38 @@ class ScWindow(QMainWindow, Ui_B_SC):
         # by the combobox height, page from the top to bottom slots.
         #
         self.ItemSlotsGrid.setFixedHeight(cbheight * 12)
-        iteminfogrid = self.ItemInfoFrame.layout().itemAt(1).layout()
-        minheight = iteminfogrid.sizeHint().height()
-        minheight = ((minheight - 1) / cbheight + 1) * cbheight
+        #minheight = self.ItemInfoGrid.layout().sizeHint().height()
+        #minheight = ((minheight - 1) / cbheight + 1) * cbheight
+        minheight = cbheight * 4
         maxheight = cbheight * 12
-        self.ScrollSlots.setWidget(self.ItemSlotsGrid)
-        self.ScrollSlots.setMaximumHeight(maxheight)
-        self.ScrollSlots.setMinimumHeight(minheight)
-        self.ScrollSlots.verticalScrollBar().setSingleStep(cbheight)
-        self.ScrollSlots.verticalScrollBar().setPageStep(cbheight * 6)
-        self.ScrollSlots.updateGeometry()
 
-        # Improve the look of scrollslots - it should have no background
+        fixheight = self.ItemInfoGrid.layout().sizeHint().height()
+        fixheight = ((fixheight - 1) / cbheight + 1) * cbheight
+        self.ItemInfoGrid.setFixedHeight(fixheight)
+        fixwidth = self.ItemInfoGrid.sizeHint().width()
+        fixwidth += self.ScrollItemInfo.verticalScrollBar().sizeHint().width()
+
+        self.ScrollItemInfo.setWidget(self.ItemInfoGrid)
+        self.ScrollItemInfo.setFixedWidth(fixwidth)
+        self.ScrollItemInfo.setMinimumHeight(minheight)
+        self.ScrollItemInfo.setMaximumHeight(maxheight)
+        self.ScrollItemInfo.verticalScrollBar().setSingleStep(cbheight)
+        self.ScrollItemInfo.verticalScrollBar().setPageStep(cbheight * 4)
+
+        self.ScrollSlots.setWidget(self.ItemSlotsGrid)
+        self.ScrollSlots.setMinimumHeight(minheight)
+        self.ScrollSlots.setMaximumHeight(maxheight)
+        self.ScrollSlots.verticalScrollBar().setSingleStep(cbheight)
+        self.ScrollSlots.verticalScrollBar().setPageStep(cbheight * 4)
+        #self.ScrollSlots.updateGeometry()
+
+        # Improve the look of QScrollArea's - should have no background
         #
-        palette = QPalette(self.ScrollSlots.palette())
+        palette = QPalette(self.ScrollItemInfo.palette())
         palette.setColor(QPalette.Window, QColor(0,0,0,0))
         palette.setBrush(QPalette.Window, QBrush(QColor(0,0,0,0)))
+        self.ScrollItemInfo.setPalette(palette)
+        palette = QPalette(palette)
         self.ScrollSlots.setPalette(palette)
 
         # To round this out, we want the ItemSummaryFrame and ItemSlotsFrame
@@ -442,36 +474,6 @@ class ScWindow(QMainWindow, Ui_B_SC):
         maxheight = self.LabelGemType.sizeHint().height() + cbheight * 12
         self.ItemSummaryFrame.setMaximumHeight(maxheight)
         self.ItemSlotsFrame.setMaximumHeight(maxheight)
-
-        # We would really like to grow and shrink ItemSlotsFrame and the
-        # ItemSummaryFrame in multiples of the height of a combo box.
-        # This doesn't appear to work either.
-        #
-        # self.ItemSlotsFrame.setBaseSize(self.ItemSlotsHeader.sizeHint())
-        # self.ItemSlotsFrame.setSizeIncrement(1, cbheight)
-        # self.ItemSummaryFrame.setBaseSize(self.ItemSlotsHeader.sizeHint())
-        # self.ItemSlotsFrame.setSizeIncrement(1, cbheight)
-
-        # We would really like to grow tye ItemSlotsFrame and the
-        # ItemSummaryFrame before other expanding labels, NOTHING
-        # tried appear to work.
-        #
-        #self.ItemInfoFrame.setMaximumHeight(cbheight * 12)
-        #self.ClassRestrictionTable.setMaximumHeight(cbheight * 12)
-        #self.ItemNoteText.setMaximumHeight(cbheight * 12)
-        #self.NoteText.setMaximumHeight(cbheight * 12)
-        #policy = QSizePolicy(QSizePolicy.Preferred, QSizePolicy.Preferred)
-        #self.ScrollSlots.setSizePolicy(QSizePolicy(policy))
-        #self.ItemSummaryFrame.setSizePolicy(QSizePolicy(policy))
-        #self.ItemSlotsFrame.setSizePolicy(QSizePolicy(policy))
-        #self.GroupItemFrame.setSizePolicy(QSizePolicy(policy))
-        #growfirst = QSizePolicy.Maximum
-        #self.ItemSummaryFrame.sizePolicy().setVerticalPolicy(growfirst)
-        #self.ItemSlotsFrame.sizePolicy().setVerticalPolicy(growfirst)
-        #self.ItemSummaryFrame.sizePolicy().setVerticalStretch(5)
-        #self.ItemSlotsFrame.sizePolicy().setVerticalStretch(5)
-        #self.GroupItemFrame.sizePolicy().setVerticalStretch(5)
-        #self..sizePolicy().setVerticalStretch(5)
 
         # Experiments in extracting ItemInfoFrame from the ISF and dropping
         # it into the ItemSlotsFrame, without crashing
@@ -1804,6 +1806,9 @@ class ScWindow(QMainWindow, Ui_B_SC):
             classitem.setCheckState(Qt.Unchecked)
             cr = 0
         classlist = ClassList[item.Realm]
+        # This reset() prepares the X11 port to correctly position
+        # the soon-to-be visible class names
+        self.ClassRestrictionTable.reset()
         rc = 0
         i = 1
         for classname in ClassList['All']:
