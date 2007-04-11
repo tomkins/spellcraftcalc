@@ -150,6 +150,22 @@ class ScWindow(QMainWindow, Ui_B_SC):
                            self.Realm.minimumSizeHint().height()) - 2
             cbheight = edheight
 
+        self.CharName.setFixedSize(QSize(cbwidth, edheight))
+        self.Realm.setFixedSize(QSize(cbwidth, cbheight))
+        self.Realm.insertItems(0, list(Realms))
+        self.CharClass.setFixedSize(QSize(cbwidth, cbheight))
+        self.CharRace.setFixedSize(QSize(cbwidth, cbheight))
+        self.CharLevel.setFixedSize(QSize(amtedwidth, edheight))
+        self.CharLevel.setValidator(QIntValidator(0, 99, self))
+        self.RealmRank.setFixedSize(QSize(amtedwidth, edheight))
+        self.ChampionLevel.setFixedSize(QSize(amtedwidth, edheight))
+        self.ChampionLevel.setValidator(QIntValidator(0, 10, self))
+        self.CraftTime.setFixedSize(QSize(amtedwidth, edheight))
+        self.CraftTime.setValidator(QIntValidator(0, 999, self))
+        self.OutfitName.setFixedSize(QSize(cbwidth, cbheight))
+        self.OutfitName.setCompleter(None)
+        self.GroupCharInfo.layout().setColumnStretch(2, 1)
+
         self.StatLabel = {}
         self.StatValue = {}
         self.StatCap = {}
@@ -177,14 +193,6 @@ class ScWindow(QMainWindow, Ui_B_SC):
         width = testfont.size(Qt.TextSingleLine, " (5)").width()
         self.GroupResists.layout().setColumnMinimumWidth(2,width)
 
-        skillmodel = QStandardItemModel(0,1,self.SkillsList)
-        self.SkillsList.setModel(skillmodel)
-        skillmodel.insertRows(0, 1)
-        index = skillmodel.index(0, 0, QModelIndex())
-        skillmodel.setData(index, QVariant("  "), Qt.DisplayRole)
-        self.GroupSkillsList.layout().setColumnStretch(0, 1)
-        self.ScWinFrame.layout().setColumnStretch(3, 1)
-
         if str(QApplication.style().objectName()[0:9]).lower() == "macintosh":
             # Mac's text is entirely too compressed, and edit boxes a bit
             # shorter than cbheights.  Adjust some label heights so that we
@@ -193,73 +201,63 @@ class ScWindow(QMainWindow, Ui_B_SC):
             lbheight = self.LabelTotalCost.sizeHint().height() + 5
             self.LabelCharName.setFixedHeight(cbheight)
             self.LabelCharLevel.setFixedHeight(cbheight)
-            self.LabelCraftTime.setFixedHeight(cbheight)
             self.LabelTotalCost.setFixedHeight(lbheight)
             self.LabelTotalPrice.setFixedHeight(lbheight)
             for ctl in self.StatLabel.itervalues():
                 ctl.setFixedHeight(lbheight)
             self.LabelTotalUtility.setFixedHeight(lbheight)
+            self.LabelCraftTime.setFixedHeight(cbheight)
             self.LabelBonusEdit.setFixedHeight(cbheight)
             self.LabelSpeedEdit.setFixedHeight(cbheight)
             self.LabelDBSource.setFixedHeight(lbheight)
 
-        self.GroupCharInfo.layout().setColumnStretch(2, 1)
-        self.CharName.setFixedSize(QSize(cbwidth, edheight))
-        self.Realm.setFixedSize(QSize(cbwidth, cbheight))
-        self.CharClass.setFixedSize(QSize(cbwidth, cbheight))
-        self.CharRace.setFixedSize(QSize(cbwidth, cbheight))
-        self.CharLevel.setFixedSize(QSize(amtedwidth, edheight))
-        self.RealmRank.setFixedSize(QSize(amtedwidth, edheight))
-        self.ChampionLevel.setFixedSize(QSize(amtedwidth, edheight))
-        self.CraftTime.setFixedSize(QSize(amtedwidth, edheight))
-        self.OutfitName.setFixedSize(QSize(cbwidth, cbheight))
+        skillmodel = QStandardItemModel(0,1,self.SkillsList)
+        self.SkillsList.setModel(skillmodel)
+        skillmodel.insertRows(0, 1)
+        index = skillmodel.index(0, 0, QModelIndex())
+        skillmodel.setData(index, QVariant("  "), Qt.DisplayRole)
         sksize = self.GroupCharInfo.layout().minimumSize()
         sksize.expandedTo(self.GroupResists.layout().minimumSize())
         self.SkillsList.setSizeHint(sksize)
         self.SkillsList.setMinimumHeight(self.SkillsList.sizeHint().height())
-
-        self.Realm.insertItems(0, list(Realms))
-        self.OutfitName.setCompleter(None)
-
-        self.QualDrop.insertItems(0, list(QualityValues))
-
-        self.CharLevel.setValidator(QIntValidator(0, 99, self))
-        self.ChampionLevel.setValidator(QIntValidator(0, 10, self))
-        self.CraftTime.setValidator(QIntValidator(0, 999, self))
-        self.ItemLevel.setValidator(QIntValidator(0, 99, self))
-        self.QualEdit.setValidator(QIntValidator(0, 100, self))
-        self.BonusEdit.setValidator(QIntValidator(0, 99, self))
-        self.ItemCraftTime.setValidator(QIntValidator(0, 99, self))
+        self.GroupSkillsList.layout().setColumnStretch(0, 1)
+        self.ScWinFrame.layout().setColumnStretch(3, 1)
 
         self.GroupItemFrame.layout().itemAt(0).changeSize(1, 
                                     self.PieceTab.baseOverlap(),
                                     QSizePolicy.Minimum, QSizePolicy.Fixed)
+        for tabname in PieceTabList:
+            self.PieceTab.addTab(0, qApp.translate("B_SC",tabname,None))
+        for tabname in JewelTabList:
+            self.PieceTab.addTab(1, qApp.translate("B_SC",tabname,None))
+        self.GroupItemFrame.stackUnder(self.PieceTab)
+        l = self.ScWinFrame.layout().itemAt(self.ScWinFrame.layout().count()-1)
+        l.layout().itemAt(1).changeSize(1, -self.PieceTab.baseOverlap(),
+                                        QSizePolicy.Minimum, QSizePolicy.Fixed)
 
         itemctllayout = self.GroupItemFrame.layout().itemAt(1).layout()
         self.ItemLevel.setFixedSize(QSize(amtedwidth, edheight))
+        self.ItemLevel.setValidator(QIntValidator(0, 99, self))
         self.ItemLevelButton.setFixedSize(
             QSize(self.ItemLevelButton.width(), edheight))
         itemctllayout.insertStretch(3, 1)
         self.QualDrop.setFixedSize(QSize(amtcbwidth, cbheight))
+        self.QualDrop.insertItems(0, list(QualityValues))
         self.QualEdit.setFixedSize(QSize(amtcbwidth, edheight))
+        self.QualEdit.setValidator(QIntValidator(0, 100, self))
         itemctllayout.insertStretch(7, 1)
         #itemctllayout.itemAt(7).spacerItem().sizePolicy().setVerticalStretch(1)
         self.ItemNameCombo.setFixedHeight(cbheight)
         self.ItemNameCombo.setCompleter(None)
+        self.ToggleItemView.setFixedHeight(cbheight)
         itemctllayout.insertStretch(10, 1)
         itemctllayout.insertStretch(12, 1)
-        
-        self.ItemCraftTime.setFixedSize(QSize(amtcbwidth, edheight))
-
-        width = testfont.size(Qt.TextSingleLine, "Damage: ").width()
-        iteminfogrid = self.ItemInfoGrid.layout()
-        iteminfogrid.setColumnMinimumWidth(0, width)
-        iteminfogrid.setColumnStretch(2, 1)
 
         self.ItemRealm.setFixedSize(QSize(itmcbwidth, cbheight))
         self.ItemType.setFixedSize(QSize(itmcbwidth, cbheight))
         self.ItemSource.setFixedSize(QSize(itmcbwidth, edheight))
         self.BonusEdit.setFixedSize(QSize(amtedwidth, edheight))
+        self.BonusEdit.setValidator(QIntValidator(0, 99, self))
         self.AFDPSEdit.setFixedSize(QSize(amtedwidth, edheight))
         self.SpeedEdit.setFixedSize(QSize(amtedwidth, edheight))
         # Check boxes are about four pixels of whitespace to the right,
@@ -269,6 +267,10 @@ class ScWindow(QMainWindow, Ui_B_SC):
         self.DamageType.setFixedSize(QSize(itmcbwidth, cbheight))
         self.LabelItemRequirement.setFixedHeight(edheight)
         self.ItemRequirement.setFixedHeight(edheight)
+        width = testfont.size(Qt.TextSingleLine, "Damage: ").width()
+        iteminfogrid = self.ItemInfoGrid.layout()
+        iteminfogrid.setColumnMinimumWidth(0, width)
+        iteminfogrid.setColumnStretch(2, 1)
 
         self.ClassRestrictionTable.setTabKeyNavigation(False)
         self.ClassRestrictionTable.setFrameStyle(QFrame.NoFrame)
@@ -320,9 +322,6 @@ class ScWindow(QMainWindow, Ui_B_SC):
 
         headergrid = self.ItemSlotsHeader.layout()
         itemslotgrid = self.ItemSlotsGrid.layout()
-        #for i in range(0, 8):
-            #headergrid.setColumnStretch(i, 0)
-            #itemslotgrid.setColumnStretch(i, 0)
         headergrid.setColumnStretch(8, 1)
         itemslotgrid.setColumnStretch(8, 1)
 
@@ -418,6 +417,9 @@ class ScWindow(QMainWindow, Ui_B_SC):
 
             itemslotgrid.setRowMinimumHeight(i, max(cbheight, edheight))
 
+        self.ItemCraftTime.setFixedSize(QSize(amtcbwidth, edheight))
+        self.ItemCraftTime.setValidator(QIntValidator(0, 99, self))
+
         # Lock the height of ItemSlotsGrid, this is all we need.  Then
         # optimize based on the height of ItemInfoFrame and round it out
         # to the next-multiple of a combobox height.  Scroll the lines
@@ -450,15 +452,6 @@ class ScWindow(QMainWindow, Ui_B_SC):
         #move = self.ItemSummaryFrame.layout().takeAt(0).widget()
         #move.setParent(self.ItemSlotsFrame)
         #self.ItemSlotsFrame.layout().insertLayout(0, move.layout())
-
-        for tabname in PieceTabList:
-            self.PieceTab.addTab(0, qApp.translate("B_SC",tabname,None))
-        for tabname in JewelTabList:
-            self.PieceTab.addTab(1, qApp.translate("B_SC",tabname,None))
-        self.GroupItemFrame.stackUnder(self.PieceTab)
-        l = self.ScWinFrame.layout().itemAt(self.ScWinFrame.layout().count()-1)
-        l.layout().itemAt(1).changeSize(1, -self.PieceTab.baseOverlap(),
-                                        QSizePolicy.Minimum, QSizePolicy.Fixed)
 
         self.ScWinFrame.updateGeometry()
 
