@@ -5,7 +5,6 @@
 # See NOTICE.txt for copyrights and grant of license
 
 from PyQt4 import QtGui, QtCore
-import sys
 
 class ScrollArea(QtGui.QScrollArea):
     def __init__(self, parent = None):
@@ -89,7 +88,6 @@ class ScrollArea(QtGui.QScrollArea):
         if (self.verticalScrollBarPolicy() != 
                     QtCore.Qt.ScrollBarAlwaysOff):
             bestwidth += self.verticalScrollBar().sizeHint().width()
-        sys.stdout.write("Height %d of %s" % (bestheight, str(self.objectName()),))
         self.setSizeHint(bestwidth, bestheight)
         self.resizeHeight()
 
