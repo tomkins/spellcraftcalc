@@ -5,6 +5,7 @@
 # See NOTICE.txt for copyrights and grant of license
 
 from PyQt4 import QtGui, QtCore
+import sys
 
 class ScrollArea(QtGui.QScrollArea):
     def __init__(self, parent = None):
@@ -16,13 +17,9 @@ class ScrollArea(QtGui.QScrollArea):
         palette.setColor(QtGui.QPalette.Window, QtGui.QColor(0,0,0,0))
         palette.setBrush(QtGui.QPalette.Window, QtGui.QBrush(QtGui.QColor(0,0,0,0)))
         self.setPalette(palette)
+
         self.sizehint = QtCore.QSize(QtGui.QScrollArea.sizeHint(self))
         self.rowheight = -1
-
-        #self.connect(self.verticalScrollBar(),
-        #             QtCore.SIGNAL("mouseReleaseEvent(QMouseEvent*)"),
-        #             self.mouseReleaseEvent)
-        #self.verticalScrollBar().mouseReleaseEvent = self.mouseReleaseEvent
 
         self.connect(self.verticalScrollBar(),
                      QtCore.SIGNAL("valueChanged(int)"),
@@ -92,36 +89,13 @@ class ScrollArea(QtGui.QScrollArea):
         if (self.verticalScrollBarPolicy() != 
                     QtCore.Qt.ScrollBarAlwaysOff):
             bestwidth += self.verticalScrollBar().sizeHint().width()
+        sys.stdout.write("Height %d of %s" % (bestheight, str(self.objectName()),))
         self.setSizeHint(bestwidth, bestheight)
         self.resizeHeight()
 
     def resizeEvent(self, e):
         self.resizeHeight()
         QtGui.QScrollArea.resizeEvent(self, e)
-
-    def TDBmouseDoubleClickEvent(self, e):
-        if (e.modifiers() != QtCore.Qt.AltModifier 
-                    or e.button() != QtCore.Qt.LeftButton):
-            return
-        ctl = self
-        while ctl.parent() is not None:
-            ctl = ctl.parent()
-        origpolicy = self.sizePolicy()
-        policy = QtGui.QSizePolicy(origpolicy.horizontalPolicy(),
-                                   QtGui.QSizePolicy.MinimumExpanding)
-        self.setSizePolicy(policy)
-        ctl.adjustSize()
-        self.setSizePolicy(origpolicy)
-        #bestheight = self.widget().sizeHint().height()
-        #rows = ((bestheight - 1) / self.rowheight) + 1
-        #bestheight = rows * self.rowheight
-
-        #if ((self.horizontalScrollBarPolicy() != 
-        #            QtCore.Qt.ScrollBarAlwaysOff)
-        #        and self.horizontalScrollBar().isVisible()):
-        #    bestheight += self.horizontalScrollBar().sizeHint().height()
-        #self.setFixedHeight(bestheight)
-        e.accept()
 
     def positionNearest(self, value):
         row = (value + self.rowheight / 2) / self.rowheight
