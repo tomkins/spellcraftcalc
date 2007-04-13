@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'ScWindow.ui'
 #
-# Created: Tue Apr 10 05:21:03 2007
+# Created: Fri Apr 13 03:41:15 2007
 #      by: PyQt4 UI code generator 4.1
 #
 # WARNING! All changes made in this file will be lost!
@@ -557,6 +557,12 @@ class Ui_B_SC(object):
         self.vboxlayout.addItem(spacerItem4)
 
         self.GroupItemFrame = MultiTabFrame(self.ScWinFrame)
+
+        sizePolicy = QtGui.QSizePolicy(QtGui.QSizePolicy.Policy(7),QtGui.QSizePolicy.Policy(7))
+        sizePolicy.setHorizontalStretch(0)
+        sizePolicy.setVerticalStretch(1)
+        sizePolicy.setHeightForWidth(self.GroupItemFrame.sizePolicy().hasHeightForWidth())
+        self.GroupItemFrame.setSizePolicy(sizePolicy)
         self.GroupItemFrame.setObjectName("GroupItemFrame")
 
         self.vboxlayout1 = QtGui.QVBoxLayout(self.GroupItemFrame)
