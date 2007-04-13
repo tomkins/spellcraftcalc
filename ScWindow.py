@@ -38,13 +38,6 @@ import codecs
 import sys
 import binascii
 
-UserEventIDRestoreItem = QEvent.Type(QEvent.User + 1)
-
-class RestoreItemEvent(QEvent):
-    def __init__(self, item):
-        QEvent.__init__(self, UserEventIDRestoreItem)
-        self.item = item
-
 def plainXMLTag(strval):
     i = 0
     while i < len(strval):
@@ -505,6 +498,8 @@ class ScWindow(QMainWindow, Ui_B_SC):
                      self.itemChanged)
         self.connect(self.ItemNameCombo,SIGNAL("activated(int)"),
                      self.itemNameSelected)
+        self.connect(self.ItemNameCombo,SIGNAL("activated(const QString&)"),
+                     self.itemNameSelected)
         self.connect(self.ItemNameCombo,
                      SIGNAL("editTextChanged(const QString&)"),
                      self.itemNameEdited)
@@ -845,18 +840,14 @@ class ScWindow(QMainWindow, Ui_B_SC):
         if h > screenH:
             h = 589
 
-        if x < 20 or x > (screenW - 20):
+        if x < 0 or x > (screenW - w):
             x = 20
-        if y < 20 or y > (screenH - 20):
+        if y < 0 or y > (screenH - h):
             y = 20
 
         self.resize(w, h)
         self.move(x, y)
         self.updateGeometry()
-
-        maximized = ScOptions.instance().getOption('Maximized', False)
-        if maximized and sys.platform == 'win32':
-            self.setWindowState(Qt.WindowMaximized)
         
     def loadOptions(self):
         self.realm = ScOptions.instance().getOption('Realm', 'Albion')
@@ -888,6 +879,15 @@ class ScWindow(QMainWindow, Ui_B_SC):
                 not isinstance(self.pricingInfo['Tier'], dict):
             self.pricingInfo['Tier'] = {}
             ScOptions.instance().setOption('Pricing', self.pricingInfo)
+        maximized = ScOptions.instance().getOption('Maximized', False)
+        if maximized and sys.platform == 'win32':
+            self.setWindowState(Qt.WindowMaximized)
+        sizepolicy = QSizePolicy(self.GroupItemFrame.sizePolicy())
+        if (ScOptions.instance().getOption('ShowScrollingSlots', True)):
+            sizepolicy.setVerticalPolicy(QSizePolicy.Preferred)
+        else:
+            sizepolicy.setVerticalPolicy(QSizePolicy.Minimum)
+        self.GroupItemFrame.setSizePolicy(sizepolicy)
 
     def saveOptions(self):
         ScOptions.instance().setOption('Realm', self.realm)
@@ -1253,8 +1253,6 @@ class ScWindow(QMainWindow, Ui_B_SC):
                 self.QualDrop.setCurrentIndex(
                     QualityValues.index(item.ItemQuality))
 
-        # Make sure the combo doesn't do anything stupid...
-        self.ItemNameCombo.blockSignals(True)
         self.ItemNameCombo.clear()
         altitem = item
         while altitem is not None:
@@ -1262,7 +1260,6 @@ class ScWindow(QMainWindow, Ui_B_SC):
             altitem = altitem.next
         self.ItemNameCombo.setCurrentIndex(0)
         self.ItemNameCombo.setEditText(item.ItemName)
-        self.ItemNameCombo.blockSignals(False)
 
         self.Equipped.setChecked(int(item.Equipped))
         self.ItemCraftTime.setText(item.Time)
@@ -1870,7 +1867,10 @@ class ScWindow(QMainWindow, Ui_B_SC):
         self.calculate()
 
     def itemNameSelected(self,a0):
-        #sys.stdout.write("Selected Item %d\n" % a0)
+        sys.stdout.write("Selected Item %s\n" % str(a0))
+        if isinstance(a0, basestring):
+            self.ItemNameCombo.setCurrentIndex(0)
+            return
         if self.nocalc: return
         if not isinstance(a0, int) or a0 < 1: return
         item = self.itemattrlist[self.currentTabLabel]
@@ -1886,16 +1886,15 @@ class ScWindow(QMainWindow, Ui_B_SC):
         item.Equipped = wasequipped
         self.outfitlist[self.currentOutfit][self.currentTabLabel] \
                 = ( item.TemplateIndex, item.Equipped, )
-        # Block any additional signals here until AFTER we
-        # execute restoreItem, so subsequent signals get the correct
-        # currentIndex which short circuits this routine
-        # (see a0 == 0 check above)
-        self.ItemNameCombo.blockSignals(True)
-        QApplication.sendEvent(self, RestoreItemEvent(item))
-        # self.restoreItem(item)
+        self.nocalc = True
+        self.restoreItem(item)
+        self.ItemNameCombo.setCurrentIndex(0)
+        #self.ItemNameCombo.setEditText(item.ItemName)
+        self.nocalc = False
+        self.calculate()
 
     def itemNameEdited(self,a0):
-        #sys.stdout.write("Edited Item %d named %s\n" % (self.ItemNameCombo.currentIndex(), a0))
+        sys.stdout.write("Edited Item %d named %s\n" % (self.ItemNameCombo.currentIndex(), a0))
         if self.nocalc: return
         # Ignore side-effect signal textEditChanged() prior to activated()
         if self.ItemNameCombo.currentIndex() != 0: return
@@ -1903,7 +1902,6 @@ class ScWindow(QMainWindow, Ui_B_SC):
         if self.ItemNameCombo.findText(a0) > -1: return
         item = self.itemattrlist[self.currentTabLabel]
         item.ItemName = unicode(self.ItemNameCombo.lineEdit().text())
-        # blockSignals will not have the desired effect, save/restore the cursor as they insert
         cursorpos = self.ItemNameCombo.lineEdit().cursorPosition()
         self.ItemNameCombo.setItemText(0,item.ItemName)
         self.ItemNameCombo.lineEdit().setCursorPosition(cursorpos)
@@ -2969,16 +2967,6 @@ class ScWindow(QMainWindow, Ui_B_SC):
     def resizeEvent(self, e):
         if str(QApplication.style().objectName()[0:9]).lower() == "macintosh":
             self.sizegrip.move(self.width() - 15, self.height() - 15)
-
-    def event(self, e):
-        if e.type() == UserEventIDRestoreItem:
-            #sys.stdout.write("Restoring Item\n")
-            self.restoreItem(e.item)
-            # Unblock any signals we may have blocked in itemNameSelected()
-            self.ItemNameCombo.blockSignals(False)
-            return True
-        else:
-            return QMainWindow.event(self, e)
 
     def ethinargTest(self):
         if not self.ethinargWindow:
