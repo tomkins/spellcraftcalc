@@ -102,6 +102,13 @@
             </widget>
            </item>
            <item>
+            <widget class="QCheckBox" name="ShowScrollingSlots" >
+             <property name="text" >
+              <string>Scrollable Slots (allows your window to be shorter)</string>
+             </property>
+            </widget>
+           </item>
+           <item>
             <widget class="QCheckBox" name="EuroServers" >
              <property name="text" >
               <string>Export Gems to European/GOA Servers</string>
