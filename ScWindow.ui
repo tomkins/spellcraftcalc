@@ -1061,6 +1061,14 @@
       </item>
       <item>
        <widget class="MultiTabFrame" native="1" name="GroupItemFrame" >
+         <property name="sizePolicy" >
+          <sizepolicy>
+           <hsizetype>7</hsizetype>
+           <vsizetype>7</vsizetype>
+           <horstretch>0</horstretch>
+           <verstretch>1</verstretch>
+          </sizepolicy>
+         </property>
         <layout class="QVBoxLayout" >
          <property name="margin" >
           <number>6</number>
