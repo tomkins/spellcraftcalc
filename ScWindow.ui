@@ -1064,7 +1064,7 @@
          <property name="sizePolicy" >
           <sizepolicy>
            <hsizetype>7</hsizetype>
-           <vsizetype>7</vsizetype>
+           <vsizetype>5</vsizetype>
            <horstretch>0</horstretch>
            <verstretch>1</verstretch>
           </sizepolicy>
@@ -1233,7 +1233,7 @@
                  <property name="sizePolicy" >
                   <sizepolicy>
                    <hsizetype>0</hsizetype>
-                   <vsizetype>7</vsizetype>
+                   <vsizetype>5</vsizetype>
                    <horstretch>0</horstretch>
                    <verstretch>1</verstretch>
                   </sizepolicy>
@@ -1660,7 +1660,7 @@
                <property name="sizePolicy" >
                 <sizepolicy>
                  <hsizetype>7</hsizetype>
-                 <vsizetype>7</vsizetype>
+                 <vsizetype>5</vsizetype>
                  <horstretch>0</horstretch>
                  <verstretch>1</verstretch>
                 </sizepolicy>
