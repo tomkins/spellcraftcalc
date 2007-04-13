@@ -134,7 +134,7 @@ class ScWindow(QMainWindow, Ui_B_SC):
         if str(QApplication.style().objectName()[0:9]).lower() == "macintosh":
             # mac is including a checkbox/icon width which is absurd
             cbwidth = cbwidth - 14
-            itmwidth = itmwidth - 14
+            itmcbwidth = itmcbwidth - 14
             amtcbwidth = amtcbwidth - 14
             edheight = self.CharName.sizeHint().height() - 1
             cbheight = self.Realm.sizeHint().height()
@@ -248,7 +248,7 @@ class ScWindow(QMainWindow, Ui_B_SC):
 
         self.ItemRealm.setFixedSize(QSize(itmcbwidth, cbheight))
         self.ItemType.setFixedSize(QSize(itmcbwidth, cbheight))
-        self.ItemSource.setFixedSize(QSize(itmcbwidth, edheight))
+        self.ItemSource.setFixedSize(QSize(itmcbwidth, cbheight))
         self.BonusEdit.setFixedSize(QSize(amtedwidth, edheight))
         self.BonusEdit.setValidator(QIntValidator(0, 99, self))
         self.AFDPSEdit.setFixedSize(QSize(amtedwidth, edheight))
