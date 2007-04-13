@@ -79,9 +79,9 @@ class ScrollArea(QtGui.QScrollArea):
             bestheight += self.horizontalScrollBar().sizeHint().height()
         rows = ((minheight - 1) / self.rowheight) + 1
         minheight += minheight - (rows * self.rowheight)
-        if (self.horizontalScrollBarPolicy() != 
+        if (self.verticalScrollBarPolicy() != 
                     QtCore.Qt.ScrollBarAlwaysOff):
-            minheight += self.horizontalScrollBar().sizeHint().height()
+            minheight += self.verticalScrollBar().sizeHint().height()
         self.setMinimumHeight(minheight)
         self.setMaximumHeight(bestheight)
         bestwidth = self.widget().sizeHint().width()
