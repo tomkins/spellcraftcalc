@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'ScWindow.ui'
 #
-# Created: Fri Apr 13 03:41:15 2007
+# Created: Fri Apr 13 04:05:20 2007
 #      by: PyQt4 UI code generator 4.1
 #
 # WARNING! All changes made in this file will be lost!
@@ -558,7 +558,7 @@ class Ui_B_SC(object):
 
         self.GroupItemFrame = MultiTabFrame(self.ScWinFrame)
 
-        sizePolicy = QtGui.QSizePolicy(QtGui.QSizePolicy.Policy(7),QtGui.QSizePolicy.Policy(7))
+        sizePolicy = QtGui.QSizePolicy(QtGui.QSizePolicy.Policy(7),QtGui.QSizePolicy.Policy(5))
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(1)
         sizePolicy.setHeightForWidth(self.GroupItemFrame.sizePolicy().hasHeightForWidth())
@@ -659,7 +659,7 @@ class Ui_B_SC(object):
 
         self.ScrollItemInfo = ScrollArea(self.ItemInfoFrame)
 
-        sizePolicy = QtGui.QSizePolicy(QtGui.QSizePolicy.Policy(0),QtGui.QSizePolicy.Policy(7))
+        sizePolicy = QtGui.QSizePolicy(QtGui.QSizePolicy.Policy(0),QtGui.QSizePolicy.Policy(5))
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(1)
         sizePolicy.setHeightForWidth(self.ScrollItemInfo.sizePolicy().hasHeightForWidth())
@@ -894,7 +894,7 @@ class Ui_B_SC(object):
 
         self.ScrollSlots = ScrollArea(self.ItemSlotsFrame)
 
-        sizePolicy = QtGui.QSizePolicy(QtGui.QSizePolicy.Policy(7),QtGui.QSizePolicy.Policy(7))
+        sizePolicy = QtGui.QSizePolicy(QtGui.QSizePolicy.Policy(7),QtGui.QSizePolicy.Policy(5))
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(1)
         sizePolicy.setHeightForWidth(self.ScrollSlots.sizePolicy().hasHeightForWidth())

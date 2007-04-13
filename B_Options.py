@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'Options.ui'
 #
-# Created: Fri Mar 02 03:05:31 2007
+# Created: Fri Apr 13 03:51:29 2007
 #      by: PyQt4 UI code generator 4.1
 #
 # WARNING! All changes made in this file will be lost!
@@ -66,6 +66,10 @@ class Ui_B_Options(object):
         self.ShowDoneGems = QtGui.QCheckBox(self.General)
         self.ShowDoneGems.setObjectName("ShowDoneGems")
         self.vboxlayout3.addWidget(self.ShowDoneGems)
+
+        self.ShowScrollingSlots = QtGui.QCheckBox(self.General)
+        self.ShowScrollingSlots.setObjectName("ShowScrollingSlots")
+        self.vboxlayout3.addWidget(self.ShowScrollingSlots)
 
         self.EuroServers = QtGui.QCheckBox(self.General)
         self.EuroServers.setChecked(True)
@@ -433,6 +437,7 @@ class Ui_B_Options(object):
         self.TextLabel1.setText(QtGui.QApplication.translate("B_Options", "Crafter Skill:", None, QtGui.QApplication.UnicodeUTF8))
         self.CapDistance.setText(QtGui.QApplication.translate("B_Options", "Show Distance To Cap (instead of total)", None, QtGui.QApplication.UnicodeUTF8))
         self.ShowDoneGems.setText(QtGui.QApplication.translate("B_Options", "Hide \"Made\" Gems from Materials List and Exported Gems", None, QtGui.QApplication.UnicodeUTF8))
+        self.ShowScrollingSlots.setText(QtGui.QApplication.translate("B_Options", "Scrollable Slots (allows your window to be shorter)", None, QtGui.QApplication.UnicodeUTF8))
         self.EuroServers.setText(QtGui.QApplication.translate("B_Options", "Export Gems to European/GOA Servers", None, QtGui.QApplication.UnicodeUTF8))
         self.IncludeRR.setText(QtGui.QApplication.translate("B_Options", "Include Racial Resists in Totals", None, QtGui.QApplication.UnicodeUTF8))
         self.HideNonClassSkills.setText(QtGui.QApplication.translate("B_Options", "Hide Skills not usable by this Class", None, QtGui.QApplication.UnicodeUTF8))
