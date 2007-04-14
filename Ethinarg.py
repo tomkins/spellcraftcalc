@@ -624,9 +624,6 @@ class EthinargTestWindow(QDialog, Ui_B_Ethinarg):
 
         self.scwin.addItem(item)
 
-        QMessageBox.information(self, "Item Added!",
-            "'%s' added to the '%s' slot" % (item.ItemName, item.Location,))
-
     def event(self, e):
         if e.type() == LoginFailedEvent:
             self.processBox.cancel()
