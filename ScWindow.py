@@ -1468,7 +1468,7 @@ class ScWindow(QMainWindow, Ui_B_SC):
                     amts['TotalBonus'] += amount
                     amts['Bonus'] = min(amts['TotalBonus'], 
                                         amts['BaseCap'])
-                elif gemtype == 'Resist Cap' and item.TYPE == 'Mythrian':
+                elif gemtype == 'Resist Cap' and item.TYPE == 'Mythirian':
                     amts = tot['Resists'][effect]
                     amts['BaseCap'] += amount
                     amts['Bonus'] = min(amts['TotalBonus'], 
@@ -1494,7 +1494,7 @@ class ScWindow(QMainWindow, Ui_B_SC):
                     for effect in effects:
                         amts = tot['Stats'][effect]
                         amts['TotalCapBonus'] += amount
-                        if item.TYPE == 'Mythrian':
+                        if item.TYPE == 'Mythirian':
                             amts['BaseCapToCapBonus'] += amount
                         amts['CapBonus'] = min(amts['TotalCapBonus'],
                                                amts['BaseCapToCapBonus'])
@@ -1509,7 +1509,7 @@ class ScWindow(QMainWindow, Ui_B_SC):
                     elif tot['OtherBonuses'].has_key(effect):
                         amts = tot['OtherBonuses'][effect]
                         amts['TotalBonus'] += amount
-                        if item.TYPE == 'Mythrian':
+                        if item.TYPE == 'Mythirian':
                             amts['BaseCap'] += amount
                         amts['Bonus'] = min(amts['TotalBonus'], 
                                             amts['BaseCap'])
@@ -1523,7 +1523,7 @@ class ScWindow(QMainWindow, Ui_B_SC):
                         amts['BaseCap'] = int(charlevel * capcalc[0]) \
                                         + capcalc[1]
                         amts['TotalBonus'] = amount
-                        if item.TYPE == 'Mythrian':
+                        if item.TYPE == 'Mythirian':
                             amts['BaseCap'] += amount
                         amts['Bonus'] = min(amts['TotalBonus'], amts['BaseCap'])
                 elif gemtype == 'PvE Bonus':

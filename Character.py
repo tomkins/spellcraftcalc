@@ -603,7 +603,7 @@ rangedTypes = d2({
 })
 
 spares = ('Belt', 'Cloak', 'Jewelry', 'Necklass', 
-          'Ring', 'Wrist', 'Mythrian',)
+          'Ring', 'Wrist', 'Mythirian',)
 
 spareTypes = d2({
     'Albion':   t2(twohandTypes['Albion']   + rangedTypes['Albion'][:-4]
@@ -625,7 +625,7 @@ ItemTypes = d2({
     'Right Ring':  t2(('Ring',)),
     'Left Wrist':  t2(('Wrist',)),
     'Right Wrist': t2(('Wrist',)),
-    'Mythical':    t2(('Mythrian',)),
+    'Mythical':    t2(('Mythirian',)),
 
     'Chest':       armorTypes,
     'Arms':        armorTypes,
