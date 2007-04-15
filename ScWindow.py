@@ -2972,6 +2972,8 @@ class ScWindow(QMainWindow, Ui_B_SC):
         if not self.ethinargWindow:
             self.ethinargWindow = Ethinarg.EthinargTestWindow(self, None)
         self.ethinargWindow.show()
+        self.ethinargWindow.setSearchDefaults(self.realm, self.charclass, 
+            self.currentTabLabel)
 
 if __name__ == '__main__':
     app = QApplication([])

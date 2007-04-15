@@ -392,6 +392,7 @@ class EthinargTestWindow(QDialog, Ui_B_Ethinarg):
         QDialog.__init__(self, parent, fl)
         Ui_B_Ethinarg.setupUi(self,self)
 
+        self.defaults = None
         self.scwin = scwin
         self.connect(self.browser, SIGNAL('anchorClicked(const QUrl&)'), self.anchorClicked)
         self.connect(self.queryButton, SIGNAL('clicked()'), self.runQuery)
@@ -643,9 +644,25 @@ class EthinargTestWindow(QDialog, Ui_B_Ethinarg):
             self.maxLevelCombo.setCurrentIndex(
                 self.maxLevelCombo.findText('51'))
             self.processBox.cancel()
+            if self.defaults:
+                self.__setSearchDefaults(self.defaults)
             return True
         else:
             return QDialog.event(self, e)
+
+    def setSearchDefaults(self, realm, charClass, slot):
+        self.defaults = (realm, charClass, slot)
+
+    def __setSearchDefaults(self, tuple):
+        realm = tuple[0]
+        charClass = tuple[1]
+        slot = tuple[2]
+        ridx = self.realmCombo.findText(realm, Qt.MatchExactly)
+        if ridx != -1: self.realmCombo.setCurrentIndex(ridx)
+        clsidx = self.classCombo.findText(charClass, Qt.MatchExactly)
+        if clsidx != -1: self.classCombo.setCurrentIndex(clsidx)
+        slotidx = self.slotCombo.findText(slot, Qt.MatchExactly)
+        if slotidx != -1: self.slotCombo.setCurrentIndex(slotidx)
 
 b = None
 
