@@ -84,6 +84,10 @@ class CraftBar(QDialog, Ui_B_CraftBar):
             'Spare', 'Right Hand', 'Left Hand', '2 Handed', 'Ranged',
         ]
 
+        if str(QApplication.style().objectName()[0:9]).lower() == "macintosh":
+            self.PathSelectButton.setFixedWidth(50)
+            self.PathSelectButton.setFixedHeight(32)
+
         self.connect(self.PathSelectButton,SIGNAL("clicked()"),self.openFileDialog)
         self.connect(self.PushButton19,SIGNAL("clicked()"),self.accept)
         self.connect(self.LoadGemsButton,SIGNAL("clicked()"),self.loadGems)

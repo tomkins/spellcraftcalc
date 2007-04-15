@@ -242,7 +242,13 @@ class ScWindow(QMainWindow, Ui_B_SC):
         #itemctllayout.itemAt(7).spacerItem().sizePolicy().setVerticalStretch(1)
         self.ItemNameCombo.setFixedHeight(cbheight)
         self.ItemNameCombo.setCompleter(None)
-        self.ToggleItemView.setFixedHeight(cbheight)
+
+        if str(QApplication.style().objectName()[0:9]).lower() == "macintosh":
+            # Force button to be rounded on mac - a rectangular button just
+            # looks really weird
+            self.ToggleItemView.setFixedHeight(32)
+        else:
+            self.ToggleItemView.setFixedHeight(cbheight)
         itemctllayout.insertStretch(10, 1)
         itemctllayout.insertStretch(12, 1)
 
