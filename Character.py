@@ -704,22 +704,22 @@ ServerCodes = d2({
 
 #Euro
 EuroServerCodes = d2({
-     '33' : 'Excalibur',
-    '177' : 'Prydwen',
-     '45' : 'Avalon',
-    '153' : 'Dartmoor',
-     '11' : 'Lyonesse',
-    '134' : 'Logres',
-     '14' : 'Stonehenge',
-     '34' : 'Broceliande',
-     '12' : 'Ys',
-    '139' : 'Orcanie',
-    '171' : 'Carnac',
-    '163' : 'Cumbria',
-    '103' : 'Deira',
-    '148' : 'Gorr',
-    '147' : 'Camlann',
-     '20' : 'Glastonbury',
+     '18' : 'Glastonbury',
+     '19' : 'Salisbury',
+      '1' : 'Excalibur',
+      '6' : 'Prydwen',
+      '2' : 'Broceliande',
+      '5' : 'Ys',
+     '13' : 'Carnac',
+     '10' : 'Orcanie',
+      '3' : 'Avalon',
+      '4' : 'Lyonesse',
+     '12' : 'Dartmoor',
+      '8' : 'Logres',
+      '7' : 'Stonehenge',
+     '17' : 'Cumbria',
+     '16' : 'Deira',
+     '11' : 'Camlann',
 })
 
 
