@@ -239,7 +239,6 @@ class ScWindow(QMainWindow, Ui_B_SC):
         self.QualEdit.setFixedSize(QSize(amtcbwidth, edheight))
         self.QualEdit.setValidator(QIntValidator(0, 100, self))
         itemctllayout.insertStretch(7, 1)
-        #itemctllayout.itemAt(7).spacerItem().sizePolicy().setVerticalStretch(1)
         self.ItemNameCombo.setFixedHeight(cbheight)
         self.ItemNameCombo.setCompleter(None)
 
@@ -503,8 +502,6 @@ class ScWindow(QMainWindow, Ui_B_SC):
         self.connect(self.QualEdit,SIGNAL("textChanged(const QString&)"),
                      self.itemChanged)
         self.connect(self.ItemNameCombo,SIGNAL("activated(int)"),
-                     self.itemNameSelected)
-        self.connect(self.ItemNameCombo,SIGNAL("activated(const QString&)"),
                      self.itemNameSelected)
         self.connect(self.ItemNameCombo,
                      SIGNAL("editTextChanged(const QString&)"),
@@ -1265,7 +1262,6 @@ class ScWindow(QMainWindow, Ui_B_SC):
             self.ItemNameCombo.addItem(altitem.ItemName)
             altitem = altitem.next
         self.ItemNameCombo.setCurrentIndex(0)
-        self.ItemNameCombo.setEditText(item.ItemName)
 
         self.Equipped.setChecked(int(item.Equipped))
         self.ItemCraftTime.setText(item.Time)
@@ -1874,11 +1870,7 @@ class ScWindow(QMainWindow, Ui_B_SC):
 
     def itemNameSelected(self,a0):
         sys.stdout.write("Selected Item %s\n" % str(a0))
-        if isinstance(a0, basestring):
-            self.ItemNameCombo.setCurrentIndex(0)
-            return
-        if self.nocalc: return
-        if not isinstance(a0, int) or a0 < 1: return
+        if self.nocalc or not isinstance(a0, int) or a0 < 1: return
         item = self.itemattrlist[self.currentTabLabel]
         wasequipped = item.Equipped
         item.Equipped = '0'
@@ -1894,17 +1886,15 @@ class ScWindow(QMainWindow, Ui_B_SC):
                 = ( item.TemplateIndex, item.Equipped, )
         self.nocalc = True
         self.restoreItem(item)
-        self.ItemNameCombo.setCurrentIndex(0)
-        #self.ItemNameCombo.setEditText(item.ItemName)
         self.nocalc = False
         self.calculate()
 
     def itemNameEdited(self,a0):
         sys.stdout.write("Edited Item %d named %s\n" % (self.ItemNameCombo.currentIndex(), a0))
-        if self.nocalc: return
         # Ignore side-effect signal textEditChanged() prior to activated()
-        if self.ItemNameCombo.currentIndex() != 0: return
-        # Don't update as we stumble upon a duplicate name, let them keep editing
+        if self.nocalc or self.ItemNameCombo.currentIndex() != 0: return
+        # Don't update as we stumble upon a duplicate name, 
+        # let them keep editing
         if self.ItemNameCombo.findText(a0) > -1: return
         item = self.itemattrlist[self.currentTabLabel]
         item.ItemName = unicode(self.ItemNameCombo.lineEdit().text())
