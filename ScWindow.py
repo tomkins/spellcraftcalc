@@ -69,6 +69,13 @@ class AboutScreen(QDialog):
             self.close()
 
 
+UserEventItemNameUpdatedID = QEvent.Type(QEvent.User + 1)
+
+class UserEventItemNameUpdated(QEvent):
+    def __init__(self):
+        QEvent.__init__(self, UserEventItemNameUpdatedID)
+
+
 class ScWindow(QMainWindow, Ui_B_SC):
     def __init__(self):
         ScOptions()
@@ -1868,9 +1875,18 @@ class ScWindow(QMainWindow, Ui_B_SC):
             item.ItemQuality = unicode(self.QualEdit.text())
         self.calculate()
 
+    def event(self, e):
+        if e.type() == UserEventItemNameUpdatedID:
+            self.ItemNameCombo.setCurrentIndex(0)
+            return True
+        else:
+            return QMainWindow.event(self, e)
+
     def itemNameSelected(self,a0):
-        sys.stdout.write("Selected Item %s\n" % str(a0))
-        if self.nocalc or not isinstance(a0, int) or a0 < 1: return
+        # only items other-than-current are interesting to us
+        if self.nocalc or not isinstance(a0, int) or (a0 < 1):
+            return
+        #sys.stdout.write("Selected Item %s\n" % str(a0))
         item = self.itemattrlist[self.currentTabLabel]
         wasequipped = item.Equipped
         item.Equipped = '0'
@@ -1888,14 +1904,20 @@ class ScWindow(QMainWindow, Ui_B_SC):
         self.restoreItem(item)
         self.nocalc = False
         self.calculate()
+        # The currentIndex is correct; however the value in the edit 
+        # text is not.  Re-Select item after this event is processed
+        QApplication.postEvent(self, UserEventItemNameUpdated())
 
     def itemNameEdited(self,a0):
-        sys.stdout.write("Edited Item %d named %s\n" % (self.ItemNameCombo.currentIndex(), a0))
         # Ignore side-effect signal textEditChanged() prior to activated()
-        if self.nocalc or self.ItemNameCombo.currentIndex() != 0: return
+        if self.nocalc or (self.ItemNameCombo.currentIndex() != 0):
+            return
         # Don't update as we stumble upon a duplicate name, 
-        # let them keep editing
-        if self.ItemNameCombo.findText(a0) > -1: return
+        # or we see an edit message for a newly selected item.
+        # let them keep editing or proceed to update the combo
+        if self.ItemNameCombo.findText(a0) > -1:
+            return
+        #sys.stdout.write("Edited Item %d named %s\n" % (self.ItemNameCombo.currentIndex(), a0))
         item = self.itemattrlist[self.currentTabLabel]
         item.ItemName = unicode(self.ItemNameCombo.lineEdit().text())
         cursorpos = self.ItemNameCombo.lineEdit().cursorPosition()
