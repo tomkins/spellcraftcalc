@@ -54,9 +54,10 @@ class CraftBar(QDialog, Ui_B_CraftBar):
         QDialog.__init__(self, parent, fl)
         Ui_B_CraftBar.setupUi(self,self)
 
-        self.model = QStandardItemModel(0, 2)
-        self.model.setHeaderData(0, Qt.Horizontal, QVariant('Server'), Qt.DisplayRole)
-        self.model.setHeaderData(1, Qt.Horizontal, QVariant('Crafter'), Qt.DisplayRole)
+        self.model = QStandardItemModel(0, 3)
+        self.model.setHeaderData(0, Qt.Horizontal, QVariant('Client'), Qt.DisplayRole)
+        self.model.setHeaderData(1, Qt.Horizontal, QVariant('Server'), Qt.DisplayRole)
+        self.model.setHeaderData(2, Qt.Horizontal, QVariant('Crafter'), Qt.DisplayRole)
         self.CharList.setModel(self.model)
         self.CharList.setEditTriggers(QAbstractItemView.NoEditTriggers)
         self.CharList.setShowGrid(False)
@@ -84,6 +85,10 @@ class CraftBar(QDialog, Ui_B_CraftBar):
             'Spare', 'Right Hand', 'Left Hand', '2 Handed', 'Ranged',
         ]
 
+        self.reini = re.compile('(\w+)-(\d+)\.ini$')
+        self.resec = re.compile('\[(\w+)\]')
+        self.rectl = re.compile('[Hh]otkey_(\d+)=44,13,')
+        
         if str(QApplication.style().objectName()[0:9]).lower() == "macintosh":
             self.PathSelectButton.setFixedWidth(50)
             self.PathSelectButton.setFixedHeight(32)
@@ -237,19 +242,25 @@ class CraftBar(QDialog, Ui_B_CraftBar):
         self.gemcount = 0
         self.computeBarEnd()
 
-    def findPath(self,a0):
+    def findPath(self,rootpath):
         servers = ServerCodes
         if self.parent.euroServers:
             servers = EuroServerCodes
         self.model.removeRows(0, self.model.rowCount())
-        a0 = unicode(a0)
-        reini = re.compile('(\w+)-(\d+)\.ini$')
-        resec = re.compile('\[(\w+)\]')
-        rectl = re.compile('[Hh]otkey_(\d+)=44,13,')
-        if os.path.isdir(a0):
-            filelist = glob.glob(a0+'/*-*.ini')
+        rootpath = unicode(rootpath)
+        if os.path.isdir(rootpath):
+            filelist = glob.glob(rootpath+'/*-*.ini')
+            filelist.extend(glob.glob(rootpath+'/*/*-*.ini'))
+            filelist.extend(glob.glob(rootpath+'/*/*/*-*.ini'))
             for file in filelist:
-                m = reini.search(file)
+                path = file[len(rootpath)+1:]
+                slash = path.rfind('/')
+                slash = max(slash, path.rfind('\\'))
+                m = self.reini.search(path[(slash+1):])
+                if slash < 0:
+                    path = ''
+                else:
+                    path = path[:slash]
                 if m is None or not servers.has_key(m.group(2)):
                     continue
                 # search the section(s) for the pattern
@@ -259,14 +270,14 @@ class CraftBar(QDialog, Ui_B_CraftBar):
                 f = open(file, 'r')
                 find = 0
                 for txt in f:
-                    sec = resec.match(txt)
+                    sec = self.resec.match(txt)
                     if sec is not None:
                         if sec.group(1)[:8] == 'Quickbar':
                             find = 1
                         else:
                             find = 0
                         continue
-                    if find == 1 and rectl.match(txt) is not None:
+                    if find == 1 and self.rectl.match(txt) is not None:
                         find = 2
                         break
                 f.close()
@@ -275,14 +286,16 @@ class CraftBar(QDialog, Ui_B_CraftBar):
                 server = servers[m.group(2)]
                 self.model.insertRows(self.model.rowCount(), 1)
                 index = self.model.index(self.model.rowCount()-1, 0, QModelIndex())
-                self.model.setData(index, QVariant(server), Qt.DisplayRole)
+                self.model.setData(index, QVariant(path), Qt.DisplayRole)
                 self.model.setData(index, QVariant(file), Qt.UserRole)
                 index = self.model.index(self.model.rowCount()-1, 1, QModelIndex())
+                self.model.setData(index, QVariant(server), Qt.DisplayRole)
+                index = self.model.index(self.model.rowCount()-1, 2, QModelIndex())
                 self.model.setData(index, QVariant(m.group(1)), Qt.DisplayRole)
                 if self.model.rowCount() == 1:
                     self.CharList.selectRow(0)
             if len(filelist) > 0:
-                ScOptions.instance().setOption('DaocIniPath', a0)
+                ScOptions.instance().setOption('DaocIniPath', rootpath)
         self.CharList.resizeRowsToContents()
 
     def openFileDialog(self):
