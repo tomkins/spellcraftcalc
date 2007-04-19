@@ -12,9 +12,6 @@ Oddball things;
   Prettify the display of stats with caps for the screen, with
   a stat/maxstat flavor option (75/101 or similar).
 
-  Add the <SCMaterials> entries to the SCData report format.
-  Perhaps per-item and per-template?  Or per-gem, then sum them?
-
   Let slots share an Item list, e.g. both Left Ring and Right Ring
   keep track of the same unused Rings.  "Move to" sort of provides this,
   but not very elegantly.

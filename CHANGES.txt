@@ -1,5 +1,7 @@
 Updated ?/??/2007 - Version 2.00 - in sync with DAoC 1.88
 
+  
+
   Aproximate the chances of success based on Mythic's half-hearted
   post about chances to blow up.  Our approximation is full of .5%
   rounding errors (in both directions), which shouldn't make a big 
@@ -28,10 +30,13 @@ Updated ?/??/2007 - Version 2.00 - in sync with DAoC 1.88
 
   Save new DaocIniPath in preferences (important for users
   not on an actual game PC.)  Select the first toon to help
-  users who are often confused at first.
+  users who are often confused at first.  The display now
+  shows the client (it digs 2 directories deep from the .ini
+  files path to find them all).
 
   Akatsuki moved from the GOA/Euro list to the US list with
-  their new server number, for exporting gems.
+  their new server number, for exporting gems.  Updated all
+  of the euro server numbers.
 
 Updated 3/30/2007 - Version 1.99 - catch up to DAoC 1.88
 
