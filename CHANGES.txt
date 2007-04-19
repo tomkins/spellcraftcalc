@@ -1,6 +1,7 @@
 Updated ?/??/2007 - Version 2.00 - in sync with DAoC 1.88
 
-  
+  Sum Archery/Spell bonuses as "Archery and Spell" bonuses,
+  for total bonuses.  
 
   Aproximate the chances of success based on Mythic's half-hearted
   post about chances to blow up.  Our approximation is full of .5%

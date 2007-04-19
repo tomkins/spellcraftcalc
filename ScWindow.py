@@ -1515,26 +1515,30 @@ class ScWindow(QMainWindow, Ui_B_SC):
                         amts['TotalBonus'] += amount
                         amts['Bonus'] = min(amts['TotalBonus'],
                                             amts['BaseCap'] + amts['CapBonus'])
-                    elif tot['OtherBonuses'].has_key(effect):
-                        amts = tot['OtherBonuses'][effect]
-                        amts['TotalBonus'] += amount
-                        if item.TYPE == 'Mythirian':
-                            amts['BaseCap'] += amount
-                        amts['Bonus'] = min(amts['TotalBonus'], 
-                                            amts['BaseCap'])
-                    else:
+                        continue
+                    if effect in ('Casting Speed', 'Archery Speed'):
+                        effect = 'Archery and Casting Speed'
+                    if effect in ('Spell Damage', 'Archery Damage'):
+                        effect = 'Archery and Spell Damage'
+                    if effect in ('Spell Range', 'Archery Range'):
+                        effect = 'Archery and Spell Range'
+                    if not tot['OtherBonuses'].has_key(effect):
                         tot['OtherBonuses'][effect] = {}
                         amts = tot['OtherBonuses'][effect]
+                        amts['TotalBonus'] = amount
                         if HighCapBonusList.has_key(effect):
                             capcalc = HighCapBonusList[effect]
                         else:
                             capcalc = HighCapBonusList[gemtype]
                         amts['BaseCap'] = int(charlevel * capcalc[0]) \
                                         + capcalc[1]
-                        amts['TotalBonus'] = amount
-                        if item.TYPE == 'Mythirian':
-                            amts['BaseCap'] += amount
-                        amts['Bonus'] = min(amts['TotalBonus'], amts['BaseCap'])
+                    else:
+                        amts = tot['OtherBonuses'][effect]
+                        amts['TotalBonus'] += amount
+                    if item.TYPE == 'Mythirian':
+                        amts['BaseCap'] += amount
+                    amts['Bonus'] = min(amts['TotalBonus'], 
+                                        amts['BaseCap'])
                 elif gemtype == 'PvE Bonus':
                     if tot['PvEBonuses'].has_key(effect):
                         amts = tot['PvEBonuses'][effect]
@@ -2606,6 +2610,13 @@ class ScWindow(QMainWindow, Ui_B_SC):
                         if not find in AllBonusList[self.realm] \
                                                    [self.charclass][effect]:
                             continue
+                    elif (((find == 'Archery and Casting Speed')
+                           and effect in ('Casting Speed', 'Archery Speed')) 
+                       or ((find == 'Archery and Spell Damage')
+                           and effect in ('Spell Damage', 'Archery Damage'))
+                       or ((find == 'Archery and Spell Range')
+                           and effect in ('Spell Range', 'Archery Range'))):
+                        pass
                     else:
                         continue
                 amount = item.slot(slot).amount()
