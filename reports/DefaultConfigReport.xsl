@@ -1,16 +1,29 @@
 <?xml version="1.0" encoding="iso-8859-1"?>
-<xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns="http://www.w3.org/1999/xhtml" xmlns:math="http://exslt.org/math" version="1.0">
-<xsl:output encoding="iso-8859-1" method="xml" doctype-public="-//W3C//DTD XHTML 1.0 Strict//EN" doctype-system="DTD/xhtml1-strict.dtd" indent="yes" omit-xml-declaration="yes"/>
+<xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
+ xmlns="http://www.w3.org/1999/xhtml" xmlns:math="http://exslt.org/math" 
+ version="1.0">
+<xsl:output encoding="iso-8859-1" method="xml" 
+ doctype-public="-//W3C//DTD XHTML 1.0 Strict//EN" 
+ doctype-system="DTD/xhtml1-strict.dtd" indent="yes" 
+ omit-xml-declaration="yes"/>
 <xsl:template name="formatCost">
-	<xsl:param name="cost"/>
-	<xsl:variable name="plat" select="floor($cost div 10000000)"/>
-	<xsl:variable name="gold" select="floor(($cost - $plat * 10000000) div 10000)"/>
-	<xsl:variable name="silver" select="floor(($cost - $plat * 10000000 - $gold * 10000) div 100)"/>
-	<xsl:variable name="copper" select="floor(($cost - $plat * 10000000 - $gold * 10000 - $silver * 100))"/>
-	<xsl:if test="$plat &gt; 0"><xsl:copy-of select="$plat"/>p<xsl:text> </xsl:text></xsl:if>
-	<xsl:if test="$gold &gt; 0 or $plat &gt; 0"><xsl:copy-of select="$gold"/>g<xsl:text> </xsl:text></xsl:if>
-	<xsl:if test="$silver &gt; 0 or $gold &gt; 0 or $plat &gt; 0"><xsl:copy-of select="$silver"/>s<xsl:text> </xsl:text></xsl:if>
-	<xsl:if test="$copper &gt; 0 or $silver &gt; 0 or $gold &gt; 0 or $plat &gt; 0"><xsl:copy-of select="$copper"/>c</xsl:if>
+  <xsl:param name="cost"/>
+  <xsl:variable name="plat" select="floor($cost div 10000000)"/>
+  <xsl:variable name="gold" select="floor(($cost - $plat * 10000000) div 10000)"/>
+  <xsl:variable name="silver" select="floor(($cost - $plat * 10000000 - $gold * 10000) div 100)"/>
+  <xsl:variable name="copper" select="floor(($cost - $plat * 10000000 - $gold * 10000 - $silver * 100))"/>
+  <xsl:if test="$plat &gt; 0">
+    <xsl:copy-of select="$plat"/><xsl:text>p </xsl:text>
+  </xsl:if>
+  <xsl:if test="$gold &gt; 0 or $plat &gt; 0">
+    <xsl:copy-of select="$gold"/><xsl:text>g </xsl:text>
+  </xsl:if>
+  <xsl:if test="$silver &gt; 0 or $gold &gt; 0 or $plat &gt; 0">
+    <xsl:copy-of select="$silver"/><xsl:text>s </xsl:text>
+  </xsl:if>
+  <xsl:if test="$copper &gt; 0 or $silver &gt; 0 or $gold &gt; 0 or $plat &gt; 0">
+    <xsl:copy-of select="$copper"/><xsl:text>c</xsl:text>
+  </xsl:if>
 </xsl:template>
 
 <xsl:template name="nl">
@@ -19,11 +32,11 @@
 </xsl:template>
 
 <xsl:template name="br">
-<xsl:text disable-output-escaping = "yes">&lt;br /&gt;</xsl:text>
+  <xsl:text disable-output-escaping = "yes">&lt;br /&gt;</xsl:text>
 </xsl:template>
 
 <xsl:template name="hr">
-<xsl:text disable-output-escaping = "yes">&lt;hr /&gt;</xsl:text>
+  <xsl:text disable-output-escaping = "yes">&lt;hr /&gt;</xsl:text>
 </xsl:template>
 
 <xsl:template match="SLOT">
