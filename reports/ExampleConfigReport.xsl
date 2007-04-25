@@ -283,6 +283,47 @@
   <xsl:call-template name="br"/>
 </xsl:template>
 
+<xsl:key name="gemname" use="Name"
+         match="/SCTemplate/SCItem/SLOT"/>
+
+<xsl:template name="gemitem">
+  <xsl:param name="nodes"/>
+  <tr>
+    <td align="right">
+      <xsl:value-of select="count($nodes)"/>
+      <xsl:text>&#160;</xsl:text>
+    </td>
+    <td><xsl:value-of select="$nodes/Name"/></td>
+  </tr>
+</xsl:template>
+
+<xsl:template name="gemlist">
+  <xsl:param name="nodes"/>
+  <xsl:for-each select="$nodes[generate-id(.)=generate-id(key('gemname',Name)[1])]">
+    <xsl:sort select="Level" data-type="number"/>
+    <xsl:sort select="Type" order="descending"/>
+    <xsl:sort select="Name"/>
+    <xsl:variable name="onename">
+      <xsl:value-of select="Name"/>
+    </xsl:variable>
+    <xsl:call-template name="gemitem">
+      <xsl:with-param name="nodes" select="$nodes[Name=$onename]"/>
+    </xsl:call-template>
+  </xsl:for-each>
+</xsl:template>
+
+<xsl:template name="gems">
+  <xsl:param name="nodes"/>
+  <center><b>Gem Listing</b></center>
+  <xsl:call-template name="hr"/>
+  <table cellspacing="0" cellpadding="0">
+    <xsl:call-template name="gemlist">
+      <xsl:with-param name="nodes" select="$nodes[Level]"/>
+    </xsl:call-template>
+  </table>
+  <xsl:call-template name="br"/>
+</xsl:template>
+
 <xsl:key name="matname" use="@Name"
          match="/SCTemplate/SCItem/SLOT/Material"/>
 
@@ -363,6 +404,9 @@
   <xsl:call-template name="hr"/>
   <xsl:apply-templates select="SCItem"/>
   <xsl:call-template name="br"/>
+  <xsl:call-template name="gems">
+    <xsl:with-param name="nodes" select="SCItem/SLOT"/>
+  </xsl:call-template>
   <xsl:call-template name="materials">
     <xsl:with-param name="nodes" select="SCItem/SLOT/Material"/>
   </xsl:call-template>
