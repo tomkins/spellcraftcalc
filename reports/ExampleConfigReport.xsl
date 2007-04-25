@@ -47,22 +47,33 @@
     <xsl:choose>
       <xsl:when test="@Type = 'player'">
 	<tr>
-	  <td>Gem <xsl:copy-of select="$slotnum"/>:&#160;</td>
-	  <td align="right"><xsl:value-of select="Amount"/>&#160;</td>
+	  <td>
+            <xsl:text>Gem&#160;</xsl:text><xsl:copy-of select="$slotnum"/>
+            <xsl:text>:&#160;</xsl:text>
+          </td>
+	  <td align="right"><xsl:value-of select="Amount"/>
+            <xsl:text>&#160;</xsl:text>
+          </td>
 	  <td>
 	    <xsl:value-of select="Effect"/><xsl:text>&#160;</xsl:text>
 	    <xsl:if test="Type != 'Stat' and substring(Type, 1, 3) != 'All'">
 	      <xsl:value-of select="Type"/><xsl:text>&#160;</xsl:text>
 	    </xsl:if>
-	    <xsl:text>- </xsl:text><xsl:value-of select="Qua"/><xsl:text>&#160;</xsl:text>
+	    <xsl:text>- </xsl:text><xsl:value-of select="Qua"/>
+            <xsl:text>&#160;</xsl:text>
 	    <xsl:value-of select="Name"/>
 	  </td>
 	</tr>
       </xsl:when>
       <xsl:otherwise>
 	<tr>
-	  <td>Slot <xsl:copy-of select="$slotnum"/>:&#160;</td>
-	  <td align="right"><xsl:value-of select="Amount"/>&#160;</td>
+	  <td>
+            <xsl:text>Slot </xsl:text><xsl:copy-of select="$slotnum"/>
+            <xsl:text>:&#160;</xsl:text>
+          </td>
+	  <td align="right"><xsl:value-of select="Amount"/>
+            <xsl:text>&#160;</xsl:text>
+          </td>
 	  <td>
 	    <xsl:value-of select="Effect"/><xsl:text>&#160;</xsl:text>
 	    <xsl:if test="Type != 'Stat' and Type != 'Other Bonus' and Type != 'PvE Bonus' and Type != 'Other Effect' and substring(Effect, 1, 4) != 'All '">
@@ -207,7 +218,7 @@
   <xsl:param name="nodes"/>
   <tr>
     <xsl:for-each select="$nodes">
-      <td><xsl:value-of select="name()"/>:&#160;</td>
+      <td><xsl:value-of select="name()"/><xsl:text>:&#160;</xsl:text></td>
       <td align="right">
 	<xsl:value-of select="TotalBonus"/>
         <xsl:text>&#160;</xsl:text>
@@ -223,7 +234,7 @@
 	</xsl:for-each>
 	<xsl:text>&#160;</xsl:text>
       </td>
-      <td width="10">&#160;&#160;&#160;</td>
+      <td width="10"><xsl:text>&#160;&#160;&#160;</xsl:text></td>
     </xsl:for-each>
   </tr>
 </xsl:template>
@@ -272,6 +283,54 @@
   <xsl:call-template name="br"/>
 </xsl:template>
 
+<xsl:key name="matname" use="@Name"
+         match="/SCTemplate/SCItem/SLOT/Material"/>
+
+<xsl:template name="materialitem">
+  <xsl:param name="nodes"/>
+  <tr>
+    <td align="right">
+      <xsl:value-of select="sum($nodes/@Amount)"/>
+      <xsl:text>&#160;</xsl:text>
+    </td>
+    <td><xsl:value-of select="$nodes/@Name"/></td>
+  </tr>
+</xsl:template>
+
+<xsl:template name="materiallist">
+  <xsl:param name="nodes"/>
+  <xsl:for-each select="$nodes[generate-id(.)=generate-id(key('matname',@Name)[1])]">
+    <xsl:sort select="@Order"/>
+    <xsl:variable name="onename">
+      <xsl:value-of select="@Name"/>
+    </xsl:variable>
+    <xsl:call-template name="materialitem">
+      <xsl:with-param name="nodes" select="$nodes[@Name=$onename]"/>
+    </xsl:call-template>
+  </xsl:for-each>
+</xsl:template>
+
+<xsl:template name="materials">
+  <xsl:param name="nodes"/>
+  <center><b>Materials</b></center>
+  <xsl:call-template name="hr"/>
+  <table cellspacing="0" cellpadding="0">
+    <tr><td colspan="2"><b>Gems</b></td></tr>
+    <xsl:call-template name="materiallist">
+      <xsl:with-param name="nodes" select="$nodes[@Type='Gems']"/>
+    </xsl:call-template>
+    <tr><td colspan="2"><b>Liquids</b></td></tr>
+    <xsl:call-template name="materiallist">
+      <xsl:with-param name="nodes" select="$nodes[@Type='Liquids']"/>
+    </xsl:call-template>
+    <tr><td colspan="2"><b>Dusts</b></td></tr>
+    <xsl:call-template name="materiallist">
+      <xsl:with-param name="nodes" select="$nodes[@Type='Dusts']"/>
+    </xsl:call-template>
+  </table>
+  <xsl:call-template name="br"/>
+</xsl:template>
+
 <xsl:template match="/SCTemplate">
 <html>
 <head>
@@ -301,8 +360,12 @@
     </xsl:if>
   </xsl:for-each>
   <center><b>Piece Listing</b></center>
-  <xsl:call-template name="hr"/>  
+  <xsl:call-template name="hr"/>
   <xsl:apply-templates select="SCItem"/>
+  <xsl:call-template name="br"/>
+  <xsl:call-template name="materials">
+    <xsl:with-param name="nodes" select="SCItem/SLOT/Material"/>
+  </xsl:call-template>
 </body>
 </html>
 </xsl:template>
