@@ -12,7 +12,7 @@ __all__ = [
   'QualityValues', 'ImbuePts',
   'OCStartPercentages', 'ItemQualOCModifiers',
   'FileExt', 'Caps', 'HighCapBonusList', 'BodyHitOdds',
-  'GemTables', 'GemDusts', 'GemLiquids', 'GemSubName',
+  'GemTables', 'GemDusts', 'GemLiquids', 'GemSubName', 'MaterialsOrder',
   'GemNames', 'MaterialGems', 'GemCosts', 'RemakeCosts', 
   'EffectTypeNames', 'ProcItemNames', 'StableItemNames', 'EffectMetal', 
   'FixTypeTable', 'FixEffectsTable', 'HotkeyGems', 'ImbueMultipliers',  
@@ -870,7 +870,7 @@ RemakeCosts =  t2(( 120,    560,   1740,    5260,      14180,     30660,    4552
 GemNames =     t2(('Raw','Uncut','Rough','Flawed','Imperfect','Polished','Faceted','Precious','Flawless','Perfect',))
 
 
-LiquidsOrder = t2((
+liquidsOrder = (
     'Air Elemental Essence', 
     'Draconic Fire', 
     'Frost From a Wasteland',
@@ -882,9 +882,9 @@ LiquidsOrder = t2((
     'Swamp Fog',
     'Treant Blood', 
     'Undead Ash and Holy Water',
-))
+)
 
-DustsOrder = t2((
+dustsOrder = (
     'Bloodied Battlefield Dirt',
     'Essence of Life', 
     'Fairy Dust', 
@@ -897,7 +897,9 @@ DustsOrder = t2((
     'Other Worldly Dust',
     'Soot From Niflheim',
     'Unseelie Dust',
-))
+)
+
+MaterialsOrder = t2(MaterialGems + liquidsOrder + dustsOrder)
 
 GemSubName = d2({ 
     'Stat' :   'Essence Jewel', 

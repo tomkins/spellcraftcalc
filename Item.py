@@ -309,23 +309,21 @@ class ItemSlot:
             slotnode.appendChild(valnode)
         if rich and (self.SlotType == 'player') and self.crafted():
             matslist = self.gemMaterials(realm)
-            valnode = document.createElement(u'Materials')
+            #valnode = document.createElement(u'Materials')
             for mattype in (u'Gems', u'Dusts', u'Liquids',):
-                typenode = document.createElement(mattype[:-1])
                 matnames = matslist[mattype].keys()
                 matnames.sort()
                 for mat in matnames:
-                    matnode = document.createElement(u'Name')
-                    valtext = document.createTextNode(unicode(mat))
-                    matnode.appendChild(valtext)
-                    typenode.appendChild(matnode)
-                    matnode = document.createElement(u'Quantity')
-                    valtext = document.createTextNode(
-                                  unicode(matslist[mattype][mat]))
-                    matnode.appendChild(valtext)
-                    typenode.appendChild(matnode)
-                valnode.appendChild(typenode)
-            slotnode.appendChild(valnode)
+                    matsort = MaterialsOrder.index(mat)
+                    matnode = document.createElement(u'Material')
+                    matnode.setAttribute(u'Amount', 
+                                          unicode(matslist[mattype][mat]))
+                    matnode.setAttribute(u'Type', mattype)
+                    matnode.setAttribute(u'Name', unicode(mat))
+                    matnode.setAttribute(u'Order', unicode(matsort))
+                    slotnode.appendChild(matnode)
+                    #valnode.appendChild(matnode)
+            #slotnode.appendChild(valnode)
 
 class Item:
     def __init__(self, state='', loc='', realm='All', idx = -1):
