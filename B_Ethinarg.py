@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'Ethinarg.ui'
 #
-# Created: Sun Mar 25 19:18:55 2007
+# Created: Thu Apr 26 19:32:04 2007
 #      by: PyQt4 UI code generator 4.1
 #
 # WARNING! All changes made in this file will be lost!
@@ -457,10 +457,17 @@ class Ui_B_Ethinarg(object):
 
         spacerItem2 = QtGui.QSpacerItem(40,20,QtGui.QSizePolicy.Expanding,QtGui.QSizePolicy.Minimum)
         self.hboxlayout14.addItem(spacerItem2)
+
+        self.clearButton = QtGui.QPushButton(self.groupBox_2)
+        self.clearButton.setObjectName("clearButton")
+        self.hboxlayout14.addWidget(self.clearButton)
+
+        spacerItem3 = QtGui.QSpacerItem(40,20,QtGui.QSizePolicy.Expanding,QtGui.QSizePolicy.Minimum)
+        self.hboxlayout14.addItem(spacerItem3)
         self.vboxlayout4.addLayout(self.hboxlayout14)
 
-        spacerItem3 = QtGui.QSpacerItem(20,311,QtGui.QSizePolicy.Minimum,QtGui.QSizePolicy.Expanding)
-        self.vboxlayout4.addItem(spacerItem3)
+        spacerItem4 = QtGui.QSpacerItem(20,311,QtGui.QSizePolicy.Minimum,QtGui.QSizePolicy.Expanding)
+        self.vboxlayout4.addItem(spacerItem4)
         self.vboxlayout3.addLayout(self.vboxlayout4)
         self.vboxlayout.addWidget(self.splitter)
 
@@ -469,15 +476,15 @@ class Ui_B_Ethinarg(object):
         self.hboxlayout15.setSpacing(6)
         self.hboxlayout15.setObjectName("hboxlayout15")
 
-        spacerItem4 = QtGui.QSpacerItem(40,20,QtGui.QSizePolicy.Expanding,QtGui.QSizePolicy.Minimum)
-        self.hboxlayout15.addItem(spacerItem4)
+        spacerItem5 = QtGui.QSpacerItem(40,20,QtGui.QSizePolicy.Expanding,QtGui.QSizePolicy.Minimum)
+        self.hboxlayout15.addItem(spacerItem5)
 
         self.closeButton = QtGui.QPushButton(B_Ethinarg)
         self.closeButton.setObjectName("closeButton")
         self.hboxlayout15.addWidget(self.closeButton)
 
-        spacerItem5 = QtGui.QSpacerItem(40,20,QtGui.QSizePolicy.Expanding,QtGui.QSizePolicy.Minimum)
-        self.hboxlayout15.addItem(spacerItem5)
+        spacerItem6 = QtGui.QSpacerItem(40,20,QtGui.QSizePolicy.Expanding,QtGui.QSizePolicy.Minimum)
+        self.hboxlayout15.addItem(spacerItem6)
         self.vboxlayout.addLayout(self.hboxlayout15)
         self.hboxlayout.addLayout(self.vboxlayout)
 
@@ -507,6 +514,7 @@ class Ui_B_Ethinarg(object):
         self.label_11.setText(QtGui.QApplication.translate("B_Ethinarg", "Bonus 3", None, QtGui.QApplication.UnicodeUTF8))
         self.label_12.setText(QtGui.QApplication.translate("B_Ethinarg", "Magical Ability", None, QtGui.QApplication.UnicodeUTF8))
         self.queryButton.setText(QtGui.QApplication.translate("B_Ethinarg", "Run Query", None, QtGui.QApplication.UnicodeUTF8))
+        self.clearButton.setText(QtGui.QApplication.translate("B_Ethinarg", "Clear Query", None, QtGui.QApplication.UnicodeUTF8))
         self.closeButton.setText(QtGui.QApplication.translate("B_Ethinarg", "Close", None, QtGui.QApplication.UnicodeUTF8))
 
 from SearchingCombo import SearchingCombo
