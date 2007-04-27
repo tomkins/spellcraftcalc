@@ -747,9 +747,6 @@
                <property name="text" >
                 <string>Clear Query</string>
                </property>
-               <property name="default" >
-                <bool>true</bool>
-               </property>
               </widget>
              </item>
              <item>
