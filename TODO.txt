@@ -1,12 +1,3 @@
-Ethinarg search related things;
-
-  When opening Search Items, default the realm to the current Realm,
-  default the class to the currently selected class.  Populate the 
-  slot with the currently selected tab (let them pick Any Slot,
-  of course)?
-
-  Add a *clear* button to Search to start fresh.
-
 Oddball things;
 
   Prettify the display of stats with caps for the screen, with
