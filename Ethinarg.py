@@ -392,10 +392,12 @@ class EthinargTestWindow(QDialog, Ui_B_Ethinarg):
         QDialog.__init__(self, parent, fl)
         Ui_B_Ethinarg.setupUi(self,self)
 
-        self.defaults = None
+        self.defaults = { 'max_level' : '51', }
+
         self.scwin = scwin
         self.connect(self.browser, SIGNAL('anchorClicked(const QUrl&)'), self.anchorClicked)
         self.connect(self.queryButton, SIGNAL('clicked()'), self.runQuery)
+        self.connect(self.clearButton, SIGNAL('clicked()'), self.clearQuery)
         self.connect(self.nextButton, SIGNAL('clicked()'), self.nextPage)
         self.connect(self.prevButton, SIGNAL('clicked()'), self.prevPage)
         self.connect(self.goButton, SIGNAL('clicked()'), self.goPage)
@@ -450,13 +452,22 @@ class EthinargTestWindow(QDialog, Ui_B_Ethinarg):
             for k, v in self.query.formValues[key]:
                 ctrl.addItem(k, QVariant(v))
 
-    def loadSavedOptions(self):
-        options_dict = ScOptions.instance().getOption('EthinargValues', {})
+    def loadOptions(self, options_dict):
         for ctrl, key, func in self.queryBoxes:
             if options_dict.has_key(key):
                 ctrl.setCurrentIndex(ctrl.findText(str(options_dict[key])))
+            else:
+                ctrl.setCurrentIndex(0)
         if options_dict.has_key('item_name'):
             self.itemNameBox.setText(options_dict['item_name'])
+        else:
+            self.itemNameBox.setText("")
+
+    def loadSavedOptions(self):
+        self.loadOptions(ScOptions.instance().getOption('EthinargValues', {}))
+
+    def loadDefaultOptions(self):
+        self.loadOptions(self.defaults)
 
     def setQueryParams(self):
         options_dict = {}
@@ -468,6 +479,9 @@ class EthinargTestWindow(QDialog, Ui_B_Ethinarg):
             options_dict[key] = str(ctrl.currentText())
         self.query.setPageNumber(self.currentPage)
         ScOptions.instance().setOption('EthinargValues', options_dict)
+
+    def clearQuery(self):
+        self.loadDefaultOptions()
 
     def runQuery(self):
         uname = str(self.usernameBox.text())
@@ -639,30 +653,22 @@ class EthinargTestWindow(QDialog, Ui_B_Ethinarg):
             return True
         elif e.type() == InitializedEvent:
             self.loadCombos()
+            self.loadDefaultOptions()
             self.loadSavedOptions()
             self.displayItemCounts()
-            self.maxLevelCombo.setCurrentIndex(
-                self.maxLevelCombo.findText('51'))
             self.processBox.cancel()
-            if self.defaults:
-                self.__setSearchDefaults(self.defaults)
             return True
         else:
             return QDialog.event(self, e)
 
-    def setSearchDefaults(self, realm, charClass, slot):
-        self.defaults = (realm, charClass, slot)
+    def setSearchDefaults(self, realm, charclass, itemtype):
+        self.defaults = {
+            'max_level' : '51',
+            'realm' :     realm,
+            'class' :     charclass,
+            'itemtype' :  itemtype,
+        }
 
-    def __setSearchDefaults(self, tuple):
-        realm = tuple[0]
-        charClass = tuple[1]
-        slot = tuple[2]
-        ridx = self.realmCombo.findText(realm, Qt.MatchExactly)
-        if ridx != -1: self.realmCombo.setCurrentIndex(ridx)
-        clsidx = self.classCombo.findText(charClass, Qt.MatchExactly)
-        if clsidx != -1: self.classCombo.setCurrentIndex(clsidx)
-        slotidx = self.slotCombo.findText(slot, Qt.MatchExactly)
-        if slotidx != -1: self.slotCombo.setCurrentIndex(slotidx)
 
 b = None
 
