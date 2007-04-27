@@ -1131,7 +1131,7 @@ class ScWindow(QMainWindow, Ui_B_SC):
             itemtypes.extend(('Caster Staff', 'Legendary Staff',
                               'Enhanced Bow', 'Legendary Bow',
                               'Legendary Weapon', 'Enhanced Sheild', 
-                              'Enhanced Harp',))
+                              'Enhanced Harp', 'Enhanced Weapon'))
         self.newitemmenu.addSeparator()
         self.chooseitemmenu.clear()
         for type in itemtypes:
