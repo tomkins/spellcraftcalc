@@ -3,7 +3,7 @@ Updated 4/26/2007 - Version 2.00 - in sync with DAoC 1.88
   Sum Archery/Spell bonuses as "Archery and Spell" bonuses,
   for total bonuses.  
 
-  Aproximate the chances of success based on Mythic's half-hearted
+  Aproximate the chances of success based on Mythic's half-hearted 
   post about chances to blow up.  Our approximation is full of .5%
   rounding errors (in both directions), which shouldn't make a big 
   difference.  The chance to succeed (and not blow up) appears to be
@@ -16,7 +16,8 @@ Updated 4/26/2007 - Version 2.00 - in sync with DAoC 1.88
 
   Touched up layout of Ethinarg's search results view, the list
   now shows the item name as clickable link (instead of seperate
-  "Add to Template" link) to add the item.
+  "Add to Template" link) to add the item.  Added a Clear Query
+  button to reset the form.
 
   Solved loading and switching outfits, loading a template
   now shows the selected outfit and each outfit's selected
