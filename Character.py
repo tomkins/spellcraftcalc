@@ -720,6 +720,7 @@ EuroServerCodes = d2({
      '17' : 'Cumbria',
      '16' : 'Deira',
      '11' : 'Camlann',
+      '9' : 'Gorre',
 })
 
 
