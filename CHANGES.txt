@@ -1,3 +1,7 @@
+Updated ?/??/2007 - Version 2.01
+
+
+
 Updated 4/26/2007 - Version 2.00 - in sync with DAoC 1.88
 
   Sum Archery/Spell bonuses as "Archery and Spell" bonuses,
