@@ -2224,6 +2224,8 @@ class ScWindow(QMainWindow, Ui_B_SC):
                 self.itemattrlist[self.currentTabLabel].Equipped = '0'
                 item.next = self.itemattrlist[self.currentTabLabel]
                 self.itemattrlist[self.currentTabLabel] = item
+                self.outfitlist[self.currentOutfit][self.currentTabLabel] \
+                          = ( item.TemplateIndex, item.Equipped, )
                 self.restoreItem(item)
                 self.modified = True
 
