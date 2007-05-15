@@ -1,6 +1,8 @@
 Updated ?/??/2007 - Version 2.01
 
-
+  Fixed saving items with bad class restrictions (or other non
+  string entries) and knock out any class restriction on read if
+  it is blank.
 
 Updated 4/26/2007 - Version 2.00 - in sync with DAoC 1.88
 
