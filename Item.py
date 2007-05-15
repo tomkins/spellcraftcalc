@@ -563,14 +563,16 @@ class Item:
             if not isinstance(val, basestring):
                 sys.stderr.write("%s value %s is not a string\n" % (key, str(val)))
             elem = document.createElement(key)
-            elem.appendChild(document.createTextNode(val))
+            elem.appendChild(document.createTextNode(unicode(val)))
             rootnode.appendChild(elem)
         if (len(self.CLASSRESTRICTIONS) > 0):
             elem = document.createElement(u'CLASSRESTRICTIONS')
             rootnode.appendChild(elem)
             for val in self.CLASSRESTRICTIONS:
+                if not isinstance(val, basestring):
+                    sys.stderr.write("CLASSRESTRICTION %s is not a string\n" % str(val))
                 classnode = document.createElement(u'CLASS')
-                classnode.appendChild(document.createTextNode(val))
+                classnode.appendChild(document.createTextNode(unicode(val)))
                 elem.appendChild(classnode)
         slotnode = None
         for num in range(0,len(self.itemslots)):
@@ -652,7 +654,9 @@ class Item:
                 for classnode in child.childNodes:
                     if classnode.nodeType == Node.TEXT_NODE: continue
                     val = XMLHelper.getText(classnode.childNodes)
-                    self.CLASSRESTRICTIONS.append(val)
+                    val = val.strip()
+                    if len(val) > 0:
+                        self.CLASSRESTRICTIONS.append(val)
             elif child.tagName[-4:] == "ITEM":
                 # Legacy nested DROPITEM/PLAYERITEM slots
                 type = string.lower(child.tagName[:-4])
