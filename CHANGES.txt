@@ -1,4 +1,6 @@
 Updated ?/??/2007 - Version 2.01
+  Outfits now get properly updated when loading an item directly from 
+  its XML file.
 
   Fixed saving items with bad class restrictions (or other non
   string entries) and knock out any class restriction on read if
