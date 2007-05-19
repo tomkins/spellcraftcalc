@@ -1831,9 +1831,9 @@ class ScWindow(QMainWindow, Ui_B_SC):
                 if a0.text() > item.CLASSRESTRICTIONS[i]:
                     break
                 i = i + 1
-            item.CLASSRESTRICTIONS.insert(i, a0.text())
+            item.CLASSRESTRICTIONS.insert(i, str(a0.text()))
         elif a0.text() in item.CLASSRESTRICTIONS:
-            index = item.CLASSRESTRICTIONS.index(a0.text())
+            index = item.CLASSRESTRICTIONS.index(str(a0.text()))
             del item.CLASSRESTRICTIONS[index]
         else:
             return
