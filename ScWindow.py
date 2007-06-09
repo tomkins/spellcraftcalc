@@ -171,7 +171,7 @@ class ScWindow(QMainWindow, Ui_B_SC):
         self.StatCap = {}
         self.StatBonus = {}
 
-        for stat in (DropLists['All']['Stat'] + ('PowerPool', 'AF',)):
+        for stat in (DropLists['All']['Stat'] + ('PowerPool', 'Fatigue', 'AF',)):
             self.StatLabel[stat] = getattr(self, stat + 'Label')
             self.StatValue[stat] = getattr(self, stat)
             self.StatCap[stat] = getattr(self, stat + 'Cap')
@@ -1398,7 +1398,7 @@ class ScWindow(QMainWindow, Ui_B_SC):
         tot['Focus'] = {}
         tot['OtherBonuses'] = {}
         tot['PvEBonuses'] = {}
-        for effect in DropLists['All']['Stat'] + ('AF', '% Power Pool'):
+        for effect in DropLists['All']['Stat'] + ('AF', '% Power Pool', 'Fatigue'):
             tot['Stats'][effect] = {}
             tot['Stats'][effect]['TotalBonus'] = 0
             tot['Stats'][effect]['Bonus'] = 0
