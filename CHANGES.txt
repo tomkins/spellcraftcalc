@@ -1,5 +1,9 @@
 Updated ?/??/2007 - Version 2.01
 
+  Show Endurance only for weapon using classes unless there are items
+  with Fatigue or Fatigue Cap bonuses, show Power/Power % only for
+  magic users unless there are items with Power/%Power/Power Cap.
+
   Added additional '5th slot' bonuses for the dragonsworn crafted items.
 
   Outfits now get properly updated when loading an item directly from 
