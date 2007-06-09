@@ -444,6 +444,7 @@ skillValues = t2(('1', '2', '3', '4', '5', '6', '7', '8',))
 
 capIncreaseList = t2(dropStatList + (
     'AF',
+    'Fatigue',
 ))
 
 
@@ -737,6 +738,7 @@ CraftedTypeList = t2((
     'Unused', 
     'Focus', 
     'Skill',
+    'Stat',
     'Cap Increase', 
     'PvE Bonus', 
     'Other Bonus',
@@ -748,20 +750,25 @@ CraftedValuesLists = d2({
     'Unused' :             unusedValues,
     'Focus' :              t2(('50',)),
     'Skill' :              t2(('3',)),
+    'Stat' : d2({
+        None :             t2(('15',)),
+        'Hits' :           t2(('40',)),
+    }),
     'Cap Increase' : d2({
         None :             t2(('5',)),
         'Hits' :           t2(('40',)),
     }),
     'PvE Bonus' :          t2(('5',)),
+    'PvE Bonus' : d2({
+        None :             t2(('5',)),
+        'To Hit' :         t2(('3',)),
+    }),
     'Other Bonus' : d2({
-        '% Power Pool' :   t2(('5',)),
+        None :             t2(('5',)),
         'AF' :             t2(('10',)),
         'Archery Damage' : t2(('2',)),
         'Melee Damage' :   t2(('2',)),
         'Spell Damage' :   t2(('2',)),
-        'Duration of Spells' :      t2(('5',)),
-        'Healing Effectiveness' :   t2(('5',)),
-        'Stat Buff Effectiveness' : t2(('5',)),
     }),
     'Charged Effect' :     t2(("60",)),
     'Offensive Effect' :   t2(("60", "25", "20",)),
@@ -781,6 +788,7 @@ CraftedLists = {
         'All Melee Weapon Skills',
         'Shield',
     )),
+    'Stat' : t2(dropStatList[0:4] + dropStatList[9:]),
     'Cap Increase' : t2((
         'Strength',
         'Constitution',
@@ -788,9 +796,12 @@ CraftedLists = {
         'Quickness',
         'Acuity',
         'Hits',
+        'Power',
+        'Fatigue',
     )),
     'Other Bonus' : t2((
         '% Power Pool',
+        'Fatigue',
         'AF',
         'Archery Damage',
         'Melee Damage',
@@ -801,6 +812,7 @@ CraftedLists = {
     )),
     'PvE Bonus' : t2((
         'Defensive',
+        'To Hit',
     )),
     'Charged Effect' : t2((
         'Dmg w/Resist Debuff (Fire)',
@@ -854,6 +866,8 @@ HighCapBonusList = d2({
     'Stat Debuff Effectiveness' : (  .50,  0 ),
     'Healing Effectiveness'     : (  .50,  0 ),
     'Duration of Spells'        : (  .50,  0 ),
+    # Fatigue Cap to Cap Bonus is a total guess :)
+    'Fatigue Cap'               : (  .50,  0 ),
     'Fatigue'                   : (  .50,  0 ),
     'Skill'                     : (  .20,  1 ),
     'PvE Bonus'                 : (  .20,  0 ),
