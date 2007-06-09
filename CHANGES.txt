@@ -1,4 +1,7 @@
 Updated ?/??/2007 - Version 2.01
+
+  Added additional '5th slot' bonuses for the dragonsworn crafted items.
+
   Outfits now get properly updated when loading an item directly from 
   its XML file.
 
