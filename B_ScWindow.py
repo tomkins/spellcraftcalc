@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'ScWindow.ui'
 #
-# Created: Fri Apr 13 04:05:20 2007
+# Created: Sat Jun 09 02:58:32 2007
 #      by: PyQt4 UI code generator 4.1
 #
 # WARNING! All changes made in this file will be lost!
@@ -310,33 +310,47 @@ class Ui_B_SC(object):
         self.PowerPoolCap.setObjectName("PowerPoolCap")
         self.gridlayout2.addWidget(self.PowerPoolCap,10,2,1,1)
 
+        self.FatigueLabel = QtGui.QLabel(self.GroupStats)
+        self.FatigueLabel.setObjectName("FatigueLabel")
+        self.gridlayout2.addWidget(self.FatigueLabel,11,0,1,1)
+
+        self.Fatigue = QtGui.QLabel(self.GroupStats)
+        self.Fatigue.setAlignment(QtCore.Qt.AlignRight|QtCore.Qt.AlignTrailing|QtCore.Qt.AlignVCenter)
+        self.Fatigue.setObjectName("Fatigue")
+        self.gridlayout2.addWidget(self.Fatigue,11,1,1,1)
+
+        self.FatigueCap = QtGui.QLabel(self.GroupStats)
+        self.FatigueCap.setAlignment(QtCore.Qt.AlignRight|QtCore.Qt.AlignTrailing|QtCore.Qt.AlignVCenter)
+        self.FatigueCap.setObjectName("FatigueCap")
+        self.gridlayout2.addWidget(self.FatigueCap,11,2,1,1)
+
         self.AFLabel = QtGui.QLabel(self.GroupStats)
         self.AFLabel.setObjectName("AFLabel")
-        self.gridlayout2.addWidget(self.AFLabel,11,0,1,1)
+        self.gridlayout2.addWidget(self.AFLabel,12,0,1,1)
 
         self.AF = QtGui.QLabel(self.GroupStats)
         self.AF.setAlignment(QtCore.Qt.AlignRight|QtCore.Qt.AlignTrailing|QtCore.Qt.AlignVCenter)
         self.AF.setObjectName("AF")
-        self.gridlayout2.addWidget(self.AF,11,1,1,1)
+        self.gridlayout2.addWidget(self.AF,12,1,1,1)
 
         self.AFCap = QtGui.QLabel(self.GroupStats)
         self.AFCap.setAlignment(QtCore.Qt.AlignRight|QtCore.Qt.AlignTrailing|QtCore.Qt.AlignVCenter)
         self.AFCap.setObjectName("AFCap")
-        self.gridlayout2.addWidget(self.AFCap,11,2,1,1)
+        self.gridlayout2.addWidget(self.AFCap,12,2,1,1)
 
         self.HitsLabel = QtGui.QLabel(self.GroupStats)
         self.HitsLabel.setObjectName("HitsLabel")
-        self.gridlayout2.addWidget(self.HitsLabel,12,0,1,1)
+        self.gridlayout2.addWidget(self.HitsLabel,13,0,1,1)
 
         self.Hits = QtGui.QLabel(self.GroupStats)
         self.Hits.setAlignment(QtCore.Qt.AlignRight|QtCore.Qt.AlignTrailing|QtCore.Qt.AlignVCenter)
         self.Hits.setObjectName("Hits")
-        self.gridlayout2.addWidget(self.Hits,12,1,1,1)
+        self.gridlayout2.addWidget(self.Hits,13,1,1,1)
 
         self.HitsCap = QtGui.QLabel(self.GroupStats)
         self.HitsCap.setAlignment(QtCore.Qt.AlignRight|QtCore.Qt.AlignTrailing|QtCore.Qt.AlignVCenter)
         self.HitsCap.setObjectName("HitsCap")
-        self.gridlayout2.addWidget(self.HitsCap,12,2,1,1)
+        self.gridlayout2.addWidget(self.HitsCap,13,2,1,1)
 
         self.hboxlayout = QtGui.QHBoxLayout()
         self.hboxlayout.setMargin(0)
@@ -352,10 +366,10 @@ class Ui_B_SC(object):
         self.TotalUtility.setAlignment(QtCore.Qt.AlignRight|QtCore.Qt.AlignTrailing|QtCore.Qt.AlignVCenter)
         self.TotalUtility.setObjectName("TotalUtility")
         self.hboxlayout.addWidget(self.TotalUtility)
-        self.gridlayout2.addLayout(self.hboxlayout,13,0,1,3)
+        self.gridlayout2.addLayout(self.hboxlayout,14,0,1,3)
 
         spacerItem2 = QtGui.QSpacerItem(1,0,QtGui.QSizePolicy.Minimum,QtGui.QSizePolicy.MinimumExpanding)
-        self.gridlayout2.addItem(spacerItem2,14,0,1,3)
+        self.gridlayout2.addItem(spacerItem2,15,0,1,3)
         self.gridlayout.addWidget(self.GroupStats,0,1,1,1)
 
         self.GroupResists = GroupFrame(self.ScWinFrame)
@@ -1546,6 +1560,9 @@ class Ui_B_SC(object):
         self.PowerPoolLabel.setText(QtGui.QApplication.translate("B_SC", "PP%: ", None, QtGui.QApplication.UnicodeUTF8))
         self.PowerPool.setText(QtGui.QApplication.translate("B_SC", "0", None, QtGui.QApplication.UnicodeUTF8))
         self.PowerPoolCap.setText(QtGui.QApplication.translate("B_SC", "-", None, QtGui.QApplication.UnicodeUTF8))
+        self.FatigueLabel.setText(QtGui.QApplication.translate("B_SC", "End: ", None, QtGui.QApplication.UnicodeUTF8))
+        self.Fatigue.setText(QtGui.QApplication.translate("B_SC", "0", None, QtGui.QApplication.UnicodeUTF8))
+        self.FatigueCap.setText(QtGui.QApplication.translate("B_SC", "-", None, QtGui.QApplication.UnicodeUTF8))
         self.AFLabel.setText(QtGui.QApplication.translate("B_SC", "AF: ", None, QtGui.QApplication.UnicodeUTF8))
         self.AF.setText(QtGui.QApplication.translate("B_SC", "0", None, QtGui.QApplication.UnicodeUTF8))
         self.AFCap.setText(QtGui.QApplication.translate("B_SC", "-", None, QtGui.QApplication.UnicodeUTF8))
