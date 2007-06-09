@@ -1,3 +1,9 @@
+Urgently needed;
+
+  Dragonsworn Caster Staves grant 4 slots, plus 2% magic damage,
+  plus 50 focus, AND can carry a tincture.  6 slots didn't last
+  that long.
+
 Oddball things;
 
   Prettify the display of stats with caps for the screen, with
