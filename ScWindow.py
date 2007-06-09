@@ -1659,12 +1659,20 @@ class ScWindow(QMainWindow, Ui_B_SC):
             acuity = AllBonusList[self.realm][self.charclass]["Acuity"]
             if key == "% Power Pool":
                 key = "PowerPool"
+            if key[:5] == "Power":
+                skills = AllBonusList[self.realm][self.charclass]["All Magic Skills"]
+                self.showStat(key, (datum['TotalCapBonus'] > 0) \
+                                 or (val > 0) or (len(skills) > 0))
+            elif key == "Fatigue":
+                skills = AllBonusList[self.realm][self.charclass]["All Melee Weapon Skills"]
+                self.showStat(key, (datum['TotalCapBonus'] > 0) \
+                                 or (val > 0) or (len(skills) > 0))
             elif key == "Acuity":
-                 self.showStat(key, ((datum['TotalCapBonus'] > 0) \
-                                  or (val > 0)) and (len(acuity) == 0))
+                self.showStat(key, ((datum['TotalCapBonus'] > 0) \
+                                 or (val > 0)) and (len(acuity) == 0))
             elif key in ("Charisma", "Empathy", "Intelligence", "Piety"):
-                 self.showStat(key, (datum['TotalCapBonus'] > 0) \
-                                 or (val > 0) or (key in acuity))
+                self.showStat(key, (datum['TotalCapBonus'] > 0) \
+                                or (val > 0) or (key in acuity))
             if not self.capDistance:
                 if datum['TotalCapBonus'] > 0:
                     self.StatCap[key].setText( \
@@ -2376,6 +2384,7 @@ class ScWindow(QMainWindow, Ui_B_SC):
                 print 'Error loading template file: ', ex
                 QMessageBox.critical(None, 'Error!', \
                     "Error loading template file " + unicode(filename) \
+                  + "\r\n(Perhaps this isn't a spellcrafting template file?)" \
                   + "\r\n\r\nPlease share this template file and your " \
                   + "Spellcraft.exe.log error report with the authors at " \
                   + "http://sourceforge.net/projects/kscraft", 'OK')
