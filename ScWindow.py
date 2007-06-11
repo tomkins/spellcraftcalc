@@ -1027,7 +1027,7 @@ class ScWindow(QMainWindow, Ui_B_SC):
             for key in (u'Stats', u'Resists', u'Skills', u'Focus', 
                         u'OtherBonuses', u'PvEBonuses'):
                 if key == 'Stats':
-                    types = DropLists['All']['Stat'] + ('% Power Pool', 'AF')
+                    types = DropLists['All']['Stat'] + ('% Power Pool', 'Fatigue', 'AF')
                 elif key == 'Resists':
                     types = DropLists['All']['Resist']
                 else:
@@ -1398,7 +1398,7 @@ class ScWindow(QMainWindow, Ui_B_SC):
         tot['Focus'] = {}
         tot['OtherBonuses'] = {}
         tot['PvEBonuses'] = {}
-        for effect in DropLists['All']['Stat'] + ('AF', '% Power Pool', 'Fatigue'):
+        for effect in DropLists['All']['Stat'] + ('AF', 'Fatigue', '% Power Pool'):
             tot['Stats'][effect] = {}
             tot['Stats'][effect]['TotalBonus'] = 0
             tot['Stats'][effect]['Bonus'] = 0
@@ -1510,7 +1510,7 @@ class ScWindow(QMainWindow, Ui_B_SC):
                         amts['Bonus'] = min(amts['TotalBonus'],
                                             amts['BaseCap'] + amts['CapBonus'])
                 elif gemtype == 'Other Bonus':
-                    if effect in ('AF', '% Power Pool',):
+                    if effect in ('AF', 'Fatigue', '% Power Pool',):
                         amts = tot['Stats'][effect]
                         amts['TotalBonus'] += amount
                         amts['Bonus'] = min(amts['TotalBonus'],
@@ -2592,7 +2592,7 @@ class ScWindow(QMainWindow, Ui_B_SC):
         locs = []
         finddesc = findtype
         if findtype is not None:
-            if (find == 'AF' or find == '% Power Pool'):
+            if (find == 'AF' or find == 'Fatigue' or find == '% Power Pool'):
                 findtype = None
             else:
                 findtype = findtype[-5:]
@@ -2604,7 +2604,7 @@ class ScWindow(QMainWindow, Ui_B_SC):
                 effect = item.slot(slot).effect()
                 if findtype is not None:
                     if slottype[-5:] != findtype: continue
-                elif effect != 'AF' and effect != '% Power Pool':
+                elif effect != 'AF' and effect != 'Fatigue' and effect != '% Power Pool':
                     if slottype == 'Resist': continue
                     if slottype[-5:] == 'Bonus': continue
                 if effect != find:

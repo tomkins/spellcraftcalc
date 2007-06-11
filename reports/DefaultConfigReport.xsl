@@ -151,6 +151,9 @@
 	<xsl:when test="name() = 'Hits'">
 	  <td>Hits:&#160;</td>
 	</xsl:when>
+	<xsl:when test="name() = 'Fatigue'">
+	  <td>End:&#160;</td>
+	</xsl:when>
 	<xsl:when test="name() = 'Power'">
 	  <td>Pow:&#160;</td>
 	</xsl:when>
@@ -188,10 +191,10 @@
   <xsl:call-template name="hr"/>
   <table cellspacing="0" cellpadding="0">
     <xsl:call-template name="statsRow">
-      <xsl:with-param name="nodes" select="Strength|Intelligence|Hits"/>
+      <xsl:with-param name="nodes" select="Strength|Intelligence|Hits|AF"/>
     </xsl:call-template>
     <xsl:call-template name="statsRow">
-      <xsl:with-param name="nodes" select="Constitution|Piety|AF"/>
+      <xsl:with-param name="nodes" select="Constitution|Piety|Fatigue"/>
     </xsl:call-template>
     <xsl:call-template name="statsRow">
       <xsl:with-param name="nodes" select="Dexterity|Empathy|Power"/>
