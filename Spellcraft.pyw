@@ -37,7 +37,6 @@ class ScApplication(QApplication):
     def __init__(self):
         args = sys.argv
         self.curPath = QDir.cleanPath(QDir.currentPath())
-        QResource.registerResource(QDir(self.curPath).absoluteFilePath("SC.rcc"))
         if args[0]:
              args[0] = unicode(QDir(self.curPath).absoluteFilePath(args[0]))
         else:
@@ -47,6 +46,7 @@ class ScApplication(QApplication):
         if len(args) > 1:
            args[1] = unicode(QDir.cleanPath(QDir(self.curPath).absoluteFilePath(args[1])))
 
+        QResource.registerResource(QDir(self.appPath).absoluteFilePath("SC.rcc"))
         QApplication.__init__(self, args)
 
     def start(self):

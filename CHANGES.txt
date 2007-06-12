@@ -1,4 +1,4 @@
-Updated ?/??/2007 - Version 2.01
+Updated 6/13/2007 - Version 2.01
 
   Show Endurance only for weapon using classes unless there are items
   with Fatigue or Fatigue Cap bonuses, show Power/Power % only for
@@ -12,6 +12,10 @@ Updated ?/??/2007 - Version 2.01
   Fixed saving items with bad class restrictions (or other non
   string entries) and knock out any class restriction on read if
   it is blank.
+
+  Load resource file from appPath and not current working directory
+  path. People who have template files mapped to open up KSCraft 
+  automatically would see no icons.
 
 Updated 4/26/2007 - Version 2.00 - in sync with DAoC 1.88
 
