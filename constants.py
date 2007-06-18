@@ -21,7 +21,7 @@ __all__ = [
   'ArmorTabList', 'WeaponTabList', 'FocusTabList',
 ]
 
-ScVersion = "Kort's Spellcrafting Calulator 2.01"
+ScVersion = "Kort's Spellcrafting Calulator 2.02"
 
 from Character import *
 from tuple2 import * 
