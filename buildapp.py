@@ -14,7 +14,7 @@ import Ft.Lib.DistExt.Py2Exe
 import os
 import os.path
 py2app_options = dict(
-    iconfile='kscraft.icns',
+    iconfile='images/ScWindow.icns',
     includes=['sip', 'cmd', 'Ft.Xml.XPath.ParsedPredicateList',
         'Ft.Xml.XPath.ParsedAbbreviatedAbsoluteLocationPath',
         'Ft.Xml.XPath.ParsedAbbreviatedRelativeLocationPath',
