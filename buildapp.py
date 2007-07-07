@@ -11,6 +11,8 @@ import glob
 from distutils.core import setup
 import py2app
 import Ft.Lib.DistExt.Py2Exe
+import os
+import os.path
 py2app_options = dict(
     iconfile='kscraft.icns',
     includes=['sip', 'cmd', 'Ft.Xml.XPath.ParsedPredicateList',
@@ -19,6 +21,7 @@ py2app_options = dict(
         'Ft.Xml.XInclude',
         'Ft.Xml.Xslt.XPatterns',
         ],
+    excludes=['_ssl',],
 )
 setup(
     app = ['Spellcraft.pyw'],
@@ -35,3 +38,6 @@ setup(
         py2app=py2app_options,
     )
 )
+
+if os.path.exists('dist/Spellcraft.app'):
+    os.system('hdiutil create -ov -imagekey zlib-level=9 -srcfolder dist/Spellcraft.app dist/Spellcraft.dmg')
