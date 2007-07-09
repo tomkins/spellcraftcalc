@@ -20,6 +20,7 @@ except:
     pass
 
 import os
+import os.path
 import sys
 import locale
 from ScOptions import ScOptions
@@ -42,9 +43,13 @@ class ScApplication(QApplication):
         else:
              args[0] = unicode(QDir(self.curPath).absoluteFilePath(__file__))
         self.appPath = unicode(QDir.cleanPath(QDir(args[0]).absoluteFilePath("..")))
- 
+
         if len(args) > 1:
-           args[1] = unicode(QDir.cleanPath(QDir(self.curPath).absoluteFilePath(args[1])))
+            # Ignore psn argument on Mac OSX when running the .app version
+            if os.path.basename(args[1])[0:4] == '-psn':
+                del args[1]
+            if len(args) > 1:
+                args[1] = unicode(QDir.cleanPath(QDir(self.curPath).absoluteFilePath(args[1])))
 
         QResource.registerResource(QDir(self.appPath).absoluteFilePath("SC.rcc"))
         QApplication.__init__(self, args)
