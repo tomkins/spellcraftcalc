@@ -5,6 +5,14 @@
 #
 # See NOTICE.txt for copyrights and grant of license
 
+#
+# Ensure we do not respect the user's PYTHONCASEOK envvar
+
+import os
+if "PYTHONCASEOK" in os.environ:
+    os.putenv("PYTHONCASEOK","")
+    del os.environ["PYTHONCASEOK"]
+
 import ScWindow
 
 try:
@@ -19,7 +27,6 @@ try:
 except:
     pass
 
-import os
 import os.path
 import sys
 import locale
