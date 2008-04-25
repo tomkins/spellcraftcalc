@@ -565,7 +565,7 @@ chargedEffectValues.update({
                                   ("47", "35", "25",), 9,),
     'Self Damage Shield' :       (t2(("4.2", "2.9", "2.1",)), 
                                   ("47", "35", "25",), 9,),
-    'Self Melee Attack Speed' :  (t2(("15%", "10%",)),  
+    'Self Melee Attack Speed' :  (t2(("17%", "10%",)),  
                                   ("49", "45",), 1,),
     'Power Transfer' :           (t2(("60",)),   ("45",), 2,),
     'Health Transfer' :          (t2(("70",)),   ("45",), 2,),
