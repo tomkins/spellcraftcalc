@@ -249,9 +249,9 @@ class EthinargQuery:
         return urllib.urlencode(self.queryparams)
 
     def makeInitialQuery(self):
-        self.conn = httplib.HTTPConnection("www.ethinarg.com")
+        self.conn = httplib.HTTPConnection("daoc.ethinarg.com")
         self.conn.request("GET",
-            "http://www.ethinarg.com/itemdb/main.php?" +
+            "http://daoc.ethinarg.com/itemdb/main.php?" +
             self.makeQueryString())
         resp = self.conn.getresponse()
 
@@ -275,9 +275,9 @@ class EthinargQuery:
             if not self.login(self.username, self.password):
                 return False
 
-        self.conn = httplib.HTTPConnection("www.ethinarg.com")
+        self.conn = httplib.HTTPConnection("daoc.ethinarg.com")
         self.conn.request("GET",
-            "http://www.ethinarg.com/itemdb/main.php?" +
+            "http://daoc.ethinarg.com/itemdb/main.php?" +
             self.makeQueryString()
             + "&sid=" + self.sid)
         resp = self.conn.getresponse()
@@ -297,13 +297,13 @@ class EthinargQuery:
         return True
 
     def getXML(self, path):
-        self.conn = httplib.HTTPConnection("www.ethinarg.com")
+        self.conn = httplib.HTTPConnection("daoc.ethinarg.com")
         self.conn.request("GET", '/itemdb/' + path)
 
         return self.conn.getresponse().read()
 
     def login(self, username, password):
-        conn = httplib.HTTPConnection('www.ethinarg.com')
+        conn = httplib.HTTPConnection('daoc.ethinarg.com')
         conn.request('GET', '/phpbb2/login.php')
         resp = conn.getresponse()
         resp.read()
@@ -313,7 +313,7 @@ class EthinargQuery:
             'login' : 'Log in', 'redirect' : ''})
         headers = {"Content-Type": "application/x-www-form-urlencoded", 
             "Accept": "text/xml,text/html,application/xml,text/plain", 'Cookie' : cookie,
-            "Referrer" : 'http://www.ethinarg.com/phpbb2/login.php' }
+            "Referrer" : 'http://daoc.ethinarg.com/phpbb2/login.php' }
 
         conn.request('POST', '/phpbb2/login.php', params, headers)
 

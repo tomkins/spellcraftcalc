@@ -5,7 +5,7 @@ import glob
 import sys
 
 # This program is designed to collect the data from
-# http://ethinarg.com/itemdb/tools/complete.zip
+# http://daoc.ethinarg.com/itemdb/tools/complete.zip
 # to ensure the entire breadth of values and fields
 # can be recorded
 
