@@ -10,7 +10,6 @@ files = (
     ('ItemLevel.ui', 'B_ItemLevel.py'),
     ('CraftBar.ui', 'B_CraftBar.py'),
     ('Options.ui', 'B_Options.py'),
-    ('Ethinarg.ui', 'B_Ethinarg.py'),
 )
 
 for ui, py in files:

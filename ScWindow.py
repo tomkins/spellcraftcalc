@@ -26,7 +26,6 @@ import DisplayWindow
 import CraftBar
 import SearchingCombo
 import MultiTabBar
-import Ethinarg
 import UIXML
 import os
 import os.path
@@ -593,9 +592,6 @@ class ScWindow(QMainWindow, Ui_B_SC):
                                 QKeySequence(Qt.CTRL+Qt.SHIFT+Qt.Key_S))
         self.toolbar.addAction(self.getIcon('SaveItem'), 'Save Item', 
                                self.saveItem)
-        self.filemenu.addAction('Search &Ethinarg\'s Items', self.ethinargTest)
-        self.toolbar.addAction(self.getIcon('Search'), 'Search Ethinarg\'s Items',
-                               self.ethinargTest)
         self.filemenu.addAction('Item Database Path...', self.chooseItemPath)
 
         self.filemenu.addSeparator()
@@ -3007,13 +3003,6 @@ class ScWindow(QMainWindow, Ui_B_SC):
     def resizeEvent(self, e):
         if str(QApplication.style().objectName()[0:9]).lower() == "macintosh":
             self.sizegrip.move(self.width() - 15, self.height() - 15)
-
-    def ethinargTest(self):
-        if not self.ethinargWindow:
-            self.ethinargWindow = Ethinarg.EthinargTestWindow(self, None)
-        self.ethinargWindow.show()
-        self.ethinargWindow.setSearchDefaults(self.realm, self.charclass, 
-            self.currentTabLabel)
 
 if __name__ == '__main__':
     app = QApplication([])
