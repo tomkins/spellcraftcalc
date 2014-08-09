@@ -88,15 +88,6 @@ class Ui_B_SC(object):
         self.RealmRank.setObjectName("RealmRank")
         self.gridlayout1.addWidget(self.RealmRank,4,3,1,1)
 
-        self.LabelCraftTime = QtGui.QLabel(self.GroupCharInfo)
-        self.LabelCraftTime.setTextFormat(QtCore.Qt.PlainText)
-        self.LabelCraftTime.setObjectName("LabelCraftTime")
-        self.gridlayout1.addWidget(self.LabelCraftTime,5,0,1,1)
-
-        self.CraftTime = QtGui.QLineEdit(self.GroupCharInfo)
-        self.CraftTime.setObjectName("CraftTime")
-        self.gridlayout1.addWidget(self.CraftTime,5,1,1,1)
-
         self.LabelChampionLevel = QtGui.QLabel(self.GroupCharInfo)
         self.LabelChampionLevel.setTextFormat(QtCore.Qt.PlainText)
         self.LabelChampionLevel.setAlignment(QtCore.Qt.AlignRight|QtCore.Qt.AlignTrailing|QtCore.Qt.AlignVCenter)
@@ -131,16 +122,6 @@ class Ui_B_SC(object):
         self.TotalCost.setAlignment(QtCore.Qt.AlignRight|QtCore.Qt.AlignTrailing|QtCore.Qt.AlignVCenter)
         self.TotalCost.setObjectName("TotalCost")
         self.gridlayout1.addWidget(self.TotalCost,8,1,1,3)
-
-        self.LabelTotalPrice = QtGui.QLabel(self.GroupCharInfo)
-        self.LabelTotalPrice.setAlignment(QtCore.Qt.AlignLeading|QtCore.Qt.AlignLeft|QtCore.Qt.AlignVCenter)
-        self.LabelTotalPrice.setObjectName("LabelTotalPrice")
-        self.gridlayout1.addWidget(self.LabelTotalPrice,9,0,1,1)
-
-        self.TotalPrice = QtGui.QLabel(self.GroupCharInfo)
-        self.TotalPrice.setAlignment(QtCore.Qt.AlignRight|QtCore.Qt.AlignTrailing|QtCore.Qt.AlignVCenter)
-        self.TotalPrice.setObjectName("TotalPrice")
-        self.gridlayout1.addWidget(self.TotalPrice,9,1,1,3)
 
         spacerItem1 = QtGui.QSpacerItem(1,0,QtGui.QSizePolicy.Minimum,QtGui.QSizePolicy.MinimumExpanding)
         self.gridlayout1.addItem(spacerItem1,10,0,1,4)
@@ -880,10 +861,6 @@ class Ui_B_SC(object):
         self.LabelGemEffect.setObjectName("LabelGemEffect")
         self.gridlayout6.addWidget(self.LabelGemEffect,0,3,1,1)
 
-        self.LabelGemMakes = QtGui.QLabel(self.ItemSlotsHeader)
-        self.LabelGemMakes.setObjectName("LabelGemMakes")
-        self.gridlayout6.addWidget(self.LabelGemMakes,0,4,1,1)
-
         self.LabelRequirement = QtGui.QLabel(self.ItemSlotsHeader)
         self.LabelRequirement.setObjectName("LabelRequirement")
         self.gridlayout6.addWidget(self.LabelRequirement,0,4,1,3)
@@ -1347,15 +1324,6 @@ class Ui_B_SC(object):
         spacerItem20 = QtGui.QSpacerItem(5,5,QtGui.QSizePolicy.Minimum,QtGui.QSizePolicy.Minimum)
         self.gridlayout7.addItem(spacerItem20,7,0,1,1)
 
-        self.LabelItemCraftTime = QtGui.QLabel(self.ItemSlotsGrid)
-        self.LabelItemCraftTime.setTextFormat(QtCore.Qt.PlainText)
-        self.LabelItemCraftTime.setObjectName("LabelItemCraftTime")
-        self.gridlayout7.addWidget(self.LabelItemCraftTime,7,1,1,1)
-
-        self.ItemCraftTime = QtGui.QLineEdit(self.ItemSlotsGrid)
-        self.ItemCraftTime.setObjectName("ItemCraftTime")
-        self.gridlayout7.addWidget(self.ItemCraftTime,7,2,1,1)
-
         self.ItemImbueLabel = QtGui.QLabel(self.ItemSlotsGrid)
         self.ItemImbueLabel.setAlignment(QtCore.Qt.AlignRight|QtCore.Qt.AlignTrailing|QtCore.Qt.AlignVCenter)
         self.ItemImbueLabel.setObjectName("ItemImbueLabel")
@@ -1394,16 +1362,6 @@ class Ui_B_SC(object):
         self.ItemCost.setObjectName("ItemCost")
         self.gridlayout7.addWidget(self.ItemCost,9,5,1,2)
 
-        self.ItemPriceLabel = QtGui.QLabel(self.ItemSlotsGrid)
-        self.ItemPriceLabel.setAlignment(QtCore.Qt.AlignRight|QtCore.Qt.AlignTrailing|QtCore.Qt.AlignVCenter)
-        self.ItemPriceLabel.setObjectName("ItemPriceLabel")
-        self.gridlayout7.addWidget(self.ItemPriceLabel,10,3,1,2)
-
-        self.ItemPrice = QtGui.QLabel(self.ItemSlotsGrid)
-        self.ItemPrice.setAlignment(QtCore.Qt.AlignRight|QtCore.Qt.AlignTrailing|QtCore.Qt.AlignVCenter)
-        self.ItemPrice.setObjectName("ItemPrice")
-        self.gridlayout7.addWidget(self.ItemPrice,10,5,1,2)
-
         spacerItem22 = QtGui.QSpacerItem(5,5,QtGui.QSizePolicy.Minimum,QtGui.QSizePolicy.Minimum)
         self.gridlayout7.addItem(spacerItem22,11,0,1,7)
 
@@ -1428,8 +1386,7 @@ class Ui_B_SC(object):
         B_SC.setTabOrder(self.CharClass,self.CharRace)
         B_SC.setTabOrder(self.CharRace,self.CharLevel)
         B_SC.setTabOrder(self.CharLevel,self.RealmRank)
-        B_SC.setTabOrder(self.RealmRank,self.CraftTime)
-        B_SC.setTabOrder(self.CraftTime,self.ChampionLevel)
+        B_SC.setTabOrder(self.RealmRank,self.ChampionLevel)
         B_SC.setTabOrder(self.ChampionLevel,self.OutfitName)
         B_SC.setTabOrder(self.OutfitName,self.PieceTab)
         B_SC.setTabOrder(self.PieceTab,self.ItemLevel)
@@ -1509,8 +1466,7 @@ class Ui_B_SC(object):
         B_SC.setTabOrder(self.Type_12,self.Amount_Edit_12)
         B_SC.setTabOrder(self.Amount_Edit_12,self.Effect_12)
         B_SC.setTabOrder(self.Effect_12,self.Requirement_12)
-        B_SC.setTabOrder(self.Requirement_12,self.ItemCraftTime)
-        B_SC.setTabOrder(self.ItemCraftTime,self.SkillsList)
+        B_SC.setTabOrder(self.Requirement_12,self.SkillsList)
 
     def retranslateUi(self, B_SC):
         B_SC.setWindowTitle(QtGui.QApplication.translate("B_SC", "Spellcrafting Calculator", None, QtGui.QApplication.UnicodeUTF8))
@@ -1520,13 +1476,10 @@ class Ui_B_SC(object):
         self.LabelCharRace.setText(QtGui.QApplication.translate("B_SC", "Race: ", None, QtGui.QApplication.UnicodeUTF8))
         self.LabelCharLevel.setText(QtGui.QApplication.translate("B_SC", "Level: ", None, QtGui.QApplication.UnicodeUTF8))
         self.LabelRealmRank.setText(QtGui.QApplication.translate("B_SC", "RR: ", None, QtGui.QApplication.UnicodeUTF8))
-        self.LabelCraftTime.setText(QtGui.QApplication.translate("B_SC", "Time: ", None, QtGui.QApplication.UnicodeUTF8))
         self.LabelChampionLevel.setText(QtGui.QApplication.translate("B_SC", "CL: ", None, QtGui.QApplication.UnicodeUTF8))
         self.LabelOutfitName.setText(QtGui.QApplication.translate("B_SC", "&Outfit: ", None, QtGui.QApplication.UnicodeUTF8))
         self.LabelTotalCost.setText(QtGui.QApplication.translate("B_SC", "Cost: ", None, QtGui.QApplication.UnicodeUTF8))
         self.TotalCost.setText(QtGui.QApplication.translate("B_SC", "0", None, QtGui.QApplication.UnicodeUTF8))
-        self.LabelTotalPrice.setText(QtGui.QApplication.translate("B_SC", "Price: ", None, QtGui.QApplication.UnicodeUTF8))
-        self.TotalPrice.setText(QtGui.QApplication.translate("B_SC", "0", None, QtGui.QApplication.UnicodeUTF8))
         self.StrengthLabel.setText(QtGui.QApplication.translate("B_SC", "STR: ", None, QtGui.QApplication.UnicodeUTF8))
         self.Strength.setText(QtGui.QApplication.translate("B_SC", "0", None, QtGui.QApplication.UnicodeUTF8))
         self.StrengthCap.setText(QtGui.QApplication.translate("B_SC", "-", None, QtGui.QApplication.UnicodeUTF8))
@@ -1624,7 +1577,6 @@ class Ui_B_SC(object):
         self.LabelGemType.setText(QtGui.QApplication.translate("B_SC", " Type", None, QtGui.QApplication.UnicodeUTF8))
         self.LabelGemAmount.setText(QtGui.QApplication.translate("B_SC", " Amount", None, QtGui.QApplication.UnicodeUTF8))
         self.LabelGemEffect.setText(QtGui.QApplication.translate("B_SC", " Effect", None, QtGui.QApplication.UnicodeUTF8))
-        self.LabelGemMakes.setText(QtGui.QApplication.translate("B_SC", " Makes", None, QtGui.QApplication.UnicodeUTF8))
         self.LabelRequirement.setText(QtGui.QApplication.translate("B_SC", " Requirement", None, QtGui.QApplication.UnicodeUTF8))
         self.LabelGemPoints.setText(QtGui.QApplication.translate("B_SC", "Points", None, QtGui.QApplication.UnicodeUTF8))
         self.LabelGemCost.setText(QtGui.QApplication.translate("B_SC", "Unit Cost", None, QtGui.QApplication.UnicodeUTF8))
@@ -1655,14 +1607,12 @@ class Ui_B_SC(object):
         self.Gem_Label_10.setText(QtGui.QApplication.translate("B_SC", "Slot 1&0:", None, QtGui.QApplication.UnicodeUTF8))
         self.Gem_Label_11.setText(QtGui.QApplication.translate("B_SC", "Slot 11&- ", None, QtGui.QApplication.UnicodeUTF8))
         self.Gem_Label_12.setText(QtGui.QApplication.translate("B_SC", "Slot 12&=", None, QtGui.QApplication.UnicodeUTF8))
-        self.LabelItemCraftTime.setText(QtGui.QApplication.translate("B_SC", "Item SC Time (min): ", None, QtGui.QApplication.UnicodeUTF8))
         self.ItemImbueLabel.setText(QtGui.QApplication.translate("B_SC", "Imbue Points: ", None, QtGui.QApplication.UnicodeUTF8))
         self.ItemImbue.setText(QtGui.QApplication.translate("B_SC", "0.0", None, QtGui.QApplication.UnicodeUTF8))
         self.ItemImbueTotal.setText(QtGui.QApplication.translate("B_SC", " / 0.0", None, QtGui.QApplication.UnicodeUTF8))
         self.ItemOverchargeLabel.setText(QtGui.QApplication.translate("B_SC", "Overcharge: ", None, QtGui.QApplication.UnicodeUTF8))
         self.ItemOvercharge.setText(QtGui.QApplication.translate("B_SC", "None", None, QtGui.QApplication.UnicodeUTF8))
         self.ItemCostLabel.setText(QtGui.QApplication.translate("B_SC", "Item Cost: ", None, QtGui.QApplication.UnicodeUTF8))
-        self.ItemPriceLabel.setText(QtGui.QApplication.translate("B_SC", "Item Price: ", None, QtGui.QApplication.UnicodeUTF8))
 
 from SearchingCombo import SearchingCombo
 from MultiTabBar import MultiTabFrame, MultiTabBar

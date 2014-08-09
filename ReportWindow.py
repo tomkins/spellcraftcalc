@@ -47,9 +47,7 @@ class ReportWindow(QDialog, Ui_B_ReportWindow):
             for slot in item.slots():
                 if slot.slotType() != 'player':
                     continue
-                if int(slot.makes()) > 0 \
-                        and showslot == 0 \
-                        and self.parent.showDoneInMatsList:
+                if showslot == 0 and self.parent.showDoneInMatsList:
                     continue
                 gemtype = slot.type()
                 if gemtype == 'Unused':

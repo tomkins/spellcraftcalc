@@ -120,13 +120,11 @@ class ScWindow(QMainWindow, Ui_B_SC):
         ]
         self.switchOnType['player'] = [
             self.QualDrop,
-            self.LabelItemCraftTime, self.ItemCraftTime,
-            self.LabelGemMakes, self.LabelGemPoints,
+            self.LabelGemPoints,
             self.LabelGemCost, self.LabelGemName,
             self.ItemImbueLabel, self.ItemImbue, self.ItemImbueTotal,
             self.ItemOverchargeLabel, self.ItemOvercharge,
             self.ItemCostLabel, self.ItemCost,
-            self.ItemPriceLabel, self.ItemPrice,
         ]
 
         cbwidth = self.CharClass.getMinimumWidth(['Necromancer'])
@@ -158,8 +156,6 @@ class ScWindow(QMainWindow, Ui_B_SC):
         self.RealmRank.setFixedSize(QSize(amtedwidth, edheight))
         self.ChampionLevel.setFixedSize(QSize(amtedwidth, edheight))
         self.ChampionLevel.setValidator(QIntValidator(0, 10, self))
-        self.CraftTime.setFixedSize(QSize(amtedwidth, edheight))
-        self.CraftTime.setValidator(QIntValidator(0, 999, self))
         self.OutfitName.setFixedSize(QSize(cbwidth, cbheight))
         self.OutfitName.setCompleter(None)
         self.GroupCharInfo.layout().setColumnStretch(2, 1)
@@ -200,11 +196,9 @@ class ScWindow(QMainWindow, Ui_B_SC):
             self.LabelCharName.setFixedHeight(cbheight)
             self.LabelCharLevel.setFixedHeight(cbheight)
             self.LabelTotalCost.setFixedHeight(lbheight)
-            self.LabelTotalPrice.setFixedHeight(lbheight)
             for ctl in self.StatLabel.itervalues():
                 ctl.setFixedHeight(lbheight)
             self.LabelTotalUtility.setFixedHeight(lbheight)
-            self.LabelCraftTime.setFixedHeight(cbheight)
             self.LabelBonusEdit.setFixedHeight(cbheight)
             self.LabelSpeedEdit.setFixedHeight(cbheight)
             self.LabelDBSource.setFixedHeight(lbheight)
@@ -404,24 +398,13 @@ class ScWindow(QMainWindow, Ui_B_SC):
 
             if i < 4:
                 self.Makes.append(getattr(self, 'Makes_%d' % idx))
-                if str(QApplication.style().objectName()[0:9]).lower() \
-                        == "macintosh":
-                    self.Makes[i].setFrame(False)
-                    self.Makes[i].lineEdit().setFrame(True)
-                self.Makes[i].setFixedSize(QSize(amtcbwidth, cbheight))
-                self.connect(self.Makes[i],SIGNAL("valueChanged(int)"),
-                             self.amountsChanged)
-                # Hide '0' values
-                self.Makes[i].setSpecialValueText(" ")
+                self.Makes[i].hide()
                 self.Points.append(getattr(self, 'Points_%d' % idx))
                 self.Cost.append(getattr(self, 'Cost_%d' % idx))
                 self.switchOnType['player'].extend([
                     self.Makes[i], self.Points[i], self.Cost[i], ])
 
             itemslotgrid.setRowMinimumHeight(i, max(cbheight, edheight))
-
-        self.ItemCraftTime.setFixedSize(QSize(amtcbwidth, edheight))
-        self.ItemCraftTime.setValidator(QIntValidator(0, 99, self))
 
         # Lock the height of ItemSlotsGrid, this is all we need.  Then
         # optimize based on the height of ItemInfoFrame and round it out
@@ -487,8 +470,6 @@ class ScWindow(QMainWindow, Ui_B_SC):
                      self.templateChanged)
         self.connect(self.ChampionLevel,SIGNAL("textChanged(const QString&)"),
                      self.templateChanged)
-        self.connect(self.CraftTime,SIGNAL("textChanged(const QString&)"),
-                     self.totalsChanged)
         self.connect(self.OutfitName,SIGNAL("activated(int)"),
                      self.outfitNameSelected)
         self.connect(self.OutfitName,SIGNAL("editTextChanged(const QString&)"),
@@ -512,8 +493,6 @@ class ScWindow(QMainWindow, Ui_B_SC):
                      SIGNAL("editTextChanged(const QString&)"),
                      self.itemNameEdited)
         self.connect(self.Equipped,SIGNAL("stateChanged(int)"),
-                     self.itemChanged)
-        self.connect(self.ItemCraftTime,SIGNAL("textChanged(const QString&)"),
                      self.itemChanged)
         self.connect(self.ItemRealm,SIGNAL("activated(int)"),
                      self.itemRealmChanged)
@@ -746,15 +725,13 @@ class ScWindow(QMainWindow, Ui_B_SC):
                 self.setTabOrder(self.AmountEdit[i],self.AmountDrop[i])
                 self.setTabOrder(self.AmountDrop[i],self.Effect[i])
                 if i < 4:
-                    self.setTabOrder(self.Effect[i],self.Makes[i])
-                    self.setTabOrder(self.Makes[i],self.Requirement[i])
+                    self.setTabOrder(self.Effect[i], self.Requirement[i])
                 else:
                     self.setTabOrder(self.Effect[i],self.Requirement[i])
             else:
                 self.setTabOrder(self.AmountEdit[i],self.Effect[i])
                 self.setTabOrder(self.Effect[i],self.Requirement[i])
             prev = self.Requirement[i]
-        self.setTabOrder(prev, self.ItemCraftTime)
 
     def showFixWidgets(self):
         for i in range(0,6):
@@ -782,11 +759,12 @@ class ScWindow(QMainWindow, Ui_B_SC):
         for w in self.switchOnType['player']:
             w.show()
         for i in range(0,item.slotCount()):
+            if i < 4:
+                self.Makes[i].hide()
             if item.slot(i).slotType() == 'player':
                 self.GemLabel[i].setText('Gem &%d:' % (i + 1))
             else:
                 if i < 4:
-                    self.Makes[i].hide()
                     self.Points[i].hide()
                     self.Cost[i].hide()
                 self.Requirement[i].show()
@@ -958,7 +936,6 @@ class ScWindow(QMainWindow, Ui_B_SC):
         self.CharLevel.setText('50')
         self.RealmRank.setText('1L1')
         self.ChampionLevel.setText('0')
-        self.CraftTime.setText('0')
         self.appendOutfit()
         self.restoreItem(self.itemattrlist[self.currentTabLabel])
         self.modified = False
@@ -997,10 +974,6 @@ class ScWindow(QMainWindow, Ui_B_SC):
                                        unicode(self.ChampionLevel.text())))
         rootnode.appendChild(childnode)
         rootnode.appendChild(childnode)
-        childnode = document.createElement('CraftTime')
-        childnode.appendChild(document.createTextNode(
-                                       unicode(self.CraftTime.text())))
-        rootnode.appendChild(childnode)
         childnode = document.createElement('Notes')
         childnode.appendChild(document.createTextNode(
                                   unicode(self.NoteText.toPlainText())))
@@ -1008,7 +981,7 @@ class ScWindow(QMainWindow, Ui_B_SC):
 
         if rich:
             totalsdict = self.summarize()
-            for key in (u'Cost', u'Price', u'Utility',):
+            for key in (u'Cost', u'Utility',):
                 val = totalsdict[key]
                 childnode = document.createElement(key)
                 childnode.appendChild(document.createTextNode(unicode(val)))
@@ -1260,7 +1233,6 @@ class ScWindow(QMainWindow, Ui_B_SC):
         self.ItemNameCombo.setCurrentIndex(0)
 
         self.Equipped.setChecked(int(item.Equipped))
-        self.ItemCraftTime.setText(item.Time)
 
         if itemtype == 'drop':
             realms = AllRealms
@@ -1341,7 +1313,7 @@ class ScWindow(QMainWindow, Ui_B_SC):
                 else:
                     self.AmountDrop[slot].setCurrentIndex(amount)
             if itemtype == 'player' and item.slot(slot).slotType() == 'player':
-                self.Makes[slot].setValue(int(item.slot(slot).makes()))
+                pass
             else:
                 self.Requirement[slot].setText(item.slot(slot).requirement())
         self.slotUpdateMenus()
@@ -1379,7 +1351,6 @@ class ScWindow(QMainWindow, Ui_B_SC):
         charlevel = int(self.CharLevel.text())
         tot = {}
         tot['Cost'] = 0
-        tot['Price'] = 0
         tot['Utility'] = 0.0
         tot['Stats'] = {}
         tot['Resists'] = {}
@@ -1416,7 +1387,6 @@ class ScWindow(QMainWindow, Ui_B_SC):
                     = int(charlevel * capcalc[0]) + capcalc[1]
         for key, item in self.itemattrlist.iteritems():
             tot['Cost'] += item.cost()
-            tot['Price'] += item.price(self.pricingInfo)
             if not item.Equipped == '1':
                 continue
             tot['Utility'] += item.utility()
@@ -1543,11 +1513,6 @@ class ScWindow(QMainWindow, Ui_B_SC):
                                         + capcalc[1]
                         amts['TotalBonus'] = amount
                     amts['Bonus'] = min(amts['TotalBonus'], amts['BaseCap'])
-        tot['Price'] += self.pricingInfo.get('PPOrder', 0) * 10000
-        if self.pricingInfo.get('HourInclude', 0) \
-                   and self.CraftTime.text() > '':
-            tot['Price'] += int(self.pricingInfo.get('Hour', 0) * 10000 \
-                           * int(self.CraftTime.text()) / 60.0)
         return tot
 
     def showStat(self, stat, show):
@@ -1609,7 +1574,6 @@ class ScWindow(QMainWindow, Ui_B_SC):
             self.ItemImbue.setText('%3.1f' % imbuepts)
             self.ItemImbueTotal.setText(' / ' + unicode(itemimbue))
             self.ItemCost.setText(SC.formatCost(item.cost()))
-            self.ItemPrice.setText(SC.formatCost(item.price(self.pricingInfo)))
             if imbuepts >= (itemimbue + 6.0):
                 self.ItemOvercharge.setText('Impossible')
                 error_act = QAction('Impossible overcharge on %s' % key, self)
@@ -1695,7 +1659,6 @@ class ScWindow(QMainWindow, Ui_B_SC):
                     amount = amounts['TotalBonus']
                 self.insertSkill(amount, skill + suffix, lookup)
         self.TotalCost.setText(SC.formatCost(tot['Cost']))
-        self.TotalPrice.setText(SC.formatCost(tot['Price']))
         self.TotalUtility.setText('%3.1f' % tot['Utility'])
         self.errorsmenuid.setEnabled(errorcount > 0)
         item = self.itemattrlist[self.currentTabLabel]
@@ -1868,8 +1831,6 @@ class ScWindow(QMainWindow, Ui_B_SC):
                 = ( item.TemplateIndex, item.Equipped, )
         if item.ActiveState == 'player':
             item.ItemQuality = unicode(self.QualDrop.currentText())
-            item.Time = unicode(self.ItemCraftTime.text())
-            if item.Time == '': item.Time = u'0'
         else:
             item.ItemQuality = unicode(self.QualEdit.text())
         self.calculate()
@@ -1953,7 +1914,7 @@ class ScWindow(QMainWindow, Ui_B_SC):
         else:
             item.slot(slot).setAmount(self.AmountEdit[slot].text())
         if item.slot(slot).slotType() == 'player':
-            item.slot(slot).setMakes(str(self.Makes[slot].value()))
+            pass
         else:
             item.slot(slot).setRequirement(self.Requirement[slot].text())
         self.modified = True
@@ -1995,8 +1956,7 @@ class ScWindow(QMainWindow, Ui_B_SC):
         if typetext == 'Unused':
             amount.clear()
             if item.slot(slot).slotType() == 'player':
-                self.Makes[slot].setValue(0)
-                self.Makes[slot].setMaximum(0)
+                pass
             else:
                 self.Requirement[slot].setText("")
         elif item.ActiveState == 'player':
@@ -2029,8 +1989,6 @@ class ScWindow(QMainWindow, Ui_B_SC):
                     amtindex = 0
                 if amtindex < len(valueslist):
                     amount.setCurrentIndex(amtindex)
-            if item.slot(slot).slotType() == 'player':
-                self.Makes[slot].setMaximum(99)
         # Cascade the changes
         self.amountsChanged(None, slot)
 
@@ -2422,8 +2380,6 @@ class ScWindow(QMainWindow, Ui_B_SC):
                 self.RealmRank.setText(XMLHelper.getText(child.childNodes))
             elif child.tagName == 'ChampionLevel':
                 self.ChampionLevel.setText(XMLHelper.getText(child.childNodes))
-            elif child.tagName == 'CraftTime':
-                self.CraftTime.setText(XMLHelper.getText(child.childNodes))
             elif child.tagName == 'Notes':
                 self.NoteText.setPlainText(XMLHelper.getText(child.childNodes))
             elif child.tagName == 'SCItem':

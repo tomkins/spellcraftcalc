@@ -1,4 +1,4 @@
-# Item.py: Dark Age of Camelot Spellcrafting Calculator 
+# Item.py: Dark Age of Camelot Spellcrafting Calculator
 #
 # See http://kscraft.sourceforge.net/ for updates
 #
@@ -15,21 +15,22 @@ from MyStringIO import UnicodeStringIO
 import sys
 import SC
 
-class ItemSlot:
-    def __init__(self, slottype='player', type='Unused', amount='0', effect='',
-                 requirement='', makes='0'):
-        self.__dict__ = { 
-            'SlotType' : unicode(slottype),
-            'Type': '', 'Effect' : '', 'Amount' : '', 'Requirement' : '',
-            'Makes' : '', }
-        self.setAll(type, amount, effect, requirement, makes)
 
-    def setAll(self, type='Unused', amount='0', effect='',
-               requirement='', makes='0'):
+class ItemSlot:
+    def __init__(self, slottype='player', type='Unused', amount='0', effect='', requirement=''):
+        self.__dict__ = {
+            'SlotType': unicode(slottype),
+            'Type': '',
+            'Effect': '',
+            'Amount': '',
+            'Requirement': '',
+        }
+        self.setAll(type, amount, effect, requirement)
+
+    def setAll(self, type='Unused', amount='0', effect='', requirement=''):
         self.Type = unicode(type)
         self.Amount = unicode(amount)
         self.Effect = unicode(effect)
-        self.Makes = unicode(makes)
         self.Requirement = unicode(requirement)
         self.fixEffect()
         self.CraftOk = False
@@ -53,12 +54,14 @@ class ItemSlot:
 
     def slotType(self):
         return self.SlotType
+
     def setSlotType(self, slottype):
         self.CraftOk = False
         self.SlotType=unicode(slottype)
 
     def type(self):
         return self.Type
+
     def setType(self, type):
         self.CraftOk = False
         if type == 'Unused' or type == '':
@@ -67,8 +70,10 @@ class ItemSlot:
             self.Type=unicode(type)
 
     def amount(self):
-        if self.Type == 'Unused': return ''
+        if self.Type == 'Unused':
+            return ''
         return self.Amount
+
     def setAmount(self, amount):
         self.CraftOk = False
         if amount == '': amount = '0'
@@ -76,34 +81,35 @@ class ItemSlot:
 
     def effect(self):
         return self.Effect
+
     def setEffect(self, effect):
         self.CraftOk = False
         self.Effect = unicode(effect)
 
     def requirement(self):
         return self.Requirement
+
     def setRequirement(self, requirement):
         self.CraftOk = False
         self.Requirement = unicode(requirement)
 
-    def makes(self):
-        return self.Makes
-    def setMakes(self, makes):
-        if makes == '': makes = '0'
-        self.Makes = unicode(makes)
-
     def crafted(self):
-        if self.CraftOk: return True
-        if self.Type == '' or self.Type == 'Unused': return False
-        if self.Effect == '': return False
-        if not self.SlotType in ('player', 'effect',): return False
-        if self.gemLevel() < 0: return False
+        if self.CraftOk:
+            return True
+        if self.Type == '' or self.Type == 'Unused':
+            return False
+        if self.Effect == '':
+            return False
+        if not self.SlotType in ('player', 'effect',):
+            return False
+        if self.gemLevel() < 0:
+            return False
         self.CraftOk = True
         return self.CraftOk
 
     def gemLevel(self):
         if ((self.SlotType != 'player' and self.SlotType != 'effect')
-         or not ValuesLists.has_key(self.Type)): 
+         or not ValuesLists.has_key(self.Type)):
             return -1
         amountlist = ValuesLists[self.Type]
         if not isinstance(amountlist, tuple):
@@ -114,7 +120,7 @@ class ItemSlot:
             elif amountlist.has_key(None):
                 amountlist = amountlist[None]
             else:
-                return -1            
+                return -1
         if not self.Amount in amountlist: return -1
         return amountlist.index(self.Amount) + 1
 
@@ -141,7 +147,7 @@ class ItemSlot:
 
         # Go lambda!
         try:
-            return { 
+            return {
                 'Stat': lambda x: (self.Effect == 'Hits' and [x / 4.0] or [x * 2.0 / 3.0])[0],
                 'Resist': lambda x: x * 2,
                 'Power': lambda x: x * 2,
@@ -152,7 +158,7 @@ class ItemSlot:
             return 0
 
     def gemName(self, realm, parts = 7):
-        if self.SlotType == 'crafted': 
+        if self.SlotType == 'crafted':
             return '(Crafted Item Bonus)'
         if not GemTables.has_key(realm): return ''
         if not self.crafted():
@@ -171,7 +177,7 @@ class ItemSlot:
                     return ''
             #requiredlevel = ValuesLists[self.Type][self.Effect][1][self.gemLevel()]
             amountindex += ValuesLists[self.Type][self.Effect][2]
-            if (len(effectItemNames[self.Effect]) > 2 
+            if (len(effectItemNames[self.Effect]) > 2
             and EffectMetal['All'][amountindex] == ""):
                 # Different naming for the Drop tinctures
                 return string.strip(
@@ -238,16 +244,9 @@ class ItemSlot:
             ret['Liquids'][gemliquid] = gemindex + 1
         return ret
 
-    def gemMakes(self):
-        makes = int(self.Makes)
-        if makes == 0: makes = 1
-        return makes
-
-    def gemCost(self, makes=0):
+    def gemCost(self, makes=1):
         if not self.crafted():
             return 0
-        if makes <= 0:
-            makes = self.gemMakes()
         costindex = self.gemLevel() - 1
         cost = GemCosts[costindex]
         if self.Effect[0:4] == 'All ':
@@ -260,31 +259,14 @@ class ItemSlot:
         cost = cost * makes
         return cost
 
-    def gemPrice(self, pricingInfo, makes=0):
-        price = 0
-        cost = self.gemCost(makes)
-        if cost > 0:
-            price += int(pricingInfo.get('PPGem', 0) * 10000)
-            if pricingInfo.get('TierInclude', 0):
-                gemlvl = str(self.gemLevel())
-                tierp = pricingInfo.get('Tier', {})
-                price += int(float(tierp.get(gemlvl, 0)) * 10000)
-            price += int(cost * pricingInfo.get('General', 0) / 100.0)
-            if pricingInfo.get('CostInPrice', 1):
-                price += cost
-        return price
-
     def asXML(self,slotnode,realm='',rich=False):
         document = Document()
         if self.Type == 'Unused' or self.Type == '':
             savexml = [(u'Type', u'Unused',),]
         else:
-            savexml = [(u'Type', self.Type,), 
+            savexml = [(u'Type', self.Type,),
                        (u'Effect', self.Effect,),
                        (u'Amount', self.Amount,)]
-            if self.SlotType == 'player':
-                savexml.extend([
-                       (u'Makes', self.Makes,)])
             if len(self.Requirement) > 0:
                 savexml.append((u'Requirement', self.Requirement,))
             if rich:
@@ -316,7 +298,7 @@ class ItemSlot:
                 for mat in matnames:
                     matsort = MaterialsOrder.index(mat)
                     matnode = document.createElement(u'Material')
-                    matnode.setAttribute(u'Amount', 
+                    matnode.setAttribute(u'Amount',
                                           unicode(matslist[mattype][mat]))
                     matnode.setAttribute(u'Type', mattype)
                     matnode.setAttribute(u'Name', unicode(mat))
@@ -327,7 +309,7 @@ class ItemSlot:
 
 class Item:
     def __init__(self, state='', loc='', realm='All', idx = -1):
-        self.__dict__ = { 
+        self.__dict__ = {
             'ActiveState' : state,
             'Equipped' : '0',
             'Location': loc,
@@ -346,7 +328,6 @@ class Item:
             'CLASSRESTRICTIONS' : list(),
             'Notes' : '',
             'Requirement' : '',
-            'Time' : '0',
             'TemplateIndex' : idx,
         }
 
@@ -482,29 +463,6 @@ class Item:
             cost += slot.gemCost()
         return cost
 
-    def price(self, pricingInfo):
-        price = 0
-        cost = 0
-        for slot in self.slots():
-            cost += slot.gemCost()
-        if cost == 0: return 0
-        for slot in self.slots():
-            price += slot.gemPrice(pricingInfo, -1)
-        if cost > 0:
-            imbuepts = self.totalImbue()
-            if pricingInfo.get('PPInclude', 0):
-                price += int(pricingInfo.get('PPImbue', 0) * 10000 \
-                           * imbuepts)
-                price += int(pricingInfo.get('PPOC', 0) * 10000 \
-                           * max(0, int(imbuepts - self.itemImbue())))
-                price += int(pricingInfo.get('PPLevel', 0) * 10000 \
-                           * int(self.Level))
-            if pricingInfo.get('HourInclude', 0):
-                price += int(pricingInfo.get('Hour', 0) * 10000 \
-                           * int(self.Time) / 60.0)
-            price += int(pricingInfo.get('PPItem', 0) * 10000)
-        return price
-
     def utility(self, skilltable={}):
         utility = 0.0
         for slot in self.slots():
@@ -516,8 +474,8 @@ class Item:
             if self.itemslots[num].type() != "Unused": return False
 
         return True
-    
-    def asXML(self, pricingInfo=None, crafterSkill=1000, 
+
+    def asXML(self, pricingInfo=None, crafterSkill=1000,
                     realm=None, rich=False, writeIndex=False):
         if realm is None:
             realm = self.Realm
@@ -541,9 +499,6 @@ class Item:
                   (u'OFFHAND', self.OFFHAND,),
                   (u'DAMAGETYPE', self.DAMAGETYPE,),
                   (u'DBSOURCE', self.DBSOURCE,),]
-        if self.Time > "0":
-            fields.extend([
-                  (u'Time', self.Time,),])
         if writeIndex:
             fields.extend([
                   (u'TemplateIndex', unicode(self.TemplateIndex),),])
@@ -552,7 +507,6 @@ class Item:
             fields.extend([
                   (u'Utility', u"%.1f" % self.utility(),),
                   (u'Cost', unicode(self.cost()),),
-                  (u'Price', unicode(self.price(pricingInfo)),),
                   (u'Imbue', u"%.1f" % sum(imbuevals),),
                   (u'ItemImbue', unicode(self.itemImbue()),),
                   (u'Success',
@@ -576,7 +530,7 @@ class Item:
                 elem.appendChild(classnode)
         slotnode = None
         for num in range(0,len(self.itemslots)):
-            if self.itemslots[num].type() == "Unused": 
+            if self.itemslots[num].type() == "Unused":
                 continue
             slotnode = document.createElement(u'SLOT')
             slotnode.setAttribute(u'Number', unicode(num))
@@ -593,13 +547,13 @@ class Item:
     def save(self, filename):
         itemxml = self.asXML()
         if itemxml is None:
-            QMessageBox.critical(None, 'Error!', 
+            QMessageBox.critical(None, 'Error!',
                 'There was no item to save!', 'OK')
             return
         try:
             f = file(filename, 'w')
         except IOError:
-            QMessageBox.critical(None, 'Error!', 
+            QMessageBox.critical(None, 'Error!',
                 'Error opening file: ' + filename, 'OK')
             return
         f.write(XMLHelper.writexml(itemxml, UnicodeStringIO(), '', '\t', '\n'))
@@ -610,7 +564,7 @@ class Item:
             f = file(filename, 'r')
         except IOError:
             if not silent:
-                QMessageBox.critical(None, 'Error!', 
+                QMessageBox.critical(None, 'Error!',
                     'Error opening item file: ' + filename, 'OK')
             return -2
 
@@ -622,7 +576,7 @@ class Item:
                 self.loadFromXML(items[0], namehint)
             except:
                 if not silent:
-                    QMessageBox.critical(None, 'Error!', 
+                    QMessageBox.critical(None, 'Error!',
                         'Error loading item:', 'OK')
                 f.close()
                 return -1

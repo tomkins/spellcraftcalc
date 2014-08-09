@@ -1,4 +1,4 @@
-# CraftBar.py: Dark Age of Camelot Spellcrafting Calculator 
+# CraftBar.py: Dark Age of Camelot Spellcrafting Calculator
 #
 # See http://kscraft.sourceforge.net/ for updates
 #
@@ -16,7 +16,7 @@ import glob
 import re
 import string
 import SC
-import ConfigParser 
+import ConfigParser
 import sys
 
 # For pick-daoc default paths, note...
@@ -48,7 +48,7 @@ class IniConfigParser(ConfigParser.RawConfigParser):
         """Override lowercase default from RawConfigParser."""
         return optionstr
 
-    
+
 class CraftBar(QDialog, Ui_B_CraftBar):
     def __init__(self,parent = None,name = None,modal = False,fl = Qt.Widget):
         QDialog.__init__(self, parent, fl)
@@ -88,7 +88,7 @@ class CraftBar(QDialog, Ui_B_CraftBar):
         self.reini = re.compile('(\w+)-(\d+)\.ini$')
         self.resec = re.compile('\[(\w+)\]')
         self.rectl = re.compile('[Hh]otkey_(\d+)=44,13,')
-        
+
         if str(QApplication.style().objectName()[0:9]).lower() == "macintosh":
             self.PathSelectButton.setFixedWidth(50)
             self.PathSelectButton.setFixedHeight(32)
@@ -115,9 +115,7 @@ class CraftBar(QDialog, Ui_B_CraftBar):
             for slot in item.slots():
                  if slot.crafted():
                      unused = False
-                     if slot.makes() == "0":
-                         done = False
-                         break
+                     done = False
             if unused:
                 self.ItemSelect[i].setEnabled(False)
                 continue
@@ -136,7 +134,7 @@ class CraftBar(QDialog, Ui_B_CraftBar):
             path = os.path.join(path, 'Electronic Arts\Dark Age of Camelot')
         else:
             path = os.environ.get('HOME', '')
-        self.DaocPath.setText(ScOptions.instance().getOption('DaocIniPath', 
+        self.DaocPath.setText(ScOptions.instance().getOption('DaocIniPath',
             path))
         self.pieceBoxChanged()
         self.computeGemCount()
@@ -151,7 +149,7 @@ class CraftBar(QDialog, Ui_B_CraftBar):
         row = indexList[0].row()
         fileIndex = self.model.index(row, 0)
         filename = unicode(self.model.data(fileIndex, Qt.UserRole).toString())
-        
+
         self.LoadGemsButton.setEnabled(0)
         self.LoadGemsButton.update()
 
@@ -182,7 +180,7 @@ class CraftBar(QDialog, Ui_B_CraftBar):
                 buttons[i] = newbuttons.pop(0)
                 CP.set('Macros', 'Macro_%d' % buttons[i],
                        "%s,/craft %s" % (Realms[i][0:3], Realms[i]))
-        
+
         realm = self.parent.realm
         slotcounter = (self.HotbarNum.value() - 1) * 100 \
                     + (self.HotbarRow.value() - 1) * 10 \
@@ -218,7 +216,7 @@ class CraftBar(QDialog, Ui_B_CraftBar):
                         if HotkeyGems[realm].has_key(gemname):
                             val = HotkeyGems[realm][gemname]
                             buttonstr = '45,13%03d%02d,,-1' % (val, slot.gemLevel() - 1)
-                            if slotcounter >= 200: 
+                            if slotcounter >= 200:
                                 CP.set('Quickbar3', 'Hotkey_%d' % (slotcounter - 200), buttonstr)
                             elif slotcounter >= 100:
                                 CP.set('Quickbar2', 'Hotkey_%d' % (slotcounter - 100), buttonstr)
