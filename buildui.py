@@ -4,7 +4,6 @@ import sys
 
 files = (
     ('ScWindow.ui', 'B_ScWindow.py'),
-    ('CraftWindow.ui', 'B_CraftWindow.py'),
     ('DisplayWindow.ui', 'B_DisplayWindow.py'),
     ('ReportWindow.ui', 'B_ReportWindow.py'),
     ('ItemLevel.ui', 'B_ItemLevel.py'),
