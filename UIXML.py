@@ -4,48 +4,36 @@
 #
 # See NOTICE.txt for copyrights and grant of license
 
-from PyQt4.QtGui import *
-import sys
-import re
+from PyQt4.QtGui import QMessageBox, QFileDialog
 import os.path
-import string
-from MyStringIO import UnicodeStringIO
-import XMLHelper
+from lxml import etree
 
-from Ft.Xml.Xslt import Processor
-from Ft.Xml.InputSource import DefaultFactory
-from Ft.Lib.Uri import OsPathToUri
 
 def uixml(scwin, uixslt):
     extidx = uixslt.rindex('.')
     xslt2 = uixslt[:extidx] + "Post" + uixslt[extidx:]
-    sctemplate = XMLHelper.writexml(scwin.asXML(True), UnicodeStringIO(), '', '\t', '\n')
+    sctemplate = etree.fromstring(scwin.asXML(True).toxml())
 
     try:
-        source = DefaultFactory.fromString(sctemplate, "urn:pass1")
-        xsltUri = OsPathToUri(uixslt)
-        transform = DefaultFactory.fromUri(xsltUri)
-
-        processor = Processor.Processor()
-        processor.appendStylesheet(transform)
-        uixmlstr = processor.run(source)
+        xslt_xml = etree.parse(uixslt)
+        transform = etree.XSLT(xslt_xml)
+        uixmlstr = transform(sctemplate)
 
         if os.path.exists(xslt2):
-            source = DefaultFactory.fromString(uixmlstr, "urn:pass2")
-            xsltUri = OsPathToUri(xslt2)
-            transform = DefaultFactory.fromUri(xsltUri)
+            xslt2_xml = etree.parse(xslt2)
+            transform2 = etree.XSLT(xslt2_xml)
+            uixmlstr = transform2(uixmlstr)
 
-            processor = Processor.Processor()
-            processor.appendStylesheet(transform)
-            uixmlstr = processor.run(source)
-    except Exception, e:
-        QMessageBox.critical(None, 'Error!', 
-            'Error with XSLT transform!\n\n'+str(e), 'OK')
+        uixmlstr = str(uixmlstr)
+    except Exception as e:
+        QMessageBox.critical(None, 'Error!', 'Error with XSLT transform!\n\n'+str(e), 'OK')
         return
-        
+
     path = os.path.join(scwin.ReportPath, 'custom1_window.xml')
-    filename = QFileDialog.getSaveFileName(scwin, "Save UI Window as",
-                   path, "UI Window XML (*_window.xml);;All Files (*.*)")
+    filename = QFileDialog.getSaveFileName(
+        scwin, "Save UI Window as",
+        path, "UI Window XML (*_window.xml);;All Files (*.*)"
+    )
     if str(filename) == '':
         return
     try:
@@ -53,7 +41,5 @@ def uixml(scwin, uixslt):
         f.write(uixmlstr)
         f.close()
     except IOError:
-        QMessageBox.critical(None, 'Error!', 
-            'Error opening file: ' + filename, 'OK')
+        QMessageBox.critical(None, 'Error!', 'Error opening file: ' + filename, 'OK')
         return
-

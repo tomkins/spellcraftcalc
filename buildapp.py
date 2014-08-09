@@ -15,12 +15,7 @@ import os
 import os.path
 py2app_options = dict(
     iconfile='images/ScWindow.icns',
-    includes=['sip', 'cmd', 'Ft.Xml.XPath.ParsedPredicateList',
-        'Ft.Xml.XPath.ParsedAbbreviatedAbsoluteLocationPath',
-        'Ft.Xml.XPath.ParsedAbbreviatedRelativeLocationPath',
-        'Ft.Xml.XInclude',
-        'Ft.Xml.Xslt.XPatterns',
-        ],
+    includes=['sip', 'cmd'],
     excludes=['_ssl',],
 )
 setup(

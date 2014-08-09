@@ -4,57 +4,48 @@
 #
 # See NOTICE.txt for copyrights and grant of license
 
-from PyQt4.QtCore import *
-from PyQt4.QtGui import *
-from B_ReportWindow import *
-from Character import *
-from constants import *
-from htmlplus import *
-from SC import *
-from MyStringIO import UnicodeStringIO
-import XMLHelper
-import Item
-import string
+from PyQt4.QtCore import Qt, SIGNAL
+from PyQt4.QtGui import QDialog, QMessageBox, QFileDialog
+from B_ReportWindow import Ui_B_ReportWindow
+from htmlplus import HTMLPlusParser, ObtuseFormatter, DimWriter
+from SC import formatCost, gemNameSort, gemTypeSort
+from lxml import etree
 import re
-import sys
 import os.path
 
-from Ft.Xml.Xslt import Processor
-from Ft.Xml import InputSource
-from Ft.Lib.Uri import OsPathToUri
-
-#import libxsltmod
 
 class ReportWindow(QDialog, Ui_B_ReportWindow):
-    def __init__(self,parent = None,name = None,modal = False,fl = Qt.Widget):
-        QDialog.__init__(self,parent,fl)
-        Ui_B_ReportWindow.setupUi(self,self)
+    def __init__(self, parent=None, name=None, modal=False, fl=Qt.Widget):
+        QDialog.__init__(self, parent, fl)
+        Ui_B_ReportWindow.setupUi(self, self)
         if (name):
             self.setObjectName(name)
         if (modal):
             self.setModal(modal)
 
-        self.connect(self.PushButton2,SIGNAL("clicked()"),self.closeWindow)
-        self.connect(self.PushButton1,SIGNAL("clicked()"),self.saveToHTML)
-        self.connect(self.PushButton1_2,SIGNAL("clicked()"),self.saveToText)
+        self.connect(self.PushButton2, SIGNAL("clicked()"), self.closeWindow)
+        self.connect(self.PushButton1, SIGNAL("clicked()"), self.saveToHTML)
+        self.connect(self.PushButton1_2, SIGNAL("clicked()"), self.saveToText)
 
-        #self.font().setPointSize(8)
-        #self.ReportText.setTextFormat(Qt.RichText)
         self.parent = parent
         self.gemnames = None
         self.materials = None
         self.totalcost = 0
-        
-    def materialsReport(self, itemlist, showslot = 0):
+
+    def materialsReport(self, itemlist, showslot=0):
         self.setWindowTitle('Materials Report')
-        self.materials = { 'Gems' : { }, 'Liquids' : {}, 'Dusts': {} }
-        self.gemnames = { }
+        self.materials = {
+            'Gems': {},
+            'Liquids': {},
+            'Dusts': {},
+        }
+        self.gemnames = {}
         self.totalcost = 0
         for loc, item in itemlist.items():
             if item.ActiveState != 'player':
                 continue
             for slot in item.slots():
-		if slot.slotType() != 'player':
+                if slot.slotType() != 'player':
                     continue
                 if int(slot.makes()) > 0 \
                         and showslot == 0 \
@@ -67,12 +58,12 @@ class ReportWindow(QDialog, Ui_B_ReportWindow):
                 amount = slot.amount()
                 for mattype, matl in slot.gemMaterials(self.parent.realm).items():
                     for mat, val in matl.items():
-                        if self.materials[mattype].has_key(mat):
+                        if mat in self.materials[mattype]:
                             self.materials[mattype][mat] += val
                         else:
                             self.materials[mattype][mat] = val
                 gemname = slot.gemName(self.parent.realm)
-                if self.gemnames.has_key(gemname):
+                if gemname in self.gemnames:
                     self.gemnames[gemname] += 1
                 else:
                     self.gemnames[gemname] = 1
@@ -81,25 +72,27 @@ class ReportWindow(QDialog, Ui_B_ReportWindow):
                 self.totalcost += cost
         keys = self.gemnames.keys()
         keys.sort(gemNameSort)
-        self.gemnames = map(lambda(x): [x, self.gemnames.get(x)], keys)
+        self.gemnames = map(lambda x: [x, self.gemnames.get(x)], keys)
         for type, matlist in self.materials.items():
             if type == 'Gems':
                 keys = matlist.keys()
                 keys.sort(gemTypeSort)
-                matlist = map(lambda(x): [x, matlist.get(x)], keys)
+                matlist = map(lambda x: [x, matlist.get(x)], keys)
             elif type == 'Liquids':
                 keys = matlist.keys()
                 keys.sort()
-                matlist = map(lambda(x): [x, matlist.get(x)], keys)
+                matlist = map(lambda x: [x, matlist.get(x)], keys)
             elif type == 'Dusts':
                 keys = matlist.keys()
                 keys.sort()
-                matlist = map(lambda(x): [x, matlist.get(x)], keys)
+                matlist = map(lambda x: [x, matlist.get(x)], keys)
             self.materials[type] = matlist
         self.printMaterials()
 
     def printMaterials(self):
-        materialsstr = '<b>Total Cost:</b> <font color="#FF0000">%s</font>\n' % formatCost(self.totalcost)
+        materialsstr = '<b>Total Cost:</b> <font color="#FF0000">%s</font>\n' % (
+            formatCost(self.totalcost),
+        )
         materialsstr += '<hr><center><b>Gem Names</b></center><ul>\n'
         for name, amount in self.gemnames:
             materialsstr += '<li>%d %s</li>\n' % (amount, name)
@@ -114,29 +107,28 @@ class ReportWindow(QDialog, Ui_B_ReportWindow):
         self.ReportText.setHtml(self.reportHtml)
 
     def parseConfigReport(self, filename, scxmldoc):
-        processor = Processor.Processor()
-        source = InputSource.DefaultFactory.fromString(
-            XMLHelper.writexml(scxmldoc, UnicodeStringIO(), '', '\t', '\n'),
-            "uri:sctemplate")
+        source = etree.fromstring(scxmldoc.toxml())
 
         try:
-            xsltUri = OsPathToUri(filename)
-            transform = InputSource.DefaultFactory.fromUri(xsltUri)
+            xslt_xml = etree.parse(filename)
+            transform = etree.XSLT(xslt_xml)
 
-            processor.appendStylesheet(transform)
-            self.reportHtml = processor.run(source)
-        except Exception, e:
-            QMessageBox.critical(None, 'Error!', 
-                'Error composing report ' + filename + "\n\n" + str(e), 'OK')
+            report = transform(source)
+            self.reportHtml = str(report)
+        except Exception as e:
+            QMessageBox.critical(
+                None, 'Error!',
+                'Error composing report ' + filename + "\n\n" + str(e), 'OK'
+            )
             return
 
         self.setWindowTitle('Config Report')
         self.ReportText.setHtml(self.reportHtml)
 
     def saveToHTML(self):
-        filename = os.path.join(self.parent.ReportPath, 
+        filename = os.path.join(self.parent.ReportPath,
                                 str(self.parent.CharName.text()) + "_report.html")
-        filename = QFileDialog.getSaveFileName(self, "Save HTML Report", filename, 
+        filename = QFileDialog.getSaveFileName(self, "Save HTML Report", filename,
                                                "HTML (*.html *.htm);;All Files (*.*)")
         if filename is not None and str(filename) != '':
             try:
@@ -148,13 +140,12 @@ class ReportWindow(QDialog, Ui_B_ReportWindow):
                 f.close()
                 self.parent.ReportPath = os.path.dirname(os.path.abspath(filename))
             except IOError:
-                QMessageBox.critical(None, 'Error!', 
-                    'Error writing to file: ' + filename, 'OK')
+                QMessageBox.critical(None, 'Error!', 'Error writing to file: ' + filename, 'OK')
 
     def saveToText(self):
-        filename = os.path.join(self.parent.ReportPath, 
+        filename = os.path.join(self.parent.ReportPath,
                                 str(self.parent.CharName.text()) + "_report.txt")
-        filename = QFileDialog.getSaveFileName(self, "Save HTML Report", filename, 
+        filename = QFileDialog.getSaveFileName(self, "Save HTML Report", filename,
                                                "Text (*.txt);;All Files (*.*)")
         if filename is not None and str(filename) != '':
             try:
@@ -171,17 +162,7 @@ class ReportWindow(QDialog, Ui_B_ReportWindow):
                 f.close()
                 self.parent.ReportPath = os.path.dirname(os.path.abspath(str(filename)))
             except IOError:
-                QMessageBox.critical(None, 'Error!', 
-                    'Error writing to file: ' + filename, 'OK')
-        
+                QMessageBox.critical(None, 'Error!', 'Error writing to file: ' + filename, 'OK')
+
     def closeWindow(self):
-        self.done(1)                        
-
-class XSLTMessageHandler:
-    def __init__(self):
-        self.content = ''
-    def write(self, msg):
-        self.content = self.content + msg
-    def getContent(self):
-        return self.content
-
+        self.done(1)
