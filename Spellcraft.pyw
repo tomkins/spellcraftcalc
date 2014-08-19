@@ -9,10 +9,6 @@
 # Ensure we do not respect the user's PYTHONCASEOK envvar
 
 import os
-if "PYTHONCASEOK" in os.environ:
-    os.putenv("PYTHONCASEOK", "")
-    del os.environ["PYTHONCASEOK"]
-
 import ScWindow
 import os.path
 import sys
