@@ -66,7 +66,7 @@ AllBonusList = {
         'Mauler': {
             'All Magic Skills': ('Aura Manipulation', 'Magnetism', 'Power Strikes',),
             'All Melee Weapon Skills': ('Fist Wraps', 'Mauler Staff',),
-            'Races': t2(('Briton', 'Korazh',)),
+            'Races': t2(('Briton', 'Half Ogre', 'Korazh',)),
             # no bonus from 'Acuity': ('Strength',),
         },
 
@@ -83,7 +83,7 @@ AllBonusList = {
             'All Magic Skills': ('Instruments',),
             'All Melee Weapon Skills': ('Slash', 'Thrust',),
             'Other Skills': ('Stealth',),
-            'Races': t2(('Briton', 'Highlander', 'Saracen',)),
+            'Races': t2(('Briton', 'Highlander', 'Inconnu', 'Saracen',)),
             'Acuity': ('Charisma',),
         },
 
@@ -166,7 +166,7 @@ AllBonusList = {
             'All Melee Weapon Skills': ('Blades', 'Blunt', 'Piercing',),
             'All Dual Wield Skills': ('Celtic Dual',),
             'Other Skills': ('Parry', 'Shield',),
-            'Races': t2(('Celt', 'Elf', 'Firbolg', 'Graoch', 'Shar',)),
+            'Races': t2(('Celt', 'Elf', 'Firbolg', 'Graoch', 'Lurikeen', 'Shar',)),
         },
 
         'Champion': {
@@ -200,7 +200,7 @@ AllBonusList = {
         'Mauler': {
             'All Magic Skills': ('Aura Manipulation', 'Magnetism', 'Power Strikes',),
             'All Melee Weapon Skills': ('Fist Wraps', 'Mauler Staff',),
-            'Races': t2(('Celt', 'Graoch',)),
+            'Races': t2(('Celt', 'Firbolg', 'Graoch',)),
             # no bonus from 'Acuity': ('Strength',),
         },
 
@@ -263,7 +263,7 @@ AllBonusList = {
             'All Melee Weapon Skills': ('Axe', 'Hammer', 'Sword',),
             'All Dual Wield Skills': ('Left Axe',),
             'Other Skills': ('Parry',),
-            'Races': t2(('Deifrang', 'Dwarf', 'Norseman', 'Troll', 'Valkyn',)),
+            'Races': t2(('Deifrang', 'Dwarf', 'Kobold', 'Norseman', 'Troll', 'Valkyn',)),
         },
 
         'Bonedancer': {
@@ -291,7 +291,7 @@ AllBonusList = {
         'Mauler': {
             'All Magic Skills': ('Aura Manipulation', 'Magnetism', 'Power Strikes',),
             'All Melee Weapon Skills': ('Fist Wraps', 'Mauler Staff',),
-            'Races': t2(('Norseman', 'Deifrang',)),
+            'Races': t2(('Deifrang', 'Norseman', 'Troll')),
             # no bonus from 'Acuity': ('Strength',),
         },
 
