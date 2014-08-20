@@ -5,8 +5,8 @@
 # See NOTICE.txt for copyrights and grant of license
 
 __all__ = [
-  'AllBonusList', 'ClassList', 'RaceList', 'Races', 'Realms', 'AllRealms',
-  'ItemTypes', 'ServerCodes', 'EuroServerCodes', 'ServerIgnCodes', 
+    'AllBonusList', 'ClassList', 'RaceList', 'Races', 'Realms', 'AllRealms',
+    'ItemTypes', 'ServerCodes', 'EuroServerCodes',
 ]
 
 from tuple2 import * 
@@ -639,37 +639,6 @@ ItemTypes = d2({
     '2 Handed':    twohandTypes,
     'Ranged':      rangedTypes,
     'Spare':       spareTypes,
-})
-
-
-# It looks like 1.86 is moving twords one .ign file per cluster,
-# so .ign server numbers are shared across servers now.
-#
-ServerIgnCodes = d2({
-    'Akatsuki' :       '80', 
-    'Bedevere' :       '85',
-    'Bors' :          '100',
-    'Ector' :          '27',
-    'Gaheris' :       '135',
-    'Galahad' :        '55',
-    'Gareth' :         '27',
-    'Gawaine' :        '95',
-    'Gwinevere' :      '80',
-    'Hector' :         '51',
-    'Igraine' :       '130',
-    'Iseult' :        '105',
-    'Kay' :           '120',
-    'Lamorak' :        '27',
-    'Lancelot' :       '60',
-    'Merlin' :         '75',
-    'Mordred' :       '140',
-    'Morgan Le Fey' :  '90',
-    'Nimue' :         '115',
-    'Palomides' :      '70',
-    'Pellinor' :      '110',
-    'Pendragon' :      '50',
-    'Percival' :       '65',
-    'Tristan' :       '125',
 })
 
 # .ini file server codes
