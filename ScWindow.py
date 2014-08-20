@@ -833,7 +833,6 @@ class ScWindow(QMainWindow, Ui_B_SC):
         self.includeRacials = ScOptions.instance().getOption('IncludeRRInRacials', False)
         self.capDistance = ScOptions.instance().getOption('DistanceToCap', False)
         self.hideNonClassSkills = ScOptions.instance().getOption('HideNonClassSkills', False)
-        self.euroServers = ScOptions.instance().getOption('EuroServers', False)
         self.coop = ScOptions.instance().getOption('Coop', False)
         self.pricingInfo = ScOptions.instance().getOption('Pricing', {})
         self.recentFiles = ScOptions.instance().getOption('RecentFiles', [])

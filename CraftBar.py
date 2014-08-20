@@ -242,8 +242,6 @@ class CraftBar(QDialog, Ui_B_CraftBar):
 
     def findPath(self,rootpath):
         servers = ServerCodes
-        if self.parent.euroServers:
-            servers = EuroServerCodes
         self.model.removeRows(0, self.model.rowCount())
         rootpath = unicode(rootpath)
         if os.path.isdir(rootpath):

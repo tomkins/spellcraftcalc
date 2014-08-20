@@ -6,7 +6,7 @@
 
 __all__ = [
     'AllBonusList', 'ClassList', 'RaceList', 'Races', 'Realms', 'AllRealms',
-    'ItemTypes', 'ServerCodes', 'EuroServerCodes',
+    'ItemTypes', 'ServerCodes',
 ]
 
 from tuple2 import * 
@@ -670,33 +670,3 @@ ServerCodes = d2({
      '12' : 'Percival',
      '27' : 'Tristan',
 })
-
-#Euro
-EuroServerCodes = d2({
-     '18' : 'Glastonbury',
-     '19' : 'Salisbury',
-      '1' : 'Excalibur',
-      '6' : 'Prydwen',
-      '2' : 'Broceliande',
-      '5' : 'Ys',
-     '13' : 'Carnac',
-     '10' : 'Orcanie',
-      '3' : 'Avalon',
-      '4' : 'Lyonesse',
-     '12' : 'Dartmoor',
-      '8' : 'Logres',
-      '7' : 'Stonehenge',
-     '17' : 'Cumbria',
-     '16' : 'Deira',
-     '11' : 'Camlann',
-      '9' : 'Gorre',
-})
-
-
-if __name__ == "__main__":
-    pass
-    #import gnosis.xml.pickle
-    #constants = {}
-    #for v in __all__:
-    #    constants[v] = locals()[v]
-    #print gnosis.xml.pickle.dumps(constants)
