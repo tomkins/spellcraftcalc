@@ -2789,12 +2789,10 @@ class ScWindow(QMainWindow, Ui_B_SC):
         self.itemnumbering += 1
         item.next = self.itemattrlist[self.currentTabLabel]
         self.itemattrlist[self.currentTabLabel] = item
-        self.outfitlist[self.currentOutfit][self.currentTabLabel] \
-                  = ( item.TemplateIndex, item.Equipped, )
-        if newtype == 'Drop Item' or newtype == 'Normal Item':
-            self.restoreItem(item)
-        else:
-            self.chooseItemType(action)
+        self.outfitlist[self.currentOutfit][self.currentTabLabel] = (
+            item.TemplateIndex, item.Equipped
+        )
+        self.chooseItemType(action)
 
     def addItem(self, item):
         if item.Location[-4:] == 'Ring':
